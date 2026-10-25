@@ -1991,3 +1991,48 @@ dialog::backdrop {
   color: var(--gold);
   background: #253223;
 }
+@media (max-width: 800px) {
+  .field {
+    min-height: 125px;
+    align-items: start;
+  }
+  .permanents {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 5px 3px 8px;
+    scrollbar-width: thin;
+    scrollbar-color: #617252 transparent;
+  }
+  .field .lands {
+    overflow-y: auto;
+    max-height: 132px;
+  }
+  .attack-line {
+    height: 24px;
+  }
+  .replay-banner {
+    gap: 7px;
+    padding: 8px 12px;
+  }
+  .replay-banner input[type='range'] {
+    min-width: 45px;
+    width: 85px;
+    accent-color: var(--gold);
+  }
+  .replay-banner button {
+    padding: 5px 7px;
+  }
+  .replay-banner .grow {
+    font-size: 9px;
+  }
+  .hand-area {
+    min-height: 165px;
+  }
+  .hand {
+    min-height: 130px;
+  }
+  .action-dock {
+    box-shadow: 0 -10px 20px #0b140f55;
+  }
+}

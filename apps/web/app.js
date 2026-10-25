@@ -90,7 +90,19 @@ function toast(text) {
   toastTimer = setTimeout(() => el.classList.remove('visible'), 4200);
 }
 function render() {
+  const focused = document.activeElement;
+  let focusSelector = null;
+  if (focused?.id) focusSelector = `#${CSS.escape(focused.id)}`;
+  else if (focused?.dataset.card)
+    focusSelector = `[data-card="${CSS.escape(focused.dataset.card)}"]`;
+  else if (focused?.dataset.action)
+    focusSelector = `[data-action="${CSS.escape(focused.dataset.action)}"]${focused.dataset.view ? `[data-view="${CSS.escape(focused.dataset.view)}"]` : ''}`;
+  const wasDock = !!focused?.closest('.action-dock');
   app.innerHTML = `<div class="shell">${header(ui)}${ui.view === 'cards' ? catalog(ui, metadata) : ui.view === 'engine' ? enginePage(state) : state ? game(state, ui, metadata) : lobby(ui, metadata)}</div>`;
+  const nextFocus = focusSelector ? app.querySelector(focusSelector) : null;
+  if (nextFocus && !nextFocus.disabled) nextFocus.focus({ preventScroll: true });
+  else if (wasDock)
+    app.querySelector('.action-dock button:not(:disabled)')?.focus({ preventScroll: true });
   schedule();
 }
 function resetSelection() {
@@ -460,6 +472,7 @@ async function action(name, el) {
       else if (d.target) {
         ui.targeting = true;
         ui.sideTab = d.target.includes('Spell') || d.target === 'spell' ? 'stack' : ui.sideTab;
+        if (d.target.includes('Spell') || d.target === 'spell') ui.inspectorOpen = true;
         render();
       } else send({ type: 'cast', card: o.id });
       break;
@@ -525,6 +538,11 @@ async function action(name, el) {
     }
     case 'loadReplay':
       document.querySelector('#replay-file').click();
+      break;
+    case 'replaySeat':
+      ui.seat = 1 - ui.seat;
+      resetSelection();
+      render();
       break;
     case 'replayNext':
       replayTo(Math.min(ui.replayIndex + 1, ui.replayRecord.commands.length));
@@ -743,6 +761,7 @@ app.addEventListener('input', (e) => {
   }
 });
 document.addEventListener('keydown', (e) => {
+  if (e.repeat) return;
   if (dialog.open || ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(e.target.tagName)) return;
   if (
     e.code === 'Space' &&
