@@ -1,0 +1,6 @@
+{
+  "name": "leyline-mtg", "version": "0.1.0", "private": true,
+  "description": "A deterministic JavaScript Magic rules kernel and a modern tabletop client.",
+  "type": "module", "license": "GPL-3.0-or-later", "engines": {"node": ">=22"},
+  "scripts": {"test": "node --test packages/engine/test/*.test.js", "start": "node scripts/serve.mjs", "check": "node scripts/check.mjs"}
+}
