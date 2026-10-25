@@ -1,5 +1,5 @@
 import http from 'node:http';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, realpath } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -22,8 +22,12 @@ export function startServer({ port = 4173, host = '127.0.0.1' } = {}) {
       if (!['/apps/web/', '/packages/engine/src/'].some((prefix) => p.startsWith(prefix)))
         throw Object.assign(new Error('Not found'), { status: 404 });
       const file = resolve(root, '.' + p);
-      if (!file.startsWith(root + sep) && !file.startsWith(root))
+      const allowedRoots = [resolve(root, 'apps/web'), resolve(root, 'packages/engine/src')];
+      const allowed = (path) => allowedRoots.some((directory) => path.startsWith(directory + sep));
+      if (!allowed(file) || !Object.hasOwn(mime, extname(file)))
         throw Object.assign(new Error('Forbidden'), { status: 403 });
+      const canonical = await realpath(file);
+      if (!allowed(canonical)) throw Object.assign(new Error('Forbidden'), { status: 403 });
       if (!['GET', 'HEAD'].includes(req.method))
         throw Object.assign(new Error('Method not allowed'), { status: 405 });
       const data = await readFile(file);

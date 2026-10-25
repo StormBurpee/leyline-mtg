@@ -1,0 +1,9 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/m/monastery_swiftspear.txt
+Name:Monastery Swiftspear
+ManaCost:R
+Types:Creature Human Monk
+PT:1/2
+K:Haste
+K:Prowess
+Oracle:Haste\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

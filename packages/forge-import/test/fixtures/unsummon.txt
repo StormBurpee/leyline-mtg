@@ -1,0 +1,7 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/u/unsummon.txt
+Name:Unsummon
+ManaCost:U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+Oracle:Return target creature to its owner's hand.

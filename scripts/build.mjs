@@ -1,10 +1,14 @@
 import { mkdir, readdir, readFile, writeFile, cp, rm } from 'node:fs/promises';
 const root = new URL('../', import.meta.url),
   out = new URL('dist/', root);
+await rm(out, { recursive: true, force: true });
 await mkdir(out, { recursive: true });
 for (const f of await readdir(new URL('apps/web/', root))) {
   if (f === 'fonts' || f === 'tokens') {
-    await cp(new URL(`apps/web/${f}/`, root), new URL(`${f}/`, out), { recursive: true });
+    await cp(new URL(`apps/web/${f}/`, root), new URL(`${f}/`, out), {
+      recursive: true,
+      filter: (path) => !path.endsWith('.ttf'),
+    });
     continue;
   }
   let body = await readFile(new URL(`apps/web/${f}`, root));

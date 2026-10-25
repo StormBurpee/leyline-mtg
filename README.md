@@ -94,6 +94,8 @@ The supported pool includes counterspells, prowess, cast triggers, token creatio
 
 Commander, multiplayer, general layers/dependencies, replacement-effect ordering and unrestricted card support are still ahead. Unsupported imports fail visibly instead of becoming approximations. The bot is a deterministic sparring partner, not a competitive deck-testing oracle.
 
+A conservative [Forge-script migration adapter](docs/FORGE-MIGRATION.md) produces reviewable candidates and explicit unsupported-syntax reports. It does not silently register partial cards.
+
 **Start with a rule, not a card count.** [Read the contribution guide →](docs/CONTRIBUTING.md)
 
 ## Standing on good work

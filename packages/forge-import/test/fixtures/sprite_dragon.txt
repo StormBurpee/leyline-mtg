@@ -1,0 +1,13 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/s/sprite_dragon.txt
+Name:Sprite Dragon
+ManaCost:U R
+Types:Creature Faerie Dragon
+PT:1/1
+K:Flying
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card.nonCreature
+DeckHas:Ability$Counters
+Oracle:Flying, haste\nWhenever you cast a noncreature spell, put a +1/+1 counter on Sprite Dragon.

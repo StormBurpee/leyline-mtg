@@ -10,19 +10,13 @@ async function scripts(dir) {
   }
   return result;
 }
-for (const dir of ['packages/', 'apps/', 'scripts/'])
+for (const dir of ['packages/', 'apps/', 'scripts/', 'tests/'])
   for (const file of await scripts(dir)) {
     const r = spawnSync(process.execPath, ['--check', root + file], { stdio: 'inherit' });
     if (r.status) process.exit(r.status);
   }
-const tests = spawnSync(
-  process.execPath,
-  [
-    '--test',
-    ...(await scripts('packages/engine/test/').then((xs) =>
-      xs.filter((x) => x.endsWith('.test.js')),
-    )),
-  ],
-  { cwd: root, stdio: 'inherit' },
-);
+const tests = spawnSync(process.execPath, [root + 'scripts/test.mjs'], {
+  cwd: root,
+  stdio: 'inherit',
+});
 process.exit(tests.status ?? 1);

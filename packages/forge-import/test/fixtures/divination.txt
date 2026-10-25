@@ -1,0 +1,7 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/d/divination.txt
+Name:Divination
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:Draw two cards.

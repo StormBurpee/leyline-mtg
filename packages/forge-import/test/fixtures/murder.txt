@@ -1,0 +1,7 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/m/murder.txt
+Name:Murder
+ManaCost:1 B B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature | SpellDescription$ Destroy target creature.
+Oracle:Destroy target creature.
