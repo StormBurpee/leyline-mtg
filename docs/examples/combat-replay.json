@@ -1,0 +1,1141 @@
+{
+  "version": "0.1.0",
+  "config": {
+    "decks": [
+      [
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Raging Goblin",
+        "Raging Goblin",
+        "Raging Goblin",
+        "Raging Goblin",
+        "Goblin Piker",
+        "Goblin Piker",
+        "Goblin Piker",
+        "Goblin Piker",
+        "Goblin Instigator",
+        "Goblin Instigator",
+        "Goblin Instigator",
+        "Goblin Instigator",
+        "Wind Drake",
+        "Wind Drake",
+        "Wind Drake",
+        "Air Elemental",
+        "Air Elemental",
+        "Lightning Bolt",
+        "Lightning Bolt",
+        "Lightning Bolt",
+        "Lightning Bolt",
+        "Shock",
+        "Shock",
+        "Shock",
+        "Counterspell",
+        "Counterspell",
+        "Counterspell",
+        "Counterspell",
+        "Unsummon",
+        "Unsummon",
+        "Unsummon",
+        "Unsummon",
+        "Divination",
+        "Divination",
+        "Divination",
+        "Divination"
+      ],
+      [
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Llanowar Elves",
+        "Llanowar Elves",
+        "Llanowar Elves",
+        "Llanowar Elves",
+        "Elvish Visionary",
+        "Elvish Visionary",
+        "Elvish Visionary",
+        "Elvish Visionary",
+        "Grizzly Bears",
+        "Grizzly Bears",
+        "Grizzly Bears",
+        "Grizzly Bears",
+        "Soul Warden",
+        "Soul Warden",
+        "Soul Warden",
+        "Youthful Knight",
+        "Youthful Knight",
+        "Youthful Knight",
+        "Giant Spider",
+        "Giant Spider",
+        "Serra Angel",
+        "Serra Angel",
+        "Colossal Dreadmaw",
+        "Colossal Dreadmaw",
+        "Giant Growth",
+        "Giant Growth",
+        "Giant Growth",
+        "Giant Growth",
+        "Raise the Alarm",
+        "Raise the Alarm",
+        "Raise the Alarm",
+        "Glorious Anthem",
+        "Glorious Anthem",
+        "Pacifism",
+        "Pacifism",
+        "Pacifism"
+      ]
+    ],
+    "seed": 71,
+    "startingPlayer": 0,
+    "names": [
+      "You",
+      "Opponent"
+    ],
+    "mulligan": true,
+    "minimumDeckSize": 60
+  },
+  "commands": [
+    {
+      "type": "keep",
+      "player": 0
+    },
+    {
+      "type": "keep",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c10",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c76",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c23",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c33",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c62",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c101",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c55",
+      "target": {
+        "kind": "object",
+        "id": "c101",
+        "incarnation": 3
+      },
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c13",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": [
+        "c33",
+        "c123"
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "blockers",
+      "player": 1,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "assignDamage",
+      "player": 0,
+      "orders": [
+        {
+          "source": "c33",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "source": "c123",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c77",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c93",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c44",
+      "target": {
+        "kind": "object",
+        "id": "c93",
+        "incarnation": 3
+      },
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c4",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c57",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": [
+        "c33",
+        "c123"
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "blockers",
+      "player": 1,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "assignDamage",
+      "player": 0,
+      "orders": [
+        {
+          "source": "c33",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "source": "c123",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c69",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c94",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c101",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c54",
+      "target": {
+        "kind": "object",
+        "id": "c101",
+        "incarnation": 6
+      },
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c3",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c83",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c95",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c101",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": [
+        "c94"
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    }
+  ]
+}

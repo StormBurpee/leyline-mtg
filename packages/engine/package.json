@@ -1,1 +1,26 @@
-{"name":"@leyline/engine","version":"0.1.0","type":"module","exports":"./src/index.js","license":"GPL-3.0-or-later"}
+{
+  "name": "@leyline/engine",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "license": "GPL-3.0-or-later",
+  "types": "./src/index.d.ts",
+  "files": [
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StormBurpee/leyline-mtg.git",
+    "directory": "packages/engine"
+  }
+}

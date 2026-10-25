@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "skipLibCheck": false
+  },
+  "include": ["tests/types/**/*.ts", "packages/engine/src/**/*.d.ts"]
+}

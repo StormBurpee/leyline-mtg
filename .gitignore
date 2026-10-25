@@ -5,3 +5,7 @@ research/
 .DS_Store
 .env
 *.log
+
+outputs/
+
+apps/web/fonts/*.ttf

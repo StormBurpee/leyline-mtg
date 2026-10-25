@@ -1,0 +1,407 @@
+{
+  "version": "0.1.0",
+  "rulesReference": "2026-09-25",
+  "cards": [
+    {
+      "name": "Plains",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Island",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Swamp",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Mountain",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Forest",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Llanowar Elves",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Grizzly Bears",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Centaur Courser",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Colossal Dreadmaw",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Giant Spider",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Elvish Visionary",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Savannah Lions",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Silvercoat Lion",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Youthful Knight",
+      "type": "creature",
+      "keywords": ["first strike"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Serra Angel",
+      "type": "creature",
+      "keywords": ["flying", "vigilance"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Soul Warden",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": ["otherCreatureEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Raging Goblin",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Goblin Piker",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Hill Giant",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Goblin Instigator",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Wind Drake",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Air Elemental",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Typhoid Rats",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Vampire Nighthawk",
+      "type": "creature",
+      "keywords": ["flying", "deathtouch", "lifelink"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Fencing Ace",
+      "type": "creature",
+      "keywords": ["double strike"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Monastery Swiftspear",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Stormchaser Mage",
+      "type": "creature",
+      "keywords": ["flying", "haste"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Young Pyromancer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": ["controllerCastsInstantOrSorcery"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Sprite Dragon",
+      "type": "creature",
+      "keywords": ["flying", "haste"],
+      "opcodes": ["counterOn"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Kiln Fiend",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsInstantOrSorcery"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Festival Crasher",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsInstantOrSorcery"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Seeker of the Way",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature", "controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Electrostatic Field",
+      "type": "creature",
+      "keywords": ["defender"],
+      "opcodes": ["damageOpponent"],
+      "triggers": ["controllerCastsInstantOrSorcery"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Thermo-Alchemist",
+      "type": "creature",
+      "keywords": ["defender"],
+      "opcodes": ["untap", "damageOpponent"],
+      "triggers": ["controllerCastsInstantOrSorcery"],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Shivan Dragon",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Prodigal Pyromancer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Lightning Bolt",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Shock",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Counterspell",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counter"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Negate",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counter"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Unsummon",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bounce"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Giant Growth",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Titanic Growth",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Murder",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Doom Blade",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Divination",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Lava Axe",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Raise the Alarm",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Glorious Anthem",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pacifism",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    }
+  ],
+  "tokens": ["Goblin Token", "Elemental Token", "Soldier Token"]
+}

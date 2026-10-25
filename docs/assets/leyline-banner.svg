@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="520" viewBox="0 0 1440 520" role="img" aria-labelledby="title desc">
+<title id="title">Leyline — a JavaScript rules engine for Magic</title><desc id="desc">An original geometric mark, warm ivory lettering and a diagram of priority, the stack and state on a dark forest background.</desc>
+<defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#82927a" stroke-opacity=".07"/></pattern><linearGradient id="fade"><stop stop-color="#17241c"/><stop offset="1" stop-color="#101712"/></linearGradient><linearGradient id="card"><stop stop-color="#283a2b"/><stop offset="1" stop-color="#1a271e"/></linearGradient></defs>
+<rect width="1440" height="520" rx="18" fill="#111a14"/><rect x="1" y="1" width="1438" height="518" rx="17" fill="url(#grid)" stroke="#3b4838"/>
+<path d="M50 447H1390" stroke="#3a4634"/><path d="M50 73H1390" stroke="#3a4634"/>
+<g fill="none" stroke="#d7be83" stroke-width="2"><path d="M76 24 98 47 76 70 54 47Z"/><path d="M76 34 88 47 76 60 64 47Z"/><path d="M76 24V70M54 47H98"/></g>
+<text x="120" y="53" font-family="Arial,sans-serif" font-size="13" fill="#a7b59d" letter-spacing="3">AN OPEN-SOURCE TABLETOP</text>
+<text x="1388" y="53" text-anchor="end" font-family="monospace" font-size="12" fill="#97a68c">JAVASCRIPT / NODE + BROWSER</text>
+<text x="68" y="240" font-family="Georgia,serif" font-size="142" letter-spacing="-7" fill="#e8e9dc">leyline</text>
+<text x="76" y="300" font-family="Georgia,serif" font-size="30" fill="#d5c08f">A JavaScript rules engine for Magic.</text>
+<text x="77" y="346" font-family="Arial,sans-serif" font-size="16" fill="#a2b19a">Understand the state. Follow the stack. Find your line.</text>
+<g transform="translate(918 118)"><circle cx="173" cy="130" r="170" fill="none" stroke="#5b6a4e" stroke-opacity=".25"/><circle cx="173" cy="130" r="132" fill="none" stroke="#5b6a4e" stroke-opacity=".25" stroke-dasharray="3 8"/><path d="M-12 130H360M173-50V310" stroke="#6c795a" stroke-opacity=".2"/>
+<g transform="translate(65 0) rotate(-13 110 140)"><rect width="210" height="272" rx="11" fill="#18261c" stroke="#4f6347"/><path d="M18 40H192M18 232H192" stroke="#4f6347"/><text x="20" y="27" fill="#879b79" font-size="10" font-family="monospace" letter-spacing="2">01 / COMMAND</text></g>
+<g transform="translate(90 12) rotate(8 105 136)"><rect width="210" height="272" rx="11" fill="url(#card)" stroke="#9b9969"/><path d="M18 40H192M18 232H192" stroke="#687452"/><text x="20" y="27" fill="#c7ba84" font-size="10" font-family="monospace" letter-spacing="2">02 / RESOLVE</text><g transform="translate(105 132)" fill="none" stroke="#cbb784"><path d="M0-62 55 0 0 62-55 0Z" stroke-width="1.5"/><path d="M0-39 35 0 0 39-35 0Z"/><circle r="18"/><path d="M-55 0H55M0-62V62" stroke-opacity=".45"/></g><text x="20" y="253" fill="#aabc9d" font-family="monospace" font-size="10">PRIORITY → STACK → STATE</text></g>
+<circle cx="91" cy="-10" r="3" fill="#d7be83"/><circle cx="338" cy="192" r="3" fill="#d7be83"/><circle cx="-6" cy="186" r="2" fill="#82976f"/></g>
+<text x="76" y="486" fill="#92a086" font-family="monospace" font-size="11" letter-spacing="1.3">DETERMINISTIC BY CONSTRUCTION</text><text x="1364" y="486" fill="#92a086" font-family="monospace" font-size="11" letter-spacing="1.3" text-anchor="end">SMALL RULES KERNEL. EXPLICIT BOUNDARIES.</text>
+</svg>

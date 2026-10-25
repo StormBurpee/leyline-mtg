@@ -1,6 +1,28 @@
 {
-  "name": "leyline-mtg", "version": "0.1.0", "private": true,
+  "name": "leyline-mtg",
+  "version": "0.1.0",
+  "private": true,
   "description": "A deterministic JavaScript Magic rules kernel and a modern tabletop client.",
-  "type": "module", "license": "GPL-3.0-or-later", "engines": {"node": ">=22"},
-  "scripts": {"test": "node --test packages/engine/test/*.test.js", "start": "node scripts/serve.mjs", "check": "node scripts/check.mjs"}
+  "type": "module",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node scripts/test.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/build.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:coverage": "node scripts/test.mjs --experimental-test-coverage --test-coverage-include=packages/engine/src/**",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "workspaces": [
+    "packages/engine"
+  ],
+  "devDependencies": {
+    "prettier": "3.6.2",
+    "typescript": "5.9.3"
+  }
 }
