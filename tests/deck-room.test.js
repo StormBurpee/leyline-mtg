@@ -60,3 +60,39 @@ test('deck room and builder escape custom titles and clearly gate incomplete lis
   assert.ok(builder.includes('Deck needs at least 60 cards'));
   assert.ok(!builder.includes('<script>'));
 });
+
+test('mobile builder panel controls retain count and separate reading from addition', () => {
+  const ui = {
+    deckDraft: { name: 'Four Shocks', cards: { Shock: 4, Mountain: 20 } },
+    builderQuery: 'Shock',
+    builderColor: 'all',
+    builderType: 'all',
+    builderPanel: 'list',
+  };
+  const before = structuredClone(ui.deckDraft);
+  const html = deckBuilder(ui, {});
+  assert.match(html, /data-builder-panel="list"/);
+  assert.match(html, /data-panel="list" aria-pressed="true"/);
+  assert.match(html, /My deck <b>24<\/b>/);
+  assert.match(
+    html,
+    /class="builder-card-preview" data-action="inspectDraftCard" data-name="Shock" aria-label="Read Shock">/,
+  );
+  assert.match(html, /class="builder-card-add"[^>]+aria-label="Add Shock" disabled/);
+  assert.match(html, /class="builder-list-name" data-action="inspectDraftCard" data-name="Shock"/);
+  assert.deepEqual(ui.deckDraft, before);
+});
+test('invalid panel values fall back to the collection and a basic land stays addable', () => {
+  const html = deckBuilder(
+    {
+      deckDraft: { name: 'Lands', cards: { Mountain: 20 } },
+      builderQuery: 'Mountain',
+      builderColor: 'all',
+      builderType: 'all',
+      builderPanel: 'bad',
+    },
+    {},
+  );
+  assert.match(html, /data-builder-panel="pool"/);
+  assert.doesNotMatch(html, /class="builder-card-add"[^>]+aria-label="Add Mountain" disabled/);
+});
