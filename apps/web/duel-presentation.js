@@ -1,3 +1,4 @@
+import { installHandLayout } from './hand-layout.js';
 import {
   definition,
   planPayment,
@@ -11,6 +12,7 @@ const escape = (s) =>
     (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
   );
 export function installDuelPresentation(root, context) {
+  const layoutHand = installHandLayout(root);
   const preview = document.createElement('div');
   preview.id = 'card-preview';
   preview.setAttribute('aria-hidden', 'true');
@@ -156,7 +158,14 @@ export function installDuelPresentation(root, context) {
     stackDot.setAttribute('cy', ty);
     stackAim.classList.toggle('opposing', entry.controller !== player);
   }
-  root.addEventListener('scroll', redrawStack, true);
+  root.addEventListener(
+    'scroll',
+    () => {
+      hidePreview();
+      redrawStack();
+    },
+    true,
+  );
   root.addEventListener('pointerover', (e) => {
     const card = e.target.closest('[data-card]');
     if (card && !card.contains(e.relatedTarget)) show(card);
@@ -182,14 +191,17 @@ export function installDuelPresentation(root, context) {
   });
   window.addEventListener('blur', hidePreview);
   window.addEventListener('resize', () => {
+    layoutHand();
     hidePreview();
     redrawAim();
     redrawStack();
   });
   return {
+    layoutHand,
     hidePreview,
     payment,
     refresh() {
+      layoutHand();
       const { state, ui } = context();
       root.classList.toggle(
         'is-targeting',
