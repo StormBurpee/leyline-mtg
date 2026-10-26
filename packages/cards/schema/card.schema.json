@@ -383,7 +383,14 @@
       "type": "object",
       "properties": {
         "scope": {
-          "enum": ["permanent", "spell", "player", "damageable", "graveyard"]
+          "enum": [
+            "permanent",
+            "spell",
+            "player",
+            "damageable",
+            "graveyard",
+            "playerOrPlaneswalker"
+          ]
         },
         "where": {
           "$ref": "#/$defs/predicate"
@@ -396,7 +403,16 @@
       "type": "object",
       "properties": {
         "event": {
-          "enum": ["enter", "cast", "dies", "attack", "step"]
+          "enum": [
+            "enter",
+            "cast",
+            "dies",
+            "attack",
+            "step",
+            "attackGroup",
+            "noncombatDamageToPlayer",
+            "faceUp"
+          ]
         },
         "object": {
           "const": "source"
@@ -438,6 +454,9 @@
         },
         "sacrificeSelf": {
           "type": "boolean"
+        },
+        "discard": {
+          "const": 1
         }
       },
       "required": [],
@@ -679,6 +698,31 @@
             },
             "tapped": {
               "type": "boolean"
+            },
+            "temporaryKeywords": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "flying",
+                  "reach",
+                  "vigilance",
+                  "haste",
+                  "trample",
+                  "deathtouch",
+                  "lifelink",
+                  "defender",
+                  "first strike",
+                  "double strike",
+                  "flash",
+                  "hexproof",
+                  "shroud",
+                  "indestructible",
+                  "menace"
+                ]
+              },
+              "maxItems": 16,
+              "uniqueItems": true
             }
           },
           "required": ["op", "token", "amount"],
@@ -935,6 +979,69 @@
           },
           "required": ["op", "target"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "damageEventOpponent"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "addMana"
+            },
+            "mana": {
+              "$ref": "#/$defs/mana"
+            }
+          },
+          "required": ["op", "mana"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "impulseChoose"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "bindingNegotiation"
+            }
+          },
+          "required": ["op"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "damageEventPowerOpponent"
+            }
+          },
+          "required": ["op"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1021,6 +1128,18 @@
             },
             "sacrificeSelf": {
               "type": "boolean"
+            },
+            "conditions": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/condition"
+              }
+            },
+            "restrictions": {
+              "type": "object",
+              "additionalProperties": {
+                "enum": ["creature", "chosenCreatureType"]
+              }
             }
           },
           "required": ["kind", "produces"],
@@ -1072,6 +1191,12 @@
             },
             "timing": {
               "const": "sorcery"
+            },
+            "condition": {
+              "$ref": "#/$defs/condition"
+            },
+            "oncePerTurn": {
+              "type": "boolean"
             }
           },
           "required": ["kind", "cost", "effects"],
@@ -1099,6 +1224,9 @@
             },
             "target": {
               "$ref": "#/$defs/selector"
+            },
+            "condition": {
+              "$ref": "#/$defs/condition"
             }
           },
           "required": ["kind", "on", "effects"],
@@ -1112,6 +1240,9 @@
             },
             "tapped": {
               "const": true
+            },
+            "unless": {
+              "$ref": "#/$defs/condition"
             }
           },
           "required": ["kind", "tapped"],
@@ -1230,6 +1361,157 @@
             }
           },
           "required": ["kind", "restriction"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "entryCounterBonus"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            },
+            "condition": {
+              "$ref": "#/$defs/condition"
+            }
+          },
+          "required": ["kind", "amount", "condition"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "damageBonus"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": ["kind", "amount", "where"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "startEngines"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "maxSpeedKeywords"
+            },
+            "keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 16
+            }
+          },
+          "required": ["kind", "keywords"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "kicker"
+            },
+            "cost": {
+              "$ref": "#/$defs/mana"
+            },
+            "effects": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/effect"
+              },
+              "maxItems": 64
+            }
+          },
+          "required": ["kind", "cost", "effects"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "offspring"
+            },
+            "cost": {
+              "$ref": "#/$defs/mana"
+            }
+          },
+          "required": ["kind", "cost"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "chooseCreatureType"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "disguise"
+            },
+            "cost": {
+              "$ref": "#/$defs/mana"
+            }
+          },
+          "required": ["kind", "cost"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "opponentLostLifeThisTurn"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "controlAtLeast"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": ["kind", "count", "where"],
           "additionalProperties": false
         }
       ]

@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "60654004-7d9a-47ac-a70d-b246dd1728d3",
+  "name": "Valley Flamecaller",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Warlock"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "If a Lizard, Mouse, Otter, or Raccoon you control would deal damage to a permanent or player, it deals that much damage plus 1 instead.",
+  "abilities": [
+    {
+      "kind": "damageBonus",
+      "amount": 1,
+      "where": {
+        "any": [
+          {
+            "subtype": "Lizard"
+          },
+          {
+            "subtype": "Mouse"
+          },
+          {
+            "subtype": "Otter"
+          },
+          {
+            "subtype": "Raccoon"
+          }
+        ]
+      }
+    }
+  ]
+}

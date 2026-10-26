@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b173245e-2009-48ff-ac42-5f28d12aec79",
+  "name": "Fireglass Mentor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Warlock"],
+    "colors": ["B", "R"],
+    "manaCost": "{B}{R}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "At the beginning of your second main phase, if an opponent lost life this turn, exile the top two cards of your library. Choose one of them. Until end of turn, you may play that card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "main2",
+        "controller": "you"
+      },
+      "condition": {
+        "kind": "opponentLostLifeThisTurn"
+      },
+      "effects": [
+        {
+          "op": "impulseChoose",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

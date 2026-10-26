@@ -1,3 +1,5 @@
+import { playableZone, playableCards } from '../../packages/engine/src/model.js';
+import { castingChoices } from '../../packages/engine/src/spell-modes.js';
 import { readableCard } from './card-inspection.js';
 import { advanceLabel, stopKey } from './priority-policy.js';
 import {
@@ -97,6 +99,7 @@ export function handCard(s, id, meta, ui, playable, index = 0) {
   return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="hand" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${playable ? ', playable' : ''}" aria-description="${escape(d.text)}" title="${escape(o.name)}">${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
 }
 function permanent(s, o, meta, ui, targetable) {
+  if (o.faceDown) o = { ...o, name: 'Face-down creature' };
   const d = definition(s, o),
     land = d.type === 'land';
   if (land)
@@ -126,7 +129,7 @@ export function game(s, ui, meta) {
     targetKind = selected
       ? ui.activation !== null
         ? definition(s, selected).activated?.[ui.activation]?.target
-        : selected.zone === 'hand'
+        : playableZone(s, selected, viewer)
           ? spellProfile(definition(s, selected), ui.spellMode ?? undefined)?.target
           : null
       : null,
@@ -144,11 +147,17 @@ export function game(s, ui, meta) {
         ? 'end'
         : 'combat';
   const band = (p, bottom = false) =>
-    `<div class="player-band ${bottom ? 'bottom' : ''} ${targetList.some((t) => t.kind === 'player' && t.id === p) ? 'targetable-player' : ''}" data-player="${p}"><div class="avatar">${p === 0 ? 'S' : 'G'}</div><div class="player-name">${escape(s.players[p].name)}<small>${s.active === p ? 'ACTIVE PLAYER' : 'DEFENDING PLAYER'}${s.priority === p && !s.choice ? ' · PRIORITY' : ''}</small><span class="compact-hand-count">${s.players[p].hand.length} cards</span></div><button class="life ${targetList.some((t) => t.kind === 'player' && t.id === p) ? 'targetable' : ''}" data-player="${p}" aria-label="${escape(s.players[p].name)} life ${s.players[p].life}">${s.players[p].life}</button><div class="pool ${Object.values(s.players[p].mana).some((amount) => amount > 0) ? '' : 'empty-pool'}">${
+    `<div class="player-band ${bottom ? 'bottom' : ''} ${targetList.some((t) => t.kind === 'player' && t.id === p) ? 'targetable-player' : ''}" data-player="${p}"><div class="avatar">${p === 0 ? 'S' : 'G'}</div><div class="player-name">${escape(s.players[p].name)}<small>${s.active === p ? 'ACTIVE PLAYER' : 'DEFENDING PLAYER'}${s.players[p].speed ? ` · SPEED ${s.players[p].speed}${s.players[p].speed === 4 ? ' MAX' : ''}` : ''}${s.priority === p && !s.choice ? ' · PRIORITY' : ''}</small><span class="compact-hand-count">${s.players[p].hand.length} cards</span></div><button class="life ${targetList.some((t) => t.kind === 'player' && t.id === p) ? 'targetable' : ''}" data-player="${p}" aria-label="${escape(s.players[p].name)} life ${s.players[p].life}">${s.players[p].life}</button><div class="pool ${Object.values(s.players[p].mana).some((amount) => amount > 0) || s.players[p].restrictedMana?.length ? '' : 'empty-pool'}">${
       Object.entries(s.players[p].mana)
         .filter(([, n]) => n)
         .map(([c, n]) => `${mana({ [c]: 1 })}${n}`)
-        .join('') || '<span>0 mana</span>'
+        .join('') +
+        (s.players[p].restrictedMana ?? [])
+          .map(
+            (unit) =>
+              `<span title="${escape(unit.restriction === 'creature' ? 'Creature spells only' : `${unit.creatureType} creature spells only; uncounterable`)}">${mana({ [unit.color]: 1 })}*</span>`,
+          )
+          .join('') || '<span>0 mana</span>'
     }</div><div class="zone-counts"><span class="zone-count" data-library="${p}" title="Library">▱ ${s.players[p].library.length}</span><button class="zone-count" data-action="zone" data-player="${p}" data-zone="graveyard" aria-label="${escape(s.players[p].name)} graveyard ${s.players[p].graveyard.length}">† ${s.players[p].graveyard.length}</button><button class="zone-count" data-action="zone" data-player="${p}" data-zone="exile" aria-label="Exile">◇ ${s.players[p].exile.length}</button>${
       !bottom
         ? `<div class="backs" data-hand-owner="${p}" aria-label="${s.players[p].hand.length} cards in opponent hand">${s.players[
@@ -192,7 +201,14 @@ export function game(s, ui, meta) {
     )
     .join(
       '',
-    )}<button class="phase-stop-menu" data-action="phaseStops" aria-label="Set phase stops">Stops ⋯</button></div>${band(other)}${field(other)}<div class="attack-line">${s.combat.attackers.length ? `${s.combat.attackers.length} attacking · ${stepName[s.step]}` : s.status === 'mulligan' ? 'Opening hands' : stepName[s.step]}</div>${field(viewer)}${band(viewer, true)}<section class="hand-area"><div class="hand-label"><span>Your hand · ${s.players[viewer].hand.length}</span><button data-action="handSize">${ui.handExpanded ? 'Compact hand' : 'Expand hand'}</button><button class="read-hand-card" data-action="readCard" ${readableCard(s, ui, viewer) ? '' : 'disabled'} title="Select or hold a visible card to read its rules">Read card</button><span>${ui.targeting ? 'Choose a highlighted target' : ui.mode === 'hotseat' ? `Seat ${viewer + 1} · shared screen` : 'Drag or double-click to play · hover to read'}</span></div><div class="hand ${s.players[viewer].hand.length > 10 ? 'wide-hand' : ''}" data-scroll-key="hand-${viewer}">${s.players[viewer].hand.map((id, index) => handCard(s, id, meta, ui, playable.has(id), index)).join('')}</div></section>${targetPrompt(s, ui, meta)}${actionDock(s, ui, viewer, actions)}${s.status === 'finished' ? `<div class="board-notice game-over"><div class="eyebrow">Match complete</div><h2>${s.winner === null ? 'A shared ending.' : s.winner === viewer ? 'Well played.' : 'A lesson in every game.'}</h2><p>${s.winner === null ? 'The game is a draw.' : `${escape(s.players[s.winner].name)} wins.`}</p><button class="btn primary" data-action="newMatch">Play again ↗</button></div>` : ''}</section><aside class="inspector ${ui.inspectorOpen ? 'open' : ''} ${s.stack.length || s.resolving ? 'stack-visible' : ''} ${ui.sideTab === 'log' ? 'log-visible' : ''}"><div class="inspect-head"><span class="desktop-inspector-label">Card inspector</span><span class="mobile-inspector-label">${ui.sideTab === 'log' ? 'Game log' : 'Stack'}</span><button class="mobile-inspector-toggle" data-action="inspector" aria-label="Close inspector">×</button><span>◇</span></div><div id="inspect-detail">${inspect(ui.inspect ?? selected?.name, meta, s, ui.inspectObject)}</div><div class="side-tabs"><button data-action="sideTab" data-tab="stack" class="${ui.sideTab === 'stack' ? 'active' : ''}">Stack <span class="stack-count">${s.stack.length}</span></button><button data-action="sideTab" data-tab="log" class="${ui.sideTab === 'log' ? 'active' : ''}">Game log</button></div><div class="side-content" data-scroll-key="sidebar-${ui.sideTab}">${ui.sideTab === 'stack' ? stack(s, ui, meta) : log(s)}</div></aside></main>`;
+    )}<button class="phase-stop-menu" data-action="phaseStops" aria-label="Set phase stops">Stops ⋯</button></div>${band(other)}${field(other)}<div class="attack-line">${s.combat.attackers.length ? `${s.combat.attackers.length} attacking · ${stepName[s.step]}` : s.status === 'mulligan' ? 'Opening hands' : stepName[s.step]}</div>${field(viewer)}${band(viewer, true)}<section class="hand-area"><div class="hand-label"><span>Your hand · ${s.players[viewer].hand.length}</span><button data-action="handSize">${ui.handExpanded ? 'Compact hand' : 'Expand hand'}</button><button class="read-hand-card" data-action="readCard" ${readableCard(s, ui, viewer) ? '' : 'disabled'} title="Select or hold a visible card to read its rules">Read card</button><span>${ui.targeting ? 'Choose a highlighted target' : ui.mode === 'hotseat' ? `Seat ${viewer + 1} · shared screen` : 'Drag or double-click to play · hover to read'}</span></div><div class="hand ${s.players[viewer].hand.length > 10 ? 'wide-hand' : ''}" data-scroll-key="hand-${viewer}">${playableCards(
+    s,
+    viewer,
+  )
+    .map((id, index) => handCard(s, id, meta, ui, playable.has(id), index))
+    .join(
+      '',
+    )}</div></section>${targetPrompt(s, ui, meta)}${actionDock(s, ui, viewer, actions)}${s.status === 'finished' ? `<div class="board-notice game-over"><div class="eyebrow">Match complete</div><h2>${s.winner === null ? 'A shared ending.' : s.winner === viewer ? 'Well played.' : 'A lesson in every game.'}</h2><p>${s.winner === null ? 'The game is a draw.' : `${escape(s.players[s.winner].name)} wins.`}</p><button class="btn primary" data-action="newMatch">Play again ↗</button></div>` : ''}</section><aside class="inspector ${ui.inspectorOpen ? 'open' : ''} ${s.stack.length || s.resolving ? 'stack-visible' : ''} ${ui.sideTab === 'log' ? 'log-visible' : ''}"><div class="inspect-head"><span class="desktop-inspector-label">Card inspector</span><span class="mobile-inspector-label">${ui.sideTab === 'log' ? 'Game log' : 'Stack'}</span><button class="mobile-inspector-toggle" data-action="inspector" aria-label="Close inspector">×</button><span>◇</span></div><div id="inspect-detail">${inspect(ui.inspect ?? selected?.name, meta, s, ui.inspectObject, viewer)}</div><div class="side-tabs"><button data-action="sideTab" data-tab="stack" class="${ui.sideTab === 'stack' ? 'active' : ''}">Stack <span class="stack-count">${s.stack.length}</span></button><button data-action="sideTab" data-tab="log" class="${ui.sideTab === 'log' ? 'active' : ''}">Game log</button></div><div class="side-content" data-scroll-key="sidebar-${ui.sideTab}">${ui.sideTab === 'stack' ? stack(s, ui, meta) : log(s)}</div></aside></main>`;
 }
 function targetPrompt(s, ui, meta) {
   const choice = s.choice?.kind === 'triggerTarget' ? s.choice : null;
@@ -268,6 +284,33 @@ function actionDock(s, ui, p, actions) {
         buttons =
           '<button class="btn" data-action="declineOptional">Decline</button><button class="btn primary" data-action="acceptOptional">Resolve effect →</button>';
         break;
+      case 'exilePlay':
+      case 'bindingNegotiation':
+      case 'exileToGraveyard': {
+        title =
+          c.kind === 'exilePlay'
+            ? 'Choose an exiled card to play this turn'
+            : c.kind === 'bindingNegotiation'
+              ? 'Revealed hand: choose a nonland to discard'
+              : 'Put one of their face-up exiled cards into their graveyard?';
+        desc = 'Finish this choice before resolution continues.';
+        buttons =
+          c.cards
+            .map(
+              (id) =>
+                `<button class="btn" data-action="chooseResolutionCard" data-cardid="${escape(id)}" ${c.kind === 'bindingNegotiation' && definition(s, s.objects[id]).type === 'land' ? 'disabled' : ''}>${escape(s.objects[id].name)}</button>`,
+            )
+            .join('') +
+          (c.kind !== 'exilePlay'
+            ? '<button class="btn" data-action="skipResolutionCard">Choose none</button>'
+            : '');
+        break;
+      }
+      case 'creatureType':
+        title = 'Choose a creature type';
+        desc = 'Choose the type for Cavern of Souls as it enters.';
+        buttons = `<select id="entry-creature-type" aria-label="Creature type">${c.types.map((type) => `<option value="${escape(type)}" ${type === 'Lizard' ? 'selected' : ''}>${escape(type)}</option>`).join('')}</select><button class="btn primary" data-action="chooseCreatureType">Confirm type</button>`;
+        break;
       case 'payCost':
         title = 'Pay for ward?';
         desc = `Pay ${[...Object.entries(c.cost.mana ?? {}).map(([symbol, count]) => (symbol === 'generic' ? `${count} mana` : `${count}${symbol}`)), ...(c.cost.life ? [`${c.cost.life} life`] : [])].join(' + ') || '0'} or your spell or ability will be countered. No player receives priority during this choice.`;
@@ -305,14 +348,14 @@ function actionDock(s, ui, p, actions) {
   } else if (ui.targeting) {
     title = `Target for ${s.objects[ui.selected]?.name}`;
     desc = 'Choose a highlighted target or open the legal-target list.';
-    buttons = `${definition(s, s.objects[ui.selected]).modes ? '<button class="btn" data-action="spellModes">Change mode</button>' : ''}<button class="btn" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="spellTargets">List legal targets →</button>`;
-  } else if (ui.selected && s.objects[ui.selected]?.zone === 'hand') {
+    buttons = `${castingChoices(definition(s, s.objects[ui.selected])) ? '<button class="btn" data-action="spellModes">Change mode</button>' : ''}<button class="btn" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="spellTargets">List legal targets →</button>`;
+  } else if (ui.selected && playableZone(s, s.objects[ui.selected], p)) {
     const o = s.objects[ui.selected],
       d = definition(s, o),
       available = actions.some((a) => a.card === o.id && ['cast', 'playLand'].includes(a.type));
     title = o.name;
     desc = available
-      ? d.modes
+      ? castingChoices(d)
         ? 'Choose one mode, then any required target. Mana is paid when you cast.'
         : d.target
           ? 'Choose a target next. Mana is paid automatically.'
@@ -320,12 +363,16 @@ function actionDock(s, ui, p, actions) {
             ? 'Playing a land does not use the stack.'
             : 'Available mana sources will be tapped automatically.'
       : 'Not playable right now. Check timing, available mana and targets.';
-    buttons = `${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">Cycle ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${d.type === 'land' ? 'Play land' : d.modes ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
+    buttons = `${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">Cycle ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${d.type === 'land' ? 'Play land' : castingChoices(d) ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
   } else
     buttons = `<button class="btn primary advance-button" data-action="pass">${advanceLabel(s, p)} <span>→</span><small>Space</small></button>`;
   return `<div class="action-dock" aria-live="polite"><div class="action-copy"><strong>${escape(title)}</strong><p>${escape(desc)}</p></div><div class="action-buttons"><button class="btn quiet short-read-card" data-action="readCard" ${readableCard(s, ui, p) ? '' : 'disabled'} aria-label="Read selected card">Read</button>${ui.yieldMode ? '<button class="btn short-yield-stop" data-action="cancelYield">Stop passing</button>' : ''}${buttons}</div>${ui.mode === 'bot' && s.status === 'playing' ? `<div class="priority-controls"><button data-action="toggleFullControl" aria-pressed="${ui.controlMode === 'full'}" title="Full control: stop at every priority window (F)">${ui.controlMode === 'full' ? '● Full control' : '○ Smart play'}</button>${ui.yieldMode ? `<button class="yield-active" data-action="cancelYield">Auto-passing · Stop ×</button>` : `<button data-action="yieldResponse" title="Pass until an opponent puts a new effect on the stack (Enter)">Pass until response</button><button data-action="yieldTurn" title="Pass through this turn, including responses (Shift+Enter)">Pass turn</button>`}<button data-action="prioritySettings" aria-label="Priority automation settings">⚙</button></div>` : ''}</div>`;
 }
-export function inspect(name, meta, state = null, objectId = null) {
+export function inspect(name, meta, state = null, objectId = null, viewer = null) {
+  const object = state?.objects[objectId];
+  if (object?.faceDown && object.controller !== viewer)
+    return '<div class="inspect-copy"><h3>Face-down creature</h3><p>Colorless 2/2 creature with ward {2}. Its identity is concealed.</p></div>';
+
   if (!name || !(state?.catalog?.[name] ?? CARDS[name]))
     return '<div class="inspect-placeholder"><div><span>◇</span>A closer look.<br>Hover or select any card.</div></div>';
   const d = state?.catalog?.[name] ?? CARDS[name],
@@ -479,8 +526,8 @@ export function legendChoiceBody(state, metadata = {}) {
 export function spellModeBody(state, player, id) {
   const card = definition(state, state.objects[id]);
   const legal = legalActions(state, player).filter((a) => a.type === 'cast' && a.card === id);
-  return `<p>Choose one mode. Targets and payment are announced before the spell goes onto the stack.</p><div class="target-grid">${(
-    card.modes ?? []
+  return `<p>Choose how to cast this spell. Targets and payment are announced before the spell goes onto the stack.</p><div class="target-grid">${(
+    castingChoices(card) ?? []
   )
     .map((mode, index) => {
       const available = legal.some((a) => a.mode === index);

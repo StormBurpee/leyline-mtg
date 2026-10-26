@@ -30,7 +30,14 @@ const PRESETS = freeze({
   },
   permanent: { scope: 'permanent' },
 });
-const SCOPES = new Set(['permanent', 'spell', 'player', 'damageable', 'graveyard']);
+const SCOPES = new Set([
+  'permanent',
+  'spell',
+  'player',
+  'damageable',
+  'graveyard',
+  'playerOrPlaneswalker',
+]);
 const COMPARISONS = new Set(['eq', 'ne', 'lt', 'lte', 'gt', 'gte']);
 export function targetSpec(value) {
   return typeof value === 'string'
@@ -179,7 +186,7 @@ export function effectTargetCompatible(op, value, effect = null) {
   if (!spec) return false;
   if (op === 'damage')
     return (
-      ['damageable', 'player'].includes(spec.scope) ||
+      ['damageable', 'player', 'playerOrPlaneswalker'].includes(spec.scope) ||
       (spec.scope === 'permanent' && impliesCreature(spec.where))
     );
   if (op === 'modify')

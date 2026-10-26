@@ -411,6 +411,6 @@ test('legacy 0.1 replay envelopes remain readable', () => {
   delete record.schemaVersion;
   delete record.config.catalog;
   const restored = replay(record);
-  assert.equal(restored.version, '0.24.0');
+  assert.equal(restored.version, '0.25.0');
   assert.equal(restored.seed, 17);
 });

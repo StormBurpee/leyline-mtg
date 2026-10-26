@@ -69,6 +69,14 @@ export function declareAttackers(s, ids) {
   emit(s, 'attackers', { player: s.active, ids });
   // CR 508.1m: only declared attackers trigger. Resolve nothing during declaration.
   for (const id of ids) notifyTriggers(s, 'attack', { object: s.objects[id] });
+  if (ids.length)
+    notifyTriggers(s, 'attackGroup', {
+      player: s.active,
+      objects: ids.map((id) => ({
+        definition: definition(s, s.objects[id]),
+        controller: s.active,
+      })),
+    });
 }
 export function declareBlockers(s, pairs) {
   requireRule(Array.isArray(pairs), 'BLOCKERS', 'Block assignments must be an array.');
@@ -284,7 +292,7 @@ export function assignDamage(s, orders) {
     return;
   }
   // All sources and damage amounts were frozen before any packet was applied.
-  for (const packet of c.packets) dealDamage(s, packet.source, packet.target, packet.amount);
+  for (const packet of c.packets) dealDamage(s, packet.source, packet.target, packet.amount, true);
   s.choice = null;
   s.priority = s.active;
   s.passes = 0;

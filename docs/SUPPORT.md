@@ -35,9 +35,22 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Legendary permanents: explicit controller choices in APNAP order, simultaneous graveyard placement alongside other state-based actions, and retained death/enter triggers. Indestructible does not prevent the legend rule.
 - State-based loss from life or empty-library draw, lethal/zero-toughness/deathtouch deaths, token cleanup and invalid Aura attachments.
 
+## Requested Rakdos deck (v0.25)
+
+The exact 60-card default in `docs/decks/storm-rakdos.txt` is executable. This adds all 18 formerly missing nonbasic definitions, not substitute cards.
+
+- Conditional land entry, subtype-conditioned mana and creature/type-restricted floating mana; Cavern chooses a creature type and marks spells uncounterable only when its restricted mana is spent.
+- Public per-turn life-loss history, intervening-if triggers, once-per-turn activations, discard costs and attack-group/noncombat-damage events.
+- Gev's additional entry counters, Valley's additive damage replacement and attacker/face-up creature damage with last-known source characteristics.
+- Kicker, offspring 1/1 token copies, disguise casting and special-action turn-up. Face-down objects are nameless colorless 2/2 creatures with ward {2}; opponent observations conceal their identity.
+- Start your engines as a state-based action, independent once-per-own-turn speed triggers, persistent speed and max-speed keywords. Rules reference: [Aetherdrift release notes](https://magic.wizards.com/en/news/feature/aetherdrift-release-notes).
+- Fireglass Mentor's second-main-phase exile choice and turn-limited play permission; Binding Negotiation's temporary hand reveal, optional nonland discard and fallback for a face-up exiled card **the targeted opponent owns**.
+
+The player-or-planeswalker selector currently offers players because planeswalker objects remain outside this kernel. These cards are executable within the documented two-player supported-card pool, not a claim of universal interaction parity. Disguise is currently authored only on supported creatures; general morph, manifest, cloak and copy effects remain outside scope.
+
 ## Deliberately not claimed
 
-Commander/Brawl, more than two players, commander tax/damage, planeswalkers, battles, Equipment, general activated costs, graveyard casting, alternative costs, replacement/prevention ordering, general layers/dependencies, continuous control changes, legendary sorcery casting restrictions, multi-mode selection and modal triggered/activated abilities, opponent-library search, replacement search restrictions, split-destination searches, adventures, transforming cards, Sagas, copies, protection, non-mana/non-life ward costs, poison, storm, combat restrictions beyond this pool, and tournament legality are not implemented.
+Commander/Brawl, more than two players, commander tax/damage, planeswalkers, battles, Equipment, general activated costs, graveyard casting, alternative costs beyond the authored disguise path, general replacement/prevention ordering, general layers/dependencies, continuous control changes, legendary sorcery casting restrictions, multi-mode selection and modal triggered/activated abilities, opponent-library search, replacement search restrictions, split-destination searches, adventures, transforming cards, Sagas, general copy effects beyond offspring, protection, non-mana/non-life ward costs, poison, storm, combat restrictions beyond this pool, and tournament legality are not implemented.
 
 Do not add these cards as “vanilla” approximations. An unsupported card should fail at import time rather than silently change the game.
 

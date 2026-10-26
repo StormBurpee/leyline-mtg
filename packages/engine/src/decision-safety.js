@@ -54,7 +54,9 @@ function actionCost(state, action) {
   if (!action.card) return {};
   const card = definition(state, state.objects[action.card]);
   if (action.type === 'cycle') return { mana: card.cycling };
-  return action.type === 'activate' ? card.activated[action.ability].cost : { mana: card.cost };
+  return action.type === 'activate'
+    ? card.activated[action.ability].cost
+    : { mana: spellProfile(card, action.mode)?.cost ?? card.cost };
 }
 
 /** Check ward after the actual automatic base-payment plan, not against mana that

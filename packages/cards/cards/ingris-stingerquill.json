@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bda098cb-31ec-41a1-a9d7-122877cc69d2",
+  "name": "Ingris Stingerquill",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Elder", "Sphinx"],
+    "colors": ["B", "R"],
+    "manaCost": "{B}{R}{R}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhenever a creature you control attacks, that creature deals 1 damage to each opponent.\n{4}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Then creatures you control gain haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "controller": "you",
+        "filter": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "damageEventOpponent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}"
+      },
+      "text": "Create a Cadet. Creatures you control gain haste until end of turn.",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/cadet",
+          "amount": 1
+        },
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["haste"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

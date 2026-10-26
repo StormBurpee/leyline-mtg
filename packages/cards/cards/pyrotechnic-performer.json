@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "78f9ec0f-6015-4024-aca6-9a14cba373fa",
+  "name": "Pyrotechnic Performer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Assassin"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Disguise {R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhenever this creature or another creature you control is turned face up, that creature deals damage equal to its power to each opponent.",
+  "abilities": [
+    {
+      "kind": "disguise",
+      "cost": "{R}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "faceUp",
+        "controller": "you",
+        "filter": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "damageEventPowerOpponent"
+        }
+      ]
+    }
+  ]
+}

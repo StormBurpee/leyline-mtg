@@ -1,4 +1,4 @@
-export { spellProfile, spellOptions } from './spell-modes.js';
+export { spellProfile, spellOptions, castingChoices } from './spell-modes.js';
 export {
   CARDS,
   CARD_IDS,

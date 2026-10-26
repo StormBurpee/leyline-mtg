@@ -1,3 +1,5 @@
+import { playableZone, playableCards } from '../../packages/engine/src/model.js';
+import { castingChoices } from '../../packages/engine/src/spell-modes.js';
 import { legalActions, canAttack, canBlock, definition } from '../../packages/engine/src/index.js';
 
 /** A projection of current legal actions, not a second implementation of the rules. */
@@ -18,8 +20,8 @@ export function cardDropPlan(state, player, id) {
         .filter((attacker) => canBlock(state, object, state.objects[attacker.id], player))
         .map((attacker) => ({ target: attacker, card: id })),
     };
-  if (state.choice || object.zone !== 'hand' || object.owner !== player) return null;
-  if (definition(state, object).modes)
+  if (state.choice || !playableZone(state, object, player)) return null;
+  if (castingChoices(definition(state, object)))
     return {
       kind: 'chooseMode',
       destinations: legalActions(state, player).some((a) => a.type === 'cast' && a.card === id)

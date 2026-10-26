@@ -11,7 +11,10 @@ import {
 import { beginDamage, combatants } from './combat.js';
 import { stabilize, stateBasedActions } from './effects.js';
 export function clearMana(s) {
-  for (const p of s.players) p.mana = emptyMana();
+  for (const p of s.players) {
+    p.mana = emptyMana();
+    p.restrictedMana = [];
+  }
 }
 export function nextTurn(s) {
   s.active = opponent(s.active);
@@ -28,6 +31,7 @@ export function nextTurn(s) {
 export function finishCleanup(s) {
   for (const o of Object.values(s.objects)) {
     o.damage = 0;
+    delete o.playPermission;
     o.deathtouchDamage = false;
   }
   s.modifiers = s.modifiers.filter((m) => m.expires !== s.turn);

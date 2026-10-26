@@ -18,6 +18,14 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const effects = (list) =>
     list.map((e) => {
       switch (e.op) {
+        case 'impulseChoose':
+          return { op: 'impulseChoose', amount: e.count };
+        case 'bindingNegotiation':
+          return { op: 'bindingNegotiation' };
+        case 'addMana':
+          return { op: 'addMana', mana: mana(e.mana) };
+        case 'damageEventPowerOpponent':
+        case 'damageEventOpponent':
         case 'destroyAll':
         case 'exileAll':
         case 'damageAll':
@@ -91,6 +99,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return {
             op: 'createToken',
             token: idsByName[e.definition],
+            ...(e.temporaryKeywords ? { temporaryKeywords: [...e.temporaryKeywords] } : {}),
             amount: e.count,
             ...(e.player ? { controller: e.player } : {}),
             ...(e.tapped ? { tapped: true } : {}),
@@ -105,9 +114,13 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   if (d.cycling) abilities.push({ kind: 'cycling', cost: mana(d.cycling) });
   if (d.ward) abilities.push({ kind: 'keyword', keyword: 'ward', cost: cost(d.ward) });
   if (d.entersTapped) abilities.push({ kind: 'entry', tapped: true });
+  if (d.entersTappedUnless)
+    abilities.push({ kind: 'entry', tapped: true, unless: structuredClone(d.entersTappedUnless) });
   if (d.mana)
     abilities.push({
       kind: 'mana',
+      ...(d.manaConditions ? { conditions: structuredClone(d.manaConditions) } : {}),
+      ...(d.manaRestrictions ? { restrictions: structuredClone(d.manaRestrictions) } : {}),
       produces: Array.isArray(d.mana) ? d.mana : [d.mana],
       ...(d.manaSacrifice ? { sacrificeSelf: true } : {}),
     });
@@ -160,6 +173,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         on: eventSpec(t.event),
         ...(t.target ? { target: structuredClone(targetSpec(t.target)) } : {}),
         ...(t.optional !== undefined ? { optional: t.optional } : {}),
+        ...(t.condition ? { condition: structuredClone(t.condition) } : {}),
         effects: effects(t.effects),
       });
     }
@@ -171,7 +185,25 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       ...(a.target ? { target: structuredClone(targetSpec(a.target)) } : {}),
       effects: effects(a.effects),
       ...(a.text !== undefined ? { text: a.text } : {}),
+      ...(a.timing ? { timing: a.timing } : {}),
+      ...(a.condition ? { condition: structuredClone(a.condition) } : {}),
+      ...(a.oncePerTurn !== undefined ? { oncePerTurn: a.oncePerTurn } : {}),
     });
+  if (d.chooseCreatureType) abilities.push({ kind: 'chooseCreatureType' });
+  if (d.kicker)
+    abilities.push({
+      kind: 'kicker',
+      cost: mana(d.kicker.cost),
+      effects: effects(d.kicker.effects),
+    });
+  if (d.disguise) abilities.push({ kind: 'disguise', cost: mana(d.disguise) });
+  if (d.offspring) abilities.push({ kind: 'offspring', cost: mana(d.offspring) });
+  if (d.startEngines) abilities.push({ kind: 'startEngines' });
+  if (d.maxSpeedKeywords)
+    abilities.push({ kind: 'maxSpeedKeywords', keywords: [...d.maxSpeedKeywords] });
+  if (d.entryCounterBonus)
+    abilities.push({ kind: 'entryCounterBonus', ...structuredClone(d.entryCounterBonus) });
+  if (d.damageBonus) abilities.push({ kind: 'damageBonus', ...structuredClone(d.damageBonus) });
   if (d.static) {
     if (d.static.kind !== 'anthem') throw new Error('Unsupported continuous rule.');
     abilities.push(structuredClone(d.static));

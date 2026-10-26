@@ -1,3 +1,4 @@
+import { validateCondition } from './condition-schema.js';
 import { validateEventSpec } from './events.js';
 import {
   targetSpec,
@@ -27,10 +28,21 @@ const FIELDS = new Set([
   'token',
   'mana',
   'manaSacrifice',
+  'manaConditions',
+  'manaRestrictions',
+  'chooseCreatureType',
+  'entryCounterBonus',
+  'damageBonus',
+  'startEngines',
+  'maxSpeedKeywords',
+  'entersTappedUnless',
   'target',
   'effects',
   'modes',
   'cycling',
+  'kicker',
+  'offspring',
+  'disguise',
   'cannotAttack',
   'cannotBlock',
   'unblockable',
@@ -70,7 +82,7 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
     errors.push(`${path}: expected a cost object.`);
     return;
   }
-  const allowed = allowTap ? ['mana', 'life', 'tap', 'sacrificeSelf'] : ['mana', 'life'];
+  const allowed = allowTap ? ['mana', 'life', 'tap', 'sacrificeSelf', 'discard'] : ['mana', 'life'];
   if (Object.keys(cost).some((key) => !allowed.includes(key)))
     errors.push(`${path}: unsupported cost.`);
   if (cost.mana !== undefined) validateCost(cost.mana, `${path}.mana`, errors);
@@ -78,6 +90,8 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
     errors.push(`${path}.life: expected a nonnegative safe integer.`);
   if (cost.sacrificeSelf !== undefined && typeof cost.sacrificeSelf !== 'boolean')
     errors.push(`${path}.sacrificeSelf: expected a boolean.`);
+  if (cost.discard !== undefined && cost.discard !== 1)
+    errors.push(`${path}.discard: only a single-card discard cost is supported.`);
   if (cost.tap !== undefined && typeof cost.tap !== 'boolean')
     errors.push(`${path}.tap: expected a boolean.`);
 }
@@ -101,6 +115,11 @@ function validateEffects(effects, path, target, errors) {
     const schema = {
       damage: ['amount'],
       damageOpponent: ['amount'],
+      damageEventOpponent: ['amount'],
+      damageEventPowerOpponent: [],
+      addMana: ['mana'],
+      impulseChoose: ['count'],
+      bindingNegotiation: [],
       gainLife: ['amount', 'player'],
       loseLife: ['amount', 'player'],
       moveTarget: ['destination', 'controller', 'tapped'],
@@ -114,7 +133,7 @@ function validateEffects(effects, path, target, errors) {
       bounce: [],
       destroy: [],
       modify: ['subject', 'power', 'toughness', 'keywords'],
-      token: ['definition', 'count', 'player', 'tapped'],
+      token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords'],
       counterOn: ['subject', 'amount'],
       untap: ['subject'],
       tap: ['subject'],
@@ -134,7 +153,14 @@ function validateEffects(effects, path, target, errors) {
       if (key !== 'op' && !schema.includes(key))
         errors.push(`${p}.${key}: unsupported effect parameter.`);
     if (
-      ['damage', 'damageOpponent', 'gainLife', 'loseLife', 'counterOn'].includes(e.op) &&
+      [
+        'damage',
+        'damageOpponent',
+        'damageEventOpponent',
+        'gainLife',
+        'loseLife',
+        'counterOn',
+      ].includes(e.op) &&
       !natural(e.amount)
     )
       errors.push(`${p}.amount: expected a nonnegative safe integer.`);
@@ -186,7 +212,21 @@ function validateEffects(effects, path, target, errors) {
       )
         errors.push(`${p}.tapped: expected a battlefield entry flag.`);
     }
+    if (e.op === 'impulseChoose' && (!natural(e.count) || e.count > 1000))
+      errors.push(`${p}.count: invalid count.`);
+    if (e.op === 'bindingNegotiation' && targetSpec(target)?.scope !== 'player')
+      errors.push(`${p}: requires a player target.`);
+    if (e.op === 'addMana') {
+      validateCost(e.mana, `${p}.mana`, errors);
+      if (e.mana?.generic !== undefined)
+        errors.push(`${p}.mana: mana production cannot be generic.`);
+    }
     if (e.op === 'token') {
+      if (
+        e.temporaryKeywords !== undefined &&
+        (!Array.isArray(e.temporaryKeywords) || e.temporaryKeywords.some((k) => !KEYWORDS.has(k)))
+      )
+        errors.push(`${p}.temporaryKeywords: unsupported keyword.`);
       if (
         e.player !== undefined &&
         !['controller', 'opponent', 'target', 'targetController'].includes(e.player)
@@ -326,6 +366,85 @@ export function validateDefinition(card) {
     (!Array.isArray(card.color) || card.color.some((x) => !COLORS.has(x)))
   )
     errors.push(`${name}.color: expected Magic colors; colorless is an empty array.`);
+  if (card.startEngines !== undefined && typeof card.startEngines !== 'boolean')
+    errors.push(`${name}.startEngines: expected boolean.`);
+  if (
+    card.maxSpeedKeywords !== undefined &&
+    (!Array.isArray(card.maxSpeedKeywords) || card.maxSpeedKeywords.some((k) => !KEYWORDS.has(k)))
+  )
+    errors.push(`${name}.maxSpeedKeywords: unsupported keywords.`);
+  if (card.disguise !== undefined) {
+    validateCost(card.disguise, `${name}.disguise`, errors);
+    if (card.type !== 'creature' || card.modes || card.kicker || card.offspring)
+      errors.push(`${name}.disguise: unsupported combination.`);
+  }
+  if (card.offspring !== undefined) {
+    validateCost(card.offspring, `${name}.offspring`, errors);
+    if (card.type !== 'creature' || card.modes || card.kicker)
+      errors.push(`${name}.offspring: requires a nonmodal creature.`);
+  }
+  if (card.kicker !== undefined) {
+    const k = card.kicker;
+    if (
+      !plain(k) ||
+      Object.keys(k).some((v) => !['cost', 'effects'].includes(v)) ||
+      card.modes ||
+      !['instant', 'sorcery'].includes(card.type)
+    )
+      errors.push(`${name}.kicker: unsupported kicker profile.`);
+    else {
+      validateCost(k.cost, `${name}.kicker.cost`, errors);
+      validateEffects(k.effects, `${name}.kicker.effects`, card.target, errors);
+    }
+  }
+  if (card.entryCounterBonus !== undefined) {
+    const b = card.entryCounterBonus;
+    if (
+      !plain(b) ||
+      Object.keys(b).some((k) => !['amount', 'condition'].includes(k)) ||
+      !natural(b.amount)
+    )
+      errors.push(`${name}.entryCounterBonus: invalid replacement.`);
+    else errors.push(...validateCondition(b.condition));
+  }
+  if (card.damageBonus !== undefined) {
+    const b = card.damageBonus;
+    if (
+      !plain(b) ||
+      Object.keys(b).some((k) => !['amount', 'where'].includes(k)) ||
+      !natural(b.amount)
+    )
+      errors.push(`${name}.damageBonus: invalid replacement.`);
+    else errors.push(...validateFilter(b.where));
+  }
+  if (card.entersTappedUnless !== undefined)
+    errors.push(
+      ...validateCondition(card.entersTappedUnless).map((v) => `${name}.entersTappedUnless: ${v}`),
+    );
+  if (card.chooseCreatureType !== undefined && card.chooseCreatureType !== true)
+    errors.push(`${name}.chooseCreatureType: expected true.`);
+  if (card.manaRestrictions !== undefined) {
+    if (!plain(card.manaRestrictions)) errors.push(`${name}.manaRestrictions: expected object.`);
+    else
+      for (const [color, restriction] of Object.entries(card.manaRestrictions)) {
+        if (
+          !(Array.isArray(card.mana) ? card.mana : [card.mana]).includes(color) ||
+          !['creature', 'chosenCreatureType'].includes(restriction)
+        )
+          errors.push(`${name}.manaRestrictions: invalid restriction.`);
+        if (restriction === 'chosenCreatureType' && !card.chooseCreatureType)
+          errors.push(`${name}: restricted mana requires a type choice.`);
+      }
+  }
+  if (card.manaConditions !== undefined) {
+    if (!plain(card.manaConditions)) errors.push(`${name}.manaConditions: expected an object.`);
+    else
+      for (const [color, condition] of Object.entries(card.manaConditions)) {
+        if (!(Array.isArray(card.mana) ? card.mana : [card.mana]).includes(color))
+          errors.push(`${name}.manaConditions: unknown production color.`);
+        errors.push(...validateCondition(condition).map((v) => `${name}.manaConditions: ${v}`));
+      }
+  }
   if (card.mana !== undefined) {
     const options = Array.isArray(card.mana) ? card.mana : [card.mana];
     if (
@@ -444,7 +563,9 @@ export function validateDefinition(card) {
       for (const [i, t] of card.triggers.entries()) {
         if (
           !plain(t) ||
-          Object.keys(t).some((k) => !['event', 'effects', 'optional', 'target'].includes(k))
+          Object.keys(t).some(
+            (k) => !['event', 'effects', 'optional', 'target', 'condition'].includes(k),
+          )
         ) {
           errors.push(`${name}.triggers[${i}]: unsupported trigger predicate or field.`);
           continue;
@@ -452,6 +573,7 @@ export function validateDefinition(card) {
         errors.push(
           ...validateEventSpec(t.event).map((error) => `${name}.triggers[${i}].event: ${error}`),
         );
+        if (t.condition !== undefined) errors.push(...validateCondition(t.condition));
         if (t.optional !== undefined && typeof t.optional !== 'boolean')
           errors.push(`${name}.triggers[${i}].optional: expected a boolean.`);
         if (t.target != null)
@@ -474,9 +596,17 @@ export function validateDefinition(card) {
           continue;
         }
         if (
-          Object.keys(a).some((k) => !['cost', 'effects', 'target', 'text', 'timing'].includes(k))
+          Object.keys(a).some(
+            (k) =>
+              !['cost', 'effects', 'target', 'text', 'timing', 'condition', 'oncePerTurn'].includes(
+                k,
+              ),
+          )
         )
           errors.push(`${p}: unsupported ability field.`);
+        if (a.condition !== undefined) errors.push(...validateCondition(a.condition));
+        if (a.oncePerTurn !== undefined && typeof a.oncePerTurn !== 'boolean')
+          errors.push(`${p}.oncePerTurn: expected a boolean.`);
         if (a.timing !== undefined && a.timing !== 'sorcery')
           errors.push(`${p}.timing: unsupported timing.`);
         validatePaymentCost(a.cost, `${p}.cost`, errors, { allowTap: true });

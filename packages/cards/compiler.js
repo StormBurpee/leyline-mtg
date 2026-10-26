@@ -82,11 +82,12 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
     return result;
   };
   const cost = (value, path) => {
-    if (!fields(value, ['mana', 'tap', 'life', 'sacrificeSelf'], path)) return {};
+    if (!fields(value, ['mana', 'tap', 'life', 'sacrificeSelf', 'discard'], path)) return {};
     return {
       ...(value.mana !== undefined ? { mana: mana(value.mana, `${path}.mana`) } : {}),
       ...(value.sacrificeSelf !== undefined ? { sacrificeSelf: value.sacrificeSelf } : {}),
       ...(value.tap !== undefined ? { tap: value.tap } : {}),
+      ...(value.discard !== undefined ? { discard: value.discard } : {}),
       ...(value.life !== undefined ? { life: value.life } : {}),
     };
   };
@@ -108,6 +109,11 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       if (
         ![
           'damage',
+          'damageEventOpponent',
+          'damageEventPowerOpponent',
+          'addMana',
+          'impulseChoose',
+          'bindingNegotiation',
           'gainLife',
           'loseLife',
           'moveTarget',
@@ -147,6 +153,11 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       const allowed = {
         damage: ['target', 'amount'],
         damageOpponent: ['amount'],
+        damageEventOpponent: ['amount'],
+        damageEventPowerOpponent: [],
+        addMana: ['mana'],
+        impulseChoose: ['amount'],
+        bindingNegotiation: [],
         gainLife: ['target', 'amount'],
         loseLife: ['target', 'amount'],
         moveTarget: ['target', 'destination', 'controller', 'tapped'],
@@ -160,7 +171,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         bounce: ['target'],
         destroy: ['target'],
         modify: ['target', 'power', 'toughness', 'keywords', 'until'],
-        token: ['token', 'amount', 'controller', 'tapped'],
+        token: ['token', 'amount', 'controller', 'tapped', 'temporaryKeywords'],
         counterOn: ['target', 'amount', 'counter'],
         untap: ['target'],
         tap: ['target'],
@@ -184,9 +195,19 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       const e = {
         op: nativeOp === 'damage' && effect.target === 'opponent' ? 'damageOpponent' : nativeOp,
       };
-      if (['damage', 'damageOpponent', 'gainLife', 'loseLife', 'counterOn'].includes(e.op))
+      if (
+        [
+          'damage',
+          'damageOpponent',
+          'damageEventOpponent',
+          'gainLife',
+          'loseLife',
+          'counterOn',
+        ].includes(e.op)
+      )
         e.amount = effect.amount;
-      if (['draw', 'mill', 'scry', 'surveil', 'discard', 'token'].includes(e.op))
+      if (e.op === 'addMana') e.mana = mana(effect.mana, `${p}.mana`);
+      if (['draw', 'mill', 'scry', 'surveil', 'discard', 'token', 'impulseChoose'].includes(e.op))
         e.count = effect.amount;
       if (['draw', 'gainLife', 'loseLife', 'scry', 'surveil', 'discard'].includes(e.op)) {
         if (!['controller', 'opponent', 'target'].includes(effect.target))
@@ -226,6 +247,8 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           );
       }
       if (e.op === 'token') {
+        if (effect.temporaryKeywords !== undefined)
+          e.temporaryKeywords = structuredClone(effect.temporaryKeywords);
         if (effect.controller !== undefined) e.player = effect.controller;
         if (effect.tapped !== undefined) e.tapped = effect.tapped;
       }
@@ -455,6 +478,41 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       continue;
     }
     switch (a.kind) {
+      case 'chooseCreatureType':
+        fields(a, ['kind'], path);
+        d.chooseCreatureType = true;
+        break;
+      case 'kicker':
+        fields(a, ['kind', 'cost', 'effects'], path);
+        d.kicker = {
+          cost: mana(a.cost, `${path}.cost`),
+          effects: effects(a.effects, `${path}.effects`),
+        };
+        break;
+      case 'disguise':
+        fields(a, ['kind', 'cost'], path);
+        d.disguise = mana(a.cost, `${path}.cost`);
+        break;
+      case 'offspring':
+        fields(a, ['kind', 'cost'], path);
+        d.offspring = mana(a.cost, `${path}.cost`);
+        break;
+      case 'startEngines':
+        fields(a, ['kind'], path);
+        d.startEngines = true;
+        break;
+      case 'maxSpeedKeywords':
+        fields(a, ['kind', 'keywords'], path);
+        d.maxSpeedKeywords = structuredClone(a.keywords);
+        break;
+      case 'entryCounterBonus':
+        fields(a, ['kind', 'amount', 'condition'], path);
+        d.entryCounterBonus = { amount: a.amount, condition: structuredClone(a.condition) };
+        break;
+      case 'damageBonus':
+        fields(a, ['kind', 'amount', 'where'], path);
+        d.damageBonus = { amount: a.amount, where: structuredClone(a.where) };
+        break;
       case 'keyword':
         fields(a, ['kind', 'keyword', 'cost'], path);
         if (a.keyword === 'ward') {
@@ -479,7 +537,9 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         d.cycling = mana(a.cost, `${path}.cost`);
         break;
       case 'mana':
-        fields(a, ['kind', 'produces', 'sacrificeSelf'], path);
+        fields(a, ['kind', 'produces', 'sacrificeSelf', 'conditions', 'restrictions'], path);
+        if (a.restrictions !== undefined) d.manaRestrictions = structuredClone(a.restrictions);
+        if (a.conditions !== undefined) d.manaConditions = structuredClone(a.conditions);
         if (a.sacrificeSelf !== undefined) d.manaSacrifice = a.sacrificeSelf;
         if (d.mana)
           problem('MULTIPLE_MANA', path, 'Only one single-mana source ability is supported.');
@@ -521,17 +581,23 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           });
         break;
       case 'activated':
-        fields(a, ['kind', 'cost', 'target', 'effects', 'text', 'timing'], path);
+        fields(
+          a,
+          ['kind', 'cost', 'target', 'effects', 'text', 'timing', 'condition', 'oncePerTurn'],
+          path,
+        );
         (d.activated ??= []).push({
           cost: cost(a.cost, `${path}.cost`),
           ...(a.target !== undefined ? { target: target(a.target, `${path}.target`) } : {}),
           effects: effects(a.effects, `${path}.effects`),
           ...(a.text !== undefined ? { text: a.text } : {}),
           ...(a.timing !== undefined ? { timing: a.timing } : {}),
+          ...(a.condition !== undefined ? { condition: structuredClone(a.condition) } : {}),
+          ...(a.oncePerTurn !== undefined ? { oncePerTurn: a.oncePerTurn } : {}),
         });
         break;
       case 'triggered': {
-        fields(a, ['kind', 'on', 'optional', 'target', 'effects'], path);
+        fields(a, ['kind', 'on', 'optional', 'target', 'effects', 'condition'], path);
         if (a.optional !== undefined && typeof a.optional !== 'boolean')
           problem('INVALID_OPTIONAL', path, 'Optional must be a boolean.');
         for (const error of validateEventSpec(a.on))
@@ -539,22 +605,25 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         const event =
           Object.keys(EVENTS).find((key) => same(EVENTS[key], a.on)) ?? structuredClone(a.on);
         const instructions = effects(a.effects, `${path}.effects`);
-        if (event === 'selfEnters' && !a.optional && !a.target && !d.etb) d.etb = instructions;
+        if (event === 'selfEnters' && !a.condition && !a.optional && !a.target && !d.etb)
+          d.etb = instructions;
         else
           (d.triggers ??= []).push({
             event,
             effects: instructions,
+            ...(a.condition ? { condition: structuredClone(a.condition) } : {}),
             ...(a.target !== undefined ? { target: target(a.target, `${path}.target`) } : {}),
             ...(a.optional !== undefined ? { optional: a.optional } : {}),
           });
         break;
       }
       case 'entry':
-        fields(a, ['kind', 'tapped'], path);
+        fields(a, ['kind', 'tapped', 'unless'], path);
+        if (a.unless !== undefined) d.entersTappedUnless = structuredClone(a.unless);
         if (a.tapped !== true)
           problem('UNSUPPORTED_ENTRY', path, 'Only unconditional tapped entry is implemented.');
         if (d.entersTapped) problem('DUPLICATE_ENTRY', path, 'Entry replacement is repeated.');
-        d.entersTapped = true;
+        if (a.unless === undefined) d.entersTapped = true;
         break;
       case 'anthem':
         fields(a, ['kind', 'power', 'toughness', 'where', 'excludeSource', 'keywords'], path);
