@@ -443,6 +443,10 @@ async function action(name, el) {
       } else render();
       break;
     }
+    case 'payWard':
+    case 'declineWard':
+      send({ type: 'payCost', pay: name === 'payWard' });
+      break;
     case 'keep':
     case 'mulligan':
       send({ type: name });
@@ -592,9 +596,12 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleWardReplay':
     case 'exampleReplay': {
       try {
-        const response = await fetch('./example-replay.json');
+        const response = await fetch(
+          name === 'exampleWardReplay' ? './example-ward-replay.json' : './example-replay.json',
+        );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();
         replay(record);

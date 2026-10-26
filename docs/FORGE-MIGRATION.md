@@ -14,7 +14,7 @@ The report destination must not already exist. Omit it to print JSON to stdout. 
 
 - The five basic lands, with their implicit mana abilities.
 - Single-type creatures with literal power/toughness and supported combat keywords.
-- Prowess, translated to a cast-trigger definition.
+- Prowess, translated to a cast-trigger definition. Menace and single-instance mana/life ward.
 - Direct spell instructions: literal damage, counterspell, untargeted draw, creature destruction, battlefield-creature bounce and temporary pumps.
 - Scry, surveil and mandatory self-discard, including resolution choices.
 - Referenced `SVar:` / `DB$` subability chains with cycle, missing-reference and unused-variable checks.
@@ -37,6 +37,6 @@ A later importer should extend this grammar one semantic family at a time. Unsup
 
 ## Reproducible inventory
 
-The pinned upstream snapshot contains 34,131 script files. Adapter 0.2.0 produces 1,216 candidates and explicitly rejects 32,915 files. This is a syntax inventory, not 1,216 verified playable cards. The report records its upstream commit and compiler hash in [forge-audit.json](forge-audit.json); the earlier adapter inventory is retained in [forge-audit-v0.1.json](forge-audit-v0.1.json).
+The pinned upstream snapshot contains 34,131 script files. Adapter 0.3.0 produces 1,251 candidates and explicitly rejects 32,880 files. This is a syntax inventory, not 1,251 verified playable cards. The report records its upstream commit and compiler hash in [forge-audit.json](forge-audit.json); the earlier adapter inventory is retained in [forge-audit-v0.1.json](forge-audit-v0.1.json).
 
 Runtime fixtures execute selected translated cards through Leyline, including private scry, surveil, tap costs, discard continuations and targeted pumps. They do not compare execution against the Forge Java runtime.

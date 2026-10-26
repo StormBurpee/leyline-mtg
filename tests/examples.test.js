@@ -1,0 +1,17 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { replay, assertInvariants } from '../packages/engine/src/index.js';
+for (const filename of ['example-replay.json', 'example-ward-replay.json'])
+  test(`shipped ${filename} replays only accepted commands`, async () => {
+    const record = JSON.parse(
+      await readFile(new URL(`../apps/web/${filename}`, import.meta.url), 'utf8'),
+    );
+    const s = replay(record);
+    assert.equal(assertInvariants(s), true);
+    if (filename.includes('ward')) {
+      assert.equal(s.choice.kind, 'payCost');
+      assert.equal(s.choice.payable, true);
+      assert.ok(s.turn <= 15);
+    }
+  });

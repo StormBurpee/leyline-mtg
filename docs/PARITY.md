@@ -1,6 +1,6 @@
 # Forge parity tracker
 
-**Target:** a maintainable JavaScript implementation with the breadth of Forge and a better modern client. **Current status:** an early local kernel. The target is not achieved.
+**Target:** a maintainable JavaScript implementation with the breadth of Forge and a better modern client. Complete Standard support is the first card-pool milestone; every non-Alchemy Arena card is the required wider pool. AI simulation is a primary use case, not a UI add-on. **Current status:** an early local kernel. The target is not achieved.
 
 This tracker separates implemented behavior from planned work. A green CI run proves that the current tests pass, not that the Comprehensive Rules are complete or that every Forge card works.
 
@@ -8,13 +8,13 @@ This tracker separates implemented behavior from planned work. A green CI run pr
 | ------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | State and execution | Serializable state, atomic commands, validated per-game registries, seeded RNG, replay, revision checks         | Large-catalog/version compatibility, long-match and simulation scaling                          |
 | Turn and stack      | Two-player turn steps, priority, LIFO stack                                                                     | Extra turns/phases, arbitrary skip effects, multiplayer turn order                              |
-| Choices             | Mulligans, discard, attackers/blockers, damage splits, trigger order, scry/surveil and resolution continuations | Modal choices, search, optional payments and broader choice families                            |
-| Costs               | Colored/generic mana, tap costs                                                                                 | X, hybrid/Phyrexian/snow, alternative/additional costs, reductions, restrictions, cost rollback |
+| Choices             | Mulligans, discard, attackers/blockers, damage splits, trigger order, scry/surveil and resolution continuations | Modal choices, search and broader choice families                                               |
+| Costs               | Colored/generic mana, tap/life costs, optional ward payments                                                    | X, hybrid/Phyrexian/snow, alternative/additional costs, reductions, restrictions, cost rollback |
 | Objects and zones   | Core zones, incarnation-safe targeting, tokens                                                                  | Copies, control changes, faces, counters beyond +1/+1, attachment families                      |
 | Continuous rules    | Temporary stats/keywords, Anthem, Pacifism                                                                      | Full layers, timestamps, dependencies, characteristic-defining abilities                        |
 | Events              | Selected ETB and cast triggers, APNAP                                                                           | General trigger predicates, delayed/reflexive/intervening-if triggers, replacements/prevention  |
-| Combat              | Basic declarations, current damage assignment, supported combat keywords                                        | Broader attack/block requirements, multiple combat variants, planeswalkers/battles              |
-| Card support        | 56 curated cards, three token definitions                                                                       | Large validated registry, broad script grammar, per-mechanic interaction fixtures               |
+| Combat              | Basic declarations, current damage assignment, menace and supported combat keywords                             | Broader attack/block requirements, multiple combat variants, planeswalkers/battles              |
+| Card support        | 96 curated cards, three token definitions                                                                       | Large validated registry, broad script grammar, per-mechanic interaction fixtures               |
 | Migration           | Conservative Forge candidate compiler                                                                           | General T/SVar grammar, differential validation harness, broad proven card-script compatibility |
 | Opponent            | Deterministic heuristic sparring policy                                                                         | Search, hidden-information modeling, deck-specific strategy, strength evaluation                |
 | Formats             | Local two-player constructed subset                                                                             | Commander/Brawl, draft/sealed/cube, variant rules, legalities and sideboards                    |

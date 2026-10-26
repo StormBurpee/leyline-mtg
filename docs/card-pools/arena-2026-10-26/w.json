@@ -1,0 +1,2527 @@
+[
+  {
+    "oracleId": "6ce24851-70d2-416c-8733-78928b4eee74",
+    "name": "Wailing Ghoul",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "030b5408-f216-43e4-8593-f78d22821876",
+    "name": "Wail of the Forgotten",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc0abdf3-3a88-4cb2-ba79-35fcaebbf7d2",
+    "name": "Wail of War",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "282d6e61-3240-4f1e-9c2d-8ddb59b03af4",
+    "name": "Wakandan Drone Flock",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ae15bd1-e0ea-4c1a-a311-dae421381ebc",
+    "name": "Wakandan Royal Guard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9268e61-2697-46ff-b219-4f2be646cbe4",
+    "name": "Wakandan Shield Guard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e8ffb63-1a7b-4ebe-839d-d5192522db65",
+    "name": "Wakandan Tusker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e850743e-e4c4-4a09-b797-d5f688b51451",
+    "name": "Wakedancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c2aec69-ffd9-4a34-888c-58adbbb99bb5",
+    "name": "Wakening Sun's Avatar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebf6ef9f-97b2-48cf-855e-d68dc7b11de4",
+    "name": "Waker of the Wilds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a19a959-ea83-404b-89f7-e5dbf4cb7995",
+    "name": "Waker of Waves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "edc6db57-3519-4649-9c4a-5cf264cce26f",
+    "name": "Wakeroot Elemental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78eb5399-8c8b-4310-b585-e4ccd9d7c9cc",
+    "name": "Wake to Slaughter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8cdabc4-e147-491b-9c44-96e57f6ec3b4",
+    "name": "Waking the Trolls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fbd37284-35ff-4409-b6d5-f813c06c4931",
+    "name": "Wakka, Devoted Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52e77cc3-f8e9-4a20-811b-fe1e46a96ad7",
+    "name": "Walk-In Closet // Forgotten Cellar",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "8ad0d89b-beef-40f7-8ce8-65589e3970be",
+    "name": "Walking Bulwark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fea95888-e16a-4209-9cd4-623f7f4d2f67",
+    "name": "Walking Corpse",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "791b8ac8-8db8-44b4-8c85-fcc9017c17ef",
+    "name": "Walking Sarcophagus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90c763b9-6173-46ff-b31c-7dcafc774170",
+    "name": "Walking Skyscraper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9093e6f1-12bc-4dfb-bc78-6ead0752ad61",
+    "name": "Walk the Plank",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce657a2e-461b-45fd-ab98-35b5c8512777",
+    "name": "Walk with the Ancestors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a09536e-dfc1-4b15-adc1-07ef866ebda0",
+    "name": "Wall Crawl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef4d5fb3-70a3-433d-a9d3-18b2beb8d79f",
+    "name": "Wall of Blossoms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fbde72f6-a8b2-4864-ad6d-b91aa03d290e",
+    "name": "Wall Off",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ab15fcd-8371-4b3c-b534-e9ef44249213",
+    "name": "Wall of Forgotten Pharaohs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49b80368-d38a-4877-b1de-f3b5f3d40d4d",
+    "name": "Wall of Lost Thoughts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2ca8824-6bd8-4aa3-b156-618118eb98a4",
+    "name": "Wall of Mist",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "5f601f48-d24b-4883-9fde-b3f620e7c9ea",
+    "name": "Wall of Omens",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b97341a7-fc96-4281-b875-fb81065e0157",
+    "name": "Wall of One Thousand Cuts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "35dfe1c7-48ab-436f-9a6e-44835ea01cf9",
+    "name": "Wall of Runes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51ce0158-c9a5-4fa5-9704-46ab02f01b86",
+    "name": "Wall of Vines",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "fb3a0910-a582-41ef-b5b9-3cda1f1cd5ce",
+    "name": "Walltop Sentries",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78df47c3-b771-4377-8963-ae3065fdcf8a",
+    "name": "Waltz of Rage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1448eadb-e8b1-4e8f-9697-3bb919085dab",
+    "name": "Wanda's Vision",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b4dcdb1-0017-494f-8d83-6706b188e575",
+    "name": "Wanderbrine Preacher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "915d70ac-46ce-41d0-a137-f17e7aaea87d",
+    "name": "Wanderbrine Trapper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4497d0b9-cf4b-4c9d-bf7e-8ed85aa6b5b8",
+    "name": "Wanderer's Intervention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6239ada-c72a-49b2-882c-6dae1dd366e3",
+    "name": "Wanderer's Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f25c5451-58fa-4916-8342-ae88c5e406cc",
+    "name": "Wander in Death",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6556c4c0-b10d-4208-821b-0c0a49abd188",
+    "name": "Wandering Archaic // Explore the Vastlands",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "741c51f1-cfbe-4c29-ac8f-ca6bcd2652f9",
+    "name": "Wandering Fumarole",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0fa886c2-9b58-4368-b2d0-e619c62a554f",
+    "name": "Wandering Mind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7166bf81-05c2-457d-a0bb-a175175b8e79",
+    "name": "Wandering Musicians",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a304703-6b48-4f3f-bd41-7f10ce0a751c",
+    "name": "Wandering Troubadour",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b4c2dcf-86f4-409d-90c3-8fe83966cac0",
+    "name": "Wanderlight Spirit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c25470c-7be0-495c-b756-6a4fc230d660",
+    "name": "Wandermare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b14d3226-adc2-4bdd-9e69-fefdc946ac04",
+    "name": "Wander Off",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d14c7bd-7802-401c-b02b-c7f3c51b007f",
+    "name": "Wandertale Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c0f6673-bc24-4c84-b4e7-736283ffd60e",
+    "name": "Wanderwine Distracter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e1da4a1-5922-4a2e-8bbc-25fbcbf20935",
+    "name": "Wanderwine Farewell",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ab36915-b600-4970-961a-403f5da0dba1",
+    "name": "Wanderwine Prophets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dbf7d799-98c9-4dc6-a58c-258bd9c19425",
+    "name": "Wand of Vertebrae",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6927bd2e-cb05-487a-af86-89ede6e8dabd",
+    "name": "Wan Shi Tong, All-Knowing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2bace3ea-7d28-4a1c-857a-d3c3a1c11b59",
+    "name": "Wan Shi Tong, Librarian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1348afe-4dc7-41bb-9d3f-1e8751abd7db",
+    "name": "Wanted Griffin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c63c4ca-5d5a-4ab9-af0d-ed1254b581cc",
+    "name": "Wanted Scoundrels",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "021b495d-236f-4274-988d-2dfd7103c9ef",
+    "name": "War Balloon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ca52e15-5a55-4d79-b0bf-0e2dc515ae6a",
+    "name": "Warbeast of Gorgoroth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4792a05e-b557-4132-8303-235feefe0d99",
+    "name": "War Behemoth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a58954a-1d20-48b8-847c-3615de67e122",
+    "name": "Warbriar Blessing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc7e259a-d965-4e25-8145-81ab3087f718",
+    "name": "Warchanter Skald",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5297f646-8235-47da-a290-a6883b374977",
+    "name": "Warcry Phoenix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7616dacf-44e2-4b03-b120-875cc2e50ea5",
+    "name": "Warded Battlements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f424b5e9-8f02-4491-a7d8-c7e088611c6a",
+    "name": "Warden of Evos Isle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2f33d3a-afc6-4d15-9049-ecd33f85eb94",
+    "name": "Warden of the Chained",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5342ce88-4afc-431c-814a-054e5fca4b9e",
+    "name": "Warden of the Eye",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13bf8103-3db3-4ee6-a6bb-441aabfd9e41",
+    "name": "Warden of the Grove",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5268f772-5b42-4b5b-9e57-c32c662a42f3",
+    "name": "Warden of the Inner Sky",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8c6924e-9af8-4212-be28-b0b4eaa4c7d8",
+    "name": "Warden of the Woods",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa7d09aa-2ebc-4571-81da-836cd80cf554",
+    "name": "Wardens of the Cycle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86f725f6-b48b-4dcc-9a02-e258a226e31c",
+    "name": "Wardscale Crocodile",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "d9bc6841-9f71-46af-ac1f-a01caee290c1",
+    "name": "War Effort",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7736614-cdd3-43bd-ab3e-461e3e24ed40",
+    "name": "Warehouse Tabby",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33a7a1e9-23b4-4cde-baf1-b1c0165c6729",
+    "name": "Warfire Javelineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce107656-f222-4d9a-9ba2-b33b4d47bdb5",
+    "name": "Wargling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f4dd9e2-6460-413e-a3b8-96b20bf57f8b",
+    "name": "Warg Rider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1663b51-37a1-45a0-b477-2d3e7dd0828e",
+    "name": "Warg Tactics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2676d0c3-0a24-4e93-ae80-8f3fe03da483",
+    "name": "War Historian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8106606c-9a1c-44b2-a9bf-3f189ce050ef",
+    "name": "Warhorn Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0218a14-8301-4484-aed5-90334349620e",
+    "name": "Warhost's Frenzy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b566757-e5e4-4d47-b5ef-80ed7d853679",
+    "name": "Warkite Marauder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a751c07b-fc21-4854-96e7-f71abf4e86c9",
+    "name": "Warleader's Call",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "766c2c67-d1ee-44ff-b9bb-355361646ef1",
+    "name": "Warlock Class",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee2c8714-6e85-4eb5-9bd6-057b6abfb136",
+    "name": "Warlord's Elite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7340199d-60c7-4c27-9a0f-047790273db0",
+    "name": "Warlord's Fury",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a512e55-793e-4936-bd27-80d749f4657e",
+    "name": "War Machine, James Rhodes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae6d1aa3-4ceb-4fc1-a3a6-033afd4b3bce",
+    "name": "War Machine, Legacy of Iron",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c947171b-ed9e-4b83-af45-bd595a8d84ee",
+    "name": "Warmaker Gunship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90f4ec87-d33d-46c1-8cc7-3e7ad3f8ad70",
+    "name": "Warmonger's Chariot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53807ded-5bbb-44a1-9c22-ffdd4b8523e0",
+    "name": "Warm Welcome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "448c84f9-712b-4970-8719-2ab9c2a59d20",
+    "name": "War-Name Aspirant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e376702a-f56e-4e47-aa8c-3f80384d12a9",
+    "name": "War of the Last Alliance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa26fb50-1b53-488e-90d1-b0c7af273622",
+    "name": "War Oracle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a994401-d37c-4e30-9410-422e7ae5a715",
+    "name": "Warped Tusker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8b9fa02-0a0c-4a87-9a00-3c1c7e2f4bfd",
+    "name": "Warping Wail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19053c47-97ce-4a25-a92c-1f4061e85bf3",
+    "name": "Warrant // Warden",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "33fcb05b-246d-4b82-8b0f-44d5f891b612",
+    "name": "Warren Elder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ace86e56-efde-4eb7-8815-71456a4c3abe",
+    "name": "Warren Soultrader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20c3c8ab-e996-462e-a1f6-87421fc3ee55",
+    "name": "Warren Torchmaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7e7059e-83f8-4124-9cc0-64ba150b5d96",
+    "name": "Warren Warleader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f47419a5-b975-4934-a987-ea064a0c7c1a",
+    "name": "Warrior's Blades",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7abbbe18-a2e5-47ce-9c65-8008e5153a4d",
+    "name": "Warriors of Wakanda",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "a339961e-3555-467f-a4f8-c5eaac7e7ed1",
+    "name": "Warrior's Sword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4617739e-4e3e-4d06-b074-8f836261a870",
+    "name": "War Screecher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f07e6ba7-42e8-4b4d-9831-00a856059060",
+    "name": "Warship Scout",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "54702a84-3125-41a7-a875-fe2ec870836d",
+    "name": "War Squeak",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42fb1a1c-ab3d-4cdc-a6ff-a591f7481583",
+    "name": "Warstorm Surge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "594a57f6-7827-41c7-aa37-00b498720b16",
+    "name": "Warteye Witch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6557813b-4ee7-4881-a37c-10c8ea097360",
+    "name": "Wartime Protestors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc89face-92b1-47d3-8cdb-360b7334d3b8",
+    "name": "War-Trained Slasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63eed1f5-442f-433d-989c-397b88543162",
+    "name": "Wary Farmer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46f01d1c-7ab6-4a58-97ce-57a4eb99843c",
+    "name": "Wary Okapi",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "448cc829-1596-4aec-b180-c0c1e0566f6b",
+    "name": "Wary Thespian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e063f60-876a-48fe-8bc6-9888180176d1",
+    "name": "Wary Watchdog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a4630da0-fe9b-4ead-9621-eac4b7825c35",
+    "name": "Wash Away",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9331cfd7-a818-45ed-9e4a-4d3c381052e0",
+    "name": "Wasp of the Bitter End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "002cd9b4-efce-429f-82cd-d37352d2e932",
+    "name": "Wasp, Shrinking Savior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d44627c0-1617-4706-bbeb-0169745364c7",
+    "name": "Wasteful Harvest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0bc418c3-ebde-4e52-9284-65d7e3433f27",
+    "name": "Wasteland Scorpion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00fdcc19-88ed-46c3-91f0-095806228105",
+    "name": "Waste Not",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05d24b0c-904a-46b6-b42a-96a4d91a0dd4",
+    "name": "Wastes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cc6475d-aae9-4592-a26b-0fbb4269759d",
+    "name": "Wastescape Battlemage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6e0574c-3e2b-4c40-b17a-05bce3d49309",
+    "name": "Wastewood Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8c0fbea-a678-46b0-b385-e36f14c07672",
+    "name": "Watcher in the Mist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92cf18ab-dd7b-4bc8-8b85-a81b8cb5192c",
+    "name": "Watcher of the Roost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d43463d2-4395-4616-acc3-c4f80ebe3242",
+    "name": "Watcher of the Spheres",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b30eafed-2755-4423-9592-c8b83c68804b",
+    "name": "Watcher of the Wayside",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ac46f46-3099-4ad9-ae58-bf25d7270e87",
+    "name": "Watchers of the Dead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca130ba1-a4a8-4225-9799-75d56bac6fb3",
+    "name": "Watchful Blisterzoa",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8239c63d-097a-449a-953a-cd480e594aa8",
+    "name": "Watchful Giant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21932be9-cdfb-48d9-87c7-3d62eca98150",
+    "name": "Watchful Naga",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aeddfdc2-149b-4703-ba57-8d844b25ef08",
+    "name": "Waterbender Ascension",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "285046f6-b3c4-4eb7-8712-9dffebabc762",
+    "name": "Waterbender's Restoration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d28886c-46bf-4d2e-a257-cb9016cc3573",
+    "name": "Waterbending Lesson",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "882d032b-db36-401a-8075-a9fabc90c53d",
+    "name": "Waterbending Scroll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "736026b2-84d4-4452-ae0d-5d1b0af0a400",
+    "name": "Waterfall Aerialist",
+    "status": "curated"
+  },
+  {
+    "oracleId": "18b0b583-d17b-4c67-bc67-c4d9aad155c7",
+    "name": "Waterfront District",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64e0c580-0e55-4f42-8594-11ccb584d633",
+    "name": "Waterkin Shaman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "002100cd-1ab1-44da-93a0-1269d47a712a",
+    "name": "Waterknot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70fa2eba-565e-4fed-adc9-7f5d9fcbf1fa",
+    "name": "Waterlogged Grove",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30820f71-9fd4-453c-b377-c2e0b01c07a7",
+    "name": "Waterlogged Hulk // Watertight Gondola",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e6ad1be9-f13d-4590-b3db-e2d0fff46f03",
+    "name": "Waterlogged Teachings // Inundated Archive",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5e11386f-4667-47f7-b280-eabd927e4a46",
+    "name": "Waterspout Warden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef0ed1b1-d092-46f0-beb2-444e3645d273",
+    "name": "Watertrap Weaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c6c4921-c6cb-4b4b-ac9d-10ccc89a5d1d",
+    "name": "Water Tribe Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64acb083-a0a3-46ec-9c93-b2ac36878703",
+    "name": "Water Tribe Rallier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2015f455-988e-444c-93df-23fab179ef87",
+    "name": "Water Whip",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77636154-962f-4ca8-85e7-c0c9c0c3cd2d",
+    "name": "Waterwhirl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db65f874-6bf3-4fdb-a977-10b01b7ee2e9",
+    "name": "Waterwind Scout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17f8e8cb-cd1b-4d94-9efa-ce268e8e7096",
+    "name": "Water Wings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "520b2799-66bd-40bf-9bc0-9cd3aed321f5",
+    "name": "Watery Grasp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc9ec820-4245-4a96-b009-5308a818ca58",
+    "name": "Watery Grave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3405c8a9-a8d6-4b45-9b64-94141076603b",
+    "name": "Wavebreak Hippocamp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1ec1e4e-faa6-4afc-9e00-a3327105c11b",
+    "name": "Wavesifter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10991b1a-7dd3-4fbf-a4c8-200dc62fc605",
+    "name": "Waves of Aggression",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c540822-4ceb-4ebf-b777-da172ada3f1b",
+    "name": "Waxen Shapethief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "426dbe89-0cbb-4a3b-8812-d9761d063373",
+    "name": "Wax-Wane Witness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31f15274-301b-47c5-ba19-0ced04520878",
+    "name": "Wayfarer's Bauble",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5453e4fa-49ea-43fc-8de5-6873d29ef627",
+    "name": "Waylaying Pirates",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d32c63d-aa9e-4f5d-a3e6-51377a786009",
+    "name": "Way of the Cryomancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54775625-bf44-4035-969e-7e70578c8b98",
+    "name": "Way of the Deathbringer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb27dc83-85ee-4f54-b032-41cd1806d3ac",
+    "name": "Way of the Healer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce924285-f4c5-44e6-909b-f5f7d302ebaf",
+    "name": "Way of the Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94be2e86-ba0e-4b8d-9b9c-114adacb26db",
+    "name": "Way of the Mind Sculptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f3087daa-d2ff-4227-abff-3398da6297af",
+    "name": "Way of the Necromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76771cd1-6b74-49bb-9421-8845fe344567",
+    "name": "Way of the Paradox",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68d3f547-674a-4d8a-b02f-01bc2f161916",
+    "name": "Way of the Pyromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10721d62-dc68-43b4-bfa2-dcb8cf8ea980",
+    "name": "Way of the Warlord",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "501580b9-692c-4804-be34-012a25ba8adf",
+    "name": "Way of the Wildspeaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b93eaf66-91b3-44da-851c-79810901be0c",
+    "name": "Wayspeaker Bodyguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c752e001-56cc-46dc-acb3-3fca6c0bdd2e",
+    "name": "Wayward Guide-Beast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2916f041-f080-450f-ae79-dc09076d971a",
+    "name": "Wayward Servant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3875aef0-3102-4fbf-be90-e4139f7a2348",
+    "name": "Wayward Swordtooth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c3745ff-6e1e-4660-abe6-1a30611ec00c",
+    "name": "Weakstone's Subjugation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c27136a-bf9d-4f42-9c37-abe347fad1bb",
+    "name": "Weaponcraft Enthusiast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa2154fb-6756-4cf8-85a6-68264fb7a0b2",
+    "name": "Weaponize the Monsters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10d366cb-b92f-401c-a88e-60b267bd8ae5",
+    "name": "Weapon Rack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e48a8160-cffe-4e00-a3e9-a59d7fc7b3a2",
+    "name": "Weapons Manufacturing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd0a7a86-a567-4145-b1d8-e0b72091db84",
+    "name": "Weapons Vendor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27905301-333e-4cdd-90cf-188159fcf8e9",
+    "name": "Wear Down",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9842734c-1eac-4509-a731-4c22017ae586",
+    "name": "Wear // Tear",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "bdcf0af3-3976-400d-a8b7-15e959e2b255",
+    "name": "Weary Prisoner // Wrathful Jailbreaker",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b14bd895-1d4e-4bd5-9ac1-fed56afb6c90",
+    "name": "Weaselback Redcap",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "4386ae4e-560a-4251-942c-0f84ba7448fa",
+    "name": "Weathered Runestone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73b3682f-396a-4ebe-aaac-6ce3ee36283a",
+    "name": "Weatherlight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "060a7d77-61a8-4964-8fb6-35bd9a999517",
+    "name": "Weatherlight Compleated",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4097fea2-ae34-4b99-ab7e-a276d608b489",
+    "name": "Weather Maker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a091f7b-efc9-4aaa-9da8-157ef8099a36",
+    "name": "Weather the Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ff568a29-e31a-4bc3-b8a3-8fa56f91d52d",
+    "name": "Weave Fate",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "a64ecae7-0b09-48e1-8108-89442547ffda",
+    "name": "Weaver of Blossoms // Blossom-Clad Werewolf",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "494b31b2-27ef-4ca1-ac72-c2fcfc8a23a1",
+    "name": "Weaver of Harmony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28274c39-19e2-4b4c-bd53-d31d6063c2ba",
+    "name": "Weaver of Lightning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33d556c5-1bb4-49bb-88c2-627311eb8c9b",
+    "name": "Web of Life and Destiny",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec528198-a38a-4ef7-9804-78a25c94ecc1",
+    "name": "Web-Shooters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7826f3f5-c8f2-43f5-a837-ff016da625e6",
+    "name": "Webspinner Cuff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48a1d55e-0b71-4724-ab2a-6d2c87e86b5b",
+    "name": "Webstrike Elite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b9b086c-d201-4574-a1e9-0d6f8de53d7d",
+    "name": "Web Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b23e4f8-882d-4cce-9b61-171ae2cc3a18",
+    "name": "Web-Warriors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8cf9387-54df-45b1-ad8d-9de57ed8916b",
+    "name": "Webweaver Changeling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "259ac30c-cc05-4c04-9b23-71283f84b808",
+    "name": "Wedding Announcement // Wedding Festivity",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d9e752f2-d552-4d72-babd-29eca3508820",
+    "name": "Wedding Invitation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c34e962-99d9-4163-b852-4f61886546aa",
+    "name": "Wedding Ring",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86360908-6b8b-4c1c-9e10-4f3d389aaa3e",
+    "name": "Wedding Security",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03259ab0-caa8-4620-b070-127e2c712252",
+    "name": "Wedgelight Rammer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9e56b1d-5ad2-4807-8c4c-1a1a6a25ecbf",
+    "name": "Wee Dragonauts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d8ee903-17b3-43c9-9637-ee596955a9f4",
+    "name": "Weftblade Enhancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "926d52a5-4db1-46ce-9567-17c28bf56ae7",
+    "name": "Weftstalker Ardent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08af6751-5848-47fb-95f5-57215e899460",
+    "name": "Weftwalking",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51f1ceb9-2305-4a4e-b422-7dd7f8deef98",
+    "name": "Weigh Down",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "826c5feb-9e82-49e0-bc6f-6c29004f8151",
+    "name": "Weight of Memory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3af07cd3-36c3-4792-bc93-3ec82e1606bb",
+    "name": "Weirded Vampire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ce5cc2f-e223-4c3b-adc1-c0109fd31762",
+    "name": "Weirding Wood",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9760c396-fc7d-41bc-8f03-5ee359eaec00",
+    "name": "Welcome to Sweettooth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "605c1ee0-5e8a-4e0a-a99b-42a38873f822",
+    "name": "Welcoming Vampire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74adb283-9bef-4a6f-9489-bcfcba53e8d7",
+    "name": "Weldfast Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d604aff-ba60-4064-b025-b1f3d1c0254e",
+    "name": "Weldfast Monitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a05bcc3e-25d5-4111-820e-a097189afb7e",
+    "name": "Weldfast Wingsmith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82db3a7e-ec3f-4f25-996e-9e1c23c86003",
+    "name": "Welding Sparks",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0394cf2-12a0-4d4f-87e0-fe8937e6faff",
+    "name": "Well of Lost Dreams",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cc333a1-c854-4b7c-8002-910e48222371",
+    "name": "Well-Worn Spatula",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5ee2ced-29f4-430f-962e-2f930b92624c",
+    "name": "Werefox Bodyguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "086a911f-9ed4-4260-ae46-58c9333b95f5",
+    "name": "Werewolf Pack Leader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1abe8246-d2f9-407b-8c16-83da0a6b7de3",
+    "name": "We Say Thee Nay!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17d35b8f-2189-4587-9c57-425e93d883c6",
+    "name": "Westfold Rider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2df30a75-4957-4eab-8b0b-4c973f00642d",
+    "name": "Westgate Regent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04eeb9ad-5c59-411b-8809-db8349838588",
+    "name": "Westvale Abbey // Ormendahl, Profane Prince",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "92e45a8f-c582-45e1-9b7f-def219023ebf",
+    "name": "West Wind Avatar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a50b8f7-1af8-4e00-9734-66a87e05cc6f",
+    "name": "Wetland Sambar",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "19becb14-3774-4732-b792-d2d0e5a94b35",
+    "name": "Whack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac88975c-fb2c-441a-bdd4-e7de6ba865e7",
+    "name": "Wharf Infiltrator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95a7db5d-26f6-4192-9dc7-4342f7e0e9c5",
+    "name": "Wheel of Potential",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e510eaaf-6497-480f-baa8-f4796b5f1086",
+    "name": "Whelming Wave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f27aa69-d17e-4f1f-9aba-cee205036f93",
+    "name": "When We Were Young",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00ed7aca-b3c1-4d48-acd5-b1596daeb4c3",
+    "name": "Whiplash, Vengeful Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1ffb884-a89e-4e2a-9beb-8bd5838b6a94",
+    "name": "Whiplash Wordsmith // Vicious Verse",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "53987a39-c18c-4c13-b1ea-fd1b2a369f9e",
+    "name": "Whip of Erebos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdf28770-0962-4317-822f-c187bc6706d1",
+    "name": "Whirlermaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7060f2c8-fca0-4b7a-bddf-37682f434596",
+    "name": "Whirler Rogue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f82da236-e567-4221-a0bc-439a0c7e2b03",
+    "name": "Whirler Virtuoso",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b37b0ef-7e89-447f-a189-b3ea7b42143f",
+    "name": "Whirling Strike",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "0c7e261f-45d5-4c86-8cba-9b6edce8ef49",
+    "name": "Whirlwind Adept",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "ba9e129d-a3cf-431c-93af-f2e4902d40a0",
+    "name": "Whirlwind Denial",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "72eabfcc-61b6-4a07-9a9c-b40a9c05cf66",
+    "name": "Whirlwind, Killer Cyclone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6467cbb7-1e4e-482d-a20f-6cb9fc0f1ad1",
+    "name": "Whirlwind of Thought",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a4477852-66eb-4a54-b4c1-760cbf624f82",
+    "name": "Whirlwind Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fbfc814-df10-4d61-ada9-c96cc8ee8d8c",
+    "name": "Whirlwing Stormbrood // Dynamic Soar",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "152b91c9-cc07-4ca8-944f-9bc2242a2283",
+    "name": "Whir of Invention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb1e1acc-3805-418b-bed1-65838ddb1d62",
+    "name": "Whiskerquill Scribe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "861e427f-cbb4-4ed5-8356-747ac638ac34",
+    "name": "Whiskervale Forerunner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ed76a99-fe5c-4d68-b572-a30848055c8a",
+    "name": "Whisper Agent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "496ab82e-24a9-4a74-ba4b-992c7309b44a",
+    "name": "Whisper, Blood Liturgist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6836023-4475-415e-9671-980d9eb6e762",
+    "name": "Whispering Snitch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "321e101c-a426-4d18-be0b-c26c5348b70d",
+    "name": "Whispering Wizard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23c2cdc9-2b16-423a-b932-2daadeb1021b",
+    "name": "Whisper of the Dross",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6b27729-fea5-46c9-8624-07ba291791df",
+    "name": "Whisper Squad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ec7c7ce-23a5-4ba7-8cfd-4caf8601a9c8",
+    "name": "Whisperwood Elemental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6022608a-6cf2-45bd-adec-63211710a5ed",
+    "name": "White Auracite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb03e682-4525-40d2-8c49-6328f84bd36a",
+    "name": "White Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2cdbfda3-98fc-4108-b551-c7049168924e",
+    "name": "White Lotus Hideout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c55a4b25-ccc4-49de-9f98-a829c547a64d",
+    "name": "White Lotus Reinforcements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8a5e009-45b7-4e62-a494-1579f5fc0ba6",
+    "name": "White Lotus Tile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af1acf07-39e2-441e-a1e0-1db535535e2e",
+    "name": "White Mage's Staff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6edd2a36-3d65-4bf9-bd82-b6d03a7e8fea",
+    "name": "White Orchid Phantom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a38828be-781e-4340-9c6f-f40b1d34773f",
+    "name": "White Sun's Twilight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0fa01155-638d-44ed-8963-46b202b0e720",
+    "name": "White Tiger, Amulet Keeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2084d73-5a4c-4b17-942a-93c1a1f7ac2a",
+    "name": "White Tiger, Ava Ayala",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f0c055f-f614-44b0-9374-c53541f89185",
+    "name": "White Widow, Free Agent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7aff7cb6-aa56-47ae-8813-75d850917320",
+    "name": "White Widow, Yelena Belova",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "855353e2-b686-482a-b987-c6ae456f088c",
+    "name": "Whoosh!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc17b7a3-7711-4449-80bd-692e8ed9087d",
+    "name": "Wiccan, Rising Magician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a317d5f4-a998-4f72-b080-5345bc7cc668",
+    "name": "Wiccan, Young Avenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dda70e25-b3c5-444d-9dff-1366771bf881",
+    "name": "Wicked Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b27b794-580c-472d-b63e-99b271eb115d",
+    "name": "Wicked Slumber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10330a79-a416-40da-bf5a-8b7cbd9a0498",
+    "name": "Wicked Visitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19cede61-1982-47d1-9e0e-49ac6de00798",
+    "name": "Wicked Wolf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "730d02c7-2f8a-47d3-99f0-e4ada7f6255c",
+    "name": "Wickerfolk Indomitable",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa6d7d68-34e3-4ff6-ae6c-36848974555a",
+    "name": "Wickerfolk Thresher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "29423a9a-31a6-4605-8b49-a75895038a3a",
+    "name": "Wick's Patrol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5af729e8-8a40-4991-8270-612e377451de",
+    "name": "Wick, the Whorled Mind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a06f4c1-2af1-495f-914f-1ac4e26f87d4",
+    "name": "Widespread Brutality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c2e4b19-ac88-426a-9f1b-ac305cd512e8",
+    "name": "Widespread Thieving",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39f2a632-30d2-4b35-9e7f-fef27713a4f7",
+    "name": "Widow's Bite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a07a676-890f-49a2-9a2d-17d7b1dc6868",
+    "name": "Wight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6397c046-4c59-4f0b-9b44-2a804eb95edf",
+    "name": "Wight of Precinct Six",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4507df69-6bf7-43d6-a609-c032b61835d5",
+    "name": "Wight of the Reliquary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55cec4bc-3de6-4c0d-a4cc-c5a30849fbda",
+    "name": "Wildborn Preserver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4dc82a49-a063-448d-bd2c-a5b69381e27e",
+    "name": "Wild Ceratok",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "8a2946ad-7a7b-4cda-8591-da8c7da5e072",
+    "name": "Wilderland Scrounger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f856f99-4cb4-479d-958d-964220965ed6",
+    "name": "Wilderness Reclamation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a25a72e-5603-4b50-ac20-36b286cc1a2b",
+    "name": "Wildest Dreams",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6a07af3-e54b-4dcb-ae2a-3dfdac386bab",
+    "name": "Wild-Field Scarecrow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76ff6653-f9b9-4bfe-92a9-52bda275b340",
+    "name": "Wildfire Elemental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04fd8c1f-80e5-4b3d-b63e-7af6ccafbbaa",
+    "name": "Wildfire Howl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50c7b13d-f217-45de-837c-49f934840368",
+    "name": "Wildfire Wickerfolk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4469ff35-54ec-4ff5-bc19-3808ae0f711b",
+    "name": "Wildgrowth Archaic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d80562c2-cf90-43a4-9721-28da40fdfeed",
+    "name": "Wildgrowth Walker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ff8fb796-af5d-4d64-ab3c-7f2469dfa6bf",
+    "name": "Wildheart Invoker",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "2e56507d-af77-47c8-a29a-410cf14cfe20",
+    "name": "Wild Hypothesis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "35d3d96a-d303-4bf5-b972-f311331ec07a",
+    "name": "Wild Nacatl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ca9ef3e-e5b2-4eb5-87b3-0d97637428a0",
+    "name": "Wild Onslaught",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "294b2aa7-cb46-46bd-8241-69b26d73aa2d",
+    "name": "Wild Pack Squad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61978202-538b-4f92-acfc-e95f4a6ce466",
+    "name": "Wild Ride",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36fbc8ba-bb4c-4e5e-9031-78c36e376851",
+    "name": "Wild Roads",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99f4a22a-ba33-43f0-bc58-9df8388706cd",
+    "name": "Wild Shape",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1f439c7-217f-4b20-a77d-b9014c5de8c0",
+    "name": "Wildsize",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "f76a0e5b-74c1-4ee8-b502-e8b988086de4",
+    "name": "Wild Slash",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dd1a4219-437b-494f-ae0e-1d3181ffcd63",
+    "name": "Wild Unraveling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c34674f-856b-4062-87d5-6ed73d9a9855",
+    "name": "Wildvine Pummeler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ff16f889-9203-4874-919b-42e540cadcbc",
+    "name": "Wild Wanderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce807ee3-a27c-4f3b-92a4-37faaca42aa1",
+    "name": "Wildwood Escort",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f4e61b03-e6c8-4751-9720-b91fdecd57da",
+    "name": "Wildwood Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fb9c040-c684-4ba8-970e-58313af5584a",
+    "name": "Wildwood Patrol",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "b9dec104-c636-4770-a7fc-7a3331face15",
+    "name": "Wildwood Scourge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ca31946-72ef-4c45-a7bb-494a99dc2982",
+    "name": "Wildwood Tracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dec281b4-e6d6-4b78-b755-358e07eb7c06",
+    "name": "Will of the All-Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a7096a7-ef1b-4015-b1eb-5c2174d7ec9a",
+    "name": "Willow Geist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c52eaa87-9251-4a47-83fd-04e582ade612",
+    "name": "Willowrush Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee3fd92c-48e0-4651-aeda-7eb2c75acbb0",
+    "name": "Willow-Wind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ecb8653-db8c-468a-853d-420ff62a7a8a",
+    "name": "Will, Scion of Peace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77b6c3bb-bd05-4547-8f3e-9c50879973f1",
+    "name": "Wilt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bed0b60-5944-44bb-9ddd-c82f323e6d20",
+    "name": "Wilt in the Heat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2441696b-a9ba-4813-ba2e-e71f85281d05",
+    "name": "Wilt-Leaf Liege",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d27ffb4c-3a34-41aa-b464-6b897132c4ea",
+    "name": "Wily Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1da1aa95-b587-4bc3-8bc1-7daa1fc33f00",
+    "name": "Windcaller Aven",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64df560a-905f-45d1-bc70-14d99e3112d3",
+    "name": "Windcrag Siege",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "334a98c0-9a16-4145-8f5b-bdf017afe73f",
+    "name": "Windgrace Acolyte",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9404d7d-a026-4082-9fcb-1ab571a136b5",
+    "name": "Winding Constrictor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4e48e76c-8756-4378-a722-2e2929feb74f",
+    "name": "Winding Way",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74dcff4f-c126-4bbb-b6f0-3f3315bc95fe",
+    "name": "Wind-Kin Raiders",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e038a3a-fbab-46c2-8773-1327d953da16",
+    "name": "Windreader Sphinx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dea0f359-19a5-4aef-8c96-574eaa748a31",
+    "name": "Windrider Patrol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78e65286-204d-43ab-8929-b8e2191b1fce",
+    "name": "Windrider Wizard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0af0c54-2a59-4075-8543-d41ff20c4c87",
+    "name": "Wind-Scarred Crag",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "499a4715-6776-461b-bee4-22ed172d455e",
+    "name": "Winds of Abandon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f525cf10-e24c-4c46-9a13-6f8579d09d50",
+    "name": "Winds of Change",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6840a63d-d627-4a18-afa9-018406767642",
+    "name": "Winds of Rebuke",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9969b822-2ead-4956-bac2-875ffd90e872",
+    "name": "Windstorm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16977ebd-6384-4c28-b9c3-448563a07807",
+    "name": "Windstorm Drake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d57cda6-9042-44bd-9785-38de9487ff85",
+    "name": "Wind Strider",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "29737a60-3ebd-40d9-b935-c4f54b90d45d",
+    "name": "Windswept Heath",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e198126a-f280-47f7-8bd0-3dc9f5ff05a0",
+    "name": "Windurst, Federation Center",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c566317e-cd82-46c1-b506-f41256d815f6",
+    "name": "Wingblade Disciple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "423c8465-82cd-4f54-b5ac-022b7ebcf3e4",
+    "name": "Wing Commando",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "378567f8-7aef-42b6-853e-8591641052e8",
+    "name": "Winged Portent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e18c93bc-2073-4bb6-83b4-c5c70f2d8a82",
+    "name": "Winged Shepherd",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c623aeb1-e6d4-48fe-bd2a-a7a6729aa4df",
+    "name": "Winged Words",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7db3bd9-ef67-4d64-a503-08a3c03404b2",
+    "name": "Wingfold Pteron",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b0b05a0-0be4-498f-be54-8d68b818f90a",
+    "name": "Wing It",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99e24041-910e-4ae2-a55b-b938d752eeff",
+    "name": "Wingmantle Chaplain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5badc2e8-a7d6-48c7-b594-65db953d9d57",
+    "name": "Wingmate Roc",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "392a71c7-8f6d-46b8-bcc3-613e086d86ed",
+    "name": "Wingnut, Bat on the Belfry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "513034fc-873a-4877-afb2-39ece1ea6a7c",
+    "name": "Wingshield Agent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b56efee-bdc8-4516-9c0d-b28ca1b0a918",
+    "name": "Wings of Hubris",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afa9cf24-cd02-41f5-9141-f6ff6f27d528",
+    "name": "Wings of the Cosmos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b3b0e56-0b83-403b-bdfd-b5b7c0accf1b",
+    "name": "Wingspan Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e75cee5d-ab02-4227-b36e-61c5d2f564a8",
+    "name": "Wingspan Stride",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c46adaa-ab39-4c0a-99bd-935b6c4f732f",
+    "name": "Wingsteed Rider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "adc18cdb-fe35-4ca3-82c1-a723b17f8c6f",
+    "name": "Wingsteed Trainer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b834f83-951b-4b5c-b9f1-3d860baa3c0e",
+    "name": "Winnowing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "02598a35-1b11-4abe-89cd-fc44c8c36c15",
+    "name": "Winota, Joiner of Forces",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "343833c1-19fd-4e8f-b82e-0f20903caaff",
+    "name": "Winter, Cursed Rider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d3a0b81-1895-47a8-87a3-3e4093cbd951",
+    "name": "Winterflame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a9baafb-bffd-4e28-bbe1-b4154cd86bf3",
+    "name": "Winter, Misanthropic Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b922f057-1c91-43eb-b74a-8a933b1be2d2",
+    "name": "Winter Moon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1e4cf31-9efe-4aca-a3ba-cc2681109a2f",
+    "name": "Wintermoor Commander",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d64687e4-ec37-4db2-9e60-4626c7a3b011",
+    "name": "Winternight Stories",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91967284-6711-4ef3-bb9b-5ba873da8bb2",
+    "name": "Winter's Intervention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "874bbeb2-aa15-41e8-afad-122ab9b555fd",
+    "name": "Winter Soldier, Bucky Barnes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f4c94b6-f829-4646-a574-083997b78dfb",
+    "name": "Winter Soldier, Icy Assassin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "254f133a-eee5-48b9-b19f-110555e49300",
+    "name": "Winter, Team Player",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b4bdbdc-3934-471b-9027-31277e7765ab",
+    "name": "Winterthorn Blessing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84eaac2e-74ce-4a16-9faa-409df7c58eb3",
+    "name": "Winter, Tormented Loner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "befc5986-f06c-40a4-98ee-ffcace4ceaa8",
+    "name": "Wiretapping",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67a52a74-9474-4f4e-8785-6ff54078a8ca",
+    "name": "Wirewood Symbiote",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9722ec3-aa5e-4c69-8ff0-cef1b1839fa4",
+    "name": "Wisdom of Ages",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9c9a445-4386-4616-ad00-f08064d73dcd",
+    "name": "Wisecrack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ccbf0ee-c856-4f67-8579-811fe8571a2e",
+    "name": "Wish",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518",
+    "name": "Wishclaw Talisman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "abc519b8-82de-4559-be03-ddb1ddaab993",
+    "name": "Wishcoin Crab",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "19ff1424-6505-4702-86ad-2d7518b584f6",
+    "name": "Wishful Merfolk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78dbbc15-9304-4178-b9b2-1db6c64ca11a",
+    "name": "Wishing Well",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6317d45a-fe02-4879-b515-bc5327ecb5ae",
+    "name": "Wispdrinker Vampire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8a88521-80e5-419b-ab4e-f4b3aba8afa0",
+    "name": "Wispweaver Angel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5e8fce4-c97a-4ae4-9583-003c565e3bd6",
+    "name": "Wistfulness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0355249a-8e4e-41db-9cea-1b901faffbe6",
+    "name": "Witch Enchanter // Witch-Blessed Meadow",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "baadfc17-42fd-4771-aabe-027ef7b3bf69",
+    "name": "Witching Well",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afcb21bb-aeb3-4024-9ce1-68ba7fb64b2d",
+    "name": "Witch-king, Bringer of Ruin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2eb1b429-8d11-42f3-8815-5a60b6a4e2d5",
+    "name": "Witch-king of Angmar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ad97dd9-1342-4ed4-bea9-1bb21d748e04",
+    "name": "Witch of the Moors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb65ee08-bfdb-4c18-8967-8bcf31fcabfa",
+    "name": "Witch's Cauldron",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c8f276e-4e7b-4974-ab02-9356cc0ffb2b",
+    "name": "Witch's Cottage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "abe06b4d-e7f0-4125-8cfc-e36296e8bacd",
+    "name": "Witch's Familiar",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "00807825-88e5-4b88-8527-a49f553a91be",
+    "name": "Witch's Mark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8fa0fe02-2452-4386-8e0c-165757b0f0a3",
+    "name": "Witch's Oven",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f46befcb-6a7f-4f5e-8634-393cbf4b3308",
+    "name": "Witchstalker Frenzy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b0d9139-b3ad-4065-9b55-aeeda8950bee",
+    "name": "Witch's Vengeance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ec9a14a-0a62-4f8a-9147-3cab01411a65",
+    "name": "Witch's Web",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf1e1d8d-c02e-4b66-b1db-49ec48fa4b03",
+    "name": "Wither and Bloom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "696f554d-0485-48a5-9273-3f6fb7d16a5d",
+    "name": "Witherbloom Apprentice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6cd58a88-6434-4c55-bf93-a739b5ed9bc1",
+    "name": "Witherbloom Campus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee1db746-f5c1-4dce-82eb-24b273cc9507",
+    "name": "Witherbloom Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7cc81fb3-495c-47cd-8c56-96197d87e9e0",
+    "name": "Witherbloom Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f10039ae-2695-4b0a-82b2-82ee79a992c7",
+    "name": "Witherbloom Pledgemage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fbb04a21-e513-4317-aac8-fa6df91c3438",
+    "name": "Witherbloom, the Balancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc700a38-7467-41fd-861f-940e0e5982bd",
+    "name": "Withercrown",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fddd1c39-bdf8-4aee-897c-666498cc4dd3",
+    "name": "Withering Curse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ffce81c5-1b58-4882-a4e7-6f8d7cb170de",
+    "name": "Withering Torment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfedb968-f27c-4117-aff6-da707dd43e82",
+    "name": "With Great Power . . .",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afeb9de8-7030-4797-a9c8-5a99de3c410f",
+    "name": "Witness of the Ages",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b46adfcd-fd7a-40c5-85f4-1cfee43a4c48",
+    "name": "Witness of Tomorrows",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5f5e71e-83a7-468d-829a-6392b764c76e",
+    "name": "Witness Protection",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc7f00ad-7cc1-4be4-9924-16531e4fb829",
+    "name": "Witness the Future",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34edbf1b-0826-49f1-a04d-15cc8c543b22",
+    "name": "Witty Roastmaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36f68aa3-9955-46f1-bc87-497f16ef5222",
+    "name": "Wizard Class",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2bd81743-84c8-43ec-86f5-68230036827b",
+    "name": "Wizard's Lightning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b828251c-86a9-454f-9852-d0876d0f5153",
+    "name": "Wizard's Retort",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "755153b5-81b8-4ebc-b6f8-9296654fcaa4",
+    "name": "Wizard's Rockets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "740fe41a-16bb-4c97-a03c-f678f15a0a0c",
+    "name": "Wizard's Spellbook",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30c3c700-46f4-4a77-8c45-5c7e3a21bd62",
+    "name": "Wizard's Staff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3adbd963-e85d-4569-963a-4472594f06f9",
+    "name": "Woe Strider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8de57b66-cb97-44e4-8c0d-8ecf3202c299",
+    "name": "Wojek Bodyguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab41243d-b178-4ebe-a7ac-bea37427be99",
+    "name": "Wojek Investigator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "adc47a25-daab-49c7-93a5-5bbf2bc20cf9",
+    "name": "Wolfbat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "549a3f53-f90e-4af0-bbc5-2c4b9df30008",
+    "name": "Wolf Cove Villager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49e22e88-d4d9-4781-81e3-bf77b76b132b",
+    "name": "Wolfkin Bond",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac3d07cd-88c4-4e22-9d86-f92d34f406d4",
+    "name": "Wolfkin Outcast // Wedding Crasher",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ec58a82f-8c78-4f88-90d5-e32d83be7a48",
+    "name": "Wolf Pack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0eeb863-6c1b-4e84-9199-e77f15724626",
+    "name": "Wolfrider's Saddle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23d3ff11-bf19-4315-b53b-3e4f20c6a89b",
+    "name": "Wolfsbane, Highland Hero",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6fead73-0473-4b57-899a-9f8c5b4f896d",
+    "name": "Wolf's Quarry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34237f39-1db3-4b3d-b87b-5fd1fbd5462a",
+    "name": "Wolf Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7579f57d-c76e-4703-a030-34fb7160cb23",
+    "name": "Wolfwillow Haven",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e53a43e-5a23-4057-9bb5-281508da57af",
+    "name": "Wolverine, Best There Is",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7100fe0c-1c2a-461a-83b3-684d44279081",
+    "name": "Wolverine, Claws Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8429ba6a-6c06-4a83-a6ee-023b64b825f8",
+    "name": "Wolverine, Fierce Fighter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "232284f7-c623-4895-9ab9-8b1a39926830",
+    "name": "Wonder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2c49754-711e-43b3-82f1-5376a4d99701",
+    "name": "Wonder Man, Hollywood Hero",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19cab267-3c51-4322-b1af-22941bbbdadf",
+    "name": "Wondrous Revival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9bc458ac-5566-4978-aeaa-73b600d4ec29",
+    "name": "Woodborn Behemoth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "124c3af4-8545-479a-b44c-446da1c8b535",
+    "name": "Woodcaller Automaton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6587a463-a108-4854-b6d1-944e89b8c8a4",
+    "name": "Wooded Foothills",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2ca3e20-23ca-4d2a-88a1-5e98ff884abb",
+    "name": "Wooded Ridgeline",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8973bd99-20f8-4867-90ef-50392147ee1b",
+    "name": "Wood Elves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f70f1bb-29fa-4abb-afc2-653acd0a08b9",
+    "name": "Woodfall Primus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba610f08-61a7-47fe-9a80-32b5ce51b118",
+    "name": "Woodland Acolyte // Mend the Wilds",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c9fe1383-1331-4a58-a45a-3320250221a9",
+    "name": "Woodland Cemetery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "675321d7-2cf0-4e0b-9517-d711b22865ab",
+    "name": "Woodland Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf5482b6-dd3e-4fb7-bc62-29e23b417a5f",
+    "name": "Woodland Chasm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df63e124-1542-48d6-b255-cf45855f1e93",
+    "name": "Woodland Liege",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6996c354-d3fa-40c3-8534-27d2f5b74756",
+    "name": "Woodland Mystic",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "e887fb3f-d4c9-4022-8f75-1de6ec94af96",
+    "name": "Woodland Stream",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5f3c711-edfa-4105-9844-e3f444942a03",
+    "name": "Woodland Wanderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28ffddca-a3c4-467d-a2dc-2c5e62393e11",
+    "name": "Woodland Weavemaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3334b218-01e3-47a3-8a28-5cc2decbedea",
+    "name": "Woodweaver's Puzzleknot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f3ed157f-a09b-405f-aec4-0e7a81d80fc8",
+    "name": "Woodwork Prodigy // Soul Tether",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b588df7a-64d8-449e-b573-13badc8cdf56",
+    "name": "Woolly Loxodon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "319ee221-bace-41e9-b386-6b528bd780c1",
+    "name": "Workshop Assistant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e9164be-3534-4445-bfad-00d16a50575c",
+    "name": "Workshop Elders",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0695af85-7405-4512-bb97-42517a532ada",
+    "name": "Workshop Warchief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "deeb7e22-b207-42de-b9d4-f790403d52a9",
+    "name": "World Breaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8863518-0bfa-49c3-8c6e-6c9116a81051",
+    "name": "Worldly Tutor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51d4f95e-aad2-4e5f-9f15-a68bbdf9ab3e",
+    "name": "World Map",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c075bb6-1831-4521-bd8d-4ed2825ae796",
+    "name": "World Shaper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6970f285-dc2b-437b-b099-ca1d3ef106ab",
+    "name": "Worldsoul Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b6ef144-bb98-4686-9718-204f1c3cf020",
+    "name": "Worldsoul's Rage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "254f87cc-e0c2-484d-b5e8-1ea8c366990c",
+    "name": "Worldspine Wurm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e25062ba-7176-4d59-ac3e-26d19b26f02a",
+    "name": "Worlds Within Worlds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9573c85a-e574-4b4e-aae0-2165c45fd27e",
+    "name": "Worldwalker Helm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c4da760-8913-46ca-b00c-bba6d877d482",
+    "name": "World War Hulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6eb21aca-116e-427b-9e75-8adaee0cc62a",
+    "name": "Wormhole Serpent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b166b670-febc-4821-855e-f8d465644c03",
+    "name": "Worn Powerstone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "face0a43-6604-4508-b511-81ab0bef7b18",
+    "name": "Worst Fears",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f8ebf11-b5ec-4f21-8c49-90d569b5a4c5",
+    "name": "Worthy Cost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37733e29-3ade-4bfd-89c9-efd13b548a53",
+    "name": "Worthy Knight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb2ff7f2-b7fd-4984-a4e8-cf57b619c1a5",
+    "name": "Wose Pathfinder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "38684c31-e8c6-4825-8740-1a3d34b58b39",
+    "name": "Wraith, Vicious Vigilante",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d8fded4-0393-43c2-82a1-383f29de65ce",
+    "name": "Wrangler of the Damned",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b46efd59-eda7-4fe6-ace7-67ca8f6c088d",
+    "name": "Wrap in Flames",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34515b16-c9a4-4f98-8c77-416a7a523407",
+    "name": "Wrath of God",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1994d6a-984d-4b75-9198-1f1822eab6eb",
+    "name": "Wrath of the Bloodmane",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21efa6f2-3e7c-4576-b5a3-0b75b2843442",
+    "name": "Wrath of the Skies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ba5af76-2485-4fd6-bd2e-fe90d1f2691c",
+    "name": "Wreckage Wickerfolk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "181a7b5a-3794-46ae-b6ff-48849ee1470f",
+    "name": "Wrecking Beast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "533c4956-87f8-4bae-8924-166fc2e9ec1f",
+    "name": "Wrecking Crew",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "4a9e0294-c967-4e90-b776-6d3195034a23",
+    "name": "Wrecking Gecko",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89c89499-23a8-412d-9406-1a7ffc88c64d",
+    "name": "Wreck Remover",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdbac0a7-18c0-48a5-a174-0d4d1473fd9c",
+    "name": "Wrench",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4566fb92-448e-4b3f-9045-9d74323c35d1",
+    "name": "Wrenn and Realmbreaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63a509ea-cedc-40e9-b4e8-0ff4fc356485",
+    "name": "Wrenn and Seven",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "108ae90a-50fa-4cfd-b751-d630e41425fe",
+    "name": "Wrenn and Six",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7d8c99c-cd44-4bad-82e6-7c7cff9bd89f",
+    "name": "Wrenn's Resolve",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2196bc3-2fe6-49d4-8c79-d6beb3d6c5d8",
+    "name": "Wren's Run Hydra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe9cdd15-a390-4a1e-bae9-474ce8d355b8",
+    "name": "Wren's Run Vanquisher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "628cf9ab-8f8b-49b6-b761-2450088ad03b",
+    "name": "Wretched Doll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83d0c4bc-aab9-4c14-a7dc-a344fcce4fea",
+    "name": "Wretched Gryff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e484372-a052-4df6-a6b2-2c6accccabef",
+    "name": "Wretched Throng",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d25e8f54-1915-4d0b-b4b1-93ee40da2cfa",
+    "name": "Wriggling Grub",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d27bebc9-348d-4b8e-816a-a4da66fb5618",
+    "name": "Writhing Chrysalis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f6505a1-ab8b-468b-a5de-33451598b464",
+    "name": "Writhing Necromass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c116801e-9893-46e8-a967-352b5fa27e86",
+    "name": "Wumpus Aberration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1a60f44-7696-49ee-91fb-cab5b3102962",
+    "name": "Wurmcoil Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "72a39730-acc3-470c-960e-3a91c5eae4be",
+    "name": "Wurmcoil Larva",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "320ed2ec-ef06-41fb-ac8a-72579f11544c",
+    "name": "Wurmwall Sweeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3ac27d6-7e18-404d-9af2-b03897a5f1d9",
+    "name": "Wylie Duke, Atiin Hero",
+    "status": "unsupported"
+  }
+]

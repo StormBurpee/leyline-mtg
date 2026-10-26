@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0 — Simulation boundary and card-pool tracking
+
+- Headless sessions with immutable, player-specific observations and opaque card handles.
+- Async policy callbacks, deterministic episode logs and explicit failure/truncation outcomes.
+- Dated Standard and non-Alchemy Arena inventories, with per-card implementation status.
+- Menace block validation and ward with mana/life payment choices.
+- Shared atomic mana, life and tap cost handling; no double-tapping a mana source to pay its own tap cost.
+- 34 reviewed single-face Standard creatures and six ward creatures; 96 executable cards total.
+- Damage source characteristics use current information or departure-time last-known information.
+- Registry and command validation hardening, plus source-limited observations for larger catalogs.
+
+Full Standard, Arena and Forge parity remain open. Card inventory is not executable coverage.
+
 ## 0.2.0 — Registry and resolution foundations
 
 - Validated, immutable per-game card catalogs, preserved in replays.

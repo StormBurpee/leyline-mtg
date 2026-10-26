@@ -1,0 +1,9 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/w/waterfall_aerialist.txt
+Name:Waterfall Aerialist
+ManaCost:3 U
+Types:Creature Djinn Wizard
+PT:3/1
+K:Flying
+K:Ward:2
+Oracle:Flying\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)

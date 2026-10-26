@@ -53,6 +53,7 @@ export interface CardDefinition {
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
   readonly etb?: readonly Effect[];
+  readonly ward?: { mana?: ManaCost; life?: number };
   readonly aura?: 'pacifism';
   readonly static?: { kind: 'anthem'; power: number; toughness: number };
   readonly triggers?: readonly {
@@ -60,7 +61,7 @@ export interface CardDefinition {
     effects: readonly Effect[];
   }[];
   readonly activated?: readonly {
-    cost: { mana?: ManaCost; tap?: boolean };
+    cost: { mana?: ManaCost; tap?: boolean; life?: number };
     target?: TargetKind | null;
     effects: readonly Effect[];
     text: string;
@@ -104,10 +105,12 @@ export interface StackEntry {
   controller: PlayerId;
   source: ObjectTarget;
   sourceKeywords: string[];
-  effects: Effect[];
+  sourceController?: PlayerId;
+  effects: (Effect | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } })[];
   targetKind?: TargetKind | null;
   target?: Target | null;
   label?: string;
+  relatedStackId?: string;
 }
 export interface DamageOrder {
   source: string;
@@ -123,6 +126,14 @@ export interface DamageSource {
   keywords: string[];
 }
 export type Choice =
+  | {
+      kind: 'payCost';
+      player: PlayerId;
+      cost: { mana?: ManaCost; life?: number };
+      stackId: string;
+      reason: 'ward';
+      payable: boolean;
+    }
   | { kind: 'mulligan' | 'attackers' | 'blockers'; player: PlayerId }
   | { kind: 'libraryOrder'; player: PlayerId; action: 'scry' | 'surveil'; cards: string[] }
   | { kind: 'bottom' | 'discard' | 'discardEffect'; player: PlayerId; count: number }
@@ -202,6 +213,7 @@ export interface GameState {
   players: PlayerState[];
 }
 export type Action =
+  | { type: 'payCost'; pay: boolean }
   | { type: 'pass' | 'concede' | 'keep' | 'mulligan' }
   | { type: 'playLand' | 'tapMana'; card: string }
   | { type: 'cast'; card: string; target?: Target; autoTap?: boolean }
@@ -316,7 +328,7 @@ export function planPayment(
   state: GameState,
   player: PlayerId,
   cost: ManaCost,
-  options?: { autoTap?: boolean },
+  options?: { autoTap?: boolean; excludeSources?: string[] },
 ): { taps: string[]; spent: Record<Color, number>; remaining: Record<Color, number> } | null;
 export function suggestedDamage(
   state: GameState,
@@ -326,7 +338,11 @@ export function chooseBotCommand(state: GameState, player: PlayerId): Command | 
 export function assertInvariants(state: GameState): true;
 export function exportReplay(state: GameState): Replay;
 export function replay(record: Replay): GameState;
-export function playerView(state: GameState, viewer: PlayerId): PlayerView;
+export function playerView(
+  state: GameState,
+  viewer: PlayerId,
+  options?: { includeEvents?: boolean },
+): PlayerView;
 
 export class RegistryError extends Error {
   diagnostics: string[];

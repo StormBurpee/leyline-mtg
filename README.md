@@ -6,6 +6,7 @@
   <a href="#start-playing">Start playing</a> ·
   <a href="docs/ARCHITECTURE.md">Architecture</a> ·
   <a href="docs/SUPPORT.md">Rules & card support</a> ·
+  <a href="docs/SIMULATION.md">Simulation</a> ·
   <a href="docs/CONTRIBUTING.md">Contributing</a>
 </p>
 
@@ -17,7 +18,9 @@
 
 Leyline is a local-first Magic rules engine with a playable tabletop, written in JavaScript. The same kernel powers the browser client, the practice opponent and deterministic replays. No Java backend. No rules hidden in click handlers.
 
-**Development preview:** 56 executable cards and three token definitions. A scoped rules kernel, not a complete Forge port or a tournament-ready client. [The boundaries are documented.](docs/SUPPORT.md)
+The target is every non-Alchemy card available on Arena, with complete Standard support first. That target is not yet met. [Track the dated card inventories.](docs/CARD-POOLS.md)
+
+**Development preview:** 96 executable cards and three token definitions. A scoped rules kernel, not a complete Forge port or a tournament-ready client. [The boundaries are documented.](docs/SUPPORT.md)
 
 <p align="center">
   <img src="docs/assets/tabletop.png" alt="The actual Leyline client inspecting a replayed cast-trigger position" width="100%" />

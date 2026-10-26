@@ -18,6 +18,7 @@ const KEYWORDS = new Set([
   'hexproof',
   'shroud',
   'indestructible',
+  'menace',
 ]);
 const TARGETS = new Set([
   'any',
@@ -53,6 +54,7 @@ const FIELDS = new Set([
   'static',
   'triggers',
   'activated',
+  'ward',
 ]);
 const plain = (v) =>
   v !== null &&
@@ -84,6 +86,20 @@ function validateCost(cost, path, errors) {
     if (!MANA.has(key) || !natural(n))
       errors.push(`${path}.${key}: unsupported mana symbol or nonnegative integer amount.`);
 }
+function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
+  if (!plain(cost)) {
+    errors.push(`${path}: expected a cost object.`);
+    return;
+  }
+  const allowed = allowTap ? ['mana', 'life', 'tap'] : ['mana', 'life'];
+  if (Object.keys(cost).some((key) => !allowed.includes(key)))
+    errors.push(`${path}: unsupported cost.`);
+  if (cost.mana !== undefined) validateCost(cost.mana, `${path}.mana`, errors);
+  if (cost.life !== undefined && !natural(cost.life))
+    errors.push(`${path}.life: expected a nonnegative safe integer.`);
+  if (cost.tap !== undefined && typeof cost.tap !== 'boolean')
+    errors.push(`${path}.tap: expected a boolean.`);
+}
 function validateEffects(effects, path, target, errors) {
   if (!Array.isArray(effects) || effects.length > 64) {
     errors.push(`${path}: expected at most 64 effect instructions.`);
@@ -111,7 +127,7 @@ function validateEffects(effects, path, target, errors) {
       counterOn: ['subject', 'amount'],
       untap: ['subject'],
     }[e.op];
-    if (!schema) {
+    if (!Array.isArray(schema)) {
       errors.push(`${p}: unsupported effect opcode ${String(e.op)}.`);
       continue;
     }
@@ -167,6 +183,7 @@ export function validateDefinition(card) {
     errors.push('Card name must be a nonempty, nonreserved string of at most 200 characters.');
   if (!TYPES.has(card.type)) errors.push(`${name}.type: unsupported card type.`);
   validateCost(card.cost, `${name}.cost`, errors);
+  if (card.ward !== undefined) validatePaymentCost(card.ward, `${name}.ward`, errors);
   if (card.text !== undefined && typeof card.text !== 'string')
     errors.push(`${name}.text: expected a string.`);
   if (card.type === 'creature' && (!signed(card.power) || !signed(card.toughness)))
@@ -239,11 +256,7 @@ export function validateDefinition(card) {
         }
         if (Object.keys(a).some((k) => !['cost', 'effects', 'target', 'text'].includes(k)))
           errors.push(`${p}: unsupported ability field.`);
-        if (Object.keys(a.cost).some((k) => !['mana', 'tap'].includes(k)))
-          errors.push(`${p}.cost: unsupported cost.`);
-        if (a.cost.mana !== undefined) validateCost(a.cost.mana, `${p}.cost.mana`, errors);
-        if (a.cost.tap !== undefined && typeof a.cost.tap !== 'boolean')
-          errors.push(`${p}.cost.tap: expected a boolean.`);
+        validatePaymentCost(a.cost, `${p}.cost`, errors, { allowTap: true });
         if (a.target != null && !TARGETS.has(a.target))
           errors.push(`${p}.target: unsupported predicate.`);
         if (a.text !== undefined && typeof a.text !== 'string')
@@ -256,8 +269,8 @@ export function validateDefinition(card) {
 /** A registry is immutable, serializable data, never executable callbacks. */
 export function createRegistry(input = CARDS) {
   const definitions = Array.isArray(input) ? input : plain(input) ? Object.values(input) : null;
-  if (!definitions || definitions.length > 5000)
-    throw new RegistryError(['Expected at most 5,000 definitions.']);
+  if (!definitions || definitions.length > 50000)
+    throw new RegistryError(['Expected at most 50,000 definitions.']);
   const errors = [],
     registry = Object.create(null);
   for (const card of definitions) {

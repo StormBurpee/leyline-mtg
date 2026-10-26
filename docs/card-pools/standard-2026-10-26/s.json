@@ -1,0 +1,3392 @@
+[
+  {
+    "oracleId": "7af493e3-15a1-42d6-a66c-82aacabe816f",
+    "name": "Saber-Tooth Moose-Lion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b788680-28e3-4378-9607-bd42acb4fbad",
+    "name": "Sabotage Strategist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65385311-1158-4e94-892a-683997706ca8",
+    "name": "Sabotender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07e15387-f346-4fa0-b556-d1c52d4acc07",
+    "name": "Sab-Sunen, Luxa Embodied",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45181cb8-2090-4471-ba90-e5a8f04d525f",
+    "name": "Sacred Foundry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e04a375-303e-43ba-bca1-4e959711a7f6",
+    "name": "Safewright Cavalry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "656fc672-efa5-484a-b5e8-eac262331439",
+    "name": "Sage of Days",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6eb2bfc-1e86-4e36-9d48-12de16955b98",
+    "name": "Sage of the Fang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cfc7cef7-0a95-49f8-970f-abff2cacd82d",
+    "name": "Sage of the Skies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97248734-6e99-42a2-8f11-f3337b25f8ab",
+    "name": "Sage's Nouliths",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00f1d167-c143-471d-bd52-da2a65d087c4",
+    "name": "Sagu Pummeler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7cee6d43-5dec-4989-85ec-c635ec783ec7",
+    "name": "Sagu Wildling // Roost Seek",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "24310f49-2156-4c0d-b3b1-40ca3182474f",
+    "name": "Sahagin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfa95c0e-393d-4b22-9de3-45a7efc0ba14",
+    "name": "Saheeli, Consul of Oversight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83705258-1f42-41db-a32e-de99ffd759eb",
+    "name": "Saheeli, Jewel of Avishkar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef8df503-6160-4e40-a689-49e97fd56cd0",
+    "name": "Saheeli's Lattice // Mastercraft Raptor",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5aa76c5d-8046-42ce-b61d-cc9b4806c11a",
+    "name": "Saheeli, the Sun's Brilliance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b529f6b0-c6b2-4eb3-bb48-178e1eda75f3",
+    "name": "Sally Pride, Lioness Leader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50261b9d-48f2-4bad-a35b-14f13b3cdd32",
+    "name": "Salt Road Packbeast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6e72f4e-d6e0-4537-93c1-7045385c8401",
+    "name": "Salt Road Skirmish",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7903666e-7803-4cfc-9ed9-482a6b577c96",
+    "name": "Salvation Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f68ae67-1671-4281-8b6b-3e52fdd4915f",
+    "name": "Salvation Swan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f532b7f-cb76-4be7-b361-0106c561dcb2",
+    "name": "Sami's Curiosity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "470c16c5-b078-47f5-89b0-42991e1f7157",
+    "name": "Sami, Ship's Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4175a34-70bb-47e5-8406-efdc4d2cd079",
+    "name": "Sami, Wildcat Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "566b65bb-fa5d-4da6-a766-b08128ee0049",
+    "name": "Sample Collector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b8b5812-73bd-453e-bdff-aad1fafa9226",
+    "name": "Samurai's Katana",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "add02a36-8811-438b-a8e1-f5c8a8146b4e",
+    "name": "Samut, Hazoret's Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee89c719-5ae8-4316-bfd0-cfe3684b5859",
+    "name": "Samut, the Driving Force",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a275f7ac-7dae-4422-875a-f34f24b6f28a",
+    "name": "Samut, Tyrant of Naktamun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2676ba6d-e7a7-48cf-9c86-6e2a11f03096",
+    "name": "Sanar, Innovative First-Year",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8c44bd9-6470-47d7-934f-77c76a44a984",
+    "name": "Sanar, Unfinished Genius // Wild Idea",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "83856c3a-652e-4afc-9dc0-0072324ac36f",
+    "name": "Sanctuary Wall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ebd64d2-c178-45a2-a51f-9869754baa0f",
+    "name": "Sanctum Lurker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0feacc7c-b93e-4322-bc8b-b3c19006128e",
+    "name": "Sandbender Scavengers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfc8b8de-be1d-4f7f-bb21-4761a0e7db4e",
+    "name": "Sandbenders' Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b205480-b1fb-490c-b1c9-cf5cc3c5acdb",
+    "name": "Sandman, Shifting Scoundrel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f2b376d2-a2f4-4d23-a1fb-eb7b6ebd0b7a",
+    "name": "Sandman's Quicksand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eae480fe-d9fe-4dbe-8b78-b65f398b0af3",
+    "name": "Sandskitter Outrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "544dbabd-cbfc-40da-a5ba-2fea9cddb453",
+    "name": "Sandsteppe Citadel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec19a9bc-6fc1-4150-976b-37a47b165016",
+    "name": "Sandstorm Salvager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de417a82-8f03-4d7e-aee7-48f7d7eba61a",
+    "name": "Sandstorm Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e92185f8-579c-4645-9cb8-ef5deb9eebc8",
+    "name": "Sandworm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a70d9645-7c25-4fcb-9d16-fb73ce8b55e2",
+    "name": "Sanguine Evangelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "010ec11a-0484-486d-b7c0-de65593bf457",
+    "name": "Sanguine Indulgence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc3a6c83-a671-4ce8-b98e-434989fb6778",
+    "name": "Sanguine Savior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b81a748b-f7a6-4ec4-8b18-40a1819745f6",
+    "name": "Sanguine Syphoner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be2ab552-df82-49a0-8f0b-ee66de34e1a7",
+    "name": "Sanitation Automaton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8bcbae66-1854-480e-a449-33e5389610ab",
+    "name": "Sapling Nursery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "71cb48e2-2328-471c-a04a-7b6461f378f4",
+    "name": "Sarkhan, Dragon Ascendant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30f058f8-5777-4c25-b881-8f1d0ce17d3a",
+    "name": "Sarkhan's Resolve",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7555c429-5f2d-4171-b6b0-8e3c8da7f314",
+    "name": "Satoru, the Infiltrator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e21ebdf-b97c-494e-a1d5-19db1b7d3016",
+    "name": "Savage Land Dinosaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1af15c1d-a41c-44cc-9614-d72694dd26e8",
+    "name": "Savage Mansion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f743d85f-754e-4e70-9907-af54acb9e8d4",
+    "name": "Savage Ventmaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60ba93eb-39e6-4af2-9c66-cd38f72daff2",
+    "name": "Savannah Lions",
+    "status": "curated"
+  },
+  {
+    "oracleId": "6074632b-4520-4ae8-bcdc-26b1eff71af9",
+    "name": "Savanti Romero, Time's Exile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ef5c812-ad7d-4d6c-8ee5-68561e7e4bd7",
+    "name": "Saved by the Shell",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "412eb5ec-bf13-45fb-94b3-c41e62b19d1d",
+    "name": "Savior of the Sleeping",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15f2085f-d5e6-4bc6-870f-00fcaccd981b",
+    "name": "Savior of the Small",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfc1dc36-0cc2-47cc-b0dd-1cc7c31057aa",
+    "name": "Savor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d88bfa98-6869-4d64-a9d2-07a308a67fe2",
+    "name": "Saw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96fd3ee0-84fb-439b-9e2d-b55afe6850a7",
+    "name": "Sawblade Skinripper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "474f0675-4088-4f77-8081-f9ed7d492837",
+    "name": "Say Its Name",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac7d1986-8388-4e4c-973e-d90382b12acf",
+    "name": "Sazacap's Brew",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e5b40dc-debf-48a1-8398-5ea00b5a5166",
+    "name": "Sazh Katzroy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2b082b4-5d9c-4125-b353-d1cf4f334720",
+    "name": "Sazh's Chocobo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12c71296-1243-49e6-a196-8b016a7b635c",
+    "name": "Scalding Viper // Steam Clean",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "655a2b78-6a6c-4b9e-b7c0-48d3768978f5",
+    "name": "Scales of Shale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55ede1d4-593d-433c-943a-4db12eeb5fa8",
+    "name": "Scalestorm Summoner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63c8f510-eba8-4f00-9f80-fbbc74801a4a",
+    "name": "Scampering Surveyor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6758e8f-5462-48a7-96d3-60d07b1563fc",
+    "name": "Scarblade Scout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66d57851-2844-4b9d-be78-e90fc620b750",
+    "name": "Scarblade's Malice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf7bb5d4-c33f-4879-a793-6d6f2a4d94be",
+    "name": "Scarecrow Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13ab2f3f-f65e-42b5-b743-39b30a4c4751",
+    "name": "Scarlet Spider, Ben Reilly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ec8a5ea-b750-4711-8843-2bc98f4ce060",
+    "name": "Scarlet Spider, Kaine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2796c3d9-9e56-40f2-8398-7a131c4657ff",
+    "name": "Scathing Shadelock // Venomous Words",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7e97a242-0bac-4f18-9228-e98ecca36254",
+    "name": "Scavenger Regent // Exude Toxin",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "aefea339-8a0d-4531-8a62-afaecc88d078",
+    "name": "Scavenger's Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ff25f67-36a7-4cfa-a2b1-2135b5b6fb67",
+    "name": "Scavenging Ooze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba11a517-1dbd-4797-9f5e-46ce0f6c77c0",
+    "name": "Scene of the Crime",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "44443716-8356-40cd-a879-35264b29108c",
+    "name": "Scheming Silvertongue // Sign in Blood",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "af2275ea-1085-4145-aa6b-36924d53d88a",
+    "name": "School Daze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c09c424b-6aba-4190-9f55-f0307d746386",
+    "name": "Scientist Supreme of A.I.M.",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b8240ad-71d3-4117-8531-6c8e79bffdb9",
+    "name": "Scolding Administrator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d14f313c-fea6-49c4-8197-5b74ee584a6b",
+    "name": "Scorching Dragonfire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e13113ba-1923-493c-a48d-ca320b7adbde",
+    "name": "Scorching Shot",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "c357230a-afde-4c2a-b390-9f6928599236",
+    "name": "Scorpion, Seething Striker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e53fe9f-9995-47ff-85e9-f09b70d7af15",
+    "name": "Scorpion Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f5e5aa8-3f15-45c9-bfc8-1f4b98d2be38",
+    "name": "Scorpion's Sting",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d37f858e-03c8-4594-9b92-cd03699a1591",
+    "name": "Scoured Barrens",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da422b3e-1092-47ad-97d6-a7a3ef060a53",
+    "name": "Scour for Scrap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a367c9c-9a7f-4587-aa05-c0fba46ed838",
+    "name": "Scout for Survivors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ecb8e283-5cdb-4e6a-bdff-546c1617363c",
+    "name": "Scout the City",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1448489c-dfb8-43aa-ae3d-ed832381c1d9",
+    "name": "Scrabbling Skullcrab",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f113875-a411-463b-8b4d-91d1dee95c2a",
+    "name": "Scrap Compactor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "235e3231-c5e5-4696-a867-705b2c4158fe",
+    "name": "Scrapshooter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d60c80d-9a95-4051-bbf7-02ca51ee1be2",
+    "name": "Scrawling Crawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d32f570a-3738-4a9d-845f-6c7892b69991",
+    "name": "Screaming Phantom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b46ddf4b-7ed8-49c4-8828-f0fbbc023c1f",
+    "name": "Scream Puff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47e33aa1-2f54-471c-a484-de13bcd2dceb",
+    "name": "Screeching Soulbreaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "71982b17-1d9a-4f98-b8b5-d232e3a8cf1d",
+    "name": "Scrounge for Eternity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a46d85b-ce1a-4842-a342-92a5bddb1053",
+    "name": "Scrounging Skyray",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af38d683-77a3-4599-ad2a-1c293ae01d45",
+    "name": "Scuzzback Scrounger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c653a0d-e35a-4596-bed6-b5156192955b",
+    "name": "Scytheclaw Raptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfd5939e-a71a-4e16-9b93-752162be4ccd",
+    "name": "Seam Rip",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23b11fdc-61b5-4f5e-ad80-f81b729fc91d",
+    "name": "Sear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86ec0b56-497f-481c-a03a-c4e64e8e7404",
+    "name": "Searslicer Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ee64b00-6619-451e-bb48-10af107dcb2f",
+    "name": "Seasoned Consultant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3936db3-d3b6-4a92-9773-6f3c52dc419d",
+    "name": "Seasoned Cryomancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5bf1dbb6-ed65-4968-8edd-b98e9bd19d4d",
+    "name": "Seasoned Warrenguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ea060d8-449c-4a5e-8883-b45bd7707b5b",
+    "name": "Season of Gathering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31b5d0ad-3a4d-4f43-b0a9-c9f7a362680f",
+    "name": "Season of Loss",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5fe29c25-a7ad-4c79-a5a5-da1bbc832141",
+    "name": "Season of the Bold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e013e51-1684-4f58-8fe1-3588b6fbb5b5",
+    "name": "Season of the Burrow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b473a42-a0c5-43d5-93f9-c599e963a06b",
+    "name": "Season of Weaving",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79ba18fd-f184-43c1-86df-56ee18ce806c",
+    "name": "Secluded Courtyard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69f55a7c-6ddf-412e-b63b-b395731a1ff2",
+    "name": "Secluded Starforge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6637f9f-8293-43a5-a134-93799a016ecb",
+    "name": "Secret Identity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25443ea4-3177-4e29-a2b1-f3fee60b3205",
+    "name": "Secret Invasion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "743fa824-18cb-4225-ba7b-5b0bbc3c8d41",
+    "name": "Secret of Bloodbending",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "632e2979-d88a-482e-9bb8-57b683c5310f",
+    "name": "Secret Tunnel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f50bbe5e-a839-40e1-ba79-1e96f91bd218",
+    "name": "Seedglaive Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2f57e48-ff5b-4a42-9b7c-1bd23b0d78ed",
+    "name": "Seedpod Squire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "003d9c17-5d5c-469f-ad87-d78faf55e025",
+    "name": "Seedship Agrarian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15c994b9-901a-46d6-804b-24560a14a481",
+    "name": "Seedship Broodtender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6d89c4a-351f-4d63-ba57-b978a695191e",
+    "name": "Seedship Impact",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cba9d6a2-1772-42dc-9bfb-c933a092be19",
+    "name": "Seeker of Sunlight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "223794f2-67a3-4ab5-81c5-046c63307c6c",
+    "name": "Seeker's Folly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7088a901-0489-41c3-9f2f-633939514de8",
+    "name": "Seifer Almasy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b66d2c2-be7a-4296-9888-f0cfb2975e89",
+    "name": "Seismic Monstrosaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b1f1a57-d83a-443f-b190-03df63d2bfe6",
+    "name": "Seismic Rupture",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d586c74-b1dd-4fcb-a24a-c703d250fa63",
+    "name": "Seismic Sense",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ac608bc-dc2a-43c9-9b3b-1b985c121d60",
+    "name": "Seized from Slumber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0458ffe-9a61-443f-8e80-3d2dde224a4d",
+    "name": "Seize Opportunity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db070312-9a27-435f-8b23-e538441103ec",
+    "name": "Seize the Secrets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58f83528-9110-4895-b5ea-51b90af30a8d",
+    "name": "Seize the Spoils",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "75b235d3-595a-4859-be45-9559d8445db5",
+    "name": "Selesnya Guildgate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ba4cb4b-f421-4abd-8fcf-a01174447790",
+    "name": "Selfcraft Mechan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98bf6311-bc9b-4bf8-ac83-c041973b86d0",
+    "name": "Self-Destruct",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ece77a64-8d99-430e-8407-bdb321828d63",
+    "name": "Selfless Police Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce19b337-9266-471d-bec3-49eb7f0e62ac",
+    "name": "Selfless Safewright",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c68853e-4fb8-465e-b262-e6dbaf972533",
+    "name": "Self-Reflection",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95b20721-1af9-4f3f-a39b-7cd1d4ce0b20",
+    "name": "Selvala, Eager Trailblazer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21b8d59f-a90d-44ff-a2e3-9f439ac3e14a",
+    "name": "Semester Foreseer // Peer Review",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "955bfcb8-6477-4ed0-b6e7-8940874ae5e4",
+    "name": "Send in the Pest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "683775ac-481e-4c26-ab2f-5d2813af0268",
+    "name": "Sentinel of Lost Lore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda",
+    "name": "Sentinel of the Nameless City",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70113003-be5e-406a-9aec-cb480468c36d",
+    "name": "Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "6af71c5a-2c1b-4120-b3c9-c3c70d94a5c9",
+    "name": "Sephiroth, Planet's Heir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94ac2990-58a5-43d4-bdac-ec2f6daf0b51",
+    "name": "Sephiroth's Intervention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8a7a3b7-015c-4fbd-8b90-e0ddf71663e4",
+    "name": "Serah Farron // Crystallized Serah",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "51622e89-aa5e-4dd6-a078-eb45e8ebb434",
+    "name": "Seraphic Steed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98e36c6e-a868-4679-a5b5-6f02097f560b",
+    "name": "Serpent of the Pass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f715f701-a735-42ab-b31a-8e1bd04ac5ff",
+    "name": "Serpent's Pass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "556f127f-6131-4171-b1ed-11420c21d345",
+    "name": "Serpent Specialist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b7ac066-e5c7-43e6-9e7e-2739b24a905d",
+    "name": "Serra Angel",
+    "status": "curated"
+  },
+  {
+    "oracleId": "39bb051f-1ca7-4d9b-b33b-7f559f816e3e",
+    "name": "Serra Redeemer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c9ec9a1-738a-4f69-b367-5dbf3d046bf1",
+    "name": "Servant of the Stinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a2ea189-b663-4f4a-bb23-ff7a4af25f71",
+    "name": "Settle the Wreckage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a38bf69-511f-4851-870f-8a65641d832e",
+    "name": "Severance Priest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25c83d45-581f-48ba-b6bb-feb66e8a65c7",
+    "name": "Sewer-veillance Cam",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7312efc2-8a02-47cd-874b-c3338241435e",
+    "name": "Seymour Flux",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59e8747a-3e3f-48d2-aaee-af94ecee378b",
+    "name": "Shackle Slinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f343b6f9-41c3-419b-a57c-a7b08603ef5c",
+    "name": "Shadow of the Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86bd332f-ba61-49a4-ad31-de4d7e3638c6",
+    "name": "Shadow Urchin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "216a2a92-9ca3-4ca3-8af7-686c13b04290",
+    "name": "Shadowy Backstreet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5cf3727b-eb7b-414e-982c-3acf4c05ddf1",
+    "name": "Shady Informant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3f4aa87-a89e-43f8-abc3-712e6bf08889",
+    "name": "Shambling Cie'th",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "700ef9c8-698b-45f7-a1fd-dec74e553224",
+    "name": "Shang-Chi, Master of Kung Fu",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "381df197-5fb7-44ab-a31f-96c4993a0e53",
+    "name": "Shantotto, Tactician Magician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c736935a-e006-4a67-b942-e8ccf1cd9abb",
+    "name": "Sharae of Numbing Depths",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "406247ee-2b86-4068-b5fa-65cdc83a82f4",
+    "name": "Shardmage's Rescue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e0fd3bf-f47a-4f06-8ff1-73f6bf5d1e03",
+    "name": "Shared Roots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dabd0867-ee3f-40cb-8314-b4a3966f8b24",
+    "name": "Shark Shredder, Killer Clone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "564bdbdd-8392-4ee1-a132-1a17a67b2110",
+    "name": "Sharlayan, Nation of Scholars",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0642fb0d-73cb-4989-852c-3233fe36c3b4",
+    "name": "Sharp-Eyed Rookie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57f58d52-0014-4cac-94fc-668063cc147a",
+    "name": "Shattered Acolyte",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c854ecb0-cc60-4c48-a9aa-7f2348a7a8c6",
+    "name": "Shattered Sanctum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "709b9f76-0ea5-456c-b1db-2cf517370fde",
+    "name": "Shattered Wings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f545870d-b628-4acb-88c7-37c2d72a5a85",
+    "name": "Shatter the Oath",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d6641e7-4d14-4a06-b588-0c752af529bd",
+    "name": "Shatterwing Pegasus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06355d3f-a82d-4f12-a399-016a12824795",
+    "name": "Shefet Archfiend",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bbd0a2a4-f81b-4a6b-bc4d-d7e53dc51333",
+    "name": "She-Hulk, Jade Defender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d13fc657-c6fc-4394-bc70-691050550226",
+    "name": "Sheltered by Ghosts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8ff3e99-eca9-44a5-baac-99ee34df3c36",
+    "name": "Shepherding Spirits",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0535854-e4e7-43e4-bc5c-7cc95fb17929",
+    "name": "Shepherd of the Clouds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec16008f-18d6-4461-b99c-0a504f211618",
+    "name": "Sheriff of Safe Passage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1669020-8f81-471a-9083-7e9ce3e8f387",
+    "name": "S.H.I.E.L.D. Deployment Drone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12d51534-a98d-487b-9ba9-c10861dff992",
+    "name": "S.H.I.E.L.D. Flying Car",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f2335bf-6a13-4483-997a-fd19d30c4d48",
+    "name": "S.H.I.E.L.D. Helicarrier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6fd44fb9-3433-4cb0-95a4-4ac8170b2166",
+    "name": "S.H.I.E.L.D. Spy Kit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "763d60ea-a0ad-4f13-b8a7-aa1515283266",
+    "name": "Shifting Grift",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3bdd3f2-9e38-436a-93a3-f87d9f4d4f86",
+    "name": "Shiko, Paragon of the Way",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52244c23-7680-4bed-8ef8-8d10e289d3f7",
+    "name": "Shimmercreep",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c63402b2-1f8c-4004-82d8-48ea26bfe3fc",
+    "name": "Shimmerwilds Growth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b94ee87-a2f4-47f1-9fc7-4a167cad1b3b",
+    "name": "Shinestriker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6cfe63ac-3581-461b-8ed3-3e231851e3f8",
+    "name": "Shinra Reinforcements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc3073fc-dc23-426e-b867-fee5dd99fe25",
+    "name": "Shipwreck Dowser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f42b67f-87fd-4f98-a0e8-0c8313f4bbc8",
+    "name": "Shipwreck Marsh",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f05575f8-4961-4780-83fc-3584d9146a14",
+    "name": "Shipwreck Sentry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "711eea87-0fa3-46e0-a42b-fa5a86455f04",
+    "name": "Shivan Dragon",
+    "status": "curated"
+  },
+  {
+    "oracleId": "a9d288b8-cdc1-4e55-a0c9-d6edfc95e65d",
+    "name": "Shock",
+    "status": "curated"
+  },
+  {
+    "oracleId": "8676e917-17dd-4047-99c4-402f2e909e16",
+    "name": "Shock Brigade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "564dac59-97f7-4988-9f30-d82a891e29ef",
+    "name": "Shocker, Unshakable",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fbb7735f-ec91-4ed4-b735-d94a76e68a80",
+    "name": "Shocking Sharpshooter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2038138e-2e52-41e4-90fc-443fa054c5c0",
+    "name": "Shoot the Sheriff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7572317-6bec-4fb0-81ac-76aec04f14ad",
+    "name": "Shopkeeper's Bane",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c15cad77-e70f-42cc-a9f5-50e1fd8c9c96",
+    "name": "Shoreline Looter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4288ba56-ddd0-4bd9-ba61-daf03e9f2d7f",
+    "name": "Shore Lurker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9d8c983-2845-42e6-b6b8-bf7cf2729b23",
+    "name": "Shore Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce5f5ff9-13f7-41eb-ada0-7f73de42acef",
+    "name": "Short Bow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bda5d0aa-3ed0-4f8c-80ae-f9cb8ed0ac82",
+    "name": "Shredder's Armor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5dd31fcd-72db-4daf-b127-ceb27bf25a94",
+    "name": "Shredder's Revenge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d92714c0-4e22-47f9-a4d4-405894e734d0",
+    "name": "Shredder's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59d96fc0-6580-43c2-8c6a-dcf983644561",
+    "name": "Shredder, Unrelenting",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec238819-81f6-4904-922d-298a17cbac7e",
+    "name": "Shrewd Storyteller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5773ae05-44bc-423c-846c-f323dd8a5079",
+    "name": "Shriek, Treblemaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d014b02f-a8b8-4b97-96e0-f588792069f0",
+    "name": "Shrike Force",
+    "status": "curated"
+  },
+  {
+    "oracleId": "de52b262-418e-418c-b2aa-8d5a776e3a75",
+    "name": "Shrouded Shepherd // Cleave Shadows",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "36415fe3-6bf3-4fec-909c-6c16584c44eb",
+    "name": "Shroudstomper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8c047fc-20a9-4c62-b8a6-9ead56d60ad0",
+    "name": "Shuri, Wakandan Inventor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b51958d-533a-45e4-aac1-3c157670978b",
+    "name": "Sibsig Appraiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c2095b0-478d-45b4-a34d-b19eb77cea4c",
+    "name": "Sidequest: Card Collection // Magicked Card",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "bd7c328e-0380-46f8-bb85-7bf4e201b7ac",
+    "name": "Sidequest: Catch a Fish // Cooking Campsite",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d74f9a18-8dab-4549-be3f-9697ff68d73c",
+    "name": "Sidequest: Hunt the Mark // Yiazmat, Ultimate Mark",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9c0255ff-6579-4ce4-810d-01df9922ab33",
+    "name": "Sidequest: Play Blitzball // World Champion, Celestial Weapon",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "aebeaf0b-4df1-4c34-919b-740bfab19e56",
+    "name": "Sidequest: Raise a Chocobo // Black Chocobo",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "72074972-418d-4dce-83cf-ce8cf310fc42",
+    "name": "Sidisi, Regent of the Mire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43654381-c55c-4d6d-abfd-12932ceb5a4a",
+    "name": "Silence the Echo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6aea681e-88d2-48df-a717-3ce0bc95205b",
+    "name": "Silent Hallcreeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53a59ba9-f4e9-460b-928a-ce6d7ae883f7",
+    "name": "Silken Strength",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50477dc8-9a2a-41eb-984d-c9e1e78e08a2",
+    "name": "Silk, Web Weaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11932191-4b19-49b1-bfe4-abb7b83b2e59",
+    "name": "Silvan Reveler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7bbede9a-8981-4435-9854-af61a18c6166",
+    "name": "Silver Deputy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dcf07f38-422f-46c3-aee9-50540b9c9115",
+    "name": "Silvergill Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08688903-d9cc-4d57-ba91-14a8523551b9",
+    "name": "Silvergill Peddler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d985b12e-2731-4ccf-9f51-90218b20b42a",
+    "name": "Silverquill Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66deb3f3-0314-427e-9cb8-6befa365ae94",
+    "name": "Silverquill, the Disputant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40b82dee-98c7-4b86-88b8-28388cd0331f",
+    "name": "Silver Sable, Mercenary Leader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8705df9-6439-4930-91b6-229f818559af",
+    "name": "Simic Guildgate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e45e2da-7064-4ec0-8d09-55fc7d1aeaa8",
+    "name": "Simulacrum Shaper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb7a1f21-a66d-415b-8520-710b44890bb6",
+    "name": "Simulacrum Synthesizer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1976b6c-7e43-4f4a-b082-f95495a1b260",
+    "name": "Singularity Rupture",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be3038ff-b39e-4d2e-97ee-85de074ccfd3",
+    "name": "Sinister Cryologist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80f08b47-a237-4efd-8d86-dfe35a816b0e",
+    "name": "Sinister Hideout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae8003eb-9f19-4f23-be3b-0ac3ddc03a72",
+    "name": "Sinister Monolith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83a47724-b8d1-4884-9442-b62aa1510dc3",
+    "name": "Sinkhole Surveyor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bcc378c-4470-4757-a0d5-025a32c918ea",
+    "name": "Sin, Spira's Punishment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3cad867-142c-4e9d-bcd8-0e7ed1fd2f77",
+    "name": "Sinuous Benthisaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a15547d0-bbcb-41ee-a9ae-8325a9e7fe1f",
+    "name": "Sire of Seven Deaths",
+    "status": "curated"
+  },
+  {
+    "oracleId": "3b9bc41a-a43f-4be7-9452-f61f5ad5b482",
+    "name": "Sita Varma, Masked Racer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60ad7aaa-8ce6-4449-8e8d-4ccf925010db",
+    "name": "Sizzling Changeling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "decfde5e-ea53-4b15-8f69-51da7ef39d15",
+    "name": "Skateboard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3792763c-7aa0-4055-b8a1-3257e0443ef1",
+    "name": "Skeleton Archer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e8433a2-ad71-4d30-84fe-12b709197824",
+    "name": "Skewer Slinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fc7c7a0-bfff-4833-a0d0-a38dc29e9dfb",
+    "name": "Skilled Battlecarver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40eb7f43-7cee-41a1-a4d1-f34ee125ccd1",
+    "name": "Skirmish Rhino",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9100530e-2bd0-487e-a4eb-13dabd55b678",
+    "name": "Skulduggery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6420e8a0-3ef4-4f95-bb6a-12409eef4d48",
+    "name": "Skullcap Snail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99348e1d-e95e-4911-aae0-8fd1a7345a82",
+    "name": "Skullsnap Nuisance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c53a913-8a99-4a15-9c47-e79af026dc05",
+    "name": "Skybeast Tracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09726c3d-f700-4bf4-a9e7-326fe41b0a4a",
+    "name": "Skybox Ferry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "788d3cfa-7706-4728-9c48-cf7bc963d002",
+    "name": "Skycoach Conductor // All Aboard",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2ac2b815-2d72-48e6-b43a-18884a74bf95",
+    "name": "Skycoach Waypoint",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2343ebff-edf4-4132-ad9e-7800f8014072",
+    "name": "Skycrash",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e497f6b-69e1-4fab-bb04-f687c99a8310",
+    "name": "Skyknight Squire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d481630c-83c4-47d2-a770-db331154d2b9",
+    "name": "Skyraker Giant",
+    "status": "curated"
+  },
+  {
+    "oracleId": "92d28545-4403-4c24-8547-efab4dde6a53",
+    "name": "Skyseer's Chariot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5da8b86a-a7be-4fb5-9a45-a47d5cb4b372",
+    "name": "Skyserpent Seeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5951f734-05d3-41ad-94ee-19bd310077d2",
+    "name": "Skyship Buccaneer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a50db36c-948b-4132-a5e5-84aab1f42612",
+    "name": "Skyskipper Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6bb7419b-e085-4616-8e5c-4ed08cb2b4c1",
+    "name": "Skystinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f920bf2-6a49-47c2-be3c-9787c377673b",
+    "name": "Skystreak Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6ba76fa-441c-4a74-bfea-8ae2a2c9e391",
+    "name": "Skyward Spider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f1edf4c-46a1-426d-8ce9-757a4c27367d",
+    "name": "Slagdrill Scrapper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ed1879a-83b8-48df-a6d2-fe28e912b4c5",
+    "name": "Slagstorm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cc4d6f4-79b2-4210-84de-a0febf81eb67",
+    "name": "Slash of Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8abff7b5-fe27-46bd-b951-b5d9f93f3a14",
+    "name": "Slash, Reptile Rampager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "29326487-6d95-40a8-9bcc-f94ada4e27c3",
+    "name": "Slavering Branchsnapper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bcd086ce-de5c-4b34-92a1-ece22055e479",
+    "name": "Sledge-Class Seedship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a17633aa-b1a7-4ae5-b051-6747975d8a2f",
+    "name": "Sleep-Cursed Faerie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33d6f4f0-e1ad-4363-a012-46a1bd9daeb7",
+    "name": "Sleep Magic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05a039ad-1689-4d13-b393-6c1219583b5d",
+    "name": "Sleight of Hand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d31d3f4-4748-4713-808f-24699fcd7b10",
+    "name": "Slice from the Shadows",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5482ddb1-7f7d-492a-aa3d-67c037062cc3",
+    "name": "Slick Imitator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ac8c118-3942-4c92-856c-20d764283650",
+    "name": "Slick Sequence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6e4ad3c-079d-429b-9f29-b9e42a1a236f",
+    "name": "Slickshot Lockpicker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74c7a029-59aa-4511-8e4c-f8f167cda4e2",
+    "name": "Slickshot Show-Off",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2085642e-29be-4e13-81dc-1f2ff6c095eb",
+    "name": "Slickshot Vault-Buster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b53597f4-1a0f-4fa8-9c17-29178cdc4d2b",
+    "name": "Slime Against Humanity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ccb1b532-92b8-4ebf-b3c2-fb5924b116f5",
+    "name": "Slimy Dualleech",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f570bac8-9987-4963-af02-476d18abc847",
+    "name": "Slithering Cryptid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39cae244-96e1-4ea3-899a-3aa871cca31c",
+    "name": "Slumbering Cerberus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89078485-c438-4035-95dc-dbe37fb13e50",
+    "name": "Slumbering Keepguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d04bce9a-822b-4a52-8826-b503ef5f5b2e",
+    "name": "Slumbering Trudge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d972501-4174-4bf0-a26b-2edef31b3a0c",
+    "name": "Slumbering Walker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c034266-8e63-4b43-8f9e-564e6fff6ec1",
+    "name": "Smaug's Fury",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "fc75cfec-e1f6-4cb5-8a3c-2f7b2c39c03f",
+    "name": "Smaug, the Great Calamity // Spew Flame",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c53b7602-5e36-4900-896c-844bf6eac22e",
+    "name": "Smaug the Magnificent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20535126-f811-4386-bdce-d73f30691724",
+    "name": "Smaug, Wicked Worm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9228f04c-506f-4453-a335-e66876b8ce8d",
+    "name": "Smile at Death",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f70b0ee-c24c-45fa-b878-9ba69266344f",
+    "name": "Smoky Lounge // Misty Salon",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "605f719d-01f8-406c-9d4c-3f4992c6a69f",
+    "name": "Smuggler's Surprise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e6a24be-8281-41c1-a5ba-b68f0ef1d7b8",
+    "name": "Snakeskin Veil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0632f1b-14e5-4534-b2c5-af9d557fdcc0",
+    "name": "Snaremaster Sprite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2b1c5eb-06f0-4ec4-9446-791faac099a7",
+    "name": "Snarling Gorehound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b6fb13b-f126-4697-90a1-64b14ffcecd6",
+    "name": "Snarl Song",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21a094d6-de3d-48d4-a35d-b99617da55db",
+    "name": "Sneering Shadewriter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f07c07d7-00f1-44a5-b51f-0a22cc51fd2b",
+    "name": "Snooping Page",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b25ccb64-e114-4d54-a07a-c8cd4560b511",
+    "name": "Snowmelt Stag",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdf7f144-56e4-4f88-b81a-b85473922355",
+    "name": "Snowslope Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01cdaf69-f53a-4735-92f2-ef149de4d5c9",
+    "name": "Snow Villiers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d840e49-3ca5-4e4f-9152-a365ad2b1773",
+    "name": "Soaring Sandwing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "62d18d2b-fa68-49cd-b62d-803728ddfa8b",
+    "name": "Soaring Stoneglider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b284913e-3530-4a7e-8c75-efb18788dad0",
+    "name": "Social Snub",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdbec6d5-0f10-4114-b709-4402a44debdf",
+    "name": "Sokka, Bold Boomeranger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "427f8ef9-12b3-4fa0-b303-28153566b6dc",
+    "name": "Sokka, Lateral Strategist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87a97c72-143d-48a8-a1c5-3c44aa8e5a86",
+    "name": "Sokka's Haiku",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b68acc2-b9d5-495b-8054-c04bae1349f1",
+    "name": "Sokka, Tenacious Tactician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afddba56-f9a0-4917-8167-c9fd17ca9954",
+    "name": "Solarium Sentry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a69d4b1-72dd-4599-a16d-32299de5b0b9",
+    "name": "Sold Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00c0543c-2a1f-4425-8283-4062d74a1637",
+    "name": "Solemn Simulacrum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66a22b35-3dc0-4a74-8474-e73293403de6",
+    "name": "Solitary Cell",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c0a8eed-f2e2-4821-8011-6e6ad2081936",
+    "name": "Solitary Sanctuary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "310c1280-dee8-426f-8440-6132a634a1e0",
+    "name": "Solstice Revelations",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3241a3f5-7ae5-4497-9dd2-a55f3370a055",
+    "name": "Solve for Disappointment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46cf0e3e-3c3e-4eb8-a71a-4b4b87744ced",
+    "name": "Something Worth Saving",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8c582bc-47de-47ec-8bf9-b2c848e27ab8",
+    "name": "Sonar Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13f0863f-ae54-4bea-8f01-7f3891797577",
+    "name": "Songcrafter Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87300967-1a59-4dce-8876-f008ff3bfb0b",
+    "name": "Song of Stupefaction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f4d0c87-7d59-41d5-9910-86765a0c144b",
+    "name": "Song of Totentanz",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d317e3f1-553f-44f6-8543-d6d4c42534ad",
+    "name": "Sonic Shrieker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "945e56b9-709f-4bb3-8a6b-0a04d9202a03",
+    "name": "Sorceress's Schemes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2187f45-80ae-4ac4-9f83-5eb7a00978e2",
+    "name": "Sorcerous Spyglass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "760ede92-a826-4144-9de8-84ba9b8743d1",
+    "name": "Sothera, the Supervoid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "762679dd-4345-43c3-929b-15959443aeb0",
+    "name": "Soulbright Seeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24c3c505-ddaa-4adb-983e-7c78d9933cc7",
+    "name": "Soulcoil Viper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b4508a3-1d21-46ec-8a50-cd3171a7348a",
+    "name": "Soul Enervation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b5e6560-ff2e-4475-96cb-63f64c8a86db",
+    "name": "Soul-Guide Lantern",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "338747e8-bed8-4e60-8b19-5c2b80799477",
+    "name": "Soul Immolation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58f12f0d-e2c1-48f9-9e27-d1de8db743cb",
+    "name": "Soul Search",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f81ca3a5-356d-4b5d-afc2-a33aa774816b",
+    "name": "Soul-Shackled Zombie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c05d5a51-8e39-4475-9743-1adc60283c5a",
+    "name": "Souls of the Lost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c0f99b8-0222-4fac-932a-eb5d77826564",
+    "name": "Soulstone Sanctuary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dbcf2a79-b455-43ac-9cf0-9e63708800f4",
+    "name": "Sound the Trumpets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b087ae1-1412-4dd9-9b96-3b45be52d386",
+    "name": "Sourbread Auntie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e579edd7-4f6c-4f22-a72f-0a20d7a698a2",
+    "name": "Soured Springs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "987c1144-69f6-4441-b0a4-d23f931df81f",
+    "name": "Southern Air Temple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c5173332-68ad-456e-ad85-dd7475464d94",
+    "name": "South Pole Voyager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "003e5dc6-8b26-4a0a-a50b-5f0806a7bacd",
+    "name": "South Wind Avatar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "087b2490-e415-44e2-a674-3b5619a0fad5",
+    "name": "Sovereign Okinec Ahau",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ec1860b-89cc-4529-8b8c-fb47f79f2b4b",
+    "name": "Sower of Chaos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc0da02c-2b85-4ddc-9ce0-63934dd14164",
+    "name": "Sozin's Comet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "241117a0-8305-48bb-9cb9-9b01e86e08f7",
+    "name": "Space-Time Anomaly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "036b7b89-e49a-4560-9de9-1d4d71f3f666",
+    "name": "Sparring Dummy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "722ab6e4-a2e0-4aaa-a050-7b6436e22b40",
+    "name": "SP//dr, Piloted by Peni",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb84b94c-dc8c-4182-9b96-abd092b20981",
+    "name": "Specimen Freighter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33a4e73d-d93a-4b6f-88ff-cd53f20d178c",
+    "name": "Spectacle Summit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f7479e6-b2bd-46b1-96ad-34deb43565c1",
+    "name": "Spectacular Pileup",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a6b19db-cdeb-4922-8642-5d872f90e7a1",
+    "name": "Spectacular Skywhale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eed5e0cc-8f88-4779-bf10-6a823c72df7f",
+    "name": "Spectacular Spider-Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15948fdf-3f9e-4eed-b85b-c5a554ff0571",
+    "name": "Spectacular Tactics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "caff40b1-28d1-4ef6-90d1-51a1dc06cbcd",
+    "name": "Specter of Mortality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8536726-993b-4100-918c-e3c7177d4c65",
+    "name": "Spectral Denial",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb5ed146-5079-46ef-a3e0-e584fa4467f6",
+    "name": "Spectral Interference",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8fdbcdf-479d-4582-9ad5-9fbd4c740c29",
+    "name": "Spectral Sailor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "371762f6-e07b-4c0e-a4ee-6c35a3809eb6",
+    "name": "Spectral Snatcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53d3ef8f-8e0f-4119-8cdc-a0bf076b4e91",
+    "name": "Speedball, New Warrior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2fb0f2d2-ed1f-4181-91f2-684a71c34998",
+    "name": "Speed, Young Avenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df5e4100-8c83-42d6-af96-1a1ec84a9210",
+    "name": "Spellbook Seeker // Careful Study",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "51dad7d3-f91d-4bd8-aaed-235da42a448b",
+    "name": "Spellbook Vendor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7db31623-5dea-4165-8593-fbac568bf5b4",
+    "name": "Spellgyre",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d64b0848-0193-4025-ba62-63ecd8fb9f50",
+    "name": "Spell Pierce",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9357fc7f-c9d0-4ce2-a6dd-0ff1f24bfc56",
+    "name": "Spellscorn Coven // Take It Back",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "38877c68-b69b-4ee1-8e8f-5137a184a8f7",
+    "name": "Spell Snare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f9bf996e-ae14-40a3-a8d8-f5725ddaa270",
+    "name": "Spell Stutter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2962fe4c-bf48-454b-8a6b-0f8253352ae8",
+    "name": "Spelunking",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f004382-c57b-4fde-af97-0c85516c3cf4",
+    "name": "Sphinx of False Conclusions",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ddb7e868-8f1d-4d57-9ee2-ebadb17b398a",
+    "name": "Sphinx of Forgotten Lore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4246e4d-390d-4925-a5a8-89cd096a237c",
+    "name": "Sphinx of the Final Word",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48b1ac27-430f-4fd9-a71b-6ad125c57fe3",
+    "name": "Sphinx's Approach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9665f940-c0a4-4d3e-b889-8049cf549a4f",
+    "name": "Spicy Oatmeal Pizza",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4bb33b2-adde-4176-9274-7598b559aa6a",
+    "name": "Spider-Bot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "845472ca-3fcb-4bcd-953c-96eb8d914af9",
+    "name": "Spider-Byte, Web Warden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "38eabfea-5ea5-4baa-8ad6-7a7cb00e1fed",
+    "name": "Spider Food",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d459b3f5-a18c-4c17-a855-dc147f7c2161",
+    "name": "Spider-Girl, Legacy Hero",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2648559d-1d96-47d2-a769-cfa2cbca2be5",
+    "name": "Spider-Gwen, Free Spirit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00b50215-e832-417f-9c80-2bc3050b6ebb",
+    "name": "Spider-Ham, Peter Porker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d1a15dc-3123-4425-b036-a3b5a83fcdf8",
+    "name": "Spider-Islanders",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19845456-3d96-48a4-89fa-9b8e583774c9",
+    "name": "Spider-Man 2099",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ca85872-9436-4515-af50-c13e59605627",
+    "name": "Spider-Man, Brooklyn Visionary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8281f2b9-e81b-48da-812a-8713b2adf8ab",
+    "name": "Spider Manifestation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8933297c-62f1-4df9-91b8-2d3481db77e5",
+    "name": "Spider-Man India",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2efd6494-c5e1-41de-bc6e-8490ff046cd1",
+    "name": "Spider-Man Noir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "163f1fce-70c8-44e3-a679-f97d52cd1e9a",
+    "name": "Spider-Man No More",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8",
+    "name": "Spider-Man, To the Rescue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "505231d8-714f-4c5b-a635-d1662bd18a78",
+    "name": "Spider-Man, Web-Slinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c322d99-2bc4-4618-aeb3-5583fce54f1b",
+    "name": "Spider-Mobile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03bf7a90-78c1-4e83-8553-e22d85e49876",
+    "name": "Spider-Punk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58b771d4-dfaf-4189-a5f6-4bc0fb4c0fa3",
+    "name": "Spider-Rex, Daring Dino",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4485bf9-e7ff-48b5-a983-02900939ee9d",
+    "name": "Spider-Sense",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca68f436-2522-4007-87bf-2669c7743db0",
+    "name": "Spider-Slayer, Hatred Honed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d21d7557-9702-46c1-8277-42a3442084c2",
+    "name": "Spiders-Man, Heroic Horde",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba08b4cf-9a13-40fd-8522-9504d2ff1a19",
+    "name": "Spider-Suit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebf8d006-2997-431b-b4cb-9692741b45ca",
+    "name": "Spider-UK",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ef7d902-1f05-40b3-8997-dec197b0b678",
+    "name": "Spider-Verse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04e53f36-9f16-4678-9caf-9afda85f76b4",
+    "name": "Spider-Woman, Secret Agent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be2b9c6d-4ecb-49ec-b276-4aa93c5dfc00",
+    "name": "Spider-Woman, Stunning Savior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23102d8a-3a93-4e83-af5b-401c85ba9dbc",
+    "name": "Spikeshell Harrier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e35d4c62-5211-4785-b683-a83719195d87",
+    "name": "Spinerock Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dcfa0476-e88f-43b4-8011-d78a3de97f2a",
+    "name": "Spineseeker Centipede",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c81f7b6-38e7-482b-afff-727074a23888",
+    "name": "Spinewoods Armadillo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2aa9649-8394-48ca-bee6-a044e5a86b38",
+    "name": "Spinewoods Paladin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "daca1d5e-349d-4e8a-abc7-427dab43fb0c",
+    "name": "Spinneret and Spiderling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6883e79e-0b4f-4fb8-aee3-a3905246a408",
+    "name": "Spinner of Souls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1b6795a-1ac6-4edb-bcee-4db1f1fbe8ea",
+    "name": "Spin Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8599f06-f030-4575-8497-307a4d7ec182",
+    "name": "Spiral into Solitude",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb0d8093-5f93-4b25-9384-08f9731bfb28",
+    "name": "Spirebluff Canal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d347d59-0cd5-4207-86cb-5d6244c7c70a",
+    "name": "Spire Mechcycle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c77ddcac-ce54-4348-bde2-5d9caf3d5b04",
+    "name": "Spiritcall Enthusiast // Scrollboost",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "34c572b2-dccf-43d9-a9c4-846653ad22da",
+    "name": "Spirit Mascot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68979160-b5ce-4787-8a1e-1f40e614c3b0",
+    "name": "Spirit Water Revival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d07e0d88-8b7f-423d-97b7-cf7b80d8924c",
+    "name": "Spiteful Hexmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7215ca87-bbff-4c14-a1f5-de5ddd97c875",
+    "name": "Spitfire Lagac",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d0c4c91-683a-4563-a0b0-39f3c04f6307",
+    "name": "Splash Lasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "29b537f5-4d9f-40ed-b38b-e8faa2b5af7d",
+    "name": "Splash Portal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21486218-70ec-4c60-9844-8f7c80912333",
+    "name": "Splashy Spellcaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2620dcfe-8738-4f81-b23d-0c1c60cf9047",
+    "name": "Splatter Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41fbdaa2-7a7a-44d5-a8f4-77624350eedd",
+    "name": "Splinter, Hamato Yoshi",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb2cd508-f5cd-4d5b-b8e7-3cae1f39fd58",
+    "name": "Splinter, Radical Rat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "532ee9c3-391c-44db-8ed5-a1d28fd7f876",
+    "name": "Splinter's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "934e2634-4b1c-4d92-b4d6-9241620f3770",
+    "name": "Splitskin Doll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e82520a-9da3-49ae-b5c8-37e7ac8853fe",
+    "name": "Split Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "659a259d-f75e-4af3-b568-c63225e647de",
+    "name": "Sporogenic Infection",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f1ada92-538b-40cb-9bf3-5c415f5325e6",
+    "name": "Spotcycle Scouter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "788a4896-3414-40bf-b391-d2efea2fb5f9",
+    "name": "Springbloom Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdeb440d-a714-40e8-9038-f651e6ae45fb",
+    "name": "Springleaf Drum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc",
+    "name": "Spring-Loaded Sawblades // Bladewheel Chariot",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f1136a22-b202-4688-a44c-a9979c91261a",
+    "name": "Spring Splasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04cc9177-1ffc-4ac8-a64d-7995b4f33d23",
+    "name": "Spry and Mighty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ec9d9eb-14e2-47ea-88a2-d2394e363784",
+    "name": "Spyglass Siren",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0b15374-b4f6-48e0-8477-4eb5d5c2a938",
+    "name": "Squad Rallier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2348e0e-eeca-47b5-9417-bf4470ec29bb",
+    "name": "Squall, SeeD Mercenary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b79404b-2fae-41fb-994c-d4cd895e8f09",
+    "name": "Squawkroaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ea2a099-7c81-4012-8148-4d377f2d64e1",
+    "name": "Squire's Lightblade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e468f1fe-d99c-4034-a94f-91c41a129092",
+    "name": "Squirming Emergence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "315ddc7a-c39c-43d9-b134-23acbd865e3e",
+    "name": "Squirrelanoids",
+    "status": "curated"
+  },
+  {
+    "oracleId": "b4ee6843-bb79-4665-9763-83f656863dc5",
+    "name": "Stab",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8cfa20a-343e-4661-9f5a-a8265f6917a8",
+    "name": "Stadium Headliner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c45e872-3af8-47a4-9dc7-a99c293338f8",
+    "name": "Stadium Tidalmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b4589ff-d141-49a4-a0bd-1c73fc3651ef",
+    "name": "Stagecoach Security",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57bda813-ad4b-40ab-aa35-3f8343ff8668",
+    "name": "Staggering Size",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "064c3269-c012-4fc7-84c3-5f147a82a03c",
+    "name": "Stalactite Dagger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8c28807-8abf-4f91-81f3-1d7d9e856c25",
+    "name": "Stalactite Stalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ec3c334-8a53-46d8-8cfb-c647c3a1ef74",
+    "name": "Stalked Researcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce55c0a9-3334-440e-ae1b-c04a9e1c3d87",
+    "name": "Stall Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45392882-e4b9-4c74-a10f-985c2b4e2be9",
+    "name": "Stalwart Successor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b860806-0118-40f8-861b-225a7c1cf151",
+    "name": "Stampeding Scurryfoot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00e94b75-ad31-4e1f-b3be-eed7cd3e4d76",
+    "name": "Stand Up for Yourself",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "076865e9-ee10-4a87-9180-4274202d37c1",
+    "name": "Starbreach Whale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "578ddb51-e128-43e5-a115-471f0cae1222",
+    "name": "Star Charter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7024532b-f99b-43a7-b0ed-5b3e7ec7592b",
+    "name": "Starfall Invocation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42fa99ab-d35f-4439-ab00-fe99bad626ac",
+    "name": "Starfield Shepherd",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4add809e-9caa-45ae-bb0d-4760a360b8e2",
+    "name": "Starfield Vocalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd6afb5e-d99a-44a7-9af4-9f064da95d63",
+    "name": "Starfighter Pilot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2cdc1d82-30dc-4f0a-af20-33dde90269b1",
+    "name": "Starforged Sword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db8b4869-f898-40ad-bbad-62390a02d1b1",
+    "name": "Stargaze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52401cb4-1bce-4191-9220-0d93ea4108b8",
+    "name": "Stark Industries",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c07970d-063a-44a1-9761-b80aafa90dac",
+    "name": "Stark Industries Executive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0691d46-5bf4-4617-8a0a-19d17afb7219",
+    "name": "Starlight Snare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13fd7ca6-c278-409f-a9c4-57f16051ffce",
+    "name": "Starling, Aerial Ally",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c0940c6-8126-4d58-809e-871cf8588ef9",
+    "name": "Starlit Soothsayer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5454dddf-c6e5-4b0d-b96d-4904c13606dc",
+    "name": "Starport Security",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04e615e6-4088-4170-904c-f2d4bcebed59",
+    "name": "Starry-Eyed Skyrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802",
+    "name": "Starscape Cleric",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12a165c4-229b-458b-8fc7-c1b7cba35a8e",
+    "name": "Starseer Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d608a3fa-faee-44a4-9ab6-be701d3b7a49",
+    "name": "Starting Column",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d04e0975-f401-41b8-a9db-9bcf9cbbce66",
+    "name": "Starting Town",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d46e85f-4a04-48b1-afe9-3a47678041d4",
+    "name": "Startled Relic Sloth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ca969eb-3d79-4d1f-8d9d-7b8204ad166a",
+    "name": "Starving Revenant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "face2dc0-37ba-4efe-b900-b5521567c943",
+    "name": "Starwinder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a83768e-672e-4fec-8931-853f5e96d43d",
+    "name": "Stasis Snare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5b742d2-f19b-47c9-84bd-e85d975900e6",
+    "name": "Static Snare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94e8791b-e72f-4aed-b761-826779337168",
+    "name": "Station Monitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd49a05c-ed51-4d69-ab9b-11192442ec17",
+    "name": "Stature, Size Shifter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ab49974-3f06-4b6b-a416-d6f872b3887f",
+    "name": "Staunch Crewmate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "266561cc-d014-48cc-ba5d-fa72f3a91736",
+    "name": "Stay Hidden, Stay Silent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de403543-e61a-44fc-85e1-1e621d90ca8b",
+    "name": "Steal the Show",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0fb9a928-9adb-4dc1-9761-857df7e6c643",
+    "name": "Steamcore Scholar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "75237b2c-232b-479a-ab3a-e1566c8a9fe7",
+    "name": "Steampath Charger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17039058-822d-409f-938c-b727a366ba63",
+    "name": "Steam Vents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e64f1e0-ddd6-4ee7-8797-086e234b02e8",
+    "name": "Steel Hellkite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "770b2097-5178-42d2-be6c-393b4bfe3727",
+    "name": "Steelswarm Operator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a07e22c-71cd-4723-b07e-0ff02009a878",
+    "name": "Steel Wrecking Ball",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c22af49-c6ef-4de6-bb84-6b3e99879148",
+    "name": "Steer Clear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c94b616-8edf-465c-b316-4599df95c52a",
+    "name": "Stegron the Dinosaur Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48b43d53-9a8a-47a2-8610-a54d276d7be7",
+    "name": "Step Between Worlds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3178c1f9-f644-4926-ac9a-d40e4db79955",
+    "name": "Sterling Hound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f893d3d6-efef-4394-8e15-e01deed72b4f",
+    "name": "Sterling Keykeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab23cca2-b59e-4d34-80de-98bd08985275",
+    "name": "Sterling Supplier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "899f0931-4e9b-4fa8-9f6d-d13a7de05334",
+    "name": "Stickytongue Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d73913ea-44d0-408f-9f8b-8e91843f2826",
+    "name": "Stillness in Motion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "958c2a27-9fb1-42b4-a0ef-296584763a98",
+    "name": "Stiltzkin, Moogle Merchant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9779f32c-b1a2-42a3-8e78-14c28c3ad254",
+    "name": "Sting, Bilbo's Sword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7938112a-3832-42b4-b123-27a42c06a290",
+    "name": "Stingblade Assassin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "056b651e-e0e2-4333-9235-d1ffe8fcca29",
+    "name": "Stingcaster Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73",
+    "name": "Stingerback Terror",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "26e20ae5-4059-4d63-9db5-6e12421d1aba",
+    "name": "Stingerquill Annex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "987aadac-d6a6-4e50-9468-9e8e53cc5529",
+    "name": "Stingerquill Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8f755f7-ec93-4d2e-bffc-c719984fa13d",
+    "name": "Stingerquill Voxmancer // Vicious Verse",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a9a35c77-637f-4d56-afa2-6c8a4ded4838",
+    "name": "Stinging Cave Crawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "624cf822-0b4e-4f0c-9893-a53cb094f616",
+    "name": "Stinging Vitriol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "945a4a4d-fdfd-4c39-9975-5b22d17a4e70",
+    "name": "Sting-Slinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bcf54f8-fcd7-4ec0-b011-92b367411cdb",
+    "name": "Stirring Honormancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7244d04a-bb9c-4fbe-a346-4a3f45709da7",
+    "name": "Stirring Hopesinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dda607bd-f419-4b7f-b052-a5ce6ce22bfe",
+    "name": "Stir Up Trouble",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "068b370f-a358-4244-8050-6c81680c55c7",
+    "name": "Stocking the Pantry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "baa4cb1b-6fb5-46df-9cdd-54421ee0fc88",
+    "name": "Stockman, Mad Fly-entist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "171150fb-dbe1-4a07-a7ac-5f45762a26b0",
+    "name": "Stockpiling Celebrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2251e34e-4ce8-4452-9dc6-d8cce8583996",
+    "name": "Stock Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96c4b51c-8a10-428c-a948-e1ba9c652bfd",
+    "name": "Stoic Grove-Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d924c13e-f266-47b0-9711-ba9a9b9df1cb",
+    "name": "Stoic Sphinx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51023277-5434-4913-b9dc-df2a3fde1652",
+    "name": "Stolen Stark Tech",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17c0cf45-a031-40e8-a37f-eda98a8f785b",
+    "name": "Stolen Uniform",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10185447-a13f-40d8-a8b6-39ce801f2fc0",
+    "name": "Stomped by the Foot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16052b52-ade1-406f-a06b-ce7ea607fb63",
+    "name": "Stomping Ground",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7907bbf0-f6d9-4e5b-b5de-73cd94979f98",
+    "name": "Stone by Sunlight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dbb1690a-f6f5-459c-9d7f-cb6541fb6688",
+    "name": "Stone Docent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cfaa8b7b-7bfc-4660-bbc7-a717e05df6ef",
+    "name": "Stone-Giant of High Pass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1322734c-3c3e-4885-a6d2-d6460a16fca2",
+    "name": "Stonesplitter Bolt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1dceaa7-d33e-4067-9e1b-8a8978a12933",
+    "name": "Stony-Voiced Goblins",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0206af2-8034-4351-a797-a1d996f080b5",
+    "name": "Stop Cold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f4b3ee43-fc01-425f-8322-29bf6d16cb3f",
+    "name": "Stormbeacon Blade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4722105b-0085-4bb8-bca1-9de0d3eb5600",
+    "name": "Stormcarved Coast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2252471-01ca-4d58-aa99-4ab0aa5eae12",
+    "name": "Stormcatch Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42081a57-b521-45c2-928d-0a0a4641818d",
+    "name": "Storm Fleet Spy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9c0e089-92ca-4fbd-9ddd-1802ac3553c9",
+    "name": "Stormkeld Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a31c49f-5b3f-4f84-a08e-58b30a6bff7c",
+    "name": "Stormkeld Vanguard // Bear Down",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "4ad9c550-5605-4ffe-8e27-e9f2d9ada000",
+    "name": "Stormplain Detainment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf37426d-b0ad-42c3-81be-79701aa4e0cf",
+    "name": "Stormscale Scion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e24916ff-7566-4f27-8e31-732311a4a88c",
+    "name": "Stormshriek Feral // Flush Out",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "4a9ae0d9-5ee7-4289-9333-ef0bcc3079ca",
+    "name": "Stormsplitter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06e9287b-56d4-443e-97ba-b5dcdc4fa989",
+    "name": "Storm, Windrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51bb6d3b-be6a-435d-8a80-0c0f0161892d",
+    "name": "Storyteller Pixie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a5b3405-a1e3-4aad-ab4e-1b8db2d1f3a8",
+    "name": "Strangled Cemetery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0127c13f-7b0f-44c3-8b35-97f306c5f239",
+    "name": "Strategic Betrayal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36ab41b7-bcfb-4618-bbfb-70d608dba15a",
+    "name": "Stratosoarer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c163a95e-9414-4b8c-b5a2-1e7674530404",
+    "name": "Streaking Oilgorger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0389b48a-e64c-44fb-8a41-fd571cba237c",
+    "name": "Strength of Will",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52124954-b0b6-492c-8d03-fe54c220facc",
+    "name": "Stress Dream",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e85c6bd2-db15-4052-88c0-3ae25414f0ca",
+    "name": "Strife Scholar // Awaken the Ages",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e286a191-39d4-4073-b844-11d2aba911b4",
+    "name": "Strixhaven Skycoach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a6d01c8-47b6-43e5-a6e9-c48088286007",
+    "name": "Strix Lookout",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "9a107e48-3d50-4941-95b1-10f2b29a4245",
+    "name": "Stroke of Midnight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c85987b4-090e-472e-b9af-1114cce56ffb",
+    "name": "Stromkirk Bloodthief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c55909d3-1f67-4a4a-9d53-8513d6cf96d8",
+    "name": "Stromkirk Noble",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba5a2689-3578-4b1a-99d6-6b6d2356330e",
+    "name": "Strongbox Raider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24bc7bd5-f262-45a2-8e94-377fef2ba5d5",
+    "name": "Stubborn Burrowfiend",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84d308ce-c3c5-4612-accc-6e6cc68a33be",
+    "name": "Stuck in Summoner's Sanctum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58b0c737-0a84-4f9a-b3b7-300c5de43874",
+    "name": "Studious First-Year // Rampant Growth",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d49a7525-eca5-48e1-b94b-d618a706fd02",
+    "name": "Subterranean Cavern",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f82bae3-feaa-4967-a843-32a4f72806d5",
+    "name": "Subterranean Schooner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ef30340-a26d-49aa-bc86-0b8aa5252f87",
+    "name": "Suburban Sanctuary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d4472ad-3fbf-4a5d-94de-dfee04fda9c3",
+    "name": "Subway Train",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73992788-8084-459c-8375-9ccc8579c5d7",
+    "name": "Succumb to the Cold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "565ba85c-bad8-4cbd-a2ff-b4384b886308",
+    "name": "Sudden Setback",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8147a759-e387-48f6-9c1e-bb39622ed553",
+    "name": "Sudden Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1caa8c8a-ff45-4eee-a834-6e5e1fb54721",
+    "name": "Sugar Coat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57085b8e-a85e-4d50-a7d2-9bddfdaf411c",
+    "name": "Sugar Rush",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "70ea1a9d-ec52-4c11-8c4d-0d957e5491ad",
+    "name": "Suki, Courageous Rescuer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9223488e-5206-4d43-90ef-387189dcee16",
+    "name": "Suki, Kyoshi Warrior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee7b3fc0-6128-4bf6-b3e7-7371e6f93c4b",
+    "name": "Sultai Devotee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9db71b76-eda7-49dd-af5a-3de18acb8ccb",
+    "name": "Sultai Monument",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b869c33-a77c-4eb7-9df9-9815d70f7444",
+    "name": "Sumala Sentry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b772d35a-d365-47ce-b1dd-a2ba574c74ea",
+    "name": "Summit Intimidator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7b88da3-7dd1-45f8-b555-98ad838b2917",
+    "name": "Summit Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0990e57f-279e-4348-a049-e06187cc38d4",
+    "name": "Summon: Anima",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe9f6825-597b-4d80-ab7c-f4ee4e824b6f",
+    "name": "Summon: Bahamut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bab5e9ce-6d55-4d1e-a9ac-c2b954191be9",
+    "name": "Summon: Brynhildr",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b4bfdc5-8c0a-40c3-abbf-ada4a536dc34",
+    "name": "Summon: Choco/Mog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "697b14c6-fe6a-4880-9cf2-b6602a52ca0b",
+    "name": "Summoned Dromedary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4453b3e-733e-4038-81da-135a6a03079c",
+    "name": "Summoner's Grimoire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d054301-8465-4a4c-91e7-9a28dda92e57",
+    "name": "Summon: Esper Ramuh",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5d2f8e7-89d3-4015-ab99-ba4d66918e37",
+    "name": "Summon: Fat Chocobo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3509171e-8d7d-4e9e-97a1-58e6c7d225ed",
+    "name": "Summon: Fenrir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6b22bac-853a-45a8-a74d-9904ec2b34fd",
+    "name": "Summon: G.F. Cerberus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96d1bfc1-b80f-466f-b07d-df1ab361e8e0",
+    "name": "Summon: G.F. Ifrit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73122880-d7f4-422f-a336-18773bcb7bfe",
+    "name": "Summon: Knights of Round",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b38d1811-64d7-4a35-a86c-3291eecd8391",
+    "name": "Summon: Leviathan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aaf9e711-94e1-4869-81b0-baa6380ee873",
+    "name": "Summon: Primal Garuda",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "032f59c3-9f47-4db3-a43c-065a99ed7efe",
+    "name": "Summon: Primal Odin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5846718c-7d31-4d2c-80a2-b1534e2aebc1",
+    "name": "Summon: Shiva",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66ce0c60-f406-4ece-915f-675da4e8b16d",
+    "name": "Summon: Titan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a202276b-1f1b-4277-95ee-26877a204f5e",
+    "name": "Sunbillow Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c69742bf-f0f5-4216-a602-c21f9c5a6501",
+    "name": "Sunbird Standard // Sunbird Effigy",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1",
+    "name": "Sun-Blessed Healer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d188a397-c7d9-4f16-bc21-d9e1b5ffc951",
+    "name": "Sun-Blessed Peak",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27c87371-697e-4ca6-a7f4-d99215d908bc",
+    "name": "Sun-Dappled Celebrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c01b221f-3993-43ab-8cde-b42fb344e2a7",
+    "name": "Sunderflock",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b095526e-94a4-416b-83de-d6271804ccf3",
+    "name": "Sundering Archaic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ca808c5-9338-4199-a45b-df1a1a20625e",
+    "name": "Sundial, Dawn Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ad0b405-cca4-475e-985c-4d7e3599d87e",
+    "name": "Sundown Pass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2da26d6-b0f7-4af0-9ce8-fb8d82fe2d85",
+    "name": "Sunfire Torch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "508189e1-9cef-4f9c-8ff1-078c99a0f603",
+    "name": "Sunken Citadel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f17b9356-a329-4f89-b690-afc2eaff4977",
+    "name": "Sunpearl Kirin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3731735-2b78-4a15-bff4-4d8559401f68",
+    "name": "Sunset Saboteur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d81ade13-e7c7-4fe3-bb0c-5007ed9f1198",
+    "name": "Sunset Strikemaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19afaf35-b420-49e0-bddf-3180bf1dc30f",
+    "name": "Sunshot Militia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a70faf5-cc04-402b-92e3-67746788f510",
+    "name": "Sunshower Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d961997-4f5f-4ce2-b062-11411147e2f7",
+    "name": "Sun-Spider, Nimble Webber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "479adf64-f42c-4cb6-bf25-648c044bca8b",
+    "name": "Sunspine Lynx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de6b26e4-8700-490f-9df2-dac430463274",
+    "name": "Sunstar Chaplain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "944a91ab-c217-4c1d-b920-2e5503c34546",
+    "name": "Sunstar Expansionist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "132de6c2-4ca2-41da-9c78-caa59838b641",
+    "name": "Sunstar Lightsmith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "513a2fca-fea4-434e-9b25-b0c0d7f322b2",
+    "name": "Sun Warriors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f93fa6ec-1f13-4109-aa60-11e148f7ba88",
+    "name": "Super-Adaptoid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d82929f2-57ad-45be-a834-984437046026",
+    "name": "Super Intelligence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a6a7af21-e52c-4f7f-a57f-bd365d075966",
+    "name": "Superior Foes of Spider-Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "636cc915-9d1b-4ffe-9e74-795b78663911",
+    "name": "Superior Spider-Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7ee76bf-d15a-489e-8f05-414788f8f649",
+    "name": "Super Shredder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4644013f-c96a-450e-a7bc-ddfa7a563050",
+    "name": "Super-Skrull",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f2ba142-5e7c-4709-ae03-e028cb2a9872",
+    "name": "Super-Soldier Serum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88923ca1-a793-42f0-b9f8-ed9ff9c1185d",
+    "name": "Super Speed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1b577ad-1488-43b5-83d9-e40bd60c74be",
+    "name": "Super Strength",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "606092eb-8fe3-4ef7-aaf1-2d3b2687d27a",
+    "name": "Super Suit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "192e150a-96b0-42d6-9d39-03d0bed61f41",
+    "name": "Super Villain Lockup",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d1bbeda-2e81-4aaa-9494-094ec3dd6c3b",
+    "name": "Suplex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d891515-39da-492e-ac19-1aa524245449",
+    "name": "Supper for Spiders",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1266feb-516e-4b44-b750-7988ca6e6e55",
+    "name": "Supportive Parents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5bbc9d7d-91bd-4a58-8d19-f7be650720b7",
+    "name": "Sureshot Sower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb694e7e-f66e-4958-b6ed-aa74bc9ac43e",
+    "name": "Sure Strike",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "0caccec3-4942-499a-9434-0c94389afcf8",
+    "name": "Surgical Precision",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68bb76af-f933-430a-a66a-fe4a7d6be4e0",
+    "name": "Surgical Suite // Hospital Room",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ef67c170-68aa-4ada-8cee-261a4dbb1b5d",
+    "name": "Surly Farrier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a0fe73f-6e08-4c9a-80e1-c2ead6cebe06",
+    "name": "Surrak, Elusive Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa56a5fa-ef96-404c-8fb6-d1f5fcebb52e",
+    "name": "Surrak, the Hunt Caller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9be5a350-c38e-425f-9d6a-8eb111132a89",
+    "name": "Surveillance Monitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b97648b7-ae98-45c9-8f0f-a52d6faf2d2d",
+    "name": "Surveillance Phantasm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3648376-dc8b-409b-b2d1-c29e326a059c",
+    "name": "Surveillance Room",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53745903-de8f-42cf-a949-842e5831de30",
+    "name": "Survey Mechan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "883267f0-be7e-43c3-b7f8-82981f6d8c23",
+    "name": "Suspend Aggression",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91f7672c-3090-48f4-8586-0426341c3159",
+    "name": "Suspicious Detonation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea6ee33f-0cba-4e96-817f-dc89c9064ead",
+    "name": "Suspicious Shambler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1d826d1-d2da-46ce-b1db-81393c88d865",
+    "name": "Susurian Dirgecraft",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f754f11-3b6d-4a4e-86d7-7495e475ef74",
+    "name": "Susurian Voidborn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50d6cadc-07e4-479e-90f4-e3a20f769bab",
+    "name": "Susur Secundi, Void Altar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "343ecf2f-0bbc-4840-8fb3-f5f61b26e76f",
+    "name": "Swab Goblin",
+    "status": "curated"
+  },
+  {
+    "oracleId": "1a8185ed-636b-49ad-bf24-2ab02c7fb91e",
+    "name": "Swallowed by Leviathan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56719f6a-1a6c-4c0a-8d21-18f7d7350b68",
+    "name": "Swamp",
+    "status": "curated"
+  },
+  {
+    "oracleId": "fc532d1d-6cf5-4b59-afb3-325d0bc0db77",
+    "name": "Swampsnare Trap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10c8cf3b-2530-49e7-b38e-95cdaae8a6e7",
+    "name": "Swarm, Being of Bees",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a6c28bde-10d9-471b-acd0-32a1c6195805",
+    "name": "Swarm Culler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5cdb69e5-9395-4ef6-be18-71e3dd70df66",
+    "name": "Swashbuckler's Whip",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79090b00-d920-4134-a838-fb434cf3ee4d",
+    "name": "Swat Away",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "635b854d-de71-4c85-9755-8c97bf3cba36",
+    "name": "Sweettooth Witch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "44240b1e-c104-4eb4-8ab9-0d56607ba241",
+    "name": "Swiftblade Vindicator",
+    "status": "curated"
+  },
+  {
+    "oracleId": "c8b143ad-43ec-4e0d-a440-e348daa31391",
+    "name": "Swiftfoot Boots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f4ad084-2062-44c0-9975-15f100204531",
+    "name": "Swiftwater Cliffs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46b36d25-25bd-48c5-9a53-75230bb27dee",
+    "name": "Swiftwing Assailant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e366afb3-c447-4bde-b358-41c8568142d5",
+    "name": "Sword of Vengeance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3a80545-9a8a-46b2-9d8c-b0d66fb68a5d",
+    "name": "Sword of Wealth and Power",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f15abe7-54aa-40ed-a15d-5b827f1c3923",
+    "name": "Swordsman, Sharp Scoundrel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fe5baab-b182-4cd9-bea5-912ce9b1464a",
+    "name": "Sygg's Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de",
+    "name": "Sygg, Wanderwine Wisdom // Sygg, Wanderbrine Shield",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "398afdf2-4a12-430e-85c9-c68847230939",
+    "name": "Sylvan Scavenging",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc681ecf-2a52-4782-9a47-90f5a9f435d8",
+    "name": "Symbiote Spider-Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5eace41-0f53-4084-8bec-1e079c04287b",
+    "name": "Synapse Necromage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "faa0055b-c1d2-4ce7-875f-41b4be8030bd",
+    "name": "Synchronized Charge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "318f7f70-e374-40ef-8afb-3389c10461d8",
+    "name": "Syncopate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a37314cf-bbbd-4003-b94d-0e6e60edfc15",
+    "name": "Synthesizer Labship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8696eae4-3dc9-4572-aab9-aa4f7e8f53af",
+    "name": "Syphon Fuel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d9a4905-4a26-410e-936c-56de849e9ca3",
+    "name": "Syr Alin, the Lion's Claw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53fc09e1-1e5d-4f22-b623-2c5c770183ab",
+    "name": "Syr Armont, the Redeemer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2eb16535-718f-4b88-92bc-96429d796327",
+    "name": "Syr Ginger, the Meal Ender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e597063-c077-4236-a9e4-b0721b24677f",
+    "name": "Syr Vondam, Sunstar Exemplar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28225bae-2d96-4352-b256-0c2ff4ef65e9",
+    "name": "Syr Vondam, the Lucent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c9d9d47-1eb6-4981-ba83-d5ec04906e71",
+    "name": "Systems Override",
+    "status": "unsupported"
+  }
+]

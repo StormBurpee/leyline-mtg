@@ -12,7 +12,7 @@ Leyline's engine and client are written in JavaScript for this repository. They 
 - `forge-game/.../trigger/TriggerHandler.java`: pending triggers, distinct from resolution.
 - `forge-gui/res/cardsfolder/l/lightning_bolt.txt` and `c/counterspell.txt`: declarative executable card definitions.
 
-No Forge Java implementation source is distributed in this repository. Sixteen small Forge card-script fixtures are reproduced in `packages/forge-import/test/fixtures/`, with upstream source links and GPL-3.0-or-later attribution; they test the conservative migration adapter. The comparable rule behavior is implemented directly from the game rules in a separate, smaller architecture. Leyline is licensed **GPL-3.0-or-later**, consistent with an open-source future that can incorporate properly attributed GPL-compatible contributions. This does not make this project an official Forge release. The included license is the unmodified GNU GPL v3 license text.
+No Forge Java implementation source is distributed in this repository. Twenty-two small Forge card-script fixtures are reproduced in `packages/forge-import/test/fixtures/`, with upstream source links and GPL-3.0-or-later attribution; they test the conservative migration adapter. The comparable rule behavior is implemented directly from the game rules in a separate, smaller architecture. Leyline is licensed **GPL-3.0-or-later**, consistent with an open-source future that can incorporate properly attributed GPL-compatible contributions. This does not make this project an official Forge release. The included license is the unmodified GNU GPL v3 license text.
 
 ## Rules and cards
 
@@ -23,3 +23,9 @@ Magic: The Gathering, card names, Oracle text, symbols, illustrations and other 
 `apps/web/card-metadata.json` contains display metadata retrieved from Scryfall. Its URLs reference externally hosted card images; image files are not bundled. Artist credits are shown in the inspector. Running `node scripts/fetch-card-metadata.mjs` explicitly refreshes metadata; no card-rule behavior is generated from Oracle text. Review Scryfall's API policies before changing its access pattern or deploying at scale.
 
 The geometric Leyline mark and README diagrams are original project graphics. Gameplay screenshots show the actual client, with third-party card art visible and credited as above. They are not concept renders or proof of broader engine support.
+
+## Reviewed card data
+
+`packages/engine/src/reviewed-creatures.js` contains 34 single-face creature definitions derived from the same pinned Forge snapshot (`e5a0f8156da70ffc7866f923bed371c0111707cd`). Each was reviewed for representation by literal characteristics, supported combat keywords and prowess, then exercised by casting/resolution fixtures. The source scripts remain attributable to Forge contributors under GPL-3.0-or-later. Their Oracle text remains Wizards property. These checks do not certify every possible interaction with unsupported Magic mechanics.
+
+`docs/card-pools/` records dated Scryfall inventories and implementation status, not executable rules. Queries, retrieval times and source-page hashes are retained. Scryfall availability tags are not a verified export of an Arena client installation. Alchemy-tagged results and auxiliary tokens/emblems are tracked separately rather than counted as playable deck cards.

@@ -18,6 +18,7 @@ const KEYWORDS = new Set([
   'hexproof',
   'shroud',
   'indestructible',
+  'menace',
 ]);
 const BASIC_MANA = { Plains: 'W', Island: 'U', Swamp: 'B', Mountain: 'R', Forest: 'G' };
 const PRESENTATION = new Set([
@@ -198,9 +199,12 @@ function parseAbilityCost(text, errors) {
   const tokens = text.trim().split(/\s+/),
     taps = tokens.filter((t) => t === 'T').length;
   if (taps > 1) errors.push('Multiple tap-cost symbols are unsupported.');
-  const mana = tokens.filter((t) => t !== 'T');
+  const life = tokens.filter((t) => /^PayLife<\d+>$/.test(t));
+  if (life.length > 1) errors.push('Multiple life-cost terms require manual migration.');
+  const mana = tokens.filter((t) => t !== 'T' && !life.includes(t));
   return {
     ...(taps ? { tap: true } : {}),
+    ...(life.length ? { life: number(life[0].slice(8, -1), 'Life cost', errors) } : {}),
     ...(mana.length ? { mana: parseCost(mana.join(' '), errors) } : {}),
   };
 }
@@ -282,7 +286,10 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
   for (const row of rows.filter((r) => r.key === 'K')) {
     const keyword = row.value.toLowerCase();
     if (KEYWORDS.has(keyword)) definition.keywords.push(keyword);
-    else if (keyword === 'prowess')
+    else if (row.value.startsWith('Ward:')) {
+      if (definition.ward) errors.push('Multiple ward instances require manual migration.');
+      definition.ward = parseAbilityCost(row.value.slice(5), errors);
+    } else if (keyword === 'prowess')
       (definition.triggers ??= []).push({
         event: 'controllerCastsNoncreature',
         effects: [{ op: 'modify', subject: 'source', power: 1, toughness: 1 }],

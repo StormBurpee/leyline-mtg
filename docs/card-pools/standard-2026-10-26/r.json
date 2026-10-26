@@ -1,0 +1,1557 @@
+[
+  {
+    "oracleId": "bd39e333-b0b8-4a85-8645-d77f4a3941db",
+    "name": "Rabanastre, Royal City",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48252207-d345-455c-b655-c2027664e6a6",
+    "name": "Rabaroo Troop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f7abd7d-1087-495c-8a52-2a2368cc1032",
+    "name": "Rabbit Response",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4db02b34-efec-437c-ab28-aa318b8879ad",
+    "name": "Rabid Attack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d5dc34b-3eea-4b77-8db7-94bc30b14c4c",
+    "name": "Rabid Bite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "077ae62d-ed94-4365-a8b7-97fd99cff028",
+    "name": "Rabid Gnaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50c038a4-6546-4a15-a117-176849edaa3d",
+    "name": "Raccoon Rallier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54c2b3b3-e247-4146-8045-d49480b795f2",
+    "name": "Racers' Scoreboard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84d648c7-655e-4590-a3e0-366a8a4a4cb3",
+    "name": "Radagast of Rhosgobel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "307be184-176a-40a8-944c-48aa00cfdd29",
+    "name": "Radiant Lotus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "186efd85-83d4-40cc-b617-76f32dbe99ce",
+    "name": "Radiant Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f15bd5c0-99ff-42c6-8eed-48de6df81b61",
+    "name": "Radioactive Spider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60754d4b-2add-4928-8d30-8ce9c0f54f91",
+    "name": "Raft Security Officer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "71b81f3f-6092-4819-8529-e27bccfcf088",
+    "name": "Ragamuffin Raptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c7641b6-3a6c-4441-a98c-3b5d61d91f76",
+    "name": "Rage into the Valley",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0732ebf-91ad-4e3c-a09a-f410d20587fc",
+    "name": "Ragged Playmate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb67d0a4-864e-4f46-8538-fdd920bf0197",
+    "name": "Ragged Short Spear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ffe4d90-b46c-4606-89cb-1b724104f6ea",
+    "name": "Raging Battle Mouse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c807b53f-2917-41a0-812c-57240b623365",
+    "name": "Raging Goblinoids",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "679841ad-f3ac-48e2-ba11-2cf6d78642b4",
+    "name": "Raging Redcap",
+    "status": "curated"
+  },
+  {
+    "oracleId": "14b839ef-80b1-4e7d-b2fd-38e973899cde",
+    "name": "Ragnarok, Divine Deliverance",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "76f5445a-5193-4794-8593-b44f961334b6",
+    "name": "Ragost, Deft Gastronaut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "854cac11-9a22-4dea-8c1b-c49a4858a754",
+    "name": "Raiding Schemes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b653db44-ddae-44e8-8fa6-6af3232cd586",
+    "name": "Railway Brawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ccf72ee-a86a-4b13-9e76-e308d0d28523",
+    "name": "Rainveil Rejuvenator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a69a24d0-ca58-4a44-8af1-a3bd1608d2f9",
+    "name": "Raise the Past",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "361f534b-39d1-4421-b5a8-d3813c62f86d",
+    "name": "Rakdos Guildgate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a47865c-8fa2-4cb2-aebf-8009c065395f",
+    "name": "Rakdos Joins Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d08ce18a-0fd9-47ac-ad2f-6934b60070f1",
+    "name": "Rakdos, Patron of Chaos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2c141af-925e-42bd-8d83-e1a71f4c9794",
+    "name": "Rakdos, the Muscle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ddf34404-39dd-4dcf-a706-ec78d47167e9",
+    "name": "Rakish Crew",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d69cb63f-98cc-4699-a03d-4f1beeeb7065",
+    "name": "Rakish Scoundrel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d87be8c6-7a1f-4db8-ada1-b1a030f03877",
+    "name": "Rakshasa's Bargain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c970f43-17da-4187-a084-efd53b579067",
+    "name": "Ral, Crackling Wit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f6101a5-3038-45b0-8302-b2e4127b9510",
+    "name": "Rally the Monastery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0dc76b7f-6405-44a1-8c55-31fa480ff70b",
+    "name": "Ral Zarek, Guest Lecturer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b100e6f-6c19-49d2-b9c4-613d63d42151",
+    "name": "Rambling Possum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ed41d2d-211b-4013-8562-8c64d54cc43a",
+    "name": "Ramos, Dragon Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d3e6549-6cc6-434f-a189-ba3b55e64c34",
+    "name": "Rampaging Baloths",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91d01119-9b3e-4629-8cf0-bbca2c19a7cc",
+    "name": "Rampaging Ceratops",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6d8e6cb-0878-4f2c-9a89-ce84cb4f5bbc",
+    "name": "Rampaging Soulrager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41f6d6d9-3fe5-44b0-904d-1cb90d36f2b6",
+    "name": "Rampaging Spiketail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0867755a-9fb9-42ad-897e-6206fbfbc1f8",
+    "name": "Rampart Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a728685f-8670-4db2-ae02-3cf74eb3c402",
+    "name": "Ran and Shaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a68fcaf-b1e8-451d-8e1c-b47db55c83cc",
+    "name": "Rancorous Archaic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "324493fc-a205-4177-aa94-cf4672844c81",
+    "name": "Random Encounter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49d149d6-de94-48cf-974b-6bb4a37ce77c",
+    "name": "Rangers' Aetherhive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e7ac64d-42c3-4e3b-9a20-9f09ee9d8a7a",
+    "name": "Rangers' Refueler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "052e8e1c-d006-4c9f-90da-deafbbf7fed3",
+    "name": "Rankle's Prank",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64e7ef06-ba30-4b19-9d44-ca77944cc930",
+    "name": "Rank Rat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0944ec2e-1dd9-459f-8f1d-667242cf52fe",
+    "name": "Rapacious Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eaf194a7-d95f-4738-9052-92ad00443a76",
+    "name": "Raphael, Most Attitude",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdb8e862-c642-4b7b-b061-400de6061ffe",
+    "name": "Raphael, Ninja Destroyer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f58a5f8b-254c-4206-bdbe-55a23798ed2d",
+    "name": "Raphael's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c1e5b25-ee5a-4ea9-a715-08dd1a4f51c4",
+    "name": "Raphael, the Nightwatcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c72e6d2-bbb0-42de-b465-438d584cbddc",
+    "name": "Raphael, Tough Turtle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57f39ce2-ecbb-4262-8140-03aba5c4303f",
+    "name": "Raph & Leo, Sibling Rivals",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82563a5f-cae4-4ece-876c-0df245d2dc58",
+    "name": "Raph & Mikey, Troublemakers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de1ad369-5aa3-4c54-8fb1-30b7f1d4d542",
+    "name": "Rapid Rescue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf43518b-bfec-443d-a6c0-f2d848dc5fa8",
+    "name": "Rapier Wit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c997afb7-82cb-4579-885e-3628cb1b51e4",
+    "name": "Rapturous Moment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ecc91e38-90fa-4d89-b262-d5f36dce5be4",
+    "name": "Ratcatcher Trainee // Pest Problem",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a5656dab-5ce6-48fd-9eae-2c06969bb8df",
+    "name": "Rat King, Verminister",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37043e1e-4556-45f7-9484-15dd8ed5272b",
+    "name": "Rat Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5538d4cf-98eb-4e20-a9c1-42c7cdcad194",
+    "name": "Rattleback Apothecary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d81d5749-ab4d-42c5-8903-0b400f10fe33",
+    "name": "Raubahn, Bull of Ala Mhigo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5be6f245-31cf-4294-ace0-ca6ce3463fed",
+    "name": "Raucous Audience",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24a97436-ba61-4ebc-a560-a6c027ccfdf3",
+    "name": "Raucous Carnival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "534e74f6-52f4-4824-9178-cce5e4bcbcc2",
+    "name": "Raucous Entertainer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04e5e84f-8fd4-43ab-8f9d-5b24646f7ae5",
+    "name": "Raucous Theater",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f75ac0a3-8795-48b4-91fd-4717900ef5b7",
+    "name": "Raven Eagle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f961374-00b0-40df-83eb-9ced2bb519aa",
+    "name": "Ravenhill Flock",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8060d231-7477-441d-b249-8e75aa1d7791",
+    "name": "Ravening Warg",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eec7d4f4-4141-49ed-8978-aefacc0a6609",
+    "name": "Raven of Fell Omens",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87424e20-00ab-4f6d-a905-1955897b358e",
+    "name": "Ravenous Amulet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46c7a552-4a98-4e1a-8651-8fb0e7153aec",
+    "name": "Ravenous Giant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45873747-f2a4-4d83-9492-bfc97df7b605",
+    "name": "Ravenous Robots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c2e84dc-b4f5-4eca-af07-1c53a1caae7c",
+    "name": "Ravine Raider",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "792da586-a687-428c-a10e-75431249df5b",
+    "name": "Rayblade Trooper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "698098b8-b8e4-4e88-b13a-6b039579d192",
+    "name": "Ray Fillet, Man Ray",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e36b78ed-4e3e-406d-85b3-fe0deb493418",
+    "name": "Ray of Ruin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3fc4bdf1-7da3-4f9f-806f-f82cd18ea65f",
+    "name": "Razorkin Hordecaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a78f981a-bf8a-42a4-b171-d655cc2cc1a2",
+    "name": "Razorkin Needlehead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb5afbd7-4d21-4449-9204-eeb4ebf6a72a",
+    "name": "Razor Rings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f69bd3a-244e-42d8-bfac-5a426f4b54b4",
+    "name": "Razortrap Gorge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1ac6d5c-b2d0-4ca4-8af8-16fd3dd3b3b5",
+    "name": "Razzle-Dazzler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68930fb6-d833-40cf-8917-1a1bf60edbe3",
+    "name": "Reach for the Sky",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "14bc29ee-4f84-4e62-8ede-5741b99414c9",
+    "name": "Reach the Horizon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb9ce416-eef1-49e8-89a0-2b6837505070",
+    "name": "Realm of Koh",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50ace222-57f1-477f-9e06-155d7b403512",
+    "name": "Realm-Scorcher Hellkite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce60402c-34cd-44fe-ae1d-4a5404298f5b",
+    "name": "Reaping Willow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95f20067-4471-4bfa-952d-dbbfbb2c2178",
+    "name": "Rearing Embermare",
+    "status": "curated"
+  },
+  {
+    "oracleId": "020503f5-0915-4cd5-a617-1c7bde045e10",
+    "name": "Reasonable Doubt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9dbc3530-b278-4c8d-b2cc-a09dfac9d5e5",
+    "name": "Reassembling Skeleton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70401db7-edbc-402f-98ef-be74bd316273",
+    "name": "Rebellious Captives",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f3d7102-f8ce-42d4-94eb-f69b695773d1",
+    "name": "Rebellious Strike",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "4debd0e4-3bb6-4dd1-addc-08e4bda69d11",
+    "name": "Reckless Detective",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73733fa5-d292-40ec-8f17-05ba5feb40ab",
+    "name": "Reckless Lackey",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebcd198e-7fbd-46e0-a6d9-ff499e541978",
+    "name": "Reckless Ransacking",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "367420cb-e77b-4d0c-9a83-0deee28f6d36",
+    "name": "Reckless Velocitaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "032ec6e2-6cc3-4a97-9cc7-3233f5e11904",
+    "name": "Reclamation Sage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b73e35b0-b8c9-471a-bdff-f7dc8f453d7a",
+    "name": "Recursive Recruitment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ada48353-4c86-44d6-83a5-e7e3c703b948",
+    "name": "Redcap Gutter-Dweller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e055bc6d-d395-4f85-8e15-3bce65b7fcca",
+    "name": "Redcap Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e85567e8-1102-4d44-a15b-d5f1fdef8465",
+    "name": "Red Guardian, Super-Soldier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0ee45b5-697b-48f8-b1a6-cb3ae75e4a29",
+    "name": "Red Herring",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a14a838a-49f4-45e3-9ec0-3c803af45a68",
+    "name": "Red Hulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c62b5c22-e058-436f-9575-a01cb2112829",
+    "name": "Redirect Lightning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "680a8e14-053f-4cde-a060-e1b36873cf14",
+    "name": "Rediscover the Way",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "35ad9e15-3e00-4bd2-96cf-36a6ef49059f",
+    "name": "Red Mage's Rapier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51a6819d-c8fb-4f52-ab0c-4ae845728ed2",
+    "name": "Redrock Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4e60c38c-cbf5-4ff7-8fff-634f7e3086cc",
+    "name": "Red Room Recruit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "582c7e54-d64c-4ffb-ae5f-d2752b3ed10b",
+    "name": "Redshift, Rocketeer Chief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94c9aea7-564d-4fc8-ae14-7b22cba18b95",
+    "name": "Red Tiger Mechan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6cb9c5a-601e-4580-9fab-903e9b00e35e",
+    "name": "Redtooth Genealogist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e459e48-d2bb-4c4e-9a87-58efb56cddd1",
+    "name": "Redtooth Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32438050-5ae7-4c19-bcaf-5a07a673e0e0",
+    "name": "Reef Roads",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebb88893-427f-496c-82a8-94d2bafb5e4c",
+    "name": "Reenact the Crime",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb1dfa29-7371-4cb6-bfa2-16f7820b69be",
+    "name": "Refute",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "2a18b3f0-8a78-46d8-b60f-3cd634062f1b",
+    "name": "Refute Destiny",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "efd93428-88a5-4f7b-95f3-1d6eec069a4c",
+    "name": "Regal Bunnicorn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa571676-b390-4b8a-baea-4c4cd60c01f6",
+    "name": "Regal Caracal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83a76601-ef59-4888-af70-5088dd1f504c",
+    "name": "Regal Imperiosaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e30ccf07-0969-4e81-ba43-c50a2ff9c040",
+    "name": "Rehearsed Debater",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8c5e481-371c-4999-bb2c-347a2aa33171",
+    "name": "Reigning Victor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b97d21b4-d730-479f-872f-3e1645b66751",
+    "name": "Release the Dogs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50994df7-300d-4e30-897a-0974dc0820ee",
+    "name": "Relentless X-ATM092",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7887f060-3024-4dc4-aeb5-fb5546db6b48",
+    "name": "Relic's Roar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dcc51bcb-a61e-471f-8a01-7fcbc069fcba",
+    "name": "Relive the Past",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dd6601c6-810d-4883-89d2-5d31419fb1cc",
+    "name": "Relm's Sketching",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "162dcfa0-36e4-41cd-8322-08e810ff04d4",
+    "name": "Reluctant Dounguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d24c12a-a300-4199-b2a9-3d5ead8df617",
+    "name": "Reluctant Role Model",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69e8333a-bddf-49e2-9c39-3dc46fec81e0",
+    "name": "Remnant Elemental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6fdddab4-fcc9-4622-9c17-c69f9d4bca08",
+    "name": "Render Speechless",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c754808-86a6-43d3-8aeb-96ec19f7396c",
+    "name": "Renet, Temporal Apprentice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f749a6d6-2c55-439f-bb02-e95fa54c2ef3",
+    "name": "Reno and Rude",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3fe1530d-bcf2-440b-a905-5a2216daa7eb",
+    "name": "Rent Is Due",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d1885d1-212e-47ae-865f-e6dc4148ddf2",
+    "name": "Repeat Offender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba58f508-8036-496c-8a2f-c1e410165e93",
+    "name": "Repel Calamity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6284597-1983-4a21-a461-724135220e0d",
+    "name": "Reptil, Dinomorpher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a12a66b5-ea4a-4a58-b0f0-13152598b7e6",
+    "name": "Reptilian Recruiter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "611bfaa6-b098-48d9-9e49-1e7dc8687f15",
+    "name": "Repulsive Mutation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "150f920c-c942-4feb-824f-79dd9b531687",
+    "name": "Repulsor Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b775a404-ec0a-47ff-bb9d-eae2273d945b",
+    "name": "Repurposed Enforcer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1787ac2f-762d-4f3a-b7e5-12db6d3d470d",
+    "name": "Repurposing Bay",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "62f09a5b-d7fb-44f4-9fab-719185b735ab",
+    "name": "Reputable Merchant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13a8b19b-23bd-4e45-81ff-23371665e4fc",
+    "name": "Requiem Monolith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09669283-eb14-46a2-b37a-51d7a52da891",
+    "name": "Requisition Raid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eda16b31-33db-4ad2-901a-80fbe6273733",
+    "name": "Requiting Hex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "26d2762b-4346-40d0-b93d-b0dbfeb6e2bc",
+    "name": "Reroute Systems",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df6fc0b4-333b-4f6c-804c-ba6c8e29c88e",
+    "name": "Rescue Girl, First Responder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d70ad04a-b940-4bb1-bcdc-408166e91723",
+    "name": "Rescue Leopard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "112aaaf0-3301-4f79-9640-d36c75a0fb30",
+    "name": "Rescue Skiff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "71d6aa12-4888-458d-9dc8-9954b247a246",
+    "name": "Resentful Revelation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78c7c73f-847d-43bf-9e02-cf85357453f4",
+    "name": "Resilient Roadrunner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eaaed253-9b11-47e2-8624-0340ab2207f6",
+    "name": "Resolute Reinforcements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9263287d-f782-4318-9ab8-e2e5f8107f5e",
+    "name": "Resonating Lute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ac93092-1a57-4cf7-8f03-1dca86d5c476",
+    "name": "Resplendent Angel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "087f9ad7-e74f-40e2-8102-1ed2925d0418",
+    "name": "Rest in Peace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91320daf-f69c-4350-b0fc-4bb37a6904b1",
+    "name": "Restless Anchorage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3c7b46f-c9ab-40ca-b50b-a4e0d0bd9be8",
+    "name": "Restless Bivouac",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e16595f-bdeb-422e-b99a-bfc0ed52e9f8",
+    "name": "Restless Cottage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b3726f1-20b8-42ec-8f9b-b361515c3f05",
+    "name": "Restless Fortress",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c071257a-63e7-48d0-a677-0b396a09b624",
+    "name": "Restless Prairie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df20f85b-5f81-4ee4-8487-55d90109ac36",
+    "name": "Restless Reef",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c0f4a63-586a-4dde-9621-b0dd9118b2e5",
+    "name": "Restless Ridgeline",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9",
+    "name": "Restless Spire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "696e7ddb-bdc7-40ee-bc5c-59e98f4a7401",
+    "name": "Restless Vents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0935faa2-fb90-48db-8a92-906ba0f374c7",
+    "name": "Restless Vinestalk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ddbe0d17-5cac-417c-afc0-e4aebae83205",
+    "name": "Restoration Magic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd0a27a9-7d7e-4a16-9dd0-0715e6c97b36",
+    "name": "Restoration Seminar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7b2606c-42b8-46d6-bcaa-8d4506b348eb",
+    "name": "Restorative Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb1e697f-6689-4f0b-8725-61d51432b8dd",
+    "name": "Restore with Empathy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b36286fa-4007-4276-af9c-d8f0da9e94d1",
+    "name": "Restricted Office // Lecture Hall",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "8b6d37a7-a88e-45dd-b45e-642a44caaf05",
+    "name": "Resurrected Cultist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d3b6e27-2f8b-42e0-9490-7b134e84bb6b",
+    "name": "Retched Wretch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d6fdbd4-ba51-4df1-b383-9b709b36a8d7",
+    "name": "Retrieve the Esper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8b5de6d-8654-4550-bccb-79de6cbef4d5",
+    "name": "Retro-Mutation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "541adb13-1277-4c9e-ae1e-976f7aac1c72",
+    "name": "Return from the Wilds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30377bd5-99ab-4888-9ea7-e5a069b527e8",
+    "name": "Return the Favor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "217e76ca-ea94-417c-b5b0-82e2302eeee8",
+    "name": "Return to the Light Realms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3ee8565-f34c-4073-bc94-3fe9ec6bbe8a",
+    "name": "Return to the Sewers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a4814615-ffa2-4692-86bc-3a1b7fc2acc8",
+    "name": "Return Triumphant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "29e3a3d9-4839-44d0-ad48-159c01645a6a",
+    "name": "Revenge of the Rats",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d",
+    "name": "Reverberating Summons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86214b4c-a3ad-4372-b5fe-8f742a7a3d4c",
+    "name": "Reverent Howl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a848c1f-d11a-42fb-b9ce-663901fc9555",
+    "name": "Revival of the Ancestors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f91c860e-3feb-4a5a-b7ef-4e7d38d61c75",
+    "name": "Rewrite History",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42565432-3a17-4274-87fc-016ab900e313",
+    "name": "Rewrite Regrets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a6bf8a3-7640-4890-ac62-d5028f41978b",
+    "name": "Rhino, Barreling Brute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a744206-04c4-46cb-b64d-cf192c9324df",
+    "name": "Rhino's Rampage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "008a11c1-d283-49fe-abd7-ff4fe8b1fe79",
+    "name": "Rhovanion Rampager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f013b5d-fff0-4c50-8621-158b6dc34834",
+    "name": "Rhys, the Evermore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4bccfa67-0c6f-42a1-b8d4-0842a8230d1e",
+    "name": "Rick Jones, Destined Sidekick",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91e49e8e-575f-43c8-9263-a8568697e7f4",
+    "name": "Rictus Robber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78bed291-0ec7-466f-bc7a-9dae7d0b56ae",
+    "name": "Riddles in the Dark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89e209f3-c474-453f-9659-ccebfc88bc0f",
+    "name": "Ride's End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81b67745-0b1f-4433-963d-9b9653fb4d95",
+    "name": "Ride the Shoopuf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e121f9cb-ed25-4be1-9822-b68cce2f2623",
+    "name": "Riftburst Hellion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05bbd557-e2c0-4855-8fe6-00527fa39878",
+    "name": "Rig for War",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "1cfe6e3a-f8c9-4105-ad03-0faf1fcc4626",
+    "name": "Riku of Many Paths",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1fc31651-70fe-4a58-9b7e-7359510bba51",
+    "name": "Riling Dawnbreaker // Signaling Roar",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "bad84deb-3f2c-46fd-9dcb-4e3ba9732769",
+    "name": "Rime Chill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c33e99c6-189e-4dcf-8b6a-64937dbad361",
+    "name": "Rimefire Torque",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66dc3237-3543-4fc2-96f1-c8d1eff7c04c",
+    "name": "Rimefur Reindeer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad99e430-e13f-4819-a2ee-bf3332ef517d",
+    "name": "Rimekin Recluse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "334ffdc4-9fe6-4a7f-bf5d-bcd88adab715",
+    "name": "Ringing Strike Mastery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d37e595f-afe7-4ad9-87db-b9ceb3f435e8",
+    "name": "Ring of the Lucii",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8896c74b-d466-4c25-94cf-82b5e2b1fdef",
+    "name": "Rinoa Heartilly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce000c0b-db42-4569-855f-f4eae0431c09",
+    "name": "Ripchain Razorkin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b2ffdb8-3681-4d64-ac03-8c860082e60e",
+    "name": "Ripclaw Wrangler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c027f369-e445-46a8-94ad-93396321295a",
+    "name": "Rip, Spawn Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f3838ff1-5403-4f3f-8531-36029c13fcfc",
+    "name": "Riptide Gearhulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8eeb83b4-dca1-497e-a6b7-0485807aeef3",
+    "name": "Rise from the Wreck",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "527cc22f-b471-4a84-93a8-be56193a9723",
+    "name": "Risen Necroregent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5223a09-f732-4747-8914-e6546ab0ef4c",
+    "name": "Rise of the Dark Realms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57ea9f63-8267-4303-a3dd-9ded220294dc",
+    "name": "Rise of the Deathbringer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d981977d-acfa-432a-b1d7-1808a89a5998",
+    "name": "Rise of the Varmints",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47d52cd7-d72f-455f-aad3-70f08d54691f",
+    "name": "Risky Research",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7c55495-6aca-4d17-b61a-cab8fa38b9f4",
+    "name": "Risky Shortcut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6512ddb8-0868-4d32-ab32-8a5250fc571b",
+    "name": "Rite of Renewal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb60739e-1dc3-481d-a056-ad72e665c680",
+    "name": "Rite of Replication",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5097f4e6-50af-4641-909f-db44abf0ce32",
+    "name": "Rite of the Dragoncaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7fea839-d7d7-48b4-aeaf-133767532e32",
+    "name": "Rite of the Moth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "71c714a2-baa9-4082-bc8e-ceadbea231e0",
+    "name": "Riverchurn Monument",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0bdebad7-a05e-439a-b5a9-241a2d09f943",
+    "name": "Riverguard's Reflexes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9687fef-4cb2-4bf1-91ad-49dada07f4d6",
+    "name": "River Herald Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "021428b1-005c-40ed-9d47-fb5aa970598b",
+    "name": "River Herald Scout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "510a6ac5-f098-4145-ac07-771b1b6f7cdf",
+    "name": "Riverpyre Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c52cfb41-18f3-4e73-b5e7-d75baf74e578",
+    "name": "River's Rebuke",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a123aab8-3f3a-4187-abcb-21a99dcf13bb",
+    "name": "Riverwalk Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "917aef2b-0e6d-460e-8745-8da8423d1592",
+    "name": "Riverwheel Sweep",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da052082-b440-4abb-9c69-05d4d13e5fd2",
+    "name": "Road Rage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cd3cdc9-2ed2-4cdf-b58a-12c3a2ef218b",
+    "name": "Roads Go Ever, Ever On",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "814f30a1-c0d6-4243-839d-0645d7bcbe4c",
+    "name": "Roadside Assistance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03008c7d-c738-473d-a968-1922b2899d1a",
+    "name": "Roadside Blowout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf2355f3-11d2-4b03-b663-9fad6b07e4b2",
+    "name": "Roamer's Routine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3640c29b-1534-4952-b297-619ade948431",
+    "name": "Roaming Throne",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5f31713-d380-42ba-8052-4b8d9beb3958",
+    "name": "Roaring Furnace // Steaming Sauna",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a3570093-3c16-42e7-a83d-2ff611a891b5",
+    "name": "Roar of Endless Song",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f69d2f9-c16a-4752-9026-794a29d73af8",
+    "name": "Robot Domination",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "855318cb-9382-4183-87c7-93bdfac86431",
+    "name": "Robotics Mastery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1ecfad3-e79a-447b-a932-68ef728eaf1f",
+    "name": "Rockalanche",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2219e636-74d0-4f82-8704-e6d66c5f7f09",
+    "name": "Rocketeer Boostbuggy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5db9121d-934a-44f1-b178-b389c6595af7",
+    "name": "Rocket-Powered Goblin Glider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e103748-3f76-42ce-a063-d0256b2dce2b",
+    "name": "Rockface Village",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "185c70c1-8403-4ae5-b45d-3679d4ee092a",
+    "name": "Rockfall Vale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0217da8e-e74f-4f5c-ab75-f17600f94405",
+    "name": "Rock Soldiers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f9330a7b-8a65-4e04-a777-bf6512332850",
+    "name": "Rocksteady, Crash Courser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd85db70-8616-42df-9dac-bad7923f88d7",
+    "name": "Rocky Rebuke",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a659c29f-aaca-44c5-8426-cdafcb195f86",
+    "name": "Rocky Roads",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82debe1c-31cb-411f-a353-98a952180666",
+    "name": "Rodeo Pyromancers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f29dc596-2121-4421-8463-15f6c2e8b9b3",
+    "name": "Rogue's Passage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6e87760-4cd0-4281-82d4-7a377ea960ad",
+    "name": "Roiling Canopy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6badc583-fabb-4d63-b70c-e7380acafc23",
+    "name": "Roiling Dragonstorm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa913409-7a7a-4e74-82ff-7ff8195585ad",
+    "name": "Roll-Roll-Roll-Roll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ca585b5-25c4-41cc-a0b9-dc66ae803d04",
+    "name": "Romantic Rendezvous",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "8ceb1acf-5ff3-4f1a-af04-9f07ad454526",
+    "name": "Ronin, Shadow Stalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f3baef8c-f8d7-4cb2-b5cc-b889a991e4e8",
+    "name": "Rooftop Assassin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3dc73517-0767-46ae-bc8d-ee378237a509",
+    "name": "Rooftop Percher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c5a6d752-9975-4059-8552-55c6ffb3ab68",
+    "name": "Rook Turret",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27d5b2eb-94fe-45fb-806c-354044de7ba5",
+    "name": "Room of Refuge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d870948e-721a-46fd-86b6-ecd42e3aa9bd",
+    "name": "Root Manipulation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87bedc9b-b4d2-41b6-b9f1-e1aeb8e75ec3",
+    "name": "Rootrider Faun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e42a6880-7ca6-498d-abc9-fb7ccd08b111",
+    "name": "Rootwise Survivor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3f09898-6c77-4d68-8d10-8440c75f884c",
+    "name": "Rope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c4fdd20-0396-40b7-8687-43b1035b6956",
+    "name": "Rosa, Resolute White Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9fee2572-8864-475c-bade-a64e36ef69c4",
+    "name": "Rot-Curse Rakshasa",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f4d3a96-bc30-4362-9c1f-40bf79f78e78",
+    "name": "Rot Farm Mortipede",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e33c1744-843f-438f-a8c3-2d9f60120776",
+    "name": "Rotisserie Elemental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c75623c-59f4-4449-ab43-9d1225185ad9",
+    "name": "Rottenmouth Viper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ac94b28-4b0a-4121-99b9-9cd7dff7948c",
+    "name": "Rough Rhino Cavalry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0cc89c15-5a48-4998-b6df-21791b6ed9a3",
+    "name": "Roughshod Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0394846e-bc27-4d67-988e-b08a389690de",
+    "name": "Rover Blades",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78ac1e6c-2704-4844-9e87-642324c23997",
+    "name": "Roving Actuator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "333c15c6-c8fd-4cdd-89d2-06b921edeb8b",
+    "name": "Rowan, Scion of War",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f60234e4-9b53-47a5-a21a-82c80b5af072",
+    "name": "Rowan's Grim Search",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a33a5c2-5aa1-48e5-95a8-d52cdce980de",
+    "name": "Rowdy Research",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74224cce-c2ce-4456-8a97-3abbbb199385",
+    "name": "Rowdy Snowballers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11765eaf-87a1-48bd-90c1-7a5f21be5918",
+    "name": "Roxanne, Starfall Savant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b92c2da9-eaa4-404b-8114-5527eec6390e",
+    "name": "Roxxon Brutes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd0f8fdc-4065-41f4-b8fb-ecb8f185774d",
+    "name": "Royal Treatment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ae7f959-9f44-4769-8bd3-49ca18928aba",
+    "name": "Rubblebelt Braggart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ba59349-a162-4444-b3e0-cddfc01ef03b",
+    "name": "Rubblebelt Maverick",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f35aa497-bd0f-4642-8713-820b9f014da5",
+    "name": "Rubble Rouser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d1b0eee-3a7a-4f22-a40d-7658a368962a",
+    "name": "Ruby, Daring Tracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0caeb396-e574-4e80-a1f6-79988fe9ba19",
+    "name": "Rufus Shinra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c922206-6e68-4dcd-9559-88da1074f2c4",
+    "name": "Rugged Highlands",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6f379ad-96b1-46c3-bbc6-a8cb57156a7f",
+    "name": "Ruin-Lurker Bat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5020628c-5e47-4a83-89c3-7bf5726e69ad",
+    "name": "Ruinous Rampage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d3a0216-871b-4c1b-adb1-de99b832f577",
+    "name": "Ruinous Waterbending",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83f2470e-2114-4cd9-ab1a-21b76e9cdf63",
+    "name": "Rumble Arena",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0909cbce-b4a0-42bb-8a97-47eeb99606c0",
+    "name": "Rumbling Rockslide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57f15861-82cf-4faf-827c-9bc7f4844d2a",
+    "name": "Runaway Boulder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "290faa28-450e-4797-9a8f-642d8af3f82a",
+    "name": "Run Away Together",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7578a192-82e5-43ff-8dee-225f313c484a",
+    "name": "Run Behind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c105948-4b8f-4615-b66a-2bbdb3f3d6dd",
+    "name": "Rune-Brand Juggler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af7db15c-93af-4c7e-a028-42181d91a923",
+    "name": "Runescale Stormbrood // Chilling Screech",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "14aefe99-fb60-4f1c-a71f-7ffbe94c8b13",
+    "name": "Rune-Scarred Demon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74d31e99-ab48-483a-a62e-5b424b27d017",
+    "name": "Rune-Sealed Wall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b1bec38-5aaf-4ca0-9a04-fb4367c59c1e",
+    "name": "Run Over",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "873fa095-5662-407a-bd24-9a1c4712a428",
+    "name": "Ruric Thar, Biomagus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "453b2b3c-7df5-4515-9565-82f603cf451b",
+    "name": "Ruric Thar, Magecrusher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0dfe6ec6-a0df-41c8-90dd-1ddf0417700a",
+    "name": "Rush of Dread",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ad956c8-71d3-436f-961e-e2dfc1d2ca70",
+    "name": "Rust Harvester",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef0c0f28-e1ee-42a1-9878-95a0ceb0a9fa",
+    "name": "Rustler Rampage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23878990-dcbd-4a2a-b4f7-ee7edb396c71",
+    "name": "Rust-Shield Rampager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82b6a283-9897-4ce1-8de3-e7579cc9b75b",
+    "name": "Ruthless Lawbringer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a82ea8f2-e576-46cd-aa08-9c98d6029db4",
+    "name": "Ruthless Negotiation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d007479-c5e8-4aa1-b53e-fa962783deee",
+    "name": "Rydia's Return",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a08f79b7-d66f-47da-9670-afd7409c0c5c",
+    "name": "Rydia, Summoner of Mist",
+    "status": "unsupported"
+  }
+]

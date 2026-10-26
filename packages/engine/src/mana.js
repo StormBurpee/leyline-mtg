@@ -21,11 +21,13 @@ export function tapForMana(s, id, p) {
   emit(s, 'mana', { player: p, objectId: id, color: definition(s, o).mana });
 }
 /** Pure payment planner. Colored costs are reserved before generic spending. */
-export function planPayment(s, p, cost, { autoTap = true } = {}) {
+export function planPayment(s, p, cost, { autoTap = true, excludeSources = [] } = {}) {
   const pool = { ...s.players[p].mana };
   const taps = [];
   const spent = Object.fromEntries(COLORS.map((c) => [c, 0]));
-  const sources = autoTap ? controlled(s, p).filter((o) => canTapForMana(s, o, p)) : [];
+  const sources = autoTap
+    ? controlled(s, p).filter((o) => !excludeSources.includes(o.id) && canTapForMana(s, o, p))
+    : [];
   const take = (color, n) => {
     while (pool[color] < n) {
       const i = sources.findIndex((o) => definition(s, o).mana === color);
@@ -56,8 +58,8 @@ export function planPayment(s, p, cost, { autoTap = true } = {}) {
   }
   return { taps, spent, remaining: pool };
 }
-export function pay(s, p, cost, autoTap = true) {
-  const plan = planPayment(s, p, cost, { autoTap });
+export function pay(s, p, cost, autoTap = true, excludeSources = []) {
+  const plan = planPayment(s, p, cost, { autoTap, excludeSources });
   requireRule(plan, 'MANA', 'You cannot pay this mana cost.');
   for (const id of plan.taps) tapForMana(s, id, p);
   for (const c of COLORS) s.players[p].mana[c] -= plan.spent[c];

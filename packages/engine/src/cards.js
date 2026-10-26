@@ -1,3 +1,4 @@
+import { reviewedCreatures } from './reviewed-creatures.js';
 /**
  * Hand-authored executable card definitions. Oracle prose is presentation data,
  * never executable code. Only definitions in this registry can enter a match.
@@ -30,6 +31,44 @@ const spell = (name, type, cost, effects, target, text) => ({
   text,
 });
 const defs = [
+  ...reviewedCreatures,
+  creature('Waterfall Aerialist', { generic: 3, U: 1 }, 3, 1, ['flying'], {
+    ward: { mana: { generic: 2 } },
+    text: 'Flying. Ward {2}.',
+  }),
+  creature('Rimeshield Frost Giant', { generic: 3, U: 2 }, 4, 5, [], {
+    ward: { mana: { generic: 3 } },
+    text: 'Ward {3}.',
+  }),
+  creature('Tomakul Honor Guard', { generic: 1, G: 1 }, 3, 1, [], {
+    ward: { mana: { generic: 2 } },
+    text: 'Ward {2}.',
+  }),
+  creature('Owlin Shieldmage', { generic: 3, W: 1, B: 1 }, 3, 3, ['flying'], {
+    ward: { life: 3 },
+    text: 'Flying. Ward—Pay 3 life.',
+  }),
+  creature(
+    'Sire of Seven Deaths',
+    { generic: 7 },
+    7,
+    7,
+    ['first strike', 'vigilance', 'menace', 'trample', 'reach', 'lifelink'],
+    {
+      ward: { life: 7 },
+      text: 'First strike, vigilance, menace, trample, reach, lifelink. Ward—Pay 7 life.',
+    },
+  ),
+  creature('Dwarven Forge-Chanter', { generic: 1, R: 1 }, 1, 3, [], {
+    ward: { life: 2 },
+    triggers: [
+      {
+        event: 'controllerCastsNoncreature',
+        effects: [{ op: 'modify', subject: 'source', power: 1, toughness: 1 }],
+      },
+    ],
+    text: 'Ward—Pay 2 life. Prowess.',
+  }),
   land('Plains', 'W'),
   land('Island', 'U'),
   land('Swamp', 'B'),

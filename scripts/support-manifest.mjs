@@ -19,6 +19,7 @@ const manifest = {
           ].map((e) => e.op),
         ),
       ],
+      ...(c.ward ? { ward: c.ward } : {}),
       triggers: (c.triggers ?? []).map((t) => t.event),
       activatedAbilities: c.activated?.length ?? 0,
     })),

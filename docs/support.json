@@ -1,7 +1,351 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "rulesReference": "2026-09-25",
   "cards": [
+    {
+      "name": "Aegis Turtle",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Agent of Atlas",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ankle Biter",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Bear Cub",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Bishop's Soldier",
+      "type": "creature",
+      "keywords": ["lifelink"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Brazen Scourge",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Brightblade Stoat",
+      "type": "creature",
+      "keywords": ["first strike", "lifelink"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Colossadactyl",
+      "type": "creature",
+      "keywords": ["reach", "trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dawn's Light Archer",
+      "type": "creature",
+      "keywords": ["flash", "reach"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dragon Sniper",
+      "type": "creature",
+      "keywords": ["vigilance", "reach", "deathtouch"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Elementalist Adept",
+      "type": "creature",
+      "keywords": ["flash"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Fire Elemental",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Galewind Moose",
+      "type": "creature",
+      "keywords": ["flash", "vigilance", "reach", "trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Gigantosaurus",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Healer's Hawk",
+      "type": "creature",
+      "keywords": ["flying", "lifelink"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Highborn Vampire",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Iguana Parrot",
+      "type": "creature",
+      "keywords": ["flying", "vigilance"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Jeskai Brushmaster",
+      "type": "creature",
+      "keywords": ["double strike"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Jibbirik Omnivore",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Kree Commandos",
+      "type": "creature",
+      "keywords": ["flying", "vigilance"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Leonin Skyhunter",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Magnigoth Sentry",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ordinary Bear",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Quakestrider Ceratops",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Quaketusk Boar",
+      "type": "creature",
+      "keywords": ["reach", "trample", "haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Raging Redcap",
+      "type": "creature",
+      "keywords": ["double strike"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rearing Embermare",
+      "type": "creature",
+      "keywords": ["reach", "haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Shrike Force",
+      "type": "creature",
+      "keywords": ["flying", "double strike", "vigilance"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Skyraker Giant",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Squirrelanoids",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Swab Goblin",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Swiftblade Vindicator",
+      "type": "creature",
+      "keywords": ["double strike", "vigilance", "trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tajuru Pathwarden",
+      "type": "creature",
+      "keywords": ["vigilance", "trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Thornweald Archer",
+      "type": "creature",
+      "keywords": ["deathtouch", "reach"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Waterfall Aerialist",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "ward": {
+        "mana": {
+          "generic": 2
+        }
+      },
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rimeshield Frost Giant",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "ward": {
+        "mana": {
+          "generic": 3
+        }
+      },
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tomakul Honor Guard",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "ward": {
+        "mana": {
+          "generic": 2
+        }
+      },
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Owlin Shieldmage",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "ward": {
+        "life": 3
+      },
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Sire of Seven Deaths",
+      "type": "creature",
+      "keywords": ["first strike", "vigilance", "menace", "trample", "reach", "lifelink"],
+      "opcodes": [],
+      "ward": {
+        "life": 7
+      },
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dwarven Forge-Chanter",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "ward": {
+        "life": 2
+      },
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
     {
       "name": "Plains",
       "type": "land",

@@ -1,0 +1,2112 @@
+[
+  {
+    "oracleId": "19cf5798-4600-4a66-b1c7-de77bde157d0",
+    "name": "Tablet of Discovery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e80d632-cf84-4562-8c93-5850cceb5bec",
+    "name": "Tackle Artist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49f2cbc3-bd03-48e6-b1c4-d7f315b8579d",
+    "name": "Taigam, Master Opportunist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17327d50-be12-423d-9d37-d6bae519f50c",
+    "name": "Taii Wakeen, Perfect Shot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60826714-b9fd-4c89-b9f2-1a3c3229686b",
+    "name": "Tainted Treats",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8c7cd66-d8bf-4a99-add5-1d5651d4e025",
+    "name": "Tajuru Pathwarden",
+    "status": "curated"
+  },
+  {
+    "oracleId": "4f815ca4-0197-48c7-bfa2-5eb937c615e6",
+    "name": "Take for a Ride",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5557c9f-e4c2-41af-9fcc-371409e1dec6",
+    "name": "Taken by Nightmares",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e07700e7-218a-45a3-9ee4-de2cc25cdc02",
+    "name": "Take Out the Trash",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "279f3aa5-5807-4797-8cd1-e009984a3691",
+    "name": "Take the Fall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8d0eafe-540a-4b2e-a989-e98ff3c31105",
+    "name": "Take Up the Shield",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a721a4c-696b-44d1-858d-20040bd01909",
+    "name": "Talion's Messenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a019e34d-00c4-4687-9d41-fe550bf1dbdc",
+    "name": "Talion, the Kindly Lord",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "096a878e-cff0-430a-90b5-031ecb9bfe1b",
+    "name": "Tam, Mindful First-Year",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "702e871d-90d8-4468-8f69-5ae42af2c9d3",
+    "name": "Tam, Observant Sequencer // Deep Sight",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7500b7dc-588d-46bd-acc5-885dcd464668",
+    "name": "Tam's Resistance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c92c7744-0c92-4a36-9ada-4ffca812009e",
+    "name": "Tam, the Possibility",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f01c327-ba50-4fc3-a930-fa1fb02e34b9",
+    "name": "Tangled Colony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6a767c2-8bc8-4686-899a-0ba3a525977a",
+    "name": "Tanglespan Lookout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d81ea20-5e7d-4eea-b0ba-fe688f27df94",
+    "name": "Tangle Tumbler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76cb1912-3791-44b8-b594-b92dab21bafc",
+    "name": "Tannuk, Memorial Ensign",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5ae8016-92ed-4ae8-83a8-65068defc616",
+    "name": "Tannuk, Steadfast Second",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf8de96b-0a75-4459-a123-dcf95e1b89f2",
+    "name": "Tanufel Rimespeaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "981138d0-bf61-406a-85be-68cc5e58796c",
+    "name": "Tapestry Warden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45900b2f-f6a9-4c42-9642-008f3c1cf6dd",
+    "name": "Tarmogoyf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0be3f25-edb1-4299-959c-9aad909730ca",
+    "name": "Tarnation Vista",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a75b02ba-b0c8-47e3-a05c-e9ba221a7578",
+    "name": "Tarrian's Journal // The Tomb of Aclazotz",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2ffb38ec-5852-4e91-85a5-cfccd1f23556",
+    "name": "Tarrian's Soulcleaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dcd97730-b793-4c0c-b158-625ac3656b4a",
+    "name": "Taskmaster, Mercenary Mimic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "020aae46-cdba-4c37-9c54-283727c09994",
+    "name": "Taster of Wares",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba36f27a-08fc-46a5-bc55-2a71091cebcc",
+    "name": "Tattered Ratter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0715e860-3b3b-4331-9718-207973e94fee",
+    "name": "Tatyova, Benthic Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd5ee26c-cc54-4dc0-b611-5cda14354a5e",
+    "name": "Taurean Mauler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a17a92f7-e95c-4d0e-a43e-7e6b41a59139",
+    "name": "Taxi Driver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4139f40a-873b-4842-96a2-b7875de1c20a",
+    "name": "TCRI Building",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d85ba214-fa05-44ca-a7f9-ab2c5dc07962",
+    "name": "Teach by Example",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12397dbf-99a9-40c3-aa7c-76d09baad008",
+    "name": "Teacher's Pest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f95f7b0c-2dd6-46e1-ae02-f51d275e7120",
+    "name": "Team Avatar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98b99d7c-d006-471a-8583-0468743c1597",
+    "name": "Team Tactics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ba19dbe-9dbb-4cc9-81a3-18c26f27bd0f",
+    "name": "Teapot Slinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51c0b46c-c379-420a-a4a4-d18724c759aa",
+    "name": "Technodrome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9097243a-39fa-4e18-8316-c0e57699c783",
+    "name": "Tectonic Hazard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2154cc68-41a4-4e88-9fe0-e0150dc0be45",
+    "name": "Teeming Dragonstorm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a080b26-c766-4f7c-9198-4974d2133f75",
+    "name": "Tellah, Great Sage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60ac490c-b489-4ad2-bcc2-3babaabf8ccb",
+    "name": "Tempest Angler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b94c233e-11d3-4556-a1da-bd193e58b663",
+    "name": "Tempest Djinn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5005df36-a100-492d-89b9-e221793cfb56",
+    "name": "Tempest Hart // Scan the Clouds",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7423b3b9-56eb-4cf2-8ada-135918219c4b",
+    "name": "Tempest Hawk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f413a83d-a40d-434c-b20a-4c707c0527fa",
+    "name": "Temple Garden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3baa8e38-ef93-435d-b63e-f781d5bfcc68",
+    "name": "Temple of Abandon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33b9b3bd-33ca-46f3-b8bb-a978bc3d1085",
+    "name": "Temple of Deceit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89f43e27-790b-4ca1-8ba7-0882b31e0783",
+    "name": "Temple of Enlightenment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79f94050-d850-41ca-b1db-5ae0cf743f0a",
+    "name": "Temple of Epiphany",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc55421f-dee8-4263-9df0-2365df5f14bb",
+    "name": "Temple of Malady",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c439c18-31dc-41fe-b03d-3fca06e6fc0b",
+    "name": "Temple of Malice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e26f0b7-20e6-46d5-8130-d98c14d6aa29",
+    "name": "Temple of Mystery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e521322b-0e83-458c-8936-7021a80ee279",
+    "name": "Temple of Plenty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6e6fce8-0f6a-4b84-865e-d4e4a4182f9f",
+    "name": "Temple of Silence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f0d94d9-64bb-4175-83bc-301e8f79f54f",
+    "name": "Temple of Triumph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f67698a-28db-43cd-aaf1-52371b0b47eb",
+    "name": "Temporal Cleansing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e8a2416-e311-41ac-a3cd-be1c2441d542",
+    "name": "Temporal Intervention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fadf984c-c224-432a-87b9-b34f929b8409",
+    "name": "Temur Battlecrier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e444f072-ce24-4fd1-99eb-d20d12bc119a",
+    "name": "Temur Devotee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5464d5ae-5be5-4e52-b9d0-ddce48fd93b3",
+    "name": "Temur Monument",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "889d26d6-9e6c-4cc0-8e8e-dd932f705a20",
+    "name": "Temur Tawnyback",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b07bf08b-d9ec-429f-be6d-a7afa27c60c4",
+    "name": "Tenacious Tomeseeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a03fa584-ceb5-410c-9b80-f75d00215537",
+    "name": "Tenderize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74868bc0-6081-4f46-a2c6-9521cd5465aa",
+    "name": "Tender Wildguide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2824464-963b-48db-a482-cc08a0a97332",
+    "name": "Tendril of the Mycotyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91363d71-eef0-48e8-9a68-8f363ff2790e",
+    "name": "Tend the Sprigs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0953772c-9374-4616-9c04-5838aaf626c9",
+    "name": "Tenth District Hero",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ecd4493-dfb4-4d56-a90e-08b74b474f39",
+    "name": "Tenured Concocter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "571cb06d-55b5-46e4-9678-1f74aca73068",
+    "name": "Tenured Tethermage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea74940f-01de-4804-92ed-b273fddf6d62",
+    "name": "Teo, Spirited Glider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "213b0814-f768-4408-9cb7-6f5960bcbb7a",
+    "name": "Terminal Criticism",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cdda2f04-d59e-4ef8-a26d-964d80750940",
+    "name": "Terminal Velocity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54ca5904-9099-497a-9684-101656025487",
+    "name": "Terra, Magical Adept // Esper Terra",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1bd3e453-aa21-4ee6-95c2-d6d920ee8e7a",
+    "name": "Terramorphic Expanse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c08e0958-8fa2-49c7-ab17-a70dfc1ef33a",
+    "name": "Terrapact Intimidator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ac94586-3ac7-4ade-af31-ad0d0e3ffc4a",
+    "name": "Terrasymbiosis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "856245a6-c697-4f03-90be-77d8eb2d274e",
+    "name": "Terrian, World Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "431c5b04-7387-4724-adfa-d1eb7874e79e",
+    "name": "Terrific Team-Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03f04c2c-1036-497e-8b13-06c61b0b0ba6",
+    "name": "Territorial Bruntar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97b9e3f1-7569-45e0-aef9-0d8d2845dbf1",
+    "name": "Territorial Witchstalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a14d89b6-23eb-4337-8dee-93c39b0efbf1",
+    "name": "Territory Forge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8161248c-16a3-47db-a3ae-cdfd878d49e0",
+    "name": "Terror of Mount Velus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8e17f4f-080d-4bba-bd05-ca27e94ccecc",
+    "name": "Terror of the Peaks",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12be58f4-1c12-4bca-8069-1f049cd8a90c",
+    "name": "Terror Tide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9918eb7b-054e-4b1c-afc7-1163ab642d50",
+    "name": "Tersa Lightshatter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a30a2b96-4a8c-4d18-b276-5005b8aff7ed",
+    "name": "Tester of the Tangential",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b4f89885-eeb9-46c7-9820-9758b624ca24",
+    "name": "Tethermage's Advantage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef",
+    "name": "Tether Technician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ceeeacbc-01b0-4421-aaca-2ce6cdbe45d7",
+    "name": "Tetsuko Umezawa, Fugitive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "708d4567-a5a3-437f-bae4-ae10f1537aa9",
+    "name": "Tetsuko Umezawa, Pursuer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6cf359a-91cb-4b3c-8837-be53e4ed9c93",
+    "name": "Teval, Arbiter of Virtue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebb40a50-cfbc-4ec1-9c54-26a1bc2e7a6e",
+    "name": "Textbook Tabulator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3bfbe1a-7831-45bd-9e42-790c28f6054c",
+    "name": "Teyo, Diamondblade Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77a9fac6-3c26-4456-9e0b-f5839a3dcae2",
+    "name": "Teyo, Lightshield Expert",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4f5748f-bb0e-4c48-8802-45a7ad5a80a4",
+    "name": "Teysa, Opulent Oligarch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0eb11b2d-a397-48da-a0f3-9f0f83f42282",
+    "name": "Tezzeret, Cruel Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55ef129e-698e-424f-be3c-3fbba6c2cc3e",
+    "name": "Thalia, the Survivor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "090d815b-b2c8-48cd-a0b3-dc662d5352ac",
+    "name": "Thanos, the Mad Titan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f9ae015-dc59-4ecb-a2bb-668496b48a48",
+    "name": "Thaumaton Torpedo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0863c4bc-1e3e-4ff9-8877-88d4021c85e5",
+    "name": "Thawbringer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "483c747a-b602-4747-95bc-72c2c17ed509",
+    "name": "The Aetherspark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6615f881-960c-4216-a32a-63856bc3afd0",
+    "name": "The Ancient One",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f45542a0-0d49-4b56-9c3e-663ff8d0529a",
+    "name": "The Apprentice's Folly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09f09d0a-6054-4545-b81e-0295773cc5f0",
+    "name": "The Arkenstone // Seek the Heart",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "6c7e4e51-099a-4398-a4b7-e2f0ddd36429",
+    "name": "The Astonishing Ant-Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a0c9023-9431-4f98-b167-ab4c7215319c",
+    "name": "The Belligerent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb2803ee-825b-420e-b404-c7c44f15ec15",
+    "name": "The Black Arrow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d33ee141-a880-4368-a274-a6ae2f2c624b",
+    "name": "The Boulder, Ready to Rumble",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2df54f1-a2db-4de3-bc96-5c07f4594752",
+    "name": "The Cave of Two Lovers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "789899eb-3a33-4a41-b6b5-5e2f55a9af51",
+    "name": "The Chase Is On",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ebe8de1-aa3d-410d-b43d-1685259c7a97",
+    "name": "The Chief Warg",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f0282c6-aceb-4879-8ec8-482d0501204a",
+    "name": "The Clone Saga",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd768e8f-8f04-487e-85e9-2828d6fd8745",
+    "name": "The Cloning of Shredder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e05f23ba-f2b2-4c40-83fa-8defce3cb978",
+    "name": "The Coming of Galactus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df4ef2f8-2591-4be3-b905-4f9ff9c538ea",
+    "name": "The Crystal's Chosen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "660f370a-b25b-4ea5-b765-7abf96899c1c",
+    "name": "The Darkness Crystal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3e10b9b-9349-4b44-a46c-c825293dbd05",
+    "name": "The Dawning Archaic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2624b5c5-ba59-4e20-8e66-e463268366e4",
+    "name": "The Death of Gwen Stacy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c017f8ae-9103-4965-a07a-f259f44a157d",
+    "name": "The Dominion Bracelet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "169a4a77-12ff-4997-9550-bdcd456aa2f7",
+    "name": "The Eagles Are Coming!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e7ef7fe-968b-4ada-9fe4-6fda0541aafc",
+    "name": "The Earth Crystal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5770b0f-4493-42e9-a2d7-0e74a28da4ba",
+    "name": "The Earth King",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c04197ad-d2f3-499f-b863-bed0c869519c",
+    "name": "The Echoverse Fulcrum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "042c01ec-9f1f-432b-bea9-d64d822cd91e",
+    "name": "The Emperor of Palamecia // The Lord Master of Hell",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "835c195a-8c35-4076-896d-8d2972cac270",
+    "name": "The End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57ee0730-3ac5-4f17-ac82-bd4a6673c2bb",
+    "name": "The Endstone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0d2bdd9-1e68-4d3a-83f8-ec2ba440a494",
+    "name": "The Enigma Jewel // Locus of Enlightenment",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "11323af4-b8b8-4ca9-932f-377c7fd77dea",
+    "name": "The Eternity Elevator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f57a9f1-6b95-4395-bdf0-c5289b786ab1",
+    "name": "The Everflowing Well // The Myriad Pools",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f2b88031-bfb7-46c4-abdd-3b6b5f5acfa4",
+    "name": "The Final Days",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57276db8-9d8d-4587-ae88-dfdc44343f17",
+    "name": "The Fire Crystal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d4b9d71-4275-4c18-a4dc-9aad234eb92c",
+    "name": "The Fire Nation Drill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7739311a-682b-48a6-8db2-c07f44141751",
+    "name": "The Gitrog, Ravenous Ride",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93e38650-ce22-4ab9-b79d-cc7b6477c075",
+    "name": "The Gold Saucer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de595f1b-3f7d-45e0-a31b-ed23e5d1ee48",
+    "name": "The Goose Mother",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83dcfac0-6efd-4e37-9402-15f9889e84e1",
+    "name": "The Great Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae63fd5c-46ff-41fb-a1f6-6259336525c1",
+    "name": "The Huntsman's Redemption",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e229d55c-9513-437d-bd67-015ac46aaa18",
+    "name": "The Infamous Cruelclaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c89ba89-9bb3-4609-873c-6f5a961733ce",
+    "name": "The Irencrag",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82ea519f-0e14-43d3-bf46-a1c5352e9600",
+    "name": "The Jolly Balloon Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a75d565-b0a7-46bf-94a0-c9255c8abd6d",
+    "name": "The Key to the Vault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3eeeb159-aa45-4a9b-9618-8542604b9830",
+    "name": "The Kingpin of Crime",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd1998c0-c18e-4310-82de-b6320be5fe10",
+    "name": "The Last Agni Kai",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ef03540-b538-466d-aa3c-da6750117ba4",
+    "name": "The Last Ride",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1865bec-1744-40c2-9031-7d6363be5333",
+    "name": "The Last Ronin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a51bb21-0c01-4ad8-99d7-17685db90b69",
+    "name": "The Last Ronin's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "201b8936-18f4-4881-a1d4-c308cf3832bf",
+    "name": "The Legend of Kuruk // Avatar Kuruk",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e41e8754-028c-4399-b530-de9e134d04b0",
+    "name": "The Legend of Kyoshi // Avatar Kyoshi",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2f26f270-26d9-46d3-957f-19f52d51eb03",
+    "name": "The Legend of Roku // Avatar Roku",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "521a63cf-5e83-4649-9800-c62b2fc474d6",
+    "name": "The Legend of Yangchen // Avatar Yangchen",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "fff728a1-56f5-4e97-91e2-19aba5772909",
+    "name": "The Lion-Turtle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3678c06f-8a33-4a6d-bf20-5b92d5c05a95",
+    "name": "The Lonely Mountain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b38f314-d997-4c2a-b4c9-40dbe780993d",
+    "name": "The Lord of the Eagles",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13b4aeac-4530-4e09-a547-548b4884bb2f",
+    "name": "The Lunar Whale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89eb4c39-35ae-405b-8af4-779880cb11c9",
+    "name": "The Masamune",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89c3c81b-8960-4f79-b2ec-f13560058071",
+    "name": "The Master of Lake-town",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcb1caea-e1ac-48f0-a67a-d4aadad490d9",
+    "name": "The Masters of Evil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bad27b43-7716-4ce1-82ba-2a6d437363e7",
+    "name": "The Mechanist, Aerial Artisan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57d02dc8-e22e-4874-9f02-490a2528a28f",
+    "name": "The Mighty Thor, Jane Foster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f250443-8d5e-46c9-920e-8e9373780e32",
+    "name": "The Millennium Calendar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e3ec514-fc9e-4964-a493-2a6cc9e63630",
+    "name": "The Mindskinner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b175e826-09e8-4fae-9f2e-b902f95b282d",
+    "name": "The Mind Stone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c50282bd-4b57-4c7b-9598-ea67ba49248b",
+    "name": "The Misty Mountains Cold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32ad5b3e-92c0-45be-b2e4-6f1794552f36",
+    "name": "The Mountain-king's Return",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b69bbb8d-7f8c-45d6-983a-759b5fce6ebd",
+    "name": "The Mycotyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1462c82-7702-451b-b612-990353a79ac4",
+    "name": "The Neutrinos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc20b29b-856e-4d45-99cd-5e12cfc2324d",
+    "name": "The Notary Hobbits",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82a6fa6f-13c2-4ea3-bec2-c51b56b2783b",
+    "name": "The Ooze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c5ed756-b999-49f7-9a52-fb8196202f0f",
+    "name": "Theoretical Necromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0089acfe-da66-4dd7-b1e5-4d7407f58257",
+    "name": "Theorist's Proxy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37513bd8-7303-4ac6-a7a7-224184faf758",
+    "name": "Theorist's Sanctum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00ad5200-5179-4d1b-8bb3-a09e1b31be58",
+    "name": "Theorix Annex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf527bbd-e898-4aa9-909d-daec2f4b62ad",
+    "name": "Theorix Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92a0aa44-0ef7-4e6f-8288-7c33067c5fd1",
+    "name": "Theorix Metamage // Omit Variables",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "bbd7b756-bbee-451e-9446-06019791cb36",
+    "name": "The Pride of Hull Clade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a09d9754-a321-4018-a237-e613e915b642",
+    "name": "The Prima Vista",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70d52457-1867-482c-ba7a-1f7dacc4514f",
+    "name": "The Princess Takes Flight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2ec1dd0-86c7-423d-b562-ed95b79bf8f7",
+    "name": "The Queen of Dale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27a7610e-acbe-4a2b-9f61-81b383eb20a5",
+    "name": "The Regalia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b0b217d-cc9d-4187-89cb-f13160ed2983",
+    "name": "The Rise of Sozin // Fire Lord Sozin",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "aed1f0cd-8df8-415f-afd6-ccfd12234334",
+    "name": "The Rollercrusher Ride",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ff9c0cc-4fb3-4117-9a8e-5b51f62306c4",
+    "name": "The Ruinous Wrecking Crew",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e3a665f9-6e51-4e0d-923b-e9552d5978a4",
+    "name": "The Sackville-Bagginses",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8ae8c38-501e-44ea-9faf-cf9d11ba6616",
+    "name": "The Scarlet Witch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1fe549c3-79be-40ef-b57c-de59f24df5ab",
+    "name": "The Sentry, Golden Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a6bcec1f-f515-4e63-9e84-8eb04cc582ff",
+    "name": "The Seriema",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3688ad0d-653b-4d5d-a57e-444db679d83e",
+    "name": "The Serpent Society",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bbdb731d-c533-48ef-b82a-cf1a8ba36208",
+    "name": "The Sibsig Ceremony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba26ff0a-e714-44f2-95cf-1a5a6088edf9",
+    "name": "The Skullspore Nexus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92cfba68-12f6-4f97-9187-0f6a39656a0f",
+    "name": "The Soul Stone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9fb22b4-dc22-4291-91f2-89c07cee7569",
+    "name": "The Speed Demon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b677a73c-f179-46bf-83ee-c2b05f9fca67",
+    "name": "The Spirit Oasis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5dfa7ad-9637-4da8-9ed2-0ac863617d9a",
+    "name": "The Spot, Living Portal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ceac6ce-acde-42ab-b79d-ff153074d2d8",
+    "name": "The Spot's Portal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11d74dc2-8c11-4d4b-b727-8216d2eb6b4e",
+    "name": "The Super Hero Civil War",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50120e90-2fdf-43c1-93e2-2230ee4e63fc",
+    "name": "The Swarmweaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98a13f7b-ebe7-4a90-a0b9-95dccfff7fa6",
+    "name": "The Tale of Tamiyo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a82d855c-50c8-43f2-99ba-a84fe84539c5",
+    "name": "The Ten Rings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89a6e876-0b00-4671-9652-766fd7ef9bf2",
+    "name": "The Theorist, Jace Beleren",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d566d5f1-5abd-405b-8553-d267ecbe72ab",
+    "name": "The Thing, Ben Grimm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be922360-ee9f-4cfb-bf10-d481c5de5cb1",
+    "name": "The Unagi of Kyoshi Island",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80312910-5d53-44f1-9982-e46dc7532abb",
+    "name": "The Unbeatable Squirrel Girl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32aee76a-e738-4898-985a-801d1cce15ea",
+    "name": "The Vision",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af7d7da5-aff5-48e1-901a-f81257a85f71",
+    "name": "The Walls of Ba Sing Se",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6e6e3d2-f2fb-46a1-8798-13a2f2efe8cc",
+    "name": "The Wandering Minstrel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8ef65df-f8e7-44e3-9864-9c127232a2b6",
+    "name": "The Wandering Rescuer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8d2a94f-7be1-4b17-8556-398dde531360",
+    "name": "The Water Crystal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "240f0835-36af-4ad8-9336-d6d3d816d293",
+    "name": "The Wind Crystal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad2793f3-a36f-4a09-a38f-eb98ce0a2b79",
+    "name": "The Witch's Vanity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ad8963b-8091-4787-9147-20a1fe7bf0fb",
+    "name": "The Wondrous Wasp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47951720-9584-4ca3-a73d-3d259102b2f8",
+    "name": "They Went This Way",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4bf589ed-58f8-40ad-bcee-50cb99da02ca",
+    "name": "Thief's Knife",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5dee663f-9e2e-4503-8086-fc51664fdf29",
+    "name": "Thieving Otter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a54fb3de-0581-461e-be33-dc4f4d16a33e",
+    "name": "Thinking Cap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa85c5a2-8e83-4624-a35a-a0bbf17ecbb4",
+    "name": "Think Twice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "045ece1e-23aa-4122-8726-86b2af4345ba",
+    "name": "Thirst for Identity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "939e6f71-185e-41f2-9d54-72cce06f1dce",
+    "name": "Thirst for Knowledge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7054c42b-48dd-4887-b878-69c005259d27",
+    "name": "Thistledown Players",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8aab9181-c306-471a-8061-9a7a7654dab5",
+    "name": "Thopter Fabricator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2842217a-173e-4879-8b25-fefe2fc1123f",
+    "name": "Thor, God of Thunder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94917b80-ac32-45ab-b4ee-157ade024bcd",
+    "name": "Thorin, Mountain-king",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdd41af0-bbd1-4ecd-a699-99f006f5e5ce",
+    "name": "Thorin Oakenshield",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c4da169-1e50-4790-abdc-214e7b8a2ad5",
+    "name": "Thorin's Last Stand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0d13d5d-677d-4e1a-9e58-2f9840581f6d",
+    "name": "Thornfist Striker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33b6555e-035d-4241-a341-a9b9139ca6f0",
+    "name": "Thornplate Intimidator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e861bc08-4f0b-4d22-9b85-9d20227fd5b4",
+    "name": "Thornspire Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b18cfad-a1cf-46c2-bcdd-7762c13d50e5",
+    "name": "Thornvault Forager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5ba87f5-3589-4a8b-ad65-2ae2523e98e8",
+    "name": "Thornweald Archer",
+    "status": "curated"
+  },
+  {
+    "oracleId": "ec96cde2-f1e6-495c-94e2-3e8ae79e556c",
+    "name": "Thornwood Falls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec9b74d0-e4fe-4764-b628-992a62f2a1cf",
+    "name": "Thor Odinson",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33f4fcd5-4eea-4146-a564-da5511a8ee0a",
+    "name": "Thought Shucker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25a63171-a1a0-4c61-ac61-49bb59fe83c1",
+    "name": "Thought-Stalker Warlock",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8cdcaa0-8e25-4c17-b5ce-16f72b535123",
+    "name": "Thoughtweft Charge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9dee8c0b-71e0-4a94-b411-78b29b599847",
+    "name": "Thoughtweft Imbuer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50dd9e17-6dae-4ff6-8a38-50088c71283f",
+    "name": "Thoughtweft Lieutenant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1ce2971-fffa-40b3-9bfd-29afdb929e74",
+    "name": "Thousand Moons Crackshot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f064a39e-ebb3-47b5-bd06-f39b02b95eaf",
+    "name": "Thousand Moons Infantry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32af5f7b-a970-484a-9aff-226749551d32",
+    "name": "Thousand Moons Smithy // Barracks of the Thousand",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "dd4cf149-2fae-40e5-b50b-639f6bcec65e",
+    "name": "Thousand-Year Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c195485-83f9-424f-854a-50c4f5b04182",
+    "name": "Thranduil's Company",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7cba934-02ad-4677-bb4d-50808b01b4f9",
+    "name": "Thranduil's Decree",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6771d32-395e-4832-b33d-cbc12dff1516",
+    "name": "Thranduil, Sindarin Liege // Silvan Rally",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "4a5f76e7-40be-4b06-9935-4a3b2672e1c2",
+    "name": "Thranduil, the Elvenking",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60bc63dc-ac9f-4a2f-aef5-c90d0aa31553",
+    "name": "Thrashing Brontodon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd575e82-99e7-44c7-ab93-d33f5678e1ad",
+    "name": "Threadbind Clique // Rip the Seams",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5c104ac8-738a-4a9d-a68b-5706018d2061",
+    "name": "Threats Around Every Corner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5926e14-d30a-4f81-803c-f36542df2db3",
+    "name": "Three Blind Mice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5369e40a-5fd6-4a9d-bdc9-4af510449649",
+    "name": "Three Bowls of Porridge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8020a8b-557b-465d-865d-b59fecd7abc1",
+    "name": "Threefold Thunderhulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "282dfeaa-6243-4f92-838a-5cb54fa85184",
+    "name": "Three Steps Ahead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da3b17a2-e1e1-44e9-b9b1-ae54a92037db",
+    "name": "Three Tree City",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6cb9d153-4eaa-4f32-8930-bd68cd99c128",
+    "name": "Three Tree Mascot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d17d4003-e1c9-42be-ac76-3b5500fad485",
+    "name": "Three Tree Rootweaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d2a7741-1dff-4fac-92d8-abea24f23f97",
+    "name": "Three Tree Scribe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1cb0610b-a731-42c2-b93f-0a29f63cebf4",
+    "name": "Thrill of Possibility",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7c96442-706b-4fd8-9b38-052872dafe58",
+    "name": "Throne of the Grim Captain // The Grim Captain",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "925cacdc-6d09-4fbd-9258-9f0539da180c",
+    "name": "Thrór's Map",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "acfe54b3-10e3-4fdb-b874-d39fde96c40a",
+    "name": "Through the Forest Gate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6780d29-0dd7-4f04-95b8-4ca6a55308f2",
+    "name": "Throw from the Saddle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04ea21b3-084b-4746-9b49-99b6ef4f0885",
+    "name": "Thrumming Hivepool",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d90a5213-3363-4cd1-97d6-4fc057f78b2a",
+    "name": "Thunderbolts Conspiracy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43b5794a-4ed6-471d-bc45-22fac486895d",
+    "name": "Thunderdrum Soloist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9b6656d-d71f-4359-bf6f-b76089741e29",
+    "name": "Thunderhead Gunner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "817464d8-1e2d-4e12-96f8-5c7ec9b3e681",
+    "name": "Thundering Broodwagon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2bcff58-7a8a-46ef-b6b3-39501d4c8e6e",
+    "name": "Thundering Falls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d98cc18b-6ebb-4f55-9d0d-b8fbe9a92bc1",
+    "name": "Thunder Lasso",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "623c1873-cd83-4a5f-b391-fd0d2bb89061",
+    "name": "Thunder Magic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8419d1d5-bb0e-4a2d-bb6f-67957d035dde",
+    "name": "Thunder of Unity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07995092-af6c-43b8-b30b-17e020ead37c",
+    "name": "Thunderous Debut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "899007b5-6a07-4491-9104-bb537106b07d",
+    "name": "Thunderous Velocipede",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3ce7c83-986f-410a-ae00-6c1c1f918a2b",
+    "name": "Thunder Salvo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0be5969-0442-4557-a5fc-bee56e1835c2",
+    "name": "Thundertrap Trainer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7d11254-b48a-4016-a035-c0d6642fdfae",
+    "name": "Thwip!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d01b62b-b924-4da5-8ff5-b2f29d7f19b2",
+    "name": "Ticket Booth // Tunnel of Hate",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "952083c5-9ffa-4cd9-915f-b7de7f3e5326",
+    "name": "Ticket Tortoise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e75e40a5-a9ae-4789-96c1-0e19d1ce59c5",
+    "name": "Tidecaller Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5753f4d6-08d0-4e12-85c5-875ee6441626",
+    "name": "Tidings of War",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef827c62-a5c5-4a7a-92a8-edefb081fae8",
+    "name": "Tidus, Blitzball Star",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "878df304-9d6d-4ce9-b65b-1439c251f3e0",
+    "name": "Tifa Lockhart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0d90dd8-0642-489f-9afc-11c307f258f2",
+    "name": "Tifa's Limit Break",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6e82d4f-4fbf-495c-bebd-982d2a855ad0",
+    "name": "Tiger-Dillo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68f84643-c0f9-4d31-ba2e-38b65ab45d04",
+    "name": "Tiger-Seal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39d993be-30ad-4756-a494-fd8808d474c9",
+    "name": "Tigra, Feline Fury",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c307122-bc18-41f1-87d5-ae6b3ca9b8b9",
+    "name": "Timeline Culler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55bc6a7e-2356-48f0-a93a-8bf19044ee4b",
+    "name": "Time Stop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8bef3511-ceeb-4d57-972a-ab363ecacd5b",
+    "name": "Timid Shieldbearer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd1e6225-31b7-4a70-81ab-681abe860328",
+    "name": "Tinker's Tote",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19dc29a7-8ccc-4e54-829b-86cc102b082d",
+    "name": "Tin Street Gossip",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd335b2f-e6a2-45ac-949e-a67278b21cb6",
+    "name": "Tinybones, Bauble Burglar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d2bd4f6-174d-411a-b930-9161aeefd33a",
+    "name": "Tinybones Joins Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97dcf9fb-3f2f-4aa6-959a-e3c4889c1673",
+    "name": "Tinybones, Pocket Nuisance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7bc4c7e2-6758-4a85-84e7-03ab93981106",
+    "name": "Tinybones, the Pickpocket",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2993dc7d-723d-4a9b-94bd-4bb02a9f7243",
+    "name": "Tishana's Tidebinder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "510bccb1-61cd-49f1-a54a-80352653d1e3",
+    "name": "Titanbones, Towering Heart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e380e37d-926b-4a4b-a275-7844bf4956d5",
+    "name": "Titania, Rugged Rumbler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61e09dd9-7870-48c2-9177-d6abc3162692",
+    "name": "Titanic Growth",
+    "status": "curated"
+  },
+  {
+    "oracleId": "595f0eb5-f521-4174-9c48-b89e85ea907c",
+    "name": "Titan's Grave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "883a4180-9ede-4249-a4b8-3a29c998fb63",
+    "name": "Tithing Blade // Consuming Sepulcher",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "77b48b3c-c780-4c5b-90e6-33c5fd940c16",
+    "name": "Toadstool Admirer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b4c27c89-fa50-4cf0-bf37-039732d16fef",
+    "name": "Toby, Beastie Befriender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "234f1c4b-dd0c-4c4e-b3c1-3b9ccfc42226",
+    "name": "Together as One",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86ef86de-104f-4eae-a2db-893b50e95ad7",
+    "name": "Tokka & Rahzar, Terrible Twos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9d0f2e1-62c2-44fd-ad38-471daf17bb0a",
+    "name": "Tolarian Terror",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d1d9914-3ef2-45c5-b1cb-cb85d2f7394c",
+    "name": "Tolls of War",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e9c7380-7584-43e6-8c31-5d1bb1685fe0",
+    "name": "Tolsimir, Midnight's Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ea58cfe-b37c-49a6-a3be-7e60065b8238",
+    "name": "Tom, Bert, and William",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ad2cbb6-2291-420c-bfc8-ed3f079b59bf",
+    "name": "Tombstone, Career Criminal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d22d3934-8437-4a18-81c1-4e9c501846ca",
+    "name": "Tomb Trawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0163420-2f91-493c-bad4-2cd33e9856bf",
+    "name": "Tome Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16604fee-cd8d-41e4-8269-3c7ff756613d",
+    "name": "Tomik, Izzet Sparkmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a501f7e-eec8-45f7-9ac3-483fd8f5ca5e",
+    "name": "Tomik, Orzhov Lawmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ef0961a-0543-4371-8c2a-333881b735e5",
+    "name": "Tomik, Wielder of Law",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a26f3cbb-39b5-4688-92f7-26534613a9f3",
+    "name": "Tonberry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a46ea59-6c5d-4bed-9951-b5590f9a1bdb",
+    "name": "Tony Stark // The Invincible Iron Man",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e50fecff-8872-42f5-8882-41ad13d9d1ae",
+    "name": "Too Evil to Stay Dead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c1c0117-6fc0-43c5-a4c8-6472de6503d9",
+    "name": "Toph, Hardheaded Teacher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ce20f43-9357-448f-bb40-7315feb08433",
+    "name": "Toph, the Blind Bandit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fbfef028-b10c-4ade-9503-d9af5b0c211b",
+    "name": "Toph, the First Metalbender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f5fe039-4be4-42ae-9fa4-4392328aa665",
+    "name": "Topiary Lecturer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "efddf972-94c4-49d1-a844-b4aba70c93aa",
+    "name": "Topiary Panther",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10d33e95-3e5d-447e-ba4a-acd3c33b4045",
+    "name": "Torch the Tower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51473069-68dc-4e87-b345-d7cbcfdeea74",
+    "name": "Torch the Witness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d6ab594-aea9-4f13-8802-f3794ee45425",
+    "name": "Torgal, A Fine Hound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97326cad-b13c-4e52-82ce-850a39e5ff08",
+    "name": "Torpor Orb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cfa46f8f-b3ec-4ee0-acdd-622f3177e02a",
+    "name": "Totentanz, Swarm Piper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a1a5862-c027-4c15-99a7-1795d0da96da",
+    "name": "Tough Cookie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9dc61ef6-da22-42a8-b348-dfd5722deadf",
+    "name": "Town Greeter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f3b0b15-2c38-4aaa-b527-afbb540a6715",
+    "name": "Toxin Analysis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed99a0b8-d82d-4c80-af97-cabd333620df",
+    "name": "Tractor Beam",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95d51048-be32-4c5f-8b75-fca3a891c9d6",
+    "name": "Trade Route Envoy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c478fb5c-9fde-400d-a2cd-f8c4fa6b957a",
+    "name": "Trade the Helm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c4277ec-aa12-41f5-8896-c83cfc754d6e",
+    "name": "Tragedy Feaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "888f58c0-1860-4df4-ad75-53e634150680",
+    "name": "Tragic Banshee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5e19326-3e90-439c-a3b2-749d43a1af0c",
+    "name": "Tragic Trajectory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc875500-f6df-4365-b2d6-7cf425daea97",
+    "name": "Trained Arynx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99c70f4e-de8a-426d-99aa-17b2f87625ba",
+    "name": "Training Compound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f44bde8b-43e9-4719-ac60-b8f0cee8df9b",
+    "name": "Training Regimen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d641bf6-0f93-4189-8dc1-ec7ea446dade",
+    "name": "Tranquil Cove",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdd4b3a9-83ce-41bf-82e2-7808657e2c09",
+    "name": "Transcendent Archaic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eaa6b294-ac66-4fe2-b694-97b0a04f7be1",
+    "name": "Transdimensional Bovine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ec56e2a-380f-4de7-9fb7-52de803008fc",
+    "name": "Transformative Commons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "991efbf1-299d-4892-aeab-8ff9827f7168",
+    "name": "Transit Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a68e57f3-f138-4c26-b8d5-55d1adec44a8",
+    "name": "Transmutation Font",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20f2fc0e-b1d4-4f80-9c7a-a9fb25fef7b8",
+    "name": "Trapped in the Screen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b47f7f1e-2d81-4b1b-870d-4c1a4f020505",
+    "name": "Trash the Town",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06c1f8a4-4948-435b-ae98-b1276b57e958",
+    "name": "Traumatic Critique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "14934ab0-41ab-44f8-bb28-2b0457eb6f5f",
+    "name": "Traveling Botanist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e5675d3-3fb0-43b5-a65c-95aacbe48bf9",
+    "name": "Traveling Chocobo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61e3709e-7ecd-4a59-bca1-019d16795740",
+    "name": "Travel the Overworld",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b9a574f-6d56-421b-8fbd-94da1e6e3ce1",
+    "name": "Traxos, Academy Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "acf4abde-4034-4fcf-b531-78c935aecd8c",
+    "name": "Traxos, Scourge Eternal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5483f787-7aca-4efe-a39a-ea29f8c07f0d",
+    "name": "Treacherous Greed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a691e96-fb47-4c23-a063-3b287c51147b",
+    "name": "Treasure Dredger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b55eac6-a745-4bf4-8926-5ce83bc38d7d",
+    "name": "Treasure Map // Treasure Cove",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d7dfb4d5-8510-4904-abb7-834ec65d9bf3",
+    "name": "Treeguard Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "922176b8-7174-4248-92fb-b196ceb802c7",
+    "name": "Treetop Freedom Fighters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5bf5739a-6322-4e6e-b41e-e7bdbb11b1ce",
+    "name": "Treetop Sentries",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f57a220-9f64-4143-979a-d6aaf63d49b2",
+    "name": "Treetop Snarespinner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d5bb714-1bf4-4f75-9ea8-bdbd18b0425b",
+    "name": "Treno, Dark City",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ef07e5a-3dc3-41dd-a3a9-e8812b4d40d3",
+    "name": "Trial of Agony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "991f4eec-cf3e-4554-ba88-c44bb0d255f0",
+    "name": "Tributary Vaulter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc5a501c-e16c-4d4b-a510-70a14272473e",
+    "name": "Tribute to Hunger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45d40cdb-21cc-4569-a894-83dd3026c947",
+    "name": "Triceraton Commander",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "843c8485-21b8-45ef-9a0c-4967f07278bb",
+    "name": "Trick Shot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "170ee399-d3cd-40ef-a340-193c0f0f6002",
+    "name": "Trickster's Stratagem",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9567d963-4815-466b-a319-6d138b6a0cd2",
+    "name": "Triple Triad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bac52ae6-24ee-4c4f-a32c-3eb9859dc025",
+    "name": "Trip Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d417f574-38a4-405c-83bb-49c5cf542648",
+    "name": "Triumphant Chomp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e275711-eb76-4924-ba38-c38a36d9d82a",
+    "name": "Troll Negotiations",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb52b3c3-09f0-4506-b7c0-250ab0b91866",
+    "name": "Troop of Ponies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c90b951-826e-4595-aacc-958904f3f794",
+    "name": "Trostani, Three Whispers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16cdba97-73cf-44ba-9d64-f27009b829f8",
+    "name": "Troublemaker Ouphe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1135ebc3-9537-4341-956b-6e22d8be5f20",
+    "name": "Troyan, Gutsy Explorer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d765055-da62-43f7-9580-98e9d164753b",
+    "name": "Truck Toss",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "26c2dd96-07e7-4294-9431-96d5aeff3761",
+    "name": "True Ancestry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f2ef8bda-373d-4387-900d-0f1b6ccf72e9",
+    "name": "Trumpeting Carnosaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c032e74-69c6-48ca-95d4-51aa3d894c14",
+    "name": "Trusty Boomerang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c744b5f4-fbcf-48b8-9d60-5e9c6ac297e0",
+    "name": "Trygon Predator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "961d1128-a022-480c-918e-16ba0abf844b",
+    "name": "Trystan, Callous Cultivator // Trystan, Penitent Culler",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ecc4e230-a546-4cb4-987c-87300060bbe2",
+    "name": "Trystan's Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dab16c93-9788-46e0-9345-838ebeda8d54",
+    "name": "Tuinvale Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef574346-1d98-447d-acb6-4d8d53c5f651",
+    "name": "Tumbleweed Rising",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ded4b02-7aa4-46a1-b10f-8480eb942cd4",
+    "name": "Tundra Tank",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aaa14260-2537-4668-8517-c825118777cc",
+    "name": "Tune Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a8e5c48-885d-4ea8-9c68-a3e9213d4289",
+    "name": "Tunnel Rats",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7aae54a6-3011-4867-b5ee-21a2111aecc6",
+    "name": "Tunnel Surveyor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d0bf685-e521-4d72-acc6-86794f685ce2",
+    "name": "Tunnel Tipster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f35cf85-6783-4d69-b5e6-a81f7c1f21e7",
+    "name": "Turncoat Kunoichi",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be0a3925-8e0d-4ef6-85cb-c9f5eef6b4bb",
+    "name": "Turn Inside Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb8c6dd2-1abe-4eb2-be1f-b0c078e5f257",
+    "name": "Turtle Blimp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e93782e3-1b93-459a-a7de-06c3b6591e6f",
+    "name": "Turtle-Duck",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb002bbc-08df-4bf0-bea3-46494ad261b6",
+    "name": "Turtle Lair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15934a19-a29e-4728-816f-20b610eec377",
+    "name": "Turtle Power!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cff5aca2-72c5-4053-a32c-c0bd3174c52d",
+    "name": "Turtles Forever",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "803971e6-67f3-4fda-aeb6-69ef8ea4b54e",
+    "name": "Turtles in Time",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aeb9a2e6-ad11-4e2c-81d0-caf279d31ece",
+    "name": "Turtle Van",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a294cbd-df18-4ee0-acaa-e31390a7f508",
+    "name": "Tweeze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05d7222b-cc08-4f1f-8e35-6058599572ba",
+    "name": "Twilight Diviner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3e1674f-dba1-4570-9990-e5dc643e237d",
+    "name": "Twinblade Blessing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d373dc71-5196-43a0-8cc5-67e2a591aad0",
+    "name": "Twinblade Paladin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88b076a4-46ff-4a41-95a5-2821f4d8944d",
+    "name": "Twin Blades",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "970dc070-3668-4584-9904-2897b27bb806",
+    "name": "Twin Bolt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "341cf69a-246c-4eb5-910c-18c13a4c3dce",
+    "name": "Twinflame Travelers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "321b5cc6-8df6-4292-97a0-a6a3a22f3b55",
+    "name": "Twinflame Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "105aea98-8eb9-4fb2-a0cb-7c7513317c5b",
+    "name": "Twining Twins // Swift Spiral",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ff812a78-3fe7-47bc-9984-1c2380cff5b1",
+    "name": "Twinmaw Stormbrood // Charring Bite",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "fa1cc78f-26bc-4d5d-973b-7cb7d7490973",
+    "name": "Twinned Vision",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ce30a19-e716-478f-be89-e2d95753cfed",
+    "name": "Twisted Fates",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5ae75de-0dff-44bf-9dc6-5895ab3ae731",
+    "name": "Twisted Fealty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99c9920a-f84b-4626-9fe5-d94cc62cd277",
+    "name": "Twisted Sewer-Witch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55b0518e-9c87-4f0e-81c2-9c984f760be1",
+    "name": "Twist Reality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "740aa9d9-91a9-431e-8bf9-1344e5273e27",
+    "name": "Twists and Turns // Mycoid Maze",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "fd6e1967-237a-41f6-bbf4-2c869f9447c8",
+    "name": "Twitching Doll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f222f3d-f02b-42b9-aedf-fb7ed92d4889",
+    "name": "Two-Headed Hunter // Twice the Rage",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3726b9a0-67cb-4f45-ab50-62db50f93568",
+    "name": "Ty Lee, Artful Acrobat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "081ad4e3-cda3-41cc-890f-412611dc9ea0",
+    "name": "Ty Lee, Chi Blocker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b24d95fa-3cf7-495e-9082-11f8db151906",
+    "name": "Tyrox, Saurid Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a242eab-204c-4411-860f-c0f3582a8f38",
+    "name": "Tyvar, the Pummeler",
+    "status": "unsupported"
+  }
+]

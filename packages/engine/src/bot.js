@@ -24,6 +24,12 @@ export function chooseBotCommand(s, p) {
           player: p,
         };
       }
+      case 'payCost':
+        return {
+          type: 'payCost',
+          player: p,
+          pay: c.payable && (c.cost.life ?? 0) < s.players[p].life,
+        };
       case 'libraryOrder':
         return { type: 'orderLibrary', player: p, top: [...c.cards], rest: [] };
       case 'discardEffect':
@@ -85,6 +91,15 @@ export function chooseBotCommand(s, p) {
           const blockers = available
             .filter((b) => canBlock(s, b, a, p))
             .sort((a, b) => value(s, a) - value(s, b));
+          if (hasKeyword(s, a, 'menace')) {
+            if (blockers.length >= 2) {
+              for (const b of blockers.slice(0, 2)) {
+                pairs.push({ blocker: b.id, attacker: a.id });
+                available.splice(available.indexOf(b), 1);
+              }
+            }
+            continue;
+          }
           const b = blockers.find(
             (b) =>
               stats(s, b).toughness > stats(s, a).power ||

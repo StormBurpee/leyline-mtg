@@ -1,0 +1,14 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/sire_of_seven_deaths.txt
+Name:Sire of Seven Deaths
+ManaCost:7
+Types:Creature Eldrazi
+PT:7/7
+K:First Strike
+K:Vigilance
+K:Menace
+K:Trample
+K:Reach
+K:Lifelink
+K:Ward:PayLife<7>
+Oracle:First strike, vigilance\nMenace, trample\nReach, lifelink\nWard—Pay 7 life.

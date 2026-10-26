@@ -1,3 +1,4 @@
+import { costProblem, payCost } from './costs.js';
 import {
   createGame,
   freezeRecord,
@@ -5,7 +6,6 @@ import {
   draw,
   emit,
   hasKeyword,
-  isSick,
   keywords,
   move,
   opponent,
@@ -24,6 +24,7 @@ import {
   stabilize,
   targetsFor,
   notifyTriggers,
+  notifyTargeted,
   finishResolutionChoice,
 } from './effects.js';
 import { assignDamage, canAttack, declareAttackers, declareBlockers } from './combat.js';
@@ -82,20 +83,22 @@ function cast(s, p, c) {
   s.passes = 0;
   emit(s, 'cast', { player: p, objectId: o.id, name: o.name, target: c.target ?? null });
   notifyTriggers(s, 'cast', { player: p, definition: d });
+  notifyTargeted(s, s.stack.at(-1));
 }
 export function abilityProblem(s, p, id, index, target) {
   const o = s.objects[id];
   if (!o || o.zone !== 'battlefield' || o.controller !== p)
     return 'You do not control that permanent.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
+  if (!Number.isSafeInteger(index) || index < 0) return 'That ability does not exist.';
   const ability = definition(s, o).activated?.[index];
   if (!ability) return 'That ability does not exist.';
-  if (ability.cost.tap && (o.tapped || (definition(s, o).type === 'creature' && isSick(s, o))))
-    return 'This creature cannot pay a tap cost now.';
+
   if (ability.target && !legalTarget(s, ability.target, target, p))
     return 'Choose a legal ability target.';
   if (!ability.target && target != null) return 'This ability has no targets.';
-  if (!planPayment(s, p, ability.cost.mana ?? {})) return 'Not enough available mana.';
+  const payment = costProblem(s, p, ability.cost, { sourceId: id });
+  if (payment) return payment;
   return null;
 }
 function activate(s, p, c) {
@@ -103,8 +106,7 @@ function activate(s, p, c) {
   requireRule(!problem, 'ACTIVATE', problem);
   const o = s.objects[c.card],
     a = definition(s, o).activated[c.ability];
-  pay(s, p, a.cost.mana ?? {});
-  if (a.cost.tap) o.tapped = true;
+  payCost(s, p, a.cost, { sourceId: o.id });
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'ability',
@@ -119,6 +121,7 @@ function activate(s, p, c) {
   });
   s.passes = 0;
   emit(s, 'activated', { player: p, name: o.name, objectId: o.id, ability: c.ability });
+  notifyTargeted(s, s.stack.at(-1));
 }
 function completeMulligan(s, p) {
   s.players[p].kept = true;
@@ -135,7 +138,7 @@ function completeMulligan(s, p) {
 function handleChoice(s, p, c) {
   const choice = s.choice;
   requireRule(choice.player === p, 'CHOICE_PLAYER', 'The other player must make this choice.');
-  if (['libraryOrder', 'discardEffect'].includes(choice.kind)) {
+  if (['libraryOrder', 'discardEffect', 'payCost'].includes(choice.kind)) {
     finishResolutionChoice(s, c);
     return;
   }
@@ -364,7 +367,7 @@ export function exportReplay(s) {
 export function replay(record) {
   requireRule(
     record &&
-      [VERSION, '0.1.0'].includes(record.version) &&
+      [VERSION, '0.2.0', '0.1.0'].includes(record.version) &&
       (record.schemaVersion === undefined || record.schemaVersion === REPLAY_SCHEMA_VERSION),
     'REPLAY_VERSION',
     'Unsupported replay schema or engine version.',

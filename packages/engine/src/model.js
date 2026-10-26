@@ -1,6 +1,6 @@
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.2.0';
+export const VERSION = '0.3.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -129,6 +129,21 @@ export function ref(o) {
 }
 export function move(s, o, to) {
   const from = o.zone;
+  if (from === 'battlefield' || from === 'stack') {
+    const entries = [
+      ...s.stack,
+      ...s.pendingTriggers,
+      ...(s.resolving ? [s.resolving.entry] : []),
+      ...(s.choice?.kind === 'orderTriggers'
+        ? [...s.choice.entries, ...s.choice.remaining.flatMap((group) => group.entries)]
+        : []),
+    ];
+    for (const entry of entries)
+      if (entry.source?.id === o.id && entry.source.incarnation === o.incarnation) {
+        entry.sourceKeywords = keywords(s, o);
+        entry.sourceController = o.controller;
+      }
+  }
   for (const p of s.players)
     for (const z of ['hand', 'library', 'graveyard', 'exile']) {
       const i = p[z].indexOf(o.id);
@@ -243,13 +258,11 @@ export function createGame({
   return s;
 }
 /** Public view removes opponents' hidden identities. Never use a full snapshot over a network. */
-export function playerView(state, viewer) {
+export function playerView(state, viewer, { includeEvents = true } = {}) {
   requireRule(viewer === 0 || viewer === 1, 'VIEWER', 'Viewer must be a player.');
-  const s = structuredClone(state);
-  delete s.rng;
-  delete s.seed;
-  delete s.config;
-  delete s.history;
+  const { rng, seed, config, history, catalog, ...core } = state;
+  const s = structuredClone({ ...core, events: includeEvents ? core.events : [] });
+  s.catalog = catalog;
   for (const [id, o] of Object.entries(s.objects))
     if (
       (o.zone === 'library' &&

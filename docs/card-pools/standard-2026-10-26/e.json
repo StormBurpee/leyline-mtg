@@ -1,0 +1,982 @@
+[
+  {
+    "oracleId": "070aa6c7-4741-47de-b68a-629aa4201ac0",
+    "name": "Eager Glyphmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f2ba562-8d5e-4915-967e-54916c3c5876",
+    "name": "Eager Trufflesnout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb4b4b63-682b-4439-9757-84cca7a27db2",
+    "name": "Eagle of the Great Shelf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95e1c368-b58a-4e69-9583-587560ad558d",
+    "name": "Eagle's Rescue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25151d18-8e73-4b0d-a8d2-e5fa291e5729",
+    "name": "Eardrum Rattler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fbf2653e-9cc4-442f-bc73-6e2ba6e067cb",
+    "name": "Early Winter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8966fd5-2926-4ba0-b7d6-cfea40cd4e05",
+    "name": "Earthbender Ascension",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e113f0f-4469-4276-82e1-0a804f3de444",
+    "name": "Earthbending Lesson",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "913bca28-faf9-42e6-a8c0-469cd9bc0208",
+    "name": "Earthen Ally",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e43c31ee-1bac-4f96-8b74-334b3238ab73",
+    "name": "Earth Kingdom General",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b799c30-4a43-403d-b822-0555bd513913",
+    "name": "Earth Kingdom Jailer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bfb3913-808d-444b-97c3-a90af3bc585b",
+    "name": "Earth Kingdom Protectors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4289f2d4-3db2-4dd1-9c18-af3f78309844",
+    "name": "Earth Kingdom Soldier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9da9248d-1201-447f-b6c2-2b64af4f71c4",
+    "name": "Earth King's Lieutenant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f04a7763-5fba-42e5-a45a-b3dc2daba902",
+    "name": "Earth Rumble",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba5982a9-e8c1-4e7c-9a73-c4caad0f7336",
+    "name": "Earthrumbler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1de17747-27e8-40bb-b6f7-6d5402d4705c",
+    "name": "Earth Rumble Wrestlers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "454cbc6a-b7f0-445e-842c-5db267917a18",
+    "name": "Earthshaker Dreadmaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b87bcac-ec64-4012-9e75-f459d3640eb3",
+    "name": "Earth's Mightiest Heroes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0380e99c-18f9-4472-8223-bb208e5f0963",
+    "name": "Earth Village Ruffians",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2ef355a-2472-47e0-9b2e-987994291921",
+    "name": "East Wind Avatar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d437ecc2-2fd3-4ad3-b23e-217f55e58dae",
+    "name": "Eaten Alive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c37eae65-1afe-4242-b677-24dd40e6f401",
+    "name": "Eaten by Piranhas",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d88c3554-18db-4e5e-a979-2402990a0311",
+    "name": "Echocasting Symposium",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ef88214-f46d-473e-a55b-795a647e2f03",
+    "name": "Echoing Deeps",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd0980ae-eabf-45da-98e7-23d81bfa185a",
+    "name": "Echo of Dusk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1091c83a-a4b9-457f-a69a-9a44a7e10759",
+    "name": "Echo, Perceptive Prodigy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9cc3b91b-ad70-4b01-b718-fda3819f84d0",
+    "name": "Eclipsed Boggart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c89ef4d-b375-4644-ac8b-034effdbe98c",
+    "name": "Eclipsed Elf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48c641df-d511-4e35-b623-9d1fdb5240da",
+    "name": "Eclipsed Flamekin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6227840-6e3e-48c7-b4a4-42cfd8f14b68",
+    "name": "Eclipsed Kithkin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3a00b62-f07e-44ef-8d97-22a3e7a06f72",
+    "name": "Eclipsed Merrow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5715ed43-395c-4877-99a7-8e28e7bf9dce",
+    "name": "Eclipsed Realms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe01c96b-eb78-4477-bec2-944b2a28c778",
+    "name": "Eddie Brock // Venom, Lethal Protector",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3c345e24-1726-45ac-91ca-e348d1e7acfe",
+    "name": "Eddymurk Crab",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84856b92-5ce8-47f3-9a1c-78d6a3e26aca",
+    "name": "Eden, Seat of the Sanctum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cab2bc93-f38b-4301-ac42-05765615586b",
+    "name": "Edgar, Ancient Bloodlord",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "264efed9-65ab-40ad-877f-c6c25ca0281e",
+    "name": "Edgar, King of Figaro",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1917bda6-c0e1-4c80-8009-74c28cf6b8e9",
+    "name": "Edgar, Moonlit Sovereign",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b907d375-b715-446b-8966-79959feb9f58",
+    "name": "Edge Rover",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4dfd33e8-7e30-493b-8564-f7df5f0257aa",
+    "name": "Edgewall Inn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef702a1a-4ace-43e0-8e86-dcceb0b1e4d5",
+    "name": "Edgewall Pack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbf5bd0a-20ef-4dce-9f70-13339d438ff7",
+    "name": "Eerie Gravestone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "35ba0e70-da7c-4ed9-b8ec-7dd5c5ce110e",
+    "name": "Eerie Interference",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "181da74b-53fb-4e46-afc0-e7c990fda128",
+    "name": "Efflorescence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "185e0892-194f-43ac-853f-1e142bf8476e",
+    "name": "Effortless Master",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b4fc198f-3595-4880-ad12-96c18fbf9c33",
+    "name": "Ego Drain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36af3c2c-49d7-46ea-ab02-c254b332448e",
+    "name": "Eirdu, Carrier of Dawn // Isilu, Carrier of Twilight",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9a18fb98-796a-43b1-8157-e3afca53a1c0",
+    "name": "Eject",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "079f0d7f-57a5-4101-a9e3-c5a57148b3fb",
+    "name": "Elder Auntie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3db16fb8-5650-4568-b975-42ad3d44ebcd",
+    "name": "Electro, Assaulting Battery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "112f2b3f-32e7-40b1-b80e-0b99184a840c",
+    "name": "Electroduplicate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9222f89-e495-4502-bb0c-f5e802686b01",
+    "name": "Electro's Bolt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ea747cf-5d04-4aa7-bdc3-8145860cd1ba",
+    "name": "Elegant Parlor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7d52eac-edc9-464b-a163-07c136aa6e4c",
+    "name": "Elegy Acolyte",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b46647a1-0c91-451b-8c0b-be8fe02faee2",
+    "name": "Elektra, Daughter of the Hand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf402270-ebc6-481b-b478-0e3acab7002a",
+    "name": "Elementalist Adept",
+    "status": "curated"
+  },
+  {
+    "oracleId": "882f30e4-4ce1-4581-8d2d-d763aa13befe",
+    "name": "Elemental Mascot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7255705c-b788-4bb1-824a-9262f4a0864e",
+    "name": "Elemental Teachings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfd614d5-4c7f-416b-9cb2-bb167c0893a0",
+    "name": "Elenda, Saint of Dusk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6abdf34-cfdc-465c-b067-cdebb659406e",
+    "name": "Elfsworn Giant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c78d4cec-6764-4cce-96d2-a2d85a57b218",
+    "name": "Eliminate the Impossible",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d97de156-5a6d-4dc6-953e-d4bad63cbad2",
+    "name": "Elite Interceptor // Rejoinder",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3e978db3-77ef-4b93-8f8f-e414e27254bd",
+    "name": "Elixir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f4d6f91-95ad-4687-8899-5a21a0abb49e",
+    "name": "Elrond, Moon-Reader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f404fe4-4335-4dcc-ba90-78246c4b880b",
+    "name": "Elspeth's Smite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f78af825-023a-42e9-8374-5c52303a1417",
+    "name": "Elspeth, Storm Slayer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "027989e7-20c4-4773-b6b4-20337cc5fe8c",
+    "name": "Eluge, the Shoreless Sea",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54175132-2c44-4749-8dfd-d08dcc63e4b3",
+    "name": "Elusive Otter // Grove's Bounty",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a91e0154-14a9-4681-8236-04db231592a4",
+    "name": "Elvenking's Halls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d070a95-49ea-4aea-b512-dbb0006a00ee",
+    "name": "Elvenking's Harper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97a2cd39-6b54-496b-b3ac-dab9dfed7edc",
+    "name": "Elven Passage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0f62148-1015-49b8-b61f-a4332325a6b0",
+    "name": "Elven Raft-Steerer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e2c2423-d854-4478-99e6-64f29851f026",
+    "name": "Elvish Archdruid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7035db0-4bde-4ba3-9028-dd14191c8126",
+    "name": "Elvish Archivist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b62f9fe-e3f4-4a21-aa6b-4dbd411d0c44",
+    "name": "Elvish Refueler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "adac526d-1a85-431a-a302-0a4b8f4a0c44",
+    "name": "Elvish Regrower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f4d7988-3f5b-45d7-9838-02897d7180be",
+    "name": "Embalmed Ascendant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c232056-9dd6-4a78-be08-3bff19daa88d",
+    "name": "Embereth Veteran",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b4b21ed-c24e-4038-83fb-bd7f3c3426cd",
+    "name": "Emberheart Challenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b786547-67ed-49fa-9981-35c4c2175f62",
+    "name": "Ember Island Production",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5208c2c-b839-42f6-8717-ee4bbaf1385b",
+    "name": "Embermouth Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0fad5713-c09c-43d3-9cc0-10c65aead488",
+    "name": "Embrace Oblivion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9110be0-3f0c-449b-8baf-689e92fdb8f0",
+    "name": "Embrace the Paradox",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fed2127c-7174-4863-ad6a-1847c96bbd3f",
+    "name": "Emerge from the Cocoon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da363da1-aecf-4d49-8e77-8dc56981a741",
+    "name": "Emergency Eject",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7737ccdc-49f2-463e-8ffd-43ab98d11f45",
+    "name": "Emergency Phytomedic // Seed Suture",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9f4d0133-0ecc-4498-8a47-4906321faae2",
+    "name": "Emergent Haunting",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5152e8d-9f55-493d-a0fc-753cc72ee299",
+    "name": "Emeritus of Abundance // Regrowth",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5963eef1-1022-42b1-8a0c-fc9850bfc2a3",
+    "name": "Emeritus of Conflict // Lightning Bolt",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "24a29be4-5bc2-469b-b2ce-2fb305c3facb",
+    "name": "Emeritus of Ideation // Ancestral Recall",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e6c41473-2398-4888-9f0c-467dce7c39a4",
+    "name": "Emeritus of Truce // Swords to Plowshares",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "93056597-b964-421f-be2f-e92abef1c2a4",
+    "name": "Emeritus of Woe // Demonic Tutor",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3b102ccc-7629-457c-aba6-e9b00fd50c85",
+    "name": "Emet-Selch, Unsundered // Hades, Sorcerer of Eld",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9f800ebc-d6e4-4bfc-bebe-8baad51efa19",
+    "name": "Emil, Vastlands Roamer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d8b53f4-bdb5-4ba1-b6c0-f4846d8d3565",
+    "name": "Emissary Escort",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc5dd7f7-375e-4d51-85cb-1abf16ca3854",
+    "name": "Emptiness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "270d14b2-07bc-46bc-918f-658102265ccf",
+    "name": "Empyrean Eagle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f",
+    "name": "Emrakul, the Exigent Doom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcc9f3bc-0bc3-4189-a4d0-9698594b99a8",
+    "name": "Enchanted River's Grasp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6accaed-ff35-4324-b31b-35e6837bc079",
+    "name": "Encouraging Aviator // Jump",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1e95c273-7fec-4f8d-8be9-e21ad4b93717",
+    "name": "Encroaching Dragonstorm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7668f7bc-9a43-4024-87c3-995aa0a65aaa",
+    "name": "Encumbered Reejerey",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00cfbea0-e862-468b-90d5-7478eb9847c0",
+    "name": "End-Blaze Epiphany",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74b8182e-54be-444a-97b1-84fc5fd3c290",
+    "name": "End of the Hunt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b4d970ed-f332-440c-8c2f-8a8a0191410b",
+    "name": "Endrider Catalyzer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "817f3b8b-4399-4c28-9453-7f57df4a7360",
+    "name": "Endrider Spikespitter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3de29cb-7d7d-4566-b5bf-37e571bd5d78",
+    "name": "Enduring Courage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d2460c3-8eeb-4f35-b6f6-748c478664c7",
+    "name": "Enduring Curiosity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98a389f4-2905-47f3-b60e-3d4afb3e5cb0",
+    "name": "Enduring Innocence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98e698ae-1a69-469c-9cfb-0e3fedeb71d4",
+    "name": "Enduring Tenacity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3577c47e-76d3-4659-b922-31c4b74be3a0",
+    "name": "Enduring Vitality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4c1e49d-5f14-486c-acf2-1952512b12b2",
+    "name": "Energybending",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e29aae9-815a-4999-ace6-7bc860acde32",
+    "name": "Engine Rat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "62007675-8a0d-4211-83b2-0daf3641dedc",
+    "name": "Enigma Drake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a139eb7f-3853-490c-a839-35d0e5aed7b5",
+    "name": "Enlightened Confidant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97e1fcdf-04e8-40cf-b04a-8505d9b7cecc",
+    "name": "Ennis, Debate Moderator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e35d7886-8c03-471c-b598-118d7eceddb4",
+    "name": "Enraged Flamecaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97607bf5-ca7b-4b1b-963e-390faf6e413e",
+    "name": "Enterprising Scallywag",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4e552be1-0702-4e18-822f-98611f8a8e70",
+    "name": "Enter the Avatar State",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67554654-e751-4679-9e92-f3588525ae4f",
+    "name": "Enter the Enigma",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9db5293-4866-46ec-9ae8-059d27bd50fc",
+    "name": "Entity Tracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90c5ea2b-d004-4219-b60c-d51bc1a5ee6b",
+    "name": "Entropic Battlecruiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b796ecc8-a2e8-4ab9-8736-6825b650434d",
+    "name": "Entrust the Spark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f30aa897-7027-47e7-ae58-73cbc448c1f0",
+    "name": "Environmental Scientist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebc70734-bf1a-4754-8094-bcbb4db91f30",
+    "name": "Envoy of Okinec Ahau",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2dea1935-c227-46d5-9d98-e7d2cd612f98",
+    "name": "EPF Point Squad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed5d6aba-0b8d-48b3-a84c-618f45fb67b1",
+    "name": "Epic Downfall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4bdfc580-de51-445b-b170-8c6832e44704",
+    "name": "Epic Fight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42bf9435-02e6-428f-a93c-fe4652deb4fc",
+    "name": "Equilibrium Adept",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f43f5855-f297-4433-984b-18263b734cfc",
+    "name": "Eriette of the Charmed Apple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b134a9e6-b004-4833-b298-10529f5a85b8",
+    "name": "Eriette's Lullaby",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b26a2875-c704-491a-b82d-07c316e53611",
+    "name": "Eriette's Tempting Apple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27ca3201-a374-4a9d-b0ba-93b391f36844",
+    "name": "Eriette's Whisper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "710a3499-64f8-4d2c-8c9c-d58950e47ea7",
+    "name": "Eriette, the Beguiler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e467fab-e808-44d3-99bf-e3621baeb7cb",
+    "name": "Erode",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "852c6520-d148-4923-a312-05a9af821f24",
+    "name": "Eroded Canyon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23d5d43c-ec78-42dd-a53e-a1ee91c94b1d",
+    "name": "Erratic Apparition",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a66ce8b-af99-411f-8ecb-52a5d2f6af3d",
+    "name": "Ertha Jo, Frontier Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d4b6613-9000-4f53-9737-fe0338f3f629",
+    "name": "Erudite Wizard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0056fc91-4398-471c-b561-7ff99750ac8a",
+    "name": "Escape Tunnel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84597236-2cfc-4654-b126-a8ee252f4d14",
+    "name": "Esgaroth Garrison",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85d87087-48ee-4dc8-a1c0-9c9ccb885adc",
+    "name": "Eshki Dragonclaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0752fe67-9b8a-42c0-90e3-087d426b2f3b",
+    "name": "Esoteric Duplicator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "947b40a2-e272-4ef6-85fb-3d767a21bc7a",
+    "name": "Esper Origins // Summon: Esper Maduin",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e28a3f0e-40bd-4293-b5eb-ec9d185c1e1c",
+    "name": "Essence Anchor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1216f36-00fd-4d03-85c1-f4910a02d4d0",
+    "name": "Essence Burn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1473580d-7cb2-48f5-a77d-08f49244c5e8",
+    "name": "Essence Channeler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dd757328-0593-4fc7-a099-e82f5c0677ff",
+    "name": "Essenceknit Scholar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "26a7f92d-6914-466d-b7c7-9ac121dd5118",
+    "name": "Essence of Antiquity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46665089-aa3d-44c3-964d-6638dfbb5782",
+    "name": "Essence Scatter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "078def07-ae5d-4591-8db6-d156834aab97",
+    "name": "Etali, Primal Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df98b93b-0aa6-4bea-9d8d-798ebc795b0b",
+    "name": "Etali's Favor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ccca5c2-66c3-495a-8d9e-1a9805569e52",
+    "name": "Etched Cornfield",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "140cb5cf-8aa2-457c-9d65-5acefea00195",
+    "name": "Eternal Student",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "566533af-5e67-463f-ac33-dfcf1ec735c9",
+    "name": "Ether",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dbba75f5-2404-4bd5-982b-f6c4effa5316",
+    "name": "Ethereal Armor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87957d09-7e22-40fe-8770-ff66d1934a38",
+    "name": "Etrata, Deadly Fugitive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92226fd2-ad93-4722-89a0-ca88ea03e1b4",
+    "name": "Eumidian Terrabotanist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f3f5a1c-8b88-4080-bd80-14db4d6c8c50",
+    "name": "Eusocial Engineering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83161d59-2520-4741-9328-e2a4a8b5d5bc",
+    "name": "Evendo, Waking Haven",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5bc4adf-9105-4901-989c-63612314af5c",
+    "name": "Evershrike's Gift",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa481983-8f1a-4519-9371-5e7edcd3274f",
+    "name": "Everything Pizza",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3468804-26ad-4919-b030-a1906a7029e8",
+    "name": "Evidence Examiner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "264f944b-386b-4378-9764-4a8bde246809",
+    "name": "Evil Reawakened",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7562f89-4808-44ab-8dc9-fc4078e8a47b",
+    "name": "Evil's Thrall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a75445d3-1303-4bb5-89ad-26ea93fecd48",
+    "name": "Evolving Wilds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43febbcd-ecbe-4edb-ad90-7fc6dc381d05",
+    "name": "Exalted Sunborn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfb6651c-e0b3-4dbd-b26a-3eeb690985fc",
+    "name": "Excalibur II",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd28fe55-36cd-4242-8dd4-edb58fbb9895",
+    "name": "Exclusion Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98c9d798-8c48-4a2d-a076-ce17d31df6f5",
+    "name": "Exdeath, Void Warlock // Neo Exdeath, Dimension's End",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9ad730b5-8950-4215-9319-387e2970dd22",
+    "name": "Exemplar of Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d32c9439-4c97-412b-83cc-6d9acb48be3c",
+    "name": "Exhibition Tidecaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79d2efb2-145d-4377-a4e2-832ff2cb5677",
+    "name": "Exit Specialist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58916455-844c-4d97-908f-8205bdc117c0",
+    "name": "Exorcise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b13ec4d-812a-48b0-8a64-6847a694a03a",
+    "name": "Exosuit Savior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11e2f581-7c3c-4f2f-877f-e41540ab967e",
+    "name": "Expedited Inheritance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8fcf50cd-e6d0-4516-850f-d42ee75dcc3a",
+    "name": "Expedition Map",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "744b7e93-c893-4770-a3bb-6a45b7f8e4f7",
+    "name": "Expel the Interlopers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87f82d15-5b6b-400f-8a15-d45a2a735f7d",
+    "name": "Experimental Confectioner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9fa0c9d1-2a63-41a8-8733-39bfaee4eb0a",
+    "name": "Explorer's Cache",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b23dc81d-01bb-4bf0-9932-5d32a6b22cf7",
+    "name": "Explosive Derailment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c844cc98-b8b9-447d-92ee-64f4a4906e7c",
+    "name": "Explosive Getaway",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22d059fc-4e47-44b5-9e21-4a56f1dff6a7",
+    "name": "Explosive Prodigy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f7e4aff-ef68-44fe-a0dc-b9ab0ecd7146",
+    "name": "Expose the Culprit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1812d69-c016-4bc3-b899-ed47f5e893e5",
+    "name": "Expressive Firedancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8164b1e8-3350-465e-8a17-75f57d326344",
+    "name": "Exsanguinate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "973fb1e3-83d5-4763-bea8-799b426a8848",
+    "name": "Extended Absence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cce3dcc3-57bb-4b95-8b70-337c67bb3c4e",
+    "name": "Extinguisher Battleship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96480e86-70a8-401d-abf8-a7d509311b73",
+    "name": "Extract a Confession",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69288566-3015-45de-b391-6fe079865f0c",
+    "name": "Extraordinary Journey",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f47c869-f4a9-43b0-aec0-8da4e3a3fec5",
+    "name": "Extrapolate the Impossible",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a646245-b8b7-4f91-a312-d5eea9a9e49a",
+    "name": "Extravagant Replication",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8f802ad-4621-4f71-b52d-fbc55853dc88",
+    "name": "Eye of Jace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4074e897-82a4-4f57-86c2-4aab3f29ef9b",
+    "name": "Ezekiel Sims, Spider-Totem",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ddcd8a0a-7ac3-4400-a16f-8bb5aa50994e",
+    "name": "Ezrim, Agency Chief",
+    "status": "unsupported"
+  }
+]

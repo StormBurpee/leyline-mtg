@@ -150,3 +150,69 @@ test('indestructible survives damage but not zero toughness', () => {
   s = act(s, 'pass');
   assert.equal(s.objects[target.id].zone, 'graveyard');
 });
+
+test('a tap-cost source cannot also be auto-tapped to pay its own mana cost', () => {
+  let s = fixture();
+  const manaAdept = {
+    ...adept,
+    mana: 'U',
+    activated: [{ cost: { mana: { U: 1 }, tap: true }, effects: [{ op: 'draw', count: 1 }] }],
+  };
+  s.catalog = createRegistry({ ...CARDS, [adept.name]: manaAdept });
+  const source = put(s, adept.name);
+  const r = dispatch(s, { type: 'activate', player: 0, card: source.id, ability: 0 });
+  assert.equal(r.ok, false);
+  assert.equal(r.state, s);
+  assert.equal(s.objects[source.id].tapped, false);
+  lands(s, 'Island', 1);
+  s = act(s, 'activate', { card: source.id, ability: 0 });
+  assert.equal(s.objects[source.id].tapped, true);
+  s = resolve(s);
+  assert.equal(s.players[0].hand.length, 1);
+});
+test('malformed ability indices reject atomically rather than accessing array prototypes', () => {
+  const s = fixture(),
+    source = put(s, 'Shivan Dragon');
+  for (const ability of ['__proto__', 'constructor', -1, 0.5, null]) {
+    const result = dispatch(s, { type: 'activate', player: 0, card: source.id, ability });
+    assert.equal(result.ok, false);
+    assert.equal(result.state, s);
+  }
+});
+
+test('prototype-named effect opcodes are ordinary registry errors', () => {
+  for (const op of ['__proto__', 'constructor', 'toString']) {
+    const invalid = { name: 'Bad opcode', type: 'sorcery', cost: {}, effects: [{ op }] };
+    assert.ok(
+      validateDefinition(invalid).some((message) => message.includes('unsupported effect opcode')),
+    );
+    assert.throws(() => createRegistry([invalid]), RegistryError);
+  }
+});
+
+test('life is paid on activation before the ability resolves', () => {
+  let s = fixture();
+  s.catalog = createRegistry({
+    ...CARDS,
+    [adept.name]: {
+      ...adept,
+      activated: [{ cost: { life: 2 }, effects: [{ op: 'draw', count: 1 }] }],
+    },
+  });
+  const source = put(s, adept.name);
+  s = act(s, 'activate', { card: source.id, ability: 0 });
+  assert.equal(s.players[0].life, 18);
+  assert.equal(s.players[0].hand.length, 0);
+  s = resolve(s);
+  assert.equal(s.players[0].hand.length, 1);
+});
+
+test('registry capacity accommodates an Arena-scale catalog without a 5000-card ceiling', () => {
+  const cards = Array.from({ length: 16000 }, (_, i) => ({
+    ...adept,
+    name: `Catalog fixture ${i}`,
+  }));
+  const catalog = createRegistry(cards);
+  assert.equal(Object.keys(catalog).length, 16000);
+  assert.equal(Object.isFrozen(catalog['Catalog fixture 15999']), true);
+});

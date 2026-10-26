@@ -1,0 +1,1532 @@
+[
+  {
+    "oracleId": "dda4b515-49c0-43fe-9f6a-36defa326bb1",
+    "name": "Maalfeld Twins",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36924990-8e3a-434e-bcd1-f03603cb350d",
+    "name": "Mabel, Bitter Recluse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b11e435-5888-4e3b-a255-db817392163f",
+    "name": "Mabel, Heir to Cragflame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c657626f-7444-4c26-842c-dda9b9656fa3",
+    "name": "Mabel's Mettle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab56f7cf-9538-45b5-a657-1e2ebef1e92b",
+    "name": "Mabel, Valley Hero",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04633ecd-eac0-426a-83a5-8e88262fca30",
+    "name": "Macabre Reconstruction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf75dbd8-b65a-48d9-b96b-4afb43f336d1",
+    "name": "Macabre Waltz",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "945e8443-9647-4eab-b091-ee8e7bc347f5",
+    "name": "Machinesmith Automaton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7fff34e-9b80-4a67-a917-fd9efddb5a1f",
+    "name": "Machinist's Arsenal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d812c8e3-a475-4ad2-a93f-7208ad873676",
+    "name": "Madame Hydra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5b0e85f-6651-4667-829c-2253ff8b130d",
+    "name": "Madame Masque",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73413bd5-8c40-4d45-8f05-c20c39ee4017",
+    "name": "Madame Null, Power Broker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1e0841d-b004-40f9-a644-aecb422f6ad5",
+    "name": "Madame Web, Clairvoyant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03931270-504a-4b0b-af3f-918bf124ea07",
+    "name": "Maelstrom Artisan // Rocket Volley",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "49e9fba7-8465-4bbb-95db-73a7e149f494",
+    "name": "Maelstrom of the Spirit Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95ce305f-34bc-4d6d-b7ba-ffd4b2a25336",
+    "name": "Maelstrom Pulse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fd2beb8-f823-4723-beec-e59b62127490",
+    "name": "Magda, the Hoardmaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c38f159-367b-4e4b-94cd-bf1b0721c3a8",
+    "name": "Magebane Lizard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f27988b-0863-4cc1-8eb9-83bd0cd8561c",
+    "name": "Mage Tower Referee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ada82f93-dc93-4a95-a13f-42b5942b3413",
+    "name": "Magic Damper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "caed9999-74b8-43e3-a319-fa505c04c71c",
+    "name": "Magic Pot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e9d8e12-b9da-4452-a758-5caffd8a752e",
+    "name": "Magitek Armor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "563992ff-6fdf-45a0-afc2-7c73c2ec6f74",
+    "name": "Magitek Infantry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d5bbde7-6f33-4708-b3ab-34d4528af649",
+    "name": "Magitek Scythe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6a5adc8-ee57-421e-8235-0b3160f44568",
+    "name": "Magmablood Archaic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "900b9409-9c16-414d-8674-2ea42c2415a1",
+    "name": "Magmakin Artillerist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59322432-591a-4e8d-aff5-12ca1feb1028",
+    "name": "Magmatic Galleon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a3b29c3-f69d-4671-8907-600d21528153",
+    "name": "Magmatic Hellkite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f85088c-256d-4925-a4dd-aafcc2632282",
+    "name": "Magnetic Snuffler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82bdf9cb-61fe-4eaf-8762-c32002403d96",
+    "name": "Magnificent End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f2ce9e55-07c0-4f36-a59e-127693fc0f62",
+    "name": "Magnifying Glass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b52824f9-7897-46b7-a4e5-a0261861cb5b",
+    "name": "Magnigoth Sentry",
+    "status": "curated"
+  },
+  {
+    "oracleId": "129476ae-9dab-4e04-8e8e-f249afd56ff9",
+    "name": "Maha, Its Feathers Night",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5029f21-e0d6-4f22-9afd-79452de26490",
+    "name": "Mai, Jaded Edge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "953a2bd3-5bca-41fc-8785-66b2d7fa381a",
+    "name": "Mai, Scornful Striker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "531f78d5-5004-4b02-99c7-b390cb342fd9",
+    "name": "Make a Stand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "942f3f06-1df0-40b4-8537-71cbec111852",
+    "name": "Makeshift Binding",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8226f31d-6f51-49c3-87f7-0c68f7f4f9ce",
+    "name": "Make Your Move",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41246140-4b44-40c4-b92b-501e49c50bf7",
+    "name": "Make Your Own Luck",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "483a0caa-e912-41e9-aaa3-bcea9369ec06",
+    "name": "Malamet Battle Glyph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06905dfb-b2df-4849-8848-fd3c964aa8c9",
+    "name": "Malamet Brawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99c5630e-cc04-4203-9006-3bc6a6807762",
+    "name": "Malamet Scythe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25a9c864-59c6-4230-a234-bf78bf1ef24c",
+    "name": "Malamet Veteran",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8978a30a-7918-4851-92ef-f40fdf90c379",
+    "name": "Malamet War Scribe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6804e329-800b-4aa4-9a00-b9a1f4b9537b",
+    "name": "Malboro",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bba3b36-f8d7-4fd6-892a-797226210b6e",
+    "name": "Malcolm, Alluring Scoundrel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7932ab35-39dc-4500-aa44-2ad7228f0d2a",
+    "name": "Malcolm, the Eyes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "437553c1-0aa4-4093-b6e5-c175ede5f278",
+    "name": "Malevolent Chandelier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aee2cd1b-9bf9-4b91-83a4-2f1dbc82dcf4",
+    "name": "Malevolent Witchkite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5beb8d6e-d3c1-46a5-8516-d6bf66413cff",
+    "name": "Malicious Eclipse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f2e4607-bece-42ba-a2a3-5dc50f246793",
+    "name": "Mammoth Bellow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "35e2f82e-7ca3-4a92-9134-b7999eef5337",
+    "name": "Mana Sculpt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c596b847-4e05-4279-8675-b4e39cb3dc91",
+    "name": "Manhole Missile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df5a66d1-61f6-44d9-b464-3ee739e78dce",
+    "name": "Manifest Dread",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b254ca74-2a96-4590-91bc-650f407daf5d",
+    "name": "Manifold Mouse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11a46cb6-ab01-4630-9541-782db2ef3b91",
+    "name": "Map the Frontier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "114e1d2c-cefc-4e2a-922e-3b2ceed1871d",
+    "name": "Maralen, Fae Ascendant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "099b8d2c-b482-48dd-b6bc-dedf546d66c5",
+    "name": "Marang River Regent // Coil and Catch",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "814b87fe-2a75-4ff2-8637-7e69e3fb285b",
+    "name": "Marauding Blight-Priest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbbd507e-06da-4b47-befc-61db8c92539e",
+    "name": "Marauding Brinefang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e349be42-5f14-44a9-9608-281985c10e2d",
+    "name": "Marauding Mako",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70bea459-f6e9-411a-bd33-339bf95ea47a",
+    "name": "Marauding Sphinx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37449c93-4d32-4f1a-982f-8f3416214368",
+    "name": "Marchesa, Dealer of Death",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a04696c4-4138-47e2-8da4-81d61748519f",
+    "name": "March of the World Ooze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24ee57b5-a505-4264-97ca-8b8dfb12298e",
+    "name": "Mardu Devotee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f662383-1684-4bd3-be05-e696d301e26c",
+    "name": "Mardu Monument",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f82e4b9-e67f-4f34-ac4c-57b0b300ee42",
+    "name": "Mardu Siegebreaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5aafc6c3-14f2-45b1-bd5b-c27760d791dd",
+    "name": "Marina Vendrell",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "096eac52-00c2-4439-b2f3-ff555d15ec88",
+    "name": "Marina Vendrell's Grimoire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0405e0a9-6d02-4691-bdb8-59c72b824dab",
+    "name": "Marketback Walker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12fa17b2-158e-4d53-897f-81111f912b00",
+    "name": "Market Gnome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b0d4192-bc76-4ef1-92b2-b5fca81970bd",
+    "name": "Marketwatch Phantom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af762373-e159-4a36-83b5-a82b8b16fa41",
+    "name": "Marshal of the Lost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60f20f32-b6db-4ee7-a0aa-535647e6fcd5",
+    "name": "Marshals' Pathcruiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22f0dbbb-9d8d-42bc-8903-fc0b65e00952",
+    "name": "Marvin, Murderous Mimic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aff4e43d-cafa-47de-8e39-011f9254a26a",
+    "name": "Marwyn, the Clearcutter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb03f6c1-c94f-4f09-b2e9-a55ce5533653",
+    "name": "Marwyn, the Preserver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d44c87b-8945-4c39-b034-7690cf483992",
+    "name": "Mary Jane Watson",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0037ff8-64db-45dd-bba1-db5c49095083",
+    "name": "Masked Meower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ccb39f4a-2684-4eb7-9066-aad81ae08962",
+    "name": "Massacre Girl, Known Killer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81f35914-73bf-429f-ba20-32e23ac30159",
+    "name": "Massacre Girl, Most Wanted",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93cf50cf-0ecc-4d3e-abea-778c1ebacec4",
+    "name": "Massacre Wurm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1cb419cc-d8e4-4676-987f-089cebccc374",
+    "name": "Masterful Flourish",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8c36337-135c-460d-a1da-cc01743dda71",
+    "name": "Master of Barbs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1727c07-c829-4d64-a1c5-8b53c743888a",
+    "name": "Master Pakku",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e294d9d2-df91-4410-85d3-8ffb13fb2285",
+    "name": "Master Piandao",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9079564-5c86-4765-988a-f2334e016fa6",
+    "name": "Master's Councillors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2dfdd358-e3cd-4bf5-871b-37689b7951e9",
+    "name": "Master's Guide-Mural // Master's Manufactory",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5f56a303-b3da-41df-a959-7823a87ee60c",
+    "name": "Mathemagics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef6c0054-3a89-4fac-b822-37c7d2514489",
+    "name": "Matoya, Archon Elder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94688e25-28cb-45aa-95ea-0d6f547cae57",
+    "name": "Matterbending Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16182e01-22ff-4786-985d-919b47c4aa4d",
+    "name": "Matzalantli, the Great Door // The Core",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7351fca5-8672-4ba3-a015-bd4b6b289efc",
+    "name": "Maximum Carnage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0e85b74-12fb-4d63-853e-7a3f41f731b4",
+    "name": "Maximum Overdrive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "800fb917-8898-4eba-9f94-aec6e9d75236",
+    "name": "Mazemind Tome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49479778-c4c0-43ba-a7b7-45f00d067462",
+    "name": "Maze's End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8229954b-e1ef-4503-8443-2356e2a87663",
+    "name": "Meanders Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68957dca-df5c-4051-af22-407cb7e47200",
+    "name": "Meathook Massacre II",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "897eef47-3e99-4a5f-8a3e-ddb06bc95e9a",
+    "name": "Meat Locker // Drowned Diner",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2c2ef1ed-2f93-48c5-bf86-e46318599aeb",
+    "name": "Mechan Assembler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0672aa3-3207-4ff8-af8f-bdabacbb4d04",
+    "name": "Mechanical Mobster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2db8dda3-8136-4cf2-ba2d-ecc344a36725",
+    "name": "Mechanized Ninja Cavalry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa72c607-7eb4-41b7-9af1-f3d6c69abf09",
+    "name": "Mechan Navigator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1aeb43f7-4d8a-4648-9c13-fd101081b448",
+    "name": "Mechanozoa",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0025d29-d652-4af8-b367-13142d5532df",
+    "name": "Mechan Shieldmate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9acb74a9-f372-43ad-a80d-4f8d52236eb8",
+    "name": "Meddling Youths",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eacfe895-5106-437c-b8c1-2ff03c107744",
+    "name": "Medic's Kitesail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66208129-20fb-4cb4-8f00-8d4574c9c653",
+    "name": "Meditation Pools",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9fff42d-31cf-4edf-8353-4a3b996bb77b",
+    "name": "Meek Attack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37731c49-1238-4e0e-8993-204e36c1f4ee",
+    "name": "Melancholic Poet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86e0e718-82b5-4c99-9837-1b4d8729a27e",
+    "name": "Melded Moxite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23140c6f-c674-4d13-9b78-bce0ffcb981f",
+    "name": "Melek, Reforged Researcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "046b60da-0a14-40b0-a36c-5328f6b8972b",
+    "name": "Meltstrider Eulogist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d6742a3-592b-4e67-8cc6-56e2962ad7c7",
+    "name": "Meltstrider's Gear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f9bc0c6-1792-4771-a839-95a22d9c699a",
+    "name": "Meltstrider's Resolve",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c71d3775-0c71-4e37-979d-35e319f357f0",
+    "name": "Memorial Team Leader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10dda10f-2549-47e5-9a8b-fb414cf38d3f",
+    "name": "Memorial Vault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6cdc6548-cb32-437f-850a-9002542ad3d5",
+    "name": "Memories Returning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dac33359-0317-4b11-9078-fccfd2321e53",
+    "name": "Memory Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70616a8c-9b6c-408e-8f3e-2c348ec136d8",
+    "name": "Memory Trap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0179bc62-823e-46b9-b536-342904fedafc",
+    "name": "Memory Vessel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b20d74a4-0e08-4779-972a-499f1a2be15a",
+    "name": "Mendicant Core, Guidelight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "448d9391-9d15-4aa1-87b3-a1d755666c03",
+    "name": "Mental Modulation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9f4f96b-6e54-4fe6-8df7-623e0fc72409",
+    "name": "Mentor of the Meek",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05da6b06-fb5f-41e8-b0a2-d949646e36d9",
+    "name": "Mephitic Draught",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23820b45-2f3a-4b6e-99ea-d84caccb7e37",
+    "name": "Merchant of Many Hats",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b32a7b97-0883-4c9f-a23d-ad269efd8cc3",
+    "name": "Merciless Enforcers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f1019df-3e76-446c-ba33-f9dfe56b10bf",
+    "name": "Merfolk Cave-Diver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05f3638f-3c66-47bb-8a82-ad173e152573",
+    "name": "Merfolk Coralsmith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d709f396-021f-49eb-adb5-374aa790eaae",
+    "name": "Merrow Skyswimmer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "699fa8e6-84f5-4010-a8fe-7b2e4f280ef9",
+    "name": "Merry Bards",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4029e884-8154-42b3-ae29-3cb98374a294",
+    "name": "Messenger Hawk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7df45a2a-75bc-4343-8dad-3a642efd13ee",
+    "name": "Metalhead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69c8e690-c0a2-4c4e-910d-123c9c5b922f",
+    "name": "Metamorphic Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9f11aa1-9219-42a8-85a9-a8f204160706",
+    "name": "Meteor Golem",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "181965fb-e685-4b1f-9bd6-3a33bed933b2",
+    "name": "Meteor Sword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ccfb8b4d-651c-418a-aa19-cb23105b3f2f",
+    "name": "Meticulous Archive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b2b3b16-389c-4581-b889-b8a2e76f83a2",
+    "name": "Meticulous Artisan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fdd471f-ec95-4aa7-8f8a-ad8946de5ab4",
+    "name": "Meticulous Commons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1df6475-e1e8-4ef3-a7b2-919d5f121c57",
+    "name": "Miasma Demon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc90f74d-11f3-4bd4-b8a1-1cf2ffcd5b73",
+    "name": "Mica, Reader of Ruins",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "594c6b1f-ff0e-4122-8b29-852632a22a79",
+    "name": "Michelangelo, Game Master",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1939679b-ea2e-4a75-b3ce-d7af68437484",
+    "name": "Michelangelo, Improviser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe1eb8b3-c605-4711-a057-ed3565bfe75c",
+    "name": "Michelangelo, Mutant BFF",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42f12942-9ac1-497e-a8b7-9f66a5afd0ae",
+    "name": "Michelangelo's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "170ab932-9d50-4ce7-9a42-08e1edce7e7c",
+    "name": "Michelangelo, Weirdness to 11",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2605782-09f1-4d52-b3e7-5ec1442bd9b5",
+    "name": "Micromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4e34a49d-f031-48ac-a458-97b79124b76c",
+    "name": "Midgar, City of Mako // Reactor Raid",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c9f8651a-4118-4d80-902e-60473e81d3a9",
+    "name": "Midnight Mangler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5236a6b5-0a96-4470-ba03-37b6d7a889bb",
+    "name": "Midnight Mayhem",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8c7566d-7cc0-48af-a986-83223ec7e06c",
+    "name": "Midnight Reaper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ddcaee9-a11e-477a-bd19-f5ee10512549",
+    "name": "Midnight Snack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79bc2c6d-b03d-4ceb-b468-293378ec73ae",
+    "name": "Midnight Tilling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e025cda-71c5-4d06-8436-decd408667af",
+    "name": "Mightform Harmonizer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e4107ce-8450-4501-9cb3-a6344ef320f1",
+    "name": "Might of the Ancestors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19b5c94b-b4fa-41a9-b649-51c4e6f03602",
+    "name": "Might of the Meek",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcdc7dfc-04b5-411a-ab49-282b9c2608e2",
+    "name": "Mighty Mutanimals",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d957045-acb2-4546-8c19-71511fd497ef",
+    "name": "Migrating Ketradon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "529178e8-425e-4d59-948c-ca7d0663f6ff",
+    "name": "Mikey & Don, Party Planners",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a86117c1-b83d-4350-9a10-a23b7e67e1bd",
+    "name": "Mikey & Leo, Chaos & Order",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb7070ab-c234-4d54-8cdc-caf106bf24a6",
+    "name": "Mild-Mannered Librarian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be48c721-bdc6-4f2c-96d6-82d934b31615",
+    "name": "Miles Morales // Ultimate Spider-Man",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2b8c2882-dbca-466a-a0af-dd1d65edfe7c",
+    "name": "Mimeoplasm, Revered One",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b10ab39-3050-475c-af8b-f293794d498c",
+    "name": "Mind Drill Assailant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03af9d24-2df6-4318-82f2-8abdd22206f1",
+    "name": "Mindful Biomancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f9e4be0-814a-4cab-948b-114769035a4a",
+    "name": "Mind into Matter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "18d1765b-3b60-4dda-93a6-d02a4e53f185",
+    "name": "Mind Meanderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d32dbf3-c157-4543-8813-da88f463de0e",
+    "name": "Mind Roots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa9547b3-e4e4-4557-9dd1-3aa9a7cb9937",
+    "name": "Mindseeker Oculus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54866c25-b332-46c8-a2c5-1a71b702ddc0",
+    "name": "Mindsparker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03e356ae-f1e8-4730-8d2b-b9e2f32db915",
+    "name": "Mind Spiral",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3428287b-cfd5-45bc-b5f9-1e3f5a425a68",
+    "name": "Mind Spring",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "35142b01-4b8d-4335-a943-a3172fa04573",
+    "name": "Mindspring Merfolk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d80d0f7-a436-431c-a54e-e7dd7dbba8de",
+    "name": "Mind Transfer Protocol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f823b122-94ac-42ba-b511-9e54d64db112",
+    "name": "Mindwhisker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df555f60-2164-49dc-be67-00aca9eb0d45",
+    "name": "Minecart Daredevil // Ride the Rails",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5d575b78-3d7b-4860-abc3-e99e429279a1",
+    "name": "Mine Raider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb161d0b-e534-463c-b1d1-7210bfba5d28",
+    "name": "Miner's Guidewing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5aa32b6-2eaf-4b48-81cc-cd3db976513d",
+    "name": "Mineshaft Spider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8c88c33-b8df-4b19-b12c-79c9709af8f1",
+    "name": "Mintstrosity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31ca9e12-8ad0-472e-8b2a-b7df26370d8c",
+    "name": "Minwu, White Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e103f422-85c0-43f8-8a2f-8b7863e503fa",
+    "name": "Mirage Mesa",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d88014b-8189-4a88-bee3-c2310d36f6e8",
+    "name": "Miriam, Herd Whisperer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd49aa99-bf84-4edd-aecc-6dae78b73412",
+    "name": "Mirkwood",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "399cd159-7376-421c-b001-c26f1cbadced",
+    "name": "Mirkwood Meditator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66630640-9605-44da-afdf-eb9d458d056f",
+    "name": "Mirkwood Nurturer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1b36dde-9cde-46c8-8d5a-9ad93feba41f",
+    "name": "Mirkwood Pathmaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81cb888c-c4d3-45a2-a03e-bfd91a2af2be",
+    "name": "Mirrorform",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "353db389-b829-4e66-85d5-6018bc87c3e0",
+    "name": "Mirrormind Crown",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7a1c21b-5966-4ce0-a925-0b3cb3c3db00",
+    "name": "Mirror Room // Fractured Realm",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "542831c6-6279-4977-9b29-0fb9c0ebf04d",
+    "name": "Mischievous Mystic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e75b187d-0e3b-4d94-a940-8b7e4e7ed1ca",
+    "name": "Mischievous Pup",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe7a4361-561a-4bab-921e-d01bab19dad3",
+    "name": "Mischievous Sneakling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09eec5a2-7835-4b24-9dd1-594612ee9152",
+    "name": "Misleading Motes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf9221f5-a4b2-4074-901c-0fa3c2bda80c",
+    "name": "Mistbreath Elder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fa5237e-dd79-4646-b935-cb8c6ee803ab",
+    "name": "Mister Fantastic, Reed Richards",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a7c7ecc-df72-4da0-af35-dd0af58ec02c",
+    "name": "Mister Hyde, Monster Within",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8da3262-826d-4ea8-bb22-06374bebefe5",
+    "name": "Mister Negative",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9acfec0d-05a0-4b28-a883-e6863f1cb773",
+    "name": "Mistmeadow Council",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "339f5334-b65a-445a-a016-20e997e0b4bb",
+    "name": "Mistrise Village",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87ccb151-a948-4e5a-878b-0d46c921a2b7",
+    "name": "Mistway Spy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b090ba3-0ecb-4585-b5b7-9d6028c32487",
+    "name": "Misty Knight, Hero for Hire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c394b767-620c-4310-b78f-ece312259e46",
+    "name": "Misty Mountains Raider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfd2c57a-4557-4df1-8f6f-da2cbd317f12",
+    "name": "Misty Palms Oasis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f9a8845-d760-44a7-a4c9-8a20dba4e14a",
+    "name": "Mjölnir, Hammer of Thor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de58fa4b-eeeb-4dc8-aab9-6521b15678cc",
+    "name": "Mm'menon, the Right Hand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c05b882-51d9-43d8-93b8-c3317590f76a",
+    "name": "Mm'menon, Uthros Exile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b71239fb-d7dc-4bac-b8aa-26b454409344",
+    "name": "Mobile Homestead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47654b36-b215-4333-aa70-d88d627447e3",
+    "name": "Mob Lookout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9df2cdf-397c-458d-89cf-911568737ffa",
+    "name": "Mockingbird",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1fd00656-83ba-4feb-b089-224007936b99",
+    "name": "Mockingbird, Ace Agent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "013ca531-1ff7-4efc-a280-4bc3ab574072",
+    "name": "Mocking Sprite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe7cc414-42d0-4dad-8516-7a0be0860a67",
+    "name": "M.O.D.O.K.",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2091eb7e-2357-4ef8-b15e-1e6f82176340",
+    "name": "Mold Adder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34d0d070-fcaf-410e-a002-012cbe104fb7",
+    "name": "Moldering Gym // Weight Room",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d0e58b8e-2c41-4602-a905-c2a6086ecf70",
+    "name": "Molecular Modifier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34994475-b914-44f6-8ca1-c2747b6d5956",
+    "name": "Mole Man, Moloid Master",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0d1636e-6f80-44fe-869a-1749ab249815",
+    "name": "Molten Collapse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "485233bf-dc4b-4f31-8dfb-5054aee70c08",
+    "name": "Molten-Core Maestro",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92b91910-9b65-4421-8eef-a33793161089",
+    "name": "Molten Duplication",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82aa1402-4b1c-4343-aba5-dd3271cc1ac5",
+    "name": "Molten Exhale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6fcf3c1-0626-4d53-92c0-caa22fa61e9a",
+    "name": "Molten Man, Inferno Incarnate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c179b8f-3a83-49d6-9e7f-9e17c293ccbb",
+    "name": "Molten Note",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a39ca64-e1a9-42ef-8efd-6aa3edde3d93",
+    "name": "Molt Tender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1489551f-5714-471b-a0e6-f40bc3085afc",
+    "name": "Moment of Craving",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d39db09-67b7-4a4e-9667-4e1b806f51a5",
+    "name": "Moment of Glory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e9576c1-b0c2-4be5-9005-35b51164f78e",
+    "name": "Moment of Reckoning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57579799-2582-417f-9864-4560cac39ac3",
+    "name": "Moment of Triumph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfac8072-2bbc-43ca-b141-9cd0799840f7",
+    "name": "Moment of Valor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "087d2e42-c69f-4cd2-b2e3-e0b64ac2893b",
+    "name": "Momentum Breaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3c56e71-0de6-447a-a9b4-0971f56c2362",
+    "name": "Momo, Friendly Flier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85ee8ab6-8db5-45d7-85ae-64838771146a",
+    "name": "Momo, Playful Pet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6490e98-37a9-4a8b-a04c-cceeb22b0c35",
+    "name": "Mona Lisa, Science Geek",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "325b88e1-ec7f-4d22-887c-a7f18a868bb0",
+    "name": "Monastery Messenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa3ae120-756d-4c52-91f9-235767539d67",
+    "name": "Mondo Gecko",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9bae56c-9666-42e8-94ec-03b0a964b142",
+    "name": "Mongoose Lizard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8dd929cb-0fe1-4cb3-bc8d-96ca37f194f3",
+    "name": "Monica Rambeau // Photon, Living Light",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1b524149-340e-4f94-9520-6a5258fabb00",
+    "name": "Monk's Fist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de70a6bb-32ed-4a89-a522-c2a71f08fb02",
+    "name": "Monoist Circuit-Feeder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b4cb111-ecf7-4ff7-a9e3-c944054f3370",
+    "name": "Monoist Sentry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5542ea4d-34ab-4f89-8894-793a7038f501",
+    "name": "Monstrous Emergence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e69e8de4-b521-4888-8074-17f1efe2f345",
+    "name": "Monument to Endurance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9627ed9a-5ade-412d-bf8d-f0705b1c9405",
+    "name": "Moogles' Valor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfe0818b-ae13-4174-85c8-24b895d28df0",
+    "name": "Moon Girl and Devil Dinosaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "980affa7-6308-4acd-af64-f804e574a89b",
+    "name": "Moonglove Extractor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce009bd4-5ffb-46a4-a9dd-b9c060926467",
+    "name": "Moonlit Lamenter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df702b0c-e011-497f-ae29-9876efac4a4c",
+    "name": "Moonlit Meditation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8067f42-68c0-42da-a1d6-859953939555",
+    "name": "Moonrise Cleric",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3635b3f-839c-4fe5-83a5-7c70e8630184",
+    "name": "Moonshadow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3f16f34-d78c-4b61-821b-05fc6bd0da37",
+    "name": "Moonshaker Cavalry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcae4f9d-8f81-42f9-93a3-82a482851bdd",
+    "name": "Moonstone Harbinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aeeb50f2-8e02-4d40-a1dd-28b1c5c85c7e",
+    "name": "Moonstone, Harsh Mistress",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0fa43f6-d8f6-4674-b538-6d546b7dcf40",
+    "name": "Moon-Vigil Adherents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a947e4d-8a14-45f1-bb80-760a317b1ed0",
+    "name": "Morbius the Living Vampire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c55a27cc-8e25-4714-b1da-86e5c1c6661a",
+    "name": "Morcant's Eyes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2c30683-cc7f-4341-add1-b08cb9b93eeb",
+    "name": "Morcant's Loyalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "273ad15c-366a-4691-978b-d6028b57005a",
+    "name": "Morlun, Devourer of Spiders",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a25bcf65-4417-45e9-a4b1-94e0ea78af63",
+    "name": "Morningtide's Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ca2f668-2a4d-4a1e-abcc-093ccbc29295",
+    "name": "Mornsong Aria",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "faa01ed1-ccfa-4e58-951f-cd81f9068027",
+    "name": "Mortify",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2e2f21a-0338-44d7-96a5-5a277f0ec419",
+    "name": "Moseo, Vein's New Dean",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84122d81-9634-4d3f-85a5-f6cf4303691a",
+    "name": "Mossborn Hydra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5783facf-d26e-4aae-a753-b9dc553361c1",
+    "name": "Mosswood Dreadknight // Dread Whispers",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "34d34f2c-06ff-4acf-8f2f-ff867774b777",
+    "name": "Most Decrepit Old Bird // Speak Secrets",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f5bece93-afb3-4fa4-83a8-d7eaac032522",
+    "name": "Most Valuable Slayer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+    "name": "Mountain",
+    "status": "curated"
+  },
+  {
+    "oracleId": "567fa6e0-fc7b-4502-9c51-f2538c411003",
+    "name": "Mourner's Surprise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bae5dc68-1fd1-428d-bee7-c238e07b21ea",
+    "name": "Mouser Attack!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "404e958b-ead9-4ec7-b786-7b3d65e29967",
+    "name": "Mouser Foundry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad0c6d46-a1ca-4a9f-93f0-4a4dc31868e6",
+    "name": "Mouser Mark III",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b0a4530-6e19-41a2-9ea6-e4c8cf85b6c4",
+    "name": "Mouse Trapper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "832fbb1f-0ff5-4d6c-b1ee-2231923a6f64",
+    "name": "Mouth of the Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5fca77c-377f-41b4-a9e9-e91a89d351cc",
+    "name": "Mox Jasper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebedff30-ae43-4861-aab2-afe1fc88337e",
+    "name": "Ms. Marvel, Kamala Khan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b63e5518-61f3-4cde-a799-5f3ee6aba70b",
+    "name": "Mudbutton Cursetosser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aeeab1df-0b8b-4bc4-a5f9-aac413449bec",
+    "name": "Mudflat Village",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c115159c-6991-4812-b3b6-6ed80221cab4",
+    "name": "Muerra, Trash Tactician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4625704-1d52-44e4-804f-2f45644d76ac",
+    "name": "Muldrotha, the Gravetide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d940611f-f84d-43fa-82d6-eecb4fb54164",
+    "name": "Multiply by Zero",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3678fce-6897-4f2c-bf50-243facb6581b",
+    "name": "Multiversal Incursion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17770eeb-ecbf-4510-af2d-acececfbe146",
+    "name": "Multiversal Passage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5fa5651-d714-44d6-867b-be0e3224b7ed",
+    "name": "Muraganda Raceway",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "938b4e2c-88d9-4637-bc00-e228920c9a78",
+    "name": "Murder",
+    "status": "curated"
+  },
+  {
+    "oracleId": "36330947-5ef9-4bff-b541-bfbddd9715a3",
+    "name": "Murdock's Crusade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2cdefeb-3176-4faf-be54-a62d31f777a5",
+    "name": "Murky Sewer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4baa7847-dfcc-4aa3-aa64-2deeaa3f013b",
+    "name": "Murmuring Volume",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31f3d37f-e613-427f-b34c-cc87611ea078",
+    "name": "Muse Seeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "62421084-96e6-40dd-8d34-7c8c1091d4a4",
+    "name": "Muse's Encouragement",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3891a914-e597-4126-846f-39bf8534eb92",
+    "name": "Museum Nightwatch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34b93a66-de1e-4133-a479-e0d90ba94a3a",
+    "name": "Mutable Explorer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "472d9a18-19a0-46c0-a4bf-328ebec7ce41",
+    "name": "Mutagen Man, Living Ooze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea9fc868-374b-4acc-be0d-4283907b4524",
+    "name": "Mutant Chain Reaction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f35aace7-57b5-44b8-91d2-4710eb7d5548",
+    "name": "Mutant Surveyor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6059731-2e10-4f72-a214-b257f1677e9e",
+    "name": "Mutant Town",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f318ddc-3dc5-4e43-92b3-3a776e41c56e",
+    "name": "Mutant Town Musicians",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9fdd445a-c8e1-4309-9d74-374676fcac1d",
+    "name": "Mutinous Massacre",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aaafcd69-6295-4d79-8e67-98df0c9bae88",
+    "name": "Mu Yanling, Wind Rider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ac65688-0a74-4dc4-b6cb-12bdf8aed01e",
+    "name": "Myojin of Night's Reach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e728381-6db0-4c66-883d-82d718fef833",
+    "name": "My Precious // Allure of Power",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "10039992-d51a-47e7-9a70-02fe2227c163",
+    "name": "Mysidian Elder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40f664d8-4c73-44aa-8fb1-d38771a42520",
+    "name": "Mysterio, Master of Illusion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99419378-8a23-44f3-aebe-e62d6e20e877",
+    "name": "Mysterio's Phantasm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81d72511-88b4-45ec-a5a9-e722caf55577",
+    "name": "Mystical Teachings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb1a6986-39f7-4592-9039-7e30f5ccd009",
+    "name": "Mystical Tether",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b77dfe2a-ebc9-46b0-9134-2ecb2abdd8be",
+    "name": "Mystic Archaeologist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "834b8f71-9a45-42ae-9e99-e749fa6fb45e",
+    "name": "Mystic Monastery",
+    "status": "unsupported"
+  }
+]

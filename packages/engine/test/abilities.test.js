@@ -146,3 +146,53 @@ test('Electrostatic Field triggers once for an instant', () => {
   s = resolve(s);
   assert.equal(s.players[1].life, 16);
 });
+
+test('activated damage uses source keywords at resolution, not just activation time', () => {
+  let s = fixture();
+  const pyro = put(s, 'Prodigal Pyromancer');
+  s = act(s, 'activate', { card: pyro.id, ability: 0, target: { kind: 'player', id: 1 } });
+  s.modifiers.push({
+    objectId: pyro.id,
+    incarnation: pyro.incarnation,
+    power: 0,
+    toughness: 0,
+    keywords: ['lifelink'],
+    expires: s.turn,
+  });
+  s = resolve(s);
+  assert.equal(s.players[0].life, 21);
+});
+test('source last-known keywords are captured on departure after an ability was activated', () => {
+  let s = fixture();
+  const pyro = put(s, 'Prodigal Pyromancer');
+  s = act(s, 'activate', { card: pyro.id, ability: 0, target: { kind: 'player', id: 1 } });
+  s.modifiers.push({
+    objectId: pyro.id,
+    incarnation: pyro.incarnation,
+    power: 0,
+    toughness: 0,
+    keywords: ['lifelink'],
+    expires: s.turn,
+  });
+  move(s, s.objects[pyro.id], 'graveyard');
+  move(s, s.objects[pyro.id], 'battlefield');
+  s = resolve(s);
+  assert.equal(s.players[0].life, 21);
+});
+test('damage lifelink benefits the current source controller, not an old ability controller', () => {
+  let s = fixture();
+  const pyro = put(s, 'Prodigal Pyromancer');
+  s = act(s, 'activate', { card: pyro.id, ability: 0, target: { kind: 'player', id: 1 } });
+  s.modifiers.push({
+    objectId: pyro.id,
+    incarnation: pyro.incarnation,
+    power: 0,
+    toughness: 0,
+    keywords: ['lifelink'],
+    expires: s.turn,
+  });
+  s.objects[pyro.id].controller = 1;
+  s = resolve(s);
+  assert.equal(s.players[0].life, 20);
+  assert.equal(s.players[1].life, 20);
+});

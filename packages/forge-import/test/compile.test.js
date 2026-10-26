@@ -33,10 +33,10 @@ test('Sprite Dragon remains unsupported rather than dropping its trigger/SVar', 
   assert.ok(result.diagnostics.some((x) => x.includes('SVar')));
 });
 test('unknown keywords fail closed', async () => {
-  const text = (await fixture('grizzly_bears')) + '\nK:Ward:2';
+  const text = (await fixture('grizzly_bears')) + '\nK:Protection:Red';
   const r = compileForgeCard(text);
   assert.equal(r.status, 'unsupported');
-  assert.ok(r.diagnostics.some((x) => x.includes('Ward')));
+  assert.ok(r.diagnostics.some((x) => x.includes('Protection')));
 });
 test('extra spell restrictions are never silently discarded', async () => {
   const text = (await fixture('lightning_bolt')).replace('NumDmg$ 3', 'NumDmg$ 3 | TargetMin$ 0');
@@ -115,4 +115,29 @@ test('new subability targets and optional effects are not silently translated', 
       compileForgeCard(text.replace('DB$ Draw', 'DB$ Draw' + extra)).status,
       'unsupported',
     );
+});
+
+for (const name of [
+  'waterfall_aerialist',
+  'rimeshield_frost_giant',
+  'tomakul_honor_guard',
+  'owlin_shieldmage',
+  'sire_of_seven_deaths',
+  'dwarven_forge_chanter',
+])
+  test(`Forge ward fixture ${name} preserves the payment and every keyword`, async () => {
+    const result = compileForgeCard(await fixture(name));
+    assert.equal(result.status, 'candidate', result.diagnostics.join('\n'));
+    assert.deepEqual(result.definition.ward, CARDS[result.name].ward);
+    assert.deepEqual(result.definition.keywords, CARDS[result.name].keywords);
+    assert.deepEqual(result.definition.triggers, CARDS[result.name].triggers);
+  });
+test('multiple ward instances and nonimplemented ward costs are rejected', async () => {
+  const source = await fixture('waterfall_aerialist');
+  for (const text of [
+    source + '\nK:Ward:1',
+    source.replace('K:Ward:2', 'K:Ward:Discard<1/Card>'),
+    source.replace('K:Ward:2', 'K:Ward:T'),
+  ])
+    assert.equal(compileForgeCard(text).status, 'unsupported');
 });

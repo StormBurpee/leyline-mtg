@@ -1,0 +1,8 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/rimeshield_frost_giant.txt
+Name:Rimeshield Frost Giant
+ManaCost:3 U U
+Types:Creature Giant Warrior
+PT:4/5
+K:Ward:3
+Oracle:Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)

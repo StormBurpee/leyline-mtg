@@ -1,0 +1,3426 @@
+{
+  "schemaVersion": 1,
+  "version": "0.3.0",
+  "config": {
+    "catalog": {
+      "Aegis Turtle": {
+        "name": "Aegis Turtle",
+        "type": "creature",
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Turtle"],
+        "text": "",
+        "power": 0,
+        "toughness": 5,
+        "color": ["U"]
+      },
+      "Agent of Atlas": {
+        "name": "Agent of Atlas",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Spy", "Hero"],
+        "text": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ],
+        "color": ["W"]
+      },
+      "Ankle Biter": {
+        "name": "Ankle Biter",
+        "type": "creature",
+        "cost": {
+          "G": 1
+        },
+        "keywords": ["deathtouch"],
+        "subtypes": ["Snake"],
+        "text": "Deathtouch",
+        "power": 1,
+        "toughness": 1,
+        "color": ["G"]
+      },
+      "Bear Cub": {
+        "name": "Bear Cub",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": ["Bear"],
+        "text": "",
+        "power": 2,
+        "toughness": 2,
+        "color": ["G"]
+      },
+      "Bishop's Soldier": {
+        "name": "Bishop's Soldier",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": ["lifelink"],
+        "subtypes": ["Vampire", "Soldier"],
+        "text": "Lifelink",
+        "power": 2,
+        "toughness": 2,
+        "color": ["W"]
+      },
+      "Brazen Scourge": {
+        "name": "Brazen Scourge",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 2
+        },
+        "keywords": ["haste"],
+        "subtypes": ["Gremlin"],
+        "text": "Haste",
+        "power": 3,
+        "toughness": 3,
+        "color": ["R"]
+      },
+      "Brightblade Stoat": {
+        "name": "Brightblade Stoat",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": ["first strike", "lifelink"],
+        "subtypes": ["Weasel", "Soldier"],
+        "text": "First strike, lifelink",
+        "power": 2,
+        "toughness": 2,
+        "color": ["W"]
+      },
+      "Colossadactyl": {
+        "name": "Colossadactyl",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "G": 2
+        },
+        "keywords": ["reach", "trample"],
+        "subtypes": ["Dinosaur"],
+        "text": "Reach, trample",
+        "power": 4,
+        "toughness": 5,
+        "color": ["G"]
+      },
+      "Dawn's Light Archer": {
+        "name": "Dawn's Light Archer",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "keywords": ["flash", "reach"],
+        "subtypes": ["Elf", "Archer"],
+        "text": "Flash\nReach",
+        "power": 4,
+        "toughness": 2,
+        "color": ["G"]
+      },
+      "Dragon Sniper": {
+        "name": "Dragon Sniper",
+        "type": "creature",
+        "cost": {
+          "G": 1
+        },
+        "keywords": ["vigilance", "reach", "deathtouch"],
+        "subtypes": ["Human", "Archer"],
+        "text": "Vigilance, reach, deathtouch",
+        "power": 1,
+        "toughness": 1,
+        "color": ["G"]
+      },
+      "Elementalist Adept": {
+        "name": "Elementalist Adept",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "keywords": ["flash"],
+        "subtypes": ["Human", "Wizard"],
+        "text": "Flash (You may cast this spell any time you could cast an instant.)\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ],
+        "color": ["U"]
+      },
+      "Fire Elemental": {
+        "name": "Fire Elemental",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "R": 2
+        },
+        "keywords": [],
+        "subtypes": ["Elemental"],
+        "text": "",
+        "power": 5,
+        "toughness": 4,
+        "color": ["R"]
+      },
+      "Galewind Moose": {
+        "name": "Galewind Moose",
+        "type": "creature",
+        "cost": {
+          "generic": 4,
+          "G": 2
+        },
+        "keywords": ["flash", "vigilance", "reach", "trample"],
+        "subtypes": ["Elemental", "Elk"],
+        "text": "Flash\nVigilance, reach, trample",
+        "power": 6,
+        "toughness": 6,
+        "color": ["G"]
+      },
+      "Gigantosaurus": {
+        "name": "Gigantosaurus",
+        "type": "creature",
+        "cost": {
+          "G": 5
+        },
+        "keywords": [],
+        "subtypes": ["Dinosaur"],
+        "text": "",
+        "power": 10,
+        "toughness": 10,
+        "color": ["G"]
+      },
+      "Healer's Hawk": {
+        "name": "Healer's Hawk",
+        "type": "creature",
+        "cost": {
+          "W": 1
+        },
+        "keywords": ["flying", "lifelink"],
+        "subtypes": ["Bird"],
+        "text": "Flying, lifelink",
+        "power": 1,
+        "toughness": 1,
+        "color": ["W"]
+      },
+      "Highborn Vampire": {
+        "name": "Highborn Vampire",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Vampire", "Warrior"],
+        "text": "",
+        "power": 4,
+        "toughness": 3,
+        "color": ["B"]
+      },
+      "Iguana Parrot": {
+        "name": "Iguana Parrot",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": ["flying", "vigilance"],
+        "subtypes": ["Lizard", "Bird", "Pirate"],
+        "text": "Flying, vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ],
+        "color": ["U"]
+      },
+      "Jeskai Brushmaster": {
+        "name": "Jeskai Brushmaster",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "U": 1,
+          "R": 1,
+          "W": 1
+        },
+        "keywords": ["double strike"],
+        "subtypes": ["Orc", "Monk"],
+        "text": "Double strike\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ],
+        "color": ["U", "R", "W"]
+      },
+      "Jibbirik Omnivore": {
+        "name": "Jibbirik Omnivore",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": ["Beast"],
+        "text": "",
+        "power": 3,
+        "toughness": 2,
+        "color": ["G"]
+      },
+      "Kree Commandos": {
+        "name": "Kree Commandos",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "W": 1
+        },
+        "keywords": ["flying", "vigilance"],
+        "subtypes": ["Kree", "Soldier", "Villain"],
+        "text": "Flying, vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ],
+        "color": ["W"]
+      },
+      "Leonin Skyhunter": {
+        "name": "Leonin Skyhunter",
+        "type": "creature",
+        "cost": {
+          "W": 2
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Cat", "Knight"],
+        "text": "Flying",
+        "power": 2,
+        "toughness": 2,
+        "color": ["W"]
+      },
+      "Magnigoth Sentry": {
+        "name": "Magnigoth Sentry",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "G": 1
+        },
+        "keywords": ["reach"],
+        "subtypes": ["Treefolk"],
+        "text": "Reach",
+        "power": 4,
+        "toughness": 4,
+        "color": ["G"]
+      },
+      "Ordinary Bear": {
+        "name": "Ordinary Bear",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": ["Bear"],
+        "text": "",
+        "power": 4,
+        "toughness": 5,
+        "color": ["G"]
+      },
+      "Quakestrider Ceratops": {
+        "name": "Quakestrider Ceratops",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "G": 3
+        },
+        "keywords": [],
+        "subtypes": ["Dinosaur"],
+        "text": "",
+        "power": 12,
+        "toughness": 8,
+        "color": ["G"]
+      },
+      "Quaketusk Boar": {
+        "name": "Quaketusk Boar",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "R": 2
+        },
+        "keywords": ["reach", "trample", "haste"],
+        "subtypes": ["Elemental", "Boar"],
+        "text": "Reach, trample, haste",
+        "power": 5,
+        "toughness": 5,
+        "color": ["R"]
+      },
+      "Raging Redcap": {
+        "name": "Raging Redcap",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "R": 1
+        },
+        "keywords": ["double strike"],
+        "subtypes": ["Goblin", "Knight"],
+        "text": "Double strike",
+        "power": 1,
+        "toughness": 2,
+        "color": ["R"]
+      },
+      "Rearing Embermare": {
+        "name": "Rearing Embermare",
+        "type": "creature",
+        "cost": {
+          "generic": 4,
+          "R": 1
+        },
+        "keywords": ["reach", "haste"],
+        "subtypes": ["Horse", "Beast"],
+        "text": "Reach, haste",
+        "power": 4,
+        "toughness": 5,
+        "color": ["R"]
+      },
+      "Shrike Force": {
+        "name": "Shrike Force",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "W": 1
+        },
+        "keywords": ["flying", "double strike", "vigilance"],
+        "subtypes": ["Bird", "Knight"],
+        "text": "Flying, double strike, vigilance",
+        "power": 1,
+        "toughness": 3,
+        "color": ["W"]
+      },
+      "Skyraker Giant": {
+        "name": "Skyraker Giant",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "R": 2
+        },
+        "keywords": ["reach"],
+        "subtypes": ["Giant"],
+        "text": "Reach",
+        "power": 4,
+        "toughness": 3,
+        "color": ["R"]
+      },
+      "Squirrelanoids": {
+        "name": "Squirrelanoids",
+        "type": "creature",
+        "cost": {
+          "B": 1
+        },
+        "keywords": ["deathtouch"],
+        "subtypes": ["Squirrel", "Mutant"],
+        "text": "Deathtouch",
+        "power": 1,
+        "toughness": 1,
+        "color": ["B"]
+      },
+      "Swab Goblin": {
+        "name": "Swab Goblin",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": ["Goblin", "Pirate"],
+        "text": "",
+        "power": 2,
+        "toughness": 2,
+        "color": ["R"]
+      },
+      "Swiftblade Vindicator": {
+        "name": "Swiftblade Vindicator",
+        "type": "creature",
+        "cost": {
+          "R": 1,
+          "W": 1
+        },
+        "keywords": ["double strike", "vigilance", "trample"],
+        "subtypes": ["Human", "Soldier"],
+        "text": "Double strike, vigilance, trample",
+        "power": 1,
+        "toughness": 1,
+        "color": ["R", "W"]
+      },
+      "Tajuru Pathwarden": {
+        "name": "Tajuru Pathwarden",
+        "type": "creature",
+        "cost": {
+          "generic": 4,
+          "G": 1
+        },
+        "keywords": ["vigilance", "trample"],
+        "subtypes": ["Elf", "Warrior", "Ally"],
+        "text": "Vigilance, trample",
+        "power": 5,
+        "toughness": 4,
+        "color": ["G"]
+      },
+      "Thornweald Archer": {
+        "name": "Thornweald Archer",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": ["deathtouch", "reach"],
+        "subtypes": ["Elf", "Archer"],
+        "text": "Reach, deathtouch",
+        "power": 2,
+        "toughness": 1,
+        "color": ["G"]
+      },
+      "Waterfall Aerialist": {
+        "name": "Waterfall Aerialist",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "U": 1
+        },
+        "power": 3,
+        "toughness": 1,
+        "keywords": ["flying"],
+        "ward": {
+          "mana": {
+            "generic": 2
+          }
+        },
+        "text": "Flying. Ward {2}.",
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Rimeshield Frost Giant": {
+        "name": "Rimeshield Frost Giant",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "U": 2
+        },
+        "power": 4,
+        "toughness": 5,
+        "keywords": [],
+        "ward": {
+          "mana": {
+            "generic": 3
+          }
+        },
+        "text": "Ward {3}.",
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Tomakul Honor Guard": {
+        "name": "Tomakul Honor Guard",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "power": 3,
+        "toughness": 1,
+        "keywords": [],
+        "ward": {
+          "mana": {
+            "generic": 2
+          }
+        },
+        "text": "Ward {2}.",
+        "subtypes": [],
+        "color": ["G"]
+      },
+      "Owlin Shieldmage": {
+        "name": "Owlin Shieldmage",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "W": 1,
+          "B": 1
+        },
+        "power": 3,
+        "toughness": 3,
+        "keywords": ["flying"],
+        "ward": {
+          "life": 3
+        },
+        "text": "Flying. Ward—Pay 3 life.",
+        "subtypes": [],
+        "color": ["W", "B"]
+      },
+      "Sire of Seven Deaths": {
+        "name": "Sire of Seven Deaths",
+        "type": "creature",
+        "cost": {
+          "generic": 7
+        },
+        "power": 7,
+        "toughness": 7,
+        "keywords": ["first strike", "vigilance", "menace", "trample", "reach", "lifelink"],
+        "ward": {
+          "life": 7
+        },
+        "text": "First strike, vigilance, menace, trample, reach, lifelink. Ward—Pay 7 life.",
+        "subtypes": [],
+        "color": []
+      },
+      "Dwarven Forge-Chanter": {
+        "name": "Dwarven Forge-Chanter",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "power": 1,
+        "toughness": 3,
+        "keywords": [],
+        "ward": {
+          "life": 2
+        },
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ],
+        "text": "Ward—Pay 2 life. Prowess.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Plains": {
+        "name": "Plains",
+        "type": "land",
+        "subtypes": ["Plains"],
+        "basic": true,
+        "mana": "W",
+        "cost": {},
+        "text": "Tap: Add W.",
+        "keywords": [],
+        "color": []
+      },
+      "Island": {
+        "name": "Island",
+        "type": "land",
+        "subtypes": ["Island"],
+        "basic": true,
+        "mana": "U",
+        "cost": {},
+        "text": "Tap: Add U.",
+        "keywords": [],
+        "color": []
+      },
+      "Swamp": {
+        "name": "Swamp",
+        "type": "land",
+        "subtypes": ["Swamp"],
+        "basic": true,
+        "mana": "B",
+        "cost": {},
+        "text": "Tap: Add B.",
+        "keywords": [],
+        "color": []
+      },
+      "Mountain": {
+        "name": "Mountain",
+        "type": "land",
+        "subtypes": ["Mountain"],
+        "basic": true,
+        "mana": "R",
+        "cost": {},
+        "text": "Tap: Add R.",
+        "keywords": [],
+        "color": []
+      },
+      "Forest": {
+        "name": "Forest",
+        "type": "land",
+        "subtypes": ["Forest"],
+        "basic": true,
+        "mana": "G",
+        "cost": {},
+        "text": "Tap: Add G.",
+        "keywords": [],
+        "color": []
+      },
+      "Llanowar Elves": {
+        "name": "Llanowar Elves",
+        "type": "creature",
+        "cost": {
+          "G": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": [],
+        "mana": "G",
+        "text": "Tap: Add G.",
+        "subtypes": [],
+        "color": ["G"]
+      },
+      "Grizzly Bears": {
+        "name": "Grizzly Bears",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "power": 2,
+        "toughness": 2,
+        "keywords": [],
+        "subtypes": [],
+        "text": "No abilities.",
+        "color": ["G"]
+      },
+      "Centaur Courser": {
+        "name": "Centaur Courser",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "power": 3,
+        "toughness": 3,
+        "keywords": [],
+        "subtypes": [],
+        "text": "No abilities.",
+        "color": ["G"]
+      },
+      "Colossal Dreadmaw": {
+        "name": "Colossal Dreadmaw",
+        "type": "creature",
+        "cost": {
+          "generic": 4,
+          "G": 2
+        },
+        "power": 6,
+        "toughness": 6,
+        "keywords": ["trample"],
+        "subtypes": [],
+        "text": "trample",
+        "color": ["G"]
+      },
+      "Giant Spider": {
+        "name": "Giant Spider",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "G": 1
+        },
+        "power": 2,
+        "toughness": 4,
+        "keywords": ["reach"],
+        "subtypes": [],
+        "text": "reach",
+        "color": ["G"]
+      },
+      "Elvish Visionary": {
+        "name": "Elvish Visionary",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": [],
+        "etb": [
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ],
+        "text": "When this creature enters, draw a card.",
+        "subtypes": [],
+        "color": ["G"]
+      },
+      "Savannah Lions": {
+        "name": "Savannah Lions",
+        "type": "creature",
+        "cost": {
+          "W": 1
+        },
+        "power": 2,
+        "toughness": 1,
+        "keywords": [],
+        "subtypes": [],
+        "text": "No abilities.",
+        "color": ["W"]
+      },
+      "Silvercoat Lion": {
+        "name": "Silvercoat Lion",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "power": 2,
+        "toughness": 2,
+        "keywords": [],
+        "subtypes": [],
+        "text": "No abilities.",
+        "color": ["W"]
+      },
+      "Youthful Knight": {
+        "name": "Youthful Knight",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "power": 2,
+        "toughness": 1,
+        "keywords": ["first strike"],
+        "subtypes": [],
+        "text": "first strike",
+        "color": ["W"]
+      },
+      "Serra Angel": {
+        "name": "Serra Angel",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "W": 2
+        },
+        "power": 4,
+        "toughness": 4,
+        "keywords": ["flying", "vigilance"],
+        "subtypes": [],
+        "text": "flying, vigilance",
+        "color": ["W"]
+      },
+      "Soul Warden": {
+        "name": "Soul Warden",
+        "type": "creature",
+        "cost": {
+          "W": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": [],
+        "triggers": [
+          {
+            "event": "otherCreatureEnters",
+            "effects": [
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ]
+          }
+        ],
+        "text": "Whenever another creature enters, you gain 1 life.",
+        "subtypes": [],
+        "color": ["W"]
+      },
+      "Raging Goblin": {
+        "name": "Raging Goblin",
+        "type": "creature",
+        "cost": {
+          "R": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": ["haste"],
+        "subtypes": [],
+        "text": "haste",
+        "color": ["R"]
+      },
+      "Goblin Piker": {
+        "name": "Goblin Piker",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "power": 2,
+        "toughness": 1,
+        "keywords": [],
+        "subtypes": [],
+        "text": "No abilities.",
+        "color": ["R"]
+      },
+      "Hill Giant": {
+        "name": "Hill Giant",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "R": 1
+        },
+        "power": 3,
+        "toughness": 3,
+        "keywords": [],
+        "subtypes": [],
+        "text": "No abilities.",
+        "color": ["R"]
+      },
+      "Goblin Instigator": {
+        "name": "Goblin Instigator",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": [],
+        "etb": [
+          {
+            "op": "token",
+            "definition": "Goblin Token",
+            "count": 1
+          }
+        ],
+        "text": "When this creature enters, create a 1/1 red Goblin creature token.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Goblin Token": {
+        "name": "Goblin Token",
+        "type": "creature",
+        "cost": {},
+        "power": 1,
+        "toughness": 1,
+        "keywords": [],
+        "token": true,
+        "color": ["R"],
+        "subtypes": [],
+        "text": "No abilities."
+      },
+      "Wind Drake": {
+        "name": "Wind Drake",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "power": 2,
+        "toughness": 2,
+        "keywords": ["flying"],
+        "subtypes": [],
+        "text": "flying",
+        "color": ["U"]
+      },
+      "Air Elemental": {
+        "name": "Air Elemental",
+        "type": "creature",
+        "cost": {
+          "generic": 3,
+          "U": 2
+        },
+        "power": 4,
+        "toughness": 4,
+        "keywords": ["flying"],
+        "subtypes": [],
+        "text": "flying",
+        "color": ["U"]
+      },
+      "Typhoid Rats": {
+        "name": "Typhoid Rats",
+        "type": "creature",
+        "cost": {
+          "B": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": ["deathtouch"],
+        "subtypes": [],
+        "text": "deathtouch",
+        "color": ["B"]
+      },
+      "Vampire Nighthawk": {
+        "name": "Vampire Nighthawk",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "B": 2
+        },
+        "power": 2,
+        "toughness": 3,
+        "keywords": ["flying", "deathtouch", "lifelink"],
+        "subtypes": [],
+        "text": "flying, deathtouch, lifelink",
+        "color": ["B"]
+      },
+      "Fencing Ace": {
+        "name": "Fencing Ace",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": ["double strike"],
+        "subtypes": [],
+        "text": "double strike",
+        "color": ["W"]
+      },
+      "Monastery Swiftspear": {
+        "name": "Monastery Swiftspear",
+        "type": "creature",
+        "cost": {
+          "R": 1
+        },
+        "power": 1,
+        "toughness": 2,
+        "keywords": ["haste"],
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ],
+        "text": "Haste. Prowess.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Stormchaser Mage": {
+        "name": "Stormchaser Mage",
+        "type": "creature",
+        "cost": {
+          "U": 1,
+          "R": 1
+        },
+        "power": 1,
+        "toughness": 3,
+        "keywords": ["flying", "haste"],
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ],
+        "text": "Flying, haste. Prowess.",
+        "subtypes": [],
+        "color": ["U", "R"]
+      },
+      "Young Pyromancer": {
+        "name": "Young Pyromancer",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "power": 2,
+        "toughness": 1,
+        "keywords": [],
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "token",
+                "definition": "Elemental Token",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "text": "Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Elemental Token": {
+        "name": "Elemental Token",
+        "type": "creature",
+        "cost": {},
+        "power": 1,
+        "toughness": 1,
+        "keywords": [],
+        "token": true,
+        "color": ["R"],
+        "subtypes": [],
+        "text": "No abilities."
+      },
+      "Sprite Dragon": {
+        "name": "Sprite Dragon",
+        "type": "creature",
+        "cost": {
+          "U": 1,
+          "R": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": ["flying", "haste"],
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "counterOn",
+                "subject": "source",
+                "amount": 1
+              }
+            ]
+          }
+        ],
+        "text": "Flying, haste. Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.",
+        "subtypes": [],
+        "color": ["U", "R"]
+      },
+      "Kiln Fiend": {
+        "name": "Kiln Fiend",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "power": 1,
+        "toughness": 2,
+        "keywords": [],
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 3,
+                "toughness": 0
+              }
+            ]
+          }
+        ],
+        "text": "Whenever you cast an instant or sorcery spell, this creature gets +3/+0 until end of turn.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Festival Crasher": {
+        "name": "Festival Crasher",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "power": 1,
+        "toughness": 3,
+        "keywords": [],
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 2,
+                "toughness": 0
+              }
+            ]
+          }
+        ],
+        "text": "Whenever you cast an instant or sorcery spell, this creature gets +2/+0 until end of turn.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Seeker of the Way": {
+        "name": "Seeker of the Way",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "power": 2,
+        "toughness": 2,
+        "keywords": [],
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          },
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 0,
+                "toughness": 0,
+                "keywords": ["lifelink"]
+              }
+            ]
+          }
+        ],
+        "text": "Prowess. Whenever you cast a noncreature spell, this creature gains lifelink until end of turn.",
+        "subtypes": [],
+        "color": ["W"]
+      },
+      "Electrostatic Field": {
+        "name": "Electrostatic Field",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "power": 0,
+        "toughness": 4,
+        "keywords": ["defender"],
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "damageOpponent",
+                "amount": 1
+              }
+            ]
+          }
+        ],
+        "text": "Defender. Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Thermo-Alchemist": {
+        "name": "Thermo-Alchemist",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "power": 0,
+        "toughness": 3,
+        "keywords": ["defender"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true
+            },
+            "effects": [
+              {
+                "op": "damageOpponent",
+                "amount": 1
+              }
+            ],
+            "text": "Tap: Deal 1 damage to each opponent."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "untap",
+                "subject": "source"
+              }
+            ]
+          }
+        ],
+        "text": "Defender. Tap: Deal 1 damage to each opponent. Whenever you cast an instant or sorcery spell, untap this creature.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Shivan Dragon": {
+        "name": "Shivan Dragon",
+        "type": "creature",
+        "cost": {
+          "generic": 4,
+          "R": 2
+        },
+        "power": 5,
+        "toughness": 5,
+        "keywords": ["flying"],
+        "activated": [
+          {
+            "cost": {
+              "mana": {
+                "R": 1
+              }
+            },
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 0
+              }
+            ],
+            "text": "R: +1/+0 until end of turn."
+          }
+        ],
+        "text": "Flying. R: This creature gets +1/+0 until end of turn.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Prodigal Pyromancer": {
+        "name": "Prodigal Pyromancer",
+        "type": "creature",
+        "cost": {
+          "generic": 2,
+          "R": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": [],
+        "activated": [
+          {
+            "cost": {
+              "tap": true
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 1
+              }
+            ],
+            "text": "Tap: Deal 1 damage to any target."
+          }
+        ],
+        "text": "Tap: This creature deals 1 damage to any target.",
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Opt": {
+        "name": "Opt",
+        "type": "instant",
+        "cost": {
+          "U": 1
+        },
+        "effects": [
+          {
+            "op": "scry",
+            "count": 1
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ],
+        "target": null,
+        "text": "Scry 1, then draw a card.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Preordain": {
+        "name": "Preordain",
+        "type": "sorcery",
+        "cost": {
+          "U": 1
+        },
+        "effects": [
+          {
+            "op": "scry",
+            "count": 2
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ],
+        "target": null,
+        "text": "Scry 2, then draw a card.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Consider": {
+        "name": "Consider",
+        "type": "instant",
+        "cost": {
+          "U": 1
+        },
+        "effects": [
+          {
+            "op": "surveil",
+            "count": 1
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ],
+        "target": null,
+        "text": "Surveil 1, then draw a card.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Catalog": {
+        "name": "Catalog",
+        "type": "instant",
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "discard",
+            "count": 1
+          }
+        ],
+        "target": null,
+        "text": "Draw two cards, then discard a card.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Careful Study": {
+        "name": "Careful Study",
+        "type": "sorcery",
+        "cost": {
+          "U": 1
+        },
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "discard",
+            "count": 2
+          }
+        ],
+        "target": null,
+        "text": "Draw two cards, then discard two cards.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Merfolk Looter": {
+        "name": "Merfolk Looter",
+        "type": "creature",
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "power": 1,
+        "toughness": 1,
+        "keywords": [],
+        "activated": [
+          {
+            "cost": {
+              "tap": true
+            },
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "discard",
+                "count": 1
+              }
+            ],
+            "text": "Tap: Draw a card, then discard a card."
+          }
+        ],
+        "text": "Tap: Draw a card, then discard a card.",
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Lightning Bolt": {
+        "name": "Lightning Bolt",
+        "type": "instant",
+        "cost": {
+          "R": 1
+        },
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 3
+          }
+        ],
+        "target": "any",
+        "text": "Deal 3 damage to any target.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Shock": {
+        "name": "Shock",
+        "type": "instant",
+        "cost": {
+          "R": 1
+        },
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 2
+          }
+        ],
+        "target": "any",
+        "text": "Deal 2 damage to any target.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Counterspell": {
+        "name": "Counterspell",
+        "type": "instant",
+        "cost": {
+          "U": 2
+        },
+        "effects": [
+          {
+            "op": "counter"
+          }
+        ],
+        "target": "spell",
+        "text": "Counter target spell.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Negate": {
+        "name": "Negate",
+        "type": "instant",
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "effects": [
+          {
+            "op": "counter"
+          }
+        ],
+        "target": "noncreatureSpell",
+        "text": "Counter target noncreature spell.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Unsummon": {
+        "name": "Unsummon",
+        "type": "instant",
+        "cost": {
+          "U": 1
+        },
+        "effects": [
+          {
+            "op": "bounce"
+          }
+        ],
+        "target": "creature",
+        "text": "Return target creature to its owner’s hand.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Giant Growth": {
+        "name": "Giant Growth",
+        "type": "instant",
+        "cost": {
+          "G": 1
+        },
+        "effects": [
+          {
+            "op": "modify",
+            "power": 3,
+            "toughness": 3
+          }
+        ],
+        "target": "creature",
+        "text": "Target creature gets +3/+3 until end of turn.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"]
+      },
+      "Titanic Growth": {
+        "name": "Titanic Growth",
+        "type": "instant",
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "effects": [
+          {
+            "op": "modify",
+            "power": 4,
+            "toughness": 4
+          }
+        ],
+        "target": "creature",
+        "text": "Target creature gets +4/+4 until end of turn.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"]
+      },
+      "Murder": {
+        "name": "Murder",
+        "type": "instant",
+        "cost": {
+          "generic": 1,
+          "B": 2
+        },
+        "effects": [
+          {
+            "op": "destroy"
+          }
+        ],
+        "target": "creature",
+        "text": "Destroy target creature.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["B"]
+      },
+      "Doom Blade": {
+        "name": "Doom Blade",
+        "type": "instant",
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "effects": [
+          {
+            "op": "destroy"
+          }
+        ],
+        "target": "nonblackCreature",
+        "text": "Destroy target nonblack creature.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["B"]
+      },
+      "Divination": {
+        "name": "Divination",
+        "type": "sorcery",
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ],
+        "target": null,
+        "text": "Draw two cards.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"]
+      },
+      "Lava Axe": {
+        "name": "Lava Axe",
+        "type": "sorcery",
+        "cost": {
+          "generic": 4,
+          "R": 1
+        },
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 5
+          }
+        ],
+        "target": "player",
+        "text": "Deal 5 damage to target player or planeswalker. (This kernel supports players.)",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"]
+      },
+      "Raise the Alarm": {
+        "name": "Raise the Alarm",
+        "type": "instant",
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "effects": [
+          {
+            "op": "token",
+            "definition": "Soldier Token",
+            "count": 2
+          }
+        ],
+        "target": null,
+        "text": "Create two 1/1 white Soldier creature tokens.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"]
+      },
+      "Soldier Token": {
+        "name": "Soldier Token",
+        "type": "creature",
+        "cost": {},
+        "power": 1,
+        "toughness": 1,
+        "keywords": [],
+        "token": true,
+        "color": ["W"],
+        "subtypes": [],
+        "text": "No abilities."
+      },
+      "Glorious Anthem": {
+        "name": "Glorious Anthem",
+        "type": "enchantment",
+        "cost": {
+          "generic": 1,
+          "W": 2
+        },
+        "static": {
+          "kind": "anthem",
+          "power": 1,
+          "toughness": 1
+        },
+        "text": "Creatures you control get +1/+1.",
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"]
+      },
+      "Pacifism": {
+        "name": "Pacifism",
+        "type": "enchantment",
+        "subtypes": ["Aura"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "target": "creature",
+        "aura": "pacifism",
+        "text": "Enchant creature. Enchanted creature can’t attack or block.",
+        "keywords": [],
+        "color": ["W"]
+      }
+    },
+    "decks": [
+      [
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Raging Goblin",
+        "Raging Goblin",
+        "Raging Goblin",
+        "Raging Goblin",
+        "Monastery Swiftspear",
+        "Monastery Swiftspear",
+        "Monastery Swiftspear",
+        "Monastery Swiftspear",
+        "Young Pyromancer",
+        "Young Pyromancer",
+        "Young Pyromancer",
+        "Young Pyromancer",
+        "Sprite Dragon",
+        "Sprite Dragon",
+        "Sprite Dragon",
+        "Stormchaser Mage",
+        "Stormchaser Mage",
+        "Lightning Bolt",
+        "Lightning Bolt",
+        "Lightning Bolt",
+        "Lightning Bolt",
+        "Shock",
+        "Shock",
+        "Shock",
+        "Counterspell",
+        "Counterspell",
+        "Counterspell",
+        "Counterspell",
+        "Unsummon",
+        "Unsummon",
+        "Unsummon",
+        "Unsummon",
+        "Divination",
+        "Divination",
+        "Divination",
+        "Divination"
+      ],
+      [
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Llanowar Elves",
+        "Llanowar Elves",
+        "Llanowar Elves",
+        "Llanowar Elves",
+        "Elvish Visionary",
+        "Elvish Visionary",
+        "Elvish Visionary",
+        "Elvish Visionary",
+        "Tomakul Honor Guard",
+        "Tomakul Honor Guard",
+        "Tomakul Honor Guard",
+        "Tomakul Honor Guard",
+        "Soul Warden",
+        "Soul Warden",
+        "Soul Warden",
+        "Youthful Knight",
+        "Youthful Knight",
+        "Youthful Knight",
+        "Giant Spider",
+        "Giant Spider",
+        "Serra Angel",
+        "Serra Angel",
+        "Colossal Dreadmaw",
+        "Colossal Dreadmaw",
+        "Giant Growth",
+        "Giant Growth",
+        "Giant Growth",
+        "Giant Growth",
+        "Raise the Alarm",
+        "Raise the Alarm",
+        "Raise the Alarm",
+        "Glorious Anthem",
+        "Glorious Anthem",
+        "Pacifism",
+        "Pacifism",
+        "Pacifism"
+      ]
+    ],
+    "seed": 6,
+    "startingPlayer": 0,
+    "names": ["Ember & Echo", "Grove with ward"],
+    "mulligan": true,
+    "minimumDeckSize": 60
+  },
+  "commands": [
+    {
+      "type": "mulligan",
+      "player": 0
+    },
+    {
+      "type": "keep",
+      "player": 0
+    },
+    {
+      "type": "bottom",
+      "player": 0,
+      "cards": ["c4"]
+    },
+    {
+      "type": "mulligan",
+      "player": 1
+    },
+    {
+      "type": "keep",
+      "player": 1
+    },
+    {
+      "type": "bottom",
+      "player": 1,
+      "cards": ["c104"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c2",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c82",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c9",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c33",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c77",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c120",
+      "target": {
+        "kind": "object",
+        "id": "c33",
+        "incarnation": 5
+      },
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c18",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c37",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c30",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": ["c30", "c37"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "blockers",
+      "player": 1,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "assignDamage",
+      "player": 0,
+      "orders": [
+        {
+          "source": "c30",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "source": "c37",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c75",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c118",
+      "target": {
+        "kind": "object",
+        "id": "c37",
+        "incarnation": 3
+      },
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c60",
+      "player": 0
+    },
+    {
+      "type": "orderTriggers",
+      "player": 0,
+      "ids": ["s127", "s128", "s129"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c19",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": ["c30"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "blockers",
+      "player": 1,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "assignDamage",
+      "player": 0,
+      "orders": [
+        {
+          "source": "c30",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c65",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c116",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c38",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c40",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": ["c30", "c38", "c40", "c130"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "blockers",
+      "player": 1,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "assignDamage",
+      "player": 0,
+      "orders": [
+        {
+          "source": "c30",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "source": "c38",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "source": "c40",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "source": "c130",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c84",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c93",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c27",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c57",
+      "player": 0
+    },
+    {
+      "type": "orderTriggers",
+      "player": 0,
+      "ids": ["s137", "s138", "s139", "s140", "s141"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": ["c38", "c40"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "blockers",
+      "player": 1,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "assignDamage",
+      "player": 0,
+      "orders": [
+        {
+          "source": "c38",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "source": "c40",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c68",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c94",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c101",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": ["c93"]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "blockers",
+      "player": 0,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "assignDamage",
+      "player": 1,
+      "orders": [
+        {
+          "source": "c93",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 0
+              },
+              "amount": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c48",
+      "target": {
+        "kind": "object",
+        "id": "c101",
+        "incarnation": 5
+      },
+      "player": 0
+    },
+    {
+      "type": "orderTriggers",
+      "player": 0,
+      "ids": ["s146", "s147", "s148", "s149", "s150"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c42",
+      "target": {
+        "kind": "object",
+        "id": "c93",
+        "incarnation": 3
+      },
+      "player": 0
+    },
+    {
+      "type": "orderTriggers",
+      "player": 0,
+      "ids": ["s153", "s154", "s155", "s156", "s157"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    }
+  ]
+}

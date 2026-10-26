@@ -1,0 +1,5067 @@
+[
+  {
+    "oracleId": "a4fed66f-ef3c-4547-8612-46e65d63ef1f",
+    "name": "Cabal Evangel",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "2fc19fa3-c6c2-42c0-85fa-8d13e1baa145",
+    "name": "Cabal Initiate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1104a746-169c-450a-80ad-bea0493c0576",
+    "name": "Cabal Paladin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "066cd584-773c-4623-be53-8f6feda5a26a",
+    "name": "Cabal Stronghold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c35c39be-6db4-4a80-ace1-07932d1bb460",
+    "name": "Cabaretti Ascendancy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36d8b701-f5dc-42c0-9869-268f8149cbd1",
+    "name": "Cabaretti Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65424bea-fd53-4f85-9757-0b91a6d40ba4",
+    "name": "Cabaretti Courtyard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e0d877c-6ce3-462b-9746-7fc921c93be9",
+    "name": "Cabaretti Initiate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06ccec61-27d2-4079-80b5-29ebd3a980ee",
+    "name": "Cache Grab",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e2adca5-f39c-4a09-bcce-8238ebac2c4a",
+    "name": "Cackling Counterpart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "898da62e-d29a-4ddc-be69-2ddec54614f5",
+    "name": "Cackling Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9671f4b-72d2-48d7-a497-2ea0ab72cd0b",
+    "name": "Cackling Slasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8bd6dea2-2fdd-482f-9fe8-6f3eeed13872",
+    "name": "Cacophodon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4854a41e-db49-462f-ae57-0ba4005bae75",
+    "name": "Cacophony Scamp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "18a5fe34-0c97-486c-b09a-80535a99e982",
+    "name": "Cactarantula",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e61d7c4-263f-4077-bdbc-d79020f2a479",
+    "name": "Cactuar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05f15b7b-28bf-4b63-a4ca-b57712a1a66a",
+    "name": "Cactusfolk Sureshot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7265d768-b79f-44eb-9873-d834e55f6463",
+    "name": "Cadaver Imp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4bbc5df9-60d7-46c1-8856-91c9c74abf18",
+    "name": "Caelorna, Coral Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09b895ff-e729-48d1-bfc1-ea5fd7adda6a",
+    "name": "Caged Sun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "430b3e61-09a5-4390-b377-89830cacf66e",
+    "name": "Caged Zombie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "18ffd8ad-1556-450d-8bc1-8103a3d0404e",
+    "name": "Cage of Hands",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "558135b3-babc-40b6-9d9d-57ab0965ee3d",
+    "name": "Calamitous Cave-In",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d605d9d1-c01a-4ef6-89f9-06fae8cd57e6",
+    "name": "Calamitous Tide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3f7c4ac-b788-4307-9bc3-d99ce310e07c",
+    "name": "Calamity Bearer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb37496e-374f-41b9-bd52-f52f37bdac31",
+    "name": "Calamity, Galloping Inferno",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a6436330-f35a-4d31-9230-03e0c62f9e7e",
+    "name": "Calamity's Wake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0e6938b-7abf-4f69-a3d6-82a58912bff4",
+    "name": "Caldaia Strongarm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e62c943e-03ac-4a8a-ad3d-faa76b79824c",
+    "name": "Caligo Skin-Witch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9f01177-2237-475e-ad91-114bfae077ce",
+    "name": "Calix, Destiny's Hand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1bcc8ca6-5fd0-4fc9-8f0c-f81d8abf9249",
+    "name": "Calix, Guided by Fate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "faf081dc-1fb2-47ac-a9c7-8001b4904120",
+    "name": "Callaphe, Beloved of the Sea",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9038a457-ce01-4f6d-9e2b-5220f08b4290",
+    "name": "Call a Surprise Witness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49a32f34-01a9-4f25-bf38-b4d46ca67b2d",
+    "name": "Call Damage Control",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0623c51a-e829-413f-a3a0-817c0902821e",
+    "name": "Call Forth the Tempest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca54e14c-67ee-4de2-bc0f-19a5f9461d37",
+    "name": "Call In a Professional",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97773064-6534-4761-8c73-3ffd713f4569",
+    "name": "Call of the Death-Dweller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9fcb920c-b8d7-4a79-a335-f63050182cca",
+    "name": "Call of the Ring",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96c12c12-140a-462d-bff0-0554d192b1f4",
+    "name": "Callous Bloodmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9219b7d5-642d-4470-a7c4-f3e56bfae8c7",
+    "name": "Callous Dismissal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d950fd4-8956-4b1a-ab0f-ab31bcffce4e",
+    "name": "Callous Inspector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e7405e3-e9e6-4213-a73f-e0c01a7d6721",
+    "name": "Callous Sell-Sword // Burn Together",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "8e90300b-c0da-4484-b065-e2fafa4e1b15",
+    "name": "Call the Bloodline",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "855b168b-e514-4a43-8bbe-7f1df40031ae",
+    "name": "Call the Cavalry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "652bfa31-b2eb-4cba-850f-1db02a83bb35",
+    "name": "Call the Gatewatch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0dd3eb4-f6f1-4bfb-935c-032dd5af3811",
+    "name": "Call the Mountain Chocobo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ceb23f5-abb1-4569-a1e4-1eed9a9babcf",
+    "name": "Call the Spirit Dragons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30536d1f-8b1a-474f-a508-d3426480a532",
+    "name": "Call to the Feast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9aab386c-d48c-4611-b757-aa69b26cc1b1",
+    "name": "Camaraderie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "312c7a7b-2084-42b0-9b13-0a6d3e43a73d",
+    "name": "Camellia, the Seedmiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b46bac37-5b45-4be5-93d0-76e48dbd9f74",
+    "name": "Camera Launcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b3155c1-c662-4ff1-80e2-4064e6233dc5",
+    "name": "Campus Composer // Aqueous Aria",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c1a9d60f-a469-48f9-8f1c-3ca5ae86bd64",
+    "name": "Campus Crier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b8e0913-47e9-4d56-971d-abd91b0f7587",
+    "name": "Campus Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d34a3b58-a905-4e90-b35c-9f5c21149b04",
+    "name": "Campus Renovation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9dadeecc-1d4b-4799-9ac9-4ca492006e46",
+    "name": "Canal Monitor",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "7d00fb28-ea6c-49a9-b4af-ffb38860a9a7",
+    "name": "Cancel",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "95f47e9b-0290-4ec4-a1ba-bc5a432ffab2",
+    "name": "Candlegrove Witch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7153bf15-53f8-445e-acbb-35b4f4b3d551",
+    "name": "Candlelight Vigil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "edfd2614-8875-4741-b64b-390afc0d2376",
+    "name": "Candlelit Cavalry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f7b46c1-3d82-4fd9-9882-589315cab47b",
+    "name": "Candlestick",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "089788ce-d06c-4a85-915c-82e2cb5b0103",
+    "name": "Candletrap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9588a7fd-bbe5-4a81-9a7e-d8e8f6c0537d",
+    "name": "Candy Grapple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c8e4f29-53e0-4242-8ef8-7a9476dce178",
+    "name": "Candy Trail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5b80895-621a-40df-bf48-6c7295658f21",
+    "name": "Cankerbloom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d491995f-e9b2-4187-852c-8a4c2495eaca",
+    "name": "Canonized in Blood",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4493828f-144f-49cf-9fd2-61de86e632ec",
+    "name": "Canopy Baloth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37f3733e-cc4e-4d84-b29b-d474f6e254a2",
+    "name": "Canopy Spider",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "b1062763-1fcf-4605-9253-daa1687e8173",
+    "name": "Canopy Stalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b20d6f4-6322-4435-92d5-acaae74774f4",
+    "name": "Canopy Tactician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dcb7e046-f01b-497c-88e5-57794eb30ce5",
+    "name": "Canopy Vista",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77c97dad-17cc-4a28-a48b-907c044d9034",
+    "name": "Cantankerous Keepers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69ae219e-bf97-4626-9b16-7901f51f0343",
+    "name": "Can't Stay Away",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4681facf-21ca-4118-a827-0e3d4233d8e6",
+    "name": "Canyon Crab",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bac94fc9-808b-4dc9-b405-408dd2aa6194",
+    "name": "Canyon Crawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "254d4918-de40-4ac4-b542-f5c67a5e21eb",
+    "name": "Canyon Jerboa",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a744c5d7-c903-446a-bb30-30788058d9db",
+    "name": "Canyon Lurkers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2031b17c-0536-446f-a9aa-b46fe79b7ea7",
+    "name": "Canyon Slough",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "829e121f-d2fa-40ef-afc7-9b2072a949d7",
+    "name": "Canyon Vaulter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f87a770-af47-4345-8dc1-0a1e8bae75c5",
+    "name": "Caparocti Sunborn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "568432d1-c7fb-4da6-922a-22d4fa26284e",
+    "name": "Capenna Express",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c96ab90-155b-4bf4-acc9-65a2f0cd3189",
+    "name": "Capital City",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aff20717-265d-4214-a8f5-f520bb243cb5",
+    "name": "Capital Guard",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "eb7b024c-da9b-4544-8648-0ac0395cf7fc",
+    "name": "Capricious Hellraiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d038055-035d-4698-b6b6-e2859bf2f1d1",
+    "name": "Captain America, First Avenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "26e92eb8-7a23-4e7e-be83-244bb6078606",
+    "name": "Captain America, Liberator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67aa946d-e694-494e-ba0c-44880d5bc03e",
+    "name": "Captain America, Living Legend",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9566303-15cf-4444-a044-fc19540f21b6",
+    "name": "Captain America, Skybound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19e60344-57a8-41e0-8eca-87dbedf5a81a",
+    "name": "Captain America's Motorcycle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8255a797-ddd3-4db0-a3f5-dd8f38c3b908",
+    "name": "Captain America's Shield",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2084a6b-3248-4ed4-8fb5-d9c439d1ee72",
+    "name": "Captain America, Steve Rogers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac1b6ffc-12a9-4d9c-a9fc-68a839a40738",
+    "name": "Captain America, Super-Soldier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "916cf34a-fd2c-47fe-bebb-f7b52b3dabed",
+    "name": "Captain America, Team Leader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fa2c9cb-106c-482c-9ba7-5bba2ea9e4a3",
+    "name": "Captain America, Unbowed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "942ac2ac-7528-4768-8398-8520a8ee15e5",
+    "name": "Captain America, Wings of Freedom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46c99d67-8307-4af0-afd0-377714806614",
+    "name": "Captain Howler, Sea Scourge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "235bf0ba-658c-463f-b112-7478ba27bd7b",
+    "name": "Captain Lannery Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d86d783-7116-4426-8c0f-718c2d904887",
+    "name": "Captain Marvel, Apex Avenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e665a03-bece-43df-bd15-b4496e233f2e",
+    "name": "Captain Marvel, Earth's Protector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b74c072d-77ac-460d-9d9c-75b25874f58b",
+    "name": "Captain Mar-Vell, Space-Born",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73fdb375-9c71-421d-8027-8636e3ea8f35",
+    "name": "Captain Marvel, Shooting Star",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1941f993-41d7-49e3-8891-41b3cecd5a9d",
+    "name": "Captain of Umbar",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "eefeeab1-b9f2-451a-9250-eb7b54d00fc1",
+    "name": "Captain Ripley Vance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46418fe4-065c-4dfa-b796-eee02c14f351",
+    "name": "Captain's Call",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3f83115-398f-4738-9bf2-b37bd363e9f6",
+    "name": "Captain's Defense",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25143290-2dd5-4def-a857-a1db6d3ed2eb",
+    "name": "Captain's Hook",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e7a9ea9-f76c-4c12-950f-c613fa16cfa8",
+    "name": "Captain Sisay",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "431e85e3-15e6-471b-ba71-6058394c9a96",
+    "name": "Captain Storm, Cosmium Raider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c77767a-8133-43bc-b7a5-09a73259d354",
+    "name": "Captivating Cave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1049bc06-83de-4ed6-ae38-f259e5038a95",
+    "name": "Captivating Crew",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41011f09-ad8a-4eea-aa52-d20a219bc94c",
+    "name": "Captivating Gyre",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22005b01-84b1-4d4b-9193-3c561bd422ce",
+    "name": "Captivating Unicorn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc25ca51-f351-4877-a092-525fb48524a1",
+    "name": "Captive Audience",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac5487ba-6d6e-47ee-ae29-776e186789cc",
+    "name": "Captive Weird // Compleated Conjurer",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "db1a29f9-1608-4502-a366-89048c2e9bda",
+    "name": "Captured by Lagacs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2dc59566-10cb-468a-b6a2-17d6c0186e6d",
+    "name": "Capture Sphere",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9d60d80-bcef-45e0-8ded-d70bd3c2780f",
+    "name": "Caradora, Heart of Alacria",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3775748-ff62-469f-916b-8e551ccce23c",
+    "name": "Careening Mine Cart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83959c3d-053c-4d95-a1b0-fe92f2b906db",
+    "name": "Careful Cultivation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56afad48-c5e5-4fbe-8889-15bcab234c31",
+    "name": "Careless Celebrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c97957a2-8310-4cff-8aad-871b7901d124",
+    "name": "Caretaker's Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93e336e3-2be7-4581-8ab3-9bea422d81c3",
+    "name": "Cargo Ship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0efafc6-8ffb-4908-ae64-3f391722370a",
+    "name": "Carnage, Crimson Chaos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4bc79fb3-81bb-42ed-9bbb-93f8cede3094",
+    "name": "Carnage Interpreter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c411f4e-a091-447c-9450-d895b10b4985",
+    "name": "Carnage Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "651c967c-8f71-4eb5-b22f-545e55ea050e",
+    "name": "Carnelian Orb of Dragonkind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "527e4eec-0983-46a9-a4f7-451080200aea",
+    "name": "Carnifex Demon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b996ae86-3bf6-4e84-8302-6ec6edaa6ff0",
+    "name": "Carnival // Carnage",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b3360259-19df-43c6-95a9-e76770f2fb77",
+    "name": "Carnivorous Canopy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db655c5a-06f6-42bc-8180-d9ca1c1d939a",
+    "name": "Carnivorous Cultivator // Enroot",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2ffc6372-f63b-4f32-8dd0-2d7938aeb412",
+    "name": "Carpet of Flowers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3e0b8a6-5de4-4988-b042-2641b1ed3e32",
+    "name": "Carrier Thrall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98a61659-9882-417c-9c16-16ebb26f9037",
+    "name": "Carrion Cruiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c54b375d-a456-4886-96f2-8dc7a0024a5b",
+    "name": "Carrion Grub",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bba44fad-b3ca-4892-b7d1-2d03478062af",
+    "name": "Carrion Imp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04e5ecda-9646-4bc3-addf-cca471553fbe",
+    "name": "Carrion Locust",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5fe3aabd-3271-41bf-ae50-f6efaba7c4ae",
+    "name": "Carrot Cake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9603e553-f72d-40bf-94ab-596afb7d6db3",
+    "name": "Cartel Aristocrat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "460c0f0b-bbf4-4307-9b44-350175d83bfe",
+    "name": "Cartographer's Companion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e05029b4-552d-4691-a5c4-885284fb1636",
+    "name": "Cartographer's Survey",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33fe5484-7cc7-45c7-a349-b15c0454ab08",
+    "name": "Cartouche of Ambition",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "488696c2-b0c7-49be-a5a1-e833b6fd8751",
+    "name": "Cartouche of Knowledge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9176173-c4a1-45ae-8f34-bd6b31c141fe",
+    "name": "Cartouche of Solidarity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cba6563e-96e5-4cd3-bddf-0cf1368f9e15",
+    "name": "Cartouche of Strength",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fa23be3-a192-45ab-bdf6-646d4be305e1",
+    "name": "Cartouche of Zeal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bddf5e9a-7c41-45a8-8fa1-18093c408e15",
+    "name": "Carven Caryatid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08992e72-49b5-4d40-8b44-cb5abfe5ce0d",
+    "name": "Cascade Seer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d98b4250-3492-4864-9c4c-42db09b3ccd4",
+    "name": "Cascading Cataracts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c612741-2b30-43b3-bd3f-7df19662d298",
+    "name": "Case File Auditor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c1eb874-97f3-463f-bf4e-4d82dcc16e69",
+    "name": "Case of the Burning Masks",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "955504bc-050a-42a2-b2e4-ab213183b2be",
+    "name": "Case of the Crimson Pulse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33b31fb0-71ce-408a-a256-2a5a3b085cb6",
+    "name": "Case of the Filched Falcon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42a9aeac-5b9c-4675-8c96-7c8ce7e9098c",
+    "name": "Case of the Gateway Express",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a89f9072-cf06-429f-a9b8-c11b5731ddd3",
+    "name": "Case of the Gorgon's Kiss",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2380fd04-6d19-4f5a-8a9e-c17d9ae09fb6",
+    "name": "Case of the Locked Hothouse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68d3084b-0f4b-44a6-8954-6ebaf1db9269",
+    "name": "Case of the Pilfered Proof",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f85eea8f-5887-4921-a943-d15e0ad1e028",
+    "name": "Case of the Ransacked Lab",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d00a089b-7d0d-4b89-902b-7b914e892178",
+    "name": "Case of the Shattered Pact",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64219e17-1302-4a43-85d2-8a6214448890",
+    "name": "Case of the Stashed Skeleton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "575a0dc2-206a-406a-90b3-72a92f2ea87a",
+    "name": "Case of the Trampled Garden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d8730b5-f7ba-48b0-928d-d8b7685347d3",
+    "name": "Case of the Uneaten Feast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "575d067a-83a0-49e7-8a74-e3e46a946c8c",
+    "name": "Case the Joint",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab9ff8e9-0ffa-4ccf-a4bf-8505079616f6",
+    "name": "Casey Jones, Back Alley Brute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b4c4fdb9-e034-49c0-9f7f-07e8cae19eb2",
+    "name": "Casey Jones, Jury-Rig Justiciar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc163b5a-0b1a-4257-8c07-5c7d5284015f",
+    "name": "Casey Jones, Vigilante",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bcf29dd7-6d5a-4139-958e-7c59434c0770",
+    "name": "Cast Away Doubt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9dc4b172-da33-40c0-ab29-d68807dbe93f",
+    "name": "Castaway's Despair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cdaab6b0-1a2d-4809-8e6b-56013acd8f78",
+    "name": "Cast Down",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b24ed296-e17d-4e36-8a86-a370868b0136",
+    "name": "Cast into the Fire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8f4fc60-725d-46d8-8e8f-e68e00d20589",
+    "name": "Castle Ardenvale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9bd013df-ad75-4099-940b-1765c58faf26",
+    "name": "Castle Doom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91fbb25b-8521-483f-88b0-77778d25f7fd",
+    "name": "Castle Embereth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de75e5dd-8a52-406c-b55c-96d686885500",
+    "name": "Castle Garenbrig",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be811e70-aaaa-41f3-bf9e-5d3f9f719b49",
+    "name": "Castle Locthwain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cdf41cf4-4e77-453d-be5b-0abbbd358934",
+    "name": "Castle Vantress",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f90b00f6-36e0-4988-9409-57297483a952",
+    "name": "Cast Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c6c8fe7-3520-423b-a224-1c0af516871a",
+    "name": "Casualties of War",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e4865c5-a590-4820-81ec-926014ddb8c4",
+    "name": "Cataclysmic Gearhulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "edc52483-19c7-4d3a-8915-6b1f41b2d6e5",
+    "name": "Catacomb Crocodile",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "4c2c5f3b-61f3-4772-9ade-f5be80719e9f",
+    "name": "Catacomb Sifter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7779525d-080d-4669-bb65-af532bf0983e",
+    "name": "Catalyst Elemental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa2c0d23-8df8-408b-a8c0-c4cd005f078d",
+    "name": "Catapult Fodder // Catapult Captain",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "52f1b5a4-62ff-44de-80da-503d4e52d312",
+    "name": "Cat Collector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "349e6b9e-40a8-49bc-9cd3-4a22f5363fa5",
+    "name": "Cat-Gator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "774dce79-67e0-4820-8013-c7a7347993ce",
+    "name": "Cathar Commando",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "433e92d2-899a-4eed-98b9-80de5d25494b",
+    "name": "Cathar's Call",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "668f646b-94f0-4f1a-badd-2d69b559d8a2",
+    "name": "Cathar's Companion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc65ac73-5bef-4ecb-ad8e-39199084c027",
+    "name": "Cathars' Crusade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e3303aa-2484-4832-86ac-f5ae290d02f1",
+    "name": "Catharsis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ea80bd9-ab7e-4a8f-85b0-167fe7fae43a",
+    "name": "Cathartic Parting",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7e55117-69fb-412e-b16e-d92e0f95f629",
+    "name": "Cathartic Pyre",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f3c3e5f-6af3-4af2-8703-4ccc8ed8f675",
+    "name": "Cathartic Reunion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ff647e4-730a-498f-8f2c-5bd64d5a9780",
+    "name": "Cathedral of War",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba6840a6-b6fd-4b91-ac1a-a61b7b15849a",
+    "name": "Cat-Owl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d262f3e1-b5bc-4dab-86c2-cd89c2419e54",
+    "name": "Caught in the Crossfire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "484b3586-c0ed-4793-a3c0-e99f265e092d",
+    "name": "Caught Red-Handed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7dc2e62-1c50-4ed7-b71f-2d782a447a5e",
+    "name": "Cauldron Familiar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2f8cde8-bf7b-4234-89f0-a95f9dc937e3",
+    "name": "Cauldron of Essence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "152bbb62-195b-4de1-90c6-10dd953f8c4b",
+    "name": "Cauldron's Gift",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "165bdc68-1da0-47db-a069-978fc4c04b3f",
+    "name": "Caustic Bronco",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4023e1f-26e3-4225-98d0-3d33f6654616",
+    "name": "Caustic Exhale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28eb696f-a42c-4444-8139-dfd62029e020",
+    "name": "Cautious Survivor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e29be33c-e5b0-428d-a057-b1cd61127557",
+    "name": "Cavalcade of Calamity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c520355-1ab8-4d6d-9a29-0f63d6b60024",
+    "name": "Cavalier of Dawn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98b19afc-7696-46b9-96f0-7f7c60003e1c",
+    "name": "Cavalier of Flame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08e2fead-53e9-445b-8fd1-c108bb09d81c",
+    "name": "Cavalier of Gales",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27c2b8ce-17b9-4f6c-8444-3bdc636dd413",
+    "name": "Cavalier of Night",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96b909ab-55f1-4cde-a675-2504de3da772",
+    "name": "Cavalier of Thorns",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d89bbfe7-e7ef-4f1c-a6b5-6d8ef4079daa",
+    "name": "Cavalry Drillmaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "75540897-53f6-433b-bd70-9851551df6ef",
+    "name": "Cave of Temptation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e4146d2-cfa0-4f5e-9761-3c83519b90c3",
+    "name": "Cave of the Frost Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "939e8448-013a-4aef-9a92-7c883a77a1a0",
+    "name": "Cavern-Hoard Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ead91e1-4062-4080-bbc7-a4b62f8c6111",
+    "name": "Cavern Lampad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89ca686a-7c72-4d8f-9290-e89635624a83",
+    "name": "Cavern of Souls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "952ab8fe-f7d3-4673-89de-8c6d3f8a081f",
+    "name": "Cavernous Maw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94657522-9977-4d2b-8eb6-f1e64e82cd0f",
+    "name": "Cavern Stomper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b42147e1-cf90-4c12-8abe-7f2931d0607c",
+    "name": "Cavern Whisperer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33de01e9-ce5a-42d4-afcb-343cd54a6d80",
+    "name": "Caves of Koilos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d18a014e-16a0-4641-9546-ff3729437eed",
+    "name": "Cayth, Famed Mechanist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba4d644f-1931-4fc4-aed5-681a476a5a58",
+    "name": "Cease // Desist",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e4719557-d94e-490f-8a56-c1867a01d2ef",
+    "name": "Cecil, Dark Knight // Cecil, Redeemed Paladin",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "64fa0416-16b7-4128-ac6c-f30373074a1e",
+    "name": "Celeborn the Wise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d51136fa-3c13-48a5-83fd-51fe00010a4b",
+    "name": "Celebrate the Mountain-king",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39f7e59e-28dd-477e-be38-3fa515838ca4",
+    "name": "Celebrity Fencer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aea8345a-191d-4c62-8d15-a716a9934b66",
+    "name": "Celes, Rune Knight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2b29bb0-9fb5-46cd-a546-fa6c4ff6113c",
+    "name": "Celestial Archon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f1b68d7-7d16-4bb1-af5f-f1708b23ca73",
+    "name": "Celestial Armor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "876ac6f6-74de-4666-84c6-83d81f054723",
+    "name": "Celestial Colonnade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81f5c70f-fbb1-4b3a-a048-1f4602adfa0e",
+    "name": "Celestial Enforcer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7417bc73-a75a-4c3a-88d2-17b43e225c2c",
+    "name": "Celestial Mantle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf40caa2-cd5b-4372-ad4a-7f4cf564241e",
+    "name": "Celestial Messenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ee68758-9431-4446-8539-f42f545f3bd0",
+    "name": "Celestial Regulator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba0a815c-1dfe-47c1-890f-496c670124f3",
+    "name": "Celestial Reunion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be030639-cbc9-416b-b0ca-1a76439791d8",
+    "name": "Celestial Unicorn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6885aa03-fbfe-4c2e-a785-0865788574b4",
+    "name": "Celestus Sanctifier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52d04c36-9d38-42b2-9e47-905ab06cb708",
+    "name": "Cement Shoes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85e9a43e-5676-4d12-ac27-e8cf57307d5e",
+    "name": "Cemetery Desecrator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa450433-85b0-4f95-bd4e-f141ba036bee",
+    "name": "Cemetery Gatekeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "14fe4531-96cd-415b-aa4a-b41fd271d902",
+    "name": "Cemetery Illuminator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34c8fffd-1b23-4f40-ad29-1f0acb519e7e",
+    "name": "Cemetery Protector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa53cc50-f06f-44b0-850f-cfa6e0caa4c5",
+    "name": "Cemetery Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07792d72-d5db-41b9-871c-e720e12ce659",
+    "name": "Cemetery Recruitment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9babcd0a-531f-417d-905e-b916a87112bb",
+    "name": "Cemetery Tampering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec3911c0-686f-4c78-838d-a683eed6c01c",
+    "name": "Cenote Scout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a42558c-7432-4c05-9599-95343eb09be1",
+    "name": "Censor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f5bf099-2e01-4e1c-9ebf-0ce0ac66939e",
+    "name": "Centaur Courser",
+    "status": "curated"
+  },
+  {
+    "oracleId": "f60e831b-1404-437a-a587-ed4f4b596084",
+    "name": "Centaur Nurturer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "495d95cf-dcce-4a15-a544-79aced7ef98d",
+    "name": "Centaur Peacemaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "927fa223-69a3-4563-80b1-b578f3d031f1",
+    "name": "Central Elevator // Promising Stairs",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c733873e-77db-471f-8061-139db24f7e7c",
+    "name": "Cephalid Coliseum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d979a0b-ba04-4abb-8f78-c707ce15351a",
+    "name": "Cephalid Inkmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8270c29-1887-4d3f-b70f-6b79ada8fe47",
+    "name": "Cephalopod Sentry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ea71ea2-65ca-4907-b857-dbd1ba8efacd",
+    "name": "Cerebral Confiscation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f27889b9-40d9-4cc7-b8af-8716c53c44f5",
+    "name": "Cerebral Download",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5bb05573-7e8f-471f-908d-04bccead79e3",
+    "name": "Ceremonial Groundbreaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db221948-fcb9-4ef9-ae69-70266235dd04",
+    "name": "Ceremonial Knife",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6aa5aa3d-fb46-47e5-bcf1-51a28e0f9974",
+    "name": "Ceremonious Rejection",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d4b8a31-6500-4e3d-bcaf-f6f184d7743e",
+    "name": "Certain Death",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ecd6587c-3548-4bc1-89e4-9f7fbbc2d2ad",
+    "name": "Cerulean Drake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3835cb81-b6e4-4be8-9d49-8307ddc2e1a2",
+    "name": "Chained Brute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afb0c14c-41ac-4536-bfce-f1c36066b278",
+    "name": "Chained to the Rocks",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "14f6fcb0-bed4-4a38-b7df-1e438d81bedb",
+    "name": "Chainer, Nightmare Adept",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7975cb9d-d37e-44f8-9614-86d2ad453c35",
+    "name": "Chainer's Edict",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c18113f-8d1e-4c63-a759-8cfc94e90876",
+    "name": "Chainer's Torment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e77a1809-d21a-4bb6-88a6-35eb13771b1d",
+    "name": "Chainflail Centipede",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8785f42f-87b9-4a0a-89ce-ea423649ba9c",
+    "name": "Chain Lightning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3db40361-5f55-417e-a7cd-7e360cc91b4d",
+    "name": "Chainsaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5acff7a3-bc84-4251-bd37-80231396ac38",
+    "name": "Chains of Custody",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3805bb3-544c-4142-a6df-c60fa38d625a",
+    "name": "Chain to Memory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c45423ad-1920-46f7-bcc1-ecade5880821",
+    "name": "Chainweb Aracnir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0324f33-3f25-4374-affa-c7b5b54bc8d7",
+    "name": "Chainwhip Cyclops",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12c57ebe-35a7-4cb3-936b-99c148a3cfed",
+    "name": "Chakra Meditation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74027ba4-a6ba-4696-baf1-60ef0b27ee0a",
+    "name": "Chalice of the Void",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af335eb3-f60a-44b3-a1ed-1e165f3e3605",
+    "name": "Chalk Outline",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78cb1f05-edad-4430-9095-f3eabd80bf41",
+    "name": "Challenger Troll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65f8e726-be50-49ee-96fc-d3a2080d7b8c",
+    "name": "Chamber Sentry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ce239f2-79ad-4a30-8e8f-f985045f78dc",
+    "name": "Chameleon, Master of Disguise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a427652-9745-4802-8c8f-5ae29a29b496",
+    "name": "Champion of Dusan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f7f0a38-fb7e-4ee8-a712-9aa911f17dae",
+    "name": "Champion of Dusk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c549b0fd-1e08-4873-952e-a14dc45a0fd2",
+    "name": "Champion of Lambholt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "517502e4-4588-4327-b2c0-451f4531fecc",
+    "name": "Champion of Rhonas",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a220e0c-e463-4264-9a96-658cf842b82e",
+    "name": "Champion of the Clachan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9dbe40f-38e9-460a-b84f-4aa22650017e",
+    "name": "Champion of the Flame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b326ccd5-8ad2-441c-9d73-82ee6390dd36",
+    "name": "Champion of the Path",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f3654fbd-16a5-4953-84ac-534e8421032f",
+    "name": "Champion of the Perished",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1726f9cd-6f18-4509-b95b-bca82ba795a4",
+    "name": "Champion of the Weird",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3fd8ba0c-75ec-43ea-8706-f71e6cf1d236",
+    "name": "Champion of Wits",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c01aafb8-3da5-4eb1-8731-2a223e747d63",
+    "name": "Champion's Helm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9cb7f23f-322d-4a87-b6c6-15b9d446aef3",
+    "name": "Champions of the Perfect",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc76ec95-f001-44df-89b2-b0f1b10c8e11",
+    "name": "Champions of the Shoal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "324af60d-142b-4b6c-afe9-6aa36267d5ee",
+    "name": "Chance for Glory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "529f259a-df66-4283-bc28-de3933c42e67",
+    "name": "Chancellor of Tales",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8958a6fe-76ef-45e3-8522-6bc13486b447",
+    "name": "Chance-Met Elves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "626e8acc-20da-496c-9a79-bfbf7529c01d",
+    "name": "Chandra, Acolyte of Flame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b2a600b-d6c8-45ff-a7fc-06105d27111f",
+    "name": "Chandra, Awakened Inferno",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1cdba3c1-19e1-43c3-a0d8-5fb2b88060d8",
+    "name": "Chandra, Bold Pyromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3dfa1e2-6785-49a0-a194-fb842a8eb63c",
+    "name": "Chandra, Chill of Compliance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4686f776-2055-470c-bd99-7c4bb32902c0",
+    "name": "Chandra, Dressed to Kill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2867d539-6a63-4fae-aae2-a7fdd4dd9f28",
+    "name": "Chandra, Fire Artisan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c2a9131-f3d7-4f71-8bcc-3c169574b2e3",
+    "name": "Chandra, Flamecaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7721e800-fba6-4ae7-855e-631b2ecc8d6b",
+    "name": "Chandra, Flame's Catalyst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "408966d2-08c0-4531-a3b4-e666840ee95c",
+    "name": "Chandra, Flame's Fury",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "818f908c-9af6-4edc-bb0e-193bc830e2e4",
+    "name": "Chandra, Flameshaper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58ad45fc-b625-4484-8d49-ebc42db9040a",
+    "name": "Chandra, Heart of Fire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53231b31-fb3c-4b30-bfe9-0ee8e754247b",
+    "name": "Chandra, Hope's Beacon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "882619f7-69b4-4ce0-be4e-1e34e608f925",
+    "name": "Chandra, Novice Pyromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68e12748-9a7b-4e99-a6de-be097a269342",
+    "name": "Chandra, Pyromaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a57ad23b-cff3-45e5-98b3-1b20224aaa19",
+    "name": "Chandra's Defeat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e75bec5c-538d-44ce-a6c7-85580d04fac8",
+    "name": "Chandra's Embercat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3576617-7867-4c3d-aa31-d6742483465b",
+    "name": "Chandra's Emberling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53b17c51-a216-484f-80df-3904284df0ea",
+    "name": "Chandra's Firemaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f84fc91-8647-4cc8-9b57-d23a83f85ab1",
+    "name": "Chandra's Flame Wave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f61680da-606e-4d16-b0a0-361aa5210901",
+    "name": "Chandra's Ignition",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "515cee6a-a2e1-4eeb-8e1d-293724313b14",
+    "name": "Chandra's Incinerator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2c4537e-70a6-416d-9e8b-f549ad535147",
+    "name": "Chandra's Magmutt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "894a344e-a8a7-4ddc-833d-eea41f1918d7",
+    "name": "Chandra's Outburst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47437865-0032-4f47-b0ab-034cc841bb84",
+    "name": "Chandra's Outrage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30bb01c1-9253-4251-80e7-fb8236b3d858",
+    "name": "Chandra, Spark Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5291deb9-0b89-42c2-bde6-26f88931c3f4",
+    "name": "Chandra's Pyreling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69a37af8-6bcd-42b3-b788-0a357e742cc0",
+    "name": "Chandra's Pyrohelix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8c95a86-2f05-44f9-8ed7-b1798eaed42f",
+    "name": "Chandra's Regulator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f72d2074-2f32-4b56-a172-947bf6104fae",
+    "name": "Chandra's Revolution",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a0eb270-b142-45da-87a2-2f1c4e25db17",
+    "name": "Chandra's Spitfire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0cc881c-b63b-44dd-8157-67680c65fc3d",
+    "name": "Chandra's Triumph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12cc800c-c7be-4811-8207-fd01a99cc892",
+    "name": "Chandra, Torch of Defiance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a61ef0cc-1da9-49f9-b0dc-01cf9f6205be",
+    "name": "Changeling Outcast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93409d98-93c8-4742-a635-2a4408e66c32",
+    "name": "Changeling Wayfinder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "925feb7e-7876-430b-b95a-92b236a2e409",
+    "name": "Change of Fortune",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aba7e9e2-8df8-454e-a332-9abae1d95b6f",
+    "name": "Change the Equation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1b815d1-2848-40d4-a555-66822d1becbc",
+    "name": "Channel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91179937-6f55-4d1b-8f06-2efe1c8fea7a",
+    "name": "Channeled Dragonfire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e12ed186-01c1-4da5-b90f-cfbb77c4e8d0",
+    "name": "Channeled Force",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea9031de-6169-4b1c-9390-7fdaf876c7cd",
+    "name": "Chaos Channeler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77217a66-4ba8-443f-b915-178cfcc233e1",
+    "name": "Chaos Spewer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b95c115-6745-4ce1-896b-9021e93c161e",
+    "name": "Chaos Wand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07a0cba9-8768-4fd9-a3d5-b0f83b4bf8e8",
+    "name": "Chaos Warp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a754458d-55b5-44c2-98de-8bf26b82c1b1",
+    "name": "Chaotic Transformation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c21d1ca3-3d19-4b4d-bbfa-07b5b7bcea4b",
+    "name": "Chaplain of Alms // Chapel Shieldgeist",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d6ded5b0-1309-4f1e-be10-d84ca0a5dd20",
+    "name": "Charforger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36b5022d-fa62-46ea-97ab-23c0f60f62a5",
+    "name": "Charge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "937f0c60-003e-446d-8889-059f7b4a2dd6",
+    "name": "Charge of the Forever-Beast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa47c190-d66a-41b0-aa08-21036cda4223",
+    "name": "Charge of the Mites",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d835137-584c-46bd-952e-4b2812bba1a3",
+    "name": "Charge the Sanctum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e24b4da-9728-43a0-8af4-f513a3e1104b",
+    "name": "Charge Through",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "04be1e69-2d5c-4931-8906-a6807b5b08ca",
+    "name": "Charging Badger",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "c808892a-83d5-4b09-b0da-118b0d6fe58e",
+    "name": "Charging Hooligan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21dd60d5-76c8-469e-8c4e-112e377d2d59",
+    "name": "Charging Monstrosaur",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "b0b9a7c1-f515-4627-a050-b595d6641611",
+    "name": "Charging Strifeknight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1198d47a-4235-4678-bd2e-20f2a97b5924",
+    "name": "Charging Tuskodon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b04b60b-0c4c-4fee-a54b-7052ca5190e1",
+    "name": "Charging War Boar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1861fac-e0e5-4b96-b6e4-6b6573bd02d1",
+    "name": "Charismatic Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a628875-96c8-4a28-aaff-99fd99ae778e",
+    "name": "Charitable Levy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f18a1a99-8363-4edf-9807-2e23fa007ce8",
+    "name": "Charity Extractor",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "c38cc5fe-936a-4d61-a816-9be773ae1d02",
+    "name": "Charix, the Raging Isle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b9df437-6988-4ddc-80c4-893e11076067",
+    "name": "Charmbreaker Devils",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad0e6b12-a6bd-4860-9eac-68b2492d9567",
+    "name": "Charmed Clothier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb33edaf-b604-48b8-8b9c-d6e462a8bebb",
+    "name": "Charmed Sleep",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6781166b-f6ab-4076-8e97-0cd9342f1b41",
+    "name": "Charmed Stray",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c48d844c-3976-4fa5-8e0d-3f0e535e7619",
+    "name": "Charming Prince",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9eec304d-ffcb-4287-b877-280ac1e4f496",
+    "name": "Charming Scoundrel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c7c35dd9-8c3b-4be5-b310-61db5e73ed6c",
+    "name": "Charnel Troll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f50ec9f-78e6-403f-8f41-84d603fee0eb",
+    "name": "Charred Foyer // Warped Space",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "05878e49-93ad-4144-9c50-a0bb86126c2e",
+    "name": "Chart a Course",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c055ef0-1164-4a9f-80de-23405423aed5",
+    "name": "Chase Inspiration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "161ff063-b784-43c7-b608-f78be3daa5b2",
+    "name": "Chase Stein, Runaway",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69facbc7-3859-4716-b627-5199571fb3cf",
+    "name": "Chasm Skulker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f15b3b76-d38a-48db-bb44-3296183c8641",
+    "name": "Chatterfang, Squirrel General",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0aaa4b1-5188-43a6-997d-7a9b2ad452bc",
+    "name": "Chatter of the Squirrel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2",
+    "name": "Chatterstorm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41b2ea88-b3b9-44f0-8886-7b2f37b22ebf",
+    "name": "Check for Traps",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03e25120-b4e4-409e-8dbc-7574ea4c78d6",
+    "name": "Checkpoint Officer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db70ddae-0ac1-47f2-9158-8448e337a08f",
+    "name": "Cheeky House-Mouse // Squeak By",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "fd01229f-1c4c-4ad1-bc6f-4023f24d8c71",
+    "name": "Cheerful Osteomancer // Raise Dead",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e11839d5-99fe-4cc8-802e-be669ad274ee",
+    "name": "Cheering Crowd",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c1c519a-6edd-4204-b825-b0feca5afa42",
+    "name": "Chelonian Tackle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2cb30d7-c0a9-4f79-bc19-fc88c4986725",
+    "name": "Chemister's Insight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd7111bc-9b8f-4c4b-b61c-7841a857ce6b",
+    "name": "Cherished Hatchling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50863075-a30b-4238-8e31-5af32a39d886",
+    "name": "Chevill, Bane of Monsters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "636a9364-54a6-4f67-ad96-731646e8bde7",
+    "name": "Chief of the Edge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fdfa41a-75a5-4b36-8c9e-083e26d137e2",
+    "name": "Chief of the Foundry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32e4de02-8437-4ffc-acc9-a3736652d282",
+    "name": "Chief of the Scale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "372d7086-b7dc-4b6d-bdf6-e9ed9c995456",
+    "name": "Chief Warg's Company",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c650a7bc-e350-44a0-a698-d4a233d66156",
+    "name": "Child of Night",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "a9c5b155-7c09-4100-9679-8fca2b5e9222",
+    "name": "Child of the Pack // Savage Packmate",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "701c8624-70d8-49df-84b1-d7b2a8e83552",
+    "name": "Child of the Volcano",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "604d2a0e-224c-4a7b-aabf-033e7dcee3f2",
+    "name": "Chillbringer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ac49129-7da2-4729-b48c-b6da279c212e",
+    "name": "Chilling Trap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ee4f7ba-7238-44b5-8315-9f50502ed796",
+    "name": "Chill of the Grave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "119d9671-61ba-4629-89b1-f94bdec5cb74",
+    "name": "Chimil, the Inner Sun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6b499d5-0e39-46ce-9de9-f64a2cc2cb32",
+    "name": "Chimney Rabble",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "acac15c8-877d-49d4-9b42-90181c05a684",
+    "name": "Chitin Gravestalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "930035c6-cde7-40ac-98ef-0840812037db",
+    "name": "Chitinous Graspling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9473b445-294b-4572-8267-f1f2fc2a05a7",
+    "name": "Chittering Harvester",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6923cf6b-7d3e-4d95-abaf-1df1a04ac7c1",
+    "name": "Chittering Host",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "864fc52a-e9f4-4254-901e-b949d96b34eb",
+    "name": "Chittering Skitterling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b1aa532-4f19-407e-83a5-13b3160ad8c2",
+    "name": "Chittering Witch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a338863-d599-46e7-9c30-e11b898ae1b0",
+    "name": "Chitterspitter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa00c18b-8719-4095-940a-8e35a57b46c2",
+    "name": "Chocobo Kick",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7522f7fd-6fda-4ed3-9131-21bf91616a73",
+    "name": "Chocobo Racetrack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07b28ed7-eab8-4560-9994-3befcba876d3",
+    "name": "Choco-Comet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7979bf83-5091-4e62-8885-ca1833a97306",
+    "name": "Choco, Seeker of Paradise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d473b507-8c33-4118-bc10-b0a268776074",
+    "name": "Choked Estuary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "158aaeab-1646-4160-9615-bc8747620a03",
+    "name": "Choking Miasma",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a60348fa-b182-4667-9e38-15bdf3511f82",
+    "name": "Choking Tethers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d740dbd9-8e90-4121-8d53-c6ddf5178d58",
+    "name": "Chomping Changeling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20a362c3-d278-437f-881c-e7d9fe78fc2d",
+    "name": "Chomping Kavu",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "faffc9fb-32b3-4015-8c3f-e6b45002c050",
+    "name": "Chong and Lily, Nomads",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3acb58d-3fb1-4602-8575-d78b716b0ea5",
+    "name": "Choose Your Weapon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd50bff0-c461-4023-b62a-6746eaaeab0e",
+    "name": "Chorale of the Void",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6789a170-f2c5-4fc0-8a45-2b2361e67410",
+    "name": "Chord of Calling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61495793-b0c7-40a5-ad3e-9df8e2b8096b",
+    "name": "Choreographed Sparks",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6475b40-e694-4aac-a25c-bbd48d45127d",
+    "name": "Chosen by Heliod",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "695ee4fe-356d-47fb-9442-d171b618151c",
+    "name": "Chromanticore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "539f5396-d99a-417d-a84c-dff7930b5900",
+    "name": "Chromatic Lantern",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95c3976c-33f3-490b-bfd3-7f1af2fe0416",
+    "name": "Chromatic Orrery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e03e44a-9fff-4490-859f-b42e89e8563a",
+    "name": "Chromatic Sphere",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fedbd40b-e3a5-449c-a8a3-b42e9da191a9",
+    "name": "Chromatic Star",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e2f8758-7457-4b54-ae61-a9c68cea4a23",
+    "name": "Chrome Cat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ac6fabb-71db-442f-8c14-ba9e659f906c",
+    "name": "Chrome Companion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a07ceaca-9964-4c24-937e-090b6643b327",
+    "name": "Chrome Courier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3dc71e16-b935-4ad7-b3f7-945ac2c179a7",
+    "name": "Chrome Dome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "837c5d0e-0a33-4f9d-ae25-68a687bdf640",
+    "name": "Chrome Host Seedshark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec3d4466-547c-4e02-b1b5-a156ec4637e9",
+    "name": "Chrome Mox",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d16c2fa-4118-4b81-92ca-6c8e9efe03b6",
+    "name": "Chrome Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f379fa0b-e9fc-4307-a574-a0c95e5e7f72",
+    "name": "Chrome Replicator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "534eb5bd-1eb0-4a12-8e98-e964495aa7e9",
+    "name": "Chromescale Drake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58d8ff36-4a4d-40e0-b812-3d23b2c7606a",
+    "name": "Chromium, the Mutable",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e949b362-4988-4482-ac51-c1049af9040c",
+    "name": "Chronicle of Victory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c7a360f5-725e-4864-93cc-87f96f95975e",
+    "name": "Chthonian Nightmare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebf7ce9b-9e5e-4557-9e28-76556997f0ee",
+    "name": "Chulane, Teller of Tales",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68c56db4-c97a-4c1b-a6f6-096392488e21",
+    "name": "Chupacabra Echo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d1c5987-3572-4bf9-b01c-eb6e98a7da77",
+    "name": "Churning Reservoir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87050537-99c9-4993-a770-4329b2e749e4",
+    "name": "Cid, Timeless Artificer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f155a05f-9f5e-4875-a407-103b85ce30ee",
+    "name": "Cinder Barrens",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7b49bee-2cb0-48e1-91c1-1e150a0da6ed",
+    "name": "Cinderclasm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01805d0d-3a72-4d26-9475-3e68c278b7fe",
+    "name": "Cinder Elemental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfac0258-e148-4d7d-8ded-fc2466d9caa6",
+    "name": "Cinder Glade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13efba9f-aedd-4ec0-a387-60c09b887341",
+    "name": "Cinderheart Giant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46e8bec0-1a09-4e6e-b78a-7ba161686ca9",
+    "name": "Cindering Cutthroat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1c6bd47-19ef-44f9-921a-e4ffa80b25e1",
+    "name": "Cinderslash Ravager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54421e69-d79e-4c2e-8ce6-96994d168835",
+    "name": "Cinder Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92d95e12-fa51-4360-88e4-9078ccc5d8d3",
+    "name": "Cindervines",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1cd7a93-4b83-4755-90bc-17cb64bfb131",
+    "name": "Circle of Confinement",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c857fa4-e823-494d-9ea4-7eb9e719c9b6",
+    "name": "Circle of Dreams Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d41fd1f-4a98-45dd-a3c5-f7c5e0152109",
+    "name": "Circle of Power",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90569b99-8b63-4d2e-b7de-b578b8adbdcb",
+    "name": "Circle of the Moon Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1665ca9f-176d-40f1-a4e9-42da4f1236e9",
+    "name": "Circuit Mender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30afacd9-4680-4aac-8c22-584f9418822d",
+    "name": "Circuitous Route",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9610d33-4cef-4171-bbf4-48d720492d55",
+    "name": "Cirith Ungol Patrol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce291948-125d-493d-8770-8b3aac515f9b",
+    "name": "Citanul Stalwart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f554418-9ee6-4a03-b81e-f93d5c70873e",
+    "name": "Citizen's Arrest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64c7e03d-ba38-4979-8889-9bf0e7b8c66e",
+    "name": "Citizen's Crowbar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "974fbeb0-77d6-4a29-aa91-226cb5b32233",
+    "name": "Citizen V, Helmut Zemo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41eec4e8-92d3-4f98-9346-3a3e3cc602ce",
+    "name": "City on Fire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac8cae63-270c-4f73-b29b-50f8f2395fd9",
+    "name": "City Pigeon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4d65797-2b92-4265-9169-133120c86c7f",
+    "name": "Cityscape Leveler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a63e0c27-cea8-408a-8e57-2f077826c50f",
+    "name": "Citywatch Sphinx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ac01298-e45b-4ea0-8379-2074279716a4",
+    "name": "Citywide Bust",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9eb7f301-b9b6-48c3-9dad-e7df9cc15355",
+    "name": "Civic Gardener",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80d7e395-f774-44b5-9442-fa2fc03aaa29",
+    "name": "Civic Stalwart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "232e16f4-32ae-4f42-a377-6bdebc9a06c7",
+    "name": "Civil Servant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5396045d-744b-435e-8324-a1bfbb03449d",
+    "name": "Clachan Festival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c2f25af-0b16-488d-9249-026a84bdb27f",
+    "name": "Clackbridge Troll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16da9e4b-c6ee-4e70-8653-31ca147f3b01",
+    "name": "Claim // Fame",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce",
+    "name": "Claim Jumper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9bb82829-05e8-4cdd-91e4-b837a620bfc8",
+    "name": "Claim the Firstborn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cd15225-e9b6-4998-b545-76536c72e948",
+    "name": "Claim the Kingdom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b0a0991-2327-45ea-b47f-c31db367fa1d",
+    "name": "Claim the Precious",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afe4a60c-747a-439b-bf61-cd323b8dffe7",
+    "name": "Clammy Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a08580da-e5aa-424b-86bf-d4535f3480d1",
+    "name": "Clamorous Ironclad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fd2dcb2-760d-461d-8e5b-693aacf548cf",
+    "name": "Clamor Shaman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f11ec1c9-347d-4d79-aaa9-5919db5f9044",
+    "name": "Clandestine Meddler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "838eeca8-02f9-44fa-8170-1426622adf30",
+    "name": "Clan Guildmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "193f9b12-ee34-40c2-9315-6794416a4f62",
+    "name": "Clarion Cathars",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1266a1b-bae6-4ded-b4d5-7586a5b6c5d0",
+    "name": "Clarion Conqueror",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dec20b18-afe6-405e-b47d-a757a5645c63",
+    "name": "Clarion Spirit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78304a06-4c9a-4cdf-b67f-067d88762381",
+    "name": "Clash of Elements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1c38b70-575d-4d87-bc50-0b77b48ee823",
+    "name": "Clash of the Eikons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "198c05ca-fb2d-4f15-a28f-1dad36466a4f",
+    "name": "Clash of Titans",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d88f249f-5bf1-448a-91d1-f81538dfd475",
+    "name": "Clattering Augur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e107382-f683-44ed-ada1-775d3ac79dd0",
+    "name": "Clattering Skeletons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b62a716-7831-4c76-8f2d-b99b04e33350",
+    "name": "Clavileño, First of the Blessed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ac5c149-f6af-46b6-974e-14689e9a583d",
+    "name": "Clawing Torment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "499d76c1-97ff-4006-922c-be1684a7754c",
+    "name": "Claws Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80920ac0-2bbe-4439-a937-282f63e23141",
+    "name": "Clay Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90e1bcef-53af-4c08-b713-bf10dfcbd577",
+    "name": "Clay-Fired Bricks // Cosmium Kiln",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c183186b-d92c-45a2-92d1-42e0df2b441f",
+    "name": "Clay Revenant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aff34f28-f707-4458-8af3-1bd5b13a6b10",
+    "name": "Cleansing Nova",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50f1948c-fa27-458d-be14-cb0e09e39f63",
+    "name": "Cleansing Ray",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "993b92f4-4160-4171-9e67-90dc935030fe",
+    "name": "Cleansing Wildfire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12e0321b-1cd7-4519-8929-3261cf11a1a9",
+    "name": "Cleanup Crew",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b8defd2-8530-47d7-a0c6-27aa5162dff6",
+    "name": "Clear Shot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "141c33be-7a25-4981-b62c-efee8e8ec91d",
+    "name": "Clear the Mind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77b6a3db-c098-4b06-bc7f-136eef892d30",
+    "name": "Clear the Stage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "144119bc-7fd1-45c5-9e29-f742e7c255ac",
+    "name": "Clearwater Pathway // Murkwater Pathway",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "70c268af-3fb4-42b8-a87a-d06d33c1c641",
+    "name": "Cleaving Reaper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb1ab332-5549-4ff4-8afa-b385a236fb9b",
+    "name": "Cleaving Skyrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b33059c-c862-4452-8609-14a0e2551fb3",
+    "name": "Cleaving Sliver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57ce5ebd-cfac-4bb9-b010-04d0c285be27",
+    "name": "Clement, the Worrywort",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e0e5060-2be0-476b-8108-c8c7cd76942f",
+    "name": "Cleon, Merry Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0ead7f5-5c82-40fd-8e89-3e3c5d31fbad",
+    "name": "Cleric Class",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99c13f8d-7f18-48ce-86da-c74ddb6c1205",
+    "name": "Cleric of Chill Depths",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7721c5e-b3c5-45c8-b757-935603dfe44b",
+    "name": "Cleric of Life's Bond",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "628e59e2-3665-40dd-ba4f-11ab5824de22",
+    "name": "Clever Conjurer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4ec0df9-a4a3-48cf-a0aa-b1aea5c49142",
+    "name": "Clever Impersonator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "901eb916-f318-4a30-a43e-8e7f9eef358b",
+    "name": "Clever Lumimancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68fb8f21-4403-4829-8826-f2418664197e",
+    "name": "Cliffhaven Kitesail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f0c8c60-96f1-4b26-a9f6-386e1cec517d",
+    "name": "Cliffhaven Sell-Sword",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "446db5a4-21b0-44c1-b12b-d365313dd67a",
+    "name": "Clifftop Lookout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7faa3c8-46cf-46b2-bfa4-89000307cf18",
+    "name": "Clifftop Retreat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c44e556-4c7a-48bf-a108-c584f69c2cfa",
+    "name": "Cling to Dust",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9a3207a-a330-4517-967e-f37c9a9f1355",
+    "name": "Clinquant Skymage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ceba3d03-be5a-4dd7-b829-7db216a0f44e",
+    "name": "Clive, Ifrit's Dominant // Ifrit, Warden of Inferno",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "283f743f-6e79-49de-b7ed-08e6ffb64cc6",
+    "name": "Clive's Hideaway",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64132f93-66ac-4794-8c07-a88f9ed0e22b",
+    "name": "Cloak and Dagger, Entwined",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08a40717-c272-42e6-adb1-0148614b1202",
+    "name": "Cloaked Cadet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e49eb21c-2a0d-4fd0-9f69-1bff6e94f9e7",
+    "name": "Clockwork Drawbridge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b74c8ac-9c19-45b0-935f-8630b8da4543",
+    "name": "Clockwork Percussionist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67dae813-907e-456d-9e91-2d7c85f1d574",
+    "name": "Clockwork Servant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1e84b14-c521-4eb7-92ed-bde1131e8662",
+    "name": "Cloister Gargoyle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42226b87-0746-4ebf-9fd0-108d508462af",
+    "name": "Clone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "690bd111-5b32-4156-b650-9afad3d6ef3d",
+    "name": "Clone Legion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "032fdd08-2ea7-442e-8162-0a8e5a585253",
+    "name": "Close Encounter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79ac7b6a-1c25-45f6-84b4-5c4a78d6fd6e",
+    "name": "Closing Statement",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+    "name": "Cloudblazer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f718b520-d79d-4b91-9d85-de1f1c90c176",
+    "name": "Cloudbound Moogle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "653f0452-5802-4639-86c2-1500c3964fcb",
+    "name": "Cloud, Ex-SOLDIER",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb0e1afa-fd9e-4bf9-bcb1-6e8110d6e2ff",
+    "name": "Cloudfin Raptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a838818-d590-4374-9a63-d9e6381a0f0d",
+    "name": "Cloud Key",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09bd4e1c-9861-481f-80dc-4de955c8d3af",
+    "name": "Cloudkin Seer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33d2584b-bf29-4c22-bd45-14ba2fb98c0e",
+    "name": "Cloud, Midgar Mercenary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "525f57df-7d4d-4089-9003-4b01005558dc",
+    "name": "Cloud of Darkness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed7885bf-c557-4328-b1a4-54780b2315f4",
+    "name": "Cloudpiercer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8512bd08-ecba-4e0e-b65c-8209764a65e5",
+    "name": "Cloud, Planet's Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5a4bf91-4d31-4557-9ec4-a96ff4d9be6b",
+    "name": "Cloudreader Sphinx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c5183be-cddf-48fb-a4b5-dc5f6faf26de",
+    "name": "Cloudsculpt Technician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6879f5ce-7a1b-4606-bad1-885779b0d456",
+    "name": "Cloudshift",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f943c005-9b77-411a-b522-1182e22724e1",
+    "name": "Cloudshredder Sliver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c86bac69-96d6-4b9f-87e4-2d7faecaa112",
+    "name": "Cloudspire Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65d8b481-ebe9-4029-98a8-dd4693340bff",
+    "name": "Cloudspire Coordinator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7467fce-61e4-401a-8a3d-b0a2bc347088",
+    "name": "Cloudspire Skycycle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a34a71eb-26a4-4e37-8d3c-a0352bea491b",
+    "name": "Cloudsteel Kirin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c6658c3-8c0e-46c9-8127-bc5b77eb0dab",
+    "name": "Clutch of Currents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "008cb342-79f5-4df6-a6b7-0e9e22ed693f",
+    "name": "Coalition Relic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc763f20-73e7-4db7-9e98-6f419b8fba84",
+    "name": "Coalition Skyknight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84d67d87-2696-4c2f-9f10-29d5832bfbb6",
+    "name": "Coalition Warbrute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2cdbaa4e-8907-49dc-9fa9-0df70db3bf23",
+    "name": "Coalstoke Gearhulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "449ed4b4-9e1e-4181-9090-af91802eba49",
+    "name": "Coastal Bulwark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a05ec32-7b0c-4f23-a4f7-413301c2a70a",
+    "name": "Coastal Piracy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "535f9bc6-9a07-4850-91eb-c00d06633e7e",
+    "name": "Coati Scavenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbc808dd-8d50-4f42-b0f1-d4e45d0462a2",
+    "name": "Coat with Venom",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "200bbf1d-835d-4d61-a6ab-a0b2abfbed79",
+    "name": "Cobbled Lancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d8682f3-9ef3-4aa7-9ea6-8a2ce09bff6f",
+    "name": "Cobbled Wings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae791b61-5825-4987-a8c2-80813758d3f7",
+    "name": "Codecracker Hound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2f83483-24a4-45db-a04e-42ff732ca98a",
+    "name": "Code of Constraint",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4388af80-118f-4bf4-8fd7-e68c58398ee8",
+    "name": "Codespell Cleric",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a17e414c-8de0-47fd-bcbc-540c7fec7642",
+    "name": "Codie, Ravenous Codex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67a9357c-4713-4e01-a60d-532bf0dd80b6",
+    "name": "Codie, Vociferous Codex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a007dbd-18fd-44d1-a305-7cc8dd6231eb",
+    "name": "Coerced to Kill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00d1596a-c3e2-4109-86da-388934a0c652",
+    "name": "Coeurl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60674ef7-f8e2-41e8-bab3-0100cfc9fbe9",
+    "name": "Cogwork Archivist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2065e9d0-c6e9-4270-898e-9822b532d467",
+    "name": "Cogworker's Puzzleknot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db27e3f0-5750-4c4b-9da9-70c3ab627f9c",
+    "name": "Cogwork Wrestler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27a91ebd-39f4-432d-b6cc-cd86b4a3979a",
+    "name": "Coiling Rebirth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54dc1c02-2d71-465b-a285-d6d11113991c",
+    "name": "Coiling Stalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e18ee5b-cda3-428b-be91-939c410256ac",
+    "name": "Cold Case Cracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21d700e8-0255-418e-96a0-6fe05b3f836d",
+    "name": "Coldsteel Heart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "457e4a49-c8fe-4e1d-a4b4-7a880a47f58d",
+    "name": "Cold-Water Snapper",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "076cf4f1-b3d4-4175-b976-938ad851cc0e",
+    "name": "Coliseum Behemoth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "adc03c37-33c7-4b92-b9fd-4608e6c372c4",
+    "name": "Collar the Culprit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b89dd47e-0f65-41f0-ad23-cefc61e68978",
+    "name": "Collateral Damage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0bbcb563-09b3-499d-a9cc-3a6d7501dd81",
+    "name": "Collected Company",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0a79e9e-38cb-45d8-a7ec-7cf10ef7e5fc",
+    "name": "Collected Conjuring",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22a78443-db21-4656-b38a-e3e3186fd94b",
+    "name": "Collective Brutality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43ddc3e8-936b-4be0-9e64-484bbbd69016",
+    "name": "Collective Defiance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a97e760a-99c8-47ea-a875-451aca913ee7",
+    "name": "Collective Effort",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "649e4969-71d4-434f-85b0-205ec2c6b24f",
+    "name": "Collective Inferno",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa7b7db2-c830-405c-a5e6-e5431d573ed3",
+    "name": "Collective Nightmare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bffdfe7b-f17a-41b6-a460-80280fe497d4",
+    "name": "Collective Resistance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f5b71fd-469f-4370-a806-9bfefbae03a2",
+    "name": "Collector's Cage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a347123d-191a-4758-aab1-9cc7769eac66",
+    "name": "Collector's Case",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f460ff80-8175-43f7-9810-540cf3817085",
+    "name": "Collector's Vault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "685181dd-0124-4c76-9270-f9dd17e6a221",
+    "name": "Colleen Wing, Street Samurai",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "197ce21b-3387-4e76-a49c-04b9c371c031",
+    "name": "Collision // Colossus",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "49ca0ca8-0733-4aa9-bd0c-1c661725b81b",
+    "name": "Collision Course",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47ee6837-2e2f-4344-ab9f-6b8887874f77",
+    "name": "Colorstorm Stallion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34ff281a-f294-4351-9665-863a5b2e882b",
+    "name": "Colossadactyl",
+    "status": "curated"
+  },
+  {
+    "oracleId": "c2f7f39b-0569-4c32-bdbf-7fb0a0efd5cf",
+    "name": "Colossal Collision",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1244902e-1a4e-4d3c-9a55-9be4602e3d2d",
+    "name": "Colossal Dreadmask",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08c7db90-c0cf-4482-b7ee-bb033e5996d2",
+    "name": "Colossal Dreadmaw",
+    "status": "curated"
+  },
+  {
+    "oracleId": "0611beb7-a38d-4fbf-af9b-ee2a5b9a2896",
+    "name": "Colossal Growth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cac95494-0db0-4bec-8665-998431a6f76b",
+    "name": "Colossal Majesty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4cdf524a-1a99-4143-823b-d3c5c867c580",
+    "name": "Colossal Plow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "510659d6-69b4-4b04-8836-08b76213954e",
+    "name": "Colossal Rattlewurm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "871e4c4e-8105-4cb9-b1cd-53c5f8e64494",
+    "name": "Colossal Skyturtle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd04b735-125f-47b5-a68e-ab2a008100b9",
+    "name": "Colossal Whale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05c5ee65-651b-4bfb-b57f-305026507135",
+    "name": "Colossification",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ec03b88-8d3a-4a32-8b7c-7da59b0c03d0",
+    "name": "Colossus Hammer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9be9625e-b98b-416b-aac4-9f7b2dfbd39d",
+    "name": "Colossus of Sardia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0788fdd2-6fab-460c-b054-a736df670f96",
+    "name": "Colossus of the Blood Age",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb47ceb6-b3b3-4e81-9c15-b9990c85e892",
+    "name": "Colossus, Steel Stalwart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e15ff93-99a0-4000-918e-4bd2c257188d",
+    "name": "Combat Celebrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54d32245-c796-4e8e-b61e-c218e3902565",
+    "name": "Combat Courier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b59665f-23c7-4df9-8e71-f9b1a419063b",
+    "name": "Combat Professor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fbfd7f38-be9a-49bf-8769-79e1e7e8dfdc",
+    "name": "Combat Research",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c460bdd-460b-4312-9ed2-32f3809a7d36",
+    "name": "Combat Thresher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a483d95-ff99-40b4-9071-6e78585090d5",
+    "name": "Combat Tutorial",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1cee8d7-f619-47b4-ba8c-faf3106d4e41",
+    "name": "Combine Chrysalis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90abb55d-5c05-453f-b4a6-c0741dc36694",
+    "name": "Combine Guildmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3494a575-f68e-4e78-9f6b-142cd8a0edea",
+    "name": "Combustible Gearhulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "533b107c-fd66-45ef-b74e-e6bd9b75ea8f",
+    "name": "Combustion Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "522a04ff-cbfe-47b0-bd29-ef6fc27a6905",
+    "name": "Combustion Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a9783c5-084b-4cd3-b7fa-ae9d7fed51d1",
+    "name": "Come Back Wrong",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c1b6305-8863-43e0-b50d-ae1c5e31be55",
+    "name": "Comet Crawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7c67480-1816-4071-9eab-a1d1b535a344",
+    "name": "Comet, Stellar Pup",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01f29158-2dc9-4b9d-b726-add5d3fd5782",
+    "name": "Comeuppance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5fd193c0-ed9f-4afb-b6cd-c1a20008fc0b",
+    "name": "Comforting Counsel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9666729d-3a06-43f9-a957-d5cc4d25b974",
+    "name": "Coming In Hot",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "7e8c2a18-e404-40ff-a9e0-ec3eeb6d576e",
+    "name": "Command Beacon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87c8e1ed-258a-4a89-bcc6-211405e49692",
+    "name": "Command Bridge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad7d854b-d303-40eb-acd6-03a8023e05e7",
+    "name": "Commandeer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cae166de-e681-40a0-83a8-3c17cf40e2fc",
+    "name": "Commander's Plate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03160a74-8b83-4e07-b702-977a91a6311f",
+    "name": "Commanding Presence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "198d31e4-1ae1-4bf9-a05a-7fa45c0aeddb",
+    "name": "Command the Dreadhorde",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13bfc51f-d079-40ef-a4ba-47d06d3150a3",
+    "name": "Command the Stage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1dc816b5-8918-4a0c-bb10-74abe579a98c",
+    "name": "Command the Storm",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25",
+    "name": "Command Tower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56ea8f6b-a765-44e7-bf0e-4d4a2405684b",
+    "name": "Commencement of Festivities",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fedb1947-9fa5-4655-8d02-b370fa63dd16",
+    "name": "Commence the Endgame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b33656ae-3473-4223-845f-f9147f87678b",
+    "name": "Commercial District",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56fd8895-3be2-4591-86fa-87567d9cdc14",
+    "name": "Commit // Memory",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ebcbfdba-34c7-40eb-91a9-d306ff5ae8b9",
+    "name": "Common Crook",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9108fffb-90f4-444e-8d3e-46a3d4ff3681",
+    "name": "Commune with Beavers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27ca27f0-95a5-4292-b30b-1db3e9d639f8",
+    "name": "Commune with Dinosaurs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0248bf01-14e0-4a39-ba3a-5177fe272fe9",
+    "name": "Commune with Evil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4ed4260-5f38-4b55-ba6e-9f54f04d2360",
+    "name": "Commune with Nature",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68f8ed23-024e-414f-bbb2-ab73fbe21b69",
+    "name": "Commune with Spirits",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6042a806-6e6a-4f1d-9563-5932a17f32f9",
+    "name": "Commune with the Gods",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b64051c0-e791-4fcb-b79f-4287e1b06468",
+    "name": "Compass Gnome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ef464bd-2ed0-4f99-af4a-ebf276f55384",
+    "name": "Compassionate Healer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a9059ac-c595-4e71-b704-b04d2d47db70",
+    "name": "Compel Brutality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "256cc907-2a13-4f43-9d37-2e52034cdaf4",
+    "name": "Compelled Duel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "686e0b86-121c-45be-842d-c83d3b6547f6",
+    "name": "Compelling Argument",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb0c9048-73ee-434b-a018-dbfbe32e56f5",
+    "name": "Compelling Deterrence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2a6cfb7-e5bd-49c8-aa51-fd5203eca8b8",
+    "name": "Compleat Devotion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65b8bb9b-91f9-44e2-aa6e-e82e3760a4d9",
+    "name": "Compleated Huntmaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "402506fa-6bd5-4814-8353-90c148dd576c",
+    "name": "Complete the Circuit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6950ab0f-f448-4ed1-9dd4-868cc79a5982",
+    "name": "Component Collector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1722d6d0-b435-4d4a-af33-21aab2199f6c",
+    "name": "Compound Fracture",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3fafb6b2-5cae-45b6-8550-3ff8daa02802",
+    "name": "Compulsion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f947808c-a1cc-41ea-9d06-e1279a0da527",
+    "name": "Compulsive Research",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "020225db-5623-49c2-8cdf-1ec2a05b8b0a",
+    "name": "Compulsory Rest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d899466-b1eb-4901-b626-1f2fb09b786d",
+    "name": "Concealed Courtyard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "104565b1-2db8-4c01-ae3d-14087768be45",
+    "name": "Concealed Weapon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3a56b02-7290-4352-a862-f2de608f2a86",
+    "name": "Concealing Curtains // Revealing Eye",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1c751201-24ba-4e5c-bf44-71c3e4693a92",
+    "name": "Conceited Witch // Price of Beauty",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a3d287ec-1a39-4f91-acf1-7c1d2c00ed89",
+    "name": "Concentrate",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "2fcb2342-202d-4baa-82ad-66d782142264",
+    "name": "Concentrated Fire",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "77f02ae6-2411-4378-b5e0-cc1cf5964458",
+    "name": "Concerted Defense",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd4236e5-6a2c-45ec-afb3-cd4fc516fbf1",
+    "name": "Concerted Effort",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6ea0e58-7b14-425b-9135-57e149c0e47e",
+    "name": "Conciliator's Duelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "653de668-beb0-4be7-bb05-30de5f52a3f1",
+    "name": "Conclave Cavalier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d0eb1f4-08ef-4ac9-902b-47335ab46984",
+    "name": "Conclave Guildmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2fe5937-212c-4e71-8d6e-f408b38100aa",
+    "name": "Conclave Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb5de977-d420-41cc-85f0-6ffee8bbeff1",
+    "name": "Conclave Naturalists",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e938ee4c-d5df-4d93-bd61-9e518fb1dc30",
+    "name": "Conclave Tribunal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93c35f9e-3346-4269-b1af-df9f216bfd7a",
+    "name": "Concordia Pegasus",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "377d31b5-0a48-4d5b-91bd-b5a62d4f7899",
+    "name": "Condemn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0369627e-3b83-4e5b-a8af-a99f944443b3",
+    "name": "Conduct Electricity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "513dbf8a-a250-4fd9-a5ae-2fb9c4810ecc",
+    "name": "Conductive Machete",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d3a38ff-4b75-4e97-9d8f-c54f441f8208",
+    "name": "Conduit Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c4cf7c9-9dc5-49da-8d43-1ecd41c74ad3",
+    "name": "Conduit of Storms // Conduit of Emrakul",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ed14be15-8f8d-4fe3-a147-f5da8ed873bf",
+    "name": "Conduit of Worlds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37f924e1-7c25-4f06-88bb-054693a21e5a",
+    "name": "Conduit Pylons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a30d076b-c942-45e4-b943-3749ce955291",
+    "name": "Confirm Suspicions",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d599a38c-7719-443e-bb59-55bd43a8fee6",
+    "name": "Confiscate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c246cdb4-2fd8-487e-944e-3e52fbd1bbaa",
+    "name": "Confiscation Coup",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f86b9a01-62fc-4120-8914-5054ed48d37e",
+    "name": "Confounding Conundrum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3df49c4d-a285-4826-824e-b742b0deed3a",
+    "name": "Confounding Riddle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "beb3f812-da58-4f03-915b-dc473cd01554",
+    "name": "Confront the Assault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a92c1ffe-88b0-467c-883c-6ca3564a39e3",
+    "name": "Confront the Past",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "221240c5-3c97-438c-b906-2508eacf190f",
+    "name": "Confront the Unknown",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a7d9887-3cc4-4fb9-9109-1315903ace45",
+    "name": "Confusticate and Bebother",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "376cbc85-2941-4d97-b031-bffff86550e7",
+    "name": "Congregation Gryff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a29e2c70-8909-465b-9cec-1a7037250313",
+    "name": "Connecting the Dots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e07e7ae-1bb7-4831-adb9-a5e71b7d79e3",
+    "name": "Connive // Concoct",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9aace0d3-89e6-4254-b96f-ee3a878f2f91",
+    "name": "Conqueror's Flail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88b18901-50cd-461c-b1bc-be900210be8e",
+    "name": "Conqueror's Galleon // Conqueror's Foothold",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "cf0f3aee-78b6-4a98-8e09-8861b73c2e74",
+    "name": "Conscripted Infantry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20e7a93f-77ce-466b-8586-35d390689d0c",
+    "name": "Consecrate // Consume",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "4c9bcba6-87b5-4fb3-97ee-6fe5b739337d",
+    "name": "Consider",
+    "status": "curated"
+  },
+  {
+    "oracleId": "8fe7436b-2467-486e-8a2d-7cbf21a65da9",
+    "name": "Consign // Oblivion",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "16c39265-72d9-4c86-a961-8dd38ff9adcd",
+    "name": "Consign to Memory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0c50079-5376-47ff-82c5-d52dbf49afdf",
+    "name": "Consign to the Pit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5d1bd3c-0e65-4999-a810-881b2389b40e",
+    "name": "Conspicuous Snoop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa81e7ff-0f2c-40df-9169-c0a22f00cd76",
+    "name": "Conspiracy Theorist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4541d02-2860-46ef-b630-1d6307b60766",
+    "name": "Conspiracy Unraveler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "abfb7234-c5cc-4e0b-9a67-d66473f918fc",
+    "name": "Constrictor Sage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "369aa9a6-af8a-432c-adff-ced2bb203dc7",
+    "name": "Construct a Cosmic Cube",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "671db0d7-b103-4c13-9914-a444f2ecf9d6",
+    "name": "Consulate Skygate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "14d71432-c2e6-4c81-92ef-cf98e1fcf5f8",
+    "name": "Consulate Turret",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e921839f-9d91-41a9-bc89-016af3c757aa",
+    "name": "Consult the Star Charts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b548578c-4910-402c-8e78-498924e0a9be",
+    "name": "Consumed by Greed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b55fb72-237d-4935-b645-8ebc6eb4140e",
+    "name": "Consuming Aberration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d472308-5bc7-4a3c-81b5-0a757f00d9e2",
+    "name": "Consuming Aetherborn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ef676f0-53c5-4efe-9341-e960d00dbc69",
+    "name": "Consuming Ashes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "818292cc-6261-47e4-b573-d92f03da6ded",
+    "name": "Consuming Blob",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bc0bd36-70be-4180-9fb3-b10ce054107b",
+    "name": "Consuming Corruption",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24cd8f54-c1d4-4040-93bf-a7b9b719ac30",
+    "name": "Consuming Tide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a352cc67-eae8-4fa5-abba-507821c4cf47",
+    "name": "Contact Other Plane",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "482bd55a-ba73-4722-8643-94fa12818515",
+    "name": "Contagion Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b6da140-0d91-4fae-a3ee-33e6808acf34",
+    "name": "Contagious Vorrac",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "043dd2e5-21e4-49b9-90b2-831e587b2238",
+    "name": "Containment Breach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54d48e54-be4a-4a78-a778-b28e74ef7134",
+    "name": "Containment Construct",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a76a9b9-3127-45fe-b20f-a8f643276281",
+    "name": "Containment Priest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c27b771d-b5ec-459a-a101-f078cb8d0184",
+    "name": "Contaminated Aquifer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28196fd9-00c9-4cd0-b603-0eec8511ec79",
+    "name": "Contaminated Landscape",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2fc6de19-9d04-422b-90bc-eee2f9f8c84c",
+    "name": "Contentious Plan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "876c9620-216c-45dd-b8a6-b9e0cba63e3d",
+    "name": "Contested Game Ball",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed73de2b-d7f4-48d9-9be2-aa9d111b7aa7",
+    "name": "Contested War Zone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be9bee08-ac04-42bc-93be-5a77482a7690",
+    "name": "Contortionist Troupe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "680da572-6cd5-482a-b01d-32944566d8c4",
+    "name": "Contraband Kingpin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5c9b167-5824-4fc8-ba7a-ffa64363c029",
+    "name": "Contract Hero",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7a0e473-77c1-4a85-b6d7-b0dfdadb696f",
+    "name": "Contract Killing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd0d7141-46d2-4aa3-bc77-6b3b4513803e",
+    "name": "Control Magic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f214dcf-9601-4ccb-bdac-2f9b9f6dff99",
+    "name": "Convenient Target",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fbb9547-a805-4768-8574-e283e64600a4",
+    "name": "Converter Beast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4374b6b1-e691-4823-802d-8de8530aa461",
+    "name": "Conviction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd201ded-cfaf-4a51-9fcc-6a61b3c910b0",
+    "name": "Convolute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f076303-d160-4e02-aa1e-9ed6040c3735",
+    "name": "Cool but Rude",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e8bcb44-b875-4fe4-b96f-97a20cbfec93",
+    "name": "Cooped Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba14843d-6b7f-4e3d-b5ba-fc573fa8bf50",
+    "name": "Coordinated Assault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "688a0b7d-bf00-45ab-ab3f-9d19f52f019a",
+    "name": "Coordinated Charge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2b65b17-1fb4-42d6-9c6a-376d3f18851b",
+    "name": "Coordinated Clobbering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ff39311-565e-4414-b32b-eb24c70b3090",
+    "name": "Coordinated Maneuver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f6fc734-4935-42d9-93a0-1b5ad8d8d277",
+    "name": "Coppercoat Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6971eac1-afd0-46c3-a37f-4a26d50ef656",
+    "name": "Copper Host Crusher",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "a05f641c-15c9-43dc-ae0d-1ea372fd33d5",
+    "name": "Copperline Gorge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "066f6a3d-5e7b-40a4-b348-6dfb5d5239de",
+    "name": "Copper Longlegs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce184565-71fb-4e23-b45b-8786727d21f7",
+    "name": "Copycrook",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87bc0b1f-49ef-4c06-9049-2c148b467882",
+    "name": "Copy Enchantment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e186931-992b-491c-bffc-6877a613d5c3",
+    "name": "Coral Colony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03ce2235-50d9-4f67-b588-166b9b37c664",
+    "name": "Coral Commando",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "621fc513-b16a-4c09-93f8-424e688471e2",
+    "name": "Coralhelm Chronicler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "979e670e-bbd8-4595-8d9d-ad1c0bc422e3",
+    "name": "Coralhelm Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ed27607-21a8-4bc3-997e-6d2242313f6d",
+    "name": "Coral Merfolk",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "d4f0dd14-bc2a-4c6d-bfd5-bc5838ab18a5",
+    "name": "Coral Sword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51c511c0-783a-456d-a7e2-959f6e8ddfc8",
+    "name": "Coram, the Undertaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d61fb9e8-d05a-481a-a90f-5def300c9abb",
+    "name": "Cordial Vampire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "35c60b66-8c85-432e-90fe-99c19d21ed15",
+    "name": "Cori Mountain Monastery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "322a2d97-cf71-4bfc-b52d-f642f2d0dcbd",
+    "name": "Cori Mountain Stalwart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46b1a169-bc32-47bf-b379-fa0c3d13878f",
+    "name": "Cori-Steel Cutter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cd9bac9-0abc-43d8-9f84-94f965f7a2e0",
+    "name": "Cormela, Glamour Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68a58e0b-1506-492e-8ca3-016e520c10ba",
+    "name": "Cornered by Black Mages",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4477eeab-a51a-4dc2-9c97-83f2551d8b54",
+    "name": "Cornered Crook",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd3cdd9b-aa67-4bf5-80c8-53574d2c221e",
+    "name": "Corpse Appraiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ded56df-c7d5-4043-85df-410f47219faa",
+    "name": "Corpseberry Cultivator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2aeac0b-af74-4c47-9ac1-51fbf869c95f",
+    "name": "Corpse Churn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b0b6c8f-472a-4ee2-8368-3b17a2df498d",
+    "name": "Corpse Cobble",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab715312-0103-4681-b559-520026abd350",
+    "name": "Corpse Explosion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2ba1c3b-08c7-4835-81f4-2f98843fb7b8",
+    "name": "Corpse Hauler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c77b805-728d-4ae4-88a9-223f4b7b52e0",
+    "name": "Corpse Knight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78bac92f-333f-4c43-bccf-03c3772ee99b",
+    "name": "Corpses of the Lost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e94297af-1236-4c9a-860f-2ee6a0d12e5e",
+    "name": "Corpse Traders",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07b6ee55-a77e-4ba7-9ab7-8a8375c7acc9",
+    "name": "Corridor Monitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c55ca3b-1254-4d44-96ac-1e1cadaf49f5",
+    "name": "Corroding Dragonstorm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "416cca4a-b1b2-49d5-9cac-ec347056bdb0",
+    "name": "Corrosive Ooze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a88a1c53-7de3-423a-a95a-24ed5666ab96",
+    "name": "Corrupt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec84201d-757f-4a7a-b3a2-85ccd5ee81ae",
+    "name": "Corrupt Court Official",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b45e35df-9032-4482-89a6-c7c50c6d0a79",
+    "name": "Corrupted Conviction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c4cbf1c-95ee-4555-8351-ea962e17ae1f",
+    "name": "Corrupted Shapeshifter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "242c39b4-5ef0-469a-a852-738f79d93bd6",
+    "name": "Corruption of Towashi",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7ec13c6-7ade-433a-b5a2-047854eef486",
+    "name": "Corsair Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88bb91b5-2ccd-4ce9-8cd4-e54d63c12abf",
+    "name": "Coruscation Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "648100cd-d44a-48f8-87e4-a1d5467f348c",
+    "name": "Cosima, God of the Voyage // The Omenkeel",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "0866a630-d962-4aa9-a15f-08b2947540ef",
+    "name": "Cosmic Cube",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fad32e19-2eda-46b7-8d3c-b95a7dbeabc2",
+    "name": "Cosmic Epiphany",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe84ce0b-cd25-41ee-82c1-8ab03df5791b",
+    "name": "Cosmic Hunger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "add60aad-2532-4f59-bfb9-f0168c2adda6",
+    "name": "Cosmic Rebirth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0334a2f8-a74a-44c9-ba64-d9b7fabe160c",
+    "name": "Cosmic Spider-Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52c96b5a-ce47-4bde-b530-0033b9bfd808",
+    "name": "Cosmium Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "798aaf78-16d9-474b-a963-f5e9c39aae6e",
+    "name": "Cosmium Confluence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99d8c5f9-ad8f-450e-9a7c-51a4c0ca5043",
+    "name": "Cosmogoyf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2cd65f6-7cbc-497c-bdc9-698ff17da31e",
+    "name": "Cosmogrand Zenith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "603e518c-8f12-432c-ae03-790db5be77bf",
+    "name": "Cosmos Charger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed7300f4-831a-4ba4-b5e6-ceba8d079eaa",
+    "name": "Cosmos Elixir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "079ac521-9414-46c1-acd9-2ff2ff047d22",
+    "name": "Cosmotronic Wave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8cdfd9df-4783-4138-a286-828a97f516aa",
+    "name": "Costly Plunder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b45afde2-eaaf-4174-8082-d344efa54c44",
+    "name": "Cost of Brilliance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "072d05c4-e0d7-47af-b2a9-16b90810fd30",
+    "name": "Costume Closet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b513bd0-27df-45f3-a85f-1f0aba3cae48",
+    "name": "Council of Echoes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3280488d-e94b-4d53-b279-c32ed711d4bc",
+    "name": "Council's Deliberation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c983da8-1436-4c06-af9c-91b72cab48c1",
+    "name": "Counterflux",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc3353e9-fe24-4ca7-bff8-9da767f2903a",
+    "name": "Countersculpt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc187110-1148-4090-bbb8-e205694a39f5",
+    "name": "Counterspell",
+    "status": "curated"
+  },
+  {
+    "oracleId": "2c51e20b-07b2-4c96-8d73-87379aafbc7c",
+    "name": "Countervailing Winds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d1f9036-a466-46b6-ab7c-2de487876978",
+    "name": "Countless Gears Renegade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ec4f81e-ede4-4d45-b768-16583f6f5b8d",
+    "name": "Count Nefaria",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73ad7bcd-4ffc-442c-b6b5-d935b9ccaaaf",
+    "name": "Count on Luck",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c5a39f76-dd1b-442c-9f52-08561ecb91ad",
+    "name": "Country Roads",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41b929ad-0c44-4e50-84d3-13b318035543",
+    "name": "Courage in Crisis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c107e271-5741-4a84-bfc4-3bc322972d0d",
+    "name": "Courageous Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00915480-ffa8-4930-a158-b1c1f75b7876",
+    "name": "Courageous Outrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8ff239c-cd71-4cd2-9e96-792a116989ca",
+    "name": "Courier Bat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "049d8b06-db90-4b9c-8195-d987b3ef1005",
+    "name": "Courier of Comestibles",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00cd3bf9-0dd6-4ec0-a841-1839a71604ab",
+    "name": "Courier's Briefcase",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46779609-4fa7-4fd2-b5b4-7d4d749339e6",
+    "name": "Courser of Kruphix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dec9edbb-677b-4773-8bc4-b388d7592276",
+    "name": "Court Cleric",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b597e801-2648-48b9-8a21-02baa13e37af",
+    "name": "Court Homunculus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d0b8dc6-f4b6-4650-805d-4240d4a4ab82",
+    "name": "Covert Cutpurse // Covetous Geist",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b713ee3a-b6cd-4cd7-b403-f0bbc683ea99",
+    "name": "Covert Technician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c495e94-3194-47c7-8129-dd0a0f915daa",
+    "name": "Coveted Falcon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98492d7d-3b9e-4ae1-ac45-1b508d6d2670",
+    "name": "Coveted Jewel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56204530-7ab5-4610-9570-fba2673725ad",
+    "name": "Coveted Prize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f3e6554-eb8a-4096-81a3-2411186d9cb4",
+    "name": "Covetous Castaway // Ghostly Castigator",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "6f52008f-3365-4cf9-9cae-8e761d657902",
+    "name": "Covetous Urge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1ddf985-1646-468c-b1a4-ab6bb8e9dd7c",
+    "name": "Cowabunga!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c26c30b-bc4a-4d20-8406-ef9022256e0d",
+    "name": "Crabomination",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bccbd5ae-4e3f-43ee-a51b-d0ec2c645238",
+    "name": "Crackdown Construct",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5314006-afe0-4cdc-88f0-ff1f7d85fba9",
+    "name": "Cracked Earth Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4415b65d-5473-4b19-94f7-e5cf4ce64d5e",
+    "name": "Cracked Skull",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "273f5483-b67e-4dd6-bba8-c0a047fa34d7",
+    "name": "Crackle with Power",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16ab9451-f3da-4f61-8e2b-d9c84e0e5428",
+    "name": "Crackling Cyclops",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee81f37b-2a81-46d7-8d2f-9091123846c4",
+    "name": "Crackling Doom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8b4eba6-88ce-42d7-a235-5a4765a4a981",
+    "name": "Crackling Drake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c984787c-f883-42c9-ae5d-9277c84dba01",
+    "name": "Crackling Emergence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "225f53ef-da42-47a0-b773-d2aad3338c72",
+    "name": "Cradle Clearcutter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0717287-9bff-446b-838d-6fc0adccc768",
+    "name": "Cradle of Safety",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "956250da-532a-4457-8696-73915be56943",
+    "name": "Cradle of Vitality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d25284b9-50e4-4dcb-9aaf-6f6478c4a90a",
+    "name": "Craftwork Crusher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ef53e18-0baf-4eee-b671-4c19b464cbfb",
+    "name": "Crafty Cutpurse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "727ca426-f4cc-4218-8ae5-8c427af2e816",
+    "name": "Cragcrown Pathway // Timbercrown Pathway",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3f599e15-cbc5-4170-b6b4-efd16aa222ac",
+    "name": "Cragplate Baloth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57120486-0316-4591-abca-438ab8283d3f",
+    "name": "Cragsmasher Yeti",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e5b8bb2-9dd8-4986-9d0a-659114be5a2a",
+    "name": "Cram Session",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "260f95c5-4058-4627-981f-98b9eafc2265",
+    "name": "Cranial Archive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e958b3c5-0666-4a99-a933-e5cb8b0da9da",
+    "name": "Cranial Ram",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "38405a37-921a-49ab-a95b-28eb8c26474a",
+    "name": "Crash and Burn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "328d5ef0-b25e-4f2a-80fe-35c6ae419e8a",
+    "name": "Crashing Drawbridge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b166d97-c2c1-4642-b151-9bb1ad32e362",
+    "name": "Crashing Footfalls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c3f87d7-a632-4b8c-9052-b4055ea88771",
+    "name": "Crashing Tide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8d3936f-4c08-4ffe-83c9-7ed26fb8f9cd",
+    "name": "Crashing Wave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2d7251e-2848-4b85-8d99-7c43be163dfb",
+    "name": "Crash of Rhinos",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "8832b76b-58b7-41b2-b2f6-842563b55b36",
+    "name": "Crash the Ramparts",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "41c15160-ee8c-42e3-bc6c-593b8c8ae335",
+    "name": "Crash Through",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "71355b51-e70e-47b0-8460-933af3567141",
+    "name": "Craterclaw Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c52bd39-0586-48ca-b263-17210cf9feb6",
+    "name": "Craterhoof Behemoth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8cf8614-14f4-4c20-9697-2e5ea34e0039",
+    "name": "Crater's Claws",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cd13364-3ee8-4a00-986a-489b0ccf90c7",
+    "name": "Craven Hulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16c99713-f19e-4b25-9b03-6a8d8203adfe",
+    "name": "Crawl from the Cellar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfe1a112-97aa-4e81-8431-81552ba2cdcf",
+    "name": "Crawling Barrens",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99ba0d4f-b2bf-48ea-95d6-b6b85ee077ab",
+    "name": "Crawling Chorus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a42262b8-8a26-4570-a6ee-24b239d095fc",
+    "name": "Crawling Infestation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98441834-7da0-4d9f-88a4-a342a9b2a4c3",
+    "name": "Crawling Sensation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f9b7bbea-ea20-400b-a5b7-4d6993d8777b",
+    "name": "Creakwood Safewright",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ffc79d71-5a1f-40a8-80af-84c85e12ba6e",
+    "name": "Creative Outburst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0bdddaf9-579a-4588-b5b3-faa189d4bdcc",
+    "name": "Creeping Bloodsucker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc0d4e58-db39-4a05-b27c-452180c86d47",
+    "name": "Creeping Chill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c23f2546-bf9e-4390-b6f7-c616920e04ca",
+    "name": "Creeping Crystal Coating",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59180e94-ccdf-4d9f-9a4a-fe55497d0d63",
+    "name": "Creeping Mold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "acf22340-7ff9-443f-a846-c44bb5a3f4e7",
+    "name": "Creeping Peeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "250cb58b-2924-4dff-92fe-ac0ebbbeb218",
+    "name": "Creeping Tar Pit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94431642-cfcf-48f4-9e0b-fcddc5b051ef",
+    "name": "Creeping Trailblazer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7bb3c3b8-25b7-4c48-aa41-dcdcebbc3d5e",
+    "name": "Creepy Puppeteer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c116b787-5f7e-47ef-a694-58709770dd32",
+    "name": "Creosote Heath",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2886f95e-c4e8-4770-b7de-40985f336cfb",
+    "name": "Crescent Island Temple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86c0ddaa-6926-450d-949a-6c89f43c71c2",
+    "name": "Crested Herdcaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "054fedbb-062e-491e-9a94-594fda33094f",
+    "name": "Crested Sunmare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0cca60c3-f0be-494d-8c2c-9b135ef83165",
+    "name": "Crew Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2987c385-011a-4032-a516-a46d1e9dc9e8",
+    "name": "Crib Swap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5996b1d0-7fe3-4fec-8730-9db901d887b1",
+    "name": "Crime Novelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3df3574-c4da-415f-a56b-807ed8e41d73",
+    "name": "Crime // Punishment",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5e238e67-00f2-4656-bf69-0115e47321a5",
+    "name": "Crimestopper Sprite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a98f48d-a5e6-497f-ba9a-92af7b489871",
+    "name": "Criminal Enterprise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2962cfc6-6557-4aee-a95a-8ca3bb06eb29",
+    "name": "Crimson Cowl, Master of Evil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8863742-6c1c-415a-ad27-7def6d119c6a",
+    "name": "Crimson Operative",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e699d140-eb13-4f15-aecb-85c76e8b1b14",
+    "name": "Crimson Wisps",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4459117a-d11c-44f4-9aac-caefc5b2d6f2",
+    "name": "Crippling Chill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7a7ba65-ad14-41d5-889b-9bbeae9ab3f7",
+    "name": "Crippling Fear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "992e6845-1c6c-4b74-839c-317823bde15b",
+    "name": "Critical Hit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "142b2f24-49f6-4ef8-9731-9ae2e513f796",
+    "name": "Croaking Counterpart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2071f278-77ba-46f8-85a0-ccd761199f29",
+    "name": "Crocanura",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5e31d27-3907-4c65-a988-a754f217e061",
+    "name": "Crocodile of the Crossing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53501112-bcdb-4bb5-9fd3-674cdba91951",
+    "name": "Crookclaw Transmuter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c39bc53-52d3-4610-920e-5607a625b01f",
+    "name": "Crooked Custodian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28b46183-c62f-47b1-9fee-3ba148202cab",
+    "name": "Crop Rotation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac950d10-e373-42d3-907b-ee56e45a2084",
+    "name": "Crossbones, Malicious Mercenary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "150cefd2-061d-43b2-8470-c17be0144021",
+    "name": "Crossover Collaboration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b817184-4965-4186-bfa9-6d9cf198050e",
+    "name": "Crossroads Candleguide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b26cfeb0-7bbe-4d93-8eed-e832f175a80c",
+    "name": "Crossroads Village",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab5f8b8c-e3f7-4265-bbc6-814bbfd4693a",
+    "name": "Crossroads Watcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a362e4d-6c02-4b67-ab63-c6622e505195",
+    "name": "Crossway Troublemakers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "439e59ab-0350-4729-9352-60e697eaa78d",
+    "name": "Crowd-Control Warden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06296d4d-a1b3-4e9a-a2fd-a0183bb892a1",
+    "name": "Crowd of True Believers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a4ffe297-5e82-43f9-91a4-7aa3d8dd3b4a",
+    "name": "Crow of Dark Tidings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33c722cf-b4bf-431f-aefd-ee96241a7fbf",
+    "name": "Crucible of Worlds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eec81460-899d-4b4c-b33c-ce2ca704df17",
+    "name": "Crude Bent Blade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24a691f3-88dc-47a5-b5cd-e02bb8026470",
+    "name": "Cruel Administrator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6897f9e0-f654-4c0a-9fda-2ad4e264bf9a",
+    "name": "Cruel Alliance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69b96fe5-9733-4b43-bd66-075742e142d9",
+    "name": "Cruel Calculations",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ee78cfc-0e9e-4737-a7e2-b42f94228040",
+    "name": "Cruel Celebrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a0bc265-6b40-48d6-a588-c9624df7d1bc",
+    "name": "Cruelclaw's Heist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39b7f3cc-e229-4cdf-9d85-db0b17203d7e",
+    "name": "Cruel Cut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c27b7cd-dcbf-45a7-9e15-a6d8dfd3a087",
+    "name": "Cruel Grimnarch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e3cc9b6-7849-4385-a487-c8f5364174e7",
+    "name": "Cruel Reality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "836d074a-8888-42a0-8dce-11ffce00d2f5",
+    "name": "Cruel Revival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "997bdec5-f67b-4822-a3ba-c636e2685e8a",
+    "name": "Cruel Somnophage // Can't Wake Up",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2e68e3f7-b168-4541-b8a0-791a8a6ebde8",
+    "name": "Cruel Truths",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9353eb6-c7e7-4d85-a0c2-32b1d091881a",
+    "name": "Cruel Tutor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01294ac9-1a06-4ee8-b3b1-db1f07c9d94e",
+    "name": "Cruel Ultimatum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1f1ca09-897a-434c-bbb1-e4ad4a1547aa",
+    "name": "Cruel Witness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93596258-bb44-4aa3-833d-9a0ab16b5ec1",
+    "name": "Crumb and Get It",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c13da0f4-917f-4e07-b484-21cb4bec4da6",
+    "name": "Crumble to Dust",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c1fe86a-3696-4634-bc26-cd45846529ec",
+    "name": "Crumbling Vestige",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea384b0d-3091-4d50-b15f-1f6763647b7c",
+    "name": "Crusader of Odric",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ecbc234d-e1d3-4bcc-81d4-fffc2c7ea16a",
+    "name": "Crush Contraband",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ece897d-5b52-4fca-9f97-d7e864134c0b",
+    "name": "Crush Dissent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "618cd1bc-4422-441b-906f-1a209277be93",
+    "name": "Crushing Canopy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77a1958e-ee24-4305-9dad-da8372803be8",
+    "name": "Crushing Disappointment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ede153c-89cb-4121-bf23-a1d213d6f238",
+    "name": "Crush of Tentacles",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4aa119f7-d411-4188-956e-547f7d14e789",
+    "name": "Crush the Weak",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b24a87af-407f-4c58-80b4-caab9c65a233",
+    "name": "Crustacean Commando",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52a0dae4-2a95-487e-acd4-eabdb2d031e2",
+    "name": "Crux of Fate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b9a5170-39c0-4cbf-a041-f3c15f1359ae",
+    "name": "Cry of the Carnarium",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "106e9c0d-67a2-4db7-97d9-03e1ea1b40b5",
+    "name": "Cryogen Relic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "865715e9-6759-4e01-803d-702c959e386e",
+    "name": "Cryoshatter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9b3ee21-1af1-4e7e-8e48-d7c90d056f5c",
+    "name": "Cryotheory Adept",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16f75a65-d067-4f79-81b9-833c373cf4d2",
+    "name": "Cryptbreaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2bdd0bcb-6cfb-48e7-972e-355ff46621a4",
+    "name": "Cryptcaller Chariot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8186a992-9065-4a7f-bb00-1c20e01e8fb6",
+    "name": "Cryptex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c22257e-8a00-40b7-a29b-55fcec7ddbd4",
+    "name": "Crypt Feaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2eb7a64-a307-4a78-a25d-63fb3ae1e237",
+    "name": "Cryptic Caves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73b8adea-1786-44fc-b190-bf240b07f5b6",
+    "name": "Cryptic Coat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3e51a35-09df-4189-b131-08a21e6a557d",
+    "name": "Cryptic Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f26c04a-9bf7-4cbd-a95f-73ee4a3b1af1",
+    "name": "Cryptic Serpent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c36f787e-d8d4-4bd5-9790-64766878fe46",
+    "name": "Cryptid Inspector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce00e0d0-c6f4-4fe8-97c3-7279b06d8fdb",
+    "name": "Crypt Incursion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0cbf361-d7dc-4556-a654-71c08785095a",
+    "name": "Crypt Lurker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc78776b-822b-4f11-8982-0805a25a9d36",
+    "name": "Crypt of the Eternals",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60c8a1d4-8d0a-4906-bcaf-d3a09d57c452",
+    "name": "Cryptolith Fragment // Aurora of Emrakul",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "043f869d-b11c-4c0d-9591-2bf0df7bde55",
+    "name": "Cryptolith Rite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "baddf7ee-f6b9-41e3-b930-57129952cc1d",
+    "name": "Crystacean",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "291c7abf-9d64-4ba0-ae21-e3459edc9a95",
+    "name": "Crystal Barricade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06a6130f-f27b-4db0-915d-decd9a7d3c15",
+    "name": "Crystal Carapace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b291d046-7649-4a05-98c4-224ecaece912",
+    "name": "Crystal Fragments // Summon: Alexander",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f15fb0cc-8e96-4f03-94d0-b51410415afd",
+    "name": "Crystal Grotto",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93d2638b-0c19-4fba-a0ad-84b6a9784eb3",
+    "name": "Crystalline Armor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49a46cfa-f2e9-4718-a6cb-47dbb0792b56",
+    "name": "Crystalline Giant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca68648f-fe3a-4770-9842-a3dc2310f099",
+    "name": "Crystal Quarry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c2d2888-38be-41f9-aaf2-8337e87d2aed",
+    "name": "Crystal Slipper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20f3388f-0931-4a09-bcda-96deb01e1787",
+    "name": "Cuboid Colony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c1b3f1b-40d8-4cd5-bedf-92c3c534be84",
+    "name": "Cubwarden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15e5136e-ed15-49a8-b027-e09436673fb4",
+    "name": "Culling Ritual",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6385fd0d-256d-4400-9319-afa8170024db",
+    "name": "Culling the Weak",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4e124af-d335-4c42-b60a-fe578f69f7ed",
+    "name": "Culmination of Studies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5762815-5fc3-4ae7-abee-69f27c5e4e90",
+    "name": "Cult Conscript",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c65f8949-5e37-4929-994a-ec037814bf63",
+    "name": "Cult Guildmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c51da69b-7fd7-43a3-be29-c44fc0c36130",
+    "name": "Cult Healer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b755881-a72d-4e21-a369-d2924eb4585a",
+    "name": "Cultivate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d8505d3-c8a1-4850-95d4-5ddb8ad49770",
+    "name": "Cultivator Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1eb530c-dd36-40ae-8617-6bb6969565e1",
+    "name": "Cultivator's Caravan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c11fef0f-972d-4756-9902-fd3e3af00707",
+    "name": "Culvert Ambusher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a38eba6a-db90-48ac-bb49-889a7fd90ce9",
+    "name": "Cunning Coyote",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "746768bc-9abc-495f-ad00-4b58497dce0d",
+    "name": "Cunning Geysermage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96335212-ec57-4beb-bab1-11c8eaa62119",
+    "name": "Cunning Maneuver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7351317d-62a1-4894-9811-aa950c49eece",
+    "name": "Cunning Nightbonder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "75e8907d-f726-4a63-ba8b-c0fd4936734e",
+    "name": "Curate",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "9938d178-0ce6-45c0-b317-fd5c54231579",
+    "name": "Curator of Destinies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04858b93-0a2a-44d0-942d-7fadf589cbb7",
+    "name": "Curator of Mysteries",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e636c98-67c7-4f02-b909-5d43e276fa41",
+    "name": "Curator of Sun's Creation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a89ad91e-2bc2-45f4-b32c-fb2b67a2019e",
+    "name": "Curator's Ward",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "223fa044-d387-4884-bf4e-75f1b61c6a46",
+    "name": "Curiosity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc5370e0-a0e6-4958-a6f2-093a3868b575",
+    "name": "Curious Cadaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8de2e1b-f2fa-4b6a-a3c5-9811c7f5f051",
+    "name": "Curious Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e451b5aa-5832-42b3-8d72-f67e126a529f",
+    "name": "Curious Farm Animals",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30af656a-99ab-4e0a-81fe-3cdb0ea6a0cc",
+    "name": "Curious Forager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c38db10f-c0b7-4391-b49a-77079a4d087c",
+    "name": "Curious Homunculus // Voracious Reader",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "52fe8101-82af-4aed-a395-54e7b7639bd2",
+    "name": "Curious Inquiry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22a23706-a5fe-46f3-b845-6f58d558c723",
+    "name": "Curious Obsession",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e67bd8eb-66db-48af-82f8-74f5595f1928",
+    "name": "Curious Pair // Treats to Share",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "981298e6-ddee-49c0-9377-f47f019b4138",
+    "name": "Currency Converter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9c4996a-35eb-4d38-9680-57d9d039ed82",
+    "name": "Cursecloth Wrappings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17916cf9-1e6c-41bd-96ce-2b050d828838",
+    "name": "Cursed Courtier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88b50194-bc39-47a6-968b-983553d89cf9",
+    "name": "Cursed Minotaur",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "4d67e2a7-4aa7-44cc-853b-500d7aac046d",
+    "name": "Cursed Mirror",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9adc3750-0ddb-4f2c-a0e7-131e59d4cba5",
+    "name": "Cursed Recording",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a265910-2e10-4e97-88ab-c0cb1a712eb8",
+    "name": "Cursed Windbreaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd077d1a-f395-41c2-b1df-dd5e2f723abf",
+    "name": "Cursed Wombat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f30a084c-5705-40f5-8e0d-2083d33973c7",
+    "name": "Curse-Marred Demon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0fb70b94-0847-4155-8953-cb53fef82ef1",
+    "name": "Curse of Hospitality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "44eb0caa-ba16-49e4-915c-bd5e1ce770e6",
+    "name": "Curse of Leeches // Leeching Lurker",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "297494f0-1f79-4f77-b68b-6ed858e21f4e",
+    "name": "Curse of Shaken Faith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36e267c5-ea98-4e26-b2b4-3faa05493eb4",
+    "name": "Curse of Silence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fd061f2-7269-4eea-bc7c-95a123893efa",
+    "name": "Curse of Surveillance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64b41b54-ca22-41df-8bd3-dc4f7832fbb7",
+    "name": "Curse of the Werefox",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b30210d-10e9-4703-8967-032063bb4f26",
+    "name": "Cut Down",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b205900-ec39-455e-900b-615ece08a07f",
+    "name": "Cut In",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ce63f60-0211-46c7-8fb6-c5484ebfa029",
+    "name": "Cut of the Profits",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf3234f2-09d7-4d8b-b871-3bf0fcb75b6d",
+    "name": "Cut Propulsion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98a5bf1a-1088-4339-9a9b-6ee5e4956cf1",
+    "name": "Cut // Ribbons",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "428d131c-b0fa-4e96-9c02-e2e6714357b9",
+    "name": "Cut Short",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5707c278-dab9-43bc-b3a3-a6b7923511f4",
+    "name": "Cutthroat Centurion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43192553-0db9-48ec-ae88-a2605a6608d8",
+    "name": "Cutthroat Contender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54530a84-8278-4c93-a2cb-f5c86619a053",
+    "name": "Cut Your Losses",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "126a5d0b-e7d6-458e-87af-47d845678014",
+    "name": "Cyberdrive Awakener",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77eda626-5cef-496d-b291-cfa1ee6fc1fb",
+    "name": "Cycle of Renewal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2088e791-9ce5-4e97-a4ce-f51adaa3f42b",
+    "name": "Cyclone Summoner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d75b9c82-1b49-4c3e-a1b5-aeef57d6644b",
+    "name": "Cyclonic Rift",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "638ecc20-a275-4810-9669-89a0730c5362",
+    "name": "Cyclops Electromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10bca1b1-4f92-40e8-b9c0-d08c534903e1",
+    "name": "Cyclops Superconductor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8170ddd6-c054-4851-bdc2-4d319b60ba41",
+    "name": "Cynette, Jelly Drover",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d5ff568-1c55-4757-94d0-5743ca674bab",
+    "name": "Cynical Loner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "026ef98e-4f0a-4a6d-b74f-d17ac8b10e37",
+    "name": "Cytoplast Manipulator",
+    "status": "unsupported"
+  }
+]

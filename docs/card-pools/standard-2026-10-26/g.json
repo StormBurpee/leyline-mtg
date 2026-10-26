@@ -1,0 +1,1312 @@
+[
+  {
+    "oracleId": "d7f777ae-6122-4af9-b962-7574bc8e2691",
+    "name": "Gadget Technician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "322e3bc1-2dfa-4d5f-848f-a82d9ce02a67",
+    "name": "Gadwick's First Duel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34bdeca4-b1e0-4fa3-afe4-bec743a080b8",
+    "name": "Gaelicat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86d2a45a-e452-4241-8ab4-28a2bb808ffa",
+    "name": "Gaius van Baelsar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86746a84-3e8a-44b4-8494-60cbee9816b5",
+    "name": "Galactic Wayfarer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0747a4f-d041-4750-aef5-a5d101696f65",
+    "name": "Galewind Moose",
+    "status": "curated"
+  },
+  {
+    "oracleId": "9efb3aa4-0023-4e0e-8bd4-f4dff1b3be66",
+    "name": "Galion, Elvenking's Butler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2fcb1c1c-6157-4955-b899-e8a8b337d188",
+    "name": "Gallant Citizen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4e0ba9d5-4bd6-49a0-ae00-70818738d0ba",
+    "name": "Gallant Fowlknight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fba2fa87-3f2a-4a9f-a19e-a1f9dada4118",
+    "name": "Gallant Pie-Wielder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04dcda3b-3401-4523-8b97-b700a14feb36",
+    "name": "Gallant Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87f39199-3e4b-44fa-8406-62019eb43c10",
+    "name": "Gallia, the Merrymaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58285b70-0d13-4723-b5a4-91fb6f9ccf03",
+    "name": "Gallia, Tragic Host",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9268d369-173e-4325-98f6-348beeb8ba62",
+    "name": "Galuf's Final Act",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48ab8ba0-0e85-4656-a798-ceb961fb02ce",
+    "name": "Galvanic Giant // Storm Reading",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9b44c005-6799-47fd-8b0d-7179b5281d78",
+    "name": "Galvanize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfe8f77a-cc26-438b-92ae-2ca7a91f813b",
+    "name": "Galvanizing Sawship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f48f2a9b-4ba5-4984-8180-3950889bba65",
+    "name": "Gandalf, Goblins' Bane // Flameshape",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "cd1a9d87-4c91-4456-8d88-19e0d6e0b200",
+    "name": "Gandalf, Spark Starter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c996bc53-184d-4dc3-8244-e8d9528516a0",
+    "name": "Gandalf, Wandering Wizard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60206d4e-4301-4d7a-a68e-46a2ad9fc407",
+    "name": "Gangly Stompling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e74a2a4c-ca3c-49e8-9b0f-b4d1bb91fb54",
+    "name": "Gardenize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "073f12d1-eaa1-4d08-bc1d-b216a3dc0c67",
+    "name": "Gargantuan Leech",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "75e930dd-32e9-4c39-81a7-d833a3976b8d",
+    "name": "Garland, Knight of Cornelia // Chaos, the Endless",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3fb83218-e18d-405d-91c8-46b5e4e672a9",
+    "name": "Garna, Bloodfist of Keld",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c709873-84b5-46c2-bb29-85b041a6df88",
+    "name": "Garnet, Princess of Alexandria",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d808e64-a648-4f1b-a3a9-fd09568db281",
+    "name": "Garrison Excavator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "184d4672-05a9-4182-8b3f-3561fb33ed62",
+    "name": "Garruk, Curse Breaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3127ae9b-a7a7-43ec-89d7-688f8445b33d",
+    "name": "Garruk's Uprising",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a6972fe-348a-4a19-a1d0-bdf8f1f9c792",
+    "name": "Garruk, Veiled Butcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c98626b-ba97-4d1e-9be7-291480ae8d22",
+    "name": "Gas Guzzler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b601721-90ca-45d3-9a3a-19c719799bfa",
+    "name": "Gastal Blockbuster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "26c09127-8225-4ba2-9f97-f5558b1c41b5",
+    "name": "Gastal Raider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86d67952-19b8-4bb8-b7d7-b2751e86591c",
+    "name": "Gastal Thrillroller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d185ad9f-c7fc-41f0-b852-4fe2cde0a8ae",
+    "name": "Gastal Thrillseeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "386c5895-9713-4c28-9ba8-8ca0caa06c13",
+    "name": "Gate Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6781f8ae-2a86-4e3d-bc43-48809c9d6c26",
+    "name": "Gatekeeper of Malakir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66c227f2-0e74-43e2-ab24-3866d15c5eef",
+    "name": "Gateway Sneak",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85e1556d-c4da-4979-a5db-4ce3842c7797",
+    "name": "Gathering of Darkness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36b58705-c5a5-4547-8d8b-a7c35e1f69ae",
+    "name": "Gathering Place",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f6d6e90-7462-46e5-bf2f-725b4badc394",
+    "name": "Gathering Stone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db69c3c9-d809-4361-8055-8c2dd4c6dd67",
+    "name": "Gather the White Lotus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f3e7420-86aa-4847-bc2d-21f6bae470c8",
+    "name": "Gearbane Orangutan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdbd8a95-1dc8-4df2-bab0-a93d1941a405",
+    "name": "Gearseeker Serpent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef32a4a9-14e2-4738-b4c2-53ce5e1d2a53",
+    "name": "Geist of Saint Thalia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf3a0585-3976-4078-8beb-6afa79f97027",
+    "name": "Genemorph Imago",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a356d04-2e86-435b-9766-27b93b468a61",
+    "name": "Gene Pollinator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ade54bb7-3df8-4578-add8-1f85afee57ab",
+    "name": "General Traag, Heart of Stone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91c835d1-22ca-4c90-9ba6-c8e01bbc0347",
+    "name": "Generous Plunderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8601f5f-0f7c-4689-9d15-137f1e82c49c",
+    "name": "Generous Revival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2487868-f386-438e-a73f-b494f6d35fac",
+    "name": "Genesis Wave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d6d0348-46ad-46ed-ae7b-d7510f0ebe70",
+    "name": "Genghis Frog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8242cd78-6675-43b5-8924-0a88c3aa6f76",
+    "name": "Genji Glove",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df",
+    "name": "Geological Appraiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f577b46-c69d-4c75-9db5-7e10206b6b59",
+    "name": "Geometer's Arthropod",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a62e6cf4-1adb-4c28-b24b-91287bb23e96",
+    "name": "Geralf, the Fleshwright",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c3a1313-a66e-4317-9732-e4ff9288b0db",
+    "name": "Germinate Recruits",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8735c62d-1508-4bdc-a5d0-f7c68d892a5e",
+    "name": "Germinating Wurm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8d22139-7b25-4bb1-b0d9-d4c622401edf",
+    "name": "Germination Practicum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a80519c4-f778-4b8e-9920-64013e98c95b",
+    "name": "Get a Leg Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ddbf891-7f80-44e9-b94c-70c1da0b91ed",
+    "name": "Getaway Barrel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98eac0f7-3f4d-46ef-9575-680c52e967cf",
+    "name": "Getaway Glamer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "522dd417-364b-44ab-8ca9-fb55db5f26a6",
+    "name": "Get Lost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2f3c27e-b646-4449-901a-8b809cdfa84e",
+    "name": "Get Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77b832a8-a3af-44fe-bc67-72510d292667",
+    "name": "Gev, Scaled Scorch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "411b9158-e427-4099-bd30-3fbb22edb553",
+    "name": "Geyser Drake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfdcb451-a597-46fe-893c-49e6dbda5f71",
+    "name": "Geyser Leaper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0b6be0c-41cf-4757-9f0e-87227b6ba6b3",
+    "name": "Ghalta, Primal Hunger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8f16311-be5a-4648-b024-849a61dff0bc",
+    "name": "Ghalta, Stampede Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d496c6e-8f7b-420f-9197-dacd2feb528f",
+    "name": "Ghalta the Immovable",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e5ea773-a60b-4502-9db5-ce93fa61cc89",
+    "name": "Ghalta the Unstoppable",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34b36022-0d93-48cc-a2cc-90ca4d65dc31",
+    "name": "Ghired, Mirror of the Wilds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e3f4987-6f31-4bc5-8bcd-6adb0440ee7c",
+    "name": "Ghitu Lavarunner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c53d958a-f660-4d2e-87cd-87702f973b3a",
+    "name": "Ghostly Dancers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec86a45f-046c-4aab-9b82-422c6f39142e",
+    "name": "Ghostly Keybearer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88f34d15-c338-40a7-b56c-c5b650847430",
+    "name": "Ghost, Spectral Saboteur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ef583ab-e0a0-4e4b-bd65-af766038b1fd",
+    "name": "Ghost Vacuum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48e6d3d8-2f27-4017-acdd-40bce8cdbc02",
+    "name": "Giada, Font of Hope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a4b42b3-6a95-41e1-9741-b35723d8da73",
+    "name": "Giant Beaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd0c0e85-ff24-46c9-a547-4f633355c131",
+    "name": "Giant Cindermaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77e5e7e3-b97b-4953-9df4-1aee509fbf2a",
+    "name": "Giantfall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5748ebf1-24e3-499d-ab7c-c2cebd462a24",
+    "name": "Giant Growth",
+    "status": "curated"
+  },
+  {
+    "oracleId": "c93bb65a-a74a-499b-a538-65272079aab8",
+    "name": "Giant Koi",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80433c2c-5196-42e0-b9fa-d7b12783f5fd",
+    "name": "Giant's Boulder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "233e3b4b-faaf-451d-8a2e-e9f5a6ced671",
+    "name": "Giant-Sized Flying Ant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8f08704-7330-4fa9-b456-2e96aa252a2c",
+    "name": "Gideon's Memorial",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7afa530f-ea51-4bee-af3b-59b83ea5cb25",
+    "name": "Gideon the Oathless",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88d7bd11-7b1d-426c-8552-01448531c6ad",
+    "name": "Gigantic Big Bear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa5e4aa5-e2cb-4c8c-91cb-554bec0f21d4",
+    "name": "Gigantoad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e666bae7-dd51-4921-8b89-7e8d423caba0",
+    "name": "Gigantosaurus",
+    "status": "curated"
+  },
+  {
+    "oracleId": "ef06e10c-553b-45b8-abf0-1d2e87c22128",
+    "name": "Gigastorm Titan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc983c67-eb5d-4a85-a12e-a410f85e949e",
+    "name": "Gila Courser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f4939dc-6e87-47fa-8287-9da60d4b5db2",
+    "name": "Gilded Ghoda",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a02a9a7-39d9-4763-85d3-747a0540b60b",
+    "name": "Gilded Lotus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9432e87-38f6-4889-8f07-ae7cd045e532",
+    "name": "Gilgamesh, Master-at-Arms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5eb8bb1d-7567-4c24-913b-463b5fe463c4",
+    "name": "Gilt-Leaf's Embrace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f762c225-1c8c-4f12-aa88-c8c89e0a7185",
+    "name": "Gingerbread Hunter // Puny Snack",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "10b8d4c7-7553-4d76-b643-d98b80701e13",
+    "name": "Gingerbrute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c629fa91-e13c-494b-a95f-a91b7c52035a",
+    "name": "Giott, King of the Dwarves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "696363c9-e8a7-4c65-b65c-4a94891ec43d",
+    "name": "Gisa, the Hellraiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a311daab-40dc-4433-9ed8-feab7c558bbf",
+    "name": "Gishath, Sun's Avatar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2bf4811f-3462-4542-acb0-101e772bfec9",
+    "name": "Give In to Violence",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "8f976399-29a9-4eb7-844d-3d3f2fdf6ea7",
+    "name": "Glacial Dragonhunt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "300e48df-7f7f-47ff-b450-8ba7bd1b1c67",
+    "name": "Glacier Godmaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "295a831c-490e-42ba-afc1-dab3524a4f0c",
+    "name": "Glacierwood Siege",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb5a05d1-baa5-459d-a2e5-438f4a60b82f",
+    "name": "Gladiolus Amicitia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2802069f-201e-43a7-b5d3-43a95951a2ec",
+    "name": "Glamdring, Foe-hammer // Gleam of Death",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e67a820b-6249-478e-91db-9827e44aa60a",
+    "name": "Glamer Gifter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7b0d897-38c0-4f90-81e8-3c5b8d31a607",
+    "name": "Glamermite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df9409e6-bd6d-4b5b-b807-fcf347ee940a",
+    "name": "Glarb, Calamity's Augur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9167046-7908-4d16-8cc1-3eb02d1ba547",
+    "name": "Glass Casket",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4122720b-cad9-4ebb-b458-be71411c21e3",
+    "name": "Glassworks // Shattered Yard",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1eb9e401-8975-447b-839d-f7cd23897465",
+    "name": "Gleaming Barrier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7785ffd4-f169-475d-9558-ce4877b3378a",
+    "name": "Gleaming Bastion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af294df7-f8a0-4d52-88cb-086678463970",
+    "name": "Gleaming Geardrake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c01aeaa5-1d3b-4493-9575-30175dcd780d",
+    "name": "Gleaming Splendor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97febf6b-302c-4c41-8838-eef7c7353bdc",
+    "name": "Glen Elendra Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11ed8209-2184-4416-a8f0-72de00599574",
+    "name": "Glen Elendra's Answer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33c06c11-8d0a-45ce-adea-c9a7a8ac8779",
+    "name": "Glidedive Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ff5ce28b-25be-4136-a7b2-8f25c08a6455",
+    "name": "Glider Kids",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "823006a8-098c-457a-8546-77ae2457c459",
+    "name": "Glider Staff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a26820b9-3bec-41b2-9812-99e4a2211297",
+    "name": "Glimmerburst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8fd88b98-9899-4bc0-a4b7-7ef6fba36dfd",
+    "name": "Glimmerlight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbb5526b-3aa1-43d9-acdb-bd230ce3fe63",
+    "name": "Glimmer Seeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa44fa48-d270-4f0f-b672-d63e1c1942ce",
+    "name": "Glimpse the Core",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eebe3fd6-afd0-4bb3-9e8f-c737497dae33",
+    "name": "Glint Weaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a7229a8-1634-4278-ab50-0ec2b51edac1",
+    "name": "Glister Bairn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0f83ab8-6185-4139-b41e-a11500036915",
+    "name": "Glitch Ghost Surveyor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6505a53b-00db-44c4-8eaa-09a1a01451a4",
+    "name": "Glóin the Mighty // Easy Pickings",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d71bda4c-3dee-4398-8fd0-f77d8743b887",
+    "name": "Gloomlake Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78e1beca-840d-47b2-8759-cc31454fdf5a",
+    "name": "Gloom Ripper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07a8ca73-9890-4c87-8b39-fd9eaea5ef45",
+    "name": "Glorifier of Suffering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac4277d7-d78a-4d6e-8d6d-11f9e56f8ae7",
+    "name": "Glorious Decay",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28673657-f05f-4b0a-b80c-939773abdefb",
+    "name": "Gloryheath Lynx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2034d41b-5e77-49a6-884e-d3a6017f84d0",
+    "name": "Glowcap Lantern",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ae339fd-8e64-4e3a-8e27-e4993932ba62",
+    "name": "Gnarlback Rhino",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a848ea46-347d-49c7-85c8-023cf836d0b3",
+    "name": "Gnarlbark Elm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5481431-c952-4ad9-94fe-355076ef632b",
+    "name": "Gnarlid Colony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "188a3f61-3f7c-450d-8ee7-e12ad13b86c6",
+    "name": "Gnashing of Teeth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0332f7b5-dad3-4fd0-b86c-78bd8301f59d",
+    "name": "Gnawing Crescendo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "060e7187-0c7d-4022-9a1f-36a6f75314ca",
+    "name": "Goatnap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c64feae-95d7-426d-9e42-d3b0841d2054",
+    "name": "Goblin Boarders",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2625fa9c-638c-46d3-966b-1166f440186f",
+    "name": "Goblin Firebomb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23c3de07-8aa2-48e9-848c-50b5a40bd133",
+    "name": "Goblin Glasswright // Craft with Pride",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ff4b9723-d5f1-40d2-aa35-fa3d2a6f4b5c",
+    "name": "Goblin Maskmaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79824266-bffa-476c-bdd3-976e9d789a42",
+    "name": "Goblin Negotiation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "836bd011-2da5-443a-a814-19a664b98a1a",
+    "name": "Goblin Oriflamme",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eda99a16-6a7c-4f39-8a6b-a284e6afd3fc",
+    "name": "Goblin Plate Mail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eae15f7d-1f6e-4dfc-afea-7698b93cd145",
+    "name": "Goblin Smuggler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79cd09e8-d738-47c0-9473-b6281bec6935",
+    "name": "Goblin Surprise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "237758f3-84b2-4e5b-a2c7-b28c893e2790",
+    "name": "Goblin Surveyor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37ce95bb-8ff5-47b9-85e4-21be7a794940",
+    "name": "Goblin Tomb Raider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98d20908-6d68-4d31-b719-207f93c9b402",
+    "name": "Goblin-town",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85ceb4ac-7a1c-4c7e-95a3-515a5b5d6116",
+    "name": "Goblin-town Flunkies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "35b2b172-5fbc-4e4d-a011-390ee1b6c848",
+    "name": "Goddric, Cloaked Reveler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73864fcc-1bde-4bc0-831e-2b93e546e417",
+    "name": "Godless Shrine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61586052-7d69-489c-84c4-0359228d131b",
+    "name": "Gogo, Master of Mimicry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13fbd525-c9ee-4bd6-b269-94fb264024b6",
+    "name": "Gohn, Town of Ruin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "533d5bf9-0912-451f-a3f4-3842b0a75b1d",
+    "name": "Golbez, Crystal Collector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7534d0b3-4211-4add-8e8d-370c033518d3",
+    "name": "Goldfury Strider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79dfe2eb-82b9-4dae-95c8-58fdf9006bc7",
+    "name": "Goldmeadow Nomad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91415d12-b13d-4b5c-bb60-6ec6f4fdde6e",
+    "name": "Gold Pan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45687a24-e8cb-4864-8721-410eb8320aab",
+    "name": "Gold Rush",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b62543f-a475-457a-a96b-b5d070383d3c",
+    "name": "Goldvein Hydra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1624d10-8838-4af8-aea1-a96c0fe6fd6b",
+    "name": "Goldvein Pick",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa2da325-6859-45bb-b185-35526b01bcc1",
+    "name": "Golgari Guildgate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9207facd-fbf9-4faa-ac44-6c0bcac81551",
+    "name": "Goliath Daydreamer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "514b451b-814d-45fb-a2ba-8fe6f0bdad60",
+    "name": "Gollum, Riddle Master",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0296d57e-e5b9-456f-bb21-eb584adefb4c",
+    "name": "Gollum, Silent Slinker // Meager Meal",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "8d88facd-cf7e-498e-ab6b-6bd021316162",
+    "name": "Gollum the Abandoned",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac4e1818-4873-4143-9b99-46f205d006d9",
+    "name": "Gongaga, Reactor Town",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46f77c8c-6817-4aea-a80a-d91f508ccbd0",
+    "name": "Go Ninja Go",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e16f79c1-ffbb-4893-b62a-d4e9d15e2b16",
+    "name": "Gonti, Night Minister",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0efe1357-bfbb-42c0-9cc9-6a919d686c66",
+    "name": "Go Nuts!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5c64331-2ba5-43ad-b77c-979875cc39e3",
+    "name": "Goobbue Gardener",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "1e0cdff3-3ec5-41fc-8053-f072bae156b3",
+    "name": "Good-Fortune Unicorn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41699d92-c209-4fcb-bbd6-685b3437d0c2",
+    "name": "Gorehorn Raider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96e6d220-87db-4dab-abaa-e80c9577d89a",
+    "name": "Gossip's Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6f59807-eaf6-4889-8c89-2ac915afefff",
+    "name": "Grabby Giant // That's Mine",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a37387f0-9d57-49ff-aa38-2c6b359e8916",
+    "name": "Grab the Prize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b580c6d8-f501-4623-843a-5bb2b638a339",
+    "name": "Graceful Takedown",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40e0665d-57b8-4c19-9fb8-b3155d7bbb94",
+    "name": "Graduation Day",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe7938ce-6289-4bf8-a8f5-85ecccbb7f86",
+    "name": "Graft Surgeon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c4603be-d71a-4d33-b62c-04ead1987dbe",
+    "name": "G'raha Tia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c749f23c-40c0-4159-b84c-a70cbb062c14",
+    "name": "Grand Abolisher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b0fdb28-f7b1-4c30-9f2c-14a9074da22d",
+    "name": "Grand Ball Guest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7574379-d10e-4bbf-b0b1-13feee753d8b",
+    "name": "Grand Entryway // Elegant Rotunda",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "37f2ec12-d703-40cd-a155-053ae2e4ddcc",
+    "name": "Granite Witness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09b71c95-7b5d-4cee-a505-e0dda72715b7",
+    "name": "Gran Pulse Ochu",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dced5cab-1438-4264-b44c-54dc37ec73d3",
+    "name": "Grapple with Death",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ba99ade-df8d-4654-882a-a5f4256ada3d",
+    "name": "Grappling Kraken",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc509d30-ceca-47ef-a574-62c021812014",
+    "name": "Grasping Longneck",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "522a4b02-24c7-45d2-9097-2803cc9fffad",
+    "name": "Grasping Shadows // Shadows' Lair",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7c340a39-4ee0-4ba1-bb66-6674f8020fda",
+    "name": "Gratuitous Violence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67821712-e58f-4fee-81af-021059ac72ea",
+    "name": "Gravblade Heavy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d7f7e6e-5076-4af7-afe3-3e500835c4aa",
+    "name": "Gravelgill Scoundrel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6cb8b8c4-0674-4f14-9d89-010969fbb80e",
+    "name": "Grave Researcher // Reanimate",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1eebc02a-9a64-49b0-8322-c5ce671457ce",
+    "name": "Graveshifter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ea58a77-9b2e-4ae2-8a31-a51804900a3b",
+    "name": "Gravestone Strider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15c6837c-775b-4b4a-a2f7-9fd79215fa05",
+    "name": "Gravkill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c009b3f-6580-4ab8-84e8-d4cf7a456a02",
+    "name": "Gravpack Monoist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "952300de-766e-4ceb-bd36-e0b721bebc17",
+    "name": "Greasewrench Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f40f374b-acaf-459d-9ccd-b0b22d1a3f28",
+    "name": "Great Arashin City",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79e69a91-d580-47fb-be76-1e32c50d2fa0",
+    "name": "Great Divide Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37f82ad8-4f0b-4b17-abcc-03f43d4fdf1c",
+    "name": "Great Fierce Bee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5cb6ebf7-6a75-4464-9e39-e171fcb52de3",
+    "name": "Great Forest Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4607026-80b2-4fa6-99d5-694cd3b43868",
+    "name": "Great Gilded Boat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8c70dab-1e27-4a9c-bd2d-910d5720d02d",
+    "name": "Great Hall of the Biblioplex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afe2f7a4-9440-4d93-801f-a18b627efb21",
+    "name": "Great Train Heist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27e17542-549b-4c05-8091-c10a245c916b",
+    "name": "Great Ugly-Looking Goblin // Clap! Snap!",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "0868ebbb-2fe9-4f53-9697-acad8cda5ec1",
+    "name": "Greed's Gambit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4a9d63a-5a8a-4f51-9e49-43d6dc3234b1",
+    "name": "Greedy Freebooter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d8aa053-289d-40d9-baa7-9bd1c5b8e957",
+    "name": "Greenbelt Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0a4efc3-fa68-48f2-a6d0-2fff93e05c77",
+    "name": "Greenbelt Radical",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67175889-02f9-4ad8-a9ab-11db44328b67",
+    "name": "Green Goblin, Revenant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6b77cb9-49a5-4d1a-ae2d-02ae176dc1fa",
+    "name": "Greenhouse Propagator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a341eb75-e6a0-468b-8c83-61102249c648",
+    "name": "Greenhouse // Rickety Gazebo",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a4e34165-4e53-4c31-bf61-eb772bc3c054",
+    "name": "Gremlin Tamer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00173df7-a584-410c-af1d-ada9c791056a",
+    "name": "Greta, Sweettooth Scourge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d97b9d1-1138-40da-b593-8065ea6ed7b3",
+    "name": "Grievous Wound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6eff5e17-946b-4433-9f48-88f103844c42",
+    "name": "Griffnaut Tracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "431d6a2b-e22c-4921-a5f1-dd672f764f78",
+    "name": "Grim Bauble",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd31487e-e95a-4d90-8c85-742aa83c3e90",
+    "name": "Grim Javelineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "edf429a8-6a4d-4d2a-b0ca-c0c72a0698a3",
+    "name": "Grim Reaper, Lethal Legionnaire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e853e2fb-f90d-4934-aa70-c8d3cdf12e56",
+    "name": "Grim Repriser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7163800-41fc-410a-9650-50ae90842170",
+    "name": "Gristle Glutton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da344e46-6bdf-4032-8590-bac850d5713d",
+    "name": "Groundchuck & Dirtbag",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a334434-072a-4486-810a-63efb29dea6d",
+    "name": "Grounded for Life",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1ce210e-2d1d-4ab4-bfb7-8e36884797fc",
+    "name": "Group Project",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52f03e73-3dba-44c2-b256-10e7e208b961",
+    "name": "Grow Extra Arms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "645ab3c7-ee1d-4dd0-811f-2dc7f7c7e792",
+    "name": "Grow from the Ashes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa1d8bfa-729a-4e10-8069-57a1d4f4392b",
+    "name": "Growing Dread",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea9c459a-6047-43aa-968f-a582be4000e8",
+    "name": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1efd6082-15a8-4322-892d-02d01e381e2a",
+    "name": "Growth Curve",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8173e160-9a22-43f7-90d1-9ada043bc1b7",
+    "name": "Grub's Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "180286e4-67fa-44d5-9e90-4a4e99c016a7",
+    "name": "Grub, Storied Matriarch // Grub, Notorious Auntie",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "32de1b70-f993-4423-b0ef-0762c2b4d1b1",
+    "name": "Gruff Triplets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d38476e9-2e47-4c0c-8129-483c0bd09ec0",
+    "name": "Gruul Guildgate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6d83a51-9d57-44a7-aae3-a96d43ec5ac8",
+    "name": "Guac & Marshmallow Pizza",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "849c97e4-df15-4ecb-bdf8-283bb497d90c",
+    "name": "Guadosalam, Farplane Gateway",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63e79a6f-ed98-480a-a740-d44e111046f7",
+    "name": "Guarded Heir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "18ba355d-a25f-4a5d-b734-11739b0b86af",
+    "name": "Guardian of the Great Door",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3fb2829-64f2-4795-b815-edcc5bbbc360",
+    "name": "Guardian of the Halls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b319540-4db1-43d3-8f4d-f5a276ad78e4",
+    "name": "Guardian Sunmare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6cb65b68-91b2-45ba-867b-3b31d6dd5643",
+    "name": "Guerrilla Gorilla",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98005890-d566-4a27-906f-625513171e85",
+    "name": "Guidelight Matrix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "045488b3-0206-4dcd-91ab-59ec542f06c0",
+    "name": "Guidelight Optimizer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8103865-5086-4f16-a35a-a56acdab1547",
+    "name": "Guidelight Pathmaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0bc3704-9bf9-4039-b3f8-205c1e5eb6e9",
+    "name": "Guidelight Synergist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24f1445c-16c9-45c0-be56-0266e6c78cdb",
+    "name": "Guiding Hydra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f5ebbb8-f49b-488f-bb85-888aaa918bdd",
+    "name": "Gumdrop Poisoner // Tempt with Treats",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "61773534-8da8-48fa-b51a-73c0a9a751c4",
+    "name": "Gundabad Opportunist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fde50a0d-9bc6-45f4-873e-3de81a513fac",
+    "name": "Gurmag Nightwatch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2be43acc-a815-44bc-8803-d702e553fbc1",
+    "name": "Gurmag Rakshasa",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4dcd7b78-ce5a-43eb-a16d-3b9ea411795d",
+    "name": "Guru Pathik",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31265357-5ecb-4d83-80ff-1795b1dfdecb",
+    "name": "Gutless Plunderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "322c1c8f-ef8a-4a9f-b9ce-927720bad1d6",
+    "name": "Gutsplitter Gang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6bdaf76-6a03-4695-9c4b-f040e73435af",
+    "name": "Guttersnipe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83eb74df-1c77-48b0-83be-55d7aa4d3618",
+    "name": "Guy in the Chair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c48cf135-b280-4e9f-a9d9-225104870741",
+    "name": "Gwenom, Remorseless",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f143d87-35fb-40e3-94ae-f85cfff9adb5",
+    "name": "Gwen Stacy // Ghost-Spider",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "eddfe7d7-6868-4b81-b46c-d0765e5210e7",
+    "name": "Gysahl Greens",
+    "status": "unsupported"
+  }
+]

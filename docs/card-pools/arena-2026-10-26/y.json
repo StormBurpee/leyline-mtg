@@ -1,0 +1,357 @@
+[
+  {
+    "oracleId": "692babfa-9b74-415e-a560-abae4ccb006b",
+    "name": "Yahenni's Expertise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdba89eb-1cf5-46e6-9d09-1adb9bc40fcd",
+    "name": "Yahenni, Undying Partisan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4bf4397-22e5-458d-b9d1-3f3a0a27e9e5",
+    "name": "Yanling's Harbinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "980e1721-3717-4425-95a4-938dbf2ac661",
+    "name": "Yargle and Multani",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed66cd31-958f-4b28-82a3-e04acc819afc",
+    "name": "Yargle, Glutton of Urborg",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "014d0bcd-b80f-4c43-8f00-f4c31e8f3370",
+    "name": "Yargle, Goliath of Otaria",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6bb60f1f-9295-41ce-bdcd-3fe67f8e175c",
+    "name": "Yarok's Fenlurker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30868d69-2ba3-4373-9d47-4bc8978f35d1",
+    "name": "Yarok's Wavecrasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95b53836-18aa-451a-992d-2a111deeeab2",
+    "name": "Yarok, the Desecrated",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30fd6171-3e57-4c05-a86b-e1c0479ba236",
+    "name": "Yarus, Roar of the Old Gods",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6dc23410-4d8f-4c8a-92b4-a8b3fae1af4e",
+    "name": "Yasharn, Implacable Earth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c3d86b6-5dcd-4016-9b4a-d4f66b1e963f",
+    "name": "Yathan Roadwatcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2321b4fc-6b73-4d1a-84cc-13524adb0899",
+    "name": "Yathan Tombguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40b36bc6-c185-4bda-99e7-0118953c2c97",
+    "name": "Yavimaya Coast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8dd5f5af-d2d8-4356-8617-8381081b930c",
+    "name": "Yavimaya, Cradle of Growth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9900c771-ab81-415e-90a7-123c1bacfa83",
+    "name": "Yavimaya Iconoclast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42a1954f-774e-4d80-98b3-a736f23e2060",
+    "name": "Yavimaya Sapherd",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3e9917e-1bcf-4e8e-9550-7f5897dcb433",
+    "name": "Yavimaya Sojourner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad181ee7-756f-4002-9009-023ea6172991",
+    "name": "Yavimaya Steelcrusher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "740f9ab2-fc94-4abc-82b4-6b53116bf1a4",
+    "name": "Yawgmoth's Vile Offering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1e232c0-dc38-47be-a5a0-f68bc1d86a29",
+    "name": "Yawgmoth, Thran Physician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1fa20b05-cc06-4fb7-ae76-677a29e2185a",
+    "name": "Yedora, Grave Gardener",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a364879-31bd-4760-833d-165cde1e96c6",
+    "name": "Yellowjacket, Heartless Marauder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0adede77-5181-4190-8066-4797cefe0189",
+    "name": "Yenna, Redtooth Regent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "62511d43-8eaf-405a-9c81-7bd593d3a01e",
+    "name": "Ygra, Eater of All",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c0e22f2-f0f3-43e6-87c5-c543032112d8",
+    "name": "Yidaro, Wandering Monster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5453550f-9136-4568-baf8-c3d20e33fbb6",
+    "name": "Yip Yip!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19b4cf0b-e1e4-4e50-80bc-673bc6ef8bb8",
+    "name": "Yoked Ox",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "07237694-b5d5-4c92-a429-55e343b8dd1c",
+    "name": "Yoked Plowbeast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e15504a7-2b67-4185-b916-172145f10b19",
+    "name": "Yorion, Sky Nomad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00a15abc-bdac-4977-90a0-f08d41941d01",
+    "name": "Yorvo, Lord of Garenbrig",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c00a0be5-d9a9-4263-a87e-7bf2d128ab3a",
+    "name": "Yoshimaru, Beloved Companion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c87da757-3daa-4874-a1e4-be0aa2adcb28",
+    "name": "Yoshimaru, Scrappy Stray",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ce785b9-aee0-4ac6-ab20-ee20d0551be4",
+    "name": "Yotia Declares War",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ad61622-a70f-423c-99e3-b1ef6ead0b31",
+    "name": "Yotian Dissident",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd39e485-71ba-40cb-8608-f5a0dfb7ef5f",
+    "name": "Yotian Frontliner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d218b9ad-3a6f-4bda-90c6-3f869c6c4e6d",
+    "name": "Yotian Medic",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "0d9d7f04-6319-4596-8b74-de5a794936e5",
+    "name": "Yotian Tactician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1157d79-38ea-4a88-b346-7b12614ff78a",
+    "name": "You Are Already Dead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e94ccdb-5978-440b-b7cd-11c7ca6b2c98",
+    "name": "You Cannot Pass!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9913da11-07f0-494a-8c47-11629dcb5be2",
+    "name": "You Come to a River",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0945337-1833-4545-a83f-fca673e7f0d0",
+    "name": "You Come to the Gnoll Camp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa7b41ba-08eb-40b8-a8d5-e67dc09c88ba",
+    "name": "You Find a Cursed Idol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "467c526a-02a7-405d-98de-c632ea83519b",
+    "name": "You Find Some Prisoners",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41cdeb52-e90f-44f8-94d2-23aa032c4870",
+    "name": "You Find the Villains' Lair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88e5300d-8339-41cb-85bf-325909116b61",
+    "name": "You Happen On a Glade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55d94c09-b6aa-4af5-923a-b4efc2a245df",
+    "name": "You Hear Something on Watch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c735077a-fae8-4c5f-a5bf-35969696460c",
+    "name": "You Meet in a Tavern",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17455491-c295-4130-99b4-1b5c6ac1cd25",
+    "name": "Young Necromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5fac139a-07d3-4e6c-98e3-d98b199f7a6f",
+    "name": "Young Pyromancer",
+    "status": "curated"
+  },
+  {
+    "oracleId": "8b492764-10b6-4506-be11-22daa9220a91",
+    "name": "Young Wolf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "934ef52e-3e97-418a-bbcf-114badbb2c8a",
+    "name": "You're Ambushed on the Road",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9dbc2fc8-ed42-4534-9676-bf0695cd518c",
+    "name": "You're Not Alone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28a362c2-0c99-48e0-b9cb-485a6c1f350b",
+    "name": "Your Fate Ends Here",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49aa87c7-034b-409d-b37f-50db6a42e533",
+    "name": "You See a Guard Approach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77d016e3-f652-4827-b49a-8044f6d2d45b",
+    "name": "You See a Pair of Goblins",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef2a24f5-ce5e-4054-843a-2cae0c66318a",
+    "name": "Youthful Knight",
+    "status": "curated"
+  },
+  {
+    "oracleId": "6d37ba4b-ff56-4eec-9dc2-2d7f357dc9c9",
+    "name": "Youthful Valkyrie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3268251a-8292-44f9-9267-c961b182f739",
+    "name": "Y'shtola, Night's Blessed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a6a7bf77-0560-4572-a826-3bc9df1f78d1",
+    "name": "Y'shtola Rhul",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ef06396-861d-4599-9976-6e5c04575456",
+    "name": "Yuan-Ti Fang-Blade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0e4dda1-2ffb-4353-a292-dcbc966967b4",
+    "name": "Yuan-Ti Malison",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "961f1883-2f97-4249-90f9-416279d7a9dd",
+    "name": "Yue, the Moon Spirit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "acdcbb49-9d71-4c36-8ccb-650fb11c3a58",
+    "name": "Yuffie, Materia Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8a0b967-3b5b-46f5-830b-5c8f1037784a",
+    "name": "Yuma, Proud Protector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba72d4a9-6f36-4796-bd71-2342fa9b4a30",
+    "name": "Yuna, Grand Summoner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3dee768a-612c-4960-bad2-2fe5b83a70c3",
+    "name": "Yuna, Hope of Spira",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f89b0143-4b19-4ab1-a96b-356b21e435ef",
+    "name": "Yuriko, Blade of the Mighty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "983f4fde-ab04-44f0-a294-c3b472de0b19",
+    "name": "Yuriko, Hope from the Shadows",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7043fbd-1dfd-42cf-be4b-cc343d0949e5",
+    "name": "Yuriko, the Tiger's Shadow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63e5180f-16d0-4524-94bf-ecbf3c417814",
+    "name": "Yuyan Archers",
+    "status": "unsupported"
+  }
+]

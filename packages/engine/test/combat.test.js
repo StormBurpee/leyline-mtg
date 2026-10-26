@@ -217,3 +217,45 @@ test('zero attackers skips blockers and damage', () => {
   assert.equal(s.step, 'endCombat');
   assert.equal(s.choice, null);
 });
+
+test('menace rejects a single blocker, allows zero or two, and stays blocked if one leaves', () => {
+  let s = fixture();
+  const attacker = put(s, 'Grizzly Bears'),
+    a = put(s, 'Grizzly Bears', 1),
+    b = put(s, 'Grizzly Bears', 1);
+  s.modifiers.push({
+    objectId: attacker.id,
+    incarnation: attacker.incarnation,
+    power: 0,
+    toughness: 0,
+    keywords: ['menace'],
+    expires: s.turn,
+  });
+  s = attack(s, [attacker.id]);
+  s = resolve(s);
+  const failed = dispatch(s, {
+    type: 'blockers',
+    player: 1,
+    pairs: [{ blocker: a.id, attacker: attacker.id }],
+  });
+  assert.equal(failed.ok, false);
+  assert.equal(failed.error.code, 'MENACE');
+  assert.equal(failed.state, s);
+  assert.equal(dispatch(s, { type: 'blockers', player: 1, pairs: [] }).ok, true);
+  s = act(s, 'blockers', {
+    pairs: [
+      { blocker: a.id, attacker: attacker.id },
+      { blocker: b.id, attacker: attacker.id },
+    ],
+  });
+  move(s, s.objects[a.id], 'graveyard');
+  assert.ok(s.combat.blocked.includes(attacker.id));
+});
+test('block eligibility rejects noncreature and friendly attackers', () => {
+  const s = fixture(),
+    b = put(s, 'Grizzly Bears', 1),
+    land = put(s, 'Forest'),
+    friendly = put(s, 'Grizzly Bears', 1);
+  assert.equal(canBlock(s, b, land, 1), false);
+  assert.equal(canBlock(s, b, friendly, 1), false);
+});

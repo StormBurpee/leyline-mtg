@@ -1,0 +1,647 @@
+[
+  {
+    "oracleId": "24fd1f47-bb15-45c6-a7b1-ba8eb3bb8b1d",
+    "name": "Vaan, Street Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b000bcf5-529a-447a-bc2e-ae6f42d6073b",
+    "name": "Vadmir, New Blood",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a871dfbf-1fb9-4d1c-81bb-e4f0b131a11b",
+    "name": "Valgavoth's Faithful",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "660d44a2-391a-416c-b46c-ddcc3739f527",
+    "name": "Valgavoth's Lair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "663d9559-6619-46fe-8ff4-655f1d5e0e4c",
+    "name": "Valgavoth's Onslaught",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cae3ec72-436d-4086-9dcb-17b3d92ad5c4",
+    "name": "Valgavoth, Terror Eater",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1333d690-a6dc-4ef8-8c57-2ba16727c0a5",
+    "name": "Valkyrie Aerial Unit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27400927-9aba-4fb3-90c4-490d01969e60",
+    "name": "Valkyrie's Call",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60654004-7d9a-47ac-a70d-b246dd1728d3",
+    "name": "Valley Flamecaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4879c8f0-8832-4290-bc71-9838940f75cd",
+    "name": "Valley Floodcaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16e9c452-6288-4da8-813d-2eb6b7a538c3",
+    "name": "Valley Mightcaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81c509b2-3164-47e9-94b3-bdba0487d2f1",
+    "name": "Valley Questcaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b919920-b1b6-499b-a7fe-c630778a7831",
+    "name": "Valley Rally",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8da0599a-8f63-4dba-857f-b4e10b7191b6",
+    "name": "Valley Rotcaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f938353-9081-4dc1-b8e7-d18ece038bd4",
+    "name": "Valorous Stance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3023de2-61e7-4f46-aa4a-09d08ee7d939",
+    "name": "Valor's Flagship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3386414c-32fa-40ae-9b30-dab976a158c1",
+    "name": "Vampire Gourmand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b753d7dd-4c6b-4472-a009-671572f927eb",
+    "name": "Vampire Interloper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0045925-25bf-403c-b721-5f05ba30985b",
+    "name": "Vampire Neonate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "feb244f8-bcb1-44cf-9940-2719221a7309",
+    "name": "Vampire Nighthawk",
+    "status": "curated"
+  },
+  {
+    "oracleId": "bbea8ade-a641-4132-b306-f39fe2f14311",
+    "name": "Vampire Soulcaller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33cee4b4-3d80-46f1-9223-49ed785891a1",
+    "name": "Vampire Spawn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "660de988-b6fb-4f36-8006-42af3e7f908d",
+    "name": "Vampiric Rites",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de4678f8-a441-4e4a-a339-9b62ebfb0100",
+    "name": "Vanguard of the Rose",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3250466f-82a4-45e1-9722-ff247ddf8c15",
+    "name": "Vanguard Seraph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "577725ae-290f-4081-8352-3317521a096f",
+    "name": "Vanille, Cheerful l'Cie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1056b27c-125c-4daa-a0c8-533efc9ccc32",
+    "name": "Vanish from Sight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8aa0d7d-e5f6-4d66-bdc1-315483e1b256",
+    "name": "Vannifar, Evolved Enigma",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89ae3475-9063-4700-a7bd-47d5dcd43a3b",
+    "name": "Vantress Transmuter // Croaking Curse",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "67c603cc-ad66-4a1c-8386-5901c9c01bfb",
+    "name": "Variable Chaser // Arc of Fortune",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3a97bc8d-bd81-468e-9277-eba4fac11ee0",
+    "name": "Vastlands Scavenger // Bind to Life",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e8d0accc-b320-4c07-8a71-a09db860351e",
+    "name": "Vaultborn Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e15c78d4-6fb1-4bd3-8219-c66b83fcaba1",
+    "name": "Vaultguard Trooper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80e5d768-cc1f-48f8-b0fe-ed974e4d1a56",
+    "name": "Vault Plunderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93af8f9d-6877-4cb8-a744-c89186db22e1",
+    "name": "Vayne's Treachery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8dcba63c-4701-4dc9-81f5-ca8e8933a3ba",
+    "name": "Vector, Imperial Capital",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f83a768c-162d-46f0-8ebd-d9c6b2c69322",
+    "name": "Vein Ripper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa123b21-518a-4f1d-9629-c44576d45f21",
+    "name": "Veloheart Bike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70a702fe-1dd6-4d7b-a85a-45744ecad741",
+    "name": "Velvetwing Butterflies // Gaze in Wonder",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2e5adbcf-6b5c-4ded-a339-8757040ef878",
+    "name": "Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "4aff2f31-619f-406e-b2c9-a2c733c04bc4",
+    "name": "Venerated Stormsinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4cdbc466-42fc-471f-beab-397caec18101",
+    "name": "Vengeful Bloodwitch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5b7c283-357b-409f-9afc-985a3b89cc40",
+    "name": "Vengeful Creeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1afb9ce6-658e-40e4-a4a2-9a68182a1e73",
+    "name": "Vengeful Possession",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c649d5ae-2f38-4737-8123-8069a2ba0bde",
+    "name": "Vengeful Townsfolk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe540a23-0357-44fa-8e1c-0a5c2a04cb01",
+    "name": "Vengeful Tracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad6442c2-7aa2-4c24-8133-f679a3499bde",
+    "name": "Vengeful Villagers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03ebc100-68ac-4d53-adc2-d537212f7d31",
+    "name": "Venom Connoisseur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6731d861-cc52-4a2e-8c33-154681fd50e4",
+    "name": "Venom, Evil Unleashed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb54d807-624b-471e-8c44-07322003903e",
+    "name": "Venomized Cat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2fac62be-dcbe-409f-a362-f0e519ec14a9",
+    "name": "Venomsac Lagac",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8388faa0-f64e-4b01-836e-617f99b808a4",
+    "name": "Venom's Hunger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b3d364d-6581-43de-a80a-d5b07f5d21ed",
+    "name": "Venus, Torn Between Worlds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83c61083-b357-4775-a855-5a9013cc2bdf",
+    "name": "Verdant Kraken",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8fc049e7-a16d-4b48-b930-5c346f6718b9",
+    "name": "Verdant Outrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "29f1484c-91b6-436a-a6be-3ab8b58c0fc1",
+    "name": "Veteran Beastrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2313a3f9-3eac-4684-a25e-6a6ae445a723",
+    "name": "Veteran Guardmouse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ccaadf8d-22c0-4139-b734-03ac2fcb4494",
+    "name": "Veteran Ice Climber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc5b1276-d13e-4392-988d-1315bc90a9b1",
+    "name": "Veteran Survivor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a66d8dc6-ced4-4b24-b0c2-3557b2a851be",
+    "name": "Vial Smasher, Gleeful Grenadier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e78e6e0-60f0-4c3c-b8dd-bd673f5152b8",
+    "name": "Viashino Pyromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52867cdd-8bf2-4cae-bb8d-0f16a18a455b",
+    "name": "Vibrance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be0b86fc-8450-41d4-9836-6de11cecb857",
+    "name": "Vibranium Energy Daggers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a7f3e1f-6798-4644-b64c-7765f81f0938",
+    "name": "Vibrant Cityscape",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0cbb1ba-73b1-4418-bbe3-5d1a02007c08",
+    "name": "Vibrant Outburst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e02abbc0-687b-4aef-95b8-bf18e199725a",
+    "name": "Vicious Clown",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90898c76-21f9-4597-88fe-dc9179911cde",
+    "name": "Vicious Rivalry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92bf8f05-cbfd-42d8-8bc1-d7f2e46f9872",
+    "name": "Victor, Valgavoth's Seneschal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcb35d42-bcd2-427c-9640-ff3602b79912",
+    "name": "Vigorbloom Annex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "826f17d1-3806-4579-8b1b-2082b7b03d69",
+    "name": "Vigorbloom Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd416426-d037-45e3-9647-816bf982cbea",
+    "name": "Vigorbloom Vanguard // Seed Suture",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "556dd333-4066-41f7-98f6-41794754de71",
+    "name": "Vile Entomber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1aae80a5-079c-48f3-aad1-563931e1a031",
+    "name": "Vile Mutilator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd2888aa-71f3-47ee-ba33-7bb95d5bc836",
+    "name": "Villainous Hideout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c7c1867-20cb-4035-bb2a-42760edf0a55",
+    "name": "Villainous Wrath",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "814679b4-51bd-4b07-a7b8-d3375d36ff45",
+    "name": "Vincent's Limit Break",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f40e6bbf-1fed-4ec5-869d-18c2dd396d14",
+    "name": "Vincent Valentine // Galian Beast",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d6b478d1-5015-49ba-b1aa-cbc2b08107a6",
+    "name": "Vindictive Triumph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43b339ec-4d7d-41ac-a5ab-96c6a6de00e2",
+    "name": "Vindictive Warden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5fffd840-1e6e-4f5d-b847-802f9a25eb5c",
+    "name": "Vinebred Brawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5918fb0-c33f-4e33-ac6d-8f94723d4296",
+    "name": "Vinelasher Adept",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db649e15-24ca-4fd8-9f0b-f1df28c9c57d",
+    "name": "Vinereap Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8ecec61-cc47-4051-a599-0e7470764488",
+    "name": "Violent Echoes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ef80a38-f464-4d1f-9e81-d4087d6ecc9b",
+    "name": "Violent Urge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af6438b9-3fde-45c9-af69-dff686c1e0de",
+    "name": "Virtue of Courage // Embereth Blaze",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f0bbcabf-29e7-4c7e-893f-86b64d3620a9",
+    "name": "Virtue of Knowledge // Vantress Visions",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f61f4307-4eec-476a-97e5-d4d3da2b54c3",
+    "name": "Virtue of Loyalty // Ardenvale Fealty",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "fae36da0-bf9c-484f-b2fe-dd8ab2effc5c",
+    "name": "Virtue of Persistence // Locthwain Scorn",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "31af78dd-e962-4d9a-b696-f3048be03486",
+    "name": "Virtue of Strength // Garenbrig Growth",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f",
+    "name": "Virulent Emissary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d70a2f4-92cb-40c3-9e5a-f6c57d4a64c2",
+    "name": "Virulent Silencer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1e489f6-37e5-469e-bca3-0e9d3fc3fa95",
+    "name": "Virus Beetle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db11596a-6704-427b-aaef-0211e7822127",
+    "name": "Visage Bandit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7cad43df-31c9-47b5-bc05-4a0f6544b396",
+    "name": "Visage of Dread // Dread Osseosaur",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c9f35490-462a-4c8f-9d8b-d8abca6596f7",
+    "name": "Visionary's Dance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70c96b50-ac2b-493d-bd15-fc66eb767111",
+    "name": "Vision of Love",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "240410a0-3288-4336-b1ad-34936e64ccf2",
+    "name": "Vision Quest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b46800b-711b-4cbb-b296-26115b4f6839",
+    "name": "Visions of Villainy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9768d43b-8b3f-4d03-ac1b-e603af832875",
+    "name": "Vito, Fanatic of Aclazotz",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03ee49c9-95a3-44f1-b010-f7c4b2f86a7c",
+    "name": "Vito's Inquisitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22a33139-a730-4792-9dd5-2c0f99f96855",
+    "name": "Vitu-Ghazi Inspector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5f20a6d-8c3e-452f-9d98-4886f0fa052a",
+    "name": "Vivien Reid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f67a599c-200a-4831-9e73-126c7435a396",
+    "name": "Viv Vision, Teen Synthezoid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f890d42-e4f1-4eed-aa6c-718865de8927",
+    "name": "Vizier of the Menagerie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6454c457-a278-431a-9e8d-bfd1a966bdde",
+    "name": "Vnwxt, Verbose Host",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b12cbda1-ac09-49eb-96b3-a4df27bc37ea",
+    "name": "Voice of Victory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "517f84b5-cf99-410d-96ea-910740231dac",
+    "name": "Void Extrapolator // Omit Variables",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f7afe534-fbb0-4f8b-9e98-aa49d4005465",
+    "name": "Voidforged Titan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d94ff0b8-5499-4eeb-80f0-20c7fbf07499",
+    "name": "Voja, Jaws of the Conclave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95c44f28-f7fa-4785-83b9-0d81be0db0c8",
+    "name": "Volatile Fault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebc3ca0f-35eb-4606-90ab-eb64556f81fe",
+    "name": "Volatile Wanderglyph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a257426d-70c9-4d58-bd8b-97ec38f6e133",
+    "name": "Volcanic Villain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf4268e6-170a-445b-b215-718f7494ae28",
+    "name": "Volley Veteran",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d96840e-f9b3-4c86-8f59-f12e5736318f",
+    "name": "Voracious Greatshark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25b0876e-c995-486e-8536-6e68b76b9c86",
+    "name": "Voracious Tome-Skimmer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd785a7e-df65-48e6-843b-7831f3c1e5d3",
+    "name": "Voracious Varmint",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d36d80e-9934-4b56-bf3c-2b18a6da3d2d",
+    "name": "Voracious Vermin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7efe9fe5-d93c-46a6-afbd-9655a902c6bc",
+    "name": "Vote Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8961618-ae68-4d13-84eb-8b5464ce4971",
+    "name": "Vow to Erebor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c0cbc44-6c31-44fe-a3da-a97a37a01726",
+    "name": "Voyage Home",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f40d73b-9106-448e-8649-5d62939f0d38",
+    "name": "Voyager Glidecar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87e8c044-5f83-437d-a89e-8a95559045f6",
+    "name": "Voyager Quickwelder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c91b0dd5-4c63-49a5-95bf-c342b6ff2076",
+    "name": "Vraska Joins Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7799413d-e313-4a05-ad28-f4c926c26d28",
+    "name": "Vraska's Final Mercy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cad63b31-667b-4518-bc49-be4ffb82bc63",
+    "name": "Vraska, Soul of Stone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "580de511-863c-4b7a-9d2e-fcdf6e12d54b",
+    "name": "Vraska, the Cutting Glare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7c5a568-3855-4a20-9edf-01a8a6a4ba97",
+    "name": "Vraska, the Silencer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1216900e-93e3-41a4-b354-9c81938639c2",
+    "name": "Vren, the Relentless",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0409765a-bbb4-465e-99b3-3687bffc3cf9",
+    "name": "Vulture, Scheming Scavenger",
+    "status": "unsupported"
+  }
+]

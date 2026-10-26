@@ -1,0 +1,9 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/o/owlin_shieldmage.txt
+Name:Owlin Shieldmage
+ManaCost:3 W B
+Types:Creature Bird Warlock
+PT:3/3
+K:Flying
+K:Ward:PayLife<3>
+Oracle:Flying\nWard—Pay 3 life. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 3 life.)

@@ -1,0 +1,2407 @@
+[
+  {
+    "oracleId": "dc92bbee-a445-4927-932b-15985bb93f19",
+    "name": "Laboratory Brute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa286dd5-aa19-446d-9003-684d81eb57ca",
+    "name": "Laboratory Maniac",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1a22f41-0543-4e85-8fb8-93c018b461aa",
+    "name": "Labyrinth Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "867ee3e7-88df-4e4b-b199-f441a8460573",
+    "name": "Labyrinth Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8",
+    "name": "Labyrinth of Skophos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a29b2e93-d872-4be8-8b15-57f57282ed45",
+    "name": "Labyrinth Raptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "201c8de7-9675-475b-8f9e-7b1935234488",
+    "name": "Lacerate Flesh",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e51fdb8-4f83-4e94-b36c-40a501075ecb",
+    "name": "Lady Octopus, Inspired Inventor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "356a85d9-2570-448c-a455-f4ce915a604f",
+    "name": "Lady of Laughter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59442ef7-5276-4f38-83c8-9a849388a711",
+    "name": "Lady Spider, Maybelle Reilly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0be9bb2-3234-4c6c-b8ce-0879b1f43003",
+    "name": "Laelia, the Blade Reforged",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12c98c1e-7e02-473d-b494-ad8a0731fe82",
+    "name": "Lagomos, Hand of Hatred",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d208c1e-c273-437f-9aea-136400e450e1",
+    "name": "Lagonna-Band Storyteller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09cc0faa-71d7-428b-9fc4-5ba09e244e89",
+    "name": "Lagonna-Band Trailblazer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7b6f5d4-b122-4ab4-a2c2-449ac781359a",
+    "name": "Lagorin, Soul of Alacria",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a98b586-5187-48a1-bde3-f6141f3e9cb1",
+    "name": "Lagrella, the Magpie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae6dc45c-b8c9-4cbf-892f-8c00f4199aaf",
+    "name": "Laid to Rest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "126e9140-2c05-4c00-8b01-5653456c736a",
+    "name": "Lair of the Hydra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80bcb154-b4be-4bbd-bbc1-b116a59045b7",
+    "name": "Lakeshore Apothecary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c56cd2ec-5907-4282-9162-d93b7dfd63b5",
+    "name": "Lakeside Shack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "717c6beb-81c6-43ed-aab0-aedfc1cbac33",
+    "name": "Lake-town",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf765efe-884c-48e2-9edb-9d45cf2756dd",
+    "name": "Lake-town Lookout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dba1d231-6b03-44ad-ab8c-be0c8fe1b6db",
+    "name": "Lake-town Mariners // Gone Fishing",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "0f208cd3-7673-4380-9cb8-5b6f09966ebd",
+    "name": "Lake-town Toymaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84c7d60a-7a7a-4344-8db5-d658792e3ac4",
+    "name": "Lambholt Harrier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f3c104e2-470b-429f-a047-a21edc2adb3b",
+    "name": "Lambholt Raconteur // Lambholt Ravager",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e0f23e7e-2858-4f5e-9dd5-8a0ba934a048",
+    "name": "Lampad of Death's Vigil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6f7efad-381c-45ba-9976-159b7e78f7ed",
+    "name": "Lamplight Phoenix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ca33b31-4707-40d0-b4ed-cbe625793122",
+    "name": "Lancer Sliver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "467c9fe6-d1d3-4242-bc0c-e522b4f21d56",
+    "name": "Landroval, Horizon Witness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ba7abbc-f6e8-40c2-800b-11efd10cca5b",
+    "name": "Landscape Painter // Vibrant Idea",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d2d9ecea-7925-420e-98b9-2f87f41f387c",
+    "name": "Land Tax",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef1a83f2-6707-41a2-b5ed-861c8e45ae07",
+    "name": "Languish",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67a025eb-6e65-435c-becb-b51085175292",
+    "name": "Lantern Bearer // Lanterns' Lift",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "06a1c404-d76f-4206-8740-7ad7488fac33",
+    "name": "Lantern Flare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0c4414f-f153-40f6-a3b3-94bcbf1d3e29",
+    "name": "Lantern of the Lost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61ab4548-5da9-4351-87e7-a3afc93d4bf5",
+    "name": "Larder Zombie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73346137-3117-4dc3-b5a4-1aca1da54548",
+    "name": "Large Bear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3f3d55c-a3f6-441b-a380-60c0734dc514",
+    "name": "Larval Scoutlander",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc3d2a9c-08a5-4aea-9fb8-42466b9152a2",
+    "name": "Lash of Malice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66499407-3ad2-464b-bbfe-95d860f53616",
+    "name": "Lash of the Balrog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "642d3494-7a6a-4aec-ba64-7c0c467ada99",
+    "name": "Lash of Thorns",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "56035e66-e730-436d-8de2-4ded7fd1b51e",
+    "name": "Lashwhip Predator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9457f3c1-a087-46cd-a8be-cf665466b77c",
+    "name": "Lassoed by the Law",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a82c3860-4dd6-4ffd-aa8f-ab8df687db6c",
+    "name": "Last Gasp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ff5502d2-37f5-4ad5-bee2-3a03ec973268",
+    "name": "Lasting Tarfire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "539583f4-21c8-4b61-a2c5-f612fadc3ffa",
+    "name": "Last Light of Durin's Day",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3999cd64-ff5c-4e2c-8aa6-d14f9f8a2b4c",
+    "name": "Last March of the Ents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f780d6f6-540b-4773-8a48-e56e95c2d39e",
+    "name": "Lasyd Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31bf199b-dfb1-428e-96a5-eb25104e2b43",
+    "name": "Late to Dinner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3c56fc4-3611-41b1-952e-4c5311b1510b",
+    "name": "Lathiel, the Bounteous Dawn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15fef45d-f1a9-49b2-abaa-fe77bb9d1afd",
+    "name": "Lathliss, Dragon Queen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c30147a-1131-402e-bdaf-9006b1022b83",
+    "name": "Lathnu Sailback",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "9b568c34-ba0a-44a7-a0ee-bee3a37b3396",
+    "name": "Lathril, Blade of the Elves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d5a1870-6d26-47e7-a86c-f3ff15cb0707",
+    "name": "Lat-Nam Adept",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6755a7af-5b55-4245-a777-27e69979479b",
+    "name": "Lattice-Blade Mantis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd7c5a8b-cf62-41e1-a664-b16e3e5d142b",
+    "name": "Laughing Jasper Flint",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f65e6a9-0d90-44b9-9b76-00814db2dbd8",
+    "name": "Laughing Mad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f713a6b4-bd9c-4bc3-9e00-26ecf16e4a92",
+    "name": "Launch Party",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "387b6b07-a283-412d-94c3-f7f1dc76e858",
+    "name": "Lava Axe",
+    "status": "curated"
+  },
+  {
+    "oracleId": "334f673e-7cfa-432c-93aa-41adfbb99113",
+    "name": "Lavabelly Sliver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea66ffa3-d084-434f-91a6-fdff49806285",
+    "name": "Lavabrink Venturer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "340de307-982a-4b26-9dc0-99113dc766cd",
+    "name": "Lavaclaw Reaches",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa71db44-5181-4c51-8b24-7fbedf36e3ca",
+    "name": "Lava Coil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa4ad622-5021-44fe-92af-0de115059eb6",
+    "name": "Lavakin Brawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a107fb84-6874-4964-a729-4425dad98330",
+    "name": "Lavaleaper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d94d807-97d9-4cdf-a63c-d8b82c2acc6e",
+    "name": "Lava Serpent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63bfb9ca-d9d5-4c17-be39-82eb115bc20c",
+    "name": "Lavaspur Boots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81ba3a33-0e04-4f68-9a42-1dd717733b57",
+    "name": "Lavinia, Azorius Renegade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d17d085f-aeda-4b23-ab80-729d070ae813",
+    "name": "Lawless Broker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10f0e797-3887-4c2b-9cff-80f110b952e1",
+    "name": "Lawmage's Binding",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd13392e-e72a-4dbb-ba9d-68f68e47e30e",
+    "name": "Law-Rune Enforcer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c7111365-b96b-4d6a-8c3c-73a0d8baf641",
+    "name": "Lay Claim",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa91d092-7f4a-4e4d-85db-e200692f3d9d",
+    "name": "Lay Down Arms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca60623a-1a98-4153-a0ee-2f34981de5cb",
+    "name": "Lazav, Familiar Stranger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c14bcef2-6d49-4430-86d0-e5a87ba442d9",
+    "name": "Lazav, the Multifarious",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ec0b64d-c793-47a6-9c26-9ad4d9e9c182",
+    "name": "Lazav, Wearer of Faces",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db145875-2a40-4fe3-b8ee-bf10ae8f7cd7",
+    "name": "Lazotep Behemoth",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "c3e67b8f-1c91-4a2f-b924-35bbaff4bab9",
+    "name": "Lazotep Chancellor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba0082fb-2d4c-489e-8140-93a6fa693fd0",
+    "name": "Lazotep Plating",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85643f9b-49ea-434b-9f27-c1431064345e",
+    "name": "Lazotep Reaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "134430b7-d566-485a-bd5c-7db8a285f4ca",
+    "name": "Leader's Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bec686dd-a9ea-4db5-bc20-8e40420b9a9b",
+    "name": "Leader, Super-Genius",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed2ef95e-8851-4226-9c63-4c19ea323b82",
+    "name": "Lead Pipe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea91be73-40f5-461a-bb39-d60216829a53",
+    "name": "Lead the Stampede",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01914751-af8e-4aea-a254-6fa4f9fd3457",
+    "name": "Leafcrown Dryad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef693b9f-11e3-49bf-8387-b8f480b9007a",
+    "name": "Leaf-Crowned Visionary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61324e37-4b79-4325-bf46-621b4270afe2",
+    "name": "Leaf Gilder",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "adff8c13-8909-47d0-acad-ba63597f2e96",
+    "name": "Leafkin Avenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55eb9310-f24b-410b-850b-a7d0d5117946",
+    "name": "Leafkin Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08bb1f33-b232-4382-a268-4804d4e72d29",
+    "name": "League Guildmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6614dbe5-d7c7-4a51-91db-912764050269",
+    "name": "Leapfrog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e920c955-66f5-4c6e-a2a8-8b282f9e456e",
+    "name": "Leaping Ambush",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b5c2ba0-3df7-4394-a3f1-8e8330d7ac81",
+    "name": "Leaping Master",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "7a6ce270-c261-422f-845f-11c22602a274",
+    "name": "Leather Armor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ee14128-3bec-4b65-8ee4-619337d4ed45",
+    "name": "Leatherback Baloth",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "1e9679e8-bef1-495c-8251-0d87d971e32a",
+    "name": "Leatherhead, Iron Gator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee9b606a-a1fe-43c8-84d0-9bf7b012cc75",
+    "name": "Leatherhead, Swamp Stalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dff5d16f-3a41-4873-8188-076e77f18c75",
+    "name": "Leave // Chance",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7bb843b6-c55b-4796-b1a7-2fff7b05c276",
+    "name": "Leave in the Dust",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c4abd72-29b0-4c82-9e67-b481cf7e8775",
+    "name": "Leaves from the Vine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "29c23fd7-0ac4-46af-8ecd-92b726575252",
+    "name": "Lecturing Scornmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97b2aa77-122f-41e3-ba28-c7040dae0f01",
+    "name": "Ledev Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "edcf36b4-dea4-4314-94da-e0ee5e30cd37",
+    "name": "Ledev Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9117015-1050-44dd-a46b-e7ffe2085fae",
+    "name": "Ledger Shredder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84bb960c-c34e-4979-8c0f-893c85cee27d",
+    "name": "Leech Collector // Bloodletting",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "17bcd92b-1826-4a36-9048-49e5e65a12fd",
+    "name": "Leech Fanatic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1aaddaeb-baab-42b6-a442-d97339da54db",
+    "name": "Leech Gauntlet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f104b361-8000-4eda-b530-1502528e09f9",
+    "name": "Leeching Sliver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06a37f16-c929-4b89-bf18-1b3f8f472eef",
+    "name": "Leering Onlooker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "843c9962-dee1-449d-8106-6383df32bcf6",
+    "name": "Legion Angel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b20671e6-d740-4ef6-b408-bf8a0465c0da",
+    "name": "Legion Conquistador",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c77dc11e-d95d-4e7e-bb24-d971c179e9b0",
+    "name": "Legion Extruder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb33abbe-b43c-4a74-b2db-cce949f0edf2",
+    "name": "Legion Guildmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad225ec2-ff3a-48f6-81a7-dfdd1b75e1f7",
+    "name": "Legion Leadership // Legion Stronghold",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5fa1b2f0-3ba4-49db-9cb5-b6130e4c255e",
+    "name": "Legion Lieutenant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "560a5452-0dc3-421d-bf16-8843a35dae6f",
+    "name": "Legion Loyalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7df8a8aa-1856-4fe6-a543-5de65da4f49f",
+    "name": "Legion's End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dce4d65f-cb91-48a2-a2a7-013e73dfb667",
+    "name": "Legion's Judgment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7d8b91b-6541-4d3e-af51-7e000eac69c1",
+    "name": "Legion's Landing // Adanto, the First Fort",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "dc29cb25-57f5-4cac-9764-efa644b41296",
+    "name": "Legions to Ashes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f2c8398-1606-400b-a593-2635656e8c4b",
+    "name": "Legion Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ccb9af3-6902-4130-a59c-4c882dc3a2fd",
+    "name": "Legion Warboss",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ddc12487-f577-4def-acdb-491f7ba6dc51",
+    "name": "Legolas, Counter of Kills",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e99497f-7c73-49ae-88b3-78d5d74ba9ea",
+    "name": "Legolas, Master Archer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59154c04-6bc5-4b95-af1f-6de5fed05649",
+    "name": "Legolas's Quick Reflexes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f71fcdc3-5e96-416e-a49d-37019806e2e2",
+    "name": "Lembas",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8a8407c-d0e3-4311-82ed-1ab1f75159d9",
+    "name": "Lena, Selfless Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7df50107-25d8-47dc-9a13-27b257cfbf6f",
+    "name": "Lens of Clarity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6496eea7-38f5-4428-a379-b08b0eeb5239",
+    "name": "Leonardo, Big Brother",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "933fe6e5-8d00-4411-aa54-7780382c1ea6",
+    "name": "Leonardo, Cutting Edge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "348c7e22-2179-41b8-a5d2-8dd488e7e66d",
+    "name": "Leonardo, Leader in Blue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74e3243b-6707-4769-8767-7cf2ef71009a",
+    "name": "Leonardo, Sewer Samurai",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e98c2af9-1393-487d-b8e9-f49a67bb7296",
+    "name": "Leonardo's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46ea8d02-b087-44f7-8403-93ffc1d3a8ad",
+    "name": "Leonardo, the Balance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f874f7f-b959-4de5-a5db-e65a90ac2f9d",
+    "name": "Leonin Lightbringer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "14079b33-cf68-4d16-962c-5c40518c4163",
+    "name": "Leonin Lightscribe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c692dd9-3986-46de-ac10-cc917b7c41b7",
+    "name": "Leonin of the Lost Pride",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e720216-a980-4a34-8aef-62ac3ef15a6e",
+    "name": "Leonin Relic-Warder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4387b6b4-661f-4a4b-adc9-8493b7c2a4e7",
+    "name": "Leonin Sanctifier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cde26d69-f3e7-4dd0-a53b-cd0ec812d717",
+    "name": "Leonin Scimitar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "517c7295-8ba2-47a6-a1c6-aee722f8ca88",
+    "name": "Leonin Skyhunter",
+    "status": "curated"
+  },
+  {
+    "oracleId": "97c29db0-b3e1-4704-afe8-5218250c044c",
+    "name": "Leonin Surveyor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de1e1352-adb2-4ac1-bb2a-ee654d5c727d",
+    "name": "Leonin Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b1351e6-165e-4ca3-96d5-4774b3176362",
+    "name": "Leonin Warleader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5d91377-fd66-4dbe-a092-07f2ea379ca7",
+    "name": "Leovold, Emissary of Trest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51df0203-578d-47e1-a9f7-a13445f597d7",
+    "name": "Lessons from Life",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61dfb656-1cdd-4ab3-b533-93718cc66b15",
+    "name": "Lethal Exploit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "464749e1-9df2-47d0-8fcd-516f566022b5",
+    "name": "Lethal Sting",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ab565bb-3188-4d23-93d8-5de67fc0d056",
+    "name": "Lethal Throwdown",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dd893746-e8bd-49fa-a1ce-755d5bd4f513",
+    "name": "Let's Play a Game",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0cb503e-9814-4280-9c29-4eff3379bc24",
+    "name": "Letter of Acceptance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "259ca16d-7753-402b-bcd0-2425500dee99",
+    "name": "Levitating Statue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f597675-0f6d-438c-990c-337171927a5e",
+    "name": "Leyline Axe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b49642f6-20bd-468d-9dac-e578f9ac3091",
+    "name": "Leyline Binding",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa6c4079-72e1-4b2e-bd26-9399298c6105",
+    "name": "Leyline Immersion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f2e713f-c7d5-4c91-9934-9e36888244fd",
+    "name": "Leyline Invocation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1197a595-3afc-4f18-b868-bbb096771922",
+    "name": "Leyline of Abundance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9dc65ffe-17fc-4280-b4bd-78073ac7e12b",
+    "name": "Leyline of Anticipation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49a5c149-5067-4840-8385-c2989d7e5a34",
+    "name": "Leyline of Combustion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c7ee79c3-a273-45b4-b3a4-548d9b2b883c",
+    "name": "Leyline of Hope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb87ec08-bb1b-43d8-8809-92904cbba685",
+    "name": "Leyline of Lightning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "caab67eb-65e7-4755-b116-6977e97f0844",
+    "name": "Leyline of Mutation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f69574dd-097f-4908-9cab-344b0eb39c62",
+    "name": "Leyline of Resonance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "492e0e6c-8c27-4376-938b-f8a8b6205810",
+    "name": "Leyline of Sanctity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b2e6a51-b9e6-4848-b7d7-98f02f2b897f",
+    "name": "Leyline of the Guildpact",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f4e32fc1-1b8d-441e-8e76-71f19f98e925",
+    "name": "Leyline of the Void",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cfaa13d6-9992-4223-8bd7-c44046505555",
+    "name": "Leyline of Transformation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ca3852a-fa37-46ef-a74d-3c7487ae50fc",
+    "name": "Leyline Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f92aaa00-6ece-4033-b3df-b2fc2c4718d9",
+    "name": "Leyline Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "798a4a6f-7443-4e8e-afcb-0a694fdfcbb3",
+    "name": "Liberator, Urza's Battlethopter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb0e6f63-2861-4392-ac0e-64380fbbd8ae",
+    "name": "Library Larcenist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2111588d-9af5-4a33-989e-b074d83f0463",
+    "name": "Library of Alexandria",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0e533dd-baf2-482a-b9e1-872eb5e47439",
+    "name": "Lich-Knights' Conquest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01b3af6d-ab7d-4137-a94a-1cf2cbfd9d44",
+    "name": "Lich's Caress",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "785c306c-471c-4699-8ab2-43c253d569cf",
+    "name": "Lich's Mastery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0540eaca-0e03-4831-955a-192ae2b87d35",
+    "name": "Lich's Relic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4dc0831a-0eb1-4f7d-9591-6e670e180116",
+    "name": "Lie in Wait",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f224db3d-cdd2-43f2-b625-4b861efa6449",
+    "name": "Lier, Disciple of the Drowned",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "efcaadbe-24e3-4dfc-b08c-a910f003d427",
+    "name": "Liesa, Forgotten Archangel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b31ac7b-7901-484c-b59f-556284fd562c",
+    "name": "Lifebane Zombie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13db0230-b57e-47fd-9025-580d06cc88ee",
+    "name": "Lifecraft Cavalry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "caa69b51-1efd-4d0e-803b-914a83ccb836",
+    "name": "Lifecraft Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f2a3797-28aa-4c7a-ba2b-fd243a1747fd",
+    "name": "Lifecrafter's Bestiary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6052d2d5-6310-42fb-bdec-7b114d74697d",
+    "name": "Lifecrafter's Gift",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63686c6b-9051-4002-aa8e-da8a3021330f",
+    "name": "Lifecreed Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d476f4b3-db63-4756-ab76-4b35f63c2825",
+    "name": "Life // Death",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "15d2176b-ab3d-4738-bcbc-bcebf891d16e",
+    "name": "Life Goes On",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a708566-2994-47b3-8d89-0547cc115e7c",
+    "name": "Life of Toshiro Umezawa // Memory of Toshiro",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c6932bcf-d66b-42c1-8ca4-6a4573e0f6bf",
+    "name": "Light 'Em Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a825e4c-4a87-4b8d-84f7-3e50b896d7cb",
+    "name": "Lightfoot Rogue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "601b7481-19fc-4779-950e-883a9a22aec3",
+    "name": "Lightfoot Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b162ccf8-e0c2-46ae-84e7-dff2b6fceec1",
+    "name": "Lightless Evangel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "585eb5bc-5a3d-44d8-b593-1ff0d67f96a7",
+    "name": "Lightning, Army of One",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81b90905-fbc0-426a-a084-c3300533abb4",
+    "name": "Lightning Axe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4457ed35-7c10-48c8-9776-456485fdf070",
+    "name": "Lightning Bolt",
+    "status": "curated"
+  },
+  {
+    "oracleId": "cdaf3711-5bec-41bf-b333-c5f34ccb12ef",
+    "name": "Lightning-Core Excavator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e4de77b-27cb-4afd-8d4b-1cc89f2a6986",
+    "name": "Lightning Diadem",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58aee5cb-7b88-446e-ab10-9f83c10d7227",
+    "name": "Lightning Elemental",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "ca204b66-8d0c-431a-8d34-282f7c2d17da",
+    "name": "Lightning Greaves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "800c258a-cfc4-4a54-a667-065ea8dea69e",
+    "name": "Lightning Helix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c7948c6-5144-4df0-8e33-117710ae00af",
+    "name": "Lightning Mare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4e0e23b-f172-4e1c-99d0-bb6f66afbc1c",
+    "name": "Lightning Phoenix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e0f93d7-7208-4902-bd92-e7bf66d35fef",
+    "name": "Lightning-Rig Crew",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1626880-0fa3-441a-9978-b293fc87c418",
+    "name": "Lightning, Security Sergeant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d07b4bb6-0c8d-44ea-a5b3-eeb6e36f3631",
+    "name": "Lightning Serpent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5196310-f449-4d5e-8ea8-901a83bad6ff",
+    "name": "Lightning Shrieker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2202faf1-5638-46bf-8bf4-91870b669717",
+    "name": "Lightning Spear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "126844f5-3a95-48cb-80f2-d7e4b0005350",
+    "name": "Lightning Stormkin",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "f34b9bc4-7bfe-47fd-ba23-4eeeb46026eb",
+    "name": "Lightning Strike",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "3ad5af12-1741-427d-92c4-6a730cd4faa2",
+    "name": "Lightning Visionary",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "d50f1ff7-d2bc-4e36-876d-77648f447f5b",
+    "name": "Lightning Wolf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b6f655b-1518-4ab1-8765-3f549819ef3b",
+    "name": "Light of Hope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "932177b8-70f8-4908-a48f-fe03204daddc",
+    "name": "Light of Judgment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64c54c9f-0550-41e2-a44a-5892a199f670",
+    "name": "Light of Promise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79fc0d30-9b9b-400c-a614-c3a1f90a5380",
+    "name": "Light of the Legion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1718a442-b878-4690-b608-a013de3d79fc",
+    "name": "Light-Paws, Emperor's Voice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef8fab12-d7d2-4c21-8b8c-41627048ac8b",
+    "name": "Lightshell Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ecef9e3d-dce8-405f-bba3-14732444258f",
+    "name": "Lightshield Parry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57012049-06d7-4354-8125-9ea9e742f14d",
+    "name": "Lightstall Inquisitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83917116-d2d8-4701-a79f-af17486706ae",
+    "name": "Light the Way",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4669926b-93f9-4d80-aee3-492fbf8e0a0a",
+    "name": "Light Up the Night",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d286376-f386-43ab-a9bd-8478fb9e2497",
+    "name": "Light Up the Stage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f4848d4-a5dc-4c71-955c-ad2b1cbb7ede",
+    "name": "Lightwalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17fae94e-558f-449a-b30c-e3c37a068b79",
+    "name": "Lightwheel Enhancements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e04560ea-f2bd-4cb7-8f65-3aa0dd58fbdf",
+    "name": "Likeness Looter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0757c5a7-e51b-4c39-bb4d-b32657c10cb4",
+    "name": "Lilah, Undefeated Slickshot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d654dd73-763d-4dfb-a30f-a058fd7f27a6",
+    "name": "Liliana, Death Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fca595e-1902-40fd-a359-622caa612b6a",
+    "name": "Liliana, Death's Majesty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e958212-6a5b-4288-8d31-f1572619d7dc",
+    "name": "Liliana, Dreadhorde General",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b96a8ad2-3d86-459b-a34f-19c9dc07c3c4",
+    "name": "Liliana, Heretical Healer // Liliana, Defiant Necromancer",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "92301066-8904-41bc-84bd-4aa286cbab9c",
+    "name": "Liliana of the Dark Realms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ba134d8-ee7d-48ec-8dc6-57942b8e9261",
+    "name": "Liliana of the Veil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6858702a-e563-4dcb-a50d-65406cea7c86",
+    "name": "Liliana's Contract",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c8b38b3-b808-4ad8-b4e5-39e216063ff6",
+    "name": "Liliana's Defeat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3b8c7d0-46b9-4519-808a-154e503a58b6",
+    "name": "Liliana's Devotee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6492082-d0ef-4f7c-a4b1-f8ecf6eb0890",
+    "name": "Liliana's Elite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd104c7e-311e-4b03-98d3-5f20f3a99d26",
+    "name": "Liliana's Mastery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97332d4e-a55c-4e4f-9040-bf426a7c8e39",
+    "name": "Liliana's Reaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2359db1c-6029-4748-9f09-d57bb0ae92e9",
+    "name": "Liliana's Scorn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "595f1dee-8c3b-44a6-9e71-a4bb4334b309",
+    "name": "Liliana's Scrounger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "751da0fa-0ab1-4b8c-81bb-d86a0a280ac4",
+    "name": "Liliana's Spoils",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b600c0e-5ad2-48a2-a147-346ca78c8629",
+    "name": "Liliana's Standard Bearer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc1203cb-6758-4454-b78b-341930ff4da1",
+    "name": "Liliana's Steward",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2e68ac5-cfff-4b76-8062-25a82fdf9a5c",
+    "name": "Liliana's Triumph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22c2e66d-a2a1-46db-a70a-dff5ad5d6c14",
+    "name": "Liliana the Faultless",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64a9a6b4-26b5-4d23-be86-85c54e9c4727",
+    "name": "Liliana, the Last Hope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f3ad60a6-05d0-48a1-a804-7900d306d613",
+    "name": "Liliana, the Necromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5eb4403f-f199-4f75-a7c6-e76783f9b07d",
+    "name": "Liliana the Repentant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f66489c-5a19-40ad-9126-461fa8231f1b",
+    "name": "Liliana, Untouched by Death",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a6c05941-2cfb-4dac-a7c0-ab808187eb7c",
+    "name": "Liliana Vess",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0df8e2a-96d2-4e4d-b065-aa2e162abbfe",
+    "name": "Liliana, Waker of the Dead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5bb06e6f-e3af-4caa-b66d-77248ad46b61",
+    "name": "Lilypad Village",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20194297-f2a4-4473-95bc-7c6835e5b6b3",
+    "name": "Lilysplash Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "101407b4-e7e8-4aff-84a2-a97947358b88",
+    "name": "Liminal Hold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2184c37-ee92-40f2-b7d1-97c39ce5f277",
+    "name": "Limits of Solidarity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4cc014f3-05e0-442e-9dee-03eab1aa65a3",
+    "name": "Lindblum, Industrial Regency // Mage Siege",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "dbc56f3b-83b3-41c8-a8ae-d3774fe6ee01",
+    "name": "Linden, the Steadfast Queen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3b395b3-fea0-41d9-a3f2-6c90f89d8bdb",
+    "name": "Linebreaker Baloth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76164af1-275e-4d68-9df5-9801768512ef",
+    "name": "Lingering Phantom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b8c3337-04dd-4798-8203-6d8b8cfb936b",
+    "name": "Lingering Souls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88dadc31-dfac-41b3-bf2a-65fa89e3c16d",
+    "name": "Linvala, Keeper of Silence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afd8ff3e-1d57-4fc5-91dc-1a8400c98787",
+    "name": "Linvala, Shield of Sea Gate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64f5689d-504d-40e9-bdb5-36dcefd257e2",
+    "name": "Linvala, the Preserver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd4151cc-743a-40f0-9e51-1f67555d9ab3",
+    "name": "Lion Heart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd63bfda-e20a-4476-8a61-cdb51355a227",
+    "name": "Lionheart Glimmer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50330e48-db74-4c5f-a0bc-f9a8607e8f31",
+    "name": "Lion Sash",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95e8e6bb-d83b-46fd-bfdf-fc042d8edd4a",
+    "name": "Lion Umbra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "169d24f3-a308-4a2e-ae25-85dae448994e",
+    "name": "Lion Vulture",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f4bdc551-c2eb-4a34-a3e3-b4a017c925af",
+    "name": "Liquimetal Coating",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "212fdb7c-1c7e-4eed-b1ed-bcc14a425da8",
+    "name": "Lita, Little Orphan Amphibian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "715cb547-726f-4bc8-ad46-297d4dccb881",
+    "name": "Lita, Mechanical Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "118c4be1-2204-4133-a80e-990ef96c7e35",
+    "name": "Lithobraking",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b256c311-e37d-4b3c-889c-85443e3d5e7e",
+    "name": "Lithoform Blight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0bf299da-1854-4153-baea-3cee2eb01ee8",
+    "name": "Lithoform Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e414dc2-d0ff-43e5-9aa2-cd9d96de6d89",
+    "name": "Lithomantic Barrage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "438a0a7a-00bc-4d93-8e69-a8a6084523c5",
+    "name": "Littjara Glade-Warden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67ff2880-1998-48e9-88c7-2aa012697401",
+    "name": "Littjara Kinseekers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b577179-10d0-43f1-ac17-9dd2d12c965d",
+    "name": "Littjara Mirrorlake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53c6c6bf-0256-424d-b937-1cc7d9e2d574",
+    "name": "Little Bear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04d02394-e17f-43cd-932f-f58e8cc56629",
+    "name": "Live Fast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b23d9aa-d4ed-4ccf-8810-4a4d11d6fb9c",
+    "name": "Lively Dirge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc367b23-d1f4-4c5c-b300-a44a726e3f74",
+    "name": "Live or Die",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b255e13d-01b2-4348-80bd-8d9a8f29be91",
+    "name": "Living Brain, Mechanical Marvel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "378ae023-04d3-44cc-9248-3d787796ed6c",
+    "name": "Living Conundrum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3939fbe0-3be4-41ef-828d-c93f2cb33b4f",
+    "name": "Living End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a76adc88-e7db-43e2-8fbf-bae95c0838ef",
+    "name": "Living History",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd15e02a-dd1e-42ee-8c69-a3e5bcb5ede6",
+    "name": "Living Laser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "061e7fb2-2c04-4845-b60a-0e2512a2dec1",
+    "name": "Living Lectern",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81f022a7-fd19-4340-b8a0-6b11ab3e9d91",
+    "name": "Living Library",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbbf61b0-5dd2-4643-8857-b7a10ec76ec8",
+    "name": "Living Lies of Loki",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f4738db-be2e-4d02-ad0c-1b74dd6bbfdc",
+    "name": "Living Lightning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9397684-f226-4f77-a57a-88f97fbd96a5",
+    "name": "Living Lightning, Charged Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da554d71-1f13-49ae-9eb2-c778a23df08b",
+    "name": "Living Phone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d684553a-f225-49af-90eb-399f55ef65df",
+    "name": "Living Tempest",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "206f7eaf-1e0b-48ea-9c40-38902e109e4f",
+    "name": "Living Twister",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6314e50-a610-4fff-8f60-803d23460ff0",
+    "name": "Lizard Blades",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48d1b217-b068-468c-bc6c-4bef9e44cc6e",
+    "name": "Lizard, Connors's Curse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68954295-54e3-4303-a6bc-fc4547a4e3a3",
+    "name": "Llanowar Elves",
+    "status": "curated"
+  },
+  {
+    "oracleId": "6f096e98-d351-4050-90ed-4c6f12e129d6",
+    "name": "Llanowar Envoy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23391456-5dfd-4402-88fa-3b08f5e23864",
+    "name": "Llanowar Greenwidow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08377424-619e-48ae-bc3c-fb199cd77cf9",
+    "name": "Llanowar Loamspeaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bdc9211-8eff-4b30-8d6f-d26f4087f77f",
+    "name": "Llanowar Scout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90d375fa-0487-4990-9a98-260f9ee28d2a",
+    "name": "Llanowar Stalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cfd0f0e6-1bbf-4450-97d2-c54907abb7e4",
+    "name": "Llanowar Tribe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f75ed312-3a23-4624-80c5-03980aa22d0b",
+    "name": "Llanowar Visionary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32116127-cf96-4a1b-8896-a1ebc087b597",
+    "name": "Llanowar Wastes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb125cd4-c7c2-415d-b802-bdcfc2454403",
+    "name": "Lluwen, Exchange Student // Pest Friend",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "81ff5764-72ce-4b9a-a14f-07413700d935",
+    "name": "Lluwen, Imperfect Naturalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16156274-8dc0-439c-94c4-e8c89bbb5687",
+    "name": "Loading Zone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf7352bf-3971-4bb7-88b9-65ab9a219289",
+    "name": "Loaming Shaman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5018037-cf4e-46d2-86c3-fb8eec6e44d1",
+    "name": "Lo and Li, Royal Advisors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad643992-eb9f-4a4a-9b74-a5aee2337f30",
+    "name": "Lo and Li, Twin Tutors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15030c1d-7c0a-4273-a022-eb98d6c7a1ce",
+    "name": "Loan Shark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe983088-6e0d-4544-90bd-f5ebb95c3418",
+    "name": "Loathsome Chimera",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d360ce89-d80d-4be6-be8c-7e7758cd5840",
+    "name": "Loathsome Troll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19f5a25a-97fc-41e6-bb26-7c35f4b4e37c",
+    "name": "Lobelia Sackville-Baggins",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e40d47cf-6232-41ec-8865-d12a335dfcee",
+    "name": "Loch Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "631eb3e9-a3e0-4341-ad2d-e79142ce537d",
+    "name": "Loch Mare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99422efb-3b44-4025-ad1b-388fc48a669a",
+    "name": "Lochmere Serpent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdcb7aed-3595-4c7e-b9da-543e92de919a",
+    "name": "Locke Cole",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "035f0aae-9c23-4b22-8c87-0d66b84b7962",
+    "name": "Locked in the Cemetery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a800bec4-bacc-43f9-a773-dd795959935b",
+    "name": "Locke, Treasure Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8a04142-1d28-4c2e-b2d5-da88b2199678",
+    "name": "Locthwain Gargoyle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6fea3c95-9663-4857-983e-eaf522efa1a8",
+    "name": "Locthwain Paladin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f9dce026-2653-4793-b949-357b08a936ea",
+    "name": "Locust Spray",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a698c9f5-325a-49f6-8902-eef09f4260c5",
+    "name": "Lodestone Golem",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f429ca15-c578-4c1d-a604-fd5509c92dba",
+    "name": "Lodestone Needle // Guidestone Compass",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d799a2c4-628a-45da-b9ca-0337c46e3e14",
+    "name": "Lofty Denial",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f75568a0-33ed-45a0-a885-48a19a5bb58b",
+    "name": "Lofty Dreams",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f72ce67-3c17-4338-904b-26e2bf4aecdc",
+    "name": "Loki, God of Lies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c112852f-61d5-4b94-b864-c7d0b5333b29",
+    "name": "Loki, God of Mischief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c78778a-6335-4949-8ade-11d0f085cb2b",
+    "name": "Loki Laufeyson",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20ec130f-05b4-4fbf-a54f-5874ae7ef90f",
+    "name": "Loki, Lord of Misrule",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17e45fd8-c924-4b42-87ad-189469a8dd18",
+    "name": "Loki, the Deceiver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a8edf45-206e-4d0e-bd69-06f1ca70d17c",
+    "name": "Lolth, Spider Queen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36508a8a-d1a4-400e-bfda-09436bc4d5d4",
+    "name": "Lonely Arroyo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "765863c8-1be0-4bb1-9e9c-db7701cffde3",
+    "name": "Lonely Sandbar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "849741a3-9e64-41a9-a4f4-d146a7d42389",
+    "name": "Lone Rider // It That Rides as One",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c8f6cc1f-b7e4-470d-8d48-ef848d7c1116",
+    "name": "Lonesome Unicorn // Rider in Need",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "6f83da19-fd89-44ec-88f3-0c3fddfbd1b2",
+    "name": "Long-Bodied Grey Dog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9bf9fe83-b0df-4ef8-ac54-c0d223d4e410",
+    "name": "Long Feng, Grand Secretariat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d63ba8a-a5cd-4fdb-bba3-95612be0077c",
+    "name": "Long Goodbye",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a0a7b02-10e6-4dbf-8356-659095519480",
+    "name": "Longhorn Sharpshooter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a833fdf1-db0c-4846-8452-d3b2059c2355",
+    "name": "Long Lake Nuisance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01376449-5cd2-4079-8aaa-5128634ef20b",
+    "name": "Long List of the Ents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0eaec4ec-0f50-4470-a7bf-acd8c6c52dc2",
+    "name": "Long-Lost Lances",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc8df5c8-fda6-454c-a1ac-21c6e3d75b9c",
+    "name": "Long Rest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c65c4d01-29da-47e6-993c-a265cf1f198c",
+    "name": "Long River Lurker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1993767-1d07-49c8-b8dc-04ec9840a999",
+    "name": "Long River's Pull",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8f53018-c496-41f3-bc3f-3c4703b9e4e1",
+    "name": "Long Road Home",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f93c3468-5b1d-4fa7-a281-1009ea0f2062",
+    "name": "Longshot, Rebel Bowman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c153e202-1d93-4044-b457-b8ebd5b36ec3",
+    "name": "Longshot Squad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "adc8976a-0871-4fd6-9c4c-822ba9549b4b",
+    "name": "Longstalk Brawl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2e78392-096a-4bd0-be19-9c54dfb8451f",
+    "name": "Longtusk Cub",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c5a08b7-7b1f-4ef4-9406-2f62b9f0c09d",
+    "name": "Longtusk Stalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ee06ed0-717a-4bfa-b634-d00e013c1f16",
+    "name": "Lonis, Cryptozoologist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2e44d46-9df4-46f8-acf7-5581b2257620",
+    "name": "Lookout's Dispersal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af5302d3-782b-4d92-bc97-dccbfc76ac95",
+    "name": "Looming Altisaur",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "f6476884-f73f-465f-8e7f-ea312a5b306d",
+    "name": "Loot, Exuberant Explorer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0142e7d-7b0b-4290-a56c-5fa950fdccf8",
+    "name": "Loot, the Anomaly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "542be13f-b9c0-4b79-b486-be576c531a82",
+    "name": "Loot, the Key to Everything",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a99ce9db-9b7d-45a0-bee7-0875fc62ca48",
+    "name": "Loot, the Nexus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68c7e459-0932-4644-a3c0-9a1eae1db7a3",
+    "name": "Loot, the Pathfinder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24630190-a630-4dd3-a8f7-82f129c881e3",
+    "name": "Loporrit Scout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d1f232c-e904-46f6-a4b7-24ca2ede711c",
+    "name": "Loran, Disciple of History",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3d81980-76f2-44e2-b1c9-01e30c726312",
+    "name": "Loran of the Third Path",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a9048d6-f3fa-4f3b-9baa-35318177bc6e",
+    "name": "Loran's Escape",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2db77e35-a54a-4e9c-8081-c97822515879",
+    "name": "Lord Dregg, Insect Invader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc7f290f-ca00-4285-9bdb-4b4402444f30",
+    "name": "Lord of Atlantis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea5e3401-bd6c-47bb-a52a-8eec5f09455d",
+    "name": "Lord of Extinction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f372107-6c52-4f1f-8bf0-7b3fa21b2cae",
+    "name": "Lord of the Accursed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a25d1e2-63d8-4a93-b0ce-f9307736b3f9",
+    "name": "Lord of the Forsaken",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7714af0e-41d9-4609-967f-27233b46055f",
+    "name": "Lord of the Undead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc60181a-5eeb-4d66-9876-3194bac1e7a7",
+    "name": "Lord of the Unreal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5bd40fc-6138-4752-b3ff-b1e5fa269214",
+    "name": "Lord Skitter's Blessing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "467f756f-75db-4748-99d3-62651776adfe",
+    "name": "Lord Skitter's Butcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5bed085-bb7a-4250-9599-b2a8a95e6b6f",
+    "name": "Lord Skitter, Sewer King",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d17bfa94-5046-46ae-80af-be5d1d35af13",
+    "name": "Lord Xander, the Collector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ec271d8-8264-4574-8c4c-e57b35872b1e",
+    "name": "Lore Drakkis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3858a2ff-cdc9-4e40-bc2c-42ed691aae08",
+    "name": "Lorehold Apprentice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45773715-3f46-4671-b633-bf087e892e26",
+    "name": "Lorehold Campus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5729f11-6cde-4830-b882-ab4c5251c1a9",
+    "name": "Lorehold Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "107becb1-f8a3-4777-b39f-a0456c2d580e",
+    "name": "Lorehold Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ed2a07c-a7a5-4910-a63c-e72803947afb",
+    "name": "Lorehold Excavation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c18d692-612c-4d43-b5dd-bd2bff37bbcb",
+    "name": "Lorehold Pledgemage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61a41cf1-60cc-45ba-aa98-493c14e87d9d",
+    "name": "Lorehold, the Historian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c87440aa-4616-49ff-a211-ebdc37767f62",
+    "name": "Lorescale Coatl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66f28905-c7fc-4ada-8fa0-199626d9bedb",
+    "name": "Lórien Revealed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9fd4ff3-5ada-40f4-b949-6fe65624a0c4",
+    "name": "Lorthos, the Tidemaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b17048f-8c7f-4e29-8f56-16db4c2106e6",
+    "name": "Los Diablos Missile Base",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1cea6439-7ae5-4887-8c33-7da9fb36e2d4",
+    "name": "Lose Focus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bc47eae-cf6f-4b5e-96e1-94a4f307f474",
+    "name": "Lost Days",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69ac3757-66f8-47d4-af7b-dda66c96c254",
+    "name": "Lost in Memories",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cec95b9f-9d1e-4988-befe-d0c9e20e428d",
+    "name": "Lost in Space",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a024389-91a1-460c-b4e8-3f212d2b8400",
+    "name": "Lost in the Maze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a37adc18-ea11-4972-8d04-936cf3fe2613",
+    "name": "Lost in the Spirit World",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0efbf29c-09a0-4472-83ad-8d692c0232a5",
+    "name": "Lost Isle Calling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9d72f78-2ab5-4e2e-ab7b-ef875e0a0609",
+    "name": "Lost Jitte",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "532f3f03-37af-46b6-bafb-031e9a3df056",
+    "name": "Lost Legacy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8f3b5b5-8835-400f-a626-94ff0a007e56",
+    "name": "Lost Legion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a92edf30-6c7f-481c-855e-2a7dc4963ea7",
+    "name": "Lost to Legend",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed839fae-3429-4ac5-997c-286d8e8cf05f",
+    "name": "Lothlórien Lookout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "135cc078-1c45-465e-b0b9-7168c89f56f4",
+    "name": "Lotho, Corrupt Shirriff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e0bd136-e7e9-49f0-910b-a9fb0b9c481a",
+    "name": "Lotleth Giant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61b1d7e5-6155-4204-b110-35a890551ec8",
+    "name": "Lotleth Troll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ad91f64-ccab-4edc-bd54-b2ee9267d614",
+    "name": "Lotus Cobra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "efb11270-4b5a-4c52-862f-1d24c6b95d73",
+    "name": "Lotus-Eye Mystics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "134d5b82-7940-4b33-a922-7f9d1f403e50",
+    "name": "Lotus Field",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1139ee31-cb6e-4ae6-a08b-252c46b2db97",
+    "name": "Lotusguard Disciple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83c8f1ca-194e-4cb6-9d5f-029133c1edbc",
+    "name": "Lotuslight Dancers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca4d3d27-ea3a-44ac-96e9-b52b563129f8",
+    "name": "Lotus Ring",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42d8ab49-703a-4fd3-84d0-0a3ac1eafca8",
+    "name": "Louisoix's Sacrifice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b87b4cd-4fb9-4bb3-b4c0-de1fcc6f44a2",
+    "name": "Love Song of Night and Day",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e84aff5-2cb6-4214-befd-3d2de31229e5",
+    "name": "Lovestruck Beast // Heart's Desire",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "8cf4ddb0-2a83-4d8f-b636-7ba3c81ea4ca",
+    "name": "Loxodon Battle Priest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "141a2757-8f20-4e10-9866-bb5d612ed62d",
+    "name": "Loxodon Eavesdropper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24adb147-95b2-4854-86a5-17d43f904601",
+    "name": "Loxodon Lifechanter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57f0f55d-4cf9-4a35-96dd-05c24c2a9a4f",
+    "name": "Loxodon Line Breaker",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "77eb2374-44a0-4383-b229-edc116c7d835",
+    "name": "Loxodon Restorer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "126038e3-3e7b-4547-83e7-a7f6ec66f782",
+    "name": "Loxodon Sergeant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "18ac2282-83af-4acc-b20b-6a95771da688",
+    "name": "Loxodon Smiter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "970f26d4-c916-444a-a2d2-4c1f5bb5556b",
+    "name": "Loxodon Surveyor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c052420-2d8b-4bbf-8197-b8a36e7208c9",
+    "name": "Loyal Fire Sage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5c07218-c8bf-4990-a366-f3c065d0b30c",
+    "name": "Loyal Gryff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b7b862a-7edd-4e96-b4b9-f7113b4c93f9",
+    "name": "Loyal Pegasus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e52f151-d1f6-4fcb-9b21-1baecae27da6",
+    "name": "Loyal Tutor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc6a83c7-e645-4a53-9550-be79b42cd851",
+    "name": "Loyal Warhound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "370d67f6-8d43-46ca-ae6c-00799bb0bd0c",
+    "name": "Lucky Clover",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbb39e5c-e31a-44e9-be0c-2003c8bce599",
+    "name": "Lucky Offering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a429a1e-62c0-4f01-b09e-2bbf63e56a98",
+    "name": "Lucky the Pizza Dog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6f684f6-0c8a-4676-ba4e-d3e064293128",
+    "name": "Ludevic, Necrogenius // Olag, Ludevic's Hubris",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3d776a25-c341-4058-9b5f-84e70edb25a4",
+    "name": "Luke Cage, Hero for Hire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c95d1558-09a4-4dbc-b08a-fe21b47bc5d2",
+    "name": "Luke Cage, Power Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e68eba1-65ac-4c03-956f-45e7b5695e2a",
+    "name": "Lukka, Bound to Ruin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ca97394-4e8c-4698-bea1-554f9b10927b",
+    "name": "Lukka, Coppercoat Outcast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdac480b-03b5-4ece-b42a-e6928b609419",
+    "name": "Lullmage's Domination",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a56fe0b-f8a9-499c-bce1-cec6cb3b66f0",
+    "name": "Lullmage's Familiar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "969fa9b9-161f-461e-8878-9ebcff5a2669",
+    "name": "Lulu, Stern Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d514704b-4055-48ed-9da3-e4397fca7576",
+    "name": "Lumaret's Favor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dcf7d099-a726-4388-9744-70d37c5ea860",
+    "name": "Lumbering Battlement",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2878f4e-3044-4d60-8ec1-b325edfca397",
+    "name": "Lumbering Falls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6afe9cc7-80e4-4607-8633-6013d96bd19c",
+    "name": "Lumbering Laundry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5230d0fc-2688-495d-9fd0-0d71ac27c811",
+    "name": "Lumbering Lightshield",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e60a641-1f2d-45ff-b3f2-d389be938b22",
+    "name": "Lumbering Worldwagon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3aa0cda4-fb2d-4fd4-84f6-482089a85547",
+    "name": "Lumen-Class Frigate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb9994b9-924b-4e10-9075-9cfbec88f2bf",
+    "name": "Luminarch Aspirant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8bf2dce-7bcd-45cb-bf15-f53e24333a01",
+    "name": "Luminollusk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c006a63-0550-4a87-a5fe-f4247857271c",
+    "name": "Luminous Bonds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28c7c816-07e7-42fb-923c-bf149ba28b38",
+    "name": "Luminous Broodmoth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d96141af-313f-4ea9-a249-d9eb22cd2431",
+    "name": "Luminous Rebuke",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97a84e9d-bfc4-4ca2-b1e8-908dba56ccdb",
+    "name": "Lumra, Bellow of the Woods",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0da104ae-c46c-4106-919f-d975721d42d9",
+    "name": "Lunarch Mantle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0761a0e7-d443-4bab-bb15-307c83d4a6a1",
+    "name": "Lunarch Veteran // Luminous Phantom",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "cb68d1e4-36aa-4a00-b671-8959e7d526d4",
+    "name": "Lunar Convocation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d95fc2cb-5e49-4a22-a93e-d21cf64dcd84",
+    "name": "Lunar Frenzy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56b4a2f7-2d35-4d05-8d26-4f9f16c5f9f5",
+    "name": "Lunar Insight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2f693d9-f338-41d6-b7e2-ddaa5f4bcc3b",
+    "name": "Lunar Rejection",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34c65c7f-33ab-4f91-84ce-d0c8f4fc5832",
+    "name": "Lunatic Pandora",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "303f91ae-1acb-4250-a4a5-71207c228dcc",
+    "name": "Lupine Prototype",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6c7c708-5212-4100-b954-b77855b27915",
+    "name": "Lupinflower Village",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "178e73f9-fc6e-4425-870e-45f96644010a",
+    "name": "Lurking Chupacabra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1dd27eb-ba7b-4d5d-a36c-3f350df2ad51",
+    "name": "Lurking Deadeye",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "616312a9-83c8-4fb7-87ce-079ccd3231fa",
+    "name": "Lurking Lizards",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15fbb7b1-c62d-4f82-9f35-2c10299779f4",
+    "name": "Lurking Predators",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61f3e964-6bea-4543-992e-3e36404bf628",
+    "name": "Lurking Roper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bc757c1-3adb-4321-8832-8e1cc9e687f7",
+    "name": "Lurrus of the Dream-Den",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6a965eb-cffb-41c1-925a-7cf3e8e2f248",
+    "name": "Lush Oasis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d51831b1-7394-456e-a1de-6787a59f5932",
+    "name": "Lush Portico",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "158a6225-a246-4fd6-aa57-0df8067b4383",
+    "name": "Lutri, the Spellchaser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f9263d7-916f-4535-95d2-888ab73cf339",
+    "name": "Luxior, Giada's Gift",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0a508b5-0896-4620-a93e-60b958829703",
+    "name": "Luxknight Breacher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa4f9618-8106-451e-889a-79a5e8159256",
+    "name": "Luxurious Libation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c68c2a98-9a6d-4199-af3a-78eb92beda48",
+    "name": "Luxurious Locomotive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "191ec087-7817-4c56-b2d5-66de5c663536",
+    "name": "Lyev Skyknight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0fca3328-484f-4050-925e-91840710b5d6",
+    "name": "Lyra, Archangel of Dawn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "592c91fc-6430-4c76-9460-65f047350f67",
+    "name": "Lyra Dawnbringer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9060fff-0b65-4b3d-930d-6e36315b802c",
+    "name": "Lyra, Tolarian Archangel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce7582a2-e014-41fb-8753-00d29cffc81a",
+    "name": "Lys Alana Dignitary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f3439e1-75ce-482d-881f-836492dca6e9",
+    "name": "Lys Alana Huntmaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5058b5c-0359-42ec-ba9e-ae1371bb9c22",
+    "name": "Lys Alana Informant",
+    "status": "unsupported"
+  }
+]

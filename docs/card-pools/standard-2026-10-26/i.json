@@ -1,0 +1,647 @@
+[
+  {
+    "oracleId": "deb16a9a-2fa9-4ad3-bb20-7c16066e3d14",
+    "name": "I Am Iron Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9650a0e-5795-42ff-84c6-6040e5cf4c90",
+    "name": "Icecave Crasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8131dca-ba6e-4ca4-943e-a3d26c75b8b8",
+    "name": "Ice Cream Kitty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b7120a6-700b-4c61-bea4-a835f0cc0bcb",
+    "name": "Ice Flan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88b0bd3b-d832-4059-b0d9-04630917ae94",
+    "name": "Ice Magic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fed3bc35-4269-48f0-9133-a595ce49c2d1",
+    "name": "Ice Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53f07529-c212-43e4-b5b6-086efeadda39",
+    "name": "Iceridge Serpent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "109cdefd-e8cc-4ac7-b6ba-2cfdef8d780f",
+    "name": "Icetill Explorer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5001bf21-9dbb-4229-aeef-25805e71b832",
+    "name": "Icewind Elemental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0828d891-f7c3-4e51-b42e-6ce88d48ac8b",
+    "name": "Icewrought Sentry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "612c7807-be70-4e2f-afd2-3d3c03eddbbe",
+    "name": "Icy Reception",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4dbf8c43-d7c5-4037-875e-6accd87aaf6f",
+    "name": "Identity Echo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7ba349e-b9c1-4373-b79f-755688138b7c",
+    "name": "Idol of the Deep King // Sovereign's Macuahuitl",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "23320d55-80cb-4da3-a53c-8c75abdc8c8f",
+    "name": "Ignis Scientia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "edd3a3ea-6bde-408c-8b16-85ed3cc312b2",
+    "name": "Iguana Parrot",
+    "status": "curated"
+  },
+  {
+    "oracleId": "01ee70d4-6527-45ae-9600-bd3d16b3037d",
+    "name": "Illegitimate Business",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa2a275a-a28b-45cd-b8ca-a93247ff59bc",
+    "name": "Illicit Masquerade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e3b3a3f-e32f-4c72-a9fb-dd1e877876b6",
+    "name": "Ill-Timed Explosion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b608288e-1755-4738-b828-9df6998bae8d",
+    "name": "Illusion Spinners",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6273621-c36c-491b-85ca-37445ed30097",
+    "name": "Illvoi Galeblade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3084377f-73fb-4b00-9dd9-3844b1ecafc2",
+    "name": "Illvoi Infiltrator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbc0b136-544d-45a6-be3e-cd21a573bf19",
+    "name": "Illvoi Light Jammer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e0b225a-d4b4-4f53-8fea-8c6c37102920",
+    "name": "Illvoi Operative",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2c47e13-b581-41a8-a4af-542557a6249a",
+    "name": "Il Mheg Pixie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcb6c6d4-ea8d-49cf-b6df-377084bdb757",
+    "name": "Immersturm Predator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50bee80e-89df-48c2-b608-ba66ff3e794a",
+    "name": "Imodane's Recruiter // Train Troops",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d70d4686-2c35-4149-aed1-7e3b9e022702",
+    "name": "Imodane, the Pyrohammer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9242cd3e-1a71-4700-8182-9c1005616033",
+    "name": "Impact Tremors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcd31653-4964-46a6-820c-f17e8cbaa1fa",
+    "name": "Imperious Inkmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3fa71348-fa4d-4f39-a451-cf1570591991",
+    "name": "Imperious Perfect",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b77764fe-bc79-410a-995a-ac392f5b46b8",
+    "name": "Impolite Entrance",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "fa7c8092-94da-4147-aa90-0a951d2a8be8",
+    "name": "Impossible Inferno",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7be47440-b627-411e-a28f-d5a92e5e2fb7",
+    "name": "Impostor Syndrome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8da73ed-2834-4094-8723-a4ad75660290",
+    "name": "Impractical Joke",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "339a7418-9a29-4eae-a3c2-ea590d175936",
+    "name": "Imprisoned in the Moon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd4f0315-567a-4cc5-bc7e-88a9d2cee910",
+    "name": "Improvisation Capstone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f02aa99-481c-4089-8f7c-cfe7eaa7dda0",
+    "name": "Improvised Arsenal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49f0da4a-e046-4220-b90e-e105a5f2ef00",
+    "name": "Incinerating Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b7d037f-3269-4e3b-9744-a977acb69c67",
+    "name": "Incinerator of the Guilty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d68439b5-7011-4b1d-a7da-14ef0f4d9994",
+    "name": "Inevitable Defeat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8225b2e-62bf-45b7-b573-e3ce301a1eab",
+    "name": "Infernal Phantom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e13c283-f462-441f-a8a5-0c75a59ff1d9",
+    "name": "Infernal Vessel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d398dca3-f3a5-44c9-998f-b4fce9e5c2bf",
+    "name": "Infestation Sage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "666b34b5-a0c2-43e3-befd-7c3979313682",
+    "name": "Infinite Coursework",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cda39514-86c9-483e-8d95-fd08138ce33a",
+    "name": "Infinite Guideline Station",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4cbbdebc-b807-4d7b-92dd-312637d2a5de",
+    "name": "Infirmary Healer // Stream of Life",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d2a372d8-3eb2-4ba4-a75f-7951654de383",
+    "name": "Informed Inkwright",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99853d2e-2223-4c05-bbd7-0a746f8f810d",
+    "name": "Ingenious Leonin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f498ff7-38c9-44ea-9cb5-994a003825ee",
+    "name": "Ingenious Prodigy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bda098cb-31ec-41a1-a9d7-122877cc69d2",
+    "name": "Ingris Stingerquill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f0959ff-4464-4738-9d79-5b06f368f144",
+    "name": "Inkling Mascot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4993651f-f161-4007-b485-a0c66a02f91b",
+    "name": "Inkshape Demonstrator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40b43763-3fbf-4ecd-8187-5d2c2c9cda82",
+    "name": "Inner Demons Gangsters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "915b75d1-b5e3-4aca-a54c-beaccef0a2e4",
+    "name": "Innkeeper's Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c293f1c0-93de-4a73-aaf6-4e9f01e557ec",
+    "name": "Innocent Bystander",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "114725ef-ac81-4d13-9153-0a303c3ce9c4",
+    "name": "Innocuous Rat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6812e4d3-0034-4fc8-9ee9-520f76a0ea94",
+    "name": "Innovative Commons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4abb227a-534e-4300-9009-065a10f10e8a",
+    "name": "Inquisitive Glimmer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad3e705f-da57-4eff-84d7-2072522de988",
+    "name": "Insatiable Avarice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69a68dec-4b01-4528-81fc-a3c5f5097f72",
+    "name": "Insatiable Skittermaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d081701-514b-4611-b5a1-239b8f335fb6",
+    "name": "Insectoid Exterminator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66961bcb-f588-47a7-b3f3-12f4ac674477",
+    "name": "Inside Information",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12bced67-69bc-4fc7-a585-577060afdd50",
+    "name": "Inside Source",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a8d0217-ff24-4177-b6be-707eb2b6b9e9",
+    "name": "Insidious Fungus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d75b2b8e-05c9-47da-b359-a867256d78ea",
+    "name": "Insidious Roots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7140f72-91b6-4be4-8d71-c019e64c2351",
+    "name": "Insomnia, Crown City",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be87e410-4302-43ee-b880-56eedf2b3648",
+    "name": "Inspiration from Beyond",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80c2784b-f27d-4a51-9380-171eb32b961d",
+    "name": "Inspired Tethermage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b9a10ff-5a5d-4df8-88aa-18d84ff9117c",
+    "name": "Inspiring Call",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d646e42b-5635-4798-b633-29c093b66a55",
+    "name": "Inspiring Overseer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95efbb81-2418-42ed-ae34-5759efff8253",
+    "name": "Inspiring Paladin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f17c60e-923a-4392-9da8-87d9ded009b7",
+    "name": "Inspiring Vantage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db756a16-3db6-4bde-bbc2-ecee3ee9d9d3",
+    "name": "Inspirited Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2283e409-c6c7-4de9-899b-2b3caea5f35e",
+    "name": "Instant Ramen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ded2b1b7-8c12-4f6f-a3be-a8f7b62b0819",
+    "name": "Interceptor Mechan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "456dbec4-1b0e-48c4-abae-5c8205651872",
+    "name": "Interdimensional Web Watch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4272676-a38a-4b23-988e-9cdb2feb46c1",
+    "name": "Interface Ace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47bbadcf-11c6-4a4d-9575-1eb8284a174c",
+    "name": "Interjection",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "142a960c-4d8e-4b3b-a0db-435c22df8f92",
+    "name": "In the Presence of Ages",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5915039b-3dbd-4a49-8bd3-23ff0fd9c90a",
+    "name": "Intimidation Campaign",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "121bd1af-da21-4937-a911-377c5b430796",
+    "name": "Intimidation Tactics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "176f5ba8-6e7b-4234-a298-b6164f51656f",
+    "name": "Inti, Seneschal of the Sun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8db0a379-4cf2-43a7-932b-c5646a604578",
+    "name": "Into the Fae Court",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8cb36a67-9206-4665-a03f-64f52ba559c4",
+    "name": "Into the Flood Maw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2898bbd-82a4-4d26-b6ee-169b0ebe71b4",
+    "name": "Into the Roil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6026309-aae9-43e7-938b-69db7af7139c",
+    "name": "Intrepid Paleontologist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ed4afc9-959a-4868-8f4a-2221bea1ba32",
+    "name": "Intrepid Rabbit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a825bdea-3ea2-46b2-93b9-21586643aab0",
+    "name": "Intrepid Stablemaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94023b23-339a-426e-85cc-cc361ef68754",
+    "name": "Intrepid Tenderfoot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "147d1e5c-fcfd-4115-a2f9-bea9b7ad7bb6",
+    "name": "Intrepid Trufflesnout // Go Hog Wild",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "eedb1527-548a-435a-a3e1-8ad7d9d6d8a9",
+    "name": "Intrude on the Mind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7673d0db-07d6-4b40-a32e-f2c98d7ea7c1",
+    "name": "Intruding Soulrager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "185316ff-6fb7-4b5c-8a60-3238674562a6",
+    "name": "Invasion Reinforcements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97369152-3b85-4cf1-aeb9-b3a8f1c37611",
+    "name": "Invasion Submersible",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eef63cb4-96de-4c9d-84aa-62a3b52a3c7f",
+    "name": "Invasion Tactics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c376349-1a50-4215-8a40-f702da81eb7b",
+    "name": "Invasive Maneuvers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96186b7e-3dd3-44e7-ad23-79638787004c",
+    "name": "Inventive Wingsmith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3feedc63-173e-4713-8e96-8f1c9576055f",
+    "name": "Inverted Iceberg // Iceberg Titan",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e9d20b6d-fa4f-473b-9866-230fd92a1319",
+    "name": "Invisible Woman, Sue Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e86fb1e-9987-43ba-b59e-0cb03bbdedb6",
+    "name": "Involuntary Employment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "445cd4bd-ba7c-42a2-a794-42aed823d0d3",
+    "name": "Irascible Wolverine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce09c5b0-9dd4-4f73-9f3f-dfbd829813e4",
+    "name": "Iridescent Tiger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f8c4927-46c2-4c18-b5af-c6288dbaff6d",
+    "name": "Iridescent Vinelasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee8e6ef3-eb96-48bd-8619-8a9112b3d4f0",
+    "name": "Iroh, Grand Lotus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8dd2e73a-d1b4-4d26-857f-9eb8e384c8ff",
+    "name": "Iroh's Demonstration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87adda41-113b-4126-8978-25a258b31bdd",
+    "name": "Iroh, Tea Master",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bbf873c2-94c1-46b8-912e-e29e48e0212c",
+    "name": "Iron Fist, Living Weapon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5cea282-9e61-47da-8c5d-f5fca6a508a4",
+    "name": "Iron-Fist Pulverizer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "325b4288-fe1b-4e29-ae13-72924b4db3dd",
+    "name": "Iron Giant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df3d5b86-7b75-4df9-8985-7159cde12261",
+    "name": "Ironheart, Clever Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a71e8d07-1a49-47a0-834e-de87d750a200",
+    "name": "Iron Hills",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9febdfa8-8af2-4aba-b2e6-cb2baad7e02b",
+    "name": "Iron Hills Blacksmith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd4ab393-9538-4230-b2a1-bc77099481c9",
+    "name": "Iron Hills Stalwart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e715032-0d21-441b-b2d4-c91084728718",
+    "name": "Iron Lad, Diverging Destiny",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "958d81c2-ca09-4275-890e-3bb595317325",
+    "name": "Iron Man Armor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94bc796d-8c04-4835-8a99-7e5dce9540ee",
+    "name": "Iron Man, Master of Machines",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fab5f694-4a9c-4e72-b164-f236e8212ff7",
+    "name": "Ironpaw Aspirant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c77b4da-b580-4ce9-b127-76de674f5694",
+    "name": "Iron-Shield Elf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e123fd7d-ace9-48a4-9510-eedcc837d8e8",
+    "name": "Iron Spider, Stark Upgrade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "44594004-52e7-4ce6-8eb0-61f72fd9c73b",
+    "name": "Irreverent Gremlin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f4358cb-59df-46d9-be27-69929f5a615c",
+    "name": "Ishgard, the Holy See // Faith & Grief",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b2c6aa39-2d2a-459c-a555-fb48ba993373",
+    "name": "Island",
+    "status": "curated"
+  },
+  {
+    "oracleId": "dcfc8c59-d032-414d-9da6-125ebcb1366c",
+    "name": "It Doesn't Add Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7532f0ea-9d13-43ca-9b7d-2d22f2a66017",
+    "name": "Item Shopkeep",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb184995-700f-4900-994a-4ce7fd12f942",
+    "name": "It'll Quench Ya!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f976a244-1240-4430-9182-bb8d6d932ea0",
+    "name": "Itzquinth, Firstborn of Gishath",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3ce0fa9-8742-4e2c-a8a0-00fc009f998a",
+    "name": "Ixalli's Lorekeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8074afbf-190b-4a24-b939-cc559bdffe38",
+    "name": "Izoni, Center of the Web",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf75a3d1-f184-4b48-a913-21caee1db084",
+    "name": "Izzet Guildgate",
+    "status": "unsupported"
+  }
+]

@@ -32,3 +32,18 @@ dispatch(state, { type: 'pass', player: 2 });
 dispatch(state, { type: 'cast', player: 0 });
 // @ts-expect-error Unknown commands must not type-check.
 dispatch(state, { type: 'skipOpponent', player: 0 });
+
+import { createSession } from '../../packages/simulation/session.js';
+import { runEpisode, type Policy } from '../../packages/simulation/run.js';
+const session = createSession({ seed: 4 });
+const context = session.context();
+if (context) {
+  const count: number = context.observation.players[0].libraryCount;
+  void count;
+  // @ts-expect-error Agent observations never contain the shuffle seed.
+  void context.observation.seed;
+  // @ts-expect-error Agent observations never contain library order.
+  void context.observation.players[0].library;
+}
+const policy: Policy = ({ player }) => ({ type: 'concede', player });
+void runEpisode({ policies: [policy, policy], maxDecisions: 100 });

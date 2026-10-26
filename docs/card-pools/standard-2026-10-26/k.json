@@ -1,0 +1,662 @@
+[
+  {
+    "oracleId": "fa9a6083-75ab-41ae-b607-39d21d9a3d3a",
+    "name": "Kaervek, the Punisher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70fbb378-d905-47cf-8c54-cc166a7867b3",
+    "name": "Kain, Traitorous Dragoon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa43077b-5d8b-4fb1-8dda-2a9185e6715e",
+    "name": "Kaito, Bane of Nightmares",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6d3f145-00e0-47cd-91d8-0381c19a000d",
+    "name": "Kaito, Cunning Infiltrator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d85f5edb-60a8-4abd-82b0-f9a58f3d4185",
+    "name": "Kalakscion, Hunger Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77e319da-d782-4258-bf0e-626755e5adc9",
+    "name": "Kalastria Highborn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "619e0686-e88c-4238-8364-75395e733533",
+    "name": "Kambal, Profiteering Mayor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b43350a8-fc4d-41ed-becd-f0277512bb5f",
+    "name": "Kang, Temporal Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da6e24a4-8adc-41a1-b5eb-3e31dc1250c9",
+    "name": "Kang the Conqueror",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6eabbff-cc0c-4000-8feb-4826e1b6bc66",
+    "name": "Kapow!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7246638e-0361-40e3-8019-3c10210a593e",
+    "name": "Karai, Future of the Foot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e53fb128-bf90-4af6-b998-ef9c250001cb",
+    "name": "Karai's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41129dc1-be88-4198-94f9-032817a79bc7",
+    "name": "Karakyk Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df366871-8ed7-4183-8b0c-414ca361a711",
+    "name": "Kargan Dragonrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73f44500-fe83-40fa-b6f2-ed5673d0edcc",
+    "name": "Karlov Watchdog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aecc621f-67da-41a7-9d47-05ded302ae35",
+    "name": "Karn, Argent Defender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20b90a18-ff62-4995-b0d6-fbef44dca357",
+    "name": "Karn, Gilded Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ac3e4bc-1678-4280-a071-3dbc8ef4a2bf",
+    "name": "Kaslem's Stonetree // Kaslem's Strider",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ced5fe9a-4237-4c89-9dd6-b133b966ebcc",
+    "name": "Kastral, the Windcrested",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55adde23-c818-40fe-9bba-123de93568a5",
+    "name": "Katara, Bending Prodigy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0972d46e-423b-454e-87c7-a2d40fb6fb6d",
+    "name": "Katara, the Fearless",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "234fb291-0b62-4092-9071-81311c71bd53",
+    "name": "Katara, Water Tribe's Hope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1972e0db-e595-4ec2-b97c-902561bb275b",
+    "name": "Kavaron Harrier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fa826ca-d361-4391-ad0d-989ebcfa4a91",
+    "name": "Kavaron, Memorial World",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1f1ba17-b5e8-4bb3-a767-befd52e2db72",
+    "name": "Kavaron Skywarden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ebb8542-5d1d-4f0b-92a9-5a98425860fd",
+    "name": "Kavaron Turbodrone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "528fe479-dab9-4cf8-bda0-1d226a644366",
+    "name": "Kav Landseeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a094c5f-cefb-4ba1-90c8-dd78ae8efe95",
+    "name": "Kaya, Spirits' Justice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88eeb519-5782-4732-bd34-81d1ee6dbc8f",
+    "name": "Ka-Zar of the Savage Land",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8cadf9c0-9a63-4cde-a6be-0ae86890c831",
+    "name": "Keen Buccaneer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46ce3698-e4e6-44e9-8b99-2b12a703e91e",
+    "name": "Keen-Eyed Curator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ecdfee75-15fd-41ea-89d4-4bfc1fa4d032",
+    "name": "Keeper of the Quiet Hour",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61cb927a-4cf8-49d6-ab4b-9e882bc08774",
+    "name": "Keep Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d3ca5cb-781d-4608-b7f1-38c020536376",
+    "name": "Kefka, Court Mage // Kefka, Ruler of Ruin",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7af69a44-e958-42e5-9d65-75e53a601e96",
+    "name": "Kellan, Daring Traveler // Journey On",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2f2d75a0-d751-4c74-b357-8f92a992447f",
+    "name": "Kellan, Inquisitive Prodigy // Tail the Suspect",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9b3ddd31-c058-4846-8784-25c7a9bbcb31",
+    "name": "Kellan Joins Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8fd428f-7521-4e6a-86b7-835f20ee3c5c",
+    "name": "Kellan, Planar Trailblazer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b803bf2-025a-4bf6-9d3c-a28d714b4781",
+    "name": "Kellan's Lightblades",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10c48d19-d91f-4674-b186-477acaf08e5a",
+    "name": "Kellan, the Fae-Blooded // Birthright Boon",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "afacc200-16ff-40f3-9d43-268438131d24",
+    "name": "Kellan, the Kid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de41ad94-b9d7-4c2b-bfa6-394d18737228",
+    "name": "Ketramose, the New Dawn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "62320290-ac8e-4f92-bb06-3368f66ae0a9",
+    "name": "Keys to the House",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76c036df-44f5-4021-b7fc-656147351341",
+    "name": "Key to the Side-Door",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aef4ab0e-c81f-428c-ab23-64504a9fb989",
+    "name": "Kheru Goldkeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94868faf-9e88-4221-8db6-3ad10aa02da5",
+    "name": "Kickoff Celebrations",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19ef0329-08de-4835-8079-2e791e19f3a6",
+    "name": "Kid Loki",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "840de40b-590e-4bf0-8d16-22b0eff61202",
+    "name": "Kíli the Resourceful",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93a04ce0-9b8e-4d69-82bf-d4c89a9856a9",
+    "name": "Killer's Mask",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c17f0e65-e5a3-4113-b782-0b192ab52046",
+    "name": "Killian's Confidence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c3ba54a-a8ef-4838-b3aa-cb6df827a619",
+    "name": "Killmonger, Scourge of Wakanda",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da35de40-6fde-4018-bda8-b0ae91ed872a",
+    "name": "Kinbinding",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebeee06e-3345-4f02-896f-cb0b2cfa5548",
+    "name": "Kindled Fury",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "c1ed20c0-f75d-4aca-8874-6955bd9fb21b",
+    "name": "Kindled Heroism",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "980cd7d5-a511-49ab-bc52-08b71c65db76",
+    "name": "Kindlespark Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c7ca6371-73bb-4717-a148-0804b8f4c1e6",
+    "name": "Kindle the Inner Flame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5dce42a-a769-4d7d-b29e-8722f79d4092",
+    "name": "Kindred Judgment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "342df67f-44d8-4b0a-b1d7-4241966d0598",
+    "name": "Kingpin's Enforcers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe00278d-4385-4e3f-919c-12a794fd86f5",
+    "name": "King T'Challa // Black Panther, Hope Enduring",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b6565da9-773c-49b1-85f5-e34f07ba84cb",
+    "name": "Kinjalli's Dawnrunner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "845d80ee-1cd5-437a-90a5-40dcc657d3aa",
+    "name": "Kinsbaile Aspirant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdf0fba8-f335-419c-b96b-e99037727c43",
+    "name": "Kinscaer Sentry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad28a1f9-8893-4693-9464-c32ed760f6b1",
+    "name": "Kin-Tree Nurturer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "211d1c59-0111-48dd-9ff6-d03e7ff2ad5c",
+    "name": "Kin-Tree Severance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "02b41d0e-82e7-4307-8cc4-8175ff78ea1f",
+    "name": "Kiora of Fire and Ashes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e70bb7f8-8098-49c5-929c-68f63cd821c5",
+    "name": "Kiora of Salt and Sand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d748bce-dff8-46fa-a3d1-633863b7bbff",
+    "name": "Kiora, the Rising Tide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a272fa9-5f28-43a4-95de-10cb511f1b43",
+    "name": "Kirol, Attentive First-Year",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df1c0d06-2109-4297-9271-8a003fc892bc",
+    "name": "Kirol, History Buff // Pack a Punch",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a3275d80-112b-4839-a014-e44ef48d2e6b",
+    "name": "Kishla Skimmer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09277185-fccd-4747-aa79-f569c581022a",
+    "name": "Kishla Trawlers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4eb428ab-f5b0-46ca-98dd-b3466a91ef97",
+    "name": "Kishla Village",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6103f294-f920-4307-af80-d44cc71167fd",
+    "name": "Kitesail Corsair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2452be47-cc23-47f7-a3a1-fec900bb0119",
+    "name": "Kitesail Larcenist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c5766f9-befd-4426-9527-d50af0699ca1",
+    "name": "Kithkeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1bd1e83-40ac-449f-838c-ef308f275a5d",
+    "name": "Kitnap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16414460-11ce-481d-ab54-6f0e0ea7d83d",
+    "name": "Kitsa, Otterball Elite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9be19bdf-db1e-433e-8be4-8b985a568211",
+    "name": "Kitsune, Dragon's Daughter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e0f8ab3-75a6-49a2-a228-fa720cbde3d8",
+    "name": "Kitsune's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c233e08-d5a3-48d7-9074-20393896a480",
+    "name": "Klaw, Sonic Subjugator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7627163a-1689-446f-b5aa-a6c56aefb532",
+    "name": "Knife",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb2d222c-df42-41a7-a517-0a41e47a4280",
+    "name": "Knightfisher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11809d9b-30f3-49d5-9119-e45b4de044c8",
+    "name": "Knight Luminary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2e6fbcb-ebbd-40e8-8a01-b675fcacaf8e",
+    "name": "Knight of Doves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b51a979-47e0-4b98-8ec5-8064c83422e1",
+    "name": "Knight of Grace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b89d912a-65a0-4bc9-9e1d-ff8317458a72",
+    "name": "Knight of Malice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39145960-a212-46b4-addb-4b187f6bf6fd",
+    "name": "Knight of Wundagore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e4931f4-f518-4200-aad4-4ac8acf202e5",
+    "name": "Knockout Maneuver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdc2d980-ca14-4040-a9a1-786d724dc65c",
+    "name": "Knowledge Seeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2bbb33e3-7d03-457c-92bb-b0c943615fa1",
+    "name": "Koh, the Face Stealer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45682055-d02a-450c-a41d-aa67162ff015",
+    "name": "Kolodin, Triumph Caster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ebf2142-f171-40cd-8143-15f50084b707",
+    "name": "Koma, World-Eater",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76372327-41ec-4516-abff-3b612e073629",
+    "name": "Kona, Rescue Beastie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31ea4f3f-392a-4319-a95b-eb28790a80e6",
+    "name": "Konstrari Annex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40961b23-b153-434a-aeb9-b9c2ff613dcb",
+    "name": "Konstrari Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bad2e3b2-ad47-4e17-b35e-0fcc13e82937",
+    "name": "Konstrari Improviser // Soul Tether",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "bcae7f20-b601-4669-b3a7-c32ed0c6b9d3",
+    "name": "Korvold and the Noble Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "567aeb60-a441-41b1-98f4-54510d299317",
+    "name": "Koth of the Homestead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b17da84-ae4d-4fc1-a327-85e54e6156c6",
+    "name": "Koth, the Geomancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2eb2f6a2-e31a-4d3e-93ce-100394899014",
+    "name": "Kotis, the Fangkeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7cd87d4-028c-49d9-9416-69f57e7dfec5",
+    "name": "Koya, Death from Above",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52562194-4a97-40d2-aa73-7827f7834f2f",
+    "name": "Krang, Master Mind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2385c8fb-9c38-4ff3-8f61-4e25a8c7d46b",
+    "name": "Krang & Shredder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d56a491-b3eb-4f3e-82ab-981d3036c45d",
+    "name": "Krang, Utrom Warlord",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b563ae31-338e-4bcc-a05f-d7ed7c3fe46e",
+    "name": "Kraul Whipcracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d764f70-985e-4cf0-9482-f30f73b9baf1",
+    "name": "Kraum, Violent Cacophony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12b8b4bf-ba85-419c-8005-1ec34b2b1deb",
+    "name": "Kraven, Proud Predator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "976db753-9887-448a-8e67-ec7937b6505c",
+    "name": "Kraven's Cats",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e74efcf2-d77f-4fb5-9027-77e462ec829e",
+    "name": "Kraven's Last Hunt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e2bfa3a-ae83-453a-8e3f-ca6205a9af12",
+    "name": "Kraven the Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09eb988a-e2eb-42e1-a786-01be63d2263f",
+    "name": "Kree Commandos",
+    "status": "curated"
+  },
+  {
+    "oracleId": "3c2b9bb2-8201-47e8-84d5-f3518cac03cb",
+    "name": "Kree Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91b2520e-85b6-4e1f-88cf-a585feeb8e65",
+    "name": "Krenko, Baron of Tin Street",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68418069-f615-40ef-ae0d-764192acae00",
+    "name": "Krenko, Mob Boss",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79a63064-f25b-4c34-867e-a9d32da97b14",
+    "name": "Krenko's Buzzcrusher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33117d34-ea70-4566-92a3-5dec9bfe529a",
+    "name": "Krotiq Nestguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85fdfa3c-4912-496a-bbcb-1ae13a34e917",
+    "name": "Krovod Haunch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65a7fb13-77b9-44ea-9e0e-34daef82eb69",
+    "name": "Krumar Initiate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3998a60d-9521-4100-8d41-3e612972a3de",
+    "name": "Kuja, Genome Sorcerer // Trance Kuja, Fate Defied",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ed428638-181b-47cb-92f4-379db020e634",
+    "name": "Kulrath Mystic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d18ca75c-3572-4851-9580-27bafe10edd6",
+    "name": "Kulrath Zealot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0618a217-2a6e-4fa1-bfe6-89c6612a594d",
+    "name": "K'un-Lun Warrior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3233af43-7826-4895-b67e-03c6102c2cd5",
+    "name": "Kutzil, Malamet Exemplar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba557e19-a409-4c02-a9ac-a8fb77762e43",
+    "name": "Kutzil's Flanker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07a28621-e617-46b0-af3e-2efb03b5056a",
+    "name": "Kwia Vigorbloom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0156c94b-e64c-49de-a46c-a203c5e05e98",
+    "name": "Kykar, Zephyr Awakener",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7b746c8-1b32-42ed-8328-4e16274209d8",
+    "name": "Kylox's Voltstrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37f6bbb8-2136-4f03-966c-85d72180e71f",
+    "name": "Kylox, Visionary Inventor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "849e54f9-7662-4186-859c-e4f52afbccac",
+    "name": "Kyoshi Battle Fan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0cdc333-6c5a-401c-9810-220d2027f2fe",
+    "name": "Kyoshi Island Plaza",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da81b78b-89fd-4fc1-9395-b5b01b96be70",
+    "name": "Kyoshi Village",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b29abb09-75ea-431c-ab60-f2940d002e83",
+    "name": "Kyoshi Warriors",
+    "status": "unsupported"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "oracleId": "4126bab7-6a2a-43b2-ba65-77299f9bb8cf",
+    "name": "Jace, Arcane Strategist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2274c7ae-5a40-4fd4-a4ac-6f56b23034e4",
+    "name": "Jace, Architect of Thought",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2341a16-ffde-42fa-9746-0d8888e812d4",
+    "name": "Jace, Cunning Castaway",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe0fcb4e-92fd-4e64-99d1-043092ea21e3",
+    "name": "Jace, Ingenious Mind-Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a4dc133-541f-456b-a95f-3d707e1c95e9",
+    "name": "Jace, Memory Adept",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ca99e2f-faf2-4301-a0ae-7cb880ba965b",
+    "name": "Jace, Mirror Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3321c134-bf5b-4f63-8035-fca0bbdfa86b",
+    "name": "Jace, Multiverse Architect",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf0e9e00-fba5-448a-9052-ae730aea4bf8",
+    "name": "Jace, Reality Sculptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbd483b5-5554-43ed-a729-535d01b0d5d3",
+    "name": "Jace Reawakened",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89bd056d-8f5b-4d0e-b80a-58a984e21100",
+    "name": "Jace's Machinations",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ff8db8aa-1d5a-42f8-8056-8da0da9846bc",
+    "name": "Jace's Projection",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59cbed39-a07e-491e-a95a-adafe19eb652",
+    "name": "Jace's Ruse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8578c462-7b2d-4b69-ad10-a2eab44ac98d",
+    "name": "Jace's Scrutiny",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfd2ef5d-618d-4062-9cb2-9dbef5432865",
+    "name": "Jace's Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfcffe67-7db6-41bb-bfcc-400cbb8c8a9c",
+    "name": "Jace's Triumph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f77a84e-5a4b-4834-aefa-3cecc175ae8e",
+    "name": "Jace, the Mind Sculptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03dafab4-841f-41cb-8f2e-8188f5177837",
+    "name": "Jace, the Perfected Mind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac29873e-28c3-4933-b427-61d34ff0afcd",
+    "name": "Jace, Unraveler of Secrets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "594f6881-c059-46f8-aa4e-7151d502de73",
+    "name": "Jace, Vryn's Prodigy // Jace, Telepath Unbound",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5277a68e-1ceb-4b40-8e10-3d0564f5d7be",
+    "name": "Jace, Wielder of Mysteries",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5998f07e-01f9-4d02-94dd-867c7166463f",
+    "name": "Jackal, Genius Geneticist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e31ef54-b2f2-4f3f-9779-151b74470ce4",
+    "name": "Jackdaw Savior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f73d89ec-05c9-4998-a24b-bc675b04ec16",
+    "name": "Jackhammer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25b30117-03ef-49a5-8743-2d1c167d4bc3",
+    "name": "Jack of Hearts, Volatile Hero",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "192b5dd7-f420-4d5b-86d6-66e86fa67f41",
+    "name": "Jack-o'-Lantern",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16d2a56a-7181-4ef3-866b-10dd8615d9e9",
+    "name": "Jacob Hauken, Inspector // Hauken's Insight",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "fb3defc0-c93a-4423-9ff9-c399f8a8ef1f",
+    "name": "Jadar, Ghoulcaller of Nephalia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "72ddbc9b-f584-433f-9d2d-6e4c374129c4",
+    "name": "Jade Bearer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "985192cd-ceb6-48ad-80b9-e10fc544260e",
+    "name": "Jade-Cast Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9290f549-3e5d-4e39-a20e-8be6b674abc7",
+    "name": "Jadecraft Artisan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e43400fe-3df5-4942-abc3-b9bba34fc7cd",
+    "name": "Jaded Analyst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f666a990-bd9c-4160-9770-4758fd40ca92",
+    "name": "Jaded Sell-Sword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9128b952-bd36-4a3a-9566-34d999305991",
+    "name": "Jade Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b5d174c-7d4d-4c31-a582-8169d3bc932a",
+    "name": "Jadelight Ranger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a72d6cd-b4a7-4c42-90ba-a14f1733d00e",
+    "name": "Jadelight Spelunker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa2c984a-6bc1-4ec8-93d7-87f9f06b841e",
+    "name": "Jade Seedstones // Jadeheart Attendant",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ca79cd3f-13ba-4d11-b885-48a504ae69aa",
+    "name": "Jadzi, Oracle of Arcavios // Journey to the Oracle",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c63b3511-d597-4c6e-9094-eabdeaa8a394",
+    "name": "Jadzi, Steward of Fate // Oracle's Gift",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "64ee02f1-afdb-474b-a893-31538ad7219a",
+    "name": "Jagged Barrens",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc7f39e1-97bf-4725-a84a-2a04121530c6",
+    "name": "Jailbreak Scheme",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32d9fd98-142b-41d2-b8f0-40ae1d4cb991",
+    "name": "Jalum Tome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93036f4e-f553-4cc7-a747-6cd087b0994c",
+    "name": "Jarad's Orders",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "294c1fed-9473-4fbe-b10e-71a7a432b98d",
+    "name": "Jarl of the Forsaken",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9a24444-289f-473f-9985-8df275257555",
+    "name": "Jasmine Dragon Tea Shop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2f98813-4f39-4135-b05b-407e9eb797f6",
+    "name": "Jaspera Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "14af3ec5-d90a-4560-a70a-8645765f1253",
+    "name": "Jawbone Duelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "764121bf-535d-40d0-ab9d-65486da31734",
+    "name": "Jaxis, the Troublemaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a56c5ca5-70eb-4d5f-8116-2acbe5f5a3cb",
+    "name": "Jaya Ballard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2458aa66-5b20-4811-a4a4-8375ad0a6498",
+    "name": "Jaya, Fiery Negotiator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "250f804f-b5d5-414c-bb25-476d1fe1f85a",
+    "name": "Jaya's Firenado",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1be474c6-5a9f-4c58-adc6-c1508348adea",
+    "name": "Jaya's Greeting",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "f5f0deb0-070a-45b6-9b81-0bc8143f3040",
+    "name": "Jaya's Immolating Inferno",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10a87c58-2d8b-4658-b7d6-8dcbb44a2d2f",
+    "name": "Jaya, Venerated Firemage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "609d13dc-c850-4877-8ad3-e84171b58069",
+    "name": "Jazal Goldmane",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6cebf8d-37e1-42de-b3f1-1c174ab17ac8",
+    "name": "Jecht, Reluctant Guardian // Braska's Final Aeon",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "170adfe9-ffbe-40b1-b665-e756e7eb0302",
+    "name": "Jeering Instigator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0587c55-06c1-4930-a62e-668f37464ce9",
+    "name": "Jegantha, the Wellspring",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5802aa98-a9b7-4b0d-9d7c-c3938701870d",
+    "name": "Jem Lightfoote, Sky Explorer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c867a778-97ef-4872-b890-b088b96a1281",
+    "name": "Jennifer Walters // The Sensational She-Hulk",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b55da4d3-2cad-4c89-ad3f-7d8397b64d52",
+    "name": "Jennika, Bad Apple Big Sister",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90b1226f-4c90-47fd-98f3-ad4edd3b3518",
+    "name": "Jennika's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9370f6bf-d6a0-4c5b-828f-7229f563cc07",
+    "name": "Jenova, Ancient Calamity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a06d281-3ca2-498f-91d0-e13e7b0869f9",
+    "name": "Jeong Jeong's Deserters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2158c73d-421b-4c94-af06-dd89cb8d3126",
+    "name": "Jeong Jeong, the Deserter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20d0df30-013c-47c0-b70b-d628d427d30b",
+    "name": "Jerren, Corrupted Bishop // Ormendahl, the Corrupter",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c3c802ba-dfbb-4f63-ae9a-e29c2e30013d",
+    "name": "Jeskai Ascendancy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fda10ef2-f431-4d9b-96a4-4db4c98d2b0c",
+    "name": "Jeskai Banner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eff690a7-c2c7-4750-894c-0667d3151165",
+    "name": "Jeskai Brushmaster",
+    "status": "curated"
+  },
+  {
+    "oracleId": "2a9a05b4-1910-4f97-a0fe-0f57017f6df0",
+    "name": "Jeskai Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6dcdd313-6df7-4d44-a4cb-0346a4fdb4e1",
+    "name": "Jeskai Devotee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfbd5ad1-0f68-4219-95c4-98f674f321be",
+    "name": "Jeskai Elder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b2b7d04-73f3-43f6-86e0-fa00cbbc6469",
+    "name": "Jeskai Monument",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61b6b1d1-4350-41c1-ac47-835b2831f24a",
+    "name": "Jeskai Revelation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb50b4f4-f0da-4283-821b-6d74bd20752f",
+    "name": "Jeskai Shrinekeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8ebfc8b-3cee-491b-a568-8a8dcb22541d",
+    "name": "Jeskai Student",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "c35f4b80-90b6-467a-a666-1cc3437d49ab",
+    "name": "Jeskai Windscout",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "0fd114c4-092b-4e28-b0dc-ef529f3bc73e",
+    "name": "Jeska's Will",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6677cd5a-0785-499b-ba99-f6bdcfb196d5",
+    "name": "Jessica Jones, Private Eye",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77cd2246-6906-4dce-8580-4c9d2e68c477",
+    "name": "Jet, Freedom Fighter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bccb06f1-8839-4104-9ffa-c79a817f8378",
+    "name": "Jet Medallion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da72a4bc-ce6f-4b72-bc66-2ee33cfa87df",
+    "name": "Jetmir, Nexus of Revels",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f87df7d4-99e2-4340-9d0a-b96c397555db",
+    "name": "Jetmir's Fixer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5896356-5744-4f7e-a4e5-1cc36dde5958",
+    "name": "Jetmir's Garden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9ca8ead-c267-4170-a6c8-04498330c82b",
+    "name": "Jet, Rebel Leader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5cca85e0-43e8-4b97-a43b-1b8f23f541d1",
+    "name": "Jet's Brainwashing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bbfee53c-30a6-4ed0-beef-5c254be75fc5",
+    "name": "Jewel-Eyed Cobra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "470f0bbf-a0c9-4216-96f0-d400dac17aef",
+    "name": "Jewel Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b917c3aa-2d54-49e0-924a-dfd02eaf4b2d",
+    "name": "Jhessian Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83b9a734-ee92-44c8-bf47-ca69b6d6405e",
+    "name": "Jhoira, Ageless Innovator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df4b5f7b-9d83-49b1-bd5e-77d0652eb34c",
+    "name": "Jhoira's Familiar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c803b788-4213-4fab-b841-7e5bbf66088e",
+    "name": "Jhoira, Weatherlight Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf9b0bb5-d545-4efd-9255-39b10c2be0ee",
+    "name": "Jhoira, Weatherlight Corsair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa8b3557-b35a-4a68-ab85-cf09683f3bc5",
+    "name": "Jiang Yanggu, Alone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ba661d7-1cb8-4fec-bfaa-5f2797235fcf",
+    "name": "Jiang Yanggu, Never Alone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04f2c320-dfcc-440a-9e24-3c2083d74e7c",
+    "name": "Jiang Yanggu, Wildcrafter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9cda6cb8-c254-413a-babd-0e24e7b89cc4",
+    "name": "Jibbirik Omnivore",
+    "status": "curated"
+  },
+  {
+    "oracleId": "bd513d9d-5aa2-4860-bd86-8b5d9430f133",
+    "name": "Jidoor, Aristocratic Capital // Overture",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c6655e05-9e31-4a74-a97d-1eeb473fe900",
+    "name": "Jill, Shiva's Dominant // Shiva, Warden of Ice",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "eb23aed0-c450-4e57-96f2-2866dceca004",
+    "name": "Jin-Gitaxias, Core Augur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5daadc1-98ff-480a-82bb-fe7bfaa7b60e",
+    "name": "Jin-Gitaxias, Progress Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b70c3adb-64ba-49ea-bcf6-6406a58cb453",
+    "name": "Jin-Gitaxias // The Great Synthesis",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "61fbaaf2-4286-4e9a-b9cb-aa31262b596a",
+    "name": "Jinnie Fay, Jetmir's Second",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fda76032-7e6f-416f-8874-2a0642837522",
+    "name": "Jirina, Dauntless General",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de861715-fd0b-493e-9a7c-c470a23044c0",
+    "name": "J. Jonah Jameson",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8be4745e-36d8-430f-945e-c8a7fde9b4f6",
+    "name": "Jodah, Archmage Eternal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ba5b108-59cb-4af1-88cb-d3ceaaf00784",
+    "name": "Jodah's Codex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "490a8045-e160-4ccf-a05e-658ad2b7ac2d",
+    "name": "Jodah, the Unifier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8068f80f-88ee-4c0b-a0fb-3a6337f83f22",
+    "name": "Johann, Apprentice Sorcerer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c7b235e1-746e-4467-be54-4e11e2bf6362",
+    "name": "Johann's Stopgap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec744a2d-4a33-4807-bce0-d95cd5277b1f",
+    "name": "Joined Researchers // Secret Rendezvous",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "6f8bf849-890e-4fc7-981f-37ff4b4fb844",
+    "name": "Join Forces",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1102524d-7287-496f-a18a-5fdae6d4c271",
+    "name": "Join Shields",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9eba1789-6e58-4d78-8a0d-b54a8be76ec5",
+    "name": "Joint Exploration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8fc015c-7e6d-441d-bbeb-98ca74b21314",
+    "name": "Join the Dance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b153fc70-0312-4856-befd-bb6b9a04a26e",
+    "name": "Join the Dead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "849a7ae8-2b4e-4fa5-9607-2bfc961fee40",
+    "name": "Join the Maestros",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb8efd6e-b8f8-4da8-ac65-5b745c02d2bb",
+    "name": "Jolene, Plundering Pugilist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e22bf51-1b1b-459b-af78-91188b6e3f09",
+    "name": "Jolly Gerbils",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8640899-2458-40f2-98a3-35c402ee9a7a",
+    "name": "Jolrael, Mwonvuli Recluse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65e4fbd1-4935-495e-9897-bad5a0cfd935",
+    "name": "Jolrael, Voice of Zhalfir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4306a9e5-6845-4fd4-96ad-8888147612aa",
+    "name": "Jolted Awake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4601ed7b-716e-4c89-b733-1eeabe8bf5a2",
+    "name": "Joo Dee, One of Many",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "216d3eed-cb07-40c5-869a-962e074e757d",
+    "name": "Joraga Invocation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7854f475-5470-4f2b-99df-af9026895595",
+    "name": "Joraga Visionary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "967897db-a34b-493c-bd48-04e2650902d2",
+    "name": "Jor Kadeen, First Goldwarden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd43b485-e42e-4c20-adcb-799b0ce18a59",
+    "name": "Jorn, God of Winter // Kaldring, the Rimestaff",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f4629329-a79b-4460-a1bc-9ae0f59adf5a",
+    "name": "Joshua, Phoenix's Dominant // Phoenix, Warden of Fire",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "974a46f9-aa84-4b34-bee5-c635166e5841",
+    "name": "Josu Vess, Lich Knight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10aab5bc-5758-443b-ba4c-49f6c6d91262",
+    "name": "Journeyer's Kite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d6ccd0b-df16-40b2-930b-bcde0b6ef73f",
+    "name": "Journey to Eternity // Atzal, Cave of Eternity",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2bfec482-be0d-4768-84e7-1c2c74ea1373",
+    "name": "Journey to Nowhere",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31e8c1e1-520a-4e64-a221-203afc819fcf",
+    "name": "Journey to Oblivion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8584e96f-a3e7-475c-bfd1-2c9a72bee774",
+    "name": "Joust",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96eea161-8af0-452f-b992-576efdf58d88",
+    "name": "Jousting Dummy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab747483-2aa1-4b25-b2fa-cf7372a1b1dc",
+    "name": "Jousting Lance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33c21ef1-33eb-447a-a318-a352f163a8a0",
+    "name": "Joust Through",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39867856-c1f3-442a-abe9-53f8f73777d0",
+    "name": "Joyful Stormsculptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d160887f-f78e-4a66-9766-0b7dd852a784",
+    "name": "Jubilant Mascot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aab55af7-8084-47b6-910f-75a75a6313a4",
+    "name": "Jubilant Skybonder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a846ad6-15c9-4bf9-9127-612018a557b9",
+    "name": "Judge Magister Gabranth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22b7975c-37a5-4895-b209-bdeeec0c6aea",
+    "name": "Judge's Familiar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aad9f9f2-4c6b-48d0-80bd-77b73a9ea5f1",
+    "name": "Judgment Bolt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e86c965b-ac10-4fff-b682-dddd6d9747c6",
+    "name": "Judith, Carnage Connoisseur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c01516e0-eec3-4370-b935-7674982e8850",
+    "name": "Judith, the Scourge Diva",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e70ac420-8540-4a69-820f-ae3e0274ca1a",
+    "name": "Jugan Defends the Temple // Remnant of the Rising Star",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "4ac9116f-36bc-4d71-b696-d6ee064e1d58",
+    "name": "Juggernaut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4d1a78f-0cca-4042-862c-8f322ee25d50",
+    "name": "Jukai Naturalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8ce90be-f0ab-4f8d-896a-cde8aaf24579",
+    "name": "Jukai Preserver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb9fa34d-1d5f-461c-acad-bc573d41ceb2",
+    "name": "Jukai Trainee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0bdfbb4-3060-4492-bd9b-0c47e719400a",
+    "name": "Jumbo Cactuar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "783aab37-3ec3-478f-a4fa-cccdfffbae18",
+    "name": "Jump Scare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1779869a-5e54-4ab5-86b8-d4d20e2e1ba4",
+    "name": "June, Bounty Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60662463-6050-46c6-84ab-64e203b67b4d",
+    "name": "Jungleborn Pioneer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "acc091c0-3891-41b9-b5f6-7537fe9493fe",
+    "name": "Jungle Creeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f299e69-d82b-48c9-b7f5-cf07cd9dced2",
+    "name": "Jungle Delver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6de714e1-446d-4fb9-9e3d-bcd3ec6af9ca",
+    "name": "Jungle Hollow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5914d4d5-51b8-49c2-9459-bf5579df4990",
+    "name": "Juniper Order Rootweaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78a48f4e-ba4c-4d8d-938a-9ddb342a885b",
+    "name": "Junji, the Midnight Sky",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a2fbdd3-4940-4bbf-ae19-f6d00d7ff294",
+    "name": "Junkblade Bruiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08c595da-9305-42a9-b72f-5ccc546edc01",
+    "name": "Junk Diver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ef46fd7-82db-45d3-b02e-7312384577f3",
+    "name": "Junktroller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b677e88-bcc9-4a55-9c89-8bbd0e2344dc",
+    "name": "Junk Winder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68d4d753-5e53-48a6-8ba2-56020893c239",
+    "name": "Junkyard Genius",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3364bad6-6d0a-4141-b410-86e3d9e1916e",
+    "name": "Juri, Master of the Revue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc63e7ca-e62a-4026-803d-eecdbbedf3c6",
+    "name": "Justice Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "184dba74-63ed-4820-9174-68adf26bfabf",
+    "name": "Justice, Vance Astrovik",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0214805d-d207-42da-a25f-2a8e1990904e",
+    "name": "Justiciar's Portal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "761ebd6a-8f53-46fa-b3cd-16616b773007",
+    "name": "Just the Wind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "941a4b14-ea2a-4bd0-8cc2-d609f80df32c",
+    "name": "Jwari Disruption // Jwari Ruins",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "67f0cef6-8ef4-4c39-b306-2b580036894e",
+    "name": "Jyoti, Moag Ancient",
+    "status": "unsupported"
+  }
+]

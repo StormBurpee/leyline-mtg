@@ -1,3 +1,4 @@
+import { costProblem, payCost } from './costs.js';
 import { cardDefinition } from './cards.js';
 import {
   addObject,
@@ -64,6 +65,34 @@ export function queueTrigger(s, source, effects, label) {
   });
   emit(s, 'triggered', { objectId: source.id, name: source.name, player: source.controller });
 }
+/** Ward is triggered, not a targeting restriction (CR 702.21). */
+export function notifyTargeted(s, entry) {
+  if (entry.target?.kind !== 'object') return;
+  const source = s.objects[entry.target.id];
+  if (!source || source.controller === entry.controller) return;
+  const cost = definition(s, source).ward;
+  if (!cost) return;
+  s.pendingTriggers.push({
+    id: `s${++s.nextId}`,
+    kind: 'ability',
+    name: source.name,
+    source: ref(source),
+    controller: source.controller,
+    sourceKeywords: keywords(s, source),
+    effects: [{ op: 'wardPayment', cost: structuredClone(cost) }],
+    relatedStackId: entry.id,
+    label: `${source.name} · ward`,
+  });
+  emit(s, 'triggered', { objectId: source.id, name: source.name, player: source.controller });
+}
+function counterEntry(s, id) {
+  const index = s.stack.findIndex((entry) => entry.id === id);
+  if (index < 0) return;
+  const [entry] = s.stack.splice(index, 1);
+  const source = s.objects[entry.source.id];
+  if (entry.kind === 'spell' && source?.zone === 'stack') move(s, source, 'graveyard');
+  emit(s, 'countered', { name: entry.name, stackId: entry.id });
+}
 export function enterBattlefield(s, o, controller = o.owner, attachment = null) {
   move(s, o, 'battlefield');
   o.controller = controller;
@@ -104,6 +133,18 @@ export function dealDamage(s, source, target, amount) {
   if (source.keywords?.includes('lifelink')) s.players[source.controller].life += amount;
   emit(s, 'damage', { source: source.id, target, amount, controller: source.controller });
 }
+function damageSource(s, entry) {
+  const source = s.objects[entry.source?.id];
+  const current =
+    source &&
+    source.incarnation === entry.source.incarnation &&
+    source.zone === (entry.kind === 'spell' ? 'stack' : 'battlefield');
+  return {
+    id: entry.source?.id,
+    controller: current ? source.controller : (entry.sourceController ?? entry.controller),
+    keywords: current ? keywords(s, source) : (entry.sourceKeywords ?? []),
+  };
+}
 export function resolveEffects(s, entry, startIndex = 0) {
   const effects = entry.effects ?? [];
   for (let index = startIndex; index < effects.length; index++) {
@@ -115,26 +156,27 @@ export function resolveEffects(s, entry, startIndex = 0) {
         ? candidate
         : null;
     switch (e.op) {
+      case 'wardPayment': {
+        const affected = s.stack.find((item) => item.id === entry.relatedStackId);
+        if (!affected) break;
+        s.resolving = { entry, index: index + 1 };
+        s.choice = {
+          kind: 'payCost',
+          player: affected.controller,
+          cost: structuredClone(e.cost),
+          stackId: affected.id,
+          reason: 'ward',
+          payable: !costProblem(s, affected.controller, e.cost),
+        };
+        return false;
+      }
       case 'damage':
-        dealDamage(
-          s,
-          {
-            id: entry.source?.id,
-            controller: entry.controller,
-            keywords: entry.sourceKeywords ?? [],
-          },
-          entry.target,
-          e.amount,
-        );
+        dealDamage(s, damageSource(s, entry), entry.target, e.amount);
         break;
       case 'damageOpponent':
         dealDamage(
           s,
-          {
-            id: entry.source?.id,
-            controller: entry.controller,
-            keywords: entry.sourceKeywords ?? [],
-          },
+          damageSource(s, entry),
           { kind: 'player', id: opponent(entry.controller) },
           e.amount,
         );
@@ -224,7 +266,16 @@ export function continueResolution(s) {
 }
 export function finishResolutionChoice(s, command) {
   const choice = s.choice;
-  if (choice.kind === 'libraryOrder') {
+  if (choice.kind === 'payCost') {
+    requireRule(
+      command.type === 'payCost' && typeof command.pay === 'boolean',
+      'PAYMENT_CHOICE',
+      'Choose whether to pay the ward cost.',
+    );
+    if (command.pay) payCost(s, choice.player, choice.cost);
+    else counterEntry(s, choice.stackId);
+    emit(s, 'wardPayment', { player: choice.player, paid: command.pay, stackId: choice.stackId });
+  } else if (choice.kind === 'libraryOrder') {
     requireRule(
       command.type === 'orderLibrary',
       'CHOICE',

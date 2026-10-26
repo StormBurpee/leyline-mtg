@@ -1,0 +1,1542 @@
+[
+  {
+    "oracleId": "ee3d21b9-58b4-480c-bae3-26de50f1a5c6",
+    "name": "Back for Seconds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aaf46eaf-2e01-46ac-b79d-6b70739d11c2",
+    "name": "Back on Track",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2084a7f6-226b-4fb4-a30e-703f674d33b4",
+    "name": "Badgermole",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a61267d2-2cc7-4208-a365-581d56b92e1c",
+    "name": "Badlands Revival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1389c9fa-fec2-4212-a7aa-6dfb318dc202",
+    "name": "Bagel and Schmear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b9ec782-0ba1-41f1-bc39-d3302494ecb3",
+    "name": "Bake into a Pie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ecd9a0a4-1dfa-4d91-8339-062e2be4e5d9",
+    "name": "Bakersbane Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b84fec5-617c-4088-8250-2ba1f1f9479a",
+    "name": "Balamb Garden, SeeD Academy // Balamb Garden, Airborne",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3f678f76-3863-4ab5-a4fd-9b76a282b1a8",
+    "name": "Balamb T-Rexaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a511772c-3739-469d-a5a2-5827b7ce9b5c",
+    "name": "Balemurk Leech",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d420e41-43e9-41d6-832c-5a9f410c994e",
+    "name": "Balin, Loremaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7485cf25-eb41-4397-be13-7f0b8c10c70a",
+    "name": "Ball Lightning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ad27d0e-b6c3-4c3f-a389-285d889b6a65",
+    "name": "Ballyrush Banneret",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7da19fc5-cb85-4ec7-beea-95210378bbfe",
+    "name": "Balmor, Battlemage Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "570cb560-c246-4652-b230-ab34f966c78a",
+    "name": "Balthier and Fran",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2dd32fec-5bc3-4cc0-a9b4-814229a64914",
+    "name": "Balustrade Wurm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84b08b55-0623-4202-98c6-1756d3c1bb8f",
+    "name": "Bandit's Haul",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bcbe879a-4609-4493-bd7d-47c26d27e83c",
+    "name": "Bandit's Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b633e58-ea1b-4ed0-addb-6dfd93645ae4",
+    "name": "Banishing Betrayal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f28b21a6-f7ce-437a-8c5b-0423cb55cefb",
+    "name": "Banishing Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c220dbd-6572-4715-aae6-dd09a4252d68",
+    "name": "Banner of Kinship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15febce7-8320-4591-9535-ef11c8adecc2",
+    "name": "Barbed Bloodletter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e3d82066-d8b9-47bf-8821-1370c506970b",
+    "name": "Barbed Servitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d05db2c1-a19a-4803-8e8a-fa2f9b798181",
+    "name": "Bard, King of Dale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4aceb786-960d-4719-9de8-79dffd491a51",
+    "name": "Bard's Bow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c5bfbb2-0e63-4e43-b441-c4878983288f",
+    "name": "Bard's Company",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec076f5b-b0e3-4b6f-9293-a8fc42f20bd8",
+    "name": "Bard the Bowman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0339bd11-ad71-4998-9b5d-a32790f0e5e3",
+    "name": "Barkform Harvester",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08e173e3-4c28-49d2-bb57-ccf533f20daf",
+    "name": "Bark-Knuckle Boxer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db3ba239-2239-4e9d-ad70-cff32ed24578",
+    "name": "Bark of Doran",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc710da0-5a2e-4bc4-8fdd-d90e7bc1f224",
+    "name": "Baron, Airship Kingdom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e25b516c-bf95-42bc-8b1e-04617a3d28df",
+    "name": "Baron Bertram Graywater",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0fe6c042-1182-4392-8938-fee36149d74f",
+    "name": "Baron Helmut Zemo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c91e64d4-e687-4ccd-a56e-796cff6e052c",
+    "name": "Baron Strucker, HYDRA Overlord",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6cd520c-106b-4ee5-bc02-6c5fbdbc78dd",
+    "name": "Barrels of Blasting Jelly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "228d3307-69a9-45ce-a610-77754ed50877",
+    "name": "Barrensteppe Siege",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "913672bc-cc88-4964-a331-7dbce40f2bda",
+    "name": "Barret Wallace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95664c29-9801-4dfc-9dbd-465abf6bb4ee",
+    "name": "Barrow Naughty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f47e4c56-0a0b-422d-bf3d-7a20ee289f15",
+    "name": "Bartolomé del Presidio",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d995c47-e548-4fc4-9182-fef46af20ca5",
+    "name": "Bartz and Boko",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b5a3765-943b-4925-b008-fc734b2934f7",
+    "name": "Baseball Bat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7aeabd9-a72c-47ee-b275-b025d7142766",
+    "name": "Bashful Beastie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e335485a-80fc-40d4-8be6-7eabf2bab571",
+    "name": "Basilica Stalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5f4dd28-f4ae-4d39-b9b8-6ebfd63c93fe",
+    "name": "Basilisk Collar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de1ae205-ca5b-4d26-8194-ca85f1406e53",
+    "name": "Ba Sing Se",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ce678fa-6495-4857-b178-231c283b4514",
+    "name": "Basking Capybara",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8e1e9ba-708c-4f54-abc3-817004a2f2ac",
+    "name": "Basri, Tomorrow's Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2022f95-2c26-4a2a-b83b-60efa937cdde",
+    "name": "Bat Colony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8af57b80-bbc6-47ce-83f6-34ae8e2f5bd5",
+    "name": "Battle Menu",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "72dc807b-35fb-4d69-ae4c-04eed0646170",
+    "name": "Battle-Rattle Shaman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "396cc8ce-9efa-4fc7-90a6-b439b2b021db",
+    "name": "Battlesong Berserker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "71bc69a5-7cec-4abd-b97d-13f8e1f9afac",
+    "name": "Baxter Building",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e610bfd4-d064-410b-929c-1d9dd82828b1",
+    "name": "Baxter Stockman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73dc28a7-37ac-4b16-aa00-967c9c44d979",
+    "name": "Baylen, the Haymaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bbe740f8-6e7c-4cfd-9134-9bf8d5f48cf5",
+    "name": "Beamsaw Prospector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2192c80-c48f-44e2-807c-2f9ee1aa1152",
+    "name": "Beanstalk Wurm // Plant Beans",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ed206651-3d9b-4546-8d45-0682817192fd",
+    "name": "Bear Cub",
+    "status": "curated"
+  },
+  {
+    "oracleId": "963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6",
+    "name": "Bearer of Glory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7afb2c3-50ee-40f5-8b14-32f80c2bacd0",
+    "name": "Bear Trap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19a32e29-45ec-433e-9cb4-b2c32cac8f80",
+    "name": "Beastbond Outcaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "191ba5f0-45f4-4b7f-910d-4bd4d2d28b33",
+    "name": "Beast, Erudite Aerialist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3da5fbe2-e47b-4a1d-9e73-393f37314fa3",
+    "name": "Beastie Beatdown",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db794af5-ba2e-4b10-b213-e481e8a50432",
+    "name": "Beast-Kin Ranger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19a0d191-64c0-4e8a-8cb0-bf680cc681bb",
+    "name": "Beastrider Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f24637d-8d8e-49de-b229-4cdb97595ed7",
+    "name": "Beatrix, Loyal General",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a08b0a07-6da2-4ff6-88e5-88355dd84589",
+    "name": "Bebop & Rocksteady",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39c813e1-0e26-440a-b9bd-e781f7576b8b",
+    "name": "Bebop, Warthog Warrior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "789e034c-7f4a-4fd5-9dd8-48313742126e",
+    "name": "Become Brutes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7143d82a-931a-4918-bb14-37bc5b9a4d99",
+    "name": "Bedhead Beastie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9c2e674-11a9-47f0-8790-a53b62c43fe6",
+    "name": "Bedrock Tortoise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e6609b4-f359-4bf1-a06e-f4317a0e7b3c",
+    "name": "Beetle-Headed Merchants",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87972de1-c1d7-408e-8d56-995590f639b8",
+    "name": "Beetle, Legacy Criminal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85ac3efc-5e19-4661-b52f-116f57e39581",
+    "name": "Behind the Mask",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6fa27f8a-bade-460f-853a-abc1c05c946a",
+    "name": "Behold the Sinister Six!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8561b088-56b3-4732-82e9-8da1e3affd55",
+    "name": "Beifong's Bounty Hunters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "051ff7e0-dd00-4467-8796-a5d1c21934ed",
+    "name": "Bejeweled Warg",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "011da9c5-aa8a-4fa0-b1f2-62b9f3760476",
+    "name": "Belladonna Took",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2be2f6c8-d8df-4e5c-a0c1-7566183bbe81",
+    "name": "Belligerent of the Ball",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d785e3e-8e19-4eea-b09f-9a30c792dba1",
+    "name": "Belligerent Yearling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cdb84830-faf2-4beb-8d57-ad696d75876b",
+    "name": "Bellowing Bruiser // Beat a Path",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f2f3be8a-5ea1-47c2-8104-747f4589f5e6",
+    "name": "Bellowing Crier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06374e6d-62fa-4833-81cd-b4d0a35e7365",
+    "name": "Beluna Grandsquall // Seek Thrills",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "52fd9309-b849-419a-8d19-5882c00a72b4",
+    "name": "Beluna's Gatekeeper // Entry Denied",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3bc46467-323f-4cbf-9d0a-f3d2ae3c3a34",
+    "name": "Bender's Waterskin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12d91743-1ccb-4f2b-b2a9-1c2b34f7c8eb",
+    "name": "Benevolent River Spirit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5539d78c-1acc-46dd-ba6d-cc0cdad6ff44",
+    "name": "Benthic Criminologists",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "288da486-393c-4995-ad02-c5093a71970d",
+    "name": "Beorn, Reluctant Host // Till and Tend",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d9ed7252-11d1-432b-9101-ac08cd28826d",
+    "name": "Beorn's Hospitality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30ca8e92-5955-46a1-86c1-094a873f518f",
+    "name": "Beorn the Fierce",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "715f0832-696c-4111-b418-d9b6da403159",
+    "name": "Berta, Wise Extrapolator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbbe535b-12d6-4e6c-8b26-9220f06a1604",
+    "name": "Beseech the Mirror",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c7b6d2cd-9105-404b-88f0-a67037fb2120",
+    "name": "Besotted Knight // Betroth the Beast",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b2ff15b8-1be4-4f94-b4cc-aa959a50288e",
+    "name": "Bespoke Battlegarb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "679480aa-f9ad-4a6c-bd79-db9f9f75433d",
+    "name": "Bespoke Bō",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3ae6694-6314-42e2-bc12-d0e32d49b347",
+    "name": "Bestial Bloodline",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc00f29a-e9d2-4b86-bb22-33b686ac4365",
+    "name": "Bestial Incursion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58a17110-b2a7-4dbc-bba5-5ed3728ad261",
+    "name": "Bestow Greatness",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "826a0db6-195a-4697-9bd6-f544b279e3cf",
+    "name": "Betor, Kin to All",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1dce3f0-30c8-488f-bbeb-b0533886c655",
+    "name": "Betrayal at the Vault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfb3d862-d92d-4a4f-9a22-671b55d954fd",
+    "name": "Betrayer's Bargain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84469042-d48d-409f-a2c9-047058f13bc5",
+    "name": "Bewildering Blizzard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c96424e7-63c4-4f07-959f-6ad09f91279a",
+    "name": "Beyond the Quiet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "020de6d7-f5a2-4036-ad25-451e5977b4d4",
+    "name": "Beza, the Bounding Spring",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08a0e845-9ef9-4de1-b9fe-4530357346ca",
+    "name": "Biblioplex Tomekeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8d563e4-e2bc-4e8b-8841-6655beff9138",
+    "name": "Bifur, Melodic Rider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4e473298-0b67-42b8-90a8-3bcdd73da473",
+    "name": "Bigfin Bouncer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa85f9e6-69ff-4669-b70a-440aa7b16c97",
+    "name": "Bilbo Baggins, Burglar // Take a Glance",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a73d9109-36e0-40ea-ab06-5c5f7eb4ac54",
+    "name": "Bilbo, Luckwearer // Burglar's Plot",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "4c054431-3667-4e28-9d68-03b43447c35b",
+    "name": "Bilbo's Deadly Slice",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "ef71ef07-8a35-41ec-a851-d95e9e3a221b",
+    "name": "Bilbo's Gambit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "72a9a85d-7cfc-4b3c-82db-9d35be6c0982",
+    "name": "Bilbo, Thief in the Night",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a651557-ce08-46ba-aecd-0e4fbfdef3c0",
+    "name": "Bile-Vial Boggart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce45d6bd-74e3-401b-983d-028d3fb942da",
+    "name": "Billowing Shriekmass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86dc3a41-4fb9-4b1f-8279-2b5edbc7e170",
+    "name": "Binding Negotiation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6fa78914-85b3-46fd-977a-0e5b4d29eca4",
+    "name": "Bioengineered Future",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30812870-87c0-469c-95a5-811d5a181e72",
+    "name": "Biogenic Upgrade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b395925b-2456-454e-9262-3b55c9f2799a",
+    "name": "Biomechan Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d27c583-469c-42d7-a547-8c65654e9d95",
+    "name": "Biorganic Carapace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3abd2342-f783-4871-ac78-1a54b35722c2",
+    "name": "Biosynthic Burst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78de77ef-c325-4342-869f-042921229577",
+    "name": "Biotech Specialist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3172c5d-c745-4422-b651-cd414c8da11b",
+    "name": "Birnin Zana Plaza",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84487586-4f71-457a-b983-4f1f7a71deef",
+    "name": "Bishop's Soldier",
+    "status": "curated"
+  },
+  {
+    "oracleId": "623903de-3c04-4745-9af3-d7ec9fb2574d",
+    "name": "Bite Down",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ff387264-31da-4f6b-88c6-2843f56acbda",
+    "name": "Bite Down on Crime",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5effb651-f9e0-4c14-8192-bd0e132b8d5d",
+    "name": "Bitterbloom Bearer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be0dcad2-8e84-4e9f-b69c-837b40b8fb83",
+    "name": "Bitter Chill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "776341cb-d2ec-423f-9250-92dc8bd8d503",
+    "name": "Bitter Triumph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9a24ed8-e844-4c50-b386-bc28da9989b1",
+    "name": "Bitter Work",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5cdb413-2b72-4dc6-b93d-2532ac2ae568",
+    "name": "Black Cat, Cunning Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "909b3d90-5762-461b-b49a-004a9e72733d",
+    "name": "Black Mage's Rod",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0bf1964-c543-4c53-9f09-0dd7c608d5c5",
+    "name": "Black Panther, Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9fdad42a-9db5-4d91-9e80-9d5ce19038b8",
+    "name": "Blacksmith's Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99da512c-e222-4e5c-aa64-a276ed9ebe87",
+    "name": "Blacksnag Buzzard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c84c681-40c1-4ff3-86e6-48b4ab7491e5",
+    "name": "Black Waltz No. 3",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6c181f1-f4f7-4a96-b50c-717cf2a02098",
+    "name": "Black Widow, Double Agent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61",
+    "name": "Black Widow, Super Spy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33042d12-f08b-4b3e-b106-c424ef868c13",
+    "name": "Blade of the Swarm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80ea56ad-e741-4a85-b4e8-ce62e7d593d5",
+    "name": "Blanchwood Armor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6cf50e21-0f60-4e9a-b910-ebe1bad2a29e",
+    "name": "Blasphemous Edict",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "977c2f33-b622-4172-9efb-7f523becd32b",
+    "name": "Blazemire Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "088acd15-029b-4091-960a-d5060a364ca9",
+    "name": "Blazing Bomb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6344c96a-efa5-4125-8219-d333228391cf",
+    "name": "Blazing Crescendo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1bf505a7-292e-4642-83b6-8ff41ebe5d51",
+    "name": "Blazing Firesinger // Seething Song",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2b8144a0-08d2-4c28-9fd7-5d90f90105e4",
+    "name": "Bleachbone Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1bdd361-c7f2-4aa2-8d07-b582775551ff",
+    "name": "Blech, Loafing Pest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47b6d2ae-d3d7-41eb-9172-2076eb8d028d",
+    "name": "Bleeding Woods",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe99d90e-4809-4310-a3f7-ceb540511d55",
+    "name": "Blessed Ghoul",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a294968e-9a7f-4d66-bde0-e775ae5f8197",
+    "name": "Blighted Blackthorn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf5b1cf9-dcd3-44d1-b8b2-338651ebb2a1",
+    "name": "Blight Rot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "75719f87-ce1a-40d6-ac5a-5ebf0c936c84",
+    "name": "Blitzball",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c99779b7-a271-416e-bdc2-0f9ba6ceb144",
+    "name": "Blitzball Shot",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "43985bbc-a0f6-4812-984e-392bc8562633",
+    "name": "Blood Crypt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64e29bfc-9313-4e8c-808c-bc27f6b018a6",
+    "name": "Bloodfell Caves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e97f9c2b-b41e-4f36-9245-77c0ac125647",
+    "name": "Bloodghast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb02e64c-0c4a-41ae-972e-ce83e6fc4cb9",
+    "name": "Blood Hustler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "469956a2-7cd4-4695-b8f4-c841526f160d",
+    "name": "Bloodletter of Aclazotz",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdb9e933-f679-4930-b669-0d123db09d16",
+    "name": "Bloodline Bidding",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8e9a7e1-28ae-40e3-8715-1bb0aa2057c7",
+    "name": "Bloodline Recollector // Ancestral Craving",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "aa929252-5dcc-4c9b-9e7c-61d0bef98d6d",
+    "name": "Blood Spatter Analysis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd505c02-c59e-476d-8e88-35da862ddc23",
+    "name": "Bloodthirsty Conqueror",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01ab7724-1967-4da6-aebd-3729983d6a0e",
+    "name": "Bloodthorn Flail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93088b0c-d158-473a-9c06-aa2f344a9868",
+    "name": "Bloodtithe Collector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7040175-7411-43a8-9b46-dba1d7c2135d",
+    "name": "Bloombrute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e5b8973-4f6e-4abe-bbbe-81fdca784997",
+    "name": "Blooming Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66fa2326-1b5d-41fb-b919-83bf9f383577",
+    "name": "Blooming Marsh",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab282bb1-900e-40b8-9821-8e2de88927bc",
+    "name": "Blooming Stinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c23fefe-9891-4dd8-9bb1-eebdb3274e31",
+    "name": "Bloom Tender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da1e019c-2ffb-412d-90d7-f2e5e5c44c4b",
+    "name": "Bloomvine Regent // Claim Territory",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "0ecb35b3-5bd1-4467-a4a3-ce468023ced2",
+    "name": "Blossombind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd61c26b-8d3c-4730-92f2-0d94d961bafd",
+    "name": "Blossom-Blessed Angel // Seed Suture",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5a851367-1c4a-4cc9-a9c3-3d2775986b4c",
+    "name": "Blossoming Defense",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45429b2c-be3b-4b2e-9bab-a059ccbda8cd",
+    "name": "Blossoming Sands",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e1bf23b-7fb0-45ff-8544-fce9fa3eba00",
+    "name": "Blossoming Tortoise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "551e4356-5b1f-475c-a64b-9c50ea9b0368",
+    "name": "Boar-q-pine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a0e35ac-6c03-4922-b3b4-e419419fe3d7",
+    "name": "Bofur, Reliable Guardian // Concerted Care",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5d58aefe-a3df-4e0a-b679-b967cd5fd2c6",
+    "name": "Boggart Cursecrafter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac65ed8c-abe8-4044-9ce5-70b1370d0e19",
+    "name": "Boggart Mischief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1bcac664-835a-4474-8ca4-263801bde08e",
+    "name": "Boggart Prankster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21695c70-f746-4d77-b6d3-e2713a5c929e",
+    "name": "Bogslither's Embrace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0109432d-5a2a-456f-ad39-b75cb4c73420",
+    "name": "Bogwater Lumaret",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0cbe2a00-4303-4ade-98b5-4172d97f15fb",
+    "name": "Boilerbilges Ripper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6caabc45-4644-4941-a2f3-f04ee7b50a89",
+    "name": "Boiling Rock Prison",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5193172c-9024-409e-bd9e-0387971d65fe",
+    "name": "Boiling Rock Rioter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45ddfa35-7b3c-4916-b231-dc721b7b56d9",
+    "name": "Bold Biochemist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab32c671-7686-435b-a987-14a08f6790eb",
+    "name": "Boldwyr Aggressor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88522a0f-5377-4522-97f4-4148bef954af",
+    "name": "Bolg of the North",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa602f8f-1d80-4f6d-8b8f-d1a1f36037bd",
+    "name": "Bolg's Company",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c23617c9-53f9-4063-8241-b504e9b80cbe",
+    "name": "Bolrac-Clan Basher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c20a96f7-aa5a-4c15-b8b1-806685c99b27",
+    "name": "Bolt Bend",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb8cccc8-e56f-42fa-a0d7-fc889b5e1c7b",
+    "name": "Boltwave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0899c12-5462-4ff1-a9e5-d99cffa7c6cc",
+    "name": "Bombard",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "925ce68e-9323-4985-8fef-0d3f36e0d74c",
+    "name": "Bombur, Gentle Dreamer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c79cf0e5-52dd-4af3-ab06-6cdaab526c23",
+    "name": "Bonebind Orator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be3c7e4c-81fd-49e7-8fb5-5eb83994dafd",
+    "name": "Bonecache Overseer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "449db6bf-d766-4d09-a7bd-9c45b3d4c4c3",
+    "name": "Bone-Cairn Butcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a08f69f9-de48-46d6-8b75-31886159cf45",
+    "name": "Boneclub Berserker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ba550a5-81fc-42c2-8df8-ad455d938605",
+    "name": "Bonehoard Dracosaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3adc698-a0c5-4c82-8347-536745c9e928",
+    "name": "Boneyard Desecrator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcb811a8-c6e6-4bc4-b64b-8963a7183669",
+    "name": "Bonny Pall, Clearcutter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0fdf2e0-3025-4919-a9dc-d33100e487fd",
+    "name": "Boom Box",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "acd881eb-f3b4-4174-9fc2-e3c7c213886b",
+    "name": "Boomerang Basics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb3edb86-ddd5-461c-98b5-ffb4df437a39",
+    "name": "Boommobile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48296cc0-0141-47c6-9ec8-ada6171fee6f",
+    "name": "Boom Scholar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cec10abd-2a2d-4d89-9ecc-ea50c2ac1538",
+    "name": "Boosted Sloop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2679d0dd-ba30-4a1c-b6a0-b3ac6c790496",
+    "name": "Boros Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73c423b7-cab8-4e69-8070-9edbf96a6c2c",
+    "name": "Boros Guildgate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6effbf59-3933-4a77-9a6a-fd3bedf45c26",
+    "name": "Borough Backup",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d6507b0-c986-49d1-aea3-77b2cf2a7433",
+    "name": "Borrowed Knowledge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88f8f683-738e-48f3-afff-c8f73f1033a2",
+    "name": "Botanical Sanctum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "14079f05-fbc1-401c-9008-da678656b4c6",
+    "name": "Bot Bashing Time",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "978e07fd-8b8c-4eab-850e-e4c0e712251e",
+    "name": "Bothersome Noisemaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9ac4856-5cdb-479f-b0f5-7fa0b232a5ff",
+    "name": "Bottomless Pool // Locker Room",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "dc788b66-d03d-4066-be35-481be96ed2f7",
+    "name": "Boughside Wanderers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1654cab1-0697-4547-b1fe-2d0a61385199",
+    "name": "Boulderborn Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30a9ad0e-1b23-41ce-bacc-3b27f78ef628",
+    "name": "Boulder Dash",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9c29e6e-5949-4599-bf74-b9539e753f76",
+    "name": "Bounce Off",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1189b5d5-ca8f-4b4e-a5f1-91122a485cf3",
+    "name": "Boundary Lands Ranger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b00f316d-7c82-40e6-80e5-9f36434590a3",
+    "name": "Bounding Felidar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7402d98f-6d58-4ff2-a0db-9eec4417a75f",
+    "name": "Bovine Intervention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ad34f85-a185-458a-a7a1-eb60f7efce5b",
+    "name": "Brackish Blunder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86ef06b3-2049-494d-9ecb-ca14766d3b68",
+    "name": "Braided Net // Braided Quipu",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "eb25920a-3162-4838-b092-09cbd43332fd",
+    "name": "Brambleback Brute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68f36dfa-bbd2-4860-b09b-37e35136be72",
+    "name": "Bramble Familiar // Fetch Quest",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "104baa4e-a3f3-45dc-979d-4c58b659ba1a",
+    "name": "Brambleguard Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc9c7e1a-5155-431a-be21-fcbd18718980",
+    "name": "Brambleguard Veteran",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a30316b-dcd5-4a4b-b959-eecde7ca92e7",
+    "name": "Branch of Vitu-Ghazi",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63b0538e-aa94-4e23-adf1-704cbf5bc3e5",
+    "name": "Brass's Bounty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af1553eb-4f9f-4335-9078-56649bd8d8fc",
+    "name": "Brass's Tunnel-Grinder // Tecutlan, the Searing Rift",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a1a791be-71e6-4c1f-8717-08ca62d40de2",
+    "name": "Brave Brawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f5b7f4c-a3d2-4472-80f5-8504562fc7fd",
+    "name": "Brave-Kin Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49d189dd-9ce7-434f-931b-7110cd5255e7",
+    "name": "Brave the Wilds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43c92618-0aae-41f8-aa39-393e5d6b5ff7",
+    "name": "Brazen Blademaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f93dc9cc-3dd2-4e2b-b972-217ab9d89dfe",
+    "name": "Brazen Collector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "422ef4ec-863a-450e-9577-a0707bc16532",
+    "name": "Brazen Scourge",
+    "status": "curated"
+  },
+  {
+    "oracleId": "5370ee80-0354-454f-a16e-ec133e432ecb",
+    "name": "Breaching Dragonstorm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a11d8372-87fb-40a2-b638-314c6a5af03b",
+    "name": "Break Down the Door",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99eaac39-28d4-4af7-984b-f75fd37902ed",
+    "name": "Break Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9d51e07-851f-4b7b-bffe-7c1efff0714c",
+    "name": "Break the Spell",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8dd23c50-cc84-4064-89cd-8d52fbfbd4ab",
+    "name": "Break Under Pressure",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15361770-c6dc-4db7-b745-aa03e4b866ea",
+    "name": "Breeches, Eager Pillager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8514f20a-50c7-4319-84cb-2bf263548234",
+    "name": "Breeches, the Blastmaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20283c4a-f1f0-42f0-bc08-6da87474426b",
+    "name": "Breeding Pool",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59384481-3ca0-49dd-b94f-d3680b336f1e",
+    "name": "Bre of Clan Stoutarm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d627996b-cbcd-4162-bd13-9ab286de64d1",
+    "name": "Bria, Riptide Rogue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a1ad848-6fda-46dd-aad8-2f6a5c71a696",
+    "name": "Bridled Bighorn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1d2f437-d474-4617-aea6-102daa5e5a15",
+    "name": "Brightblade Stoat",
+    "status": "curated"
+  },
+  {
+    "oracleId": "acff6e5c-7f25-4ae1-8672-8672450ad844",
+    "name": "Brightfield Glider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b05e355-38a5-4307-9d8b-e99ec30f8ed3",
+    "name": "Brightfield Mustang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c7019a7-3cca-481a-9af0-abedb89c15ad",
+    "name": "Brightglass Gearhulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31a0c9a2-c9bd-47f7-872b-a43fb64d873c",
+    "name": "Brightspear Zealot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60fc89a1-cc6f-4a32-84c3-09abf7a4a1df",
+    "name": "Brigid, Clachan's Heart // Brigid, Doun's Mind",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "6487fc1b-5c83-4d09-94d3-175725bcb922",
+    "name": "Brigid's Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b047cd3f-9129-41cc-8b91-b0dc970f5068",
+    "name": "Brilliance Unleashed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e79deeee-c14d-496d-9b0b-475a6a24274c",
+    "name": "Brimstone Roundup",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "916cb70f-3b06-48ed-972d-75f805aa0892",
+    "name": "Brineborn Cutthroat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0fb9a8a2-4331-4259-9460-a37397554962",
+    "name": "Bringer of the Last Gift",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "592689f2-f17c-40d6-b880-431f4b6a6b0c",
+    "name": "Bristlebane Battler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48f7217e-ae11-44bd-ac42-7c8d9dd5dc36",
+    "name": "Bristlebane Outrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e44226b-51a2-4099-aff8-a5befab720cb",
+    "name": "Bristlebud Farmer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05852d99-8f30-4318-913c-d0b1eaf8c222",
+    "name": "Bristlepack Sentry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9cbc9f83-8979-42a5-a466-a8d89c8e6de8",
+    "name": "Bristling Backwoods",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3b2d8a2-d3bc-448c-9cf6-6bead6010c28",
+    "name": "Bristly Bill, Spine Sower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21aaecc7-b9ec-4068-8e47-4dffaa12f102",
+    "name": "Broadcast Rambler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0d221da-16cd-4399-830f-eecc9a0912eb",
+    "name": "Broadcast Takeover",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dbf9feb3-0751-47bd-a8dc-ed1c076cf8c7",
+    "name": "Broadside Barrage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e316864-d55c-496f-8f46-773567896864",
+    "name": "Broken Wings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c90da077-de8c-4402-abfc-b63dd15853da",
+    "name": "Broodguard Elite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b759831-abe8-4996-a897-3c6d6d30a1c7",
+    "name": "Broodheart Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eeba4706-b4f2-48f9-bcb1-e42a5fc68c40",
+    "name": "Broodrage Mycoid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad50214c-4d0e-4f95-9098-fd7d64dbf7f4",
+    "name": "Broodspinner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6c0ee14-2028-4e8b-9acd-ff78821bca9b",
+    "name": "Bruce Banner // The Incredible Hulk",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c22589e1-1721-43a3-897e-990af6ebcffa",
+    "name": "Bruse Tarl, Roving Rancher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "873694c0-c100-4d24-a74f-1ab26442dd18",
+    "name": "Brush Off",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca22fa33-5460-4d31-a9c8-4115d35b994c",
+    "name": "Bubble Smuggler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f5902bf-4bc4-4d0c-84ea-a425307a4eb2",
+    "name": "Bucolic Ranch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "723669e0-4a04-45ec-8c76-b1a369aa6892",
+    "name": "Budding Insurgent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b19082c-8f80-448b-9e1b-0f324a159409",
+    "name": "Builder's Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fade8af0-5fdb-4237-9dd6-48bfd1d62767",
+    "name": "Bulk Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10db57b4-f895-4514-b610-2252ba676353",
+    "name": "Bullseye, Death Dealer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bcd56fbf-fde3-41c2-83f5-9636e92d2893",
+    "name": "Bulwark Ox",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e152529-64b4-472c-8e50-99095af6af99",
+    "name": "Bumbleflower's Sharepot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "629f247c-1e64-4c32-8892-0716ed469d1c",
+    "name": "Bumi Bash",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7493bcf-5c17-4562-a759-37082ec49ff8",
+    "name": "Bumi, King of Three Trials",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1fef13d8-5da2-46a6-91ed-7a31bd46e538",
+    "name": "Bumi, Unleashed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a5e17a0-6f3c-49ed-b328-ed90a46ed6c5",
+    "name": "Burdened Stoneback",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1767573-713d-4f63-a09d-e94150655093",
+    "name": "Burden of Proof",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f807301-37df-4724-871a-08e3512b07b3",
+    "name": "Burglar Rat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1f0eab3-681b-4c2d-b590-555951920880",
+    "name": "Buried in the Garden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56f5ed8d-ef53-4766-9ef3-1e24a10e267b",
+    "name": "Buried Treasure",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a97d6c5c-1cff-442d-b535-fc8389160b0b",
+    "name": "Burn, Burn, Tree and Fern",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d07eb9f-46f4-466d-acb6-609437c34f13",
+    "name": "Burner Rocket",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f420633-901d-47f9-ae0f-0f5b0ea8359c",
+    "name": "Burning Curiosity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9da7e8b5-887d-4174-b7aa-982fd052fcd1",
+    "name": "Burning Sun Cavalry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "893fed41-c144-433f-af88-bc7d419b7fb3",
+    "name": "Burnished Hart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc",
+    "name": "Burnout Bashtronaut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c531801c-acf0-45ae-a112-054cc5ccb6ed",
+    "name": "Burrog Banemaker",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "c47caa45-e7fc-414a-8a5d-59b58f1751f3",
+    "name": "Burrog Barrage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73b60c2c-7c74-4554-8861-daa0d6fc22b4",
+    "name": "Burrog Befuddler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f293da27-e42d-4e87-8b61-d3c27e4c6d71",
+    "name": "Burrowguard Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac2086fe-98ee-4280-9c7c-c5c2d6548a8b",
+    "name": "Burst Lightning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c61374e5-a7f6-455e-a40b-a481751b536b",
+    "name": "Bushwhack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381",
+    "name": "Bushy Bodyguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e060d58-4d6e-425c-b7d4-727669fcce5b",
+    "name": "Buster Sword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "29fd050c-dd1d-4e1b-b3cc-f7d8d18e4dcb",
+    "name": "Buzzard-Wasp Colony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "434e720f-2bfa-49b6-a5ac-fe0c0b24764d",
+    "name": "Buzz Bots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1bd584d5-4e11-428c-b51e-462e4292b07f",
+    "name": "Bygone Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9c6e4e6-0c3f-4048-93e6-161a1221ea36",
+    "name": "Byrke, Long Ear of the Law",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a864b032-6e1a-4211-ad6e-54a5a5c7321b",
+    "name": "Byway Barterer",
+    "status": "unsupported"
+  }
+]

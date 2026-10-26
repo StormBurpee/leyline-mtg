@@ -11,18 +11,19 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Mana pools, colored and generic costs, mana abilities, optional automatic source selection. No hybrid, Phyrexian, snow, variable X, alternative or additional costs.
 - Objects changing zones become new incarnations; spells recheck targets at resolution.
 - Creatures, instants, sorceries, basic lands, Glorious Anthem and Pacifism. No general enchantment system beyond the executable definitions.
-- Activated abilities with mana and tap costs, explicit targets, and stack resolution.
+- Activated abilities with mana, life and tap costs, explicit targets, and stack resolution.
 - Scry, surveil and mandatory discard choices during resolution, with instruction continuations and no intervening priority.
+- Ward triggers for opposing spells and activated abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.
 - Immutable per-game catalogs validated before play and embedded in replays.
 - ETB, noncreature-cast and instant/sorcery-cast triggers. APNAP order and explicit same-controller ordering.
-- Haste, vigilance, flying, reach, defender, first strike, double strike, trample, deathtouch and lifelink in the supported card pool.
+- Menace, haste, vigilance, flying, reach, defender, first strike, double strike, trample, deathtouch and lifelink in the supported card pool.
 - Prowess-style triggers, persistent +1/+1 counters, temporary stat/keyword modifiers, token creation, card draw, damage, life gain, countering, destroy and bounce.
 - Simultaneous combat damage with player-chosen splits across multiple blockers.
 - State-based loss from life or empty-library draw, lethal/zero-toughness/deathtouch deaths, token cleanup and invalid Aura attachments.
 
 ## Deliberately not claimed
 
-Commander/Brawl, more than two players, commander tax/damage, planeswalkers, battles, Equipment, general activated costs, graveyard casting, alternative costs, replacement/prevention ordering, general layers/dependencies, continuous control changes, legend choices, modal choices, searching/shuffling effects, adventures, transforming cards, Sagas, copies, protection, ward, poison, storm, combat restrictions beyond this pool, and tournament legality are not implemented.
+Commander/Brawl, more than two players, commander tax/damage, planeswalkers, battles, Equipment, general activated costs, graveyard casting, alternative costs, replacement/prevention ordering, general layers/dependencies, continuous control changes, legend choices, modal choices, searching/shuffling effects, adventures, transforming cards, Sagas, copies, protection, non-mana/non-life ward costs, poison, storm, combat restrictions beyond this pool, and tournament legality are not implemented.
 
 Do not add these cards as “vanilla” approximations. An unsupported card should fail at import time rather than silently change the game.
 

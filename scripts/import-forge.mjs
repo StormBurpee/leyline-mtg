@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve, join, extname } from 'node:path';
 import { compileForgeCard } from '../packages/forge-import/compile.js';
@@ -22,7 +23,15 @@ const files = (await collect(resolve(input))).sort();
 const results = [];
 for (const file of files)
   results.push(compileForgeCard(await readFile(file, 'utf8'), { source: file }));
+const compilerPackage = JSON.parse(
+  await readFile(new URL('../packages/forge-import/package.json', import.meta.url), 'utf8'),
+);
+const compilerSource = await readFile(
+  new URL('../packages/forge-import/compile.js', import.meta.url),
+);
 const report = {
+  compilerVersion: compilerPackage.version,
+  compilerSourceSha256: createHash('sha256').update(compilerSource).digest('hex'),
   purpose: 'Migration candidates only. No cards were registered or game code changed.',
   total: results.length,
   candidates: results.filter((r) => r.status === 'candidate').length,

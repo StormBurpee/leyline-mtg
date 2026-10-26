@@ -1,0 +1,1597 @@
+[
+  {
+    "oracleId": "cffb9b7f-d52c-43e0-a4a6-b06dea83eb53",
+    "name": "Naban, Dean of Iteration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e3f9345-d986-4d60-a343-45598ab59aff",
+    "name": "Nadaar, Selfless Paladin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "391978f6-0bbc-41e8-9246-f7d0e21c7900",
+    "name": "Nadier's Nightblade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a73d439-bd78-42e1-90ae-eedd30536881",
+    "name": "Nadir Kraken",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ff11a61-6fe3-4c70-aba8-417023a5e54e",
+    "name": "Nadu, Winged Wisdom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6044696a-0f64-474a-840e-8ed4dbd30221",
+    "name": "Nael, Avizoa Aeronaut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d6a10c6-5d39-49c6-b50d-8fc5b8ddcd77",
+    "name": "Naga Eternal",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "a4f8012e-9880-45b0-9eba-d74c207d3242",
+    "name": "Naga Fleshcrafter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "249e18a4-12c5-4836-a172-cb4e9b9cb7d7",
+    "name": "Naga Oracle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9cea8783-c7d7-49f9-b23d-324309efc140",
+    "name": "Naga Vitalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87966759-206a-4a2d-bf78-86f727c29972",
+    "name": "Nahiri, Forged in Fury",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39bbc4cf-53fe-47dd-8ba3-1a59b1fa7dd1",
+    "name": "Nahiri, Heir of the Ancients",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f674382-78b5-462c-9a7f-c5f613c317d4",
+    "name": "Nahiri's Binding",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "888e711a-1251-4704-8ef1-b4b98ec54b5a",
+    "name": "Nahiri's Lithoforming",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12bd2051-297b-4bab-ac64-6eb26a42e3e2",
+    "name": "Nahiri's Resolve",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a84cc828-8d1b-4e61-a13f-60124e2ee35f",
+    "name": "Nahiri's Sacrifice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "769774f9-1d8d-406f-8b0c-2d6713e7ab3e",
+    "name": "Nahiri's Stoneblades",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6332d6d3-1d77-486c-b040-02fc7225f245",
+    "name": "Nahiri, Storm of Stone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48838239-bec4-4a57-9858-425f0a937dc9",
+    "name": "Nahiri's Warcrafting",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "420091b5-b966-4233-877d-e9143481e97e",
+    "name": "Nahiri's Wrath",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d492eb9a-1f3b-4bf2-9a5d-0f4a4433f33f",
+    "name": "Nahiri, the Harbinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d71d42e0-cd56-4f53-95ff-ecab7f8c6552",
+    "name": "Nahiri, the Unforgiving",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "38b4798d-47cc-4ffd-8b0b-e90b5da2ee2d",
+    "name": "Naiad of Hidden Coves",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a7504b9-220d-412e-9381-b6a8a3750241",
+    "name": "Najal, the Storm Runner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09619943-6aec-4080-ace5-a0c6ebb23f1c",
+    "name": "Najeela, the Blade-Blossom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d01c351-6dbd-4d63-9843-3aa1a3c039a6",
+    "name": "Namazu Trader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6911456-42cb-4b23-a560-dc98784530f5",
+    "name": "Nameless Inversion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0cd3edd-d908-47c5-bff1-2089c22ab41c",
+    "name": "Namora, the Sea Queen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "171a0a09-4aee-466c-aebd-3b0d4c1f51b4",
+    "name": "Namor, Atlantean King",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5278728e-9203-4d18-97a5-1c4f751a5acf",
+    "name": "Namor, Scourge of the Seas",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dff11626-ad4d-443a-b7db-f508790b5fd2",
+    "name": "Namor the Sub-Mariner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07155470-c5ab-41ae-ade3-bdc06d357379",
+    "name": "Nanoform Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8dab16c-681c-4abe-b164-fcfb5dc66678",
+    "name": "Nantuko Cultivator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0dcefc00-9425-43e3-bd47-1e34fff8b0e2",
+    "name": "Nantuko Husk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd6018de-5791-4c13-b134-38c410f04872",
+    "name": "Naomi, Pillar of Order",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3da1412e-a72c-4da1-8848-37145ca6614a",
+    "name": "Narcolepsy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc65bb62-4ba2-4ec1-b3b9-9c51e64cbfc8",
+    "name": "Narcomoeba",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "18beb8eb-6f67-482f-9a7d-282f1e7ecbc1",
+    "name": "Narfi, Betrayer King",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ac0d584-997b-4d11-aecf-f1494eebc94c",
+    "name": "Narnam Cobra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a4f99939-4b70-41ee-ad38-2dda56dbc9ce",
+    "name": "Narnam Renegade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d92725de-ead0-4a6c-83db-55ec3acc7184",
+    "name": "Narset, Enlightened Exile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aeaf7768-ed67-487d-8506-e667babb88ba",
+    "name": "Narset, Enlightened Master",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a2a74b8-0689-4959-9348-02cc832194cf",
+    "name": "Narset, Jeskai Waymaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7ac6e89-941f-4ad9-a437-38ec38ec5263",
+    "name": "Narset of the Ancient Way",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab26fbe2-e808-48b9-8d0d-3fbb6c3d554f",
+    "name": "Narset, Parter of Veils",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "247075c5-62f8-41a1-91b3-562ff0aabb30",
+    "name": "Narset's Rebuke",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d55f6c70-321f-4fb4-bd33-0850ae1a7c36",
+    "name": "Narset's Reversal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1de0c94-0ecc-425a-9b92-27c2745d07e7",
+    "name": "Narset Transcendent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "562c9c68-e5a7-45ab-b098-5b649d165ff5",
+    "name": "Naru Meha, Master Wizard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d04b6c2c-50fc-464d-9991-230efec70d2b",
+    "name": "Nashi, Moon Sage's Scion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ffa6c14e-3d8e-47a2-b102-d37538d60ef6",
+    "name": "Nashi, Moon's Legacy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ade8fc6f-efaa-4a24-96d8-99ef5026cd74",
+    "name": "Nashi, Searcher in the Dark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f73da5d8-fd15-4315-ad3c-c86c28087285",
+    "name": "Nasty End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee86cce6-c7c1-40a6-896b-cde9b86bb532",
+    "name": "Nasty Little Rabbit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05b5c0fb-84b2-4a32-bf66-179c4dccb3df",
+    "name": "Natural End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdb3ca68-ec1f-4e16-81cc-d23f8f52c728",
+    "name": "Naturalize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c1fe337-375a-4add-93b6-0ac39ed72b4f",
+    "name": "Natural Order",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f500f4cc-d5ee-4995-b7b5-96a5f63dfb47",
+    "name": "Natural State",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d4e558e-9109-4918-a082-fdcbaffd516b",
+    "name": "Nature's Claim",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ab101c2-215b-4736-873a-4a1ef6666b6d",
+    "name": "Nature's Embrace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78826359-fe63-44ad-adc4-a17ffcd710e4",
+    "name": "Nature's Lore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0259f063-3e3f-4e07-9066-f748d4819829",
+    "name": "Nature's Rhythm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "565922d6-8152-411f-8d4d-dc7c8523a49b",
+    "name": "Nature's Spiral",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c04663a-1023-49a5-a0b9-78f24a72fb1e",
+    "name": "Nature's Way",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9837287b-d821-4655-8f01-93fc6c7f0ecc",
+    "name": "Nature's Will",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c994e148-1bb5-4113-a9f2-73e6dab8f72d",
+    "name": "Navigator's Compass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd830c46-3444-488d-ae5b-0a2533158a13",
+    "name": "Navigator's Ruin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "beeed1c5-2f51-4e40-87b9-9a6f810ee4cb",
+    "name": "Nazar, the Velvet Fang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48a62778-7c11-486f-a0e1-020c283a7ef9",
+    "name": "Nazgûl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16c587db-d07b-47ab-8b03-c3b2cc7144f5",
+    "name": "Nearheath Chaplain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1e76ce9-6f39-419c-99e3-ede2dfa4858c",
+    "name": "Nebelgast Beguiler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf336e4c-a0d3-43aa-ad23-b98effb2b751",
+    "name": "Nebelgast Herald",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c591977-f2af-4a6e-a0be-3dfb45a3598b",
+    "name": "Nebelgast Intruder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "724b4a59-9c69-4f2b-a436-72183c62f1ff",
+    "name": "Nebula Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f970385-e7c6-40bf-999e-7015693c2250",
+    "name": "Necklace of Girion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "761ee6f9-b0fa-43c9-8d1f-9591ea18e52d",
+    "name": "Necroblossom Snarl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a10b3e35-8cc4-450e-9e30-0fce8df0fea4",
+    "name": "Necrodominance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d36acdfe-2b1b-4c19-8b81-0b3127e480fe",
+    "name": "Necroduality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ff58459a-0015-4012-86c0-580da4e02676",
+    "name": "Necrogen Communion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d9a424e-cab1-410f-9c04-ee0025d04169",
+    "name": "Necrogen Rotpriest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e034a02d-3482-44eb-90dc-c38be104197f",
+    "name": "Necrogoyf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce8833ea-5f58-4ab9-b33d-8972f2215574",
+    "name": "Necromancer's Familiar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "699b192c-f3f2-4ac5-9ca9-e35bcf08ad8a",
+    "name": "Necromancy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92acbbeb-f82b-413b-b243-f7a012f5400c",
+    "name": "Necromentia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7df82bf8-b232-48e1-858b-1571c48b6f46",
+    "name": "Necropanther",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb714bc6-9f32-42f6-9064-f28a383675b5",
+    "name": "Necropolis Fiend",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33c3a6be-8cae-4de8-9d9b-43216d727e93",
+    "name": "Necropolis Regent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94a844d2-0574-45a7-b347-e0e329767c42",
+    "name": "Necropotence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41dd7ec7-a238-4723-a244-9a112d4fbfd2",
+    "name": "Necrosquito",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "661618a2-54c7-4136-beff-fff5ff7d84cb",
+    "name": "Necrosynthesis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "784108b9-dc85-4344-8c71-d527c4f850c0",
+    "name": "Necrotic Fumes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a30159ae-f6a6-4e29-bca2-769d3657d310",
+    "name": "Necrotic Wound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7bb8160-0a4b-4e46-b196-7a19fb388d8e",
+    "name": "Needle Spires",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6edacc06-9523-4ccf-a4c2-2ac4af386b8a",
+    "name": "Needlethorn Drake",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "ac68fe30-a4a5-45f6-8782-fed57718c42e",
+    "name": "Needletooth Pack",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c431df9-095a-44f1-993e-74eb215d75fe",
+    "name": "Needletooth Raptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9b8d020-4d72-4934-8942-df29ef19fc1d",
+    "name": "Needleverge Pathway // Pillarverge Pathway",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b015ec84-95b9-4010-afef-d9d0cacb98dd",
+    "name": "Neerdiv, Devious Diver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04dc245b-011f-4207-ab5c-1528037200f5",
+    "name": "Nef-Crop Entangler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3407fe41-fdd3-4119-8f70-4bc4590a379f",
+    "name": "Negate",
+    "status": "curated"
+  },
+  {
+    "oracleId": "1374498c-58fd-40b9-b63b-f87fedc42e58",
+    "name": "Neglected Heirloom // Ashmouth Blade",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "c8c632ab-14ec-44e1-ac00-81d48336320d",
+    "name": "Neglected Manor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed8e9a2e-5fb8-4f39-b954-dbcbc96d909f",
+    "name": "Neheb, Dreadhorde Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0d3fd57-1420-4dd1-8410-9d659655287f",
+    "name": "Neheb, the Eternal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "092847a7-a238-4acf-9dcd-be6f3e6a6b93",
+    "name": "Neheb, the Worthy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef414347-bbe3-47cb-b900-88275561c43e",
+    "name": "Neighborhood Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f72558f5-ac5c-4efa-b01b-439bc0bbf18d",
+    "name": "Nemata, Primeval Warden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "599fc217-e0a3-45ee-b9aa-cd7f181dcdf3",
+    "name": "Nemesis of Mortals",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "420c6dcf-966d-4a4c-a0ef-23037ab8b325",
+    "name": "Neoform",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "721aeedc-1de5-40d0-a04c-a2ebc056d06a",
+    "name": "Neonate's Rush",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8f827d7-4740-43c8-b494-c9e0479e0bf7",
+    "name": "Neriv, Crackling Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66290104-ac65-4eb5-bf00-89b944249e07",
+    "name": "Neriv, Heart of the Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15dca6a7-8367-4b86-a86c-e44f10fb3c53",
+    "name": "Nervous Gardener",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b46e077-f667-432f-ab5b-8256a7378311",
+    "name": "Nessian Asp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "139a5f0b-6f76-4918-96e6-cdcf27253230",
+    "name": "Nessian Boar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab097f46-a7bf-4cf1-a96c-36b681fe79da",
+    "name": "Nessian Hornbeetle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45703364-660a-4e73-a467-5ee47d936c1a",
+    "name": "Nessian Wanderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfa882ee-de18-4ef8-8957-3e04ed6e3c1e",
+    "name": "Nested Shambler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ffb8c2e-1737-4df3-b310-384a5000bfa5",
+    "name": "Nesting Bot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d27bb97d-286b-4947-8d7b-443e4df93319",
+    "name": "Nesting Grounds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f21cf59-6390-44b4-ab2e-ef290dfd8c85",
+    "name": "Nest of Scarabs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b909ff27-423f-4e84-887b-7840149a85be",
+    "name": "Nest Robber",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "0ddb3fa0-447c-40c5-928a-541f3d543014",
+    "name": "Netcaster Spider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "040cbd8a-a9e5-454b-a5ae-9b66bb66b8e9",
+    "name": "Nethergoyf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "194e2563-c0bf-4151-bbb0-0d626130b055",
+    "name": "Nether Spirit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66bef5a7-79b7-4a9c-98dc-8670f867f04c",
+    "name": "Nethroi, Apex of Death",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04c7f4fe-2098-4311-866d-6733c08d5178",
+    "name": "Nettlecyst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ac2dcb6-dacc-4fcb-b820-9fc6744ec503",
+    "name": "Nettle Guard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d64d150-1716-4da4-9cfe-ee7749b89918",
+    "name": "Network Disruptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0eb1d5b-2c54-44fa-b7ad-bdd4b1147929",
+    "name": "Network Terminal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2c60973-b4d5-43fa-a0c4-b5688b28df05",
+    "name": "Neutralize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b793141d-581c-4cc7-b09f-1fe8bd5536c5",
+    "name": "Neutralize the Guards",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba5895e1-f12b-43c7-b47c-376588d9d2d2",
+    "name": "Neva, Stalked by Nightmares",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec4a1a8d-4071-40e9-812e-42c746180d99",
+    "name": "Never Happened",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf276236-18a6-4a48-b47d-5227832d26e6",
+    "name": "Never // Return",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a6e654fb-3567-4b92-ae9b-d064bba7112a",
+    "name": "Neverwinter Dryad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7ae3ee7-824f-4dcb-8f28-7de99e4d8c3e",
+    "name": "New Generation's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8834d3c9-cdb5-423b-bc78-94a94add5e74",
+    "name": "New Horizons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1b8a89a-b308-4fc5-ada7-61de6e21b7f9",
+    "name": "New Perspectives",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "192dd1e2-b6c2-432a-a1b4-e52ff39b3db2",
+    "name": "News Helicopter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "429368e6-3de1-4a44-a062-86cbbb73e243",
+    "name": "New Way Forward",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07142ee9-dc2c-4b33-ad20-2f5285225e86",
+    "name": "Nexus of Becoming",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c1d22d4-f28e-4041-a9b6-1575e8929b61",
+    "name": "Nexus of Fate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2652158-e63f-477b-b328-cae7ef2263bd",
+    "name": "Nexus Wardens",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aba04455-c13f-48f7-9674-56803b39a42b",
+    "name": "Neyith of the Dire Hunt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c45e96cb-2539-4e00-9fff-782a182c2f4b",
+    "name": "Nezahal, Primal Tide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "408512c7-5016-4df4-b708-b7467bcdf0ae",
+    "name": "Nezumi Bladeblesser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a323a3af-8a74-433c-8994-707a09ef3a0c",
+    "name": "Nezumi Cutthroat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6fd0c7c-b164-4cf1-8910-0f8e680b2213",
+    "name": "Nezumi Freewheeler // Hideous Fleshwheeler",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a70ffefb-840c-48c3-a59d-e12306086bb6",
+    "name": "Nezumi Informant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d24fb6b-7176-407c-b917-6c88a6da40df",
+    "name": "Nezumi Linkbreaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a93b5956-c11e-434e-bed5-94af9de55382",
+    "name": "Nezumi Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91c9dbd8-a8d8-4a4e-8408-3ad92e974d11",
+    "name": "Niambi, Esteemed Speaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c107664-a9fc-4684-8a1b-fa750401a6dd",
+    "name": "Niambi, Faithful Healer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eab5eef8-d180-4b08-a770-6b3a1df03745",
+    "name": "Nibelheim Aflame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed2f3339-5c3e-473f-b08e-58288c4ad9c2",
+    "name": "Niblis of Frost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4cb86fb6-3e06-4c67-aee0-d5952178f664",
+    "name": "Nicanzil, Current Conductor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "62916107-14c0-4516-9fed-a032b1a80e5d",
+    "name": "Nick Fury, Agent of S.H.I.E.L.D.",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b20860da-2e71-414a-a512-1cce7ba64079",
+    "name": "Nick Fury, Spymaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "581eedc4-efe4-4ae4-baf2-88071e7e6f6d",
+    "name": "Nicol Bolas, Dragon-God",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb33e07b-9599-4979-991f-df0c43ddac31",
+    "name": "Nicol Bolas, God-Pharaoh",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55e4b27e-5447-4fc2-8cae-a03e344600c6",
+    "name": "Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5303b3f6-970c-47d8-977e-2d6679206ba5",
+    "name": "Nico Minoru, Runaway",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36d04190-7ce3-431a-b18e-3a1895ec6fc7",
+    "name": "Nightblade Brigade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d2abfe1-f5f8-4ed5-915d-bfe98c6321ee",
+    "name": "Night Clubber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07d830a7-f0a2-4d46-9a53-101dca681603",
+    "name": "Nightdrinker Moroii",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb8a373a-ba15-4b3f-959a-b7c708fea616",
+    "name": "Nighthawk, Dark Defender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "379ed4ec-8f2e-448b-9ed2-a3181e2f877e",
+    "name": "Nighthawk Scavenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57b3f7fc-1812-4134-a645-6cef48a8aa71",
+    "name": "Nighthowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89aa97d0-1aef-4ed8-b29c-7943bb3d0e60",
+    "name": "Nighthowl Pursuer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "375932e6-1b3e-48dc-8154-9b664c3add34",
+    "name": "Nightmare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0403bfb0-2174-4360-994d-68d8ca96fc55",
+    "name": "Nightmares and Daydreams",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8ee0dfc-f588-43b6-ab96-f3a3c58a8a3d",
+    "name": "Nightmare Shepherd",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4121b7d9-5fbe-40e2-a2a6-d7633f423b5f",
+    "name": "Nightmare Sower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ecf56b9-1f36-4030-8333-1675ccc663d9",
+    "name": "Nightmare's Thirst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4cdb9f80-d08f-4986-99c8-573166d66082",
+    "name": "Night Market",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e08157e6-a5a3-4b1e-80e0-32702288d8ed",
+    "name": "Night Market Aeronaut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f5c5f59-1cc0-4a72-863c-c26db411f114",
+    "name": "Night Market Lookout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e3559565-0512-4525-addb-bf27903bcd13",
+    "name": "Night Nurse, Healer of Heroes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "916bd025-c44f-49c9-8d76-4b7b2f9a8ba3",
+    "name": "Night of Souls' Betrayal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4bcf4f12-470e-4f73-a19a-643a20084e16",
+    "name": "Night of the Sweets' Revenge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d67357c-5939-45c8-a656-aaf76728a5a6",
+    "name": "Nightpack Ambusher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8263274-8cb4-4eab-b541-c7655b555830",
+    "name": "Nightshade Dryad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c57edca9-b71e-4ec1-84d5-4b178969ccb7",
+    "name": "Nightshade Stinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04cffc41-05da-45fb-82da-2c4d4108c7e1",
+    "name": "Nightsquad Commando",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ffae8f8-3006-4969-a339-6d30678f87ea",
+    "name": "Night's Whisper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b94591b8-2e99-4983-8f36-9b52207bfd2e",
+    "name": "Nightveil Predator",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "4ce83f8c-b27e-4e5b-b19b-76b66aaa904b",
+    "name": "Nightveil Specter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ac23863-0aa7-41bc-b9b7-c5f0566172cf",
+    "name": "Nightveil Sprite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99007c40-1eb5-4c3a-9889-6d12417d8191",
+    "name": "Nightwhorl Hermit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "781162c4-9c0f-436c-b9a5-214e60e009e4",
+    "name": "Niko Aris",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e79bf038-071e-448e-ad95-234c207a9575",
+    "name": "Niko Defies Destiny",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f153e369-1d5b-4d8b-a2f6-d93b849cabb5",
+    "name": "Niko, Light of Hope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebf3fd80-9574-489b-9428-f4251834bdc4",
+    "name": "Nikya of the Old Ways",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3168d01-12ea-4a93-9519-82a3544b5bf6",
+    "name": "Nimana Skitter-Sneak",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27a66362-f2f5-4d46-9faf-a73752753304",
+    "name": "Nimana Skydancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f047fcb-c198-44ac-aa1e-31447f6c6aba",
+    "name": "Nimble Birdsticker",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "09c68fb5-2000-4bb8-b03b-94b093e50bca",
+    "name": "Nimble-Blade Khenra",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "8b153452-b4f2-4310-99e2-c729f28be6b9",
+    "name": "Nimble Brigand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "547da0ef-f1e1-4b04-ba83-4845552b0dc4",
+    "name": "Nimble Hobbit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30929713-47dc-40f0-883c-4bd41aa399d5",
+    "name": "Nimble Innovator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "abd839ab-8b08-4bc0-900a-3a161c62b06c",
+    "name": "Nimble Larcenist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "750d846e-2774-4296-8d9f-5207477d842d",
+    "name": "Nimble Obstructionist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6de183ad-8cdf-4fa6-b17d-5ba1b480849a",
+    "name": "Nimble Pilferer",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "01813091-75e8-431b-ba3f-b1ea1ba20a3b",
+    "name": "Nimble Thopterist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e95a9488-3f86-4598-9c6e-6b1b959f8570",
+    "name": "Nimble Trapfinder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b3b14b9-088d-48df-8d21-54ee68989ac0",
+    "name": "Nimbus Naiad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce02ef24-d53e-4025-bc45-ca27aba89fe9",
+    "name": "Nimbus Swimmer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9daff24-1af8-4133-bff1-e0e4d1042db4",
+    "name": "Nimraiser Paladin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b8de1c5-1e23-4c84-bc5a-a14853ad8c7a",
+    "name": "Nimrodel Watcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "236e1f57-7ef5-455a-82a6-8ff6b85d8849",
+    "name": "Nine Lives",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5049da27-f38b-4fe6-a387-51510bd1f44e",
+    "name": "Nine-Lives Familiar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f3c2b00-0000-4ae1-9650-9553accac52e",
+    "name": "Ninja of the Deep Hours",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c38f7447-e646-438d-81bd-fe2a71c8a79c",
+    "name": "Ninja of the Hand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cdaffb13-c2a4-4bc5-a9d6-c1a0d1686a81",
+    "name": "Ninja's Blades",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa5aefaf-432f-41d0-8e54-0e8b7bc7ba98",
+    "name": "Ninja's Kunai",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c5044ff-a303-4276-8e23-7caac30a275b",
+    "name": "Ninja Teen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c501e577-5137-4dd6-b923-95408b78258a",
+    "name": "Nishoba Brawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c8845d6-fa65-4731-b348-dc724fc2d285",
+    "name": "Nissa, Ascended Animist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6067b8d0-5b00-402c-967d-e35a1304fafc",
+    "name": "Nissa, Leyline Tamer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15e3e226-0dd1-4c9b-a7ec-af67509cbfc5",
+    "name": "Nissa of Shadowed Boughs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1fc5923-c3cd-448a-98d1-c154661c2812",
+    "name": "Nissa, Resurgent Animist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f808e3b-6b69-4b46-8a92-36d960527acc",
+    "name": "Nissa's Defeat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e83236f8-1c45-4d31-8937-1c76db549955",
+    "name": "Nissa's Pilgrimage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdb96b5c-ecac-4db3-8b9a-24f824149f91",
+    "name": "Nissa, Steward of Elements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d4ef98d-228e-41ff-9133-53f0987e58d8",
+    "name": "Nissa's Triumph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b8c4cbe-b2fc-4d52-9382-1e03c40003be",
+    "name": "Nissa's Zendikon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "35754a21-9fba-4370-a254-292918a777ba",
+    "name": "Nissa, Vastwood Seer // Nissa, Sage Animist",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "31d4d8ce-36ba-4297-8c7a-34a83ba25255",
+    "name": "Nissa, Vital Force",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0f36bf7-bdde-4576-9eca-ec02d41326ab",
+    "name": "Nissa, Voice of Zendikar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f",
+    "name": "Nissa, Who Shakes the World",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f589e5ee-399c-4613-b7a2-9ab2866cc830",
+    "name": "Nita, Forum Conciliator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "68b8bfac-63f7-4dbd-bb2e-4ad394c77335",
+    "name": "Nivix Cyclops",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5350327-e84c-44b6-8359-87882e521048",
+    "name": "Niv-Mizzet, Ghost Counsel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46570366-5e58-40b7-b725-833321a3b7b1",
+    "name": "Niv-Mizzet, Guildpact",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33666a98-812f-4892-9f8d-33e0cbecc340",
+    "name": "Niv-Mizzet, Parun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10764b35-5c6c-4161-8579-1124d5963a0e",
+    "name": "Niv-Mizzet Reborn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c3a865a-88b1-43e0-b326-17c45670da54",
+    "name": "Niv-Mizzet, Supreme",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9f1dc61-831e-4244-a2da-aa9da6fd5b50",
+    "name": "Niv-Mizzet, Visionary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d53ae01b-87e1-48e1-9fc3-23a734ce6622",
+    "name": "No Admittance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98aa9424-5912-4bd6-9300-b3972a31d8af",
+    "name": "Noble Hierarch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eddab60f-2eac-4f20-934c-3d9307f885c3",
+    "name": "Nobody",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d44bdd2-aa31-415a-be71-d9e98ef12334",
+    "name": "Noctis, Prince of Lucis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f71bbaf2-02ea-4fc0-9a39-49d6689b36cd",
+    "name": "Nocturnal Feeder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed7f64d1-69ba-40f5-9863-3edba10e23c7",
+    "name": "Nocturnal Hunger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c6e0198-edd8-42b8-ba1b-549e1713d188",
+    "name": "No Escape",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2f33166-6cfc-4dc5-8edc-088bf40f06b5",
+    "name": "Noggle Robber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b49efbe8-e15b-4dc7-82de-970cbce92b79",
+    "name": "Noggle the Mind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4619de7e-3d6e-4c6b-8e6e-e24db324839d",
+    "name": "Nomad Outpost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9538d53-480b-481a-abbf-83ab17e1a45b",
+    "name": "No Mercy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ead1ee6a-e0da-46d5-89e8-31e8c0270bc2",
+    "name": "No More Lies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afe8fd01-f0c7-46a5-9e9c-e8b9599cd19a",
+    "name": "No One Left Behind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb1d521f-cb64-4b87-b3f4-a74e91a60349",
+    "name": "Noose Constrictor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f27fb53f-a983-410a-821b-e48cd8c01f2e",
+    "name": "Noosegraf Mob",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f143c8f-cb5c-4abc-a01b-b6813f5a524c",
+    "name": "Norika Yamazaki, the Poet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "425d755b-7a15-423d-9640-494debc79dd9",
+    "name": "Norin, Swift Survivalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03253076-9add-4efb-9227-b0a062c86534",
+    "name": "Nori, Teller of Tales",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa5b06a4-90c3-45e7-ab83-cb5c96ded21d",
+    "name": "Norman Osborn // Green Goblin",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "89a59a6d-e9d4-405c-8518-4da86dae30d1",
+    "name": "Norn's Inquisitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56a55f45-2cc6-407d-b212-5619c98456d9",
+    "name": "Norn's Wellspring",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e05f1a43-16ce-4e88-b0ad-2202efb25516",
+    "name": "Northampton Farm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28a2ad5b-d637-4634-8d4b-889e1fc88319",
+    "name": "Northern Air Temple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3fcd1432-66d0-40e1-85ef-b57a6fa94b7c",
+    "name": "North Pole Gates",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1230e78-0bfa-489e-a1b9-3c227bceb6fb",
+    "name": "North Pole Patrol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b408c345-b308-4920-8494-4f204d856aa3",
+    "name": "North Wind Avatar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "380c367f-73ea-485f-a37b-5af0ba160893",
+    "name": "Not Dead After All",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f93dbe17-71d1-4542-96ff-81ac6da9513f",
+    "name": "Notion Rain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8dab16e-1d50-443e-9431-8b6f1cf61c9c",
+    "name": "Notion Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d400c01-d2d0-442a-bc3d-cf106a754dab",
+    "name": "Not on My Watch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9635d79e-62ec-4d80-ae37-2793489cc13b",
+    "name": "Nova Hellkite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d819742-3d02-4d60-9b10-82caa49a9d49",
+    "name": "Novel Nunchaku",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5d6a41e-84bd-4b10-9734-50d91d523d2f",
+    "name": "Novice Dissector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c206bdcb-d2c4-4bda-a979-6c0627ef8f73",
+    "name": "Novice Inspector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "916d2a0d-1c3e-4102-958d-524b6b4df509",
+    "name": "Novice Knight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e51f5b41-5465-4b1d-b96a-544762657ca5",
+    "name": "Novice Occultist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8cbbb1f4-4654-4865-a14c-0c94cd5d8b19",
+    "name": "No Way Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8141fb64-7b55-40fb-8fe4-5efd805d8fef",
+    "name": "Now for Wrath, Now for Ruin!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da82ca96-a613-4d00-9e6b-1fece4fc23d0",
+    "name": "Nowhere to Run",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0639bd82-084f-47d5-b158-05dfc29efa40",
+    "name": "No Witnesses",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95c0611a-b6f1-4cb8-8b47-73aa9c2a7d2c",
+    "name": "Noxious Assault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a77b5be2-f361-4135-ba25-670a74d268ac",
+    "name": "Noxious Gearhulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b17f4960-9603-4a81-8dc8-e09e8b822357",
+    "name": "Noxious Grasp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aed587bf-c6e5-4850-baeb-2715cb27bf4c",
+    "name": "Noxious Groodion",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "1232c461-643c-40a3-901e-09b665f817da",
+    "name": "Noxious Newt",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "97cabeda-9fe3-490d-99b4-4c8d87c17157",
+    "name": "Noxious Revival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef8d9c3a-5860-45bf-8205-14e2df9a6fc8",
+    "name": "Nulldrifter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec7699e3-ce56-46e4-9e4d-5ed2bd5fca83",
+    "name": "Null Elemental Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49598fd5-2aad-4974-b499-38b60fc371b6",
+    "name": "Null Group Biological Assets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b04a337-3152-481e-973f-a11dbd615f93",
+    "name": "Nullhide Ferox",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1111228-ef88-4b64-91e0-66ee32a1f5e4",
+    "name": "Nullpriest of Oblivion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56c412be-daab-4461-931f-1e2ea8ecd75d",
+    "name": "Null Summoner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d33509d6-9d0c-4248-bb6d-0a9b7712f3a0",
+    "name": "Nurturing Bristleback",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ed932ff-986c-4592-ad70-53b3fac80d69",
+    "name": "Nurturing Peatland",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ecd3743-7c32-41ce-9ac1-c8c855a47302",
+    "name": "Nurturing Pixie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f03c834-2cb3-4c54-bee6-c64f3a5fce47",
+    "name": "Nurturing Presence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04a0382f-7e4e-4450-ae70-18999379d875",
+    "name": "Nutrient Block",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "367ac7e2-5056-48f3-a296-87d6cb1f7b54",
+    "name": "Nykthos Paragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84dc18f0-8225-4b40-a165-b10321e41769",
+    "name": "Nykthos, Shrine to Nyx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3492cee8-b854-449a-ada4-a4e8a4333d87",
+    "name": "Nyla, Shirshu Sleuth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43674fdf-496f-42dc-8a0a-5c42a7c7d910",
+    "name": "Nylea, God of the Hunt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "642bbdf6-9a8c-4158-83c8-d59feb49101b",
+    "name": "Nylea, Keen-Eyed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aaefdb6f-306e-4fdc-9e49-af7a63e70f06",
+    "name": "Nylea's Disciple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf0948b7-f7af-4d99-a8aa-ea7e6a69232d",
+    "name": "Nylea's Forerunner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ce273f2-a865-4934-afd4-cf6d5c4f1a4f",
+    "name": "Nylea's Huntmaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "acf388b2-c4e3-4f1b-a16c-88f991d5c17b",
+    "name": "Nylea's Intervention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93fe5eed-520f-467a-8e27-6f40eaa727e8",
+    "name": "Nylea's Presence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c889b2e-380a-4bc4-8d56-5fb12bc7c78b",
+    "name": "Nyxathid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b610f8f-c8dd-4eeb-bc6e-3bc706d5f63e",
+    "name": "Nyxbloom Ancient",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "986ba716-3921-4f64-9acf-703200d666f6",
+    "name": "Nyxborn Brute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a74cccb-5d75-4362-9c9e-2622096544fe",
+    "name": "Nyxborn Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9b345ea-3e34-48cf-8ab8-887c2b67df9c",
+    "name": "Nyxborn Courser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d1b655f-05b8-4b82-9cb9-67660f570a9b",
+    "name": "Nyxborn Hydra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1552c6d1-f20a-4303-acf2-2fdd432a98e4",
+    "name": "Nyxborn Marauder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48cc79b8-f7a5-474b-bd88-7cd6ae673086",
+    "name": "Nyxborn Seaguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9304d88-a1de-4300-9425-50350969bd70",
+    "name": "Nyxborn Unicorn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a20113c-7ea8-4edf-af9f-148ccd326a88",
+    "name": "Nyx-Fleece Ram",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed347609-15f9-4d57-9523-63a33a9dccbc",
+    "name": "Nyx Herald",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cfb8cdde-11f6-441a-942b-32d8c191fc90",
+    "name": "Nyx Lotus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f8bf968-0571-4582-8c04-9791e44d5df0",
+    "name": "Nyx Weaver",
+    "status": "unsupported"
+  }
+]

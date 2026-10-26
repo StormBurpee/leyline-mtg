@@ -1,0 +1,422 @@
+[
+  {
+    "oracleId": "36bfcc4a-7f66-4649-ab6b-18d360299d46",
+    "name": "Uchbenbak, the Great Mistake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c58353a-fd60-4528-bf0d-669626cda0b2",
+    "name": "Ugin, Eye of the Storms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "020d561b-2e5d-439e-9e6a-318d23e73542",
+    "name": "Uldaros Theorix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9da7f9ec-872a-471d-8d60-5f4213f0204f",
+    "name": "Ulna Alley Shopkeep",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9a45c28-826e-4e6e-8adc-1368ea1af11a",
+    "name": "Ultima",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "baa337ce-edc6-4ee5-a898-68e9dbb4ab93",
+    "name": "Ultima, Origin of Oblivion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5b43d01-fce6-4a00-9c19-7a7e2a09d833",
+    "name": "Ultimate Green Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0dc4bf39-67d6-44e5-8993-dd18b20cfdee",
+    "name": "Ultima Weapon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a8e7e35-e9ea-4808-8aa7-7580a23b9d9d",
+    "name": "Ultimecia, Temporal Threat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70773879-b773-4e81-99ca-8f4bba478962",
+    "name": "Ultimecia, Time Sorceress // Ultimecia, Omnipotent",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a8f25e67-2112-4355-9298-363ed04a5cb8",
+    "name": "Ultron, Artificial Malevolence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51c1f21d-1512-4885-bfdc-58790cf77d51",
+    "name": "Ultron Drone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6f4b524-1081-4263-b7e4-9aee93131b31",
+    "name": "Ultros, Obnoxious Octopus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12db6263-75c2-442f-a1a5-7af7915f8f9f",
+    "name": "Umbral Collar Zealot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d240726-5214-4493-8537-29bf65db1e4b",
+    "name": "Unable to Scream",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1cf4e16b-2273-41c7-9bcd-0cdc78e12198",
+    "name": "Unassuming Sage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d145811-adb2-46a4-b173-bf8152e5de48",
+    "name": "Unauthorized Exit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "75da657e-0e36-4f2a-9b81-b7eba7d8e050",
+    "name": "Unburied Earthcarver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2928d3c-b64a-443e-a1c1-fd204bb098ba",
+    "name": "Unbury",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d23c3613-bc5e-4fc5-939c-62a090c53a79",
+    "name": "Uncharted Haven",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d6796ce-9316-430a-8126-8b0414cf181c",
+    "name": "Uncharted Voyage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a98ddac-7341-4118-b188-51d8d03afd1d",
+    "name": "Uncle Iroh",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c67359d-5590-4eb0-827e-b411967ee238",
+    "name": "Uncover the Moon-Letters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3416ac84-c5ef-44be-894f-ab3b89e592ce",
+    "name": "Undead Sprinter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f09811d0-c5da-4061-aaa7-835ccee3b05a",
+    "name": "Undercity Dire Rat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93cb9c7e-d6d3-4b1e-8bcf-2a4a1d95a549",
+    "name": "Undercity Eliminator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08d80efc-9542-4ba2-824c-c8615d8d07f2",
+    "name": "Undercity Sewers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ba223b7-743f-4f99-836e-869778fb2e99",
+    "name": "Undercover Crocodelf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33b1379f-b329-42cd-92ed-4811d44ed8dd",
+    "name": "Undercover Skrull",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3740b86d-b0e6-4837-b408-e7f62b95c787",
+    "name": "Underfoot Underdogs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "840119bf-e60f-4ff7-9c9b-d420d09df545",
+    "name": "Underground Mortuary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "511fa8a3-0a65-47fc-9f3b-57eaef2698cd",
+    "name": "Undergrowth Leopard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3fbe46fa-88da-439a-994e-c8f1791332a8",
+    "name": "Undergrowth Recon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e121178-e9e3-43a5-a174-ecbe47d759f9",
+    "name": "Under the Skin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b46394e-d337-4b1a-88e6-7fdac2ee4ac4",
+    "name": "Underwater Tunnel // Slimy Aquarium",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "77b684b8-227b-40de-80b4-15d0e70914f4",
+    "name": "Undulating Witness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b061702-1bc3-45aa-a758-446b25034801",
+    "name": "Undying Malice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "989b93fe-cad0-4890-a228-8a20ca666f10",
+    "name": "Uneasy Alliance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15211eaa-d906-4b95-8942-2f49d3cb4b81",
+    "name": "Uneasy Partings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c5da5c31-0cf1-4393-8701-eda7880ecebc",
+    "name": "Unending Whisper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c452e748-8a2a-4f68-8869-e294925a8b0b",
+    "name": "Unexpected Assistance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f4497af5-8b81-46b3-bb52-eaed1999809b",
+    "name": "Unexpected Request",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e969a27-1609-4ab4-b0db-46b1af8066a9",
+    "name": "Unflinching Courage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7cd0bd74-2463-4e9d-9802-69ac4ef6d543",
+    "name": "Unflinching Hortimancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be7e220e-272e-45ca-8265-8d78da2cd2a7",
+    "name": "Unforgiving Aim",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "011558f3-3c23-430e-a08b-8f91238e7971",
+    "name": "Unfortunate Accident",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd388ad9-a47b-4b0b-b94a-8e4343cd3de5",
+    "name": "Unholy Annex // Ritual Chamber",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "bde67dfb-706b-4942-a365-984ea6e97a2b",
+    "name": "Unidentified Hovership",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "892a83a0-a3cb-4cfb-9106-4008e4e75c0f",
+    "name": "United Battlefront",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c23f260b-b7d3-4c25-a08a-dabdb99e1791",
+    "name": "United Front",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98e547de-b963-4ee4-9a08-67bae010734b",
+    "name": "University Campus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0edaf433-4ded-4841-bc86-136780c0767f",
+    "name": "Unliving Legionnaire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8f7d4c8-bc50-4bcf-b930-797dcb3c2a21",
+    "name": "Unlucky Cabbage Merchant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98ebde8c-b47d-440b-93cb-a1407b807074",
+    "name": "Unlucky Drop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a335332-87ff-42dc-a547-c84295dd8138",
+    "name": "Unnerving Grasp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1525cbc1-0d95-4f58-99fb-136e54c4d486",
+    "name": "Unravel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de5c6c9d-04a2-4287-8c6e-fdf56c411507",
+    "name": "Unrooted Ancestor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2b0a5d0-0084-43a4-b6dc-e893ef42cdb7",
+    "name": "Unruly Catapult",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e7879d5-62ea-4c9a-9fc0-659d70f3a8e1",
+    "name": "Unscrupulous Agent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00ff5598-2f7f-4e28-8b63-5ae1ce18f0c5",
+    "name": "Unscrupulous Contractor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0b2ca8c-cb5a-45f8-ae7c-63ad9ebb4afd",
+    "name": "Unsettling Twins",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a56a33b-033f-4398-8dc1-e531be059710",
+    "name": "Unsparing Boltcaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b7bbc76-22cc-482e-8d65-34cff34c93c8",
+    "name": "Unstable Experiment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcd54631-ea47-49a7-ad5f-9a9a51a815ba",
+    "name": "Unstable Glyphbridge // Sandswirl Wanderglyph",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3f6f4c98-ed7e-4fb1-8bfe-4210a39f77f2",
+    "name": "Unstoppable Plan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6662968e-ca9e-454c-be44-24ad10e43d3e",
+    "name": "Unstoppable Slasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d059345-1a2f-4ecb-b419-3873ebadf318",
+    "name": "Unsubtle Mockery",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "837182db-1bf3-4a2c-bd01-1af9d9873561",
+    "name": "Unsummon",
+    "status": "curated"
+  },
+  {
+    "oracleId": "5e512ce9-5e2e-4ec3-9486-a10c63cff299",
+    "name": "Unswerving Sloth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "550abd9b-9aae-4812-9bc0-7f131d6dcde8",
+    "name": "Untamed Hunger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c49d24a-98a4-43c2-bb59-1ef13d4214c2",
+    "name": "Untimely Malfunction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "90aa9113-5148-486b-a1c6-b4230e6d3e41",
+    "name": "Unwanted Remake",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0a38e8c-c42c-4c99-8a44-d390ff2511ff",
+    "name": "Unwelcome Sprite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2593334-ce0b-43e1-97ad-b00950bfae2b",
+    "name": "Unwilling Vessel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c8fa799-7f30-4532-8317-f37a7ab787de",
+    "name": "Unyielding Gatekeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "18290c4b-cff6-4ee5-a487-fe0d5706d3de",
+    "name": "Urban Retreat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0b7e989-8194-484c-93aa-a44df0764a77",
+    "name": "Ureni's Rebuff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c995c80-3301-409b-822b-9297aa260823",
+    "name": "Ureni, the Song Unending",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "378a6203-0d47-4165-bdc2-43dfdfb4d15d",
+    "name": "Urgent Necropsy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b6fa8b6-4865-4eb6-974b-00f6b16b6f0f",
+    "name": "U.S.Agent, John Walker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f51aede-fb86-4b7e-9027-2ba8be62b567",
+    "name": "Uthros Psionicist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b4c37dc-8cb0-4870-929e-11c2a45952a2",
+    "name": "Uthros Scanship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df08ac72-010f-42f8-beb3-6d645c638e1e",
+    "name": "Uthros, Titanic Godcore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89793c8c-98a3-4621-ad3d-cfc5949c65da",
+    "name": "Utrom Scientists",
+    "status": "unsupported"
+  }
+]

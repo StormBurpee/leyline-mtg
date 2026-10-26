@@ -29,6 +29,8 @@ export function canBlock(s, blocker, attacker, p) {
     blocker?.zone === 'battlefield' &&
     attacker?.zone === 'battlefield' &&
     blocker.controller === p &&
+    attacker.controller !== p &&
+    definition(s, attacker).type === 'creature' &&
     definition(s, blocker).type === 'creature' &&
     !blocker.tapped &&
     !isPacified(s, blocker) &&
@@ -78,6 +80,14 @@ export function declareBlockers(s, pairs) {
       ) && canBlock(s, s.objects[blocker], s.objects[attacker], opponent(s.active)),
       'BLOCKER',
       'That block is not legal.',
+    );
+  }
+  for (const attack of s.combat.attackers) {
+    const count = pairs.filter((pair) => pair.attacker === attack.id).length;
+    requireRule(
+      count !== 1 || !hasKeyword(s, s.objects[attack.id], 'menace'),
+      'MENACE',
+      'A creature with menace must be blocked by at least two creatures.',
     );
   }
   s.combat.blocks = {};

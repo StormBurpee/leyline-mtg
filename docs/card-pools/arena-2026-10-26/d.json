@@ -1,0 +1,4397 @@
+[
+  {
+    "oracleId": "9d4b1e44-3c66-4b1b-8a1d-308aa4f841f8",
+    "name": "Dack Fayden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a52e73bb-47cb-4912-9b81-4ae40641eabb",
+    "name": "Daemogoth Titan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "290323d7-d8cb-4706-87d9-b920a4e2f680",
+    "name": "Daemogoth Woe-Eater",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea4d30c7-7c39-46d5-9b71-a7ebc3e219a1",
+    "name": "Daggerback Basilisk",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "f1352a81-6fd5-4c4d-ada4-b81d3a9f74c0",
+    "name": "Dagger Caster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43ccc568-2509-49b6-99d7-c56900d1565a",
+    "name": "Daggerfang Duo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc638413-c4f8-4f6a-a003-5ce8a10a8f94",
+    "name": "Daggermaw Megalodon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c0ef3b7-b368-4a5b-8cbe-bf1f47610f74",
+    "name": "Daggersail Aeronaut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c05e716-b6eb-4f95-866b-7e43a898ebe2",
+    "name": "Dai Li Agents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f13a8621-4d88-4c1f-8b6e-80f8ef383cd2",
+    "name": "Dai Li Censor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5591efbc-1b2c-489a-b4f3-935c9b6bd71a",
+    "name": "Dai Li Indoctrination",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "483e0c6c-8131-486c-b482-cc3396c9786b",
+    "name": "Daily Bugle Building",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d2a3f735-9523-4ddd-96a9-b0a5ecd39284",
+    "name": "Daily Bugle Newspaper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e677ded-7af3-4af0-81df-b70d6ee616ec",
+    "name": "Daily Bugle Reporters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9924c189-3c82-431a-b570-7805b2a406f0",
+    "name": "Dáin Ironfoot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b79b68a-db71-4638-824e-ab89b1716c86",
+    "name": "Dáin, Lord of the Iron Hills",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae03782f-8f05-4ce2-a049-005b1b688faf",
+    "name": "Dáin's Company",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "211814a5-195d-41c6-b96c-4c26b2cbb33c",
+    "name": "Dalakos, Crafter of Wonders",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33a90122-7280-4481-9b97-5879194cae40",
+    "name": "Dalkovan Encampment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cdd1a043-bd47-4197-be26-e2f7d3f1d209",
+    "name": "Dalkovan Packbeasts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0f9e604-a8bf-4c7d-8480-487e8076e1d8",
+    "name": "Damage Control Crew",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b01d61cc-9844-4191-86a0-f2db6d42d6e5",
+    "name": "Damn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d57a8f0b-7989-4db5-8756-6f2690097252",
+    "name": "Damnation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd50d76c-7654-47b9-a5b6-d075874e4357",
+    "name": "Damping Sphere",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fdfac093-a5c0-47b4-9052-e0af517d83cf",
+    "name": "Dance of the Manse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c57d4aa-d221-4b36-a544-9fa89d63ffbe",
+    "name": "Dance of the Tumbleweeds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "caeb508a-c1fd-45b5-a14e-e0ac7321c9a9",
+    "name": "Dance with Devils",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ba482e9-fbb0-4d9f-a3a9-414892bcdfed",
+    "name": "Dancing from Dark to Dawn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da3b12d1-8867-4063-b50d-3b2f5ce0549f",
+    "name": "Dancing Sword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43b5dbe9-41f7-4082-944b-ea9d6292c6fd",
+    "name": "Danitha, Benalia's Hope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b6377da-83e7-4519-9582-16a9c16b8faa",
+    "name": "Danitha Capashen, Paragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "971b30a8-4ab4-4e96-9d50-597da4d52994",
+    "name": "Danitha, New Benalia's Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b5c7f11-75f2-4bad-86cd-f0232861f569",
+    "name": "Danitha, Spear of Agony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7b754d3-9863-420d-895d-00e70b8b078a",
+    "name": "Danitha, Sword of Hope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cdd795b-13b8-4812-89ee-d248368f915b",
+    "name": "Dapper Shieldmate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6aa96a6e-9a88-4662-aa26-b4c16c0ef650",
+    "name": "Daredevil Dragster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9436a736-9139-4d8a-9eb0-9dbf706da51c",
+    "name": "Daredevil, Fearless Fighter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88aadf60-91f9-4932-a2bc-63365a139d36",
+    "name": "Daredevil, Man Without Fear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "654db13d-c7e4-4ee0-a87a-3635467f2f19",
+    "name": "Daredevil's Billy Club",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0eb1d539-6301-46b0-903e-487eda34253f",
+    "name": "Daretti, Rocketeer Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2f42c67-ff88-4248-bfa5-79a18c6473d5",
+    "name": "Darigaaz Reincarnated",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9d89f7c-a362-48dc-a335-f0e556e83f35",
+    "name": "Daring Archaeologist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e6f2997-a84b-4302-9d8b-ca4928961d24",
+    "name": "Daring Buccaneer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c8a3962-42a5-4070-8719-00d7483c7dbe",
+    "name": "Daring Demolition",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9564593-b5a6-4a83-be1e-2af8caf647d7",
+    "name": "Daring Discovery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c777002d-dcd4-4d75-8175-5440a8bb118e",
+    "name": "Daring Escape",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b1d79b7-a812-4f48-9be0-789294da3b56",
+    "name": "Daring Mechanic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d36f64a0-53f7-4c56-9f40-a7927a5c2608",
+    "name": "Daring Saboteur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69ca69c7-403b-4b5d-be08-d9dce8ce410e",
+    "name": "Daring Sleuth // Bearer of Overwhelming Truths",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "0f5401c2-0189-4a07-8e7b-a765ccd7c954",
+    "name": "Daring Thunder-Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4d52559-7624-48b2-96ba-e52ada6c507a",
+    "name": "Daring Waverider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f872417-3dbe-40ec-ac91-e3132c0b7514",
+    "name": "Dark Bargain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3ebe9ae-108f-4d23-a236-35d632889cf8",
+    "name": "Dark Betrayal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a293c87-ad40-4c6c-9fa4-9a8b5f081ac9",
+    "name": "Darkblade Agent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "868e6e68-4367-4073-a864-235d5961ae56",
+    "name": "Darkbore Pathway // Slitherbore Pathway",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2068185c-1b50-47d0-aa3f-bf505d199428",
+    "name": "Dark Confidant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c527eb80-ccac-40b8-8377-c31121613128",
+    "name": "Dark Deal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e98cd00c-b812-4c6a-81d4-e3f94b64fc58",
+    "name": "Dark Deed",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "c9b82110-7dfd-4617-9399-9510be449043",
+    "name": "Dark Depths",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17917b7a-2b2b-4a96-a21e-10cd91375660",
+    "name": "Dark-Dweller Oracle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ded4009d-be23-4e36-a7a3-9e07230712ee",
+    "name": "Dark Endurance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40760bfa-a423-487c-ba29-043b2d00c736",
+    "name": "Dark Fortress",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa04f161-4141-491b-ad6f-a16f69c862f3",
+    "name": "Dark Inquiry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "228cb63f-0b93-4be5-94e5-4eaae9112eeb",
+    "name": "Dark Intimations",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eda09ed4-7509-4d1e-b169-2b7c1c87e936",
+    "name": "Dark Knight's Greatsword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3ea6af5-48b9-45d2-9576-46cacb2db5b0",
+    "name": "Dark Leo & Shredder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4b51c2d-7e56-435b-89d6-85e33df65879",
+    "name": "Darklight Phoenix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a3862f0-8dfc-4ac9-8eb9-faefcad685d4",
+    "name": "Dark Matter Manipulator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2065cada-4078-41c4-9e06-2460d2a2e8ee",
+    "name": "Darkmoss Bridge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "932708ae-9d5c-4561-aa8b-0d2222d37fdc",
+    "name": "Darkness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3435757-d049-4aaf-a2cb-897dd4940997",
+    "name": "Darkness Descends",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95650a60-6f1d-4594-8b53-7fd406212207",
+    "name": "Dark Nourishment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79acdb37-8d52-4bc8-a7be-a7e92b6166e5",
+    "name": "Dark Petition",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7cc744b-2fbd-40e6-8a59-392535c17454",
+    "name": "Dark Remedy",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "53f7c868-b03e-4fc2-8dcf-a75bbfa3272b",
+    "name": "Dark Ritual",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5c2b700-da52-4436-b234-e32ba7759e17",
+    "name": "Dark Salvation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2b48695-f7d7-42ce-a8a0-2a723428542a",
+    "name": "Darkslick Shores",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67d2a021-a042-4e5f-b6e4-39cb35514794",
+    "name": "Darkstar Augur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8dc067bf-f78f-4ac4-b6e7-b305c42cf0bc",
+    "name": "Darksteel Citadel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b09d0cf-403c-4a15-aeee-602a1bdaf0c1",
+    "name": "Darksteel Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2529491-7389-4cfa-92d2-145eda779603",
+    "name": "Darksteel Ingot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5b4cf54-ed5e-42d0-9d98-5fec76b0b0b8",
+    "name": "Darksteel Plate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc483bab-14fb-498d-9310-9c070766c7ae",
+    "name": "Darksteel Reactor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc7929cb-50a9-4662-a106-c415fc03a1a9",
+    "name": "Dark Supplicant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c6ce7c9-316b-4171-a8fa-ca26af1eecb7",
+    "name": "Dark Tutelage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96818698-c104-48f4-b73f-c8722d1d1be4",
+    "name": "Darling of the Masses",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4061572b-b7ff-4d06-9f71-9e66e064593d",
+    "name": "Darwin, Adaptive Mutant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "211dca11-b633-4deb-9d51-210fd3843995",
+    "name": "Dashing Bloodsucker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63e0f03f-16da-4c09-ad03-8945f660942d",
+    "name": "Daughter of the Deep",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7104e471-06aa-426d-af1e-d5f0b1fb18c3",
+    "name": "Dauntless Aven",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70973a2d-66e6-4662-ab10-99678775dda1",
+    "name": "Dauntless Bodyguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c14bd133-ff17-48b3-a1c8-56c93d8c6e43",
+    "name": "Dauntless Cathar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7129bdec-83e0-4c1e-a87b-ac0da1a714b3",
+    "name": "Dauntless Dismantler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce29f71a-6662-4be4-9915-5a4be87288e0",
+    "name": "Dauntless Onslaught",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b75ca527-4494-4957-b2e3-8c590df42e95",
+    "name": "Dauntless Scrapbot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8371dee1-5f4a-410a-8b7c-e4110cdbe9bd",
+    "name": "Dauntless Survivor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc665ddc-4326-4860-94ba-c40ced8b0af6",
+    "name": "Dauntless Unity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "97b2fb8b-0c69-4ed2-b2d0-8a780f9b5b97",
+    "name": "Dauntless Veteran",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1c2dbe2-fbe0-4058-bdf1-91d1b1832786",
+    "name": "Dauthi Voidwalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "745d37dd-d18e-47cc-81d0-8e61a07342f2",
+    "name": "D'Avenant Trapper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1bd5e51f-f9a5-4eb7-bda2-957310602c20",
+    "name": "Davriel, Rogue Shadowmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22b5721d-c187-4e0f-b752-52c2a26f3505",
+    "name": "Davriel, Soul Broker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb490f3f-74ed-4d38-8eda-9948c095f3bc",
+    "name": "Davriel's Shadowfugue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b4215b2-d473-4521-846d-6d63e93faebe",
+    "name": "Davriel's Withering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "311eef28-21e9-44fa-96df-d281f0a9ba34",
+    "name": "Dawn-Blessed Pennant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0146f430-da82-48d3-a576-c2b05101797f",
+    "name": "Dawnbringer Cleric",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d6e38f6-480b-4f81-a5d4-342fc45e39b0",
+    "name": "Dawn Evangel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e17db9d8-14b0-4f72-aacc-f51fae4597e2",
+    "name": "Dawnfeather Eagle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c34b2e4-e600-4688-86cb-8a1c11fdc770",
+    "name": "Dawn Gryff",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "2cabf7a4-17af-45c7-b314-a84f5dc0d070",
+    "name": "Dawnhand Dissident",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57bbd80b-290f-461e-8dc6-26ba4d673fa9",
+    "name": "Dawnhand Eulogist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e86279ba-cb22-4754-90f4-38354657b8fa",
+    "name": "Dawnhart Disciple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed7a2ee0-289d-4e5f-92e0-1539395baf33",
+    "name": "Dawnhart Geist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e12fb44a-524e-4603-a89c-fad8204fdb2b",
+    "name": "Dawnhart Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6e92911-a100-43eb-ab4b-3778b0db1918",
+    "name": "Dawnhart Rejuvenator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0604ed6c-a85f-41da-a163-0c414e57d133",
+    "name": "Dawnhart Wardens",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7d88510-d2ce-4dd6-938c-964cc74ff7d7",
+    "name": "Dawning Angel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37df5ade-6a21-4b0c-89f8-e2e917589a8d",
+    "name": "Dawn of a New Age",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7a38484-2acc-49a6-b32d-d54dddb14d31",
+    "name": "Dawn of Hope",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afc9436b-8cad-4916-929d-ff33a37b42d5",
+    "name": "Dawnsire, Sunstar Dreadnought",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f2d1de6-42e0-4f45-b43d-ce4980146469",
+    "name": "Dawn's Light Archer",
+    "status": "curated"
+  },
+  {
+    "oracleId": "69892dc7-4087-447c-a41c-99cf3d5c0c12",
+    "name": "Dawnstrike Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37c06f89-db36-4937-9404-2b07cd22e1a6",
+    "name": "Dawn's Truce",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de6d0248-79f6-48df-bdca-8ce207b2ec08",
+    "name": "Dawntreader Elk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6640c234-8863-4670-a61f-ba6f59b60d69",
+    "name": "Dawnwing Marshal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d3c7c96-056f-408e-a834-fa45a430d3d4",
+    "name": "Daxos, Blessed by the Sun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebd33f4c-2cc8-46e3-b367-ce5b37c2719b",
+    "name": "Daybreak Chaplain",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "d3de6b36-c631-4b52-b16b-0749a347d73d",
+    "name": "Daybreak Charger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2ea435c-5a61-4c98-bb76-8ff4ef0a0da9",
+    "name": "Daybreak Chimera",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fbb3f959-ded7-4570-bacf-0e1394dbef80",
+    "name": "Daybreak Combatants",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "094c4486-6cae-4268-850e-ff0082e5ad10",
+    "name": "Daydream",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc857129-533c-41d1-8e8b-1c0443030d69",
+    "name": "Day of Black Sun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d057289d-5e28-43d5-8ff3-4a1bc723477d",
+    "name": "Day of Judgment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42de2d46-c98d-4ae5-a53d-97531592529b",
+    "name": "Daysquad Marshal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "810a6cf5-e9f4-48e1-8e06-3e0af85633ce",
+    "name": "Day's Undoing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70486bee-6ee7-41ea-b834-8caf4699302b",
+    "name": "Daze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7de464e3-fae3-44cc-8233-776fc727c00a",
+    "name": "Dazzling Angel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d56bd32-f47a-4e54-a88e-b69d16283ea4",
+    "name": "Dazzling Denial",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "394709f0-2d29-4a2d-be05-7b22fec57763",
+    "name": "Dazzling Lights",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0527fc47-2bfc-4d02-90fa-5a1284f89a0a",
+    "name": "Dazzling Ramparts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c46a02db-13d6-477f-9da0-822599470168",
+    "name": "Dazzling Theater // Prop Room",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "09f3d60c-34ee-41ec-a047-fe2140b11950",
+    "name": "Dead Drop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7c36b66-4f58-41af-b1c5-704ff0d9eac8",
+    "name": "Deadeye Brawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "29ef90ac-2396-4488-970d-d440297ba5ee",
+    "name": "Deadeye Duelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "597afe7c-a4ba-48d0-9c37-d9affe5ba195",
+    "name": "Deadeye Plunderers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40abba38-533b-4f51-99e9-a2b337d65171",
+    "name": "Deadeye Quartermaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1355424e-9909-41dc-8d43-b8d21b0919bf",
+    "name": "Deadeye Rig-Hauler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab735456-f831-4988-84c6-50ca14351990",
+    "name": "Deadeye Tormentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "26184baf-5d48-4919-8df2-c98ac460b78f",
+    "name": "Deadeye Tracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d2cdcc6-da65-4f66-ba38-111efad44919",
+    "name": "Deadly Alliance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b831d3f8-07ce-4172-ba29-213cac414c9a",
+    "name": "Deadly Brew",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c53c75a0-c248-4e76-8d28-f7e53b2dcc49",
+    "name": "Deadly Complication",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04e2afbe-0c08-42bc-93e6-662066a958bf",
+    "name": "Deadly Cover-Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b74d2d9-d75b-496e-bbb4-2b95b3d3ba55",
+    "name": "Deadly Derision",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "457af74a-02b3-4659-846d-63e482667f34",
+    "name": "Deadly Dispute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32ad99a9-b5ed-41a1-8060-22265f7c5da1",
+    "name": "Deadly Embrace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6178715c-870d-4710-b758-66e080804ee3",
+    "name": "Deadly Plot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d23ca3d2-0731-4df4-a3c6-69ddf0c58601",
+    "name": "Deadly Precision",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e341478e-c3f8-45d9-9430-abe3a58fa2fc",
+    "name": "Deadly Riposte",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0456ec64-2c81-4763-a352-8ff64a4c3d6b",
+    "name": "Deadly Rollick",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04a3bb42-0464-4638-a6ac-d5f412c222cc",
+    "name": "Deadly Visit",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "e5fdd6fd-6492-47ec-8b74-9ff22ff9849a",
+    "name": "Dead Man's Chest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4354eb0a-28c5-4f3f-8e78-fd7eec230c7b",
+    "name": "Dead Revels",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1804304-fac1-4b19-a48d-6ade9407972a",
+    "name": "Dead Weight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9bbebbd-9f2d-499c-adb1-8d3170c3fd0d",
+    "name": "Deafening Clarion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6284ef01-d17d-4584-aecb-1b841ae638e5",
+    "name": "Deafening Silence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9ede348-f1dc-45ba-9e31-3129ccc182d1",
+    "name": "Deal Gone Bad",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99024aa8-5687-4d38-8a4b-feef42d6c1ff",
+    "name": "Death Baron",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "53e86135-3b24-4618-bcc0-af4d81e672dd",
+    "name": "Death Begets Life",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "947835a2-a72f-44e2-a183-99dcb019d6ff",
+    "name": "Deathbellow War Cry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c7f9701-c39e-4f14-844a-15f2e3c41ca9",
+    "name": "Deathbloom Gardener",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b52148c3-fe97-4cc0-a814-a5a0f5d426f6",
+    "name": "Deathbloom Ritualist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce873790-de4d-4ba3-8023-c44306ba3ff8",
+    "name": "Deathbloom Thallid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c92d6f26-5856-42dc-9ee5-21292d78a1fb",
+    "name": "Deathbonnet Sprout // Deathbonnet Hulk",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "26e555f1-e0ed-4b84-8783-1c0c968f462d",
+    "name": "Deathcap Cultivator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6d24565-5b32-4eff-b2e0-6e2c25516ff0",
+    "name": "Deathcap Glade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f",
+    "name": "Deathcap Marionette",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0842cc1d-de1e-4fb7-a54b-78a4c8f40d3e",
+    "name": "Death Frenzy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17da3654-7517-473b-89e7-0303f6f030cb",
+    "name": "Deathgorge Scavenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81abb451-5ee0-4f90-bacc-a8ff69726a27",
+    "name": "Death-Greeter's Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f599471a-31a6-4fb0-bf27-c5b707e1db6a",
+    "name": "Death in the Family",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4658ae19-d203-4c12-b56e-42cd8f0db91d",
+    "name": "Deathknell Berserker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "990dde55-8ee3-41ad-874b-60864ec28ff4",
+    "name": "Deathless Ancient",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f96f1a94-6226-4e1f-a7fb-a43a276b3c3a",
+    "name": "Deathless Knight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31284a0b-9bd5-4186-bd27-6b16a3597e27",
+    "name": "Deathless Pilot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf09b0af-3cf1-4486-8f65-8cfd2410314a",
+    "name": "Deathmark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af231505-bd2e-4499-9fd5-f761dde2ecef",
+    "name": "Death-Priest of Myrkul",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bea40c67-73ca-4b5e-b902-5de07f21585c",
+    "name": "Death-Rattle Oni",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22f1a4a4-c423-4d1c-8775-0ed604a9fa51",
+    "name": "Deathrite Shaman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a1798d3-33fb-4092-a843-45a25f3b4e82",
+    "name": "Death's Approach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b10f6915-96b6-4e87-8171-4d3e96bfd48c",
+    "name": "Death's Oasis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "793b0c73-601c-41dc-b49a-45fee4970d52",
+    "name": "Deathsprout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e08722b3-0f79-4c82-b298-603e04a37857",
+    "name": "Death's Shadow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2b2b743-dfc7-439e-8563-1ccce54422bd",
+    "name": "Death to Our Enemies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a636b62a-340b-444d-9161-f6d3367b745c",
+    "name": "Death Wind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52eab77d-9a07-4e14-8872-72681d3b3d0e",
+    "name": "Debilitating Injury",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b15d571-2f90-44f7-9153-20ed51253045",
+    "name": "Debris Beetle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db0894e1-2644-48d4-8de4-8cc43e940bc1",
+    "name": "Debris Field Crusher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "72f89173-2998-45e6-94da-5b5bb9738a6b",
+    "name": "Debtors' Transport",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c6c1e576-7197-4067-8cd1-aa535188e1b8",
+    "name": "Debt to the Kami",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5df44b8d-b337-49d8-8427-34253f52cb47",
+    "name": "Decadent Dragon // Expensive Taste",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d7dddeac-c6ed-4111-ba40-e2830c08d480",
+    "name": "Deceit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c939ea6-68b7-4965-b1d3-af1d3dc79778",
+    "name": "Deceiver Exarch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9720545-37f4-42f1-932f-13ef88c9ea72",
+    "name": "Deceive the Messenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1831fe12-dbe0-437f-8fc8-f01bbb701fe1",
+    "name": "Deceptive Landscape",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a4e5693f-12a0-451e-818d-d6efc7b4ed25",
+    "name": "Decimate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f522ded-09fd-457e-9efe-0a6324925e4c",
+    "name": "Decimator of the Provinces",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d0bd780-b754-44a3-894c-a9c8aa711f05",
+    "name": "Decisive Denial",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49554441-bb48-4829-b8d6-55e687a6c2e2",
+    "name": "Declaration in Stone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db640c5b-4548-44b1-a9cd-cc6838707dbb",
+    "name": "Declare Dominance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1daba4f6-2a7d-426a-97d1-0298a7100c45",
+    "name": "Decoction Module",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "42510758-6167-420b-bb70-65f914b7a259",
+    "name": "Decode Transmissions",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a",
+    "name": "Deconstruction Hammer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f4c57454-d36f-4f38-b7ac-76477a516c3e",
+    "name": "Decorum Dissertation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "035cddbc-39c9-42af-9e26-c88419b43b49",
+    "name": "Decoy Ploy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67a98359-6f02-4556-ad47-c01b643686d6",
+    "name": "Decree of Justice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4e0749a-e179-4c19-8536-bf8f1a198549",
+    "name": "Dedicated Commons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eeae4161-9f35-45df-8b3c-c55e37f49cd1",
+    "name": "Deduce",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0bd4a29-ac13-4d4f-8479-e0e80f8d846f",
+    "name": "Deem Inferior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "008c92bc-3022-4d34-aa04-584576ff8f8e",
+    "name": "Deem Worthy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "579cbd92-797f-4cdf-91ed-fca7a523eae5",
+    "name": "Deep Analysis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e46f6644-6bf1-47b1-817c-906bd3eca99f",
+    "name": "Deep-Cavern Bat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c892d28c-4a78-4a7f-b8d5-c3663b819c5e",
+    "name": "Deepchannel Duelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c0d6c7e-a7cc-49e0-bf84-3fc33dd10b90",
+    "name": "Deepfathom Echo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "648aead4-dc0b-47bc-911c-8dcd2cfd32d3",
+    "name": "Deep Freeze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7f56bbb-961a-4641-9446-7292ef188b1d",
+    "name": "Deep Goblin Skulltaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b75ffa62-a291-44d7-a950-b50c8394e066",
+    "name": "Deepmuck Desperado",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "507c2921-7070-482d-8754-dc667e3315bd",
+    "name": "Deeproot Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "764e8e6e-0ace-4fc8-8ca5-468a10ae3b73",
+    "name": "Deeproot Elite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "188656d8-4ea8-4e58-88da-b010a16eb6f2",
+    "name": "Deeproot Pilgrimage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2af1930c-a5f2-4e7e-910f-e84458b051ac",
+    "name": "Deeproot Warrior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e7b31eb-7a91-4992-b24a-d81173e1dbc8",
+    "name": "Deeproot Waters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ec767f2-40ba-46c9-b7cd-5821986dda0c",
+    "name": "Deeproot Wayfinder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "812df594-75af-494f-be09-5f9633aca46a",
+    "name": "Deepway Navigator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a6887e3-7a65-4f24-be71-183b00a0ad56",
+    "name": "Deepwood Denizen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76c7a339-015b-4074-8e10-14d52b784f9b",
+    "name": "Deer-Dog",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "60fc5eb0-95d6-49b0-a538-945ef599e484",
+    "name": "Defabricate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "390290b3-77cc-4180-8e6c-9cb808f6ac7a",
+    "name": "Deface",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "274c2781-f40a-49b4-a039-669739beaab6",
+    "name": "Defend the Campus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c079a636-cfd4-49cd-bcd4-54375b3fa355",
+    "name": "Defend the Celestus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "561af57d-d43d-4d98-9ef6-18a0843f22ae",
+    "name": "Defend the Rider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "caf840e8-c1d3-4570-8542-432a765c09ff",
+    "name": "Defenestrate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e73addfa-d18a-46f7-882e-7bc2f292230b",
+    "name": "Defenestrated Phantom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22ba474e-f6e6-450d-a4cf-0739f0b51079",
+    "name": "Defense Grid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7e1b166-9267-426d-897d-24903327b48d",
+    "name": "Defense of the Heart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee152ffa-9c39-48ed-9aca-e53c8ebb0231",
+    "name": "Defiant Greatmaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a8c9ef7-8171-4f6f-bf39-4a08d127e729",
+    "name": "Defiant Salvager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8c2d9c5-6fe6-4698-9972-83cdd625d94b",
+    "name": "Defiant Strike",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "7b62c53a-46a2-4c57-9eab-0c6706795b4e",
+    "name": "Defiant Survivor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a96b93b-bae6-48fb-87f5-05f3ffcf7ba9",
+    "name": "Defibrillating Current",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f97de425-c7ab-4688-8606-159370d179ee",
+    "name": "Defiled Crypt // Cadaver Lab",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9d4ec5e5-5520-45c3-8071-53191811117d",
+    "name": "Defiler of Dreams",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88ac2d09-7993-4bce-8aae-b2683c5c25a5",
+    "name": "Defiler of Faith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ad002de-8be3-48d2-a0e0-865538144789",
+    "name": "Defiler of Flesh",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "590137df-af61-4e93-b6f1-3a2e438b8037",
+    "name": "Defiler of Instinct",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a1dc797-7531-4494-afe6-add6ac3f74c0",
+    "name": "Defiler of Vigor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc5dffc8-fac5-4956-bac4-1ad2cc16f6be",
+    "name": "Deflecting Palm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae120613-97d6-4393-b39d-c3e6c076f5d6",
+    "name": "Deflecting Swat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d620de15-8141-4877-9330-8328a3fa85e1",
+    "name": "Defossilize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c8f93d7-d89a-401b-8764-76be71ad16e3",
+    "name": "Deification",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "362fc643-ab76-4160-a73e-73397464db40",
+    "name": "Deliberate",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "f9d3b046-0b95-4103-a630-4b3fb88bb60b",
+    "name": "Delighted Halfling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "705cc928-d6d4-4294-979b-a385d1b07dc6",
+    "name": "Delightful Discovery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d57dadb-c689-4691-b331-aba15daf46ff",
+    "name": "Delina, Wild Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e73f938-0aa4-4639-a97a-f7e68f645623",
+    "name": "Deliver Unto Evil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60043b87-6008-4cfa-9d8f-6ee6e3f70766",
+    "name": "Delivery Moogle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "245d0ccf-87b6-460a-8b99-9e2079f2d375",
+    "name": "Delney, Streetwise Lookout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a64cf8e-ae7f-4697-93fc-9c946eb1088b",
+    "name": "Delta Bloodflies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "416c70ab-f136-43e0-b5d5-9af8d4211c01",
+    "name": "Deluge Virtuoso",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "edd531b9-f615-4399-8c8c-1c5e18c4acbf",
+    "name": "Delver of Secrets // Insectile Aberration",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a1c8b833-8c74-4f95-8a47-1dd41ef99361",
+    "name": "Delver's Torch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c11e84a1-dbda-429b-8cd6-fd0deaefc689",
+    "name": "Demand Answers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8f1e3bd-bbf0-4750-b054-03553fc61850",
+    "name": "Demanding Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eeb50bfc-8443-482b-bfc1-ea96b37809cd",
+    "name": "Demilich",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0bbab99f-2ff6-4d48-b7c1-1ab0500c9422",
+    "name": "Demogorgon's Clutches",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08c6d2fd-d9ae-4f95-bb9d-7e16b1039814",
+    "name": "Demolish",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93953926-a644-49bb-9b5a-4c8f19114c7e",
+    "name": "Demolition Field",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "282e5e5f-365a-4e11-aeac-ead71d1cf68a",
+    "name": "Demolition Stomper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e786f0b-e2cb-40ee-96bc-81945a0b35a3",
+    "name": "Demon Bolt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae18580a-1753-4dc8-b437-8a779b1a6e4d",
+    "name": "Demonic Bargain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "712e3479-722c-40a1-9b61-d5bdde93042b",
+    "name": "Demonic Counsel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d185c829-ef12-403a-a071-7520a0293d4a",
+    "name": "Demonic Embrace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "162bcc9d-6edf-4b3b-83e6-2c933e2a5967",
+    "name": "Demonic Gifts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88075828-a76e-412d-b738-182f50e3a133",
+    "name": "Demonic Junker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19a2f0a0-9e68-4982-a5f5-b77d805befd7",
+    "name": "Demonic Pact",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a861ee41-a2c6-4530-9974-82f55ce712b1",
+    "name": "Demonic Ruckus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82004860-e589-4e38-8d61-8c0210e4ea39",
+    "name": "Demonic Tutor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00cb93a8-5d33-4c6a-9e2a-4b3560f76f3f",
+    "name": "Demonic Vigor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "667ece0e-a474-4e11-8ac4-6c8fc354457c",
+    "name": "Demonlord Belzenlok",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dac85722-d741-4584-8b98-8ac220958a38",
+    "name": "Demonmail Hauberk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e0b838d-c858-4aa5-999e-c4ef9d29571b",
+    "name": "Demon of Catastrophes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b2f2abd-6c0f-49a5-a44b-f366614c944d",
+    "name": "Demon of Dark Schemes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be465805-1a37-4212-acf1-5dfec890b338",
+    "name": "Demon of Death's Gate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e55fc03-779c-4a71-beb7-aa0ade738c24",
+    "name": "Demon of Loathing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5a33091-a348-4b13-8dbd-79ab0ad99afe",
+    "name": "Demon's Disciple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf65a5f5-5536-4616-a09e-2416439c7bc6",
+    "name": "Demon's Due",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "077b5ed2-05c2-4a16-b5eb-794884ee1c21",
+    "name": "Demon Wall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c333eb79-300e-4dc0-9126-8dca1bac6ef2",
+    "name": "Demotion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd591199-9f7a-4147-a150-13279dbb4498",
+    "name": "Demystify",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b82312c-f748-4c36-8934-ecbcfc10cc7d",
+    "name": "Denethor, Ruling Steward",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45802eb2-6848-416c-95e0-c1c1ea0620d0",
+    "name": "Dennick, Pious Apprentice // Dennick, Pious Apparition",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f451b8f0-1ff5-4e8d-9f30-9352d83ed687",
+    "name": "Den of the Bugbear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7dad8fe-b0b8-4c6d-ad11-76b402952799",
+    "name": "Deny Entry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b665a64b-4772-42dd-9fd2-fd8598e689ba",
+    "name": "Deny Existence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0146de73-29bf-415a-b450-11074553f715",
+    "name": "Deny the Divine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f8de7f0-c61d-415d-b4db-4959374343da",
+    "name": "Denzilore Fatehold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc913f28-18ef-485e-8d2b-ae0115523020",
+    "name": "Depala, Pilot Exemplar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a620a765-97ba-4687-acfd-4dec7da75d9f",
+    "name": "Departed Deckhand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae069ba4-8ca6-4eda-8f5d-fc82072d7d40",
+    "name": "Depart the Realm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60105eb8-bdca-44b9-a970-68a7615526e8",
+    "name": "Dependable Quinjet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a83c2fa-f2d2-4b86-8407-4269f127936d",
+    "name": "Depopulate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c547c9ab-a303-48fb-9579-37f9de9a558b",
+    "name": "Depose // Deploy",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "33f89437-885b-4850-88b7-239f5dfcc8b1",
+    "name": "Depower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "abcb5321-c295-4abf-8622-7de79679d27a",
+    "name": "Depressurize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f376f4c6-4526-4ae3-a84a-e8ea50fe78b6",
+    "name": "Depth Charge Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ca4ca66-30b1-4074-a2e3-545b7682381b",
+    "name": "Depth Defiler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "caa0c20c-594b-4ffd-87de-60bf15d8c3be",
+    "name": "Depths of Desire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e4150db-ac43-48b4-9791-0d874906acf5",
+    "name": "Deputy of Detention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f246109-8c8b-4909-9888-561bc46ad776",
+    "name": "Deranged Whelp",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "993b7b94-ed06-422d-9c7e-52a74ce9d045",
+    "name": "Derelict Attic // Widow's Walk",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "afa49a09-146f-4439-850e-dd1938c93cef",
+    "name": "Derevi, Empyrial Tactician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca773c52-ca64-463c-99cf-e71b59d2cff7",
+    "name": "Descendant of Storms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba13cbdb-8043-4c1b-8a85-084c86886ac8",
+    "name": "Descendants' Path",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9cbf95f4-3510-420b-9355-645450f4493d",
+    "name": "Descend upon the Sinful",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d80ee9c-55d4-4115-8a58-63e8460f9795",
+    "name": "Desculpting Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07ff619a-21ee-44b6-b666-ceab4a78096a",
+    "name": "Desecrated Tomb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef75be00-1a88-47a1-a1ae-fe2c9881a798",
+    "name": "Desecration Demon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "195107ad-879d-4b02-a44a-a3ba70fedf88",
+    "name": "Desert",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ad18589-ece4-4809-80f6-6764d2822372",
+    "name": "Desert Cerodon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0ec8681-da50-466b-8cdd-1dc710deccd9",
+    "name": "Deserted Beach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f12bf9a-6e1a-4377-b4af-e8cabd3ee58a",
+    "name": "Deserted Temple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73ca3132-d849-4cf9-beba-75ba09789332",
+    "name": "Deserter's Disciple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee3d1f44-e0ca-4ce9-be76-4b675a115156",
+    "name": "Desertion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "311f38a6-f68f-4d30-bc4e-62339f1e0d88",
+    "name": "Desert of the Fervent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "190e664b-9875-4335-af46-353886ed18ff",
+    "name": "Desert of the Glorified",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "852d4dc3-404d-4565-99e9-1eac8f6eca5e",
+    "name": "Desert of the Indomitable",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "508f9e7e-2ff7-4593-b0a9-0612d7b5d646",
+    "name": "Desert of the Mindful",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2672e0ca-8d5c-449f-8483-35d0e697fbb2",
+    "name": "Desert of the True",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "909eacf3-05ce-4c2b-97a8-49b6ea597b64",
+    "name": "Desert's Due",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3639381-e401-409e-8f07-0a3bc736c50d",
+    "name": "Desert's Hold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81c2913f-42b7-4cfa-adc0-b3416fbe2ec6",
+    "name": "Desert Were-Worm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c9634afc-4a5b-4cf6-b63d-0ff9909dd5a7",
+    "name": "Desolation of Smaug",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed9d4bb1-7335-45fd-b2ea-97b1f6491d7a",
+    "name": "Desolation Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd16434d-55ea-4c5a-a9ef-752971a4af16",
+    "name": "Despark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de8d7cad-02c7-43f1-896e-eaa73f016ada",
+    "name": "Desperate Bloodseeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0432e07d-baf6-4c20-8646-08338c7dc950",
+    "name": "Desperate Castaways",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60d591f6-6d84-45d2-9d78-a2ef07a3e403",
+    "name": "Desperate Farmer // Depraved Harvester",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "83c12f50-e5a1-479d-afab-edb0b40412f2",
+    "name": "Desperate Futurescribe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87644a09-241a-44e5-99f2-16fc9a7d8b93",
+    "name": "Desperate Lunge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1f3df1c-5c51-445a-b66d-eee4aab23691",
+    "name": "Desperate Measures",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc1ea0ba-46bf-49b6-af95-51eaf1ab915e",
+    "name": "Desperate Plea",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b13b40f1-1b1f-40e8-989b-ef24dc05007a",
+    "name": "Despise",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9703140f-36ee-4427-a390-c1dbdb9e4ee9",
+    "name": "Destined Confrontation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ebde396-6672-491a-a6ce-1de49b12379b",
+    "name": "Destined // Lead",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7dd189f8-a23f-4b43-b0ef-fb174a9664ba",
+    "name": "Destiny Spinner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b75e667a-1ceb-445a-acf4-ae1fd2dae9e7",
+    "name": "Destroy Evil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56787f7d-d9e9-42f2-a419-31f15e6e436e",
+    "name": "Destructive Digger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7165fade-ea96-4026-bc80-620729b8f70c",
+    "name": "Destructive Revelry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6ae536a-95c0-495d-98b8-200b3564dd79",
+    "name": "Destructive Tampering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dae81b1b-28dd-4f7f-9bcb-65e72eaa37e2",
+    "name": "Desynchronize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "93695c16-c441-492d-af12-b57df9739846",
+    "name": "Detection Tower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52c3fe55-74ee-44cb-b62b-dc6c5dfdc33e",
+    "name": "Detective's Phoenix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4ecfccd-b8b4-4b18-b989-30de79b4971e",
+    "name": "Detective's Satchel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ea2c5ad-2982-4041-8c9d-a1d31ced11aa",
+    "name": "Detention Chariot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a0b376d-7824-4ba5-8bc9-bc0be12800c5",
+    "name": "Detention Sphere",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5383a1c1-662f-46fe-a0e5-0f38efe1a37a",
+    "name": "Detention Vortex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07bfb7d2-f171-4ce1-876a-f9fb5c7cd11a",
+    "name": "Devastating Mastery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e17cd4c-ebf0-40d0-b52d-b4d84bbcf7b3",
+    "name": "Devastating Onslaught",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08de884f-1930-43d6-8c23-04353a136b4e",
+    "name": "Devil Dinosaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1e0dc37-20c9-4236-ae01-e0891ce83afb",
+    "name": "Devilish Valet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee9f0b29-8a54-4cb8-8e2c-7bd67c2184ba",
+    "name": "Devil's Play",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab9e2045-860a-40ab-bec1-0dffced003ef",
+    "name": "Devils' Playground",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f80a7be-3da3-4e84-82a8-dd5d4b2c3f32",
+    "name": "Devilthorn Fox",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "feb221fb-59bf-4671-a53f-1bbe8e9c2ca9",
+    "name": "Devious Cover-Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a671fedf-3766-4fda-abeb-6f63e2fdd20b",
+    "name": "Devkarin Dissident",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "cb814e16-acf7-41d5-a357-1323dcc369f3",
+    "name": "Devoted Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7620c46-b3d8-4694-ac7c-a43933c86c22",
+    "name": "Devoted Duelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a154fb2-9f23-4c22-baee-728492385d6d",
+    "name": "Devoted Grafkeeper // Departed Soulkeeper",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "00bcbeb5-196a-4a54-ac8d-dec708e68d01",
+    "name": "Devoted Paladin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89215e6d-ebe7-4eb0-9999-11ee2e6eb1d2",
+    "name": "Devourer of Destiny",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f747b39a-28a0-46a8-a161-182939556d39",
+    "name": "Devourer of Memory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c40f825-836e-4b76-8e43-267b4abf013b",
+    "name": "Devour Flesh",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f6620c3-2c15-467c-92ca-fdf9042a63f7",
+    "name": "Devouring Hellion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5334dc24-040e-4094-80f4-8d1b9de01230",
+    "name": "Devouring Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8bc28ea-5630-49d5-963a-5789fa83f3c7",
+    "name": "Devouring Sugarmaw // Have for Dinner",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "11656b2a-b459-4b1c-b505-8547c3507856",
+    "name": "Devouring Swarm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0112586-3826-452e-9e44-7e6edd197f78",
+    "name": "Devouring Tendrils",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "abf8264e-d020-4939-8092-83469b1a2244",
+    "name": "Devour Intellect",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92f8c8b1-1fd5-4e80-b8a9-51671937aaf2",
+    "name": "Devout Decree",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07634620-a83a-4ca0-8a60-2a21368a2661",
+    "name": "Dewdrop Cure",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "038519b9-bca8-4b27-b5ac-2409595469d0",
+    "name": "Diabolic Intent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "29ae4471-c28f-4e43-8afb-fee5023e4d08",
+    "name": "Diamond Knight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a440122-a015-4af2-b270-37f019884458",
+    "name": "Diamond Mare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "542e7d60-3fc8-46e2-8786-f7c8b3d4c979",
+    "name": "Diamond Pick-Axe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3beba02f-4d50-4a93-a13b-78d4595bfbfc",
+    "name": "Diamond Weapon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bf20bc37-3205-45af-a3be-05d6835c0d87",
+    "name": "Diaochan, Artful Beauty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98b43c61-4563-4a29-8cf0-fb8b34f337ce",
+    "name": "Diary of Dreams",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c777a41-e40a-4b40-96bf-8ddd5c12924c",
+    "name": "Dictate of Erebos",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b989279c-665d-4f15-afc1-adf3872a4851",
+    "name": "Dictate of Heliod",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be74a4c1-d569-4203-b28a-3e2ac6a82990",
+    "name": "Dictate of Kruphix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8151668c-6459-41b5-9e57-bb47c3876b81",
+    "name": "Didact Echo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b90bc464-a95a-42e4-9d9a-4b0882eb57ba",
+    "name": "Didn't Say Please",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4bcc54d1-8ab6-4ad3-91b6-97fb02b88cc0",
+    "name": "Die Young",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "458ca9f4-4622-48e1-9ca1-6a8117188973",
+    "name": "Diffusion Sliver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ced2ae56-988a-4c60-93d0-85a2261be72c",
+    "name": "Digsite Conservator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96742ebc-10a6-49e6-812a-631e5a60847d",
+    "name": "Dig Site Inventory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8b17b89-26ce-4208-874a-9e1d66514640",
+    "name": "Dig Through Time",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae96fe7e-8d89-4f44-9cc4-3c9b124fdc4b",
+    "name": "Dig Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "144e3d90-8ed8-4c21-941d-fc59cec042a2",
+    "name": "Dig Up the Body",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3866181-c127-45d6-8553-97e9f64a3ca5",
+    "name": "Diligent Excavator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a84a8a4-c8b0-45ce-af6f-605fcffc395b",
+    "name": "Diligent Zookeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f0777bc-4fca-4601-beed-1fd060f28075",
+    "name": "Dimensional Exile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8683341a-e836-41e5-9034-4da09eb0ab42",
+    "name": "Dimension X",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2283655-f6b8-4399-ba1f-68a7107f9485",
+    "name": "Diminisher Witch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52d14717-0cbc-4d7e-b546-54ea91580338",
+    "name": "Dimir Guildgate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa66d63b-dfb7-42b8-8249-4d60e89058ac",
+    "name": "Dimir Informant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ae4b679-2e3c-4f60-bcf4-b279917cdc54",
+    "name": "Dimir Locket",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d881c57-0bd9-4c57-aa4a-b10808b86143",
+    "name": "Dimir Signet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bb7041c-4f3e-4123-9181-3442ea0c98e8",
+    "name": "Dimir Spybug",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f61c1dc4-2f09-4b50-957f-ee656c659072",
+    "name": "Dina, Essence Brewer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9abed25-9256-4fc7-8afb-edb4286e18f4",
+    "name": "Dina's Guidance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2121bcb4-f5fe-447f-9112-c7e5b5c45baf",
+    "name": "Dina, Soul Steeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c58f2eb-2617-4d10-a393-6e4a9eddd1dd",
+    "name": "Dinosaur Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d6af1ee-16d2-4b82-8d9f-6d956603a746",
+    "name": "Dinosaur Stampede",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "443f2272-6475-4966-8ca2-717d4cf208ee",
+    "name": "Dinotomaton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1eb7a92-3055-426e-9716-cc6d2a69f0af",
+    "name": "Dinrova Horror",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb",
+    "name": "Dion, Bahamut's Dominant // Bahamut, Warden of Light",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d5e5cf55-eb9e-4f01-9056-791215411b27",
+    "name": "Dionus, Elvish Archdruid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57b75be4-9229-4a48-a59e-a0f812f38637",
+    "name": "Diplomatic Relations",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54e34440-c890-4a07-83c6-63a2f7a65639",
+    "name": "Direct Current",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04b907bf-c80c-4e92-9fea-26dc3d1aaf2a",
+    "name": "Director Nick Fury",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a45065e9-951a-4c6d-80b6-bd86a49f7439",
+    "name": "Dire Downdraft",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a043512-fa56-4361-bb92-0a0f229f34d3",
+    "name": "Dire Flail // Dire Blunderbuss",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "68f1da0d-1143-457a-b709-1da3c060a45d",
+    "name": "Dire Fleet Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a3e50a5-c163-4c41-b62d-d52c233c55b7",
+    "name": "Dire Fleet Daredevil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d48ad95-d428-4e2d-b697-56907c3ce579",
+    "name": "Dire Fleet Hoarder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ae7cfde-8f2a-4e66-abe2-c15477e9fac3",
+    "name": "Dire Fleet Interloper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bcf34a1c-162a-400c-b1db-9d1bb62bf7e9",
+    "name": "Dire Fleet Neckbreaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8150cc84-3f9f-470d-a0f9-ee6d9dab13da",
+    "name": "Dire Fleet Poisoner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b83080af-9616-4dc3-bc47-6ef84b9ccc1b",
+    "name": "Dire Fleet Ravager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee08435b-a2c1-491a-87cb-e60789b09c25",
+    "name": "Dire Fleet Warmonger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70de24d9-c585-4bf6-ac2c-c5b4b7aa298c",
+    "name": "Diregraf Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd62ad01-601f-4250-bc2a-8ef3982e45c4",
+    "name": "Diregraf Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6048fc70-0dcc-4b54-977d-16e240225f82",
+    "name": "Diregraf Ghoul",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7947858-f11d-438c-8ad3-991afe950a11",
+    "name": "Diregraf Horde",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1920254f-0f65-4426-aabc-f3807476b67b",
+    "name": "Diregraf Rebirth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54731e3f-a84a-4fc9-8c02-2f769133c71c",
+    "name": "Diregraf Scavenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7b12df9-fddd-4cd4-8c09-d54a47867ab6",
+    "name": "Diresight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55281479-9d30-4f3e-afd0-66b0df5de68c",
+    "name": "Dire-Strain Rampage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c8cb2ec-5b58-497c-a6e7-2d25512d5a44",
+    "name": "Dire Tactics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d558b465-75c6-450e-b1f2-5843ad67de71",
+    "name": "Dire Wolf Prowler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4746828f-46ea-439f-88de-5e54cc536545",
+    "name": "Dirge Bat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23cda76b-6e47-4922-a38d-93f7aae1eb00",
+    "name": "Dirgur Island Dragon // Skimming Strike",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "88b51e15-6630-4e14-a6b8-db0aa12e34ef",
+    "name": "Disallow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "283bfc53-afd3-4d21-b7d5-5baba4232422",
+    "name": "Disa the Restless",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "734a5186-caa6-4811-b6d7-91b7b32fc403",
+    "name": "Discerning Financier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a6584af7-583d-4d89-9b46-d61be8236413",
+    "name": "Discerning Peddler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1896c513-ec48-4c8f-9acb-30bc6357fce2",
+    "name": "Discerning Taste",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f2c8498-5b10-4ec7-8678-598c90987556",
+    "name": "Disciple of Bolas",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2699005b-a471-429f-a9d8-fbf2077ee2fd",
+    "name": "Disciple of Freyalise // Garden of Freyalise",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d7cbe54b-f217-45f5-8583-c254a1c80bb8",
+    "name": "Disciple of Phenax",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ea41848-7a11-4608-88c1-7a6e76e812ca",
+    "name": "Disciple of the Sun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb7e451b-a9d2-4f50-9651-b5df34e34d99",
+    "name": "Disciples of Gix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c650f497-92d6-48cf-8b59-5d61eb184dc0",
+    "name": "Disciplined Duelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5cfd73ab-8509-4e4b-9704-68d8dad3b301",
+    "name": "Discontinuity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb0107f4-723a-4f2c-8e4b-237d5f668e3c",
+    "name": "Discordant Piper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c2a3f13-6bcb-42ad-98f6-642151ad54f1",
+    "name": "Discover the Impossible",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f1c1bd6-8420-4de2-81f4-5faa419da301",
+    "name": "Discovery // Dispersal",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "11e02134-7b1a-46a4-a89e-7539dd1efada",
+    "name": "Disdainful Stroke",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7e97fa9-4b72-4548-b854-5be5f18a6f1a",
+    "name": "Disenchant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4ab986d-662c-4879-b6f1-6887a2ec4d7c",
+    "name": "Disentomb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77eafe49-b9c5-461d-89c5-cec217dd2974",
+    "name": "Disfigure",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1dd336b0-9b13-4180-b80a-e8ba5d63d04f",
+    "name": "Disinformation Campaign",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "865a2194-fca0-446e-aae3-ca475cd66e00",
+    "name": "Dismal Backwater",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd74f8eb-0253-42dd-8277-186d4934da38",
+    "name": "Dismember",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c828a5e-10ae-4f63-86fd-2f160af43cc3",
+    "name": "Dismiss",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "99eff6e9-5911-4f89-bad1-0888067a7783",
+    "name": "Dismissive Denial",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f040310d-d6ac-4d77-9f76-ca325eddf306",
+    "name": "Dismissive Pyromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "192603a4-720e-4c53-bee5-4f2826c1ed7f",
+    "name": "Disowned Ancestor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d7be242-a072-40ce-b540-95880506cccd",
+    "name": "Dispel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dd3a4b64-0987-4e9b-a18d-c54365438857",
+    "name": "Dispelling Exhale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d8fe3f8-5027-4f9e-999e-e277caa96478",
+    "name": "Disperse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f24c0b7-1d39-48b6-969f-ee97fdf99305",
+    "name": "Displacer Beast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99140891-face-4015-aacd-1309e87d8f9f",
+    "name": "Display of Power",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "002a9cea-8cf7-48ba-83eb-e1c87a7024e5",
+    "name": "Disposal Mummy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c2bbab4-97a9-4aad-96ea-31d7ef9e28fe",
+    "name": "Dispossess",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ca3306b-06f7-4a09-b904-f5540d11ddf1",
+    "name": "Disruption Protocol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec74ae5d-1284-443c-9842-18954f8cf5a8",
+    "name": "Disruptive Stormbrood // Petty Revenge",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d6c46906-1339-4440-8cd0-2bb9890d4975",
+    "name": "Disruptor Flute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e76ae81f-729c-4def-ae83-6870a696cbe8",
+    "name": "Disruptor of Currents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81dda1a8-72ac-4e69-8367-4f72c445197c",
+    "name": "Disruptor Wanderglyph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73905f94-9665-4d82-8927-725d2c4fc4bd",
+    "name": "Dissection Practice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50de5faa-d22e-4909-a1ff-3810cfcfcb1a",
+    "name": "Dissection Tools",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b73639b-2b07-4e82-b990-ca7721074e43",
+    "name": "Dissenter's Deliverance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b2e9aa9-6f91-41de-84b6-e9a89be06a53",
+    "name": "Dissipate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac6c5852-71c7-4f19-8c87-ccb345052862",
+    "name": "Distant Melody",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36d32194-d547-4e2d-894f-f4bf13cf7da6",
+    "name": "Distended Mindbender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6df57d67-2fd9-4e7a-b67b-f361fc30e496",
+    "name": "Distinguished Conjurer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ebbf025-2996-46f2-ac23-992909251525",
+    "name": "Distorted Curiosity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2fcd5779-7234-49e3-b3c5-ebc07db74462",
+    "name": "Distracting Geist // Clever Distraction",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1eb4c001-1115-4b99-bbbf-703eb551a381",
+    "name": "District Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5fa7cf3a-2a4d-4dd7-890b-49c497570b16",
+    "name": "District Mascot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a381297-ebce-403c-b1dc-b7405fa6902c",
+    "name": "Disturbed Slumber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "adde6737-516c-4d6f-9363-388ad37d4114",
+    "name": "Disturbing Conversion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7010bfbb-8aea-473b-a9a5-27488de13cc5",
+    "name": "Disturbing Mirth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f990b54-fbf3-4949-85bb-9ba39710e72a",
+    "name": "Dive Down",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84681f12-2978-4f62-ab89-b579033c5192",
+    "name": "Divergent Equation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7130d063-fc1b-408b-97f2-14cb6b55d9cd",
+    "name": "Diversion Specialist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d739edc-4e02-4b35-a2a0-e9685c6e2889",
+    "name": "Diversion Unit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3047ad53-1fbd-4b01-bf75-a3e633c863fe",
+    "name": "Diver Skaab",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76fdbc2c-d2b1-466f-9230-06e187bcc9e6",
+    "name": "Divert Disaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e0d7408-3827-4a65-9905-9fef3ae23c7e",
+    "name": "Divest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b1c1a0c-f443-4eb5-a430-9eea886361ca",
+    "name": "Divide by Zero",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "273b339c-964b-4a18-8eb5-ceb8abcdfd9e",
+    "name": "Divination",
+    "status": "curated"
+  },
+  {
+    "oracleId": "6add505a-9c0f-42e6-898d-be3194c3df33",
+    "name": "Divine Arrow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bffa18c3-642c-4239-b425-238599007976",
+    "name": "Divine Favor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25fcf381-6f0a-49ef-9c41-f202be7d8368",
+    "name": "Divine Gambit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15d8b339-7520-43c9-b2dc-4a936357042b",
+    "name": "Divine Reckoning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f6e2e47-34df-4bf3-a546-e06b42840167",
+    "name": "Divine Resilience",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7b78acd-5288-4528-97a8-a5b43de90bf5",
+    "name": "Diviner of Victory // Unwind History",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e00810cd-8863-433b-aa7a-683b8f308a9b",
+    "name": "Diviner's Lockbox",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b06b242-caed-4c8f-b5ab-30e86061286e",
+    "name": "Divine Smite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3070f997-24f2-471d-af96-a2f3b588198e",
+    "name": "Divine Verdict",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5917216f-5b42-41fa-8976-401bdbeb782e",
+    "name": "Divine Visitation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0ce03fa-2284-4217-85b2-4db6b8a88c94",
+    "name": "Divining Duelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c0061ab-4123-4b0c-8286-3207e8f9497d",
+    "name": "Djeru and Hazoret",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11b21086-0779-4d16-8a56-252c6bee9bed",
+    "name": "Djeru's Renunciation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c48ce123-bb07-4221-b3b3-0a458e101ca1",
+    "name": "Djeru's Resolve",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f06cecd4-8447-4351-9dfa-861afb84f1e6",
+    "name": "Djinni Windseer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7dbb540f-ee96-4115-b6ef-28ffc73da8b7",
+    "name": "Djinn of Fool's Fall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dcf28f91-1bf4-48be-a3d0-e061f443fd9e",
+    "name": "Djinn of the Fountain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a34c3012-f787-4998-93c7-89c4decaa1ba",
+    "name": "Djinn of Wishes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ca32660-bf5f-4398-bef6-a0ec8bc767cf",
+    "name": "Doc Aurlock, Grizzled Genius",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85e797de-da27-4cd5-8fa4-4aef948988b2",
+    "name": "Docent of Perfection // Final Iteration",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "fed12a16-8920-403c-be63-0601a9d864b0",
+    "name": "Dockside Chef",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "697bcfe1-ecbf-42a1-bfc7-0766d48ca56b",
+    "name": "Dockside Extortionist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa704b26-729a-4d0f-b92d-56aadb1e20b9",
+    "name": "Dockworker Drone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae91c16c-5267-4957-b36c-5aa787fa6b5e",
+    "name": "Doc Ock's Henchmen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dbaa70e6-26de-4ce9-9543-e652cbe387c1",
+    "name": "Doc Ock, Sinister Scientist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5a18764-eb29-4bd8-a2e9-0ce55f4f6c88",
+    "name": "Doc Ock's Tentacles",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "699610c9-c991-4faf-b712-d015ef0799ad",
+    "name": "Doc Samson, Super Psychiatrist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e4fa592-71f8-4c71-8c91-78e6326cd736",
+    "name": "Doctor Doom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c9cd0fd-bfe9-409c-a9a9-146f5f4a2ef4",
+    "name": "Doctor Doom, King of Latveria",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb3dd50b-ce78-4727-b174-06f99fc5ec74",
+    "name": "Doctor Doom, Unrivaled",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1c8fddb-d686-4b4a-8aff-d79ea747801c",
+    "name": "Doctor Jane Foster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2fecfbef-e521-4025-94ea-451c9abde3de",
+    "name": "Doctor Octopus, Master Planner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fad80e75-8d08-4a0b-a05e-14f4c96947bf",
+    "name": "Doctor Spectrum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43c31a03-2bbd-49a6-8b78-c5f3cab04a07",
+    "name": "Doctor Strange, Surgeon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df54b79d-f31d-4582-86c0-1d34ec77be0f",
+    "name": "Does Machines",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "987f8c13-0164-4536-b505-d9fa799222fb",
+    "name": "Dogged Pursuit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e475c96f-6cf8-4139-92fd-f68ecaae4893",
+    "name": "Dog Umbra",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10d24900-cd40-4c98-bb1e-b9e66113f703",
+    "name": "Dog Walker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e79b7bf-8a2d-4585-81d0-755dce78a4ea",
+    "name": "Dokuchi Shadow-Walker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d377b28f-c887-4937-9f14-74484b612551",
+    "name": "Dokuchi Silencer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73970475-f899-4e93-8498-286240181295",
+    "name": "Dollhouse of Horrors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e633412b-e36b-4ec5-b0d0-7cb24c7503f4",
+    "name": "Dollmaker's Shop // Porcelain Gallery",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d53d000f-c92f-4d70-ae60-8be3791da8a2",
+    "name": "Dolmen Gate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "145ef633-a2e0-4bd9-a866-5767821eb44f",
+    "name": "Dominating Vampire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "afc2269c-d3b5-487d-9445-800c7a8e526b",
+    "name": "Domri, Anarch of Bolas",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a5408ed-8b47-4896-97e4-aa102a4b85c9",
+    "name": "Domri, Chaos Bringer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d8fe9672-0ead-4f47-abd8-e1ee133c5c60",
+    "name": "Domri, City Smasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c4a2c42-0874-40b4-8d12-47eeadc3e976",
+    "name": "Domri Rade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a481f910-59a8-48b0-a8e4-c24675e1a67d",
+    "name": "Domri's Ambush",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3992209a-0a28-449d-8ba5-f75e861a79b4",
+    "name": "Domri's Nodorog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f966ae40-4717-4f41-9437-0e38b01a8be9",
+    "name": "Donald Blake, Guise of Thor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb6aef0d-052b-44e6-b4cd-2d2eafd84969",
+    "name": "Donatello, Gadget Master",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6a7838d-380f-4752-a647-c55c2a0eb6e2",
+    "name": "Donatello, Mutant Mechanic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "194284f7-cf92-4d9f-a8ce-e4dc3505ab7a",
+    "name": "Donatello's Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ba2f763-5895-4663-b38f-95591ebb2ef4",
+    "name": "Donatello, the Brains",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f84850bc-6348-449e-bd82-bb39e2119bec",
+    "name": "Donatello, Turtle Techie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "194af2be-50c7-484b-bdd3-402bad70335b",
+    "name": "Donatello, Way with Machines",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a4ae71c8-ea1b-4fa4-9e47-cf00ab60c5ee",
+    "name": "Don & Leo, Problem Solvers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01758a4a-ac29-47ad-8e88-158374f1ae4c",
+    "name": "Don & Raph, Hard Science",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f28a373b-4a8d-40a5-ace1-3bbd8489ad36",
+    "name": "Don't Make a Sound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23cf095c-d43e-4a80-9bc5-f0f46ff885c4",
+    "name": "Don't Move",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59e7f2ae-4535-4191-98be-3e65b6b2befa",
+    "name": "Doom Blade",
+    "status": "curated"
+  },
+  {
+    "oracleId": "37042a3e-c377-4282-80f9-068e4955f8a1",
+    "name": "Doombot Harbinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11cb509d-21af-48f1-b355-135ebd3e4bd1",
+    "name": "Doomed Dissenter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "155422a0-a0cd-4399-8ed9-fa68ac2c80a6",
+    "name": "Doomed Necromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a30907c0-fbde-4fd3-a8c7-f304305fcea7",
+    "name": "Doomed Traveler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba2c2a65-256a-46db-bf2b-b02b7d114a42",
+    "name": "Doomfall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2baf24c-7055-431d-8e96-ba5ff2ef91e1",
+    "name": "Doom Foretold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f398a742-22c1-4da9-9d49-fdce2eb93d01",
+    "name": "Doom Reigns Supreme",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "721eb5a2-d7cf-4db0-8013-ef3f596c52a5",
+    "name": "Doomsday",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad0db433-a406-4ef0-8ffa-416af610c4e7",
+    "name": "Doomsday Excruciator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "38ece0fa-2c94-4eae-b6ab-74b783862f3e",
+    "name": "Doomskar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1d8e97b-f34b-4e52-9795-a4433f26725a",
+    "name": "Doomskar Oracle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86692047-813f-47b1-9f4e-c8b9d5b17b1c",
+    "name": "Doomskar Titan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ac00312-8963-4fee-8561-1a54e533adbb",
+    "name": "Doomskar Warrior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "296e79f9-57cb-4af7-9e18-48d2d655b537",
+    "name": "Doom's Servo-Guards",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a01db2e-cd43-4b1a-a480-169018f82501",
+    "name": "Doom Whisperer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0eaea4fd-a377-4541-9bdd-14921034a975",
+    "name": "Doorkeeper Thrull",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01ea2130-e212-4532-b68b-2f940d53ef6e",
+    "name": "Doorman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b6d3dcf-aa5a-4516-bd48-a0723e86bfd1",
+    "name": "Door of Destinies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d82c77a1-2b81-415d-9f18-47e059c15e01",
+    "name": "Doors of Durin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b919cca5-88c0-4104-b54e-49644fbf78a5",
+    "name": "Door to Nothingness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d04c6375-25dd-4882-b8b3-a3b0d3081f32",
+    "name": "Doppelgang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dd35a377-0865-4b25-bd0f-aaead29a9f0e",
+    "name": "Doran, Besieged by Time",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58acd6b2-730c-4472-a34a-f2784977aca8",
+    "name": "Dori, Bearer of Friends",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1be58157-186e-48e4-b375-dc5f10d785ac",
+    "name": "Dormant Grove // Gnarled Grovestrider",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2cef4171-8151-4ee9-83a7-bcb5116451bf",
+    "name": "Dorothea, Vengeful Victim // Dorothea's Retribution",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "f852bc33-e2f8-43be-9e6e-7badd1f894ef",
+    "name": "Dose of Dawnglow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "946675f5-8998-4f1b-934b-85ffe6e2f002",
+    "name": "Doublecast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60dd4233-ee50-42b8-88f5-ac5d105d83cd",
+    "name": "Double Down",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ece44a82-dcf0-4439-bdd9-a09c99a6f159",
+    "name": "Double Major",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6629a48b-be9a-4636-8add-69d096a1ca7e",
+    "name": "Double Vision",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01546b7d-a233-4176-8843-d732074dc5b6",
+    "name": "Doubling Season",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf58e309-00e8-438e-813e-2e1c1002db23",
+    "name": "Dour Port-Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1fd754fd-c053-4638-b379-46d903357b01",
+    "name": "Douse in Gloom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e53032e-fe14-4424-86ee-f69336f049fe",
+    "name": "Douser of Lights",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "a3386efe-d6c5-4853-a4db-61460da3364a",
+    "name": "Dovin, Architect of Law",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b33bfbf-e4e1-43de-9c96-ccdc2916510a",
+    "name": "Dovin Baan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "596237da-3d51-4052-a8ca-2218efc1afb3",
+    "name": "Dovin, Grand Arbiter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95bbe04c-bcea-461d-9946-6c1a35dfbeb1",
+    "name": "Dovin, Hand of Control",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "898e480d-c44e-4080-910a-f53e4ee471e1",
+    "name": "Dovin's Acuity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d133b18-f1c7-48de-82a6-affb0514b96b",
+    "name": "Dovin's Automaton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6db5f1a7-4cd8-42e2-a5d8-1603206ad0cc",
+    "name": "Dovin's Dismissal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b388371-f9ef-45b4-82a3-ca20a8cd7807",
+    "name": "Dovin's Veto",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eba21e3b-e2b2-4e0b-82e3-f0849943fd89",
+    "name": "Down // Dirty",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e01860cd-0aa1-435a-9ef9-ee412bc458cd",
+    "name": "Down, Down to Goblin-town",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e3491542-569e-48a8-b625-fa7c4aa2792a",
+    "name": "Down in the Valley",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e0a2709-2cd2-4954-81ca-60654ab03d7c",
+    "name": "Downwind Ambusher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df34a6ad-ae1c-4470-8c9e-49815bba1973",
+    "name": "Dowsing Dagger // Lost Vale",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "2f4374f6-c695-4a5d-a6d6-0e41eaa587ca",
+    "name": "Dowsing Device // Geode Grotto",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "9b06f2bf-146d-4b30-b467-e16f1a942253",
+    "name": "Dracogenesis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "380d8d64-9aec-4656-b5b8-d336ebf803c8",
+    "name": "Draconautics Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f034137e-c19f-48af-a2f2-f767bf87a275",
+    "name": "Draconic Destiny",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "781cee5f-f9cb-42ed-b408-543d297bf96d",
+    "name": "Draconic Disciple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9fe75f56-c2e4-4c82-8113-039b8c486fae",
+    "name": "Draconic Intervention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "843af5d3-447e-40e4-a562-f5a7ed09ca3e",
+    "name": "Draconic Roar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6745e850-68f6-480b-a1e0-e06180dde169",
+    "name": "Draconic Visitor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "457e3218-b2ef-4280-931a-5320987b9657",
+    "name": "Dracosaur Auxiliary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ed2e8718-4b20-4310-96ce-05a29a24ef32",
+    "name": "Drafna, Founder of Lat-Nam",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "413fb2db-f1a1-4d22-ac37-a52821d35ca2",
+    "name": "Dragonback Assault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7875c063-19c3-4e6e-81d8-1a378a4e16e5",
+    "name": "Dragonback Lancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61822bbe-0407-4425-b8d7-0263a8c521ec",
+    "name": "Dragonbroods' Relic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69e0d9f1-f9dd-4614-ad9f-13e7153710ce",
+    "name": "Dragonclaw Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5be7a4d5-33b7-464b-8851-d4ad35302e62",
+    "name": "Dragon-Cursed Halls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f561498-66e7-4cbf-8cb9-e6fd4717993d",
+    "name": "Dragon Egg",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e809b847-b712-4558-95ea-9bb7356cde91",
+    "name": "Dragonfire Blade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f242d66c-011c-4b5b-a7d6-5e0bce257f73",
+    "name": "Dragonfly Suit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83abf1d0-04e4-49e5-bf63-59f77829ffd1",
+    "name": "Dragonfly Swarm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0d2c45b-b6e3-4999-bdab-976e8f0d6617",
+    "name": "Dragon Fodder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e83a750-bf86-468e-8342-2c4eb7700dfd",
+    "name": "Dragon Grip",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f48f6a7-906d-4287-8440-06bfabc93b89",
+    "name": "Dragon Hatchling",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "f7f435bc-1716-4412-9505-a1f2f2d83d08",
+    "name": "Dragonhawk, Fate's Tempest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06b77a80-4968-4385-960a-fb66bb4faa94",
+    "name": "Dragonkin Berserker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "736ce43b-28cd-4b8b-9936-3e3975a56b6a",
+    "name": "Dragonloft Idol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "daff70a4-a990-47c9-b6ef-2c379272c8a3",
+    "name": "Dragonlord Atarka",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82cdd612-3322-4372-810f-1ff106ea8e6a",
+    "name": "Dragonlord Dromoka",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ff89859-ddfd-48e5-8423-57b3956173ac",
+    "name": "Dragonlord Kolaghan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "654ff673-4630-4068-9bcf-e88a7877eb58",
+    "name": "Dragonlord Ojutai",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "44581d4f-746b-43b8-a34d-16dc383ab70e",
+    "name": "Dragonlord Silumgar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "faf81ae0-0b35-45ef-a50d-6cecf0c0eeeb",
+    "name": "Dragonlord's Servant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eab71e4e-27c3-4c41-b95f-259c1d14b97a",
+    "name": "Dragon Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0cc5aaa1-07bf-4872-ac72-303cef9fb143",
+    "name": "Dragon Mantle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6fb79c3-cd32-4045-8177-e52841eea65b",
+    "name": "Dragonmaster Outcast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a678c6f-5a93-4a3b-80fd-4c0d0f9040c9",
+    "name": "Dragon Moose",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "f6791df0-a37b-44dc-8bf3-40ac2304d188",
+    "name": "Dragonologist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47e191f7-6314-4875-b5ee-57e5daf089c4",
+    "name": "Dragon's Approach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "629b3aee-b8fd-495a-a988-815a0aaf3e82",
+    "name": "Dragonscale Boon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "caef715c-3ca6-4f56-9dd5-aebce9cd0621",
+    "name": "Dragon's Desire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e5d3574-cc92-434a-a210-fcda906391c8",
+    "name": "Dragon's Disciple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca588f4e-4d2f-4aae-84de-be9862e13f1c",
+    "name": "Dragon's Eye Savants",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7237d607-2613-4786-96d6-55792c2e02b9",
+    "name": "Dragon's Fire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9bc966b3-1b6e-4bea-ab1d-321bc03d2bc7",
+    "name": "Dragonsguard Elite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8cf77dc4-763b-41b7-a5da-0ef2734f08e6",
+    "name": "Dragon's Hoard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63398c02-6fb1-481d-9d9f-81063532fbc0",
+    "name": "Dragonskull Summit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "913dbce2-6805-453f-a9c3-64f1cc658627",
+    "name": "Dragon Sniper",
+    "status": "curated"
+  },
+  {
+    "oracleId": "a8acb0b0-7265-42f6-8143-62d0c02d5a28",
+    "name": "Dragonspark Reactor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a29f36b-7911-4d84-a3ae-546b131d5159",
+    "name": "Dragonspeaker Shaman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86cb340f-ef06-4be9-b457-703784387dbe",
+    "name": "Dragon's Prey",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c016ccc-a341-4b76-87ba-69c639d2746d",
+    "name": "Dragon's Rage Channeler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d74c3871-018a-4450-a613-f67703bb0d72",
+    "name": "Dragonstorm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "02de8fa3-ac8d-47e5-b137-d5a0b7d8e951",
+    "name": "Dragonstorm Forecaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6de5bd7-7704-4a0c-a27a-9e565e49f5e9",
+    "name": "Dragonstorm Globe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d150f456-c33a-4b19-ac73-b1d818d5db8f",
+    "name": "Dragon-Style Twins",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "93e40d56-18fd-42e1-a598-636aab79b836",
+    "name": "Dragon Throne of Tarkir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "328a0691-9453-4f2d-a9c3-5c69da252d20",
+    "name": "Dragon Trainer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3270e64-38d2-49e5-8a1e-a5e81205776b",
+    "name": "Dragon Turtle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6288865d-7f64-411f-a044-ca350cf6fb8d",
+    "name": "Dragon Tyrant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "705a1985-ed39-4a4b-812e-a677170b596e",
+    "name": "Dragon Whelp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4cd4c6da-a84e-4cba-893b-799a7cb5c411",
+    "name": "Dragonwing Glider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a66c35fc-d5db-4cfd-9b85-d70b001d83d3",
+    "name": "Dragoon's Lance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f328012f-4696-47bb-ab43-247bdcb13f03",
+    "name": "Dragoon's Wyvern",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c0ffb66-94db-4ba9-afde-c5b4fbf09578",
+    "name": "Drag the Canal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4d7a200-7401-4c9a-a7cf-6c98fa8eb61a",
+    "name": "Drag to the Bottom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef4c478c-7019-4ec0-8edf-2a3078a8e97a",
+    "name": "Drag to the Roots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "746dc1d8-f245-47be-abd5-50ca6ac0d1af",
+    "name": "Drag to the Underworld",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "021d8596-782a-4cfd-8b70-ac5bb8a5aff1",
+    "name": "Drag Under",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "b6d39905-e074-4517-b806-d081d1069f74",
+    "name": "Drainpipe Vermin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4de0ccab-bb5d-4c7c-827e-36aa1d00b182",
+    "name": "Drake Hatcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86d3def3-53fa-4cad-bb25-d3275af1e3f5",
+    "name": "Drake Haven",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "060deaff-44d6-4f03-9568-bcb7add80255",
+    "name": "Drakuseth, Maw of Flames",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "677b9c19-4886-4e06-88f8-9afa94e58aa8",
+    "name": "Dramatic Accusation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0155236-13c5-4e01-b4de-b8fa4af846d8",
+    "name": "Dramatic Finale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da46904c-8fb8-44c2-b2ab-775a1cc12ec3",
+    "name": "Dramatic Reversal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e3473ed5-f2b2-4a41-aed9-ee37caa9d7be",
+    "name": "Dramatist's Puppet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7abc2a1b-b758-480b-9415-f8f5369ab52f",
+    "name": "Drana and Linvala",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89b24b5f-d837-4274-8877-8ff7dc2708ba",
+    "name": "Drana, Liberator of Malakir",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e993c7a-606d-47f0-bdea-6ad197a59426",
+    "name": "Drana's Silencer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ae3b901-4d36-40e2-b861-26209fa1e823",
+    "name": "Drana, the Last Bloodchief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13e2a2c3-5ab5-4de4-96ca-5f9c72137000",
+    "name": "Drannith Healer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aadd10d0-6dd0-4bdc-8d93-ff08e29a5863",
+    "name": "Drannith Magistrate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1f10cca-8dfa-4ea5-b227-4446cd8514a8",
+    "name": "Drannith Ruins",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "edd1727e-3a6e-4d0e-b7ae-fae2108d2147",
+    "name": "Drannith Stinger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ccdf3399-b836-47ab-802d-af5a9c24d759",
+    "name": "Draugr Necromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f854ea0d-aae3-4b6a-9767-6ac1788f2190",
+    "name": "Draugr Recruiter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8762e9ec-e026-45aa-9c7b-d894d17c75a2",
+    "name": "Draugr's Helm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0952cfaf-8031-4df7-b276-dcb0b8f19ab7",
+    "name": "Draugr Thought-Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77acdc13-e1b5-4a6c-9be1-b987e8256f10",
+    "name": "Drawn from Dreams",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d685799f-cc1a-40d6-9df6-d05b8b1f5b13",
+    "name": "Dreadbore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d34e78e-4fe9-44e1-88d3-a98fd64555a9",
+    "name": "Dread Cacodemon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cc64ce6-45e2-4dc3-9b28-d7206a131873",
+    "name": "Dreaded Bat-Cloud",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa364a33-7c72-4096-b8ed-ca9d5515c3fe",
+    "name": "Dreadfeast Demon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "efe4194a-b3c5-4308-abfe-553e035f5e64",
+    "name": "Dread Fugue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c41b4ad-a73f-4274-9b71-9c9834910e05",
+    "name": "Dreadful Apathy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd9f4f20-cdef-4a20-b4cb-4f25c137a786",
+    "name": "Dreadful as the Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c05b382-58ab-4a2d-a81c-408ea273b6b6",
+    "name": "Dreadhorde Arcanist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d254514b-0688-4f05-9473-3090a2ce7ced",
+    "name": "Dreadhorde Butcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01deabbb-af6a-4998-99a7-35b7cfa9ef77",
+    "name": "Dreadhorde Invasion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fbb8e03-22f1-4171-88e9-877244e25613",
+    "name": "Dreadhorde Twins",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ed533a7-82b0-4a71-a9e9-4dffe9d18851",
+    "name": "Dreadhound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "068b9586-53e3-4791-a26c-a6b38d038f66",
+    "name": "Dreadlight Monstrosity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "118cf682-a532-42e9-8d91-6ce6f0d31ace",
+    "name": "Dreadmalkin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "781d6981-d389-4677-9eaf-9c46c9192ed6",
+    "name": "Dreadmaw's Ire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51cc270d-55c8-4b6b-a6d7-f98d7b8e5185",
+    "name": "Dreadmobile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1690a782-9e54-4231-9a72-abae5ed7050c",
+    "name": "Dread Presence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e5c15ef5-6795-40c2-a131-a73f74142314",
+    "name": "Dread Rider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b90c7d1-38c6-4210-bc76-68c5fcb91202",
+    "name": "Dread Shade",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "642fa01d-025e-44dd-8360-5325e5a28282",
+    "name": "Dread Summons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88154d64-221f-4742-bccb-b1b61a2e8bf0",
+    "name": "Dread Wanderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bbfd0de0-3558-4833-bae4-8efae44b7fff",
+    "name": "Dreadwing Scavenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9feb7600-f844-4573-bcb7-d6b34473517b",
+    "name": "Dreadwurm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1cec8e8-cf3c-42a4-b625-ca0cd148664e",
+    "name": "Dream Beavers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8ed7791d-6d75-4cd7-9428-c731f623b241",
+    "name": "Dreamcaller Siren",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ff7440b-b831-40a9-81c4-99d77bf93b8d",
+    "name": "Dream Devourer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6b2d63f-5b8c-47ee-8712-58596e0e9e94",
+    "name": "Dreamdew Entrancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b4e1163-09aa-4597-9a41-e1e384975056",
+    "name": "Dreamdrinker Vampire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ec84bb3-796a-4074-ac9a-1bd277158896",
+    "name": "Dream Eater",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c5843d13-855f-41dd-ac13-3c7f7e18bb39",
+    "name": "Dream Fracture",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70b9497f-0dd6-4b66-9675-57c7041fe3c0",
+    "name": "Dream Harvest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dd8538e6-cd5f-4a88-aff5-eb5e76ce8ddb",
+    "name": "Dreamroot Cascade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c7e4bc5d-e1d9-4fbc-8d53-0cec73086828",
+    "name": "Dream Seizer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aa40d270-63d7-4022-ade9-67c1ab65ef70",
+    "name": "Dreamshackle Geist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d06ef178-f02a-45a4-8193-140dee52c99d",
+    "name": "Dreamshaper Shaman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e060bf7a-f266-40b4-9772-e243dcbf965b",
+    "name": "Dreams of Laguna",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c308ebf-df5e-4f47-9b97-5c31944fe91c",
+    "name": "Dreams of Steel and Oil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07c3e91c-3593-4797-b7be-ef4fb2913cef",
+    "name": "Dream Spoilers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ecb3349-ccb8-4b54-bd81-8d649d6f96f0",
+    "name": "Dreamstalker Manticore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e2575be-c596-4c8c-bf07-7941ca065721",
+    "name": "Dreamstone Hedron",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfd6a73e-d126-4afe-99db-98cf716a1772",
+    "name": "Dream Strix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1cadb1e1-19b6-4ce5-8eb5-7851cec7dfa3",
+    "name": "Dreamtail Heron",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee8c0b4c-03c5-4da5-b4f1-028c845384af",
+    "name": "Dreamtide Whale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "661b2159-4040-4a44-b182-46085416ebd9",
+    "name": "Dream Trawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f21c1c6-7992-4036-ad3e-b599153e54fe",
+    "name": "Dredger's Insight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3808afb9-962f-48ba-94c5-6b3eae7053d0",
+    "name": "Dredging Claw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "71358110-4e28-4794-befa-ea6e27e720ef",
+    "name": "Dreg Mangler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "556c4dad-002e-41a8-8ba3-8b4eda70232f",
+    "name": "Dreg Recycler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1678eed-a335-454c-9fa1-749317500a36",
+    "name": "Dregscape Sliver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1cbbda0-e02b-4b9c-8669-ea87ca629520",
+    "name": "Dress Down",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7223ef44-0bfb-4108-810d-134174ff26b0",
+    "name": "Drey Keeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1db76752-31ed-4a16-986a-d0852ba7d812",
+    "name": "Drider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f76a86f3-568a-40b3-8e2c-f84db4141293",
+    "name": "Driftgloom Coyote",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0dbd6e47-a8b4-4268-ba44-8924cd4963a6",
+    "name": "Drill Bit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0413e0e4-c8f8-44c3-a749-c799766bc8cd",
+    "name": "Drill Too Deep",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87fca901-678d-4c9a-be4a-9dce2a53074b",
+    "name": "Driven // Despair",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7c179e54-3beb-4761-bddf-41fa98b082db",
+    "name": "Driver of the Dead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51780f71-bf60-4208-94ea-76fa84790fb6",
+    "name": "Drivnod, Carnage Dominus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "583102f8-7232-4fbb-a715-087448536bb2",
+    "name": "Drix Fatemaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e939df0-d421-42b7-b642-88b3555fd8df",
+    "name": "Drizzt Do'Urden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c33604ac-636a-43ad-9efe-8d7b3a28bf81",
+    "name": "Drogskol Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "389bcb9f-4e66-4704-9968-a1c1574ec2c8",
+    "name": "Drogskol Infantry // Drogskol Armaments",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "68175b49-f1e6-4b34-aad9-20d61a43d427",
+    "name": "Drogskol Reaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "470028cf-0b99-4dd1-bb9d-aba91c52ee28",
+    "name": "Drogskol Shieldmate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bd8ea71-cbcc-4659-b9a8-88cf27ee12d8",
+    "name": "Dromoka's Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c394d4b6-cfb8-4639-90cb-a322a25c0a2f",
+    "name": "Dropkick Bomber",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cda1ac77-3986-4600-9835-b0c0063ecc2f",
+    "name": "Drossclaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "44b83535-fdbf-4307-bf53-ca20470a768d",
+    "name": "Drossforge Bridge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ec8c540-73bf-4412-a53a-499e9b9fd213",
+    "name": "Dross Hopper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c43e9b4-013a-47ee-9805-f41afb0a3bde",
+    "name": "Dross Skullbomb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "290fe09e-04ab-48d1-a60e-db47ea8c4d00",
+    "name": "Drover Grizzly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6deba6e8-077b-4602-86af-64db766fbbd9",
+    "name": "Drover of the Mighty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "819fc966-434e-470f-91e9-a38df974ad17",
+    "name": "Drowned Catacomb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cab305d9-27fb-4a41-adf1-892e15167cb9",
+    "name": "Drowned Secrets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db19a27a-ee22-4931-ae3c-0ce21f456ea6",
+    "name": "Drowner of Truth // Drowned Jungle",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "e4912bc3-bee9-4a2f-a13e-3a99018f8a65",
+    "name": "Drown in Ichor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0f264e5b-264e-4e97-9a8d-8ae1d6a286ce",
+    "name": "Drown in the Loch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2378d6fc-b6ba-4a44-b951-5698ed507e4c",
+    "name": "Drownyard Amalgam",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfe1a52a-f2f8-4c62-8502-037f2d1395b2",
+    "name": "Drownyard Behemoth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1ebbe89-8976-4ed7-a68a-8b08aac4616c",
+    "name": "Drownyard Explorers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7cf5c3dd-5c07-4eaf-8227-6f4e7f9b134d",
+    "name": "Drownyard Lurker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee811356-ef6a-4972-b827-32c2d329b3c3",
+    "name": "Drowsing Tyrannodon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "71ecb454-3598-4860-bba1-b3932f906171",
+    "name": "Drudge Sentinel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dcbcbf42-4654-487a-acad-21f2606d229b",
+    "name": "Druid Class",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06c12fcc-1c08-40a0-a0da-e139c42f083f",
+    "name": "Druid of Horns",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d7933c4-4c74-492f-a9cd-50b339a4b29e",
+    "name": "Druid of the Anima",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1793c3b-25d6-4fae-a99d-cfdd2210ca67",
+    "name": "Druid of the Cowl",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "9740ce6d-ef6b-4d70-839a-8bd5e0e1e0a1",
+    "name": "Druid of the Spade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "870ca989-0e72-4e74-9570-57e129298f2e",
+    "name": "Drunau Corpse Trawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c43c1d7-1899-45c1-992b-443873890d78",
+    "name": "Dryad Greenseeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8ca5877-ac9e-4b15-8c23-c70f61b01895",
+    "name": "Dryad Militant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdbde5d0-f5e4-44da-b27c-b4ad6f374cc9",
+    "name": "Dryad of the Ilysian Grove",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a69a0f0-5f0f-4098-ab6d-be3233af5cd3",
+    "name": "Dryad's Revival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8eb7c0a5-6190-40de-b473-2d1daa3bbe28",
+    "name": "Dualcaster Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e56056dc-637e-4229-ae2c-dfd06d24086b",
+    "name": "Dual Shot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a498ca5f-7743-47b7-a57a-471efa1a99e8",
+    "name": "Dual Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "155e01a1-5809-4be9-ad38-c11553a4a723",
+    "name": "Dual-Sun Adepts",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89ec0f03-47d0-4657-8987-95e680404f24",
+    "name": "Dual-Sun Technique",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e3ca6b70-01d2-44e9-937a-a2d50bbf9d10",
+    "name": "Dub",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "697b8045-0edb-4f7b-a933-4d41ec2b53d5",
+    "name": "Dubious Delicacy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d412150d-3c70-44cf-97cd-965c438e7303",
+    "name": "Due Diligence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81713b4d-85df-4b2c-9673-4f5162590149",
+    "name": "Duelcraft Trainer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5064a55a-9692-4a67-9e82-16250b9140d1",
+    "name": "Duel for Dominance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aae4dd38-3b35-4c92-a0d4-5d37cfd93df8",
+    "name": "Dueling Coach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ceec1fd-4af5-40d4-9d17-424e21889d64",
+    "name": "Dueling Rapier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30d69e88-2bf6-43b8-8678-2cf37f6a5cf5",
+    "name": "Duelist of Deep Faith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ff78f166-cca2-44bc-abe3-3a338bf543be",
+    "name": "Duelist of the Mind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5cdc4654-b8c5-4599-a1d2-9e9d5f6509cb",
+    "name": "Duelist's Heritage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "262c5ac9-af41-42d1-a53a-8a671eedd5a6",
+    "name": "Duel Tactics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "abc5ac3e-f196-49df-8a9d-16df3114ffad",
+    "name": "Dukhara Peafowl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28564d10-bfc5-4beb-b0e2-b9aa5c03f740",
+    "name": "Dundoolin Weaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f79603a-3173-404e-8c69-b2254c1270dc",
+    "name": "Dune Beetle",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "14104a52-c4e8-4755-8196-7fa5c5a35f36",
+    "name": "Duneblast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b418846-6426-448a-b4cb-ce631e0a99a2",
+    "name": "Dúnedain Blade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7de2a364-4383-437a-b6d6-55e4721a0141",
+    "name": "Dúnedain Rangers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b32649cb-bf5c-45fa-86f0-8bf4e8555f06",
+    "name": "Dune Drifter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "38d2176c-1a1e-4030-9c63-e28ba4a69b6d",
+    "name": "Dune Mover",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "26b53524-9ec5-4ec9-a1e2-73e78959481b",
+    "name": "Dungeon Crawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f086a63c-0c62-4674-bd27-82e7aed12b1a",
+    "name": "Dungeon Descent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab5ebae2-cd77-4a7d-a93b-8042cd486429",
+    "name": "Dungeon Geists",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20f1bba5-d398-4d6e-a76a-75e29df42aec",
+    "name": "Dungeon Map",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9dd755a5-0bef-4bde-92fa-14ef2a1a1410",
+    "name": "Dunland Crebain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a421582a-f673-4f43-beb5-28ee785da11e",
+    "name": "Durable Coilbug",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33d405ea-7a9a-4970-b70f-9c05d90dd6f0",
+    "name": "Duress",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f7ff0046-8365-4ea4-9872-583d140f7b3f",
+    "name": "Duskborne Skymarcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0190e13-89f6-4b51-a277-bf3eb842963e",
+    "name": "Dusk Charger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7bc3f92f-68a2-4934-afc4-89f6d0e8cf98",
+    "name": "Dusk // Dawn",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d8b770c2-0406-4a2d-95d9-e14bb5d3bdc6",
+    "name": "Duskfang Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d56d82b-03a6-41cf-9833-c4efd8be6ea7",
+    "name": "Dusk Feaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7278f382-8249-4981-9d87-47cef7dc13dd",
+    "name": "Dusk Legion Dreadnought",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30367a59-a812-41d4-a451-80d9071dd4a4",
+    "name": "Dusk Legion Duelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea2dce18-195e-4681-a687-f9819edaf9fc",
+    "name": "Dusk Legion Zealot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74de3356-9779-40f9-9881-fe795a1d5bbd",
+    "name": "Dusk Mangler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67b2cd0c-ecc8-4129-b1ac-820c9924190c",
+    "name": "Duskmantle, House of Shadow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7734ee04-1d99-4807-be68-b889e75a7551",
+    "name": "Duskmantle Operative",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebdace8f-8e8e-411b-b1d5-5b27cca7d9fb",
+    "name": "Duskmourn's Domination",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dca7102e-c020-4fdc-9b59-f186e3e615a5",
+    "name": "Dusk Rose Reliquary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e54ad5a1-e79d-42db-a3e9-5caecae62c9f",
+    "name": "Duskshell Crawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6283e5ca-9924-478b-89a5-36924accb9aa",
+    "name": "Duskwatch Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87c43776-dd98-4e12-9b95-82d2b8f4f1ab",
+    "name": "Duskwatch Recruiter // Krallenhorde Howler",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b9227f38-7db7-4ea1-9482-94e5de3984fe",
+    "name": "Duskwielder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "494f8c29-7626-43ed-b0b8-fb9afd4cd5d3",
+    "name": "Dust Animus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3df7128-31dd-4d71-90be-87e2e9ff51b4",
+    "name": "Dust Bowl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "387b12b1-d8f5-487b-972f-5303b23eed5a",
+    "name": "Dusyut Earthcarver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9195f10-8cc2-482a-9e28-0be9a37099b4",
+    "name": "Dutiful Attendant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f91ff377-a997-4f24-926c-76edcbf91a6c",
+    "name": "Dutiful Griffin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b58a70e2-3609-441a-993a-dccb9a2cf242",
+    "name": "Dutiful Knowledge Seeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8f958da-3a31-4064-9a78-66e9b65b85ab",
+    "name": "Dutiful Return",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67e6ce99-4883-4713-9822-cb2334765b5b",
+    "name": "Duty Beyond Death",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cee583b7-7cc3-40ea-a227-b760839ec291",
+    "name": "Dwalin, Weaponmaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3db19689-73bb-48b2-a464-63615eb6bba0",
+    "name": "Dwarfhold Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b51e0ae3-126b-4b7e-9dd1-818a5b8e512a",
+    "name": "Dwarven Castle Guard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e69a8970-3ead-479d-860a-26ed65f9c846",
+    "name": "Dwarven Forge-Chanter",
+    "status": "curated"
+  },
+  {
+    "oracleId": "a6365f98-f652-492b-81de-5f8cd6fe0a1c",
+    "name": "Dwarven Hammer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f75bb13b-41fc-4614-b35e-f456069ce9c6",
+    "name": "Dwarven Mattock",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70538676-2ffb-4cad-827e-b55e81088678",
+    "name": "Dwarven Mauler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74ed0bd3-ac31-41a4-8220-d8e7c8c1c437",
+    "name": "Dwarven Mine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a077a9b-d725-4b14-957f-1586db2adf59",
+    "name": "Dwarven Priest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8fcab221-8737-4357-b8ee-bad9421739a3",
+    "name": "Dwarven Provisioner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b38c567e-fd79-4a74-ab5f-df4a6a8f7e00",
+    "name": "Dwarven Reinforcements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9cc52afb-9788-46f6-9f9b-347513f8a64f",
+    "name": "Dwarven Shortsword",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48a8fce6-b493-4b1d-8ac8-2a4f4b4781b5",
+    "name": "Dwindle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30d0d75f-e94c-460b-b957-9f1d655c0f65",
+    "name": "Dwynen, Gilt-Leaf Daen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d4a7dd3-9258-4bd1-adc4-08f0205e196a",
+    "name": "Dwynen's Elite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "618a2272-62e0-4d0e-834d-7b81719eba12",
+    "name": "Dyadrine, Synthesis Amalgam",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b719057-1bc0-4c3a-97c3-8377844570dd",
+    "name": "Dying to Serve",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f9ef763-22aa-4d43-b084-ef02465b489c",
+    "name": "Dynamite Diver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59f56dd9-cc82-4f0d-a522-0d8ed274fa40",
+    "name": "Dynavolt Tower",
+    "status": "unsupported"
+  }
+]

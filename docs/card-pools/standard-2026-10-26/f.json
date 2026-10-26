@@ -1,0 +1,1192 @@
+[
+  {
+    "oracleId": "0c85b8f7-0bd0-4680-9ec5-d4b110460a54",
+    "name": "Fabled Passage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0bb20c36-689f-4a7c-80b5-a12bda821847",
+    "name": "Fabrication Foundry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c0fe71c-bee1-41d3-aeb5-1723028eedde",
+    "name": "Face Yourself",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "903d114b-1899-4e67-bee3-af0673850388",
+    "name": "Faebloom Trick",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3912c82-37f8-456e-ba49-65c7f5b39d13",
+    "name": "Fae Flight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6e68414-80cb-4e08-ae84-b084a3f4b6de",
+    "name": "Faerie Dreamthief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "450a9b73-9024-4103-b9f9-216a2f395cff",
+    "name": "Faerie Fencing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48ee9007-2d1c-446f-aee3-795d23028e06",
+    "name": "Faerie Slumber Party",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b759e8a6-8dd0-48ce-8816-e45b35a79895",
+    "name": "Faerie Snoop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe4bbe82-1d6b-4f3d-8cc0-f6df22d9e9fb",
+    "name": "Failed Fording",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad01df89-29fe-44c7-a133-91425f8ff09c",
+    "name": "Fake Your Own Death",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e69db5f0-beed-48e8-bc25-768b1e8be5ea",
+    "name": "Falcon's Wing Harness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92e222c2-28e6-4d43-8b48-480ebcd88495",
+    "name": "Falcon, Winged Wonder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df7500e8-76b4-49b3-a427-9a28ffa14637",
+    "name": "Faller's Faithful",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8972de18-2c49-4162-a285-264a44c0e675",
+    "name": "Family Reunion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7f53928-a4cc-41ed-877d-b72d786e77d9",
+    "name": "Famished Worldsire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d36e11f1-6ab3-4273-8114-a8fbbe21c1c3",
+    "name": "Fanatical Firebrand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e5402bf-ce7b-4c23-9333-0acdcf349caf",
+    "name": "Fanatical Offering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b92e97f5-a307-471f-be06-afa4fcdab757",
+    "name": "Fanatical Strength",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "878e5e0d-beb9-4f8d-a640-62140c907e52",
+    "name": "Fanatic of the Harrowing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c5648a32-98b0-4625-aae1-ae56e0ef0197",
+    "name": "Fancy Footwork",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a9bfe76-6c74-4393-b04e-461422a29ddb",
+    "name": "Fang-Druid Summoner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04ac8b2c-95e9-40e9-8cc0-af9b075a94c0",
+    "name": "Fang, Fearless l'Cie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e0b9767-8e51-4021-a8fb-22259e2f5347",
+    "name": "Fang Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06343800-b555-4a13-ad4d-19e37d200138",
+    "name": "Fangkeeper's Familiar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b9734c1-7185-40f6-8582-9f87109e3a09",
+    "name": "Far Fortune, End Boss",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7de66ba3-6e97-4e0a-928e-7ce45dee278b",
+    "name": "Farsight Ritual",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "202e45d6-8c7a-46db-85fb-634aa77b4097",
+    "name": "Fatal Fissure",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13daa21c-278d-45bd-9a6e-a77d6a558453",
+    "name": "Fated Firepower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "72c6174c-fa2c-4ff2-b76e-eb6e890e97c9",
+    "name": "Fateful Discovery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d35876a3-e891-43d3-a50c-69e8469497e0",
+    "name": "Fatehold Annex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "313aee0e-4090-4589-b323-a4edbda21c68",
+    "name": "Fatehold Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1063822f-47d3-42e9-8a21-f62b12609fe1",
+    "name": "Fatehold Chronologist // Peer Review",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "0ffeec93-89d7-42c2-8abf-802e9f6dc992",
+    "name": "Fate of the Sun-Cryst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb3996b6-b68d-4ea1-b3dd-1600f8da2f1c",
+    "name": "Fateshaper Aspirant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b707c131-de13-4d4d-839d-b9f47d62f090",
+    "name": "Faunsbane Troll",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17e7212e-69d8-4014-af98-447baed2cae7",
+    "name": "Fblthp, Impossibly Lost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48b891b6-3175-4864-bb98-af131098c557",
+    "name": "Fblthp, Knows the Way",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "764f6412-c4ff-4eec-9a9d-870661f97f8b",
+    "name": "Fblthp, Lost on the Range",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a6cdb3e-c850-4b3c-bf4b-c53dd4eaf56e",
+    "name": "Fearless Swashbuckler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f5495d7-ac44-47cd-aa39-48a35034b390",
+    "name": "Fear of Abduction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a23293cf-4352-4ce6-8a68-3b30f908e137",
+    "name": "Fear of Being Hunted",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ae74149-60fc-407a-8782-8865458606b5",
+    "name": "Fear of Burning Alive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "abec56eb-7b3d-4bd8-93c7-bd7049c859c3",
+    "name": "Fear of Exposure",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34fd461b-a913-4a60-9477-ce2bd5c6fc5a",
+    "name": "Fear of Failed Tests",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00ba96e0-42a7-432a-a500-5e607d75a358",
+    "name": "Fear of Falling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb2600a8-0ba6-4888-ac8a-f206469d4c71",
+    "name": "Fear of Immobility",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "628ae0e4-5d54-48a1-a24c-b9c1d862df9d",
+    "name": "Fear of Impostors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "018327d1-a3ba-4912-9c88-f0f0c54a1750",
+    "name": "Fear of Infinity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ee28549-5909-4372-8376-34010b7b6654",
+    "name": "Fear of Isolation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3724cc42-1bbd-4a11-8469-ab8492ddba52",
+    "name": "Fear of Lost Teeth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "236ce592-1321-4a7c-b695-fd84496f8924",
+    "name": "Fear of Missing Out",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52478437-bb6c-48bb-855d-54a8a4d42d18",
+    "name": "Fear of Surveillance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9285cdf1-ad25-4aee-a865-1bf0cc905183",
+    "name": "Fear of the Dark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "edbd3d4e-78a2-4c03-936d-dcb24cf7c87c",
+    "name": "Fearsome Goblin Pair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "79a9fc1c-a6a9-483a-9ba7-d09fe41760c3",
+    "name": "Featherbrained Filcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c61b05b8-00f1-4371-9856-c65852b4ca02",
+    "name": "Feather of Flight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a090be5a-b0f2-4c17-8f7d-e742f9de8f6b",
+    "name": "Fecund Greenshell",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21153db6-552a-4956-a53a-a9dfb6968629",
+    "name": "Feed the Cauldron",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c338eedb-9b70-4b77-b5d6-8ea74b7bea3e",
+    "name": "Feed the Cycle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f474d244-d9be-4580-bf62-f97660e9c1a3",
+    "name": "Feed the Flames",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5825997b-10d7-4a36-972c-a80ddd90b8ed",
+    "name": "Feed the Swarm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcf796fa-43ae-43d1-a124-776338bc3542",
+    "name": "Feisty Spikeling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b884dfd-59f4-45c0-bf1e-6ad9f5b58895",
+    "name": "Feldon's Cane",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cae60cf8-cd64-4595-a4dd-946694cf2bb1",
+    "name": "Felidar Cub",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16629f59-bae8-4c19-bf50-443eb0ed6856",
+    "name": "Felidar Retreat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2bee2508-cd5d-4c62-a205-12d8bbb3143d",
+    "name": "Felidar Savior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f968470-ce00-43a3-95f5-2e3fe987be19",
+    "name": "Fell",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "1a82be68-3b74-4dfc-9068-3abea61db709",
+    "name": "Fell Gravship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fab8d954-807b-426f-8057-99a5d2fec618",
+    "name": "Fell Horseman // Deathly Ride",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "fbfa19ca-98bb-4c7d-a04e-920a8aafb031",
+    "name": "Felling Blow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1905321-180b-41d2-b7ef-0974ab90f188",
+    "name": "Felonious Rage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd666669-ad23-4e41-b78c-1cd7b82eb8b4",
+    "name": "Felothar, Dawn of the Abzan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1722f814-2d4e-4d59-9b74-10ef8e89def9",
+    "name": "Feral Deathgorger // Dusk Sight",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5a8196ef-24ee-40b6-97d1-8a2257180f86",
+    "name": "Feral Encounter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "814e06c0-9b61-4a64-8c67-73a8eb00a768",
+    "name": "Ferocification",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fef67393-9b7b-495d-8b03-865537386d42",
+    "name": "Ferocious Werefox // Guard Change",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "747a1b36-eb4f-44e6-9e5a-bb1a0259a471",
+    "name": "Ferocity of the Hunt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d3b60af-3e38-4d36-95fc-11b31c38f955",
+    "name": "Festering Gulch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d14fdc1d-62bc-4e9c-b79b-8c9c3232f0bc",
+    "name": "Festerleech",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2de138b0-3159-4a0c-a474-a4e5600b2e51",
+    "name": "Festival of Embers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a32e08fa-bea4-4ba9-a126-9bf0a91f67e2",
+    "name": "Fields of Strife",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5d64271-4478-4c55-8c71-ba8f02b47fac",
+    "name": "Fiendish Panda",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5104053a-d394-4b00-82a4-60fd9f051a6e",
+    "name": "Fierce Empath",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d44f3724-17b7-48f0-885d-75292669f971",
+    "name": "Fiery Annihilation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ab42daa-8726-4973-947d-1d6c32f0ba61",
+    "name": "Fight On!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d4ea910-3b16-4f98-89be-c1b2cfff4bf0",
+    "name": "Figure of Fable",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c91c7d6b-a502-4b66-9509-3c1eda00e763",
+    "name": "Fíli the Pathfinder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "755bd5d8-67f1-4f24-a4e8-d98edf2f2e03",
+    "name": "Finale of Revelation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e7ec3d6-a84f-4cc3-93f4-4d181d41e126",
+    "name": "Final Showdown",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cdba7f43-df9e-4bfb-9480-721c787ad051",
+    "name": "Final Vengeance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76c2e0b4-d4fa-4e98-b363-0a76eb481304",
+    "name": "Finch Formation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52ec472e-a745-4e25-b9a7-8e1eb8873594",
+    "name": "Fin Fang Foom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69924636-138e-4baa-a378-0fd7df5b847d",
+    "name": "Finneas, Ace Archer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "126c75c0-414b-4e55-8747-2b5566ce716f",
+    "name": "Firdoch Core",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96cc63af-69d1-4493-b241-0cb244a9e48a",
+    "name": "Firebender Ascension",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9282f91-638e-414b-8b3d-9a99e30aec96",
+    "name": "Firebending Lesson",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ad3be51-f68b-46d6-b58e-400b50e384f1",
+    "name": "Firebending Student",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e9289d6-dbc6-456d-88cf-d1f534e731d6",
+    "name": "Firebrand Archer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3912d21e-1ebc-4a81-9dc9-f404248d564a",
+    "name": "Fire Elemental",
+    "status": "curated"
+  },
+  {
+    "oracleId": "b173245e-2009-48ff-ac42-5f28d12aec79",
+    "name": "Fireglass Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2631130e-63e2-43a3-914a-648e76722203",
+    "name": "Fire Lord Azula",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a129423d-c886-4120-96f7-c2517ea7eb83",
+    "name": "Fire Lord Zuko",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c87db803-3490-41bc-af7a-78f99bcd77c8",
+    "name": "Fire Magic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "399fba23-fc13-440b-ab67-192eede6ecab",
+    "name": "Fire Nation Attacks",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ebfa3f5-f80a-4845-bba7-75c4ddb88682",
+    "name": "Fire Nation Cadets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a983666-376b-48a8-9f82-8d041d32ae93",
+    "name": "Fire Nation Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f2000fb8-39c6-4ad6-a020-5245faaa1eba",
+    "name": "Fire Nation Palace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b37e9bc5-6a2c-4f08-b856-3f8d0d16defb",
+    "name": "Fire Nation Raider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "987aab63-a889-400f-a3bd-feaef978b407",
+    "name": "Fire Nation Warship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f018a8c-6ceb-4d03-94a7-8713467c9cf5",
+    "name": "Fire Navy Trebuchet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89fb21dc-4cf2-4c9a-b0ae-cc6e10277fb6",
+    "name": "Fire-Rim Form",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08d1940a-ddc6-4b6d-b6c9-9d2aa470b906",
+    "name": "Fire Sages",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a02e1ca7-23c5-41e3-a744-72fc9e9dd8ba",
+    "name": "Fireshrieker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1cad92ce-55c8-4b78-8d8c-56645ef8e6ee",
+    "name": "Firespitter Whelp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df42c768-34ca-4ebf-8f66-eaccf7261f70",
+    "name": "Firion, Wild Rose Warrior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cbbea4e2-4b36-4965-89b6-00d2a564f146",
+    "name": "First-Time Flyer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c1d3e9e-213e-492a-ad5a-91139d70bc0f",
+    "name": "Fishing Pole",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5554db95-9676-4c24-b82a-8173513d7927",
+    "name": "Fisk Tower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7f8f46c0-889a-4c9a-9bfa-2b43db608d55",
+    "name": "Fix What's Broken",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c552bd73-ce75-40fd-9d80-9e90b6f45274",
+    "name": "Flamebraider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d767463b-0fc9-43fc-a85f-e60f030f9b96",
+    "name": "Flamecache Gecko",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6eef6a7-0cf4-4ee8-90e0-727a283c3be9",
+    "name": "Flame-Chain Mauler",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "e2d21635-182f-4ebf-a6f5-d4c1fd7f9705",
+    "name": "Flamehold Grappler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc8427fb-e5ee-4b44-9a4f-6d9f01b4b896",
+    "name": "Flamekin Gildweaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c65e804b-9222-4fa8-88d1-df06a3279f22",
+    "name": "Flame Lash",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "9e43805d-3576-47d4-9331-524869ab99d0",
+    "name": "Flamewake Phoenix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f70d65bf-5f1c-4aee-9bd1-f5ee6974b058",
+    "name": "Flaring Cinder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "02070488-9203-4304-9392-a111d20218c5",
+    "name": "Flashback",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eaf98e03-729b-4145-b2af-c910c415c15d",
+    "name": "Flashfreeze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f536a518-160e-4267-89da-3d34accc6d2c",
+    "name": "Flash Thompson, Spider-Fan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b36271cb-cda2-434a-a580-6050dc460409",
+    "name": "Fleeting Distraction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6d9b5d2-0ab6-4637-a468-5149b7c7d0cf",
+    "name": "Fleeting Effigy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6336401f-4e2d-4ebe-8c5b-24aa6f516abf",
+    "name": "Fleeting Flight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c915f815-77d7-4e08-b178-82b29a58bb03",
+    "name": "Fleeting Reflection",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04c4250e-014a-4067-80e8-4134069354f7",
+    "name": "Flesh Burrower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8cf88fa8-2f47-4125-a59d-9c2b2d4765a7",
+    "name": "Flexible Waterbender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "990583ef-5bf4-4e14-a8f1-61d32c6a75df",
+    "name": "Flick a Coin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "162421d2-8761-437f-bed9-578b61c96f1f",
+    "name": "Flickering Hound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57927909-11a9-44ef-989d-1dcca1f6e23f",
+    "name": "Flight-Deck Coordinator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9148f2cb-5594-463c-a21b-a67706ec46d1",
+    "name": "Flitterwing Nuisance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6522070b-7002-44fd-8deb-832fe67ef9a9",
+    "name": "Flock Impostor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1e9abfb-c3c8-483e-b446-5c2afc9f6394",
+    "name": "Floodfarm Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43c69d19-c06c-470a-bdba-a0335ff2d655",
+    "name": "Floodpits Drowner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e16e2199-d821-49fd-94a0-30ecebd8bd4c",
+    "name": "Flood the Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8966245-501c-47e4-8ce0-849dcb532eb2",
+    "name": "Flopsie, Bumi's Buddy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0c28b2b-a2dd-4b76-bb1c-cec55a0a6784",
+    "name": "Flotsam // Jetsam",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "66e74e8f-036e-4b26-a4a8-2365891765bc",
+    "name": "Flourishing Bloom-Kin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b4f1569-2025-46a8-89ba-79859208b04e",
+    "name": "Flourishing Grapple",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "523d075d-b577-4f24-8c14-9a76761a2eaf",
+    "name": "Flowerfoot Swordmaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7194bca-0cf4-4a86-8b84-d2f9219a08b3",
+    "name": "Flow State",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ef8925c-5f43-49ca-83f0-e2ca8e655600",
+    "name": "Flying Octobot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c4514be-fda7-45e8-83fe-04d49e2b932c",
+    "name": "Focus Fire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "695a84b5-96b0-4e48-b615-15624efab3b7",
+    "name": "Focus the Mind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a2bb47d-228d-499e-a34b-9e10d99e9b2c",
+    "name": "Fog Bank",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b56bb8cb-457e-4b85-9bf9-5e891e79f1dd",
+    "name": "Foggy Bottom Swamp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1941cf7a-ad53-4bce-beea-104951619a30",
+    "name": "Foggy Swamp Hunters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "faecfb8d-2f63-4b98-a842-b11448f0d538",
+    "name": "Foggy Swamp Spirit Keeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82fefb82-a436-488d-8ecd-594686117e34",
+    "name": "Foggy Swamp Vinebender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "16af0a22-833e-47c6-ac27-002702194595",
+    "name": "Foggy Swamp Visions",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5bb38d08-582e-43aa-9507-7c20759978ec",
+    "name": "Follow the Lumarets",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "622a53bd-d894-422c-a606-7126041afa02",
+    "name": "Fomori Vault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aab3774c-4ec3-4946-a09b-af0fab7cacb7",
+    "name": "Food Coma",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00571e7f-4e40-4a07-a529-34580e942338",
+    "name": "Food Fight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c51893f-9118-4d95-b88a-e264f4cbd7a8",
+    "name": "Foolish Fate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6244b6c-664d-417a-bd58-ace5c7a995a2",
+    "name": "Foot Elite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "063dd25b-d4b4-4e09-acae-8c52dcb40803",
+    "name": "Foot Headquarters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2043fbde-48c4-4a77-8911-8991d77de1eb",
+    "name": "Foot Mystic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "306652a8-9a9c-4b33-96d7-b59234d148e9",
+    "name": "Foot Ninjas",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11ceb2db-021e-422d-976e-7bfe3b67a8aa",
+    "name": "Foraging Wickermaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5a05edd-2a30-414b-b766-f0651d5783f5",
+    "name": "Forecasting Fortune Teller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9d5917d5-4fb3-4f37-9278-e08c1f73aae5",
+    "name": "Forensic Gadgeteer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "75e7f7c7-fa98-497b-bf5e-8f74571e190c",
+    "name": "Forensic Researcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+    "name": "Forest",
+    "status": "curated"
+  },
+  {
+    "oracleId": "71393988-ad6f-43fd-9978-c0de15ae8e87",
+    "name": "Forgotten Monument",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebb3e2ff-2214-4e11-88fb-e0fa84288cf1",
+    "name": "Forlorn Flats",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8923462f-0540-41e8-931e-97b5f1dadd51",
+    "name": "Form a Posse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82f59ac4-bf94-4fa2-9457-f0bec8360bd9",
+    "name": "Formation Breaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3e51c060-1e86-4a0e-8fee-8b7273161468",
+    "name": "Formidable Commons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5bd06f9e-9a42-455d-ad26-24bc04e51c7c",
+    "name": "Formidable Speaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d37e0127-6f68-438e-8b9e-a71bb3c34733",
+    "name": "Forsaken Miner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de6e4aa2-23f1-46e5-a061-05522944e0c6",
+    "name": "For the Common Good",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa3ed0f6-e44e-433d-80d3-824de5e6135a",
+    "name": "Fortress Kin-Guard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc440b62-0bf0-4f23-9210-3550ff0a8d4d",
+    "name": "Fortune, Loyal Steed",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7ea0012b-b90b-43d6-bb5b-e4e92452bea7",
+    "name": "Forum Familiar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50c97054-77c9-4446-9a41-e4f8877b887d",
+    "name": "Forum Necroscribe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "349ea6c7-6b3e-417f-b082-b712e2b1635b",
+    "name": "Forum of Amity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4e4c8a5-e97b-4295-a403-d17834f73502",
+    "name": "Foul Roads",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad37551c-9d20-4902-8190-6a0aa32a7947",
+    "name": "Found Footage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94e8b0a9-44a1-4dce-8d44-78681ae638a1",
+    "name": "Fountainport",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea4c5b8f-a5ff-47dd-8e47-5ae7b21926b4",
+    "name": "Fountainport Bell",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "644379e7-782e-48e1-9b47-c4dc62e62d85",
+    "name": "Fractal Anomaly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e7bd032-8946-4d72-9910-b224823bc940",
+    "name": "Fractalize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cca3f3e8-15a7-4ad8-893a-d3570178a800",
+    "name": "Fractal Mascot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb45860a-1937-4803-b6d8-331a35be39fd",
+    "name": "Fractal Tender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1882cc8-c81a-4131-b639-1bd6e083f8ba",
+    "name": "Frantic Firebolt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d181310f-404b-4f26-8024-b7b537d1fd90",
+    "name": "Frantic Scapegoat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5dbe4648-f4c9-4d26-98f5-58a7e53b149d",
+    "name": "Frantic Strength",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09117016-5fd1-4590-9867-aad65d3097e3",
+    "name": "Freestrider Commando",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7d3e234-0954-4422-96c0-cda91101faa3",
+    "name": "Freestrider Lookout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8bf90bb0-f9c1-49c8-905e-32747e921e92",
+    "name": "Freeze in Place",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6a4ef075-9254-4d36-9572-622833fae54e",
+    "name": "Frenzied Baloth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ac470a1-c2be-4971-a5ca-10bb189ebe4d",
+    "name": "Frenzied Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77f1734d-ea0b-4344-8a9e-9d1a34eb6164",
+    "name": "Fresh Start",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e3085d8-9d46-41e0-ad9d-54c44d9ef267",
+    "name": "Freya Crescent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6a93240-8578-479e-b5e7-73f51b141cc8",
+    "name": "Friendly Ghost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "10fe402e-8d6f-4058-9f42-86f229055359",
+    "name": "Friendly Neighborhood",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "02a8b849-e708-427c-92fe-9a41bb0ec7fe",
+    "name": "Friendly Teddy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac5294c6-bc79-4a0f-b8b3-52b554561e38",
+    "name": "Frilled Cave-Wurm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69038520-7156-48d9-aae8-ba3cc76a5993",
+    "name": "Frilled Sparkshooter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b865275-4114-44d0-9832-ae5d3b4efba4",
+    "name": "Frog Butler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bbb6867f-7186-41de-9828-21be469178c1",
+    "name": "Frolicking Familiar // Blow Off Steam",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "87864421-505c-4bdb-b1e3-3e44e05f2beb",
+    "name": "From Father to Son",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4cf6c2f-0f1e-4980-9ef9-e4eabcae42a9",
+    "name": "Frontier Bivouac",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "466cf331-2d9c-4ebc-84f6-30c890e1b637",
+    "name": "Frontier Seeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b80d21de-2ace-4e0d-92b2-6f0273512621",
+    "name": "Frontline Rush",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "610d006a-3ceb-4136-b92b-a500c74d06b0",
+    "name": "Frontline War-Rager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b39f03cf-3d1a-42ad-903f-e3b3542878b0",
+    "name": "Front Porch Sentries",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a104f73-597b-49e3-8088-13db31f61900",
+    "name": "Frostbite Pyromental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "515c1604-59f0-45b4-91be-d2f20fdd3e1e",
+    "name": "Frostbridge Guard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7af31ff-fa1b-4225-b3bc-fde80ac72d0a",
+    "name": "Frostcliff Siege",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82fa14d8-5019-4e1b-a86c-923d9292b87a",
+    "name": "Frozen in Ice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7d4e952-d7b9-489d-a9a7-c61d08bf17cc",
+    "name": "Fuel the Flames",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af2b36ee-2945-41d3-a186-8fd28f3cde16",
+    "name": "Fugitive Codebreaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c04d4fd4-e5aa-431d-824b-8bc94245f103",
+    "name": "Fugitive Droid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b96d003-d3b4-4181-9f50-06a3e6eb1916",
+    "name": "Full Bore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65e64c50-4757-4e8e-8043-bc61a5f21750",
+    "name": "Full Steam Ahead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c2f87eb-b0f4-4578-b143-6fba313a82ec",
+    "name": "Full Throttle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a29d028-d1a4-413f-9c01-d6842294420a",
+    "name": "Fulminous Forte",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b17ea905-0696-4e58-b564-557e87236e27",
+    "name": "Fumigate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a39d541e-86c1-4595-a2e9-f107def5bbc6",
+    "name": "Funeral Room // Awakening Hall",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ce25dd89-dcc7-4576-b148-ef4c1cd5290c",
+    "name": "Fungal Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf73d2e7-584f-41d0-8fc7-50d886dcf9fe",
+    "name": "Fungal Fortitude",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fb1d33f-a87d-46cf-a73e-882c3dbcb26f",
+    "name": "Furious Forebear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "92d24b75-419b-4068-89c1-db9945f74972",
+    "name": "Furtive Courier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88e9006a-cfdf-40f3-80d5-23465f3dceca",
+    "name": "Fuss // Bother",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "0e5f97b5-bb8c-4688-a141-5db4d4eeccf0",
+    "name": "Futurist Forge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0b1fba1-4338-4671-934b-098689ad2085",
+    "name": "Fynn, the Fangbearer",
+    "status": "unsupported"
+  }
+]

@@ -1,0 +1,522 @@
+[
+  {
+    "oracleId": "a06a35a9-a23e-4a0a-90bc-84e7a52d2cef",
+    "name": "Oaken Siren",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "177b7fe4-8565-4631-b4d9-8b2b4282f3ac",
+    "name": "Oakhollow Village",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "210a130c-d5d3-43bf-8a80-d796c37242e8",
+    "name": "Oasis Gardener",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d15a06f-5471-48f2-8c4a-9b0886bef5af",
+    "name": "Obeka, Splitter of Seconds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57fe941c-a830-4570-afe2-18f93c7a7b84",
+    "name": "Obliterating Bolt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "300fd0a2-23e6-4da9-bfaa-ad626097d5b5",
+    "name": "Oblivious Bookworm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e7abb44-47b0-4d80-b8a1-36f0c1032aa3",
+    "name": "Obsessive Pursuit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4162e60f-9d70-4b8c-a838-df57b83c208d",
+    "name": "Obyra, Dreaming Duelist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "396b088d-f9af-4ee1-843f-dbe1633f9cc8",
+    "name": "Obyra's Attendants // Desperate Parry",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "6fec368d-374d-4318-861b-ff478ba51a3c",
+    "name": "Octopus Form",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8c42851-1b1b-49dd-a97c-7eda57dadb13",
+    "name": "Offender at Large",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be4499e6-616a-4c11-b37e-9201d2492682",
+    "name": "Offer Immortality",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "e57e448b-1186-4662-a6b0-01a9ce33b961",
+    "name": "Officious Interrogation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "532cac99-e3cf-4869-a19f-cba67a2a6fd0",
+    "name": "Ogre Chitterlord",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aff0740f-51d5-41c7-ac13-97c298cfd743",
+    "name": "Oildeep Gearhulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3b7b541-6f05-46c1-8031-c848c4bd4635",
+    "name": "Ojer Axonil, Deepest Might // Temple of Power",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "eda11077-b2ce-408b-b982-def2da8fe599",
+    "name": "Ojer Kaslem, Deepest Growth // Temple of Cultivation",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "34ef174e-1b3d-43d5-9f72-3d35befbdd7f",
+    "name": "Ojer Pakpatiq, Deepest Epoch // Temple of Cyclical Time",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "486bb9a5-73f1-4cec-b097-fb07ac80b72e",
+    "name": "Ojer Taq, Deepest Foundation // Temple of Civilization",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a0c956dc-d7de-4f11-b76f-7537fbee1731",
+    "name": "Oko, Lorwyn Liege // Oko, Shadowmoor Scion",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "4372b729-dc3d-4469-8fc5-811cc787d653",
+    "name": "Oko, the Ringleader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d397d26-7e52-47b2-9880-2c10e90cfba4",
+    "name": "Okoye, Dora Milaje Leader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8790f842-e842-4bed-adf4-5b3cc5fd68a9",
+    "name": "Old Fat Spider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4402d21-bb7f-4777-bc8d-b24bf2faccb0",
+    "name": "Old Fat Spider Can't See Me",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f95bdf0d-5bd1-4215-b143-0930973807ce",
+    "name": "Old Flitterfang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b7362a9-3518-4071-ab1b-40689a50e12a",
+    "name": "Old-Growth Educator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e88b1520-aa9a-41ee-9036-4d4bebd1a0c0",
+    "name": "Old Hob, Alleycat Blues",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8259b0e-131f-44f0-86d4-7c4d711b328d",
+    "name": "Old Thrush",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b19c4bbf-258f-4436-8ef9-fc905c283776",
+    "name": "Oltec Archaeologists",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "922a8e27-a367-40c6-84df-86ed32f71c7c",
+    "name": "Oltec Cloud Guard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3cb91696-242f-4e91-806b-61b1bb45a20c",
+    "name": "Oltec Matterweaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f9a4bb2-5959-4a5c-83af-c2729e6673df",
+    "name": "Omashu City",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3173ca98-d46a-4de3-a95e-3eaad28d4017",
+    "name": "Omega, Heartless Evolution",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8b067e44-2001-4b49-aa4a-2c86f8929751",
+    "name": "Omenpath Journey",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "852e3d89-64a0-4b32-be2b-b1d6cd7c2f64",
+    "name": "Omenport Vigilante",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "676141c3-a433-4aba-86fb-729628f96dfa",
+    "name": "Ominous Asylum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66d4370e-19b9-4680-9b1e-a192537bc002",
+    "name": "Omni-Changeling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "73144877-1d37-4c7a-8493-3cef191b9211",
+    "name": "Omni-Cheese Pizza",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8dad1fa8-3533-4e3c-b9b3-fcd57b20a33d",
+    "name": "Omnipresence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "730e39e6-c61d-48b5-8827-bfd952bf1be7",
+    "name": "Omniscience",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0aa2ab46-c5ad-462b-b441-dbbc4b2c3532",
+    "name": "Omnivorous Flytrap",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55cba59c-932c-4295-87dc-9179fbdfbd53",
+    "name": "One Last Job",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4733889-4d4c-4bf7-8a9b-fb5ad7a38395",
+    "name": "On the Job",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9e3e8b0-4276-419d-9326-be56af3c41be",
+    "name": "Ooze Patrol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1c5f9da-1396-4406-b803-b64f66b8e49d",
+    "name": "Ooze Spill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22f259b3-9de1-44a1-a89d-f2f1b1249d4d",
+    "name": "Opera Love Song",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "713332c1-5bd8-400f-bfff-c1ca0697a043",
+    "name": "Opt",
+    "status": "curated"
+  },
+  {
+    "oracleId": "0180c67b-c5c8-4a67-9562-d51f9e7ffff5",
+    "name": "Optimistic Scavenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f9e7e855-1e3b-42d3-91b0-64ba8b5b8982",
+    "name": "Opulent Palace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00e75a6b-699e-4824-86e5-66d45245cd9b",
+    "name": "Oracle's Restoration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6bcf21ef-6641-4752-a0da-937a9277c812",
+    "name": "Orazca Puzzle-Door",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4f10b164-6d36-4935-92e7-53be73ac4c8a",
+    "name": "Orbital Plunge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc65821a-1893-4087-b461-35cf9fd26c71",
+    "name": "Orcrist, Goblin-cleaver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5fff2bf4-9e26-4815-9bf6-672ed7e55b96",
+    "name": "Ordeal of Nylea",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89a2fab8-b074-42aa-a871-d9c5de2d0895",
+    "name": "Ordinary Bear",
+    "status": "curated"
+  },
+  {
+    "oracleId": "72e8c978-f66d-42e1-ac5f-d1c307d7b93c",
+    "name": "Oreplate Pangolin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "177113f8-1188-4e5e-8ad7-34a7bb8ca7f1",
+    "name": "Origin of Metalbending",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fbe9056-190f-40a1-bee9-59ebd6f981f5",
+    "name": "Origin of Spider-Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7f3178d-7b7c-4346-af50-a7b0206bee22",
+    "name": "Origin of the Avengers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69cc089a-abd3-4edb-bc79-f02daac70837",
+    "name": "Ori, Keeper of Songs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f8d7bcbd-9a1d-4fc6-abdd-88a7e01b9411",
+    "name": "Ornery Tumblewagg",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d14f620c-0fbd-485c-9fe4-34949e742147",
+    "name": "Oroku Saki, Shredder Rising",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f758bad0-8f36-4985-ad1d-66b695f3bbb6",
+    "name": "Orphans of the Wheat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf56a5b4-48fa-4d53-a4b9-14afe079c1d3",
+    "name": "Orysa, Tide Choreographer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "57b37df5-fee4-4720-931f-f0cb0a8b338c",
+    "name": "Orzhov Guildgate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f432eb6a-f1bf-4ce7-b915-1488dccb4bb9",
+    "name": "Oscorp Industries",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d2e233c-0173-417f-82a0-1e692a400ae1",
+    "name": "Oscorp Research Team",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d84a706-080c-4fb2-b1b9-3dbb3294fb7b",
+    "name": "Osseous Exhale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33c3a81a-6cea-48c9-b966-67084d96e74f",
+    "name": "Osseous Sticktwister",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "791cbb7c-7935-4902-b050-9ea9d030e9fa",
+    "name": "Osteomancer Adept",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b6cb199-1564-4214-b24f-624dc962c907",
+    "name": "Ostrich-Horse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2420828e-b886-42d3-81ba-8ee81b6e1eb8",
+    "name": "Oteclan Landmark // Oteclan Levitator",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "43a6de3e-152e-4af1-acec-53405742425c",
+    "name": "Otterball Antics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2171c48-a816-41b2-aa55-e0ba2503fd6a",
+    "name": "Otter-Penguin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50d6fd91-23d3-4d32-804f-6233e4386904",
+    "name": "Ouroboroid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "855a2579-8f78-46ce-a3a8-eddc808bd7b4",
+    "name": "Outcaster Greenblade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee",
+    "name": "Outcaster Trailblazer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d16d51b-47e0-4cdc-83dd-a805ba50bd83",
+    "name": "Out Cold",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "637be5f7-ab39-4e3a-a5eb-c6e48fca00a9",
+    "name": "Outlaw Medic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b5ef88c-f863-4f55-91fc-a63f7f3c1b3f",
+    "name": "Outlaws' Fury",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9fda1239-97ca-41f0-8bfa-040484769396",
+    "name": "Outlaw Stitcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fcea912b-58b1-4068-ac4d-1bc89aa7f33c",
+    "name": "Out of Air",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d92f48d-c851-4b71-b7fa-916459928d59",
+    "name": "Outpace Oblivion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b194438-6946-45dd-8d77-c9de8c115d09",
+    "name": "Outrageous Robbery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "709d2f10-1585-48c3-9058-ddd5f62f0452",
+    "name": "Overgrown Farmland",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "975ec9a3-6f20-4177-8211-82526e092538",
+    "name": "Overgrown Tomb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5146b291-1170-481f-a4b9-709dd5c4b09c",
+    "name": "Overgrown Zealot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "571cb4b6-b4e5-40a2-a970-42c1ab65c8a9",
+    "name": "Overkill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "652e87af-7cf0-407f-9fb7-1a630fb8dd47",
+    "name": "Overlord of the Balemurk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2db05e0-879b-43e4-9009-37a95fd848dc",
+    "name": "Overlord of the Boilerbilges",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31196f0b-33ee-4981-ac97-24226e8b405f",
+    "name": "Overlord of the Floodpits",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4669e8c7-fc37-4b97-9cb7-8d29b43d9176",
+    "name": "Overlord of the Hauntwoods",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e64b1dc-a238-4bff-98ff-2bea44340568",
+    "name": "Overlord of the Mistmoors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8c3a293-ae6d-4c52-be2d-2d4b6a8edb66",
+    "name": "Overprotect",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "204f9afe-c20b-4933-b5cd-aa572784762a",
+    "name": "Overrun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "26b441b9-fdfb-43e2-bc02-b358653eadf4",
+    "name": "Over the Edge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc8a37f1-c36b-4d0f-82da-4558ff712565",
+    "name": "Overwhelming Surge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0372cde-bf30-4a1b-93bb-9ff4ac1c116d",
+    "name": "Overwrite the Multiverse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4cb63198-29b5-4607-bd4a-f449807fb764",
+    "name": "Overzealous Muscle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b05a2b5f-1b5c-4f1b-8a6b-525c5c8b8ba1",
+    "name": "Ovika, Enigma Goliath",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b01649b8-b0b5-4cf6-aea7-291f3407859e",
+    "name": "Oviya, Automech Artisan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1ebb60e-fbf3-4f8f-a76f-d637ec59ffb0",
+    "name": "Owlin Historian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aba5c046-2f8c-4749-b347-9a7d8cb1c865",
+    "name": "Ozai's Cruelty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7472af8e-2e93-43b2-bc32-a3741f6d7502",
+    "name": "Ozai, the Phoenix King",
+    "status": "unsupported"
+  }
+]

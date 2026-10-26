@@ -1,0 +1,3202 @@
+[
+  {
+    "oracleId": "1acb289f-fb7f-4d83-aaef-4e7b9462c593",
+    "name": "Pacesetter Paragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2c14195-2747-490e-99ef-5b71048ff51a",
+    "name": "Pacification Array",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f5e0b10-c8cf-450c-bfd3-bcb0528ec330",
+    "name": "Pacifism",
+    "status": "curated"
+  },
+  {
+    "oracleId": "61ad6bd2-c079-44e7-a1d9-8089f086ec69",
+    "name": "Pack Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3701ed34-a97c-4d7b-a15a-4faec02ef24b",
+    "name": "Pack Leader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f62d4437-bac6-49c8-9aeb-07de78551df7",
+    "name": "Pack Mastiff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5632c2df-71e6-41b7-b8f5-c683812cc0e2",
+    "name": "Pack Rat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b7abe71-0be3-4dd4-880e-88b65b47ea4d",
+    "name": "Pack's Betrayal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "072288da-5ba0-4176-b0e6-b3e43ecab2ec",
+    "name": "Pack's Favor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd796e12-c422-4869-8d59-794600425381",
+    "name": "Packsong Pup",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e02fff6b-9ee4-474f-97fc-d70d4bc8001b",
+    "name": "Pactdoll Terror",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f3e213a4-ba5a-468a-93b3-c0a34e1bd725",
+    "name": "Pact of Negation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0c7ba712-6a99-4d2f-9242-a2163a11f69c",
+    "name": "Padeem, Consul of Innovation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bbad38b-7d88-4ff2-9fd3-5081536e7c56",
+    "name": "Page, Loose Leaf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9975888-c75f-471e-a70d-17449e92226d",
+    "name": "Pain 101",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4eedf21c-0ad1-48da-a9fe-2ffdbf8371e9",
+    "name": "Pain for All",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c37051cc-6683-4dbb-b5ff-5c3a5bdab1df",
+    "name": "Painful Quandary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58a2d15f-1b4b-4303-b524-8cc0d1b3e7d2",
+    "name": "Painful Truths",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "baf93873-35e6-4bf2-bdcc-78a5206422fb",
+    "name": "Painter's Servant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2af01e09-f233-4675-89cd-470816471c62",
+    "name": "Painter's Studio // Defaced Gallery",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "99262e50-94c1-4796-a7bf-11d7b6164839",
+    "name": "Paired Tactician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac9d52b2-78a5-4b17-8aaf-1c1cb936a508",
+    "name": "Paladin Class",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f44dc71d-d08a-45ed-ac7c-f6d1ef811d96",
+    "name": "Paladin of Atonement",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb5a02ce-6080-47f9-815a-fef3758d753b",
+    "name": "Paladin of Predation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f340018d-8b68-45d5-a72e-a922be68365d",
+    "name": "Paladin of the Bloodstained",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22076484-e9d5-4f33-8cf3-b9b427436b05",
+    "name": "Paladin's Arms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc548b03-ef5f-40df-8311-35d4cf26f3c5",
+    "name": "Paladin's Shield",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce6b6869-e4d7-4156-b66d-57fc224e4b20",
+    "name": "Palani's Hatcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7798a4d9-1c1d-48e6-b9a2-ecd6aec1efa7",
+    "name": "Palantír of Orthanc",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c2b10ba-1930-4da8-9570-c89b2e239e3e",
+    "name": "Palladia-Mors, the Ruiner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b0767b8-b504-456e-93bd-218502f73b3d",
+    "name": "Palladium Myr",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76678885-3674-443d-b9a2-2a460cf6aac0",
+    "name": "Panharmonicon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6de64e59-0a47-46c4-90bf-c56e63266f19",
+    "name": "Panicked Altisaur",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc58a086-2743-4465-bf16-4a20701cd3b1",
+    "name": "Panicked Bystander // Cackling Culprit",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ead0820e-fc6b-4ab2-9110-048d6d53985d",
+    "name": "Panther Pounce",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b828ba28-e98d-498b-9ab4-d4aa7143e407",
+    "name": "Pantlaza, Sun-Favored",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0494c34-f142-441f-b7f8-e981416f0bad",
+    "name": "Papercraft Decoy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e119869d-1f66-402b-8251-d351965cf0d3",
+    "name": "Paradise Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d38937a6-ab1c-4de8-a278-d81a6ce0d921",
+    "name": "Paradox Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "638ff242-63d5-457d-a7a6-40ad51052e2e",
+    "name": "Paradox Gardens",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "daff0e7b-08f2-435f-97b9-9b000e94ffa8",
+    "name": "Paradox Haze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2cce7250-f8f9-4c0a-87b1-ba3c5b8ed6b3",
+    "name": "Paradoxical Outcome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "511951ed-fbff-4e44-9429-27f237496672",
+    "name": "Paradox Shaper // Omit Variables",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "247cc471-fed5-41e3-8b6a-a10bbc129b36",
+    "name": "Paradox Surveyor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1c62704-1f20-48cf-8588-47e7fca85f7b",
+    "name": "Paragon of Modernity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0accfb04-bc8b-4cab-997a-2337ac42db8f",
+    "name": "Parallax Wave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84dc94b2-95fb-4d53-aaa2-191cb645639f",
+    "name": "Parallel Lives",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9076a886-efe0-4c99-8661-f0fd7a7b3129",
+    "name": "Paramecia Coloniex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8cbe71d3-b77b-49a7-9c51-ed308011b8b0",
+    "name": "Paranormal Analyst",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9763c75-75f7-4766-8cca-84c899796e3c",
+    "name": "Parasitic Grasp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fc0f58c-5f7f-4a32-8f14-cae696672beb",
+    "name": "Parasitic Implant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de83b309-ac31-4a57-95e6-ccd3659e6c1f",
+    "name": "Parcelbeast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e660f66-0a94-4694-95e0-25296799b193",
+    "name": "Parcel Myr",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "82ff4500-b118-4ce7-9f7c-92661328b242",
+    "name": "Pardic Wanderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24d22bcb-8a77-4c47-a508-6f4bc093c1d0",
+    "name": "Parhelion II",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4891bfc-12b7-4412-be11-d02e6d014463",
+    "name": "Parhelion Patrol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c5c8250-1860-42a1-a335-071f54830d37",
+    "name": "Pariah",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1733392-1402-458b-bbc7-673d733c731c",
+    "name": "Parish-Blade Trainee",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03d1a4e9-3ebc-491f-8741-5d933b500abf",
+    "name": "Parker Luck",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fd92b588-f273-4206-9887-34e6877fc14f",
+    "name": "Park Heights Pegasus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1a9c467-2d64-4e11-adf3-7333c923b187",
+    "name": "Part in Friendship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "367bb252-41e1-4f98-9d22-442dd332cccf",
+    "name": "Parting Gust",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54dd35ee-6f89-460d-9370-72bc3fa6840a",
+    "name": "Part the Waterveil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8df7a58c-053f-4ead-a778-2747718e5f10",
+    "name": "Party Dude",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03cd7583-d054-4359-8c94-7776c54198ed",
+    "name": "Party Thrasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bdb94ccd-1bb5-4bb7-9539-e1b1c97c19c5",
+    "name": "Pashalik Mons",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e9832d58-0ee6-4641-a9fd-d34d54b3b11c",
+    "name": "Passenger Ferry",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9a2bc266-4076-4923-b201-5898b18cbad9",
+    "name": "Passwall Adept",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37a18736-5fe2-4897-809b-013497bdd890",
+    "name": "Past in Flames",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "256ab710-4210-4142-973f-22ca029d5474",
+    "name": "Patagia Tiger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0b7e950a-89e1-4ec4-94af-5af2f1252b12",
+    "name": "Patched Plaything",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34a7026f-c6ca-4d89-8364-fd60fb613634",
+    "name": "Patch Up",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ba86a50-13df-4b26-8b3a-9e3917ff850f",
+    "name": "Patchwork Automaton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fb00dbe-1f82-4ba6-b18c-97e816d10d3a",
+    "name": "Patchwork Banner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6cf995e9-115a-4659-bace-9fbe75898b48",
+    "name": "Patchwork Beastie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74cbe86b-cc8c-4a5f-93c3-f4eaced50393",
+    "name": "Patchwork Crawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e52e91b-70e6-4f26-a5d4-b8e33d1debbf",
+    "name": "Pathbreaker Ibex",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "54452df0-560c-4561-9dd2-3903ae49c91b",
+    "name": "Pathfinding Axejaw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0247a19-9c8f-422c-88cf-9f298c3a8c96",
+    "name": "Pathmaker Initiate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eca6ffeb-463c-40b0-90b4-7e09e5579c10",
+    "name": "Path of Annihilation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fc04bfa9-a8f9-478d-8164-34b1e6c85417",
+    "name": "Path of Bravery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "52714c3c-6821-44dd-88ba-813554df9914",
+    "name": "Path of Discovery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "db9ea3f9-c723-422f-98cc-a3ef7ca2c290",
+    "name": "Path of Mettle // Metzali, Tower of Triumph",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d41987b0-2ea0-4cc7-8608-70c486db76eb",
+    "name": "Path of Peril",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d683d985-9888-4d21-8b5f-69e69ce4a03b",
+    "name": "Path to Exile",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac94860b-70b8-4624-9758-4bb024a56f60",
+    "name": "Path to Redemption",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e54d4ecf-ebcc-4374-98e7-c682f83c82a9",
+    "name": "Path to the Festival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a933f443-dd53-4805-8446-72693a27cb56",
+    "name": "Path to the World Tree",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bddd7e99-ec74-4ca6-9137-155b85695a95",
+    "name": "Patient Instructor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ba7c1062-f777-4ba9-84df-ec340a9ec514",
+    "name": "Patient Naturalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df9fe645-6f7b-44a0-ab69-b68cb7e525cd",
+    "name": "Patient Rebuilding",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f65c853-5262-4b75-b324-1fe0c165170d",
+    "name": "Patrician Geist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1df7a09f-fbc8-4c2a-a903-bab9e680eda7",
+    "name": "Patriot, Shield Wielder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c44d62f-52de-446c-9824-6b474534a612",
+    "name": "Patriot, Young Avenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4d36ea21-e8cb-442d-ba3f-c399289ac208",
+    "name": "Patron of the Valiant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5b33c1a-6e15-4a08-b834-38b0465b0cfb",
+    "name": "Pattern Matcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7f266b5-7258-4eaa-b447-66460ec38505",
+    "name": "Pause for Reflection",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa99cf82-ebf1-4526-ab9c-b24eb2970f2a",
+    "name": "Pawpatch Formation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "50ab0194-c7dc-4f11-abc0-1a82393cc42e",
+    "name": "Pawpatch Recruit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f89f7c7d-6eb3-4335-b9df-0ccaa9c50558",
+    "name": "Peacewalker Colossus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9bdc1e63-1cf9-4ddb-a7d5-f2a2eb91bdfd",
+    "name": "Pearl-Ear, Imperial Advisor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7ae125c-955b-4cfd-9aeb-e6572c0d4d3d",
+    "name": "Pearl Lake Ancient",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "19015380-1332-4960-8cc6-0732009525a2",
+    "name": "Pearl Medallion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91ddd2bd-2dec-4670-8edb-e89c009b2187",
+    "name": "Pearl of Wisdom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d55f7e20-11c6-44e2-8a21-dca67d3dbc68",
+    "name": "Peculiar Lighthouse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22196948-9f30-4fcd-b43b-c7f81a0f4f36",
+    "name": "Pedal to the Metal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "873abbf4-c9b5-4b8f-8cd0-613cf3b9b1d5",
+    "name": "Peek",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65dc05d0-f885-4fe5-9a23-d6b75185c179",
+    "name": "Peel from Reality",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a00f56e-e558-4239-bc75-fb0af7639042",
+    "name": "Peema Aether-Seer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7747e94c-35a7-4e3b-956b-339a16634502",
+    "name": "Peema Outrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "21fa2442-6eac-4dce-a9cc-76f0053fdb8f",
+    "name": "Peer into the Abyss",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "938c03fc-8adf-4c7a-8ae1-eca8401f7a83",
+    "name": "Peerless Recycling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7aaffed-a143-49d6-a516-b9bc8b503aee",
+    "name": "Peerless Ropemaster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fe3b0393-dc50-4fa6-9b3f-1175a6a825e4",
+    "name": "Peerless Samurai",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8fb7ad08-9bb2-49f1-8ed0-8cc8abca4fe0",
+    "name": "Peer Past the Veil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24db5905-d513-42c6-9e9d-114ac5cbd21d",
+    "name": "Pegasus Courser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f3c6b8e-df89-4f0c-97bb-fbfcda5232b4",
+    "name": "Peggy Carter, Secret Agent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0fd6889-20b4-439b-aa97-2e90aca1675a",
+    "name": "Pelakka Predation // Pelakka Caverns",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "d36075c2-de66-4202-9217-b1102a2bc14b",
+    "name": "Pelakka Wurm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ce0b3c22-3f77-4a6c-a126-9ed3c06b4482",
+    "name": "Pelargir Survivor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2348f3d4-02cc-4611-a7e0-b77604d5f2e8",
+    "name": "Pelt Collector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "992075d5-f413-4896-b75e-7bb2d589c50e",
+    "name": "Pendulum of Patterns",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a4e34111-aefd-4c61-a6e3-ac8895799c3f",
+    "name": "Penregon Strongbull",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b8736e2-fc41-4a25-bb6c-7351afc40981",
+    "name": "Pensive Professor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "72e8d67a-41e6-4074-bcbd-b54ead995237",
+    "name": "Pentad Prism",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f0787397-8edb-4794-8ee1-22f97a057be8",
+    "name": "Penumbra Bobcat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "188da0ad-8524-4fb2-915e-1876dc9df89f",
+    "name": "Peregrin Took",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be5138fd-3e92-42b9-93c5-311e66bd443f",
+    "name": "Perennation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee4b7aca-31dd-4369-8e85-b300892b9b41",
+    "name": "Perennial Behemoth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d824a319-fa74-42e4-9cbe-dba1576d6bad",
+    "name": "Perfected Theory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da099c34-74b2-4db8-8583-09bf2c56606f",
+    "name": "Perfect Intimidation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3643f66-dfa2-4275-a093-23e162496354",
+    "name": "Perforating Artist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e0a35a44-e56d-434e-8043-43d5031b2e84",
+    "name": "Perigee Beckoner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2b472dd-047d-47eb-9ebb-df6aa4b52dd4",
+    "name": "Perilous Landscape",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1e8f746-1837-4ea8-9a07-e57946883353",
+    "name": "Perilous Myr",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cff7499a-44b0-4a2a-b96c-ed2cafb1a90d",
+    "name": "Perilous Snare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7acd7ef5-0e26-436d-962a-1a391f81c2e8",
+    "name": "Perilous Vault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ab090db-f8fc-42ff-95db-e9370796db97",
+    "name": "Perilous Voyage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be8d3788-709b-4d10-861c-a6f27d4b63a6",
+    "name": "Perimeter Enforcer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef625caf-c5d3-47f4-b1fb-bd040c5d864c",
+    "name": "Perimeter Patrol",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6e1b21f9-c890-4d27-81d0-d38bf7493d33",
+    "name": "Perimeter Sergeant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e719329-612e-4ad5-ac95-6eb5328738ab",
+    "name": "Permeating Mass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "367d4cf2-270f-4236-af10-7d5e8ea8c9fe",
+    "name": "Persist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "77eb76cf-a361-44e0-aeee-e8ef4b695799",
+    "name": "Persistent Marshstalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0e488c6c-aae2-450f-b969-7bb5a1b37a66",
+    "name": "Persistent Petitioners",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f4ad578-f2c4-47f6-8080-8fbc17383f6f",
+    "name": "Persistent Specimen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1708ad9-35d4-4243-92ca-ddf9d129aa32",
+    "name": "Personify",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d18cd9b-6013-48d7-9269-4787e7585a51",
+    "name": "Person of Interest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b401179f-eded-4973-8182-df4627133886",
+    "name": "Persuasive Interrogators",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2970d09b-4bef-468e-8de5-f994c820ccc0",
+    "name": "Pestbrood Sloth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "072db429-3838-42ba-89b6-e26cbce22af9",
+    "name": "Pest Control",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b0dbfd40-ecc5-493b-976b-bc3f62137fcf",
+    "name": "Pestered Wellguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83cf4235-eb4e-4c55-839a-f2740d41ed5e",
+    "name": "Pestermite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78780f37-f215-4ae1-adce-6255b0146873",
+    "name": "Pestilent Cauldron // Restorative Burst",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "b24d1540-ed8b-4df3-abfe-1b8492a58388",
+    "name": "Pestilent Haze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83930f98-5596-4713-998c-732d5ecedf72",
+    "name": "Pestilent Spirit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b27303b-756e-45b9-956f-6bbbd83d31ab",
+    "name": "Pestilent Syphoner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "39940633-ef64-408e-ae8f-ade201fe7f06",
+    "name": "Pestilent Wolf",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "1b704798-0c69-4c18-ac7e-42933ce90028",
+    "name": "Pest Infestation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b8ecddf7-ba89-40dd-9f63-5bad27dd850d",
+    "name": "Pest Mascot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c2a4066a-f911-4622-beb2-683e7e10822f",
+    "name": "Pests of Honor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6e0cb77-4115-4948-8e1e-fdb774b1b254",
+    "name": "Pest Summoning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bbee7921-19c9-4c70-8462-f16e7e9c25db",
+    "name": "Pet Avengers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1b7488c-c675-42e9-818a-24a50347ec2c",
+    "name": "Peter Parker // Amazing Spider-Man",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "10777360-c046-43e3-ab44-9d0b926fbbf8",
+    "name": "Peter Parker's Camera",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4bc5bc4-e589-42c5-91fa-2ebc96448e85",
+    "name": "Petrified Field",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78a2972c-14f4-41f3-99f9-167948bdd73a",
+    "name": "Petrified Hamlet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebec110e-aff3-48aa-abf6-309dd2ffb478",
+    "name": "Petrify",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bd9b3009-f389-4831-b250-80c4bb8f25e5",
+    "name": "Petrifying Meddler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "857db7e0-254a-4920-a71d-9bab6555342f",
+    "name": "Phalanx Leader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9962a9cc-6e9f-461e-a9d3-8c28ec34caf1",
+    "name": "Phalanx Tactics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "265f461e-d076-4119-8ea4-96360305f3a0",
+    "name": "Phalanx Vanguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d21facb6-27c2-49cb-9f13-7d6079096eda",
+    "name": "Phantasmal Form",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bde94af8-faea-41ff-8eed-ba642eac9968",
+    "name": "Phantasmal Image",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e514bc9-7c8c-4257-9dbc-19a78f61df05",
+    "name": "Phantasmal Shieldback",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d95e7282-b298-4410-baac-01766d6852e3",
+    "name": "Phantom Carriage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0db20037-35b3-4b1f-8dd6-3ee797c421ca",
+    "name": "Phantom Interference",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e7a13f43-1171-4808-9964-c5ad424027cb",
+    "name": "Phantom Ninja",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0c4eb78-bee0-42c6-ab1e-64bacde87960",
+    "name": "Phantom Train",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "23745133-e5e2-4ce3-b94a-73d0d3d8a013",
+    "name": "Phantom Warrior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c02c8e3-943a-4c20-9dad-1408793a825e",
+    "name": "Pharaoh Rama-Tut",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7d05d00-1e69-4d11-bff0-c1ca2026aad6",
+    "name": "Pharika, God of Affliction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5a26a1b-d2be-406e-a6a9-1993045313b5",
+    "name": "Pharika's Chosen",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "32c84176-cf11-4010-b1cc-ed570a8c3e54",
+    "name": "Pharika's Libation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a44955e7-f1ad-41b9-b93d-0a980ac341d8",
+    "name": "Pharika's Spawn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b70b739b-b147-4abe-8e48-26e7ea02a9f6",
+    "name": "Phase Dolphin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5d86a59a-ba1f-45f7-b829-dca6f9f3e624",
+    "name": "Phelia, Exuberant Shepherd",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "046ccc8a-ec0d-4dc5-b41d-5e8a6d86812a",
+    "name": "Phenax, God of Deception",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "01499544-6850-49f0-a66e-113df19c4340",
+    "name": "Pheres-Band Brawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08f17ebc-c0fd-493f-84b3-e9250694543e",
+    "name": "Phial of Galadriel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3407eb6e-b74d-4159-a801-d7163937953c",
+    "name": "Phlage, Titan of Fire's Fury",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "40bb7b6b-a75d-4b59-ba45-a5801dcd59a1",
+    "name": "Phoenix Chick",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8cc7e418-cc5e-4aef-9757-874223fccd74",
+    "name": "Phoenix Down",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ffe71c0-acb5-4ba9-8c2f-719330e1ea69",
+    "name": "Phoenix Fleet Airship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ad557fc-6b7e-4f7e-b060-e3c8ec8acf6d",
+    "name": "Phoenix of Ash",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5424e33-ff4e-4c82-8aa9-9d25ced7830a",
+    "name": "Photon Blast Barrage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d0aa801-1227-4226-8c27-3bdd441857aa",
+    "name": "Photon, Lady of Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c46d6f42-5e50-4c0d-8908-360337285f83",
+    "name": "Photon, Mighty Marvel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "520c4d88-34b6-4a26-81ca-65eb8b10461c",
+    "name": "Phylactery Lich",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3d79cbe2-cf1b-4313-ab47-0118fcdbfc6c",
+    "name": "Phylath, World Sculptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cdef800d-033e-4095-964d-9b6066f9fd36",
+    "name": "Phyrexian Archivist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee579a32-a048-4335-b966-231ba731cdea",
+    "name": "Phyrexian Arena",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b85d54e9-4f21-4440-9fd4-7b73b560c99d",
+    "name": "Phyrexian Atlas",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0566ab5d-c804-4ac0-add2-87fc352b4c7e",
+    "name": "Phyrexian Awakening",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7d5e4033-bd58-4854-b9d3-a440240995ee",
+    "name": "Phyrexian Broodlings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c77de57-29fd-45ba-b2c7-eef231c6b7c7",
+    "name": "Phyrexian Censor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "554de904-086c-428c-9f32-b0b2498a6fd5",
+    "name": "Phyrexian Debaser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "022b42a6-ee0f-4080-b973-c1b68938c3be",
+    "name": "Phyrexian Dragon Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32dce35e-182d-41be-9fb2-b0738d0781b8",
+    "name": "Phyrexian Espionage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d3a5a830-cd14-49da-9412-c50049c74c92",
+    "name": "Phyrexian Fleshgorger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a3925dfd-62b0-44ef-8545-7bee92cad5a2",
+    "name": "Phyrexian Gargantua",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3c87cb9-a37a-428e-95d1-e6dd90b31097",
+    "name": "Phyrexian Ironworks",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "340bbe8b-e987-4c3e-ab4e-9dee63e57d4f",
+    "name": "Phyrexian Metamorph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "be04f54f-59fa-4f0a-b8b5-790d568932b6",
+    "name": "Phyrexian Missionary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "41820f91-27cf-41c0-bb5e-9adf6845a6a4",
+    "name": "Phyrexian Obliterator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "30236ff8-f6d5-462d-9a2f-846b2d8a1ca6",
+    "name": "Phyrexian Pegasus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36c800cb-b1ca-4432-ad3c-4d8b90337f4c",
+    "name": "Phyrexian Processor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e409c9be-0c9a-43c3-adb4-8c47afc1d551",
+    "name": "Phyrexian Rager",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "647ca69e-cc01-4b2b-b376-bee2a98331e8",
+    "name": "Phyrexian Reclamation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "786b3657-b595-4b38-83f2-d40915e51e2b",
+    "name": "Phyrexian Revoker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11173ad3-c007-478f-bce0-d756eac07ccb",
+    "name": "Phyrexian Scriptures",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1861e642-21d5-4232-89f3-b5557f2946c1",
+    "name": "Phyrexian Tower",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6598d988-d60e-4441-88b6-8d0995c4675a",
+    "name": "Phyrexian Unlife",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b5cfbb7-21ed-491d-b77d-547e4d30a7da",
+    "name": "Phyrexian Vindicator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c99ce14-5059-47a9-b874-637b39473062",
+    "name": "Phyrexian Vivisector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05075332-6856-4147-a22d-3a5bd1e96b7b",
+    "name": "Phyrexian Warhorse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6519dc16-4960-4220-aaa8-7e4279743714",
+    "name": "Pia, Aether Ascetic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86084ed9-b8bb-4289-9579-6056194787bc",
+    "name": "Pia and Kiran Nalaar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a49c0c64-ea87-44f4-9acf-e7181962aeb2",
+    "name": "Pia, Determined Rebuilder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "715336f5-a708-488b-9f30-5702a9013af0",
+    "name": "Pia Nalaar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31cb87bf-1020-4fd5-95f7-8ecb197d823b",
+    "name": "Pia Nalaar, Chief Mechanic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "65d4ebdb-8757-4e5e-9411-d78597e20d57",
+    "name": "Pia Nalaar, Consul of Revival",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "22d82f4c-2896-477e-8d20-8fe43acd4ba2",
+    "name": "Picklock Prankster // Free the Fae",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "bef3fca4-7290-416c-a100-1b7abbe7886e",
+    "name": "Pick the Brain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "873e739c-edf4-46a7-9024-5caaf87f507e",
+    "name": "Pick Up the Pace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9af4a832-d634-47aa-91ed-79d44fe08864",
+    "name": "Pick Your Poison",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "334fba11-e500-40fd-a142-41ff553642b5",
+    "name": "Picnic Ruiner // Stolen Goodies",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "4fd74a8c-a4e7-4988-ae02-9a73ab6ec89e",
+    "name": "Pictures of Spider-Man",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7b599b4d-95bc-4ed2-a167-84a697944747",
+    "name": "Pieces of the Puzzle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e4504c1-4349-408d-8fdf-0c44efdd3f56",
+    "name": "Pierce the Sky",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea96fe35-88ed-432b-a495-08e787d23d0b",
+    "name": "Piercing Exhale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a6c7826-dcfe-4029-894e-6c82c4dd84b7",
+    "name": "Piercing Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a13f4095-300b-434f-aa9a-3608aaae5163",
+    "name": "Piggy Bank",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "89abdf4c-ba9d-4602-ae50-cf79c68ea08d",
+    "name": "Pigment Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c008d60a-ee06-4411-b8e7-c2df13616105",
+    "name": "Pigment Wrangler // Striking Palette",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "0534e20d-8352-4d9f-a617-378070602673",
+    "name": "Pileated Provisioner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "361b0d7f-1e43-45c5-92c2-92baacaf326f",
+    "name": "Pile On",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d13f0907-de39-4a90-940a-831740d7aa9b",
+    "name": "Pilfer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8dbe7a06-3935-44a3-ac47-4ef00ed990f1",
+    "name": "Pilfering Hawk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "61017a67-653c-4f75-9ec3-22d2149340a8",
+    "name": "Pilfering Imp",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f67084bb-07f8-420a-ad6e-9ab9842d3ee6",
+    "name": "Pilgrim of the Ages",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66155010-cc2c-449a-85d5-92c95aade514",
+    "name": "Pilgrim's Eye",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "91740570-1a97-4513-8af9-b32c363daf15",
+    "name": "Pillage the Bog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5cf9002d-6c04-420b-8c3b-0a17f674bb09",
+    "name": "Pillardrop Rescuer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ee2a7ba-a676-4d05-b214-7db52e41afe7",
+    "name": "Pillardrop Warden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a39c758d-82be-4d8c-bb3e-8ee8a6c6788b",
+    "name": "Pillar Launch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "468cfc88-a493-44dc-9d0a-63d9cc89c114",
+    "name": "Pillar of Flame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e62f30d-3130-416e-b459-48b5f71f8be9",
+    "name": "Pillar of Origins",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "961e3023-39ea-4141-99b6-738280a2815d",
+    "name": "Pinecone Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c92b862-34c7-4195-bee3-bcc0cafad140",
+    "name": "Pine Walker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "522e8db5-857e-492f-afed-d60cd2ce3dcd",
+    "name": "Pinnacle Emissary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad556aee-3dbf-4c8b-9f3a-31947e26c6f5",
+    "name": "Pinnacle Kill-Ship",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f3d48efa-910a-4872-a5b1-a353c5dbce99",
+    "name": "Pinnacle Monk // Mystic Peak",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "10e0b563-4dfc-4530-a010-0ba40bdf02ac",
+    "name": "Pinnacle Starcage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6762a65-5c88-4652-ac3d-b9de220634c7",
+    "name": "Pious Interdiction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8790c7be-c14a-4293-bc4a-3d0efe42ed79",
+    "name": "Pious Wayfarer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a6c5c5ea-0bd0-4d5a-bd3f-6217f14c9939",
+    "name": "Piper of the Swarm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "25afddd2-6e48-4742-b34e-e3b5def7c0fd",
+    "name": "Pippin, Guard of the Citadel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c7ec52b1-295a-4daa-86fd-dcbe6fb412d7",
+    "name": "Pippin's Bravery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08a5445b-e9e6-44c3-9bc4-aff1b91c18a7",
+    "name": "Pipsqueak, Rebel Strongarm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58d87cfe-7402-43c3-81ce-13de8cd04005",
+    "name": "Piranha Fly",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b9080653-87cb-4443-a4a3-36637d5ad165",
+    "name": "Pirate Hat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4771a871-576e-4a14-92f0-b5b41c63d615",
+    "name": "Pirate Peddlers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac77591c-39d7-4fd1-a6e9-805f57c6614a",
+    "name": "Pirate's Cutlass",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a2e866b-9642-495e-b47f-5b13a24373cc",
+    "name": "Pirate's Pillage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6de8bdc0-9b2a-4105-bbac-d5a2f73f52dc",
+    "name": "Pirate's Prize",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "790e3c9e-7d94-43f7-bc14-d83c7d4c889e",
+    "name": "Piston-Fist Cyclops",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49bfecc3-6258-454e-a8fd-fc49098a0898",
+    "name": "Pit Automaton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86e2bbdd-a788-4f76-9ebb-ef48d9bc9dcf",
+    "name": "Pitchburn Devils",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a188fe7e-68de-4c7c-806c-bfe8fc7b44bf",
+    "name": "Pithing Needle",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "186bfdac-ce9c-476f-89b6-ef467487fca5",
+    "name": "Pitiless Carnage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d46a97a-b1d6-4bf3-b3ba-a5cdfd4c8bf5",
+    "name": "Pitiless Fists",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4704ce78-b287-4038-abdd-ddb20116874d",
+    "name": "Pitiless Gorgon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a784481f-eccb-4112-bb38-04a659319660",
+    "name": "Pitiless Plunderer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "46a9f5af-b024-497d-9f55-98d17e2ffa76",
+    "name": "Pitiless Pontiff",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "340e1078-5158-4199-ab43-976741780b2b",
+    "name": "Pitiless Vizier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "044d2788-6daa-4849-a813-1f577eef9295",
+    "name": "Pit of Offerings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b6003419-1a2a-46f3-b32c-47b825324f78",
+    "name": "Pixie Guide",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3bd066d3-5b07-4986-9e6c-39d1ae6212ff",
+    "name": "Pixie Illusionist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e71479c9-bb38-4112-bf8a-41b39a3ade51",
+    "name": "Pizza Face, Gastromancer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "502f8beb-0132-492f-bbfb-acf1ea532967",
+    "name": "Placid Rottentail",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1c95b7cf-be4d-4961-9073-3e39487492c8",
+    "name": "Plagon, Lord of the Beach",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e3ee458-fa3f-4452-ab95-5a7fb5a0483b",
+    "name": "Plaguecrafter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4e6747f8-abd4-4e97-a91e-17c7025a07ad",
+    "name": "Plaguecrafter's Familiar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d6912f52-e478-4cc6-a34c-67e372abc4fa",
+    "name": "Plagued Rusalka",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4cd096ac-dd67-4208-a3ad-8e6061b442c6",
+    "name": "Plague Mare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af7abd22-3134-4872-bbe2-0ad84742d9e5",
+    "name": "Plague Nurse",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "efc12acf-ffef-40a6-b2ce-fe93e89ad840",
+    "name": "Plague of Vermin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b7639d86-4c7c-423f-8b13-fde3086d3cbb",
+    "name": "Plague Wight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+    "name": "Plains",
+    "status": "curated"
+  },
+  {
+    "oracleId": "9ae30bd5-b638-4647-b59d-ffe08e77c182",
+    "name": "Planar Ally",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "853c6cc0-ed2b-4d65-add1-2449ade8cf68",
+    "name": "Planar Bridge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a98c2d81-4add-4292-bbdd-e1b69ff936d4",
+    "name": "Planar Cleansing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6128679e-7e54-41e4-ab6e-25aeeffed49f",
+    "name": "Planar Disruption",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc48079a-b1c4-4c43-a989-418c78a264ec",
+    "name": "Planar Engineering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b368121b-9984-4a01-8d35-d1e4a8a87539",
+    "name": "Planar Genesis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a959a91a-3e1d-4bd4-9e14-5ee977540146",
+    "name": "Planar Incision",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f89d093d-c815-4df7-a348-2005aa227586",
+    "name": "Planetarium of Wan Shi Tong",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af23d348-adc9-451e-af08-bf9b1986c591",
+    "name": "Planewide Celebration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fd2cac5-cd29-4a47-9e89-9c6be39a0b67",
+    "name": "Plan for All Outcomes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a9471b33-b5b0-408a-9900-6964e5fe42da",
+    "name": "Plan the Heist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9e769a65-7aa5-484d-9493-badb485b5964",
+    "name": "Plargg and Nassari",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0e85762-e433-4a23-bbee-69daeebb5898",
+    "name": "Plargg, Dean of Chaos // Augusta, Dean of Order",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ac5258c1-5b46-4892-a445-bfd56875f039",
+    "name": "Plasma Bolt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dedf0d3a-090a-4cc3-b5ee-65b6cb990b72",
+    "name": "Plasma Jockey",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "36082b5e-760b-4245-af59-00d308470d1a",
+    "name": "Plate Armor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1589d90d-411a-4e77-9771-51518b2b224b",
+    "name": "Plated Onslaught",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b148578c-c0bf-4785-b97c-4b6f83028008",
+    "name": "Platinum Angel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "339c39d9-7e10-458e-b602-4f0550840436",
+    "name": "Platoon Dispenser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "933e4e8a-01ea-4f58-8f5e-4f6c43f4e105",
+    "name": "Platypus-Bear",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2094fb68-3859-401f-97f2-c8bae64a4822",
+    "name": "Playful Shove",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "5ffc1e77-152b-4a82-8ea8-2c79cc31d5ef",
+    "name": "Play with Fire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ff1d6d8-8cea-4a25-90d9-b575f4c99bc8",
+    "name": "Plaza of Harmony",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c58d241-4d9f-4b46-b8ee-f4587f9acfd6",
+    "name": "Plaza of Heroes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ad501bcb-b838-4716-9759-98c484772285",
+    "name": "Pledge of Unity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a5492d28-b1bf-408d-a048-8f200158d6b1",
+    "name": "Plow Through",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b099fc54-cdbc-46cb-b4e4-7c2ca77b115b",
+    "name": "Plumb the Forbidden",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "04669a6f-6299-465b-a26e-6cae37cdc081",
+    "name": "Plumecreed Escort",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0eb8983e-4e44-4bfe-81dd-ddb41007a166",
+    "name": "Plumecreed Mentor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "85bde6ac-3dd4-4946-8b57-24f57e3eae2b",
+    "name": "Plummet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da2d27f7-cced-4118-bddc-41712e37e916",
+    "name": "Plundering Barbarian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ab13412-1eaf-40c0-905d-8a3ca0c51be5",
+    "name": "Plundering Pirate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "526f520e-b4bb-4215-9c6b-afc298744f06",
+    "name": "Plunder the Trollshaws",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a272f15d-caa2-40e9-894f-19638bd5f375",
+    "name": "Plunge into Winter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9780d975-acbe-40c6-b444-1e1e6b772788",
+    "name": "Poetic Ingenuity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f474d421-5fd0-4d76-95cb-4824a2381a29",
+    "name": "Poet's Quill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "aff9a568-2848-4614-a28b-b1ea84f7f0b7",
+    "name": "Pointed Discussion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ffe9c8b-e0cb-4a29-bc14-649dbec5d1f3",
+    "name": "Point the Way",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e08debdc-2db5-4562-8a02-4158bfc0db88",
+    "name": "Poised Practitioner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e88a2b71-c90d-4e16-99a3-93d11fe7a968",
+    "name": "Poison Dart Frog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4b0e5626-0282-42e5-abef-a079b26a8e5f",
+    "name": "Poisoner's Apprentice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58020778-554c-4af6-8484-0b90f64bc5d9",
+    "name": "Poison the Cup",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c9bf40b-ddcb-4f46-a81e-56b91dfc784f",
+    "name": "Poison the Waters",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d0e810bb-5f38-4045-a718-30d423c05659",
+    "name": "Poison-Tip Archer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0bbceb51-1fb8-44d7-8afc-b4746d292262",
+    "name": "Political Triumph",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f200a14-7e5b-4b7c-a283-5cf9abb1f95d",
+    "name": "Pol Jamaar, Illusionist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "828fe0c0-e280-4a8b-9e49-68cb34c2da97",
+    "name": "Pollenbright Druid",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ef02f2b-b611-40c3-a1d5-8b34989643cf",
+    "name": "Pollen-Shield Hare // Hare Raising",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "efd2a4ca-1bd0-4762-a997-f099326b1746",
+    "name": "Polliwallop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13b33a41-c22b-4e7a-8323-abadf7f80961",
+    "name": "Polluted Bonds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ef86989d-ce80-4e55-aece-7d11710eeffa",
+    "name": "Polluted Delta",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a766368-c982-4cba-9638-c7a56978c240",
+    "name": "Pollywog Symbiote",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a9fa906-b43e-4d98-b134-5936d3085851",
+    "name": "Polukranos Reborn // Polukranos, Engine of Ruin",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "649e7237-b38b-43e9-83f4-763751fb1bea",
+    "name": "Polukranos, Unchained",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ecbf5560-853a-43a9-bf70-ac8d403b0ce8",
+    "name": "Polukranos, World Eater",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bb039957-9e88-48cf-b41c-38d42eb87251",
+    "name": "Polygraph Orb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e47e3a40-f51f-41ed-8e7c-06200a2abc22",
+    "name": "Polyraptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33e3793c-098f-4897-88f3-9f9ce9081e0f",
+    "name": "Pompous Battlemage // Improvised Act",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "0361b9b7-9097-4aae-aa06-c63a5fb47a76",
+    "name": "Pompous Gadabout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "02090581-61aa-4348-ad57-451be8ee91c2",
+    "name": "Ponder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f278970-201d-4a93-b038-cc7218f2ac57",
+    "name": "Pondering Mage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6eabebdf-c1a3-4789-a67f-859f0957c5df",
+    "name": "Pond Prophet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05849bd6-8f38-4031-be2b-e2aa03beb8cc",
+    "name": "Pongify",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8cfb5181-8ab7-484b-8821-a62c561f762f",
+    "name": "Ponyback Brigade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1304825-b424-4bb8-8d29-a9f1b1fa163b",
+    "name": "Pool of Vigorous Growth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc2d0702-b140-4b78-8a8f-3a6d19073b59",
+    "name": "Poppet Stitcher // Poppet Factory",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "dda9ac6c-1ab2-4f77-b499-f03d587163d8",
+    "name": "Pop Quiz",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e6377683-1c36-4786-bd8d-c62ff2d25767",
+    "name": "Popular Egotist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c11bda3-903f-4b7c-9e5e-f6c5c91977cf",
+    "name": "Porcelain Zealot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1efd99f-d918-4cd1-b85f-b90b106c3c88",
+    "name": "Porcuparrot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "55fe5ec3-1c81-4e9d-9e4c-f68ce6d7c2de",
+    "name": "Pore Over the Pages",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e57a8cd-f4f0-40b2-84a0-e002751c0d40",
+    "name": "Portable Hole",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c30491b5-08fe-4694-9ac8-53be7b4b92ce",
+    "name": "Portal of Sanctuary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "301d1d8e-d3fc-4010-8b29-4724fa0b31cd",
+    "name": "Portal to Phyrexia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a217f386-11b5-48f0-b173-3b0700ba295f",
+    "name": "Portcullis Vine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15d794f4-7789-40e3-9ee0-b09250c0516d",
+    "name": "Portent of Betrayal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d49187a-1c37-4c3a-afc2-fac2bbc6b29a",
+    "name": "Portent of Calamity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca49d6ad-97b1-4fd4-b1cf-fecd9cafee6d",
+    "name": "Portent Tracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f500a8a4-6135-448c-9116-bd2695a72229",
+    "name": "Port of Karfell",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "653e4b68-3184-4352-ac91-127f7e6d7c12",
+    "name": "Port Razer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "458d2b12-f578-4392-98d3-c3bc83f316c4",
+    "name": "Port Town",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "821f4ff3-ebc7-4f47-ac35-d00093b6d35b",
+    "name": "Possessed Goat",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a42b567d-6bfc-49e7-8f91-917e2bb3046c",
+    "name": "Possessed Skaab",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab7c0256-eea9-4e0d-932d-c25460eed836",
+    "name": "Possession Engine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8586169f-cb8c-4424-ba64-a7c1cc00680e",
+    "name": "Possibility Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ebbf84f7-d142-4de5-bfc1-ea86f082d733",
+    "name": "Possibility Technician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0859d16e-2a1f-4b48-8687-99af8a8bdb38",
+    "name": "Postmortem Professor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8a8bc537-b69f-441d-a10e-d7f17f2f75bb",
+    "name": "Pothole Mole",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d604c75e-9d81-49de-80bc-08f4ef3ee975",
+    "name": "Potioner's Trove",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "11fb3fee-ae84-4bf3-b834-63d3b8987df3",
+    "name": "Potion of Healing",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f4126dac-add4-4d5f-bf52-6f74c7c6aa67",
+    "name": "Pounce",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d5e32b1-1a2d-4b3d-80f2-f8c688b90587",
+    "name": "Pouncing Cheetah",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "d8d92f97-d54c-4954-8324-b9c0a9b96ec2",
+    "name": "Pouncing Lynx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "38630f89-bc22-49b2-b97e-d31a5169decc",
+    "name": "Pouncing Shoreshark",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8be368dc-6212-4627-989e-077eea78f30d",
+    "name": "Powerbalance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fed58ccc-db56-4094-8b56-bd29b00e9327",
+    "name": "Power Boost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64687880-03f9-4f38-985b-1027c797e33f",
+    "name": "Power Depot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2b3d76e7-faaa-4e6f-9e21-a88dd719247e",
+    "name": "Powerful Broker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5c615c99-77b7-4bea-9286-1e8d257153fb",
+    "name": "Power of Persuasion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "054c6250-ac96-42f6-931d-925761ab7764",
+    "name": "Power Plant Worker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f2ffc999-609f-4424-8d40-ebc042357a40",
+    "name": "Powerstone Engineer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f13baf38-27fc-4c5d-8fee-459eefdb32da",
+    "name": "Powerstone Fracture",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "769c45ae-5d49-4815-944e-98790ad4efb0",
+    "name": "Powerstone Shard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ea935885-acbc-450d-a3ad-f80c09e12ce7",
+    "name": "Power Word Kill",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c505d304-9428-4532-87a2-167c69f16969",
+    "name": "Pox Plague",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9110480b-a5d6-4cf8-a72c-dc1a50f11fac",
+    "name": "Practical Research",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99678cc9-59c8-4358-b847-8c38ffb4a050",
+    "name": "Practiced Offense",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a02f9f42-4c3a-4a97-8667-68ba4617f193",
+    "name": "Practiced Scrollsmith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "612c9079-adae-4fe5-9a72-8efc09ddfe5c",
+    "name": "Practiced Tactics",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "70987216-f84d-43b9-8d75-bb21ff37747b",
+    "name": "Prairie Dog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5330e24a-8568-446e-840a-594cd08bd1bc",
+    "name": "Prairie Stream",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1ec95969-4a6f-49f3-af23-1680276e7da2",
+    "name": "Prakhata Pillar-Bug",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4505ff9f-97f1-45d1-aea9-5590fefb4a4d",
+    "name": "Prayer of Binding",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "74947e47-c4ff-4f47-9845-befa7403cbde",
+    "name": "Preacher of the Schism",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d60c8cfe-435c-419e-a44b-b47d49d1afef",
+    "name": "Precipitous Drop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c251b676-0e98-4047-bed1-d72c83aa8da0",
+    "name": "Precise Redaction",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bfd2138b-1883-4900-a5f1-373884965c34",
+    "name": "Precise Strike",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "5f9ea6e4-f5be-4ea2-95b4-fbdc69685ac5",
+    "name": "Precision Bolt",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "9c3e4bd4-2e1e-4103-adc3-f9ccc259dcdf",
+    "name": "Precognition Field",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "275d0b90-a8d6-4388-b7db-34615287f532",
+    "name": "Precognitive Perception",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "668fc293-1b8f-4870-9784-4ac660925e30",
+    "name": "Precursor Golem",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e3d2b03-4c44-49a3-ab11-871ca9c372f7",
+    "name": "Predation Steward",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a51ec70d-1356-4403-a858-b99445bac54a",
+    "name": "Predator Ooze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f62e9a9f-9989-4a62-b063-cca32e21fe8b",
+    "name": "Predator's Strike",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "6b589e70-9c1d-48dd-a597-479959e692bf",
+    "name": "Predatory Sliver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "99ed6e18-7f14-4ea8-baee-ad6c081388ff",
+    "name": "Predatory Wurm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d06a5642-861b-4b0d-9ea5-07046b7e1d37",
+    "name": "Predictive Preparations",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e1c458ca-10f6-4da8-a93d-3adfb86fe97d",
+    "name": "Preening Champion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2519ccc0-c206-41fb-aa15-2ef88025ff96",
+    "name": "Prehistoric Pet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac641490-ca14-48d7-8cc4-b69ce984befa",
+    "name": "Preordain",
+    "status": "curated"
+  },
+  {
+    "oracleId": "fed7a6ad-68d8-4923-9ef0-619f73bfd6c2",
+    "name": "Prepare // Fight",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "1e03aad2-6426-4d18-a0e5-bc3d8e6b7b11",
+    "name": "Preposterous Proportions",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "af199b80-d5d8-417a-97d5-459a5bd48b22",
+    "name": "Prescient Chimera",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab42398c-f0a1-4b94-ac5f-b8768e1b4e05",
+    "name": "Presence of Gond",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "347a3622-4425-4ba4-821d-ef3d00beb058",
+    "name": "Press the Enemy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d4bbdd0c-e578-49ed-b2f7-b1decb04ee87",
+    "name": "Pressure Point",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a2d3e3f0-7399-4eb9-a0cf-831710c3d431",
+    "name": "Presumed Dead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fefef024-3a05-4221-bb74-419ee08716e5",
+    "name": "Pretending Poxbearers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "67f6e949-14d9-4253-9d18-4004cac2f900",
+    "name": "Prey's Vengeance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3c12848-528d-4005-878f-4f950a07240a",
+    "name": "Prey Upon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43a2bfe4-9705-4d0f-901a-21f9803b50f1",
+    "name": "Price of Betrayal",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45d5cd4c-7285-4507-8cbf-eace7a734f41",
+    "name": "Price of Fame",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e6faa98-cf55-430d-87ce-8085f68aa20a",
+    "name": "Price of Freedom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f25b97f9-8ca2-40f7-9d55-47fa8bb2054e",
+    "name": "Price of Loyalty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1ef3b31-b996-48ea-967a-2b56fb2fb22b",
+    "name": "Prickly Marmoset",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4ce8e0d0-6a3e-4c47-a7b7-c1b1ea1b9426",
+    "name": "Prickly Pair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "faf2f368-a7e7-4427-bc03-929f294b1e03",
+    "name": "Prideful Feastling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a90d1d35-6d67-43b3-8256-b0318b3a4b07",
+    "name": "Prideful Parent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f9672b63-415a-448b-a3da-140df63a0f0c",
+    "name": "Pridemalkin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e45a1c99-a020-49ab-8971-35c6bcd096c8",
+    "name": "Pride of Conquerors",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2af236b0-6b30-4ddc-8735-864d2ffad68e",
+    "name": "Pride of the Road",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a131c32d-2b4f-4ee4-aab2-ab05ab010978",
+    "name": "Pride Sovereign",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a89b0fd5-84b2-487c-8b03-e78d97276fd3",
+    "name": "Priest of Ancient Lore",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ec6ccd8f-cc75-4a50-8639-f4ec31a280aa",
+    "name": "Priest of Fell Rites",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2ad8ff62-d090-4835-9274-3b755ba0f8e6",
+    "name": "Priest of Forgotten Gods",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d93f82ce-0eed-45cc-a7b1-50fd4cbb6152",
+    "name": "Priest of Gix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "441cdd7d-6c4c-4a91-a118-7eaa35276660",
+    "name": "Priest of the Blood Rite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb711b7d-bd7f-48e3-a6de-a12f94ef55d2",
+    "name": "Priest of the Haunted Edge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc11efa2-27ca-4745-8178-31576539512a",
+    "name": "Priest of the Wakening Sun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a198a16-17b9-481e-b516-5bc945c7e247",
+    "name": "Priest of Titania",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "087d6330-c9de-42b7-a804-1202bc6aa682",
+    "name": "Primal Adversary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8e4d0da0-c7d8-4a20-9bfd-02c1331a7a49",
+    "name": "Primal Amulet // Primal Wellspring",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "350f5c0a-563f-41c5-8f7b-10f409bb4d3b",
+    "name": "Primal Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24645d9e-5e6d-411d-be41-c2bd1659937f",
+    "name": "Primal Empathy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58d7b8b3-ac47-4805-8259-4ba8e70d7dc3",
+    "name": "Primal Might",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8d087fe0-d554-4d7c-ba22-32db2cf71887",
+    "name": "Primal Prayers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c665544f-557b-4631-a1dc-39571470ca2e",
+    "name": "Primal Vigor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c21fafaf-4510-4752-a501-606ae68e6699",
+    "name": "Primal Witchstalker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "51af3da5-0970-436e-baa6-3171889a40e0",
+    "name": "Primary Research",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b543bfa2-0174-4dd8-9ee6-09b92fb44934",
+    "name": "Prime Speaker Vannifar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "311e9368-696a-47e7-aa2f-3ef1b1a92e2b",
+    "name": "Prime Speaker Zegana",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f633c16d-d943-421c-ad18-af35db9ec9fc",
+    "name": "Primeval Bounty",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "495348d7-bc11-4209-8b0f-72db2e6c6993",
+    "name": "Primeval Herald",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8de8027b-072a-474b-b76b-dc49c417cc55",
+    "name": "Primevals' Glorious Rebirth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ae83ef2c-960f-4c5b-97cc-52465c687c18",
+    "name": "Primeval Titan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "80ca6596-9763-4310-b30b-7153ade9f567",
+    "name": "Primordial Gnawer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ebdc1a5-e678-444b-abb8-8753558a39de",
+    "name": "Primordial Pachyderm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "499f1e1e-d96e-481f-a5d9-eb38da927cd7",
+    "name": "Primordial Sage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab9778da-f5e3-4c17-a3da-ffef6ed7a7a1",
+    "name": "Primordial Wurm",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "65fb0e20-61f8-4c61-bc08-7f6f718ee9ee",
+    "name": "Primo, the Unbounded",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c66e0ca-2d8a-4f68-ad15-55d75959d6e8",
+    "name": "Prince Imrahil the Fair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "08c59e5e-d01c-49b7-a812-8ea75e9e945d",
+    "name": "Princess Yue",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bc92988c-d628-45ea-8606-516a1211cef3",
+    "name": "Prishe's Wanderings",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f75be4f2-d1a7-40c7-a0e4-ba8b03556ac6",
+    "name": "Prismabasher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0d60ffba-9904-442e-8d4a-a6b1b50a38eb",
+    "name": "Prismari Apprentice",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3a3a1b35-ae4d-49d5-ae09-5a1693ad53ce",
+    "name": "Prismari Campus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3c25a2c-f71c-4cb7-9117-0bcda9248bfd",
+    "name": "Prismari Charm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fa3e28b1-131c-4223-81e0-18dfbab22c26",
+    "name": "Prismari Command",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47ecedec-7bf7-4a3b-ac33-2bf203fa50d9",
+    "name": "Prismari Pledgemage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "258f5045-3aa7-4b95-a15f-3172577294a8",
+    "name": "Prismari, the Inspiration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2cb98ca9-d7bb-416b-a17e-ee5f8e4d78f2",
+    "name": "Prismatic Ending",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d90882ae-6572-4214-8d9c-0bdfb75f9be2",
+    "name": "Prismatic Omen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27a3aa64-1de7-4b0c-af23-52886e7d258a",
+    "name": "Prismatic Undercurrents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "032b8a0d-491a-4a12-ab9f-689010054d5b",
+    "name": "Prismatic Vista",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "feb4fcec-6f3a-4643-9ffb-69d3f5953322",
+    "name": "Prismite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9c6a6332-37f0-4d7d-a86f-478cf0eeec91",
+    "name": "Prison Break",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "808a8491-2966-4388-8590-a46ba147f65a",
+    "name": "Prison Realm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d9f2fe0-5657-45b4-9431-36e0f6c8eba2",
+    "name": "Prison Sentence",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1b3d7fce-e9fe-4176-9d9a-472415826cdd",
+    "name": "Pristine Talisman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "20750317-061b-4b65-9fc8-43477fcd7a21",
+    "name": "Private Eye",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "abd62af0-c17d-4f62-af15-9ea83037b990",
+    "name": "Privileged Position",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8499b3ec-9a61-47a4-a880-e8230b41c81b",
+    "name": "Prized Amalgam",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d383902c-63ba-4714-bfeb-377829950b0d",
+    "name": "Prized Griffin",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "766787ef-654a-4544-b5d7-d2f96949edf1",
+    "name": "Prized Unicorn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0c4ecf6-84e6-443e-8a81-e395b31c631d",
+    "name": "Prizefight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6f8fa68e-e961-4ae1-b27d-22d87e90f26b",
+    "name": "Procrastinate",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c612ba0a-5134-45fa-a762-f4621bda4f83",
+    "name": "Proctor of Potential",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a7fe7621-9bb1-4d0d-8b50-c179c685d79d",
+    "name": "Proctor's Gaze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15d63e5d-dc4d-4e5f-8043-78039a49732b",
+    "name": "Prodigious Growth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "405a54b3-fb9f-4503-a4fc-3ba6a5e58205",
+    "name": "Prodigy's Prototype",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a656ad7f-133f-4d93-919a-43bcf1f815f3",
+    "name": "Profane Procession // Tomb of the Dusk Rose",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "04152e7a-969c-4858-841b-0a569a9fc1bf",
+    "name": "Professional Face-Breaker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3dd92eea-02ca-4e55-8f69-8c8059dd7ee6",
+    "name": "Professional Wrestler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8c5fe985-69e1-4a03-99fc-a6fd2314a9a7",
+    "name": "Professor Dellian Fel",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a8ae444-6237-4591-97ab-f43e181b2f4f",
+    "name": "Professor of Symbology",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a22b8220-b41d-4b58-aa68-2c65ce37c517",
+    "name": "Professor of Zoomancy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9df2e909-ed13-456a-9636-7398732009a9",
+    "name": "Professor Onyx",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e3c8e552-d315-486d-a176-813b3a300174",
+    "name": "Professor's Warning",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "59a10335-72df-44a5-a514-5bac392cd282",
+    "name": "Professor Zei, Anthropologist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c41e8a99-e4a8-4323-a59d-265266e29fa9",
+    "name": "Profit // Loss",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "45473bdb-b96f-4213-a46d-b2dbdf6b5e56",
+    "name": "Proft, Consulting Detective",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b749e9e4-0f2a-4157-8cca-facd6b48157f",
+    "name": "Proft's Eidetic Memory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a350856c-87f2-4605-999f-4e26aa362a55",
+    "name": "Proft, Sinister Mastermind",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4052f710-6ba7-406f-8fb7-653a684a80e0",
+    "name": "Progenitor Exarch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "88929ea9-900f-4dbb-b16c-cf3bad4e410c",
+    "name": "Progenitor Mimic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2d7e00b6-12f0-4b03-82a6-50e3d1b5395e",
+    "name": "Progenitus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d89aa87a-d59a-41e2-b92f-15c9bc6d3d13",
+    "name": "Project Deathlok Soldier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "58b27a79-ba63-45d4-84ee-423ce0d91f6b",
+    "name": "Projektor Inspector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3f661b58-e8ca-412c-bdac-af151162de12",
+    "name": "Prologue to Phyresis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "44958014-7e30-4e70-9aef-b148843f9c45",
+    "name": "Promising Duskmage",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "861eb7d7-7616-4620-a4fd-4b8c3bf00dd1",
+    "name": "Promising Vein",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e13d7600-0924-42eb-9d65-aa18548624a7",
+    "name": "Prompto Argentum",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9485db26-7e03-4a66-beeb-627a3bc6f367",
+    "name": "Propagator Drone",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d17a9750-a89f-4ad1-9c15-7ccffc554ee5",
+    "name": "Propeller Pioneer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "45f4d057-5134-40a2-9590-ddba73a65582",
+    "name": "Prophesied End",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "134a9877-5cfb-4a2a-a0f0-930dce45f58b",
+    "name": "Prophetic Prism",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "224f5f1a-4f31-4935-bf5a-910fd0a666a1",
+    "name": "Prophetic Titan",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eaa1634e-6ba1-41c2-91c0-967b36d13e14",
+    "name": "Prophet of the Peak",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c586312d-d04a-4bfb-bbb2-b41186ca178e",
+    "name": "Prosperity",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07acb7e5-7aae-4d89-aabf-cbd329b3480b",
+    "name": "Prosperity Tycoon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da785227-cf8a-4d44-9e7c-fc909ea868f2",
+    "name": "Prosperous Innkeeper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9dc6281b-08e0-4c66-9aef-abc7184ca36a",
+    "name": "Prosperous Pirates",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d03971a-8365-449a-8fbe-07b5b9bb42dc",
+    "name": "Prosperous Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8026533d-c0e7-48b7-9e1a-9a370899aa57",
+    "name": "Prosthetic Injector",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2f6a75e-5637-41a8-a32b-56666716492d",
+    "name": "Protean Raider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "148331cc-24de-481f-9131-c3089d1ff7ce",
+    "name": "Protean Thaumaturge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c5f611c9-9e6e-4719-ad71-8686327a8564",
+    "name": "Protection of the Hekma",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d9717522-358b-41ac-9183-8a6b3981f921",
+    "name": "Protective Parents",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c840b89b-81be-4644-8bb5-35d14b1bc620",
+    "name": "Protective Response",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf6bb391-4fde-43c4-a0c5-990630d0ddcf",
+    "name": "Protector of Gondor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e0cd5a5-3aee-4b32-873a-e5a40bfba3e9",
+    "name": "Protect // Serve",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7ccd666a-0d56-4fe3-b16b-d035bf2ad420",
+    "name": "Protect the Negotiators",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "07617648-6490-4719-acec-7705671f7e01",
+    "name": "Protege's Awakening",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac935fad-2fa7-4afc-9db4-3cd30ec4aabd",
+    "name": "Protocol Knight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "292cd535-916e-486e-b0cc-ecdb9477287d",
+    "name": "Proud Pack-Rhino",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e72f995e-288f-4d32-b067-ae73eea87e67",
+    "name": "Proud Wildbonder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2f796869-7350-4886-b210-cb5b9cb3e78a",
+    "name": "Provisions Merchant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac844303-487b-49e9-9170-02892153ca6a",
+    "name": "Provoke the Trolls",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "594132ac-32a7-41d5-b7f0-3692bbed7f6f",
+    "name": "Prowcatcher Specialist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76742bfc-ae99-4b06-b29d-e0e41d92ae14",
+    "name": "Prowler, Clawed Thief",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0eabe5e9-cb03-4481-9360-5e79eccd0631",
+    "name": "Prowling Caracal",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "ed26f6bf-fcd6-4cf4-9b65-a492cb79f2df",
+    "name": "Prowling Felidar",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4bdfd718-f474-4223-88d8-7fa9fb0c86b4",
+    "name": "Prowling Serpopard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "63f67baa-3f37-41b8-9ee6-3c37f828917d",
+    "name": "Prudent Fateseer // Peer Review",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "5fe86083-1009-4de2-b186-f817ad1cc4e4",
+    "name": "Prying Blade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "06b60766-a1fb-4ed0-93f6-8423008f75b4",
+    "name": "Prying Eyes",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "12712419-a2a9-483d-a65a-2b727ae404ae",
+    "name": "Psemilla, Meletian Poet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a4e8d2ad-cce2-45de-b9a2-7ba3b1546efb",
+    "name": "Psionic Snoop",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "328b42f1-d679-4f9c-80e3-38fe3b965d10",
+    "name": "Psychic Corrosion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e157ad1e-be35-47f3-92db-01799f8fb6a5",
+    "name": "Psychic Frog",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "60ead8a5-11fb-4eeb-99bf-0caaf1de1731",
+    "name": "Psychic Pickpocket",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "34439fb2-0272-4624-aa4c-9ea439b60489",
+    "name": "Psychic Symbiont",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3df4eb80-e8dd-4a9e-bd8a-b4b23fb9de6c",
+    "name": "Psychic Whorl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2876e74f-a242-4995-9702-0b737a1ab67a",
+    "name": "Psychosis Crawler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cca03b76-dd3c-4228-b97a-f7fa20819b2e",
+    "name": "Pterafractyl",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "00187de2-bc48-4137-97d8-a9a0fafc76c1",
+    "name": "Pteramander",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8feb7149-a4dc-491a-a0b4-d2e8b85a97ce",
+    "name": "Pterodon Knight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c5f360dc-fe4e-4796-b5c1-468cbd0f6d24",
+    "name": "Public Enemy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de5b995c-9691-4555-9070-66bcbc29f955",
+    "name": "Public Thoroughfare",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "499b4cf9-2aaa-45a0-8362-77b727b7f7cc",
+    "name": "Puca's Eye",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "da989677-3647-46b8-aa56-b2cfb60f7a2a",
+    "name": "Pugnacious Hammerskull",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7c22e6ba-5570-460b-962e-b7c0fbb3f394",
+    "name": "Pugnacious Pugilist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c5373026-8b43-42a7-aa69-a1b0f1619795",
+    "name": "Pull from the Grave",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1a23235-3076-475c-a68a-db29cf2a9dba",
+    "name": "Pull from Tomorrow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37bd9e54-c93e-4fec-9b21-6940da75ab7a",
+    "name": "Pull Through the Weft",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8019e879-cfea-40a2-ac0d-86b47ec02b48",
+    "name": "Pulsar Squadron Ace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d5b446a4-a761-42f0-acf0-ea0a1a9538d6",
+    "name": "Pulse of Murasa",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f916f689-a314-4952-8107-41c4c2f2e811",
+    "name": "Pulse Tracker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ffa23c3a-76a8-414f-aa3b-fc09aabd78c5",
+    "name": "Pummeler for Hire",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37827e84-9f5f-49ed-b939-0cf80dac82e7",
+    "name": "Pumpkin Bombardment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1128d2ab-0b6e-4912-8735-15521bc314e6",
+    "name": "Puncturing Blow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15e71226-feb0-4870-a3ea-d8604ca5b3dc",
+    "name": "Puncturing Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "454c4e8b-e417-4381-a931-6a11356ef64e",
+    "name": "Punishing Punch",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dfb13eca-55fd-4ac6-aee3-2bdbfe9e1c4e",
+    "name": "Punk Frogs",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d13c111a-ebfc-48ac-b734-f203c7c29d21",
+    "name": "Puppet Crafting",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b1412eda-e3a4-41b2-932e-795a0ba0f7f8",
+    "name": "PuPu UFO",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5e8086d5-ea48-4555-b65a-a33d08ba4afd",
+    "name": "Purging Stormbrood // Absorb Essence",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a45762af-4aac-40b3-a983-ea441b04c5ee",
+    "name": "Purifying Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6728b9d0-d3ab-4ba3-af13-63cb83e0ed99",
+    "name": "Purphoros, Bronze-Blooded",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fdbbec2-e921-4b63-958d-f9ba1e417197",
+    "name": "Purphoros, God of the Forge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d78d7fd6-778b-4030-a776-29ddce83e33f",
+    "name": "Purphoros's Emissary",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e190f086-ebee-447f-907f-7b37ec8824ac",
+    "name": "Purphoros's Intervention",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df4569d7-ee75-4ba0-bbc3-7766ac686523",
+    "name": "Purple-Crystal Crab",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1edb950-a118-4b4d-a0ef-9a6683d74c9f",
+    "name": "Purple Dragon Punks",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "37d2e83d-f5fd-48d2-b091-3c9167522530",
+    "name": "Purple Pentapus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "179cc807-5150-4513-88b2-73cb05009b7d",
+    "name": "Purple Worm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6de2d53c-06e3-4c56-a5cf-c9cb2db42527",
+    "name": "Pursued Whale",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f85edb4f-1eec-40cc-9e21-0a6fb71e8499",
+    "name": "Pursue Glory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4384996f-aeaa-41ac-aa0e-12d72c887731",
+    "name": "Pursue the Past",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e050495-bed7-43b9-abce-866c61beb1da",
+    "name": "Push // Pull",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "62e54c6d-d775-4597-bd4d-dc38460b33ec",
+    "name": "Push the Limit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b271430-f53d-42d6-a547-2f286dd9bcb6",
+    "name": "Putrefy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27faa94b-c7a7-45e7-8630-80126fab74ba",
+    "name": "Putrid Goblin",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3aa3b908-e8d3-4944-8ced-5219d4129594",
+    "name": "Putrid Pals",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6ec24c24-7e87-4c12-b94e-3cd5b184beb5",
+    "name": "Putrid Warrior",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "636b44dc-f7e4-42d2-abf6-ae49432b6052",
+    "name": "Pym Particles",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5a8977fc-0732-4807-b876-01819aedd70b",
+    "name": "Pym Technologies",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a6f45e9-5c7a-4e2c-bf8a-fc5fe0ae0793",
+    "name": "Pyre Hound",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "691ba449-40e1-4976-8dab-9b1741ea37b8",
+    "name": "Pyre of Heroes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8940f503-fc6d-4fae-be74-22c660cae1a7",
+    "name": "Pyre Rhymer // Molten Tide",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "7f42a05c-9e6d-4cbc-92f1-4433cd22f149",
+    "name": "Pyre-Sledge Arsonist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "13b0a3f3-04a5-465f-898b-13a28f795a16",
+    "name": "Pyre Spawn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f810e185-4498-483b-ab37-0c583dae0eaf",
+    "name": "Pyretic Prankster // Glistening Goremonger",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a38ace5b-34f5-4105-b6ee-dedb86037729",
+    "name": "Pyretic Rebirth",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "86ef6474-613f-41fb-931c-d4279b03ed99",
+    "name": "Pyretic Ritual",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c4c6083a-b0b5-4c6b-9f11-9f4fe38417c2",
+    "name": "Pyrewood Gearhulk",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c10cae2-951a-4f4f-94e4-8713b58d07dd",
+    "name": "Pyrite Spellbomb",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b5306bf4-0cba-48dd-8af8-7c7821db7e02",
+    "name": "Pyroceratops",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e4bcd4ea-e7cd-4471-8f3b-18bb51d3d70c",
+    "name": "Pyroclasm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f37e3a6-ce3a-472f-ac45-0d9b23a31a11",
+    "name": "Pyroclastic Elemental",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b2151d51-39f6-49cc-a5cc-8202dd028336",
+    "name": "Pyroclastic Hellion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7fd7457a-388d-4cca-a7cf-86b4ea922037",
+    "name": "Pyrogoyf",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d001febc-d511-4e65-a631-91dc9415056b",
+    "name": "Pyrokinesis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87038d1b-0fa9-4604-b119-1de56db30144",
+    "name": "Pyromancer's Assault",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f76bcbfe-483f-4e63-8425-76feca1abf3e",
+    "name": "Pyromancer's Goggles",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "24d52cf1-d4f1-4b4c-a50b-87d3ba0aeebb",
+    "name": "Pyromantic Pilgrim",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "fa70903d-3c8b-49f7-8817-f708b5ba250f",
+    "name": "Pyrophobia",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78f9ec0f-6015-4024-aca6-9a14cba373fa",
+    "name": "Pyrotechnic Performer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "98ec58aa-8776-4a19-bff8-e288a9bd6bac",
+    "name": "Pyrrhic Blast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5ea1d89c-8650-4373-9835-e369587020ef",
+    "name": "Pyrrhic Strike",
+    "status": "unsupported"
+  }
+]

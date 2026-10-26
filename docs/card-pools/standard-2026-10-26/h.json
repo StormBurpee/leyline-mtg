@@ -1,0 +1,982 @@
+[
+  {
+    "oracleId": "4b707ef4-2c17-41e7-8dac-583791a98055",
+    "name": "Haazda Vigilante",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "de3a469a-e38b-456b-994d-abec1b010e42",
+    "name": "Hakoda, Selfless Commander",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b347be2d-9aa1-42a9-b652-8fb032832f09",
+    "name": "Halana and Alena, Partners",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6846448b-d5a0-4ae0-bb11-ea7fa6ed2558",
+    "name": "Haliya, Ascendant Cadet",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9b0af3ad-1b4d-4480-af91-fe9baee5d1c5",
+    "name": "Haliya, Guided by Light",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc0a51d4-5b7e-4987-b1fe-349fd118a625",
+    "name": "Hall of Echoes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f1750962-a87c-49f6-b731-02ae971ac6ea",
+    "name": "Hallowed Fountain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d1af8018-35b5-4b6f-93c8-1ed6bd8c92b1",
+    "name": "Hallway Heckler // Vicious Verse",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "ef80e174-78e8-412d-a6fe-89c7af746669",
+    "name": "Hama, the Bloodbender",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e08b19ca-f9d7-4c33-b37a-a77b37aabf1b",
+    "name": "Hamato Guardian Stance",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "aa1b7cdd-0296-418c-ac3b-7ad3c51f1760",
+    "name": "Hamlet Glutton",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b348051-3ba8-4aa0-b337-b42d8ef8cbba",
+    "name": "Hand That Feeds",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6894345f-52a6-46e4-b278-0783087daee1",
+    "name": "Hapatra, the Desert Fang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ac0f161a-e5ec-4a95-9f37-305bdf1ac900",
+    "name": "Hapatra, the Desert Frost",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f5277e8-1cbe-478c-a8bc-ac028f13305e",
+    "name": "Harbinger of the Tides",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "116eea43-4235-4608-8c6a-599e860ae2f1",
+    "name": "Hardbristle Bandit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "921252df-6679-4f70-ae26-d4956c90b7df",
+    "name": "Hardened Academic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2c6ef9e8-6b60-436c-8391-ae0baabb3a1b",
+    "name": "Hardened Escort",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca1dc6f0-3ec2-4f62-a08a-1395201bd93f",
+    "name": "Hardened Tactician",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "05fdefb4-2be7-4d9a-9ab9-14bbbe72aef7",
+    "name": "Hard-Hitting Question",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8054092a-1940-4f4b-991d-81f4d384cdb1",
+    "name": "Hardlight Containment",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab433d41-e801-405c-81f7-06fa6640797d",
+    "name": "Hard-Won Jitte",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c1619bd-db5e-4df6-a196-0a9d62374f6d",
+    "name": "Hare Apparent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f5d32e5f-066b-42cf-8dd1-072a96275313",
+    "name": "Harmless Offering",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0ebec97e-3cb1-41e2-a693-0febb5623016",
+    "name": "Harmonious Grovestrider",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b93cd38a-1d0c-40e6-aaf1-621a2c88bf46",
+    "name": "Harmonized Crescendo",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f6036065-7196-44d4-8a27-2199f0e1a03c",
+    "name": "Harmonized Trio // Brainstorm",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "fb8f7047-280b-464f-aca2-6add3e21df8f",
+    "name": "Harnesser of Storms",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a6e2d8bd-8fe7-4de0-af25-7ad3e9dcb81b",
+    "name": "Harried Dronesmith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e3542d0f-fcee-4df7-aa95-b55138caa2ab",
+    "name": "Harried Spearguard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "eb154ebb-d02f-405a-a557-3d5ec7648c42",
+    "name": "Harrier Strix",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1657be64-b38f-4074-a743-bf558dc57901",
+    "name": "Harsh Annotation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7488ce54-37c6-475c-b327-59f52f2b1424",
+    "name": "Haru, Hidden Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0d3bb63-2977-41b2-bcc3-2488e6696cb8",
+    "name": "Harvester of Misery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "56208bdc-2eed-4ccc-8c34-c0eba9db0aa9",
+    "name": "Harvestrite Host",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5249dd0d-3bda-452e-ac6e-774c0ebc2e41",
+    "name": "Haste Magic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "47944bf1-b954-4143-b479-45c10071e35a",
+    "name": "Haunted Hellride",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e2a37967-4212-4553-9f77-bcb613405807",
+    "name": "Haunted Ridge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "49f92c0b-16ac-4cf0-8ec3-e3638990ee75",
+    "name": "Haunted Screen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7e074b14-0ec8-439b-9b83-5f7c1a904384",
+    "name": "Haunt the Network",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09c275bd-8323-485e-81f6-aff1f99d0d03",
+    "name": "Hauntwoods Shrieker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6b59bb1f-f2d4-4d47-bd57-23927d588381",
+    "name": "Hawkeye, Master Marksman",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "83798eb8-b14f-4620-bce2-1a6804a24dc7",
+    "name": "Hawkeye's Bow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8f8b4ed-8455-45cd-a24c-e2f42cd5e5b1",
+    "name": "Hawkeye, Young Avenger",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "799664fc-279c-40c1-8e40-44a68c38801b",
+    "name": "Hazard of the Dunes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f40cb1af-3db6-4e90-830f-86ff4b60e239",
+    "name": "Hazardroot Herbalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2a74a055-ff7f-434b-8dfb-d9fb72579cee",
+    "name": "Hazel's Nocturne",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6c5d8599-75ca-4479-a02b-1b257b7aea57",
+    "name": "Hazoret, Godseeker",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "467d6acb-9a3c-433f-836d-54e0e670b7d0",
+    "name": "Head of the Homestead",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0523e271-5e0b-4e4b-9eac-86f915d18952",
+    "name": "Head of the Hunt",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28a52ba1-95da-44e1-8ac5-0dc23c902394",
+    "name": "Healer's Hawk",
+    "status": "curated"
+  },
+  {
+    "oracleId": "bbfc5011-a9b7-442d-a443-974a5a64de46",
+    "name": "Heaped Harvest",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1e414a4f-6e76-4cbe-9c69-d52852cd5bc0",
+    "name": "Heartfire Immolator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3ca07da2-29a1-40ce-a7f3-4838e95ca1d9",
+    "name": "Heartflame Duelist // Heartflame Slash",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "beb02f49-95a6-49bf-b176-4e4b2ab5b651",
+    "name": "Hearthborn Battler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f01cf0c5-0ac6-4ad3-8642-dd21c8e8563e",
+    "name": "Hearth Elemental // Stoke Genius",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "3641d572-8335-4804-88ad-edf4dc67a8e4",
+    "name": "Heartless Act",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2cdcf65c-03d2-416f-8a3f-0322f75e8595",
+    "name": "Heartstring Puller",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c8b3a070-408e-4a8f-8597-6476eeec0a5f",
+    "name": "Heartwood Crafter // Soul Tether",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "329f6434-8f1b-4a10-8feb-2a9dc5f2712b",
+    "name": "Heated Argument",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7a11b4ed-430d-4ef8-b0c1-6a022f12448c",
+    "name": "Hecteyes",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca4b6689-04ee-4227-9bdc-cb5a9590c745",
+    "name": "Hedge Maze",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f22665cd-4710-48df-83c1-3c9081097cb5",
+    "name": "Hedge Shredder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "923b2a1b-d7b6-439d-9681-c7ba88165c31",
+    "name": "Hedge Whisperer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "32263baa-d3f0-463f-92b3-4e9938476add",
+    "name": "Hedron Archive",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8f709660-bb26-409f-9650-e5228ac8db7e",
+    "name": "Hei Bai, Spirit of Balance",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cc9523da-f48e-49ab-9989-a4031dafb426",
+    "name": "Heirloom Auntie",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43037ef5-09e8-4881-beff-ed38cf7574c6",
+    "name": "Heirloom Epic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0a0d25a8-4f28-453b-9270-4d449fe0ca65",
+    "name": "Helga, Skittish Seer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ca3cda24-0ecd-4edf-b1b3-54311ad58a51",
+    "name": "Helicarrier Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4c27ba61-6812-4dd7-8efc-65435a8df7b5",
+    "name": "Hellcat, Undying Vigilante",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d919d8e9-d1ba-42de-9884-12e38dca78ac",
+    "name": "Hellish Sideswipe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1337d89e-a883-4568-a14f-9ca3305cc3df",
+    "name": "Hell's Kitchen",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "81e5c62c-5aed-41e2-8bd1-610022e880bd",
+    "name": "Hellspur Brute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "15260fa6-6062-423a-a248-81292ea46178",
+    "name": "Hellspur Posse Boss",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7dc7d90d-5979-4c4a-9183-392e0e0b878a",
+    "name": "Hell to Pay",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c0864adb-e9aa-40b6-91ff-a0646193e887",
+    "name": "Helpful Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "170a5dbc-6a43-4715-9501-178b1eb7b08c",
+    "name": "Helping Hand",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "103e0b63-fbde-4054-91f7-dd04b40b59ef",
+    "name": "Hemosymbic Mite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1f097c91-6c2e-410f-8c8f-c021f39491af",
+    "name": "Henchbots",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3525e263-e29a-49bf-a29f-fb3ce43bbd33",
+    "name": "Heraldic Banner",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4080f7e3-06d3-4d3d-9929-4e826cb66713",
+    "name": "Herald of Eternal Dawn",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cb97da84-1d13-4795-b68a-2bf111a50067",
+    "name": "Herald of Faith",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "393ff8c5-4da0-4290-b498-222cc0244026",
+    "name": "H.E.R.B.I.E. Scout Unit",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c3a8cc79-3771-484d-84dd-1a97f8bd12c2",
+    "name": "Hercules, Prince of Power",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "78b6dd40-c182-4037-a4d3-9fd012b2c584",
+    "name": "Herd Heirloom",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "09955b4b-6052-4c27-8b63-9548482b3c5c",
+    "name": "Heritage Reclamation",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9928773d-3f35-4b0e-965d-4233e04398fb",
+    "name": "Hermitic Herbalist",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6bda307b-1508-4582-952b-c690db85e045",
+    "name": "Hermitic Nautilus",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "bccd722a-b610-4017-93bd-313f08448f5e",
+    "name": "Heroes' Bane",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "43306a78-85b5-4df4-a018-75dd75aa8997",
+    "name": "Heroes' Hangout",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31cae00a-3a74-4a59-80b0-a656f524e878",
+    "name": "Heroic Feast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c442e8b0-a0a4-4839-8049-125b91b15c99",
+    "name": "Heroic Reinforcements",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "87f1a840-021c-4699-a2c4-f2926daf98eb",
+    "name": "Hero in Training",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03df6a57-37c9-46d3-83b3-4a6240100714",
+    "name": "Hero's Downfall",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "158823ed-6015-437a-82b0-8dadb1e9aab2",
+    "name": "Hexhaven Battalion",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2cc075da-f79b-4050-84eb-2c1b9a30260c",
+    "name": "Hexhaven Dueling Arena",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12d617b1-c95b-4b1c-a586-ccfdf5898b03",
+    "name": "Hexhaven Invigorator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "96c2d71e-0fc9-42aa-bc6b-6d0ae3f66f8b",
+    "name": "Hexing Squelcher",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2283729c-11db-471c-9f63-46092c97bd00",
+    "name": "Hex Magic",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "927979d7-9b5c-4448-aef0-baf2907a89f1",
+    "name": "Hidden Cataract",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e19d5071-4ea1-4883-b067-a21e553f96e0",
+    "name": "Hidden Courtyard",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "382d18a2-438e-4ae7-a83f-1658ef1f9b07",
+    "name": "Hidden Grotto",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "7069d241-4e66-40bf-afd1-551a4a5457f0",
+    "name": "Hidden Lair",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f780ee53-62b0-4c32-b5b7-047651f48e5f",
+    "name": "Hidden Necropolis",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961",
+    "name": "Hidden Nursery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a1c7cd7a-0795-4135-b787-effeb981d95b",
+    "name": "Hidden Volcano",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "94b15f1d-827b-45e9-a684-5d0c52ea0a09",
+    "name": "Hide in Plain Sight",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "376fa374-ead1-4728-ab8b-aca230b72031",
+    "name": "Hide on the Ceiling",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "749683c9-8cc0-4e8e-8d90-adda5e5f4e93",
+    "name": "Hidetsugu's Second Rite",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1adcf587-9035-4299-a2bd-62f805fdd897",
+    "name": "Highborn Vampire",
+    "status": "curated"
+  },
+  {
+    "oracleId": "90ecd452-333a-43b0-be08-a61f3779b3bd",
+    "name": "High Fae Negotiator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "28c1a4a0-f58c-4d07-a918-51ff8a74f050",
+    "name": "High Fae Trickster",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "84a56740-8563-4ce5-8560-d44998d7f80d",
+    "name": "High-Flying Ace",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c8cbf0f-0288-4b5e-bd4f-0f208670b6b5",
+    "name": "High Noon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dd27c5fa-4355-4e5c-8219-b74cfe209da0",
+    "name": "High Perfect Morcant",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "0dc158ba-7ec8-4558-91f5-0a87ef8380d4",
+    "name": "High-Society Hunter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6d2d250b-cdce-4075-8724-b52ad31664fb",
+    "name": "Highspire Bell-Ringer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab0aea13-1dbc-424a-ab7e-cdb303036a56",
+    "name": "High Stride",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "df020a47-1784-479b-9882-be77b7f30950",
+    "name": "Highway Robbery",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "137594f7-2422-461b-a3ae-7ce3c135e0c7",
+    "name": "Hill Gigas",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d812fc6d-b96d-4986-b171-9f3feee603dc",
+    "name": "Hinterland Sanctifier",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6eb7a870-b626-4326-9e4c-45193f8ce138",
+    "name": "Hire a Crew",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "031cfc7d-8bda-454b-b88a-15d3f5fe47e2",
+    "name": "Hired Claw",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a49900b3-cc34-428f-806d-71861dc8059d",
+    "name": "Hit the Mother Lode",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "312be209-dba5-4e6c-938e-1287642f67d4",
+    "name": "Hivespine Wolverine",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "75f7d9c7-5d52-4bfe-a730-62fef187b8b8",
+    "name": "Hoarder's Overflow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d36d3c93-ed24-4447-9d15-3071f5c0989b",
+    "name": "Hoarding Dragon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "17492186-9814-4c41-8111-1f000a96c212",
+    "name": "Hobbit Hole",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1d453331-6b8e-4d3d-b658-683eab2760da",
+    "name": "Hobgoblin, Mantled Marauder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e11591ee-7074-488e-8d2f-f8c89e385a55",
+    "name": "Hog-Monkey",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1a4075f3-6c18-4cbe-99e0-f403dd78a7b0",
+    "name": "Hollow Marauder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "31061e34-042e-40c3-99ab-752795ab4324",
+    "name": "Hollowmurk Siege",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4fad3816-41af-4fa4-85b4-ba37614ec848",
+    "name": "Hollow Scavenger // Bakery Raid",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "748003fd-84c5-4c99-b146-d7d382eef64d",
+    "name": "Holy Cow",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ee57fba8-e68b-4c52-8de7-9b9873d84506",
+    "name": "Homesickness",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "dc4d5602-47cb-47c8-8a43-3b840e12b79c",
+    "name": "Homicide Investigator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "b3c69bf4-880f-4198-a67c-87d23d9c3d41",
+    "name": "Homunculus Horde",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "439bf6d1-bd65-474b-a70c-7fdd446de4bb",
+    "name": "Honest Rutstein",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "12956c07-e679-471b-8dcb-2a2d15b0be55",
+    "name": "Honest Work",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "48c0cd06-465d-4901-bf23-948a003afc0b",
+    "name": "Honor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "66ee56b9-aca8-4efa-b9b5-50717e0784a7",
+    "name": "Honorbound Page // Forum's Favor",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "44bffa3e-4d31-4f9b-829c-e2066ab2f641",
+    "name": "Honored Dreyleader",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "69741d3b-1259-43f5-897f-6f4c3ca0844b",
+    "name": "Honored Knight-Captain",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "187a110c-032a-42e1-be2d-3cfaaa9495f8",
+    "name": "Hope Estheim",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "33fff722-5cc5-4d0e-b788-166b3edb1223",
+    "name": "Hopeful Vigil",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e8a9350a-07c1-47ed-8c4f-88e4b3b17545",
+    "name": "Hop to It",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "adca3929-4ecc-45bc-932e-604bcc32550a",
+    "name": "Horned Loch-Whale // Lagoon Breach",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "bef3f0a9-4d5c-4469-81df-adbeedeed768",
+    "name": "Horrid Vigor",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "de83b1a4-0ce0-4cc1-aff3-6d0239d92302",
+    "name": "Hostile Investigator",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3431338b-928a-47f2-bc2f-f3c5d8eda8d0",
+    "name": "Host of the Hereafter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cf27f1f8-2d95-4a00-97f8-72a244837f08",
+    "name": "Hot Dog Cart",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3efb64a4-04f6-4b78-be1c-5b6320c02a71",
+    "name": "Hotfoot Gnome",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "288fcf5c-f5aa-4f62-9dd8-ba295df48f7a",
+    "name": "Hotshot Investigators",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2774fcb7-8988-4a18-b5ec-7534dd8b2e05",
+    "name": "Hour of Defeat",
+    "status": "compiler_candidate"
+  },
+  {
+    "oracleId": "eb100b3b-bc3f-48f3-8f28-bb2d80225ea9",
+    "name": "Hour of Victory",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "76d93d50-4fc1-4ed4-a6dc-5fb193286b54",
+    "name": "House Cartographer",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "fb9cd9d0-8eea-4aa8-bb9c-bb0aac847421",
+    "name": "Hovel Hurler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64399663-2c1e-447e-a3ed-c49ebd9f2231",
+    "name": "Hoverstone Pilgrim",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "8abeaa77-d455-47e7-bf60-aefb94ab83fb",
+    "name": "Howler's Heavy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "f12c2b65-4a04-4fab-ae77-973fe5cc823d",
+    "name": "Howling Galefang",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cd45a29f-73bc-435c-9d50-09a4ecaa77be",
+    "name": "Howlsquad Heavy",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "268d0056-0d3e-438a-ab17-625a6f5ec68a",
+    "name": "How to Start a Riot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "2e6ed3e6-d2b8-4b75-b7e1-0773da4987a1",
+    "name": "Huatli, Poet of Unity // Roar of the Fifth People",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "20acb8df-2ea0-48b0-8dcf-54dd0e1f8db8",
+    "name": "Huatli's Final Strike",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3c5c227a-335b-4995-9821-d4269a0a233a",
+    "name": "Hugs, Grisly Guardian",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "3508fd7d-ca02-47f9-8b0a-525f7bde4f57",
+    "name": "Hulk, Gamma Goliath",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9f2e7533-cfc1-4dd8-a9b8-09cdc712ef2f",
+    "name": "Hulking Raptor",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "03c934a6-be57-480d-8c84-4e46d9ccb406",
+    "name": "Hulkling, Burgeoning Bruiser",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5f97d49c-d0fa-4776-9455-93c1a172cd83",
+    "name": "HULK SMASH!",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "931c2153-e5e5-4642-bff0-f9dadcc24c9a",
+    "name": "Hullcarver",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0a7319d-9441-4aed-a351-9ff3fb3b1d9e",
+    "name": "Hulldrifter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "5b6f2770-e774-4a77-801f-a3fda093c3dd",
+    "name": "Human Torch, Johnny Storm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "013bcab8-e527-4700-82c9-4cb9cb8a4807",
+    "name": "Humbling Elder",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9ed6aa5b-4369-42f7-9853-aae1ac9b17e2",
+    "name": "Hundred-Battle Veteran",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "690ae865-87bd-46b2-8e65-c53bd80c1a18",
+    "name": "Hungering Puppetbeast",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "4a7a55a3-568c-4c31-9460-5b94dc0121d8",
+    "name": "Hungry Ghoul",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "9494c499-6ead-491f-aeb0-6dbfac4d960c",
+    "name": "Hungry Graffalon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "c1d9c41a-0941-4b7e-b8a6-890d30386458",
+    "name": "Hunted Bonebrute",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "d7d59fef-1401-464b-b1bb-ee5da92cde51",
+    "name": "Hunter's Axe",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a0292e0b-7bb3-46d3-a29f-b54bce5b20f0",
+    "name": "Hunter's Blowgun",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8a9b103-0cb8-4810-a2d7-42f6a10f80bd",
+    "name": "Hunter's Talent",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "016718df-2eb5-499f-adea-18231c0375b3",
+    "name": "Hurl into History",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "cce328b9-6100-417e-9ddf-808bbe3e3bc5",
+    "name": "Hushwood Verge",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "faefb352-575c-49f7-9f7a-96f2279a077b",
+    "name": "Huskburster Swarm",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "e294d85f-caf2-4939-99d3-7ca5bba2b8d1",
+    "name": "Hustle // Bustle",
+    "status": "no_exact_forge_match"
+  },
+  {
+    "oracleId": "a2558476-5506-4a09-93fc-b8ab33c98985",
+    "name": "HYDRA Assault Robot",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "27692079-a517-4d38-b452-7409980b5912",
+    "name": "HYDRA Infiltration",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "6de67fad-0d01-443d-9ae0-4126ae903069",
+    "name": "HYDRA Troopers",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "503928cd-1abd-44cd-92c3-6dc19bb07f78",
+    "name": "Hydraulic Helper",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "95630a83-3699-4340-b3e5-17e81db1b82f",
+    "name": "Hydro-Channeler",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a93a8edf-2879-4cae-b3b9-b46298270823",
+    "name": "Hydro-Man, Fluid Felon",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "1733c71b-fd28-48dd-8a3d-41afd4b22f0e",
+    "name": "Hylda of the Icy Crown",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "a8291d04-240e-456b-8c86-1fb4eb460476",
+    "name": "Hylda's Crown of Winter",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "64ca59b8-6e90-46c8-8047-6172b9c84226",
+    "name": "Hylderblade",
+    "status": "unsupported"
+  },
+  {
+    "oracleId": "ab1379b7-0016-4d2a-a83b-952666e43b89",
+    "name": "Hymn of the Faller",
+    "status": "unsupported"
+  }
+]
