@@ -212,7 +212,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
                 : null;
       if (e.op === 'counterOn' && effect.counter !== '+1/+1')
         problem('UNSUPPORTED_COUNTER', `${p}.counter`, 'Only +1/+1 counters are implemented.');
-      if (['counterOn', 'untap'].includes(e.op)) {
+      if (e.op === 'counterOn') {
         if (effect.target !== 'source')
           problem(
             'UNSUPPORTED_BINDING',
@@ -220,6 +220,11 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
             'This instruction currently affects its source only.',
           );
         e.subject = 'source';
+      }
+      if (e.op === 'untap') {
+        if (!['source', 'target'].includes(effect.target))
+          problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
+        if (effect.target === 'source') e.subject = 'source';
       }
       if (e.op === 'modify') {
         if (!['source', 'target'].includes(effect.target))

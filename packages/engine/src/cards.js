@@ -323,6 +323,29 @@ export const DECKS = Object.freeze({
       'Serra Angel': 4,
     },
   },
+  assault: {
+    name: 'First Blood',
+    colors: ['B', 'R'],
+    art: 'Audacious Thief',
+    thumbnail: 'Pulse Tracker',
+    archetype: 'Attack triggers / pressure',
+    description:
+      'Make attacks matter before blockers: drain life, grow Marauders and turn Thief attacks into fresh cards.',
+    cards: {
+      Swamp: 12,
+      Mountain: 12,
+      'Pulse Tracker': 4,
+      'Sanguine Syphoner': 4,
+      'Agate-Blade Assassin': 2,
+      'Boomerang, Blade Flinger': 2,
+      'Borderland Marauder': 4,
+      'Falkenrath Perforator': 4,
+      'Audacious Thief': 4,
+      Shock: 4,
+      Fell: 4,
+      'Lightning Strike': 4,
+    },
+  },
 });
 export function expandDeck(list) {
   return Object.entries(list).flatMap(([name, count]) => Array.from({ length: count }, () => name));

@@ -60,7 +60,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         case 'counterOn':
           return { op: 'addCounters', counter: '+1/+1', target: 'source', amount: e.amount };
         case 'untap':
-          return { op: 'untap', target: 'source' };
+          return { op: 'untap', target: e.subject === 'source' ? 'source' : 'target' };
         case 'searchLibrary':
           return {
             op: 'searchLibrary',

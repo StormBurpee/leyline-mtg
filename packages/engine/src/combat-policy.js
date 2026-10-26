@@ -1,7 +1,16 @@
 import { beginDamage, assignDamage, canBlock, canAttack } from './combat.js';
-import { stateBasedActions } from './effects.js';
+import { stateBasedActions, stabilize, resolveTop, finishTriggerOrder } from './effects.js';
 import { settleCombatPayoffs } from './combat-payoffs.js';
-import { definition, stats, keywords, hasKeyword, isPacified, ref, emptyMana } from './model.js';
+import {
+  notifyTriggers,
+  definition,
+  stats,
+  keywords,
+  hasKeyword,
+  isPacified,
+  ref,
+  emptyMana,
+} from './model.js';
 
 /** Bounded, public-board combat search. No hands, library order, seed or RNG are read.
  * Damage and life-only death payoffs use the actual rules. Future draws, combat
@@ -317,6 +326,39 @@ export function preserveForDefense(s, source, p) {
 }
 /** Compare bounded attack subsets against a defending response and a public-board
  * crack-back check. No unknown combat tricks or future draws are invented. */
+/** Only mandatory untargeted public-board attack effects are forecast. Whole
+ * mixed/draw/search/targeted abilities are omitted; this never reads a library. */
+function projectAttackDeclaration(s, p, ids) {
+  const work = boardCopy(s, p, [], ids);
+  work.step = 'attackers';
+  for (const id of ids) {
+    if (!hasKeyword(work, work.objects[id], 'vigilance')) work.objects[id].tapped = true;
+  }
+  for (const id of ids) notifyTriggers(work, 'attack', { object: work.objects[id] });
+  work.pendingTriggers = work.pendingTriggers.filter(
+    (entry) =>
+      !entry.optional &&
+      !entry.targetKind &&
+      entry.effects.every(
+        (e) =>
+          ['gainLife', 'loseLife', 'damageOpponent'].includes(e.op) ||
+          (e.op === 'modify' && e.subject === 'source' && e.power >= 0 && e.toughness >= 0),
+      ),
+  );
+  for (let i = 0; i < 512 && work.status !== 'finished'; i++) {
+    if (!work.choice) stabilize(work);
+    if (work.status === 'finished') break;
+    if (work.choice?.kind === 'orderTriggers')
+      finishTriggerOrder(
+        work,
+        work.choice.entries.map((e) => e.id),
+      );
+    else if (work.choice) break;
+    else if (work.stack.length) resolveTop(work);
+    else break;
+  }
+  return work;
+}
 export function chooseAttacks(s, p) {
   const eligible = Object.values(s.objects).filter((o) => canAttack(s, o, p));
   if (!eligible.length) return [];
@@ -334,7 +376,7 @@ export function chooseAttacks(s, p) {
   }
   let best = { cards: [], score: -Infinity };
   for (const cards of sets) {
-    const scenario = {
+    let scenario = {
       ...s,
       active: p,
       combat: {
@@ -345,7 +387,28 @@ export function chooseAttacks(s, p) {
         hasFirst: false,
       },
     };
-    const result = chooseBlocks(scenario, 1 - p, { budget: 96 }).outcome;
+    const hasAttackTriggers = Object.values(s.objects).some(
+      (o) =>
+        o.zone === 'battlefield' &&
+        (definition(s, o).triggers ?? []).some(
+          (t) => t.event === 'selfAttacks' || t.event?.event === 'attack',
+        ),
+    );
+    if (hasAttackTriggers) scenario = projectAttackDeclaration(scenario, p, cards);
+    const result =
+      scenario.status === 'finished'
+        ? {
+            life: scenario.players.map((player) => player.life),
+            values: [0, 1].map((player) =>
+              Object.values(scenario.objects)
+                .filter((o) => o.zone === 'battlefield' && o.controller === player)
+                .reduce((sum, o) => sum + permanentValue(scenario, o), 0),
+            ),
+            alive: Object.values(scenario.objects)
+              .filter((o) => o.zone === 'battlefield')
+              .map((o) => o.id),
+          }
+        : chooseBlocks(scenario, 1 - p, { budget: 96 }).outcome;
     let score = utility(result, p);
     if (result.life[p] > 0 && result.life[1 - p] > 0) {
       const alive = new Set(result.alive);

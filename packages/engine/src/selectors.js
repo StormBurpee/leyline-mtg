@@ -85,7 +85,7 @@ export function validateFilter(filter) {
         errors.push(`${path}.subtype: expected a subtype name.`);
       return;
     }
-    if (key === 'tapped' || key === 'token' || key === 'basic') {
+    if (['tapped', 'token', 'basic', 'legendary', 'attacking'].includes(key)) {
       if (typeof operand !== 'boolean') errors.push(`${path}.${key}: expected a boolean.`);
       return;
     }
@@ -133,9 +133,9 @@ export function matchesFilter(facts, filter, you) {
     return (
       Number.isInteger(facts[key]) && (value === 'you' ? facts[key] === you : facts[key] !== you)
     );
-  if (key === 'basic') return !!facts.definition?.basic === value;
+  if (key === 'basic' || key === 'legendary') return !!facts.definition?.[key] === value;
   if (key === 'subtype') return !!facts.definition?.subtypes?.includes(value);
-  if (key === 'token' || key === 'tapped') return facts[key] === value;
+  if (key === 'token' || key === 'tapped' || key === 'attacking') return facts[key] === value;
   if (['power', 'toughness', 'manaValue'].includes(key)) {
     const actual = facts[key];
     if (!Number.isFinite(actual)) return false;
@@ -175,6 +175,7 @@ export function effectTargetCompatible(op, value) {
       (spec.scope === 'permanent' && impliesCreature(spec.where))
     );
   if (op === 'modify') return spec.scope === 'permanent' && impliesCreature(spec.where);
+  if (op === 'untap') return spec.scope === 'permanent';
   if (op === 'counter') return spec.scope === 'spell';
   if (['mill', 'draw', 'discard', 'gainLife', 'loseLife', 'scry', 'surveil'].includes(op))
     return spec.scope === 'player';

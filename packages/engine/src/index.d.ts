@@ -52,6 +52,8 @@ export type CardPredicate =
   | { tapped: boolean }
   | { token: boolean }
   | { basic: boolean }
+  | { legendary: boolean }
+  | { attacking: boolean }
   | { subtype: string }
   | { power: NumericComparison }
   | { toughness: NumericComparison }
@@ -62,7 +64,7 @@ export interface TargetSpec {
 }
 export type TargetKind = LegacyTargetKind | TargetSpec;
 export interface EventSpec {
-  event: 'enter' | 'cast' | 'dies';
+  event: 'enter' | 'cast' | 'dies' | 'attack';
   object?: 'source';
   controller?: 'you' | 'opponent';
   filter?: CardPredicate;
@@ -92,7 +94,7 @@ export type Effect =
     }
   | { op: 'mill'; count: number; player: 'controller' | 'opponent' | 'target' }
   | { op: 'counter' | 'bounce' | 'destroy' }
-  | { op: 'untap'; subject: 'source' }
+  | { op: 'untap'; subject?: 'source' }
   | { op: 'counterOn'; subject: 'source'; amount: number }
   | { op: 'modify'; subject?: 'source'; power: number; toughness: number; keywords?: string[] }
   | { op: 'token'; definition: string; count: number };
@@ -122,6 +124,7 @@ export interface CardDefinition {
     event:
       | EventSpec
       | 'selfEnters'
+      | 'selfAttacks'
       | 'selfDies'
       | 'otherCreatureDies'
       | 'controllerCreatureDies'

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.22.0 — Attacks before blockers
+
+- Queue declared-attacker triggers before priority, with APNAP ordering, targeted-trigger choices and existing resolution continuations. Entering attacking is not a declared attack.
+- Add attacking/legendary card predicates and targeted permanent untapping, with zone-incarnation and resolution-time target checks.
+- Add 22 reviewed Arena cards, eight in the dated Standard inventory: 489 executable cards and three tokens. Add First Blood as the fifteenth starter and an attack-trigger replay.
+- Forecast mandatory, untargeted public-board attack life effects and nonnegative self modifications in the bounded sparring policy. Omit mixed draw/search/targeted abilities whole rather than inventing hidden information. Improve untap target selection.
+- Preserve full legacy traces and rerun the pinned Forge inventory. General attack costs/restrictions, attacks-or-blocks triggers, dynamic X values, extra combats and entering-attacking effects remain unsupported.
+- Managed browser preview remained unavailable after an environment recovery and one retry. No new browser/mobile validation is claimed.
+
 ## 0.21.0 — One legend stays
 
 - Implement the legend rule for legendary permanents: controller choices before priority, APNAP sequencing, simultaneous state-based departures, and correctly retained enters/death triggers.
