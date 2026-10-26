@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "88bb91b5-2ccd-4ce9-8cd4-e54d63c12abf",
+  "name": "Coruscation Mage",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Otter", "Wizard"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nWhenever you cast a noncreature spell, this creature deals 1 damage to each opponent.",
+  "abilities": [
+    {
+      "kind": "offspring",
+      "cost": "{2}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

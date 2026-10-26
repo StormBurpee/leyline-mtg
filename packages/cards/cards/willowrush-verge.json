@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c52eaa87-9251-4a47-83fd-04e582ade612",
+  "name": "Willowrush Verge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {U}.\n{T}: Add {G}. Activate only if you control a Forest or an Island.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["U", "G"],
+      "conditions": {
+        "G": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "subtype": "Forest"
+              },
+              {
+                "subtype": "Island"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

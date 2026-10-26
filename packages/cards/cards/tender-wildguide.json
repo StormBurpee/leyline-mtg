@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "74868bc0-6081-4f46-a2c6-9521cd5465aa",
+  "name": "Tender Wildguide",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Possum", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\n{T}: Add one mana of any color.\n{T}: Put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "offspring",
+      "cost": "{2}"
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

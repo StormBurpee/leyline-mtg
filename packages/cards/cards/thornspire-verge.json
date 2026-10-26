@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e861bc08-4f0b-4d22-9b85-9d20227fd5b4",
+  "name": "Thornspire Verge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {R}.\n{T}: Add {G}. Activate only if you control a Mountain or a Forest.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["R", "G"],
+      "conditions": {
+        "G": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "subtype": "Mountain"
+              },
+              {
+                "subtype": "Forest"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

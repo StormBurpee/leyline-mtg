@@ -875,11 +875,11 @@ async function action(name, el) {
         state = replay(saved.replay);
         ui.catalog = state.catalog;
         ui.mode = saved.mode;
-        ui.deck = DECKS[saved.deck] ? saved.deck : 'ember';
+        ui.deck = deckEntries(ui).some(([id]) => id === saved.deck) ? saved.deck : 'storm-rakdos';
         ui.customDeck =
           saved.customDeck ??
           (JSON.stringify(state.config.decks[0]) ===
-          JSON.stringify(expandDeck(DECKS[ui.deck].cards))
+          JSON.stringify(expandDeck(selectedDeck(ui).cards))
             ? null
             : state.config.decks[0]);
         ui.autoYield = saved.autoYield ?? true;

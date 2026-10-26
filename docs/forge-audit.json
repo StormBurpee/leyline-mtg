@@ -2549,5 +2549,5 @@
     "packages/engine/src/events.js": "55feeaf1d5af4d76e7faf72aeeb3972e02b937497ecb0f9bc04fa7b3fbd30b89",
     "packages/engine/src/types.js": "f8c6957528dcfb640252c9f94e46b04415c06a6f5ce89a354ebec0ee0b6a4980"
   },
-  "auditedWithEngine": "0.25.0"
+  "auditedWithEngine": "0.26.0"
 }

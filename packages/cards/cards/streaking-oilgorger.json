@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c163a95e-9414-4b8c-b5a2-1e7674530404",
+  "name": "Streaking Oilgorger",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying, haste\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed \u2014 This creature has lifelink.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "startEngines"
+    },
+    {
+      "kind": "maxSpeedKeywords",
+      "keywords": ["lifelink"]
+    }
+  ]
+}

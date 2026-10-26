@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a202276b-1f1b-4277-95ee-26877a204f5e",
+  "name": "Sunbillow Verge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {W}.\n{T}: Add {R}. Activate only if you control a Mountain or a Plains.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "R"],
+      "conditions": {
+        "R": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "subtype": "Mountain"
+              },
+              {
+                "subtype": "Plains"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

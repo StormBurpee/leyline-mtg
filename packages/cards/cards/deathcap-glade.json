@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f6d24565-5b32-4eff-b2e0-6e2c25516ff0",
+  "name": "Deathcap Glade",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {B} or {G}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 2,
+        "where": {
+          "type": "land"
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["B", "G"]
+    }
+  ]
+}

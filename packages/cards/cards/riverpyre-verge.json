@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "510a6ac5-f098-4145-ac07-771b1b6f7cdf",
+  "name": "Riverpyre Verge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {R}.\n{T}: Add {U}. Activate only if you control an Island or a Mountain.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["R", "U"],
+      "conditions": {
+        "U": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "subtype": "Island"
+              },
+              {
+                "subtype": "Mountain"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

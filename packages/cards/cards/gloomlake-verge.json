@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d71bda4c-3dee-4398-8fd0-f77d8743b887",
+  "name": "Gloomlake Verge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {U}.\n{T}: Add {B}. Activate only if you control an Island or a Swamp.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["U", "B"],
+      "conditions": {
+        "B": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "subtype": "Island"
+              },
+              {
+                "subtype": "Swamp"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

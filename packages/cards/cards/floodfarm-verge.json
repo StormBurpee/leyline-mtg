@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f1e9abfb-c3c8-483e-b446-5c2afc9f6394",
+  "name": "Floodfarm Verge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {W}.\n{T}: Add {U}. Activate only if you control a Plains or an Island.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U"],
+      "conditions": {
+        "U": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "subtype": "Plains"
+              },
+              {
+                "subtype": "Island"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

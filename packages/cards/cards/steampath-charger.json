@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "75237b2c-232b-479a-ab3a-e1566c8a9fe7",
+  "name": "Steampath Charger",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Warlock"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nWhen this creature dies, it deals 1 damage to target player.",
+  "abilities": [
+    {
+      "kind": "offspring",
+      "cost": "{2}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

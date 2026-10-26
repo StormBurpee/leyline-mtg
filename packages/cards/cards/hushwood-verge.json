@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cce328b9-6100-417e-9ddf-808bbe3e3bc5",
+  "name": "Hushwood Verge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {G}.\n{T}: Add {W}. Activate only if you control a Forest or a Plains.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["G", "W"],
+      "conditions": {
+        "W": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "subtype": "Forest"
+              },
+              {
+                "subtype": "Plains"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

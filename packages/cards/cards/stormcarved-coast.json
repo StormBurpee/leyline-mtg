@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4722105b-0085-4bb8-bca1-9de0d3eb5600",
+  "name": "Stormcarved Coast",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {U} or {R}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 2,
+        "where": {
+          "type": "land"
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["U", "R"]
+    }
+  ]
+}
