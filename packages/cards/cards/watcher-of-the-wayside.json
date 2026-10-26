@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b30eafed-2755-4423-9592-c8b83c68804b",
+  "name": "Watcher of the Wayside",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Golem"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, target player mills two cards. You gain 2 life. (To mill two cards, a player puts the top two cards of their library into their graveyard.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "target",
+          "amount": 2
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

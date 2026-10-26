@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "58a17110-b2a7-4dbc-bba5-5ed3728ad261",
+  "name": "Bestow Greatness",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "Target creature gets +4/+4 and gains trample until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 4,
+          "toughness": 4,
+          "keywords": ["trample"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

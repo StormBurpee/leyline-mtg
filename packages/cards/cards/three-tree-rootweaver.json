@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d17d4003-e1c9-42be-ac76-3b5500fad485",
+  "name": "Three Tree Rootweaver",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Mole", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "{T}: Add one mana of any color.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    }
+  ]
+}

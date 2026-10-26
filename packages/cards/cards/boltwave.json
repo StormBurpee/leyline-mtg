@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bb8cccc8-e56f-42fa-a0d7-fc889b5e1c7b",
+  "name": "Boltwave",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Boltwave deals 3 damage to each opponent.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

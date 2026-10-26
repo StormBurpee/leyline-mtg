@@ -19,18 +19,18 @@ The report destination must not already exist. Omit it to print JSON to stdout. 
 - Direct spell instructions: literal damage, counterspell, untargeted draw, creature destruction, battlefield-creature bounce and temporary pumps.
 - Scry, surveil and mandatory self-discard, including resolution choices.
 - Referenced `SVar:` / `DB$` subability chains with cycle, missing-reference and unused-variable checks.
-- Supported mana/tap activated abilities and single-color tap mana abilities.
-- Selected self-enter, other-creature-enter, landfall and controlled spell-cast triggers, including optional controller decisions.
+- Supported mana/tap activated abilities and flexible one-mana abilities.
+- Selected self-enter, other-creature-enter, landfall and controlled spell-cast triggers, including target selection and optional controller decisions.
 - Literal mill, life-gain, source-counter and source-untap instructions.
 - Simple colored/generic costs and the supported target predicates.
 
-Every unrecognized rules field, opcode, keyword or extra ability parameter is a rejection. Modal spells, variable expressions, alternate costs, broader `T:` predicates and dynamic `SVar:` expressions remain manual migration work. For example, the real Sprite Dragon script is rejected even though Leyline has a separate hand-authored Sprite Dragon implementation. The adapter must not pretend it understands a grammar it has not implemented.
+Every unrecognized rules field, opcode, keyword or extra ability parameter is a rejection. Modal spells, variable expressions, alternate costs, broader `T:` predicates and dynamic `SVar:` expressions remain manual migration work. A recognized opcode does not authorize dropping an unrecognized restriction or subability.
 
 ## Review workflow
 
 1. Inspect the diagnostics. A candidate is not a proof of card correctness.
 2. Compare its executable definition with current Oracle text and rule interactions.
-3. Validate the reviewed definition with `createRegistry` and supply that catalog to `createGame`. The curated built-in registry lives in `packages/engine/src/cards.js`.
+3. Author or migrate a schema-versioned source under `packages/cards/cards/`. Compile it with `npm run cards:build`, then validate with `npm run cards:check`. The generated catalog is not edited by hand.
 4. Add engine interaction tests. Parser tests only establish translation behavior.
 5. Refresh display metadata separately and regenerate the support manifest.
 
@@ -43,3 +43,5 @@ A later importer should extend this grammar one semantic family at a time. Unsup
 The pinned upstream snapshot contains 34,131 script files. Adapter 0.8.0 produces 1,896 candidates and explicitly rejects 32,235 files. This is a syntax inventory, not 1,896 verified playable cards. The report records its upstream commit and compiler hash in [forge-audit.json](forge-audit.json); the earlier adapter inventory is retained in [forge-audit-v0.1.json](forge-audit-v0.1.json).
 
 Runtime fixtures execute selected translated cards through Leyline, including private scry, surveil, tap costs, discard continuations and targeted pumps. They do not compare execution against the Forge Java runtime.
+
+The v0.9 Standard tranche promotes 145 previously recognized candidates after Oracle identity/characteristic comparison, review of their printed rules, and per-card casting/ability execution checks. It does not register the remaining Arena candidates automatically. The fixture manifest records pinned Forge source links and hashes alongside the independently retrieved Oracle records.

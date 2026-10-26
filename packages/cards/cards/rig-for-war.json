@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "05bbd557-e2c0-4855-8fe6-00527fa39878",
+  "name": "Rig for War",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "Target creature gets +3/+0 and gains reach and first strike until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 3,
+          "toughness": 0,
+          "keywords": ["first strike", "reach"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

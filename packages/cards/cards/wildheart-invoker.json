@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ff8fb796-af5d-4d64-ab3c-7f2469dfa6bf",
+  "name": "Wildheart Invoker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Shaman"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}{G}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "{8}: Target creature gets +5/+5 and gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{8}"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 5,
+          "toughness": 5,
+          "keywords": ["trample"],
+          "until": "endOfTurn"
+        }
+      ],
+      "text": "Target creature gets +5/+5 and gains trample until end of turn."
+    }
+  ]
+}

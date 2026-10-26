@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b1793c3b-25d6-4fae-a99d-cfdd2210ca67",
+  "name": "Druid of the Cowl",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "{T}: Add {G}.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["G"]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "931c2153-e5e5-4642-bff0-f9dadcc24c9a",
+  "name": "Hullcarver",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot", "Assassin"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Deathtouch",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "628cf9ab-8f8b-49b6-b761-2450088ad03b",
+  "name": "Wretched Doll",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Toy"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "{B}, {T}: Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{B}"
+      },
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "text": "Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)"
+    }
+  ]
+}

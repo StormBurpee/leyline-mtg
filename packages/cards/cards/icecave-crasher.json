@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b9650a0e-5795-42ff-84c6-6040e5cf4c90",
+  "name": "Icecave Crasher",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Beast"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Trample\nLandfall — Whenever a land you control enters, this creature gets +1/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "use": "landfall.grow",
+      "args": {
+        "power": 1,
+        "toughness": 0
+      }
+    }
+  ]
+}

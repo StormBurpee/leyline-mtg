@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.9.0 — Reviewed Standard expansion
+
+- Added 145 reviewed Standard source definitions, including spells, creatures, gain lands, scry lands and mana/filtering abilities.
+- Independent Oracle identity/characteristic checks and pinned Forge provenance for every addition.
+- Per-card casting/payment/resolution tests, mana-option and ability tests, and five mixed-deck simulation matchups.
+- Fixed summoning sickness expiring at the opponent's turn boundary; readiness now follows the controller's most recent turn start.
+- Permanents with both mana and other activated abilities expose both in the client.
+- Live characteristics display granted keywords, not only printed ones.
+
+279 executable cards plus three tokens. The dated Standard inventory has 212 executable definitions out of 5,164; this remains a small subset, not complete Standard support.
+
 ## 0.8.0 — Targeted triggered abilities
 
 - Required trigger targets are chosen during stack placement, preserving APNAP and same-controller ordering.

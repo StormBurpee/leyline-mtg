@@ -9,8 +9,9 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - London mulligans, chosen bottom cards, first-player first-draw skip, cleanup discard.
 - Main-phase land timing, one land per turn, instant/sorcery timing, priority and LIFO stack.
 - Mana pools, colored and generic costs, mana abilities, flexible single-mana sources and optional automatic source selection. No hybrid, Phyrexian, snow, variable X, alternative or additional costs.
+- Creature tap costs and attacking remain restricted until the controller’s next turn begins, unless the creature has haste.
 - Objects changing zones become new incarnations; spells recheck targets at resolution.
-- Creatures, instants, sorceries, basic lands, ten unconditional tapped gain lands, Millstone, Glorious Anthem and Pacifism. Artifact and enchantment creatures retain both types; only the listed executable definitions are supported.
+- Creatures, instants, sorceries, basic/nonbasic mana lands, supported artifacts and enchantments. Artifact and enchantment creatures retain both types; only the listed executable definitions are supported.
 - Type-aware artifact/enchantment removal and permanent bounce.
 - Triggered abilities choose legal targets when placed on the stack, before priority. Impossible required targets remove the trigger; targets are rechecked on resolution.
 - Optional triggered effects with explicit resolution-time accept/decline choices.

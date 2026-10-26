@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4a9e0294-c967-4e90-b776-6d3195034a23",
+  "name": "Wrecking Gecko",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Construct"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\n{6}{G}{G}: This creature gets +4/+4 and gains trample until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{6}{G}{G}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 4,
+          "toughness": 4,
+          "keywords": ["trample"],
+          "until": "endOfTurn"
+        }
+      ],
+      "text": "This creature gets +4/+4 and gains trample until end of turn."
+    }
+  ]
+}

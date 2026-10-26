@@ -13,6 +13,7 @@ import {
   targetsFor,
   definition,
   hasType,
+  keywords,
 } from '../../packages/engine/src/index.js';
 export const escape = (s) =>
   String(s ?? '').replace(
@@ -99,6 +100,7 @@ function permanent(s, o, meta, ui, targetable) {
   if (land)
     return `<button class="land-card ${o.tapped ? 'tapped' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" ${artStyle(meta, o.name)} title="${escape(o.name)}${o.tapped ? ' · tapped' : ''}" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}">${d.mana ? mana(Object.fromEntries((Array.isArray(d.mana) ? d.mana : [d.mana]).map((color) => [color, 1]))) : '—'}</button>`;
   const pt = stats(s, o),
+    gained = keywords(s, o).filter((keyword) => !d.keywords.includes(keyword)),
     attacking = s.combat.attackers.some((r) => r.id === o.id),
     blocking =
       Object.values(s.combat.blocks)
@@ -107,7 +109,7 @@ function permanent(s, o, meta, ui, targetable) {
   return `<button class="permanent ${o.tapped ? 'tapped' : ''} ${attacking ? 'attacking' : ''} ${blocking ? 'blocking' : ''} ${ui.chosen.includes(o.id) || ui.selected === o.id ? 'selected' : ''} ${targetable ? 'targetable' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}${d.type === 'creature' ? `, ${pt.power}/${pt.toughness}` : ''}"><div class="permanent-art" ${artStyle(meta, o.name)}>${o.damage ? `<span class="damage-marker">−${o.damage}</span>` : ''}${d.type === 'creature' && isSick(s, o) ? '<span class="sick-marker">NEW</span>' : ''}</div><div class="permanent-name">${escape(o.name)}</div><div class="permanent-footer"><span>${
     isPacified(s, o)
       ? 'PACIFIED'
-      : d.keywords
+      : [...gained, ...d.keywords]
           .slice(0, 1)
           .map((k) => k.toUpperCase())
           .join('') || d.type.toUpperCase()
@@ -412,6 +414,8 @@ function liveCharacteristics(s, o) {
     if (o.plusCounters) bits.push(`+${o.plusCounters} counter${o.plusCounters === 1 ? '' : 's'}`);
     if (o.damage) bits.push(`${o.damage} damage`);
   }
+  const gained = keywords(s, o).filter((keyword) => !d.keywords.includes(keyword));
+  if (gained.length) bits.push(`Gained: ${gained.join(', ')}`);
   if (o.tapped) bits.push('Tapped');
   if (isPacified(s, o)) bits.push('Pacified');
   if (o.attachedTo) {

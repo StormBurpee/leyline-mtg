@@ -1137,7 +1137,7 @@
   {
     "oracleId": "57579799-2582-417f-9864-4560cac39ac3",
     "name": "Moment of Triumph",
-    "status": "compiler_candidate"
+    "status": "curated"
   },
   {
     "oracleId": "bfac8072-2bbc-43ca-b141-9cd0799840f7",
@@ -1197,7 +1197,7 @@
   {
     "oracleId": "0b4cb111-ecf7-4ff7-a9e3-c944054f3370",
     "name": "Monoist Sentry",
-    "status": "compiler_candidate"
+    "status": "curated"
   },
   {
     "oracleId": "5542ea4d-34ab-4f89-8894-793a7038f501",
@@ -1467,7 +1467,7 @@
   {
     "oracleId": "f6059731-2e10-4f72-a214-b257f1677e9e",
     "name": "Mutant Town",
-    "status": "compiler_candidate"
+    "status": "curated"
   },
   {
     "oracleId": "9f318ddc-3dc5-4e43-92b3-3a776e41c56e",
@@ -1527,6 +1527,6 @@
   {
     "oracleId": "834b8f71-9a45-42ae-9e99-e749fa6fb45e",
     "name": "Mystic Monastery",
-    "status": "compiler_candidate"
+    "status": "curated"
   }
 ]

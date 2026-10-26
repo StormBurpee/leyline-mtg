@@ -952,17 +952,28 @@ function selectCard(id) {
   ) {
     const abilities = definition(state, o).activated,
       legal = legalActions(state, p);
+    const manaButtons = definition(state, o).mana
+      ? manaOptions(state, o)
+          .map(
+            (color) =>
+              `<button class="btn" data-action="chooseMana" data-color="${color}" ${canTapForMana(state, o, p) ? '' : 'disabled'}>${mana({ [color]: 1 })} Tap: add ${color}</button>`,
+          )
+          .join('')
+      : '';
     openDialog(
       o.name,
-      `<p style="margin-bottom:16px">Activated abilities use the stack. Costs are paid when you activate, not when the ability resolves.</p>`,
-      abilities
-        .map(
-          (a, i) =>
-            `<button class="btn primary" data-action="activateAbility" data-ability="${i}" ${legal.some((x) => x.type === 'activate' && x.card === id && x.ability === i) ? '' : 'disabled'}>${escape(a.text)}</button>`,
-        )
-        .join('') + '<button class="btn" data-action="closeDialog">Cancel</button>',
+      `<p style="margin-bottom:16px">Mana abilities resolve immediately. Other abilities use the stack. Costs are paid when you activate, not when the ability resolves.</p>`,
+      manaButtons +
+        abilities
+          .map(
+            (a, i) =>
+              `<button class="btn primary" data-action="activateAbility" data-ability="${i}" ${legal.some((x) => x.type === 'activate' && x.card === id && x.ability === i) ? '' : 'disabled'}>${escape((a.text ?? 'Activate ability').replaceAll('CARDNAME', o.name))}</button>`,
+          )
+          .join('') +
+        '<button class="btn" data-action="closeDialog">Cancel</button>',
     );
     dialog._activationCard = id;
+    dialog._manaCard = id;
     return;
   }
   if (!c && canTapForMana(state, o, p)) {

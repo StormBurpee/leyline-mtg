@@ -1,6 +1,6 @@
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.8.0';
+export const VERSION = '0.9.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -67,7 +67,11 @@ export function stats(s, o) {
     }
   return { power, toughness };
 }
-export const isSick = (s, o) => o.controlledSince >= s.turn && !hasKeyword(s, o, 'haste');
+// CR 302.6 measures the controller's most recent turn start, not any turn change.
+// Turns alternate in this two-player profile; extra turns are not implemented.
+export const isSick = (s, o) =>
+  o.controlledSince >= (s.active === o.controller ? s.turn : s.turn - 1) &&
+  !hasKeyword(s, o, 'haste');
 export const isPacified = (s, o) =>
   battlefield(s).some(
     (a) =>

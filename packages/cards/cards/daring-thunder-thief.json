@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0f5401c2-0189-4a07-8e7b-a765ccd7c954",
+  "name": "Daring Thunder-Thief",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Turtle", "Rogue"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Flash\nThis creature enters tapped.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "entry",
+      "tapped": true
+    }
+  ]
+}

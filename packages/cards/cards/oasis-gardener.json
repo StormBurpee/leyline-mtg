@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "210a130c-d5d3-43bf-8a80-d796c37242e8",
+  "name": "Oasis Gardener",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Scarecrow"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, you gain 2 life.\n{T}: Add one mana of any color.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

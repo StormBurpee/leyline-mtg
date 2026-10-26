@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "325b4288-fe1b-4e29-ae13-72924b4db3dd",
+  "name": "Iron Giant",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Demon"],
+    "colors": [],
+    "manaCost": "{7}",
+    "power": 6,
+    "toughness": 6
+  },
+  "rulesText": "Reach, vigilance, trample",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    }
+  ]
+}

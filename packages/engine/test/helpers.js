@@ -9,7 +9,7 @@ export function fixture() {
 }
 export function put(s, name, player = 0, zone = 'battlefield', { ready = true } = {}) {
   const o = addObject(s, name, player, zone);
-  if (ready) o.controlledSince = s.turn - 1;
+  if (ready) o.controlledSince = s.turn - 2;
   return o;
 }
 export function lands(s, color, count, p = 0) {

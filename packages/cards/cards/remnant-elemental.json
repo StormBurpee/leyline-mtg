@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "69e8333a-bddf-49e2-9c39-3dc46fec81e0",
+  "name": "Remnant Elemental",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 0,
+    "toughness": 4
+  },
+  "rulesText": "Reach\nLandfall — Whenever a land you control enters, this creature gets +2/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "use": "landfall.grow",
+      "args": {
+        "power": 2,
+        "toughness": 0
+      }
+    }
+  ]
+}

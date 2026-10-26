@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d6eef6a7-0cf4-4ee8-90e0-727a283c3be9",
+  "name": "Flame-Chain Mauler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Warrior"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{1}{R}: This creature gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{R}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 0,
+          "keywords": ["menace"],
+          "until": "endOfTurn"
+        }
+      ],
+      "text": "This creature gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)"
+    }
+  ]
+}

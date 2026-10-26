@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6bda307b-1508-4582-952b-c690db85e045",
+  "name": "Hermitic Nautilus",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Nautilus"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Vigilance\n{1}{U}: This creature gets +3/-3 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{U}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 3,
+          "toughness": -3,
+          "until": "endOfTurn"
+        }
+      ],
+      "text": "Hermitic Nautilus gets +3/-3 until end of turn."
+    }
+  ]
+}

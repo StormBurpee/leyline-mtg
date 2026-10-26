@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+  "name": "Cloudblazer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Scout"],
+    "colors": ["W", "U"],
+    "manaCost": "{3}{W}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhen this creature enters, you gain 2 life and draw two cards.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

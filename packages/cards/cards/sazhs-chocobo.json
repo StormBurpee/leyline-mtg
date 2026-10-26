@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c2b082b4-5d9c-4125-b353-d1cf4f334720",
+  "name": "Sazh's Chocobo",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 0,
+    "toughness": 1
+  },
+  "rulesText": "Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "counter": "+1/+1",
+          "target": "source",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

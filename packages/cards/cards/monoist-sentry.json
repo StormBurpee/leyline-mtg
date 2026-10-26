@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0b4cb111-ecf7-4ff7-a9e3-c944054f3370",
+  "name": "Monoist Sentry",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 4,
+    "toughness": 1
+  },
+  "rulesText": "Defender",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "defender"
+    }
+  ]
+}

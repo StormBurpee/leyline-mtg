@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b5c64331-2ba5-43ad-b77c-979875cc39e3",
+  "name": "Goobbue Gardener",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Plant", "Beast"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "{T}: Add {G}.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["G"]
+    }
+  ]
+}
