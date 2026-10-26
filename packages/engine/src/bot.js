@@ -13,6 +13,7 @@ import {
   tacticalDamage,
 } from './combat-policy.js';
 import { orderLifePayoffs, acceptLifePayoff } from './combat-payoffs.js';
+import { chooseLandAction } from './development-policy.js';
 import { planPayment } from './mana.js';
 import { matchesEvent } from './events.js';
 import { legalActions } from './engine.js';
@@ -150,7 +151,7 @@ export function chooseBotCommand(s, p) {
   const actions = legalActions(s, p).filter((action) => actionSafe(s, p, action));
   const lethal = actions.find((action) => directLethal(s, p, action));
   if (lethal) return { ...lethal, player: p };
-  const land = actions.find((a) => a.type === 'playLand');
+  const land = chooseLandAction(s, p, actions);
   if (land) {
     const landCard = definition(s, s.objects[land.card]);
     const setup = actions.find((action) => {
@@ -199,10 +200,16 @@ export function chooseBotCommand(s, p) {
         damage &&
         target &&
         target.controller !== p &&
+        !hasKeyword(s, target, 'indestructible') &&
         stats(s, target).toughness - target.damage <= damage.amount
       )
         score = 8 + value(s, target) - value(s, source) / 2;
-      if (effect.some((e) => e.op === 'destroy') && target?.controller !== p && target)
+      if (
+        effect.some((e) => e.op === 'destroy') &&
+        target?.controller !== p &&
+        target &&
+        !hasKeyword(s, target, 'indestructible')
+      )
         score = 8 + value(s, target) - value(s, source) / 2;
       const movement = effect.find((e) => e.op === 'moveTarget');
       if (
@@ -277,6 +284,7 @@ export function chooseBotCommand(s, p) {
       if (d.type === 'creature' || d.static || d.mana)
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);
       if (d.effects?.some((e) => e.op === 'token')) score = 6;
+      if (d.effects?.some((e) => e.op === 'damageOpponent')) score = Math.max(score, 2);
       if (d.effects?.some((e) => e.op === 'draw')) score = s.players[p].hand.length < 5 ? 5 : 1;
       if (d.type === 'creature' && !s.stack.length && s.active === p && s.step === 'main1') {
         const enables = actions
@@ -329,6 +337,7 @@ export function chooseBotCommand(s, p) {
         else if (
           target &&
           target.controller !== p &&
+          !hasKeyword(s, target, 'indestructible') &&
           stats(s, target).toughness - target.damage <= dmg.amount
         )
           score = 8 + value(s, target);
@@ -338,10 +347,15 @@ export function chooseBotCommand(s, p) {
         if (entry?.controller !== p) score = 12;
       }
       if (
-        (d.aura || d.effects?.some((e) => ['destroy', 'bounce'].includes(e.op))) &&
-        target?.controller !== p
+        target &&
+        target.controller !== p &&
+        (d.aura ||
+          d.effects?.some(
+            (e) =>
+              e.op === 'bounce' || (e.op === 'destroy' && !hasKeyword(s, target, 'indestructible')),
+          ))
       )
-        score = target ? 6 + value(s, target) : -100;
+        score = 6 + value(s, target);
       if (d.effects?.some((e) => e.op === 'modify') && target?.controller === p) {
         const inCombat =
           s.combat.attackers.some((r) => r.id === target.id) ||

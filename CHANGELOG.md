@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.16.0 — Mana development and removal discipline
+
+- Choose land drops by immediate lethal, newly affordable plays and the colors required by the known hand instead of hand order.
+- Prefer an untapped source when it enables a play; develop tapped fixing early when it does not delay one. This is a mana heuristic, not a full landfall/ETB forecast.
+- Stop valuing damage or destroy effects as creature removal against indestructible. Bounce remains an option.
+- Give nonlethal opponent-wide burn a pressure score, so cards such as Boltwave are not silently held until lethal.
+
 ## 0.15.0 — Combat death payoffs
 
 - Include life-only death triggers in bounded attack and block evaluation, including Blood Artist and Zulaport Cutthroat.
