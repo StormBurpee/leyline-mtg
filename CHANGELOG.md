@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.1 — Keyboard focus
+
+- Escape now cancels click-targeting even while a card button has keyboard focus.
+- Full-control and explicit pass-turn shortcuts work from focused controls without hijacking text input or ordinary button activation.
+- Enter on an already selected hand card uses its play action.
+
 ## 0.13.0 — Read the table
 
 - Larger expanded hands, adjacent full-card inspection, visible auto-payment previews and direct click-to-target.

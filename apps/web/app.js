@@ -1,3 +1,4 @@
+import { duelShortcut } from './duel-shortcuts.js';
 import { autoCommand, updateYield, stopKey, hasStop } from './priority-policy.js';
 import { installDuelPresentation } from './duel-presentation.js';
 import {
@@ -1544,33 +1545,37 @@ app.addEventListener('dragend', () =>
   app.querySelector('[data-deck-drop]')?.classList.remove('accepting-card'),
 );
 document.addEventListener('keydown', (e) => {
-  if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
-  if (dialog.open || ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(e.target.tagName)) return;
-  if (e.key === 'f' && state && ui.view === 'play') {
-    action('toggleFullControl', {});
-    return;
-  }
-  if (e.key === 'Enter' && state && ui.view === 'play' && !ui.replayRecord) {
-    e.preventDefault();
-    action(e.shiftKey ? 'yieldTurn' : ui.selected ? 'playSelected' : 'yieldResponse', {});
-    return;
-  }
-  if (
-    e.code === 'Space' &&
-    state &&
-    ui.view === 'play' &&
-    !state.choice &&
-    state.priority === viewer() &&
-    !ui.replayRecord
-  ) {
-    e.preventDefault();
-    action('pass', {});
-  }
-  if (e.key === 'Escape') {
+  const shortcut = duelShortcut(
+    {
+      key: e.key,
+      code: e.code,
+      repeat: e.repeat,
+      ctrlKey: e.ctrlKey,
+      metaKey: e.metaKey,
+      altKey: e.altKey,
+      shiftKey: e.shiftKey,
+      targetTag: e.target.tagName,
+      editable: e.target.isContentEditable,
+      focusedCard: e.target.closest('.hand-card')?.dataset.card,
+    },
+    {
+      dialogOpen: dialog.open,
+      hasState: !!state,
+      view: ui.view,
+      replay: !!ui.replayRecord,
+      selected: ui.selected,
+      targeting: ui.targeting,
+      hasChoice: !!state?.choice,
+      hasPriority: state?.priority === viewer(),
+    },
+  );
+  if (!shortcut) return;
+  e.preventDefault();
+  if (shortcut === 'cancelSelection') {
     ui.yieldMode = null;
-    resetSelection();
-    render();
+    duelPresentation.hidePreview();
   }
+  action(shortcut, {});
 });
 document.querySelector('#replay-file').addEventListener('change', async (e) => {
   const file = e.target.files[0];
