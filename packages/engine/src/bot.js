@@ -13,6 +13,7 @@ import {
   tacticalDamage,
 } from './combat-policy.js';
 import { orderLifePayoffs, acceptLifePayoff } from './combat-payoffs.js';
+import { trickScore } from './trick-policy.js';
 import { chooseLandAction } from './development-policy.js';
 import { planPayment } from './mana.js';
 import { matchesEvent } from './events.js';
@@ -264,17 +265,15 @@ export function chooseBotCommand(s, p) {
     if (!defenseCache.has(id)) defenseCache.set(id, preserveForDefense(s, s.objects[id], p));
     return defenseCache.get(id);
   };
-  const ability = actions.find(
-    (a) =>
-      a.type === 'activate' &&
-      !definition(s, s.objects[a.card]).activated[a.ability].cost.sacrificeSelf &&
-      !(definition(s, s.objects[a.card]).activated[a.ability].cost.tap && keepBlocker(a.card)) &&
-      (a.target?.kind === 'player' ? a.target.id !== p : !a.target) &&
-      (!definition(s, s.objects[a.card]).activated[a.ability].effects.some(
-        (e) => e.op === 'modify',
-      ) ||
-        ['blockers', 'firstDamage'].includes(s.step)),
-  );
+  const ability = actions.find((action) => {
+    if (action.type !== 'activate') return false;
+    const activated = definition(s, s.objects[action.card]).activated[action.ability];
+    if (activated.cost.sacrificeSelf || (activated.cost.tap && keepBlocker(action.card)))
+      return false;
+    if (activated.effects.some((effect) => effect.op === 'modify'))
+      return trickScore(s, p, action) > 0;
+    return action.target?.kind === 'player' ? action.target.id !== p : !action.target;
+  });
   if (ability) return { ...ability, player: p };
   const casts = actions
     .filter((a) => a.type === 'cast')
@@ -356,14 +355,8 @@ export function chooseBotCommand(s, p) {
           ))
       )
         score = 6 + value(s, target);
-      if (d.effects?.some((e) => e.op === 'modify') && target?.controller === p) {
-        const inCombat =
-          s.combat.attackers.some((r) => r.id === target.id) ||
-          Object.values(s.combat.blocks)
-            .flat()
-            .some((r) => r.id === target.id);
-        if (inCombat && s.step === 'blockers') score = 9;
-      }
+      if (d.effects?.some((e) => e.op === 'modify') && target?.controller === p)
+        score = Math.max(score, trickScore(s, p, a));
       // Do not pile redundant damage/removal on the same target while it waits.
       if (
         a.target &&

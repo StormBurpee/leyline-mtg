@@ -139,9 +139,10 @@ export function tacticalDamage(s, choice = s.choice) {
 export function combatOutcome(
   s,
   pairs,
-  { active = s.active, attackers = s.combat.attackers.map((r) => r.id) } = {},
+  { active = s.active, attackers = s.combat.attackers.map((r) => r.id), blocked = null } = {},
 ) {
   const work = boardCopy(s, active, pairs, attackers);
+  if (blocked) work.combat.blocked = [...blocked];
   const first = [...attackers, ...pairs.map((p) => p.blocker)].some(
     (id) =>
       hasKeyword(work, work.objects[id], 'first strike') ||
