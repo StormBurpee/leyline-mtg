@@ -69,3 +69,11 @@ The rules engine always retains normal priority. The client chooses when to send
 - **Presentation:** the bot and automated passing wait for readable cast/resolution intervals. Manual responses are not replaced by animation outcomes. Reduced motion disables the visual movement, not rules.
 
 Wizards describes Arena as skipping common low-activity windows and adding card-specific smart-priority exceptions; it also documents expanding hands and drag-to-cast interaction. Those inform this client's design, not a claim of Arena parity. Leyline has not implemented every Arena exception or shortcut. Sources: [Wizards smart-priority guide](https://magic.wizards.com/en/news/mtg-arena/announcements-october-27-2025), [Wizards interface overview](https://magic.wizards.com/en/news/mtg-arena/mtg-arena-state-game-january-2021-01-21).
+
+## Width-aware hands
+
+The hand chooses a fan only when its measured width leaves a usable exposed strip on every card. Otherwise it becomes a horizontally scrollable rail. The arena uses an explicit zero-minimum grid column so intrinsic card widths cannot stretch the whole board beyond the viewport. Both hand modes use the same horizontal padding to avoid resize oscillation.
+
+Narrow-screen hand controls have 44px hit areas without shrinking the card faces. Read card opens a read-only dialog for a current card in the viewing player's hand. Closing it preserves any pending target choice. Selection restores the rail's scroll position; switching hand size keeps the inspected card in view.
+
+Chromium checks covered 1180, 768, 376 and 320 CSS-pixel widths, seven-card and twelve-card hands, reaching the last card, compact/expanded switching and keyboard Enter/Escape for inspection. A real Shock targeting flow was preserved across inspection, then paid and placed on the stack against the opponent. Native pointer dragging moved a Mountain from hand to the battlefield exactly once and cleared the drag state. These are desktop-browser responsive checks, not physical iOS or Android certification; the gesture tests separately cover horizontal touch-scroll intent and drag cancellation.

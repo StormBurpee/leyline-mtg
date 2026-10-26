@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.17.1 — Reachable hands
+
+- Fit the playing surface to its container instead of allowing an implicit grid column to force horizontal overflow.
+- Choose a fan or scrollable card rail from actual available width; keep every card reachable in normal and large hands.
+- Add a read-only hand-card dialog that preserves pending targeting. Give narrow-screen hand controls 44px hit areas without shrinking card faces.
+- Preserve the inspected card when switching hand size, retain scroll through selection, and hide stale previews while scrolling.
+- Fix compact-hand sizing at intermediate screen widths. The rules engine remains 0.17.0.
+
 ## 0.17.0 — Purposeful combat tricks
 
 - Compare supported modifier spells against the declared combat before spending a card: save a creature, improve a trade, prevent lethal or win now.

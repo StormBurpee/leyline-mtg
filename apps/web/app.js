@@ -620,11 +620,17 @@ async function action(name, el) {
       );
       break;
     }
-    case 'handSize':
+    case 'handSize': {
+      const anchor = readableHandCard(state, ui, viewer());
       ui.handExpanded = !ui.handExpanded;
       save();
       render();
+      if (anchor)
+        app
+          .querySelector(`.hand [data-card="${CSS.escape(anchor)}"]`)
+          ?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       break;
+    }
     case 'prioritySettings':
       openDialog(
         'Priority & automation',

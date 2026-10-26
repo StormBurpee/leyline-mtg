@@ -14,6 +14,7 @@
   width: 100%;
   height: 100%;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows:
     30px 30px 42px minmax(100px, 1fr) 20px minmax(100px, 1fr) 42px var(--hand-height)
     var(--dock-height);
@@ -26,6 +27,7 @@
 }
 .game-layout .arena > * {
   min-height: 0;
+  min-width: 0;
 }
 .game-layout .matchbar {
   height: 100%;
@@ -696,7 +698,7 @@
   .game-layout {
     height: auto;
     min-height: calc(100dvh - 62px);
-    --hand-height: 205px;
+    --hand-height: 236px;
     --dock-height: 100px;
   }
   .game-layout .arena {
@@ -713,6 +715,16 @@
   }
   .game-layout .hand-card {
     margin: 0 -15px;
+    height: calc(var(--hand-height) - 69px);
+  }
+  .game-layout .hand-label {
+    height: 48px;
+  }
+  .game-layout .hand-label > button {
+    min-height: 44px;
+  }
+  .game-layout .hand {
+    height: calc(100% - 48px);
   }
   .game-layout .field {
     grid-template-columns: 75px minmax(0, 1fr);
@@ -786,20 +798,20 @@
     font-size: 9px;
   }
   .game-layout.hand-compact {
-    --hand-height: 160px;
+    --hand-height: 191px;
   }
 }
 @media (max-width: 560px) {
   .game-layout {
-    --hand-height: 182px;
+    --hand-height: 213px;
     --dock-height: 110px;
   }
   .game-layout.hand-compact {
-    --hand-height: 145px;
+    --hand-height: 176px;
   }
   .game-layout .hand-card {
     margin: 0 -21px;
-    height: calc(var(--hand-height) - 34px);
+    height: calc(var(--hand-height) - 65px);
   }
   .game-layout .hand {
     padding: 5px 10px 0;
