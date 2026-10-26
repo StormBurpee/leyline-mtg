@@ -1,3 +1,4 @@
+export { spellProfile, spellOptions } from './spell-modes.js';
 export {
   CARDS,
   CARD_IDS,

@@ -5,7 +5,7 @@
   "name": "Prodigal Pyromancer",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Human", "Wizard"],
     "colors": ["R"],
     "manaCost": "{2}{R}",
     "power": 1,

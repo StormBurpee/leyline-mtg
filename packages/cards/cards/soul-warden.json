@@ -5,7 +5,7 @@
   "name": "Soul Warden",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Human", "Cleric"],
     "colors": ["W"],
     "manaCost": "{W}",
     "power": 1,

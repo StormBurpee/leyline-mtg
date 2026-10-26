@@ -5,7 +5,7 @@
   "name": "Festival Crasher",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Devil"],
     "colors": ["R"],
     "manaCost": "{1}{R}",
     "power": 1,

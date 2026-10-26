@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a8cd3a52-1056-4664-ae55-eb0ba3a43a15",
+  "name": "Fiery Intervention",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{4}{R}"
+  },
+  "rulesText": "Choose one —\n• Fiery Intervention deals 5 damage to target creature.\n• Destroy target artifact.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Fiery Intervention deals 5 damage to target creature.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "label": "Destroy target artifact.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

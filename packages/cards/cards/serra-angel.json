@@ -5,7 +5,7 @@
   "name": "Serra Angel",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Angel"],
     "colors": ["W"],
     "manaCost": "{3}{W}{W}",
     "power": 4,

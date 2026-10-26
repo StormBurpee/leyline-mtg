@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b59c7c62-ce2f-4062-9790-566191aded69",
+  "name": "Alley Evasion",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Choose one —\n• Target creature you control gets +1/+2 until end of turn.\n• Return target creature you control to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target creature you control gets +1/+2 until end of turn.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 1,
+              "toughness": 2,
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Return target creature you control to its owner's hand.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "returnToHand",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

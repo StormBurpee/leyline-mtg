@@ -213,13 +213,9 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       if (e.op === 'counterOn' && effect.counter !== '+1/+1')
         problem('UNSUPPORTED_COUNTER', `${p}.counter`, 'Only +1/+1 counters are implemented.');
       if (e.op === 'counterOn') {
-        if (effect.target !== 'source')
-          problem(
-            'UNSUPPORTED_BINDING',
-            `${p}.target`,
-            'This instruction currently affects its source only.',
-          );
-        e.subject = 'source';
+        if (!['source', 'target'].includes(effect.target))
+          problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
+        if (effect.target === 'source') e.subject = 'source';
       }
       if (e.op === 'untap') {
         if (!['source', 'target'].includes(effect.target))
@@ -439,6 +435,30 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         spells++;
         d.target = a.target === undefined ? null : target(a.target, `${path}.target`);
         d.effects = effects(a.effects, `${path}.effects`);
+        break;
+      case 'modalSpell':
+        fields(a, ['kind', 'choose', 'modes'], path);
+        spells++;
+        if (a.choose !== 1)
+          problem(
+            'UNSUPPORTED_MODE_COUNT',
+            `${path}.choose`,
+            'Only choose-one spells are implemented.',
+          );
+        if (!Array.isArray(a.modes) || a.modes.length < 2 || a.modes.length > 8)
+          problem('INVALID_MODES', `${path}.modes`, 'Expected 2–8 modes.');
+        else
+          d.modes = a.modes.map((mode, i) => {
+            const mp = `${path}.modes[${i}]`;
+            fields(mode, ['label', 'target', 'effects'], mp);
+            return {
+              label: mode?.label,
+              ...(mode?.target !== undefined
+                ? { target: target(mode.target, `${mp}.target`) }
+                : {}),
+              effects: effects(mode?.effects, `${mp}.effects`),
+            };
+          });
         break;
       case 'activated':
         fields(a, ['kind', 'cost', 'target', 'effects', 'text'], path);

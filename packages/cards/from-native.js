@@ -58,7 +58,12 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
             until: 'endOfTurn',
           };
         case 'counterOn':
-          return { op: 'addCounters', counter: '+1/+1', target: 'source', amount: e.amount };
+          return {
+            op: 'addCounters',
+            counter: '+1/+1',
+            target: e.subject === 'source' ? 'source' : 'target',
+            amount: e.amount,
+          };
         case 'untap':
           return { op: 'untap', target: e.subject === 'source' ? 'source' : 'target' };
         case 'searchLibrary':
@@ -81,6 +86,16 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   if (d.ward) abilities.push({ kind: 'keyword', keyword: 'ward', cost: cost(d.ward) });
   if (d.entersTapped) abilities.push({ kind: 'entry', tapped: true });
   if (d.mana) abilities.push({ kind: 'mana', produces: Array.isArray(d.mana) ? d.mana : [d.mana] });
+  if (d.modes)
+    abilities.push({
+      kind: 'modalSpell',
+      choose: 1,
+      modes: d.modes.map((mode) => ({
+        label: mode.label,
+        ...(mode.target ? { target: structuredClone(targetSpec(mode.target)) } : {}),
+        effects: effects(mode.effects),
+      })),
+    });
   if (d.effects)
     abilities.push({
       kind: 'spell',

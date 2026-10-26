@@ -1,27 +1,11 @@
 import { validateEventSpec } from './events.js';
 import { validateTargetSpec, effectTargetCompatible, validateFilter } from './selectors.js';
-import { CARD_TYPES, primaryType } from './types.js';
+import { CARD_TYPES, primaryType, KEYWORD_NAMES } from './types.js';
 
 const TYPES = new Set(CARD_TYPES);
 const COLORS = new Set(['W', 'U', 'B', 'R', 'G']);
 const MANA = new Set([...COLORS, 'C', 'generic']);
-const KEYWORDS = new Set([
-  'flying',
-  'reach',
-  'haste',
-  'vigilance',
-  'trample',
-  'deathtouch',
-  'lifelink',
-  'defender',
-  'first strike',
-  'double strike',
-  'flash',
-  'hexproof',
-  'shroud',
-  'indestructible',
-  'menace',
-]);
+const KEYWORDS = new Set(KEYWORD_NAMES);
 const FIELDS = new Set([
   'name',
   'type',
@@ -39,6 +23,7 @@ const FIELDS = new Set([
   'mana',
   'target',
   'effects',
+  'modes',
   'etb',
   'aura',
   'static',
@@ -198,12 +183,21 @@ function validateEffects(effects, path, target, errors) {
     }
     if (e.op === 'untap' && e.subject !== undefined && e.subject !== 'source')
       errors.push(`${p}.subject: only source or the chosen target is supported.`);
-    if (e.op === 'counterOn' && e.subject !== 'source')
-      errors.push(`${p}.subject: only source is supported.`);
+    if (e.op === 'counterOn' && e.subject !== undefined && e.subject !== 'source')
+      errors.push(`${p}.subject: only source or the chosen target is supported.`);
     if (
-      ['damage', 'counter', 'bounce', 'destroy', 'modify', 'moveTarget', 'untap'].includes(e.op) &&
+      [
+        'damage',
+        'counter',
+        'bounce',
+        'destroy',
+        'modify',
+        'moveTarget',
+        'untap',
+        'counterOn',
+      ].includes(e.op) &&
       e.subject !== 'source' &&
-      !effectTargetCompatible(e.op, target)
+      !effectTargetCompatible(e.op, target, e)
     )
       errors.push(`${p}: effect requires a compatible target selector.`);
   }
@@ -300,6 +294,44 @@ export function validateDefinition(card) {
       Object.keys(card.static).some((k) => !['kind', 'power', 'toughness'].includes(k)))
   )
     errors.push(`${name}.static: unsupported continuous effect.`);
+  if (card.modes !== undefined) {
+    if (
+      !['instant', 'sorcery'].includes(card.type) ||
+      card.effects !== undefined ||
+      card.target != null
+    )
+      errors.push(
+        `${name}.modes: only choose-one instants/sorceries without shared effects or targets are supported.`,
+      );
+    if (!Array.isArray(card.modes) || card.modes.length < 2 || card.modes.length > 8)
+      errors.push(`${name}.modes: expected 2–8 modes.`);
+    else {
+      const labels = new Set();
+      for (const [i, mode] of card.modes.entries()) {
+        const path = `${name}.modes[${i}]`;
+        if (
+          !plain(mode) ||
+          Object.keys(mode).some((key) => !['label', 'target', 'effects'].includes(key))
+        ) {
+          errors.push(`${path}: unsupported mode fields.`);
+          continue;
+        }
+        if (
+          typeof mode.label !== 'string' ||
+          !mode.label.trim() ||
+          mode.label.length > 180 ||
+          labels.has(mode.label)
+        )
+          errors.push(
+            `${path}.label: expected a distinct nonempty label of at most 180 characters.`,
+          );
+        labels.add(mode.label);
+        if (mode.target != null)
+          errors.push(...validateTargetSpec(mode.target).map((e) => `${path}.target: ${e}`));
+        validateEffects(mode.effects, `${path}.effects`, mode.target, errors);
+      }
+    }
+  }
   for (const key of ['effects', 'etb'])
     if (card[key] !== undefined)
       validateEffects(card[key], `${name}.${key}`, key === 'effects' ? card.target : null, errors);

@@ -5,7 +5,7 @@
   "name": "Monastery Swiftspear",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Human", "Monk"],
     "colors": ["R"],
     "manaCost": "{R}",
     "power": 1,

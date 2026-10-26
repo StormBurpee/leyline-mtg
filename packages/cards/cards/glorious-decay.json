@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ac4277d7-d78a-4d6e-8d6d-11f9e56f8ae7",
+  "name": "Glorious Decay",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Choose one —\n• Destroy target artifact.\n• Glorious Decay deals 4 damage to target creature with flying.\n• Exile target card from a graveyard. Draw a card.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target artifact.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Glorious Decay deals 4 damage to target creature with flying.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "keyword": "flying"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 4
+            }
+          ]
+        },
+        {
+          "label": "Exile target card from a graveyard. Draw a card.",
+          "target": {
+            "scope": "graveyard"
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

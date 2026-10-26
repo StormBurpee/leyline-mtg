@@ -5,7 +5,7 @@
   "name": "Goblin Token",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Goblin"],
     "colors": ["R"],
     "manaCost": null,
     "power": 1,

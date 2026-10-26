@@ -5,7 +5,7 @@
   "name": "Vampire Nighthawk",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Vampire", "Shaman"],
     "colors": ["B"],
     "manaCost": "{1}{B}{B}",
     "power": 2,

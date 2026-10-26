@@ -5,7 +5,7 @@
   "name": "Owlin Shieldmage",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Bird", "Warlock"],
     "colors": ["W", "B"],
     "manaCost": "{3}{W}{B}",
     "power": 3,

@@ -50,13 +50,40 @@ test('the complete source pack compiles to the checked-in runtime catalog', () =
   assert.deepEqual(canonical(result.index), canonical(CARD_IDS));
   for (const [id, name] of Object.entries(result.index)) assert.equal(resolveCardName(id), name);
 });
-test('all pre-migration definitions preserve their exact v0.5 runtime contracts', async () => {
+test('pre-migration contracts change only their explicitly reviewed printed subtypes', async () => {
   const baseline = JSON.parse(
     await readFile(new URL('./fixtures/v05-card-contracts.json', import.meta.url), 'utf8'),
   );
   assert.equal(baseline.cards.length, 129);
-  for (const contract of baseline.cards)
-    assert.equal(hash(CARDS[contract.name]), contract.sha256, contract.name);
+  const corrections = JSON.parse(
+    await readFile(
+      new URL('./fixtures/printed-subtypes-reviewed-v023.json', import.meta.url),
+      'utf8',
+    ),
+  );
+  const byName = new Map(corrections.map((row) => [row.name, row]));
+  assert.equal(byName.size, corrections.length);
+  for (const row of corrections) {
+    assert.deepEqual(CARDS[row.name].subtypes, row.subtypes, row.name);
+    assert.deepEqual(row.oldSubtypes, []);
+    assert.ok(row.subtypes.length > 0);
+    if (row.evidence.kind === 'scryfall') {
+      assert.equal(CARD_IDS[row.evidence.oracleId], row.name);
+      assert.deepEqual(row.evidence.typeLine.split(' — ')[1].split(' '), row.subtypes);
+      assert.ok(row.evidence.releasedAt <= '2026-10-26');
+    } else assert.ok(row.evidence.rulesText.includes(row.subtypes[0]));
+  }
+  // Keep every original hash. Only the recorded subtype correction is normalized;
+  // costs, effects, stats, keywords and all other fields still match exactly.
+  for (const contract of baseline.cards) {
+    const current = CARDS[contract.name],
+      correction = byName.get(contract.name);
+    assert.equal(
+      hash(correction ? { ...current, subtypes: correction.oldSubtypes } : current),
+      contract.sha256,
+      contract.name,
+    );
+  }
 });
 test('mechanic arguments are substituted as data and unsupported instructions are explicit', () => {
   const card = example([{ use: 'landfall.grow', args: { power: 2, toughness: 3 } }]);

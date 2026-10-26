@@ -47,6 +47,7 @@ export function createRegistry(input = CARDS) {
   for (const card of Object.values(registry))
     for (const e of [
       ...(card.effects ?? []),
+      ...(card.modes ?? []).flatMap((mode) => mode.effects),
       ...(card.etb ?? []),
       ...(card.triggers ?? []).flatMap((t) => t.effects),
       ...(card.activated ?? []).flatMap((a) => a.effects),

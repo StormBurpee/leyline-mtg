@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "af2275ea-1085-4145-aa6b-36924d53d88a",
+  "name": "School Daze",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}"
+  },
+  "rulesText": "Choose one —\n• Do Homework — Draw three cards.\n• Fight Crime — Counter target spell. Draw a card.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Do Homework — Draw three cards.",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "Fight Crime — Counter target spell. Draw a card.",
+          "target": {
+            "scope": "spell"
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target"
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

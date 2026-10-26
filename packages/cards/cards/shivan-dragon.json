@@ -5,7 +5,7 @@
   "name": "Shivan Dragon",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Dragon"],
     "colors": ["R"],
     "manaCost": "{4}{R}{R}",
     "power": 5,

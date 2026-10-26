@@ -1,5 +1,5 @@
 {
-  "version": "0.22.0",
+  "version": "0.23.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -15,6 +15,15 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["surveil"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Abrade",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage", "destroy"],
+      "modes": ["Abrade deals 3 damage to target creature.", "Destroy target artifact."],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -87,6 +96,18 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Alley Evasion",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "bounce"],
+      "modes": [
+        "Target creature you control gets +1/+2 until end of turn.",
+        "Return target creature you control to its owner's hand."
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -543,6 +564,18 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Change the Equation",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counter"],
+      "modes": [
+        "Counter target spell with mana value 2 or less.",
+        "Counter target red or green spell with mana value 6 or less."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Chase Inspiration",
       "type": "instant",
       "keywords": [],
@@ -572,6 +605,15 @@
       "keywords": [],
       "opcodes": ["untap"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Cleansing Ray",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "modes": ["Destroy target Vampire.", "Destroy target enchantment."],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -687,6 +729,15 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Deface",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "modes": ["Destroy target artifact.", "Destroy target creature with defender."],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Demon's Due",
       "type": "instant",
       "keywords": [],
@@ -700,6 +751,18 @@
       "keywords": ["lifelink"],
       "opcodes": ["mill"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Destroy Evil",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "modes": [
+        "Destroy target creature with toughness 4 or greater.",
+        "Destroy target enchantment."
+      ],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1042,6 +1105,18 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Fiery Intervention",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage", "destroy"],
+      "modes": [
+        "Fiery Intervention deals 5 damage to target creature.",
+        "Destroy target artifact."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Final Death",
       "type": "instant",
       "keywords": [],
@@ -1242,10 +1317,47 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Glimpse the Core",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "moveTarget"],
+      "modes": [
+        "Search your library for a basic Forest card, put that card onto the battlefield tapped, then shuffle.",
+        "Return target Cave card from your graveyard to the battlefield tapped."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Glorious Anthem",
       "type": "enchantment",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Glorious Decay",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy", "damage", "moveTarget", "draw"],
+      "modes": [
+        "Destroy target artifact.",
+        "Glorious Decay deals 4 damage to target creature with flying.",
+        "Exile target card from a graveyard. Draw a card."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Go Forth",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "modify"],
+      "modes": [
+        "Search your library for a basic land card, reveal it, put it into your hand, then shuffle.",
+        "Target creature gets +2/+2 until end of turn."
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1649,6 +1761,18 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Keep Out",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage", "destroy"],
+      "modes": [
+        "Keep Out deals 4 damage to target tapped creature.",
+        "Destroy target enchantment."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Kiln Fiend",
       "type": "creature",
       "keywords": [],
@@ -1705,6 +1829,31 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Light of Hope",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["gainLife", "destroy", "counterOn"],
+      "modes": [
+        "You gain 4 life.",
+        "Destroy target enchantment.",
+        "Put a +1/+1 counter on target creature."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Light the Way",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counterOn", "untap", "bounce"],
+      "modes": [
+        "Put a +1/+1 counter on target creature or Vehicle. Untap it.",
+        "Return target permanent you control to its owner's hand."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Lightning Bolt",
       "type": "instant",
       "keywords": [],
@@ -1742,6 +1891,18 @@
       "keywords": [],
       "opcodes": ["surveil", "modify"],
       "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Live or Die",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget", "destroy"],
+      "modes": [
+        "Return target creature card from your graveyard to the battlefield.",
+        "Destroy target creature."
+      ],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1965,6 +2126,18 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Moment of Valor",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["untap", "modify", "destroy"],
+      "modes": [
+        "Untap target creature. It gets +1/+0 and gains indestructible until end of turn.",
+        "Destroy target creature with power 4 or greater."
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2401,6 +2574,18 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Professor's Warning",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counterOn", "modify"],
+      "modes": [
+        "Put a +1/+1 counter on target creature.",
+        "Target creature gains indestructible until end of turn."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Promising Vein",
       "type": "land",
       "keywords": [],
@@ -2537,6 +2722,18 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Raze the Effigy",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy", "modify"],
+      "modes": [
+        "Destroy target artifact.",
+        "Target attacking creature gets +2/+2 until end of turn."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Read the Bones",
       "type": "sorcery",
       "keywords": [],
@@ -2557,6 +2754,18 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Reckless Air Strike",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage", "destroy"],
+      "modes": [
+        "Reckless Air Strike deals 3 damage to target creature with flying.",
+        "Destroy target artifact."
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2625,12 +2834,58 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Repel the Vile",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "modes": ["Exile target creature with power 4 or greater.", "Exile target enchantment."],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Reroute Systems",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "damage"],
+      "modes": [
+        "Target artifact or creature gains indestructible until end of turn.",
+        "Reroute Systems deals 2 damage to target tapped creature."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Resolute Watchdog",
       "type": "creature",
       "keywords": ["defender"],
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Return to Nature",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy", "moveTarget"],
+      "modes": [
+        "Destroy target artifact.",
+        "Destroy target enchantment.",
+        "Exile target card from a graveyard."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Reverent Howl",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife", "modify"],
+      "modes": [
+        "Target player draws two cards and loses 2 life.",
+        "Target creature gets +2/+2 and gains lifelink until end of turn."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Revoke Existence",
@@ -2830,6 +3085,18 @@
       "activatedAbilities": 0
     },
     {
+      "name": "School Daze",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["draw", "counter"],
+      "modes": [
+        "Do Homework — Draw three cards.",
+        "Fight Crime — Counter target spell. Draw a card."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Scorch Spitter",
       "type": "creature",
       "keywords": [],
@@ -2938,6 +3205,18 @@
       "type": "creature",
       "keywords": ["flying"],
       "opcodes": ["surveil"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Shredder's Revenge",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["discard", "draw", "loseLife"],
+      "modes": [
+        "Target player discards two cards.",
+        "Target player draws two cards and loses 2 life."
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -3129,6 +3408,15 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Spellgyre",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counter", "surveil", "draw"],
+      "modes": ["Counter target spell.", "Surveil 2, then draw two cards."],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spider-Bot",
       "type": "creature",
       "keywords": ["reach"],
@@ -3213,6 +3501,15 @@
       "type": "land",
       "keywords": [],
       "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Start from Scratch",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage", "destroy"],
+      "modes": ["Start from Scratch deals 1 damage to any target.", "Destroy target artifact."],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -3940,6 +4237,30 @@
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "You Find the Villains' Lair",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counter", "draw", "discard"],
+      "modes": [
+        "Foil Their Scheme — Counter target spell.",
+        "Learn Their Secrets — Draw two cards, then discard two cards."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "You Happen On a Glade",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "moveTarget"],
+      "modes": [
+        "Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.",
+        "Make Camp — Return target permanent card from your graveyard to your hand."
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },

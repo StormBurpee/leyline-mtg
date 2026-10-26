@@ -1,4 +1,4 @@
-import { legalActions, canAttack, canBlock } from '../../packages/engine/src/index.js';
+import { legalActions, canAttack, canBlock, definition } from '../../packages/engine/src/index.js';
 
 /** A projection of current legal actions, not a second implementation of the rules. */
 export function cardDropPlan(state, player, id) {
@@ -19,6 +19,13 @@ export function cardDropPlan(state, player, id) {
         .map((attacker) => ({ target: attacker, card: id })),
     };
   if (state.choice || object.zone !== 'hand' || object.owner !== player) return null;
+  if (definition(state, object).modes)
+    return {
+      kind: 'chooseMode',
+      destinations: legalActions(state, player).some((a) => a.type === 'cast' && a.card === id)
+        ? [{ field: player, card: id }]
+        : [],
+    };
   return {
     kind: 'play',
     destinations: legalActions(state, player)

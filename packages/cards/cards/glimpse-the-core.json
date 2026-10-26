@@ -1,0 +1,74 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fa44fa48-d270-4f0f-b672-d63e1c1942ce",
+  "name": "Glimpse the Core",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Choose one —\n• Search your library for a basic Forest card, put that card onto the battlefield tapped, then shuffle.\n• Return target Cave card from your graveyard to the battlefield tapped.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Search your library for a basic Forest card, put that card onto the battlefield tapped, then shuffle.",
+          "effects": [
+            {
+              "op": "searchLibrary",
+              "amount": 1,
+              "where": {
+                "all": [
+                  {
+                    "all": [
+                      {
+                        "type": "land"
+                      },
+                      {
+                        "basic": true
+                      }
+                    ]
+                  },
+                  {
+                    "subtype": "Forest"
+                  }
+                ]
+              },
+              "destination": "battlefield",
+              "tapped": true
+            }
+          ]
+        },
+        {
+          "label": "Return target Cave card from your graveyard to the battlefield tapped.",
+          "target": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "owner": "you"
+                },
+                {
+                  "subtype": "Cave"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "battlefield",
+              "tapped": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

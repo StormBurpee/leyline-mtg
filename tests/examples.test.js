@@ -1,12 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { replay, assertInvariants } from '../packages/engine/src/index.js';
+import { replay, assertInvariants, legalActions } from '../packages/engine/src/index.js';
 for (const filename of [
   'example-replay.json',
   'example-search-replay.json',
   'example-legend-replay.json',
   'example-attack-replay.json',
+  'example-modal-replay.json',
   'example-burial-replay.json',
   'example-sacrifice-replay.json',
   'example-target-replay.json',
@@ -20,6 +21,15 @@ for (const filename of [
     );
     const s = replay(record);
     assert.equal(assertInvariants(s), true);
+    if (filename.includes('modal'))
+      assert.equal(
+        new Set(
+          legalActions(s, 0)
+            .filter((a) => a.type === 'cast' && s.objects[a.card].name === 'Abrade')
+            .map((a) => a.mode),
+        ).size,
+        2,
+      );
     if (filename.includes('attack')) {
       assert.equal(s.step, 'attackers');
       assert.equal(s.choice.kind, 'orderTriggers');

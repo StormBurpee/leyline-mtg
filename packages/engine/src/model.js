@@ -2,7 +2,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.22.0';
+export const VERSION = '0.23.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -175,6 +175,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     token: object?.token,
     tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
     attacking: isAttacking(s, object),
+    keywords: object.zone === 'battlefield' ? keywords(s, object) : d.keywords,
     power: pt.power,
     toughness: pt.toughness,
     manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
@@ -218,6 +219,7 @@ export function captureDepartureContext(s) {
             token: o.token,
             tapped: o.tapped,
             attacking: isAttacking(s, o),
+            keywords: keywords(s, o),
             power: pt.power,
             toughness: pt.toughness,
             manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),

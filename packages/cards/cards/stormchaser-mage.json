@@ -5,7 +5,7 @@
   "name": "Stormchaser Mage",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Human", "Wizard"],
     "colors": ["U", "R"],
     "manaCost": "{U}{R}",
     "power": 1,

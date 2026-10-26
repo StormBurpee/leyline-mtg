@@ -5,7 +5,7 @@
   "name": "Hill Giant",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Giant"],
     "colors": ["R"],
     "manaCost": "{3}{R}",
     "power": 3,

@@ -5,7 +5,7 @@
   "name": "Merfolk Looter",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Merfolk", "Rogue"],
     "colors": ["U"],
     "manaCost": "{1}{U}",
     "power": 1,

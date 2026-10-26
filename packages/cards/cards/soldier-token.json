@@ -5,7 +5,7 @@
   "name": "Soldier Token",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Soldier"],
     "colors": ["W"],
     "manaCost": null,
     "power": 1,

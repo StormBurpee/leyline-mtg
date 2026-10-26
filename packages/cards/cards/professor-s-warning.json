@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e3c8e552-d315-486d-a176-813b3a300174",
+  "name": "Professor's Warning",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "Choose one —\n• Put a +1/+1 counter on target creature.\n• Target creature gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Put a +1/+1 counter on target creature.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "counter": "+1/+1",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Target creature gains indestructible until end of turn.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["indestructible"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

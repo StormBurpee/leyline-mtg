@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dc367b23-d1f4-4c5c-b300-a44a726e3f74",
+  "name": "Live or Die",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}{B}"
+  },
+  "rulesText": "Choose one —\n• Return target creature card from your graveyard to the battlefield.\n• Destroy target creature.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Return target creature card from your graveyard to the battlefield.",
+          "target": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "owner": "you"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "battlefield"
+            }
+          ]
+        },
+        {
+          "label": "Destroy target creature.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

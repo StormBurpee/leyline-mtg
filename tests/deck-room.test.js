@@ -10,8 +10,8 @@ import {
 } from '../packages/engine/src/index.js';
 import { readDeckLibrary, deckEntries, deckRoom, deckBuilder } from '../apps/web/deck-room.js';
 
-test('all fifteen starter decks are executable 60-card lists and independent match opponents', () => {
-  assert.equal(Object.keys(DECKS).length, 15);
+test('all sixteen starter decks are executable 60-card lists and independent match opponents', () => {
+  assert.equal(Object.keys(DECKS).length, 16);
   const entries = Object.entries(DECKS);
   for (let i = 0; i < entries.length; i++) {
     const [id, deck] = entries[i],

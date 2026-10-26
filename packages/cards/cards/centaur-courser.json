@@ -5,7 +5,7 @@
   "name": "Centaur Courser",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Centaur", "Warrior"],
     "colors": ["G"],
     "manaCost": "{2}{G}",
     "power": 3,

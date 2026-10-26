@@ -5,7 +5,7 @@
   "name": "Savannah Lions",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Cat"],
     "colors": ["W"],
     "manaCost": "{W}",
     "power": 2,

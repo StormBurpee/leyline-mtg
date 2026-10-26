@@ -5,7 +5,7 @@
   "name": "Fencing Ace",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Human", "Soldier"],
     "colors": ["W"],
     "manaCost": "{1}{W}",
     "power": 1,

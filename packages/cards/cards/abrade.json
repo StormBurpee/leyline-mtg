@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f9db72dc-9a5b-48a4-a86e-7464d9a2166a",
+  "name": "Abrade",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "Choose one —\n• Abrade deals 3 damage to target creature.\n• Destroy target artifact.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Abrade deals 3 damage to target creature.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "Destroy target artifact.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

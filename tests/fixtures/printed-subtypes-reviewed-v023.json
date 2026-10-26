@@ -1,0 +1,565 @@
+[
+  {
+    "name": "Centaur Courser",
+    "oldSubtypes": [],
+    "subtypes": ["Centaur", "Warrior"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "2f5bf099-2e01-4e1c-9ebf-0ce0ac66939e",
+      "printingId": "e8b67ee8-3189-4426-8b1a-b540267768fd",
+      "typeLine": "Creature — Centaur Warrior",
+      "releasedAt": "2019-07-12",
+      "url": "https://scryfall.com/card/m20/168/centaur-courser?utm_source=api"
+    }
+  },
+  {
+    "name": "Raging Goblin",
+    "oldSubtypes": [],
+    "subtypes": ["Goblin", "Berserker"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "30997b43-fc13-41d3-8064-1ccc2cb6fd2b",
+      "printingId": "3480927c-10da-4817-9954-10aea2bc7100",
+      "typeLine": "Creature — Goblin Berserker",
+      "releasedAt": "2018-07-14",
+      "url": "https://scryfall.com/card/oana/43/raging-goblin?utm_source=api"
+    }
+  },
+  {
+    "name": "Tomakul Honor Guard",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "b68cf4e6-205e-40b6-b28b-f4b7d8af7017",
+      "printingId": "c7745439-f40b-4647-8bff-53751d511bbd",
+      "typeLine": "Creature — Human Soldier",
+      "releasedAt": "2022-11-18",
+      "url": "https://scryfall.com/card/bro/195/tomakul-honor-guard?utm_source=api"
+    }
+  },
+  {
+    "name": "Kiln Fiend",
+    "oldSubtypes": [],
+    "subtypes": ["Elemental", "Beast"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "eac8c196-8477-4b79-9875-21afa1e61708",
+      "printingId": "6c957c94-3d2d-4b98-8990-cd8909462081",
+      "typeLine": "Creature — Elemental Beast",
+      "releasedAt": "2020-07-17",
+      "url": "https://scryfall.com/card/jmp/338/kiln-fiend?utm_source=api"
+    }
+  },
+  {
+    "name": "Savannah Lions",
+    "oldSubtypes": [],
+    "subtypes": ["Cat"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "60ba93eb-39e6-4af2-9c66-cd38f72daff2",
+      "printingId": "9c9ac1bc-cdf3-4fa6-8319-a7ea164e9e47",
+      "typeLine": "Creature — Cat",
+      "releasedAt": "2024-11-15",
+      "url": "https://scryfall.com/card/fdn/146/savannah-lions?utm_source=api"
+    }
+  },
+  {
+    "name": "Goblin Piker",
+    "oldSubtypes": [],
+    "subtypes": ["Goblin", "Warrior"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "50608184-90d3-43d2-a221-deb186c78323",
+      "printingId": "083ec3e7-950c-4e9d-aba5-02ed13d723f0",
+      "typeLine": "Creature — Goblin Warrior",
+      "releasedAt": "2011-07-15",
+      "url": "https://scryfall.com/card/m12/141/goblin-piker?utm_source=api"
+    }
+  },
+  {
+    "name": "Snapping Gnarlid",
+    "oldSubtypes": [],
+    "subtypes": ["Beast"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "eeba70f5-336c-46e6-90db-50818f88e8a5",
+      "printingId": "834409e3-134e-4a34-89cb-53e2a039e980",
+      "typeLine": "Creature — Beast",
+      "releasedAt": "2015-10-02",
+      "url": "https://scryfall.com/card/bfz/190/snapping-gnarlid?utm_source=api"
+    }
+  },
+  {
+    "name": "Merfolk Looter",
+    "oldSubtypes": [],
+    "subtypes": ["Merfolk", "Rogue"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "67362406-b1ca-49e2-800d-9050bfe8742a",
+      "printingId": "6d740928-bf61-4420-a403-63097538b97d",
+      "typeLine": "Creature — Merfolk Rogue",
+      "releasedAt": "2021-07-23",
+      "url": "https://scryfall.com/card/afc/86/merfolk-looter?utm_source=api"
+    }
+  },
+  {
+    "name": "Seeker of the Way",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Warrior"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "e206842f-139b-490d-bc10-d365705ac720",
+      "printingId": "e9e3cb28-d318-4d5d-b5bf-1ea7c6249a89",
+      "typeLine": "Creature — Human Warrior",
+      "releasedAt": "2022-07-08",
+      "url": "https://scryfall.com/card/2x2/28/seeker-of-the-way?utm_source=api"
+    }
+  },
+  {
+    "name": "Youthful Knight",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Knight"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "ef2a24f5-ce5e-4054-843a-2cae0c66318a",
+      "printingId": "3d1a3fec-39de-4223-9da2-22749a58cd62",
+      "typeLine": "Creature — Human Knight",
+      "releasedAt": "2019-10-04",
+      "url": "https://scryfall.com/card/eld/37/youthful-knight?utm_source=api"
+    }
+  },
+  {
+    "name": "Dwarven Forge-Chanter",
+    "oldSubtypes": [],
+    "subtypes": ["Dwarf", "Wizard"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "e69a8970-3ead-479d-860a-26ed65f9c846",
+      "printingId": "bbd6a95a-11b9-43aa-b293-20a3102bae71",
+      "typeLine": "Creature — Dwarf Wizard",
+      "releasedAt": "2022-11-18",
+      "url": "https://scryfall.com/card/bro/131/dwarven-forge-chanter?utm_source=api"
+    }
+  },
+  {
+    "name": "Sire of Seven Deaths",
+    "oldSubtypes": [],
+    "subtypes": ["Eldrazi"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "a15547d0-bbcb-41ee-a9ae-8325a9e7fe1f",
+      "printingId": "8d8432a7-1c8a-4cfb-947c-ecf9791063eb",
+      "typeLine": "Creature — Eldrazi",
+      "releasedAt": "2024-11-15",
+      "url": "https://scryfall.com/card/fdn/1/sire-of-seven-deaths?utm_source=api"
+    }
+  },
+  {
+    "name": "Festival Crasher",
+    "oldSubtypes": [],
+    "subtypes": ["Devil"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "e6ddea98-b23f-44de-a63d-5d5dfad60e71",
+      "printingId": "d8d050c1-ae0c-46c1-8aa7-7cde4606105b",
+      "typeLine": "Creature — Devil",
+      "releasedAt": "2025-01-24",
+      "url": "https://scryfall.com/card/inr/153/festival-crasher?utm_source=api"
+    }
+  },
+  {
+    "name": "Stormchaser Mage",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Wizard"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "32902854-2c64-431e-9d9c-9a23e52afb1b",
+      "printingId": "7bba1b45-d8ae-42fd-b30f-c904640ab173",
+      "typeLine": "Creature — Human Wizard",
+      "releasedAt": "2016-01-22",
+      "url": "https://scryfall.com/card/ogw/159/stormchaser-mage?utm_source=api"
+    }
+  },
+  {
+    "name": "Territorial Scythecat",
+    "oldSubtypes": [],
+    "subtypes": ["Cat"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "75d38954-6148-4d95-bf4b-cb82efcbe8df",
+      "printingId": "5e0f725c-8d1f-47ff-ad81-a5007199a5e2",
+      "typeLine": "Creature — Cat",
+      "releasedAt": "2020-09-25",
+      "url": "https://scryfall.com/card/znr/213/territorial-scythecat?utm_source=api"
+    }
+  },
+  {
+    "name": "Elvish Visionary",
+    "oldSubtypes": [],
+    "subtypes": ["Elf", "Shaman"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "c6a3a882-a127-4590-93d7-679ef4313efe",
+      "printingId": "6d2f4a37-453f-4a2c-bfba-2d1227394c90",
+      "typeLine": "Creature — Elf Shaman",
+      "releasedAt": "2026-08-14",
+      "url": "https://scryfall.com/card/hoc/206/elvish-visionary?utm_source=api"
+    }
+  },
+  {
+    "name": "Young Pyromancer",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Shaman"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "5fac139a-07d3-4e6c-98e3-d98b199f7a6f",
+      "printingId": "c0d74ecd-a595-4012-81b4-083264b40c94",
+      "typeLine": "Creature — Human Shaman",
+      "releasedAt": "2025-04-11",
+      "url": "https://scryfall.com/card/tdc/95/young-pyromancer?utm_source=api"
+    }
+  },
+  {
+    "name": "Prodigal Pyromancer",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Wizard"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "29b3cb3e-aeb1-43eb-8095-9f7881aa34bd",
+      "printingId": "cf16600a-c2a5-49e4-89e2-260cfaf58b52",
+      "typeLine": "Creature — Human Wizard",
+      "releasedAt": "2021-03-19",
+      "url": "https://scryfall.com/card/tsr/180/prodigal-pyromancer?utm_source=api"
+    }
+  },
+  {
+    "name": "Serra Angel",
+    "oldSubtypes": [],
+    "subtypes": ["Angel"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "4b7ac066-e5c7-43e6-9e7e-2739b24a905d",
+      "printingId": "b8c5e74c-96e7-4a1f-93b7-14d776fe4b2d",
+      "typeLine": "Creature — Angel",
+      "releasedAt": "2026-04-24",
+      "url": "https://scryfall.com/card/fdn/740/serra-angel?utm_source=api"
+    }
+  },
+  {
+    "name": "Shivan Dragon",
+    "oldSubtypes": [],
+    "subtypes": ["Dragon"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "711eea87-0fa3-46e0-a42b-fa5a86455f04",
+      "printingId": "702c4781-670b-49ae-b511-90ed119841b0",
+      "typeLine": "Creature — Dragon",
+      "releasedAt": "2026-04-24",
+      "url": "https://scryfall.com/card/fdn/763/shivan-dragon?utm_source=api"
+    }
+  },
+  {
+    "name": "Goblin Instigator",
+    "oldSubtypes": [],
+    "subtypes": ["Goblin", "Rogue"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "8b022754-6d16-470e-b754-4df6e4f4709e",
+      "printingId": "b36a1bc7-a080-4fb6-b975-c59bb33a090a",
+      "typeLine": "Creature — Goblin Rogue",
+      "releasedAt": "2023-04-21",
+      "url": "https://scryfall.com/card/moc/282/goblin-instigator?utm_source=api"
+    }
+  },
+  {
+    "name": "Sprite Dragon",
+    "oldSubtypes": [],
+    "subtypes": ["Faerie", "Dragon"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "a9d8ab76-70a4-475e-b87e-4737c090553a",
+      "printingId": "361385d8-d9c7-4de8-a5c8-683e682779f4",
+      "typeLine": "Creature — Faerie Dragon",
+      "releasedAt": "2022-06-10",
+      "url": "https://scryfall.com/card/clb/852/sprite-dragon?utm_source=api"
+    }
+  },
+  {
+    "name": "Fencing Ace",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "2f810936-2ba6-4c2b-84a0-ff4c1deb026b",
+      "printingId": "994094f8-e175-4e2e-aa39-c096f0ed9e6a",
+      "typeLine": "Creature — Human Soldier",
+      "releasedAt": "2023-08-04",
+      "url": "https://scryfall.com/card/cmm/23/fencing-ace?utm_source=api"
+    }
+  },
+  {
+    "name": "Llanowar Elves",
+    "oldSubtypes": [],
+    "subtypes": ["Elf", "Druid"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "68954295-54e3-4303-a6bc-fc4547a4e3a3",
+      "printingId": "6a0b230b-d391-4998-a3f7-7b158a0ec2cd",
+      "typeLine": "Creature — Elf Druid",
+      "releasedAt": "2024-11-15",
+      "url": "https://scryfall.com/card/fdn/227/llanowar-elves?utm_source=api"
+    }
+  },
+  {
+    "name": "Wind Drake",
+    "oldSubtypes": [],
+    "subtypes": ["Drake"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "d6ffdaf0-ac08-4de9-bbce-2eab2f86bcca",
+      "printingId": "5e227a63-abea-494e-9d66-6ff0a3da14ca",
+      "typeLine": "Creature — Drake",
+      "releasedAt": "2016-09-30",
+      "url": "https://scryfall.com/card/kld/70/wind-drake?utm_source=api"
+    }
+  },
+  {
+    "name": "Colossal Dreadmaw",
+    "oldSubtypes": [],
+    "subtypes": ["Dinosaur"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "08c7db90-c0cf-4482-b7ee-bb033e5996d2",
+      "printingId": "8059c52b-5d25-4052-b48a-e9e219a7a546",
+      "typeLine": "Creature — Dinosaur",
+      "releasedAt": "2020-07-03",
+      "url": "https://scryfall.com/card/m21/176/colossal-dreadmaw?utm_source=api"
+    }
+  },
+  {
+    "name": "Soul Warden",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Cleric"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "f3fad295-1af2-4ecc-8546-b121ad6be27b",
+      "printingId": "d96266b3-a7cb-40ce-a328-ac13719fe5f0",
+      "typeLine": "Creature — Human Cleric",
+      "releasedAt": "2017-03-17",
+      "url": "https://scryfall.com/card/mm3/24/soul-warden?utm_source=api"
+    }
+  },
+  {
+    "name": "Owlin Shieldmage",
+    "oldSubtypes": [],
+    "subtypes": ["Bird", "Warlock"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "50c477c1-8457-40f6-bba9-1a4ba0862178",
+      "printingId": "d3350367-42bd-44af-be13-ad31c002f8ac",
+      "typeLine": "Creature — Bird Warlock",
+      "releasedAt": "2021-04-23",
+      "url": "https://scryfall.com/card/stx/210/owlin-shieldmage?utm_source=api"
+    }
+  },
+  {
+    "name": "Air Elemental",
+    "oldSubtypes": [],
+    "subtypes": ["Elemental"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "7744bae4-a8b7-44a5-9b4c-0048ad4cc448",
+      "printingId": "a27efec0-40c4-48bc-a21a-3af28a6529b5",
+      "typeLine": "Creature — Elemental",
+      "releasedAt": "2019-07-12",
+      "url": "https://scryfall.com/card/m20/44/air-elemental?utm_source=api"
+    }
+  },
+  {
+    "name": "Giant Spider",
+    "oldSubtypes": [],
+    "subtypes": ["Spider"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "e740ce2f-2134-473c-afa1-1b6d2d1e38ef",
+      "printingId": "213c9202-b6f4-43ab-b57f-b97a1da5e263",
+      "typeLine": "Creature — Spider",
+      "releasedAt": "2023-01-13",
+      "url": "https://scryfall.com/card/dmr/163/giant-spider?utm_source=api"
+    }
+  },
+  {
+    "name": "Waterfall Aerialist",
+    "oldSubtypes": [],
+    "subtypes": ["Djinn", "Wizard"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "736026b2-84d4-4452-ae0d-5d1b0af0a400",
+      "printingId": "7bc6966c-18d9-4675-9594-6f0b2d11c405",
+      "typeLine": "Creature — Djinn Wizard",
+      "releasedAt": "2021-04-23",
+      "url": "https://scryfall.com/card/stx/61/waterfall-aerialist?utm_source=api"
+    }
+  },
+  {
+    "name": "Silvercoat Lion",
+    "oldSubtypes": [],
+    "subtypes": ["Cat"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "e3c0b11e-7340-4e0a-98b7-91b38439d4f9",
+      "printingId": "9d33e866-cfd8-44e6-8070-df8df1ce965d",
+      "typeLine": "Creature — Cat",
+      "releasedAt": "2012-07-13",
+      "url": "https://scryfall.com/card/m13/35/silvercoat-lion?utm_source=api"
+    }
+  },
+  {
+    "name": "Monastery Swiftspear",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Monk"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "dafd2713-d1bc-474b-b390-d2ff20b5375e",
+      "printingId": "d6bfa227-4309-40ed-952c-279595eab17e",
+      "typeLine": "Creature — Human Monk",
+      "releasedAt": "2022-11-18",
+      "url": "https://scryfall.com/card/bro/144/monastery-swiftspear?utm_source=api"
+    }
+  },
+  {
+    "name": "Hill Giant",
+    "oldSubtypes": [],
+    "subtypes": ["Giant"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "342199e0-15b6-4824-83da-25caef2592b3",
+      "printingId": "14c2be6a-9ca6-4d3a-8dd0-db4ea40799f8",
+      "typeLine": "Creature — Giant",
+      "releasedAt": "2007-07-13",
+      "url": "https://scryfall.com/card/10e/212/hill-giant?utm_source=api"
+    }
+  },
+  {
+    "name": "Rimeshield Frost Giant",
+    "oldSubtypes": [],
+    "subtypes": ["Giant", "Warrior"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "ec47cf67-2580-464f-8118-7eabea5be11c",
+      "printingId": "767b499e-3bdb-4809-b430-6e965bd100d4",
+      "typeLine": "Creature — Giant Warrior",
+      "releasedAt": "2021-07-23",
+      "url": "https://scryfall.com/card/afr/69/rimeshield-frost-giant?utm_source=api"
+    }
+  },
+  {
+    "name": "Thermo-Alchemist",
+    "oldSubtypes": [],
+    "subtypes": ["Human", "Shaman"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "228fbae1-423e-461d-b8c3-55786938a3cb",
+      "printingId": "78b194b3-108a-4152-bd37-52c302e25ad6",
+      "typeLine": "Creature — Human Shaman",
+      "releasedAt": "2025-01-24",
+      "url": "https://scryfall.com/card/inr/174/thermo-alchemist?utm_source=api"
+    }
+  },
+  {
+    "name": "Grizzly Bears",
+    "oldSubtypes": [],
+    "subtypes": ["Bear"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "14c8f55d-d177-4c25-a931-ebeb9e6062a0",
+      "printingId": "409f9b88-f03e-40b6-9883-68c14c37c0de",
+      "typeLine": "Creature — Bear",
+      "releasedAt": "2007-07-13",
+      "url": "https://scryfall.com/card/10e/268/grizzly-bears?utm_source=api"
+    }
+  },
+  {
+    "name": "Electrostatic Field",
+    "oldSubtypes": [],
+    "subtypes": ["Wall"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "2fa94a07-c932-4f85-b6e0-a97d2b29eb52",
+      "printingId": "21923a95-e65e-4f4a-81f8-fc0895beb107",
+      "typeLine": "Creature — Wall",
+      "releasedAt": "2024-04-19",
+      "url": "https://scryfall.com/card/otc/164/electrostatic-field?utm_source=api"
+    }
+  },
+  {
+    "name": "Vampire Nighthawk",
+    "oldSubtypes": [],
+    "subtypes": ["Vampire", "Shaman"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "feb244f8-bcb1-44cf-9940-2719221a7309",
+      "printingId": "7aff07f9-9528-4149-9af0-f4e3c66c9dc5",
+      "typeLine": "Creature — Vampire Shaman",
+      "releasedAt": "2026-04-24",
+      "url": "https://scryfall.com/card/fdn/757/vampire-nighthawk?utm_source=api"
+    }
+  },
+  {
+    "name": "Typhoid Rats",
+    "oldSubtypes": [],
+    "subtypes": ["Rat"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "d6ee6cc1-902d-4f56-afa5-6fa4813bfbbc",
+      "printingId": "d13cb90b-50c3-46ef-83f8-812dfb7ff881",
+      "typeLine": "Creature — Rat",
+      "releasedAt": "2015-01-23",
+      "url": "https://scryfall.com/card/frf/89/typhoid-rats?utm_source=api"
+    }
+  },
+  {
+    "name": "Makindi Sliderunner",
+    "oldSubtypes": [],
+    "subtypes": ["Beast"],
+    "evidence": {
+      "kind": "scryfall",
+      "oracleId": "4754e9c6-1790-4c01-87c2-3a16ce7e65f5",
+      "printingId": "9e6da400-ee4e-44d1-887d-1e2fb59b9322",
+      "typeLine": "Creature — Beast",
+      "releasedAt": "2015-10-02",
+      "url": "https://scryfall.com/card/bfz/148/makindi-sliderunner?utm_source=api"
+    }
+  },
+  {
+    "name": "Soldier Token",
+    "oldSubtypes": [],
+    "subtypes": ["Soldier"],
+    "evidence": {
+      "kind": "generated-token",
+      "sourceCard": "Raise the Alarm",
+      "rulesText": "Create two 1/1 white Soldier creature tokens."
+    }
+  },
+  {
+    "name": "Goblin Token",
+    "oldSubtypes": [],
+    "subtypes": ["Goblin"],
+    "evidence": {
+      "kind": "generated-token",
+      "sourceCard": "Goblin Instigator",
+      "rulesText": "When this creature enters, create a 1/1 red Goblin creature token."
+    }
+  },
+  {
+    "name": "Elemental Token",
+    "oldSubtypes": [],
+    "subtypes": ["Elemental"],
+    "evidence": {
+      "kind": "generated-token",
+      "sourceCard": "Young Pyromancer",
+      "rulesText": "Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token."
+    }
+  }
+]

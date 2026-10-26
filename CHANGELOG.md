@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.23.0 — Choose your line
+
+- Implement choose-one instant/sorcery modes at cast time, with mode-specific legal targets/effects, normal cost payment and public stack labels. Preserve mode indices through opaque agent commands and replays.
+- Add a deliberate mode picker, disabled unavailable modes, mode-filtered target lists, change-mode controls and mode-safe dragging. Add Forked Lightning as the sixteenth starter and an Abrade replay position.
+- Add 28 reviewed Arena spells, eleven in the dated Standard inventory: 517 executable cards plus three tokens. Support keyword predicates, targeted +1/+1 counters and keyword-only temporary modifiers on noncreature permanents.
+- Correct missing printed subtypes on 41 early card definitions and three generated tokens. Keep the original v0.5 contract hashes, explicitly review the subtype-only exceptions, and preserve all twenty historical game-command traces.
+- Multi-mode choices, modal abilities and general multi-target spells remain unsupported. Managed browser preview is unavailable; renderer/drag-plan/engine/replay tests are not a substitute for browser or physical mobile QA.
+
 ## 0.22.0 — Attacks before blockers
 
 - Queue declared-attacker triggers before priority, with APNAP ordering, targeted-trigger choices and existing resolution continuations. Entering attacking is not a declared attack.

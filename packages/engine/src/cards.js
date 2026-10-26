@@ -346,6 +346,29 @@ export const DECKS = Object.freeze({
       'Lightning Strike': 4,
     },
   },
+  forks: {
+    name: 'Forked Lightning',
+    colors: ['U', 'R'],
+    art: 'Abrade',
+    thumbnail: 'Spellgyre',
+    archetype: 'Modal spells / prowess',
+    description:
+      'Keep options open: burn or break artifacts, counter or draw, and grow threats as you cast.',
+    cards: {
+      Island: 12,
+      Mountain: 12,
+      Abrade: 4,
+      Spellgyre: 4,
+      'School Daze': 2,
+      'Change the Equation': 2,
+      "You Find the Villains' Lair": 4,
+      'Nightveil Sprite': 4,
+      'Monastery Swiftspear': 4,
+      'Young Pyromancer': 4,
+      'Stormchaser Mage': 4,
+      Opt: 4,
+    },
+  },
 });
 export function expandDeck(list) {
   return Object.entries(list).flatMap(([name, count]) => Array.from({ length: count }, () => name));

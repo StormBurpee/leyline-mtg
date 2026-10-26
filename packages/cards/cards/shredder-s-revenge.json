@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5dd31fcd-72db-4daf-b127-ceb27bf25a94",
+  "name": "Shredder's Revenge",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Choose one —\n• Target player discards two cards.\n• Target player draws two cards and loses 2 life.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target player discards two cards.",
+          "target": {
+            "scope": "player"
+          },
+          "effects": [
+            {
+              "op": "discard",
+              "target": "target",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "Target player draws two cards and loses 2 life.",
+          "target": {
+            "scope": "player"
+          },
+          "effects": [
+            {
+              "op": "draw",
+              "target": "target",
+              "amount": 2
+            },
+            {
+              "op": "loseLife",
+              "target": "target",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

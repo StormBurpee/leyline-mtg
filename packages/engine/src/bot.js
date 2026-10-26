@@ -1,3 +1,4 @@
+import { spellProfile } from './spell-modes.js';
 import { chooseSearchCards } from './library-search.js';
 import {
   actionSafe,
@@ -312,7 +313,7 @@ export function chooseBotCommand(s, p) {
   const casts = actions
     .filter((a) => a.type === 'cast')
     .map((a) => {
-      const d = definition(s, s.objects[a.card]);
+      const d = spellProfile(definition(s, s.objects[a.card]), a.mode);
       let score = -100;
       if (d.type === 'creature' || d.static || d.mana)
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);

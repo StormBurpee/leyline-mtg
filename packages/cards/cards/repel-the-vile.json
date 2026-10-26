@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "aa108554-f1a0-45b6-aa15-597d42be7a8a",
+  "name": "Repel the Vile",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{3}{W}"
+  },
+  "rulesText": "Choose one —\n• Exile target creature with power 4 or greater.\n• Exile target enchantment.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Exile target creature with power 4 or greater.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "power": {
+                    "gte": 4
+                  }
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            }
+          ]
+        },
+        {
+          "label": "Exile target enchantment.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "enchantment"
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

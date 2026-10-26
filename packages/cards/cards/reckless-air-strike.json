@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "89247308-e16f-4f60-a2a2-0b5e297c1fc1",
+  "name": "Reckless Air Strike",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Choose one —\n• Reckless Air Strike deals 3 damage to target creature with flying.\n• Destroy target artifact.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Reckless Air Strike deals 3 damage to target creature with flying.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "keyword": "flying"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "Destroy target artifact.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

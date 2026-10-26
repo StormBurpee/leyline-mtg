@@ -55,6 +55,7 @@ export type CardPredicate =
   | { legendary: boolean }
   | { attacking: boolean }
   | { subtype: string }
+  | { keyword: string }
   | { power: NumericComparison }
   | { toughness: NumericComparison }
   | { manaValue: NumericComparison };
@@ -95,7 +96,7 @@ export type Effect =
   | { op: 'mill'; count: number; player: 'controller' | 'opponent' | 'target' }
   | { op: 'counter' | 'bounce' | 'destroy' }
   | { op: 'untap'; subject?: 'source' }
-  | { op: 'counterOn'; subject: 'source'; amount: number }
+  | { op: 'counterOn'; subject?: 'source'; amount: number }
   | { op: 'modify'; subject?: 'source'; power: number; toughness: number; keywords?: string[] }
   | { op: 'token'; definition: string; count: number };
 export interface CardDefinition {
@@ -116,6 +117,7 @@ export interface CardDefinition {
   readonly entersTapped?: boolean;
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
+  readonly modes?: readonly { label: string; target?: TargetKind; effects: readonly Effect[] }[];
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
   readonly aura?: 'pacifism';
@@ -189,6 +191,8 @@ export interface StackEntry {
   targetKind?: TargetKind | null;
   target?: Target | null;
   label?: string;
+  mode?: number;
+  modeLabel?: string;
   relatedStackId?: string;
   optional?: boolean;
 }
@@ -327,7 +331,7 @@ export type Action =
   | { type: 'pass' | 'concede' | 'keep' | 'mulligan' }
   | { type: 'playLand'; card: string }
   | { type: 'tapMana'; card: string; color?: Color }
-  | { type: 'cast'; card: string; target?: Target; autoTap?: boolean }
+  | { type: 'cast'; card: string; target?: Target; autoTap?: boolean; mode?: number }
   | { type: 'activate'; card: string; ability: number; target?: Target }
   | { type: 'bottom' | 'discard' | 'discardEffect' | 'attackers'; cards: string[] }
   | { type: 'blockers'; pairs: { blocker: string; attacker: string }[] }
@@ -443,7 +447,7 @@ export function castProblem(
   player: PlayerId,
   id: string,
   target?: Target,
-  options?: { autoTap?: boolean },
+  options?: { autoTap?: boolean; mode?: number },
 ): string | null;
 export function abilityProblem(
   state: GameState,
@@ -506,3 +510,6 @@ export function resolveCardName(identifier: string): string | null;
 
 export function eventSpec(value: string | EventSpec): Readonly<EventSpec> | null;
 export function validateEventSpec(value: unknown): string[];
+
+export function spellProfile(card: CardDefinition, mode?: number): CardDefinition | null;
+export function spellOptions(card: CardDefinition): { mode?: number; profile: CardDefinition }[];

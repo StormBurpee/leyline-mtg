@@ -5,7 +5,7 @@
   "name": "Tomakul Honor Guard",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Human", "Soldier"],
     "colors": ["G"],
     "manaCost": "{1}{G}",
     "power": 3,

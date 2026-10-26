@@ -15,6 +15,7 @@ import { cardDropPlan } from './drop-plan.js';
 import { installCardDrag } from './gestures.js';
 import { captureTable, animateTable, renderCombatLinks, animateEffects } from './motion.js';
 import {
+  spellProfile,
   CARDS,
   definition,
   DECKS,
@@ -36,6 +37,7 @@ import {
   targetsFor,
 } from '../../packages/engine/src/index.js';
 import {
+  spellModeBody,
   legendChoiceBody,
   escape,
   header,
@@ -106,6 +108,7 @@ const ui = {
   selected: null,
   targeting: false,
   activation: null,
+  spellMode: null,
   chosen: [],
   blocks: [],
   inspect: null,
@@ -204,6 +207,7 @@ function resetSelection() {
   ui.selected = null;
   ui.targeting = false;
   ui.activation = null;
+  ui.spellMode = null;
   ui.chosen = [];
   ui.blocks = [];
 }
@@ -436,6 +440,20 @@ function showDeck() {
       .join('')}`,
   );
 }
+function showSpellModes() {
+  const o = state?.objects[ui.selected];
+  if (!o || o.zone !== 'hand' || o.owner !== viewer() || !definition(state, o).modes) return;
+  ui.spellMode = null;
+  ui.targeting = false;
+  render();
+  openDialog(
+    `Choose a mode: ${o.name}`,
+    spellModeBody(state, viewer(), o.id),
+    '<button class="btn quiet" data-action="closeDialog">Cancel</button>',
+  );
+  dialog._spellModeCard = ref(o);
+  dialog._spellModeRevision = state.revision;
+}
 function showLegendChoice() {
   const c = state.choice;
   if (c?.kind !== 'legendRule' || c.player !== viewer()) return;
@@ -572,7 +590,9 @@ function showTargetMenu() {
             command.card === ui.selected &&
             command.target &&
             command.type === (ui.activation === null ? 'cast' : 'activate') &&
-            (ui.activation === null || command.ability === ui.activation),
+            (ui.activation === null
+              ? command.mode === (ui.spellMode ?? undefined)
+              : command.ability === ui.activation),
         );
   const name =
     choice?.kind === 'triggerTarget' ? choice.entry.name : state.objects[ui.selected]?.name;
@@ -1109,9 +1129,50 @@ async function action(name, el) {
       } else send({ type: 'activate', card: id, ability: index });
       break;
     }
+    case 'spellModes':
+      showSpellModes();
+      break;
+    case 'chooseSpellMode': {
+      const saved = dialog._spellModeCard,
+        mode = Number(el.dataset.mode);
+      const o = state.objects[saved?.id];
+      if (
+        state.revision !== dialog._spellModeRevision ||
+        !o ||
+        o.incarnation !== saved.incarnation ||
+        ui.selected !== o.id
+      ) {
+        toast('The game changed. Choose a mode again.');
+        showSpellModes();
+        break;
+      }
+      if (
+        !legalActions(state, viewer()).some(
+          (a) => a.type === 'cast' && a.card === o.id && a.mode === mode,
+        )
+      ) {
+        toast('That mode has no legal cast right now.');
+        showSpellModes();
+        break;
+      }
+      ui.spellMode = mode;
+      closeDialog();
+      action('playSelected', el);
+      break;
+    }
     case 'playSelected': {
-      const o = state.objects[ui.selected],
-        d = definition(state, o);
+      const o = state.objects[ui.selected];
+      if (!o) break;
+      const printed = definition(state, o);
+      if (printed.modes && ui.spellMode == null) {
+        showSpellModes();
+        break;
+      }
+      const d = spellProfile(printed, ui.spellMode ?? undefined);
+      if (!d) {
+        showSpellModes();
+        break;
+      }
       if (d.type === 'land') send({ type: 'playLand', card: o.id });
       else if (d.target) {
         ui.targeting = true;
@@ -1127,7 +1188,7 @@ async function action(name, el) {
           )
         )
           showTargetMenu();
-      } else send({ type: 'cast', card: o.id });
+      } else send({ type: 'cast', card: o.id, ...(d.modes ? { mode: ui.spellMode } : {}) });
       break;
     }
     case 'pause':
@@ -1220,6 +1281,7 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleModalReplay':
     case 'exampleAttackReplay':
     case 'exampleLegendReplay':
     case 'exampleSearchReplay':
@@ -1232,25 +1294,27 @@ async function action(name, el) {
     case 'exampleReplay': {
       try {
         const response = await fetch(
-          name === 'exampleAttackReplay'
-            ? './example-attack-replay.json'
-            : name === 'exampleLegendReplay'
-              ? './example-legend-replay.json'
-              : name === 'exampleSearchReplay'
-                ? './example-search-replay.json'
-                : name === 'exampleSacrificeReplay'
-                  ? './example-sacrifice-replay.json'
-                  : name === 'exampleBurialReplay'
-                    ? './example-burial-replay.json'
-                    : name === 'exampleTargetReplay'
-                      ? './example-target-replay.json'
-                      : name === 'exampleInteractionReplay'
-                        ? './example-interaction-replay.json'
-                        : name === 'exampleOptionalReplay'
-                          ? './example-optional-replay.json'
-                          : name === 'exampleWardReplay'
-                            ? './example-ward-replay.json'
-                            : './example-replay.json',
+          name === 'exampleModalReplay'
+            ? './example-modal-replay.json'
+            : name === 'exampleAttackReplay'
+              ? './example-attack-replay.json'
+              : name === 'exampleLegendReplay'
+                ? './example-legend-replay.json'
+                : name === 'exampleSearchReplay'
+                  ? './example-search-replay.json'
+                  : name === 'exampleSacrificeReplay'
+                    ? './example-sacrifice-replay.json'
+                    : name === 'exampleBurialReplay'
+                      ? './example-burial-replay.json'
+                      : name === 'exampleTargetReplay'
+                        ? './example-target-replay.json'
+                        : name === 'exampleInteractionReplay'
+                          ? './example-interaction-replay.json'
+                          : name === 'exampleOptionalReplay'
+                            ? './example-optional-replay.json'
+                            : name === 'exampleWardReplay'
+                              ? './example-ward-replay.json'
+                              : './example-replay.json',
         );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();
@@ -1368,13 +1432,15 @@ const cardDrag = installCardDrag(app, {
           : null);
       if (!element) continue;
       const label =
-        plan.kind === 'attack'
-          ? `Release to select ${object.name} as an attacker`
-          : plan.kind === 'block'
-            ? `Release to assign ${object.name} as a blocker`
-            : target
-              ? `Release to target ${element.getAttribute('aria-label') ?? element.textContent.trim()}`
-              : `Release to ${destination.type === 'playLand' ? 'play' : 'cast'} ${object.name}`;
+        plan.kind === 'chooseMode'
+          ? `Release to choose a mode for ${object.name}`
+          : plan.kind === 'attack'
+            ? `Release to select ${object.name} as an attacker`
+            : plan.kind === 'block'
+              ? `Release to assign ${object.name} as a blocker`
+              : target
+                ? `Release to target ${element.getAttribute('aria-label') ?? element.textContent.trim()}`
+                : `Release to ${destination.type === 'playLand' ? 'play' : 'cast'} ${object.name}`;
       zones.push({
         element,
         command: destination,
@@ -1418,6 +1484,12 @@ const cardDrag = installCardDrag(app, {
     if (state.revision !== gesture.revision) {
       toast('The game changed while you were dragging. Pick the card up again.');
       return false;
+    }
+    if (gesture.kind === 'chooseMode') {
+      resetSelection();
+      ui.selected = gesture.id;
+      showSpellModes();
+      return true;
     }
     if (zone.intent) {
       ui.selected = gesture.id;
@@ -1476,14 +1548,19 @@ function selectCard(id) {
         state,
         ui.activation !== null
           ? definition(state, state.objects[ui.selected]).activated[ui.activation].target
-          : definition(state, state.objects[ui.selected]).target,
+          : spellProfile(definition(state, state.objects[ui.selected]), ui.spellMode ?? undefined)
+              ?.target,
         p,
       ).some((t) => t.kind === 'object' && t.id === id)
     )
       send({
         type: ui.activation !== null ? 'activate' : 'cast',
         card: ui.selected,
-        ...(ui.activation !== null ? { ability: ui.activation } : {}),
+        ...(ui.activation !== null
+          ? { ability: ui.activation }
+          : ui.spellMode != null
+            ? { mode: ui.spellMode }
+            : {}),
         target: ref(o),
       });
     else toast('That is not a legal target.');
@@ -1537,6 +1614,7 @@ function selectCard(id) {
       action('playSelected', {});
       return;
     }
+    ui.spellMode = null;
     ui.selected = ui.selected === id ? null : id;
     if (
       ui.selected &&
@@ -1630,7 +1708,11 @@ document.addEventListener('click', (e) => {
       send({
         type: ui.activation !== null ? 'activate' : 'cast',
         card: ui.selected,
-        ...(ui.activation !== null ? { ability: ui.activation } : {}),
+        ...(ui.activation !== null
+          ? { ability: ui.activation }
+          : ui.spellMode != null
+            ? { mode: ui.spellMode }
+            : {}),
         target,
       });
   }
@@ -1647,6 +1729,7 @@ app.addEventListener('dblclick', (e) => {
   if (!legal) return;
   ui.selected = id;
   ui.activation = null;
+  ui.spellMode = null;
   action('playSelected', card);
 });
 app.addEventListener(

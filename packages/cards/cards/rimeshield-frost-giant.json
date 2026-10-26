@@ -5,7 +5,7 @@
   "name": "Rimeshield Frost Giant",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Giant", "Warrior"],
     "colors": ["U"],
     "manaCost": "{3}{U}{U}",
     "power": 4,

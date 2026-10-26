@@ -5,7 +5,7 @@
   "name": "Colossal Dreadmaw",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Dinosaur"],
     "colors": ["G"],
     "manaCost": "{4}{G}{G}",
     "power": 6,
