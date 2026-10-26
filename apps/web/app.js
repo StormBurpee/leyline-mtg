@@ -177,6 +177,9 @@ function send(command, { autoPass = true } = {}) {
     toast(result.error.message);
     return false;
   }
+  clearTimeout(toastTimer);
+  document.querySelector('#toast').classList.remove('visible');
+  document.querySelector('#toast').textContent = '';
   const motion = captureTable(app, state);
   state = result.state;
   resetSelection();
@@ -556,6 +559,34 @@ async function action(name, el) {
       if (ok) closeDialog();
       break;
     }
+    case 'triggerTargets': {
+      const choice = state.choice;
+      if (choice?.kind !== 'triggerTarget') break;
+      openDialog(
+        `Target for ${choice.entry.name}`,
+        '<p>This choice puts the triggered ability on the stack. It does not resolve it.</p>',
+        choice.targets
+          .map((target, index) => {
+            const name =
+              target.kind === 'player'
+                ? state.players[target.id].name
+                : target.kind === 'object'
+                  ? state.objects[target.id].name
+                  : state.stack.find((entry) => entry.id === target.id)?.name;
+            return `<button class="btn" data-action="chooseTriggerTarget" data-index="${index}">${escape(name)} · ${escape(target.kind)}</button>`;
+          })
+          .join(''),
+      );
+      break;
+    }
+    case 'chooseTriggerTarget': {
+      const target =
+        state.choice?.kind === 'triggerTarget'
+          ? state.choice.targets[Number(el.dataset.index)]
+          : null;
+      if (target && send({ type: 'chooseTriggerTarget', target })) closeDialog();
+      break;
+    }
     case 'orderTriggers':
       showTriggerOrder();
       break;
@@ -648,19 +679,22 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleTargetReplay':
     case 'exampleInteractionReplay':
     case 'exampleOptionalReplay':
     case 'exampleWardReplay':
     case 'exampleReplay': {
       try {
         const response = await fetch(
-          name === 'exampleInteractionReplay'
-            ? './example-interaction-replay.json'
-            : name === 'exampleOptionalReplay'
-              ? './example-optional-replay.json'
-              : name === 'exampleWardReplay'
-                ? './example-ward-replay.json'
-                : './example-replay.json',
+          name === 'exampleTargetReplay'
+            ? './example-target-replay.json'
+            : name === 'exampleInteractionReplay'
+              ? './example-interaction-replay.json'
+              : name === 'exampleOptionalReplay'
+                ? './example-optional-replay.json'
+                : name === 'exampleWardReplay'
+                  ? './example-ward-replay.json'
+                  : './example-replay.json',
         );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();
@@ -847,6 +881,10 @@ function selectCard(id) {
     render();
     return;
   }
+  if (c?.kind === 'triggerTarget') {
+    send({ type: 'chooseTriggerTarget', target: ref(o) });
+    return;
+  }
   if (ui.targeting) {
     if (
       targetsFor(
@@ -962,12 +1000,16 @@ document.addEventListener('click', (e) => {
     openDialog(catalogCard.dataset.inspect, inspect(catalogCard.dataset.inspect, metadata));
     return;
   }
-  if (state && ui.targeting) {
+  if (state && (ui.targeting || state.choice?.kind === 'triggerTarget')) {
     const player = e.target.closest('[data-player]'),
       stack = e.target.closest('[data-stack]');
     let target = null;
     if (player) target = { kind: 'player', id: Number(player.dataset.player) };
     if (stack) target = { kind: 'stack', id: stack.dataset.stack };
+    if (target && state.choice?.kind === 'triggerTarget') {
+      send({ type: 'chooseTriggerTarget', target });
+      return;
+    }
     if (target)
       send({
         type: ui.activation !== null ? 'activate' : 'cast',

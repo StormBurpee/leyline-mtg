@@ -254,7 +254,7 @@ export function validateDefinition(card) {
       for (const [i, t] of card.triggers.entries()) {
         if (
           !plain(t) ||
-          Object.keys(t).some((k) => !['event', 'effects', 'optional'].includes(k))
+          Object.keys(t).some((k) => !['event', 'effects', 'optional', 'target'].includes(k))
         ) {
           errors.push(`${name}.triggers[${i}]: unsupported trigger predicate or field.`);
           continue;
@@ -264,7 +264,13 @@ export function validateDefinition(card) {
         );
         if (t.optional !== undefined && typeof t.optional !== 'boolean')
           errors.push(`${name}.triggers[${i}].optional: expected a boolean.`);
-        validateEffects(t.effects, `${name}.triggers[${i}].effects`, null, errors);
+        if (t.target != null)
+          errors.push(
+            ...validateTargetSpec(t.target).map(
+              (error) => `${name}.triggers[${i}].target: ${error}`,
+            ),
+          );
+        validateEffects(t.effects, `${name}.triggers[${i}].effects`, t.target, errors);
       }
   }
   if (card.activated !== undefined) {

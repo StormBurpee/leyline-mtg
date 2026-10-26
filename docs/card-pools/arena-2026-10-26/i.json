@@ -67,7 +67,7 @@
   {
     "oracleId": "53f07529-c212-43e4-b5b6-086efeadda39",
     "name": "Iceridge Serpent",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "109cdefd-e8cc-4ac7-b6ba-2cfdef8d780f",

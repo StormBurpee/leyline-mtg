@@ -60,6 +60,27 @@ export function chooseBotCommand(s, p) {
           .slice(0, c.count);
         return { type: c.kind, player: p, cards };
       }
+      case 'triggerTarget': {
+        const harmful = c.entry.effects.some((effect) =>
+          ['damage', 'destroy', 'bounce', 'counter'].includes(effect.op),
+        );
+        const targets = [...c.targets].sort((a, b) => {
+          const score = (target) => {
+            const controller =
+              target.kind === 'player'
+                ? target.id
+                : target.kind === 'object'
+                  ? s.objects[target.id]?.controller
+                  : s.stack.find((entry) => entry.id === target.id)?.controller;
+            return (
+              (controller === (harmful ? 1 - p : p) ? 10 : 0) +
+              (target.kind === 'object' ? value(s, s.objects[target.id]) : 0)
+            );
+          };
+          return score(b) - score(a);
+        });
+        return { type: 'chooseTriggerTarget', player: p, target: targets[0] };
+      }
       case 'orderTriggers':
         return { type: 'orderTriggers', player: p, ids: c.entries.map((e) => e.id) };
       case 'assignDamage':

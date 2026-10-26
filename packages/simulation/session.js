@@ -33,6 +33,7 @@ export function createSession(config = {}) {
       ...visible.map((o) => o.name),
       ...view.stack.map((e) => e.name),
       ...(view.resolving ? [view.resolving.entry.name] : []),
+      ...(view.choice?.entry ? [view.choice.entry.name] : []),
     ]);
     view.catalog = Object.fromEntries([...names].map((name) => [name, state.catalog[name]]));
     const ids = new Map();
@@ -61,6 +62,17 @@ export function createSession(config = {}) {
       if (['catalog', 'name', 'text', 'label'].includes(key)) return value;
       if (typeof value === 'string') return ids.get(value) ?? value;
       if (Array.isArray(value)) return value.map((v) => redact(v));
+      if (
+        value &&
+        typeof value === 'object' &&
+        value.kind === 'object' &&
+        typeof value.id === 'string'
+      ) {
+        const identity = `${value.id}:${value.incarnation}`;
+        if (!perspective.outward.has(identity))
+          perspective.outward.set(identity, `object:${++perspective.next}`);
+        return { ...value, id: perspective.outward.get(identity) };
+      }
       if (value && typeof value === 'object')
         return Object.fromEntries(
           Object.entries(value).map(([k, v]) => [ids.get(k) ?? k, redact(v, k)]),
@@ -71,6 +83,7 @@ export function createSession(config = {}) {
     // Pending choices may include a previous player's private damage allocation.
     if (view.choice) {
       delete view.choice.remaining;
+      delete view.choice.remainingEntries;
       delete view.choice.packets;
     }
     const observation = redact(view);

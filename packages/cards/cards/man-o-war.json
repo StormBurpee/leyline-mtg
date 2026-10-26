@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "67a3541c-8408-40c8-b44f-90035b860f57",
+  "name": "Man-o'-War",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Jellyfish"],
+    "supertypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, return target creature to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

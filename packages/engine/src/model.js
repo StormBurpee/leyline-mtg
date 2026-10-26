@@ -1,6 +1,6 @@
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.6.0';
+export const VERSION = '0.8.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -134,6 +134,13 @@ export function move(s, o, to) {
       ...s.stack,
       ...s.pendingTriggers,
       ...(s.resolving ? [s.resolving.entry] : []),
+      ...(s.choice?.kind === 'triggerTarget'
+        ? [
+            s.choice.entry,
+            ...s.choice.remainingEntries,
+            ...s.choice.remaining.flatMap((group) => group.entries),
+          ]
+        : []),
       ...(s.choice?.kind === 'orderTriggers'
         ? [...s.choice.entries, ...s.choice.remaining.flatMap((group) => group.entries)]
         : []),

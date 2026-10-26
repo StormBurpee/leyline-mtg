@@ -12,10 +12,11 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Objects changing zones become new incarnations; spells recheck targets at resolution.
 - Creatures, instants, sorceries, basic lands, ten unconditional tapped gain lands, Millstone, Glorious Anthem and Pacifism. Artifact and enchantment creatures retain both types; only the listed executable definitions are supported.
 - Type-aware artifact/enchantment removal and permanent bounce.
+- Triggered abilities choose legal targets when placed on the stack, before priority. Impossible required targets remove the trigger; targets are rechecked on resolution.
 - Optional triggered effects with explicit resolution-time accept/decline choices.
 - Activated abilities with mana, life and tap costs, explicit targets, and stack resolution.
 - Scry, surveil and mandatory discard choices during resolution, with instruction continuations and no intervening priority.
-- Ward triggers for opposing spells and activated abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.
+- Ward triggers for opposing spells and activated/triggered abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.
 - Schema-checked card sources, reusable mechanics, composable target/event predicates and all-or-nothing pack compilation.
 - Immutable per-game catalogs validated before play and embedded in replays.
 - ETB, landfall, noncreature-cast and instant/sorcery-cast triggers. APNAP order and explicit same-controller ordering.

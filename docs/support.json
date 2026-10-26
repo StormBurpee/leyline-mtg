@@ -1,7 +1,15 @@
 {
-  "version": "0.6.0",
+  "version": "0.8.0",
   "rulesReference": "2026-09-25",
   "cards": [
+    {
+      "name": "Acidic Slime",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": ["destroy"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
     {
       "name": "Aegis Turtle",
       "type": "creature",
@@ -254,6 +262,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Exclusion Mage",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["bounce"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Fencing Ace",
       "type": "creature",
       "keywords": ["double strike"],
@@ -275,6 +291,14 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Flametongue Kavu",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -478,6 +502,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Man-o'-War",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["bounce"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Memnite",
       "type": "creature",
       "keywords": [],
@@ -499,6 +531,14 @@
       "keywords": [],
       "opcodes": ["draw"],
       "triggers": ["controllerCastsEnchantment"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Meteor Golem",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -694,11 +734,27 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ravenous Chupacabra",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Rearing Embermare",
       "type": "creature",
       "keywords": ["reach", "haste"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Reclamation Sage",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -720,6 +776,30 @@
       "keywords": [],
       "opcodes": ["gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Sage's Row Denizen",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["mill"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "excludeSource": true,
+          "filter": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "color": "U"
+              }
+            ]
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {

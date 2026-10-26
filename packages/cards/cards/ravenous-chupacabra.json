@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7b459306-149b-4f43-abc1-2dd70c748c0e",
+  "name": "Ravenous Chupacabra",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Beast", "Horror"],
+    "supertypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, destroy target creature an opponent controls.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

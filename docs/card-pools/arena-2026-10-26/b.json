@@ -892,7 +892,7 @@
   {
     "oracleId": "f88eeb04-4b8e-4c76-a8c6-90887b94d518",
     "name": "Beaming Defiance",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "bbe740f8-6e7c-4cfd-9134-9bf8d5f48cf5",
@@ -1407,7 +1407,7 @@
   {
     "oracleId": "4e473298-0b67-42b8-90a8-3bcdd73da473",
     "name": "Bigfin Bouncer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "607425ac-9e90-4c9e-88bf-72f8a76cce97",
@@ -2647,7 +2647,7 @@
   {
     "oracleId": "5a851367-1c4a-4cc9-a9c3-3d2775986b4c",
     "name": "Blossoming Defense",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "45429b2c-be3b-4b2e-9bab-a059ccbda8cd",

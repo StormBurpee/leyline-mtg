@@ -732,7 +732,7 @@
   {
     "oracleId": "67a3541c-8408-40c8-b44f-90035b860f57",
     "name": "Man-o'-War",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fe35b55e-52ae-428e-b27e-817ee78b5d8c",
@@ -1977,7 +1977,7 @@
   {
     "oracleId": "d9f11aa1-9219-42a8-85a9-a8f204160706",
     "name": "Meteor Golem",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "c6a607f2-4228-4bcc-84ed-37bd362d7542",
@@ -4317,7 +4317,7 @@
   {
     "oracleId": "161b6d06-e6a7-488e-9f9c-d266c1402a3a",
     "name": "Mystic Snake",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "fdd423d5-f19b-4bb2-98ca-75cc3c058d32",

@@ -792,6 +792,9 @@
               },
               "minItems": 0,
               "maxItems": 64
+            },
+            "target": {
+              "$ref": "#/$defs/selector"
             }
           },
           "required": ["kind", "on", "effects"],

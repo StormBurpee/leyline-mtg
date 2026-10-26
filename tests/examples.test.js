@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { replay, assertInvariants } from '../packages/engine/src/index.js';
 for (const filename of [
   'example-replay.json',
+  'example-target-replay.json',
   'example-interaction-replay.json',
   'example-ward-replay.json',
   'example-optional-replay.json',
@@ -14,6 +15,7 @@ for (const filename of [
     );
     const s = replay(record);
     assert.equal(assertInvariants(s), true);
+    if (filename.includes('target')) assert.equal(s.choice.kind, 'triggerTarget');
     if (filename.includes('optional')) assert.equal(s.choice.kind, 'optionalEffect');
     if (filename.includes('ward')) {
       assert.equal(s.choice.kind, 'payCost');

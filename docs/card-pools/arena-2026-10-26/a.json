@@ -372,7 +372,7 @@
   {
     "oracleId": "21f45043-5419-4019-8b6c-e5294bd5f549",
     "name": "Acidic Slime",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fcdfe9d5-2743-4d3e-ab57-bf0f96beaa15",
@@ -1367,7 +1367,7 @@
   {
     "oracleId": "ea7a8acb-f01f-4a69-9b3c-954d8f0d3155",
     "name": "Alabaster Mage",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "3fa2d51c-d549-4287-ac3b-76bc72bcd8bc",
@@ -1432,7 +1432,7 @@
   {
     "oracleId": "c4229cc8-11e5-4221-b00d-86969701e21b",
     "name": "Alesha's Legacy",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "17ce2c17-b69b-4ebf-9c3c-c64e771af101",

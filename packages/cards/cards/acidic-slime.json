@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "21f45043-5419-4019-8b6c-e5294bd5f549",
+  "name": "Acidic Slime",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Ooze"],
+    "supertypes": [],
+    "colors": ["G"],
+    "manaCost": "{3}{G}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            },
+            {
+              "type": "land"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

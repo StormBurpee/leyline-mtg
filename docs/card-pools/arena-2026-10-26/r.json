@@ -227,7 +227,7 @@
   {
     "oracleId": "658d54d4-e967-490c-b958-3743b3b1ef45",
     "name": "Rage-Scarred Berserker",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d0732ebf-91ad-4e3c-a09a-f410d20587fc",
@@ -742,7 +742,7 @@
   {
     "oracleId": "694cb93a-bcc5-44b0-a76c-19ae4a4e5e0f",
     "name": "Ranger's Guile",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "44924f1e-edc4-481b-93f3-78606d4fd691",
@@ -1012,7 +1012,7 @@
   {
     "oracleId": "7b459306-149b-4f43-abc1-2dd70c748c0e",
     "name": "Ravenous Chupacabra",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "f5ef25fb-545e-41b7-8fed-d3cfff3d8668",
@@ -1467,7 +1467,7 @@
   {
     "oracleId": "032ec6e2-6cc3-4a97-9cc7-3233f5e11904",
     "name": "Reclamation Sage",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "7a0168c5-e258-4c50-96aa-95deb2198e6f",
@@ -2502,7 +2502,7 @@
   {
     "oracleId": "223c97fb-dc96-41ba-be9d-bad9b5e4876f",
     "name": "Returned Centaur",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "58b9f933-7b13-4335-996c-4722ab9e08b2",
@@ -2807,7 +2807,7 @@
   {
     "oracleId": "29f61caf-1aba-40cd-aff6-c3685a0997d7",
     "name": "Riddlemaster Sphinx",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ea480035-9f1b-40c9-a3a5-ce7cd093dfcf",

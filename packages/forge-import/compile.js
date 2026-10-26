@@ -1,3 +1,4 @@
+import { effectTargetCompatible } from '../engine/src/selectors.js';
 import { primaryType } from '../engine/src/types.js';
 /**
  * Conservative Forge-script migration aid. Compiles a finite, explicit grammar
@@ -88,6 +89,25 @@ function fields(text, errors) {
   return out;
 }
 function targetFor(a, errors) {
+  const scoped = {
+    'Artifact,Enchantment,Land': {
+      scope: 'permanent',
+      where: { any: [{ type: 'artifact' }, { type: 'enchantment' }, { type: 'land' }] },
+    },
+    'Creature.OppCtrl': {
+      scope: 'permanent',
+      where: { all: [{ type: 'creature' }, { controller: 'opponent' }] },
+    },
+    'Creature.YouCtrl': {
+      scope: 'permanent',
+      where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+    },
+    'Permanent.OppCtrl+nonLand': {
+      scope: 'permanent',
+      where: { all: [{ not: { type: 'land' } }, { controller: 'opponent' }] },
+    },
+  };
+  if (Object.hasOwn(scoped, a.ValidTgts)) return scoped[a.ValidTgts];
   const target =
     a.ValidTgts === 'Artifact,Enchantment'
       ? 'artifactOrEnchantment'
@@ -120,7 +140,8 @@ function compileInstruction(a, context) {
   }
   const tag = tags[0],
     opcode = a[tag];
-  if (sub && tag !== 'DB') errors.push('SubAbility references must point to a DB instruction.');
+  if ((sub || rootKind === 'TR') && tag !== 'DB')
+    errors.push('SubAbility references must point to a DB instruction.');
   const operands = OPERAND_FIELDS[opcode];
   if (!Array.isArray(operands)) {
     errors.push(`Unsupported ${tag === 'AB' ? 'ability' : 'spell'} opcode: ${opcode}`);
@@ -213,18 +234,12 @@ function compileInstruction(a, context) {
         ],
       };
     case 'Destroy':
-      if (
-        !['creature', 'artifact', 'enchantment', 'artifactOrEnchantment', 'permanent'].includes(
-          target,
-        )
-      )
+      if (!effectTargetCompatible('destroy', target))
         errors.push('Destroy requires a supported permanent target.');
       return { target, effects: [{ op: 'destroy' }] };
     case 'ChangeZone':
       if (
-        !['creature', 'artifact', 'enchantment', 'artifactOrEnchantment', 'permanent'].includes(
-          target,
-        ) ||
+        !effectTargetCompatible('bounce', target) ||
         a.Origin !== 'Battlefield' ||
         a.Destination !== 'Hand'
       )
@@ -237,7 +252,7 @@ function compileInstruction(a, context) {
         !target && (a.Defined === 'Self' || (a.Defined === undefined && rootKind === 'AB'));
       if (a.Defined !== undefined && a.Defined !== 'Self')
         errors.push('Only Defined Self is supported for source pumps.');
-      if (!self && target !== 'creature')
+      if (!self && !effectTargetCompatible('modify', target))
         errors.push('Pump needs a creature target or an activated source.');
       if (self && !['AB', 'TR'].includes(rootKind))
         errors.push('A spell cannot use this source-pump translation.');
@@ -376,7 +391,11 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
       errors.push('SubAbility chain exceeds 32 instructions.');
       return { effects: [] };
     }
-    const instruction = compileInstruction(a, { errors, rootKind, sub: chain.length > 0 });
+    const instruction = compileInstruction(a, {
+      errors,
+      rootKind,
+      sub: chain.length > (rootKind === 'TR' ? 1 : 0),
+    });
     if (a.SubAbility) {
       const symbol = a.SubAbility;
       if (chain.includes(symbol)) {
@@ -457,6 +476,13 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
       if (trigger.ValidCard === 'Card.Self') event = 'selfEnters';
       else if (trigger.ValidCard === 'Creature.Other') event = 'otherCreatureEnters';
       else if (trigger.ValidCard === 'Land.YouCtrl') event = 'controllerLandEnters';
+      else if (trigger.ValidCard === 'Creature.Blue+YouCtrl+Other')
+        event = {
+          event: 'enter',
+          controller: 'you',
+          excludeSource: true,
+          filter: { all: [{ type: 'creature' }, { color: 'U' }] },
+        };
       else errors.push(`Unsupported zone-change trigger predicate: ${trigger.ValidCard}`);
       if (
         trigger.TriggerZones !== 'Battlefield' &&
@@ -484,11 +510,11 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
     }
     used.add(trigger.Execute);
     const result = walk(fields(symbols.get(trigger.Execute), errors), 'TR', [trigger.Execute]);
-    if (result.target) errors.push('Targeted triggers require a target-choice implementation.');
     if (event)
       (definition.triggers ??= []).push({
         event,
         effects: result.effects,
+        ...(result.target ? { target: result.target } : {}),
         ...(trigger.OptionalDecider ? { optional: true } : {}),
       });
   }

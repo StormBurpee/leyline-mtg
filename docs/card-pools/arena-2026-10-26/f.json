@@ -1917,7 +1917,7 @@
   {
     "oracleId": "b215196a-3716-451f-bdbd-d16c05ace5b4",
     "name": "Flametongue Kavu",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "9e43805d-3576-47d4-9331-524869ab99d0",
@@ -3082,7 +3082,7 @@
   {
     "oracleId": "724bc69c-cd09-4ff8-91e7-70500b9474e1",
     "name": "Frilled Mystic",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "3315aa42-d3ae-425e-9c12-191d26e67a0a",

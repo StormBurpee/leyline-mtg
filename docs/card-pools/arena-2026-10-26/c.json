@@ -1042,7 +1042,7 @@
   {
     "oracleId": "d89bbfe7-e7ef-4f1c-a6b5-6d8ef4079daa",
     "name": "Cavalry Drillmaster",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "75540897-53f6-433b-bd70-9851551df6ef",
@@ -1817,7 +1817,7 @@
   {
     "oracleId": "9c055ef0-1164-4a9f-80de-23405423aed5",
     "name": "Chase Inspiration",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "161ff063-b784-43c7-b608-f78be3daa5b2",
@@ -4297,7 +4297,7 @@
   {
     "oracleId": "59180e94-ccdf-4d9f-9a4a-fe55497d0d63",
     "name": "Creeping Mold",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "acf22340-7ff9-443f-a846-c44bb5a3f4e7",

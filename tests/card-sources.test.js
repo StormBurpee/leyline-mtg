@@ -249,3 +249,25 @@ test('source compilation can bootstrap without a generated runtime catalog', asy
     await rm(dir, { recursive: true, force: true });
   }
 });
+
+test('targeted ETB sources compile without losing the selector into legacy etb shorthand', () => {
+  const result = compileCard(
+    example([
+      {
+        kind: 'triggered',
+        on: { event: 'enter', object: 'source' },
+        target: { scope: 'damageable' },
+        effects: [{ op: 'damage', target: 'target', amount: 2 }],
+      },
+    ]),
+  );
+  assert.equal(result.ok, true, JSON.stringify(result.diagnostics));
+  assert.equal(result.definition.etb, undefined);
+  assert.ok(result.definition.triggers[0].target);
+  const state = fixture();
+  state.catalog = createRegistry({ ...CARDS, [result.definition.name]: result.definition });
+  lands(state, 'Mountain', 2);
+  const object = put(state, result.definition.name, 0, 'hand');
+  const next = resolve(act(state, 'cast', { card: object.id }));
+  assert.equal(next.choice.kind, 'triggerTarget');
+});

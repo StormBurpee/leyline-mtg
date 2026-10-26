@@ -582,7 +582,7 @@
   {
     "oracleId": "de8d7cad-02c7-43f1-896e-eaa73f016ada",
     "name": "Desperate Bloodseeker",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "83c12f50-e5a1-479d-afab-edb0b40412f2",
@@ -817,7 +817,7 @@
   {
     "oracleId": "2f990b54-fbf3-4949-85bb-9ba39710e72a",
     "name": "Dive Down",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "84681f12-2978-4f62-ab89-b579033c5192",

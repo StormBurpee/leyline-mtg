@@ -48,3 +48,5 @@ Cancellation is checked between decisions and after an asynchronous policy retur
 - Invalid episodes reported separately from game outcomes.
 - Paired-seat evaluation, throughput profiling and parallel workers before large training jobs.
 - Differential and information-flow tests as the supported rules surface expands.
+
+Targeted triggered abilities expose concrete `chooseTriggerTarget` actions. Object references use player-specific incarnation-bound handles, including references to departed sources; departed/concealed handles cannot be submitted as current visible objects. Internal trigger-placement continuations are omitted from observations.

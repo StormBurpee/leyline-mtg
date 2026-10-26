@@ -1,0 +1,9 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/sages_row_denizen.txt
+Name:Sage's Row Denizen
+ManaCost:2 U
+Types:Creature Vedalken Wizard
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Blue+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever another blue creature you control enters, target player mills two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player
+Oracle:Whenever another blue creature you control enters, target player mills two cards.

@@ -1,0 +1,9 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/e/exclusion_mage.txt
+Name:Exclusion Mage
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters, return target creature an opponent controls to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select target creature an opponent controls
+Oracle:When Exclusion Mage enters, return target creature an opponent controls to its owner's hand.

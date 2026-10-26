@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.8.0 — Targeted triggered abilities
+
+- Required trigger targets are chosen during stack placement, preserving APNAP and same-controller ordering.
+- Missing legal targets remove the trigger; invalid and stale target choices reject atomically.
+- Targeted triggers interact with ward, optional resolution and source last-known information.
+- Eight reviewed source definitions, including Reclamation Sage, Meteor Golem and Exclusion Mage; 134 executable cards total.
+- Explicit legal target-choice actions for simulation policies, with opaque object handles and private continuations.
+- Departed trigger sources retain opaque incarnation-bound references rather than leaking concealed raw object IDs.
+- Browser highlights and a target-list alternative, plus a reproducible replay paused at the new decision.
+- Conservative Forge translation for targeted DB trigger roots; nested additional targets still reject.
+
+Multi-target, modal, delayed/reflexive and general leave-the-battlefield triggers remain unsupported.
+
 ## 0.7.0 — Direct manipulation at the table
 
 - Drag cards from hand to the battlefield, players, permanents or spells on the stack.

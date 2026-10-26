@@ -78,7 +78,7 @@ export function targetsFor(s, kind, p) {
     ...s.stack.map((e) => ({ kind: 'stack', id: e.id })),
   ].filter((t) => legalTarget(s, kind, t, p));
 }
-export function queueTrigger(s, source, effects, label, optional = false) {
+export function queueTrigger(s, source, effects, label, optional = false, targetKind = null) {
   s.pendingTriggers.push({
     id: `s${++s.nextId}`,
     kind: 'ability',
@@ -89,6 +89,7 @@ export function queueTrigger(s, source, effects, label, optional = false) {
     sourceKeywords: keywords(s, source),
     label,
     ...(optional ? { optional: true } : {}),
+    ...(targetKind ? { targetKind: structuredClone(targetKind) } : {}),
   });
   emit(s, 'triggered', { objectId: source.id, name: source.name, player: source.controller });
 }
@@ -157,6 +158,7 @@ export function notifyTriggers(s, event, payload) {
           trigger.effects,
           `${watcher.name} · triggered ability`,
           trigger.optional,
+          trigger.target,
         );
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
@@ -476,35 +478,72 @@ export function stabilize(s) {
     .map((p) => ({ player: p, entries: s.pendingTriggers.filter((t) => t.controller === p) }))
     .filter((g) => g.entries.length);
   s.pendingTriggers = [];
-  for (const g of groups) {
-    if (g.entries.length === 1) {
-      s.stack.push(g.entries[0]);
-      continue;
+  placeTriggerGroups(s, groups);
+}
+function placeTriggerGroups(s, groups) {
+  for (let index = 0; index < groups.length; index++) {
+    const group = groups[index],
+      remaining = groups.slice(index + 1);
+    if (group.entries.length > 1) {
+      s.choice = { kind: 'orderTriggers', player: group.player, entries: group.entries, remaining };
+      return;
     }
-    s.choice = {
-      kind: 'orderTriggers',
-      player: g.player,
-      entries: g.entries,
-      remaining: groups.slice(groups.indexOf(g) + 1),
-    };
-    return;
+    if (!placeOrderedTriggers(s, group.entries, remaining)) return;
   }
+}
+function placeOrderedTriggers(s, entries, remaining) {
+  for (let index = 0; index < entries.length; index++) {
+    const entry = entries[index];
+    if (entry.targetKind) {
+      const targets = targetsFor(s, entry.targetKind, entry.controller);
+      if (!targets.length) {
+        // CR 603.3d: a trigger with no legal required choice is removed, not deferred.
+        emit(s, 'triggerRemoved', {
+          stackId: entry.id,
+          name: entry.name,
+          reason: 'no legal target',
+        });
+        continue;
+      }
+      s.choice = {
+        kind: 'triggerTarget',
+        player: entry.controller,
+        entry,
+        targets,
+        remainingEntries: entries.slice(index + 1),
+        remaining,
+      };
+      return false;
+    }
+    s.stack.push(entry);
+  }
+  return true;
 }
 export function finishTriggerOrder(s, ids) {
   const choice = s.choice,
-    byId = Object.fromEntries(choice.entries.map((e) => [e.id, e]));
-  for (const id of ids) s.stack.push(byId[id]);
+    byId = Object.fromEntries(choice.entries.map((entry) => [entry.id, entry]));
   s.choice = null;
-  for (const g of choice.remaining) {
-    if (g.entries.length === 1) s.stack.push(g.entries[0]);
-    else {
-      s.choice = {
-        kind: 'orderTriggers',
-        player: g.player,
-        entries: g.entries,
-        remaining: choice.remaining.slice(choice.remaining.indexOf(g) + 1),
-      };
-      return;
-    }
-  }
+  if (
+    placeOrderedTriggers(
+      s,
+      ids.map((id) => byId[id]),
+      choice.remaining,
+    )
+  )
+    placeTriggerGroups(s, choice.remaining);
+}
+export function finishTriggerTarget(s, target) {
+  const choice = s.choice,
+    entry = choice.entry;
+  requireRule(
+    legalTarget(s, entry.targetKind, target, choice.player),
+    'TRIGGER_TARGET',
+    'Choose a legal target for the triggered ability.',
+  );
+  entry.target = structuredClone(target);
+  s.stack.push(entry);
+  s.choice = null;
+  notifyTargeted(s, entry);
+  if (placeOrderedTriggers(s, choice.remainingEntries, choice.remaining))
+    placeTriggerGroups(s, choice.remaining);
 }

@@ -637,7 +637,7 @@
   {
     "oracleId": "d3de6b36-c631-4b52-b16b-0749a347d73d",
     "name": "Daybreak Charger",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a2ea435c-5a61-4c98-bb76-8ff4ef0a0da9",
@@ -1722,7 +1722,7 @@
   {
     "oracleId": "de8d7cad-02c7-43f1-896e-eaa73f016ada",
     "name": "Desperate Bloodseeker",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0432e07d-baf6-4c20-8646-08338c7dc950",
@@ -2527,7 +2527,7 @@
   {
     "oracleId": "2f990b54-fbf3-4949-85bb-9ba39710e72a",
     "name": "Dive Down",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "84681f12-2978-4f62-ab89-b579033c5192",

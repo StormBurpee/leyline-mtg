@@ -12,7 +12,7 @@ Leyline's engine and client are written in JavaScript for this repository. They 
 - `forge-game/.../trigger/TriggerHandler.java`: pending triggers, distinct from resolution.
 - `forge-gui/res/cardsfolder/l/lightning_bolt.txt` and `c/counterspell.txt`: declarative executable card definitions.
 
-No Forge Java implementation source is distributed in this repository. Forty-seven small Forge card-script fixtures are reproduced in `packages/forge-import/test/fixtures/`, with upstream source links and GPL-3.0-or-later attribution; they test the conservative migration adapter. The comparable rule behavior is implemented directly from the game rules in a separate, smaller architecture. Leyline is licensed **GPL-3.0-or-later**, consistent with an open-source future that can incorporate properly attributed GPL-compatible contributions. This does not make this project an official Forge release. The included license is the unmodified GNU GPL v3 license text.
+No Forge Java implementation source is distributed in this repository. Fifty-one small Forge card-script fixtures are reproduced in `packages/forge-import/test/fixtures/`, with upstream source links and GPL-3.0-or-later attribution; they test the conservative migration adapter. The comparable rule behavior is implemented directly from the game rules in a separate, smaller architecture. Leyline is licensed **GPL-3.0-or-later**, consistent with an open-source future that can incorporate properly attributed GPL-compatible contributions. This does not make this project an official Forge release. The included license is the unmodified GNU GPL v3 license text.
 
 ## Rules and cards
 
@@ -37,3 +37,5 @@ The exact `AI:RemoveDeck:Random` presentation/deck-generation flag is ignored by
 ## Native source pack
 
 Version 0.6 migrates the complete v0.5 registry into schema-versioned JSON files under `packages/cards/cards/`. Real-card identities come from the already-retrieved Scryfall Oracle IDs. Token identities are project-local. All 129 pre-migration runtime definitions are protected by cryptographic regression contracts. The original 34-creature fixture remains under engine test fixtures, not in the production registry. This is a data-format migration, not a claim that importing Oracle text executes its rules.
+
+Version 0.8 adds eight targeted-trigger sources reviewed against Scryfall Oracle records on October 26, 2026 and the same pinned Forge scripts: Acidic Slime, Exclusion Mage, Flametongue Kavu, Man-o'-War, Meteor Golem, Ravenous Chupacabra, Reclamation Sage and Sage's Row Denizen. Scryfall keyword-action tags (such as Mill) are not treated as printed keyword abilities. The four added Forge fixtures are unmodified apart from attribution headers; unsupported AI hints remain diagnostics.

@@ -367,7 +367,7 @@
   {
     "oracleId": "724b4a59-9c69-4f2b-a436-72183c62f1ff",
     "name": "Nebula Dragon",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "9f970385-e7c6-40bf-999e-7015693c2250",
@@ -977,7 +977,7 @@
   {
     "oracleId": "27a66362-f2f5-4d46-9faf-a73752753304",
     "name": "Nimana Skydancer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "2f047fcb-c198-44ac-aa1e-31447f6c6aba",

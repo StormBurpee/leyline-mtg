@@ -112,7 +112,7 @@
   {
     "oracleId": "1758e102-22da-4cb3-98d5-76f7501d026d",
     "name": "Gale Swooper",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b0747a4f-d041-4750-aef5-a5d101696f65",
@@ -1722,7 +1722,7 @@
   {
     "oracleId": "2fc07680-3ffb-4507-a1e1-b9580f5ce878",
     "name": "Glint",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "64ad5657-78e9-4f34-8877-18c4f51fff9a",

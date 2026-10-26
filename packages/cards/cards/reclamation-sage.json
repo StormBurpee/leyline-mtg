@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "032ec6e2-6cc3-4a97-9cc7-3233f5e11904",
+  "name": "Reclamation Sage",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Elf", "Shaman"],
+    "supertypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, you may destroy target artifact or enchantment.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      },
+      "optional": true,
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

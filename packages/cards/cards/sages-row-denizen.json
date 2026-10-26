@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fc59aa9a-3abd-4479-a63e-ef0eeb35b5f2",
+  "name": "Sage's Row Denizen",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Vedalken", "Wizard"],
+    "supertypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Whenever another blue creature you control enters, target player mills two cards.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "color": "U"
+            }
+          ]
+        }
+      },
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "target",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

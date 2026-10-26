@@ -40,3 +40,5 @@ Manual Chromium checks on October 26, 2026 exercised:
 - A real targeted drag at 400 CSS pixels, with no horizontal page overflow.
 
 This is not a claim of exhaustive browser or device coverage. Physical touchscreen, Safari and Firefox verification remain open. The gesture harness is not a substitute for those checks.
+
+The v0.8 target-choice browser check used the shipped Exclusion Mage replay: an own-creature target was rejected, closing the legal-target list preserved the pending choice, and both the list and direct battlefield selection put the ability onto the stack targeting Serra Angel. Soul Warden resolved first in APNAP order; Serra Angel then returned to its owner's hand.

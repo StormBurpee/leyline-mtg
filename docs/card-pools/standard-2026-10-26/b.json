@@ -527,7 +527,7 @@
   {
     "oracleId": "4e473298-0b67-42b8-90a8-3bcdd73da473",
     "name": "Bigfin Bouncer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "fa85f9e6-69ff-4669-b70a-440aa7b16c97",
@@ -852,7 +852,7 @@
   {
     "oracleId": "5a851367-1c4a-4cc9-a9c3-3d2775986b4c",
     "name": "Blossoming Defense",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "45429b2c-be3b-4b2e-9bab-a059ccbda8cd",

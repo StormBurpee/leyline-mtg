@@ -1,0 +1,4515 @@
+{
+  "schemaVersion": 1,
+  "version": "0.8.0",
+  "config": {
+    "catalog": {
+      "Acidic Slime": {
+        "name": "Acidic Slime",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "G": 2
+        },
+        "keywords": ["deathtouch"],
+        "subtypes": ["Ooze"],
+        "color": ["G"],
+        "text": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, destroy target artifact, enchantment, or land.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "any": [
+                  {
+                    "type": "artifact"
+                  },
+                  {
+                    "type": "enchantment"
+                  },
+                  {
+                    "type": "land"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "Aegis Turtle": {
+        "name": "Aegis Turtle",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Turtle"],
+        "color": ["U"],
+        "text": "",
+        "power": 0,
+        "toughness": 5
+      },
+      "Agent of Atlas": {
+        "name": "Agent of Atlas",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Spy", "Hero"],
+        "color": ["W"],
+        "text": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Air Elemental": {
+        "name": "Air Elemental",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "U": 2
+        },
+        "keywords": ["flying"],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "flying",
+        "power": 4,
+        "toughness": 4
+      },
+      "Ankle Biter": {
+        "name": "Ankle Biter",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "G": 1
+        },
+        "keywords": ["deathtouch"],
+        "subtypes": ["Snake"],
+        "color": ["G"],
+        "text": "Deathtouch",
+        "power": 1,
+        "toughness": 1
+      },
+      "Bear Cub": {
+        "name": "Bear Cub",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": ["Bear"],
+        "color": ["G"],
+        "text": "",
+        "power": 2,
+        "toughness": 2
+      },
+      "Beast Whisperer": {
+        "name": "Beast Whisperer",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "G": 2
+        },
+        "keywords": [],
+        "subtypes": ["Elf", "Druid"],
+        "color": ["G"],
+        "text": "Whenever you cast a creature spell, draw a card.",
+        "power": 2,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "controllerCastsCreature",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Bishop's Soldier": {
+        "name": "Bishop's Soldier",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": ["lifelink"],
+        "subtypes": ["Vampire", "Soldier"],
+        "color": ["W"],
+        "text": "Lifelink",
+        "power": 2,
+        "toughness": 2
+      },
+      "Bloodfell Caves": {
+        "name": "Bloodfell Caves",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Bloodfell Caves enters tapped. When it enters, you gain 1 life. Tap: Add B or R.",
+        "entersTapped": true,
+        "mana": ["B", "R"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Blossoming Sands": {
+        "name": "Blossoming Sands",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Blossoming Sands enters tapped. When it enters, you gain 1 life. Tap: Add G or W.",
+        "entersTapped": true,
+        "mana": ["G", "W"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Boomerang": {
+        "name": "Boomerang",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "U": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Return target permanent to its owner's hand.",
+        "target": "permanent",
+        "effects": [
+          {
+            "op": "bounce"
+          }
+        ]
+      },
+      "Brazen Scourge": {
+        "name": "Brazen Scourge",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 2
+        },
+        "keywords": ["haste"],
+        "subtypes": ["Gremlin"],
+        "color": ["R"],
+        "text": "Haste",
+        "power": 3,
+        "toughness": 3
+      },
+      "Brightblade Stoat": {
+        "name": "Brightblade Stoat",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": ["first strike", "lifelink"],
+        "subtypes": ["Weasel", "Soldier"],
+        "color": ["W"],
+        "text": "First strike, lifelink",
+        "power": 2,
+        "toughness": 2
+      },
+      "Careful Study": {
+        "name": "Careful Study",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Draw two cards, then discard two cards.",
+        "target": null,
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "discard",
+            "count": 2
+          }
+        ]
+      },
+      "Catalog": {
+        "name": "Catalog",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Draw two cards, then discard a card.",
+        "target": null,
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "discard",
+            "count": 1
+          }
+        ]
+      },
+      "Centaur Courser": {
+        "name": "Centaur Courser",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "No abilities.",
+        "power": 3,
+        "toughness": 3
+      },
+      "Colossadactyl": {
+        "name": "Colossadactyl",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "G": 2
+        },
+        "keywords": ["reach", "trample"],
+        "subtypes": ["Dinosaur"],
+        "color": ["G"],
+        "text": "Reach, trample",
+        "power": 4,
+        "toughness": 5
+      },
+      "Colossal Dreadmaw": {
+        "name": "Colossal Dreadmaw",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "G": 2
+        },
+        "keywords": ["trample"],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "trample",
+        "power": 6,
+        "toughness": 6
+      },
+      "Consider": {
+        "name": "Consider",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Surveil 1, then draw a card.",
+        "target": null,
+        "effects": [
+          {
+            "op": "surveil",
+            "count": 1
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      },
+      "Counterspell": {
+        "name": "Counterspell",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "U": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Counter target spell.",
+        "target": "spell",
+        "effects": [
+          {
+            "op": "counter"
+          }
+        ]
+      },
+      "Darksteel Ingot": {
+        "name": "Darksteel Ingot",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": ["indestructible"],
+        "subtypes": [],
+        "color": [],
+        "text": "Indestructible. Tap: Add one mana of any color.",
+        "mana": ["W", "U", "B", "R", "G"]
+      },
+      "Dawn's Light Archer": {
+        "name": "Dawn's Light Archer",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "keywords": ["flash", "reach"],
+        "subtypes": ["Elf", "Archer"],
+        "color": ["G"],
+        "text": "Flash\nReach",
+        "power": 4,
+        "toughness": 2
+      },
+      "Disenchant": {
+        "name": "Disenchant",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "Destroy target artifact or enchantment.",
+        "target": "artifactOrEnchantment",
+        "effects": [
+          {
+            "op": "destroy"
+          }
+        ]
+      },
+      "Dismal Backwater": {
+        "name": "Dismal Backwater",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Dismal Backwater enters tapped. When it enters, you gain 1 life. Tap: Add U or B.",
+        "entersTapped": true,
+        "mana": ["U", "B"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Divination": {
+        "name": "Divination",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Draw two cards.",
+        "target": null,
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2
+          }
+        ]
+      },
+      "Doom Blade": {
+        "name": "Doom Blade",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["B"],
+        "text": "Destroy target nonblack creature.",
+        "target": "nonblackCreature",
+        "effects": [
+          {
+            "op": "destroy"
+          }
+        ]
+      },
+      "Dragon Sniper": {
+        "name": "Dragon Sniper",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "G": 1
+        },
+        "keywords": ["vigilance", "reach", "deathtouch"],
+        "subtypes": ["Human", "Archer"],
+        "color": ["G"],
+        "text": "Vigilance, reach, deathtouch",
+        "power": 1,
+        "toughness": 1
+      },
+      "Dwarven Forge-Chanter": {
+        "name": "Dwarven Forge-Chanter",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Ward—Pay 2 life. Prowess.",
+        "power": 1,
+        "toughness": 3,
+        "ward": {
+          "life": 2
+        },
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Electrostatic Field": {
+        "name": "Electrostatic Field",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": ["defender"],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Defender. Whenever you cast an instant or sorcery spell, this creature deals 1 damage to each opponent.",
+        "power": 0,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "damageOpponent",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Elemental Token": {
+        "name": "Elemental Token",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "No abilities.",
+        "power": 1,
+        "toughness": 1,
+        "token": true
+      },
+      "Elementalist Adept": {
+        "name": "Elementalist Adept",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "keywords": ["flash"],
+        "subtypes": ["Human", "Wizard"],
+        "color": ["U"],
+        "text": "Flash (You may cast this spell any time you could cast an instant.)\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Elvish Visionary": {
+        "name": "Elvish Visionary",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "When this creature enters, draw a card.",
+        "power": 1,
+        "toughness": 1,
+        "etb": [
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      },
+      "Enchantress's Presence": {
+        "name": "Enchantress's Presence",
+        "type": "enchantment",
+        "types": ["enchantment"],
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "Whenever you cast an enchantment spell, draw a card.",
+        "triggers": [
+          {
+            "event": "controllerCastsEnchantment",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Exclusion Mage": {
+        "name": "Exclusion Mage",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Wizard"],
+        "color": ["U"],
+        "text": "When this creature enters, return target creature an opponent controls to its owner's hand.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "bounce"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "opponent"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "Fencing Ace": {
+        "name": "Fencing Ace",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": ["double strike"],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "double strike",
+        "power": 1,
+        "toughness": 1
+      },
+      "Festival Crasher": {
+        "name": "Festival Crasher",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Whenever you cast an instant or sorcery spell, this creature gets +2/+0 until end of turn.",
+        "power": 1,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 2,
+                "toughness": 0
+              }
+            ]
+          }
+        ]
+      },
+      "Fire Elemental": {
+        "name": "Fire Elemental",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "R": 2
+        },
+        "keywords": [],
+        "subtypes": ["Elemental"],
+        "color": ["R"],
+        "text": "",
+        "power": 5,
+        "toughness": 4
+      },
+      "Flametongue Kavu": {
+        "name": "Flametongue Kavu",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": ["Kavu"],
+        "color": ["R"],
+        "text": "When this creature enters, it deals 4 damage to target creature.",
+        "power": 4,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 4
+              }
+            ],
+            "target": "creature"
+          }
+        ]
+      },
+      "Forest": {
+        "name": "Forest",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": ["Forest"],
+        "color": [],
+        "text": "Tap: Add G.",
+        "basic": true,
+        "mana": "G"
+      },
+      "Galewind Moose": {
+        "name": "Galewind Moose",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "G": 2
+        },
+        "keywords": ["flash", "vigilance", "reach", "trample"],
+        "subtypes": ["Elemental", "Elk"],
+        "color": ["G"],
+        "text": "Flash\nVigilance, reach, trample",
+        "power": 6,
+        "toughness": 6
+      },
+      "Giant Growth": {
+        "name": "Giant Growth",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "Target creature gets +3/+3 until end of turn.",
+        "target": "creature",
+        "effects": [
+          {
+            "op": "modify",
+            "power": 3,
+            "toughness": 3
+          }
+        ]
+      },
+      "Giant Spider": {
+        "name": "Giant Spider",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "G": 1
+        },
+        "keywords": ["reach"],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "reach",
+        "power": 2,
+        "toughness": 4
+      },
+      "Gigantosaurus": {
+        "name": "Gigantosaurus",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "G": 5
+        },
+        "keywords": [],
+        "subtypes": ["Dinosaur"],
+        "color": ["G"],
+        "text": "",
+        "power": 10,
+        "toughness": 10
+      },
+      "Glorious Anthem": {
+        "name": "Glorious Anthem",
+        "type": "enchantment",
+        "types": ["enchantment"],
+        "cost": {
+          "generic": 1,
+          "W": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "Creatures you control get +1/+1.",
+        "static": {
+          "kind": "anthem",
+          "power": 1,
+          "toughness": 1
+        }
+      },
+      "Goblin Instigator": {
+        "name": "Goblin Instigator",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "When this creature enters, create a 1/1 red Goblin creature token.",
+        "power": 1,
+        "toughness": 1,
+        "etb": [
+          {
+            "op": "token",
+            "count": 1,
+            "definition": "Goblin Token"
+          }
+        ]
+      },
+      "Goblin Piker": {
+        "name": "Goblin Piker",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "No abilities.",
+        "power": 2,
+        "toughness": 1
+      },
+      "Goblin Token": {
+        "name": "Goblin Token",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "No abilities.",
+        "power": 1,
+        "toughness": 1,
+        "token": true
+      },
+      "Grizzly Bears": {
+        "name": "Grizzly Bears",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "No abilities.",
+        "power": 2,
+        "toughness": 2
+      },
+      "Healer's Hawk": {
+        "name": "Healer's Hawk",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "W": 1
+        },
+        "keywords": ["flying", "lifelink"],
+        "subtypes": ["Bird"],
+        "color": ["W"],
+        "text": "Flying, lifelink",
+        "power": 1,
+        "toughness": 1
+      },
+      "Highborn Vampire": {
+        "name": "Highborn Vampire",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Vampire", "Warrior"],
+        "color": ["B"],
+        "text": "",
+        "power": 4,
+        "toughness": 3
+      },
+      "Hill Giant": {
+        "name": "Hill Giant",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "No abilities.",
+        "power": 3,
+        "toughness": 3
+      },
+      "Iguana Parrot": {
+        "name": "Iguana Parrot",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": ["flying", "vigilance"],
+        "subtypes": ["Lizard", "Bird", "Pirate"],
+        "color": ["U"],
+        "text": "Flying, vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Island": {
+        "name": "Island",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": ["Island"],
+        "color": [],
+        "text": "Tap: Add U.",
+        "basic": true,
+        "mana": "U"
+      },
+      "Jeskai Brushmaster": {
+        "name": "Jeskai Brushmaster",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1,
+          "U": 1,
+          "R": 1
+        },
+        "keywords": ["double strike"],
+        "subtypes": ["Orc", "Monk"],
+        "color": ["U", "R", "W"],
+        "text": "Double strike\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Jibbirik Omnivore": {
+        "name": "Jibbirik Omnivore",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": ["Beast"],
+        "color": ["G"],
+        "text": "",
+        "power": 3,
+        "toughness": 2
+      },
+      "Jungle Hollow": {
+        "name": "Jungle Hollow",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Jungle Hollow enters tapped. When it enters, you gain 1 life. Tap: Add B or G.",
+        "entersTapped": true,
+        "mana": ["B", "G"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Kiln Fiend": {
+        "name": "Kiln Fiend",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Whenever you cast an instant or sorcery spell, this creature gets +3/+0 until end of turn.",
+        "power": 1,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 3,
+                "toughness": 0
+              }
+            ]
+          }
+        ]
+      },
+      "Kree Commandos": {
+        "name": "Kree Commandos",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "W": 1
+        },
+        "keywords": ["flying", "vigilance"],
+        "subtypes": ["Kree", "Soldier", "Villain"],
+        "color": ["W"],
+        "text": "Flying, vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Lava Axe": {
+        "name": "Lava Axe",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 4,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Deal 5 damage to target player or planeswalker. (This kernel supports players.)",
+        "target": "player",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 5
+          }
+        ]
+      },
+      "Leonin Skyhunter": {
+        "name": "Leonin Skyhunter",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "W": 2
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Cat", "Knight"],
+        "color": ["W"],
+        "text": "Flying",
+        "power": 2,
+        "toughness": 2
+      },
+      "Lightning Bolt": {
+        "name": "Lightning Bolt",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Deal 3 damage to any target.",
+        "target": "any",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 3
+          }
+        ]
+      },
+      "Llanowar Elves": {
+        "name": "Llanowar Elves",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "Tap: Add G.",
+        "power": 1,
+        "toughness": 1,
+        "mana": "G"
+      },
+      "Magnigoth Sentry": {
+        "name": "Magnigoth Sentry",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "G": 1
+        },
+        "keywords": ["reach"],
+        "subtypes": ["Treefolk"],
+        "color": ["G"],
+        "text": "Reach",
+        "power": 4,
+        "toughness": 4
+      },
+      "Makindi Sliderunner": {
+        "name": "Makindi Sliderunner",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": ["trample"],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Trample. Landfall — Whenever a land you control enters, this creature gets +1/+1 until end of turn.",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerLandEnters",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Man-o'-War": {
+        "name": "Man-o'-War",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Jellyfish"],
+        "color": ["U"],
+        "text": "When this creature enters, return target creature to its owner's hand.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "bounce"
+              }
+            ],
+            "target": "creature"
+          }
+        ]
+      },
+      "Memnite": {
+        "name": "Memnite",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 0
+        },
+        "keywords": [],
+        "subtypes": ["Construct"],
+        "color": [],
+        "text": "No abilities.",
+        "power": 1,
+        "toughness": 1
+      },
+      "Merfolk Looter": {
+        "name": "Merfolk Looter",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Tap: Draw a card, then discard a card.",
+        "power": 1,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "tap": true
+            },
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "discard",
+                "count": 1
+              }
+            ],
+            "text": "Tap: Draw a card, then discard a card."
+          }
+        ]
+      },
+      "Mesa Enchantress": {
+        "name": "Mesa Enchantress",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 2
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Druid"],
+        "color": ["W"],
+        "text": "Whenever you cast an enchantment spell, you may draw a card.",
+        "power": 0,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCastsEnchantment",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "optional": true
+          }
+        ]
+      },
+      "Meteor Golem": {
+        "name": "Meteor Golem",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 7
+        },
+        "keywords": [],
+        "subtypes": ["Golem"],
+        "color": [],
+        "text": "When this creature enters, destroy target nonland permanent an opponent controls.",
+        "power": 3,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "not": {
+                      "type": "land"
+                    }
+                  },
+                  {
+                    "controller": "opponent"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "Millstone": {
+        "name": "Millstone",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "2, Tap: Target player mills two cards.",
+        "activated": [
+          {
+            "cost": {
+              "mana": {
+                "generic": 2
+              },
+              "tap": true
+            },
+            "target": "player",
+            "effects": [
+              {
+                "op": "mill",
+                "count": 2,
+                "player": "target"
+              }
+            ],
+            "text": "2, Tap: Target player mills two cards."
+          }
+        ]
+      },
+      "Mind Sculpt": {
+        "name": "Mind Sculpt",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Target opponent mills seven cards.",
+        "target": "opponent",
+        "effects": [
+          {
+            "op": "mill",
+            "count": 7,
+            "player": "target"
+          }
+        ]
+      },
+      "Monastery Swiftspear": {
+        "name": "Monastery Swiftspear",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "R": 1
+        },
+        "keywords": ["haste"],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Haste. Prowess.",
+        "power": 1,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Mountain": {
+        "name": "Mountain",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": ["Mountain"],
+        "color": [],
+        "text": "Tap: Add R.",
+        "basic": true,
+        "mana": "R"
+      },
+      "Murder": {
+        "name": "Murder",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 1,
+          "B": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["B"],
+        "text": "Destroy target creature.",
+        "target": "creature",
+        "effects": [
+          {
+            "op": "destroy"
+          }
+        ]
+      },
+      "Naturalize": {
+        "name": "Naturalize",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "Destroy target artifact or enchantment.",
+        "target": "artifactOrEnchantment",
+        "effects": [
+          {
+            "op": "destroy"
+          }
+        ]
+      },
+      "Negate": {
+        "name": "Negate",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Counter target noncreature spell.",
+        "target": "noncreatureSpell",
+        "effects": [
+          {
+            "op": "counter"
+          }
+        ]
+      },
+      "Opt": {
+        "name": "Opt",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Scry 1, then draw a card.",
+        "target": null,
+        "effects": [
+          {
+            "op": "scry",
+            "count": 1
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      },
+      "Ordinary Bear": {
+        "name": "Ordinary Bear",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": ["Bear"],
+        "color": ["G"],
+        "text": "",
+        "power": 4,
+        "toughness": 5
+      },
+      "Ornithopter of Paradise": {
+        "name": "Ornithopter of Paradise",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Thopter"],
+        "color": [],
+        "text": "Flying. Tap: Add one mana of any color.",
+        "power": 0,
+        "toughness": 2,
+        "mana": ["W", "U", "B", "R", "G"]
+      },
+      "Ornithopter": {
+        "name": "Ornithopter",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 0
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Thopter"],
+        "color": [],
+        "text": "flying",
+        "power": 0,
+        "toughness": 2
+      },
+      "Owlin Shieldmage": {
+        "name": "Owlin Shieldmage",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "W": 1,
+          "B": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": [],
+        "color": ["W", "B"],
+        "text": "Flying. Ward—Pay 3 life.",
+        "power": 3,
+        "toughness": 3,
+        "ward": {
+          "life": 3
+        }
+      },
+      "Pacifism": {
+        "name": "Pacifism",
+        "type": "enchantment",
+        "types": ["enchantment"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": ["Aura"],
+        "color": ["W"],
+        "text": "Enchant creature. Enchanted creature can’t attack or block.",
+        "aura": "pacifism",
+        "target": "creature"
+      },
+      "Patchwork Automaton": {
+        "name": "Patchwork Automaton",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": [],
+        "subtypes": ["Construct"],
+        "color": [],
+        "text": "Ward {2}. Whenever you cast an artifact spell, put a +1/+1 counter on this creature.",
+        "power": 1,
+        "toughness": 1,
+        "ward": {
+          "mana": {
+            "generic": 2
+          }
+        },
+        "triggers": [
+          {
+            "event": "controllerCastsArtifact",
+            "effects": [
+              {
+                "op": "counterOn",
+                "amount": 1,
+                "subject": "source"
+              }
+            ]
+          }
+        ]
+      },
+      "Phyrexian Walker": {
+        "name": "Phyrexian Walker",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 0
+        },
+        "keywords": [],
+        "subtypes": ["Phyrexian", "Construct"],
+        "color": [],
+        "text": "No abilities.",
+        "power": 0,
+        "toughness": 3
+      },
+      "Plains": {
+        "name": "Plains",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": ["Plains"],
+        "color": [],
+        "text": "Tap: Add W.",
+        "basic": true,
+        "mana": "W"
+      },
+      "Preordain": {
+        "name": "Preordain",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Scry 2, then draw a card.",
+        "target": null,
+        "effects": [
+          {
+            "op": "scry",
+            "count": 2
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      },
+      "Prodigal Pyromancer": {
+        "name": "Prodigal Pyromancer",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Tap: This creature deals 1 damage to any target.",
+        "power": 1,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "tap": true
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 1
+              }
+            ],
+            "text": "Tap: Deal 1 damage to any target."
+          }
+        ]
+      },
+      "Quakestrider Ceratops": {
+        "name": "Quakestrider Ceratops",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "G": 3
+        },
+        "keywords": [],
+        "subtypes": ["Dinosaur"],
+        "color": ["G"],
+        "text": "",
+        "power": 12,
+        "toughness": 8
+      },
+      "Quaketusk Boar": {
+        "name": "Quaketusk Boar",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "R": 2
+        },
+        "keywords": ["reach", "trample", "haste"],
+        "subtypes": ["Elemental", "Boar"],
+        "color": ["R"],
+        "text": "Reach, trample, haste",
+        "power": 5,
+        "toughness": 5
+      },
+      "Raging Goblin": {
+        "name": "Raging Goblin",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "R": 1
+        },
+        "keywords": ["haste"],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "haste",
+        "power": 1,
+        "toughness": 1
+      },
+      "Raging Redcap": {
+        "name": "Raging Redcap",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "R": 1
+        },
+        "keywords": ["double strike"],
+        "subtypes": ["Goblin", "Knight"],
+        "color": ["R"],
+        "text": "Double strike",
+        "power": 1,
+        "toughness": 2
+      },
+      "Raise the Alarm": {
+        "name": "Raise the Alarm",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "Create two 1/1 white Soldier creature tokens.",
+        "target": null,
+        "effects": [
+          {
+            "op": "token",
+            "count": 2,
+            "definition": "Soldier Token"
+          }
+        ]
+      },
+      "Ravenous Chupacabra": {
+        "name": "Ravenous Chupacabra",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "B": 2
+        },
+        "keywords": [],
+        "subtypes": ["Beast", "Horror"],
+        "color": ["B"],
+        "text": "When this creature enters, destroy target creature an opponent controls.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "opponent"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "Rearing Embermare": {
+        "name": "Rearing Embermare",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "R": 1
+        },
+        "keywords": ["reach", "haste"],
+        "subtypes": ["Horse", "Beast"],
+        "color": ["R"],
+        "text": "Reach, haste",
+        "power": 4,
+        "toughness": 5
+      },
+      "Reclamation Sage": {
+        "name": "Reclamation Sage",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": ["Elf", "Shaman"],
+        "color": ["G"],
+        "text": "When this creature enters, you may destroy target artifact or enchantment.",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "target": "artifactOrEnchantment",
+            "optional": true
+          }
+        ]
+      },
+      "Rimeshield Frost Giant": {
+        "name": "Rimeshield Frost Giant",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "U": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Ward {3}.",
+        "power": 4,
+        "toughness": 5,
+        "ward": {
+          "mana": {
+            "generic": 3
+          }
+        }
+      },
+      "Rugged Highlands": {
+        "name": "Rugged Highlands",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Rugged Highlands enters tapped. When it enters, you gain 1 life. Tap: Add R or G.",
+        "entersTapped": true,
+        "mana": ["R", "G"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Sage's Row Denizen": {
+        "name": "Sage's Row Denizen",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Vedalken", "Wizard"],
+        "color": ["U"],
+        "text": "Whenever another blue creature you control enters, target player mills two cards.",
+        "power": 2,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": {
+              "event": "enter",
+              "controller": "you",
+              "excludeSource": true,
+              "filter": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "color": "U"
+                  }
+                ]
+              }
+            },
+            "effects": [
+              {
+                "op": "mill",
+                "count": 2,
+                "player": "target"
+              }
+            ],
+            "target": "player"
+          }
+        ]
+      },
+      "Savannah Lions": {
+        "name": "Savannah Lions",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "No abilities.",
+        "power": 2,
+        "toughness": 1
+      },
+      "Scoured Barrens": {
+        "name": "Scoured Barrens",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Scoured Barrens enters tapped. When it enters, you gain 1 life. Tap: Add W or B.",
+        "entersTapped": true,
+        "mana": ["W", "B"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Seeker of the Way": {
+        "name": "Seeker of the Way",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "Prowess. Whenever you cast a noncreature spell, this creature gains lifelink until end of turn.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          },
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 0,
+                "toughness": 0,
+                "keywords": ["lifelink"]
+              }
+            ]
+          }
+        ]
+      },
+      "Serra Angel": {
+        "name": "Serra Angel",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "W": 2
+        },
+        "keywords": ["flying", "vigilance"],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "flying, vigilance",
+        "power": 4,
+        "toughness": 4
+      },
+      "Shatter": {
+        "name": "Shatter",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Destroy target artifact.",
+        "target": "artifact",
+        "effects": [
+          {
+            "op": "destroy"
+          }
+        ]
+      },
+      "Shivan Dragon": {
+        "name": "Shivan Dragon",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "R": 2
+        },
+        "keywords": ["flying"],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Flying. R: This creature gets +1/+0 until end of turn.",
+        "power": 5,
+        "toughness": 5,
+        "activated": [
+          {
+            "cost": {
+              "mana": {
+                "R": 1
+              }
+            },
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 0
+              }
+            ],
+            "text": "R: +1/+0 until end of turn."
+          }
+        ]
+      },
+      "Shock": {
+        "name": "Shock",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Deal 2 damage to any target.",
+        "target": "any",
+        "effects": [
+          {
+            "op": "damage",
+            "amount": 2
+          }
+        ]
+      },
+      "Shrike Force": {
+        "name": "Shrike Force",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "W": 1
+        },
+        "keywords": ["flying", "double strike", "vigilance"],
+        "subtypes": ["Bird", "Knight"],
+        "color": ["W"],
+        "text": "Flying, double strike, vigilance",
+        "power": 1,
+        "toughness": 3
+      },
+      "Silvercoat Lion": {
+        "name": "Silvercoat Lion",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "No abilities.",
+        "power": 2,
+        "toughness": 2
+      },
+      "Sire of Seven Deaths": {
+        "name": "Sire of Seven Deaths",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 7
+        },
+        "keywords": ["first strike", "vigilance", "menace", "trample", "reach", "lifelink"],
+        "subtypes": [],
+        "color": [],
+        "text": "First strike, vigilance, menace, trample, reach, lifelink. Ward—Pay 7 life.",
+        "power": 7,
+        "toughness": 7,
+        "ward": {
+          "life": 7
+        }
+      },
+      "Skyraker Giant": {
+        "name": "Skyraker Giant",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "R": 2
+        },
+        "keywords": ["reach"],
+        "subtypes": ["Giant"],
+        "color": ["R"],
+        "text": "Reach",
+        "power": 4,
+        "toughness": 3
+      },
+      "Snapping Gnarlid": {
+        "name": "Snapping Gnarlid",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "Landfall — Whenever a land you control enters, this creature gets +1/+1 until end of turn.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerLandEnters",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Soldier Token": {
+        "name": "Soldier Token",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "No abilities.",
+        "power": 1,
+        "toughness": 1,
+        "token": true
+      },
+      "Soul Warden": {
+        "name": "Soul Warden",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "Whenever another creature enters, you gain 1 life.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "otherCreatureEnters",
+            "effects": [
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Spirited Companion": {
+        "name": "Spirited Companion",
+        "type": "creature",
+        "types": ["enchantment", "creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": ["Dog"],
+        "color": ["W"],
+        "text": "When this creature enters, draw a card.",
+        "power": 1,
+        "toughness": 1,
+        "etb": [
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      },
+      "Sprite Dragon": {
+        "name": "Sprite Dragon",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "U": 1,
+          "R": 1
+        },
+        "keywords": ["flying", "haste"],
+        "subtypes": [],
+        "color": ["U", "R"],
+        "text": "Flying, haste. Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "counterOn",
+                "amount": 1,
+                "subject": "source"
+              }
+            ]
+          }
+        ]
+      },
+      "Squirrelanoids": {
+        "name": "Squirrelanoids",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "B": 1
+        },
+        "keywords": ["deathtouch"],
+        "subtypes": ["Squirrel", "Mutant"],
+        "color": ["B"],
+        "text": "Deathtouch",
+        "power": 1,
+        "toughness": 1
+      },
+      "Stormchaser Mage": {
+        "name": "Stormchaser Mage",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "U": 1,
+          "R": 1
+        },
+        "keywords": ["flying", "haste"],
+        "subtypes": [],
+        "color": ["U", "R"],
+        "text": "Flying, haste. Prowess.",
+        "power": 1,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "controllerCastsNoncreature",
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          }
+        ]
+      },
+      "Swab Goblin": {
+        "name": "Swab Goblin",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": ["Goblin", "Pirate"],
+        "color": ["R"],
+        "text": "",
+        "power": 2,
+        "toughness": 2
+      },
+      "Swamp": {
+        "name": "Swamp",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": ["Swamp"],
+        "color": [],
+        "text": "Tap: Add B.",
+        "basic": true,
+        "mana": "B"
+      },
+      "Swiftblade Vindicator": {
+        "name": "Swiftblade Vindicator",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "W": 1,
+          "R": 1
+        },
+        "keywords": ["double strike", "vigilance", "trample"],
+        "subtypes": ["Human", "Soldier"],
+        "color": ["R", "W"],
+        "text": "Double strike, vigilance, trample",
+        "power": 1,
+        "toughness": 1
+      },
+      "Swiftwater Cliffs": {
+        "name": "Swiftwater Cliffs",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Swiftwater Cliffs enters tapped. When it enters, you gain 1 life. Tap: Add U or R.",
+        "entersTapped": true,
+        "mana": ["U", "R"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Tajuru Pathwarden": {
+        "name": "Tajuru Pathwarden",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "G": 1
+        },
+        "keywords": ["vigilance", "trample"],
+        "subtypes": ["Elf", "Warrior", "Ally"],
+        "color": ["G"],
+        "text": "Vigilance, trample",
+        "power": 5,
+        "toughness": 4
+      },
+      "Territorial Scythecat": {
+        "name": "Territorial Scythecat",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "keywords": ["trample"],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "Trample. Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature.",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerLandEnters",
+            "effects": [
+              {
+                "op": "counterOn",
+                "amount": 1,
+                "subject": "source"
+              }
+            ]
+          }
+        ]
+      },
+      "Thermo-Alchemist": {
+        "name": "Thermo-Alchemist",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": ["defender"],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Defender. Tap: Deal 1 damage to each opponent. Whenever you cast an instant or sorcery spell, untap this creature.",
+        "power": 0,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "untap",
+                "subject": "source"
+              }
+            ]
+          }
+        ],
+        "activated": [
+          {
+            "cost": {
+              "tap": true
+            },
+            "effects": [
+              {
+                "op": "damageOpponent",
+                "amount": 1
+              }
+            ],
+            "text": "Tap: Deal 1 damage to each opponent."
+          }
+        ]
+      },
+      "Thornweald Archer": {
+        "name": "Thornweald Archer",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": ["deathtouch", "reach"],
+        "subtypes": ["Elf", "Archer"],
+        "color": ["G"],
+        "text": "Reach, deathtouch",
+        "power": 2,
+        "toughness": 1
+      },
+      "Thornwood Falls": {
+        "name": "Thornwood Falls",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Thornwood Falls enters tapped. When it enters, you gain 1 life. Tap: Add G or U.",
+        "entersTapped": true,
+        "mana": ["G", "U"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Titanic Growth": {
+        "name": "Titanic Growth",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "Target creature gets +4/+4 until end of turn.",
+        "target": "creature",
+        "effects": [
+          {
+            "op": "modify",
+            "power": 4,
+            "toughness": 4
+          }
+        ]
+      },
+      "Tomakul Honor Guard": {
+        "name": "Tomakul Honor Guard",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["G"],
+        "text": "Ward {2}.",
+        "power": 3,
+        "toughness": 1,
+        "ward": {
+          "mana": {
+            "generic": 2
+          }
+        }
+      },
+      "Tome Scour": {
+        "name": "Tome Scour",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Target player mills five cards.",
+        "target": "player",
+        "effects": [
+          {
+            "op": "mill",
+            "count": 5,
+            "player": "target"
+          }
+        ]
+      },
+      "Tranquil Cove": {
+        "name": "Tranquil Cove",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Tranquil Cove enters tapped. When it enters, you gain 1 life. Tap: Add W or U.",
+        "entersTapped": true,
+        "mana": ["W", "U"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Typhoid Rats": {
+        "name": "Typhoid Rats",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "B": 1
+        },
+        "keywords": ["deathtouch"],
+        "subtypes": [],
+        "color": ["B"],
+        "text": "deathtouch",
+        "power": 1,
+        "toughness": 1
+      },
+      "Unsummon": {
+        "name": "Unsummon",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Return target creature to its owner’s hand.",
+        "target": "creature",
+        "effects": [
+          {
+            "op": "bounce"
+          }
+        ]
+      },
+      "Vampire Nighthawk": {
+        "name": "Vampire Nighthawk",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 2
+        },
+        "keywords": ["flying", "deathtouch", "lifelink"],
+        "subtypes": [],
+        "color": ["B"],
+        "text": "flying, deathtouch, lifelink",
+        "power": 2,
+        "toughness": 3
+      },
+      "Waterfall Aerialist": {
+        "name": "Waterfall Aerialist",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "U": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "Flying. Ward {2}.",
+        "power": 3,
+        "toughness": 1,
+        "ward": {
+          "mana": {
+            "generic": 2
+          }
+        }
+      },
+      "Wind Drake": {
+        "name": "Wind Drake",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": [],
+        "color": ["U"],
+        "text": "flying",
+        "power": 2,
+        "toughness": 2
+      },
+      "Wind-Scarred Crag": {
+        "name": "Wind-Scarred Crag",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "color": [],
+        "text": "Wind-Scarred Crag enters tapped. When it enters, you gain 1 life. Tap: Add R or W.",
+        "entersTapped": true,
+        "mana": ["R", "W"],
+        "etb": [
+          {
+            "op": "gainLife",
+            "amount": 1
+          }
+        ]
+      },
+      "Young Pyromancer": {
+        "name": "Young Pyromancer",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "color": ["R"],
+        "text": "Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerCastsInstantOrSorcery",
+            "effects": [
+              {
+                "op": "token",
+                "count": 1,
+                "definition": "Elemental Token"
+              }
+            ]
+          }
+        ]
+      },
+      "Youthful Knight": {
+        "name": "Youthful Knight",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": ["first strike"],
+        "subtypes": [],
+        "color": ["W"],
+        "text": "first strike",
+        "power": 2,
+        "toughness": 1
+      }
+    },
+    "decks": [
+      [
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Island",
+        "Raging Goblin",
+        "Raging Goblin",
+        "Raging Goblin",
+        "Raging Goblin",
+        "Monastery Swiftspear",
+        "Monastery Swiftspear",
+        "Monastery Swiftspear",
+        "Monastery Swiftspear",
+        "Exclusion Mage",
+        "Exclusion Mage",
+        "Exclusion Mage",
+        "Exclusion Mage",
+        "Sprite Dragon",
+        "Sprite Dragon",
+        "Sprite Dragon",
+        "Stormchaser Mage",
+        "Stormchaser Mage",
+        "Lightning Bolt",
+        "Lightning Bolt",
+        "Lightning Bolt",
+        "Lightning Bolt",
+        "Shock",
+        "Shock",
+        "Shock",
+        "Counterspell",
+        "Counterspell",
+        "Counterspell",
+        "Counterspell",
+        "Unsummon",
+        "Unsummon",
+        "Unsummon",
+        "Unsummon",
+        "Divination",
+        "Divination",
+        "Divination",
+        "Divination"
+      ],
+      [
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Forest",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Plains",
+        "Llanowar Elves",
+        "Llanowar Elves",
+        "Llanowar Elves",
+        "Llanowar Elves",
+        "Elvish Visionary",
+        "Elvish Visionary",
+        "Elvish Visionary",
+        "Elvish Visionary",
+        "Grizzly Bears",
+        "Grizzly Bears",
+        "Grizzly Bears",
+        "Grizzly Bears",
+        "Soul Warden",
+        "Soul Warden",
+        "Soul Warden",
+        "Youthful Knight",
+        "Youthful Knight",
+        "Youthful Knight",
+        "Giant Spider",
+        "Giant Spider",
+        "Serra Angel",
+        "Serra Angel",
+        "Colossal Dreadmaw",
+        "Colossal Dreadmaw",
+        "Giant Growth",
+        "Giant Growth",
+        "Giant Growth",
+        "Giant Growth",
+        "Raise the Alarm",
+        "Raise the Alarm",
+        "Raise the Alarm",
+        "Glorious Anthem",
+        "Glorious Anthem",
+        "Pacifism",
+        "Pacifism",
+        "Pacifism"
+      ]
+    ],
+    "seed": 3,
+    "startingPlayer": 0,
+    "names": ["Echo", "Grove"],
+    "mulligan": true,
+    "minimumDeckSize": 60
+  },
+  "commands": [
+    {
+      "type": "mulligan",
+      "player": 0
+    },
+    {
+      "type": "keep",
+      "player": 0
+    },
+    {
+      "type": "bottom",
+      "player": 0,
+      "cards": ["c33"]
+    },
+    {
+      "type": "keep",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c20",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c69",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c6",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c40",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": ["c40"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "blockers",
+      "player": 1,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "assignDamage",
+      "player": 0,
+      "orders": [
+        {
+          "source": "c40",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c80",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c119",
+      "target": {
+        "kind": "object",
+        "id": "c40",
+        "incarnation": 3
+      },
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c46",
+      "target": {
+        "kind": "player",
+        "id": 1
+      },
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c14",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c78",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c116",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c52",
+      "target": {
+        "kind": "stack",
+        "id": "s125"
+      },
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c7",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c32",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": ["c32"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "blockers",
+      "player": 1,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "assignDamage",
+      "player": 0,
+      "orders": [
+        {
+          "source": "c32",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c68",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c90",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c98",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c9",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": ["c32"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "blockers",
+      "player": 1,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "assignDamage",
+      "player": 0,
+      "orders": [
+        {
+          "source": "c32",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 1
+              },
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c81",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c105",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": ["c90", "c98"]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "blockers",
+      "player": 0,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "assignDamage",
+      "player": 1,
+      "orders": [
+        {
+          "source": "c90",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 0
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "source": "c98",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 0
+              },
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "playLand",
+      "card": "c2",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c37",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "playLand",
+      "card": "c72",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c118",
+      "target": {
+        "kind": "object",
+        "id": "c40",
+        "incarnation": 3
+      },
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c89",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "orderTriggers",
+      "player": 1,
+      "ids": ["s138", "s139"]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c120",
+      "target": {
+        "kind": "object",
+        "id": "c40",
+        "incarnation": 3
+      },
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": ["c105"]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "blockers",
+      "player": 0,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "assignDamage",
+      "player": 1,
+      "orders": [
+        {
+          "source": "c105",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 0
+              },
+              "amount": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "attackers",
+      "player": 0,
+      "cards": []
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "cast",
+      "card": "c107",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c51",
+      "target": {
+        "kind": "stack",
+        "id": "s141"
+      },
+      "player": 0
+    },
+    {
+      "type": "orderTriggers",
+      "player": 0,
+      "ids": ["s143", "s144", "s145"]
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "attackers",
+      "player": 1,
+      "cards": ["c105"]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "blockers",
+      "player": 0,
+      "pairs": []
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "assignDamage",
+      "player": 1,
+      "orders": [
+        {
+          "source": "c105",
+          "assignments": [
+            {
+              "target": {
+                "kind": "player",
+                "id": 0
+              },
+              "amount": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    },
+    {
+      "type": "cast",
+      "card": "c36",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 0
+    },
+    {
+      "type": "pass",
+      "player": 1
+    }
+  ]
+}

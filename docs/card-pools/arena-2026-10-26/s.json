@@ -132,7 +132,7 @@
   {
     "oracleId": "fc59aa9a-3abd-4479-a63e-ef0eeb35b5f2",
     "name": "Sage's Row Denizen",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "6eaf5cdc-2843-4167-bd18-df4c2ac73ac0",
@@ -4297,7 +4297,7 @@
   {
     "oracleId": "3792763c-7aa0-4055-b8a1-3257e0443ef1",
     "name": "Skeleton Archer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "47c67df1-52f5-459f-b83e-6b971be9b294",

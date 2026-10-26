@@ -139,5 +139,113 @@ test('episode outputs identify the engine, exact ruleset and experiment configur
   assert.match(first.configHash, /^[a-f0-9]{64}$/);
   assert.equal(first.rulesetHash, second.rulesetHash);
   assert.notEqual(first.configHash, second.configHash);
-  assert.equal(first.engineVersion, '0.6.0');
+  assert.equal(first.engineVersion, '0.8.0');
+});
+
+test('target-choice actions use opaque handles and hide trigger-placement continuations', async () => {
+  const { chooseBotCommand } = await import('../packages/engine/src/index.js');
+  const session = createSession({
+    decks: [
+      [...Array(56).fill('Island'), ...Array(4).fill("Man-o'-War")],
+      Array(60).fill('Forest'),
+    ],
+    seed: 3,
+    mulligan: false,
+  });
+  let found = false;
+  for (let i = 0; i < 400; i++) {
+    const context = session.context();
+    if (!context) break;
+    if (context.observation.choice?.kind === 'triggerTarget') {
+      found = true;
+      assert.equal(context.observation.choice.remaining, undefined);
+      assert.equal(context.observation.choice.remainingEntries, undefined);
+      const actions = context.actions.filter((a) => a.type === 'chooseTriggerTarget');
+      assert.ok(actions.length);
+      for (const action of actions) {
+        assert.match(action.target.id, /^object:/);
+        assert.ok(context.observation.objects[action.target.id]);
+      }
+      assert.equal(session.step(actions[0]).ok, true);
+      break;
+    }
+    const command = chooseBotCommand(context.observation, context.player);
+    assert.equal(session.step(command).ok, true);
+  }
+  assert.equal(found, true);
+});
+
+test('a departed trigger source never exposes its concealed raw object ID', async () => {
+  const { CARDS, createGame } = await import('../packages/engine/src/index.js');
+  const source = {
+    name: 'Source fixture',
+    type: 'creature',
+    cost: {},
+    power: 1,
+    toughness: 1,
+    triggers: [{ event: 'selfEnters', target: 'player', effects: [{ op: 'damage', amount: 1 }] }],
+  };
+  const bounce = {
+    name: 'Bounce fixture',
+    type: 'instant',
+    cost: {},
+    target: 'creature',
+    effects: [{ op: 'bounce' }],
+  };
+  const config = {
+    catalog: { ...CARDS, [source.name]: source, [bounce.name]: bounce },
+    mulligan: false,
+    decks: [
+      [...Array(56).fill('Island'), ...Array(4).fill(source.name)],
+      [...Array(56).fill('Forest'), ...Array(4).fill(bounce.name)],
+    ],
+  };
+  let seed;
+  for (seed = 1; seed < 100; seed++) {
+    const state = createGame({ ...config, seed });
+    if (
+      state.players[0].hand.some((id) => state.objects[id].name === source.name) &&
+      state.players[1].hand.some((id) => state.objects[id].name === bounce.name)
+    )
+      break;
+  }
+  assert.ok(seed < 100);
+  const session = createSession({ ...config, seed });
+  const step = (command) => {
+    const c = session.context();
+    const result = session.step({ player: c.player, ...command });
+    assert.equal(result.ok, true, JSON.stringify(result.error));
+  };
+  for (let i = 0; i < 4; i++) step({ type: 'pass' });
+  let c = session.context();
+  step(
+    c.actions.find((a) => a.type === 'cast' && c.observation.objects[a.card].name === source.name),
+  );
+  step({ type: 'pass' });
+  step({ type: 'pass' });
+  c = session.context();
+  assert.equal(c.observation.choice.kind, 'triggerTarget');
+  step({ type: 'chooseTriggerTarget', target: { kind: 'player', id: 1 } });
+  step({ type: 'pass' });
+  c = session.context();
+  const target = Object.values(c.observation.objects).find(
+    (o) => o.name === source.name && o.zone === 'battlefield',
+  );
+  step(c.actions.find((a) => a.type === 'cast' && a.target.id === target.id));
+  step({ type: 'pass' });
+  step({ type: 'pass' });
+  step({ type: 'pass' });
+  c = session.context();
+  assert.equal(c.player, 1);
+  const reference = c.observation.stack[0].source;
+  assert.match(reference.id, /^object:/);
+  assert.equal(c.observation.objects[reference.id], undefined);
+  assert.equal(/"c\d+"/.test(JSON.stringify(c.observation)), false);
+  const result = session.step({
+    type: 'cast',
+    player: 1,
+    card: c.observation.players[1].hand[0],
+    target: reference,
+  });
+  assert.equal(result.error.code, 'AGENT_HANDLE');
 });

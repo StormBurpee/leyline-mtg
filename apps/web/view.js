@@ -126,7 +126,12 @@ export function game(s, ui, meta) {
           ? definition(s, selected).target
           : null
       : null,
-    targetList = ui.targeting ? targetsFor(s, targetKind, viewer) : [];
+    targetList =
+      s.choice?.kind === 'triggerTarget' && s.choice.player === viewer
+        ? s.choice.targets
+        : ui.targeting
+          ? targetsFor(s, targetKind, viewer)
+          : [];
   const phase = s.step.includes('main')
     ? 'main'
     : ['upkeep', 'draw'].includes(s.step)
@@ -232,6 +237,13 @@ function actionDock(s, ui, p, actions) {
           : 'Drag a blocker onto an attacker, or click both. Click a paired blocker to undo.';
         buttons = `<button class="btn primary" data-action="block">${ui.blocks.length ? `Confirm ${ui.blocks.length} blocks` : 'No blocks'} →</button>`;
         break;
+      case 'triggerTarget':
+        title = `${c.entry.name}: choose a target`;
+        desc =
+          'Select a highlighted target before this triggered ability goes onto the stack. Neither player has priority.';
+        buttons =
+          '<button class="btn primary" data-action="triggerTargets">List legal targets →</button>';
+        break;
       case 'optionalEffect':
         title = `${c.name}: optional ability`;
         desc =
@@ -300,12 +312,12 @@ function stack(s, ui) {
           .reverse()
           .map(
             (e, i) =>
-              `<button class="stack-item" data-stack="${e.id}" ${e.kind === 'spell' ? `data-motion-card="${e.source.id}" data-motion-zone="stack"` : ''}><small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape(e.kind === 'ability' ? e.label : e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : 'Spell')}</p></button>`,
+              `<button class="stack-item" data-stack="${e.id}" ${e.kind === 'spell' ? `data-motion-card="${e.source.id}" data-motion-zone="stack"` : ''}><small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape([e.kind === 'ability' ? e.label : !e.target ? 'Spell' : '', e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : ''].filter(Boolean).join(' · '))}</p></button>`,
           )
           .join('')
       : resolving
         ? ''
-        : '<div class="empty-stack">The stack is clear.<br>Both players must pass before the game advances.</div>')
+        : `<div class="empty-stack">${s.choice?.kind === 'triggerTarget' ? 'A triggered ability is waiting for its target.<br>Choose before priority resumes.' : 'The stack is clear.<br>Both players must pass before the game advances.'}</div>`)
   );
 }
 export function eventText(e, s) {
@@ -388,7 +400,7 @@ export function enginePage(s) {
     )
     .join(
       '',
-    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleInteractionReplay">Inspect interactive position</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Versioned card source packs, compiled separately from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
+    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleInteractionReplay">Inspect interactive position</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleTargetReplay">Inspect triggered target</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Versioned card source packs, compiled separately from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
 }
 
 function liveCharacteristics(s, o) {

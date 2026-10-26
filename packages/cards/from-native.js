@@ -84,6 +84,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     else if (
       t.event === 'controllerLandEnters' &&
       !t.optional &&
+      !t.target &&
       t.effects.length === 1 &&
       t.effects[0].op === 'modify' &&
       t.effects[0].subject === 'source' &&
@@ -98,6 +99,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       abilities.push({
         kind: 'triggered',
         on: eventSpec(t.event),
+        ...(t.target ? { target: structuredClone(targetSpec(t.target)) } : {}),
         ...(t.optional !== undefined ? { optional: t.optional } : {}),
         effects: effects(t.effects),
       });

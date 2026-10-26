@@ -79,3 +79,7 @@ The current event families are casting and entering the battlefield. For example
 This change makes authoring and importing maintainable; it does not implement all of Magic. Quantities are currently literals or compile-time parameters. Variable costs, runtime count expressions, arbitrary event bindings, general layers/replacements, search, multiple targets and multi-face cards still need engine work. Unsupported supertypes can be represented in source but are not flattened into vanilla cards.
 
 The compiler lowers into the existing runtime instruction set to preserve tested behavior. That representation is internal; edit source files, not `packages/engine/src/generated-catalog.js`. The Forge adapter is a separate input frontend with its own strict grammar and diagnostics. Its candidates are not automatically promoted into the core pack.
+
+## Targeted triggered abilities
+
+A triggered ability can declare the same `target` selector as a spell or activated ability. Targets are selected when the trigger is put on the stack, not when its event happens and not when it resolves. `optional: true` makes the effect optional at resolution; it does not make a required target optional. See [Reclamation Sage](../packages/cards/cards/reclamation-sage.json) and [Sage's Row Denizen](../packages/cards/cards/sages-row-denizen.json).

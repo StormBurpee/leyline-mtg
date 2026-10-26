@@ -108,6 +108,7 @@ export interface CardDefinition {
       | 'controllerCastsNoncreature'
       | 'controllerCastsInstantOrSorcery';
     effects: readonly Effect[];
+    target?: TargetKind;
     optional?: boolean;
   }[];
   readonly activated?: readonly {
@@ -177,6 +178,14 @@ export interface DamageSource {
   keywords: string[];
 }
 export type Choice =
+  | {
+      kind: 'triggerTarget';
+      player: PlayerId;
+      entry: StackEntry;
+      targets: Target[];
+      remainingEntries: StackEntry[];
+      remaining: { player: PlayerId; entries: StackEntry[] }[];
+    }
   | { kind: 'optionalEffect'; player: PlayerId; name: string }
   | {
       kind: 'payCost';
@@ -276,11 +285,24 @@ export type Action =
   | { type: 'blockers'; pairs: { blocker: string; attacker: string }[] }
   | { type: 'assignDamage'; orders: DamageOrder[] }
   | { type: 'orderTriggers'; ids: string[] }
+  | { type: 'chooseTriggerTarget'; target: Target }
   | { type: 'orderLibrary'; top: string[]; rest: string[] };
 export type Command = Action & { player: PlayerId; expectedRevision?: number };
 export type LegalAction =
   | { type: 'pass' | 'concede' }
-  | Extract<Action, { type: 'pass' | 'concede' | 'playLand' | 'tapMana' | 'cast' | 'activate' }>
+  | Extract<
+      Action,
+      {
+        type:
+          | 'pass'
+          | 'concede'
+          | 'playLand'
+          | 'tapMana'
+          | 'cast'
+          | 'activate'
+          | 'chooseTriggerTarget';
+      }
+    >
   | { type: 'choice'; kind: Choice['kind'] };
 export type DispatchResult =
   | { ok: true; state: GameState; events: readonly GameEvent[] }

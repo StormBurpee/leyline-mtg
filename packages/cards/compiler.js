@@ -423,7 +423,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         });
         break;
       case 'triggered': {
-        fields(a, ['kind', 'on', 'optional', 'effects'], path);
+        fields(a, ['kind', 'on', 'optional', 'target', 'effects'], path);
         if (a.optional !== undefined && typeof a.optional !== 'boolean')
           problem('INVALID_OPTIONAL', path, 'Optional must be a boolean.');
         for (const error of validateEventSpec(a.on))
@@ -431,11 +431,12 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         const event =
           Object.keys(EVENTS).find((key) => same(EVENTS[key], a.on)) ?? structuredClone(a.on);
         const instructions = effects(a.effects, `${path}.effects`);
-        if (event === 'selfEnters' && !a.optional && !d.etb) d.etb = instructions;
+        if (event === 'selfEnters' && !a.optional && !a.target && !d.etb) d.etb = instructions;
         else
           (d.triggers ??= []).push({
             event,
             effects: instructions,
+            ...(a.target !== undefined ? { target: target(a.target, `${path}.target`) } : {}),
             ...(a.optional !== undefined ? { optional: a.optional } : {}),
           });
         break;

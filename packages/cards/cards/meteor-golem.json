@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d9f11aa1-9219-42a8-85a9-a8f204160706",
+  "name": "Meteor Golem",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Golem"],
+    "supertypes": [],
+    "colors": [],
+    "manaCost": "{7}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, destroy target nonland permanent an opponent controls.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "not": {
+                "type": "land"
+              }
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

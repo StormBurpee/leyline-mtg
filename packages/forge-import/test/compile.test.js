@@ -252,3 +252,25 @@ test('an optional trigger cannot silently change its deciding player', async () 
     'unsupported',
   );
 });
+
+for (const name of ['aether_adept', 'exclusion_mage', 'meteor_golem', 'sages_row_denizen'])
+  test(`Forge ${name} preserves a targeted trigger as a real target choice`, async () => {
+    const result = compileForgeCard(await fixture(name));
+    assert.equal(result.status, 'candidate', result.diagnostics.join('\n'));
+    assert.ok(result.definition.triggers[0].target);
+    assert.ok(result.definition.triggers[0].effects.length);
+  });
+test('trigger executables require DB instructions and nested targets still fail explicitly', async () => {
+  const source = await fixture('aether_adept');
+  assert.equal(
+    compileForgeCard(source.replace('DB$ ChangeZone', 'AB$ ChangeZone')).status,
+    'unsupported',
+  );
+  const nested = source.replace(
+    'SVar:TrigChangeZone:DB$ ChangeZone',
+    'SVar:Second:DB$ Destroy | ValidTgts$ Artifact\nSVar:TrigChangeZone:DB$ ChangeZone | SubAbility$ Second',
+  );
+  const result = compileForgeCard(nested);
+  assert.equal(result.status, 'unsupported');
+  assert.ok(result.diagnostics.some((d) => d.includes('subability cannot introduce a new target')));
+});

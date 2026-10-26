@@ -19,6 +19,7 @@ import {
 import { canTapForMana, manaOptions, pay, planPayment, tapForMana } from './mana.js';
 import {
   finishTriggerOrder,
+  finishTriggerTarget,
   legalTarget,
   resolveTop,
   stabilize,
@@ -202,6 +203,14 @@ function handleChoice(s, p, c) {
       requireRule(c.type === 'assignDamage', 'CHOICE', 'Assign combat damage first.');
       assignDamage(s, c.orders);
       return;
+    case 'triggerTarget':
+      requireRule(
+        c.type === 'chooseTriggerTarget',
+        'CHOICE',
+        'Choose the triggered ability target first.',
+      );
+      finishTriggerTarget(s, c.target);
+      return;
     case 'orderTriggers':
       requireRule(c.type === 'orderTriggers', 'CHOICE', 'Order pending triggers first.');
       requireRule(
@@ -295,6 +304,14 @@ export function dispatch(state, command) {
 }
 export function legalActions(s, p) {
   if (s.status === 'finished') return [];
+  if (s.choice?.kind === 'triggerTarget' && s.choice.player === p)
+    return [
+      ...s.choice.targets.map((target) => ({
+        type: 'chooseTriggerTarget',
+        target: structuredClone(target),
+      })),
+      { type: 'concede' },
+    ];
   if (s.choice)
     return s.choice.player === p
       ? [{ type: 'choice', kind: s.choice.kind }, { type: 'concede' }]
@@ -369,7 +386,7 @@ export function exportReplay(s) {
 export function replay(record) {
   requireRule(
     record &&
-      [VERSION, '0.5.0', '0.4.0', '0.3.0', '0.2.0', '0.1.0'].includes(record.version) &&
+      [VERSION, '0.6.0', '0.5.0', '0.4.0', '0.3.0', '0.2.0', '0.1.0'].includes(record.version) &&
       (record.schemaVersion === undefined || record.schemaVersion === REPLAY_SCHEMA_VERSION),
     'REPLAY_VERSION',
     'Unsupported replay schema or engine version.',
