@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.14.0 — Safer AI decisions
+
+- Evaluate ward using resources remaining after base payment.
+- Avoid voluntary self-lethal life-loss and empty-library draw lines in known effect chains.
+- Prefer immediate lethal over routine activations; deploy an already-castable landfall permanent before the land drop.
+- Preserve cards during surveil when the same spell still has a draw to perform.
+- Prefer safe trigger targets while retaining a legal fallback for mandatory choices.
+
+These are bounded policy guards, not a complete forecast of every triggered interaction.
+
 ## 0.13.1 — Keyboard focus
 
 - Escape now cancels click-targeting even while a card button has keyboard focus.

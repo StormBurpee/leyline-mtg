@@ -16,9 +16,8 @@ export const libraryCount = (state, player) =>
 export function drawsFor(effects, controller, target, player = controller) {
   return effects.reduce(
     (count, effect) =>
-      count + (effect.op === 'draw' && recipient(effect, controller, target) === player
-        ? effect.count
-        : 0),
+      count +
+      (effect.op === 'draw' && recipient(effect, controller, target) === player ? effect.count : 0),
     0,
   );
 }
@@ -44,17 +43,13 @@ export function actionEffects(state, action) {
   const object = state.objects[action.card];
   if (!object) return [];
   const card = definition(state, object);
-  return action.type === 'activate'
-    ? card.activated[action.ability].effects
-    : card.effects ?? [];
+  return action.type === 'activate' ? card.activated[action.ability].effects : (card.effects ?? []);
 }
 
 function actionCost(state, action) {
   if (!action.card) return {};
   const card = definition(state, state.objects[action.card]);
-  return action.type === 'activate'
-    ? card.activated[action.ability].cost
-    : { mana: card.cost };
+  return action.type === 'activate' ? card.activated[action.ability].cost : { mana: card.cost };
 }
 
 /** Check ward after the actual automatic base-payment plan, not against mana that

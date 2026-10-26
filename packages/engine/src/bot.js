@@ -116,8 +116,7 @@ export function chooseBotCommand(s, p) {
         );
         const safe = c.targets.filter(
           (target) =>
-            canPayTargetWard(s, p, target) &&
-            !resolutionRisk(s, p, c.entry.effects, target),
+            canPayTargetWard(s, p, target) && !resolutionRisk(s, p, c.entry.effects, target),
         );
         const targets = [...(safe.length ? safe : c.targets)].sort((a, b) => {
           const score = (target) => {

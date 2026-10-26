@@ -2,10 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { chooseBotCommand, ref } from '../packages/engine/src/index.js';
 import { move } from '../packages/engine/src/model.js';
-import {
-  canPayTargetWard,
-  resolutionRisk,
-} from '../packages/engine/src/decision-safety.js';
+import { canPayTargetWard, resolutionRisk } from '../packages/engine/src/decision-safety.js';
 import { fixture, put, lands, act, resolve } from '../packages/engine/test/helpers.js';
 
 test('avoid a voluntary spell that loses the player their remaining life', () => {
@@ -19,7 +16,10 @@ test('avoid a voluntary spell that loses the player their remaining life', () =>
 test('check life at the end of a resolution, not between its instructions', () => {
   const s = fixture();
   s.players[0].life = 1;
-  const effects = [{ op: 'loseLife', amount: 2 }, { op: 'gainLife', amount: 2 }];
+  const effects = [
+    { op: 'loseLife', amount: 2 },
+    { op: 'gainLife', amount: 2 },
+  ];
   assert.equal(resolutionRisk(s, 0, effects), null);
 });
 
@@ -74,7 +74,7 @@ test('deploy a castable landfall creature before the available land drop', () =>
   assert.equal(chooseBotCommand(s, 0).card, creature.id);
 });
 
-test('surveil does not bin cards needed for the same spell subsequent draw', () => {
+test('surveil keeps enough cards for the following draw in the same spell', () => {
   let s = fixture();
   for (const id of [...s.players[0].library]) move(s, s.objects[id], 'graveyard');
   put(s, 'Sire of Seven Deaths', 0, 'library');
