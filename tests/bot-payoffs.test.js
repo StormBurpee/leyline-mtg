@@ -120,3 +120,27 @@ test('optional self-lethal life payoff is declined in the forecast', () => {
   assert.equal(result.life[1], 1);
   assert.equal(result.status, 'playing');
 });
+
+test('actual policy puts immediate lethal life payoff above routine lifegain', () => {
+  const s = fixture();
+  s.players[1].life = 1;
+  s.choice = {
+    kind: 'orderTriggers',
+    player: 0,
+    entries: [
+      { id: 'lethal', controller: 0, effects: [{ op: 'loseLife', player: 'opponent', amount: 1 }] },
+      { id: 'gain', controller: 0, effects: [{ op: 'gainLife', amount: 3 }] },
+    ],
+  };
+  assert.deepEqual(chooseBotCommand(s, 0).ids, ['gain', 'lethal']);
+});
+
+test('actual policy declines an optional life loss even when it is not lethal', () => {
+  const s = fixture();
+  s.choice = { kind: 'optionalEffect', player: 0 };
+  s.resolving = {
+    entry: { controller: 0, effects: [{ op: 'loseLife', amount: 1 }] },
+    index: 0,
+  };
+  assert.equal(chooseBotCommand(s, 0).accept, false);
+});

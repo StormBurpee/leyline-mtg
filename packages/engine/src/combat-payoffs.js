@@ -52,6 +52,25 @@ function orderingValue(s, entry) {
     : [undefined];
   return Math.max(...targets.map((target) => valueAfter(s, entry, target)));
 }
+/** Share the bounded life-only ordering with the actual sparring policy.
+ * Mixed or unsupported groups keep their original deterministic order.
+ */
+export function orderLifePayoffs(s, entries) {
+  if (!entries.every(supported)) return entries.map((entry) => entry.id);
+  return [...entries]
+    .sort((a, b) => orderingValue(s, a) - orderingValue(s, b))
+    .map((entry) => entry.id);
+}
+export function acceptLifePayoff(s, entry) {
+  if (!supported(entry)) return null;
+  return (
+    valueAfter(s, entry, entry.target) >=
+    lifeValue(
+      s.players.map((player) => player.life),
+      entry.controller,
+    )
+  );
+}
 /** Resolve supported combat death payoffs with the real stack, APNAP placement,
  * target validation, last-known information and state-based actions. This is a
  * no-response tactical forecast, not a claim to search every possible response.
@@ -72,25 +91,14 @@ export function settleCombatPayoffs(s) {
     if (!s.choice) stabilize(s);
     if (s.status === 'finished') return { omitted, limited: false };
     if (s.choice?.kind === 'orderTriggers') {
-      const entries = [...s.choice.entries].sort(
-        (a, b) => orderingValue(s, a) - orderingValue(s, b),
-      );
-      finishTriggerOrder(
-        s,
-        entries.map((entry) => entry.id),
-      );
+      finishTriggerOrder(s, orderLifePayoffs(s, s.choice.entries));
     } else if (s.choice?.kind === 'triggerTarget') {
       finishTriggerTarget(s, bestTarget(s, s.choice.entry, s.choice.targets));
     } else if (s.choice?.kind === 'optionalEffect') {
       const entry = s.resolving.entry;
       finishResolutionChoice(s, {
         type: 'resolveOptional',
-        accept:
-          valueAfter(s, entry, entry.target) >=
-          lifeValue(
-            s.players.map((player) => player.life),
-            entry.controller,
-          ),
+        accept: acceptLifePayoff(s, entry),
       });
     } else if (s.stack.length) resolveTop(s);
     else return { omitted, limited: false };

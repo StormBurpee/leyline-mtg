@@ -12,6 +12,7 @@ import {
   preserveForDefense,
   tacticalDamage,
 } from './combat-policy.js';
+import { orderLifePayoffs, acceptLifePayoff } from './combat-payoffs.js';
 import { planPayment } from './mana.js';
 import { matchesEvent } from './events.js';
 import { legalActions } from './engine.js';
@@ -45,7 +46,7 @@ export function chooseBotCommand(s, p) {
         return {
           type: 'resolveOptional',
           player: p,
-          accept: !resolutionRisk(s, p, entry.effects, entry.target),
+          accept: acceptLifePayoff(s, entry) ?? !resolutionRisk(s, p, entry.effects, entry.target),
         };
       }
       case 'payCost':
@@ -136,7 +137,7 @@ export function chooseBotCommand(s, p) {
         return { type: 'chooseTriggerTarget', player: p, target: targets[0] };
       }
       case 'orderTriggers':
-        return { type: 'orderTriggers', player: p, ids: c.entries.map((e) => e.id) };
+        return { type: 'orderTriggers', player: p, ids: orderLifePayoffs(s, c.entries) };
       case 'assignDamage':
         return { type: 'assignDamage', player: p, orders: tacticalDamage(s) };
       case 'attackers':
