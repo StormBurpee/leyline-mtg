@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "990583ef-5bf4-4e14-a8f1-61d32c6a75df",
+  "name": "Flick a Coin",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "Flick a Coin deals 1 damage to any target. You create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nDraw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

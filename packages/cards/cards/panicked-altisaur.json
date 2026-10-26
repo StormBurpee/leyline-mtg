@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6de64e59-0a47-46c4-90bf-c56e63266f19",
+  "name": "Panicked Altisaur",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Reach\n{T}: This creature deals 2 damage to each opponent.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

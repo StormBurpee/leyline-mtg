@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3fa71348-fa4d-4f39-a451-cf1570591991",
+  "name": "Imperious Perfect",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Warrior"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Other Elves you control get +1/+1.\n{G}, {T}: Create a 1/1 green Elf Warrior creature token.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "subtype": "Elf"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 1,
+      "toughness": 1
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{G}"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/elf-warrior-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

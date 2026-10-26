@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5e4107ce-8450-4501-9cb3-a6344ef320f1",
+  "name": "Might of the Ancestors",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "At the beginning of combat on your turn, target creature you control gets +2/+0 and gains vigilance until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 2,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["vigilance"]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

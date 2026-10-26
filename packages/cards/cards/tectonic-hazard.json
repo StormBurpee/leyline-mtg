@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9097243a-39fa-4e18-8316-c0e57699c783",
+  "name": "Tectonic Hazard",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Tectonic Hazard deals 1 damage to each opponent and each creature they control.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "damageAll",
+          "players": "opponent",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "opponent"
+              }
+            ]
+          },
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

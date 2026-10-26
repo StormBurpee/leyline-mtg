@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "83a76601-ef59-4888-af70-5088dd1f504c",
+  "name": "Regal Imperiosaur",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}{G}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Other Dinosaurs you control get +1/+1.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "subtype": "Dinosaur"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

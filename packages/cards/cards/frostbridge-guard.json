@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "515c1604-59f0-45b4-91be-d2f20fdd3e1e",
+  "name": "Frostbridge Guard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{2}{W}, {T}: Tap target creature.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{2}{W}"
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

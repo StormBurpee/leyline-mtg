@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c1b6795a-1ac6-4edb-bcee-4db1f1fbe8ea",
+  "name": "Spin Out",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}{B}"
+  },
+  "rulesText": "Destroy target creature or Vehicle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "subtype": "Vehicle"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d38476e9-2e47-4c0c-8129-483c0bd09ec0",
+  "name": "Gruul Guildgate",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Gate"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {R} or {G}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "G"]
+    }
+  ]
+}

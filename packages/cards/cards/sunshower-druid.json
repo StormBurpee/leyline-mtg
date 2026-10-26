@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7a70faf5-cc04-402b-92e3-67746788f510",
+  "name": "Sunshower Druid",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Frog", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 0,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, put a +1/+1 counter on target creature and you gain 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

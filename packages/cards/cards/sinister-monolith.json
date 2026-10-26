@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ae8003eb-9f19-4f23-be3b-0ac3ddc03a72",
+  "name": "Sinister Monolith",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}"
+  },
+  "rulesText": "At the beginning of combat on your turn, each opponent loses 1 life and you gain 1 life.\n{T}, Pay 2 life, Sacrifice this artifact: Draw two cards. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "life": 2,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ],
+      "timing": "sorcery"
+    }
+  ]
+}

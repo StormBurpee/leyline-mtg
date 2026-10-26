@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a5a05edd-2a30-414b-b766-f0651d5783f5",
+  "name": "Forecasting Fortune Teller",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Advisor", "Ally"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, create a Clue token. (It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

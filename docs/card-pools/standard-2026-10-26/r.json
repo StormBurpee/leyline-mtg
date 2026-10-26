@@ -2,7 +2,7 @@
   {
     "oracleId": "bd39e333-b0b8-4a85-8645-d77f4a3941db",
     "name": "Rabanastre, Royal City",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "48252207-d345-455c-b655-c2027664e6a6",
@@ -32,7 +32,7 @@
   {
     "oracleId": "50c038a4-6546-4a15-a117-176849edaa3d",
     "name": "Raccoon Rallier",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "54c2b3b3-e247-4146-8045-d49480b795f2",
@@ -132,7 +132,7 @@
   {
     "oracleId": "361f534b-39d1-4421-b5a8-d3813c62f86d",
     "name": "Rakdos Guildgate",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "6a47865c-8fa2-4cb2-aebf-8009c065395f",
@@ -212,7 +212,7 @@
   {
     "oracleId": "0867755a-9fb9-42ad-897e-6206fbfbc1f8",
     "name": "Rampart Hunter",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "a728685f-8670-4db2-ae02-3cf74eb3c402",
@@ -252,7 +252,7 @@
   {
     "oracleId": "0944ec2e-1dd9-459f-8f1d-667242cf52fe",
     "name": "Rapacious Dragon",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "eaf194a7-d95f-4738-9052-92ad00443a76",
@@ -277,7 +277,7 @@
   {
     "oracleId": "2c72e6d2-bbb0-42de-b465-438d584cbddc",
     "name": "Raphael, Tough Turtle",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "57f39ce2-ecbb-4262-8140-03aba5c4303f",
@@ -347,7 +347,7 @@
   {
     "oracleId": "04e5e84f-8fd4-43ab-8f9d-5b24646f7ae5",
     "name": "Raucous Theater",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "f75ac0a3-8795-48b4-91fd-4717900ef5b7",
@@ -487,12 +487,12 @@
   {
     "oracleId": "73733fa5-d292-40ec-8f17-05ba5feb40ab",
     "name": "Reckless Lackey",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ebcd198e-7fbd-46e0-a6d9-ff499e541978",
     "name": "Reckless Ransacking",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "367420cb-e77b-4d0c-9a83-0deee28f6d36",
@@ -517,7 +517,7 @@
   {
     "oracleId": "e055bc6d-d395-4f85-8e15-3bce65b7fcca",
     "name": "Redcap Thief",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e85567e8-1102-4d44-a15b-d5f1fdef8465",
@@ -612,7 +612,7 @@
   {
     "oracleId": "83a76601-ef59-4888-af70-5088dd1f504c",
     "name": "Regal Imperiosaur",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e30ccf07-0969-4e81-ba43-c50a2ff9c040",
@@ -627,7 +627,7 @@
   {
     "oracleId": "b97d21b4-d730-479f-872f-3e1645b66751",
     "name": "Release the Dogs",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "50994df7-300d-4e30-897a-0974dc0820ee",
@@ -777,7 +777,7 @@
   {
     "oracleId": "eaaed253-9b11-47e2-8624-0340ab2207f6",
     "name": "Resolute Reinforcements",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "9263287d-f782-4318-9ab8-e2e5f8107f5e",
@@ -862,7 +862,7 @@
   {
     "oracleId": "cb1e697f-6689-4f0b-8725-61d51432b8dd",
     "name": "Restore with Empathy",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "b36286fa-4007-4276-af9c-d8f0da9e94d1",
@@ -1092,7 +1092,7 @@
   {
     "oracleId": "47d52cd7-d72f-455f-aad3-70f08d54691f",
     "name": "Risky Research",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "a7c55495-6aca-4d17-b61a-cab8fa38b9f4",
@@ -1127,7 +1127,7 @@
   {
     "oracleId": "0bdebad7-a05e-439a-b5a9-241a2d09f943",
     "name": "Riverguard's Reflexes",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "b9687fef-4cb2-4bf1-91ad-49dada07f4d6",
@@ -1332,7 +1332,7 @@
   {
     "oracleId": "9c4fdd20-0396-40b7-8687-43b1035b6956",
     "name": "Rosa, Resolute White Mage",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "9fee2572-8864-475c-bade-a64e36ef69c4",
@@ -1447,7 +1447,7 @@
   {
     "oracleId": "5020628c-5e47-4a83-89c3-7bf5726e69ad",
     "name": "Ruinous Rampage",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "7d3a0216-871b-4c1b-adb1-de99b832f577",

@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "30f058f8-5777-4c25-b881-8f1d0ce17d3a",
+  "name": "Sarkhan's Resolve",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Choose one —\n• Target creature gets +3/+3 until end of turn.\n• Destroy target creature with flying.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target creature gets +3/+3 until end of turn",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 3,
+              "toughness": 3,
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Destroy target creature with flying",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "keyword": "flying"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

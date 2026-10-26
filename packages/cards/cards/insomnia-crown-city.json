@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b7140f72-91b6-4be4-8d71-c019e64c2351",
+  "name": "Insomnia, Crown City",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Town"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {W} or {B}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "B"]
+    }
+  ]
+}

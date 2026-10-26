@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b6b77cb9-49a5-4d1a-ae2d-02ae176dc1fa",
+  "name": "Greenhouse Propagator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Whenever another creature you control enters, you gain 1 life.\n{T}: Add {G}.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "creature"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "mana",
+      "produces": ["G"]
+    }
+  ]
+}

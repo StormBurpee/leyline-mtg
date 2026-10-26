@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "43ccc568-2509-49b6-99d7-c56900d1565a",
+  "name": "Daggerfang Duo",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rat", "Squirrel"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Deathtouch\nWhen this creature enters, you may mill two cards. (You may put the top two cards of your library into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 2
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

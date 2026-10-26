@@ -1,5 +1,10 @@
 import { validateEventSpec } from './events.js';
-import { validateTargetSpec, effectTargetCompatible, validateFilter } from './selectors.js';
+import {
+  targetSpec,
+  validateTargetSpec,
+  effectTargetCompatible,
+  validateFilter,
+} from './selectors.js';
 import { CARD_TYPES, primaryType, KEYWORD_NAMES } from './types.js';
 
 const TYPES = new Set(CARD_TYPES);
@@ -21,9 +26,14 @@ const FIELDS = new Set([
   'legendary',
   'token',
   'mana',
+  'manaSacrifice',
   'target',
   'effects',
   'modes',
+  'cycling',
+  'cannotAttack',
+  'cannotBlock',
+  'unblockable',
   'etb',
   'aura',
   'static',
@@ -104,9 +114,17 @@ function validateEffects(effects, path, target, errors) {
       bounce: [],
       destroy: [],
       modify: ['subject', 'power', 'toughness', 'keywords'],
-      token: ['definition', 'count'],
+      token: ['definition', 'count', 'player', 'tapped'],
       counterOn: ['subject', 'amount'],
       untap: ['subject'],
+      tap: ['subject'],
+      destroyAll: ['where', 'excludeSource'],
+      exileAll: ['where', 'excludeSource'],
+      modifyAll: ['where', 'excludeSource', 'power', 'toughness', 'keywords'],
+      damageAll: ['where', 'excludeSource', 'amount', 'players'],
+      counterAll: ['where', 'excludeSource', 'amount'],
+      tapAll: ['where', 'excludeSource'],
+      untapAll: ['where', 'excludeSource'],
     }[e.op];
     if (!Array.isArray(schema)) {
       errors.push(`${p}: unsupported effect opcode ${String(e.op)}.`);
@@ -168,9 +186,53 @@ function validateEffects(effects, path, target, errors) {
       )
         errors.push(`${p}.tapped: expected a battlefield entry flag.`);
     }
+    if (e.op === 'token') {
+      if (
+        e.player !== undefined &&
+        !['controller', 'opponent', 'target', 'targetController'].includes(e.player)
+      )
+        errors.push(`${p}: invalid token controller.`);
+      if (e.player === 'target' && targetSpec(target)?.scope !== 'player')
+        errors.push(`${p}: token recipient needs a player target.`);
+      if (
+        e.player === 'targetController' &&
+        !['spell', 'permanent', 'graveyard'].includes(targetSpec(target)?.scope)
+      )
+        errors.push(`${p}: token recipient needs an object or spell target.`);
+      if (e.tapped !== undefined && typeof e.tapped !== 'boolean')
+        errors.push(`${p}.tapped: expected boolean.`);
+    }
     if (e.op === 'token' && (typeof e.definition !== 'string' || !e.definition))
       errors.push(`${p}.definition: expected a token definition name.`);
-    if (e.op === 'modify') {
+    if (
+      [
+        'destroyAll',
+        'exileAll',
+        'modifyAll',
+        'damageAll',
+        'counterAll',
+        'tapAll',
+        'untapAll',
+      ].includes(e.op)
+    ) {
+      if (e.where !== undefined)
+        errors.push(...validateFilter(e.where).map((v) => `${p}.where: ${v}`));
+      else if (e.op !== 'damageAll')
+        errors.push(`${p}.where: a group effect needs an explicit filter.`);
+      if (e.excludeSource !== undefined && typeof e.excludeSource !== 'boolean')
+        errors.push(`${p}.excludeSource: expected boolean.`);
+      if (['damageAll', 'counterAll'].includes(e.op) && !natural(e.amount))
+        errors.push(`${p}.amount: expected a nonnegative integer.`);
+      if (e.op === 'damageAll') {
+        if (!['none', 'controller', 'opponent', 'all'].includes(e.players ?? 'none'))
+          errors.push(`${p}.players: invalid player group.`);
+        if (!e.where && (!e.players || e.players === 'none'))
+          errors.push(`${p}: damage needs creatures or players.`);
+        if (e.where && !effectTargetCompatible('damage', { scope: 'permanent', where: e.where }))
+          errors.push(`${p}: group damage requires a creature filter.`);
+      }
+    }
+    if (e.op === 'modify' || e.op === 'modifyAll') {
       if (!signed(e.power) || !signed(e.toughness))
         errors.push(`${p}: power and toughness changes must be safe integers.`);
       if (e.subject !== undefined && e.subject !== 'source')
@@ -181,7 +243,7 @@ function validateEffects(effects, path, target, errors) {
       )
         errors.push(`${p}.keywords: unsupported keyword.`);
     }
-    if (e.op === 'untap' && e.subject !== undefined && e.subject !== 'source')
+    if (['untap', 'tap'].includes(e.op) && e.subject !== undefined && e.subject !== 'source')
       errors.push(`${p}.subject: only source or the chosen target is supported.`);
     if (e.op === 'counterOn' && e.subject !== undefined && e.subject !== 'source')
       errors.push(`${p}.subject: only source or the chosen target is supported.`);
@@ -194,6 +256,7 @@ function validateEffects(effects, path, target, errors) {
         'modify',
         'moveTarget',
         'untap',
+        'tap',
         'counterOn',
       ].includes(e.op) &&
       e.subject !== 'source' &&
@@ -241,6 +304,7 @@ export function validateDefinition(card) {
     for (const field of ['etb', 'triggers', 'activated', 'static', 'ward', 'mana', 'entersTapped'])
       if (card[field] !== undefined)
         errors.push(`${name}.${field}: only battlefield permanents support this field.`);
+  if (card.cycling !== undefined) validateCost(card.cycling, `${name}.cycling`, errors);
   validateCost(card.cost, `${name}.cost`, errors);
   if (card.ward !== undefined) validatePaymentCost(card.ward, `${name}.ward`, errors);
   if (card.text !== undefined && typeof card.text !== 'string')
@@ -272,9 +336,20 @@ export function validateDefinition(card) {
     )
       errors.push(`${name}.mana: expected distinct supported production colors.`);
   }
-  for (const key of ['basic', 'legendary', 'token', 'entersTapped'])
+  for (const key of [
+    'basic',
+    'legendary',
+    'token',
+    'entersTapped',
+    'manaSacrifice',
+    'cannotAttack',
+    'cannotBlock',
+    'unblockable',
+  ])
     if (card[key] !== undefined && typeof card[key] !== 'boolean')
       errors.push(`${name}.${key}: expected a boolean.`);
+  if (card.manaSacrifice && !card.mana)
+    errors.push(`${name}: a sacrificing mana source must produce mana.`);
   if (card.legendary && ['instant', 'sorcery'].includes(card.type))
     errors.push(`${name}: legendary spell casting restrictions are not implemented.`);
   if (card.basic && card.type !== 'land') errors.push(`${name}: only lands can be basic.`);
@@ -291,9 +366,36 @@ export function validateDefinition(card) {
       card.static.kind !== 'anthem' ||
       !signed(card.static.power) ||
       !signed(card.static.toughness) ||
-      Object.keys(card.static).some((k) => !['kind', 'power', 'toughness'].includes(k)))
+      Object.keys(card.static).some(
+        (k) => !['kind', 'power', 'toughness', 'where', 'excludeSource', 'keywords'].includes(k),
+      ))
   )
     errors.push(`${name}.static: unsupported continuous effect.`);
+  if (plain(card.static)) {
+    const e = card.static;
+    if (e.where !== undefined) {
+      errors.push(...validateFilter(e.where).map((v) => `${name}.static.where: ${v}`));
+      const stable = (v) =>
+        Object.entries(v).every(([key, value]) =>
+          ['all', 'any'].includes(key)
+            ? value.every(stable)
+            : key === 'not'
+              ? stable(value)
+              : !['power', 'toughness', 'keyword'].includes(key),
+        );
+      if (!validateFilter(e.where).length && !stable(e.where))
+        errors.push(
+          `${name}.static.where: dependent characteristic filters require the future layer evaluator.`,
+        );
+    }
+    if (e.excludeSource !== undefined && typeof e.excludeSource !== 'boolean')
+      errors.push(`${name}.static.excludeSource: expected boolean.`);
+    if (
+      e.keywords !== undefined &&
+      (!Array.isArray(e.keywords) || e.keywords.some((k) => !KEYWORDS.has(k)))
+    )
+      errors.push(`${name}.static.keywords: unsupported keyword.`);
+  }
   if (card.modes !== undefined) {
     if (
       !['instant', 'sorcery'].includes(card.type) ||
@@ -371,8 +473,12 @@ export function validateDefinition(card) {
           errors.push(`${p}: expected an ability with costs.`);
           continue;
         }
-        if (Object.keys(a).some((k) => !['cost', 'effects', 'target', 'text'].includes(k)))
+        if (
+          Object.keys(a).some((k) => !['cost', 'effects', 'target', 'text', 'timing'].includes(k))
+        )
           errors.push(`${p}: unsupported ability field.`);
+        if (a.timing !== undefined && a.timing !== 'sorcery')
+          errors.push(`${p}.timing: unsupported timing.`);
         validatePaymentCost(a.cost, `${p}.cost`, errors, { allowTap: true });
         if (a.target != null)
           errors.push(...validateTargetSpec(a.target).map((error) => `${p}.target: ${error}`));

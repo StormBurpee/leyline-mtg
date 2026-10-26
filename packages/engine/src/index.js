@@ -29,6 +29,7 @@ export {
   dispatch,
   legalActions,
   castProblem,
+  cyclingProblem,
   abilityProblem,
   canPlayLand,
   assertInvariants,

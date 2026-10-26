@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "db649e15-24ca-4fd8-9f0b-f1df28c9c57d",
+  "name": "Vinereap Mentor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Squirrel", "Druid"],
+    "colors": ["B", "G"],
+    "manaCost": "{B}{G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters or dies, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/food-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/food-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5d957045-acb2-4546-8c19-71511fd497ef",
+  "name": "Migrating Ketradon",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}{G}",
+    "power": 6,
+    "toughness": 6
+  },
+  "rulesText": "Reach\nWhen this creature enters, you gain 4 life.\nCycling {2} ({2}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}"
+    }
+  ]
+}

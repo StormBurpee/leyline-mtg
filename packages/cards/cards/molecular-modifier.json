@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d0e58b8e-2c41-4602-a905-c2a6086ecf70",
+  "name": "Molecular Modifier",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Kavu", "Artificer"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "At the beginning of combat on your turn, target creature you control gets +1/+0 and gains first strike until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["first strike"]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

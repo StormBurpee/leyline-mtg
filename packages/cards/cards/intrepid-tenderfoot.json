@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "94023b23-339a-426e-85cc-cc361ef68754",
+  "name": "Intrepid Tenderfoot",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Insect", "Citizen"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{3}: Put a +1/+1 counter on this creature. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "timing": "sorcery"
+    }
+  ]
+}

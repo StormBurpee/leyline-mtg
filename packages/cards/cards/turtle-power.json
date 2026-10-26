@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "15934a19-a29e-4728-816f-20b610eec377",
+  "name": "Turtle Power!",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "Flash\nTurtles you control get +2/+2.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "subtype": "Turtle"
+          }
+        ]
+      },
+      "power": 2,
+      "toughness": 2
+    }
+  ]
+}

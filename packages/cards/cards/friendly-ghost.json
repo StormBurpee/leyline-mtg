@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e6a93240-8578-479e-b5e7-73f51b141cc8",
+  "name": "Friendly Ghost",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this creature enters, target creature gets +2/+4 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 2,
+          "toughness": 4,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

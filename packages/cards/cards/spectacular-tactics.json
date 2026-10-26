@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "15948fdf-3f9e-4eed-b85b-c5a554ff0571",
+  "name": "Spectacular Tactics",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Choose one —\n• Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn.\n• Destroy target creature with power 4 or greater.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "controller": "you"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "counter": "+1/+1",
+              "amount": 1
+            },
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "keywords": ["hexproof"],
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Destroy target creature with power 4 or greater",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "power": {
+                    "gte": 4
+                  }
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

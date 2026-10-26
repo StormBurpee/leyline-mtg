@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "592c91fc-6430-4c76-9460-65f047350f67",
+  "name": "Lyra Dawnbringer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Angel"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Flying\nFirst strike (This creature deals combat damage before creatures without first strike.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nOther Angels you control get +1/+1 and have lifelink.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "subtype": "Angel"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 1,
+      "toughness": 1,
+      "keywords": ["lifelink"]
+    }
+  ]
+}

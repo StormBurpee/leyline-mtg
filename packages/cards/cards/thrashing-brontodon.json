@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "60bc63dc-ac9f-4a2f-aef5-c90d0aa31553",
+  "name": "Thrashing Brontodon",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}{G}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "{1}, Sacrifice this creature: Destroy target artifact or enchantment.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "mana": "{1}"
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

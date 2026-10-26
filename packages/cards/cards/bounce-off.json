@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d9c29e6e-5949-4599-bf74-b9539e753f76",
+  "name": "Bounce Off",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Return target creature or Vehicle to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "subtype": "Vehicle"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

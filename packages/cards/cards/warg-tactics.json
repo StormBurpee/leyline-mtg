@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d1663b51-37a1-45a0-b477-2d3e7dd0828e",
+  "name": "Warg Tactics",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Choose one —\n• Destroy target creature with flying.\n• Put a +1/+1 counter on target creature you control. It gains trample and hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target creature with flying",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "keyword": "flying"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Put a +1/+1 counter on target creature you control. It gains trample and hexproof until end of turn",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "controller": "you"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "counter": "+1/+1",
+              "amount": 1
+            },
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "keywords": ["trample", "hexproof"],
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8bef3511-ceeb-4d57-972a-ab363ecacd5b",
+  "name": "Timid Shieldbearer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Kithkin", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{4}{W}: Creatures you control get +1/+1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{W}"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

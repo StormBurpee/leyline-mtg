@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c3fb2829-64f2-4795-b815-edcc5bbbc360",
+  "name": "Guardian of the Halls",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Soldier"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Trample\n{5}{G}{G}: Put three +1/+1 counters on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{5}{G}{G}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

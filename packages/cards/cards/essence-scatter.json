@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "46665089-aa3d-44c3-964d-6638dfbb5782",
+  "name": "Essence Scatter",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Counter target creature spell.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

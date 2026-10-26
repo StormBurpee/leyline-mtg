@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "caed9999-74b8-43e3-a319-fa505c04c71c",
+  "name": "Magic Pot",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Construct"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "When this creature dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\n{2}, {T}: Exile target card from a graveyard.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{2}"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ],
+      "target": {
+        "scope": "graveyard"
+      }
+    }
+  ]
+}

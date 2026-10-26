@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "14c356aa-178d-4c14-a88e-fbe92ee6d89f",
+  "name": "Agent Venom",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Symbiote", "Soldier", "Hero"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flash\nMenace\nWhenever another nontoken creature you control dies, you draw a card and lose 1 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "controller": "you",
+        "filter": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "token": false
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

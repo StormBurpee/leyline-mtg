@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "129b41cf-8327-42f0-b186-1111b42c08ab",
+  "name": "Artifist Acumen",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Creatures you control gain first strike until end of turn.\nDraw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["first strike"],
+          "until": "endOfTurn"
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

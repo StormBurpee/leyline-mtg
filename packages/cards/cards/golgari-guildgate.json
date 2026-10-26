@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fa2da325-6859-45bb-b185-35526b01bcc1",
+  "name": "Golgari Guildgate",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Gate"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {B} or {G}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["B", "G"]
+    }
+  ]
+}

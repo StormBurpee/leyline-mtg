@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8fcab221-8737-4357-b8ee-bad9421739a3",
+  "name": "Dwarven Provisioner",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dwarf", "Citizen"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{3}{W}: Creatures you control get +1/+1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}{W}"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

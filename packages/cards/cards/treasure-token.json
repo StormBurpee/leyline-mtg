@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/treasure-token",
+  "name": "Treasure Token",
+  "characteristics": {
+    "types": ["artifact"],
+    "subtypes": ["Treasure"],
+    "colors": [],
+    "manaCost": null,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "{T}, Sacrifice this artifact: Add one mana of any color.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"],
+      "sacrificeSelf": true
+    }
+  ]
+}

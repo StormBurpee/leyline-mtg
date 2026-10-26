@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b39f03cf-3d1a-42ad-903f-e3b3542878b0",
+  "name": "Front Porch Sentries",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Soldier"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature dies, target creature an opponent controls gets -1/-1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": -1,
+          "toughness": -1,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "opponent"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

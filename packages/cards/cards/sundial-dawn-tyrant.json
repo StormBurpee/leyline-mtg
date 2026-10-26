@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9ca808c5-9338-4199-a45b-df1a1a20625e",
+  "name": "Sundial, Dawn Tyrant",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Construct"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "",
+  "abilities": []
+}

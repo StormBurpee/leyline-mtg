@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "849c97e4-df15-4ecb-bdf8-283bb497d90c",
+  "name": "Guadosalam, Farplane Gateway",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Town"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {G} or {U}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["G", "U"]
+    }
+  ]
+}

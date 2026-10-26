@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eb154ebb-d02f-405a-a557-3d5ec7648c42",
+  "name": "Harrier Strix",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Flying\nWhen this creature enters, tap target permanent.\n{2}{U}: Draw a card, then discard a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent"
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{U}"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

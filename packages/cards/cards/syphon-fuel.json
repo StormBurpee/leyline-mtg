@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8696eae4-3dc9-4572-aab9-aa4f7e8f53af",
+  "name": "Syphon Fuel",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{4}{B}"
+  },
+  "rulesText": "Target creature gets -6/-6 until end of turn. You gain 2 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": -6,
+          "toughness": -6,
+          "until": "endOfTurn"
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

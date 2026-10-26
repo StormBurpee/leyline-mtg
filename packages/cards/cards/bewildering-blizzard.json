@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "84469042-d48d-409f-a2c9-047058f13bc5",
+  "name": "Bewildering Blizzard",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{4}{U}{U}"
+  },
+  "rulesText": "Draw three cards. Creatures your opponents control get -3/-0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        },
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "controller": "opponent"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          },
+          "power": -3,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

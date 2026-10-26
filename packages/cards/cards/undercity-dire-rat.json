@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f09811d0-c5da-4061-aaa7-835ccee3b05a",
+  "name": "Undercity Dire Rat",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rat"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Rat Tail — When this creature dies, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

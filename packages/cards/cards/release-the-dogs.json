@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b97d21b4-d730-479f-872f-3e1645b66751",
+  "name": "Release the Dogs",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{3}{W}"
+  },
+  "rulesText": "Create four 1/1 white Dog creature tokens.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/dog-token",
+          "amount": 4
+        }
+      ]
+    }
+  ]
+}

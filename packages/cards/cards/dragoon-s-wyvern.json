@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f328012f-4696-47bb-ab43-247bdcb13f03",
+  "name": "Dragoon's Wyvern",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Drake"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Flying\nWhen this creature enters, create a 1/1 colorless Hero creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/hero-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d32f570a-3738-4a9d-845f-6c7892b69991",
+  "name": "Screaming Phantom",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhenever this creature attacks, mill a card. (Put the top card of your library into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -15,14 +15,33 @@ export function costProblem(s, p, cost, { sourceId, autoTap = true } = {}) {
   if (cost.sacrificeSelf && (!source || source.zone !== 'battlefield' || source.controller !== p))
     return 'The source cannot be sacrificed now.';
   if ((cost.life ?? 0) > s.players[p].life) return 'Not enough life to pay this cost.';
-  if (!planPayment(s, p, cost.mana ?? {}, { autoTap, excludeSources: cost.tap ? [sourceId] : [] }))
+  if (
+    !planPayment(s, p, cost.mana ?? {}, {
+      autoTap,
+      excludeSources:
+        cost.tap || (cost.sacrificeSelf && source && definition(s, source).manaSacrifice)
+          ? [sourceId]
+          : [],
+    })
+  )
     return 'Not enough available mana.';
   return null;
 }
 export function payCost(s, p, cost, options = {}) {
   const problem = costProblem(s, p, cost, options);
   requireRule(!problem, 'COST', problem);
-  pay(s, p, cost.mana ?? {}, options.autoTap !== false, cost.tap ? [options.sourceId] : []);
+  pay(
+    s,
+    p,
+    cost.mana ?? {},
+    options.autoTap !== false,
+    cost.tap ||
+      (cost.sacrificeSelf &&
+        s.objects[options.sourceId] &&
+        definition(s, s.objects[options.sourceId]).manaSacrifice)
+      ? [options.sourceId]
+      : [],
+  );
   if (cost.tap) s.objects[options.sourceId].tapped = true;
   if (cost.sacrificeSelf) {
     const object = s.objects[options.sourceId];

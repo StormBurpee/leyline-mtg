@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d08e9784-75f7-4164-ac48-d06160f8c56b",
+  "name": "Annul",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Counter target artifact or enchantment spell.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

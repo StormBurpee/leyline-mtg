@@ -1,8 +1,9 @@
+import { matchesFilter } from './selectors.js';
 import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.23.0';
+export const VERSION = '0.24.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -39,10 +40,34 @@ export function definition(stateOrObject, object) {
 export const battlefield = (s) => Object.values(s.objects).filter((o) => o.zone === 'battlefield');
 export const creatures = (s) => battlefield(s).filter((o) => definition(s, o).type === 'creature');
 export const controlled = (s, p) => battlefield(s).filter((o) => o.controller === p);
+function staticApplies(s, source, object, effect) {
+  if (object.zone !== 'battlefield') return false;
+  if (effect.excludeSource && source.id === object.id && source.incarnation === object.incarnation)
+    return false;
+  const d = definition(s, object);
+  if (!effect.where) return source.controller === object.controller && hasType(d, 'creature');
+  return matchesFilter(
+    {
+      definition: d,
+      controller: object.controller,
+      owner: object.owner,
+      token: object.token,
+      tapped: object.tapped,
+      attacking: isAttacking(s, object),
+      manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+    },
+    effect.where,
+    source.controller,
+  );
+}
 export function keywords(s, o) {
   return [
     ...new Set([
       ...definition(s, o).keywords,
+      ...battlefield(s).flatMap((source) => {
+        const e = definition(s, source).static;
+        return e?.kind === 'anthem' && staticApplies(s, source, o, e) ? (e.keywords ?? []) : [];
+      }),
       ...s.modifiers
         .filter((m) => m.objectId === o.id && m.incarnation === o.incarnation)
         .flatMap((m) => m.keywords ?? []),
@@ -60,9 +85,9 @@ export function stats(s, o) {
       toughness += m.toughness ?? 0;
     }
   if (d.type === 'creature' && o.zone === 'battlefield')
-    for (const a of controlled(s, o.controller)) {
+    for (const a of battlefield(s)) {
       const effect = definition(s, a).static;
-      if (effect?.kind === 'anthem') {
+      if (effect?.kind === 'anthem' && staticApplies(s, a, o, effect)) {
         power += effect.power;
         toughness += effect.toughness;
       }
@@ -162,23 +187,24 @@ export function queueTrigger(
 /** Match declarative trigger predicates against committed game events. */
 export function notifyTriggers(s, event, payload, context = null) {
   const object = payload.object;
-  const d = payload.definition ?? definition(s, object);
+  const d = payload.definition ?? (object ? definition(s, object) : null);
   const pt =
     object?.zone === 'battlefield' && hasType(d, 'creature')
       ? stats(s, object)
-      : { power: d.power, toughness: d.toughness };
-  const facts = context?.facts?.[object.id] ?? {
+      : { power: d?.power, toughness: d?.toughness };
+  const facts = context?.facts?.[object?.id] ?? {
     id: object?.id,
     definition: d,
-    controller: payload.player ?? object.controller,
+    controller: payload.player ?? object?.controller,
+    step: payload.step,
     owner: object?.owner,
     token: object?.token,
     tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
-    attacking: isAttacking(s, object),
-    keywords: object.zone === 'battlefield' ? keywords(s, object) : d.keywords,
+    attacking: object ? isAttacking(s, object) : false,
+    keywords: object?.zone === 'battlefield' ? keywords(s, object) : d?.keywords,
     power: pt.power,
     toughness: pt.toughness,
-    manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+    manaValue: Object.values(d?.cost ?? {}).reduce((a, b) => a + b, 0),
   };
   const watchers =
     context?.watchers ??
@@ -222,7 +248,7 @@ export function captureDepartureContext(s) {
             keywords: keywords(s, o),
             power: pt.power,
             toughness: pt.toughness,
-            manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+            manaValue: Object.values(d?.cost ?? {}).reduce((a, b) => a + b, 0),
           },
         ];
       }),

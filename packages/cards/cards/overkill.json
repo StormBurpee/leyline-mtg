@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "571cb4b6-b4e5-40a2-a970-42c1ab65c8a9",
+  "name": "Overkill",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Target creature gets -0/-9999 until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": -9999,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

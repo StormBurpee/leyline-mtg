@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6640c234-8863-4670-a61f-ba6f59b60d69",
+  "name": "Dawnwing Marshal",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying\n{4}{W}: Creatures you control get +1/+1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{W}"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

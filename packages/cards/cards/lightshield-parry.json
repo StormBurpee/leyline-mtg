@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ecef9e3d-dce8-405f-bba3-14732444258f",
+  "name": "Lightshield Parry",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Target creature gets +2/+2 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "cycling",
+      "cost": "{2}"
+    },
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 2,
+          "toughness": 2,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

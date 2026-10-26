@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d85f5edb-60a8-4abd-82b0-f9a58f3d4185",
+  "name": "Kalakscion, Hunger Tyrant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Crocodile"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}{B}",
+    "power": 7,
+    "toughness": 2
+  },
+  "rulesText": "",
+  "abilities": []
+}

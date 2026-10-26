@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/inkling-token",
+  "name": "Inkling Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Inkling"],
+    "colors": ["W", "B"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

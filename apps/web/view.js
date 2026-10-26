@@ -309,7 +309,7 @@ function actionDock(s, ui, p, actions) {
   } else if (ui.selected && s.objects[ui.selected]?.zone === 'hand') {
     const o = s.objects[ui.selected],
       d = definition(s, o),
-      available = actions.some((a) => a.card === o.id);
+      available = actions.some((a) => a.card === o.id && ['cast', 'playLand'].includes(a.type));
     title = o.name;
     desc = available
       ? d.modes
@@ -320,7 +320,7 @@ function actionDock(s, ui, p, actions) {
             ? 'Playing a land does not use the stack.'
             : 'Available mana sources will be tapped automatically.'
       : 'Not playable right now. Check timing, available mana and targets.';
-    buttons = `<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${d.type === 'land' ? 'Play land' : d.modes ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
+    buttons = `${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">Cycle ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${d.type === 'land' ? 'Play land' : d.modes ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
   } else
     buttons = `<button class="btn primary advance-button" data-action="pass">${advanceLabel(s, p)} <span>→</span><small>Space</small></button>`;
   return `<div class="action-dock" aria-live="polite"><div class="action-copy"><strong>${escape(title)}</strong><p>${escape(desc)}</p></div><div class="action-buttons"><button class="btn quiet short-read-card" data-action="readCard" ${readableCard(s, ui, p) ? '' : 'disabled'} aria-label="Read selected card">Read</button>${ui.yieldMode ? '<button class="btn short-yield-stop" data-action="cancelYield">Stop passing</button>' : ''}${buttons}</div>${ui.mode === 'bot' && s.status === 'playing' ? `<div class="priority-controls"><button data-action="toggleFullControl" aria-pressed="${ui.controlMode === 'full'}" title="Full control: stop at every priority window (F)">${ui.controlMode === 'full' ? '● Full control' : '○ Smart play'}</button>${ui.yieldMode ? `<button class="yield-active" data-action="cancelYield">Auto-passing · Stop ×</button>` : `<button data-action="yieldResponse" title="Pass until an opponent puts a new effect on the stack (Enter)">Pass until response</button><button data-action="yieldTurn" title="Pass through this turn, including responses (Shift+Enter)">Pass turn</button>`}<button data-action="prioritySettings" aria-label="Priority automation settings">⚙</button></div>` : ''}</div>`;
@@ -380,6 +380,8 @@ export function eventText(e, s) {
       return `${p} declared ${e.ids.length} attackers.`;
     case 'blockers':
       return `${p} declared ${e.pairs.length} blockers.`;
+    case 'cycled':
+      return `${p} cycled ${name}.`;
     case 'legendChosen':
       return `${p} chose which ${name} to keep (legend rule).`;
     case 'triggered':

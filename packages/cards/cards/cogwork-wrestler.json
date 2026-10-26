@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "db27e3f0-5750-4c4b-9da9-70c3ab627f9c",
+  "name": "Cogwork Wrestler",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Gnome"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nWhen this creature enters, target creature an opponent controls gets -2/-0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": -2,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "opponent"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

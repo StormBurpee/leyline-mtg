@@ -44,6 +44,7 @@ export function actionEffects(state, action) {
   const object = state.objects[action.card];
   if (!object) return [];
   const card = definition(state, object);
+  if (action.type === 'cycle') return [{ op: 'draw', count: 1 }];
   return action.type === 'activate'
     ? card.activated[action.ability].effects
     : (spellProfile(card, action.mode)?.effects ?? []);
@@ -52,6 +53,7 @@ export function actionEffects(state, action) {
 function actionCost(state, action) {
   if (!action.card) return {};
   const card = definition(state, state.objects[action.card]);
+  if (action.type === 'cycle') return { mana: card.cycling };
   return action.type === 'activate' ? card.activated[action.ability].cost : { mana: card.cost };
 }
 

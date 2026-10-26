@@ -65,7 +65,8 @@ export interface TargetSpec {
 }
 export type TargetKind = LegacyTargetKind | TargetSpec;
 export interface EventSpec {
-  event: 'enter' | 'cast' | 'dies' | 'attack';
+  event: 'enter' | 'cast' | 'dies' | 'attack' | 'step';
+  step?: 'upkeep' | 'beginCombat' | 'end' | 'main1' | 'main2';
   object?: 'source';
   controller?: 'you' | 'opponent';
   filter?: CardPredicate;
@@ -95,10 +96,37 @@ export type Effect =
     }
   | { op: 'mill'; count: number; player: 'controller' | 'opponent' | 'target' }
   | { op: 'counter' | 'bounce' | 'destroy' }
-  | { op: 'untap'; subject?: 'source' }
+  | { op: 'untap' | 'tap'; subject?: 'source' }
+  | {
+      op: 'destroyAll' | 'exileAll' | 'tapAll' | 'untapAll';
+      where: CardPredicate;
+      excludeSource?: boolean;
+    }
+  | { op: 'counterAll'; where: CardPredicate; amount: number; excludeSource?: boolean }
+  | {
+      op: 'modifyAll';
+      where: CardPredicate;
+      power: number;
+      toughness: number;
+      keywords?: readonly string[];
+      excludeSource?: boolean;
+    }
+  | {
+      op: 'damageAll';
+      where?: CardPredicate;
+      amount: number;
+      players?: 'none' | 'controller' | 'opponent' | 'all';
+      excludeSource?: boolean;
+    }
   | { op: 'counterOn'; subject?: 'source'; amount: number }
   | { op: 'modify'; subject?: 'source'; power: number; toughness: number; keywords?: string[] }
-  | { op: 'token'; definition: string; count: number };
+  | {
+      op: 'token';
+      definition: string;
+      count: number;
+      player?: 'controller' | 'opponent' | 'target' | 'targetController';
+      tapped?: boolean;
+    };
 export interface CardDefinition {
   readonly name: string;
   readonly type: CardType;
@@ -114,14 +142,26 @@ export interface CardDefinition {
   readonly legendary?: boolean;
   readonly token?: boolean;
   readonly mana?: Color | readonly Color[];
+  readonly manaSacrifice?: boolean;
   readonly entersTapped?: boolean;
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
+  readonly cycling?: ManaCost;
+  readonly cannotAttack?: boolean;
+  readonly cannotBlock?: boolean;
+  readonly unblockable?: boolean;
   readonly modes?: readonly { label: string; target?: TargetKind; effects: readonly Effect[] }[];
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
   readonly aura?: 'pacifism';
-  readonly static?: { kind: 'anthem'; power: number; toughness: number };
+  readonly static?: {
+    kind: 'anthem';
+    power: number;
+    toughness: number;
+    where?: CardPredicate;
+    excludeSource?: boolean;
+    keywords?: readonly string[];
+  };
   readonly triggers?: readonly {
     event:
       | EventSpec
@@ -146,6 +186,7 @@ export interface CardDefinition {
     target?: TargetKind | null;
     effects: readonly Effect[];
     text: string;
+    timing?: 'sorcery';
   }[];
 }
 export type CardSpec = Omit<CardDefinition, 'text' | 'color' | 'keywords' | 'subtypes'> &
@@ -326,6 +367,7 @@ export interface GameState {
 }
 export type Action =
   | { type: 'chooseLegend'; card: string }
+  | { type: 'cycle'; card: string }
   | { type: 'resolveOptional'; accept: boolean }
   | { type: 'payCost'; pay: boolean }
   | { type: 'pass' | 'concede' | 'keep' | 'mulligan' }
@@ -352,6 +394,7 @@ export type LegalAction =
           | 'playLand'
           | 'tapMana'
           | 'cast'
+          | 'cycle'
           | 'activate'
           | 'chooseTriggerTarget'
           | 'chooseLegend';
@@ -513,3 +556,5 @@ export function validateEventSpec(value: unknown): string[];
 
 export function spellProfile(card: CardDefinition, mode?: number): CardDefinition | null;
 export function spellOptions(card: CardDefinition): { mode?: number; profile: CardDefinition }[];
+
+export function cyclingProblem(state: GameState, player: PlayerId, id: string): string | null;

@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b51e0ae3-126b-4b7e-9dd1-818a5b8e512a",
+  "name": "Dwarven Castle Guard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dwarf", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature dies, create a 1/1 colorless Hero creature token.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/hero-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5020628c-5e47-4a83-89c3-7bf5726e69ad",
+  "name": "Ruinous Rampage",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}{R}"
+  },
+  "rulesText": "Choose one —\n• Ruinous Rampage deals 3 damage to each opponent.\n• Exile all artifacts with mana value 3 or less.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Ruinous Rampage deals 3 damage to each opponent",
+          "effects": [
+            {
+              "op": "damage",
+              "target": "opponent",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "Exile all artifacts with mana value 3 or less",
+          "effects": [
+            {
+              "op": "exileAll",
+              "where": {
+                "all": [
+                  {
+                    "manaValue": {
+                      "lte": 3
+                    }
+                  },
+                  {
+                    "type": "artifact"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

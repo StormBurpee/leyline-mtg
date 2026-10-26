@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5effb651-f9e0-4c14-8192-bd0e132b8d5d",
+  "name": "Bitterbloom Bearer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Rogue"],
+    "colors": ["B"],
+    "manaCost": "{B}{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Flash\nFlying\nAt the beginning of your upkeep, you lose 1 life and create a 1/1 blue and black Faerie creature token with flying.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "upkeep",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/faerie-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

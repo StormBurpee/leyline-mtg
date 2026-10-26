@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b24d95fa-3cf7-495e-9082-11f8db151906",
+  "name": "Tyrox, Saurid Tyrant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dinosaur", "Warrior"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 4,
+    "toughness": 1
+  },
+  "rulesText": "",
+  "abilities": []
+}

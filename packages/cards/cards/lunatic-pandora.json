@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "34c65c7f-33ab-4f91-84ce-d0c8f4fc5832",
+  "name": "Lunatic Pandora",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": ["legendary"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "{2}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{6}, {T}, Sacrifice Lunatic Pandora: Destroy target nonland permanent.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{2}"
+      },
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true,
+        "mana": "{6}"
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "not": {
+            "type": "land"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ada82f93-dc93-4a95-a13f-42b5942b3413",
+  "name": "Magic Damper",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Target creature you control gets +1/+1 and gains hexproof until end of turn. Untap it.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn",
+          "keywords": ["hexproof"]
+        },
+        {
+          "op": "untap",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

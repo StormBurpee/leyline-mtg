@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3f6f4c98-ed7e-4fb1-8bfe-4210a39f77f2",
+  "name": "Unstoppable Plan",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}"
+  },
+  "rulesText": "At the beginning of your end step, untap all nonland permanents you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "untapAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "not": {
+                  "type": "land"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

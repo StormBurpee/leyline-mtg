@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0",
+  "name": "Zookeeper Mechan",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "{T}: Add {R}.\n{6}{R}: Target creature you control gets +4/+0 until end of turn. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["R"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{6}{R}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 4,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "timing": "sorcery"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/dragon-token",
+  "name": "Dragon Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Dragon"],
+    "colors": ["R"],
+    "manaCost": null,
+    "power": 4,
+    "toughness": 4,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

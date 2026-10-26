@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ffce81c5-1b58-4882-a4e7-6f8d7cb170de",
+  "name": "Withering Torment",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Destroy target creature or enchantment. You lose 2 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

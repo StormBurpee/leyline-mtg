@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eed5e0cc-8f88-4779-bf10-6a823c72df7f",
+  "name": "Spectacular Spider-Man",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Spider", "Human", "Hero"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flash\n{1}: Spectacular Spider-Man gains flying until end of turn.\n{1}, Sacrifice Spectacular Spider-Man: Creatures you control gain hexproof and indestructible until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["flying"],
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "mana": "{1}"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["hexproof", "indestructible"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

@@ -18,6 +18,17 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const effects = (list) =>
     list.map((e) => {
       switch (e.op) {
+        case 'destroyAll':
+        case 'exileAll':
+        case 'damageAll':
+        case 'counterAll':
+        case 'tapAll':
+        case 'untapAll':
+          return structuredClone(e);
+        case 'modifyAll':
+          return { ...structuredClone(e), until: 'endOfTurn' };
+        case 'tap':
+          return { op: 'tap', target: e.subject === 'source' ? 'source' : 'target' };
         case 'damage':
           return { op: 'damage', target: 'target', amount: e.amount };
         case 'damageOpponent':
@@ -77,15 +88,29 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           };
         case 'token':
           if (!idsByName[e.definition]) throw new Error(`Missing token identity: ${e.definition}`);
-          return { op: 'createToken', token: idsByName[e.definition], amount: e.count };
+          return {
+            op: 'createToken',
+            token: idsByName[e.definition],
+            amount: e.count,
+            ...(e.player ? { controller: e.player } : {}),
+            ...(e.tapped ? { tapped: true } : {}),
+          };
         default:
           throw new Error(`Cannot migrate unsupported opcode ${e.op}.`);
       }
     });
   const abilities = d.keywords.map((keyword) => ({ kind: 'keyword', keyword }));
+  for (const restriction of ['cannotAttack', 'cannotBlock', 'unblockable'])
+    if (d[restriction]) abilities.push({ kind: 'combatRestriction', restriction });
+  if (d.cycling) abilities.push({ kind: 'cycling', cost: mana(d.cycling) });
   if (d.ward) abilities.push({ kind: 'keyword', keyword: 'ward', cost: cost(d.ward) });
   if (d.entersTapped) abilities.push({ kind: 'entry', tapped: true });
-  if (d.mana) abilities.push({ kind: 'mana', produces: Array.isArray(d.mana) ? d.mana : [d.mana] });
+  if (d.mana)
+    abilities.push({
+      kind: 'mana',
+      produces: Array.isArray(d.mana) ? d.mana : [d.mana],
+      ...(d.manaSacrifice ? { sacrificeSelf: true } : {}),
+    });
   if (d.modes)
     abilities.push({
       kind: 'modalSpell',
@@ -149,7 +174,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     });
   if (d.static) {
     if (d.static.kind !== 'anthem') throw new Error('Unsupported continuous rule.');
-    abilities.push({ kind: 'anthem', power: d.static.power, toughness: d.static.toughness });
+    abilities.push(structuredClone(d.static));
   }
   if (d.aura) {
     if (d.aura !== 'pacifism') throw new Error('Unsupported aura.');

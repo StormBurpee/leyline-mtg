@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2343ebff-edf4-4132-ad9e-7800f8014072",
+  "name": "Skycrash",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "Destroy target artifact.\nCycling {R} ({R}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "cycling",
+      "cost": "{R}"
+    },
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

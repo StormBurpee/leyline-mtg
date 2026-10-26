@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6a06d281-3ca2-498f-91d0-e13e7b0869f9",
+  "name": "Jeong Jeong's Deserters",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Rebel", "Ally"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, put a +1/+1 counter on target creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

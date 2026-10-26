@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ca4b6689-04ee-4227-9bdc-cb5a9590c745",
+  "name": "Hedge Maze",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Forest", "Island"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "({T}: Add {G} or {U}.)\nThis land enters tapped.\nWhen this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

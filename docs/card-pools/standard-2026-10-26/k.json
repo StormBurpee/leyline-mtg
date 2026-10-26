@@ -22,7 +22,7 @@
   {
     "oracleId": "d85f5edb-60a8-4abd-82b0-f9a58f3d4185",
     "name": "Kalakscion, Hunger Tyrant",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "77e319da-d782-4258-bf0e-626755e5adc9",
@@ -127,7 +127,7 @@
   {
     "oracleId": "3ebb8542-5d1d-4f0b-92a9-5a98425860fd",
     "name": "Kavaron Turbodrone",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "528fe479-dab9-4cf8-bda0-1d226a644366",
@@ -657,6 +657,6 @@
   {
     "oracleId": "b29abb09-75ea-431c-ab60-f2940d002e83",
     "name": "Kyoshi Warriors",
-    "status": "unsupported"
+    "status": "curated"
   }
 ]

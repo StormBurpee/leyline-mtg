@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/human-citizen-token",
+  "name": "Human Citizen Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Human", "Citizen"],
+    "colors": ["G", "W"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

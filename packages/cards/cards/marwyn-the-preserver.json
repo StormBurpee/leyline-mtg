@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eb03f6c1-c94f-4f09-b2e9-a55ce5533653",
+  "name": "Marwyn, the Preserver",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Elf", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Lands you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)\n{2}: Return target land card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "type": "land"
+          }
+        ]
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["hexproof"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "type": "land"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

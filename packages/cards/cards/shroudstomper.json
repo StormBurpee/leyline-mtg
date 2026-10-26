@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "36415fe3-6bf3-4fec-909c-6c16584c44eb",
+  "name": "Shroudstomper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental"],
+    "colors": ["B", "W"],
+    "manaCost": "{3}{W}{W}{B}{B}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Deathtouch\nWhenever this creature enters or attacks, each opponent loses 2 life. You gain 2 life and draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 2
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 2
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "602cce3e-7033-47d6-aec1-d755f234f270",
+  "name": "Adept Watershaper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Cleric"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Other tapped creatures you control have indestructible.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "tapped": true
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["indestructible"]
+    }
+  ]
+}

@@ -188,6 +188,73 @@ export function resolveEffects(s, entry, startIndex = 0) {
         ? candidate
         : null;
     switch (e.op) {
+      case 'destroyAll':
+      case 'exileAll':
+      case 'modifyAll':
+      case 'damageAll':
+      case 'counterAll':
+      case 'tapAll':
+      case 'untapAll': {
+        const objects = e.where
+          ? battlefield(s).filter((object) => {
+              if (
+                e.excludeSource &&
+                object.id === entry.source?.id &&
+                object.incarnation === entry.source.incarnation
+              )
+                return false;
+              const d = definition(s, object),
+                pt = stats(s, object);
+              return matchesFilter(
+                {
+                  definition: d,
+                  controller: object.controller,
+                  owner: object.owner,
+                  token: object.token,
+                  tapped: object.tapped,
+                  attacking: isAttacking(s, object),
+                  keywords: keywords(s, object),
+                  ...pt,
+                  manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+                },
+                e.where,
+                entry.controller,
+              );
+            })
+          : [];
+        if (e.op === 'destroyAll' || e.op === 'exileAll') {
+          const victims = objects.filter(
+            (object) => e.op === 'exileAll' || !hasKeyword(s, object, 'indestructible'),
+          );
+          const context = victims.length ? captureDepartureContext(s) : null;
+          for (const object of victims)
+            move(s, object, e.op === 'exileAll' ? 'exile' : 'graveyard', context);
+        } else if (e.op === 'damageAll') {
+          const source = damageSource(s, entry);
+          for (const object of objects) dealDamage(s, source, ref(object), e.amount);
+          for (const player of s.players)
+            if (
+              e.players === 'all' ||
+              (e.players === 'controller' && player.id === entry.controller) ||
+              (e.players === 'opponent' && player.id !== entry.controller)
+            )
+              dealDamage(s, source, { kind: 'player', id: player.id }, e.amount);
+        } else
+          for (const object of objects) {
+            if (e.op === 'modifyAll')
+              s.modifiers.push({
+                objectId: object.id,
+                incarnation: object.incarnation,
+                power: e.power,
+                toughness: e.toughness,
+                keywords: e.keywords ?? [],
+                expires: s.turn,
+              });
+            else if (e.op === 'counterAll') object.plusCounters += e.amount;
+            else object.tapped = e.op === 'tapAll';
+          }
+        break;
+      }
       case 'wardPayment': {
         const affected = s.stack.find((item) => item.id === entry.relatedStackId);
         if (!affected) break;
@@ -216,8 +283,9 @@ export function resolveEffects(s, entry, startIndex = 0) {
       case 'counterOn':
         if (o) o.plusCounters += e.amount;
         break;
+      case 'tap':
       case 'untap':
-        if (o) o.tapped = false;
+        if (o) o.tapped = e.op === 'tap';
         break;
       case 'scry':
       case 'surveil': {
@@ -324,8 +392,9 @@ export function resolveEffects(s, entry, startIndex = 0) {
       }
       case 'token':
         for (let i = 0; i < e.count; i++) {
-          const token = addObject(s, e.definition, entry.controller, 'void');
-          enterBattlefield(s, token, entry.controller);
+          const controller = e.player === 'targetController' ? entry.targetController : recipient;
+          const token = addObject(s, e.definition, controller, 'void');
+          enterBattlefield(s, token, controller, null, { tapped: e.tapped });
         }
         break;
       default:
@@ -472,6 +541,13 @@ export function resolveTop(s) {
     if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
     return;
   }
+  if (entry.effects?.some((e) => e.op === 'token' && e.player === 'targetController'))
+    entry.targetController =
+      entry.target?.kind === 'player'
+        ? entry.target.id
+        : entry.target?.kind === 'stack'
+          ? s.stack.find((v) => v.id === entry.target.id)?.controller
+          : s.objects[entry.target?.id]?.controller;
   if (entry.kind === 'spell' && ['creature', 'enchantment', 'artifact'].includes(d.type)) {
     enterBattlefield(s, object, entry.controller, entry.target ?? null);
     emit(s, 'resolved', { name: entry.name, stackId: entry.id });

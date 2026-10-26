@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fbb7735f-ec91-4ed4-b735-d94a76e68a80",
+  "name": "Shocking Sharpshooter",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Archer"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Reach\nWhenever another creature you control enters, this creature deals 1 damage to target opponent.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "creature"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      }
+    }
+  ]
+}

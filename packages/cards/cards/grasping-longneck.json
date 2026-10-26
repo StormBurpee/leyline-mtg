@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bc509d30-ceca-47ef-a574-62c021812014",
+  "name": "Grasping Longneck",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "supertypes": [],
+    "subtypes": ["Horror"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Reach\nWhen this creature dies, you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

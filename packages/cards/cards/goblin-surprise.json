@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "79cd09e8-d738-47c0-9473-b6281bec6935",
+  "name": "Goblin Surprise",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "Choose one —\n• Creatures you control get +2/+0 until end of turn.\n• Create two 1/1 red Goblin creature tokens.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Creatures you control get +2/+0 until end of turn",
+          "effects": [
+            {
+              "op": "modifyAll",
+              "where": {
+                "all": [
+                  {
+                    "controller": "you"
+                  },
+                  {
+                    "type": "creature"
+                  }
+                ]
+              },
+              "power": 2,
+              "toughness": 0,
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Create two 1/1 red Goblin creature tokens",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/goblin-token",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

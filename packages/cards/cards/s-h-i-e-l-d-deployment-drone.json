@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c1669020-8f81-471a-9083-7e9ce3e8f387",
+  "name": "S.H.I.E.L.D. Deployment Drone",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhen this creature enters, create a 1/1 white Soldier creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/soldier-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

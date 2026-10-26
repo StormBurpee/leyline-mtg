@@ -108,6 +108,8 @@ export function abilityProblem(s, p, id, index, target) {
   if (!Number.isSafeInteger(index) || index < 0) return 'That ability does not exist.';
   const ability = definition(s, o).activated?.[index];
   if (!ability) return 'That ability does not exist.';
+  if (ability.timing === 'sorcery' && !(s.active === p && main(s) && s.stack.length === 0))
+    return 'Activate this only as a sorcery.';
 
   if (ability.target && !legalTarget(s, ability.target, target, p))
     return 'Choose a legal ability target.';
@@ -115,6 +117,37 @@ export function abilityProblem(s, p, id, index, target) {
   const payment = costProblem(s, p, ability.cost, { sourceId: id });
   if (payment) return payment;
   return null;
+}
+export function cyclingProblem(s, p, id) {
+  const o = s.objects[id];
+  if (!o || o.zone !== 'hand' || o.owner !== p || !definition(s, o).cycling)
+    return 'That card cannot be cycled from your hand.';
+  if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
+  if (!planPayment(s, p, definition(s, o).cycling))
+    return 'Not enough available mana to cycle this card.';
+  return null;
+}
+function cycle(s, p, c) {
+  const problem = cyclingProblem(s, p, c.card);
+  requireRule(!problem, 'CYCLING', problem);
+  const o = s.objects[c.card],
+    d = definition(s, o);
+  s.stack.push({
+    id: `s${++s.nextId}`,
+    kind: 'ability',
+    name: o.name,
+    controller: p,
+    source: ref(o),
+    sourceKeywords: keywords(s, o),
+    effects: [{ op: 'draw', count: 1 }],
+    targetKind: null,
+    target: null,
+    label: 'Cycling',
+  });
+  pay(s, p, d.cycling);
+  move(s, o, 'graveyard');
+  s.passes = 0;
+  emit(s, 'cycled', { player: p, objectId: o.id, name: o.name });
 }
 function activate(s, p, c) {
   const problem = abilityProblem(s, p, c.card, c.ability, c.target);
@@ -291,6 +324,9 @@ export function dispatch(state, command) {
           tapForMana(s, command.card, p, command.color);
           s.passes = 0;
           break;
+        case 'cycle':
+          cycle(s, p, command);
+          break;
         case 'cast':
           cast(s, p, command);
           break;
@@ -342,6 +378,7 @@ export function legalActions(s, p) {
   if (s.priority !== p) return [{ type: 'concede' }];
   const actions = [{ type: 'pass' }, { type: 'concede' }];
   for (const id of s.players[p].hand) {
+    if (!cyclingProblem(s, p, id)) actions.push({ type: 'cycle', card: id });
     if (canPlayLand(s, p, id)) {
       actions.push({ type: 'playLand', card: id });
       continue;
@@ -418,6 +455,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.23.0',
         '0.22.0',
         '0.21.0',
         '0.20.0',

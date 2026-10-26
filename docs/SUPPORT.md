@@ -22,6 +22,8 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Activated abilities with mana, life, tap and self-sacrifice costs, explicit targets, and stack resolution.
 - Scry, surveil and mandatory discard choices during resolution, with instruction continuations and no intervening priority.
 - Choose-one instant/sorcery modes announced at cast time with independent targets/effects, public stack labels and replayed mode indices. Unavailable modes are not legal actions.
+- Group destruction/exile, damage, temporary modifiers, counters and tap/untap effects with explicit filters and simultaneous departure snapshots.
+- Treasure/Food/Clue and additional fixed creature tokens; sacrificing mana sources; cycling from hand; upkeep, combat, main-phase and end-step triggers; stable filtered static anthems and intrinsic attack/block restrictions.
 - Own-library search with basic/type/subtype/color/mana-value filters, chosen quantities, explicit reveal flags, hand/graveyard/battlefield/top destinations and deterministic shuffle. Unrestricted searches require the available quantity; quality-restricted searches can fail to find. Multiple searched permanents enter together.
 - Ward triggers for opposing spells and activated/triggered abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.
 - Schema-checked card sources, reusable mechanics, composable target/event predicates and all-or-nothing pack compilation.

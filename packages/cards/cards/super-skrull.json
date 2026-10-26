@@ -1,0 +1,85 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4644013f-c96a-450e-a7bc-ddfa7a563050",
+  "name": "Super-Skrull",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Skrull", "Shapeshifter", "Villain"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}{B}{B}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Flying\n{2}{W}: Create a 0/4 colorless Wall creature token with defender.\n{3}{G}: Super-Skrull gets +4/+4 until end of turn.\n{4}{R}: Super-Skrull deals 4 damage to target creature.\n{5}{U}: Target player draws four cards.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{W}"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/wall-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}{G}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 4,
+          "toughness": 4,
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{R}"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 4
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{5}{U}"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "target",
+          "amount": 4
+        }
+      ],
+      "target": {
+        "scope": "player"
+      }
+    }
+  ]
+}

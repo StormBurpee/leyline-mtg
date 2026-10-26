@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "856245a6-c697-4f03-90be-77d8eb2d274e",
+  "name": "Terrian, World Tyrant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dinosaur", "Ooze"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}{G}{G}",
+    "power": 9,
+    "toughness": 7
+  },
+  "rulesText": "",
+  "abilities": []
+}

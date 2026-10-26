@@ -79,7 +79,7 @@ function readSave() {
 const ui = {
   view: 'play',
   catalog: CARDS,
-  deck: 'ember',
+  deck: 'storm-rakdos',
   opponentDeck: 'grove',
   personalDecks: [],
   deckQuery: '',
@@ -1160,6 +1160,9 @@ async function action(name, el) {
       action('playSelected', el);
       break;
     }
+    case 'cycleSelected':
+      if (ui.selected) send({ type: 'cycle', card: ui.selected });
+      break;
     case 'playSelected': {
       const o = state.objects[ui.selected];
       if (!o) break;

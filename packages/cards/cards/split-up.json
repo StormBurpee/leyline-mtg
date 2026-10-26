@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2e82520a-9da3-49ae-b5c8-37e7ac8853fe",
+  "name": "Split Up",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}{W}"
+  },
+  "rulesText": "Choose one —\n• Destroy all tapped creatures.\n• Destroy all untapped creatures.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy all tapped creatures",
+          "effects": [
+            {
+              "op": "destroyAll",
+              "where": {
+                "all": [
+                  {
+                    "tapped": true
+                  },
+                  {
+                    "type": "creature"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Destroy all untapped creatures",
+          "effects": [
+            {
+              "op": "destroyAll",
+              "where": {
+                "all": [
+                  {
+                    "tapped": false
+                  },
+                  {
+                    "type": "creature"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

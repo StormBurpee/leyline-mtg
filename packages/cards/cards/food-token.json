@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/food-token",
+  "name": "Food Token",
+  "characteristics": {
+    "types": ["artifact"],
+    "subtypes": ["Food"],
+    "colors": [],
+    "manaCost": null,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "{2}, {T}, Sacrifice this artifact: You gain 3 life.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

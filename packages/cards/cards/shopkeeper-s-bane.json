@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e7572317-6bec-4fb0-81ac-76aec04f14ad",
+  "name": "Shopkeeper's Bane",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Badger", "Pest"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Trample\nWhenever this creature attacks, you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

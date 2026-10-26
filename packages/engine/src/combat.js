@@ -22,6 +22,7 @@ export function canAttack(s, o, p) {
     !o.tapped &&
     !isSick(s, o) &&
     !isPacified(s, o) &&
+    !definition(s, o).cannotAttack &&
     !hasKeyword(s, o, 'defender')
   );
 }
@@ -34,6 +35,8 @@ export function canBlock(s, blocker, attacker, p) {
     definition(s, attacker).type === 'creature' &&
     definition(s, blocker).type === 'creature' &&
     !blocker.tapped &&
+    !definition(s, blocker).cannotBlock &&
+    !definition(s, attacker).unblockable &&
     !isPacified(s, blocker) &&
     (!hasKeyword(s, attacker, 'flying') ||
       hasKeyword(s, blocker, 'flying') ||

@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "31816924-1430-4581-86e8-325e2ca16217",
+  "name": "Agents of HYDRA",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Spy", "Villain"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature dies, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/villain-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}
