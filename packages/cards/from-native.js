@@ -146,7 +146,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   }
   const characteristics = {
     types: d.types ?? [d.type],
-    supertypes: d.basic ? ['basic'] : [],
+    supertypes: [...(d.basic ? ['basic'] : []), ...(d.legendary ? ['legendary'] : [])],
     subtypes: d.subtypes,
     colors: d.color,
     manaCost: d.type === 'land' || d.token ? null : mana(d.cost),

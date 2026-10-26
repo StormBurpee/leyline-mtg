@@ -108,6 +108,7 @@ export interface CardDefinition {
   readonly power?: number;
   readonly toughness?: number;
   readonly basic?: boolean;
+  readonly legendary?: boolean;
   readonly token?: boolean;
   readonly mana?: Color | readonly Color[];
   readonly entersTapped?: boolean;
@@ -202,6 +203,14 @@ export interface DamageSource {
   keywords: string[];
 }
 export type Choice =
+  | {
+      kind: 'legendRule';
+      player: PlayerId;
+      name: string;
+      cards: string[];
+      remaining: { player: PlayerId; name: string; cards: string[] }[];
+      toGrave: string[];
+    }
   | {
       kind: 'triggerTarget';
       player: PlayerId;
@@ -309,6 +318,7 @@ export interface GameState {
   players: PlayerState[];
 }
 export type Action =
+  | { type: 'chooseLegend'; card: string }
   | { type: 'resolveOptional'; accept: boolean }
   | { type: 'payCost'; pay: boolean }
   | { type: 'pass' | 'concede' | 'keep' | 'mulligan' }
@@ -336,7 +346,8 @@ export type LegalAction =
           | 'tapMana'
           | 'cast'
           | 'activate'
-          | 'chooseTriggerTarget';
+          | 'chooseTriggerTarget'
+          | 'chooseLegend';
       }
     >
   | { type: 'choice'; kind: Choice['kind'] };

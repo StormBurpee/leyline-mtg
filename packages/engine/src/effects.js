@@ -482,8 +482,7 @@ export function resolveTop(s) {
 }
 /** All supported state-based actions are computed from one pre-action state. */
 export function stateBasedActions(s) {
-  if (s.resolving) return false;
-  let changed = false;
+  if (s.resolving || s.choice?.kind === 'legendRule') return false;
   const losers = s.players.filter((p) => p.life <= 0 || p.failedDraw).map((p) => p.id);
   if (losers.length) {
     s.status = 'finished';
@@ -517,6 +516,35 @@ export function stateBasedActions(s) {
         toGrave.push(o);
     }
   }
+  const groups = [];
+  for (const player of [s.active, opponent(s.active)]) {
+    const byName = new Map();
+    for (const o of battlefield(s)) {
+      if (o.controller !== player || !definition(s, o).legendary) continue;
+      if (!byName.has(o.name)) byName.set(o.name, []);
+      byName.get(o.name).push(o.id);
+    }
+    for (const [name, cards] of byName) if (cards.length > 1) groups.push({ player, name, cards });
+  }
+  if (groups.length) {
+    const [first, ...remaining] = groups;
+    // Even a lethally damaged legend can be chosen. All SBAs use this same snapshot.
+    s.choice = {
+      kind: 'legendRule',
+      ...first,
+      remaining,
+      toGrave: [...new Set(toGrave.map((o) => o.id))],
+    };
+    return false;
+  }
+  return applyStateBasedBatch(
+    s,
+    toGrave.map((o) => o.id),
+  );
+}
+function applyStateBasedBatch(s, ids) {
+  let changed = false;
+  const toGrave = [...new Set(ids)].map((id) => s.objects[id]);
   const departureContext = toGrave.length ? captureDepartureContext(s) : null;
   for (const o of toGrave) {
     move(s, o, 'graveyard', departureContext);
@@ -534,6 +562,24 @@ export function stateBasedActions(s) {
     }
   return changed;
 }
+/** APNAP choices precede one simultaneous state-based-action batch (CR 101.4, 704). */
+export function finishLegendChoice(s, card) {
+  const choice = s.choice;
+  requireRule(
+    choice?.kind === 'legendRule' && choice.cards.includes(card),
+    'LEGEND_CHOICE',
+    'Choose one of these legendary permanents to keep.',
+  );
+  const toGrave = [...choice.toGrave, ...choice.cards.filter((id) => id !== card)];
+  emit(s, 'legendChosen', { player: choice.player, name: choice.name, objectId: card });
+  if (choice.remaining.length) {
+    const [first, ...remaining] = choice.remaining;
+    s.choice = { kind: 'legendRule', ...first, remaining, toGrave };
+    return;
+  }
+  s.choice = null;
+  applyStateBasedBatch(s, toGrave);
+}
 /** Stabilize before priority (CR 117.5). Trigger ordering remains an explicit choice. */
 export function stabilize(s) {
   if (s.resolving) return;
@@ -541,7 +587,8 @@ export function stabilize(s) {
   while (s.status === 'playing' && stateBasedActions(s)) {
     if (++iterations > 100) throw new Error('State-based action fixed point did not converge.');
   }
-  if (s.status !== 'playing' || !s.pendingTriggers.length) return;
+  if (s.status !== 'playing' || s.choice?.kind === 'legendRule' || !s.pendingTriggers.length)
+    return;
   // Each player's simultaneous triggers must be ordered by that player, APNAP.
   const groups = [s.active, opponent(s.active)]
     .map((p) => ({ player: p, entries: s.pendingTriggers.filter((t) => t.controller === p) }))

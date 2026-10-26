@@ -28,11 +28,12 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Menace, haste, vigilance, flying, reach, defender, first strike, double strike, trample, deathtouch and lifelink in the supported card pool.
 - Prowess-style triggers, persistent +1/+1 counters, temporary stat/keyword modifiers, token creation, card draw, mill, damage, life gain, countering, destroy and bounce.
 - Simultaneous combat damage with player-chosen splits across multiple blockers.
+- Legendary permanents: explicit controller choices in APNAP order, simultaneous graveyard placement alongside other state-based actions, and retained death/enter triggers. Indestructible does not prevent the legend rule.
 - State-based loss from life or empty-library draw, lethal/zero-toughness/deathtouch deaths, token cleanup and invalid Aura attachments.
 
 ## Deliberately not claimed
 
-Commander/Brawl, more than two players, commander tax/damage, planeswalkers, battles, Equipment, general activated costs, graveyard casting, alternative costs, replacement/prevention ordering, general layers/dependencies, continuous control changes, legend choices, modal choices, opponent-library search, replacement search restrictions, split-destination searches, adventures, transforming cards, Sagas, copies, protection, non-mana/non-life ward costs, poison, storm, combat restrictions beyond this pool, and tournament legality are not implemented.
+Commander/Brawl, more than two players, commander tax/damage, planeswalkers, battles, Equipment, general activated costs, graveyard casting, alternative costs, replacement/prevention ordering, general layers/dependencies, continuous control changes, legendary sorcery casting restrictions, modal choices, opponent-library search, replacement search restrictions, split-destination searches, adventures, transforming cards, Sagas, copies, protection, non-mana/non-life ward costs, poison, storm, combat restrictions beyond this pool, and tournament legality are not implemented.
 
 Do not add these cards as “vanilla” approximations. An unsupported card should fail at import time rather than silently change the game.
 
@@ -44,7 +45,7 @@ The current starter lists intentionally exercise stack interaction and creature 
 
 ## Extension sequence
 
-1. Extend the existing choice continuations to modal, search and optional-payment effects.
+1. Extend the existing choice continuations to modal effects (search and optional-payment continuations are already implemented).
 2. A timestamp/dependency-aware layer evaluator with an interaction fixture suite.
 3. A replacement/prevention proposal-and-choice pipeline, including recursive-event protections.
 4. Broader costs, flexible targets and legal-action generation.

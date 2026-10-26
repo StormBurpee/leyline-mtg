@@ -272,6 +272,12 @@ function actionDock(s, ui, p, actions) {
         desc = `Pay ${[...Object.entries(c.cost.mana ?? {}).map(([symbol, count]) => (symbol === 'generic' ? `${count} mana` : `${count}${symbol}`)), ...(c.cost.life ? [`${c.cost.life} life`] : [])].join(' + ') || '0'} or your spell or ability will be countered. No player receives priority during this choice.`;
         buttons = `<button class="btn" data-action="declineWard">Don't pay</button><button class="btn primary" data-action="payWard" ${c.payable ? '' : 'disabled'}>Pay ward →</button>`;
         break;
+      case 'legendRule':
+        title = `Choose one ${c.name} to keep`;
+        desc =
+          'The legend rule applies before anyone gets priority. Review the copies and choose which stays.';
+        buttons = '<button class="btn primary" data-action="legendRule">Choose a copy →</button>';
+        break;
       case 'librarySearch':
         title = 'Search your library';
         desc = `Choose ${c.min === c.max ? c.max : `up to ${c.max}`} card${c.max === 1 ? '' : 's'}, then shuffle. The spell is still resolving.`;
@@ -322,7 +328,7 @@ export function inspect(name, meta, state = null, objectId = null) {
     return '<div class="inspect-placeholder"><div><span>◇</span>A closer look.<br>Hover or select any card.</div></div>';
   const d = state?.catalog?.[name] ?? CARDS[name],
     m = meta[name];
-  return `<div class="inspect-card">${m?.image ? `<img src="${escape(m.image)}" alt="${escape(name)}">` : `<div class="inspect-placeholder"><div><span>◇</span>${escape(name)}</div></div>`}</div><div class="inspect-copy"><h3>${escape(name)}</h3><div class="type">${escape(m?.type_line ?? d.type)}</div><div class="rules">${escape(m?.oracle_text ?? d.text)}</div>${state && state.objects[objectId]?.zone === 'battlefield' ? liveCharacteristics(state, state.objects[objectId]) : ''}<div class="artist">${m?.artist ? `Illustration: ${escape(m.artist)} · ` : ''}Supported executable definition${d.token ? ' · Token' : ''}</div></div>`;
+  return `<div class="inspect-card">${m?.image ? `<img src="${escape(m.image)}" alt="${escape(name)}">` : `<div class="inspect-placeholder"><div><span>◇</span>${escape(name)}</div></div>`}</div><div class="inspect-copy"><h3>${escape(name)}</h3><div class="type">${escape(m?.type_line ?? `${d.legendary ? 'Legendary ' : ''}${d.type}`)}</div><div class="rules">${escape(m?.oracle_text ?? d.text)}</div>${state && state.objects[objectId]?.zone === 'battlefield' ? liveCharacteristics(state, state.objects[objectId]) : ''}<div class="artist">${m?.artist ? `Illustration: ${escape(m.artist)} · ` : ''}Supported executable definition${d.token ? ' · Token' : ''}</div></div>`;
 }
 function stack(s, ui, meta = {}) {
   const resolving = s.resolving
@@ -372,6 +378,8 @@ export function eventText(e, s) {
       return `${p} declared ${e.ids.length} attackers.`;
     case 'blockers':
       return `${p} declared ${e.pairs.length} blockers.`;
+    case 'legendChosen':
+      return `${p} chose which ${name} to keep (legend rule).`;
     case 'triggered':
       return `${name} triggered.`;
     case 'turn':
@@ -426,7 +434,7 @@ export function enginePage(s) {
     )
     .join(
       '',
-    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleSearchReplay">Inspect library search</button><button class="btn quiet" data-action="exampleSacrificeReplay">Inspect sacrifice position</button><button class="btn quiet" data-action="exampleBurialReplay">Inspect reanimation position</button><button class="btn quiet" data-action="exampleInteractionReplay">Inspect interactive position</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleTargetReplay">Inspect triggered target</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Versioned card source packs, compiled separately from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
+    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleLegendReplay">Inspect legend rule</button><button class="btn quiet" data-action="exampleSearchReplay">Inspect library search</button><button class="btn quiet" data-action="exampleSacrificeReplay">Inspect sacrifice position</button><button class="btn quiet" data-action="exampleBurialReplay">Inspect reanimation position</button><button class="btn quiet" data-action="exampleInteractionReplay">Inspect interactive position</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleTargetReplay">Inspect triggered target</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Versioned card source packs, compiled separately from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
 }
 
 function liveCharacteristics(s, o) {
@@ -449,4 +457,17 @@ function liveCharacteristics(s, o) {
   return bits.length
     ? `<div class="live-characteristics">${bits.map(escape).join(' · ')}</div>`
     : '';
+}
+
+export function legendChoiceBody(state, metadata = {}) {
+  const c = state.choice;
+  if (c?.kind !== 'legendRule') return '';
+  return `<p>Keep one ${escape(c.name)}. The other copies go to their owners’ graveyards, even if indestructible. Other state-based actions still apply.</p><div class="library-group">${c.cards
+    .map((id, index) => {
+      const o = state.objects[id],
+        d = definition(state, o),
+        pt = stats(state, o);
+      return `<div class="library-choice"><div class="library-thumb">${metadata[o.name]?.image ? `<img src="${escape(metadata[o.name].image)}" alt="">` : '◇'}</div><div class="library-choice-body"><strong>Copy ${index + 1}: ${escape(o.name)}</strong><span class="small muted">${d.type === 'creature' ? `${pt.power}/${pt.toughness} · ${o.damage} damage · ` : ''}${o.tapped ? 'Tapped' : 'Untapped'}${o.plusCounters ? ` · ${o.plusCounters} +1/+1 counters` : ''}</span><div class="library-choice-actions"><button class="btn primary" data-action="keepLegend" data-cardid="${id}">Keep this copy</button><button class="btn" data-action="readLegend" data-cardid="${id}">Read card</button></div></div></div>`;
+    })
+    .join('')}</div>`;
 }

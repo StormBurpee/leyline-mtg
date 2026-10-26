@@ -213,7 +213,7 @@ test('malformed JSON identities and ability references produce diagnostics, not 
 });
 test('unsupported supertypes remain represented in source but cannot become vanilla runtime cards', () => {
   const source = example([]);
-  source.characteristics.supertypes = ['legendary'];
+  source.characteristics.supertypes = ['snow'];
   const result = compileCard(source);
   assert.equal(result.ok, false);
   assert.ok(result.diagnostics.some((d) => d.code === 'UNSUPPORTED_SUPERTYPE'));
@@ -270,4 +270,12 @@ test('targeted ETB sources compile without losing the selector into legacy etb s
   const object = put(state, result.definition.name, 0, 'hand');
   const next = resolve(act(state, 'cast', { card: object.id }));
   assert.equal(next.choice.kind, 'triggerTarget');
+});
+
+test('legendary permanent sources preserve the supertype rather than becoming vanilla', () => {
+  const source = example([]);
+  source.characteristics.supertypes = ['legendary'];
+  const result = compileCard(source);
+  assert.equal(result.ok, true, JSON.stringify(result.diagnostics));
+  assert.equal(result.definition.legendary, true);
 });

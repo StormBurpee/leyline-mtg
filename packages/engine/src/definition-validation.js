@@ -34,6 +34,7 @@ const FIELDS = new Set([
   'power',
   'toughness',
   'basic',
+  'legendary',
   'token',
   'mana',
   'target',
@@ -275,9 +276,11 @@ export function validateDefinition(card) {
     )
       errors.push(`${name}.mana: expected distinct supported production colors.`);
   }
-  for (const key of ['basic', 'token', 'entersTapped'])
+  for (const key of ['basic', 'legendary', 'token', 'entersTapped'])
     if (card[key] !== undefined && typeof card[key] !== 'boolean')
       errors.push(`${name}.${key}: expected a boolean.`);
+  if (card.legendary && ['instant', 'sorcery'].includes(card.type))
+    errors.push(`${name}: legendary spell casting restrictions are not implemented.`);
   if (card.basic && card.type !== 'land') errors.push(`${name}: only lands can be basic.`);
   if (card.target != null)
     errors.push(...validateTargetSpec(card.target).map((error) => `${name}.target: ${error}`));

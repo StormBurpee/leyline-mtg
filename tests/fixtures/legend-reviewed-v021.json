@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Isamaru, Hound of Konda",
+    "oracle_id": "cfb756dd-6fe1-430a-8f04-8b10cac62a86",
+    "arena_print": "6afead32-3542-44c4-82d6-b6a81beb9f90",
+    "released_at": "2020-07-17",
+    "scryfall_uri": "https://scryfall.com/card/jmp/113/isamaru-hound-of-konda?utm_source=api"
+  },
+  {
+    "name": "Yargle, Glutton of Urborg",
+    "oracle_id": "ed66cd31-958f-4b28-82a3-e04acc819afc",
+    "arena_print": "04c816fb-5951-4db1-8834-ed3f0b36bfe1",
+    "released_at": "2026-10-02",
+    "scryfall_uri": "https://scryfall.com/card/fra/241/yargle-glutton-of-urborg?utm_source=api"
+  },
+  {
+    "name": "Yargle and Multani",
+    "oracle_id": "980e1721-3717-4425-95a4-938dbf2ac661",
+    "arena_print": "9c15e244-14cc-46a5-abd4-66a58d1c0dd0",
+    "released_at": "2023-04-21",
+    "scryfall_uri": "https://scryfall.com/card/mom/256/yargle-and-multani?utm_source=api"
+  },
+  {
+    "name": "Zetalpa, Primal Dawn",
+    "oracle_id": "7da0e5de-3e4c-420a-8685-991206100b9d",
+    "arena_print": "694df80e-77d1-4455-b6f1-58d212267d76",
+    "released_at": "2024-11-15",
+    "scryfall_uri": "https://scryfall.com/card/fdn/584/zetalpa-primal-dawn?utm_source=api"
+  }
+]

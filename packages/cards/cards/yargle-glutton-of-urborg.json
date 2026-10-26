@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ed66cd31-958f-4b28-82a3-e04acc819afc",
+  "name": "Yargle, Glutton of Urborg",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Frog", "Spirit"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}",
+    "power": 9,
+    "toughness": 3
+  },
+  "rulesText": "",
+  "abilities": []
+}
