@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4bbc5df9-60d7-46c1-8856-91c9c74abf18",
+  "name": "Caelorna, Coral Tyrant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Octopus"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 0,
+    "toughness": 8
+  },
+  "rulesText": "",
+  "abilities": []
+}

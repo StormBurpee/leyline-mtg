@@ -1,0 +1,79 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d985b12e-2731-4ccf-9f51-90218b20b42a",
+  "name": "Silverquill Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "W"],
+    "manaCost": "{W}{B}"
+  },
+  "rulesText": "Choose one —\n• Put two +1/+1 counters on target creature.\n• Exile target creature with power 2 or less.\n• Each opponent loses 3 life and you gain 3 life.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Put two +1/+1 counters on target creature",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "counter": "+1/+1",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "Exile target creature with power 2 or less",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "power": {
+                    "lte": 2
+                  }
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            }
+          ]
+        },
+        {
+          "label": "Each opponent loses 3 life and you gain 3 life",
+          "effects": [
+            {
+              "op": "loseLife",
+              "target": "opponent",
+              "amount": 3
+            },
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

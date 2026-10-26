@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "032b5fc4-5aca-41b6-9bf6-2c1ed0018968",
+  "name": "Aggressive Mammoth",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elephant"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}{G}{G}",
+    "power": 8,
+    "toughness": 8
+  },
+  "rulesText": "Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nOther creatures you control have trample.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["trample"]
+    }
+  ]
+}

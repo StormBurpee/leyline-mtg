@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0caccec3-4942-499a-9434-0c94389afcf8",
+  "name": "Surgical Precision",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Choose one —\n• Destroy target creature with toughness 4 or greater. You gain 1 life.\n• You draw a card and gain 2 life.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target creature with toughness 4 or greater. You gain 1 life",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "toughness": {
+                    "gte": 4
+                  }
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            },
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "You draw a card and gain 2 life",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            },
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

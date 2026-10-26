@@ -1,4 +1,13 @@
-import { controlled, draw, emit, emptyMana, hasKeyword, opponent, STEPS } from './model.js';
+import {
+  notifyTriggers,
+  controlled,
+  draw,
+  emit,
+  emptyMana,
+  hasKeyword,
+  opponent,
+  STEPS,
+} from './model.js';
 import { beginDamage, combatants } from './combat.js';
 import { stabilize, stateBasedActions } from './effects.js';
 export function clearMana(s) {
@@ -14,6 +23,7 @@ export function nextTurn(s) {
   s.players[s.active].landsPlayed = 0;
   for (const o of controlled(s, s.active)) o.tapped = false;
   emit(s, 'turn', { player: s.active });
+  notifyTriggers(s, 'step', { player: s.active, step: 'upkeep' });
 }
 export function finishCleanup(s) {
   for (const o of Object.values(s.objects)) {
@@ -59,6 +69,7 @@ export function advanceStep(s) {
   s.step = STEPS[index];
   s.priority = s.active;
   emit(s, 'step', { step: s.step, player: s.active });
+  const enteredStep = s.step;
   switch (s.step) {
     case 'draw':
       if (!(s.turn === 1 && s.active === s.startingPlayer)) draw(s, s.active, 1);
@@ -82,4 +93,5 @@ export function advanceStep(s) {
       cleanup(s);
       break;
   }
+  if (s.step === enteredStep) notifyTriggers(s, 'step', { player: s.active, step: enteredStep });
 }

@@ -27,7 +27,7 @@ export function autoCommand(s, player, ui) {
   if (ui.yieldMode && ui.yieldTurn === s.turn) return { type: 'pass' };
   if (!ui.autoYield) return null;
   const actions = legalActions(s, player),
-    useful = actions.some((a) => ['cast', 'activate', 'playLand'].includes(a.type));
+    useful = actions.some((a) => ['cast', 'activate', 'cycle', 'playLand'].includes(a.type));
   if (s.stack.length) {
     if (s.stack.at(-1).controller === player) return ui.holdPriority ? null : { type: 'pass' };
     return useful ? null : { type: 'pass' };

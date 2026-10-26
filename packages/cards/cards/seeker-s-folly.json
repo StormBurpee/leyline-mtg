@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "223794f2-67a3-4ab5-81c5-046c63307c6c",
+  "name": "Seeker's Folly",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Choose one —\n• Target opponent discards two cards.\n• Creatures your opponents control get -1/-1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target opponent discards two cards",
+          "target": {
+            "scope": "player",
+            "where": {
+              "controller": "opponent"
+            }
+          },
+          "effects": [
+            {
+              "op": "discard",
+              "target": "target",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "Creatures your opponents control get -1/-1 until end of turn",
+          "effects": [
+            {
+              "op": "modifyAll",
+              "where": {
+                "all": [
+                  {
+                    "controller": "opponent"
+                  },
+                  {
+                    "type": "creature"
+                  }
+                ]
+              },
+              "power": -1,
+              "toughness": -1,
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

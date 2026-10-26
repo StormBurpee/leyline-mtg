@@ -396,7 +396,7 @@
       "type": "object",
       "properties": {
         "event": {
-          "enum": ["enter", "cast", "dies", "attack"]
+          "enum": ["enter", "cast", "dies", "attack", "step"]
         },
         "object": {
           "const": "source"
@@ -409,6 +409,9 @@
         },
         "excludeSource": {
           "type": "boolean"
+        },
+        "step": {
+          "enum": ["upkeep", "beginCombat", "end", "main1", "main2"]
         }
       },
       "required": ["event"],
@@ -670,6 +673,12 @@
               "type": "integer",
               "minimum": 0,
               "maximum": 1000
+            },
+            "controller": {
+              "enum": ["controller", "opponent", "target", "targetController"]
+            },
+            "tapped": {
+              "type": "boolean"
             }
           },
           "required": ["op", "token", "amount"],
@@ -775,6 +784,157 @@
           },
           "required": ["op", "amount", "destination"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "destroyAll"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            }
+          },
+          "required": ["op", "where"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "exileAll"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            }
+          },
+          "required": ["op", "where"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "modifyAll"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            },
+            "power": {
+              "type": "integer"
+            },
+            "toughness": {
+              "type": "integer"
+            },
+            "keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "until": {
+              "const": "endOfTurn"
+            }
+          },
+          "required": ["op", "where", "power", "toughness", "until"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "damageAll"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "players": {
+              "enum": ["none", "controller", "opponent", "all"]
+            }
+          },
+          "required": ["op", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "counterAll"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": ["op", "where", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "tapAll"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            }
+          },
+          "required": ["op", "where"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "untapAll"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            }
+          },
+          "required": ["op", "where"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "tap"
+            },
+            "target": {
+              "enum": ["source", "target"]
+            }
+          },
+          "required": ["op", "target"],
+          "additionalProperties": false
         }
       ]
     },
@@ -858,6 +1018,9 @@
               "minItems": 1,
               "maxItems": 6,
               "uniqueItems": true
+            },
+            "sacrificeSelf": {
+              "type": "boolean"
             }
           },
           "required": ["kind", "produces"],
@@ -906,6 +1069,9 @@
             },
             "text": {
               "type": "string"
+            },
+            "timing": {
+              "const": "sorcery"
             }
           },
           "required": ["kind", "cost", "effects"],
@@ -966,6 +1132,18 @@
               "type": "integer",
               "minimum": -9007199254740991,
               "maximum": 9007199254740991
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            },
+            "keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "required": ["kind", "power", "toughness"],
@@ -1026,6 +1204,32 @@
             }
           },
           "required": ["kind", "choose", "modes"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "cycling"
+            },
+            "cost": {
+              "$ref": "#/$defs/mana"
+            }
+          },
+          "required": ["kind", "cost"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "combatRestriction"
+            },
+            "restriction": {
+              "enum": ["cannotAttack", "cannotBlock", "unblockable"]
+            }
+          },
+          "required": ["kind", "restriction"],
           "additionalProperties": false
         }
       ]

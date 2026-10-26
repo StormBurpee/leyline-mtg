@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/villain-token",
+  "name": "Villain Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Villain"],
+    "colors": ["B"],
+    "manaCost": null,
+    "power": 2,
+    "toughness": 1,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "menace",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "63e79a6f-ed98-480a-a740-d44e111046f7",
+  "name": "Guarded Heir",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Noble"],
+    "colors": ["W"],
+    "manaCost": "{5}{W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nWhen this creature enters, create two 3/3 white Knight creature tokens.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/knight-token",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

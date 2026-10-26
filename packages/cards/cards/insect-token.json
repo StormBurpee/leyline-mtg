@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/insect-token",
+  "name": "Insect Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Insect"],
+    "colors": ["B", "G"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

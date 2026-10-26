@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c55a4b25-ccc4-49de-9f98-a829c547a64d",
+  "name": "White Lotus Reinforcements",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier", "Ally"],
+    "colors": ["G", "W"],
+    "manaCost": "{1}{G}{W}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Vigilance\nOther Allies you control get +1/+1.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "subtype": "Ally"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

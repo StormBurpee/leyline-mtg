@@ -77,7 +77,7 @@
   {
     "oracleId": "a82c3860-4dd6-4ffd-aa8f-ab8df687db6c",
     "name": "Last Gasp",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ff5502d2-37f5-4ad5-bee2-3a03ec973268",
@@ -152,7 +152,7 @@
   {
     "oracleId": "e920c955-66f5-4c6e-a2a8-8b282f9e456e",
     "name": "Leaping Ambush",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ee9b606a-a1fe-43c8-84d0-9bf7b012cc75",
@@ -292,12 +292,12 @@
   {
     "oracleId": "63686c6b-9051-4002-aa8e-da8a3021330f",
     "name": "Lifecreed Duo",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "601b7481-19fc-4779-950e-883a9a22aec3",
     "name": "Lightfoot Technique",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "b162ccf8-e0c2-46ae-84e7-dff2b6fceec1",
@@ -337,7 +337,7 @@
   {
     "oracleId": "ecef9e3d-dce8-405f-bba3-14732444258f",
     "name": "Lightshield Parry",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "57012049-06d7-4354-8125-9ea9e742f14d",
@@ -512,7 +512,7 @@
   {
     "oracleId": "f9dce026-2653-4793-b949-357b08a936ea",
     "name": "Locust Spray",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "f429ca15-c578-4c1d-a604-fd5509c92dba",
@@ -542,7 +542,7 @@
   {
     "oracleId": "6f83da19-fd89-44ec-88f3-0c3fddfbd1b2",
     "name": "Long-Bodied Grey Dog",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "9bf9fe83-b0df-4ef8-ac54-c0d223d4e410",
@@ -607,7 +607,7 @@
   {
     "oracleId": "24630190-a630-4dd3-a8f7-82f129c881e3",
     "name": "Loporrit Scout",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "2db77e35-a54a-4e9c-8081-c97822515879",
@@ -667,7 +667,7 @@
   {
     "oracleId": "1139ee31-cb6e-4ae6-a08b-252c46b2db97",
     "name": "Lotusguard Disciple",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "83c8f1ca-194e-4cb6-9d5f-029133c1edbc",
@@ -757,7 +757,7 @@
   {
     "oracleId": "34c65c7f-33ab-4f91-84ce-d0c8f4fc5832",
     "name": "Lunatic Pandora",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "b6c7c708-5212-4100-b954-b77855b27915",
@@ -777,7 +777,7 @@
   {
     "oracleId": "d51831b1-7394-456e-a1de-6787a59f5932",
     "name": "Lush Portico",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e0a508b5-0896-4620-a93e-60b958829703",
@@ -797,7 +797,7 @@
   {
     "oracleId": "592c91fc-6430-4c76-9460-65f047350f67",
     "name": "Lyra Dawnbringer",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "d9060fff-0b65-4b3d-930d-6e36315b802c",
@@ -812,6 +812,6 @@
   {
     "oracleId": "b5058b5c-0359-42ec-ba9e-ae1371bb9c22",
     "name": "Lys Alana Informant",
-    "status": "unsupported"
+    "status": "curated"
   }
 ]

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.24.0 — Standard expansion and bot integration
+
+- Add 280 complete-match Standard card definitions from a strict, fail-closed authoring pass, plus 21 token definitions. The catalog now contains 797 playable cards and 24 tokens; dated coverage is 579/5,164 Standard and 785/15,332 non-Alchemy Arena.
+- Add filtered group effects, step triggers, cycling, sacrificing mana sources, stable filtered anthems, combat restrictions and sorcery-speed activated abilities. Unknown clauses remain unsupported rather than being dropped.
+- Integrate the bot planning/hand-selection/combat improvements from PR #13, preserving modal routing and benchmark limitations. No claim of human-level play.
+- Preserve the exact requested Rakdos list as the default deck selection. It is visibly locked while its missing mechanics are implemented; there are no substitutions.
+- Browser preview remains unavailable; this checkpoint has no new browser or physical-mobile validation.
+
 ## 0.23.0 — Choose your line
 
 - Implement choose-one instant/sorcery modes at cast time, with mode-specific legal targets/effects, normal cost payment and public stack labels. Preserve mode indices through opaque agent commands and replays.

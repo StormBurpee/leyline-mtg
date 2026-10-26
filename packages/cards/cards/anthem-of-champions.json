@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f1d8e9a6-1903-4be5-8609-1009a463f393",
+  "name": "Anthem of Champions",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G", "W"],
+    "manaCost": "{G}{W}"
+  },
+  "rulesText": "Creatures you control get +1/+1.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      },
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

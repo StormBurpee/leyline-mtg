@@ -1,0 +1,74 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fa99cf82-ebf1-4526-ab9c-b24eb2970f2a",
+  "name": "Pawpatch Formation",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Choose one —\n• Destroy target creature with flying.\n• Destroy target enchantment.\n• Draw a card. Create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target creature with flying",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "keyword": "flying"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Destroy target enchantment",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "enchantment"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Draw a card. Create a Food token",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            },
+            {
+              "op": "createToken",
+              "token": "leyline:token/food-token",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

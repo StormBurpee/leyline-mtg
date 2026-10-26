@@ -124,6 +124,14 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'createToken',
           'addCounters',
           'untap',
+          'tap',
+          'destroyAll',
+          'exileAll',
+          'modifyAll',
+          'damageAll',
+          'counterAll',
+          'tapAll',
+          'untapAll',
         ].includes(effect.op)
       ) {
         problem('UNSUPPORTED_EFFECT', `${p}.op`, 'Unknown authoring instruction.');
@@ -152,9 +160,17 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         bounce: ['target'],
         destroy: ['target'],
         modify: ['target', 'power', 'toughness', 'keywords', 'until'],
-        token: ['token', 'amount'],
+        token: ['token', 'amount', 'controller', 'tapped'],
         counterOn: ['target', 'amount', 'counter'],
         untap: ['target'],
+        tap: ['target'],
+        destroyAll: ['where', 'excludeSource'],
+        exileAll: ['where', 'excludeSource'],
+        modifyAll: ['where', 'excludeSource', 'power', 'toughness', 'keywords', 'until'],
+        damageAll: ['where', 'excludeSource', 'amount', 'players'],
+        counterAll: ['where', 'excludeSource', 'amount'],
+        tapAll: ['where', 'excludeSource'],
+        untapAll: ['where', 'excludeSource'],
       }[nativeOp];
       if (!Array.isArray(allowed)) {
         problem(
@@ -180,6 +196,38 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
             'Expected controller, opponent or target.',
           );
         else if (effect.target !== 'controller') e.player = effect.target;
+      }
+      if (
+        [
+          'destroyAll',
+          'exileAll',
+          'modifyAll',
+          'damageAll',
+          'counterAll',
+          'tapAll',
+          'untapAll',
+        ].includes(e.op)
+      ) {
+        for (const key of [
+          'where',
+          'excludeSource',
+          'amount',
+          'players',
+          'power',
+          'toughness',
+          'keywords',
+        ])
+          if (effect[key] !== undefined) e[key] = structuredClone(effect[key]);
+        if (e.op === 'modifyAll' && effect.until !== 'endOfTurn')
+          problem(
+            'UNSUPPORTED_DURATION',
+            `${p}.until`,
+            'Only end-of-turn group modifiers are implemented.',
+          );
+      }
+      if (e.op === 'token') {
+        if (effect.controller !== undefined) e.player = effect.controller;
+        if (effect.tapped !== undefined) e.tapped = effect.tapped;
       }
       if (e.op === 'searchLibrary') {
         e.count = effect.amount;
@@ -217,7 +265,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
         if (effect.target === 'source') e.subject = 'source';
       }
-      if (e.op === 'untap') {
+      if (e.op === 'untap' || e.op === 'tap') {
         if (!['source', 'target'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
         if (effect.target === 'source') e.subject = 'source';
@@ -419,8 +467,20 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           d.keywords.push(a.keyword);
         }
         break;
+      case 'combatRestriction':
+        fields(a, ['kind', 'restriction'], path);
+        if (!['cannotAttack', 'cannotBlock', 'unblockable'].includes(a.restriction))
+          problem('UNSUPPORTED_RESTRICTION', path, 'Unsupported combat restriction.');
+        else d[a.restriction] = true;
+        break;
+      case 'cycling':
+        fields(a, ['kind', 'cost'], path);
+        if (d.cycling) problem('DUPLICATE_CYCLING', path, 'Only one cycling ability is supported.');
+        d.cycling = mana(a.cost, `${path}.cost`);
+        break;
       case 'mana':
-        fields(a, ['kind', 'produces'], path);
+        fields(a, ['kind', 'produces', 'sacrificeSelf'], path);
+        if (a.sacrificeSelf !== undefined) d.manaSacrifice = a.sacrificeSelf;
         if (d.mana)
           problem('MULTIPLE_MANA', path, 'Only one single-mana source ability is supported.');
         if (!Array.isArray(a.produces) || !a.produces.length)
@@ -461,12 +521,13 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           });
         break;
       case 'activated':
-        fields(a, ['kind', 'cost', 'target', 'effects', 'text'], path);
+        fields(a, ['kind', 'cost', 'target', 'effects', 'text', 'timing'], path);
         (d.activated ??= []).push({
           cost: cost(a.cost, `${path}.cost`),
           ...(a.target !== undefined ? { target: target(a.target, `${path}.target`) } : {}),
           effects: effects(a.effects, `${path}.effects`),
           ...(a.text !== undefined ? { text: a.text } : {}),
+          ...(a.timing !== undefined ? { timing: a.timing } : {}),
         });
         break;
       case 'triggered': {
@@ -496,14 +557,23 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         d.entersTapped = true;
         break;
       case 'anthem':
-        fields(a, ['kind', 'power', 'toughness'], path);
+        fields(a, ['kind', 'power', 'toughness', 'where', 'excludeSource', 'keywords'], path);
         if (d.static)
           problem(
             'MULTIPLE_STATIC',
             path,
             'This profile supports one controller-wide creature anthem.',
           );
-        d.static = { kind: 'anthem', power: a.power, toughness: a.toughness };
+        d.static = {
+          kind: 'anthem',
+          power: a.power,
+          toughness: a.toughness,
+          ...Object.fromEntries(
+            ['where', 'excludeSource', 'keywords']
+              .filter((k) => a[k] !== undefined)
+              .map((k) => [k, structuredClone(a[k])]),
+          ),
+        };
         break;
       case 'aura':
         fields(a, ['kind', 'enchant', 'restriction'], path);

@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "05d24b0c-904a-46b6-b42a-96a4d91a0dd4",
+  "name": "Wastes",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": ["basic"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {C}.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C"]
+    }
+  ]
+}

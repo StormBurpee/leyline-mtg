@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/elf-warrior-token",
+  "name": "Elf Warrior Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Elf", "Warrior"],
+    "colors": ["G"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

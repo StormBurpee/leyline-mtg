@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "014d0bcd-b80f-4c43-8f00-f4c31e8f3370",
+  "name": "Yargle, Goliath of Otaria",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Frog", "Spirit"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 3,
+    "toughness": 9
+  },
+  "rulesText": "",
+  "abilities": []
+}

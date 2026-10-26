@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "192dd1e2-b6c2-432a-a1b4-e52ff39b3db2",
+  "name": "News Helicopter",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Construct"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Flying\nWhen this creature enters, create a 1/1 green and white Human Citizen creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/human-citizen-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

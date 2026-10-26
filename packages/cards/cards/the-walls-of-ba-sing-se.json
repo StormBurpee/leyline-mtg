@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "af7d7da5-aff5-48e1-901a-f81257a85f71",
+  "name": "The Walls of Ba Sing Se",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Wall"],
+    "colors": [],
+    "manaCost": "{8}",
+    "power": 0,
+    "toughness": 30
+  },
+  "rulesText": "Defender\nOther permanents you control have indestructible.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "defender"
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "controller": "you"
+      },
+      "excludeSource": true,
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["indestructible"]
+    }
+  ]
+}

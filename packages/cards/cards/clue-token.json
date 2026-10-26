@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/clue-token",
+  "name": "Clue Token",
+  "characteristics": {
+    "types": ["artifact"],
+    "subtypes": ["Clue"],
+    "colors": [],
+    "manaCost": null,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "{2}, Sacrifice this artifact: Draw a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

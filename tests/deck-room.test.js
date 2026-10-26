@@ -52,7 +52,7 @@ test('deck room and builder escape custom titles and clearly gate incomplete lis
     mode: 'bot',
     seed: 7,
   };
-  assert.equal(deckEntries(ui).length, Object.keys(DECKS).length + 1);
+  assert.equal(deckEntries(ui).length, Object.keys(DECKS).length + 2);
   const room = deckRoom(ui, {});
   assert.ok(room.includes('&lt;script&gt;'));
   assert.ok(room.includes('Needs attention'));

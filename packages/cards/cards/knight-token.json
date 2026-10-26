@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/knight-token",
+  "name": "Knight Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Knight"],
+    "colors": ["W"],
+    "manaCost": null,
+    "power": 3,
+    "toughness": 3,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

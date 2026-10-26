@@ -117,7 +117,7 @@
   {
     "oracleId": "c2c47e13-b581-41a8-a4af-542557a6249a",
     "name": "Il Mheg Pixie",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fcb6c6d4-ea8d-49cf-b6df-377084bdb757",
@@ -147,7 +147,7 @@
   {
     "oracleId": "3fa71348-fa4d-4f39-a451-cf1570591991",
     "name": "Imperious Perfect",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "b77764fe-bc79-410a-995a-ac392f5b46b8",
@@ -212,7 +212,7 @@
   {
     "oracleId": "d398dca3-f3a5-44c9-998f-b4fce9e5c2bf",
     "name": "Infestation Sage",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "666b34b5-a0c2-43e3-befd-7c3979313682",
@@ -327,7 +327,7 @@
   {
     "oracleId": "b7140f72-91b6-4be4-8d71-c019e64c2351",
     "name": "Insomnia, Crown City",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "be87e410-4302-43ee-b880-56eedf2b3648",
@@ -367,7 +367,7 @@
   {
     "oracleId": "2283e409-c6c7-4de9-899b-2b3caea5f35e",
     "name": "Instant Ramen",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ded2b1b7-8c12-4f6f-a3be-a8f7b62b0819",
@@ -442,7 +442,7 @@
   {
     "oracleId": "94023b23-339a-426e-85cc-cc361ef68754",
     "name": "Intrepid Tenderfoot",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "147d1e5c-fcfd-4115-a2f9-bea9b7ad7bb6",
@@ -462,7 +462,7 @@
   {
     "oracleId": "185316ff-6fb7-4b5c-8a60-3238674562a6",
     "name": "Invasion Reinforcements",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "97369152-3b85-4cf1-aeb9-b3a8f1c37611",
@@ -582,7 +582,7 @@
   {
     "oracleId": "fab5f694-4a9c-4e72-b164-f236e8212ff7",
     "name": "Ironpaw Aspirant",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "1c77b4da-b580-4ce9-b127-76de674f5694",
@@ -642,6 +642,6 @@
   {
     "oracleId": "bf75a3d1-f184-4b48-a913-21caee1db084",
     "name": "Izzet Guildgate",
-    "status": "unsupported"
+    "status": "curated"
   }
 ]

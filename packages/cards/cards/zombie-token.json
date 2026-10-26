@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/zombie-token",
+  "name": "Zombie Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Zombie"],
+    "colors": ["B"],
+    "manaCost": null,
+    "power": 2,
+    "toughness": 2,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

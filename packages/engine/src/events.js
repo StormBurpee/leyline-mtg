@@ -47,11 +47,11 @@ export function validateEventSpec(value) {
   const errors = [];
   if (
     Object.keys(spec).some(
-      (key) => !['event', 'object', 'controller', 'filter', 'excludeSource'].includes(key),
+      (key) => !['event', 'object', 'controller', 'filter', 'excludeSource', 'step'].includes(key),
     )
   )
     errors.push('Unsupported event predicate field.');
-  if (!['enter', 'cast', 'dies', 'attack'].includes(spec.event))
+  if (!['enter', 'cast', 'dies', 'attack', 'step'].includes(spec.event))
     errors.push('Unsupported event family.');
   if (
     spec.object !== undefined &&
@@ -60,6 +60,12 @@ export function validateEventSpec(value) {
     errors.push(
       'Source identity predicates currently apply to enter, dies and attack events only.',
     );
+  if (spec.event === 'step') {
+    if (!['upkeep', 'beginCombat', 'end', 'main1', 'main2'].includes(spec.step))
+      errors.push('Unsupported beginning-of-step trigger.');
+    if (spec.object !== undefined || spec.filter !== undefined || spec.excludeSource !== undefined)
+      errors.push('Step events have no object filter.');
+  } else if (spec.step !== undefined) errors.push('Only step events take a step.');
   if (spec.controller !== undefined && !['you', 'opponent'].includes(spec.controller))
     errors.push('Unknown event controller relation.');
   if (spec.excludeSource !== undefined && typeof spec.excludeSource !== 'boolean')
@@ -72,6 +78,7 @@ export function validateEventSpec(value) {
 export function matchesEvent(value, event, facts, source) {
   const spec = eventSpec(value);
   if (!spec || spec.event !== event) return false;
+  if (event === 'step' && spec.step !== facts.step) return false;
   if (spec.object === 'source' && facts.id !== source.id) return false;
   if (spec.excludeSource && facts.id === source.id) return false;
   if (spec.controller === 'you' && facts.controller !== source.controller) return false;

@@ -122,7 +122,7 @@
   {
     "oracleId": "192dd1e2-b6c2-432a-a1b4-e52ff39b3db2",
     "name": "News Helicopter",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "429368e6-3de1-4a44-a062-86cbbb73e243",
@@ -332,7 +332,7 @@
   {
     "oracleId": "2d400c01-d2d0-442a-bc3d-cf106a754dab",
     "name": "Not on My Watch",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "9635d79e-62ec-4d80-ae37-2793489cc13b",
@@ -347,7 +347,7 @@
   {
     "oracleId": "c206bdcb-d2c4-4bda-a979-6c0627ef8f73",
     "name": "Novice Inspector",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "da82ca96-a613-4d00-9e6b-1fece4fc23d0",

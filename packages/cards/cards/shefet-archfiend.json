@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "06355d3f-a82d-4f12-a399-016a12824795",
+  "name": "Shefet Archfiend",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Demon"],
+    "colors": ["B"],
+    "manaCost": "{5}{B}{B}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Flying\nWhen this creature enters, all other creatures get -2/-2 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "type": "creature"
+          },
+          "excludeSource": true,
+          "power": -2,
+          "toughness": -2,
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}"
+    }
+  ]
+}

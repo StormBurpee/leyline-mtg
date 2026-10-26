@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "072db429-3838-42ba-89b6-e26cbce22af9",
+  "name": "Pest Control",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "W"],
+    "manaCost": "{W}{B}"
+  },
+  "rulesText": "Destroy all nonland permanents with mana value 1 or less.\nCycling {2} ({2}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "cycling",
+      "cost": "{2}"
+    },
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "destroyAll",
+          "where": {
+            "all": [
+              {
+                "not": {
+                  "type": "land"
+                }
+              },
+              {
+                "manaValue": {
+                  "lte": 1
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

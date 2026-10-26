@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4d2e233c-0173-417f-82a0-1e692a400ae1",
+  "name": "Oscorp Research Team",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Scientist"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 1,
+    "toughness": 5
+  },
+  "rulesText": "{6}{U}: Draw two cards.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{6}{U}"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

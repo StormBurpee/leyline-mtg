@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dda4b515-49c0-43fe-9f6a-36defa326bb1",
+  "name": "Maalfeld Twins",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Zombie"],
+    "colors": ["B"],
+    "manaCost": "{5}{B}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When this creature dies, create two 2/2 black Zombie creature tokens.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/zombie-token",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

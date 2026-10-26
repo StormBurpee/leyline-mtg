@@ -1,4 +1,4 @@
-import { COLORS, controlled, definition, isSick, requireRule, emit } from './model.js';
+import { COLORS, controlled, definition, isSick, requireRule, emit, move } from './model.js';
 export function manaOptions(s, o) {
   const mana = definition(s, o).mana;
   return mana ? (Array.isArray(mana) ? mana : [mana]) : [];
@@ -26,6 +26,10 @@ export function tapForMana(s, id, p, color) {
   o.tapped = true;
   s.players[p].mana[chosen]++;
   emit(s, 'mana', { player: p, objectId: id, color: chosen });
+  if (definition(s, o).manaSacrifice) {
+    emit(s, 'sacrificed', { player: p, objectId: id, name: o.name });
+    move(s, o, 'graveyard');
+  }
 }
 /** Pure unit-capacity matching. Flexible sources must not strand a colored cost. */
 export function planPayment(s, p, cost, { autoTap = true, excludeSources = [] } = {}) {
@@ -34,6 +38,14 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [] } 
   const sources = autoTap
     ? controlled(s, p).filter((o) => !excludeSources.includes(o.id) && canTapForMana(s, o, p))
     : [];
+  const sacrificial = sources.filter((o) => definition(s, o).manaSacrifice).map((o) => o.id);
+  if (sacrificial.length) {
+    const preserve = planPayment(s, p, cost, {
+      autoTap,
+      excludeSources: [...excludeSources, ...sacrificial],
+    });
+    if (preserve) return preserve;
+  }
   const demand = [];
   for (const color of COLORS) {
     const amount = cost[color] ?? 0,
