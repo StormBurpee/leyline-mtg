@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "49c7b7c6-c8dc-4871-9103-b057d2034c3e",
+  "name": "Vampire Sovereign",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Noble"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}{B}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this creature enters, target opponent loses 3 life and you gain 3 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "target",
+          "amount": 3
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

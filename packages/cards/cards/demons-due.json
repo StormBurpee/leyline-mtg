@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bf65a5f5-5536-4616-a09e-2416439c7bc6",
+  "name": "Demon's Due",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}"
+  },
+  "rulesText": "Scry 2, then draw two cards. You lose 2 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "scry",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

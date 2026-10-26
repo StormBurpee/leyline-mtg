@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "84de4fec-2f38-4293-93d3-b3882c5aac14",
+  "name": "Ambition's Cost",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}"
+  },
+  "rulesText": "You draw three cards and lose 3 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

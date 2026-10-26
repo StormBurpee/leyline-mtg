@@ -386,7 +386,7 @@ export function exportReplay(s) {
 export function replay(record) {
   requireRule(
     record &&
-      [VERSION, '0.8.0', '0.6.0', '0.5.0', '0.4.0', '0.3.0', '0.2.0', '0.1.0'].includes(
+      [VERSION, '0.9.0', '0.8.0', '0.6.0', '0.5.0', '0.4.0', '0.3.0', '0.2.0', '0.1.0'].includes(
         record.version,
       ) &&
       (record.schemaVersion === undefined || record.schemaVersion === REPLAY_SCHEMA_VERSION),

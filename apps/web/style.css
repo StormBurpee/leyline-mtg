@@ -2315,3 +2315,27 @@ html[data-motion='reduced'] .hand-card:focus-visible {
   fill: none;
   filter: drop-shadow(0 1px 4px #000);
 }
+.target-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+.target-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  white-space: normal;
+  text-align: left;
+}
+.target-option span {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: capitalize;
+}
+@media (max-width: 500px) {
+  .target-grid {
+    grid-template-columns: 1fr;
+  }
+}

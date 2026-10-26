@@ -117,21 +117,22 @@ export function installCardDrag(root, { begin, commit, end, feedback }) {
         g.aim.append(g.path, g.dot);
         document.body.append(g.aim);
       }
-      const stackTargets = g.zones.filter((zone) => zone.stackLabel);
+      const stackTargets = g.zones.filter((zone) => zone.stackLabel || zone.trayLabel);
       if (stackTargets.length) {
         g.tray = document.createElement('div');
         g.tray.className = 'drag-stack-tray';
         const heading = document.createElement('span');
         heading.className = 'eyebrow';
-        heading.textContent = 'Drop onto a spell';
+        heading.textContent = 'Drop onto a target';
         g.tray.append(heading);
         for (const zone of stackTargets) {
           const element = document.createElement('div');
           element.className = 'drag-stack-target';
-          element.textContent = zone.stackLabel;
+          element.textContent = zone.trayLabel ?? zone.stackLabel;
           g.tray.append(element);
           g.zones.push({ ...zone, element });
         }
+        g.zones = g.zones.filter((zone) => !zone.proxyOnly || g.tray.contains(zone.element));
         document.body.append(g.tray);
       }
       g.source.classList.add('drag-source');

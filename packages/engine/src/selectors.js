@@ -30,7 +30,7 @@ const PRESETS = freeze({
   },
   permanent: { scope: 'permanent' },
 });
-const SCOPES = new Set(['permanent', 'spell', 'player', 'damageable']);
+const SCOPES = new Set(['permanent', 'spell', 'player', 'damageable', 'graveyard']);
 const COMPARISONS = new Set(['eq', 'ne', 'lt', 'lte', 'gt', 'gte']);
 export function targetSpec(value) {
   return typeof value === 'string'
@@ -169,7 +169,9 @@ export function effectTargetCompatible(op, value) {
     );
   if (op === 'modify') return spec.scope === 'permanent' && impliesCreature(spec.where);
   if (op === 'counter') return spec.scope === 'spell';
-  if (op === 'mill') return spec.scope === 'player';
+  if (['mill', 'draw', 'discard', 'gainLife', 'loseLife', 'scry', 'surveil'].includes(op))
+    return spec.scope === 'player';
+  if (op === 'moveTarget') return ['permanent', 'graveyard'].includes(spec.scope);
   if (['destroy', 'bounce'].includes(op)) return spec.scope === 'permanent';
   return true;
 }

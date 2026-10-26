@@ -108,6 +108,8 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         ![
           'damage',
           'gainLife',
+          'loseLife',
+          'moveTarget',
           'draw',
           'mill',
           'scry',
@@ -136,6 +138,8 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         damage: ['target', 'amount'],
         damageOpponent: ['amount'],
         gainLife: ['target', 'amount'],
+        loseLife: ['target', 'amount'],
+        moveTarget: ['target', 'destination', 'controller', 'tapped'],
         draw: ['target', 'amount'],
         mill: ['target', 'amount'],
         scry: ['target', 'amount'],
@@ -161,19 +165,26 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       const e = {
         op: nativeOp === 'damage' && effect.target === 'opponent' ? 'damageOpponent' : nativeOp,
       };
-      if (['damage', 'damageOpponent', 'gainLife', 'counterOn'].includes(e.op))
+      if (['damage', 'damageOpponent', 'gainLife', 'loseLife', 'counterOn'].includes(e.op))
         e.amount = effect.amount;
       if (['draw', 'mill', 'scry', 'surveil', 'discard', 'token'].includes(e.op))
         e.count = effect.amount;
-      if (
-        ['draw', 'gainLife', 'scry', 'surveil', 'discard'].includes(e.op) &&
-        effect.target !== 'controller'
-      )
-        problem(
-          'UNSUPPORTED_RECIPIENT',
-          `${p}.target`,
-          'This instruction currently affects its controller only.',
-        );
+      if (['draw', 'gainLife', 'loseLife', 'scry', 'surveil', 'discard'].includes(e.op)) {
+        if (!['controller', 'opponent', 'target'].includes(effect.target))
+          problem(
+            'UNSUPPORTED_RECIPIENT',
+            `${p}.target`,
+            'Expected controller, opponent or target.',
+          );
+        else if (effect.target !== 'controller') e.player = effect.target;
+      }
+      if (e.op === 'moveTarget') {
+        if (effect.target !== 'target')
+          problem('UNSUPPORTED_BINDING', `${p}.target`, 'A zone change needs a declared target.');
+        e.destination = effect.destination;
+        if (effect.controller !== undefined) e.controller = effect.controller;
+        if (effect.tapped !== undefined) e.tapped = effect.tapped;
+      }
       if (['damage', 'counter', 'bounce', 'destroy'].includes(e.op) && effect.target !== 'target')
         problem(
           'UNSUPPORTED_BINDING',

@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a3925dfd-62b0-44ef-8545-7bee92cad5a2",
+  "name": "Phyrexian Gargantua",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Phyrexian", "Horror"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}{B}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, you draw two cards and you lose 2 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

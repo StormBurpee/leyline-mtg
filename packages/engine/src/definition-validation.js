@@ -97,12 +97,14 @@ function validateEffects(effects, path, target, errors) {
     const schema = {
       damage: ['amount'],
       damageOpponent: ['amount'],
-      gainLife: ['amount'],
-      draw: ['count'],
+      gainLife: ['amount', 'player'],
+      loseLife: ['amount', 'player'],
+      moveTarget: ['destination', 'controller', 'tapped'],
+      draw: ['count', 'player'],
       mill: ['count', 'player'],
-      scry: ['count'],
-      surveil: ['count'],
-      discard: ['count'],
+      scry: ['count', 'player'],
+      surveil: ['count', 'player'],
+      discard: ['count', 'player'],
       counter: [],
       bounce: [],
       destroy: [],
@@ -118,7 +120,10 @@ function validateEffects(effects, path, target, errors) {
     for (const key of Object.keys(e))
       if (key !== 'op' && !schema.includes(key))
         errors.push(`${p}.${key}: unsupported effect parameter.`);
-    if (['damage', 'damageOpponent', 'gainLife', 'counterOn'].includes(e.op) && !natural(e.amount))
+    if (
+      ['damage', 'damageOpponent', 'gainLife', 'loseLife', 'counterOn'].includes(e.op) &&
+      !natural(e.amount)
+    )
       errors.push(`${p}.amount: expected a nonnegative safe integer.`);
     if (
       ['draw', 'mill', 'token', 'scry', 'surveil', 'discard'].includes(e.op) &&
@@ -131,6 +136,27 @@ function validateEffects(effects, path, target, errors) {
         (e.player === 'target' && !effectTargetCompatible('mill', target)))
     )
       errors.push(`${p}: mill requires a supported player selector and compatible target.`);
+    if (
+      ['draw', 'discard', 'gainLife', 'loseLife', 'scry', 'surveil'].includes(e.op) &&
+      e.player !== undefined &&
+      (!['controller', 'opponent', 'target'].includes(e.player) ||
+        (e.player === 'target' && !effectTargetCompatible(e.op, target)))
+    )
+      errors.push(`${p}.player: expected a compatible player recipient.`);
+    if (e.op === 'moveTarget') {
+      if (!['hand', 'battlefield', 'exile'].includes(e.destination))
+        errors.push(`${p}.destination: unsupported zone.`);
+      if (
+        e.controller !== undefined &&
+        (e.destination !== 'battlefield' || !['owner', 'you'].includes(e.controller))
+      )
+        errors.push(`${p}.controller: only battlefield entry can change control.`);
+      if (
+        e.tapped !== undefined &&
+        (e.destination !== 'battlefield' || typeof e.tapped !== 'boolean')
+      )
+        errors.push(`${p}.tapped: expected a battlefield entry flag.`);
+    }
     if (e.op === 'token' && (typeof e.definition !== 'string' || !e.definition))
       errors.push(`${p}.definition: expected a token definition name.`);
     if (e.op === 'modify') {
@@ -147,7 +173,7 @@ function validateEffects(effects, path, target, errors) {
     if (['counterOn', 'untap'].includes(e.op) && e.subject !== 'source')
       errors.push(`${p}.subject: only source is supported.`);
     if (
-      ['damage', 'counter', 'bounce', 'destroy', 'modify'].includes(e.op) &&
+      ['damage', 'counter', 'bounce', 'destroy', 'modify', 'moveTarget'].includes(e.op) &&
       e.subject !== 'source' &&
       !effectTargetCompatible(e.op, target)
     )

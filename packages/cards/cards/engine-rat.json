@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7e29aae9-815a-4999-ace6-7bc860acde32",
+  "name": "Engine Rat",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Zombie", "Rat"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Deathtouch\n{5}{B}: Each opponent loses 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{5}{B}"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 2
+        }
+      ],
+      "text": "Each opponent loses 2 life."
+    }
+  ]
+}

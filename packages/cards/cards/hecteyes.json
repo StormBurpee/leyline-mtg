@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7a11b4ed-430d-4ef8-b0c1-6a022f12448c",
+  "name": "Hecteyes",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Ooze", "Horror"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, each opponent discards a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

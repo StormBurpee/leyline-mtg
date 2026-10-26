@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c0045925-25bf-403c-b721-5f05ba30985b",
+  "name": "Vampire Neonate",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 0,
+    "toughness": 3
+  },
+  "rulesText": "{2}, {T}: Each opponent loses 1 life and you gain 1 life.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{2}"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "text": "Each opponent loses 1 life and you gain 1 life."
+    }
+  ]
+}

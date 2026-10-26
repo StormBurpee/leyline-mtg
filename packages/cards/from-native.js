@@ -23,12 +23,22 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         case 'damageOpponent':
           return { op: 'damage', target: 'opponent', amount: e.amount };
         case 'gainLife':
-          return { op: 'gainLife', target: 'controller', amount: e.amount };
+          return { op: 'gainLife', target: e.player ?? 'controller', amount: e.amount };
+        case 'loseLife':
+          return { op: 'loseLife', target: e.player ?? 'controller', amount: e.amount };
+        case 'moveTarget':
+          return {
+            op: 'moveTarget',
+            target: 'target',
+            destination: e.destination,
+            ...(e.controller !== undefined ? { controller: e.controller } : {}),
+            ...(e.tapped !== undefined ? { tapped: e.tapped } : {}),
+          };
         case 'draw':
         case 'scry':
         case 'surveil':
         case 'discard':
-          return { op: e.op, target: 'controller', amount: e.count };
+          return { op: e.op, target: e.player ?? 'controller', amount: e.count };
         case 'mill':
           return { op: 'mill', target: e.player, amount: e.count };
         case 'counter':

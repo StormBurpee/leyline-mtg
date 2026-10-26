@@ -1,5 +1,5 @@
 {
-  "version": "0.9.0",
+  "version": "0.10.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -67,6 +67,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ambition's Cost",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Ancestral Reminiscence",
       "type": "sorcery",
       "keywords": [],
@@ -81,6 +89,22 @@
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Archaeomender",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Archers' Parapet",
+      "type": "creature",
+      "keywords": ["defender"],
+      "opcodes": ["loseLife"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Archive Dragon",
@@ -112,6 +136,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Auroral Procession",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Avengers Hangar",
       "type": "land",
       "keywords": [],
@@ -126,6 +158,14 @@
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Basilica Bell-Haunt",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Bear Cub",
@@ -208,6 +248,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Bloodhunter Bat",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Blossoming Defense",
       "type": "instant",
       "keywords": [],
@@ -272,12 +320,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Burglar Rat",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Burrog Banemaker",
       "type": "creature",
       "keywords": ["deathtouch"],
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Cadaver Imp",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
     },
     {
       "name": "Cancel",
@@ -360,10 +424,26 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Corrupt Court Official",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Counterspell",
       "type": "instant",
       "keywords": [],
       "opcodes": ["counter"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Cruel Truths",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["surveil", "draw", "loseLife"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -392,6 +472,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Davriel's Shadowfugue",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["discard", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dawn's Light Archer",
       "type": "creature",
       "keywords": ["flash", "reach"],
@@ -406,6 +494,14 @@
       "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Demon's Due",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["scry", "draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Desperate Bloodseeker",
@@ -432,10 +528,26 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Diresight",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["surveil", "draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Disenchant",
       "type": "instant",
       "keywords": [],
       "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Disentomb",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -480,10 +592,26 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Dream Beavers",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife", "gainLife", "scry"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Druid of the Cowl",
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dusk Legion Zealot",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -496,6 +624,14 @@
         "life": 2
       },
       "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Elderfang Disciple",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -531,6 +667,30 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Engine Rat",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": ["loseLife"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Erase",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Eternal Witness",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Eumidian Terrabotanist",
       "type": "creature",
       "keywords": [],
@@ -544,6 +704,14 @@
       "keywords": [],
       "opcodes": ["bounce"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Fade into Antiquity",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -585,6 +753,22 @@
       "opcodes": ["surveil"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Final Death",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Final Reward",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Fire Elemental",
@@ -667,6 +851,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Funeral Rites",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife", "mill"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Galewind Moose",
       "type": "creature",
       "keywords": ["flash", "vigilance", "reach", "trample"],
@@ -703,6 +895,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Glidedive Duo",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife", "gainLife"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -747,6 +947,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gravedigger",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Great Forest Druid",
       "type": "creature",
       "keywords": [],
@@ -787,6 +995,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hecteyes",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Hell's Kitchen",
       "type": "land",
       "keywords": [],
@@ -811,6 +1027,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Hierophant's Chalice",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Highborn Vampire",
       "type": "creature",
       "keywords": [],
@@ -833,6 +1057,14 @@
       "opcodes": ["gainLife", "scry"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Honored Heirloom",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Horrid Vigor",
@@ -911,6 +1143,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["modify", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Infernal Grasp",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy", "loseLife"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1131,6 +1371,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Mind Rot",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Mind Sculpt",
       "type": "sorcery",
       "keywords": [],
@@ -1219,6 +1467,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Nezumi Informant",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Night's Whisper",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Nomad Outpost",
       "type": "land",
       "keywords": [],
@@ -1259,6 +1523,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Opportunity",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Opt",
       "type": "instant",
       "keywords": [],
@@ -1295,6 +1567,14 @@
       "type": "creature",
       "keywords": ["flying"],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Overflowing Insight",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1344,6 +1624,22 @@
         }
       },
       "triggers": ["controllerCastsArtifact"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Phyrexian Gargantua",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Phyrexian Rager",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1467,10 +1763,34 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Raise Dead",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Raise the Alarm",
       "type": "instant",
       "keywords": [],
       "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rakshasa's Secret",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["discard", "mill"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rank Rat",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1491,6 +1811,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Read the Bones",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["scry", "draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Rearing Embermare",
       "type": "creature",
       "keywords": ["reach", "haste"],
@@ -1507,11 +1835,43 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Reckless Scholar",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "discard"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Reclamation Sage",
       "type": "creature",
       "keywords": [],
       "opcodes": ["destroy"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Recollect",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Recover",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Refurbish",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1523,11 +1883,27 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Regrowth",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Remnant Elemental",
       "type": "creature",
       "keywords": ["reach"],
       "opcodes": ["modify"],
       "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Revoke Existence",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1744,6 +2120,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Siege Rhino",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Sign in Blood",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Silvercoat Lion",
       "type": "creature",
       "keywords": [],
@@ -1779,6 +2171,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Skirmish Rhino",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Skymarch Bloodletter",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Skyraker Giant",
       "type": "creature",
       "keywords": ["reach"],
@@ -1803,6 +2211,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sneering Shadewriter",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Soul Warden",
       "type": "creature",
       "keywords": [],
@@ -1811,10 +2227,26 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sovereign's Bite",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spectacle Summit",
       "type": "land",
       "keywords": [],
       "opcodes": ["surveil"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Specter of the Fens",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife", "gainLife"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -1871,6 +2303,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["surveil"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Stony-Voiced Goblins",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2107,6 +2547,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Tithebearer Giant",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Tomakul Honor Guard",
       "type": "creature",
       "keywords": [],
@@ -2128,11 +2576,35 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Toxic Abomination",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Tranquil Cove",
       "type": "land",
       "keywords": [],
       "opcodes": ["gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "True Love's Kiss",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Trusty Packbeast",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -2176,6 +2648,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Vampire Neonate",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Vampire Nighthawk",
       "type": "creature",
       "keywords": ["flying", "deathtouch", "lifelink"],
@@ -2184,10 +2664,58 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Vampire Opportunist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Vampire Sovereign",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Vampire Spawn",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Vault Plunderer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Virus Beetle",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Wakandan Drone Flock",
       "type": "creature",
       "keywords": ["flying"],
       "opcodes": ["scry"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Wander Off",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2286,6 +2814,14 @@
       "type": "creature",
       "keywords": ["first strike"],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Zombify",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
       "triggers": [],
       "activatedAbilities": 0
     }

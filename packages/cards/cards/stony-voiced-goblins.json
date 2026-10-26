@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d1dceaa7-d33e-4067-9e1b-8a8978a12933",
+  "name": "Stony-Voiced Goblins",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Bard"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, each opponent discards a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

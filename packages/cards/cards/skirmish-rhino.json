@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "40eb7f43-7cee-41a1-a4d1-f34ee125ccd1",
+  "name": "Skirmish Rhino",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rhino"],
+    "colors": ["W", "B", "G"],
+    "manaCost": "{W}{B}{G}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Trample\nWhen this creature enters, each opponent loses 2 life and you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 2
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

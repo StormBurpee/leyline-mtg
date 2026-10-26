@@ -395,6 +395,44 @@ function showSettings() {
     `<div class="options-row"><label class="toggle"><input type="checkbox" id="auto-yield" ${ui.autoYield ? 'checked' : ''}>Yield when no response is available</label><label class="toggle"><input type="checkbox" id="hold-priority" ${ui.holdPriority ? 'checked' : ''}>Hold priority after casting</label><label class="toggle"><input type="checkbox" id="reduce-motion" ${ui.reduceMotion ? 'checked' : ''}>Reduce motion</label></div><p class="small muted">System reduced-motion preferences are always respected.</p><p style="margin-top:22px">Automatic yielding stops whenever you can cast a spell. Disable it to inspect every priority window. Mana sources are paid automatically when casting, or click a land to float mana manually.</p><p style="margin-top:12px">Drag a card onto your field to play, or onto a highlighted target to cast. Drag creatures toward your opponent to select attackers, or onto an attacker to assign a blocker, then confirm the group. Keyboard: Space passes priority. Escape cancels a drag or card selection. All match controls are reachable with Tab.</p>`,
   );
 }
+function showTargetMenu() {
+  const choice = state.choice;
+  const commands =
+    choice?.kind === 'triggerTarget'
+      ? choice.targets.map((target) => ({ type: 'chooseTriggerTarget', target }))
+      : legalActions(state, viewer()).filter(
+          (command) =>
+            command.card === ui.selected &&
+            command.target &&
+            command.type === (ui.activation === null ? 'cast' : 'activate') &&
+            (ui.activation === null || command.ability === ui.activation),
+        );
+  const name =
+    choice?.kind === 'triggerTarget' ? choice.entry.name : state.objects[ui.selected]?.name;
+  openDialog(
+    `Target for ${name}`,
+    `<p>Choose a legal target. The spell or ability will still use the stack.</p><div class="target-grid">${
+      commands
+        .map((command, index) => {
+          const target = command.target,
+            object = target.kind === 'object' ? state.objects[target.id] : null;
+          const label =
+            object?.name ??
+            (target.kind === 'player'
+              ? state.players[target.id].name
+              : state.stack.find((entry) => entry.id === target.id)?.name);
+          const detail = object
+            ? `${object.zone} · ${state.players[object.owner].name}`
+            : target.kind;
+          return `<button class="btn target-option" data-action="submitTargetChoice" data-index="${index}"><strong>${escape(label)}</strong><span>${escape(detail)}</span></button>`;
+        })
+        .join('') || '<p>No legal targets remain.</p>'
+    }</div>`,
+    '<button class="btn" data-action="closeDialog">Back to table</button>',
+  );
+  dialog._targetCommands = commands;
+  dialog._targetRevision = state.revision;
+}
 async function action(name, el) {
   switch (name) {
     case 'home':
@@ -559,32 +597,13 @@ async function action(name, el) {
       if (ok) closeDialog();
       break;
     }
-    case 'triggerTargets': {
-      const choice = state.choice;
-      if (choice?.kind !== 'triggerTarget') break;
-      openDialog(
-        `Target for ${choice.entry.name}`,
-        '<p>This choice puts the triggered ability on the stack. It does not resolve it.</p>',
-        choice.targets
-          .map((target, index) => {
-            const name =
-              target.kind === 'player'
-                ? state.players[target.id].name
-                : target.kind === 'object'
-                  ? state.objects[target.id].name
-                  : state.stack.find((entry) => entry.id === target.id)?.name;
-            return `<button class="btn" data-action="chooseTriggerTarget" data-index="${index}">${escape(name)} · ${escape(target.kind)}</button>`;
-          })
-          .join(''),
-      );
+    case 'triggerTargets':
+    case 'spellTargets':
+      showTargetMenu();
       break;
-    }
-    case 'chooseTriggerTarget': {
-      const target =
-        state.choice?.kind === 'triggerTarget'
-          ? state.choice.targets[Number(el.dataset.index)]
-          : null;
-      if (target && send({ type: 'chooseTriggerTarget', target })) closeDialog();
+    case 'submitTargetChoice': {
+      const command = dialog._targetCommands?.[Number(el.dataset.index)];
+      if (command && send({ ...command, expectedRevision: dialog._targetRevision })) closeDialog();
       break;
     }
     case 'orderTriggers':
@@ -620,6 +639,12 @@ async function action(name, el) {
       if (a.target) {
         ui.targeting = true;
         render();
+        if (
+          targetsFor(state, a.target, viewer()).some(
+            (target) => state.objects[target.id]?.zone === 'graveyard',
+          )
+        )
+          showTargetMenu();
       } else send({ type: 'activate', card: id, ability: index });
       break;
     }
@@ -635,6 +660,12 @@ async function action(name, el) {
         if (targetsFor(state, d.target, viewer()).some((target) => target.kind === 'stack'))
           ui.inspectorOpen = true;
         render();
+        if (
+          targetsFor(state, d.target, viewer()).some(
+            (target) => state.objects[target.id]?.zone === 'graveyard',
+          )
+        )
+          showTargetMenu();
       } else send({ type: 'cast', card: o.id });
       break;
     }
@@ -679,6 +710,7 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleBurialReplay':
     case 'exampleTargetReplay':
     case 'exampleInteractionReplay':
     case 'exampleOptionalReplay':
@@ -686,15 +718,17 @@ async function action(name, el) {
     case 'exampleReplay': {
       try {
         const response = await fetch(
-          name === 'exampleTargetReplay'
-            ? './example-target-replay.json'
-            : name === 'exampleInteractionReplay'
-              ? './example-interaction-replay.json'
-              : name === 'exampleOptionalReplay'
-                ? './example-optional-replay.json'
-                : name === 'exampleWardReplay'
-                  ? './example-ward-replay.json'
-                  : './example-replay.json',
+          name === 'exampleBurialReplay'
+            ? './example-burial-replay.json'
+            : name === 'exampleTargetReplay'
+              ? './example-target-replay.json'
+              : name === 'exampleInteractionReplay'
+                ? './example-interaction-replay.json'
+                : name === 'exampleOptionalReplay'
+                  ? './example-optional-replay.json'
+                  : name === 'exampleWardReplay'
+                    ? './example-ward-replay.json'
+                    : './example-replay.json',
         );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();
@@ -800,7 +834,14 @@ const cardDrag = installCardDrag(app, {
           : target.kind === 'stack'
             ? `[data-stack="${CSS.escape(target.id)}"]`
             : `[data-card="${CSS.escape(target.id)}"]`;
-      const element = app.querySelector(selector);
+      const graveyard = target?.kind === 'object' && state.objects[target.id]?.zone === 'graveyard';
+      const element =
+        app.querySelector(selector) ??
+        (graveyard
+          ? app.querySelector(
+              `[data-zone="graveyard"][data-player="${state.objects[target.id].owner}"]`,
+            )
+          : null);
       if (!element) continue;
       const label =
         plan.kind === 'attack'
@@ -813,7 +854,9 @@ const cardDrag = installCardDrag(app, {
       zones.push({
         element,
         command: destination,
-        label,
+        label: graveyard ? `Release to target ${state.objects[target.id].name}` : label,
+        proxyOnly: graveyard,
+        trayLabel: graveyard ? state.objects[target.id].name : null,
         stackLabel:
           target?.kind === 'stack'
             ? state.stack.find((entry) => entry.id === target.id)?.name

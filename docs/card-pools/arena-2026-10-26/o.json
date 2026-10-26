@@ -887,7 +887,7 @@
   {
     "oracleId": "1f544a9f-c238-4858-be19-d6cd7d023dcc",
     "name": "Opportunity",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "1f438b8f-fe23-4f3b-ab2e-f6c33676c462",
@@ -1407,7 +1407,7 @@
   {
     "oracleId": "ff03a063-9634-4746-a208-9dbcde5c6bdb",
     "name": "Overflowing Insight",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "802f8bcd-9219-48cd-a4c5-d9ea9ef60c9e",

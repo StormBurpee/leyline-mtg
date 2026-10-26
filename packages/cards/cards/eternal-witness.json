@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "30b24e8e-3b0e-4d8e-90f3-f66eb7c1858c",
+  "name": "Eternal Witness",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Shaman"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}{G}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, you may return target card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "owner": "you"
+        }
+      },
+      "optional": true,
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "771210f7-0f00-4438-a886-a1f716e3d80e",
+  "name": "Funeral Rites",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "You draw two cards, lose 2 life, then mill two cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

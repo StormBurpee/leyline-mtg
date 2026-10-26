@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6358ee1c-3577-4196-bae4-29a3c160a66a",
+  "name": "Toxic Abomination",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Phyrexian", "Zombie"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, you lose 2 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

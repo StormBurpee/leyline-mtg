@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ad44cf74-b717-48fb-9fa2-77512024d76a",
+  "name": "Mind Rot",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Target player discards two cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "target",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

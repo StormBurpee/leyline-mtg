@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e1e489f6-37e5-469e-bca3-0e9d3fc3fa95",
+  "name": "Virus Beetle",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Insect"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, each opponent discards a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

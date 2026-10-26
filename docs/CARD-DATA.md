@@ -83,3 +83,5 @@ The compiler lowers into the existing runtime instruction set to preserve tested
 ## Targeted triggered abilities
 
 A triggered ability can declare the same `target` selector as a spell or activated ability. Targets are selected when the trigger is put on the stack, not when its event happens and not when it resolves. `optional: true` makes the effect optional at resolution; it does not make a required target optional. See [Reclamation Sage](../packages/cards/cards/reclamation-sage.json) and [Sage's Row Denizen](../packages/cards/cards/sages-row-denizen.json).
+
+Graveyard selectors use `scope: "graveyard"`, with ownership/type predicates. `moveTarget` supports recovery to hand, reanimation to the battlefield and exile; zone changes create new incarnations. Draw, discard, life gain and `loseLife` accept controller, opponent or selected-player recipients. Life loss does not trigger lifelink or count as damage. These operations do not imply library search, flashback, multi-target effects or generic Aura reattachment support.

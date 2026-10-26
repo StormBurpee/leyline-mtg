@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7e3e09a2-b45c-4897-ba10-02628cca3f4c",
+  "name": "Bloodhunter Bat",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bat"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhen this creature enters, target player loses 2 life and you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "target",
+          "amount": 2
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

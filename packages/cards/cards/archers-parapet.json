@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9df1c48b-52a8-47d7-8315-272fecf1a8a0",
+  "name": "Archers' Parapet",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Wall"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 0,
+    "toughness": 5
+  },
+  "rulesText": "Defender\n{1}{B}, {T}: Each opponent loses 1 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "defender"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{1}{B}"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        }
+      ],
+      "text": "Each opponent loses 1 life."
+    }
+  ]
+}

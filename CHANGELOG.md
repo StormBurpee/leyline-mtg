@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.10.0 — Graveyard play and a third deck
+
+- Graveyard targeting, recovery, reanimation and exile removal.
+- Life loss is distinct from damage; draw/discard/life effects can affect another player without granting priority during resolution.
+- Added 67 reviewed cards, including Zombify, Eternal Witness, Siege Rhino, Burglar Rat, Regrowth and Sign in Blood.
+- Added Second Burial, a 60-card introductory reanimation deck, and a playable showcase position.
+- Graveyard target menus and drag-target trays; card motion starts from the graveyard counter.
+- Ward and hexproof do not incorrectly protect cards in graveyards.
+
+346 executable cards plus three tokens. The dated inventories contain 231 executable Standard cards and 334 non-Alchemy Arena cards; full coverage remains open.
+
 ## 0.9.0 — Reviewed Standard expansion
 
 - Added 145 reviewed Standard source definitions, including spells, creatures, gain lands, scry lands and mana/filtering abilities.

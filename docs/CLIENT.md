@@ -44,3 +44,5 @@ This is not a claim of exhaustive browser or device coverage. Physical touchscre
 The v0.8 target-choice browser check used the shipped Exclusion Mage replay: an own-creature target was rejected, closing the legal-target list preserved the pending choice, and both the list and direct battlefield selection put the ability onto the stack targeting Serra Angel. Soul Warden resolved first in APNAP order; Serra Angel then returned to its owner's hand.
 
 For v0.9, a real Poison Dart Frog replay exercised cancelling its ability menu, choosing blue mana, reopening the tapped creature and paying for its separate deathtouch ability. Mana production did not use the stack; the other ability did. The inspector now displays gained keywords after resolution.
+
+Second Burial demonstrates graveyard play. In the shipped reanimation position, Zombify can target Sire of Seven Deaths in its owner's graveyard. The graveyard chooser can be dismissed and reopened without casting; selecting the card pays the spell's mana cost and puts it on the stack. The card returns only after both players pass. Earlier QA matches are preserved as replay exports before replacing preview state.

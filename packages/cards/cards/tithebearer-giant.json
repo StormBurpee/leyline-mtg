@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "475aaf7c-b0f8-40f3-ad91-3e7d414de933",
+  "name": "Tithebearer Giant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant", "Warrior"],
+    "colors": ["B"],
+    "manaCost": "{5}{B}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "When this creature enters, you draw a card and you lose 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

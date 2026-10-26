@@ -37,8 +37,28 @@ export function chooseBotCommand(s, p) {
           player: p,
           pay: c.payable && (c.cost.life ?? 0) < s.players[p].life,
         };
-      case 'libraryOrder':
-        return { type: 'orderLibrary', player: p, top: [...c.cards], rest: [] };
+      case 'libraryOrder': {
+        const canReanimate = s.players[p].hand.some((id) =>
+          definition(s, s.objects[id]).effects?.some(
+            (effect) => effect.op === 'moveTarget' && effect.destination === 'battlefield',
+          ),
+        );
+        const rest =
+          c.action === 'surveil' && canReanimate
+            ? c.cards.filter((id) => {
+                const d = definition(s, s.objects[id]);
+                return (
+                  d.type === 'creature' && Object.values(d.cost).reduce((a, b) => a + b, 0) >= 5
+                );
+              })
+            : [];
+        return {
+          type: 'orderLibrary',
+          player: p,
+          top: c.cards.filter((id) => !rest.includes(id)),
+          rest,
+        };
+      }
       case 'discardEffect':
       case 'bottom':
       case 'discard': {
@@ -61,8 +81,15 @@ export function chooseBotCommand(s, p) {
         return { type: c.kind, player: p, cards };
       }
       case 'triggerTarget': {
-        const harmful = c.entry.effects.some((effect) =>
-          ['damage', 'destroy', 'bounce', 'counter'].includes(effect.op),
+        const harmful = c.entry.effects.some(
+          (effect) =>
+            ['damage', 'destroy', 'bounce', 'counter', 'loseLife', 'discard', 'mill'].includes(
+              effect.op,
+            ) ||
+            (effect.op === 'moveTarget' && effect.destination === 'exile'),
+        );
+        const drawsForTarget = c.entry.effects.some(
+          (effect) => effect.op === 'draw' && effect.player === 'target',
         );
         const targets = [...c.targets].sort((a, b) => {
           const score = (target) => {
@@ -73,7 +100,7 @@ export function chooseBotCommand(s, p) {
                   ? s.objects[target.id]?.controller
                   : s.stack.find((entry) => entry.id === target.id)?.controller;
             return (
-              (controller === (harmful ? 1 - p : p) ? 10 : 0) +
+              (controller === (harmful && !drawsForTarget ? 1 - p : p) ? 10 : 0) +
               (target.kind === 'object' ? value(s, s.objects[target.id]) : 0)
             );
           };
@@ -168,6 +195,29 @@ export function chooseBotCommand(s, p) {
       if (d.effects?.some((e) => e.op === 'token')) score = 6;
       if (d.effects?.some((e) => e.op === 'draw')) score = s.players[p].hand.length < 5 ? 5 : 1;
       const target = a.target?.kind === 'object' ? s.objects[a.target.id] : null;
+      const movement = d.effects?.find((effect) => effect.op === 'moveTarget');
+      if (movement && target) {
+        if (target.zone === 'graveyard' && ['hand', 'battlefield'].includes(movement.destination))
+          score = target.owner === p ? 7 + value(s, target) : -100;
+        else if (movement.destination === 'exile')
+          score = target.controller !== p ? 8 + value(s, target) : -100;
+      }
+      const drawEffect = d.effects?.find((effect) => effect.op === 'draw');
+      if (drawEffect?.player === 'target' && a.target?.id !== p) score = -50;
+      const discardEffect = d.effects?.find((effect) => effect.op === 'discard');
+      if (
+        discardEffect &&
+        (discardEffect.player === 'opponent' ||
+          (discardEffect.player === 'target' && a.target?.id !== p))
+      )
+        score = (s.players[1 - p].handCount ?? s.players[1 - p].hand.length) ? 7 : -10;
+      const lifeLoss = d.effects?.find((effect) => effect.op === 'loseLife');
+      if (
+        lifeLoss &&
+        (lifeLoss.player === 'opponent' || (lifeLoss.player === 'target' && a.target?.id !== p))
+      )
+        score =
+          s.players[1 - p].life <= lifeLoss.amount ? 100 : drawEffect ? score : Math.max(score, 3);
       const dmg = d.effects?.find((e) => e.op === 'damage');
       if (dmg) {
         if (a.target.kind === 'player' && a.target.id !== p)

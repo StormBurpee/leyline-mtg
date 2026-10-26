@@ -315,7 +315,7 @@
       "type": "object",
       "properties": {
         "scope": {
-          "enum": ["permanent", "spell", "player", "damageable"]
+          "enum": ["permanent", "spell", "player", "damageable", "graveyard"]
         },
         "where": {
           "$ref": "#/$defs/predicate"
@@ -378,7 +378,7 @@
               "const": "draw"
             },
             "target": {
-              "const": "controller"
+              "enum": ["controller", "opponent", "target"]
             },
             "amount": {
               "type": "integer",
@@ -396,7 +396,7 @@
               "const": "gainLife"
             },
             "target": {
-              "const": "controller"
+              "enum": ["controller", "opponent", "target"]
             },
             "amount": {
               "type": "integer",
@@ -414,7 +414,7 @@
               "const": "scry"
             },
             "target": {
-              "const": "controller"
+              "enum": ["controller", "opponent", "target"]
             },
             "amount": {
               "type": "integer",
@@ -432,7 +432,7 @@
               "const": "surveil"
             },
             "target": {
-              "const": "controller"
+              "enum": ["controller", "opponent", "target"]
             },
             "amount": {
               "type": "integer",
@@ -450,7 +450,7 @@
               "const": "discard"
             },
             "target": {
-              "const": "controller"
+              "enum": ["controller", "opponent", "target"]
             },
             "amount": {
               "type": "integer",
@@ -636,6 +636,46 @@
             }
           },
           "required": ["op", "target"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "loseLife"
+            },
+            "target": {
+              "enum": ["controller", "opponent", "target"]
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "moveTarget"
+            },
+            "target": {
+              "const": "target"
+            },
+            "destination": {
+              "enum": ["hand", "battlefield", "exile"]
+            },
+            "controller": {
+              "enum": ["owner", "you"]
+            },
+            "tapped": {
+              "type": "boolean"
+            }
+          },
+          "required": ["op", "target", "destination"],
           "additionalProperties": false
         }
       ]

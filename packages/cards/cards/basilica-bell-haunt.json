@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "796dc53d-5a0d-4d19-9fa4-f474a9d96041",
+  "name": "Basilica Bell-Haunt",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit"],
+    "colors": ["W", "B"],
+    "manaCost": "{W}{W}{B}{B}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, each opponent discards a card and you gain 3 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "opponent",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

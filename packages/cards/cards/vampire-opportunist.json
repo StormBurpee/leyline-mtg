@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6f525ccd-4776-492c-a1f9-8bce5740fb28",
+  "name": "Vampire Opportunist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "{6}{B}: Each opponent loses 2 life and you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{6}{B}"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 2
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ],
+      "text": "Each opponent loses 2 life and you gain 2 life."
+    }
+  ]
+}

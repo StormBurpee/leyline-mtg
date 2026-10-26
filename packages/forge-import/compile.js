@@ -36,16 +36,17 @@ const PRESENTATION = new Set([
 const OPERAND_FIELDS = {
   DealDamage: ['ValidTgts', 'NumDmg', 'Defined'],
   Counter: ['ValidTgts', 'TargetType'],
-  GainLife: ['Defined', 'LifeAmount'],
+  GainLife: ['Defined', 'LifeAmount', 'ValidTgts'],
+  LoseLife: ['Defined', 'LifeAmount', 'ValidTgts'],
   Mill: ['Defined', 'NumCards', 'ValidTgts'],
   PutCounter: ['Defined', 'CounterType', 'CounterNum'],
   Untap: ['Defined'],
-  Draw: ['NumCards', 'Defined'],
+  Draw: ['NumCards', 'Defined', 'ValidTgts'],
   Destroy: ['ValidTgts'],
-  ChangeZone: ['ValidTgts', 'Origin', 'Destination'],
+  ChangeZone: ['ValidTgts', 'Origin', 'Destination', 'Tapped'],
   Scry: ['ScryNum', 'Defined'],
   Surveil: ['Amount', 'Defined'],
-  Discard: ['NumCards', 'Defined', 'Mode'],
+  Discard: ['NumCards', 'Defined', 'Mode', 'ValidTgts'],
   Pump: ['ValidTgts', 'Defined', 'NumAtt', 'NumDef', 'KW', 'Duration'],
 };
 function number(text, label, errors, { signed = false, fallback } = {}) {
@@ -89,6 +90,22 @@ function fields(text, errors) {
   return out;
 }
 function targetFor(a, errors) {
+  if (a.Origin === 'Graveyard') {
+    const graveyard = {
+      'Card.YouCtrl': { owner: 'you' },
+      'Creature.YouCtrl': { all: [{ type: 'creature' }, { owner: 'you' }] },
+      'Artifact.YouCtrl': { all: [{ type: 'artifact' }, { owner: 'you' }] },
+      Creature: { type: 'creature' },
+      Card: null,
+    };
+    if (Object.hasOwn(graveyard, a.ValidTgts))
+      return {
+        scope: 'graveyard',
+        ...(graveyard[a.ValidTgts] ? { where: graveyard[a.ValidTgts] } : {}),
+      };
+    errors.push(`Unsupported graveyard target predicate: ${a.ValidTgts}`);
+    return null;
+  }
   const scoped = {
     'Artifact,Enchantment,Land': {
       scope: 'permanent',
@@ -160,12 +177,17 @@ function compileInstruction(a, context) {
   if (sub && (a.ValidTgts || a.TargetType))
     errors.push('A subability cannot introduce a new target in this subset.');
   const target = targetFor(a, errors);
-  if (
-    ['Draw', 'Scry', 'Surveil', 'Discard'].includes(opcode) &&
-    a.Defined !== undefined &&
-    a.Defined !== 'You'
-  )
-    errors.push(`${opcode}: only Defined You is supported.`);
+  const playerRecipient = () => {
+    if (a.Defined === 'Targeted' || (target && a.Defined === undefined)) return 'target';
+    if (a.Defined === undefined || a.Defined === 'You') return 'controller';
+    if (['Opponent', 'Player.Opponent'].includes(a.Defined)) return 'opponent';
+    errors.push(`Unsupported player recipient: ${a.Defined}`);
+    return null;
+  };
+  const playerFields = () => {
+    const player = playerRecipient();
+    return player === 'controller' ? {} : { player };
+  };
   switch (opcode) {
     case 'DealDamage':
       if (a.Defined === 'Player.Opponent' && !target)
@@ -178,9 +200,17 @@ function compileInstruction(a, context) {
       if (target !== 'spell') errors.push('Counter requires TargetType Spell and ValidTgts Card.');
       return { target, effects: [{ op: 'counter' }] };
     case 'GainLife':
-      if (a.Defined !== undefined && a.Defined !== 'You')
-        errors.push('GainLife requires Defined You.');
-      return { effects: [{ op: 'gainLife', amount: number(a.LifeAmount, 'LifeAmount', errors) }] };
+    case 'LoseLife':
+      return {
+        target,
+        effects: [
+          {
+            op: opcode === 'GainLife' ? 'gainLife' : 'loseLife',
+            amount: number(a.LifeAmount, 'LifeAmount', errors),
+            ...playerFields(),
+          },
+        ],
+      };
     case 'Mill': {
       if (target && (!['player', 'opponent'].includes(target) || a.Defined !== undefined))
         errors.push('Unsupported mill target/Defined combination.');
@@ -215,36 +245,85 @@ function compileInstruction(a, context) {
       return { effects: [{ op: 'untap', subject: 'source' }] };
     case 'Draw':
       return {
-        effects: [{ op: 'draw', count: number(a.NumCards, 'NumCards', errors, { fallback: 1 }) }],
+        target,
+        effects: [
+          {
+            op: 'draw',
+            count: number(a.NumCards, 'NumCards', errors, { fallback: 1 }),
+            ...playerFields(),
+          },
+        ],
       };
     case 'Scry':
       return {
-        effects: [{ op: 'scry', count: number(a.ScryNum, 'ScryNum', errors, { fallback: 1 }) }],
+        target,
+        effects: [
+          {
+            op: 'scry',
+            count: number(a.ScryNum, 'ScryNum', errors, { fallback: 1 }),
+            ...playerFields(),
+          },
+        ],
       };
     case 'Surveil':
       return {
-        effects: [{ op: 'surveil', count: number(a.Amount, 'Amount', errors, { fallback: 1 }) }],
+        target,
+        effects: [
+          {
+            op: 'surveil',
+            count: number(a.Amount, 'Amount', errors, { fallback: 1 }),
+            ...playerFields(),
+          },
+        ],
       };
     case 'Discard':
       if (a.Mode !== undefined && a.Mode !== 'TgtChoose')
         errors.push('Only a player choosing their own discard is supported.');
       return {
+        target,
         effects: [
-          { op: 'discard', count: number(a.NumCards, 'NumCards', errors, { fallback: 1 }) },
+          {
+            op: 'discard',
+            count: number(a.NumCards, 'NumCards', errors, { fallback: 1 }),
+            ...playerFields(),
+          },
         ],
       };
     case 'Destroy':
       if (!effectTargetCompatible('destroy', target))
         errors.push('Destroy requires a supported permanent target.');
       return { target, effects: [{ op: 'destroy' }] };
-    case 'ChangeZone':
+    case 'ChangeZone': {
+      if (a.Origin === 'Battlefield' && a.Destination === 'Hand' && a.Tapped === undefined) {
+        if (!effectTargetCompatible('bounce', target))
+          errors.push('Bounce requires a permanent target.');
+        return { target, effects: [{ op: 'bounce' }] };
+      }
+      const destination = { Hand: 'hand', Battlefield: 'battlefield', Exile: 'exile' }[
+        a.Destination
+      ];
       if (
-        !effectTargetCompatible('bounce', target) ||
-        a.Origin !== 'Battlefield' ||
-        a.Destination !== 'Hand'
+        !['Battlefield', 'Graveyard'].includes(a.Origin) ||
+        !destination ||
+        !effectTargetCompatible('moveTarget', target)
       )
-        errors.push('Only supported battlefield-permanent-to-hand ChangeZone is supported.');
-      return { target, effects: [{ op: 'bounce' }] };
+        errors.push('Unsupported targeted zone transition.');
+      if (
+        a.Tapped !== undefined &&
+        (destination !== 'battlefield' || !['True', 'False'].includes(a.Tapped))
+      )
+        errors.push('Unsupported entry-tapped instruction.');
+      return {
+        target,
+        effects: [
+          {
+            op: 'moveTarget',
+            destination,
+            ...(a.Tapped !== undefined ? { tapped: a.Tapped === 'True' } : {}),
+          },
+        ],
+      };
+    }
     case 'Pump': {
       if (a.Duration !== undefined && a.Duration !== 'UntilEndOfTurn')
         errors.push('Only until-end-of-turn Pump duration is supported.');

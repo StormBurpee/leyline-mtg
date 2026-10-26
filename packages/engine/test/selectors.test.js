@@ -115,7 +115,7 @@ test('spell selectors filter mana value and full printed type sets', () => {
 });
 test('malformed, executable-looking and oversized predicates fail before registration', () => {
   for (const spec of [
-    { scope: 'graveyard' },
+    { scope: 'library' },
     { scope: 'permanent', where: { type: 'creature', color: 'G' } },
     { scope: 'permanent', where: { javascript: 'process.exit()' } },
     { scope: 'permanent', where: { manaValue: { gte: NaN } } },

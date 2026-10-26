@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4bf0427e-5e87-4d32-ad34-1d8946ab96fd",
+  "name": "Honored Heirloom",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{3}"
+  },
+  "rulesText": "{T}: Add one mana of any color.\n{2}, {T}: Exile target card from a graveyard.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{2}"
+      },
+      "target": {
+        "scope": "graveyard"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ],
+      "text": "Exile target card from a graveyard."
+    }
+  ]
+}

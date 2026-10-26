@@ -12,7 +12,9 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Creature tap costs and attacking remain restricted until the controller’s next turn begins, unless the creature has haste.
 - Objects changing zones become new incarnations; spells recheck targets at resolution.
 - Creatures, instants, sorceries, basic/nonbasic mana lands, supported artifacts and enchantments. Artifact and enchantment creatures retain both types; only the listed executable definitions are supported.
-- Type-aware artifact/enchantment removal and permanent bounce.
+- Type-aware artifact/enchantment removal, permanent bounce and exile.
+- Public graveyard-card targets, recovery to hand and creature/artifact reanimation with fresh incarnations and enters triggers.
+- Player-directed draw/discard/life gain/life loss, including choices made by an opponent during resolution.
 - Triggered abilities choose legal targets when placed on the stack, before priority. Impossible required targets remove the trigger; targets are rechecked on resolution.
 - Optional triggered effects with explicit resolution-time accept/decline choices.
 - Activated abilities with mana, life and tap costs, explicit targets, and stack resolution.

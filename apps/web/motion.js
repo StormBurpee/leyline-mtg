@@ -59,9 +59,11 @@ export function animateTable(root, before, state, { skip = null } = {}) {
           ? `[data-library="${object?.owner}"]`
           : oldZone === 'hand'
             ? `[data-hand-owner="${object?.owner}"]`
-            : oldZone === 'stack'
-              ? '.side-content'
-              : `[data-field="${object?.controller}"]`,
+            : ['graveyard', 'exile'].includes(oldZone)
+              ? `[data-zone="${oldZone}"][data-player="${object?.owner}"]`
+              : oldZone === 'stack'
+                ? '.side-content'
+                : `[data-field="${object?.controller}"]`,
       );
       const sourceRect = source?.getBoundingClientRect();
       const origin = previous?.rect ?? (oldZone ? sourceRect : rect);

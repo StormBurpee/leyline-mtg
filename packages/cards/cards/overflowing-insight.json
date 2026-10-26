@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ff03a063-9634-4746-a208-9dbcde5c6bdb",
+  "name": "Overflowing Insight",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{4}{U}{U}{U}"
+  },
+  "rulesText": "Target player draws seven cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "target",
+          "amount": 7
+        }
+      ]
+    }
+  ]
+}

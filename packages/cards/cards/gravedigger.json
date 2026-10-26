@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1a2030cc-d7ee-4059-b2d7-fb95ea8e267b",
+  "name": "Gravedigger",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Zombie"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, you may return target creature card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "owner": "you"
+            }
+          ]
+        }
+      },
+      "optional": true,
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ]
+    }
+  ]
+}

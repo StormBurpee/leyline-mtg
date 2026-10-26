@@ -21,6 +21,9 @@ export const DECKS = Object.freeze({
   ember: {
     name: 'Ember & Echo',
     colors: ['R', 'U'],
+    art: 'Lightning Bolt',
+    thumbnail: 'Raging Goblin',
+    archetype: 'Tempo / spells',
     description: 'Make them answer the threat. Then answer their answer.',
     cards: {
       Mountain: 12,
@@ -40,6 +43,9 @@ export const DECKS = Object.freeze({
   grove: {
     name: 'The Living Grove',
     colors: ['G', 'W'],
+    art: 'Serra Angel',
+    thumbnail: 'Elvish Visionary',
+    archetype: 'Creatures / growth',
     description: 'A small beginning. An overwhelming board.',
     cards: {
       Forest: 13,
@@ -56,6 +62,26 @@ export const DECKS = Object.freeze({
       'Raise the Alarm': 3,
       'Glorious Anthem': 2,
       Pacifism: 3,
+    },
+  },
+  burial: {
+    name: 'Second Burial',
+    colors: ['B'],
+    art: 'Sire of Seven Deaths',
+    thumbnail: 'Zombify',
+    archetype: 'Reanimation / attrition',
+    description: 'Surveil large threats into your graveyard, then bring them back with Zombify.',
+    cards: {
+      Swamp: 24,
+      Zombify: 4,
+      Diresight: 4,
+      'Burglar Rat': 4,
+      'Vampire Spawn': 4,
+      'Sire of Seven Deaths': 4,
+      'Meteor Golem': 4,
+      'Vault Plunderer': 4,
+      'Corrupt Court Official': 4,
+      'Diregraf Ghoul': 4,
     },
   },
 });

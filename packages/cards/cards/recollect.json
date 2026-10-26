@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5b38fafb-3999-46dc-928b-1677625c1943",
+  "name": "Recollect",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "Return target card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "owner": "you"
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ]
+    }
+  ]
+}

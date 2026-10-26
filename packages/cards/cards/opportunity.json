@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1f544a9f-c238-4858-be19-d6cd7d023dcc",
+  "name": "Opportunity",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{4}{U}{U}"
+  },
+  "rulesText": "Target player draws four cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "target",
+          "amount": 4
+        }
+      ]
+    }
+  ]
+}

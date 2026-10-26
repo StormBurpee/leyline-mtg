@@ -70,15 +70,13 @@ export function lobby(ui, meta) {
     : DECKS[ui.deck];
   const art = ui.customDeck
     ? (ui.customDeck.find((name) => catalog[name]?.type !== 'land') ?? ui.customDeck[0])
-    : ui.deck === 'ember'
-      ? 'Lightning Bolt'
-      : 'Serra Angel';
-  return `<main class="page"><div class="lobby-intro"><div><h2>Your next game starts here.</h2><p>Pick a deck. Find a line. Make it yours.</p></div><span class="status-label small">Local play · no account needed</span></div><div class="lobby-grid"><div><section class="deck-feature"><div class="deck-art" ${artStyle(meta, art)}></div><div class="feature-top"><span class="badge">${ui.customDeck ? 'Imported deck' : 'Featured deck'} · ${ui.customDeck?.length ?? 60} cards</span>${mana(Object.fromEntries(deck.colors.map((c) => [c, 1])))}</div><div class="feature-copy"><div class="eyebrow">${ui.customDeck ? 'Your list / local play' : ui.deck === 'ember' ? 'Tempo / spells' : 'Creatures / growth'}</div><h1>${deck.name.replace(' & ', '<br>& ')}</h1><p>${deck.description}</p><div class="feature-bottom"><span class="small muted">${ui.customDeck ? 'Validated executable definitions' : 'A handcrafted introductory deck'}</span><button class="btn small quiet" data-action="deckList">Explore deck ↗</button></div></div></section><div class="deck-tabs">${Object.entries(
+    : deck.art;
+  return `<main class="page"><div class="lobby-intro"><div><h2>Your next game starts here.</h2><p>Pick a deck. Find a line. Make it yours.</p></div><span class="status-label small">Local play · no account needed</span></div><div class="lobby-grid"><div><section class="deck-feature"><div class="deck-art" ${artStyle(meta, art)}></div><div class="feature-top"><span class="badge">${ui.customDeck ? 'Imported deck' : 'Featured deck'} · ${ui.customDeck?.length ?? 60} cards</span>${mana(Object.fromEntries(deck.colors.map((c) => [c, 1])))}</div><div class="feature-copy"><div class="eyebrow">${ui.customDeck ? 'Your list / local play' : deck.archetype}</div><h1>${deck.name.replace(' & ', '<br>& ')}</h1><p>${deck.description}</p><div class="feature-bottom"><span class="small muted">${ui.customDeck ? 'Validated executable definitions' : 'A handcrafted introductory deck'}</span><button class="btn small quiet" data-action="deckList">Explore deck ↗</button></div></div></section><div class="deck-tabs">${Object.entries(
     DECKS,
   )
     .map(
       ([id, d]) =>
-        `<button data-action="selectDeck" data-deck="${id}" class="deck-tab ${ui.deck === id ? 'selected' : ''}"><div class="tile" ${artStyle(meta, id === 'ember' ? 'Raging Goblin' : 'Elvish Visionary')}></div><div><strong>${d.name}</strong><span>${d.colors.join(' / ')} · 60 cards</span></div></button>`,
+        `<button data-action="selectDeck" data-deck="${id}" class="deck-tab ${ui.deck === id ? 'selected' : ''}"><div class="tile" ${artStyle(meta, d.thumbnail)}></div><div><strong>${d.name}</strong><span>${d.colors.join(' / ')} · 60 cards</span></div></button>`,
     )
     .join(
       '',
@@ -277,8 +275,9 @@ function actionDock(s, ui, p, actions) {
     }
   } else if (ui.targeting) {
     title = `Target for ${s.objects[ui.selected]?.name}`;
-    desc = 'Click a highlighted creature, life total, or spell on the stack.';
-    buttons = '<button class="btn" data-action="cancelSelection">Cancel</button>';
+    desc = 'Choose a highlighted target or open the legal-target list.';
+    buttons =
+      '<button class="btn" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="spellTargets">List legal targets →</button>';
   } else if (ui.selected && s.objects[ui.selected]?.zone === 'hand') {
     const o = s.objects[ui.selected],
       d = definition(s, o),
@@ -338,6 +337,8 @@ export function eventText(e, s) {
       return `${name} had no legal target and did not resolve.`;
     case 'countered':
       return `${name} was countered.`;
+    case 'lifeLost':
+      return `${p} lost ${e.amount} life.`;
     case 'damage':
       return `${e.amount} damage to ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? 'a creature')}.`;
     case 'draw':
@@ -402,7 +403,7 @@ export function enginePage(s) {
     )
     .join(
       '',
-    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleInteractionReplay">Inspect interactive position</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleTargetReplay">Inspect triggered target</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Versioned card source packs, compiled separately from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
+    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleBurialReplay">Inspect reanimation position</button><button class="btn quiet" data-action="exampleInteractionReplay">Inspect interactive position</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleTargetReplay">Inspect triggered target</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Versioned card source packs, compiled separately from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
 }
 
 function liveCharacteristics(s, o) {

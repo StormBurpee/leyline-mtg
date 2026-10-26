@@ -1,0 +1,2958 @@
+{
+  "upstream": "https://github.com/Card-Forge/forge",
+  "commit": "e5a0f8156da70ffc7866f923bed371c0111707cd",
+  "asOf": "2026-10-26",
+  "cards": [
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/a/ambitions_cost.txt",
+      "definition": {
+        "name": "Ambition's Cost",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "You draw three cards and you lose 3 life.",
+        "target": null,
+        "effects": [
+          {
+            "op": "draw",
+            "count": 3
+          },
+          {
+            "op": "loseLife",
+            "amount": 3
+          }
+        ]
+      },
+      "oracle": {
+        "id": "84de4fec-2f38-4293-93d3-b3882c5aac14",
+        "printingId": "43e2d5fe-9b9c-4450-908a-3e8e091c385a",
+        "url": "https://scryfall.com/card/xana/25/ambitions-cost?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:22.636Z",
+        "manaCost": "{3}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "You draw three cards and lose 3 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "01b0f2660c74afda6faece6a1b18cc43ba9fcb3ef48e4c4c4a428615d4b3be12"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/a/archaeomender.txt",
+      "definition": {
+        "name": "Archaeomender",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Wizard"],
+        "text": "When Archaeomender enters, return target artifact card from your graveyard to your hand.",
+        "power": 2,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "hand"
+              }
+            ],
+            "target": {
+              "scope": "graveyard",
+              "where": {
+                "all": [
+                  {
+                    "type": "artifact"
+                  },
+                  {
+                    "owner": "you"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "oracle": {
+        "id": "5a4553fc-f945-4094-b231-2d378ed6609e",
+        "printingId": "22bb8779-ac19-43d6-b818-86eb8ee2f87d",
+        "url": "https://scryfall.com/card/jmp/9/archaeomender?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:28.127Z",
+        "manaCost": "{2}{U}",
+        "typeLine": "Creature — Human Wizard",
+        "colors": ["U"],
+        "power": "2",
+        "toughness": "3",
+        "text": "When this creature enters, return target artifact card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "9237c6e3a0447263f3ae24a6ac679a0754a32f74fb2529c2368a14e90b864011"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/a/archers_parapet.txt",
+      "definition": {
+        "name": "Archers' Parapet",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": ["defender"],
+        "subtypes": ["Wall"],
+        "text": "Defender\n{1}{B}, {T}: Each opponent loses 1 life.",
+        "power": 0,
+        "toughness": 5,
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "mana": {
+                "generic": 1,
+                "B": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "opponent"
+              }
+            ],
+            "text": "Each opponent loses 1 life."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "9df1c48b-52a8-47d7-8315-272fecf1a8a0",
+        "printingId": "64ac0667-8ecc-4034-89bb-dce0af531014",
+        "url": "https://scryfall.com/card/ktk/128/archers-parapet?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:28.127Z",
+        "manaCost": "{1}{G}",
+        "typeLine": "Creature — Wall",
+        "colors": ["G"],
+        "power": "0",
+        "toughness": "5",
+        "text": "Defender\n{1}{B}, {T}: Each opponent loses 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "4151e4f1e86bacecdb0b2e779ae79c5ca7c22a6cff114dd01e0ca4daec543741"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/a/auroral_procession.txt",
+      "definition": {
+        "name": "Auroral Procession",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "G": 1,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Return target card from your graveyard to your hand.",
+        "target": {
+          "scope": "graveyard",
+          "where": {
+            "owner": "you"
+          }
+        },
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "hand"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "511d3de9-076b-4811-bddf-00623f98993f",
+        "printingId": "672f94ad-65d6-4c7d-925d-165ef264626f",
+        "url": "https://scryfall.com/card/tdm/169/auroral-procession?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:30.934Z",
+        "manaCost": "{G}{U}",
+        "typeLine": "Instant",
+        "colors": ["G", "U"],
+        "text": "Return target card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "4bbfd8daf1b400b7365efae8850a155c25769fd91a92ef0b42e126ede30e3d5d"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/basilica_bell_haunt.txt",
+      "definition": {
+        "name": "Basilica Bell-Haunt",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "W": 2,
+          "B": 2
+        },
+        "keywords": [],
+        "subtypes": ["Spirit"],
+        "text": "When Basilica Bell-Haunt enters, each opponent discards a card and you gain 3 life.",
+        "power": 3,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 3
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "796dc53d-5a0d-4d19-9fa4-f474a9d96041",
+        "printingId": "e72f4329-db6f-4284-b63e-55f22a0a0f6e",
+        "url": "https://scryfall.com/card/rna/156/basilica-bell-haunt?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:33.531Z",
+        "manaCost": "{W}{W}{B}{B}",
+        "typeLine": "Creature — Spirit",
+        "colors": ["B", "W"],
+        "power": "3",
+        "toughness": "4",
+        "text": "When this creature enters, each opponent discards a card and you gain 3 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "4fe4c6161c05c46ab5deeaec2376e03360868909d80b363da54df261790696cb"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/bloodhunter_bat.txt",
+      "definition": {
+        "name": "Bloodhunter Bat",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Bat"],
+        "text": "Flying\nWhen Bloodhunter Bat enters, target player loses 2 life and you gain 2 life.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "target"
+              },
+              {
+                "op": "gainLife",
+                "amount": 2
+              }
+            ],
+            "target": "player"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "7e3e09a2-b45c-4897-ba10-02628cca3f4c",
+        "printingId": "99a14228-3716-4448-a8c3-93928b9b85d6",
+        "url": "https://scryfall.com/card/jmp/210/bloodhunter-bat?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:38.589Z",
+        "manaCost": "{3}{B}",
+        "typeLine": "Creature — Bat",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "2",
+        "text": "Flying\nWhen this creature enters, target player loses 2 life and you gain 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "061553baf8de2611213a23317810d6c0f883544d4ff3b7e1d7587c992a13a4d6"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/burglar_rat.txt",
+      "definition": {
+        "name": "Burglar Rat",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Rat"],
+        "text": "When Burglar Rat enters, each opponent discards a card.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "opponent"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "2f807301-37df-4724-871a-08e3512b07b3",
+        "printingId": "de1c8758-ce3d-49cf-8173-c0eb46f5e7bc",
+        "url": "https://scryfall.com/card/fdn/170/burglar-rat?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:46.437Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Rat",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature enters, each opponent discards a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "0ba6ac927d44747fbb66466fabc872bb696471402fa1b10bba0add43958158a9"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/c/cadaver_imp.txt",
+      "definition": {
+        "name": "Cadaver Imp",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 2
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Imp"],
+        "text": "Flying\nWhen Cadaver Imp enters, you may return target creature card from your graveyard to your hand.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "hand"
+              }
+            ],
+            "target": {
+              "scope": "graveyard",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "owner": "you"
+                  }
+                ]
+              }
+            },
+            "optional": true
+          }
+        ]
+      },
+      "oracle": {
+        "id": "7265d768-b79f-44eb-9873-d834e55f6463",
+        "printingId": "4fefd7f9-57ff-41bb-aef6-b1d568a7588b",
+        "url": "https://scryfall.com/card/jmp/215/cadaver-imp?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:46.437Z",
+        "manaCost": "{1}{B}{B}",
+        "typeLine": "Creature — Imp",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Flying\nWhen this creature enters, you may return target creature card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "e09968c5b9fbc585a91476a870f1c4ff171a51f868c63a080d0a51a012d455a4"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/c/corrupt_court_official.txt",
+      "definition": {
+        "name": "Corrupt Court Official",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Advisor"],
+        "text": "When Corrupt Court Official enters, target opponent discards a card.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "target"
+              }
+            ],
+            "target": "opponent"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "ec84201d-757f-4a7a-b3a2-85ccd5ee81ae",
+        "printingId": "4692610e-d64c-438e-b5ad-0cf67fd57f1f",
+        "url": "https://scryfall.com/card/tla/92/corrupt-court-official?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:56.875Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Human Advisor",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature enters, target opponent discards a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "7ee996e1d8b07d038e58a65b6a4514d9ecdb3b1a2ea52e41129d4da81f01f016"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/c/cruel_truths.txt",
+      "definition": {
+        "name": "Cruel Truths",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Surveil 2, then draw two cards. You lose 2 life. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+        "target": null,
+        "effects": [
+          {
+            "op": "surveil",
+            "count": 2
+          },
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "loseLife",
+            "amount": 2
+          }
+        ]
+      },
+      "oracle": {
+        "id": "2e68e3f7-b168-4541-b8a0-791a8a6ebde8",
+        "printingId": "6852b4d5-74e0-44ba-ba44-20aa91e3c4c8",
+        "url": "https://scryfall.com/card/tdm/76/cruel-truths?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:59.427Z",
+        "manaCost": "{3}{B}",
+        "typeLine": "Instant",
+        "colors": ["B"],
+        "text": "Surveil 2, then draw two cards. You lose 2 life. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "2c00c8d605df4ffe13fd25d27834f3a83f105d6164955000abf4bf39c6784e5f"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/d/davriels_shadowfugue.txt",
+      "definition": {
+        "name": "Davriel's Shadowfugue",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Target player discards two cards and loses 2 life.",
+        "target": "player",
+        "effects": [
+          {
+            "op": "discard",
+            "count": 2,
+            "player": "target"
+          },
+          {
+            "op": "loseLife",
+            "amount": 2,
+            "player": "target"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "cb490f3f-74ed-4d38-8eda-9948c095f3bc",
+        "printingId": "09c8fe63-37a7-478d-b9ba-33a0f6519cf1",
+        "url": "https://scryfall.com/card/war/84/davriels-shadowfugue?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:01.978Z",
+        "manaCost": "{3}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Target player discards two cards and loses 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "21b1d5bd37d34135d4596bf10d773235e54aab635755a5201a60efe66ebadd57"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/d/demons_due.txt",
+      "definition": {
+        "name": "Demon's Due",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Scry 2, then draw two cards. You lose 2 life.",
+        "target": null,
+        "effects": [
+          {
+            "op": "scry",
+            "count": 2
+          },
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "loseLife",
+            "amount": 2
+          }
+        ]
+      },
+      "oracle": {
+        "id": "bf65a5f5-5536-4616-a09e-2416439c7bc6",
+        "printingId": "2e59fb98-c887-42f1-a620-9e6b40b94cb5",
+        "url": "https://scryfall.com/card/snc/75/demons-due?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:04.610Z",
+        "manaCost": "{3}{B}",
+        "typeLine": "Instant",
+        "colors": ["B"],
+        "text": "Scry 2, then draw two cards. You lose 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "55897d87c41d642bd05b8bcd94b87d9bd4e6be370cbe4ff503a8972f1a1c533e"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/d/diresight.txt",
+      "definition": {
+        "name": "Diresight",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Surveil 2, then draw two cards. You lose 2 life. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+        "target": null,
+        "effects": [
+          {
+            "op": "surveil",
+            "count": 2
+          },
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "loseLife",
+            "amount": 2
+          }
+        ]
+      },
+      "oracle": {
+        "id": "a7b12df9-fddd-4cd4-8c09-d54a47867ab6",
+        "printingId": "144d5261-ee05-4b7f-ba9d-68aefbdab48e",
+        "url": "https://scryfall.com/card/tle/162/diresight?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:06.997Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Surveil 2, then draw two cards. You lose 2 life. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "0d7d12569168a62edb39a0a0142ef9d2db7aec7336b63a5edf0be52501fb9eb7"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/d/disentomb.txt",
+      "definition": {
+        "name": "Disentomb",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Return target creature card from your graveyard to your hand.",
+        "target": {
+          "scope": "graveyard",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "owner": "you"
+              }
+            ]
+          }
+        },
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "hand"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "e4ab986d-662c-4879-b6f1-6887a2ec4d7c",
+        "printingId": "7debd8f7-2f34-4fdd-8eb6-fa8f9d2a60e8",
+        "url": "https://scryfall.com/card/m20/322/disentomb?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:06.997Z",
+        "manaCost": "{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Return target creature card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "878e906d9d92e953dc3b6aace681b30274e5b39e027aabd7dd199530c3aec18a"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/d/dream_beavers.txt",
+      "definition": {
+        "name": "Dream Beavers",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "B": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Beaver", "Nightmare"],
+        "text": "Flying\nWhen this creature enters, each opponent loses 1 life and you gain 1 life. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 1
+              },
+              {
+                "op": "scry",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "a1cec8e8-cf3c-42a4-b625-ca0cd148664e",
+        "printingId": "600e3bc1-9777-4057-a11e-4f61582636c6",
+        "url": "https://scryfall.com/card/tmt/62/dream-beavers?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:12.309Z",
+        "manaCost": "{B}",
+        "typeLine": "Creature — Beaver Nightmare",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Flying\nWhen this creature enters, each opponent loses 1 life and you gain 1 life. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "ebd88b886fd86008095de69cf01f89004496b16b7633518a9ddc3086b834d635"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/d/dusk_legion_zealot.txt",
+      "definition": {
+        "name": "Dusk Legion Zealot",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Vampire", "Soldier"],
+        "text": "When Dusk Legion Zealot enters, you draw a card and you lose 1 life.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "loseLife",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "ea2dce18-195e-4681-a687-f9819edaf9fc",
+        "printingId": "3190cea3-fbea-464f-999b-4b4473be745e",
+        "url": "https://scryfall.com/card/rix/70/dusk-legion-zealot?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:12.309Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Vampire Soldier",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature enters, you draw a card and you lose 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "491cbd36a10eeb7b57139e7f0aeb625af6bb48448e6ebc995e500b8d2ce0425e"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/e/elderfang_disciple.txt",
+      "definition": {
+        "name": "Elderfang Disciple",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Elf", "Cleric"],
+        "text": "When Elderfang Disciple enters, each opponent discards a card.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "opponent"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "8db63f1a-0d63-4b11-966d-818d83a082f9",
+        "printingId": "7f3a6148-d005-49c1-a7fc-867c4e8251cd",
+        "url": "https://scryfall.com/card/khm/93/elderfang-disciple?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:14.908Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Elf Cleric",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature enters, each opponent discards a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "183f4348b30adfaf4d3dd4808d67daaf9fc4d86edf516b86be8e26d4b61537bd"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/e/engine_rat.txt",
+      "definition": {
+        "name": "Engine Rat",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "B": 1
+        },
+        "keywords": ["deathtouch"],
+        "subtypes": ["Zombie", "Rat"],
+        "text": "Deathtouch\n{5}{B}: Each opponent loses 2 life.",
+        "power": 1,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "mana": {
+                "generic": 5,
+                "B": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "opponent"
+              }
+            ],
+            "text": "Each opponent loses 2 life."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "7e29aae9-815a-4999-ace6-7bc860acde32",
+        "printingId": "949d6137-98d3-4f46-ab1e-08d7492af307",
+        "url": "https://scryfall.com/card/dft/84/engine-rat?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:17.534Z",
+        "manaCost": "{B}",
+        "typeLine": "Creature — Zombie Rat",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Deathtouch\n{5}{B}: Each opponent loses 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "7a636c7f2dd065b25ec30d13a83c9d31d10ac7d1e11b4a269617180a6f2d860f"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/e/erase.txt",
+      "definition": {
+        "name": "Erase",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Exile target enchantment.",
+        "target": "enchantment",
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "exile"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "c2ceb15c-5d02-4cf4-a7c9-c1a40b7ca667",
+        "printingId": "d1dd0e10-2ad7-467f-8d4b-c70b95bf2e9c",
+        "url": "https://scryfall.com/card/ktk/9/erase?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:20.116Z",
+        "manaCost": "{W}",
+        "typeLine": "Instant",
+        "colors": ["W"],
+        "text": "Exile target enchantment.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "9df4ca9db050419700ec2fb9dba5657882d34e39c8db9f04846a4d2e2a8212b7"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/e/eternal_witness.txt",
+      "definition": {
+        "name": "Eternal Witness",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "G": 2
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Shaman"],
+        "text": "When Eternal Witness enters, you may return target card from your graveyard to your hand.",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "hand"
+              }
+            ],
+            "target": {
+              "scope": "graveyard",
+              "where": {
+                "owner": "you"
+              }
+            },
+            "optional": true
+          }
+        ]
+      },
+      "oracle": {
+        "id": "30b24e8e-3b0e-4d8e-90f3-f66eb7c1858c",
+        "printingId": "05c1ce9a-2d66-4815-aead-91257fe1ff74",
+        "url": "https://scryfall.com/card/aa2/13/eternal-witness?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:20.116Z",
+        "manaCost": "{1}{G}{G}",
+        "typeLine": "Creature — Human Shaman",
+        "colors": ["G"],
+        "power": "2",
+        "toughness": "1",
+        "text": "When this creature enters, you may return target card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "dc79adedc12ee93301cfac72ff4565d53e77d85beb7e430acf9a47e0471fbda2"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/fade_into_antiquity.txt",
+      "definition": {
+        "name": "Fade into Antiquity",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Exile target artifact or enchantment.",
+        "target": "artifactOrEnchantment",
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "exile"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "3bd3156f-dbc7-48f7-9e50-1f2b8b227f97",
+        "printingId": "55174ab7-9f2e-42e5-a61b-57458cfd33f3",
+        "url": "https://scryfall.com/card/neo/182/fade-into-antiquity?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:22.832Z",
+        "manaCost": "{2}{G}",
+        "typeLine": "Sorcery",
+        "colors": ["G"],
+        "text": "Exile target artifact or enchantment.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "c02e37c9d53c4d70de792589f8c4153eb0eb6b6e4f92ccbaee0f5e95c77ddd02"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/final_death.txt",
+      "definition": {
+        "name": "Final Death",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 4,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Exile target creature.",
+        "target": "creature",
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "exile"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "1be3eea4-eaff-469c-9689-abadac1e848c",
+        "printingId": "8e5b8580-9198-4735-83c1-289400c1d814",
+        "url": "https://scryfall.com/card/thb/95/final-death?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:25.327Z",
+        "manaCost": "{4}{B}",
+        "typeLine": "Instant",
+        "colors": ["B"],
+        "text": "Exile target creature.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "ff9a62630846c1159c0877964444cae9eb1dbc07f6d914d5649f88d7cfd2efc7"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/final_reward.txt",
+      "definition": {
+        "name": "Final Reward",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 4,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Exile target creature.",
+        "target": "creature",
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "exile"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "e654242f-c7c5-4713-bbd0-26d41de8e2e7",
+        "printingId": "48e35bc5-d96f-4991-8e1b-56274d0d680e",
+        "url": "https://scryfall.com/card/akr/106/final-reward?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:27.907Z",
+        "manaCost": "{4}{B}",
+        "typeLine": "Instant",
+        "colors": ["B"],
+        "text": "Exile target creature.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "1f66206d0ef830836665914c4fdf0d706a29051bfb6826d60036eb989a4ee5ec"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/funeral_rites.txt",
+      "definition": {
+        "name": "Funeral Rites",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "You draw two cards, lose 2 life, then mill two cards.",
+        "target": null,
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "loseLife",
+            "amount": 2
+          },
+          {
+            "op": "mill",
+            "count": 2,
+            "player": "controller"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "771210f7-0f00-4438-a886-a1f716e3d80e",
+        "printingId": "ecb5fb06-d7b3-4871-a530-9004110596ad",
+        "url": "https://scryfall.com/card/jmp/235/funeral-rites?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:33.111Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "You draw two cards, lose 2 life, then mill two cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "e10902db95059e5ae1f22eeaba80cb0f2f75cc7f6d5e0613d3fb29724cd0be3a"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/g/glidedive_duo.txt",
+      "definition": {
+        "name": "Glidedive Duo",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "B": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Bat", "Lizard"],
+        "text": "Flying\nWhen Glidedive Duo enters, each opponent loses 2 life and you gain 2 life.",
+        "power": 3,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "33c06c11-8d0a-45ce-adea-c9a7a8ac8779",
+        "printingId": "4831e7ae-54e3-4bd9-b5af-52dc29f81715",
+        "url": "https://scryfall.com/card/blb/96/glidedive-duo?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:38.690Z",
+        "manaCost": "{4}{B}",
+        "typeLine": "Creature — Bat Lizard",
+        "colors": ["B"],
+        "power": "3",
+        "toughness": "3",
+        "text": "Flying\nWhen this creature enters, each opponent loses 2 life and you gain 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "5759e66b65112131978ce3bd7298bef0d3f8911db5071c48024f501248e19e2c"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/g/gravedigger.txt",
+      "definition": {
+        "name": "Gravedigger",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Zombie"],
+        "text": "When Gravedigger enters, you may return target creature card from your graveyard to your hand.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "hand"
+              }
+            ],
+            "target": {
+              "scope": "graveyard",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "owner": "you"
+                  }
+                ]
+              }
+            },
+            "optional": true
+          }
+        ]
+      },
+      "oracle": {
+        "id": "1a2030cc-d7ee-4059-b2d7-fb95ea8e267b",
+        "printingId": "0fb714a0-e61b-4ccf-8de6-3a6bf87c8315",
+        "url": "https://scryfall.com/card/m20/103/gravedigger?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:41.386Z",
+        "manaCost": "{3}{B}",
+        "typeLine": "Creature — Zombie",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "2",
+        "text": "When this creature enters, you may return target creature card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "e1abd89f8a075eda914f9a26a2b18afc7f731f572f698c357ffeb69b7ee8c8ad"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/h/hecteyes.txt",
+      "definition": {
+        "name": "Hecteyes",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Ooze", "Horror"],
+        "text": "When this creature enters, each opponent discards a card.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "opponent"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "7a11b4ed-430d-4ef8-b0c1-6a022f12448c",
+        "printingId": "8680d052-c07b-4d9b-bda9-b5f69f44f424",
+        "url": "https://scryfall.com/card/fin/103/hecteyes?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:49.911Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Ooze Horror",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature enters, each opponent discards a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "0fe7e0ef095977a0c8108b64bc74d643aaa8f40a348c817e1683b6025d6f6fca"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/h/hierophants_chalice.txt",
+      "definition": {
+        "name": "Hierophant's Chalice",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "When Hierophant's Chalice enters, target opponent loses 1 life and you gain 1 life.\n{T}: Add {C}.",
+        "mana": "C",
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "target"
+              },
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ],
+            "target": "opponent"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "52732f93-b951-43c3-bb02-c254996606e5",
+        "printingId": "6e8be52c-25ce-49da-8435-58797550f058",
+        "url": "https://scryfall.com/card/xln/240/hierophants-chalice?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:49.911Z",
+        "manaCost": "{3}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "When this artifact enters, target opponent loses 1 life and you gain 1 life.\n{T}: Add {C}.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "9d9234bb344407acf5183b233cf8840abf675f212d0252eee93f5cc303d45e03"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/h/honored_heirloom.txt",
+      "definition": {
+        "name": "Honored Heirloom",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{T}: Add one mana of any color.\n{2}, {T}: Exile target card from a graveyard.",
+        "mana": ["W", "U", "B", "R", "G"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "mana": {
+                "generic": 2
+              }
+            },
+            "target": {
+              "scope": "graveyard"
+            },
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "exile"
+              }
+            ],
+            "text": "Exile target card from a graveyard."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "4bf0427e-5e87-4d32-ad34-1d8946ab96fd",
+        "printingId": "d3390e4d-9137-40ff-b998-bdb19c90b7d5",
+        "url": "https://scryfall.com/card/vow/257/honored-heirloom?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:52.712Z",
+        "manaCost": "{3}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{T}: Add one mana of any color.\n{2}, {T}: Exile target card from a graveyard.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "846ab79d478b679c4ae31b549ec52c427dc170f88a48ae970cd1c32976bccf9b"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/i/infernal_grasp.txt",
+      "definition": {
+        "name": "Infernal Grasp",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Destroy target creature. You lose 2 life.",
+        "target": "creature",
+        "effects": [
+          {
+            "op": "destroy"
+          },
+          {
+            "op": "loseLife",
+            "amount": 2
+          }
+        ]
+      },
+      "oracle": {
+        "id": "94f0a572-e91c-4b56-a5d1-6cbbeabd210d",
+        "printingId": "17824929-f131-4b8d-addb-66c25323155e",
+        "url": "https://scryfall.com/card/mid/107/infernal-grasp?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:58.067Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Instant",
+        "colors": ["B"],
+        "text": "Destroy target creature. You lose 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "7d8464ee1b76d1b6ad491d6a75809328f371ea40d9b7effd9c7cd71ac278a2dc"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/mind_rot.txt",
+      "definition": {
+        "name": "Mind Rot",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Target player discards two cards.",
+        "target": "player",
+        "effects": [
+          {
+            "op": "discard",
+            "count": 2,
+            "player": "target"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "ad44cf74-b717-48fb-9fa2-77512024d76a",
+        "printingId": "833a8604-92d5-443b-9bc0-bd91c973ef07",
+        "url": "https://scryfall.com/card/m21/115/mind-rot?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:24.902Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Target player discards two cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "61fefbc9d55d286f48d5208000aca99a3b0042a5b5b630c46e4177e71cd47abb"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/n/nezumi_informant.txt",
+      "definition": {
+        "name": "Nezumi Informant",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Rat", "Rogue"],
+        "text": "When Nezumi Informant enters, each opponent discards a card.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "opponent"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "a70ffefb-840c-48c3-a59d-e12306086bb6",
+        "printingId": "e36fbff8-471e-4cf8-8946-e1e5cdf598af",
+        "url": "https://scryfall.com/card/mom/120/nezumi-informant?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:32.985Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Rat Rogue",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature enters, each opponent discards a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "0290460ba7f4384e3c823a4224cda50c27e5c087e529b3e1134b8dcd74291cf8"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/n/nights_whisper.txt",
+      "definition": {
+        "name": "Night's Whisper",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "You draw two cards and you lose 2 life.",
+        "target": null,
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "loseLife",
+            "amount": 2
+          }
+        ]
+      },
+      "oracle": {
+        "id": "7ffae8f8-3006-4969-a339-6d30678f87ea",
+        "printingId": "e8399c2e-ecc8-41c9-a690-a0eeafb27f77",
+        "url": "https://scryfall.com/card/hoc/189/nights-whisper?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:32.985Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "You draw two cards and lose 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "4b01505f1b629b07e15c0ed6ae862ca1ebd9e87a517d995c2329d736ad1ae602"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/o/opportunity.txt",
+      "definition": {
+        "name": "Opportunity",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 4,
+          "U": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Target player draws four cards.",
+        "target": "player",
+        "effects": [
+          {
+            "op": "draw",
+            "count": 4,
+            "player": "target"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "1f544a9f-c238-4858-be19-d6cd7d023dcc",
+        "printingId": "2237063a-2c2a-44fc-9103-c6e5db171ae5",
+        "url": "https://scryfall.com/card/j25/338/opportunity?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:38.489Z",
+        "manaCost": "{4}{U}{U}",
+        "typeLine": "Instant",
+        "colors": ["U"],
+        "text": "Target player draws four cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "3ab3c9138b935e0856ee4c96190614977d93ff8bf02374541531dba2525b6adb"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/o/overflowing_insight.txt",
+      "definition": {
+        "name": "Overflowing Insight",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 4,
+          "U": 3
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Target player draws seven cards.",
+        "target": "player",
+        "effects": [
+          {
+            "op": "draw",
+            "count": 7,
+            "player": "target"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "ff03a063-9634-4746-a208-9dbcde5c6bdb",
+        "printingId": "f6b3dd8f-902e-45b8-a422-370705621294",
+        "url": "https://scryfall.com/card/xln/66/overflowing-insight?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:41.015Z",
+        "manaCost": "{4}{U}{U}{U}",
+        "typeLine": "Sorcery",
+        "colors": ["U"],
+        "text": "Target player draws seven cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "af6d025377f62f61e2fec7e21f823b1ac892d8e07ba4e61e2cfd776f21d7d245"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/phyrexian_gargantua.txt",
+      "definition": {
+        "name": "Phyrexian Gargantua",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "B": 2
+        },
+        "keywords": [],
+        "subtypes": ["Phyrexian", "Horror"],
+        "text": "When Phyrexian Gargantua enters, you draw two cards and you lose 2 life.",
+        "power": 4,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 2
+              },
+              {
+                "op": "loseLife",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "a3925dfd-62b0-44ef-8545-7bee92cad5a2",
+        "printingId": "a2be7576-bea6-4c20-b594-a058115f7acf",
+        "url": "https://scryfall.com/card/mom/121/phyrexian-gargantua?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:43.853Z",
+        "manaCost": "{4}{B}{B}",
+        "typeLine": "Creature — Phyrexian Horror",
+        "colors": ["B"],
+        "power": "4",
+        "toughness": "4",
+        "text": "When this creature enters, you draw two cards and you lose 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "bf95aa3befc259ee607498dd8b984183d5e12c0d540879aee7c402d3455b0c01"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/phyrexian_rager.txt",
+      "definition": {
+        "name": "Phyrexian Rager",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Phyrexian", "Horror"],
+        "text": "When Phyrexian Rager enters, you draw a card and you lose 1 life.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "loseLife",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "e409c9be-0c9a-43c3-adb4-8c47afc1d551",
+        "printingId": "6fd574e7-705f-4a65-aad0-68ff6d63bf0f",
+        "url": "https://scryfall.com/card/dmu/99/phyrexian-rager?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:43.853Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Creature — Phyrexian Horror",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "2",
+        "text": "When this creature enters, you draw a card and you lose 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "8ffc2ecbfc86ce473c2c84296418e3f71083ecce42122ab2a1f0e1ff4eaafea2"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/raise_dead.txt",
+      "definition": {
+        "name": "Raise Dead",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Return target creature card from your graveyard to your hand.",
+        "target": {
+          "scope": "graveyard",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "owner": "you"
+              }
+            ]
+          }
+        },
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "hand"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "cbc9c731-181a-4f00-a7b0-eb7e56eac2ea",
+        "printingId": "a68fdb3d-cb34-4691-ada3-ff47b6802363",
+        "url": "https://scryfall.com/card/anb/56/raise-dead?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:52.388Z",
+        "manaCost": "{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Return target creature card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "95086a93b9905b1a78e5e9037da6dc9f957de3662c740e6db800e70af234b9c0"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/rakshasas_secret.txt",
+      "definition": {
+        "name": "Rakshasa's Secret",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Target opponent discards two cards. Mill two cards.",
+        "target": "opponent",
+        "effects": [
+          {
+            "op": "discard",
+            "count": 2,
+            "player": "target"
+          },
+          {
+            "op": "mill",
+            "count": 2,
+            "player": "controller"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "e753f50d-64ed-4822-a301-57659ee378b6",
+        "printingId": "3fd55bf6-6fae-4135-a347-5903f47b4d49",
+        "url": "https://scryfall.com/card/ktk/84y/rakshasas-secret?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:52.388Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Target opponent discards two cards. You mill two cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "d14427367c966b0f52cc6e409cdd258548c3a62d0e2c04d2fe51b24d99e1bdb0"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/rank_rat.txt",
+      "definition": {
+        "name": "Rank Rat",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Zombie", "Rat"],
+        "text": "When this creature enters, each opponent discards a card.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "opponent"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "64e7ef06-ba30-4b19-9d44-ca77944cc930",
+        "printingId": "4ff6da82-d7dd-4b59-b7e6-30670cea7169",
+        "url": "https://scryfall.com/card/fra/61/rank-rat?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:54.959Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Zombie Rat",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature enters, each opponent discards a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "0e75fc0dd12448655bab4868b38c810bfcdfe82534cb0f3f54d74299d2a22db3"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/read_the_bones.txt",
+      "definition": {
+        "name": "Read the Bones",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Scry 2, then draw two cards. You lose 2 life.",
+        "target": null,
+        "effects": [
+          {
+            "op": "scry",
+            "count": 2
+          },
+          {
+            "op": "draw",
+            "count": 2
+          },
+          {
+            "op": "loseLife",
+            "amount": 2
+          }
+        ]
+      },
+      "oracle": {
+        "id": "5bf4d8d9-a2b2-4dba-ac05-9d4470a89db2",
+        "printingId": "301dcd54-cfbb-4a32-907c-70130a6c5deb",
+        "url": "https://scryfall.com/card/pio/104/read-the-bones?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:54.959Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Scry 2, then draw two cards. You lose 2 life. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "1aca73ca724e6395212876206fd4b0a1def089719fba1eada7e99c8f3f90663c"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/reckless_scholar.txt",
+      "definition": {
+        "name": "Reckless Scholar",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Wizard"],
+        "text": "{T}: Target player draws a card, then discards a card.",
+        "power": 2,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "tap": true
+            },
+            "target": "player",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1,
+                "player": "target"
+              },
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "target"
+              }
+            ],
+            "text": "Target player draws a card, then discards a card."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "604aded2-64c2-4474-b5b7-8c83e0e3fe76",
+        "printingId": "bad3313a-61ef-42c8-a092-390adb51e17e",
+        "url": "https://scryfall.com/card/jmp/168/reckless-scholar?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:57.513Z",
+        "manaCost": "{2}{U}",
+        "typeLine": "Creature — Human Wizard",
+        "colors": ["U"],
+        "power": "2",
+        "toughness": "1",
+        "text": "{T}: Target player draws a card, then discards a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "0dda9fd5309ba27f16407094a6af4bdf0491056b8e5e775d4f4431de95659421"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/recollect.txt",
+      "definition": {
+        "name": "Recollect",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Return target card from your graveyard to your hand.",
+        "target": {
+          "scope": "graveyard",
+          "where": {
+            "owner": "you"
+          }
+        },
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "hand"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "5b38fafb-3999-46dc-928b-1677625c1943",
+        "printingId": "f127214f-3e91-4988-b593-1568d0ae1718",
+        "url": "https://scryfall.com/card/m19/197/recollect?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:57.513Z",
+        "manaCost": "{2}{G}",
+        "typeLine": "Sorcery",
+        "colors": ["G"],
+        "text": "Return target card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "cd4e1626864cd6bc9b2d6873a1efae480848b176685fd717935358e58ad9e1d2"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/recover.txt",
+      "definition": {
+        "name": "Recover",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Return target creature card from your graveyard to your hand.\nDraw a card.",
+        "target": {
+          "scope": "graveyard",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "owner": "you"
+              }
+            ]
+          }
+        },
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "hand"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      },
+      "oracle": {
+        "id": "f4361602-63da-430b-adbb-36d74e987aa6",
+        "printingId": "f2f4e0a8-7af7-4422-a964-c19503692ba6",
+        "url": "https://scryfall.com/card/rix/84/recover?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:57.513Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Return target creature card from your graveyard to your hand.\nDraw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "6bdf949092ef4f68d4333397e8f072b77612e39b1e5fe6d4d0855d874b32cd21"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/refurbish.txt",
+      "definition": {
+        "name": "Refurbish",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 3,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Return target artifact card from your graveyard to the battlefield.",
+        "target": {
+          "scope": "graveyard",
+          "where": {
+            "all": [
+              {
+                "type": "artifact"
+              },
+              {
+                "owner": "you"
+              }
+            ]
+          }
+        },
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "battlefield"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "e4e61fe3-27a4-4149-bdfb-67dcfc8eb32c",
+        "printingId": "a10c118c-1074-4037-a771-0f54a9066ca5",
+        "url": "https://scryfall.com/card/klr/27/refurbish?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:57.513Z",
+        "manaCost": "{3}{W}",
+        "typeLine": "Sorcery",
+        "colors": ["W"],
+        "text": "Return target artifact card from your graveyard to the battlefield.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "8c6b75364420e476184ae010e960d3f9c0b558355e7349eb76e5604ce88ebc5e"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/regrowth.txt",
+      "definition": {
+        "name": "Regrowth",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Return target card from your graveyard to your hand.",
+        "target": {
+          "scope": "graveyard",
+          "where": {
+            "owner": "you"
+          }
+        },
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "hand"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "e6e4a8bd-5c40-4654-8de1-0da9afed90fd",
+        "printingId": "af727601-5251-48b6-b5e3-b68ca0608bc9",
+        "url": "https://scryfall.com/card/sta/56/regrowth?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:57.513Z",
+        "manaCost": "{1}{G}",
+        "typeLine": "Sorcery",
+        "colors": ["G"],
+        "text": "Return target card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "1dce28f064bcc46215b7a562658c72790add117e42316c816b068fd28a4fd2c9"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/revoke_existence.txt",
+      "definition": {
+        "name": "Revoke Existence",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Exile target artifact or enchantment.",
+        "target": "artifactOrEnchantment",
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "exile"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "289e1a7c-b301-4395-baf8-e9a1c6d38aab",
+        "printingId": "9dbb9f86-f487-44b1-815f-30d87868b531",
+        "url": "https://scryfall.com/card/thb/34/revoke-existence?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:00.384Z",
+        "manaCost": "{1}{W}",
+        "typeLine": "Sorcery",
+        "colors": ["W"],
+        "text": "Exile target artifact or enchantment.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "35b7eb4525c249e9f2f763f4f84df59712e8a7649816c149865db9731784b77e"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/siege_rhino.txt",
+      "definition": {
+        "name": "Siege Rhino",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1,
+          "B": 1,
+          "G": 1
+        },
+        "keywords": ["trample"],
+        "subtypes": ["Rhino"],
+        "text": "Trample\nWhen Siege Rhino enters, each opponent loses 3 life and you gain 3 life.",
+        "power": 4,
+        "toughness": 5,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 3,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 3
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "e1087ce2-e3c2-4ab1-bd08-1dc9ab70f12f",
+        "printingId": "9011126a-20bd-4c86-a63b-1691f79ac247",
+        "url": "https://scryfall.com/card/ktk/200/siege-rhino?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:17.106Z",
+        "manaCost": "{1}{W}{B}{G}",
+        "typeLine": "Creature — Rhino",
+        "colors": ["B", "G", "W"],
+        "power": "4",
+        "toughness": "5",
+        "text": "Trample\nWhen this creature enters, each opponent loses 3 life and you gain 3 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "33609e3d1c20702673bc8e9cec4bd0674f0801df28407432bc2428deff617ee3"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/sign_in_blood.txt",
+      "definition": {
+        "name": "Sign in Blood",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "B": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Target player draws two cards and loses 2 life.",
+        "target": "player",
+        "effects": [
+          {
+            "op": "draw",
+            "count": 2,
+            "player": "target"
+          },
+          {
+            "op": "loseLife",
+            "amount": 2,
+            "player": "target"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "c6207f6a-a624-4754-88f5-dbe700c841ff",
+        "printingId": "0ef84fcc-7685-41e5-bcd0-25b974ce570f",
+        "url": "https://scryfall.com/card/sta/32/sign-in-blood?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:17.106Z",
+        "manaCost": "{B}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Target player draws two cards and loses 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "666948d1dffd6bff476639cd4ad740d0a75e985543e5590b181830db75dc3855"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/skirmish_rhino.txt",
+      "definition": {
+        "name": "Skirmish Rhino",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "W": 1,
+          "B": 1,
+          "G": 1
+        },
+        "keywords": ["trample"],
+        "subtypes": ["Rhino"],
+        "text": "Trample\nWhen this creature enters, each opponent loses 2 life and you gain 2 life.",
+        "power": 3,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "40eb7f43-7cee-41a1-a4d1-f34ee125ccd1",
+        "printingId": "4a2e9ba1-c254-41e3-9845-4e81f9fec38d",
+        "url": "https://scryfall.com/card/tdm/224/skirmish-rhino?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:19.687Z",
+        "manaCost": "{W}{B}{G}",
+        "typeLine": "Creature — Rhino",
+        "colors": ["B", "G", "W"],
+        "power": "3",
+        "toughness": "4",
+        "text": "Trample\nWhen this creature enters, each opponent loses 2 life and you gain 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "eb69fdb21abef9065c04a4487beec8323cf7be1678670d5549ee5a9b10d6e564"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/skymarch_bloodletter.txt",
+      "definition": {
+        "name": "Skymarch Bloodletter",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Vampire", "Soldier"],
+        "text": "Flying\nWhen Skymarch Bloodletter enters, target opponent loses 1 life and you gain 1 life.",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "target"
+              },
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ],
+            "target": "opponent"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "41684707-5118-45cf-892d-46b66045d026",
+        "printingId": "2c7f2740-a193-4b4c-af00-2dd22d74a4ba",
+        "url": "https://scryfall.com/card/m19/119/skymarch-bloodletter?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:19.687Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Creature — Vampire Soldier",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "2",
+        "text": "Flying\nWhen this creature enters, target opponent loses 1 life and you gain 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "c297873d8a086329111793768e6fcfed87bed65462ec879c7c75f4e68474f886"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/sneering_shadewriter.txt",
+      "definition": {
+        "name": "Sneering Shadewriter",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "B": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Vampire", "Warlock"],
+        "text": "Flying\nWhen this creature enters, each opponent loses 2 life and you gain 2 life.",
+        "power": 3,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "21a094d6-de3d-48d4-a35d-b99617da55db",
+        "printingId": "4b4c120e-abe9-4f11-a7e4-bc3f723da4b2",
+        "url": "https://scryfall.com/card/sos/101/sneering-shadewriter?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:22.471Z",
+        "manaCost": "{4}{B}",
+        "typeLine": "Creature — Vampire Warlock",
+        "colors": ["B"],
+        "power": "3",
+        "toughness": "3",
+        "text": "Flying\nWhen this creature enters, each opponent loses 2 life and you gain 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "269d297ed50af2b9dddc1f6483af707cdea801bc0a4eeab6f97668072ce76887"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/sovereigns_bite.txt",
+      "definition": {
+        "name": "Sovereign's Bite",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Target player loses 3 life and you gain 3 life.",
+        "target": "player",
+        "effects": [
+          {
+            "op": "loseLife",
+            "amount": 3,
+            "player": "target"
+          },
+          {
+            "op": "gainLife",
+            "amount": 3
+          }
+        ]
+      },
+      "oracle": {
+        "id": "13718d93-fe46-4a18-a511-88649ef1c9de",
+        "printingId": "5326d251-bb91-4653-b1fa-44f14c4e0b88",
+        "url": "https://scryfall.com/card/m19/120/sovereigns-bite?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:25.422Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Target player loses 3 life and you gain 3 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "528ff936707b4698bf5102a0c11cea0761fee96b399efe33cd4a547dfd60bad0"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/specter_of_the_fens.txt",
+      "definition": {
+        "name": "Specter of the Fens",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Specter"],
+        "text": "Flying\n{5}{B}: Target opponent loses 2 life and you gain 2 life.",
+        "power": 2,
+        "toughness": 3,
+        "activated": [
+          {
+            "cost": {
+              "mana": {
+                "generic": 5,
+                "B": 1
+              }
+            },
+            "target": "opponent",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "target"
+              },
+              {
+                "op": "gainLife",
+                "amount": 2
+              }
+            ],
+            "text": "Target opponent loses 2 life and you gain 2 life."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "048925e1-3bd6-4caa-90b9-e75e890032a5",
+        "printingId": "73e3cfbc-7177-4bbc-89c4-560c9c2f97db",
+        "url": "https://scryfall.com/card/stx/87/specter-of-the-fens?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:25.422Z",
+        "manaCost": "{3}{B}",
+        "typeLine": "Creature — Specter",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "3",
+        "text": "Flying\n{5}{B}: Target opponent loses 2 life and you gain 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "8760d0d81d775ba58d360bc9e6078c8d42cd4e13e5691f82e9e93b4381f64392"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/stony_voiced_goblins.txt",
+      "definition": {
+        "name": "Stony-Voiced Goblins",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Goblin", "Bard"],
+        "text": "When this creature enters, each opponent discards a card.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "opponent"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "d1dceaa7-d33e-4067-9e1b-8a8978a12933",
+        "printingId": "6fcc3699-b475-4612-884d-81bd4f21e9c1",
+        "url": "https://scryfall.com/card/hob/85/stony-voiced-goblins?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:30.613Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Goblin Bard",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature enters, each opponent discards a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "8a934e35354d084eb991d94529a400895d8d427fdecd4a6ba44d4d739f997821"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/t/tithebearer_giant.txt",
+      "definition": {
+        "name": "Tithebearer Giant",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 5,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Giant", "Warrior"],
+        "text": "When Tithebearer Giant enters, you draw a card and you lose 1 life.",
+        "power": 4,
+        "toughness": 5,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "loseLife",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "475aaf7c-b0f8-40f3-ad91-3e7d414de933",
+        "printingId": "e49bddc9-0b0b-4d6d-a708-019356f9649e",
+        "url": "https://scryfall.com/card/jmp/284/tithebearer-giant?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:50.622Z",
+        "manaCost": "{5}{B}",
+        "typeLine": "Creature — Giant Warrior",
+        "colors": ["B"],
+        "power": "4",
+        "toughness": "5",
+        "text": "When this creature enters, you draw a card and you lose 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "170cc6700a9d4e0aa6c585edcf4a4441cfe0c5b29fda560c7984d1b2e08c8f0f"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/t/toxic_abomination.txt",
+      "definition": {
+        "name": "Toxic Abomination",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Phyrexian", "Zombie"],
+        "text": "When Toxic Abomination enters, you lose 2 life.",
+        "power": 3,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "6358ee1c-3577-4196-bae4-29a3c160a66a",
+        "printingId": "f435329e-6de7-4b05-ba70-cb63d121116e",
+        "url": "https://scryfall.com/card/dmu/112/toxic-abomination?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:53.459Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Phyrexian Zombie",
+        "colors": ["B"],
+        "power": "3",
+        "toughness": "2",
+        "text": "When this creature enters, you lose 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "44bc0482d8a776c84f36bd8227d5b01ea8809f465d42d6c06f629a0fa0ac7709"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/t/true_loves_kiss.txt",
+      "definition": {
+        "name": "True Love's Kiss",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 2,
+          "W": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Exile target artifact or enchantment.\nDraw a card.",
+        "target": "artifactOrEnchantment",
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "exile"
+          },
+          {
+            "op": "draw",
+            "count": 1
+          }
+        ]
+      },
+      "oracle": {
+        "id": "9506aba2-5e1d-48c5-ace8-4beb824ad8af",
+        "printingId": "23a4bac2-f6cb-4712-8510-a63657c43a5c",
+        "url": "https://scryfall.com/card/eld/34/true-loves-kiss?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:53.459Z",
+        "manaCost": "{2}{W}{W}",
+        "typeLine": "Instant",
+        "colors": ["W"],
+        "text": "Exile target artifact or enchantment.\nDraw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "50f82cb219494a4a03c16bf6bbd3177939a6fadb48a5a87c08cf42d24fdf97a0"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/t/trusty_packbeast.txt",
+      "definition": {
+        "name": "Trusty Packbeast",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": ["Beast"],
+        "text": "When Trusty Packbeast enters, return target artifact card from your graveyard to your hand.",
+        "power": 2,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "hand"
+              }
+            ],
+            "target": {
+              "scope": "graveyard",
+              "where": {
+                "all": [
+                  {
+                    "type": "artifact"
+                  },
+                  {
+                    "owner": "you"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "oracle": {
+        "id": "12c7289f-da53-403a-a607-227f43c7e171",
+        "printingId": "8320e35b-15b9-4f98-b9b8-9c951696408b",
+        "url": "https://scryfall.com/card/m19/41/trusty-packbeast?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:53.459Z",
+        "manaCost": "{2}{W}",
+        "typeLine": "Creature — Beast",
+        "colors": ["W"],
+        "power": "2",
+        "toughness": "3",
+        "text": "When this creature enters, return target artifact card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "bbf4518e2d9c1ffe1c4d989057746e459faf45289d84ccdc57959057e42804c4"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/v/vampire_neonate.txt",
+      "definition": {
+        "name": "Vampire Neonate",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Vampire"],
+        "text": "{2}, {T}: Each opponent loses 1 life and you gain 1 life.",
+        "power": 0,
+        "toughness": 3,
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "mana": {
+                "generic": 2
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ],
+            "text": "Each opponent loses 1 life and you gain 1 life."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "c0045925-25bf-403c-b721-5f05ba30985b",
+        "printingId": "c7649d57-3537-45a2-b57e-98e7d32025c9",
+        "url": "https://scryfall.com/card/jmp/285/vampire-neonate?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:02.599Z",
+        "manaCost": "{B}",
+        "typeLine": "Creature — Vampire",
+        "colors": ["B"],
+        "power": "0",
+        "toughness": "3",
+        "text": "{2}, {T}: Each opponent loses 1 life and you gain 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "d56ded154f6a16ea8db8c7fa205c90ee796f413837b3c504cee8890987f4e500"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/v/vampire_opportunist.txt",
+      "definition": {
+        "name": "Vampire Opportunist",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Vampire"],
+        "text": "{6}{B}: Each opponent loses 2 life and you gain 2 life.",
+        "power": 2,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "mana": {
+                "generic": 6,
+                "B": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 2
+              }
+            ],
+            "text": "Each opponent loses 2 life and you gain 2 life."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "6f525ccd-4776-492c-a1f9-8bce5740fb28",
+        "printingId": "ced4b4a9-73a8-4135-b150-cd78d1558aca",
+        "url": "https://scryfall.com/card/m20/326/vampire-opportunist?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:02.599Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Vampire",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "1",
+        "text": "{6}{B}: Each opponent loses 2 life and you gain 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "54731af21770e7bf59b438e0b600bb3c21e3d57a60d50f8726f376ae79bd5945"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/v/vampire_sovereign.txt",
+      "definition": {
+        "name": "Vampire Sovereign",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "B": 2
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Vampire", "Noble"],
+        "text": "Flying\nWhen Vampire Sovereign enters, target opponent loses 3 life and you gain 3 life.",
+        "power": 3,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 3,
+                "player": "target"
+              },
+              {
+                "op": "gainLife",
+                "amount": 3
+              }
+            ],
+            "target": "opponent"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "49c7b7c6-c8dc-4871-9103-b057d2034c3e",
+        "printingId": "ee338221-ead9-4b89-8b0c-12745c4ca13d",
+        "url": "https://scryfall.com/card/m19/125/vampire-sovereign?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:02.599Z",
+        "manaCost": "{3}{B}{B}",
+        "typeLine": "Creature — Vampire Noble",
+        "colors": ["B"],
+        "power": "3",
+        "toughness": "4",
+        "text": "Flying\nWhen this creature enters, target opponent loses 3 life and you gain 3 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "89a273c1f9bef2181632b666060d6636f6e3a22875fc29bb41be95adc1f4964d"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/v/vampire_spawn.txt",
+      "definition": {
+        "name": "Vampire Spawn",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Vampire"],
+        "text": "When Vampire Spawn enters, each opponent loses 2 life and you gain 2 life.",
+        "power": 2,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "33cee4b4-3d80-46f1-9223-49ed785891a1",
+        "printingId": "b8975c72-b2ec-4c5f-86a4-4e1e3bb41c15",
+        "url": "https://scryfall.com/card/afr/123/vampire-spawn?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:02.599Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Creature — Vampire",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "3",
+        "text": "When this creature enters, each opponent loses 2 life and you gain 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "6246e5ef871aeb54be7ac6b36285083fd3e0f4727d39d2601d95dda6836d19f3"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/v/vault_plunderer.txt",
+      "definition": {
+        "name": "Vault Plunderer",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Rogue"],
+        "text": "When Vault Plunderer enters, target player draws a card and loses 1 life.",
+        "power": 3,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1,
+                "player": "target"
+              },
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "target"
+              }
+            ],
+            "target": "player"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "80e5d768-cc1f-48f8-b0fe-ed974e4d1a56",
+        "printingId": "2e6bf35c-8763-47cc-ab2d-5dbabeb28072",
+        "url": "https://scryfall.com/card/otj/114/vault-plunderer?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:02.599Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Creature — Human Rogue",
+        "colors": ["B"],
+        "power": "3",
+        "toughness": "1",
+        "text": "When this creature enters, target player draws a card and loses 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "f6d9fe8e7c21df98cba58275e3605a7120a5710930bf0da712d27c3a246b214c"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/v/virus_beetle.txt",
+      "definition": {
+        "name": "Virus Beetle",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Insect"],
+        "text": "When Virus Beetle enters, each opponent discards a card.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "discard",
+                "count": 1,
+                "player": "opponent"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "e1e489f6-37e5-469e-bca3-0e9d3fc3fa95",
+        "printingId": "e96c986c-684c-4546-a9c9-b6b903bda101",
+        "url": "https://scryfall.com/card/eoe/124/virus-beetle?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:05.497Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Artifact Creature — Insect",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature enters, each opponent discards a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "9366225b0fddda4bb95b35047722e67fea9584816e13e36e191ac5cbfb70c88f"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/w/wander_off.txt",
+      "definition": {
+        "name": "Wander Off",
+        "type": "instant",
+        "types": ["instant"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Exile target creature.",
+        "target": "creature",
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "exile"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "b14d3226-adc2-4bdd-9e69-fefdc946ac04",
+        "printingId": "3d409512-50b9-4a38-91b0-19ba25227992",
+        "url": "https://scryfall.com/card/sos/104/wander-off?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:08.546Z",
+        "manaCost": "{3}{B}",
+        "typeLine": "Instant",
+        "colors": ["B"],
+        "text": "Exile target creature.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "57d4c291197d96b4b8a47fc5e8e144de79ff45e1ccb14aa40632ff149c0be904"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/z/zombify.txt",
+      "definition": {
+        "name": "Zombify",
+        "type": "sorcery",
+        "types": ["sorcery"],
+        "cost": {
+          "generic": 3,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Return target creature card from your graveyard to the battlefield.",
+        "target": {
+          "scope": "graveyard",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "owner": "you"
+              }
+            ]
+          }
+        },
+        "effects": [
+          {
+            "op": "moveTarget",
+            "destination": "battlefield"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "bb95db4d-5017-4121-bf79-d68476602d8c",
+        "printingId": "dc798e6f-13c4-457c-b052-b7b65bc83cfe",
+        "url": "https://scryfall.com/card/fdn/187/zombify?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:17.780Z",
+        "manaCost": "{3}{B}",
+        "typeLine": "Sorcery",
+        "colors": ["B"],
+        "text": "Return target creature card from your graveyard to the battlefield.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "01de4d0da50bbc9fcd48f6a1b45e23d123f6aad6fce119285e79b0fe5defa61e"
+    }
+  ]
+}

@@ -55,7 +55,7 @@ export type CardPredicate =
   | { toughness: NumericComparison }
   | { manaValue: NumericComparison };
 export interface TargetSpec {
-  scope: 'permanent' | 'spell' | 'player' | 'damageable';
+  scope: 'permanent' | 'spell' | 'player' | 'damageable' | 'graveyard';
   where?: CardPredicate;
 }
 export type TargetKind = LegacyTargetKind | TargetSpec;
@@ -67,8 +67,19 @@ export interface EventSpec {
   excludeSource?: boolean;
 }
 export type Effect =
-  | { op: 'damage' | 'damageOpponent' | 'gainLife'; amount: number }
-  | { op: 'draw' | 'scry' | 'surveil' | 'discard'; count: number }
+  | { op: 'damage' | 'damageOpponent'; amount: number }
+  | { op: 'gainLife' | 'loseLife'; amount: number; player?: 'controller' | 'opponent' | 'target' }
+  | {
+      op: 'moveTarget';
+      destination: 'hand' | 'battlefield' | 'exile';
+      controller?: 'owner' | 'you';
+      tapped?: boolean;
+    }
+  | {
+      op: 'draw' | 'scry' | 'surveil' | 'discard';
+      count: number;
+      player?: 'controller' | 'opponent' | 'target';
+    }
   | { op: 'mill'; count: number; player: 'controller' | 'opponent' | 'target' }
   | { op: 'counter' | 'bounce' | 'destroy' }
   | { op: 'untap'; subject: 'source' }
@@ -337,7 +348,15 @@ export const CARDS: Readonly<Record<string, CardDefinition>>;
 export const DECKS: Readonly<
   Record<
     string,
-    { name: string; colors: Color[]; description: string; cards: Record<string, number> }
+    {
+      name: string;
+      colors: Color[];
+      description: string;
+      art: string;
+      thumbnail: string;
+      archetype: string;
+      cards: Record<string, number>;
+    }
   >
 >;
 export class RuleError extends Error {

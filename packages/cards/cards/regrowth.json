@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e6e4a8bd-5c40-4654-8de1-0da9afed90fd",
+  "name": "Regrowth",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Return target card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "owner": "you"
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ]
+    }
+  ]
+}

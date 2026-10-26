@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "21a094d6-de3d-48d4-a35d-b99617da55db",
+  "name": "Sneering Shadewriter",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhen this creature enters, each opponent loses 2 life and you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 2
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

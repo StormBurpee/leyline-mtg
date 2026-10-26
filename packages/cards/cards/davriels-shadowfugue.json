@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cb490f3f-74ed-4d38-8eda-9948c095f3bc",
+  "name": "Davriel's Shadowfugue",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}"
+  },
+  "rulesText": "Target player discards two cards and loses 2 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "target",
+          "amount": 2
+        },
+        {
+          "op": "loseLife",
+          "target": "target",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

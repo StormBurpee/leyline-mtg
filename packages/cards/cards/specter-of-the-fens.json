@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "048925e1-3bd6-4caa-90b9-e75e890032a5",
+  "name": "Specter of the Fens",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Specter"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flying\n{5}{B}: Target opponent loses 2 life and you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{5}{B}"
+      },
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "target",
+          "amount": 2
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ],
+      "text": "Target opponent loses 2 life and you gain 2 life."
+    }
+  ]
+}

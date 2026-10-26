@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "604aded2-64c2-4474-b5b7-8c83e0e3fe76",
+  "name": "Reckless Scholar",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "{T}: Target player draws a card, then discards a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "target",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "target",
+          "amount": 1
+        }
+      ],
+      "text": "Target player draws a card, then discards a card."
+    }
+  ]
+}

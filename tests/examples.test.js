@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { replay, assertInvariants } from '../packages/engine/src/index.js';
 for (const filename of [
   'example-replay.json',
+  'example-burial-replay.json',
   'example-target-replay.json',
   'example-interaction-replay.json',
   'example-ward-replay.json',
