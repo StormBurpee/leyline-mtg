@@ -311,11 +311,15 @@ export function preserveForDefense(s, source, p) {
           ),
         }
       : s;
-  const view = {
+  let view = {
     ...projected,
     active: enemy,
     combat: { ...s.combat, attackers: attackers.map((id) => ref(s.objects[id])) },
   };
+  // Already declared attackers carry their resolved modifiers in the public
+  // board. Only hypothetical declarations should add attack payoffs again.
+  if (!(s.active === enemy && s.combat.attackers.length))
+    view = projectAttackDeclaration(view, enemy, attackers);
   const held = chooseBlocks(view, p, { budget: 180 });
   const tapped = {
     ...view,
@@ -375,6 +379,22 @@ export function chooseAttacks(s, p) {
     for (const count of [2, 3, 4]) sets.push(byPower.slice(0, count).map((o) => o.id));
   }
   let best = { cards: [], score: -Infinity };
+  const hasAttackTriggers = Object.values(s.objects).some(
+    (o) =>
+      o.zone === 'battlefield' &&
+      (definition(s, o).triggers ?? []).some(
+        (t) => t.event === 'selfAttacks' || t.event?.event === 'attack',
+      ),
+  );
+  const stable = { ...s, modifiers: (s.modifiers ?? []).filter((m) => m.expires !== s.turn) };
+  const stableOutcome = (result) => ({
+    ...result,
+    values: [0, 1].map((player) =>
+      result.alive
+        .filter((id) => s.objects[id]?.controller === player)
+        .reduce((sum, id) => sum + permanentValue(stable, s.objects[id]), 0),
+    ),
+  });
   for (const cards of sets) {
     let scenario = {
       ...s,
@@ -387,13 +407,6 @@ export function chooseAttacks(s, p) {
         hasFirst: false,
       },
     };
-    const hasAttackTriggers = Object.values(s.objects).some(
-      (o) =>
-        o.zone === 'battlefield' &&
-        (definition(s, o).triggers ?? []).some(
-          (t) => t.event === 'selfAttacks' || t.event?.event === 'attack',
-        ),
-    );
     if (hasAttackTriggers) scenario = projectAttackDeclaration(scenario, p, cards);
     const result =
       scenario.status === 'finished'
@@ -409,7 +422,8 @@ export function chooseAttacks(s, p) {
               .map((o) => o.id),
           }
         : chooseBlocks(scenario, 1 - p, { budget: 96 }).outcome;
-    let score = utility(result, p);
+    // Temporary attack boosts are not permanent material won by attacking.
+    let score = utility(stableOutcome(result), p);
     if (result.life[p] > 0 && result.life[1 - p] > 0) {
       const alive = new Set(result.alive);
       const objects = Object.fromEntries(
@@ -452,7 +466,16 @@ export function chooseAttacks(s, p) {
         firstEligible: [],
         hasFirst: false,
       };
-      const defense = chooseBlocks(reply, p, { budget: 64 }).outcome;
+      // The opponent's declared-attack payoffs matter on the return attack too.
+      // Evaluate only public deterministic effects, with no invented hand/draw.
+      const responding = hasAttackTriggers
+        ? projectAttackDeclaration(
+            reply,
+            1 - p,
+            incoming.map((o) => o.id),
+          )
+        : reply;
+      const defense = chooseBlocks(responding, p, { budget: 64 }).outcome;
       if (defense.life[p] <= 0) score -= 100_000;
       else if (defense.life[p] <= 4) score -= 12;
     }

@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "createdAt": "2026-10-26T21:25:06.001Z",
+    "commit": "dae135954740ff4d8e50fa6094c31e64e539c275",
+    "policies": [
+      {
+        "name": "released",
+        "sha256": "f1ffeedaab6859dc54af11ff3f0bf671925e356c851f97052156340822ec8d0e",
+        "modules": 22
+      },
+      {
+        "name": "legacy",
+        "sha256": "bb6ce6b2fb7cfe6393179fdc0a9e7ba297fc3e02e96efff0d2c16293de29125b",
+        "modules": 16
+      }
+    ],
+    "workers": 2,
+    "node": "v24.22.1",
+    "platform": "win32",
+    "budgets": {
+      "maxDecisions": 3000,
+      "blockers": 1400,
+      "attackResponse": 96,
+      "counterattack": 64,
+      "mainPhaseNodes": 256
+    },
+    "options": {
+      "candidate": "released",
+      "opponent": "legacy",
+      "decks": "ember,grove,dawn,nightfall",
+      "seeds": "11,38,731",
+      "starting": "0",
+      "workers": "2",
+      "output": "docs/benchmarks/v022-reproduction.jsonl"
+    },
+    "games": 24
+  },
+  "games": 24,
+  "wins": 15,
+  "losses": 9,
+  "draws": 0,
+  "invalid": 0,
+  "terminations": {
+    "finished": 24
+  },
+  "decks": {
+    "dawn/dawn": {
+      "wins": 4,
+      "losses": 2,
+      "draws": 0,
+      "invalid": 0
+    },
+    "ember/ember": {
+      "wins": 4,
+      "losses": 2,
+      "draws": 0,
+      "invalid": 0
+    },
+    "grove/grove": {
+      "wins": 3,
+      "losses": 3,
+      "draws": 0,
+      "invalid": 0
+    },
+    "nightfall/nightfall": {
+      "wins": 4,
+      "losses": 2,
+      "draws": 0,
+      "invalid": 0
+    }
+  },
+  "completePairs": 12,
+  "excludedPairs": 0,
+  "pairedScore": 0.625,
+  "pairedNormal95": [0.4970529228725621, 0.7529470771274379],
+  "swept": 3,
+  "sweptAgainst": 0,
+  "elapsedMs": 64646.4833
+}

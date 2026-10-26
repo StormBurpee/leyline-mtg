@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { chooseBotCommand, ref, dispatch, playerView } from '../packages/engine/src/index.js';
+import { chooseBotCommand as released } from './fixtures/v0.22-policy/bot.js';
 import { chooseBlocks, combatOutcome } from '../packages/engine/src/combat-policy.js';
 import { fixture, put, lands } from '../packages/engine/test/helpers.js';
 test('menace blocking searches beyond two creatures when survival requires it', () => {
@@ -49,4 +50,46 @@ test('take lethal Shock rather than spending mana on Swiftspear first', () => {
   const shock = put(s, 'Shock', 0, 'hand');
   s.players[1].life = 2;
   assert.equal(chooseBotCommand(s, 0).card, shock.id);
+});
+
+test('reserve a blocker against a public attack-trigger boost on the return attack', () => {
+  const s = fixture();
+  const bear = put(s, 'Grizzly Bears', 0);
+  const jumbo = put(s, 'Jumbo Cactuar', 1);
+  jumbo.tapped = true;
+  s.players[0].life = 10;
+  s.choice = { kind: 'attackers', player: 0 };
+  assert.deepEqual(released(s, 0).cards, [bear.id]);
+  assert.deepEqual(chooseBotCommand(s, 0).cards, []);
+});
+
+test('tap abilities preserve a blocker against a public attack-trigger lethal', () => {
+  const s = fixture();
+  put(s, 'Thermo-Alchemist', 0);
+  put(s, 'Jumbo Cactuar', 1);
+  assert.equal(released(s, 0).type, 'activate');
+  assert.notEqual(chooseBotCommand(s, 0).type, 'activate');
+});
+
+test('do not spend a second Pacifism on a creature already unable to attack or block', () => {
+  const s = fixture();
+  lands(s, 'Plains', 2);
+  const bear = put(s, 'Grizzly Bears', 1);
+  const aura = put(s, 'Pacifism', 0);
+  aura.attachedTo = ref(bear);
+  put(s, 'Pacifism', 0, 'hand');
+  assert.equal(released(s, 0).type, 'cast');
+  assert.equal(chooseBotCommand(s, 0).type, 'pass');
+});
+
+test('ordinary development waits for main two while a known combat trick stays available', () => {
+  const s = fixture();
+  lands(s, 'Forest', 2);
+  put(s, 'Grizzly Bears', 0);
+  put(s, 'Grizzly Bears', 1);
+  const handBear = put(s, 'Grizzly Bears', 0, 'hand');
+  put(s, 'Giant Growth', 0, 'hand');
+  assert.equal(chooseBotCommand(s, 0).type, 'pass');
+  s.step = 'main2';
+  assert.equal(chooseBotCommand(s, 0).card, handBear.id);
 });

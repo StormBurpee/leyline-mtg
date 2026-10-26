@@ -16,11 +16,13 @@ import {
 import { orderLifePayoffs, acceptLifePayoff } from './combat-payoffs.js';
 import { trickScore } from './trick-policy.js';
 import { chooseLandAction } from './development-policy.js';
+import { chooseDiscards, chooseLibraryOrder } from './hand-policy.js';
+import { chooseSequence } from './sequence-policy.js';
 import { planPayment } from './mana.js';
 import { matchesEvent } from './events.js';
 import { legalActions } from './engine.js';
 import { canAttack, canBlock, suggestedDamage } from './combat.js';
-import { controlled, definition, hasKeyword, opponent, stats } from './model.js';
+import { controlled, definition, hasKeyword, isPacified, opponent, stats } from './model.js';
 const value = (s, o) => {
   const d = definition(s, o);
   return d.type === 'creature'
@@ -86,38 +88,27 @@ export function chooseBotCommand(s, p) {
                 );
               })
             : [];
+        let ordered = chooseLibraryOrder(s, p, rest);
         if (c.action === 'surveil') {
           const entry = s.resolving.entry;
           const remaining = entry.effects.slice(s.resolving.index);
           const draws = drawsFor(remaining, entry.controller, entry.target, p);
-          rest = rest.slice(0, Math.max(0, libraryCount(s, p) - draws));
+          rest = ordered.rest.slice(0, Math.max(0, libraryCount(s, p) - draws));
+          ordered = {
+            top: [...ordered.top, ...ordered.rest.filter((id) => !rest.includes(id))],
+            rest,
+          };
         }
         return {
           type: 'orderLibrary',
           player: p,
-          top: c.cards.filter((id) => !rest.includes(id)),
-          rest,
+          ...ordered,
         };
       }
       case 'discardEffect':
       case 'bottom':
       case 'discard': {
-        const cards = [...s.players[p].hand]
-          .sort((a, b) => {
-            const da = definition(s, s.objects[a]),
-              db = definition(s, s.objects[b]);
-            const landCount = s.players[p].hand.filter(
-              (id) => definition(s, s.objects[id]).type === 'land',
-            ).length;
-            const score = (d) =>
-              d.type === 'land'
-                ? landCount > 3
-                  ? -10
-                  : 10
-                : 8 - Object.values(d.cost).reduce((a, b) => a + b, 0);
-            return score(da) - score(db);
-          })
-          .slice(0, c.count);
+        const cards = chooseDiscards(s, p, c.count);
         return { type: c.kind, player: p, cards };
       }
       case 'triggerTarget': {
@@ -401,6 +392,10 @@ export function chooseBotCommand(s, p) {
           ))
       )
         score = 6 + value(s, target);
+      // A second Pacifism does not neutralize another threat. Existing pacified
+      // bodies can still have relevant abilities, so only reject the redundant
+      // combat restriction, not all removal targeting those permanents.
+      if (d.aura === 'pacifism' && target && isPacified(s, target)) score = -100;
       if (d.effects?.some((e) => e.op === 'modify') && target?.controller === p)
         score = Math.max(score, trickScore(s, p, a));
       // Do not pile redundant damage/removal on the same target while it waits.
@@ -412,9 +407,27 @@ export function chooseBotCommand(s, p) {
         )
       )
         score = -100;
+      // Deploy ordinary creatures after combat so known tricks remain available
+      // during blocks. Haste, public static effects, ETBs and cast triggers can
+      // change this combat and are deliberately allowed before it.
+      if (
+        s.active === p &&
+        s.step === 'main1' &&
+        !s.stack.length &&
+        d.type === 'creature' &&
+        !d.mana &&
+        !d.static &&
+        !d.etb?.length &&
+        !d.triggers?.length &&
+        !d.keywords.includes('haste') &&
+        Object.values(s.objects).some((o) => canAttack(s, o, p))
+      )
+        score = -100;
       return { a, score };
     })
     .sort((a, b) => b.score - a.score);
+  const sequence = chooseSequence(s, p, casts);
+  if (sequence?.action) return { ...sequence.action, player: p };
   if (casts[0]?.score > 0) return { ...casts[0].a, player: p };
   return { type: 'pass', player: p };
 }
