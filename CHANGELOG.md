@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.15.0 — Combat death payoffs
+
+- Include life-only death triggers in bounded attack and block evaluation, including Blood Artist and Zulaport Cutthroat.
+- Resolve those payoffs through the real stack, APNAP order, legal player targets and last-known damage keywords, including between first-strike and normal damage.
+- Preserve the rule that lethal combat damage ends the game before death-trigger lifegain can rescue a player.
+- Expose omitted triggers and search-limit exhaustion rather than claiming full trigger-chain search. Draw, token and creature-targeted death effects remain outside this forecast.
+
 ## 0.14.0 — Safer AI decisions
 
 - Evaluate ward using resources remaining after base payment.

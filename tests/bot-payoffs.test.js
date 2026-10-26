@@ -80,6 +80,7 @@ test('draw death triggers are explicitly outside the life-only forecast', () => 
   const result = combatOutcome(s, pairs);
   assert.equal(result.status, 'playing');
   assert.equal(result.omittedTriggers, 1);
+  assert.deepEqual(result.life, [20, 20], 'omit the whole draw/life-loss entry');
   assert.equal(result.payoffLimitReached, false);
   // Neither hidden identity nor actual draw order can influence this projection.
   s.players[1].library.reverse();
@@ -97,4 +98,25 @@ test('player-targeted death payoff respects controller target selection', () => 
   const result = combatOutcome(s, [{ blocker: artist.id, attacker: attacker.id }]);
   assert.deepEqual(result.life, [4, 8]);
   assert.equal(result.omittedTriggers, 0);
+});
+
+test('optional self-lethal life payoff is declined in the forecast', () => {
+  const s = fixture();
+  const name = 'Zulaport Cutthroat';
+  const definition = structuredClone(s.catalog[name]);
+  definition.triggers = [
+    {
+      event: 'controllerCreatureDies',
+      optional: true,
+      effects: [{ op: 'loseLife', amount: 2 }],
+    },
+  ];
+  s.catalog = { ...s.catalog, [name]: definition };
+  s.players[1].life = 1;
+  const attacker = put(s, 'Grizzly Bears', 0);
+  const blocker = put(s, name, 1);
+  s.combat.attackers = [ref(attacker)];
+  const result = combatOutcome(s, [{ blocker: blocker.id, attacker: attacker.id }]);
+  assert.equal(result.life[1], 1);
+  assert.equal(result.status, 'playing');
 });

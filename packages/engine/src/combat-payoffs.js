@@ -38,12 +38,13 @@ function valueAfter(s, entry, target) {
     events: [],
   };
   resolveEffects(copy, { ...entry, target });
-  return lifeValue(copy.players.map((player) => player.life), entry.controller);
+  return lifeValue(
+    copy.players.map((player) => player.life),
+    entry.controller,
+  );
 }
 function bestTarget(s, entry, targets) {
-  return [...targets].sort(
-    (a, b) => valueAfter(s, entry, b) - valueAfter(s, entry, a),
-  )[0];
+  return [...targets].sort((a, b) => valueAfter(s, entry, b) - valueAfter(s, entry, a))[0];
 }
 function orderingValue(s, entry) {
   const targets = entry.targetKind
@@ -63,6 +64,7 @@ export function settleCombatPayoffs(s) {
     return false;
   });
   s.pendingTriggers = eligible;
+  if (!eligible.length) return { omitted, limited: false };
   // Life-only effects cannot create more triggers or resolution-time choices
   // beyond optionalEffect. Bound work on unusually large simultaneous deaths.
   for (let decisions = 0; decisions < 512; decisions++) {
@@ -73,7 +75,10 @@ export function settleCombatPayoffs(s) {
       const entries = [...s.choice.entries].sort(
         (a, b) => orderingValue(s, a) - orderingValue(s, b),
       );
-      finishTriggerOrder(s, entries.map((entry) => entry.id));
+      finishTriggerOrder(
+        s,
+        entries.map((entry) => entry.id),
+      );
     } else if (s.choice?.kind === 'triggerTarget') {
       finishTriggerTarget(s, bestTarget(s, s.choice.entry, s.choice.targets));
     } else if (s.choice?.kind === 'optionalEffect') {
@@ -82,7 +87,10 @@ export function settleCombatPayoffs(s) {
         type: 'resolveOptional',
         accept:
           valueAfter(s, entry, entry.target) >=
-          lifeValue(s.players.map((player) => player.life), entry.controller),
+          lifeValue(
+            s.players.map((player) => player.life),
+            entry.controller,
+          ),
       });
     } else if (s.stack.length) resolveTop(s);
     else return { omitted, limited: false };
