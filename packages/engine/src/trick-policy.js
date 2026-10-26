@@ -110,8 +110,7 @@ export function trickScore(s, p, action) {
   const after = combatOutcome(projected, pairs, options);
   if (before.status === 'finished' && before.winner === p) return score;
   if (after.status === 'finished' && after.winner === p) return 10_000;
-  if (after.status === 'finished' && after.winner === null && before.winner === 1 - p)
-    return 8_000;
+  if (after.status === 'finished' && after.winner === null && before.winner === 1 - p) return 8_000;
   if (after.status === 'finished' && after.winner !== p) return score;
   if (before.status === 'finished' && before.winner === 1 - p) return 9_000;
   // Evaluate surviving original permanents, not the inflated temporary stats.
