@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "185c70c1-8403-4ae5-b45d-3679d4ee092a",
+  "name": "Rockfall Vale",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {R} or {G}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 2,
+        "where": {
+          "type": "land"
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "G"]
+    }
+  ]
+}

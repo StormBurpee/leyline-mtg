@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5ad0b405-cca4-475e-985c-4d7e3599d87e",
+  "name": "Sundown Pass",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {R} or {W}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 2,
+        "where": {
+          "type": "land"
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "W"]
+    }
+  ]
+}

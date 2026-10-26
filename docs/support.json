@@ -1,5 +1,5 @@
 {
-  "version": "0.25.0",
+  "version": "0.26.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -532,6 +532,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Bleachbone Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Blight Keeper",
       "type": "creature",
       "keywords": ["flying"],
@@ -751,6 +759,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Burnout Bashtronaut",
+      "type": "creature",
+      "keywords": ["menace"],
+      "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -1040,6 +1056,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Coruscation Mage",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageOpponent"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Counterspell",
       "type": "instant",
       "keywords": [],
@@ -1095,6 +1119,14 @@
       "opcodes": ["surveil", "draw", "loseLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Cryptic Caves",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Cunning Maneuver",
@@ -1218,6 +1250,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Deathcap Glade",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Deathcap Marionette",
       "type": "creature",
       "keywords": ["deathtouch"],
@@ -1249,6 +1289,22 @@
       "opcodes": ["scry", "draw", "loseLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Deserted Beach",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Desolation Prowler",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Desperate Bloodseeker",
@@ -1411,6 +1467,14 @@
       "type": "creature",
       "keywords": ["flying"],
       "opcodes": ["loseLife", "gainLife", "scry"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dreamroot Cascade",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1795,10 +1859,26 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Finch Formation",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["modify"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Fire Elemental",
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Firebending Lesson",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1893,6 +1973,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["damage", "token", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Floodfarm Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2120,6 +2208,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gloomlake Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Glorious Anthem",
       "type": "enchantment",
       "keywords": [],
@@ -2329,6 +2425,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Grow from the Ashes",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2614,6 +2718,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hushwood Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Icecave Crasher",
       "type": "creature",
       "keywords": ["trample"],
@@ -2771,6 +2883,22 @@
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Into the Roil",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bounce"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Intrepid Rabbit",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -3965,6 +4093,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Overgrown Farmland",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Overkill",
       "type": "instant",
       "keywords": [],
@@ -4752,12 +4888,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Riverpyre Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Rockface Village",
       "type": "land",
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Rockfall Vale",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Romantic Rendezvous",
@@ -5134,6 +5286,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Shattered Sanctum",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Shatterwing Pegasus",
       "type": "creature",
       "keywords": ["flying"],
@@ -5154,6 +5314,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["mill", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Shipwreck Marsh",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -5695,6 +5863,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Steampath Charger",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sterling Hound",
       "type": "creature",
       "keywords": [],
@@ -5732,11 +5908,27 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Stormcarved Coast",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stormchaser Mage",
       "type": "creature",
       "keywords": ["flying", "haste"],
       "opcodes": ["modify"],
       "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Streaking Oilgorger",
+      "type": "creature",
+      "keywords": ["flying", "haste"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -5796,8 +5988,24 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Sunbillow Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sundial, Dawn Tyrant",
       "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Sundown Pass",
+      "type": "land",
       "keywords": [],
       "opcodes": [],
       "triggers": [],
@@ -6048,6 +6256,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Tender Wildguide",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Terramorphic Expanse",
       "type": "land",
       "keywords": [],
@@ -6136,6 +6352,14 @@
         "Creatures you control get +2/+1 until end of turn",
         "Destroy target artifact or enchantment. You gain 2 life"
       ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Thornspire Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6762,6 +6986,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Wastewood Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Watcher of the Wayside",
       "type": "creature",
       "keywords": [],
@@ -6807,12 +7039,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Whoosh!",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bounce"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Wildheart Invoker",
       "type": "creature",
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Willowrush Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Wind Drake",
@@ -6994,6 +7242,14 @@
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Zuko's Conviction",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Zulaport Cutthroat",

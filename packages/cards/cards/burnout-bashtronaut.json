@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc",
+  "name": "Burnout Bashtronaut",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Warrior"],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Menace\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{2}: This creature gets +1/+0 until end of turn.\nMax speed \u2014 This creature has double strike.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "startEngines"
+    },
+    {
+      "kind": "maxSpeedKeywords",
+      "keywords": ["double strike"]
+    }
+  ]
+}

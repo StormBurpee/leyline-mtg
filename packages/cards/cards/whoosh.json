@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "855353e2-b686-482a-b987-c6ae456f088c",
+  "name": "Whoosh!",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nReturn target nonland permanent to its owner's hand. If this spell was kicked, draw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "not": {
+            "type": "land"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "kicker",
+      "cost": "{1}{U}",
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target"
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

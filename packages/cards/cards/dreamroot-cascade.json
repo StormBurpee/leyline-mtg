@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dd8538e6-cd5f-4a88-aff5-eb5e76ce8ddb",
+  "name": "Dreamroot Cascade",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control two or more other lands.\n{T}: Add {G} or {U}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 2,
+        "where": {
+          "type": "land"
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["G", "U"]
+    }
+  ]
+}

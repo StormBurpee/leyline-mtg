@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c6e0574c-3e2b-4c40-b17a-05bce3d49309",
+  "name": "Wastewood Verge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {G}.\n{T}: Add {B}. Activate only if you control a Swamp or a Forest.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["G", "B"],
+      "conditions": {
+        "B": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "subtype": "Swamp"
+              },
+              {
+                "subtype": "Forest"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

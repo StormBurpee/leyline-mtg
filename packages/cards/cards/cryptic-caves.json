@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b2eb7a64-a307-4a78-a25d-63fb3ae1e237",
+  "name": "Cryptic Caves",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: Draw a card. Activate only if you control five or more lands.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "condition": {
+        "kind": "controlAtLeast",
+        "count": 5,
+        "where": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

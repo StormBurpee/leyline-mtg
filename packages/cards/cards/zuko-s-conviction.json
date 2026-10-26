@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f034e8a3-82f7-4c70-93ea-0bf2688f66e1",
+  "name": "Zuko's Conviction",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "Kicker {4} (You may pay an additional {4} as you cast this spell.)\nReturn target creature card from your graveyard to your hand. If this spell was kicked, instead put that card onto the battlefield tapped.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "owner": "you"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ]
+    },
+    {
+      "kind": "kicker",
+      "cost": "{4}",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "battlefield",
+          "controller": "you",
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}
