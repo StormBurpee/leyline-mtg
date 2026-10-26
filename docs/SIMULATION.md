@@ -59,6 +59,8 @@ Since v0.15, combat forecasts also resolve life-only death payoffs through the r
 
 Combat results expose `omittedTriggers` and `payoffLimitReached`. Unsupported entries are omitted whole: a draw-plus-life-loss trigger is not partially resolved. Hidden zones are never fabricated into known draws. These fields describe the search horizon, not a rules-engine inability to execute the cards in an actual game.
 
+Since v0.16, land sequencing compares mana-enabled legal plays before considering the colored requirements of the known hand. It prioritizes an immediately available lethal line and avoids delaying a playable threat with a tapped land. This projection does not resolve landfall or land ETB triggers. Removal scoring distinguishes destruction/damage from bounce against indestructible, and opponent-wide burn can be used for nonlethal pressure.
+
 This is still bounded tactical search plus heuristics. It does not model unknown tricks, draw distributions, full death-trigger resolution, multi-turn strategy, opponent ranges or trained play. Search limits can miss better assignments on wide boards. Its win rates are not reliable evidence of competitive deck strength. Evaluate an external policy through the same observation boundary and record its identity, sampling settings and failures alongside the engine and ruleset fingerprints.
 
 Historical replay/engine regression uses a frozen pre-tactical policy so changes in decision quality do not masquerade as rules changes. Current-policy tests instead check legality, information boundaries, reproducibility and named tactical decisions.

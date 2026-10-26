@@ -29,5 +29,10 @@ jobs:
       - run: npm run typecheck
       - run: npm run cards:check
       - run: npm run check
+      - name: Formatting diagnostic
+        if: always() && matrix.os == 'ubuntu-latest' && matrix.node == 24
+        run: |
+          npx prettier --write packages/engine/src/development-policy.js packages/engine/src/bot.js tests/bot-development.test.js
+          git diff -- packages/engine/src/development-policy.js packages/engine/src/bot.js tests/bot-development.test.js
       - run: npm run format:check
       - run: npm run build
