@@ -1,0 +1,466 @@
+/* A mobile match is a viewport, not a page that scrolls past its controls. */
+.mobile-phase-button,
+.mobile-stack-button,
+.compact-hand-count,
+.short-read-card,
+.short-yield-stop,
+.mobile-inspector-label {
+  display: none;
+}
+.table-menu,
+.table-control-menu,
+.table-zones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+.table-menu .btn,
+.table-control-menu .btn,
+.table-zones .btn {
+  min-height: 44px;
+  white-space: normal;
+}
+.table-zones section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.table-zones h3 {
+  font-size: 17px;
+}
+.table-zones p {
+  font-size: 11px;
+}
+@media (max-width: 900px), (max-width: 1000px) and (max-height: 600px) {
+  html:has(.game-layout),
+  body:has(.game-layout) {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  .shell:has(.game-layout) {
+    height: 100dvh;
+    overflow: hidden;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+      env(safe-area-inset-left);
+  }
+  .shell:has(.game-layout) > .topbar {
+    display: none;
+  }
+  .game-layout {
+    height: 100%;
+    min-height: 0;
+    --hand-height: clamp(145px, 26dvh, 213px);
+    --dock-height: 84px;
+  }
+  .game-layout.hand-compact {
+    --hand-height: clamp(127px, 21dvh, 176px);
+  }
+  .game-layout:has(.priority-controls) {
+    --dock-height: 128px;
+  }
+  .game-layout .arena,
+  .game-layout .arena:has(.replay-banner) {
+    height: 100%;
+    min-height: 0;
+    grid-template-areas: 'match' 'enemy' 'divider' 'own' 'hand' 'dock';
+    grid-template-rows: 44px minmax(0, 1fr) 10px minmax(0, 1fr) var(--hand-height) var(
+        --dock-height
+      );
+  }
+  .game-layout .arena:has(.replay-banner) {
+    grid-template-areas: 'replay' 'match' 'enemy' 'divider' 'own' 'hand' 'dock';
+    grid-template-rows: 88px 44px minmax(0, 1fr) 10px minmax(0, 1fr) var(--hand-height) var(
+        --dock-height
+      );
+  }
+  .game-layout .replay-banner {
+    grid-area: replay;
+    flex-wrap: wrap;
+    min-width: 0;
+    gap: 4px;
+    padding: 2px 8px;
+    overflow: auto;
+  }
+  .game-layout .replay-banner button {
+    min-width: 44px;
+    min-height: 36px;
+  }
+  .game-layout .matchbar {
+    grid-area: match;
+    gap: 6px;
+    padding: 0 8px;
+  }
+  .game-layout .match-mode,
+  .game-layout .match-separator,
+  .game-layout .phase-track,
+  .game-layout .matchbar .right > :not([data-action='matchMenu']) {
+    display: none;
+  }
+  .game-layout .match-turn {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  .game-layout .matchbar .right {
+    margin-left: 0;
+  }
+  .game-layout .matchbar [data-action='matchMenu'] {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .mobile-phase-button,
+  .mobile-stack-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 8px;
+    font-size: 11px;
+    color: #ead6a4;
+    border-radius: 7px;
+  }
+  .mobile-phase-button {
+    flex: 1;
+    min-width: 0;
+  }
+  .mobile-stack-button {
+    flex-shrink: 0;
+    border: 1px solid #e2c78e55;
+  }
+  .game-layout .opponent-field,
+  .game-layout .player-band:not(.bottom) {
+    grid-area: enemy;
+  }
+  .game-layout .own-field,
+  .game-layout .player-band.bottom {
+    grid-area: own;
+  }
+  .game-layout .attack-line {
+    grid-area: divider;
+    margin: 0;
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .game-layout .player-band {
+    align-self: start;
+    height: 44px;
+    padding: 0 8px;
+    margin: 0;
+    gap: 8px;
+    z-index: 2;
+    background: linear-gradient(180deg, #15271cf5, #15271cc0);
+  }
+  .game-layout .player-band .avatar {
+    display: none;
+  }
+  .game-layout .player-name {
+    min-width: 60px;
+    font-size: 11px;
+  }
+  .game-layout .player-name small {
+    font-size: 7px;
+  }
+  .game-layout .life {
+    min-width: 44px;
+    height: 44px;
+    font-size: 28px;
+  }
+  .game-layout .empty-pool {
+    display: none;
+  }
+  .game-layout .zone-counts {
+    gap: 3px;
+  }
+  .game-layout .zone-counts button {
+    min-width: 36px;
+    min-height: 44px;
+  }
+  .game-layout .backs {
+    display: none;
+  }
+  .game-layout .field {
+    position: relative;
+    z-index: 1;
+    min-height: 0;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 6px;
+    padding: 48px 8px 4px;
+    overflow: hidden;
+  }
+  .game-layout .lands {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: initial;
+    overflow: auto;
+    gap: 4px;
+    padding: 2px;
+  }
+  .game-layout .land-card {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .game-layout .permanents {
+    padding: 2px 4px;
+    gap: 8px;
+  }
+  .game-layout:has(.stack-visible) .permanents {
+    padding-right: 4px;
+  }
+  .game-layout .field .permanents .permanent {
+    width: clamp(
+      44px,
+      min(
+        calc((100cqw - 64px - (var(--permanent-count) - 1) * 8px) / var(--permanent-count)),
+        calc((100cqh - 8px) * 0.713)
+      ),
+      96px
+    );
+  }
+  .game-layout .hand-area {
+    grid-area: hand;
+    padding: 3px 8px 5px;
+  }
+  .game-layout .hand-label {
+    height: 48px;
+    gap: 8px;
+  }
+  .game-layout .hand-label > span:last-child {
+    display: none;
+  }
+  .game-layout .hand-label > button {
+    min-height: 44px;
+  }
+  .game-layout .hand {
+    height: calc(100% - 48px);
+  }
+  .game-layout .hand-card {
+    height: calc(var(--hand-height) - 65px);
+  }
+  .game-layout .action-dock {
+    grid-area: dock;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 28px 44px;
+    gap: 2px;
+    padding: 4px 8px;
+  }
+  .game-layout .action-dock:has(.priority-controls) {
+    grid-template-rows: 28px 44px 44px;
+  }
+  .game-layout .action-copy {
+    grid-column: 1;
+    min-width: 0;
+  }
+  .game-layout .action-copy strong,
+  .game-layout .action-copy p {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
+  .game-layout .action-copy strong {
+    font-size: 12px;
+  }
+  .game-layout .action-copy p {
+    font-size: 10px;
+  }
+  .game-layout .action-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  .game-layout .action-buttons .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .game-layout .action-buttons .primary {
+    flex: 1;
+  }
+  .game-layout .priority-controls {
+    grid-column: 1;
+    margin: 0;
+    overflow-x: auto;
+    gap: 4px;
+    scrollbar-width: none;
+  }
+  .game-layout .priority-controls button {
+    min-height: 44px;
+    flex-shrink: 0;
+    font-size: 10px;
+  }
+  .game-layout .inspector {
+    top: 48px;
+    right: 8px;
+    width: min(280px, calc(100% - 16px));
+    max-height: calc(100% - var(--hand-height) - var(--dock-height) - 56px);
+  }
+  .game-layout .inspector:not(.open) {
+    display: none;
+  }
+  .game-layout .inspector.open #inspect-detail,
+  .game-layout .desktop-inspector-label {
+    display: none;
+  }
+  .game-layout .mobile-inspector-label {
+    display: inline;
+  }
+  .game-layout .inspect-head button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .game-layout .target-message {
+    bottom: calc(var(--dock-height) + 8px);
+    min-height: 70px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .game-layout .target-message .btn,
+  #dialog .btn,
+  #dialog .icon-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+@media (max-width: 1000px) and (max-height: 600px) {
+  .shell:has(.game-layout) > .topbar {
+    display: none;
+  }
+  .game-layout,
+  .game-layout:has(.priority-controls) {
+    --hand-height: clamp(100px, 27dvh, 140px);
+    --dock-height: 52px;
+  }
+  .game-layout.hand-compact {
+    --hand-height: clamp(82px, 22dvh, 112px);
+  }
+  .game-layout .hand-label,
+  .game-layout .action-copy,
+  .game-layout .priority-controls,
+  .game-layout .player-band .zone-counts,
+  .game-layout .player-name small {
+    display: none;
+  }
+  .game-layout .hand {
+    height: 100%;
+  }
+  .game-layout .hand-card {
+    height: calc(var(--hand-height) - 18px);
+  }
+  .game-layout .action-dock,
+  .game-layout .action-dock:has(.priority-controls) {
+    grid-template-rows: 44px;
+  }
+  .game-layout .short-read-card,
+  .game-layout .short-yield-stop {
+    display: inline-flex;
+  }
+  .game-layout .player-band {
+    align-self: center;
+    justify-self: start;
+    width: 96px;
+    height: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    gap: 2px;
+    padding: 2px 4px;
+    background: #14251ccc;
+  }
+  .game-layout .player-name {
+    min-width: 0;
+    font-size: 9px;
+  }
+  .compact-hand-count {
+    display: block;
+    font-size: 8px;
+    color: #a8baa0;
+    margin-top: 4px;
+  }
+  .game-layout .life {
+    font-size: 24px;
+  }
+  .game-layout .pool {
+    grid-column: 1/-1;
+    font-size: 9px;
+  }
+  .game-layout .field {
+    padding: 4px 6px 4px 102px;
+  }
+  .game-layout .arena:has(.replay-banner) {
+    grid-template-rows: 44px 44px minmax(0, 1fr) 8px minmax(0, 1fr) var(--hand-height) var(
+        --dock-height
+      );
+  }
+  .game-layout .replay-banner {
+    flex-wrap: nowrap;
+  }
+}
+@media (max-width: 900px), (max-width: 1000px) and (max-height: 600px) {
+  .game-layout .compact-hand-count {
+    display: block;
+    font-size: 8px;
+    color: #a8baa0;
+  }
+  #dialog[open] {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);
+    max-width: calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 16px);
+  }
+  #dialog .dialog-head {
+    flex-shrink: 0;
+    margin: 0;
+    padding: 8px 16px;
+  }
+  #dialog .dialog-head h2 {
+    font-size: 24px;
+  }
+  #dialog .dialog-body {
+    min-height: 0;
+    overflow: auto;
+    padding: 16px;
+  }
+  #dialog .dialog-actions {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    margin: 0;
+  }
+}
+.hand-card,
+.permanent,
+.land-card {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+@media (max-width: 900px), (max-width: 1000px) and (max-height: 600px) {
+  .game-layout:has(.hand:empty) {
+    --hand-height: 52px;
+  }
+  .hand-area:has(.hand:empty) .hand {
+    display: none;
+  }
+  .hand-area:has(.hand:empty) .hand-label {
+    height: 44px;
+  }
+  .hand-area:has(.hand:empty) [data-action='handSize'] {
+    display: none;
+  }
+}
+@media (max-width: 1000px) and (max-height: 600px) {
+  .game-layout:has(.hand:empty) {
+    --hand-height: 24px;
+  }
+  .hand-area:has(.hand:empty) .hand-label {
+    display: flex;
+    height: 16px;
+  }
+  .hand-area:has(.hand:empty) .hand-label button {
+    display: none;
+  }
+}

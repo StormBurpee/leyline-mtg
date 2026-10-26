@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.18.0 — A table that fits your phone
+
+- Keep the match, battlefield, hand and primary action within the dynamic viewport, including short landscape screens and safe-area insets.
+- Reclaim empty-hand space; move navigation, public zones and priority settings into a touch-friendly table menu.
+- Add compact phase and stack controls, keeping active stack targets linked to their objects.
+- Hold any visible card to read it without playing it. Cancel inspection on movement, scroll, interruption or removal, and suppress delayed accidental clicks.
+- Keep dialog headers and actions reachable while long card content scrolls. Restrict hover previews to mouse or keyboard, not touch.
+- The rules engine remains 0.17.0. Phone-sized Chromium checks do not replace physical iOS or Android testing.
+
 ## 0.17.1 — Reachable hands
 
 - Fit the playing surface to its container instead of allowing an implicit grid column to force horizontal overflow.

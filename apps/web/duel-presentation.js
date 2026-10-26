@@ -59,6 +59,7 @@ export function installDuelPresentation(root, context) {
       o = state?.objects[id];
     if (
       !o ||
+      document.querySelector('dialog[open]') ||
       ui.targeting ||
       state.choice?.kind === 'triggerTarget' ||
       document.body.classList.contains('card-dragging')
@@ -135,15 +136,16 @@ export function installDuelPresentation(root, context) {
       entry?.target;
     stackAim.classList.toggle('visible', !!shown);
     if (!shown) return;
-    const source = root.querySelector(`[data-stack="${CSS.escape(entry.id)}"]`),
-      t = entry.target;
+    let source = root.querySelector(`[data-stack="${CSS.escape(entry.id)}"]`);
+    if (!source?.getClientRects().length) source = root.querySelector('[data-stack-summary]');
+    const t = entry.target;
     const target =
       t.kind === 'player'
         ? root.querySelector(`.life[data-player="${t.id}"]`)
         : t.kind === 'stack'
           ? root.querySelector(`[data-stack="${CSS.escape(t.id)}"]`)
           : root.querySelector(`[data-card="${CSS.escape(t.id)}"]`);
-    if (!source || !target) {
+    if (!source?.getClientRects().length || !target?.getClientRects().length) {
       stackAim.classList.remove('visible');
       return;
     }
@@ -167,6 +169,7 @@ export function installDuelPresentation(root, context) {
     true,
   );
   root.addEventListener('pointerover', (e) => {
+    if (e.pointerType === 'touch') return;
     const card = e.target.closest('[data-card]');
     if (card && !card.contains(e.relatedTarget)) show(card);
   });
@@ -180,7 +183,7 @@ export function installDuelPresentation(root, context) {
   });
   root.addEventListener('focusin', (e) => {
     const card = e.target.closest('[data-card]');
-    if (card) show(card);
+    if (card?.matches(':focus-visible')) show(card);
   });
   root.addEventListener('focusout', () => hidePreview());
   root.addEventListener('pointerdown', () => hidePreview());
