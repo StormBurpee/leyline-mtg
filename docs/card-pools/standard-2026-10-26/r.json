@@ -662,7 +662,7 @@
   {
     "oracleId": "69e8333a-bddf-49e2-9c39-3dc46fec81e0",
     "name": "Remnant Elemental",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "6fdddab4-fcc9-4622-9c17-c69f9d4bca08",
@@ -1437,7 +1437,7 @@
   {
     "oracleId": "6c922206-6e68-4dcd-9559-88da1074f2c4",
     "name": "Rugged Highlands",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e6f379ad-96b1-46c3-bbc6-a8cb57156a7f",

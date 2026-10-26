@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 — Trigger migration and flexible mana
+
+- Strict Forge translation for selected enters-the-battlefield, cast and landfall triggers.
+- Land entry uses the common event path, with explicit trigger ordering.
+- Flexible single-mana sources use matching rather than a greedy colored-cost assignment.
+- Manual color choices, unconditional tapped entry and the ten life-gain dual lands.
+- Milling, three landfall creatures and three milling cards; 112 executable cards total.
+- CI-gated annotated version tags, with immutable backfilled checkpoints.
+
+General replacement ordering, broader triggers and full Standard/Arena coverage remain open.
+
 ## 0.3.0 — Simulation boundary and card-pool tracking
 
 - Headless sessions with immutable, player-specific observations and opaque card handles.

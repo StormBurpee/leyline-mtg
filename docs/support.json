@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.4.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -272,6 +272,134 @@
       "keywords": ["deathtouch", "reach"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tome Scour",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["mill"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Mind Sculpt",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["mill"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Millstone",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["mill"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Tranquil Cove",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dismal Backwater",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Bloodfell Caves",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rugged Highlands",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Blossoming Sands",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Scoured Barrens",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Swiftwater Cliffs",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Thornwood Falls",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Wind-Scarred Crag",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Jungle Hollow",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Snapping Gnarlid",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Makindi Sliderunner",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Territorial Scythecat",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["counterOn"],
+      "triggers": ["controllerLandEnters"],
       "activatedAbilities": 0
     },
     {

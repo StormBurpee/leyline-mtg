@@ -2,7 +2,7 @@
   {
     "oracleId": "6ce24851-70d2-416c-8733-78928b4eee74",
     "name": "Wailing Ghoul",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "030b5408-f216-43e4-8593-f78d22821876",
@@ -117,7 +117,7 @@
   {
     "oracleId": "ef4d5fb3-70a3-433d-a9d3-18b2beb8d79f",
     "name": "Wall of Blossoms",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "fbde72f6-a8b2-4864-ad6d-b91aa03d290e",
@@ -142,7 +142,7 @@
   {
     "oracleId": "5f601f48-d24b-4883-9fde-b3f620e7c9ea",
     "name": "Wall of Omens",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b97341a7-fc96-4281-b875-fb81065e0157",
@@ -152,7 +152,7 @@
   {
     "oracleId": "35dfe1c7-48ab-436f-9a6e-44835ea01cf9",
     "name": "Wall of Runes",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "51ce0158-c9a5-4fa5-9704-46ab02f01b86",
@@ -622,7 +622,7 @@
   {
     "oracleId": "e8c0fbea-a678-46b0-b385-e36f14c07672",
     "name": "Watcher in the Mist",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "92cf18ab-dd7b-4bc8-8b85-a81b8cb5192c",
@@ -1592,7 +1592,7 @@
   {
     "oracleId": "ee3fd92c-48e0-4651-aeda-7eb2c75acbb0",
     "name": "Willow-Wind",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "4ecb8653-db8c-468a-853d-420ff62a7a8a",
@@ -1632,7 +1632,7 @@
   {
     "oracleId": "334a98c0-9a16-4145-8f5b-bdf017afe73f",
     "name": "Windgrace Acolyte",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c9404d7d-a026-4082-9fcb-1ab571a136b5",
@@ -1667,7 +1667,7 @@
   {
     "oracleId": "b0af0c54-2a59-4075-8543-d41ff20c4c87",
     "name": "Wind-Scarred Crag",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "499a4715-6776-461b-bee4-22ed172d455e",
@@ -1837,7 +1837,7 @@
   {
     "oracleId": "91967284-6711-4ef3-bb9b-5ba873da8bb2",
     "name": "Winter's Intervention",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "874bbeb2-aa15-41e8-afad-122ab9b555fd",
@@ -2002,7 +2002,7 @@
   {
     "oracleId": "6cd58a88-6434-4c55-bf93-a739b5ed9bc1",
     "name": "Witherbloom Campus",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ee1db746-f5c1-4dce-82eb-24b273cc9507",
@@ -2122,7 +2122,7 @@
   {
     "oracleId": "549a3f53-f90e-4af0-bbc5-2c4b9df30008",
     "name": "Wolf Cove Villager",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "49e22e88-d4d9-4781-81e3-bf77b76b132b",
@@ -2257,7 +2257,7 @@
   {
     "oracleId": "e887fb3f-d4c9-4022-8f75-1de6ec94af96",
     "name": "Woodland Stream",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d5f3c711-edfa-4105-9844-e3f444942a03",

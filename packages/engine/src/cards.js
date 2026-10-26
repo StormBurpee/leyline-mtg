@@ -32,6 +32,83 @@ const spell = (name, type, cost, effects, target, text) => ({
 });
 const defs = [
   ...reviewedCreatures,
+  spell(
+    'Tome Scour',
+    'sorcery',
+    { U: 1 },
+    [{ op: 'mill', count: 5, player: 'target' }],
+    'player',
+    'Target player mills five cards.',
+  ),
+  spell(
+    'Mind Sculpt',
+    'sorcery',
+    { generic: 1, U: 1 },
+    [{ op: 'mill', count: 7, player: 'target' }],
+    'opponent',
+    'Target opponent mills seven cards.',
+  ),
+  {
+    name: 'Millstone',
+    type: 'artifact',
+    cost: { generic: 2 },
+    activated: [
+      {
+        cost: { mana: { generic: 2 }, tap: true },
+        target: 'player',
+        effects: [{ op: 'mill', count: 2, player: 'target' }],
+        text: '2, Tap: Target player mills two cards.',
+      },
+    ],
+    text: '2, Tap: Target player mills two cards.',
+  },
+  ...[
+    ['Tranquil Cove', 'W', 'U'],
+    ['Dismal Backwater', 'U', 'B'],
+    ['Bloodfell Caves', 'B', 'R'],
+    ['Rugged Highlands', 'R', 'G'],
+    ['Blossoming Sands', 'G', 'W'],
+    ['Scoured Barrens', 'W', 'B'],
+    ['Swiftwater Cliffs', 'U', 'R'],
+    ['Thornwood Falls', 'G', 'U'],
+    ['Wind-Scarred Crag', 'R', 'W'],
+    ['Jungle Hollow', 'B', 'G'],
+  ].map(([name, ...colors]) => ({
+    name,
+    type: 'land',
+    cost: {},
+    mana: colors,
+    entersTapped: true,
+    etb: [{ op: 'gainLife', amount: 1 }],
+    text: `${name} enters tapped. When it enters, you gain 1 life. Tap: Add ${colors.join(' or ')}.`,
+  })),
+  creature('Snapping Gnarlid', { generic: 1, G: 1 }, 2, 2, [], {
+    triggers: [
+      {
+        event: 'controllerLandEnters',
+        effects: [{ op: 'modify', subject: 'source', power: 1, toughness: 1 }],
+      },
+    ],
+    text: 'Landfall — Whenever a land you control enters, this creature gets +1/+1 until end of turn.',
+  }),
+  creature('Makindi Sliderunner', { generic: 1, R: 1 }, 2, 1, ['trample'], {
+    triggers: [
+      {
+        event: 'controllerLandEnters',
+        effects: [{ op: 'modify', subject: 'source', power: 1, toughness: 1 }],
+      },
+    ],
+    text: 'Trample. Landfall — Whenever a land you control enters, this creature gets +1/+1 until end of turn.',
+  }),
+  creature('Territorial Scythecat', { generic: 2, G: 1 }, 2, 1, ['trample'], {
+    triggers: [
+      {
+        event: 'controllerLandEnters',
+        effects: [{ op: 'counterOn', subject: 'source', amount: 1 }],
+      },
+    ],
+    text: 'Trample. Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature.',
+  }),
   creature('Waterfall Aerialist', { generic: 3, U: 1 }, 3, 1, ['flying'], {
     ward: { mana: { generic: 2 } },
     text: 'Flying. Ward {2}.',

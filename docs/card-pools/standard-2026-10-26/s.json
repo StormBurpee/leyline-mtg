@@ -12,7 +12,7 @@
   {
     "oracleId": "65385311-1158-4e94-892a-683997706ca8",
     "name": "Sabotender",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "07e15387-f346-4fa0-b556-d1c52d4acc07",
@@ -197,7 +197,7 @@
   {
     "oracleId": "544dbabd-cbfc-40da-a5ba-2fea9cddb453",
     "name": "Sandsteppe Citadel",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ec19a9bc-6fc1-4150-976b-37a47b165016",
@@ -267,7 +267,7 @@
   {
     "oracleId": "1af15c1d-a41c-44cc-9614-d72694dd26e8",
     "name": "Savage Mansion",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f743d85f-754e-4e70-9907-af54acb9e8d4",
@@ -332,7 +332,7 @@
   {
     "oracleId": "c2b082b4-5d9c-4125-b353-d1cf4f334720",
     "name": "Sazh's Chocobo",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "12c71296-1243-49e6-a196-8b016a7b635c",
@@ -357,7 +357,7 @@
   {
     "oracleId": "f6758e8f-5462-48a7-96d3-60d07b1563fc",
     "name": "Scarblade Scout",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "66d57851-2844-4b9d-be78-e90fc620b750",
@@ -452,7 +452,7 @@
   {
     "oracleId": "d37f858e-03c8-4594-9b92-cd03699a1591",
     "name": "Scoured Barrens",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "da422b3e-1092-47ad-97d6-a7a3ef060a53",
@@ -752,7 +752,7 @@
   {
     "oracleId": "94ac2990-58a5-43d4-bdac-ec2f6daf0b51",
     "name": "Sephiroth's Intervention",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a8a7a3b7-015c-4fbd-8b90-e0ddf71663e4",
@@ -987,7 +987,7 @@
   {
     "oracleId": "6cfe63ac-3581-461b-8ed3-3e231851e3f8",
     "name": "Shinra Reinforcements",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "dc3073fc-dc23-426e-b867-fee5dd99fe25",
@@ -1047,7 +1047,7 @@
   {
     "oracleId": "4288ba56-ddd0-4bd9-ba61-daf03e9f2d7f",
     "name": "Shore Lurker",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c9d8c983-2845-42e6-b6b8-bf7cf2729b23",
@@ -1227,7 +1227,7 @@
   {
     "oracleId": "80f08b47-a237-4efd-8d86-dfe35a816b0e",
     "name": "Sinister Hideout",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ae8003eb-9f19-4f23-be3b-0ac3ddc03a72",
@@ -1792,7 +1792,7 @@
   {
     "oracleId": "33a4e73d-d93a-4b6f-88ff-cd53f20d178c",
     "name": "Spectacle Summit",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "8f7479e6-b2bd-46b1-96ad-34deb43565c1",
@@ -2122,7 +2122,7 @@
   {
     "oracleId": "7215ca87-bbff-4c14-a1f5-de5ddd97c875",
     "name": "Spitfire Lagac",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0d0c4c91-683a-4563-a0b0-39f3c04f6307",
@@ -2342,7 +2342,7 @@
   {
     "oracleId": "52401cb4-1bce-4191-9220-0d93ea4108b8",
     "name": "Stark Industries",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "7c07970d-063a-44a1-9761-b80aafa90dac",
@@ -2807,7 +2807,7 @@
   {
     "oracleId": "d49a7525-eca5-48e1-b94b-d618a706fd02",
     "name": "Subterranean Cavern",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "7f82bae3-feaa-4967-a843-32a4f72806d5",
@@ -2817,7 +2817,7 @@
   {
     "oracleId": "6ef30340-a26d-49aa-bc86-0b8aa5252f87",
     "name": "Suburban Sanctuary",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "6d4472ad-3fbf-4a5d-94de-dfee04fda9c3",
@@ -3292,7 +3292,7 @@
   {
     "oracleId": "2f4ad084-2062-44c0-9975-15f100204531",
     "name": "Swiftwater Cliffs",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "46b36d25-25bd-48c5-9a53-75230bb27dee",

@@ -16,7 +16,7 @@ import {
   VERSION,
   REPLAY_SCHEMA_VERSION,
 } from './model.js';
-import { canTapForMana, pay, planPayment, tapForMana } from './mana.js';
+import { canTapForMana, manaOptions, pay, planPayment, tapForMana } from './mana.js';
 import {
   finishTriggerOrder,
   legalTarget,
@@ -26,6 +26,7 @@ import {
   notifyTriggers,
   notifyTargeted,
   finishResolutionChoice,
+  enterBattlefield,
 } from './effects.js';
 import { assignDamage, canAttack, declareAttackers, declareBlockers } from './combat.js';
 import { advanceStep, finishCleanup } from './turn.js';
@@ -251,13 +252,13 @@ export function dispatch(state, command) {
       switch (command.type) {
         case 'playLand':
           requireRule(canPlayLand(s, p, command.card), 'LAND', 'You cannot play that land now.');
-          move(s, s.objects[command.card], 'battlefield');
+          enterBattlefield(s, s.objects[command.card], p);
           s.players[p].landsPlayed++;
           s.passes = 0;
           emit(s, 'land', { player: p, objectId: command.card });
           break;
         case 'tapMana':
-          tapForMana(s, command.card, p);
+          tapForMana(s, command.card, p, command.color);
           s.passes = 0;
           break;
         case 'cast':
@@ -313,7 +314,8 @@ export function legalActions(s, p) {
         actions.push({ type: 'cast', card: id, ...(target ? { target } : {}) });
   }
   for (const o of Object.values(s.objects)) {
-    if (canTapForMana(s, o, p)) actions.push({ type: 'tapMana', card: o.id });
+    if (canTapForMana(s, o, p))
+      for (const color of manaOptions(s, o)) actions.push({ type: 'tapMana', card: o.id, color });
     if (o.zone !== 'battlefield' || o.controller !== p) continue;
     for (const [index, a] of (definition(s, o).activated ?? []).entries())
       for (const target of a.target ? targetsFor(s, a.target, p) : [null])
@@ -367,7 +369,7 @@ export function exportReplay(s) {
 export function replay(record) {
   requireRule(
     record &&
-      [VERSION, '0.2.0', '0.1.0'].includes(record.version) &&
+      [VERSION, '0.3.0', '0.2.0', '0.1.0'].includes(record.version) &&
       (record.schemaVersion === undefined || record.schemaVersion === REPLAY_SCHEMA_VERSION),
     'REPLAY_VERSION',
     'Unsupported replay schema or engine version.',

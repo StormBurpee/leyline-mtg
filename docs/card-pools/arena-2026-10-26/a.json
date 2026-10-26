@@ -182,7 +182,7 @@
   {
     "oracleId": "132ca99a-a3c7-4ed6-b4d0-0edcd7140ca2",
     "name": "Absorb",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "4489f362-9b7e-4dc0-a459-a990a487454e",
@@ -1012,7 +1012,7 @@
   {
     "oracleId": "11669fe5-9298-4e1a-a4f7-6a4598dbc8dd",
     "name": "Agonizing Syphon",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "11b7ee78-fca6-4b34-93e4-e60492583d50",
@@ -1062,7 +1062,7 @@
   {
     "oracleId": "8417f2d5-93c9-474a-a143-5c4e17097a88",
     "name": "A.I.M. Labs",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "fa732888-5b7d-4087-a6e5-1db1c98fbd4c",
@@ -1317,7 +1317,7 @@
   {
     "oracleId": "05074b68-6b31-4f9f-b3ec-bffe3e7eab47",
     "name": "Akoum Hellhound",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "afedce7b-0e18-40ad-a26a-1933fddb560d",
@@ -2067,7 +2067,7 @@
   {
     "oracleId": "a2daaf32-dbfe-4618-892e-0da24f63a44a",
     "name": "Angel of Mercy",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "3c49e98d-d33b-47fa-8b07-b38b367de2c7",
@@ -2612,7 +2612,7 @@
   {
     "oracleId": "a3f35e0f-bf7a-42bf-b612-ac3af3a33727",
     "name": "Arborback Stomper",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d18a0815-59d3-4667-b52b-9acda741215e",
@@ -2837,7 +2837,7 @@
   {
     "oracleId": "cddbd819-4895-4712-b44b-d6b51f3d8646",
     "name": "Archive Dragon",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d412b175-2365-4b2c-a8f5-3e4e9d06280d",
@@ -3402,7 +3402,7 @@
   {
     "oracleId": "e3614df6-ce84-4180-ade1-a1751e8e3c9a",
     "name": "Asgardian Citadel",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "1be4bb28-6ad7-4df9-98b7-fa32061e7a95",
@@ -3807,7 +3807,7 @@
   {
     "oracleId": "45d652c4-188e-4f00-acdd-1be014922cbc",
     "name": "Attercop",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e3b70a85-4296-411f-a673-7992b0c8a9aa",
@@ -4092,7 +4092,7 @@
   {
     "oracleId": "10fc2009-4212-47c6-8a97-ab0f45c1f91b",
     "name": "Avengers Hangar",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c5fc8e7c-a87e-4586-a13c-d30e0a3aafbf",
@@ -4127,7 +4127,7 @@
   {
     "oracleId": "e8291185-9d87-4aa2-b7ba-d4946e5a082f",
     "name": "Aven of Enduring Hope",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d9f43942-4296-417d-a180-5b4f64e4b12d",
@@ -4147,7 +4147,7 @@
   {
     "oracleId": "ad5f9a18-89a5-4bcb-9cd7-5399ffd252d3",
     "name": "Aven Wind Mage",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "23695bc2-86d3-4d78-b374-9e83c4cc9cc4",

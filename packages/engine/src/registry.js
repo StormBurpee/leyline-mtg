@@ -30,6 +30,8 @@ const TARGETS = new Set([
   'noncreatureSpell',
 ]);
 const TRIGGERS = new Set([
+  'selfEnters',
+  'controllerLandEnters',
   'otherCreatureEnters',
   'controllerCastsNoncreature',
   'controllerCastsInstantOrSorcery',
@@ -55,6 +57,7 @@ const FIELDS = new Set([
   'triggers',
   'activated',
   'ward',
+  'entersTapped',
 ]);
 const plain = (v) =>
   v !== null &&
@@ -116,6 +119,7 @@ function validateEffects(effects, path, target, errors) {
       damageOpponent: ['amount'],
       gainLife: ['amount'],
       draw: ['count'],
+      mill: ['count', 'player'],
       scry: ['count'],
       surveil: ['count'],
       discard: ['count'],
@@ -137,10 +141,16 @@ function validateEffects(effects, path, target, errors) {
     if (['damage', 'damageOpponent', 'gainLife', 'counterOn'].includes(e.op) && !natural(e.amount))
       errors.push(`${p}.amount: expected a nonnegative safe integer.`);
     if (
-      ['draw', 'token', 'scry', 'surveil', 'discard'].includes(e.op) &&
+      ['draw', 'mill', 'token', 'scry', 'surveil', 'discard'].includes(e.op) &&
       (!natural(e.count) || e.count > 1000)
     )
       errors.push(`${p}.count: expected a literal count from 0 to 1000.`);
+    if (
+      e.op === 'mill' &&
+      (!['controller', 'opponent', 'target'].includes(e.player) ||
+        (e.player === 'target' && !['player', 'opponent'].includes(target)))
+    )
+      errors.push(`${p}: mill requires a supported player selector and compatible target.`);
     if (e.op === 'token' && (typeof e.definition !== 'string' || !e.definition))
       errors.push(`${p}.definition: expected a token definition name.`);
     if (e.op === 'modify') {
@@ -203,9 +213,17 @@ export function validateDefinition(card) {
     (!Array.isArray(card.color) || card.color.some((x) => !COLORS.has(x)))
   )
     errors.push(`${name}.color: expected Magic colors; colorless is an empty array.`);
-  if (card.mana !== undefined && !['W', 'U', 'B', 'R', 'G', 'C'].includes(card.mana))
-    errors.push(`${name}.mana: only a single supported mana symbol is supported.`);
-  for (const key of ['basic', 'token'])
+  if (card.mana !== undefined) {
+    const options = Array.isArray(card.mana) ? card.mana : [card.mana];
+    if (
+      !options.length ||
+      options.length > 6 ||
+      new Set(options).size !== options.length ||
+      options.some((c) => !['W', 'U', 'B', 'R', 'G', 'C'].includes(c))
+    )
+      errors.push(`${name}.mana: expected distinct supported production colors.`);
+  }
+  for (const key of ['basic', 'token', 'entersTapped'])
     if (card[key] !== undefined && typeof card[key] !== 'boolean')
       errors.push(`${name}.${key}: expected a boolean.`);
   if (card.basic && card.type !== 'land') errors.push(`${name}: only lands can be basic.`);

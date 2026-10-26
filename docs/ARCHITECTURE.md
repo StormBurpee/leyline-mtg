@@ -63,3 +63,9 @@ A save is a versioned initial configuration plus commands, including the complet
 ## Resolution continuations
 
 A resolving spell or ability has a serializable instruction cursor, separate from the waiting stack. Scry, surveil and effect-discard instructions suspend at a typed choice and resume the same frame after a validated answer. Priority, state-based actions and pending-trigger placement wait until the entire resolution finishes. Hidden library choices are redacted in the other player’s view. The spell remains in the stack zone until completion even though it is no longer a waiting stack item.
+
+## Mana and release checkpoints
+
+Flexible mana sources are modeled as one source with a choice of colors, not one source per color. The pure payment planner reserves floating colored mana, matches remaining colored requirements to unit-capacity sources, then pays generic costs. Tests compare small-source plans with exhaustive assignments. Always-tapped entry is a literal characteristic in this subset; it is not a general replacement/prevention engine.
+
+Annotated version tags are created by the repository workflow only after successful trusted main-branch CI and a matching package version. Existing tags are never moved. Historical tags remain verifiable even after CI log retention expires.

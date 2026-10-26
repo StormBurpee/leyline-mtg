@@ -2,7 +2,7 @@
   {
     "oracleId": "dc92bbee-a445-4927-932b-15985bb93f19",
     "name": "Laboratory Brute",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "aa286dd5-aa19-446d-9003-684d81eb57ca",
@@ -872,7 +872,7 @@
   {
     "oracleId": "01b3af6d-ab7d-4137-a94a-1cf2cbfd9d44",
     "name": "Lich's Caress",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "785c306c-471c-4699-8ab2-43c253d569cf",
@@ -1002,7 +1002,7 @@
   {
     "oracleId": "800c258a-cfc4-4a54-a667-065ea8dea69e",
     "name": "Lightning Helix",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "7c7948c6-5144-4df0-8e33-117710ae00af",
@@ -1087,7 +1087,7 @@
   {
     "oracleId": "ef8fab12-d7d2-4c21-8b8c-41627048ac8b",
     "name": "Lightshell Duo",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ecef9e3d-dce8-405f-bba3-14732444258f",
@@ -1527,7 +1527,7 @@
   {
     "oracleId": "f75ed312-3a23-4624-80c5-03980aa22d0b",
     "name": "Llanowar Visionary",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "32116127-cf96-4a1b-8896-a1ebc087b597",
@@ -1907,7 +1907,7 @@
   {
     "oracleId": "45773715-3f46-4671-b633-bf087e892e26",
     "name": "Lorehold Campus",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a5729f11-6cde-4830-b882-ab4c5251c1a9",
@@ -1952,7 +1952,7 @@
   {
     "oracleId": "4b17048f-8c7f-4e29-8f56-16db4c2106e6",
     "name": "Los Diablos Missile Base",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "1cea6439-7ae5-4887-8c33-7da9fb36e2d4",
@@ -2002,7 +2002,7 @@
   {
     "oracleId": "b8f3b5b5-8835-400f-a626-94ff0a007e56",
     "name": "Lost Legion",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a92edf30-6c7f-481c-855e-2a7dc4963ea7",

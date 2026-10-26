@@ -132,7 +132,7 @@
   {
     "oracleId": "b2e65e8b-5f08-4cc2-ab1d-00f8903dbea2",
     "name": "Faerie Seer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "48ee9007-2d1c-446f-aee3-795d23028e06",
@@ -712,7 +712,7 @@
   {
     "oracleId": "75ae9b87-7137-47a0-b3e1-8915ccd0edf1",
     "name": "Fearless Fledgling",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "2ef2f417-2061-4796-974a-92f800ef05e4",
@@ -1212,7 +1212,7 @@
   {
     "oracleId": "a32e08fa-bea4-4ba9-a126-9bf0a91f67e2",
     "name": "Fields of Strife",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "29423b70-7cb7-4617-898c-78a38eb233ad",
@@ -1797,7 +1797,7 @@
   {
     "oracleId": "5554db95-9676-4c24-b82a-8173513d7927",
     "name": "Fisk Tower",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e3474632-6d81-43a8-9329-4c7e0c631755",
@@ -2457,7 +2457,7 @@
   {
     "oracleId": "063dd25b-d4b4-4e09-acae-8c52dcb40803",
     "name": "Foot Headquarters",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "77a5305a-2611-4a64-adb4-da131dcea233",
@@ -2707,7 +2707,7 @@
   {
     "oracleId": "941b0dd1-0df2-48ee-8829-615e9c3177a7",
     "name": "Forsaken Sanctuary",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f60fb81a-969a-476c-a227-5231bbed4ad4",
@@ -2787,7 +2787,7 @@
   {
     "oracleId": "349ea6c7-6b3e-417f-b082-b712e2b1635b",
     "name": "Forum of Amity",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "10c0f814-e302-49ff-aded-1b8d8424fd60",
@@ -2797,7 +2797,7 @@
   {
     "oracleId": "ad6a2776-801f-4743-8268-6d654122171e",
     "name": "Foul Orchard",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "773c7a1e-0f59-4606-a2fc-c47bda760ecd",
@@ -3172,7 +3172,7 @@
   {
     "oracleId": "e4cf6c2f-0f1e-4980-9ef9-e4eabcae42a9",
     "name": "Frontier Bivouac",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "466cf331-2d9c-4ebc-84f6-30c890e1b637",

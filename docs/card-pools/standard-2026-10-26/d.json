@@ -102,7 +102,7 @@
   {
     "oracleId": "0f5401c2-0189-4a07-8e7b-a765ccd7c954",
     "name": "Daring Thunder-Thief",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e4d52559-7624-48b2-96ba-e52ada6c507a",
@@ -257,7 +257,7 @@
   {
     "oracleId": "29ef90ac-2396-4488-970d-d440297ba5ee",
     "name": "Deadeye Duelist",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b831d3f8-07ce-4172-ba29-213cac414c9a",
@@ -687,7 +687,7 @@
   {
     "oracleId": "8683341a-e836-41e5-9034-4da09eb0ab42",
     "name": "Dimension X",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c2283655-f6b8-4399-ba1f-68a7107f9485",
@@ -732,7 +732,7 @@
   {
     "oracleId": "6048fc70-0dcc-4b54-977d-16e240225f82",
     "name": "Diregraf Ghoul",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a7b12df9-fddd-4cd4-8c09-d54a47867ab6",
@@ -767,7 +767,7 @@
   {
     "oracleId": "865a2194-fca0-446e-aae3-ca475cd66e00",
     "name": "Dismal Backwater",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "dd3a4b64-0987-4e9b-a18d-c54365438857",

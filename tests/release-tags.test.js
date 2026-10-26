@@ -4,6 +4,7 @@ import {
   validateCheckpoint,
   validateEvidence,
   ensureVersionTag,
+  existingVersionTag,
 } from '../scripts/lib/release-tags.mjs';
 const checkpoint = { tag: 'v0.3.0', sha: 'a'.repeat(40), runId: 5 };
 const run = {
@@ -77,4 +78,11 @@ test('uncertain tag creation is reconciled with a read rather than retried', asy
   const m = mock(null, { conflict: true });
   assert.equal((await ensureVersionTag(m.api, checkpoint)).status, 'created');
   assert.equal(m.calls.filter((c) => c.method === 'POST' && c.path === '/git/refs').length, 1);
+});
+
+test('existing tag inspection performs no writes and does not depend on retained CI logs', async () => {
+  const m = mock({ object: { type: 'commit', sha: checkpoint.sha } });
+  assert.equal((await existingVersionTag(m.api, checkpoint)).status, 'already_tagged');
+  assert.equal(m.calls.length, 1);
+  assert.equal(m.calls[0].method, 'GET');
 });

@@ -14,6 +14,7 @@ import {
   canAttack,
   canBlock,
   canTapForMana,
+  manaOptions,
   ref,
   suggestedDamage,
   targetsFor,
@@ -443,6 +444,15 @@ async function action(name, el) {
       } else render();
       break;
     }
+    case 'chooseMana':
+      if (
+        send(
+          { type: 'tapMana', card: dialog._manaCard, color: el.dataset.color },
+          { autoPass: false },
+        )
+      )
+        closeDialog();
+      break;
     case 'payWard':
     case 'declineWard':
       send({ type: 'payCost', pay: name === 'payWard' });
@@ -784,7 +794,20 @@ function selectCard(id) {
     return;
   }
   if (!c && canTapForMana(state, o, p)) {
-    send({ type: 'tapMana', card: id }, { autoPass: false });
+    const options = manaOptions(state, o);
+    if (options.length > 1) {
+      openDialog(
+        'Choose mana',
+        `<p>${escape(o.name)} can produce one of these colors.</p>`,
+        options
+          .map(
+            (color) =>
+              `<button class="btn primary" data-action="chooseMana" data-color="${color}">${mana({ [color]: 1 })} Add ${color}</button>`,
+          )
+          .join('') + '<button class="btn" data-action="closeDialog">Cancel</button>',
+      );
+      dialog._manaCard = id;
+    } else send({ type: 'tapMana', card: id }, { autoPass: false });
     return;
   }
   render();

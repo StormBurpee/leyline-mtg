@@ -637,7 +637,7 @@
   {
     "oracleId": "4139f40a-873b-4842-96a2-b7875de1c20a",
     "name": "TCRI Building",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d85ba214-fa05-44ca-a7f9-ab2c5dc07962",
@@ -907,47 +907,47 @@
   {
     "oracleId": "3baa8e38-ef93-435d-b63e-f781d5bfcc68",
     "name": "Temple of Abandon",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "33b9b3bd-33ca-46f3-b8bb-a978bc3d1085",
     "name": "Temple of Deceit",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "89f43e27-790b-4ca1-8ba7-0882b31e0783",
     "name": "Temple of Enlightenment",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "79f94050-d850-41ca-b1db-5ae0cf743f0a",
     "name": "Temple of Epiphany",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "dc55421f-dee8-4263-9df0-2365df5f14bb",
     "name": "Temple of Malady",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "7c439c18-31dc-41fe-b03d-3fca06e6fc0b",
     "name": "Temple of Malice",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "7e26f0b7-20e6-46d5-8130-d98c14d6aa29",
     "name": "Temple of Mystery",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e521322b-0e83-458c-8936-7021a80ee279",
     "name": "Temple of Plenty",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e6e6fce8-0f6a-4b84-865e-d4e4a4182f9f",
     "name": "Temple of Silence",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "169a26d2-7bc9-4403-9c92-98d4bd5ca4f3",
@@ -957,7 +957,7 @@
   {
     "oracleId": "6f0d94d9-64bb-4175-83bc-301e8f79f54f",
     "name": "Temple of Triumph",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "493ecd11-e980-42da-a79e-cddd9a94cc7a",
@@ -1277,7 +1277,7 @@
   {
     "oracleId": "75d38954-6148-4d95-bf4b-cb82efcbe8df",
     "name": "Territorial Scythecat",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "97b9e3f1-7569-45e0-aef9-0d8d2845dbf1",
@@ -2942,7 +2942,7 @@
   {
     "oracleId": "ec96cde2-f1e6-495c-94e2-3e8ae79e556c",
     "name": "Thornwood Falls",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ec9b74d0-e4fe-4764-b628-992a62f2a1cf",
@@ -2992,7 +2992,7 @@
   {
     "oracleId": "83101ba8-a569-4827-8c53-9ca0dfcd59a7",
     "name": "Thought Scour",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "edd8d1e8-be43-4c38-bb3a-83081fbaf0b5",
@@ -3682,7 +3682,7 @@
   {
     "oracleId": "00b34fab-5a80-4a4d-b6cf-72479197677a",
     "name": "Timber Gorge",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e71eca6f-388c-4750-b70e-3ee1832931f0",
@@ -3907,7 +3907,7 @@
   {
     "oracleId": "595f0eb5-f521-4174-9c48-b89e85ea907c",
     "name": "Titan's Grave",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "04505544-8341-4bd9-afa7-b31d6b415c47",
@@ -3957,7 +3957,7 @@
   {
     "oracleId": "a91f93fd-e428-4a36-b1b3-604b47a34287",
     "name": "Tocasia's Dig Site",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "150dd67b-4de2-4fcd-b753-e4096de911a2",
@@ -4117,12 +4117,12 @@
   {
     "oracleId": "ecd9aa9a-06b2-4d8d-9264-fda2036ff142",
     "name": "Tome Raider",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "446a9d7e-9c1a-4e83-8342-2ed5acae2eed",
     "name": "Tome Scour",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "b145952b-52e3-4a66-b47e-f08a489f9443",
@@ -4567,12 +4567,12 @@
   {
     "oracleId": "5d641bf6-0f93-4189-8dc1-ec7ea446dade",
     "name": "Tranquil Cove",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "a5478263-47c9-447f-9c7a-c77ce0752947",
     "name": "Tranquil Expanse",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e87a4461-f3d1-443f-ad4c-dba91a993809",
@@ -5292,7 +5292,7 @@
   {
     "oracleId": "90b16d52-4cf4-4788-a0d7-264d1bcd17f0",
     "name": "Turntimber Ascetic",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "403b59f3-7ade-4bc2-a3e6-de0c3c700f18",

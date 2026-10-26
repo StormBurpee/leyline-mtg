@@ -252,7 +252,7 @@
   {
     "oracleId": "af6cfc23-b64b-4c8a-94b4-69d2b01cb3b9",
     "name": "Octoprophet",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "6fec368d-374d-4318-861b-ff478ba51a3c",
@@ -637,12 +637,12 @@
   {
     "oracleId": "43d7fcf3-acc2-4e9b-a466-c73b1b6c58af",
     "name": "Omenspeaker",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "676141c3-a433-4aba-86fb-729628f96dfa",
     "name": "Ominous Asylum",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "be3c138b-045b-4b08-a12f-a5679d972051",
@@ -912,7 +912,7 @@
   {
     "oracleId": "f9e7e855-1e3b-42d3-91b0-64ba8b5b8982",
     "name": "Opulent Palace",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "6c5b02eb-7829-436a-8555-fea200e4b67f",
@@ -1512,7 +1512,7 @@
   {
     "oracleId": "e68d6459-2f32-4320-a062-6d33f85348f9",
     "name": "Overwhelmed Apprentice",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "13c90d78-cfb1-4d40-a35e-1fd170450b45",
@@ -1572,12 +1572,12 @@
   {
     "oracleId": "0fab815f-bccf-40ef-95e9-ba64b137fb8c",
     "name": "Owlbear",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "099a5835-da6c-4e03-ad3e-aeb448897fed",
     "name": "Owl Familiar",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e1ebb60e-fbf3-4f8f-a76f-d637ec59ffb0",

@@ -1,4 +1,8 @@
 import { COLORS, controlled, definition, isSick, requireRule, emit } from './model.js';
+export function manaOptions(s, o) {
+  const mana = definition(s, o).mana;
+  return mana ? (Array.isArray(mana) ? mana : [mana]) : [];
+}
 export function canTapForMana(s, o, p) {
   const d = definition(s, o);
   return (
@@ -9,38 +13,58 @@ export function canTapForMana(s, o, p) {
     (d.type !== 'creature' || !isSick(s, o))
   );
 }
-export function tapForMana(s, id, p) {
+export function tapForMana(s, id, p, color) {
   const o = s.objects[id];
   requireRule(
     Object.hasOwn(s.objects, id) && o && canTapForMana(s, o, p),
     'MANA_SOURCE',
     'That permanent cannot produce mana now.',
   );
+  const options = manaOptions(s, o);
+  const chosen = color ?? (options.length === 1 ? options[0] : null);
+  requireRule(options.includes(chosen), 'MANA_COLOR', 'Choose a color this source can produce.');
   o.tapped = true;
-  s.players[p].mana[definition(s, o).mana]++;
-  emit(s, 'mana', { player: p, objectId: id, color: definition(s, o).mana });
+  s.players[p].mana[chosen]++;
+  emit(s, 'mana', { player: p, objectId: id, color: chosen });
 }
-/** Pure payment planner. Colored costs are reserved before generic spending. */
+/** Pure unit-capacity matching. Flexible sources must not strand a colored cost. */
 export function planPayment(s, p, cost, { autoTap = true, excludeSources = [] } = {}) {
   const pool = { ...s.players[p].mana };
-  const taps = [];
   const spent = Object.fromEntries(COLORS.map((c) => [c, 0]));
   const sources = autoTap
     ? controlled(s, p).filter((o) => !excludeSources.includes(o.id) && canTapForMana(s, o, p))
     : [];
-  const take = (color, n) => {
-    while (pool[color] < n) {
-      const i = sources.findIndex((o) => definition(s, o).mana === color);
-      if (i < 0) return false;
-      const [o] = sources.splice(i, 1);
-      taps.push(o.id);
-      pool[color]++;
+  const demand = [];
+  for (const color of COLORS) {
+    const amount = cost[color] ?? 0,
+      floating = Math.min(pool[color], amount);
+    pool[color] -= floating;
+    spent[color] += floating;
+    const remaining = amount - floating;
+    if (remaining > sources.length - demand.length) return null;
+    for (let i = 0; i < remaining; i++) demand.push(color);
+  }
+  const choices = sources.map((o) => manaOptions(s, o)),
+    assigned = Array(sources.length).fill(-1);
+  const match = (slot, visited) => {
+    for (let i = 0; i < sources.length; i++) {
+      if (visited.has(i) || !choices[i].includes(demand[slot])) continue;
+      visited.add(i);
+      if (assigned[i] < 0 || match(assigned[i], visited)) {
+        assigned[i] = slot;
+        return true;
+      }
     }
-    pool[color] -= n;
-    spent[color] += n;
-    return true;
+    return false;
   };
-  for (const color of COLORS) if (!take(color, cost[color] ?? 0)) return null;
+  for (let slot = 0; slot < demand.length; slot++) if (!match(slot, new Set())) return null;
+  const activations = [];
+  for (let i = 0; i < sources.length; i++)
+    if (assigned[i] >= 0) {
+      const color = demand[assigned[i]];
+      activations.push({ card: sources[i].id, color });
+      spent[color]++;
+    }
   let generic = cost.generic ?? 0;
   for (const color of ['C', 'W', 'U', 'B', 'R', 'G']) {
     const n = Math.min(generic, pool[color]);
@@ -48,21 +72,21 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [] } 
     spent[color] += n;
     generic -= n;
   }
-  while (generic > 0) {
-    const o = sources.shift();
-    if (!o) return null;
-    const color = definition(s, o).mana;
-    taps.push(o.id);
-    spent[color]++;
-    generic--;
-  }
-  return { taps, spent, remaining: pool };
+  for (let i = 0; i < sources.length && generic > 0; i++)
+    if (assigned[i] < 0) {
+      const color = choices[i][0];
+      activations.push({ card: sources[i].id, color });
+      spent[color]++;
+      generic--;
+    }
+  if (generic > 0) return null;
+  return { taps: activations.map((a) => a.card), activations, spent, remaining: pool };
 }
 export function pay(s, p, cost, autoTap = true, excludeSources = []) {
   const plan = planPayment(s, p, cost, { autoTap, excludeSources });
   requireRule(plan, 'MANA', 'You cannot pay this mana cost.');
-  for (const id of plan.taps) tapForMana(s, id, p);
-  for (const c of COLORS) s.players[p].mana[c] -= plan.spent[c];
+  for (const activation of plan.activations) tapForMana(s, activation.card, p, activation.color);
+  for (const color of COLORS) s.players[p].mana[color] -= plan.spent[color];
   emit(s, 'paid', { player: p, spent: plan.spent });
   return plan;
 }

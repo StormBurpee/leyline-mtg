@@ -96,7 +96,7 @@ function permanent(s, o, meta, ui, targetable) {
   const d = definition(s, o),
     land = d.type === 'land';
   if (land)
-    return `<button class="land-card ${o.tapped ? 'tapped' : ''}" data-card="${o.id}" ${artStyle(meta, o.name)} title="${escape(o.name)}${o.tapped ? ' · tapped' : ''}" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}">${d.mana ? mana({ [d.mana]: 1 }) : '—'}</button>`;
+    return `<button class="land-card ${o.tapped ? 'tapped' : ''}" data-card="${o.id}" ${artStyle(meta, o.name)} title="${escape(o.name)}${o.tapped ? ' · tapped' : ''}" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}">${d.mana ? mana(Object.fromEntries((Array.isArray(d.mana) ? d.mana : [d.mana]).map((color) => [color, 1]))) : '—'}</button>`;
   const pt = stats(s, o),
     attacking = s.combat.attackers.some((r) => r.id === o.id),
     blocking =

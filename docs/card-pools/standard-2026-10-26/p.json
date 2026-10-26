@@ -62,7 +62,7 @@
   {
     "oracleId": "638ff242-63d5-457d-a7a6-40ad51052e2e",
     "name": "Paradox Gardens",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "511951ed-fbff-4e44-9429-27f237496672",
@@ -422,7 +422,7 @@
   {
     "oracleId": "58d87cfe-7402-43c3-81ce-13de8cd04005",
     "name": "Piranha Fly",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b9080653-87cb-4443-a4a3-36637d5ad165",
@@ -767,7 +767,7 @@
   {
     "oracleId": "5ebdc1a5-e678-444b-abb8-8753558a39de",
     "name": "Primordial Pachyderm",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "bc92988c-d628-45ea-8606-516a1211cef3",
@@ -1032,7 +1032,7 @@
   {
     "oracleId": "5a8977fc-0732-4807-b876-01819aedd70b",
     "name": "Pym Technologies",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "8940f503-fc6d-4fae-be74-22c660cae1a7",

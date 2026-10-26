@@ -617,7 +617,7 @@
   {
     "oracleId": "7854f475-5470-4f2b-99df-af9026895595",
     "name": "Joraga Visionary",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "967897db-a34b-493c-bd48-04e2650902d2",
@@ -777,7 +777,7 @@
   {
     "oracleId": "6de714e1-446d-4fb9-9e3d-bcd3ec6af9ca",
     "name": "Jungle Hollow",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "5914d4d5-51b8-49c2-9459-bf5579df4990",

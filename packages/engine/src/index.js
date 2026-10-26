@@ -25,7 +25,7 @@ export {
   exportReplay,
   replay,
 } from './engine.js';
-export { planPayment, canTapForMana } from './mana.js';
+export { planPayment, canTapForMana, manaOptions } from './mana.js';
 export { legalTarget, targetsFor } from './effects.js';
 export { canAttack, canBlock, suggestedDamage } from './combat.js';
 export { chooseBotCommand } from './bot.js';

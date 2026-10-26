@@ -597,7 +597,7 @@
   {
     "oracleId": "ff5ce28b-25be-4136-a7b2-8f25c08a6455",
     "name": "Glider Kids",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "823006a8-098c-457a-8546-77ae2457c459",
@@ -1287,7 +1287,7 @@
   {
     "oracleId": "c6bdaf76-6a03-4695-9c4b-f040e73435af",
     "name": "Guttersnipe",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "83eb74df-1c77-48b0-83be-55d7aa4d3618",

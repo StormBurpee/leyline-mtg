@@ -1137,7 +1137,7 @@
   {
     "oracleId": "57579799-2582-417f-9864-4560cac39ac3",
     "name": "Moment of Triumph",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "bfac8072-2bbc-43ca-b141-9cd0799840f7",
@@ -1467,7 +1467,7 @@
   {
     "oracleId": "f6059731-2e10-4f72-a214-b257f1677e9e",
     "name": "Mutant Town",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "9f318ddc-3dc5-4e43-92b3-3a776e41c56e",
@@ -1527,6 +1527,6 @@
   {
     "oracleId": "834b8f71-9a45-42ae-9e99-e749fa6fb45e",
     "name": "Mystic Monastery",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   }
 ]

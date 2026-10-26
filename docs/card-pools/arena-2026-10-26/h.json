@@ -762,7 +762,7 @@
   {
     "oracleId": "2701b912-b672-4764-97f7-51c444f754f2",
     "name": "Healer of the Glade",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0b3b2fb1-d5fe-4d14-985a-85f13cd60d9c",
@@ -1067,7 +1067,7 @@
   {
     "oracleId": "1337d89e-a883-4568-a14f-9ca3305cc3df",
     "name": "Hell's Kitchen",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "81e5c62c-5aed-41e2-8bd1-610022e880bd",
@@ -1092,7 +1092,7 @@
   {
     "oracleId": "c0864adb-e9aa-40b6-91ff-a0646193e887",
     "name": "Helpful Hunter",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "170a5dbc-6a43-4715-9501-178b1eb7b08c",
@@ -1547,7 +1547,7 @@
   {
     "oracleId": "c643365a-4255-4d23-adb9-0f8b456f0838",
     "name": "Highland Lake",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "86fb3749-37d6-48a6-8524-71e996850307",
@@ -1622,7 +1622,7 @@
   {
     "oracleId": "05c5752a-6ccb-45ff-bb85-5f89efd5944b",
     "name": "Hill Giant Herdgorger",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "137594f7-2422-461b-a3ae-7ce3c135e0c7",
@@ -1872,7 +1872,7 @@
   {
     "oracleId": "748003fd-84c5-4c99-b146-d7d382eef64d",
     "name": "Holy Cow",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ac30745c-addf-433a-be73-d3d9f4cc4328",
@@ -1942,7 +1942,7 @@
   {
     "oracleId": "41da0e8c-ba86-446d-9719-667695c7f1cc",
     "name": "Honey Mammoth",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "87925405-072b-49d6-97c0-fc3a13c10d07",
@@ -2087,7 +2087,7 @@
   {
     "oracleId": "29933a32-3738-4ec5-aa6d-ce3684e2e5a3",
     "name": "Horizon Scholar",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e0610ab1-88d3-4502-84b7-3a08d0170167",

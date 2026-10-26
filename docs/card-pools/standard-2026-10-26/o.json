@@ -177,7 +177,7 @@
   {
     "oracleId": "676141c3-a433-4aba-86fb-729628f96dfa",
     "name": "Ominous Asylum",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "66d4370e-19b9-4680-9b1e-a192537bc002",
@@ -242,7 +242,7 @@
   {
     "oracleId": "f9e7e855-1e3b-42d3-91b0-64ba8b5b8982",
     "name": "Opulent Palace",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "00e75a6b-699e-4824-86e5-66d45245cd9b",

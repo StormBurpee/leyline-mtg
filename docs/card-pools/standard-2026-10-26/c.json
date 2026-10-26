@@ -532,7 +532,7 @@
   {
     "oracleId": "d3576617-7867-4c3d-aa31-d6742483465b",
     "name": "Chandra's Emberling",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "30bb01c1-9253-4251-80e7-fb8236b3d858",
@@ -837,7 +837,7 @@
   {
     "oracleId": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
     "name": "Cloudblazer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f718b520-d79d-4b91-9d85-de1f1c90c176",

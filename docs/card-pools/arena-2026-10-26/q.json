@@ -52,7 +52,7 @@
   {
     "oracleId": "172f86b6-9580-4eb2-b7dc-2a44277d978b",
     "name": "Quandrix Campus",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f43e36ea-6bf5-45bd-a4ad-cc507ae45641",
@@ -227,7 +227,7 @@
   {
     "oracleId": "b3e3d037-992b-4718-913d-7ab509d2047e",
     "name": "Quicksilver Fisher",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c5c1fb0f-b9cf-48a0-a4ea-e995e222e4b4",

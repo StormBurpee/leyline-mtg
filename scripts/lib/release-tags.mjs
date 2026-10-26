@@ -32,7 +32,7 @@ async function tagCommit(api, ref) {
   return tag.object.sha;
 }
 /** Never updates or deletes a reference. A conflicting checkpoint requires human review. */
-export async function ensureVersionTag(api, checkpoint, { preserveExisting = false } = {}) {
+export async function existingVersionTag(api, checkpoint, { preserveExisting = false } = {}) {
   validateCheckpoint(checkpoint);
   const path = `/git/ref/tags/${checkpoint.tag}`;
   const existing = await api('GET', path, undefined, { missing: true });
@@ -46,6 +46,12 @@ export async function ensureVersionTag(api, checkpoint, { preserveExisting = fal
       status: sha === checkpoint.sha ? 'already_tagged' : 'preserved',
     };
   }
+  return null;
+}
+export async function ensureVersionTag(api, checkpoint, options = {}) {
+  const existing = await existingVersionTag(api, checkpoint, options);
+  if (existing) return existing;
+  const path = `/git/ref/tags/${checkpoint.tag}`;
   const object = await api('POST', '/git/tags', {
     tag: checkpoint.tag,
     message: `Leyline ${checkpoint.tag}\n\nTested development checkpoint. CI run ${checkpoint.runId}.\nSee CHANGELOG.md for scope and remaining limitations.`,

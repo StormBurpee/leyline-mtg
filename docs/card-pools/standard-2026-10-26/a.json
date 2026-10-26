@@ -407,7 +407,7 @@
   {
     "oracleId": "8417f2d5-93c9-474a-a143-5c4e17097a88",
     "name": "A.I.M. Labs",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "fa732888-5b7d-4087-a6e5-1db1c98fbd4c",
@@ -972,7 +972,7 @@
   {
     "oracleId": "cddbd819-4895-4712-b44b-d6b51f3d8646",
     "name": "Archive Dragon",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "28045b32-4c1a-40e5-a15d-524d0f8fe6ec",
@@ -1107,7 +1107,7 @@
   {
     "oracleId": "e3614df6-ce84-4180-ade1-a1751e8e3c9a",
     "name": "Asgardian Citadel",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "db75577d-1001-4088-999f-40684218a07f",
@@ -1222,7 +1222,7 @@
   {
     "oracleId": "45d652c4-188e-4f00-acdd-1be014922cbc",
     "name": "Attercop",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e3b70a85-4296-411f-a673-7992b0c8a9aa",
@@ -1342,7 +1342,7 @@
   {
     "oracleId": "10fc2009-4212-47c6-8a97-ab0f45c1f91b",
     "name": "Avengers Hangar",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c5fc8e7c-a87e-4586-a13c-d30e0a3aafbf",

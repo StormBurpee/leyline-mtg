@@ -627,7 +627,7 @@
   {
     "oracleId": "b0af0c54-2a59-4075-8543-d41ff20c4c87",
     "name": "Wind-Scarred Crag",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e198126a-f280-47f7-8bd0-3dc9f5ff05a0",
@@ -672,7 +672,7 @@
   {
     "oracleId": "91967284-6711-4ef3-bb9b-5ba873da8bb2",
     "name": "Winter's Intervention",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "6f4c94b6-f829-4646-a574-083997b78dfb",

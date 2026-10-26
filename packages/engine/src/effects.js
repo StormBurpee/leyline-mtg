@@ -98,16 +98,25 @@ export function enterBattlefield(s, o, controller = o.owner, attachment = null) 
   o.controller = controller;
   o.attachedTo = attachment;
   const d = definition(s, o);
+  o.tapped = !!d.entersTapped;
   if (d.etb) queueTrigger(s, o, d.etb, `${o.name} · enters`);
-  if (d.type === 'creature') notifyTriggers(s, 'creatureEnters', { object: o });
+  notifyTriggers(s, 'enters', { object: o });
 }
 /** Match declarative trigger predicates against committed game events. */
 export function notifyTriggers(s, event, payload) {
   for (const watcher of battlefield(s))
     for (const trigger of definition(s, watcher).triggers ?? []) {
       const match =
+        (trigger.event === 'selfEnters' &&
+          event === 'enters' &&
+          watcher.id === payload.object.id) ||
+        (trigger.event === 'controllerLandEnters' &&
+          event === 'enters' &&
+          definition(s, payload.object).type === 'land' &&
+          watcher.controller === payload.object.controller) ||
         (trigger.event === 'otherCreatureEnters' &&
-          event === 'creatureEnters' &&
+          event === 'enters' &&
+          definition(s, payload.object).type === 'creature' &&
           watcher.id !== payload.object.id) ||
         (event === 'cast' &&
           watcher.controller === payload.player &&
@@ -205,6 +214,18 @@ export function resolveEffects(s, entry, startIndex = 0) {
         s.resolving = { entry, index: index + 1 };
         s.choice = { kind: 'discardEffect', player: entry.controller, count };
         return false;
+      }
+      case 'mill': {
+        const player =
+          e.player === 'target'
+            ? entry.target.id
+            : e.player === 'opponent'
+              ? opponent(entry.controller)
+              : entry.controller;
+        const cards = s.players[player].library.slice(0, e.count);
+        for (const id of cards) move(s, s.objects[id], 'graveyard');
+        emit(s, 'mill', { player, count: cards.length, requested: e.count });
+        break;
       }
       case 'draw':
         draw(s, entry.controller, e.count);

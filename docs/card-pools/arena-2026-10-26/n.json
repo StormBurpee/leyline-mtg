@@ -42,7 +42,7 @@
   {
     "oracleId": "249e18a4-12c5-4836-a172-cb4e9b9cb7d7",
     "name": "Naga Oracle",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "9cea8783-c7d7-49f9-b23d-324309efc140",
@@ -1002,7 +1002,7 @@
   {
     "oracleId": "30929713-47dc-40f0-883c-4bd41aa399d5",
     "name": "Nimble Innovator",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "abd839ab-8b08-4bc0-900a-3a161c62b06c",
@@ -1242,7 +1242,7 @@
   {
     "oracleId": "4619de7e-3d6e-4c6b-8e6e-e24db324839d",
     "name": "Nomad Outpost",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b9538d53-480b-481a-abbf-83ab17e1a45b",

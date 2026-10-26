@@ -117,7 +117,7 @@
   {
     "oracleId": "ea0b0c71-4a1b-49aa-b4cd-db6c5d26b95e",
     "name": "Valkyrior Skyrider",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "aad16b50-a866-4871-843f-ec8813ad5dfd",
@@ -457,7 +457,7 @@
   {
     "oracleId": "04cc5292-a485-4bb8-a143-9364229d480f",
     "name": "Vedalken Entrancer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f507f9ba-a7e9-4e45-86dc-8c60a72a6234",
@@ -632,7 +632,7 @@
   {
     "oracleId": "e235d1ca-3099-46c1-8f33-798286292d71",
     "name": "Venomous Hierophant",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "2fac62be-dcbe-409f-a362-f0e519ec14a9",
@@ -1447,7 +1447,7 @@
   {
     "oracleId": "82e52a09-ce6f-417d-8460-8806df63f0bf",
     "name": "Void Helix",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "bb4ebe30-2501-48aa-879a-2402a9eb1be7",

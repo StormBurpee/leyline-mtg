@@ -482,7 +482,7 @@
   {
     "oracleId": "ff12dfee-7140-44bd-a62e-5f8ab98e93c6",
     "name": "Undersea Invader",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "8e121178-e9e3-43a5-a174-ecbe47d759f9",
@@ -637,7 +637,7 @@
   {
     "oracleId": "94c98a3b-9c3e-497f-b954-8f2248ca01ac",
     "name": "Unhallowed Phalanx",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "bd388ad9-a47b-4b0b-b94a-8e4343cd3de5",
@@ -657,7 +657,7 @@
   {
     "oracleId": "41c06726-0360-4488-8dc3-ec257386a372",
     "name": "Unholy Officiant",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "bde67dfb-706b-4942-a365-984ea6e97a2b",
@@ -692,7 +692,7 @@
   {
     "oracleId": "98e547de-b963-4ee4-9a08-67bae010734b",
     "name": "University Campus",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "82c5ec8e-27be-475a-9921-ad61209fd022",

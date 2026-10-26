@@ -22,7 +22,7 @@
   {
     "oracleId": "b9650a0e-5795-42ff-84c6-6040e5cf4c90",
     "name": "Icecave Crasher",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f8131dca-ba6e-4ca4-943e-a3d26c75b8b8",
@@ -82,7 +82,7 @@
   {
     "oracleId": "5001bf21-9dbb-4229-aeef-25805e71b832",
     "name": "Icewind Elemental",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0828d891-f7c3-4e51-b42e-6ce88d48ac8b",
@@ -242,7 +242,7 @@
   {
     "oracleId": "01ee70d4-6527-45ae-9600-bd3d16b3037d",
     "name": "Illegitimate Business",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "84e8ca5e-730e-468b-943c-7c6358ade95c",
@@ -477,7 +477,7 @@
   {
     "oracleId": "fcd31653-4964-46a6-820c-f17e8cbaa1fa",
     "name": "Imperious Inkmage",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b0381c2a-40e2-4002-82e3-ae2d687daed3",
@@ -1167,7 +1167,7 @@
   {
     "oracleId": "65e19aec-e8ea-412f-a239-bd8d1b78249c",
     "name": "Inspiring Cleric",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b26b1d22-3882-4aa9-b86b-f3748a6c9a25",
@@ -1177,7 +1177,7 @@
   {
     "oracleId": "d646e42b-5635-4798-b633-29c093b66a55",
     "name": "Inspiring Overseer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "95efbb81-2418-42ed-ae34-5759efff8253",

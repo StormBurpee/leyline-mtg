@@ -462,7 +462,7 @@
   {
     "oracleId": "4754e9c6-1790-4c01-87c2-3a16ce7e65f5",
     "name": "Makindi Sliderunner",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "342e08f9-d4d0-4408-8621-66e087058616",
@@ -767,7 +767,7 @@
   {
     "oracleId": "013e4281-4e3e-47c2-ac9a-f570668bcb16",
     "name": "Maraleaf Pixie",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "66412a7a-4ec0-41f0-80ad-eb483213ff81",
@@ -1437,7 +1437,7 @@
   {
     "oracleId": "2d9663be-c466-4191-85e2-a69ce0965432",
     "name": "Meandering River",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "45154dc6-ff0a-4e99-8528-689757d1778e",
@@ -1892,7 +1892,7 @@
   {
     "oracleId": "898763f8-a333-43f5-9f66-52e2adbe5758",
     "name": "Mesa Cavalier",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "211add65-b63d-43ad-8d69-b0598e003fef",
@@ -2257,7 +2257,7 @@
   {
     "oracleId": "3212e47a-5492-4c50-9d4a-6ea562f1a6e1",
     "name": "Millstone",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "2b8c2882-dbca-466a-a0af-dd1d65edfe7c",
@@ -2522,7 +2522,7 @@
   {
     "oracleId": "dd36aea8-9f1c-4daf-86f6-ab9307279ce7",
     "name": "Minotaur Skullcleaver",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "cbb6c481-bcf1-459d-a6fb-bb46cc521368",
@@ -2567,7 +2567,7 @@
   {
     "oracleId": "4fe6f784-0290-4d4a-85ae-0b66522d31e9",
     "name": "Mire Triton",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "1d88014b-8189-4a88-bee3-c2310d36f6e8",
@@ -3292,7 +3292,7 @@
   {
     "oracleId": "57579799-2582-417f-9864-4560cac39ac3",
     "name": "Moment of Triumph",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ef61fb5c-2ea6-4f82-92c5-c4713dee45fa",
@@ -3707,7 +3707,7 @@
   {
     "oracleId": "26afc8c1-c23f-4212-a2aa-386c71c4a7f9",
     "name": "Mossbeard Ancient",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "84122d81-9634-4d3f-85a5-f6cf4303691a",
@@ -4032,7 +4032,7 @@
   {
     "oracleId": "04c9b3d7-83ba-400e-9837-2ba0119e9445",
     "name": "Muse Drake",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "31f3d37f-e613-427f-b34c-cc87611ea078",
@@ -4087,7 +4087,7 @@
   {
     "oracleId": "f6059731-2e10-4f72-a214-b257f1677e9e",
     "name": "Mutant Town",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "9f318ddc-3dc5-4e43-92b3-3a776e41c56e",
@@ -4272,7 +4272,7 @@
   {
     "oracleId": "834b8f71-9a45-42ae-9e99-e749fa6fb45e",
     "name": "Mystic Monastery",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "530853b4-68a0-4814-b0aa-ffeb5585cd43",

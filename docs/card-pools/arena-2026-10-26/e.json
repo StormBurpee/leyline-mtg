@@ -757,7 +757,7 @@
   {
     "oracleId": "92dfeeb2-1117-422b-87ea-08a589f1134b",
     "name": "Elite Guardmage",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "fad0118b-d046-4ee7-87d9-e6799f70a7a8",
@@ -767,7 +767,7 @@
   {
     "oracleId": "6536f72e-ff4e-4cda-bc7d-909145adf829",
     "name": "Elite Instructor",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d97de156-5a6d-4dc6-953e-d4bad63cbad2",
@@ -1737,7 +1737,7 @@
   {
     "oracleId": "6eb93545-a1a6-4447-82c5-421d8e9f023d",
     "name": "Erebor Flamesmith",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a5690dc9-f12e-4ecc-b528-f2f83c79c3c8",
@@ -1952,7 +1952,7 @@
   {
     "oracleId": "14363df6-ac0f-476a-bbd8-ce351de0babf",
     "name": "Essence Extraction",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "64824ae5-efab-4b55-9d3c-b9c690bad857",
@@ -2137,7 +2137,7 @@
   {
     "oracleId": "92226fd2-ad93-4722-89a0-ca88ea03e1b4",
     "name": "Eumidian Terrabotanist",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0e2c11b2-d95f-4402-9a4a-afd3f7ffb8be",
@@ -2317,7 +2317,7 @@
   {
     "oracleId": "68e0b691-f332-4b0a-8173-bb8a48b463a1",
     "name": "Excavation Mole",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a8c9f91a-b1e7-451d-b6db-ae865e2b853c",

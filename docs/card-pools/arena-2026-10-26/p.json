@@ -197,7 +197,7 @@
   {
     "oracleId": "638ff242-63d5-457d-a7a6-40ad51052e2e",
     "name": "Paradox Gardens",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "daff0e7b-08f2-435f-97b9-9b000e94ffa8",
@@ -1352,7 +1352,7 @@
   {
     "oracleId": "58d87cfe-7402-43c3-81ce-13de8cd04005",
     "name": "Piranha Fly",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b9080653-87cb-4443-a4a3-36637d5ad165",
@@ -2162,7 +2162,7 @@
   {
     "oracleId": "af199b80-d5d8-417a-97d5-459a5bd48b22",
     "name": "Prescient Chimera",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ab42398c-f0a1-4b94-ac5f-b8768e1b4e05",
@@ -2262,7 +2262,7 @@
   {
     "oracleId": "a89b0fd5-84b2-487c-8b03-e78d97276fd3",
     "name": "Priest of Ancient Lore",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ec6ccd8f-cc75-4a50-8639-f4ec31a280aa",
@@ -2382,7 +2382,7 @@
   {
     "oracleId": "5ebdc1a5-e678-444b-abb8-8753558a39de",
     "name": "Primordial Pachyderm",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "499f1e1e-d96e-481f-a5d9-eb38da927cd7",
@@ -2427,7 +2427,7 @@
   {
     "oracleId": "3a3a1b35-ae4d-49d5-ae09-5a1693ad53ce",
     "name": "Prismari Campus",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c3c25a2c-f71c-4cb7-9117-0bcda9248bfd",
@@ -2807,7 +2807,7 @@
   {
     "oracleId": "ed26f6bf-fcd6-4cf4-9b65-a492cb79f2df",
     "name": "Prowling Felidar",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "4bdfd718-f474-4223-88d8-7fa9fb0c86b4",
@@ -3082,7 +3082,7 @@
   {
     "oracleId": "5a8977fc-0732-4807-b876-01819aedd70b",
     "name": "Pym Technologies",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0a6f45e9-5c7a-4e2c-bf8a-fc5fe0ae0793",
@@ -3137,7 +3137,7 @@
   {
     "oracleId": "b5306bf4-0cba-48dd-8af8-7c7821db7e02",
     "name": "Pyroceratops",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e4bcd4ea-e7cd-4471-8f3b-18bb51d3d70c",
@@ -3147,7 +3147,7 @@
   {
     "oracleId": "1f37e3a6-ce3a-472f-ac45-0d9b23a31a11",
     "name": "Pyroclastic Elemental",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b2151d51-39f6-49cc-a5cc-8202dd028336",

@@ -25,12 +25,10 @@ for (const name of [
     if (expected.effects) assert.deepEqual(result.definition.effects, expected.effects);
     if (expected.triggers) assert.deepEqual(result.definition.triggers, expected.triggers);
   });
-test('Sprite Dragon remains unsupported rather than dropping its trigger/SVar', async () => {
+test('Sprite Dragon compiles its cast trigger and source counter without dropping the SVar', async () => {
   const result = compileForgeCard(await fixture('sprite_dragon'));
-  assert.equal(result.status, 'unsupported');
-  assert.equal(result.definition, null);
-  assert.ok(result.diagnostics.some((x) => x.includes('unsupported field T')));
-  assert.ok(result.diagnostics.some((x) => x.includes('SVar')));
+  assert.equal(result.status, 'candidate', result.diagnostics.join('\n'));
+  assert.deepEqual(result.definition.triggers, CARDS['Sprite Dragon'].triggers);
 });
 test('unknown keywords fail closed', async () => {
   const text = (await fixture('grizzly_bears')) + '\nK:Protection:Red';
@@ -138,6 +136,86 @@ test('multiple ward instances and nonimplemented ward costs are rejected', async
     source + '\nK:Ward:1',
     source.replace('K:Ward:2', 'K:Ward:Discard<1/Card>'),
     source.replace('K:Ward:2', 'K:Ward:T'),
+  ])
+    assert.equal(compileForgeCard(text).status, 'unsupported');
+});
+
+for (const name of [
+  'snapping_gnarlid',
+  'makindi_sliderunner',
+  'territorial_scythecat',
+  'thermo_alchemist',
+  'electrostatic_field',
+])
+  test(`Forge trigger fixture ${name} compiles to the implemented event predicate`, async () => {
+    const result = compileForgeCard(await fixture(name));
+    assert.equal(result.status, 'candidate', result.diagnostics.join('\n'));
+    assert.deepEqual(result.definition.triggers, CARDS[result.name].triggers);
+    if (CARDS[result.name].activated)
+      assert.deepEqual(
+        result.definition.activated[0].effects,
+        CARDS[result.name].activated[0].effects,
+      );
+  });
+for (const name of ['elvish_visionary', 'soul_warden'])
+  test(`Forge ETB fixture ${name} keeps the enter predicate and effects`, async () => {
+    const r = compileForgeCard(await fixture(name));
+    assert.equal(r.status, 'candidate', r.diagnostics.join('\n'));
+    assert.equal(
+      r.definition.triggers[0].event,
+      name === 'elvish_visionary' ? 'selfEnters' : 'otherCreatureEnters',
+    );
+  });
+test('trigger conditions and alternate zones fail closed', async () => {
+  const source = await fixture('snapping_gnarlid');
+  for (const text of [
+    source.replace('TriggerZones$ Battlefield', 'TriggerZones$ Graveyard'),
+    source.replace('Mode$ ChangesZone', 'Mode$ ChangesZone | CheckSVar$ X'),
+    source.replace('Destination$ Battlefield', 'Destination$ Graveyard'),
+    source.replace('ValidCard$ Land.YouCtrl', 'ValidCard$ Land.OppCtrl'),
+  ])
+    assert.equal(compileForgeCard(text).status, 'unsupported');
+});
+test('prototype-named Forge opcodes reject instead of accessing inherited operand schemas', () => {
+  for (const op of ['__proto__', 'constructor', 'toString'])
+    assert.equal(
+      compileForgeCard(`Name:Bad\nManaCost:U\nTypes:Instant\nA:SP$ ${op}`).status,
+      'unsupported',
+    );
+});
+test('only audited non-executable AI hints may remain unreferenced', async () => {
+  const source = await fixture('snapping_gnarlid');
+  assert.equal(
+    compileForgeCard(source.replace('SVar:BuffedBy:Land', 'SVar:BuffedBy:Count$Valid Land')).status,
+    'unsupported',
+  );
+  assert.equal(compileForgeCard(source + '\nSVar:Unused:DB$ Draw').status, 'unsupported');
+});
+
+for (const name of ['tranquil_cove', 'blossoming_sands'])
+  test(`Forge nonbasic ${name} keeps its mana choices, tapped entry and life trigger`, async () => {
+    const r = compileForgeCard(await fixture(name));
+    assert.equal(r.status, 'candidate', r.diagnostics.join('\n'));
+    assert.deepEqual(r.definition.mana, CARDS[r.name].mana);
+    assert.equal(r.definition.entersTapped, true);
+    assert.deepEqual(r.definition.triggers, [
+      { event: 'selfEnters', effects: [{ op: 'gainLife', amount: 1 }] },
+    ]);
+  });
+for (const name of ['tome_scour', 'mind_sculpt'])
+  test(`Forge ${name} targets the correct player for milling`, async () => {
+    const r = compileForgeCard(await fixture(name));
+    assert.equal(r.status, 'candidate', r.diagnostics.join('\n'));
+    assert.deepEqual(r.definition.effects, CARDS[r.name].effects);
+    assert.equal(r.definition.target, CARDS[r.name].target);
+  });
+test('conditional tapped lands and unrelated replacement instructions are rejected', async () => {
+  const source = await fixture('tranquil_cove');
+  for (const text of [
+    source.replace('ReplacementResult$ Updated', 'ReplacementResult$ Updated | CheckSVar$ X'),
+    source.replace('DB$ Tap', 'DB$ Tap | SubAbility$ Draw'),
+    source.replace('Produced$ Combo W U', 'Produced$ Any'),
+    source.replace('Types:Land', 'Types:Land Plains Island'),
   ])
     assert.equal(compileForgeCard(text).status, 'unsupported');
 });

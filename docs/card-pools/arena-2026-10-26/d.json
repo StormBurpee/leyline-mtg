@@ -247,7 +247,7 @@
   {
     "oracleId": "0f5401c2-0189-4a07-8e7b-a765ccd7c954",
     "name": "Daring Thunder-Thief",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e4d52559-7624-48b2-96ba-e52ada6c507a",
@@ -357,7 +357,7 @@
   {
     "oracleId": "95650a60-6f1d-4594-8b53-7fd406212207",
     "name": "Dark Nourishment",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "79acdb37-8d52-4bc8-a7be-a7e92b6166e5",
@@ -582,7 +582,7 @@
   {
     "oracleId": "a7d88510-d2ce-4dd6-938c-964cc74ff7d7",
     "name": "Dawning Angel",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "37df5ade-6a21-4b0c-89f8-e2e917589a8d",
@@ -717,7 +717,7 @@
   {
     "oracleId": "29ef90ac-2396-4488-970d-d440297ba5ee",
     "name": "Deadeye Duelist",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "597afe7c-a4ba-48d0-9c37-d9affe5ba195",
@@ -1137,7 +1137,7 @@
   {
     "oracleId": "507c2921-7070-482d-8754-dc667e3315bd",
     "name": "Deeproot Champion",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "764e8e6e-0ace-4fc8-8ca5-468a10ae3b73",
@@ -1742,7 +1742,7 @@
   {
     "oracleId": "87644a09-241a-44e5-99f2-16fc9a7d8b93",
     "name": "Desperate Lunge",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f1f3df1c-5c51-445a-b66d-eee4aab23691",
@@ -2062,7 +2062,7 @@
   {
     "oracleId": "8683341a-e836-41e5-9034-4da09eb0ab42",
     "name": "Dimension X",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c2283655-f6b8-4399-ba1f-68a7107f9485",
@@ -2077,7 +2077,7 @@
   {
     "oracleId": "fa66d63b-dfb7-42b8-8249-4d60e89058ac",
     "name": "Dimir Informant",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "3ae4b679-2e3c-4f60-bcf4-b279917cdc54",
@@ -2217,7 +2217,7 @@
   {
     "oracleId": "6048fc70-0dcc-4b54-977d-16e240225f82",
     "name": "Diregraf Ghoul",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d7947858-f11d-438c-8ad3-991afe950a11",
@@ -2367,7 +2367,7 @@
   {
     "oracleId": "865a2194-fca0-446e-aae3-ca475cd66e00",
     "name": "Dismal Backwater",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fd74f8eb-0253-42dd-8277-186d4934da38",
@@ -3042,7 +3042,7 @@
   {
     "oracleId": "1fd754fd-c053-4638-b379-46d903357b01",
     "name": "Douse in Gloom",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "1e53032e-fe14-4424-86ee-f69336f049fe",
@@ -3667,7 +3667,7 @@
   {
     "oracleId": "9feb7600-f844-4573-bcb7-d6b34473517b",
     "name": "Dreadwurm",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a1cec8e8-cf3c-42a4-b625-ca0cd148664e",
@@ -3982,7 +3982,7 @@
   {
     "oracleId": "8d7933c4-4c74-492f-a9cd-50b339a4b29e",
     "name": "Druid of the Anima",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b1793c3b-25d6-4fae-a99d-cfdd2210ca67",

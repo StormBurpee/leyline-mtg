@@ -32,8 +32,12 @@ const PRESENTATION = new Set([
   'DeckNeeds',
 ]);
 const OPERAND_FIELDS = {
-  DealDamage: ['ValidTgts', 'NumDmg'],
+  DealDamage: ['ValidTgts', 'NumDmg', 'Defined'],
   Counter: ['ValidTgts', 'TargetType'],
+  GainLife: ['Defined', 'LifeAmount'],
+  Mill: ['Defined', 'NumCards', 'ValidTgts'],
+  PutCounter: ['Defined', 'CounterType', 'CounterNum'],
+  Untap: ['Defined'],
   Draw: ['NumCards', 'Defined'],
   Destroy: ['ValidTgts'],
   ChangeZone: ['ValidTgts', 'Origin', 'Destination'],
@@ -86,11 +90,15 @@ function targetFor(a, errors) {
   const target =
     a.ValidTgts === 'Any'
       ? 'any'
-      : a.ValidTgts === 'Creature'
-        ? 'creature'
-        : a.TargetType === 'Spell' && a.ValidTgts === 'Card'
-          ? 'spell'
-          : null;
+      : a.ValidTgts === 'Player'
+        ? 'player'
+        : a.ValidTgts === 'Opponent'
+          ? 'opponent'
+          : a.ValidTgts === 'Creature'
+            ? 'creature'
+            : a.TargetType === 'Spell' && a.ValidTgts === 'Card'
+              ? 'spell'
+              : null;
   if (a.ValidTgts && !target) errors.push(`Unsupported target predicate: ${a.ValidTgts}`);
   return target;
 }
@@ -105,7 +113,7 @@ function compileInstruction(a, context) {
     opcode = a[tag];
   if (sub && tag !== 'DB') errors.push('SubAbility references must point to a DB instruction.');
   const operands = OPERAND_FIELDS[opcode];
-  if (!operands) {
+  if (!Array.isArray(operands)) {
     errors.push(`Unsupported ${tag === 'AB' ? 'ability' : 'spell'} opcode: ${opcode}`);
     return { effects: [] };
   }
@@ -130,11 +138,51 @@ function compileInstruction(a, context) {
     errors.push(`${opcode}: only Defined You is supported.`);
   switch (opcode) {
     case 'DealDamage':
+      if (a.Defined === 'Player.Opponent' && !target)
+        return { effects: [{ op: 'damageOpponent', amount: number(a.NumDmg, 'NumDmg', errors) }] };
+      if (a.Defined !== undefined)
+        errors.push('Only untargeted Defined Player.Opponent damage is supported.');
       if (!target) errors.push('DealDamage requires a supported target predicate.');
       return { target, effects: [{ op: 'damage', amount: number(a.NumDmg, 'NumDmg', errors) }] };
     case 'Counter':
       if (target !== 'spell') errors.push('Counter requires TargetType Spell and ValidTgts Card.');
       return { target, effects: [{ op: 'counter' }] };
+    case 'GainLife':
+      if (a.Defined !== undefined && a.Defined !== 'You')
+        errors.push('GainLife requires Defined You.');
+      return { effects: [{ op: 'gainLife', amount: number(a.LifeAmount, 'LifeAmount', errors) }] };
+    case 'Mill': {
+      if (target && (!['player', 'opponent'].includes(target) || a.Defined !== undefined))
+        errors.push('Unsupported mill target/Defined combination.');
+      if (!target && a.Defined !== undefined && !['You', 'Player.Opponent'].includes(a.Defined))
+        errors.push('Unsupported mill player selector.');
+      return {
+        target,
+        effects: [
+          {
+            op: 'mill',
+            count: number(a.NumCards, 'NumCards', errors, { fallback: 1 }),
+            player: target ? 'target' : a.Defined === 'Player.Opponent' ? 'opponent' : 'controller',
+          },
+        ],
+      };
+    }
+    case 'PutCounter':
+      if (a.Defined !== 'Self' || a.CounterType !== 'P1P1' || !['AB', 'TR'].includes(rootKind))
+        errors.push('Only source +1/+1 counters on abilities are supported.');
+      return {
+        effects: [
+          {
+            op: 'counterOn',
+            subject: 'source',
+            amount: number(a.CounterNum, 'CounterNum', errors),
+          },
+        ],
+      };
+    case 'Untap':
+      if (a.Defined !== 'Self' || !['AB', 'TR'].includes(rootKind))
+        errors.push('Only a permanent ability untapping its source is supported.');
+      return { effects: [{ op: 'untap', subject: 'source' }] };
     case 'Draw':
       return {
         effects: [{ op: 'draw', count: number(a.NumCards, 'NumCards', errors, { fallback: 1 }) }],
@@ -171,7 +219,7 @@ function compileInstruction(a, context) {
         errors.push('Only Defined Self is supported for source pumps.');
       if (!self && target !== 'creature')
         errors.push('Pump needs a creature target or an activated source.');
-      if (self && rootKind !== 'AB')
+      if (self && !['AB', 'TR'].includes(rootKind))
         errors.push('A spell cannot use this source-pump translation.');
       const keywords = a.KW ? a.KW.split(' & ').map((k) => k.trim().toLowerCase()) : [];
       if (keywords.some((k) => !KEYWORDS.has(k)))
@@ -224,7 +272,7 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
     const key = line.slice(0, colon),
       value = line.slice(colon + 1);
     rows.push({ key, value, line: i + 1 });
-    if (!PRESENTATION.has(key) && !['K', 'A', 'SVar'].includes(key))
+    if (!PRESENTATION.has(key) && !['K', 'A', 'T', 'R', 'SVar'].includes(key))
       errors.push(`Line ${i + 1}: unsupported field ${key}.`);
     if (key === 'SVar') {
       const split = value.indexOf(':');
@@ -263,16 +311,14 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
       text: rows.find((r) => r.key === 'Oracle')?.value.replaceAll('\\n', '\n') ?? '',
     };
   if (type === 'land') {
-    if (
-      !tokens.includes('Basic') ||
-      !BASIC_MANA[name] ||
-      definition.subtypes.length !== 1 ||
-      definition.subtypes[0] !== name
-    )
-      errors.push('Only the five named basic lands are supported.');
-    if (mana !== 'no cost') errors.push('Basic lands must have no mana cost.');
-    definition.basic = true;
-    definition.mana = BASIC_MANA[name];
+    if (mana !== 'no cost') errors.push('Lands must have no mana cost.');
+    if (tokens.includes('Basic')) {
+      if (!BASIC_MANA[name] || definition.subtypes.length !== 1 || definition.subtypes[0] !== name)
+        errors.push('Only the five named basic lands are supported.');
+      definition.basic = true;
+      definition.mana = BASIC_MANA[name];
+    } else if (definition.subtypes.length)
+      errors.push('Nonbasic land subtypes require intrinsic-ability support.');
   } else if (mana === 'no cost')
     errors.push('No-cost nonland cards require separate casting rules.');
   if (type === 'creature') {
@@ -330,14 +376,16 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
         continue;
       }
       if (a.AB === 'Mana') {
+        const produced = /^Combo ([WUBRGC](?: [WUBRGC]){1,5})$/.exec(a.Produced ?? '');
+        const mana = produced ? produced[1].split(' ') : a.Produced;
         if (
           Object.keys(a).some((k) => !['AB', 'Cost', 'Produced', 'SpellDescription'].includes(k)) ||
           a.Cost !== 'T' ||
-          !/^[WUBRGC]$/.test(a.Produced ?? '') ||
+          (!produced && !/^[WUBRGC]$/.test(a.Produced ?? '')) ||
           definition.mana
         )
-          errors.push('Only one tap ability producing a single mana is supported.');
-        else definition.mana = a.Produced;
+          errors.push('Only one tap ability producing one mana of a listed color is supported.');
+        else definition.mana = mana;
       } else {
         const result = walk(a, 'AB');
         (definition.activated ??= []).push({
@@ -347,8 +395,104 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
         });
       }
     }
+  for (const row of rows.filter((r) => r.key === 'T')) {
+    const trigger = fields(row.value, errors);
+    const allowed = new Set([
+      'Mode',
+      'Origin',
+      'Destination',
+      'ValidCard',
+      'TriggerZones',
+      'Execute',
+      'TriggerDescription',
+      'ValidActivatingPlayer',
+    ]);
+    for (const key of Object.keys(trigger))
+      if (!allowed.has(key)) errors.push(`Unsupported trigger field: ${key}`);
+    let event;
+    if (trigger.Mode === 'ChangesZone') {
+      if (
+        trigger.Destination !== 'Battlefield' ||
+        (trigger.Origin !== undefined && trigger.Origin !== 'Any') ||
+        trigger.ValidActivatingPlayer !== undefined
+      )
+        errors.push('Unsupported zone-change trigger restriction.');
+      if (trigger.ValidCard === 'Card.Self') event = 'selfEnters';
+      else if (trigger.ValidCard === 'Creature.Other') event = 'otherCreatureEnters';
+      else if (trigger.ValidCard === 'Land.YouCtrl') event = 'controllerLandEnters';
+      else errors.push(`Unsupported zone-change trigger predicate: ${trigger.ValidCard}`);
+      if (
+        trigger.TriggerZones !== 'Battlefield' &&
+        !(event === 'selfEnters' && trigger.TriggerZones === undefined)
+      )
+        errors.push('Trigger must watch from the battlefield.');
+    } else if (trigger.Mode === 'SpellCast') {
+      if (
+        trigger.ValidActivatingPlayer !== 'You' ||
+        trigger.TriggerZones !== 'Battlefield' ||
+        trigger.Origin !== undefined ||
+        trigger.Destination !== undefined
+      )
+        errors.push('Unsupported spell-cast trigger restriction.');
+      if (trigger.ValidCard === 'Card.nonCreature') event = 'controllerCastsNoncreature';
+      else if (trigger.ValidCard === 'Instant,Sorcery') event = 'controllerCastsInstantOrSorcery';
+      else errors.push(`Unsupported cast trigger predicate: ${trigger.ValidCard}`);
+    } else errors.push(`Unsupported trigger mode: ${trigger.Mode}`);
+    if (!trigger.Execute || !symbols.has(trigger.Execute)) {
+      errors.push(`Missing trigger SVar: ${trigger.Execute}`);
+      continue;
+    }
+    used.add(trigger.Execute);
+    const result = walk(fields(symbols.get(trigger.Execute), errors), 'TR', [trigger.Execute]);
+    if (result.target) errors.push('Targeted triggers require a target-choice implementation.');
+    if (event) (definition.triggers ??= []).push({ event, effects: result.effects });
+  }
+  const replacements = rows.filter((r) => r.key === 'R');
+  if (replacements.length > 1)
+    errors.push('Multiple replacement effects require the general replacement pipeline.');
+  for (const row of replacements) {
+    const rule = fields(row.value, errors);
+    const allowed = [
+      'Event',
+      'ValidCard',
+      'Destination',
+      'ReplacementResult',
+      'ReplaceWith',
+      'Description',
+    ];
+    if (
+      Object.keys(rule).some((k) => !allowed.includes(k)) ||
+      rule.Event !== 'Moved' ||
+      rule.ValidCard !== 'Card.Self' ||
+      rule.Destination !== 'Battlefield' ||
+      rule.ReplacementResult !== 'Updated' ||
+      !symbols.has(rule.ReplaceWith)
+    ) {
+      errors.push('Only an unconditional self enters-tapped replacement is supported.');
+      continue;
+    }
+    const effect = fields(symbols.get(rule.ReplaceWith), errors);
+    used.add(rule.ReplaceWith);
+    if (
+      Object.keys(effect).some((k) => !['DB', 'Defined', 'ETB'].includes(k)) ||
+      effect.DB !== 'Tap' ||
+      effect.Defined !== 'Self' ||
+      effect.ETB !== 'True'
+    )
+      errors.push('Only the literal ETB tap instruction is supported.');
+    else definition.entersTapped = true;
+  }
+  if (type === 'land' && !definition.mana)
+    errors.push('This land subset requires an explicit supported mana ability.');
   for (const symbol of symbols.keys())
-    if (!used.has(symbol)) errors.push(`Unreferenced or unsupported SVar: ${symbol}`);
+    if (
+      !used.has(symbol) &&
+      !(
+        symbol === 'BuffedBy' &&
+        ['Land', 'Creature', 'Card.nonCreature'].includes(symbols.get(symbol))
+      )
+    )
+      errors.push(`Unreferenced or unsupported SVar: ${symbol}`);
   if (type !== 'creature' && rows.some((r) => r.key === 'PT'))
     errors.push('Unexpected PT on a noncreature.');
   if (type !== 'creature' && rows.some((r) => r.key === 'K'))

@@ -32,6 +32,7 @@ export type TargetKind =
 export type Effect =
   | { op: 'damage' | 'damageOpponent' | 'gainLife'; amount: number }
   | { op: 'draw' | 'scry' | 'surveil' | 'discard'; count: number }
+  | { op: 'mill'; count: number; player: 'controller' | 'opponent' | 'target' }
   | { op: 'counter' | 'bounce' | 'destroy' }
   | { op: 'untap'; subject: 'source' }
   | { op: 'counterOn'; subject: 'source'; amount: number }
@@ -49,7 +50,8 @@ export interface CardDefinition {
   readonly toughness?: number;
   readonly basic?: boolean;
   readonly token?: boolean;
-  readonly mana?: Color;
+  readonly mana?: Color | readonly Color[];
+  readonly entersTapped?: boolean;
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
   readonly etb?: readonly Effect[];
@@ -57,7 +59,12 @@ export interface CardDefinition {
   readonly aura?: 'pacifism';
   readonly static?: { kind: 'anthem'; power: number; toughness: number };
   readonly triggers?: readonly {
-    event: 'otherCreatureEnters' | 'controllerCastsNoncreature' | 'controllerCastsInstantOrSorcery';
+    event:
+      | 'selfEnters'
+      | 'controllerLandEnters'
+      | 'otherCreatureEnters'
+      | 'controllerCastsNoncreature'
+      | 'controllerCastsInstantOrSorcery';
     effects: readonly Effect[];
   }[];
   readonly activated?: readonly {
@@ -215,7 +222,8 @@ export interface GameState {
 export type Action =
   | { type: 'payCost'; pay: boolean }
   | { type: 'pass' | 'concede' | 'keep' | 'mulligan' }
-  | { type: 'playLand' | 'tapMana'; card: string }
+  | { type: 'playLand'; card: string }
+  | { type: 'tapMana'; card: string; color?: Color }
   | { type: 'cast'; card: string; target?: Target; autoTap?: boolean }
   | { type: 'activate'; card: string; ability: number; target?: Target }
   | { type: 'bottom' | 'discard' | 'discardEffect' | 'attackers'; cards: string[] }
@@ -301,6 +309,7 @@ export function canBlock(
   attacker: GameObject,
   player: PlayerId,
 ): boolean;
+export function manaOptions(state: GameState, object: GameObject): readonly Color[];
 export function canTapForMana(state: GameState, object: GameObject, player: PlayerId): boolean;
 export function canPlayLand(state: GameState, player: PlayerId, id: string): boolean;
 export function castProblem(
@@ -329,7 +338,12 @@ export function planPayment(
   player: PlayerId,
   cost: ManaCost,
   options?: { autoTap?: boolean; excludeSources?: string[] },
-): { taps: string[]; spent: Record<Color, number>; remaining: Record<Color, number> } | null;
+): {
+  taps: string[];
+  activations: { card: string; color: Color }[];
+  spent: Record<Color, number>;
+  remaining: Record<Color, number>;
+} | null;
 export function suggestedDamage(
   state: GameState,
   choice?: Extract<Choice, { kind: 'assignDamage' }>,

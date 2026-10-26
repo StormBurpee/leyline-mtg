@@ -92,7 +92,7 @@
   {
     "oracleId": "6db442e5-fbcc-4456-a4c5-bea1aee3fc8e",
     "name": "Radiant Fountain",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "93cddbad-92ef-4b30-a0e7-981aee714bce",
@@ -1042,7 +1042,7 @@
   {
     "oracleId": "3583ec24-4f26-45ea-8fb4-a45bdd7bfc79",
     "name": "Ravenous Lindwurm",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "90109cb4-1e16-4d54-9332-b5fb1e71042c",
@@ -1552,7 +1552,7 @@
   {
     "oracleId": "ff6e4346-463c-445d-8f72-11cb35dd99ee",
     "name": "Red Dragon",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e85567e8-1102-4d44-a15b-d5f1fdef8465",
@@ -1957,7 +1957,7 @@
   {
     "oracleId": "69e8333a-bddf-49e2-9c39-3dc46fec81e0",
     "name": "Remnant Elemental",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c40bc9f6-2b72-4ae1-b912-50075af59628",
@@ -2622,7 +2622,7 @@
   {
     "oracleId": "b1385b03-cb4b-4812-857f-7421f1df39af",
     "name": "Revitalize",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "8dd6d060-d023-48a6-85cb-7a5521b6257b",
@@ -2742,7 +2742,7 @@
   {
     "oracleId": "d26d1cce-3bcf-48d4-abce-8b12ca7b7432",
     "name": "Rhox Oracle",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "898c8415-8769-48c4-ad16-a4ba8c3d5d7d",
@@ -3227,7 +3227,7 @@
   {
     "oracleId": "7c9d8065-9ab0-4468-a11c-383bd036029f",
     "name": "Ritual of Rejuvenation",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "29e9cf1c-a6bd-4bee-9000-ac1b4e19d6b0",
@@ -3282,7 +3282,7 @@
   {
     "oracleId": "058bbc0a-9c09-4c98-8735-83255a71bbca",
     "name": "River Hoopoe",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "510a6ac5-f098-4145-ac07-771b1b6f7cdf",
@@ -4007,7 +4007,7 @@
   {
     "oracleId": "6c922206-6e68-4dcd-9559-88da1074f2c4",
     "name": "Rugged Highlands",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "8b3cec74-0d32-4762-b3e0-3f4e5eb6f179",
@@ -4017,7 +4017,7 @@
   {
     "oracleId": "8afc00d4-a1c6-4329-af2c-a7f58a0c33e7",
     "name": "Ruin Crab",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e6f379ad-96b1-46c3-bbc6-a8cb57156a7f",
@@ -4097,7 +4097,7 @@
   {
     "oracleId": "7126772a-d586-4859-81ec-46bbe9d1a678",
     "name": "Rumbling Sentry",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "2055eb91-ee36-4752-a6dc-581eaef335c8",

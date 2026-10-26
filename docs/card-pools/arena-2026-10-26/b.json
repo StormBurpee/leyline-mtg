@@ -222,7 +222,7 @@
   {
     "oracleId": "faaf9975-74df-4e9d-be0c-19a446cd507c",
     "name": "Baloth Woodcrasher",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "570cb560-c246-4652-b230-ab34f966c78a",
@@ -517,7 +517,7 @@
   {
     "oracleId": "4f25b125-1ded-4a34-9ed1-e6ce087ec48d",
     "name": "Barrier of Bones",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f98f7cb7-90ca-41e7-9f1d-8054931ecf0e",
@@ -1167,7 +1167,7 @@
   {
     "oracleId": "f2f3be8a-5ea1-47c2-8104-747f4589f5e6",
     "name": "Bellowing Crier",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e1e5ad8c-d425-44ad-a8f6-e9290667f6f5",
@@ -1602,7 +1602,7 @@
   {
     "oracleId": "c3172c5d-c745-4422-b651-cd414c8da11b",
     "name": "Birnin Zana Plaza",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "4f958678-2a32-4a30-8fe7-47df9ada6b2f",
@@ -2312,7 +2312,7 @@
   {
     "oracleId": "64e29bfc-9313-4e8c-808c-bc27f6b018a6",
     "name": "Bloodfell Caves",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fc401d42-80fa-4a17-937a-c230e9317543",
@@ -2477,7 +2477,7 @@
   {
     "oracleId": "8603e2d4-93f3-491a-91e7-a187fc6db599",
     "name": "Bloodrage Brawler",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a465ba74-615a-4261-b4a0-fcb0819f10b3",
@@ -2652,7 +2652,7 @@
   {
     "oracleId": "45429b2c-be3b-4b2e-9bab-a059ccbda8cd",
     "name": "Blossoming Sands",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "5e1bf23b-7fb0-45ff-8544-fce9fa3eba00",
@@ -2727,7 +2727,7 @@
   {
     "oracleId": "551e4356-5b1f-475c-a64b-9c50ea9b0368",
     "name": "Boar-q-pine",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "9caa490e-dc28-4069-9ffb-4b1afd8fdd54",
@@ -2902,7 +2902,7 @@
   {
     "oracleId": "bb8cccc8-e56f-42fa-a0d7-fc889b5e1c7b",
     "name": "Boltwave",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c46a7dc0-88d7-4fbe-8d63-a40688bb5861",
@@ -4292,7 +4292,7 @@
   {
     "oracleId": "f606bd15-b380-447f-b147-72f811266593",
     "name": "Bulwark Giant",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "bcd56fbf-fde3-41c2-83f5-9636e92d2893",
@@ -4447,7 +4447,7 @@
   {
     "oracleId": "1e462ce2-15d3-473c-8f48-9c9363fc65eb",
     "name": "Burning Prophet",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d551fae8-6b40-4118-b9db-29d2f5dff405",

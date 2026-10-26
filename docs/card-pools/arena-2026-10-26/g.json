@@ -72,7 +72,7 @@
   {
     "oracleId": "9204de14-cbb6-40e5-9dcc-44cce3723e8e",
     "name": "Galadhrim Guide",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "d0c0a2ef-27b4-4186-8538-6ba5d35d85bb",
@@ -702,7 +702,7 @@
   {
     "oracleId": "5722a13f-7d70-438c-94ba-97a3f53fbc5c",
     "name": "Generous Stray",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0629747e-8dd8-4150-95ee-9d860264ccb0",
@@ -1647,7 +1647,7 @@
   {
     "oracleId": "ff5ce28b-25be-4136-a7b2-8f25c08a6455",
     "name": "Glider Kids",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "823006a8-098c-457a-8546-77ae2457c459",
@@ -1717,7 +1717,7 @@
   {
     "oracleId": "552f0163-a19d-4671-888f-044fc0354875",
     "name": "Glimpse the Unthinkable",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "2fc07680-3ffb-4507-a1e1-b9580f5ce878",
@@ -3307,7 +3307,7 @@
   {
     "oracleId": "14291205-1ac2-4804-b365-4f65377d5803",
     "name": "Grey Havens Navigator",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0d6b89dc-23fb-48e9-a54b-cea2838ae7c8",
@@ -3952,7 +3952,7 @@
   {
     "oracleId": "c6bdaf76-6a03-4695-9c4b-f040e73435af",
     "name": "Guttersnipe",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "60e7130a-d321-4e50-93a4-999013c76054",
