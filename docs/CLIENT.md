@@ -56,3 +56,16 @@ Customize a starter or build a fresh list. The visual builder has card/rules sea
 Save personal lists locally, export plain-text Arena-style lists, or import main decks. Unsupported cards stay visible in imported drafts, and block playing until removed or supported. Syntax errors and sideboards are rejected rather than silently discarded. Drafts are recoverable from the deck room after a reload. Browser storage is not cloud synchronization; export important lists.
 
 The table uses bounded layout tracks for priority controls, separate art and live-stat overlays, and physical tap rotations. Reduced-motion preferences still apply to all game animations. Deck editing does not change a match already in progress; starting a replacement match requires a separate confirmation.
+
+## Priority policy and Arena reference
+
+The rules engine always retains normal priority. The client chooses when to send a pass, separately from rule resolution.
+
+- **Smart play:** holds on your main phases, meaningful opposing response windows and explicit decisions; skips empty windows and most responses to your own effects.
+- **Full control (F):** no automated priority passes or automated choice shortcuts. Opponent actions still proceed normally.
+- **Phase stops:** click a phase for the current side, or use Stops to select a step on either player's next matching turn. Stops override passing modes and are consumed by a manual pass there. Setting a stop cancels and rechecks the pending timer.
+- **Pass until response (Enter):** yields until a new opposing stack entry, a stop, a required decision or the turn boundary. **Pass turn (Shift+Enter)** also yields through opposing responses, but never silently chooses targets, attacks, blocks or discards. Cancel either mode with its visible Stop control or Escape.
+- **Space:** the contextual next/resolve action. Double-click an untargeted hand card to play it; click a targeted card to enter target selection directly. Dragging onto a legal target still works, and dropping onto the table first can start target selection without paying costs.
+- **Presentation:** the bot and automated passing wait for readable cast/resolution intervals. Manual responses are not replaced by animation outcomes. Reduced motion disables the visual movement, not rules.
+
+Wizards describes Arena as skipping common low-activity windows and adding card-specific smart-priority exceptions; it also documents expanding hands and drag-to-cast interaction. Those inform this client's design, not a claim of Arena parity. Leyline has not implemented every Arena exception or shortcut. Sources: [Wizards smart-priority guide](https://magic.wizards.com/en/news/mtg-arena/announcements-october-27-2025), [Wizards interface overview](https://magic.wizards.com/en/news/mtg-arena/mtg-arena-state-game-january-2021-01-21).

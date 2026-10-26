@@ -1,0 +1,997 @@
+/* Playing surface: cards first, controls at the edge, policy outside the rules engine. */
+.game-layout {
+  position: relative;
+  display: block;
+  height: calc(100dvh - 72px);
+  min-height: 680px;
+  --hand-height: 238px;
+  --dock-height: 92px;
+}
+.game-layout.hand-compact {
+  --hand-height: 172px;
+}
+.game-layout .arena {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows:
+    30px 30px 42px minmax(100px, 1fr) 20px minmax(100px, 1fr) 42px var(--hand-height)
+    var(--dock-height);
+  overflow: hidden;
+}
+.game-layout .arena:has(.replay-banner) {
+  grid-template-rows:
+    34px 28px 26px 38px minmax(90px, 1fr) 18px minmax(90px, 1fr) 38px var(--hand-height)
+    58px;
+}
+.game-layout .arena > * {
+  min-height: 0;
+}
+.game-layout .matchbar {
+  height: 100%;
+  padding: 0 24px;
+}
+.game-layout .phase-track {
+  height: 100%;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  padding: 2px 15px;
+}
+.phase-owner {
+  margin-right: 13px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #8fa28a;
+}
+.phase {
+  position: relative;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid transparent;
+}
+.phase:hover {
+  color: #e2d29c;
+  background: #b8c49c0e;
+}
+.phase.has-stop {
+  border-color: #daac71;
+  color: #f2d19b;
+}
+.phase.has-stop i {
+  width: 5px;
+  height: 5px;
+  display: block;
+  border-radius: 50%;
+  background: #f6bb75;
+  box-shadow: 0 0 6px #ecbd7377;
+}
+.phase-stop-menu {
+  font-size: 9px;
+  color: #a6b69a;
+  margin-left: 8px;
+  padding: 4px 8px;
+}
+.game-layout .player-band {
+  height: 100%;
+  padding: 4px 0;
+  margin: 0 28px;
+  position: relative;
+  border-radius: 10px;
+  transition:
+    box-shadow 170ms,
+    background 170ms;
+}
+.game-layout .player-name {
+  min-width: 125px;
+}
+.game-layout .life {
+  font-size: 34px;
+  min-width: 48px;
+}
+.game-layout .field {
+  padding: 5px 28px;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 24px;
+  container-type: size;
+  min-height: 0;
+  scrollbar-width: thin;
+}
+.game-layout .lands {
+  padding: 3px;
+  display: flex;
+  gap: 5px;
+  align-content: center;
+  overflow: auto;
+  max-height: none;
+}
+.game-layout .land-card {
+  width: 37px;
+  height: 51px;
+}
+.game-layout .permanents {
+  height: 100%;
+  min-height: 0;
+  padding: 5px 18px;
+  align-items: center;
+  justify-content: safe center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 15px;
+}
+.game-layout .permanent {
+  width: clamp(
+    68px,
+    min(
+      calc((100cqw - 190px - (var(--permanent-count) - 1) * 15px) / var(--permanent-count)),
+      calc((100cqh - 12px) * 0.713)
+    ),
+    115px
+  );
+  height: auto;
+  aspect-ratio: 92/129;
+}
+.game-layout:has(.stack-visible) .permanents {
+  padding-right: 245px;
+}
+.game-layout .permanent-name {
+  font-size: 9px;
+}
+.game-layout .permanent-footer {
+  font-size: 8px;
+}
+.game-layout .permanent-footer .pt {
+  font-size: 14px;
+}
+.game-layout .hand-area {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  padding: 4px 28px 7px;
+  background: linear-gradient(0deg, #07150ce0, #10241960 70%, transparent);
+  z-index: 4;
+  overflow: visible;
+}
+.game-layout .hand-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 23px;
+  margin: 0;
+  font-size: 9px;
+  letter-spacing: 0.8px;
+}
+.hand-label > button {
+  color: #c9b785;
+  font-size: 9px;
+  padding: 3px 9px;
+  border: 1px solid #b8c49c22;
+  border-radius: 5px;
+  letter-spacing: 0;
+}
+.hand-label > span:last-child {
+  margin-left: auto;
+  letter-spacing: 0;
+  color: #a7b49a;
+}
+.game-layout .hand {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: calc(100% - 23px);
+  min-height: 0;
+  padding: 5px 24px 0;
+  overflow: visible;
+  gap: 0;
+}
+.game-layout .hand-card {
+  height: calc(var(--hand-height) - 38px);
+  width: auto;
+  aspect-ratio: 488/680;
+  max-width: none;
+  margin: 0 -9px;
+  border: 1px solid #b8bda678;
+  border-radius: 9px;
+  overflow: visible;
+  box-shadow: 0 8px 18px #000c;
+  transform: translateY(calc(var(--fan) * var(--fan) * 0.8px)) rotate(calc(var(--fan) * 1.1deg));
+}
+.game-layout .hand-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.game-layout .hand-card::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 -32px;
+  z-index: -1;
+}
+.game-layout .hand-card:hover,
+.game-layout .hand-card:focus-visible {
+  transform: translateY(-27px) scale(1.12) rotate(0);
+  z-index: 50;
+  box-shadow:
+    0 12px 36px #000d,
+    0 0 0 2px #e8d8aa99;
+}
+.game-layout .hand-card.selected {
+  transform: translateY(-22px) rotate(0);
+  z-index: 40;
+  outline: 2px solid #e8d294;
+  outline-offset: 3px;
+}
+.game-layout .hand-card.playable {
+  border-color: #9adbe1;
+  box-shadow:
+    0 0 0 1px #a1dbe76b,
+    0 0 17px #70c7dc16,
+    0 8px 18px #000a;
+}
+.game-layout .hand.wide-hand {
+  justify-content: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 14px 18px 0;
+  scrollbar-width: thin;
+}
+.game-layout .hand.wide-hand .hand-card {
+  flex-shrink: 0;
+  margin: 0 3px;
+}
+.game-layout .action-dock {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: 1fr 26px;
+  gap: 0 20px;
+  height: 100%;
+  min-height: 0;
+  padding: 8px 24px 3px;
+  background: #0d1913f5;
+  border-top: 1px solid #cbd9ad2a;
+  z-index: 8;
+  box-shadow: 0 -8px 30px #0002;
+}
+.action-copy {
+  align-self: center;
+}
+.action-copy strong {
+  font-size: 14px;
+}
+.action-copy p {
+  font-size: 11px;
+  line-height: 1.45;
+  margin-top: 4px;
+}
+.action-buttons {
+  align-self: center;
+}
+.advance-button {
+  min-width: 185px;
+  justify-content: space-between;
+  gap: 13px;
+  position: relative;
+}
+.advance-button small {
+  font-size: 8px;
+  opacity: 0.65;
+  border: 1px solid #3b362c33;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+.priority-controls {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px solid #c6d2b310;
+  margin-top: 3px;
+}
+.priority-controls button {
+  font-size: 9px;
+  color: #99ac90;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.priority-controls button:hover {
+  color: #e8d9b3;
+  background: #ffffff08;
+}
+.priority-controls button[aria-pressed='true'] {
+  color: #efc787;
+  background: #dbba6420;
+}
+.priority-controls button:last-child {
+  margin-left: auto;
+  font-size: 13px;
+}
+.priority-controls .yield-active {
+  color: #efcc8b;
+  background: #e7bd5919;
+}
+.priority-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px 0;
+}
+.priority-settings label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+.stop-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+.stop-columns section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.stop-columns h3 {
+  color: #d9c38e;
+  margin-bottom: 8px;
+}
+.stop-columns .btn {
+  justify-content: flex-start;
+  min-height: 30px;
+  font-size: 11px;
+}
+.stop-columns .stop-on {
+  border-color: #ddae70;
+  color: #f3d6a3;
+  background: #c6a66819;
+}
+/* A visible stack rather than a permanent empty inspector taking the table's width. */
+.game-layout .inspector {
+  position: absolute;
+  right: 18px;
+  top: 140px;
+  width: 220px;
+  height: auto;
+  max-height: calc(100% - var(--hand-height) - 170px);
+  display: none;
+  z-index: 6;
+  background: #14231aef;
+  border: 1px solid #ccdab533;
+  border-radius: 12px;
+  box-shadow: 0 12px 35px #0007;
+  backdrop-filter: blur(18px);
+  overflow: auto;
+}
+.game-layout .inspector.stack-visible,
+.game-layout .inspector.log-visible,
+.game-layout .inspector.open {
+  display: flex;
+}
+.game-layout .inspect-head,
+.game-layout #inspect-detail {
+  display: none;
+}
+.game-layout .inspector.open #inspect-detail {
+  display: block;
+}
+.game-layout .inspector.open .inspect-head {
+  display: flex;
+}
+.game-layout .side-tabs {
+  margin: 0;
+  padding: 0 12px;
+  min-height: 35px;
+  flex-shrink: 0;
+}
+.game-layout .side-tabs button {
+  font-size: 10px;
+  padding: 9px 0;
+}
+.game-layout .side-content {
+  min-height: 0;
+  overflow: auto;
+  padding: 7px 10px;
+  max-height: 340px;
+}
+.game-layout .stack-item {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 4px 9px;
+  padding: 9px;
+  width: 100%;
+  border: 1px solid #d1d9b527;
+  min-height: 87px;
+  background: #233223c9;
+}
+.stack-card-art {
+  grid-column: 1;
+  grid-row: 1/4;
+  width: 48px;
+  height: 67px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px #0007;
+}
+.game-layout .stack-item small,
+.game-layout .stack-item strong,
+.game-layout .stack-item p {
+  grid-column: 2;
+}
+.game-layout .stack-item small {
+  font-size: 7px;
+  letter-spacing: 0.5px;
+}
+.game-layout .stack-item strong {
+  font:
+    17px 'Newsreader',
+    Georgia,
+    serif;
+  line-height: 1.1;
+}
+.game-layout .stack-item p {
+  font-size: 9px;
+  line-height: 1.4;
+  margin: 0;
+}
+.game-layout .stack-item:first-child {
+  border-color: #d5c38b88;
+  box-shadow: 0 0 15px #d5c38b0b;
+}
+/* Readability lives next to the card being inspected, not at the far edge. */
+#card-preview {
+  position: fixed;
+  z-index: 12000;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(7px) scale(0.97);
+  transform-origin: bottom center;
+  transition:
+    opacity 90ms,
+    transform 130ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: drop-shadow(0 16px 26px #000b);
+}
+#card-preview.visible {
+  opacity: 1;
+  transform: none;
+}
+#card-preview > img {
+  display: block;
+  width: 100%;
+  max-height: 370px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+.preview-caption {
+  padding: 9px 12px;
+  margin-top: 7px;
+  border: 1px solid #d3dabb44;
+  border-radius: 8px;
+  background: #15271cf5;
+  color: #ecdfb9;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.preview-fallback {
+  background: #1b3022;
+  border: 1px solid #c8d4aa;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 300px;
+}
+.preview-fallback h3 {
+  font:
+    26px 'Newsreader',
+    Georgia,
+    serif;
+  margin-bottom: 20px;
+}
+.preview-fallback p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.payment-preview {
+  outline: 2px solid #ead185 !important;
+  outline-offset: 3px;
+  box-shadow: 0 0 18px #f0d26b55 !important;
+}
+.targeting-mode .hand-card:not(.selected) {
+  opacity: 0.35;
+  filter: saturate(0.4);
+}
+.targeting-mode .permanent:not(.targetable) {
+  opacity: 0.48;
+}
+.game-layout .permanent.targetable,
+.game-layout .life.targetable {
+  outline: 2px solid #79d9eb;
+  outline-offset: 4px;
+  box-shadow: 0 0 24px #65cce240;
+  cursor: crosshair;
+}
+.game-layout .player-band.targetable-player {
+  cursor: crosshair;
+  background: #63cfe20b;
+  box-shadow:
+    inset 0 0 0 1px #74d5e644,
+    0 0 16px #5acde511;
+}
+.game-layout .player-band.targetable-player:hover {
+  background: #63cfe218;
+  box-shadow: inset 0 0 0 2px #8ce7f0aa;
+}
+.game-layout .permanent.targetable:hover {
+  transform: translateY(-5px) scale(1.09);
+  outline-color: #c9fbff;
+}
+.target-message {
+  position: absolute;
+  bottom: calc(var(--dock-height) + 25px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: min(640px, calc(100% - 40px));
+  padding: 15px 20px 15px 115px;
+  min-height: 104px;
+  border: 1px solid #87d1d874;
+  background: #112b28f2;
+  box-shadow:
+    0 12px 40px #0009,
+    0 0 30px #74d6e010;
+  border-radius: 14px;
+  pointer-events: none;
+}
+.target-message > div:not(.pending-card) {
+  flex: 1;
+}
+.target-message span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #9ae2e9;
+  display: block;
+  margin-bottom: 7px;
+}
+.target-message strong {
+  font:
+    27px 'Newsreader',
+    Georgia,
+    serif;
+  color: #fff0cf;
+}
+.target-message p {
+  font-size: 10px;
+  color: #accbc0;
+  margin-top: 7px;
+}
+.target-message > .btn {
+  pointer-events: auto;
+  min-height: 34px;
+  font-size: 11px;
+}
+.target-message small {
+  margin-left: 8px;
+  opacity: 0.6;
+}
+.pending-card {
+  position: absolute;
+  left: 18px;
+  bottom: 10px;
+  width: 78px;
+  transform: rotate(-5deg);
+  filter: drop-shadow(0 7px 12px #0009);
+}
+.pending-card img {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+}
+.click-target-tether {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10010;
+  display: none;
+  overflow: visible;
+}
+.click-target-tether.visible {
+  display: block;
+}
+.click-target-tether path {
+  fill: none;
+  stroke: #9be7f2;
+  stroke-width: 3;
+  stroke-dasharray: 6 7;
+  filter: drop-shadow(0 0 4px #69c8e7);
+  animation: target-flow 0.7s linear infinite;
+}
+.click-target-tether circle {
+  fill: #d5fcff;
+  stroke: #63bfd9;
+  stroke-width: 2;
+}
+@keyframes target-flow {
+  to {
+    stroke-dashoffset: -26;
+  }
+}
+@media (min-width: 1500px) {
+  .game-layout {
+    --hand-height: 265px;
+  }
+  .game-layout .permanent {
+    max-width: 125px;
+  }
+  .game-layout .hand-card {
+    margin: 0 -7px;
+  }
+}
+@media (max-height: 800px) and (min-width: 801px) {
+  .game-layout {
+    height: calc(100dvh - 58px);
+    min-height: 650px;
+    --hand-height: 218px;
+    --dock-height: 88px;
+  }
+  .game-layout.hand-compact {
+    --hand-height: 158px;
+  }
+  .game-layout .arena {
+    grid-template-rows:
+      26px 26px 38px minmax(94px, 1fr) 18px minmax(94px, 1fr) 38px var(--hand-height)
+      var(--dock-height);
+  }
+  .game-layout .arena:has(.replay-banner) {
+    grid-template-rows:
+      30px 24px 24px 36px minmax(82px, 1fr) 18px minmax(82px, 1fr) 36px var(--hand-height)
+      52px;
+  }
+  .game-layout .field {
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 16px;
+  }
+  .game-layout .land-card {
+    width: 30px;
+    height: 41px;
+  }
+  .game-layout .player-band .avatar {
+    width: 27px;
+    height: 27px;
+  }
+  .game-layout .inspector {
+    top: 122px;
+  }
+  .game-layout .hand-card {
+    height: calc(var(--hand-height) - 36px);
+  }
+}
+@media (max-width: 1000px) and (min-width: 801px) {
+  .game-layout .hand-card {
+    margin: 0 -15px;
+  }
+  .game-layout .permanent-name {
+    font-size: 8px;
+  }
+  .game-layout .inspector {
+    width: 200px;
+    right: 12px;
+  }
+  .game-layout:has(.stack-visible) .permanents {
+    padding-right: 205px;
+  }
+}
+@media (max-width: 800px) {
+  .game-layout {
+    height: auto;
+    min-height: calc(100dvh - 62px);
+    --hand-height: 205px;
+    --dock-height: 100px;
+  }
+  .game-layout .arena {
+    min-height: calc(100dvh - 62px);
+    height: auto;
+    grid-template-rows:
+      30px 30px 42px minmax(135px, 1fr) 20px minmax(135px, 1fr) 42px var(--hand-height)
+      var(--dock-height);
+  }
+  .game-layout .arena:has(.replay-banner) {
+    grid-template-rows:
+      36px 30px 30px 42px minmax(125px, 1fr) 20px minmax(125px, 1fr) 42px var(--hand-height)
+      60px;
+  }
+  .game-layout .hand-card {
+    margin: 0 -15px;
+  }
+  .game-layout .field {
+    grid-template-columns: 75px minmax(0, 1fr);
+    gap: 10px;
+    padding: 5px 14px;
+  }
+  .game-layout .land-card {
+    width: 30px;
+    height: 42px;
+  }
+  .game-layout .player-band {
+    margin: 0 14px;
+  }
+  .game-layout .phase-owner {
+    display: none;
+  }
+  .game-layout .phase {
+    font-size: 7px;
+    padding: 4px 7px;
+  }
+  .game-layout .phase-stop-menu {
+    font-size: 8px;
+    margin-left: 0;
+  }
+  .game-layout .hand-area {
+    padding: 3px 14px 5px;
+  }
+  .hand-label > span:last-child {
+    font-size: 8px;
+  }
+  .game-layout .inspector {
+    position: absolute;
+    right: 10px;
+    top: 148px;
+    width: 190px;
+    max-height: 330px;
+  }
+  .game-layout:has(.stack-visible) .permanents {
+    padding-right: 190px;
+  }
+  .game-layout .action-dock {
+    padding: 8px 15px 3px;
+    gap: 0 10px;
+  }
+  .action-copy strong {
+    font-size: 12px;
+  }
+  .action-copy p {
+    font-size: 10px;
+  }
+  .advance-button {
+    min-width: 155px;
+  }
+  .priority-controls button {
+    font-size: 9px;
+    padding: 4px 7px;
+  }
+  .target-message {
+    padding-left: 92px;
+    gap: 10px;
+    bottom: calc(var(--dock-height) + 24px);
+  }
+  .pending-card {
+    width: 65px;
+    left: 12px;
+  }
+  .target-message strong {
+    font-size: 24px;
+  }
+  .target-message p {
+    font-size: 9px;
+  }
+  .game-layout .hand-compact {
+    --hand-height: 160px;
+  }
+}
+@media (max-width: 560px) {
+  .game-layout {
+    --hand-height: 182px;
+    --dock-height: 110px;
+  }
+  .game-layout.hand-compact {
+    --hand-height: 145px;
+  }
+  .game-layout .hand-card {
+    margin: 0 -21px;
+    height: calc(var(--hand-height) - 34px);
+  }
+  .game-layout .hand {
+    padding: 5px 10px 0;
+  }
+  .hand-label > span:last-child {
+    display: none;
+  }
+  .game-layout .action-dock {
+    grid-template-rows: 1fr 29px;
+  }
+  .action-copy p {
+    font-size: 9px;
+  }
+  .action-buttons .btn {
+    font-size: 10px;
+    padding: 9px 11px;
+  }
+  .advance-button {
+    min-width: 130px;
+  }
+  .advance-button small {
+    display: none;
+  }
+  .priority-controls {
+    gap: 1px;
+  }
+  .priority-controls button {
+    font-size: 8px;
+    padding: 4px 5px;
+  }
+  .game-layout .player-name {
+    min-width: 100px;
+  }
+  .game-layout .permanent-name {
+    font-size: 7px;
+  }
+  .game-layout .phase {
+    font-size: 6px;
+    padding: 4px 5px;
+    letter-spacing: 0;
+  }
+  .phase-track {
+    gap: 2px !important;
+  }
+  .game-layout .inspector {
+    width: 172px;
+    right: 8px;
+  }
+  .game-layout:has(.stack-visible) .permanents {
+    padding-right: 150px;
+  }
+  .stack-card-art {
+    width: 36px;
+    height: 50px;
+  }
+  .game-layout .stack-item {
+    grid-template-columns: 36px minmax(0, 1fr);
+    min-height: 68px;
+    padding: 6px;
+    gap: 3px 6px;
+  }
+  .game-layout .stack-item strong {
+    font-size: 14px;
+  }
+  .game-layout .stack-item p {
+    font-size: 8px;
+  }
+  .target-message {
+    min-height: 90px;
+    padding: 12px 12px 12px 75px;
+  }
+  .pending-card {
+    width: 54px;
+    bottom: 14px;
+  }
+  .target-message strong {
+    font-size: 20px;
+  }
+  .target-message p {
+    display: none;
+  }
+  .target-message .btn {
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+  .target-message small {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #card-preview,
+  .click-target-tether path {
+    transition: none;
+    animation: none;
+  }
+}
+html[data-motion='reduced'] .click-target-tether path {
+  animation: none;
+}
+.game-layout .field .permanents .permanent {
+  flex: 0 0 auto;
+  min-width: 0;
+  min-height: 0;
+  width: clamp(
+    62px,
+    min(
+      calc((100cqw - 190px - (var(--permanent-count) - 1) * 15px) / var(--permanent-count)),
+      calc((100cqh - 16px) * 0.713)
+    ),
+    115px
+  );
+  height: auto;
+  aspect-ratio: 92/129;
+}
+.stack-target-tether,
+.resolution-ray {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10005;
+  overflow: visible;
+}
+.stack-target-tether {
+  display: none;
+}
+.stack-target-tether.visible {
+  display: block;
+}
+.stack-target-tether path {
+  fill: none;
+  stroke: #d5bf85aa;
+  stroke-width: 2;
+  stroke-dasharray: 4 6;
+}
+.stack-target-tether circle {
+  fill: #ecd6a5;
+  stroke: #947b48;
+  stroke-width: 2;
+}
+.stack-target-tether.opposing path {
+  stroke: #e79f85cc;
+}
+.stack-target-tether.opposing circle {
+  fill: #efb29b;
+  stroke: #a3644c;
+}
+.resolution-ray path {
+  fill: none;
+  stroke: #f3c58a;
+  stroke-width: 5;
+  filter: drop-shadow(0 0 7px #e3784d);
+  stroke-linecap: round;
+}
+.image-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 7px;
+  background: linear-gradient(145deg, #344a33, #17281c);
+  overflow: hidden;
+  text-align: left;
+}
+.image-fallback strong {
+  font:
+    19px 'Newsreader',
+    Georgia,
+    serif;
+  color: #f3e4bd;
+}
+.image-fallback p {
+  font-size: 10px;
+  line-height: 1.5;
+}
+.image-fallback small {
+  margin-top: auto;
+  font-size: 8px;
+  color: #a6b99c;
+}
+.permanent .image-fallback {
+  inset: 0 0 44px;
+  padding: 7px;
+}
+.permanent .image-fallback strong {
+  font-size: 13px;
+}
+.permanent .image-fallback p,
+.permanent .image-fallback small,
+.permanent .image-fallback .mana-row {
+  display: none;
+}

@@ -20,7 +20,8 @@ export function installCardDrag(root, { begin, commit, end, feedback }) {
     if (g.lifted) {
       suppressClickUntil = performance.now() + 350;
       const destination = accepted
-        ? root.querySelector(`[data-motion-card="${CSS.escape(g.id)}"]`)
+        ? (root.querySelector(`[data-pending-card="${CSS.escape(g.id)}"]`) ??
+          root.querySelector(`[data-motion-card="${CSS.escape(g.id)}"]`))
         : root.querySelector(`[data-card="${CSS.escape(g.id)}"]`);
       const rect = destination?.getBoundingClientRect() ?? g.rect;
       const current = g.ghost.getBoundingClientRect();

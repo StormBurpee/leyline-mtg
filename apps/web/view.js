@@ -1,3 +1,4 @@
+import { advanceLabel, stopKey } from './priority-policy.js';
 import {
   CARDS,
   DECKS,
@@ -91,7 +92,7 @@ const fallback = (name, d = CARDS[name]) =>
 export function handCard(s, id, meta, ui, playable, index = 0) {
   const o = s.objects[id],
     d = definition(s, o);
-  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="hand" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${playable ? ', playable' : ''}" title="${escape(o.name)}">${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
+  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="hand" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${playable ? ', playable' : ''}" aria-description="${escape(d.text)}" title="${escape(o.name)}">${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
 }
 function permanent(s, o, meta, ui, targetable) {
   const d = definition(s, o),
@@ -141,7 +142,7 @@ export function game(s, ui, meta) {
         ? 'end'
         : 'combat';
   const band = (p, bottom = false) =>
-    `<div class="player-band ${bottom ? 'bottom' : ''}"><div class="avatar">${p === 0 ? 'S' : 'G'}</div><div class="player-name">${escape(s.players[p].name)}<small>${s.active === p ? 'ACTIVE PLAYER' : 'DEFENDING PLAYER'}${s.priority === p && !s.choice ? ' · PRIORITY' : ''}</small></div><button class="life ${targetList.some((t) => t.kind === 'player' && t.id === p) ? 'targetable' : ''}" data-player="${p}" aria-label="${escape(s.players[p].name)} life ${s.players[p].life}">${s.players[p].life}</button><div class="pool">${
+    `<div class="player-band ${bottom ? 'bottom' : ''} ${targetList.some((t) => t.kind === 'player' && t.id === p) ? 'targetable-player' : ''}" data-player="${p}"><div class="avatar">${p === 0 ? 'S' : 'G'}</div><div class="player-name">${escape(s.players[p].name)}<small>${s.active === p ? 'ACTIVE PLAYER' : 'DEFENDING PLAYER'}${s.priority === p && !s.choice ? ' · PRIORITY' : ''}</small></div><button class="life ${targetList.some((t) => t.kind === 'player' && t.id === p) ? 'targetable' : ''}" data-player="${p}" aria-label="${escape(s.players[p].name)} life ${s.players[p].life}">${s.players[p].life}</button><div class="pool">${
       Object.entries(s.players[p].mana)
         .filter(([, n]) => n)
         .map(([c, n]) => `${mana({ [c]: 1 })}${n}`)
@@ -175,7 +176,7 @@ export function game(s, ui, meta) {
       '<div class="empty-field"><span class="rune">◇</span><span>Battlefield</span></div>'
     }</div></section>`;
   };
-  return `<main class="game-layout"><section class="arena">${ui.replayRecord ? `<div class="replay-banner"><span class="grow">Replay · ${ui.replayIndex}/${ui.replayRecord.commands.length} commands</span><input id="replay-position" type="range" min="0" max="${ui.replayRecord.commands.length}" value="${ui.replayIndex}" aria-label="Replay position"><button data-action="replayBack">←</button><button data-action="replayNext">Next →</button><button data-action="replaySeat" aria-label="Switch replay viewpoint">Side ${ui.seat + 1}</button><button data-action="takeoverReplay" ${s.status === 'finished' ? 'disabled' : ''}>Continue</button><button data-action="exitReplay">Exit replay</button></div>` : ''}<div class="matchbar"><span class="live-dot"></span><span>${ui.mode === 'bot' ? 'PRACTICE' : 'LOCAL TWO-PLAYER'}</span><span class="muted">/</span><span>Turn ${s.turn}</span><div class="right"><button class="btn small quiet" data-action="settings">Options</button><button class="icon-btn mobile-inspector-toggle" data-action="inspector" aria-label="Toggle inspector">◇</button><button class="icon-btn" data-action="matchMenu" aria-label="Match menu">⋯</button></div></div><div class="phase-track">${[
+  return `<main class="game-layout ${ui.handExpanded ? 'hand-expanded' : 'hand-compact'} ${ui.targeting || s.choice?.kind === 'triggerTarget' ? 'targeting-mode' : ''}"><section class="arena">${ui.replayRecord ? `<div class="replay-banner"><span class="grow">Replay · ${ui.replayIndex}/${ui.replayRecord.commands.length} commands</span><input id="replay-position" type="range" min="0" max="${ui.replayRecord.commands.length}" value="${ui.replayIndex}" aria-label="Replay position"><button data-action="replayBack">←</button><button data-action="replayNext">Next →</button><button data-action="replaySeat" aria-label="Switch replay viewpoint">Side ${ui.seat + 1}</button><button data-action="takeoverReplay" ${s.status === 'finished' ? 'disabled' : ''}>Continue</button><button data-action="exitReplay">Exit replay</button></div>` : ''}<div class="matchbar"><span class="live-dot"></span><span>${ui.mode === 'bot' ? 'PRACTICE' : 'LOCAL TWO-PLAYER'}</span><span class="muted">/</span><span>Turn ${s.turn}</span><div class="right"><button class="btn small quiet" data-action="sideTab" data-tab="log">History</button><button class="btn small quiet" data-action="settings">Options</button><button class="icon-btn mobile-inspector-toggle" data-action="inspector" aria-label="Toggle inspector">◇</button><button class="icon-btn" data-action="matchMenu" aria-label="Match menu">⋯</button></div></div><div class="phase-track"><span class="phase-owner">${s.active === viewer ? 'Your turn' : 'Opponent turn'}</span>${[
     ['upkeep', 'Upkeep'],
     ['draw', 'Draw'],
     ['main', 'Main'],
@@ -185,15 +186,28 @@ export function game(s, ui, meta) {
   ]
     .map(
       ([id, label]) =>
-        `<span class="phase ${(id === phase && !(phase === 'main' && s.step === 'main2')) || id === s.step ? 'active' : ''}">${label}</span>`,
+        `<button data-action="toggleStop" data-stop="${stopKey(s, viewer, id === 'main' ? 'main1' : id === 'combat' ? 'beginCombat' : id)}" aria-label="Stop on ${s.active === viewer ? 'your' : 'opponent'} ${label}" aria-pressed="${!!ui.stops?.[stopKey(s, viewer, id === 'main' ? 'main1' : id === 'combat' ? 'beginCombat' : id)]}" class="phase ${(id === phase && !(phase === 'main' && s.step === 'main2')) || id === s.step ? 'active' : ''} ${ui.stops?.[stopKey(s, viewer, id === 'main' ? 'main1' : id === 'combat' ? 'beginCombat' : id)] ? 'has-stop' : ''}">${label}<i></i></button>`,
     )
     .join(
       '',
-    )}</div>${band(other)}${field(other)}<div class="attack-line">${s.combat.attackers.length ? `${s.combat.attackers.length} attacking · ${stepName[s.step]}` : s.status === 'mulligan' ? 'Opening hands' : stepName[s.step]}</div>${field(viewer)}${band(viewer, true)}<section class="hand-area"><div class="hand-label"><span>Your hand · ${s.players[viewer].hand.length}</span><span>${ui.targeting ? 'Choose a highlighted target' : ui.mode === 'hotseat' ? `Seat ${viewer + 1} · shared screen` : 'Drag to play · click to inspect'}</span></div><div class="hand" data-scroll-key="hand-${viewer}">${s.players[viewer].hand.map((id, index) => handCard(s, id, meta, ui, playable.has(id), index)).join('')}</div></section>${actionDock(s, ui, viewer, actions)}${s.status === 'finished' ? `<div class="board-notice game-over"><div class="eyebrow">Match complete</div><h2>${s.winner === null ? 'A shared ending.' : s.winner === viewer ? 'Well played.' : 'A lesson in every game.'}</h2><p>${s.winner === null ? 'The game is a draw.' : `${escape(s.players[s.winner].name)} wins.`}</p><button class="btn primary" data-action="newMatch">Play again ↗</button></div>` : ''}</section><aside class="inspector ${ui.inspectorOpen ? 'open' : ''}"><div class="inspect-head"><span>Card inspector</span><button class="mobile-inspector-toggle" data-action="inspector" aria-label="Close inspector">×</button><span>◇</span></div><div id="inspect-detail">${inspect(ui.inspect ?? selected?.name, meta, s, ui.inspectObject)}</div><div class="side-tabs"><button data-action="sideTab" data-tab="stack" class="${ui.sideTab === 'stack' ? 'active' : ''}">Stack <span class="stack-count">${s.stack.length}</span></button><button data-action="sideTab" data-tab="log" class="${ui.sideTab === 'log' ? 'active' : ''}">Game log</button></div><div class="side-content" data-scroll-key="sidebar-${ui.sideTab}">${ui.sideTab === 'stack' ? stack(s, ui) : log(s)}</div></aside></main>`;
+    )}<button class="phase-stop-menu" data-action="phaseStops" aria-label="Set phase stops">Stops ⋯</button></div>${band(other)}${field(other)}<div class="attack-line">${s.combat.attackers.length ? `${s.combat.attackers.length} attacking · ${stepName[s.step]}` : s.status === 'mulligan' ? 'Opening hands' : stepName[s.step]}</div>${field(viewer)}${band(viewer, true)}<section class="hand-area"><div class="hand-label"><span>Your hand · ${s.players[viewer].hand.length}</span><button data-action="handSize">${ui.handExpanded ? 'Compact hand' : 'Expand hand'}</button><span>${ui.targeting ? 'Choose a highlighted target' : ui.mode === 'hotseat' ? `Seat ${viewer + 1} · shared screen` : 'Drag or double-click to play · hover to read'}</span></div><div class="hand ${s.players[viewer].hand.length > 10 ? 'wide-hand' : ''}" data-scroll-key="hand-${viewer}">${s.players[viewer].hand.map((id, index) => handCard(s, id, meta, ui, playable.has(id), index)).join('')}</div></section>${targetPrompt(s, ui, meta)}${actionDock(s, ui, viewer, actions)}${s.status === 'finished' ? `<div class="board-notice game-over"><div class="eyebrow">Match complete</div><h2>${s.winner === null ? 'A shared ending.' : s.winner === viewer ? 'Well played.' : 'A lesson in every game.'}</h2><p>${s.winner === null ? 'The game is a draw.' : `${escape(s.players[s.winner].name)} wins.`}</p><button class="btn primary" data-action="newMatch">Play again ↗</button></div>` : ''}</section><aside class="inspector ${ui.inspectorOpen ? 'open' : ''} ${s.stack.length || s.resolving ? 'stack-visible' : ''} ${ui.sideTab === 'log' ? 'log-visible' : ''}"><div class="inspect-head"><span>Card inspector</span><button class="mobile-inspector-toggle" data-action="inspector" aria-label="Close inspector">×</button><span>◇</span></div><div id="inspect-detail">${inspect(ui.inspect ?? selected?.name, meta, s, ui.inspectObject)}</div><div class="side-tabs"><button data-action="sideTab" data-tab="stack" class="${ui.sideTab === 'stack' ? 'active' : ''}">Stack <span class="stack-count">${s.stack.length}</span></button><button data-action="sideTab" data-tab="log" class="${ui.sideTab === 'log' ? 'active' : ''}">Game log</button></div><div class="side-content" data-scroll-key="sidebar-${ui.sideTab}">${ui.sideTab === 'stack' ? stack(s, ui, meta) : log(s)}</div></aside></main>`;
+}
+function targetPrompt(s, ui, meta) {
+  const choice = s.choice?.kind === 'triggerTarget' ? s.choice : null;
+  if (!ui.targeting && !choice) return '';
+  const name = choice?.entry.name ?? s.objects[ui.selected]?.name,
+    id = choice?.entry.source.id ?? ui.selected;
+  return `<div class="target-message"><div class="pending-card" data-pending-card="${escape(id)}">${meta[name]?.image ? `<img src="${escape(meta[name].image)}" alt="${escape(name)}">` : ''}</div><div><span>CHOOSE A TARGET</span><strong>${escape(name)}</strong><p>Click a glowing target. The dotted line follows your cursor.</p></div>${choice ? '' : `<button class="btn" data-action="cancelSelection">Cancel <small>Esc</small></button>`}</div>`;
 }
 function actionDock(s, ui, p, actions) {
-  let title = 'Your priority',
-    desc = 'Play a card, activate a mana ability, or pass.',
+  let title = s.stack.length
+      ? 'Your response'
+      : s.active === p
+        ? stepName[s.step]
+        : 'Opponent’s turn',
+    desc = s.stack.length
+      ? `${s.stack.at(-1).name} is on the stack. Respond, or let it resolve.`
+      : 'Drag or double-click a playable card. Hover to read it.',
     buttons = '';
   const c = s.choice;
   if (ui.replayRecord)
@@ -292,8 +306,9 @@ function actionDock(s, ui, p, actions) {
           : 'Available mana sources will be tapped automatically.'
       : 'Not playable right now. Check timing, available mana and targets.';
     buttons = `<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${d.type === 'land' ? 'Play land' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
-  } else buttons = '<button class="btn primary" data-action="pass">Pass priority →</button>';
-  return `<div class="action-dock" aria-live="polite"><div class="action-copy"><strong>${escape(title)}</strong><p>${escape(desc)}</p></div><div class="action-buttons">${buttons}</div></div>`;
+  } else
+    buttons = `<button class="btn primary advance-button" data-action="pass">${advanceLabel(s, p)} <span>→</span><small>Space</small></button>`;
+  return `<div class="action-dock" aria-live="polite"><div class="action-copy"><strong>${escape(title)}</strong><p>${escape(desc)}</p></div><div class="action-buttons">${buttons}</div>${ui.mode === 'bot' && s.status === 'playing' ? `<div class="priority-controls"><button data-action="toggleFullControl" aria-pressed="${ui.controlMode === 'full'}" title="Full control: stop at every priority window (F)">${ui.controlMode === 'full' ? '● Full control' : '○ Smart play'}</button>${ui.yieldMode ? `<button class="yield-active" data-action="cancelYield">Auto-passing · Stop ×</button>` : `<button data-action="yieldResponse" title="Pass until an opponent puts a new effect on the stack (Enter)">Pass until response</button><button data-action="yieldTurn" title="Pass through this turn, including responses (Shift+Enter)">Pass turn</button>`}<button data-action="prioritySettings" aria-label="Priority automation settings">⚙</button></div>` : ''}</div>`;
 }
 export function inspect(name, meta, state = null, objectId = null) {
   if (!name || !(state?.catalog?.[name] ?? CARDS[name]))
@@ -302,7 +317,7 @@ export function inspect(name, meta, state = null, objectId = null) {
     m = meta[name];
   return `<div class="inspect-card">${m?.image ? `<img src="${escape(m.image)}" alt="${escape(name)}">` : `<div class="inspect-placeholder"><div><span>◇</span>${escape(name)}</div></div>`}</div><div class="inspect-copy"><h3>${escape(name)}</h3><div class="type">${escape(m?.type_line ?? d.type)}</div><div class="rules">${escape(m?.oracle_text ?? d.text)}</div>${state && state.objects[objectId]?.zone === 'battlefield' ? liveCharacteristics(state, state.objects[objectId]) : ''}<div class="artist">${m?.artist ? `Illustration: ${escape(m.artist)} · ` : ''}Supported executable definition${d.token ? ' · Token' : ''}</div></div>`;
 }
-function stack(s, ui) {
+function stack(s, ui, meta = {}) {
   const resolving = s.resolving
     ? `<div class="stack-item resolving"><small>RESOLVING · ${escape(s.players[s.resolving.entry.controller].name)}</small><strong>${escape(s.resolving.entry.name)}</strong><p>Waiting for a choice. Priority is not available.</p></div>`
     : '';
@@ -314,7 +329,7 @@ function stack(s, ui) {
           .reverse()
           .map(
             (e, i) =>
-              `<button class="stack-item" data-stack="${e.id}" ${e.kind === 'spell' ? `data-motion-card="${e.source.id}" data-motion-zone="stack"` : ''}><small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape([e.kind === 'ability' ? e.label : !e.target ? 'Spell' : '', e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : ''].filter(Boolean).join(' · '))}</p></button>`,
+              `<button class="stack-item" data-stack="${e.id}" ${e.kind === 'spell' ? `data-motion-card="${e.source.id}" data-motion-zone="stack"` : ''}>${meta[e.name]?.image ? `<img class="stack-card-art" src="${escape(meta[e.name].image)}" alt="" draggable="false">` : ''}<small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape([e.kind === 'ability' ? e.label : !e.target ? 'Spell' : '', e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : ''].filter(Boolean).join(' · '))}</p></button>`,
           )
           .join('')
       : resolving

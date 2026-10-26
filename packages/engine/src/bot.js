@@ -1,3 +1,11 @@
+import {
+  chooseBlocks,
+  chooseAttacks,
+  preserveForDefense,
+  tacticalDamage,
+} from './combat-policy.js';
+import { planPayment } from './mana.js';
+import { matchesEvent } from './events.js';
 import { legalActions } from './engine.js';
 import { canAttack, canBlock, suggestedDamage } from './combat.js';
 import { controlled, definition, hasKeyword, opponent, stats } from './model.js';
@@ -111,64 +119,11 @@ export function chooseBotCommand(s, p) {
       case 'orderTriggers':
         return { type: 'orderTriggers', player: p, ids: c.entries.map((e) => e.id) };
       case 'assignDamage':
-        return { type: 'assignDamage', player: p, orders: suggestedDamage(s) };
-      case 'attackers': {
-        const defenders = controlled(s, opponent(p)).filter(
-          (o) => definition(s, o).type === 'creature' && !o.tapped,
-        );
-        const cards = controlled(s, p)
-          .filter((o) => canAttack(s, o, p))
-          .filter((a) => {
-            const possible = defenders.filter((b) => canBlock(s, b, a, opponent(p)));
-            return (
-              !possible.length ||
-              hasKeyword(s, a, 'vigilance') ||
-              hasKeyword(s, a, 'trample') ||
-              possible.every(
-                (b) =>
-                  stats(s, a).power >= stats(s, b).toughness &&
-                  stats(s, a).toughness > stats(s, b).power,
-              ) ||
-              s.players[opponent(p)].life <= stats(s, a).power
-            );
-          })
-          .map((o) => o.id);
-        return { type: 'attackers', player: p, cards };
-      }
-      case 'blockers': {
-        const available = controlled(s, p).filter(
-          (o) => definition(s, o).type === 'creature' && !o.tapped,
-        );
-        const pairs = [];
-        for (const ar of s.combat.attackers) {
-          const a = s.objects[ar.id];
-          if (a?.zone !== 'battlefield') continue;
-          const blockers = available
-            .filter((b) => canBlock(s, b, a, p))
-            .sort((a, b) => value(s, a) - value(s, b));
-          if (hasKeyword(s, a, 'menace')) {
-            if (blockers.length >= 2) {
-              for (const b of blockers.slice(0, 2)) {
-                pairs.push({ blocker: b.id, attacker: a.id });
-                available.splice(available.indexOf(b), 1);
-              }
-            }
-            continue;
-          }
-          const b = blockers.find(
-            (b) =>
-              stats(s, b).toughness > stats(s, a).power ||
-              stats(s, b).power >= stats(s, a).toughness ||
-              hasKeyword(s, b, 'deathtouch') ||
-              s.players[p].life <= stats(s, a).power + 3,
-          );
-          if (b) {
-            pairs.push({ blocker: b.id, attacker: a.id });
-            available.splice(available.indexOf(b), 1);
-          }
-        }
-        return { type: 'blockers', player: p, pairs };
-      }
+        return { type: 'assignDamage', player: p, orders: tacticalDamage(s) };
+      case 'attackers':
+        return { type: 'attackers', player: p, cards: chooseAttacks(s, p) };
+      case 'blockers':
+        return { type: 'blockers', player: p, pairs: chooseBlocks(s, p).pairs };
     }
   }
   if (s.priority !== p) return null;
@@ -245,10 +200,30 @@ export function chooseBotCommand(s, p) {
     })
     .sort((a, b) => b.score - a.score);
   if (sacrifices[0]?.score > 0) return { ...sacrifices[0].a, player: p };
+  const lethalAbility = actions.find((a) => {
+    if (a.type !== 'activate') return false;
+    const ability = definition(s, s.objects[a.card]).activated[a.ability];
+    if ((ability.cost.life ?? 0) >= s.players[p].life) return false;
+    return ability.effects.some(
+      (e) =>
+        (e.op === 'damageOpponent' ||
+          (e.op === 'damage' && a.target?.kind === 'player' && a.target.id === 1 - p) ||
+          (e.op === 'loseLife' &&
+            (e.player === 'opponent' || (e.player === 'target' && a.target?.id === 1 - p)))) &&
+        e.amount >= s.players[1 - p].life,
+    );
+  });
+  if (lethalAbility) return { ...lethalAbility, player: p };
+  const defenseCache = new Map();
+  const keepBlocker = (id) => {
+    if (!defenseCache.has(id)) defenseCache.set(id, preserveForDefense(s, s.objects[id], p));
+    return defenseCache.get(id);
+  };
   const ability = actions.find(
     (a) =>
       a.type === 'activate' &&
       !definition(s, s.objects[a.card]).activated[a.ability].cost.sacrificeSelf &&
+      !(definition(s, s.objects[a.card]).activated[a.ability].cost.tap && keepBlocker(a.card)) &&
       (a.target?.kind === 'player' ? a.target.id !== p : !a.target) &&
       (!definition(s, s.objects[a.card]).activated[a.ability].effects.some(
         (e) => e.op === 'modify',
@@ -265,6 +240,26 @@ export function chooseBotCommand(s, p) {
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);
       if (d.effects?.some((e) => e.op === 'token')) score = 6;
       if (d.effects?.some((e) => e.op === 'draw')) score = s.players[p].hand.length < 5 ? 5 : 1;
+      if (d.type === 'creature' && !s.stack.length && s.active === p && s.step === 'main1') {
+        const enables = actions
+          .filter((other) => other.type === 'cast' && other.card !== a.card)
+          .some((other) => {
+            const next = definition(s, s.objects[other.card]);
+            const cost = { ...d.cost };
+            for (const [color, n] of Object.entries(next.cost))
+              cost[color] = (cost[color] ?? 0) + n;
+            if (!planPayment(s, p, cost)) return false;
+            return (d.triggers ?? []).some((trigger) =>
+              matchesEvent(
+                trigger.event,
+                'cast',
+                { definition: next, controller: p, owner: p },
+                { id: a.card, controller: p },
+              ),
+            );
+          });
+        if (enables) score += 10;
+      }
       const target = a.target?.kind === 'object' ? s.objects[a.target.id] : null;
       const movement = d.effects?.find((effect) => effect.op === 'moveTarget');
       if (movement && target) {

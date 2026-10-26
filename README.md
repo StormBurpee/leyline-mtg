@@ -24,8 +24,8 @@ The target is every non-Alchemy card available on Arena, with complete Standard 
 **Development preview:** 434 executable cards and three token definitions. A scoped rules kernel, not a complete Forge port or a tournament-ready client. [The boundaries are documented.](docs/SUPPORT.md)
 
 <p align="center">
-  <img src="docs/assets/tabletop.png" alt="The actual Leyline client inspecting a replayed reanimation position" width="100%" />
-  <sub>Actual client capture. A saved match, replayed through the engine. Card art belongs to its respective owners.</sub>
+  <img src="docs/assets/tabletop.png" alt="The actual Leyline client selecting a spell target in a resumed match" width="100%" />
+  <sub>Actual client capture. A real match resumed through the engine, with a readable hand and explicit target selection. Card art belongs to its respective owners.</sub>
 </p>
 
 Cards are versioned JSON, compiled into a validated runtime catalog. Shared mechanics and composable predicates replace per-card JavaScript. [Read the card format.](docs/CARD-DATA.md)

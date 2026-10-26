@@ -188,3 +188,42 @@ export function renderCombatLinks(root, state, pending = []) {
   }
   arena.append(svg);
 }
+
+/** Short source-to-target feedback for accepted damage events, never game state. */
+export function animateEffects(root, before, state, events) {
+  if (prefersReducedMotion()) return;
+  for (const event of events.filter((e) => e.type === 'damage' && e.amount > 0).slice(0, 16)) {
+    const target =
+      event.target.kind === 'player'
+        ? root.querySelector(`.life[data-player="${event.target.id}"]`)
+        : root.querySelector(`[data-card="${CSS.escape(event.target.id)}"]`);
+    const destination = target?.getBoundingClientRect() ?? before.cards.get(event.target.id)?.rect;
+    const origin =
+      before.cards.get(event.source)?.rect ??
+      root.querySelector(`[data-card="${CSS.escape(event.source)}"]`)?.getBoundingClientRect();
+    if (!destination) continue;
+    target?.animate(
+      [
+        { filter: 'brightness(2)', boxShadow: '0 0 28px #eea06a' },
+        { filter: 'brightness(1)', boxShadow: 'none' },
+      ],
+      { duration: 380, easing: 'ease-out' },
+    );
+    if (!origin) continue;
+    const ns = 'http://www.w3.org/2000/svg',
+      svg = document.createElementNS(ns, 'svg'),
+      path = document.createElementNS(ns, 'path');
+    svg.classList.add('resolution-ray');
+    svg.setAttribute('aria-hidden', 'true');
+    const x = origin.left + origin.width / 2,
+      y = origin.top + origin.height / 2,
+      tx = destination.left + destination.width / 2,
+      ty = destination.top + destination.height / 2;
+    path.setAttribute('d', `M${x},${y} Q${(x + tx) / 2},${Math.min(y, ty) - 50} ${tx},${ty}`);
+    svg.append(path);
+    document.body.append(svg);
+    animate(svg, [{ opacity: 0 }, { opacity: 1, offset: 0.25 }, { opacity: 0 }], 420).finally(() =>
+      svg.remove(),
+    );
+  }
+}

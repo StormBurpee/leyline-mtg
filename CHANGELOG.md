@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.13.0 — Read the table
+
+- Larger expanded hands, adjacent full-card inspection, visible auto-payment previews and direct click-to-target.
+- Targeted spells can be dropped onto the table before choosing a target; cast/ability targets have visible tethers and damage has source-to-target feedback.
+- A contextual action button, explicit full control, one-shot phase stops, pass-until-response and pass-turn controls. Automation sends normal engine commands and rechecks stops at timer execution.
+- Optional automatic trigger ordering and suggested damage; attacks, blocks, targets, discards and optional effects remain explicit choices.
+- Public-board tactical combat search replaces the two-blocker menace shortcut. Attack subsets include a bounded defensive-response and crack-back check; tap abilities preserve necessary blockers, and cast-trigger threats receive sequencing consideration.
+- Tactical evaluation uses the real combat damage kernel, but does not solve hidden information, future draws, combat tricks or full triggered-ability chains. This remains a sparring bot, not a competitive benchmark.
+- Replays from v0.10 and v0.11 are accepted again. Legacy trace regression uses a frozen policy rather than requiring new AI to repeat old mistakes.
+
 ## 0.12.0 — Last Rites
 
 - Death triggers use pre-event characteristics and controllers, including simultaneous creature deaths and tokens.

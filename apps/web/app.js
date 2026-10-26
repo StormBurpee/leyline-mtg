@@ -1,3 +1,5 @@
+import { autoCommand, updateYield, stopKey, hasStop } from './priority-policy.js';
+import { installDuelPresentation } from './duel-presentation.js';
 import {
   deckRoom,
   deckBuilder,
@@ -8,7 +10,7 @@ import {
 } from './deck-room.js';
 import { cardDropPlan } from './drop-plan.js';
 import { installCardDrag } from './gestures.js';
-import { captureTable, animateTable, renderCombatLinks } from './motion.js';
+import { captureTable, animateTable, renderCombatLinks, animateEffects } from './motion.js';
 import {
   CARDS,
   definition,
@@ -75,6 +77,14 @@ const ui = {
   mode: 'bot',
   seed: 731,
   autoYield: true,
+  controlMode: 'smart',
+  yieldMode: null,
+  yieldTurn: null,
+  stops: {},
+  autoOrderTriggers: true,
+  autoDamage: true,
+  handExpanded: true,
+  presentationUntil: 0,
   holdPriority: false,
   reduceMotion: false,
   saved: !!readSave(),
@@ -117,6 +127,12 @@ try {
 document.documentElement.dataset.motion = ui.reduceMotion ? 'reduced' : 'system';
 let dragMotionCard = null;
 const viewer = () => (ui.mode === 'hotseat' ? ui.seat : 0);
+const duelPresentation = installDuelPresentation(app, () => ({
+  state,
+  ui,
+  player: viewer(),
+  metadata,
+}));
 function toast(text) {
   const el = document.querySelector('#toast');
   el.textContent = text;
@@ -151,6 +167,7 @@ function render() {
   else if (wasDock)
     app.querySelector('.action-dock button:not(:disabled)')?.focus({ preventScroll: true });
   renderCombatLinks(app, state, ui.blocks);
+  duelPresentation.refresh();
   schedule();
 }
 let combatFrame = null;
@@ -182,6 +199,13 @@ function save() {
         customDeck: ui.customDeck,
         autoYield: ui.autoYield,
         holdPriority: ui.holdPriority,
+        controls: {
+          controlMode: ui.controlMode,
+          stops: ui.stops,
+          autoOrderTriggers: ui.autoOrderTriggers,
+          autoDamage: ui.autoDamage,
+          handExpanded: ui.handExpanded,
+        },
       }),
     );
     ui.saved = true;
@@ -189,7 +213,7 @@ function save() {
     toast('Local storage is full or unavailable. Export a replay to save this match.');
   }
 }
-function send(command, { autoPass = true } = {}) {
+function send(command, { autoPass = true, automatic = false } = {}) {
   if (ui.replayRecord) {
     toast('Exit replay inspection before playing.');
     return false;
@@ -204,27 +228,36 @@ function send(command, { autoPass = true } = {}) {
   document.querySelector('#toast').classList.remove('visible');
   document.querySelector('#toast').textContent = '';
   const motion = captureTable(app, state);
+  const previous = state;
   state = result.state;
+  updateYield(previous, state, viewer(), ui);
+  if (
+    !automatic &&
+    c.player === viewer() &&
+    ['cast', 'playLand', 'activate', 'tapMana'].includes(c.type)
+  )
+    ui.yieldMode = null;
+  const newStack = state.stack.some((entry) => !previous.stack.some((old) => old.id === entry.id));
+  const resolved = state.events
+    .slice(previous.events.length)
+    .some((event) => ['resolved', 'fizzled', 'countered'].includes(event.type));
+  ui.presentationUntil =
+    performance.now() +
+    (newStack
+      ? 900
+      : resolved
+        ? 650
+        : c.type === 'playLand'
+          ? 480
+          : state.turn !== previous.turn
+            ? 450
+            : 100);
   resetSelection();
   save();
-  if (
-    autoPass &&
-    !ui.holdPriority &&
-    ['cast', 'activate'].includes(c.type) &&
-    state.priority === c.player &&
-    !state.choice &&
-    state.status === 'playing'
-  ) {
-    const passed = dispatch(state, {
-      type: 'pass',
-      player: c.player,
-      expectedRevision: state.revision,
-    });
-    if (passed.ok) state = passed.state;
-  }
   save();
   render();
   animateTable(app, motion, state, { skip: dragMotionCard });
+  animateEffects(app, motion, state, state.events.slice(previous.events.length));
   return true;
 }
 function schedule() {
@@ -240,26 +273,38 @@ function schedule() {
     ui.mode !== 'bot'
   )
     return;
-  const actor = state.choice?.player ?? state.priority;
+  const revision = state.revision,
+    actor = state.choice?.player ?? state.priority;
+  const delay = Math.max(actor === 1 ? 340 : 100, ui.presentationUntil - performance.now());
   if (actor === 1) {
-    const revision = state.revision;
     botTimer = setTimeout(() => {
-      if (state.revision !== revision) return;
-      const cmd = chooseBotCommand(state, 1);
-      if (cmd) send(cmd, { autoPass: false });
-    }, 650);
+      if (
+        !state ||
+        state.revision !== revision ||
+        ui.view !== 'play' ||
+        dialog.open ||
+        cardDrag.active
+      )
+        return;
+      const command = chooseBotCommand(state, 1);
+      if (command) send(command, { automatic: true, autoPass: false });
+    }, delay);
     return;
   }
-  if (!state.choice && ui.autoYield && !ui.targeting && !ui.selected) {
-    const actions = legalActions(state, 0);
-    const useful = actions.some((a) => ['cast', 'activate', 'playLand'].includes(a.type));
-    if (!useful && (state.active !== 0 || !['main1', 'main2'].includes(state.step))) {
-      const revision = state.revision;
-      botTimer = setTimeout(() => {
-        if (state.revision === revision) send({ type: 'pass' }, { autoPass: false });
-      }, 450);
-    }
-  }
+  if (!autoCommand(state, 0, ui)) return;
+  botTimer = setTimeout(() => {
+    if (
+      !state ||
+      state.revision !== revision ||
+      ui.view !== 'play' ||
+      dialog.open ||
+      cardDrag.active
+    )
+      return;
+    // Recheck user intent at execution time: a stop added during animation wins.
+    const command = autoCommand(state, 0, ui);
+    if (command) send(command, { automatic: true, autoPass: false });
+  }, delay);
 }
 function openDialog(title, body, actions = '') {
   clearTimeout(botTimer);
@@ -295,6 +340,8 @@ function startConfirmed() {
   ui.replayRecord = null;
   ui.seat = 0;
   ui.paused = false;
+  ui.yieldMode = null;
+  ui.stops = {};
   resetSelection();
   try {
     state = createGame({
@@ -524,6 +571,63 @@ function saveDraft(select = false) {
 }
 async function action(name, el) {
   switch (name) {
+    case 'toggleFullControl':
+      ui.controlMode = ui.controlMode === 'full' ? 'smart' : 'full';
+      ui.yieldMode = null;
+      save();
+      render();
+      break;
+    case 'yieldResponse':
+    case 'yieldTurn':
+      ui.yieldMode = name === 'yieldTurn' ? 'turn' : 'response';
+      ui.yieldTurn = state.turn;
+      ui.controlMode = 'smart';
+      resetSelection();
+      render();
+      break;
+    case 'cancelYield':
+      ui.yieldMode = null;
+      render();
+      break;
+    case 'toggleStop': {
+      const key = el.dataset.stop;
+      ui.stops[key] = !ui.stops[key];
+      save();
+      render();
+      if (dialog.open) action('phaseStops', {});
+      break;
+    }
+    case 'phaseStops': {
+      const steps = [
+        ['upkeep', 'Upkeep'],
+        ['draw', 'Draw'],
+        ['main1', 'First main'],
+        ['beginCombat', 'Begin combat'],
+        ['attackers', 'After attackers'],
+        ['blockers', 'After blockers'],
+        ['firstDamage', 'First strike'],
+        ['damage', 'After damage'],
+        ['endCombat', 'End combat'],
+        ['main2', 'Second main'],
+        ['end', 'End step'],
+      ];
+      openDialog(
+        'Set a stop',
+        `<p>Stop at the next matching step even with no playable cards. A manual pass consumes that stop. You can set a stop while an animation is playing.</p><div class="stop-columns">${['you', 'opponent'].map((side) => `<section><h3>${side === 'you' ? 'Your turn' : 'Opponent’s turn'}</h3>${steps.map(([step, label]) => `<button class="btn ${ui.stops[`${side}:${step}`] ? 'stop-on' : ''}" data-action="toggleStop" data-stop="${side}:${step}" aria-pressed="${!!ui.stops[`${side}:${step}`]}">${ui.stops[`${side}:${step}`] ? '●' : '○'} ${label}</button>`).join('')}</section>`).join('')}</div>`,
+      );
+      break;
+    }
+    case 'handSize':
+      ui.handExpanded = !ui.handExpanded;
+      save();
+      render();
+      break;
+    case 'prioritySettings':
+      openDialog(
+        'Priority & automation',
+        `<p>Smart play skips empty response windows and responses to your own effects. Full control stops at every priority window. Phase stops override both passing shortcuts.</p><div class="priority-settings"><label><input id="auto-order-triggers" type="checkbox" ${ui.autoOrderTriggers ? 'checked' : ''}> Automatically order my triggers</label><label><input id="auto-damage" type="checkbox" ${ui.autoDamage ? 'checked' : ''}> Use suggested combat damage</label></div><p>Targets, attacks, blocks, optional effects and discards always remain your decisions.</p>`,
+      );
+      break;
     case 'resumeDraft':
       if (ui.recoveredDraft) editDeck(ui.recoveredDraft);
       break;
@@ -652,6 +756,14 @@ async function action(name, el) {
             : state.config.decks[0]);
         ui.autoYield = saved.autoYield ?? true;
         ui.holdPriority = saved.holdPriority ?? false;
+        if (saved.controls) {
+          ui.controlMode = saved.controls.controlMode === 'full' ? 'full' : 'smart';
+          ui.stops = saved.controls.stops ?? {};
+          ui.autoOrderTriggers = saved.controls.autoOrderTriggers !== false;
+          ui.autoDamage = saved.controls.autoDamage !== false;
+          ui.handExpanded = saved.controls.handExpanded !== false;
+        }
+        ui.yieldMode = null;
         ui.seat = state.choice?.player ?? state.priority;
         ui.replayRecord = null;
         ui.view = 'play';
@@ -794,6 +906,8 @@ async function action(name, el) {
       break;
     }
     case 'pass':
+      delete ui.stops[stopKey(state, viewer())];
+      ui.yieldMode = null;
       send({ type: 'pass' }, { autoPass: false });
       break;
     case 'cancelSelection':
@@ -845,7 +959,7 @@ async function action(name, el) {
       render();
       break;
     case 'switchSeat':
-      ui.seat = state.choice?.player ?? state.priority;
+      ui.seat = ui.mode === 'bot' ? 0 : (state.choice?.player ?? state.priority);
       resetSelection();
       render();
       break;
@@ -926,15 +1040,16 @@ async function action(name, el) {
       openDialog(
         'Continue this position?',
         '<p>This creates a local branch from the current replay position. The original replay is unchanged. Both hands are available in hotseat mode.</p>',
-        '<button class="btn" data-action="closeDialog">Cancel</button><button class="btn primary" data-action="confirmTakeover">Continue as hotseat</button>',
+        '<button class="btn" data-action="closeDialog">Cancel</button><button class="btn" data-action="confirmTakeover">Continue as hotseat</button><button class="btn primary" data-action="confirmTakeoverBot">Continue against bot</button>',
       );
       break;
+    case 'confirmTakeoverBot':
     case 'confirmTakeover':
       ui.replayRecord = null;
-      ui.mode = 'hotseat';
+      ui.mode = name === 'confirmTakeoverBot' ? 'bot' : 'hotseat';
       ui.catalog = state.catalog;
       ui.customDeck = state.config.decks[0];
-      ui.seat = state.choice?.player ?? state.priority;
+      ui.seat = ui.mode === 'bot' ? 0 : (state.choice?.player ?? state.priority);
       resetSelection();
       closeDialog();
       save();
@@ -1004,7 +1119,7 @@ const cardDrag = installCardDrag(app, {
       const selector = !target
         ? `[data-field="${destination.field}"]`
         : target.kind === 'player'
-          ? `.life[data-player="${target.id}"]`
+          ? `.player-band[data-player="${target.id}"]`
           : target.kind === 'stack'
             ? `[data-stack="${CSS.escape(target.id)}"]`
             : `[data-card="${CSS.escape(target.id)}"]`;
@@ -1037,6 +1152,17 @@ const cardDrag = installCardDrag(app, {
             : null,
       });
     }
+    if (plan.kind === 'play' && plan.destinations.some((d) => d.target)) {
+      for (const player of [viewer(), 1 - viewer()]) {
+        const field = app.querySelector(`[data-field="${player}"]`);
+        if (field)
+          zones.push({
+            element: field,
+            intent: true,
+            label: `Release to choose a target for ${object.name}`,
+          });
+      }
+    }
     return {
       revision: state.revision,
       kind: plan.kind,
@@ -1057,6 +1183,13 @@ const cardDrag = installCardDrag(app, {
     if (state.revision !== gesture.revision) {
       toast('The game changed while you were dragging. Pick the card up again.');
       return false;
+    }
+    if (zone.intent) {
+      ui.selected = gesture.id;
+      ui.activation = null;
+      ui.targeting = true;
+      render();
+      return true;
     }
     if (gesture.kind === 'attack') {
       ui.chosen = ui.chosen.includes(gesture.id) ? ui.chosen : [...ui.chosen, gesture.id];
@@ -1157,7 +1290,27 @@ function selectCard(id) {
     return;
   }
   if (!c && o.zone === 'hand' && o.owner === p) {
+    const again = ui.lastHandClick?.id === id && performance.now() - ui.lastHandClick.time < 450;
+    ui.lastHandClick = { id, time: performance.now() };
+    if (
+      again &&
+      !definition(state, o).target &&
+      legalActions(state, p).some((a) => a.card === id && ['playLand', 'cast'].includes(a.type))
+    ) {
+      ui.selected = id;
+      ui.activation = null;
+      action('playSelected', {});
+      return;
+    }
     ui.selected = ui.selected === id ? null : id;
+    if (
+      ui.selected &&
+      definition(state, o).target &&
+      legalActions(state, p).some((a) => a.type === 'cast' && a.card === id)
+    ) {
+      ui.targeting = true;
+      ui.activation = null;
+    }
     render();
     return;
   }
@@ -1247,6 +1400,37 @@ document.addEventListener('click', (e) => {
       });
   }
 });
+app.addEventListener('dblclick', (e) => {
+  const card = e.target.closest('.hand-card[data-card]');
+  if (!card || !state || ui.replayRecord) return;
+  const id = card.dataset.card,
+    o = state.objects[id];
+  if (!o || o.owner !== viewer() || state.choice) return;
+  const legal = legalActions(state, viewer()).find(
+    (a) => a.card === id && ['playLand', 'cast'].includes(a.type),
+  );
+  if (!legal) return;
+  ui.selected = id;
+  ui.activation = null;
+  action('playSelected', card);
+});
+app.addEventListener(
+  'error',
+  (event) => {
+    const image = event.target;
+    if (image.tagName !== 'IMG') return;
+    const card = image.closest('[data-card]'),
+      object = state?.objects[card?.dataset.card];
+    if (!object || card.querySelector('.image-fallback')) return;
+    image.hidden = true;
+    const d = definition(state, object),
+      fallback = document.createElement('div');
+    fallback.className = 'image-fallback';
+    fallback.innerHTML = `<strong>${escape(object.name)}</strong>${mana(d.cost)}<p>${escape(d.text)}</p><small>Card image unavailable</small>`;
+    card.append(fallback);
+  },
+  true,
+);
 app.addEventListener('pointerover', (e) => {
   if (cardDrag.active) return;
   const el = e.target.closest('[data-card]');
@@ -1271,6 +1455,12 @@ document.addEventListener('change', (e) => {
     case 'builder-type':
       ui.builderType = e.target.value;
       render();
+      break;
+    case 'auto-order-triggers':
+      ui.autoOrderTriggers = e.target.checked;
+      break;
+    case 'auto-damage':
+      ui.autoDamage = e.target.checked;
       break;
     case 'mode':
       ui.mode = e.target.value;
@@ -1354,8 +1544,17 @@ app.addEventListener('dragend', () =>
   app.querySelector('[data-deck-drop]')?.classList.remove('accepting-card'),
 );
 document.addEventListener('keydown', (e) => {
-  if (e.repeat) return;
+  if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
   if (dialog.open || ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(e.target.tagName)) return;
+  if (e.key === 'f' && state && ui.view === 'play') {
+    action('toggleFullControl', {});
+    return;
+  }
+  if (e.key === 'Enter' && state && ui.view === 'play' && !ui.replayRecord) {
+    e.preventDefault();
+    action(e.shiftKey ? 'yieldTurn' : ui.selected ? 'playSelected' : 'yieldResponse', {});
+    return;
+  }
   if (
     e.code === 'Space' &&
     state &&
@@ -1365,9 +1564,10 @@ document.addEventListener('keydown', (e) => {
     !ui.replayRecord
   ) {
     e.preventDefault();
-    send({ type: 'pass' }, { autoPass: false });
+    action('pass', {});
   }
   if (e.key === 'Escape') {
+    ui.yieldMode = null;
     resetSelection();
     render();
   }

@@ -2,8 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { createGame, chooseBotCommand, dispatch } from '../packages/engine/src/index.js';
-test('the source-pack migration preserves twenty released v0.5 game traces', async () => {
+import { createGame, dispatch } from '../packages/engine/src/index.js';
+import { chooseBotCommand } from './fixtures/pre-tactical-policy.js';
+test('the frozen policy preserves twenty released v0.5 game traces through the current engine', async () => {
   const baseline = JSON.parse(
     await readFile(new URL('./fixtures/v05-simulation-contracts.json', import.meta.url), 'utf8'),
   );

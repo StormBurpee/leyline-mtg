@@ -50,3 +50,11 @@ Cancellation is checked between decisions and after an asynchronous policy retur
 - Differential and information-flow tests as the supported rules surface expands.
 
 Targeted triggered abilities expose concrete `chooseTriggerTarget` actions. Object references use player-specific incarnation-bound handles, including references to departed sources; departed/concealed handles cannot be submitted as current visible objects. Internal trigger-placement continuations are omitted from observations.
+
+## Tactical sparring policy
+
+Since v0.13, the default policy searches public-board blocker assignments instead of using a fixed two-creature menace rule. Candidate combat damage uses the engine's first/double-strike, trample, deathtouch, indestructible and lifelink handling. Damage allocation considers valuable blockers; attack candidates include a bounded defending response and a next-turn public-board lethal check. Tap abilities preserve a blocker when the defensive comparison matters, except when an immediate lethal ability is available. Cast-trigger creatures can be deployed before a nonlethal spell when both are affordable.
+
+This is still bounded tactical search plus heuristics. It does not model unknown tricks, draw distributions, full death-trigger resolution, multi-turn strategy, opponent ranges or trained play. Search limits can miss better assignments on wide boards. Its win rates are not reliable evidence of competitive deck strength. Evaluate an external policy through the same observation boundary and record its identity, sampling settings and failures alongside the engine and ruleset fingerprints.
+
+Historical replay/engine regression uses a frozen pre-tactical policy so changes in decision quality do not masquerade as rules changes. Current-policy tests instead check legality, information boundaries, reproducibility and named tactical decisions.
