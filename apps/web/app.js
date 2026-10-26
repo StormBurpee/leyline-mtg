@@ -1,3 +1,6 @@
+import { cardDropPlan } from './drop-plan.js';
+import { installCardDrag } from './gestures.js';
+import { captureTable, animateTable, renderCombatLinks } from './motion.js';
 import {
   CARDS,
   definition,
@@ -66,6 +69,7 @@ const ui = {
   seed: 731,
   autoYield: true,
   holdPriority: false,
+  reduceMotion: false,
   saved: !!readSave(),
   selected: null,
   targeting: false,
@@ -84,6 +88,11 @@ const ui = {
   replayRecord: null,
   replayIndex: 0,
 };
+try {
+  ui.reduceMotion = localStorage.getItem('leyline.reduce-motion') === 'true';
+} catch {}
+document.documentElement.dataset.motion = ui.reduceMotion ? 'reduced' : 'system';
+let dragMotionCard = null;
 const viewer = () => (ui.mode === 'hotseat' ? ui.seat : 0);
 function toast(text) {
   const el = document.querySelector('#toast');
@@ -93,6 +102,11 @@ function toast(text) {
   toastTimer = setTimeout(() => el.classList.remove('visible'), 4200);
 }
 function render() {
+  const scrollPositions = [...app.querySelectorAll('[data-scroll-key]')].map((element) => ({
+    key: element.dataset.scrollKey,
+    left: element.scrollLeft,
+    top: element.scrollTop,
+  }));
   const focused = document.activeElement;
   let focusSelector = null;
   if (focused?.id) focusSelector = `#${CSS.escape(focused.id)}`;
@@ -102,12 +116,30 @@ function render() {
     focusSelector = `[data-action="${CSS.escape(focused.dataset.action)}"]${focused.dataset.view ? `[data-view="${CSS.escape(focused.dataset.view)}"]` : ''}`;
   const wasDock = !!focused?.closest('.action-dock');
   app.innerHTML = `<div class="shell">${header(ui)}${ui.view === 'cards' ? catalog(ui, metadata) : ui.view === 'engine' ? enginePage(state) : state ? game(state, ui, metadata) : lobby(ui, metadata)}</div>`;
+  for (const position of scrollPositions) {
+    const element = app.querySelector(`[data-scroll-key="${CSS.escape(position.key)}"]`);
+    if (element) {
+      element.scrollLeft = position.left;
+      element.scrollTop = position.top;
+    }
+  }
   const nextFocus = focusSelector ? app.querySelector(focusSelector) : null;
   if (nextFocus && !nextFocus.disabled) nextFocus.focus({ preventScroll: true });
   else if (wasDock)
     app.querySelector('.action-dock button:not(:disabled)')?.focus({ preventScroll: true });
+  renderCombatLinks(app, state, ui.blocks);
   schedule();
 }
+let combatFrame = null;
+function updateCombatLinks() {
+  if (combatFrame !== null) cancelAnimationFrame(combatFrame);
+  combatFrame = requestAnimationFrame(() => {
+    combatFrame = null;
+    renderCombatLinks(app, state, ui.blocks);
+  });
+}
+app.addEventListener('scroll', updateCombatLinks, true);
+window.addEventListener('resize', updateCombatLinks);
 function resetSelection() {
   ui.selected = null;
   ui.targeting = false;
@@ -145,6 +177,7 @@ function send(command, { autoPass = true } = {}) {
     toast(result.error.message);
     return false;
   }
+  const motion = captureTable(app, state);
   state = result.state;
   resetSelection();
   save();
@@ -165,6 +198,7 @@ function send(command, { autoPass = true } = {}) {
   }
   save();
   render();
+  animateTable(app, motion, state, { skip: dragMotionCard });
   return true;
 }
 function schedule() {
@@ -173,6 +207,7 @@ function schedule() {
     !state ||
     ui.view !== 'play' ||
     ui.paused ||
+    cardDrag.active ||
     ui.replayRecord ||
     dialog.open ||
     state.status === 'finished' ||
@@ -354,7 +389,7 @@ function replayTo(index) {
 function showSettings() {
   openDialog(
     'Table preferences',
-    `<div class="options-row"><label class="toggle"><input type="checkbox" id="auto-yield" ${ui.autoYield ? 'checked' : ''}>Yield when no response is available</label><label class="toggle"><input type="checkbox" id="hold-priority" ${ui.holdPriority ? 'checked' : ''}>Hold priority after casting</label></div><p style="margin-top:22px">Automatic yielding stops whenever you can cast a spell. Disable it to inspect every priority window. Mana sources are paid automatically when casting, or click a land to float mana manually.</p><p style="margin-top:12px">Keyboard: Space passes priority. Escape cancels card selection. All match controls are reachable with Tab.</p>`,
+    `<div class="options-row"><label class="toggle"><input type="checkbox" id="auto-yield" ${ui.autoYield ? 'checked' : ''}>Yield when no response is available</label><label class="toggle"><input type="checkbox" id="hold-priority" ${ui.holdPriority ? 'checked' : ''}>Hold priority after casting</label><label class="toggle"><input type="checkbox" id="reduce-motion" ${ui.reduceMotion ? 'checked' : ''}>Reduce motion</label></div><p class="small muted">System reduced-motion preferences are always respected.</p><p style="margin-top:22px">Automatic yielding stops whenever you can cast a spell. Disable it to inspect every priority window. Mana sources are paid automatically when casting, or click a land to float mana manually.</p><p style="margin-top:12px">Drag a card onto your field to play, or onto a highlighted target to cast. Drag creatures toward your opponent to select attackers, or onto an attacker to assign a blocker, then confirm the group. Keyboard: Space passes priority. Escape cancels a drag or card selection. All match controls are reachable with Tab.</p>`,
   );
 }
 async function action(name, el) {
@@ -563,8 +598,11 @@ async function action(name, el) {
       if (d.type === 'land') send({ type: 'playLand', card: o.id });
       else if (d.target) {
         ui.targeting = true;
-        ui.sideTab = d.target.includes('Spell') || d.target === 'spell' ? 'stack' : ui.sideTab;
-        if (d.target.includes('Spell') || d.target === 'spell') ui.inspectorOpen = true;
+        ui.sideTab = targetsFor(state, d.target, viewer()).some((target) => target.kind === 'stack')
+          ? 'stack'
+          : ui.sideTab;
+        if (targetsFor(state, d.target, viewer()).some((target) => target.kind === 'stack'))
+          ui.inspectorOpen = true;
         render();
       } else send({ type: 'cast', card: o.id });
       break;
@@ -610,16 +648,19 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleInteractionReplay':
     case 'exampleOptionalReplay':
     case 'exampleWardReplay':
     case 'exampleReplay': {
       try {
         const response = await fetch(
-          name === 'exampleOptionalReplay'
-            ? './example-optional-replay.json'
-            : name === 'exampleWardReplay'
-              ? './example-ward-replay.json'
-              : './example-replay.json',
+          name === 'exampleInteractionReplay'
+            ? './example-interaction-replay.json'
+            : name === 'exampleOptionalReplay'
+              ? './example-optional-replay.json'
+              : name === 'exampleWardReplay'
+                ? './example-ward-replay.json'
+                : './example-replay.json',
         );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();
@@ -707,6 +748,90 @@ function controlledCreatures(p) {
       o.zone === 'battlefield' && o.controller === p && definition(state, o).type === 'creature',
   );
 }
+const cardDrag = installCardDrag(app, {
+  begin(id) {
+    if (ui.replayRecord || ui.view !== 'play' || dialog.open) return null;
+    const player = viewer(),
+      plan = cardDropPlan(state, player, id);
+    if (!plan) return null;
+    clearTimeout(botTimer);
+    const object = state.objects[id],
+      zones = [];
+    for (const destination of plan.destinations) {
+      const target = destination.target;
+      const selector = !target
+        ? `[data-field="${destination.field}"]`
+        : target.kind === 'player'
+          ? `.life[data-player="${target.id}"]`
+          : target.kind === 'stack'
+            ? `[data-stack="${CSS.escape(target.id)}"]`
+            : `[data-card="${CSS.escape(target.id)}"]`;
+      const element = app.querySelector(selector);
+      if (!element) continue;
+      const label =
+        plan.kind === 'attack'
+          ? `Release to select ${object.name} as an attacker`
+          : plan.kind === 'block'
+            ? `Release to assign ${object.name} as a blocker`
+            : target
+              ? `Release to target ${element.getAttribute('aria-label') ?? element.textContent.trim()}`
+              : `Release to ${destination.type === 'playLand' ? 'play' : 'cast'} ${object.name}`;
+      zones.push({
+        element,
+        command: destination,
+        label,
+        stackLabel:
+          target?.kind === 'stack'
+            ? state.stack.find((entry) => entry.id === target.id)?.name
+            : null,
+      });
+    }
+    return {
+      revision: state.revision,
+      kind: plan.kind,
+      targeted: !!plan.destinations[0]?.target,
+      zones,
+      label: !zones.length
+        ? 'No legal drop available · release to return'
+        : plan.kind === 'attack'
+          ? 'Drag toward your opponent · confirm attackers afterward'
+          : plan.kind === 'block'
+            ? 'Drag onto an attacker · confirm blockers afterward'
+            : plan.destinations[0]?.target
+              ? 'Drag onto a highlighted target · Esc to cancel'
+              : 'Drag onto your battlefield · Esc to cancel',
+    };
+  },
+  commit(gesture, zone) {
+    if (state.revision !== gesture.revision) {
+      toast('The game changed while you were dragging. Pick the card up again.');
+      return false;
+    }
+    if (gesture.kind === 'attack') {
+      ui.chosen = ui.chosen.includes(gesture.id) ? ui.chosen : [...ui.chosen, gesture.id];
+      render();
+      return true;
+    }
+    if (gesture.kind === 'block') {
+      ui.blocks = [
+        ...ui.blocks.filter((pair) => pair.blocker !== gesture.id),
+        { blocker: gesture.id, attacker: zone.command.target.id },
+      ];
+      ui.selected = null;
+      render();
+      return true;
+    }
+    dragMotionCard = gesture.id;
+    try {
+      const { field, ...command } = zone.command;
+      return send({ ...command, expectedRevision: gesture.revision });
+    } finally {
+      dragMotionCard = null;
+    }
+  },
+  end: schedule,
+  feedback: toast,
+});
 function selectCard(id) {
   const o = state?.objects[id];
   if (!o) return;
@@ -853,6 +978,7 @@ document.addEventListener('click', (e) => {
   }
 });
 app.addEventListener('pointerover', (e) => {
+  if (cardDrag.active) return;
   const el = e.target.closest('[data-card]');
   if (!el || !state) return;
   const name = state.objects[el.dataset.card]?.name;
@@ -874,6 +1000,13 @@ document.addEventListener('change', (e) => {
       ui.autoYield = e.target.checked;
       save();
       schedule();
+      break;
+    case 'reduce-motion':
+      ui.reduceMotion = e.target.checked;
+      document.documentElement.dataset.motion = ui.reduceMotion ? 'reduced' : 'system';
+      try {
+        localStorage.setItem('leyline.reduce-motion', String(ui.reduceMotion));
+      } catch {}
       break;
     case 'hold-priority':
       ui.holdPriority = e.target.checked;

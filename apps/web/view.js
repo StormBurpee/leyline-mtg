@@ -88,23 +88,23 @@ export function footer() {
 }
 const fallback = (name, d = CARDS[name]) =>
   `<div class="fallback"><strong>${escape(name)}</strong><p>${escape(d?.text)}</p></div>`;
-export function handCard(s, id, meta, ui, playable) {
+export function handCard(s, id, meta, ui, playable, index = 0) {
   const o = s.objects[id],
     d = definition(s, o);
-  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" aria-label="${escape(o.name)}${playable ? ', playable' : ''}" title="${escape(o.name)}">${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
+  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="hand" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${playable ? ', playable' : ''}" title="${escape(o.name)}">${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
 }
 function permanent(s, o, meta, ui, targetable) {
   const d = definition(s, o),
     land = d.type === 'land';
   if (land)
-    return `<button class="land-card ${o.tapped ? 'tapped' : ''}" data-card="${o.id}" ${artStyle(meta, o.name)} title="${escape(o.name)}${o.tapped ? ' · tapped' : ''}" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}">${d.mana ? mana(Object.fromEntries((Array.isArray(d.mana) ? d.mana : [d.mana]).map((color) => [color, 1]))) : '—'}</button>`;
+    return `<button class="land-card ${o.tapped ? 'tapped' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" ${artStyle(meta, o.name)} title="${escape(o.name)}${o.tapped ? ' · tapped' : ''}" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}">${d.mana ? mana(Object.fromEntries((Array.isArray(d.mana) ? d.mana : [d.mana]).map((color) => [color, 1]))) : '—'}</button>`;
   const pt = stats(s, o),
     attacking = s.combat.attackers.some((r) => r.id === o.id),
     blocking =
       Object.values(s.combat.blocks)
         .flat()
         .some((r) => r.id === o.id) || ui.blocks.some((b) => b.blocker === o.id);
-  return `<button class="permanent ${o.tapped ? 'tapped' : ''} ${attacking ? 'attacking' : ''} ${blocking ? 'blocking' : ''} ${ui.chosen.includes(o.id) || ui.selected === o.id ? 'selected' : ''} ${targetable ? 'targetable' : ''}" data-card="${o.id}" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}${d.type === 'creature' ? `, ${pt.power}/${pt.toughness}` : ''}"><div class="permanent-art" ${artStyle(meta, o.name)}>${o.damage ? `<span class="damage-marker">−${o.damage}</span>` : ''}${d.type === 'creature' && isSick(s, o) ? '<span class="sick-marker">NEW</span>' : ''}</div><div class="permanent-name">${escape(o.name)}</div><div class="permanent-footer"><span>${
+  return `<button class="permanent ${o.tapped ? 'tapped' : ''} ${attacking ? 'attacking' : ''} ${blocking ? 'blocking' : ''} ${ui.chosen.includes(o.id) || ui.selected === o.id ? 'selected' : ''} ${targetable ? 'targetable' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}${d.type === 'creature' ? `, ${pt.power}/${pt.toughness}` : ''}"><div class="permanent-art" ${artStyle(meta, o.name)}>${o.damage ? `<span class="damage-marker">−${o.damage}</span>` : ''}${d.type === 'creature' && isSick(s, o) ? '<span class="sick-marker">NEW</span>' : ''}</div><div class="permanent-name">${escape(o.name)}</div><div class="permanent-footer"><span>${
     isPacified(s, o)
       ? 'PACIFIED'
       : d.keywords
@@ -140,9 +140,9 @@ export function game(s, ui, meta) {
         .filter(([, n]) => n)
         .map(([c, n]) => `${mana({ [c]: 1 })}${n}`)
         .join('') || '<span>0 mana</span>'
-    }</div><div class="zone-counts"><span class="zone-count" title="Library">▱ ${s.players[p].library.length}</span><button class="zone-count" data-action="zone" data-player="${p}" data-zone="graveyard" aria-label="${escape(s.players[p].name)} graveyard ${s.players[p].graveyard.length}">† ${s.players[p].graveyard.length}</button><button class="zone-count" data-action="zone" data-player="${p}" data-zone="exile" aria-label="Exile">◇ ${s.players[p].exile.length}</button>${
+    }</div><div class="zone-counts"><span class="zone-count" data-library="${p}" title="Library">▱ ${s.players[p].library.length}</span><button class="zone-count" data-action="zone" data-player="${p}" data-zone="graveyard" aria-label="${escape(s.players[p].name)} graveyard ${s.players[p].graveyard.length}">† ${s.players[p].graveyard.length}</button><button class="zone-count" data-action="zone" data-player="${p}" data-zone="exile" aria-label="Exile">◇ ${s.players[p].exile.length}</button>${
       !bottom
-        ? `<div class="backs" aria-label="${s.players[p].hand.length} cards in opponent hand">${s.players[
+        ? `<div class="backs" data-hand-owner="${p}" aria-label="${s.players[p].hand.length} cards in opponent hand">${s.players[
             p
           ].hand
             .slice(0, 12)
@@ -154,7 +154,7 @@ export function game(s, ui, meta) {
     const all = controlled(s, p),
       lands = all.filter((o) => definition(s, o).type === 'land'),
       others = all.filter((o) => definition(s, o).type !== 'land');
-    return `<section class="field" aria-label="${escape(s.players[p].name)} battlefield"><div class="lands">${lands.map((o) => permanent(s, o, meta, ui, false)).join('') || '<span class="small muted" style="font-size:9px">LANDS</span>'}</div><div class="permanents">${
+    return `<section class="field" data-field="${p}" aria-label="${escape(s.players[p].name)} battlefield"><div class="lands">${lands.map((o) => permanent(s, o, meta, ui, false)).join('') || '<span class="small muted" style="font-size:9px">LANDS</span>'}</div><div class="permanents" data-scroll-key="field-${p}" style="--permanent-count:${Math.max(1, others.length)}">${
       others
         .map((o) =>
           permanent(
@@ -183,7 +183,7 @@ export function game(s, ui, meta) {
     )
     .join(
       '',
-    )}</div>${band(other)}${field(other)}<div class="attack-line">${s.combat.attackers.length ? `${s.combat.attackers.length} attacking · ${stepName[s.step]}` : s.status === 'mulligan' ? 'Opening hands' : stepName[s.step]}</div>${field(viewer)}${band(viewer, true)}<section class="hand-area"><div class="hand-label"><span>Your hand · ${s.players[viewer].hand.length}</span><span>${ui.targeting ? 'Choose a highlighted target' : ui.mode === 'hotseat' ? `Seat ${viewer + 1} · shared screen` : 'Click a card to inspect or play'}</span></div><div class="hand">${s.players[viewer].hand.map((id) => handCard(s, id, meta, ui, playable.has(id))).join('')}</div></section>${actionDock(s, ui, viewer, actions)}${s.status === 'finished' ? `<div class="board-notice game-over"><div class="eyebrow">Match complete</div><h2>${s.winner === null ? 'A shared ending.' : s.winner === viewer ? 'Well played.' : 'A lesson in every game.'}</h2><p>${s.winner === null ? 'The game is a draw.' : `${escape(s.players[s.winner].name)} wins.`}</p><button class="btn primary" data-action="newMatch">Play again ↗</button></div>` : ''}</section><aside class="inspector ${ui.inspectorOpen ? 'open' : ''}"><div class="inspect-head"><span>Card inspector</span><button class="mobile-inspector-toggle" data-action="inspector" aria-label="Close inspector">×</button><span>◇</span></div><div id="inspect-detail">${inspect(ui.inspect ?? selected?.name, meta, s, ui.inspectObject)}</div><div class="side-tabs"><button data-action="sideTab" data-tab="stack" class="${ui.sideTab === 'stack' ? 'active' : ''}">Stack <span class="stack-count">${s.stack.length}</span></button><button data-action="sideTab" data-tab="log" class="${ui.sideTab === 'log' ? 'active' : ''}">Game log</button></div><div class="side-content">${ui.sideTab === 'stack' ? stack(s, ui) : log(s)}</div></aside></main>`;
+    )}</div>${band(other)}${field(other)}<div class="attack-line">${s.combat.attackers.length ? `${s.combat.attackers.length} attacking · ${stepName[s.step]}` : s.status === 'mulligan' ? 'Opening hands' : stepName[s.step]}</div>${field(viewer)}${band(viewer, true)}<section class="hand-area"><div class="hand-label"><span>Your hand · ${s.players[viewer].hand.length}</span><span>${ui.targeting ? 'Choose a highlighted target' : ui.mode === 'hotseat' ? `Seat ${viewer + 1} · shared screen` : 'Drag to play · click to inspect'}</span></div><div class="hand" data-scroll-key="hand-${viewer}">${s.players[viewer].hand.map((id, index) => handCard(s, id, meta, ui, playable.has(id), index)).join('')}</div></section>${actionDock(s, ui, viewer, actions)}${s.status === 'finished' ? `<div class="board-notice game-over"><div class="eyebrow">Match complete</div><h2>${s.winner === null ? 'A shared ending.' : s.winner === viewer ? 'Well played.' : 'A lesson in every game.'}</h2><p>${s.winner === null ? 'The game is a draw.' : `${escape(s.players[s.winner].name)} wins.`}</p><button class="btn primary" data-action="newMatch">Play again ↗</button></div>` : ''}</section><aside class="inspector ${ui.inspectorOpen ? 'open' : ''}"><div class="inspect-head"><span>Card inspector</span><button class="mobile-inspector-toggle" data-action="inspector" aria-label="Close inspector">×</button><span>◇</span></div><div id="inspect-detail">${inspect(ui.inspect ?? selected?.name, meta, s, ui.inspectObject)}</div><div class="side-tabs"><button data-action="sideTab" data-tab="stack" class="${ui.sideTab === 'stack' ? 'active' : ''}">Stack <span class="stack-count">${s.stack.length}</span></button><button data-action="sideTab" data-tab="log" class="${ui.sideTab === 'log' ? 'active' : ''}">Game log</button></div><div class="side-content" data-scroll-key="sidebar-${ui.sideTab}">${ui.sideTab === 'stack' ? stack(s, ui) : log(s)}</div></aside></main>`;
 }
 function actionDock(s, ui, p, actions) {
   let title = 'Your priority',
@@ -222,14 +222,14 @@ function actionDock(s, ui, p, actions) {
         break;
       case 'attackers':
         title = 'Declare your attackers';
-        desc = `${ui.chosen.length} selected. Click creatures, then confirm.`;
+        desc = `${ui.chosen.length} selected. Drag toward your opponent or click creatures, then confirm.`;
         buttons = `<button class="btn quiet" data-action="allAttack">Select all</button><button class="btn primary" data-action="attack">${ui.chosen.length ? `Attack with ${ui.chosen.length}` : 'No attacks'} →</button>`;
         break;
       case 'blockers':
         title = 'Declare your blockers';
         desc = ui.selected
           ? 'Now click the attacker to block.'
-          : 'Click your blocker, then an attacker. Click a paired blocker to undo.';
+          : 'Drag a blocker onto an attacker, or click both. Click a paired blocker to undo.';
         buttons = `<button class="btn primary" data-action="block">${ui.blocks.length ? `Confirm ${ui.blocks.length} blocks` : 'No blocks'} →</button>`;
         break;
       case 'optionalEffect':
@@ -300,7 +300,7 @@ function stack(s, ui) {
           .reverse()
           .map(
             (e, i) =>
-              `<button class="stack-item" data-stack="${e.id}"><small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape(e.kind === 'ability' ? e.label : e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : 'Spell')}</p></button>`,
+              `<button class="stack-item" data-stack="${e.id}" ${e.kind === 'spell' ? `data-motion-card="${e.source.id}" data-motion-zone="stack"` : ''}><small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape(e.kind === 'ability' ? e.label : e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : 'Spell')}</p></button>`,
           )
           .join('')
       : resolving
@@ -388,7 +388,7 @@ export function enginePage(s) {
     )
     .join(
       '',
-    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Hand-authored card definitions, separate from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
+    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleInteractionReplay">Inspect interactive position</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Versioned card source packs, compiled separately from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
 }
 
 function liveCharacteristics(s, o) {

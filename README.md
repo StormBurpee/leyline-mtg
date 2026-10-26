@@ -40,7 +40,9 @@ npm start
 
 Open the local address printed in your terminal. Requires **Node.js 22+**. There are no runtime dependencies to install.
 
-Choose **Ember & Echo** for spells and cast triggers, or **The Living Grove** for creatures, tokens and combat tricks. Play against the practice bot or share a screen in local two-player mode. Hover a card to inspect it. Click to play, target or activate. The stack and game log stay visible.
+Choose **Ember & Echo** for spells and cast triggers, or **The Living Grove** for creatures, tokens and combat tricks. Play against the practice bot or share a screen in local two-player mode. Drag a card onto your battlefield to play it, or onto a highlighted target to cast it. Select attackers and assign blockers by dragging, then confirm the group. Click and keyboard controls remain available. The stack and game log stay visible.
+
+For a position with decisions already on the table, open **Engine → Inspect interactive position → Continue**. It is a real replay branch, not a staged board. [Client controls and verification.](docs/CLIENT.md)
 
 For development:
 
@@ -48,6 +50,7 @@ For development:
 npm ci
 npm run check
 npm run typecheck
+npm run cards:check
 npm run format:check
 npm run build
 ```

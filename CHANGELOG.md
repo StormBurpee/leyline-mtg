@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.7.0 — Direct manipulation at the table
+
+- Drag cards from hand to the battlefield, players, permanents or spells on the stack.
+- Legal drop zones come from the engine, with revision checks at submission.
+- Drag to select attackers and assign blockers; confirm the complete group separately.
+- Targeting tethers, compact spell-target trays, combat links and cancelled-drag returns.
+- State-driven card movement, tap transitions, graveyard departures and life changes.
+- Saved reduced-motion preference, keyboard/click alternatives and stable scroll positions.
+- Added a reproducible interactive position and gesture/command-boundary regression tests.
+
+This is a client release. The rules package and core card pack remain at 0.6.0; executable coverage remains 126 cards and three tokens.
+
 ## 0.6.0 — Versioned card sources
 
 - Replaced the hand-written JavaScript card list with one schema-versioned JSON file per card.
