@@ -1,7 +1,12 @@
+import { cardDefinition } from './cards.js';
+import { meetsCondition } from './conditions.js';
 import { spellProfile, spellOptions } from './spell-modes.js';
 import { costProblem, payCost } from './costs.js';
 import {
   createGame,
+  playableZone,
+  playableCards,
+  revealFaceDownAtEnd,
   freezeRecord,
   definition,
   draw,
@@ -20,6 +25,7 @@ import {
 import { canTapForMana, manaOptions, pay, planPayment, tapForMana } from './mana.js';
 import {
   finishLegendChoice,
+  finishCreatureTypeChoice,
   finishTriggerOrder,
   finishTriggerTarget,
   legalTarget,
@@ -36,7 +42,7 @@ import { advanceStep, finishCleanup } from './turn.js';
 const main = (s) => ['main1', 'main2'].includes(s.step);
 export function castProblem(s, p, id, target, { autoTap = true, mode } = {}) {
   const o = s.objects[id];
-  if (!o || o.zone !== 'hand' || o.owner !== p) return 'Card is not in your hand.';
+  if (!playableZone(s, o, p)) return 'You cannot play this card from its current zone.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
   const d = spellProfile(definition(s, o), mode);
   if (!d) return 'Choose one valid spell mode.';
@@ -49,7 +55,8 @@ export function castProblem(s, p, id, target, { autoTap = true, mode } = {}) {
     return 'Cast this only during your main phase with an empty stack.';
   if (d.target && !legalTarget(s, d.target, target, p)) return 'Choose a legal target.';
   if (!d.target && target != null) return 'This spell has no targets.';
-  if (!planPayment(s, p, d.cost, { autoTap })) return 'Not enough available mana.';
+  if (!planPayment(s, p, d.cost, { autoTap, purpose: { type: 'cast', card: d } }))
+    return 'Not enough available mana.';
   return null;
 }
 export function canPlayLand(s, p, id) {
@@ -62,8 +69,7 @@ export function canPlayLand(s, p, id) {
     main(s) &&
     !s.stack.length &&
     s.players[p].landsPlayed < 1 &&
-    o?.zone === 'hand' &&
-    o.owner === p &&
+    playableZone(s, o, p) &&
     definition(s, o).type === 'land'
   );
 }
@@ -75,17 +81,24 @@ function cast(s, p, c) {
   requireRule(!problem, 'CAST', problem);
   const o = s.objects[c.card],
     d = spellProfile(definition(s, o), c.mode);
-  pay(s, p, d.cost, c.autoTap !== false);
+  const payment = pay(s, p, d.cost, c.autoTap !== false, [], { type: 'cast', card: d });
+  if (d.faceDownCast) o.castingFaceDown = true;
   move(s, o, 'stack');
+  delete o.castingFaceDown;
+  if (d.faceDownCast) o.faceDown = true;
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'spell',
-    name: o.name,
+    uncounterable: payment.uncounterable,
+    name: o.faceDown ? 'Face-down creature' : o.name,
     controller: p,
     source: ref(o),
     sourceKeywords: [...d.keywords],
+    sourceDefinition: structuredClone(definition(s, o)),
     effects: structuredClone(d.effects ?? []),
-    ...(d.modes ? { mode: c.mode, modeLabel: d.modes[c.mode].label } : {}),
+    ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
+    ...(d.kicked ? { kicked: true } : {}),
+    ...(d.offspringPaid ? { offspringPaid: true } : {}),
     targetKind: d.target ?? null,
     target: c.target ?? null,
   });
@@ -93,14 +106,16 @@ function cast(s, p, c) {
   emit(s, 'cast', {
     player: p,
     objectId: o.id,
-    name: o.name,
+    name: o.faceDown ? 'Face-down creature' : o.name,
     target: c.target ?? null,
-    ...(d.modes ? { mode: c.mode, modeLabel: d.modes[c.mode].label } : {}),
+    ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
+    ...(d.kicked ? { kicked: true } : {}),
+    ...(d.offspringPaid ? { offspringPaid: true } : {}),
   });
   notifyTriggers(s, 'cast', { player: p, definition: d, object: o });
   notifyTargeted(s, s.stack.at(-1));
 }
-export function abilityProblem(s, p, id, index, target) {
+export function abilityProblem(s, p, id, index, target, discardCard) {
   const o = s.objects[id];
   if (!o || o.zone !== 'battlefield' || o.controller !== p)
     return 'You do not control that permanent.';
@@ -108,15 +123,38 @@ export function abilityProblem(s, p, id, index, target) {
   if (!Number.isSafeInteger(index) || index < 0) return 'That ability does not exist.';
   const ability = definition(s, o).activated?.[index];
   if (!ability) return 'That ability does not exist.';
+  if (!meetsCondition(s, p, ability.condition)) return 'The activation condition is not met.';
+  if (ability.oncePerTurn && o.abilityUses?.[index] === `${s.turn}:${o.incarnation}`)
+    return 'This ability has already been activated this turn.';
   if (ability.timing === 'sorcery' && !(s.active === p && main(s) && s.stack.length === 0))
     return 'Activate this only as a sorcery.';
 
   if (ability.target && !legalTarget(s, ability.target, target, p))
     return 'Choose a legal ability target.';
   if (!ability.target && target != null) return 'This ability has no targets.';
-  const payment = costProblem(s, p, ability.cost, { sourceId: id });
+  const payment = costProblem(s, p, ability.cost, { sourceId: id, discardCard });
   if (payment) return payment;
   return null;
+}
+export function turnFaceUpProblem(s, p, id) {
+  const o = s.objects[id];
+  if (!o || !o.faceDown || o.zone !== 'battlefield' || o.controller !== p)
+    return 'You do not control that face-down creature.';
+  if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
+  const d = o.definitionOverride ?? cardDefinition(o.name, s.catalog);
+  if (!d.disguise || !planPayment(s, p, d.disguise)) return 'Cannot pay its disguise cost.';
+  return null;
+}
+function turnFaceUp(s, p, id) {
+  const error = turnFaceUpProblem(s, p, id);
+  requireRule(!error, 'DISGUISE', error);
+  const o = s.objects[id],
+    d = o.definitionOverride ?? cardDefinition(o.name, s.catalog);
+  pay(s, p, d.disguise);
+  delete o.faceDown;
+  s.passes = 0;
+  emit(s, 'turnedFaceUp', { player: p, objectId: id, name: o.name });
+  notifyTriggers(s, 'faceUp', { object: o });
 }
 export function cyclingProblem(s, p, id) {
   const o = s.objects[id];
@@ -150,7 +188,7 @@ function cycle(s, p, c) {
   emit(s, 'cycled', { player: p, objectId: o.id, name: o.name });
 }
 function activate(s, p, c) {
-  const problem = abilityProblem(s, p, c.card, c.ability, c.target);
+  const problem = abilityProblem(s, p, c.card, c.ability, c.target, c.discardCard);
   requireRule(!problem, 'ACTIVATE', problem);
   const o = s.objects[c.card],
     a = definition(s, o).activated[c.ability];
@@ -166,7 +204,8 @@ function activate(s, p, c) {
     target: c.target ?? null,
     label: a.text,
   });
-  payCost(s, p, a.cost, { sourceId: o.id });
+  if (a.oncePerTurn) (o.abilityUses ??= {})[c.ability] = `${s.turn}:${o.incarnation}`;
+  payCost(s, p, a.cost, { sourceId: o.id, discardCard: c.discardCard });
   s.passes = 0;
   emit(s, 'activated', { player: p, name: o.name, objectId: o.id, ability: c.ability });
   notifyTargeted(s, s.stack.at(-1));
@@ -187,14 +226,24 @@ function handleChoice(s, p, c) {
   const choice = s.choice;
   requireRule(choice.player === p, 'CHOICE_PLAYER', 'The other player must make this choice.');
   if (
-    ['libraryOrder', 'librarySearch', 'discardEffect', 'payCost', 'optionalEffect'].includes(
-      choice.kind,
-    )
+    [
+      'libraryOrder',
+      'librarySearch',
+      'discardEffect',
+      'payCost',
+      'optionalEffect',
+      'exilePlay',
+      'bindingNegotiation',
+      'exileToGraveyard',
+    ].includes(choice.kind)
   ) {
     finishResolutionChoice(s, c);
     return;
   }
   switch (choice.kind) {
+    case 'creatureType':
+      finishCreatureTypeChoice(s, c);
+      return;
     case 'legendRule':
       requireRule(c.type === 'chooseLegend', 'CHOICE', 'Choose a legendary permanent to keep.');
       finishLegendChoice(s, c.card);
@@ -305,6 +354,7 @@ export function dispatch(state, command) {
     s.history = [...state.history];
     if (command.type === 'concede') {
       s.status = 'finished';
+      revealFaceDownAtEnd(s);
       s.winner = opponent(p);
       s.choice = null;
       emit(s, 'gameOver', { winner: s.winner, reason: 'concession' });
@@ -323,6 +373,9 @@ export function dispatch(state, command) {
         case 'tapMana':
           tapForMana(s, command.card, p, command.color);
           s.passes = 0;
+          break;
+        case 'turnFaceUp':
+          turnFaceUp(s, p, command.card);
           break;
         case 'cycle':
           cycle(s, p, command);
@@ -377,7 +430,7 @@ export function legalActions(s, p) {
       : [{ type: 'concede' }];
   if (s.priority !== p) return [{ type: 'concede' }];
   const actions = [{ type: 'pass' }, { type: 'concede' }];
-  for (const id of s.players[p].hand) {
+  for (const id of playableCards(s, p)) {
     if (!cyclingProblem(s, p, id)) actions.push({ type: 'cycle', card: id });
     if (canPlayLand(s, p, id)) {
       actions.push({ type: 'playLand', card: id });
@@ -398,18 +451,21 @@ export function legalActions(s, p) {
     }
   }
   for (const o of Object.values(s.objects)) {
+    if (!turnFaceUpProblem(s, p, o.id)) actions.push({ type: 'turnFaceUp', card: o.id });
     if (canTapForMana(s, o, p))
       for (const color of manaOptions(s, o)) actions.push({ type: 'tapMana', card: o.id, color });
     if (o.zone !== 'battlefield' || o.controller !== p) continue;
     for (const [index, a] of (definition(s, o).activated ?? []).entries())
       for (const target of a.target ? targetsFor(s, a.target, p) : [null])
-        if (!abilityProblem(s, p, o.id, index, target))
-          actions.push({
-            type: 'activate',
-            card: o.id,
-            ability: index,
-            ...(target ? { target } : {}),
-          });
+        for (const discardCard of a.cost.discard ? s.players[p].hand : [undefined])
+          if (!abilityProblem(s, p, o.id, index, target, discardCard))
+            actions.push({
+              type: 'activate',
+              card: o.id,
+              ability: index,
+              ...(discardCard ? { discardCard } : {}),
+              ...(target ? { target } : {}),
+            });
   }
   return actions;
 }
@@ -455,6 +511,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.24.0',
         '0.23.0',
         '0.22.0',
         '0.21.0',

@@ -1,3 +1,5 @@
+import { CREATURE_TYPES } from './creature-types.js';
+import { meetsCondition } from './conditions.js';
 import { searchableCards } from './library-search.js';
 import { targetSpec, matchesFilter } from './selectors.js';
 import { hasType } from './types.js';
@@ -20,6 +22,8 @@ import {
   ref,
   stats,
   keywords,
+  loseLife,
+  revealFaceDownAtEnd,
   requireRule,
   shuffle,
 } from './model.js';
@@ -30,14 +34,14 @@ export function legalTarget(s, kind, target, controller) {
   if (target.kind === 'player')
     return (
       (target.id === 0 || target.id === 1) &&
-      ['player', 'damageable'].includes(spec.scope) &&
+      ['player', 'damageable', 'playerOrPlaneswalker'].includes(spec.scope) &&
       matchesFilter({ controller: target.id, owner: target.id }, spec.where, controller)
     );
   if (target.kind === 'stack') {
     const entry = s.stack.find((e) => e.id === target.id);
     if (!entry || entry.kind !== 'spell' || spec.scope !== 'spell') return false;
-    const d = cardDefinition(entry.name, s.catalog),
-      source = s.objects[entry.source.id];
+    const source = s.objects[entry.source.id],
+      d = definition(s, source);
     return matchesFilter(
       {
         definition: d,
@@ -106,50 +110,124 @@ export function notifyTargeted(s, entry) {
   s.pendingTriggers.push({
     id: `s${++s.nextId}`,
     kind: 'ability',
-    name: source.name,
+    name: source.faceDown ? 'Face-down creature' : source.name,
     source: ref(source),
     controller: source.controller,
     sourceKeywords: keywords(s, source),
     effects: [{ op: 'wardPayment', cost: structuredClone(cost) }],
     relatedStackId: entry.id,
-    label: `${source.name} · ward`,
+    label: `${source.faceDown ? 'Face-down creature' : source.name} · ward`,
   });
-  emit(s, 'triggered', { objectId: source.id, name: source.name, player: source.controller });
+  emit(s, 'triggered', {
+    objectId: source.id,
+    name: source.faceDown ? 'Face-down creature' : source.name,
+    player: source.controller,
+  });
 }
 function counterEntry(s, id) {
   const index = s.stack.findIndex((entry) => entry.id === id);
   if (index < 0) return;
+  if (s.stack[index].uncounterable) return;
   const [entry] = s.stack.splice(index, 1);
   const source = s.objects[entry.source.id];
   if (entry.kind === 'spell' && source?.zone === 'stack') move(s, source, 'graveyard');
   emit(s, 'countered', { name: entry.name, stackId: entry.id });
 }
 export function enterBattlefield(s, o, controller = o.owner, attachment = null, options = {}) {
-  enterBattlefieldBatch(s, [{ object: o, controller, attachment, tapped: options.tapped }]);
+  return enterBattlefieldBatch(s, [{ object: o, controller, attachment, tapped: options.tapped }]);
 }
 /** Move every entrant before observing any enters event, so simultaneous entrants see one another. */
-export function enterBattlefieldBatch(s, entries) {
+export function enterBattlefieldBatch(s, entries, typeChoices = {}) {
   const entering = entries.filter(
     ({ object }) =>
       object.zone !== 'battlefield' &&
       ['creature', 'artifact', 'enchantment', 'land'].includes(definition(s, object).type),
   );
+  const chooser = entering.find(
+    ({ object }) => definition(s, object).chooseCreatureType && !typeChoices[object.id],
+  );
+  if (chooser) {
+    s.choice = {
+      kind: 'creatureType',
+      player: chooser.controller ?? chooser.object.owner,
+      card: chooser.object.id,
+      entries: entering.map(({ object, ...rest }) => ({ ...rest, object: ref(object) })),
+      typeChoices,
+      types: CREATURE_TYPES,
+    };
+    return false;
+  }
+  const tappedReplacements = new Map(
+    entering.map(({ object, controller = object.owner }) => [
+      object.id,
+      !!definition(s, object).entersTapped ||
+        (definition(s, object).entersTappedUnless &&
+          !meetsCondition(s, controller, definition(s, object).entersTappedUnless)),
+    ]),
+  );
+  const entryCounters = new Map(
+    entering.map(({ object, controller = object.owner }) => [
+      object.id,
+      battlefield(s).reduce((n, source) => {
+        const bonus = definition(s, source).entryCounterBonus;
+        return (
+          n +
+          (bonus &&
+          source.controller === controller &&
+          source.id !== object.id &&
+          hasType(definition(s, object), 'creature') &&
+          meetsCondition(s, controller, bonus.condition)
+            ? bonus.amount
+            : 0)
+        );
+      }, 0),
+    ]),
+  );
   for (const { object, controller = object.owner, attachment = null, tapped = false } of entering) {
     move(s, object, 'battlefield');
     object.controller = controller;
+    if (typeChoices[object.id]) object.chosenCreatureType = typeChoices[object.id];
     object.attachedTo = attachment;
-    object.tapped = !!definition(s, object).entersTapped || tapped;
+    object.plusCounters += entryCounters.get(object.id) ?? 0;
+    object.tapped = !!tappedReplacements.get(object.id) || tapped;
   }
   for (const { object } of entering) {
     const d = definition(s, object);
     if (d.etb) queueTrigger(s, object, d.etb, `${object.name} · enters`);
     notifyTriggers(s, 'enters', { object });
   }
+  return true;
+}
+export function finishCreatureTypeChoice(s, command) {
+  const choice = s.choice;
+  requireRule(
+    command.type === 'chooseCreatureType' && CREATURE_TYPES.includes(command.creatureType),
+    'CREATURE_TYPE',
+    'Choose a valid creature type.',
+  );
+  const choices = { ...choice.typeChoices, [choice.card]: command.creatureType };
+  const entries = choice.entries.map(({ object, ...rest }) => ({
+    ...rest,
+    object: s.objects[object.id],
+  }));
+  s.choice = null;
+  if (enterBattlefieldBatch(s, entries, choices) !== false && s.resolving) continueResolution(s);
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
-export function dealDamage(s, source, target, amount) {
+export function dealDamage(s, source, target, amount, combat = false) {
   if (amount <= 0) return;
-  if (target.kind === 'player') s.players[target.id].life -= amount;
+  const sourceObject = s.objects[source.id];
+  const sourceDefinition = source.definition ?? (sourceObject ? definition(s, sourceObject) : null);
+  for (const watcher of battlefield(s)) {
+    const bonus = definition(s, watcher).damageBonus;
+    if (
+      bonus &&
+      watcher.controller === source.controller &&
+      matchesFilter({ definition: sourceDefinition }, bonus.where, watcher.controller)
+    )
+      amount += bonus.amount;
+  }
+  if (target.kind === 'player') loseLife(s, target.id, amount);
   else {
     const o = s.objects[target.id];
     if (!o || o.zone !== 'battlefield' || o.incarnation !== target.incarnation) return;
@@ -158,6 +236,8 @@ export function dealDamage(s, source, target, amount) {
   }
   if (source.keywords?.includes('lifelink')) s.players[source.controller].life += amount;
   emit(s, 'damage', { source: source.id, target, amount, controller: source.controller });
+  if (!combat && target.kind === 'player')
+    notifyTriggers(s, 'noncombatDamageToPlayer', { player: target.id });
 }
 function damageSource(s, entry) {
   const source = s.objects[entry.source?.id];
@@ -167,6 +247,9 @@ function damageSource(s, entry) {
     source.zone === (entry.kind === 'spell' ? 'stack' : 'battlefield');
   return {
     id: entry.source?.id,
+    definition: current
+      ? definition(s, source)
+      : (entry.sourceDefinition ?? cardDefinition(entry.name, s.catalog)),
     controller: current ? source.controller : (entry.sourceController ?? entry.controller),
     keywords: current ? keywords(s, source) : (entry.sourceKeywords ?? []),
   };
@@ -287,6 +370,24 @@ export function resolveEffects(s, entry, startIndex = 0) {
       case 'untap':
         if (o) o.tapped = e.op === 'tap';
         break;
+      case 'impulseChoose': {
+        const cards = s.players[entry.controller].library.slice(0, e.count);
+        for (const id of cards) move(s, s.objects[id], 'exile');
+        if (!cards.length) break;
+        s.resolving = { entry, index: index + 1 };
+        s.choice = { kind: 'exilePlay', player: entry.controller, cards };
+        return false;
+      }
+      case 'bindingNegotiation': {
+        s.resolving = { entry, index: index + 1, revealedPlayer: entry.target.id };
+        s.choice = {
+          kind: 'bindingNegotiation',
+          player: entry.controller,
+          cards: [...s.players[entry.target.id].hand],
+          targetPlayer: entry.target.id,
+        };
+        return false;
+      }
       case 'scry':
       case 'surveil': {
         if (e.count === 0) break;
@@ -335,6 +436,47 @@ export function resolveEffects(s, entry, startIndex = 0) {
         emit(s, 'mill', { player, count: cards.length, requested: e.count });
         break;
       }
+      case 'offspringCopy': {
+        const source = s.objects[entry.source.id];
+        const base =
+          source?.zone === 'battlefield' && source.incarnation === entry.source.incarnation
+            ? definition(s, source)
+            : entry.sourceDefinition;
+        if (!base) break;
+        const token = addObject(s, base.name, entry.controller, 'void');
+        token.definitionOverride = {
+          ...structuredClone(base),
+          power: 1,
+          toughness: 1,
+          token: true,
+        };
+        token.token = true;
+        enterBattlefield(s, token, entry.controller);
+        break;
+      }
+      case 'addMana':
+        for (const [color, amount] of Object.entries(e.mana))
+          s.players[entry.controller].mana[color] += amount;
+        break;
+      case 'damageEventPowerOpponent':
+      case 'damageEventOpponent': {
+        const bound = entry.eventSource;
+        const current = bound && s.objects[bound.id];
+        if (bound)
+          dealDamage(
+            s,
+            current?.zone === 'battlefield' && current.incarnation === bound.incarnation
+              ? { id: current.id, controller: current.controller, keywords: keywords(s, current) }
+              : bound,
+            { kind: 'player', id: opponent(entry.controller) },
+            e.op === 'damageEventPowerOpponent'
+              ? current?.zone === 'battlefield' && current.incarnation === bound.incarnation
+                ? stats(s, current).power
+                : bound.power
+              : e.amount,
+          );
+        break;
+      }
       case 'draw':
         draw(s, recipient, e.count);
         break;
@@ -343,7 +485,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
         emit(s, 'lifeGain', { player: recipient, amount: e.amount });
         break;
       case 'loseLife':
-        s.players[recipient].life -= e.amount;
+        loseLife(s, recipient, e.amount);
         emit(s, 'lifeLost', { player: recipient, amount: e.amount });
         break;
       case 'moveTarget':
@@ -352,15 +494,20 @@ export function resolveEffects(s, entry, startIndex = 0) {
           ['battlefield', 'graveyard'].includes(candidate.zone) &&
           candidate.incarnation === target.incarnation
         ) {
-          if (e.destination === 'battlefield')
-            enterBattlefield(
-              s,
-              candidate,
-              e.controller === 'you' ? entry.controller : candidate.owner,
-              null,
-              { tapped: e.tapped },
-            );
-          else move(s, candidate, e.destination);
+          if (e.destination === 'battlefield') {
+            if (
+              enterBattlefield(
+                s,
+                candidate,
+                e.controller === 'you' ? entry.controller : candidate.owner,
+                null,
+                { tapped: e.tapped },
+              ) === false
+            ) {
+              s.resolving.index = index + 1;
+              return false;
+            }
+          } else move(s, candidate, e.destination);
         }
         break;
       case 'bounce':
@@ -382,7 +529,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
         break;
       case 'counter': {
         const i = s.stack.findIndex((x) => x.id === entry.target.id);
-        if (i >= 0) {
+        if (i >= 0 && !s.stack[i].uncounterable) {
           const [countered] = s.stack.splice(i, 1);
           const card = s.objects[countered.source.id];
           if (card?.zone === 'stack') move(s, card, 'graveyard');
@@ -395,6 +542,15 @@ export function resolveEffects(s, entry, startIndex = 0) {
           const controller = e.player === 'targetController' ? entry.targetController : recipient;
           const token = addObject(s, e.definition, controller, 'void');
           enterBattlefield(s, token, controller, null, { tapped: e.tapped });
+          if (token.zone === 'battlefield' && e.temporaryKeywords?.length)
+            s.modifiers.push({
+              objectId: token.id,
+              incarnation: token.incarnation,
+              power: 0,
+              toughness: 0,
+              keywords: [...e.temporaryKeywords],
+              expires: s.turn,
+            });
         }
         break;
       default:
@@ -417,6 +573,59 @@ export function continueResolution(s) {
 }
 export function finishResolutionChoice(s, command) {
   const choice = s.choice;
+  if (['exilePlay', 'bindingNegotiation', 'exileToGraveyard'].includes(choice.kind)) {
+    requireRule(
+      command.type === 'chooseResolutionCard',
+      'RESOLUTION_CHOICE',
+      'Choose a card for this effect.',
+    );
+    const id = command.card;
+    requireRule(
+      (id === null && choice.kind !== 'exilePlay') || choice.cards.includes(id),
+      'RESOLUTION_CARD',
+      'Choose an offered card.',
+    );
+    if (choice.kind === 'exilePlay') {
+      const object = s.objects[id];
+      requireRule(object.zone === 'exile', 'EXILE_CHOICE', 'Card has left exile.');
+      object.playPermission = {
+        player: choice.player,
+        turn: s.turn,
+        incarnation: object.incarnation,
+      };
+    } else if (choice.kind === 'bindingNegotiation') {
+      if (id !== null) {
+        requireRule(
+          s.objects[id].zone === 'hand' &&
+            s.objects[id].owner === choice.targetPlayer &&
+            definition(s, s.objects[id]).type !== 'land',
+          'DISCARD_CHOICE',
+          'Choose a nonland from the revealed hand.',
+        );
+        move(s, s.objects[id], 'graveyard');
+      } else {
+        s.choice = {
+          kind: 'exileToGraveyard',
+          player: choice.player,
+          targetPlayer: choice.targetPlayer,
+          cards: s.players[choice.targetPlayer].exile.filter((id) => !s.objects[id].faceDown),
+        };
+        return;
+      }
+    } else if (id !== null) {
+      requireRule(
+        s.objects[id].zone === 'exile' &&
+          s.objects[id].owner === choice.targetPlayer &&
+          !s.objects[id].faceDown,
+        'EXILE_CHOICE',
+        'Choose a face-up exiled card the targeted opponent owns.',
+      );
+      move(s, s.objects[id], 'graveyard');
+    }
+    s.choice = null;
+    continueResolution(s);
+    return;
+  }
   if (choice.kind === 'optionalEffect') {
     requireRule(
       command.type === 'resolveOptional' && typeof command.accept === 'boolean',
@@ -534,8 +743,17 @@ export function finishResolutionChoice(s, command) {
 export function resolveTop(s) {
   const entry = s.stack.pop();
   if (!entry) return;
-  const d = cardDefinition(entry.name, s.catalog),
-    object = s.objects[entry.source?.id];
+  if (entry.rule === 'increaseSpeed') {
+    const player = s.players[entry.controller];
+    if (player.speed > 0 && player.speed < 4) {
+      player.speed++;
+      emit(s, 'speedChanged', { player: player.id, speed: player.speed });
+    }
+    return;
+  }
+  if (entry.condition && !meetsCondition(s, entry.controller, entry.condition)) return;
+  const object = s.objects[entry.source?.id],
+    d = entry.kind === 'spell' && object ? definition(s, object) : null;
   if (entry.targetKind && !legalTarget(s, entry.targetKind, entry.target, entry.controller)) {
     emit(s, 'fizzled', { name: entry.name, stackId: entry.id });
     if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
@@ -550,6 +768,8 @@ export function resolveTop(s) {
           : s.objects[entry.target?.id]?.controller;
   if (entry.kind === 'spell' && ['creature', 'enchantment', 'artifact'].includes(d.type)) {
     enterBattlefield(s, object, entry.controller, entry.target ?? null);
+    if (entry.offspringPaid)
+      queueTrigger(s, object, [{ op: 'offspringCopy' }], `${object.name} · offspring`);
     emit(s, 'resolved', { name: entry.name, stackId: entry.id });
   } else {
     s.resolving = { entry, index: 0 };
@@ -565,6 +785,7 @@ export function stateBasedActions(s) {
   const losers = s.players.filter((p) => p.life <= 0 || p.failedDraw).map((p) => p.id);
   if (losers.length) {
     s.status = 'finished';
+    revealFaceDownAtEnd(s);
     s.winner = losers.length === 2 ? null : opponent(losers[0]);
     s.choice = null;
     emit(s, 'gameOver', {
@@ -572,6 +793,15 @@ export function stateBasedActions(s) {
       reason: losers.some((p) => s.players[p].failedDraw) ? 'emptyLibrary' : 'life',
     });
     return true;
+  }
+  let speedStarted = false;
+  for (const object of battlefield(s)) {
+    const player = s.players[object.controller];
+    if (!player.speed && definition(s, object).startEngines) {
+      player.speed = 1;
+      speedStarted = true;
+      emit(s, 'speedChanged', { player: player.id, speed: 1 });
+    }
   }
   const toGrave = [];
   for (const o of battlefield(s)) {
@@ -616,9 +846,11 @@ export function stateBasedActions(s) {
     };
     return false;
   }
-  return applyStateBasedBatch(
-    s,
-    toGrave.map((o) => o.id),
+  return (
+    applyStateBasedBatch(
+      s,
+      toGrave.map((o) => o.id),
+    ) || speedStarted
   );
 }
 function applyStateBasedBatch(s, ids) {

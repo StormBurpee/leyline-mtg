@@ -567,7 +567,7 @@
   {
     "oracleId": "86dc3a41-4fb9-4b1f-8279-2b5edbc7e170",
     "name": "Binding Negotiation",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "6fa78914-85b3-46fd-977a-0e5b4d29eca4",
@@ -697,7 +697,7 @@
   {
     "oracleId": "977c2f33-b622-4172-9efb-7f523becd32b",
     "name": "Blazemire Verge",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "088acd15-029b-4091-960a-d5060a364ca9",
@@ -1497,7 +1497,7 @@
   {
     "oracleId": "ac2086fe-98ee-4280-9c7c-c5c2d6548a8b",
     "name": "Burst Lightning",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "c61374e5-a7f6-455e-a40b-a481751b536b",

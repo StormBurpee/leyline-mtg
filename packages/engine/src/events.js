@@ -51,11 +51,22 @@ export function validateEventSpec(value) {
     )
   )
     errors.push('Unsupported event predicate field.');
-  if (!['enter', 'cast', 'dies', 'attack', 'step'].includes(spec.event))
+  if (
+    ![
+      'enter',
+      'cast',
+      'dies',
+      'attack',
+      'step',
+      'faceUp',
+      'attackGroup',
+      'noncombatDamageToPlayer',
+    ].includes(spec.event)
+  )
     errors.push('Unsupported event family.');
   if (
     spec.object !== undefined &&
-    (spec.object !== 'source' || !['enter', 'dies', 'attack'].includes(spec.event))
+    (spec.object !== 'source' || !['enter', 'dies', 'attack', 'faceUp'].includes(spec.event))
   )
     errors.push(
       'Source identity predicates currently apply to enter, dies and attack events only.',
@@ -83,5 +94,10 @@ export function matchesEvent(value, event, facts, source) {
   if (spec.excludeSource && facts.id === source.id) return false;
   if (spec.controller === 'you' && facts.controller !== source.controller) return false;
   if (spec.controller === 'opponent' && facts.controller === source.controller) return false;
+  if (event === 'attackGroup')
+    return (
+      facts.objects?.some((object) => matchesFilter(object, spec.filter, source.controller)) ??
+      false
+    );
   return matchesFilter(facts, spec.filter, source.controller);
 }

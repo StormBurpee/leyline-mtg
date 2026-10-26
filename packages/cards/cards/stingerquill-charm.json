@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "987aadac-d6a6-4e50-9468-9e8e53cc5529",
+  "name": "Stingerquill Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "R"],
+    "manaCost": "{B}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Stingerquill Charm deals 3 damage to any target.\n\u2022 Target creature gains first strike and deathtouch until end of turn.\n\u2022 Create a 2/2 colorless Wizard Soldier creature token named Cadet. It gains haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Deal 3 damage to any target",
+          "target": {
+            "scope": "damageable"
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "Grant first strike and deathtouch until end of turn",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "keywords": ["first strike", "deathtouch"],
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Create a Cadet with haste until end of turn",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/cadet",
+              "amount": 1,
+              "temporaryKeywords": ["haste"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

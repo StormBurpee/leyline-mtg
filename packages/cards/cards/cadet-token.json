@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/cadet",
+  "name": "Cadet",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Wizard", "Soldier"],
+    "colors": [],
+    "manaCost": null,
+    "power": 2,
+    "toughness": 2,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

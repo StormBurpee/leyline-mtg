@@ -34,6 +34,7 @@ for (const path of [
   'packages/forge-import/compile.js',
   'packages/engine/src/registry.js',
   'packages/engine/src/definition-validation.js',
+  'packages/engine/src/condition-schema.js',
   'packages/engine/src/selectors.js',
   'packages/engine/src/events.js',
   'packages/engine/src/types.js',

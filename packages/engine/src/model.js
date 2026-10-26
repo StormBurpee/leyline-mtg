@@ -1,9 +1,11 @@
+import { FACE_DOWN } from './disguise.js';
+import { meetsCondition } from './conditions.js';
 import { matchesFilter } from './selectors.js';
 import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.24.0';
+export const VERSION = '0.25.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -31,11 +33,31 @@ export function requireRule(ok, code, message) {
   if (!ok) throw new RuleError(code, message);
 }
 export const opponent = (p) => 1 - p;
+export function playableZone(s, o, p) {
+  return (
+    !!o &&
+    ((o.zone === 'hand' && o.owner === p) ||
+      (o.zone === 'exile' &&
+        o.playPermission?.player === p &&
+        o.playPermission.turn === s.turn &&
+        o.playPermission.incarnation === o.incarnation))
+  );
+}
+export function playableCards(s, p) {
+  return [
+    ...s.players[p].hand,
+    ...Object.values(s.objects)
+      .filter((o) => o.zone === 'exile' && playableZone(s, o, p))
+      .map((o) => o.id),
+  ];
+}
+
 export const emptyMana = () => Object.fromEntries(COLORS.map((c) => [c, 0]));
 export function definition(stateOrObject, object) {
+  if ((object ?? stateOrObject).faceDown) return FACE_DOWN;
   return object
-    ? cardDefinition(object.name, stateOrObject.catalog)
-    : cardDefinition(stateOrObject.name);
+    ? (object.definitionOverride ?? cardDefinition(object.name, stateOrObject.catalog))
+    : (stateOrObject.definitionOverride ?? cardDefinition(stateOrObject.name));
 }
 export const battlefield = (s) => Object.values(s.objects).filter((o) => o.zone === 'battlefield');
 export const creatures = (s) => battlefield(s).filter((o) => definition(s, o).type === 'creature');
@@ -64,6 +86,7 @@ export function keywords(s, o) {
   return [
     ...new Set([
       ...definition(s, o).keywords,
+      ...(s.players[o.controller].speed === 4 ? (definition(s, o).maxSpeedKeywords ?? []) : []),
       ...battlefield(s).flatMap((source) => {
         const e = definition(s, source).static;
         return e?.kind === 'anthem' && staticApplies(s, source, o, e) ? (e.keywords ?? []) : [];
@@ -161,6 +184,40 @@ export function addObject(s, name, owner, zone = 'library') {
 export function ref(o) {
   return { kind: 'object', id: o.id, incarnation: o.incarnation };
 }
+export function revealFaceDownAtEnd(s) {
+  for (const object of Object.values(s.objects))
+    if (object.faceDown) {
+      emit(s, 'revealed', { objectId: object.id, name: object.name });
+      delete object.faceDown;
+    }
+}
+export function loseLife(s, player, amount) {
+  s.players[player].life -= amount;
+  if (amount > 0) {
+    s.players[player].lifeLostTurn = s.turn;
+    const racer = s.players[opponent(player)];
+    if (
+      s.active === racer.id &&
+      racer.speed > 0 &&
+      racer.speed < 4 &&
+      racer.speedTriggeredTurn !== s.turn
+    ) {
+      racer.speedTriggeredTurn = s.turn;
+      s.pendingTriggers.push({
+        id: `s${++s.nextId}`,
+        kind: 'ability',
+        name: 'Speed',
+        controller: racer.id,
+        source: null,
+        sourceKeywords: [],
+        effects: [],
+        rule: 'increaseSpeed',
+        label: 'Increase speed by 1',
+      });
+      emit(s, 'speedTriggered', { player: racer.id });
+    }
+  }
+}
 export function queueTrigger(
   s,
   source,
@@ -178,6 +235,7 @@ export function queueTrigger(
     controller: source.controller,
     effects: structuredClone(effects),
     sourceKeywords: sourceKeywords ?? keywords(s, source),
+    sourceDefinition: structuredClone(definition(s, source)),
     label,
     ...(optional ? { optional: true } : {}),
     ...(targetKind ? { targetKind: structuredClone(targetKind) } : {}),
@@ -197,6 +255,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     definition: d,
     controller: payload.player ?? object?.controller,
     step: payload.step,
+    objects: payload.objects,
     owner: object?.owner,
     token: object?.token,
     tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
@@ -211,7 +270,10 @@ export function notifyTriggers(s, event, payload, context = null) {
     battlefield(s).map((object) => ({ object, keywords: keywords(s, object) }));
   for (const { object: watcher, keywords: sourceKeywords } of watchers)
     for (const trigger of definition(s, watcher).triggers ?? [])
-      if (matchesEvent(trigger.event, event === 'enters' ? 'enter' : event, facts, watcher))
+      if (
+        matchesEvent(trigger.event, event === 'enters' ? 'enter' : event, facts, watcher) &&
+        meetsCondition(s, watcher.controller, trigger.condition)
+      ) {
         queueTrigger(
           s,
           watcher,
@@ -221,6 +283,17 @@ export function notifyTriggers(s, event, payload, context = null) {
           trigger.target,
           sourceKeywords,
         );
+        const queued = s.pendingTriggers.at(-1);
+        if (trigger.condition) queued.condition = structuredClone(trigger.condition);
+        if (object)
+          queued.eventSource = {
+            ...ref(object),
+            controller: facts.controller,
+            keywords: facts.keywords ?? [],
+            power: facts.power,
+            definition: structuredClone(d),
+          };
+      }
 }
 /** CR 603.10: leaves-the-battlefield triggers look back before the event.
  * One shared snapshot is used for an entire simultaneous state-based-action batch.
@@ -277,17 +350,28 @@ export function move(s, o, to, departureContext = null) {
         ? [...s.choice.entries, ...s.choice.remaining.flatMap((group) => group.entries)]
         : []),
     ];
-    for (const entry of entries)
+    for (const entry of entries) {
+      if (entry.eventSource?.id === o.id && entry.eventSource.incarnation === o.incarnation) {
+        entry.eventSource.keywords = keywords(s, o);
+        entry.eventSource.controller = o.controller;
+        entry.eventSource.power = stats(s, o).power;
+        entry.eventSource.definition = structuredClone(definition(s, o));
+      }
       if (entry.source?.id === o.id && entry.source.incarnation === o.incarnation) {
         entry.sourceKeywords = keywords(s, o);
         entry.sourceController = o.controller;
+        entry.sourceDefinition = structuredClone(definition(s, o));
       }
+    }
   }
   for (const p of s.players)
     for (const z of ['hand', 'library', 'graveyard', 'exile']) {
       const i = p[z].indexOf(o.id);
       if (i >= 0) p[z].splice(i, 1);
     }
+  const preserveFaceDown = o.faceDown && from === 'stack' && to === 'battlefield';
+  if (o.faceDown && !preserveFaceDown) emit(s, 'revealed', { objectId: o.id, name: o.name });
+  if (!preserveFaceDown) delete o.faceDown;
   o.zone = to;
   o.incarnation++;
   o.controller = o.owner;
@@ -297,8 +381,15 @@ export function move(s, o, to, departureContext = null) {
   o.tapped = false;
   o.controlledSince = s.turn;
   o.attachedTo = null;
+  delete o.chosenCreatureType;
+  delete o.playPermission;
   if (s.players[o.owner][to]) s.players[o.owner][to].push(o.id);
-  emit(s, 'zoneChange', { objectId: o.id, name: o.name, from, to });
+  emit(s, 'zoneChange', {
+    objectId: o.id,
+    name: o.faceDown || o.castingFaceDown ? 'Face-down creature' : o.name,
+    from,
+    to,
+  });
   if (dying) notifyTriggers(s, 'dies', { object: departed }, context);
   return o;
 }
@@ -412,7 +503,7 @@ export function playerView(state, viewer, { includeEvents = true } = {}) {
         const o = s.objects[id];
         const visible =
           zone === 'hand'
-            ? p.id === viewer
+            ? p.id === viewer || state.resolving?.revealedPlayer === p.id
             : state.choice?.player === viewer &&
               ((state.choice.kind === 'libraryOrder' && state.choice.cards.includes(id)) ||
                 (state.choice.kind === 'librarySearch' && o.owner === viewer));
@@ -429,6 +520,11 @@ export function playerView(state, viewer, { includeEvents = true } = {}) {
     ['libraryOrder', 'librarySearch', 'discardEffect'].includes(s.choice?.kind)
   )
     s.choice = { kind: 'opponentChoice', player: s.choice.player };
+  for (const o of Object.values(s.objects))
+    if (o.faceDown && o.controller !== viewer) {
+      o.name = 'Face-down creature';
+      delete o.definitionOverride;
+    }
   s.events = s.events.map((e) => {
     const c = { ...e };
     delete c.seed;

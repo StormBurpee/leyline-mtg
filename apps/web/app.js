@@ -1,3 +1,5 @@
+import { playableZone, playableCards } from '../../packages/engine/src/model.js';
+import { castingChoices } from '../../packages/engine/src/spell-modes.js';
 import { inspectableCard, readableCard } from './card-inspection.js';
 import { readableHandCard } from './hand-layout.js';
 import { duelShortcut } from './duel-shortcuts.js';
@@ -341,7 +343,10 @@ function showCardReader(id) {
   if (!object) return false;
   ui.inspect = object.name;
   ui.inspectObject = id;
-  openDialog(object.name, inspect(object.name, metadata, state, id));
+  openDialog(
+    object.faceDown && object.controller !== viewer() ? 'Face-down creature' : object.name,
+    inspect(object.name, metadata, state, id, viewer()),
+  );
   return true;
 }
 function closeDialog() {
@@ -442,12 +447,12 @@ function showDeck() {
 }
 function showSpellModes() {
   const o = state?.objects[ui.selected];
-  if (!o || o.zone !== 'hand' || o.owner !== viewer() || !definition(state, o).modes) return;
+  if (!o || !playableZone(state, o, viewer()) || !castingChoices(definition(state, o))) return;
   ui.spellMode = null;
   ui.targeting = false;
   render();
   openDialog(
-    `Choose a mode: ${o.name}`,
+    `Casting options: ${o.name}`,
     spellModeBody(state, viewer(), o.id),
     '<button class="btn quiet" data-action="closeDialog">Cancel</button>',
   );
@@ -939,6 +944,19 @@ async function action(name, el) {
       )
         closeDialog();
       break;
+    case 'chooseResolutionCard':
+    case 'skipResolutionCard':
+      send({
+        type: 'chooseResolutionCard',
+        card: name === 'skipResolutionCard' ? null : el.dataset.cardid,
+      });
+      break;
+    case 'chooseCreatureType':
+      send({
+        type: 'chooseCreatureType',
+        creatureType: document.getElementById('entry-creature-type')?.value,
+      });
+      break;
     case 'payWard':
     case 'declineWard':
       send({ type: 'payCost', pay: name === 'payWard' });
@@ -1117,7 +1135,23 @@ async function action(name, el) {
       closeDialog();
       ui.selected = id;
       ui.activation = index;
-      if (a.target) {
+      if (a.cost.discard) {
+        const choices = legalActions(state, viewer()).filter(
+          (c) => c.type === 'activate' && c.card === id && c.ability === index,
+        );
+        openDialog(
+          'Discard a card as the activation cost',
+          choices
+            .map(
+              (c, i) =>
+                `<button class="btn" data-action="payActivationDiscard" data-index="${i}">${escape(state.objects[c.discardCard].name)}</button>`,
+            )
+            .join(''),
+          '<button class="btn quiet" data-action="closeDialog">Cancel</button>',
+        );
+        dialog._discardActions = choices;
+        dialog._discardRevision = state.revision;
+      } else if (a.target) {
         ui.targeting = true;
         render();
         if (
@@ -1127,6 +1161,17 @@ async function action(name, el) {
         )
           showTargetMenu();
       } else send({ type: 'activate', card: id, ability: index });
+      break;
+    }
+    case 'payActivationDiscard': {
+      const command = dialog._discardActions?.[Number(el.dataset.index)];
+      if (!command || state.revision !== dialog._discardRevision) {
+        closeDialog();
+        toast('The game changed. Choose the ability again.');
+        break;
+      }
+      closeDialog();
+      send(command);
       break;
     }
     case 'spellModes':
@@ -1160,6 +1205,10 @@ async function action(name, el) {
       action('playSelected', el);
       break;
     }
+    case 'turnFaceUp':
+      closeDialog();
+      send({ type: 'turnFaceUp', card: el.dataset.cardid });
+      break;
     case 'cycleSelected':
       if (ui.selected) send({ type: 'cycle', card: ui.selected });
       break;
@@ -1167,7 +1216,7 @@ async function action(name, el) {
       const o = state.objects[ui.selected];
       if (!o) break;
       const printed = definition(state, o);
-      if (printed.modes && ui.spellMode == null) {
+      if (castingChoices(printed) && ui.spellMode == null) {
         showSpellModes();
         break;
       }
@@ -1191,7 +1240,8 @@ async function action(name, el) {
           )
         )
           showTargetMenu();
-      } else send({ type: 'cast', card: o.id, ...(d.modes ? { mode: ui.spellMode } : {}) });
+      } else
+        send({ type: 'cast', card: o.id, ...(castingChoices(d) ? { mode: ui.spellMode } : {}) });
       break;
     }
     case 'pause':
@@ -1604,7 +1654,7 @@ function selectCard(id) {
     render();
     return;
   }
-  if (!c && o.zone === 'hand' && o.owner === p) {
+  if (!c && playableZone(state, o, p)) {
     const again = ui.lastHandClick?.id === id && performance.now() - ui.lastHandClick.time < 450;
     ui.lastHandClick = { id, time: performance.now() };
     if (
@@ -1628,6 +1678,15 @@ function selectCard(id) {
       ui.activation = null;
     }
     render();
+    return;
+  }
+  if (!c && o.zone === 'battlefield' && o.controller === p && o.faceDown) {
+    const allowed = legalActions(state, p).some((a) => a.type === 'turnFaceUp' && a.card === id);
+    openDialog(
+      'Turn face up',
+      '<p>This is a special action, not an activated ability. Pay the disguise cost to reveal it without using the stack.</p>',
+      `<button class="btn primary" data-action="turnFaceUp" data-cardid="${id}" ${allowed ? '' : 'disabled'}>Turn face up</button><button class="btn" data-action="closeDialog">Cancel</button>`,
+    );
     return;
   }
   if (
@@ -1761,7 +1820,7 @@ app.addEventListener('pointerover', (e) => {
   ui.inspectObject = el.dataset.card;
   ui.inspect = name;
   const detail = document.querySelector('#inspect-detail');
-  if (detail) detail.innerHTML = inspect(name, metadata, state, ui.inspectObject);
+  if (detail) detail.innerHTML = inspect(name, metadata, state, ui.inspectObject, viewer());
 });
 document.addEventListener('change', (e) => {
   switch (e.target.id) {

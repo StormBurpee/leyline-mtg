@@ -6,7 +6,7 @@ export const REQUESTED_DECKS = Object.freeze({
     thumbnail: 'Gev, Scaled Scorch',
     archetype: 'Your requested default',
     description:
-      'Your exact 60-card list. No substitutions. Play unlocks when every required card and mechanic is implemented.',
+      'Your exact 60-card Rakdos list, ready to play. Lizard pressure, damage payoffs, disguise and offspring. No substitutions.',
     requested: true,
     cards: {
       'Fireglass Mentor': 4,

@@ -60,12 +60,20 @@ export type CardPredicate =
   | { toughness: NumericComparison }
   | { manaValue: NumericComparison };
 export interface TargetSpec {
-  scope: 'permanent' | 'spell' | 'player' | 'damageable' | 'graveyard';
+  scope: 'permanent' | 'spell' | 'player' | 'damageable' | 'graveyard' | 'playerOrPlaneswalker';
   where?: CardPredicate;
 }
 export type TargetKind = LegacyTargetKind | TargetSpec;
 export interface EventSpec {
-  event: 'enter' | 'cast' | 'dies' | 'attack' | 'step';
+  event:
+    | 'enter'
+    | 'cast'
+    | 'dies'
+    | 'attack'
+    | 'step'
+    | 'attackGroup'
+    | 'noncombatDamageToPlayer'
+    | 'faceUp';
   step?: 'upkeep' | 'beginCombat' | 'end' | 'main1' | 'main2';
   object?: 'source';
   controller?: 'you' | 'opponent';
@@ -73,6 +81,11 @@ export interface EventSpec {
   excludeSource?: boolean;
 }
 export type Effect =
+  | { op: 'damageEventPowerOpponent' }
+  | { op: 'impulseChoose'; count: number }
+  | { op: 'bindingNegotiation' }
+  | { op: 'addMana'; mana: ManaCost }
+  | { op: 'damageEventOpponent'; amount: number }
   | { op: 'damage' | 'damageOpponent'; amount: number }
   | { op: 'gainLife' | 'loseLife'; amount: number; player?: 'controller' | 'opponent' | 'target' }
   | {
@@ -124,9 +137,13 @@ export type Effect =
       op: 'token';
       definition: string;
       count: number;
+      temporaryKeywords?: string[];
       player?: 'controller' | 'opponent' | 'target' | 'targetController';
       tapped?: boolean;
     };
+export type StateCondition =
+  | { kind: 'opponentLostLifeThisTurn' }
+  | { kind: 'controlAtLeast'; count: number; where: CardPredicate };
 export interface CardDefinition {
   readonly name: string;
   readonly type: CardType;
@@ -143,10 +160,21 @@ export interface CardDefinition {
   readonly token?: boolean;
   readonly mana?: Color | readonly Color[];
   readonly manaSacrifice?: boolean;
+  readonly chooseCreatureType?: boolean;
+  readonly manaRestrictions?: Partial<Record<Color, 'creature' | 'chosenCreatureType'>>;
   readonly entersTapped?: boolean;
+  readonly entersTappedUnless?: StateCondition;
+  readonly manaConditions?: Partial<Record<Color, StateCondition>>;
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
   readonly cycling?: ManaCost;
+  readonly kicker?: { cost: ManaCost; effects: readonly Effect[] };
+  readonly offspring?: ManaCost;
+  readonly disguise?: ManaCost;
+  readonly startEngines?: boolean;
+  readonly maxSpeedKeywords?: readonly string[];
+  readonly entryCounterBonus?: { amount: number; condition: StateCondition };
+  readonly damageBonus?: { amount: number; where: CardPredicate };
   readonly cannotAttack?: boolean;
   readonly cannotBlock?: boolean;
   readonly unblockable?: boolean;
@@ -180,13 +208,16 @@ export interface CardDefinition {
     effects: readonly Effect[];
     target?: TargetKind;
     optional?: boolean;
+    condition?: StateCondition;
   }[];
   readonly activated?: readonly {
-    cost: { mana?: ManaCost; tap?: boolean; life?: number; sacrificeSelf?: boolean };
+    cost: { mana?: ManaCost; tap?: boolean; life?: number; sacrificeSelf?: boolean; discard?: 1 };
     target?: TargetKind | null;
     effects: readonly Effect[];
     text: string;
     timing?: 'sorcery';
+    condition?: StateCondition;
+    oncePerTurn?: boolean;
   }[];
 }
 export type CardSpec = Omit<CardDefinition, 'text' | 'color' | 'keywords' | 'subtypes'> &
@@ -205,12 +236,26 @@ export interface GameObject {
   controlledSince: number;
   token: boolean;
   attachedTo: ObjectTarget | null;
+  faceDown?: boolean;
+  definitionOverride?: CardDefinition;
+  chosenCreatureType?: string;
+  abilityUses?: Record<number, string>;
+  playPermission?: { player: PlayerId; turn: number; incarnation: number };
 }
 export interface PlayerState {
   id: PlayerId;
   name: string;
   life: number;
   mana: Record<Color, number>;
+  restrictedMana?: {
+    color: Color;
+    restriction: 'creature' | 'chosenCreatureType';
+    creatureType?: string;
+    uncounterable: boolean;
+  }[];
+  speed?: number;
+  speedTriggeredTurn?: number;
+  lifeLostTurn?: number;
   hand: string[];
   library: string[];
   graveyard: string[];
@@ -225,7 +270,13 @@ export interface StackEntry {
   kind: 'spell' | 'ability';
   name: string;
   controller: PlayerId;
-  source: ObjectTarget;
+  source: ObjectTarget | null;
+  sourceDefinition?: CardDefinition;
+  rule?: 'increaseSpeed';
+  kicked?: boolean;
+  offspringPaid?: boolean;
+  uncounterable?: boolean;
+  condition?: StateCondition;
   sourceKeywords: string[];
   sourceController?: PlayerId;
   effects: (Effect | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } })[];
@@ -251,6 +302,25 @@ export interface DamageSource {
   keywords: string[];
 }
 export type Choice =
+  | {
+      kind: 'exilePlay' | 'bindingNegotiation' | 'exileToGraveyard';
+      player: PlayerId;
+      cards: string[];
+      targetPlayer?: PlayerId;
+    }
+  | {
+      kind: 'creatureType';
+      player: PlayerId;
+      card: string;
+      types: readonly string[];
+      typeChoices: Record<string, string>;
+      entries: {
+        object: ObjectTarget;
+        controller?: PlayerId;
+        attachment?: ObjectTarget | null;
+        tapped?: boolean;
+      }[];
+    }
   | {
       kind: 'legendRule';
       player: PlayerId;
@@ -352,7 +422,7 @@ export interface GameState {
     expires: number;
   }[];
   choice: Choice | null;
-  resolving: { entry: StackEntry; index: number } | null;
+  resolving: { entry: StackEntry; index: number; revealedPlayer?: PlayerId } | null;
   combat: {
     attackers: ObjectTarget[];
     blocks: Record<string, ObjectTarget[]>;
@@ -366,6 +436,9 @@ export interface GameState {
   players: PlayerState[];
 }
 export type Action =
+  | { type: 'turnFaceUp'; card: string }
+  | { type: 'chooseCreatureType'; creatureType: string }
+  | { type: 'chooseResolutionCard'; card: string | null }
   | { type: 'chooseLegend'; card: string }
   | { type: 'cycle'; card: string }
   | { type: 'resolveOptional'; accept: boolean }
@@ -374,7 +447,7 @@ export type Action =
   | { type: 'playLand'; card: string }
   | { type: 'tapMana'; card: string; color?: Color }
   | { type: 'cast'; card: string; target?: Target; autoTap?: boolean; mode?: number }
-  | { type: 'activate'; card: string; ability: number; target?: Target }
+  | { type: 'activate'; card: string; ability: number; discardCard?: string; target?: Target }
   | { type: 'bottom' | 'discard' | 'discardEffect' | 'attackers'; cards: string[] }
   | { type: 'blockers'; pairs: { blocker: string; attacker: string }[] }
   | { type: 'assignDamage'; orders: DamageOrder[] }
@@ -394,6 +467,7 @@ export type LegalAction =
           | 'playLand'
           | 'tapMana'
           | 'cast'
+          | 'turnFaceUp'
           | 'cycle'
           | 'activate'
           | 'chooseTriggerTarget'

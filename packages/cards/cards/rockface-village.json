@@ -1,0 +1,71 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7e103748-3f76-42ce-a063-d0256b2dce2b",
+  "name": "Rockface Village",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {C}.\n{T}: Add {R}. Spend this mana only to cast a creature spell.\n{R}, {T}: Target Lizard, Mouse, Otter, or Raccoon you control gets +1/+0 and gains haste until end of turn. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C", "R"],
+      "restrictions": {
+        "R": "creature"
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{R}",
+        "tap": true
+      },
+      "timing": "sorcery",
+      "text": "Give a Lizard, Mouse, Otter, or Raccoon you control +1/+0 and haste until end of turn.",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            },
+            {
+              "any": [
+                {
+                  "subtype": "Lizard"
+                },
+                {
+                  "subtype": "Mouse"
+                },
+                {
+                  "subtype": "Otter"
+                },
+                {
+                  "subtype": "Raccoon"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 1,
+          "toughness": 0,
+          "keywords": ["haste"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

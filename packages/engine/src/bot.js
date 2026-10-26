@@ -39,6 +39,28 @@ export function chooseBotCommand(s, p) {
   if (c) {
     if (c.player !== p) return null;
     switch (c.kind) {
+      case 'exilePlay':
+      case 'bindingNegotiation':
+      case 'exileToGraveyard': {
+        const candidates = c.cards.filter(
+          (id) => c.kind !== 'bindingNegotiation' || definition(s, s.objects[id]).type !== 'land',
+        );
+        candidates.sort((a, b) => value(s, s.objects[b]) - value(s, s.objects[a]));
+        return { type: 'chooseResolutionCard', player: p, card: candidates[0] ?? null };
+      }
+      case 'creatureType': {
+        const counts = new Map();
+        for (const o of Object.values(s.objects))
+          if (o.owner === p && o.name)
+            for (const type of definition(s, o).subtypes ?? [])
+              if (c.types.includes(type)) counts.set(type, (counts.get(type) ?? 0) + 1);
+        return {
+          type: 'chooseCreatureType',
+          player: p,
+          creatureType:
+            [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]?.[0] ?? 'Human',
+        };
+      }
       case 'legendRule':
         return {
           type: 'chooseLegend',
@@ -163,6 +185,8 @@ export function chooseBotCommand(s, p) {
   }
   if (s.priority !== p) return null;
   const actions = legalActions(s, p).filter((action) => actionSafe(s, p, action));
+  const faceUp = actions.find((a) => a.type === 'turnFaceUp');
+  if (faceUp) return { ...faceUp, player: p };
   const lethal = actions.find((action) => directLethal(s, p, action));
   if (lethal) return { ...lethal, player: p };
   const land = chooseLandAction(s, p, actions);

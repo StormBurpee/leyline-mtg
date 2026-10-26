@@ -1,7 +1,9 @@
-import { definition, isSick, requireRule, emit, move } from './model.js';
+import { definition, isSick, requireRule, emit, move, loseLife } from './model.js';
 import { planPayment, pay } from './mana.js';
 /** Pure affordability check. No partial payment mutates the game. */
-export function costProblem(s, p, cost, { sourceId, autoTap = true } = {}) {
+export function costProblem(s, p, cost, { sourceId, autoTap = true, discardCard } = {}) {
+  if (cost.discard && !s.players[p].hand.includes(discardCard))
+    return 'Choose a card in your hand to discard as a cost.';
   const source = sourceId ? s.objects[sourceId] : null;
   if (
     cost.tap &&
@@ -42,6 +44,10 @@ export function payCost(s, p, cost, options = {}) {
       ? [options.sourceId]
       : [],
   );
+  if (cost.discard) {
+    move(s, s.objects[options.discardCard], 'graveyard');
+    emit(s, 'discard', { player: p, count: 1 });
+  }
   if (cost.tap) s.objects[options.sourceId].tapped = true;
   if (cost.sacrificeSelf) {
     const object = s.objects[options.sourceId];
@@ -49,7 +55,7 @@ export function payCost(s, p, cost, options = {}) {
     move(s, object, 'graveyard');
   }
   if (cost.life) {
-    s.players[p].life -= cost.life;
+    loseLife(s, p, cost.life);
     emit(s, 'lifePaid', { player: p, amount: cost.life });
   }
 }

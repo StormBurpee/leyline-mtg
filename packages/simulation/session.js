@@ -48,8 +48,9 @@ export function createSession(config = {}) {
             state.objects[a].name.localeCompare(state.objects[b].name),
           )
         : []),
-      ...state.stack.map((e) => e.source.id),
+      ...state.stack.map((e) => e.source?.id).filter(Boolean),
       ...state.players.flatMap((p) => [...p.graveyard, ...p.exile]),
+      ...visible.filter((o) => o.zone === 'hand').map((o) => o.id),
       ...visible.filter((o) => o.zone === 'battlefield').map((o) => o.id),
     ];
     const allowed = new Set(visible.map((o) => o.id));
@@ -117,10 +118,10 @@ export function createSession(config = {}) {
     };
     function decode(value, key = '') {
       if (
-        ['card', 'blocker', 'attacker'].includes(key) ||
+        ['card', 'blocker', 'attacker', 'discardCard'].includes(key) ||
         (key === 'source' && typeof value === 'string')
       )
-        return handle(value);
+        return value === null ? null : handle(value);
       if (['cards', 'top', 'rest'].includes(key)) {
         if (!Array.isArray(value)) throw new Error('Expected a list of object handles.');
         return value.map(handle);

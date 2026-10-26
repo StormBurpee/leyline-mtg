@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "89ca686a-7c72-4d8f-9290-e89635624a83",
+  "name": "Cavern of Souls",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.",
+  "abilities": [
+    {
+      "kind": "chooseCreatureType"
+    },
+    {
+      "kind": "mana",
+      "produces": ["C", "W", "U", "B", "R", "G"],
+      "restrictions": {
+        "W": "chosenCreatureType",
+        "U": "chosenCreatureType",
+        "B": "chosenCreatureType",
+        "R": "chosenCreatureType",
+        "G": "chosenCreatureType"
+      }
+    }
+  ]
+}

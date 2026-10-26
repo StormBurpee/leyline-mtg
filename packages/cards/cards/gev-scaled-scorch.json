@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "77b832a8-a3af-44fe-bc67-72510d292667",
+  "name": "Gev, Scaled Scorch",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Lizard", "Mercenary"],
+    "colors": ["B", "R"],
+    "manaCost": "{B}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Ward\u2014Pay 2 life.\nOther creatures you control enter with an additional +1/+1 counter on them for each opponent who lost life this turn.\nWhenever you cast a Lizard spell, Gev deals 1 damage to target opponent.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "life": 2
+      }
+    },
+    {
+      "kind": "entryCounterBonus",
+      "amount": 1,
+      "condition": {
+        "kind": "opponentLostLifeThisTurn"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "subtype": "Lizard"
+        }
+      },
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

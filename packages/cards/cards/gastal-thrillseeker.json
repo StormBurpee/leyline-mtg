@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d185ad9f-c7fc-41f0-b852-4fe2cde0a8ae",
+  "name": "Gastal Thrillseeker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Berserker"],
+    "colors": ["B", "R"],
+    "manaCost": "{B}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nWhen this creature enters, it deals 1 damage to target opponent and you gain 1 life.\nMax speed \u2014 This creature has deathtouch and haste.",
+  "abilities": [
+    {
+      "kind": "startEngines"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "maxSpeedKeywords",
+      "keywords": ["deathtouch", "haste"]
+    }
+  ]
+}

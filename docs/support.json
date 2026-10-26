@@ -1,5 +1,5 @@
 {
-  "version": "0.24.0",
+  "version": "0.25.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -486,6 +486,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Binding Negotiation",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["bindingNegotiation"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Birnin Zana Plaza",
       "type": "land",
       "keywords": [],
@@ -513,6 +521,14 @@
           "controller": "you"
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Blazemire Verge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -763,6 +779,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Burst Lightning",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Buzz Bots",
       "type": "creature",
       "keywords": ["flying", "vigilance"],
@@ -841,6 +865,14 @@
       "opcodes": ["destroy"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Cavern of Souls",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Centaur Courser",
@@ -1787,6 +1819,20 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Fireglass Mentor",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["impulseChoose"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "main2",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Fisk Tower",
       "type": "land",
       "keywords": [],
@@ -1809,6 +1855,14 @@
       "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Flamecache Gecko",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["addMana", "draw"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
     },
     {
       "name": "Flamekin Gildweaver",
@@ -1963,12 +2017,39 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gastal Thrillseeker",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage", "gainLife"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Gates of Istfell",
       "type": "land",
       "keywords": [],
       "opcodes": ["gainLife", "draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Gev, Scaled Scorch",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "ward": {
+        "life": 2
+      },
+      "triggers": [
+        {
+          "event": "cast",
+          "controller": "you",
+          "filter": {
+            "subtype": "Lizard"
+          }
+        }
+      ],
+      "activatedAbilities": 0
     },
     {
       "name": "Giant Growth",
@@ -2316,6 +2397,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Haunted Ridge",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Healer's Hawk",
       "type": "creature",
       "keywords": ["flying", "lifelink"],
@@ -2435,6 +2524,22 @@
       "opcodes": ["token", "modifyAll"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Hired Claw",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage", "counterOn"],
+      "triggers": [
+        {
+          "event": "attackGroup",
+          "controller": "you",
+          "filter": {
+            "subtype": "Lizard"
+          }
+        }
+      ],
+      "activatedAbilities": 1
     },
     {
       "name": "Holy Cow",
@@ -2613,6 +2718,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ingris Stingerquill",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["damageEventOpponent", "token", "modifyAll"],
+      "triggers": [
+        {
+          "event": "attack",
+          "controller": "you",
+          "filter": {
+            "type": "creature"
+          }
+        }
+      ],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Insomnia, Crown City",
       "type": "land",
       "keywords": [],
@@ -2666,6 +2787,14 @@
       "keywords": ["flash"],
       "opcodes": ["token"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Iridescent Vinelasher",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": ["controllerLandEnters"],
       "activatedAbilities": 0
     },
     {
@@ -3199,6 +3328,19 @@
       "opcodes": ["moveTarget"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Master of Barbs",
+      "type": "creature",
+      "keywords": ["menace"],
+      "opcodes": ["modifyAll"],
+      "triggers": [
+        {
+          "event": "noncombatDamageToPlayer",
+          "controller": "opponent"
+        }
+      ],
+      "activatedAbilities": 0
     },
     {
       "name": "Masterful Flourish",
@@ -4158,6 +4300,22 @@
       "activatedAbilities": 2
     },
     {
+      "name": "Pyrotechnic Performer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageEventPowerOpponent"],
+      "triggers": [
+        {
+          "event": "faceUp",
+          "controller": "you",
+          "filter": {
+            "type": "creature"
+          }
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Quake, Agent of S.H.I.E.L.D.",
       "type": "creature",
       "keywords": [],
@@ -4592,6 +4750,14 @@
       "opcodes": ["modify", "untap"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Rockface Village",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Romantic Rendezvous",
@@ -5537,6 +5703,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Stingerquill Charm",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage", "modify", "token"],
+      "modes": [
+        "Deal 3 damage to any target",
+        "Grant first strike and deathtouch until end of turn",
+        "Create a Cadet with haste until end of turn"
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stony-Voiced Goblins",
       "type": "creature",
       "keywords": [],
@@ -6310,6 +6489,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Valley Flamecaller",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Valorous Stance",
       "type": "instant",
       "keywords": [],
@@ -6424,6 +6611,14 @@
       "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Viashino Pyromancer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
     },
     {
       "name": "Vibrant Cityscape",
@@ -6811,6 +7006,7 @@
   ],
   "tokens": [
     "Ally Token",
+    "Cadet",
     "Cat Token",
     "Clue Token",
     "Detective Token",
