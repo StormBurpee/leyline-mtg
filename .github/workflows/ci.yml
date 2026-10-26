@@ -29,5 +29,10 @@ jobs:
       - run: npm run typecheck
       - run: npm run cards:check
       - run: npm run check
+      - name: Formatting diagnostic
+        if: always() && matrix.os == 'ubuntu-latest' && matrix.node == 24
+        run: |
+          npx prettier --write apps/web/hand-layout.js apps/web/duel.css apps/web/duel-presentation.js apps/web/app.js apps/web/view.js tests/client-hand-layout.test.js
+          git diff -- apps/web/hand-layout.js apps/web/duel.css apps/web/duel-presentation.js apps/web/app.js apps/web/view.js tests/client-hand-layout.test.js
       - run: npm run format:check
       - run: npm run build

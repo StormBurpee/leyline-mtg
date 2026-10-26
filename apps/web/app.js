@@ -1,3 +1,4 @@
+import { readableHandCard } from './hand-layout.js';
 import { duelShortcut } from './duel-shortcuts.js';
 import { autoCommand, updateYield, stopKey, hasStop } from './priority-policy.js';
 import { installDuelPresentation } from './duel-presentation.js';
@@ -156,6 +157,7 @@ function render() {
     focusSelector = `[data-action="${CSS.escape(focused.dataset.action)}"]${focused.dataset.view ? `[data-view="${CSS.escape(focused.dataset.view)}"]` : ''}`;
   const wasDock = !!focused?.closest('.action-dock');
   app.innerHTML = `<div class="shell">${header(ui)}${ui.view === 'builder' ? deckBuilder(ui, metadata) : ui.view === 'decks' ? deckRoom(ui, metadata) : ui.view === 'cards' ? catalog(ui, metadata) : ui.view === 'engine' ? enginePage(state) : state ? game(state, ui, metadata) : deckRoom(ui, metadata)}</div>`;
+  duelPresentation.layoutHand();
   for (const position of scrollPositions) {
     const element = app.querySelector(`[data-scroll-key="${CSS.escape(position.key)}"]`);
     if (element) {
@@ -964,6 +966,14 @@ async function action(name, el) {
       resetSelection();
       render();
       break;
+    case 'readHandCard': {
+      const id = readableHandCard(state, ui, viewer());
+      if (!id) break;
+      cardDrag.cancel();
+      const object = state.objects[id];
+      openDialog(object.name, inspect(object.name, metadata, state, id));
+      break;
+    }
     case 'inspector':
       ui.inspectorOpen = !ui.inspectorOpen;
       render();

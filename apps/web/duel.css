@@ -785,7 +785,7 @@
   .target-message p {
     font-size: 9px;
   }
-  .game-layout .hand-compact {
+  .game-layout.hand-compact {
     --hand-height: 160px;
   }
 }
@@ -994,4 +994,43 @@ html[data-motion='reduced'] .click-target-tether path {
 .permanent .image-fallback small,
 .permanent .image-fallback .mana-row {
   display: none;
+}
+
+/* Width-aware hands keep their first and last cards reachable on small screens. */
+.game-layout .hand[data-layout] {
+  padding: 0 12px;
+}
+.game-layout .hand[data-layout='fan'] .hand-card {
+  margin: 0 0 0 calc(-1 * var(--hand-overlap, 0px));
+}
+.game-layout .hand[data-layout='fan'] .hand-card:first-child {
+  margin-left: 0;
+}
+.game-layout .hand[data-layout='rail'] {
+  justify-content: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 12px;
+  scrollbar-width: thin;
+}
+.game-layout .hand[data-layout='rail'] .hand-card {
+  flex: 0 0 auto;
+  margin: 0 8px 0 0;
+  transform: none;
+  scroll-snap-align: center;
+  outline-offset: -2px;
+}
+.game-layout .hand[data-layout='rail'] .hand-card:last-child {
+  margin-right: 0;
+}
+.game-layout .hand[data-layout='rail'] .hand-card:hover,
+.game-layout .hand[data-layout='rail'] .hand-card:focus-visible,
+.game-layout .hand[data-layout='rail'] .hand-card.selected {
+  transform: none;
+}
+.hand-label .read-hand-card:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
