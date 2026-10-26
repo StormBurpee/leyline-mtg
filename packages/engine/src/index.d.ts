@@ -22,7 +22,7 @@ export type Target =
   | ObjectTarget
   | { kind: 'player'; id: PlayerId }
   | { kind: 'stack'; id: string };
-export type TargetKind =
+export type LegacyTargetKind =
   | 'any'
   | 'player'
   | 'opponent'
@@ -34,6 +34,38 @@ export type TargetKind =
   | 'enchantment'
   | 'artifactOrEnchantment'
   | 'permanent';
+export type NumericComparison =
+  | { eq: number }
+  | { ne: number }
+  | { lt: number }
+  | { lte: number }
+  | { gt: number }
+  | { gte: number };
+export type CardPredicate =
+  | { all: readonly CardPredicate[] }
+  | { any: readonly CardPredicate[] }
+  | { not: CardPredicate }
+  | { type: CardType }
+  | { color: 'W' | 'U' | 'B' | 'R' | 'G' | 'colorless' }
+  | { controller: 'you' | 'opponent' }
+  | { owner: 'you' | 'opponent' }
+  | { tapped: boolean }
+  | { token: boolean }
+  | { power: NumericComparison }
+  | { toughness: NumericComparison }
+  | { manaValue: NumericComparison };
+export interface TargetSpec {
+  scope: 'permanent' | 'spell' | 'player' | 'damageable';
+  where?: CardPredicate;
+}
+export type TargetKind = LegacyTargetKind | TargetSpec;
+export interface EventSpec {
+  event: 'enter' | 'cast';
+  object?: 'source';
+  controller?: 'you' | 'opponent';
+  filter?: CardPredicate;
+  excludeSource?: boolean;
+}
 export type Effect =
   | { op: 'damage' | 'damageOpponent' | 'gainLife'; amount: number }
   | { op: 'draw' | 'scry' | 'surveil' | 'discard'; count: number }
@@ -66,6 +98,7 @@ export interface CardDefinition {
   readonly static?: { kind: 'anthem'; power: number; toughness: number };
   readonly triggers?: readonly {
     event:
+      | EventSpec
       | 'selfEnters'
       | 'controllerLandEnters'
       | 'controllerCastsArtifact'
@@ -383,3 +416,13 @@ export function createRegistry(
 export function hasType(card: CardDefinition, type: CardType): boolean;
 export function typesOf(card: CardDefinition): readonly CardType[];
 export function primaryType(types: readonly CardType[]): CardType | undefined;
+
+export function targetSpec(value: TargetKind): Readonly<TargetSpec> | null;
+export function validateTargetSpec(value: unknown): string[];
+export function validateFilter(value: unknown): string[];
+
+export const CARD_IDS: Readonly<Record<string, string>>;
+export function resolveCardName(identifier: string): string | null;
+
+export function eventSpec(value: string | EventSpec): Readonly<EventSpec> | null;
+export function validateEventSpec(value: unknown): string[];

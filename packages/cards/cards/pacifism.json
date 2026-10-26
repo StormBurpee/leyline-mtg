@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5f5e0b10-c8cf-450c-bfd3-bcb0528ec330",
+  "name": "Pacifism",
+  "characteristics": {
+    "types": ["enchantment"],
+    "subtypes": ["Aura"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "supertypes": []
+  },
+  "rulesText": "Enchant creature. Enchanted creature can’t attack or block.",
+  "abilities": [
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "restriction": "cantAttackOrBlock"
+    }
+  ]
+}

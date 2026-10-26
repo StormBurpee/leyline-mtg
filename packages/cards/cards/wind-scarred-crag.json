@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b0af0c54-2a59-4075-8543-d41ff20c4c87",
+  "name": "Wind-Scarred Crag",
+  "characteristics": {
+    "types": ["land"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": []
+  },
+  "rulesText": "Wind-Scarred Crag enters tapped. When it enters, you gain 1 life. Tap: Add R or W.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "W"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

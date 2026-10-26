@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "30997b43-fc13-41d3-8064-1ccc2cb6fd2b",
+  "name": "Raging Goblin",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "haste",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    }
+  ]
+}

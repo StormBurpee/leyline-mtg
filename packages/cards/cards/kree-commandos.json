@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "09eb988a-e2eb-42e1-a786-01be63d2263f",
+  "name": "Kree Commandos",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Kree", "Soldier", "Villain"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 2,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Flying, vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "use": "prowess"
+    }
+  ]
+}

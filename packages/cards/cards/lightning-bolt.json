@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4457ed35-7c10-48c8-9776-456485fdf070",
+  "name": "Lightning Bolt",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "supertypes": []
+  },
+  "rulesText": "Deal 3 damage to any target.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

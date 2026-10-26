@@ -26,10 +26,14 @@ The geometric Leyline mark and README diagrams are original project graphics. Ga
 
 ## Reviewed card data
 
-`packages/engine/src/reviewed-creatures.js` contains 34 single-face creature definitions derived from the same pinned Forge snapshot (`e5a0f8156da70ffc7866f923bed371c0111707cd`). Each was reviewed for representation by literal characteristics, supported combat keywords and prowess, then exercised by casting/resolution fixtures. The source scripts remain attributable to Forge contributors under GPL-3.0-or-later. Their Oracle text remains Wizards property. These checks do not certify every possible interaction with unsupported Magic mechanics.
+The v0.3–v0.5 `reviewed-creatures.js` contained 34 single-face creature definitions derived from the same pinned Forge snapshot (`e5a0f8156da70ffc7866f923bed371c0111707cd`). Each was reviewed for representation by literal characteristics, supported combat keywords and prowess, then exercised by casting/resolution fixtures. The source scripts remain attributable to Forge contributors under GPL-3.0-or-later. Their Oracle text remains Wizards property. These checks do not certify every possible interaction with unsupported Magic mechanics.
 
 `docs/card-pools/` records dated Scryfall inventories and implementation status, not executable rules. Queries, retrieval times and source-page hashes are retained. Scryfall availability tags are not a verified export of an Arena client installation. Alchemy-tagged results and auxiliary tokens/emblems are tracked separately rather than counted as playable deck cards.
 
 The adapter recognizes a narrow set of `T:` trigger predicates and unconditional self enters-tapped `R:` replacements. Unused `SVar:BuffedBy` values `Land`, `Creature` and `Card.nonCreature` are treated as AI hints, based on their use in Forge `forge-ai/.../ComputerUtil.java` and `AiController.java`; other unused variables still fail. This is not a general Forge trigger or replacement interpreter.
 
 The exact `AI:RemoveDeck:Random` presentation/deck-generation flag is ignored by the adapter. Forge `forge-core/.../CardRules.java` stores it as a random-deck exclusion, not an in-game rule. Other AI fields remain explicit diagnostics. Optional trigger control comes from `OptionalDecider$ You`; it is preserved as a resolution choice, not dropped.
+
+## Native source pack
+
+Version 0.6 migrates the complete v0.5 registry into schema-versioned JSON files under `packages/cards/cards/`. Real-card identities come from the already-retrieved Scryfall Oracle IDs. Token identities are project-local. All 129 pre-migration runtime definitions are protected by cryptographic regression contracts. The original 34-creature fixture remains under engine test fixtures, not in the production registry. This is a data-format migration, not a claim that importing Oracle text executes its rules.

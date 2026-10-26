@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5b2364d7-a811-4595-a1b4-224c70555ffa",
+  "name": "Raise the Alarm",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "supertypes": []
+  },
+  "rulesText": "Create two 1/1 white Soldier creature tokens.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/soldier-token",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

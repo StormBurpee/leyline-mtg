@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6c922206-6e68-4dcd-9559-88da1074f2c4",
+  "name": "Rugged Highlands",
+  "characteristics": {
+    "types": ["land"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": []
+  },
+  "rulesText": "Rugged Highlands enters tapped. When it enters, you gain 1 life. Tap: Add R or G.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "G"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

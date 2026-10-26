@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "67362406-b1ca-49e2-800d-9050bfe8742a",
+  "name": "Merfolk Looter",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Tap: Draw a card, then discard a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "text": "Tap: Draw a card, then discard a card."
+    }
+  ]
+}

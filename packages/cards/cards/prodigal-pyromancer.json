@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "29b3cb3e-aeb1-43eb-8095-9f7881aa34bd",
+  "name": "Prodigal Pyromancer",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Tap: This creature deals 1 damage to any target.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        }
+      ],
+      "text": "Tap: Deal 1 damage to any target."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cd403866-bef1-413a-85e2-c86e295b3589",
+  "name": "Agent of Atlas",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Human", "Spy", "Hero"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+  "abilities": [
+    {
+      "use": "prowess"
+    }
+  ]
+}

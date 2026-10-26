@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e56629ba-82d4-470f-9a6b-40c29d835af2",
+  "name": "Quakestrider Ceratops",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Dinosaur"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}{G}{G}",
+    "power": 12,
+    "toughness": 8,
+    "supertypes": []
+  },
+  "rulesText": "",
+  "abilities": []
+}

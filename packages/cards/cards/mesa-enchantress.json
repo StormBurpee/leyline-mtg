@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8f4b8a19-72f4-48ed-ac05-62a7c7525797",
+  "name": "Mesa Enchantress",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Human", "Druid"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}{W}",
+    "power": 0,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "Whenever you cast an enchantment spell, you may draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "type": "enchantment"
+        }
+      },
+      "optional": true,
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

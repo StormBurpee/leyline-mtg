@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a9d288b8-cdc1-4e55-a0c9-d6edfc95e65d",
+  "name": "Shock",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "supertypes": []
+  },
+  "rulesText": "Deal 2 damage to any target.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

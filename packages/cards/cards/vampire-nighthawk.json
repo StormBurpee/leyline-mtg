@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "feb244f8-bcb1-44cf-9940-2719221a7309",
+  "name": "Vampire Nighthawk",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}{B}",
+    "power": 2,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "flying, deathtouch, lifelink",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    }
+  ]
+}

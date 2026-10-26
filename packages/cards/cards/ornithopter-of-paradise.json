@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3a940dfa-a026-4969-8981-ef90cdfbe9ef",
+  "name": "Ornithopter of Paradise",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Thopter"],
+    "colors": [],
+    "manaCost": "{2}",
+    "power": 0,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "Flying. Tap: Add one mana of any color.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    }
+  ]
+}

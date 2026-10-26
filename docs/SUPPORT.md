@@ -1,6 +1,6 @@
 # Supported rules and cards
 
-This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The playable registry is `packages/engine/src/cards.js`.
+This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
 ## Scope
 
@@ -16,6 +16,7 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Activated abilities with mana, life and tap costs, explicit targets, and stack resolution.
 - Scry, surveil and mandatory discard choices during resolution, with instruction continuations and no intervening priority.
 - Ward triggers for opposing spells and activated abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.
+- Schema-checked card sources, reusable mechanics, composable target/event predicates and all-or-nothing pack compilation.
 - Immutable per-game catalogs validated before play and embedded in replays.
 - ETB, landfall, noncreature-cast and instant/sorcery-cast triggers. APNAP order and explicit same-controller ordering.
 - Menace, haste, vigilance, flying, reach, defender, first strike, double strike, trample, deathtouch and lifelink in the supported card pool.

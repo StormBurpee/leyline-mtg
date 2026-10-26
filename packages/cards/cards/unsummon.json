@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "837182db-1bf3-4a2c-bd01-1af9d9873561",
+  "name": "Unsummon",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "supertypes": []
+  },
+  "rulesText": "Return target creature to its owner’s hand.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

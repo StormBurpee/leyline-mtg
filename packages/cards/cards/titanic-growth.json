@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "61e09dd9-7870-48c2-9177-d6abc3162692",
+  "name": "Titanic Growth",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "supertypes": []
+  },
+  "rulesText": "Target creature gets +4/+4 until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 4,
+          "toughness": 4,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

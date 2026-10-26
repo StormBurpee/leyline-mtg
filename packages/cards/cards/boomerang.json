@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dc4a4996-108a-4aac-850f-2d9f76403446",
+  "name": "Boomerang",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}{U}",
+    "supertypes": []
+  },
+  "rulesText": "Return target permanent to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent"
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

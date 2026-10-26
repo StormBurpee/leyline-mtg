@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a2529491-7389-4cfa-92d2-145eda779603",
+  "name": "Darksteel Ingot",
+  "characteristics": {
+    "types": ["artifact"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{3}",
+    "supertypes": []
+  },
+  "rulesText": "Indestructible. Tap: Add one mana of any color.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "indestructible"
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    }
+  ]
+}

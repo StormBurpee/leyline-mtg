@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "343ecf2f-0bbc-4840-8fb3-f5f61b26e76f",
+  "name": "Swab Goblin",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Goblin", "Pirate"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "",
+  "abilities": []
+}

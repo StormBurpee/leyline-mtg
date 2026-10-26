@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "14c8f55d-d177-4c25-a931-ebeb9e6062a0",
+  "name": "Grizzly Bears",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

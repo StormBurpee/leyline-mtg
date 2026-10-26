@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b68cf4e6-205e-40b6-b28b-f4b7d8af7017",
+  "name": "Tomakul Honor Guard",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 3,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Ward {2}.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    }
+  ]
+}

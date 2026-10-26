@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7af75024-6c9b-4844-aeb6-81de25464822",
+  "name": "Phyrexian Walker",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Phyrexian", "Construct"],
+    "colors": [],
+    "manaCost": "{0}",
+    "power": 0,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

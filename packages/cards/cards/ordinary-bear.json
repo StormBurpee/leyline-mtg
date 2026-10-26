@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "89a2fab8-b074-42aa-a871-d9c5de2d0895",
+  "name": "Ordinary Bear",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Bear"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 5,
+    "supertypes": []
+  },
+  "rulesText": "",
+  "abilities": []
+}

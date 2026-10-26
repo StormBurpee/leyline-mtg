@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b2c6aa39-2d2a-459c-a555-fb48ba993373",
+  "name": "Island",
+  "characteristics": {
+    "types": ["land"],
+    "subtypes": ["Island"],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": ["basic"]
+  },
+  "rulesText": "Tap: Add U.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["U"]
+    }
+  ]
+}

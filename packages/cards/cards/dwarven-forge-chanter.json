@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e69a8970-3ead-479d-860a-26ed65f9c846",
+  "name": "Dwarven Forge-Chanter",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 1,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "Ward—Pay 2 life. Prowess.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "life": 2
+      }
+    },
+    {
+      "use": "prowess"
+    }
+  ]
+}

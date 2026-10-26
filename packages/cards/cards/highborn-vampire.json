@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1adcf587-9035-4299-a2bd-62f805fdd897",
+  "name": "Highborn Vampire",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Vampire", "Warrior"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 4,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "",
+  "abilities": []
+}

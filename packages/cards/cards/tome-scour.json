@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "446a9d7e-9c1a-4e83-8342-2ed5acae2eed",
+  "name": "Tome Scour",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "supertypes": []
+  },
+  "rulesText": "Target player mills five cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "target",
+          "amount": 5
+        }
+      ]
+    }
+  ]
+}

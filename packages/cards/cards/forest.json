@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+  "name": "Forest",
+  "characteristics": {
+    "types": ["land"],
+    "subtypes": ["Forest"],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": ["basic"]
+  },
+  "rulesText": "Tap: Add G.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["G"]
+    }
+  ]
+}

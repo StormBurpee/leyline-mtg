@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "44240b1e-c104-4eb4-8ab9-0d56607ba241",
+  "name": "Swiftblade Vindicator",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["R", "W"],
+    "manaCost": "{W}{R}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Double strike, vigilance, trample",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    }
+  ]
+}

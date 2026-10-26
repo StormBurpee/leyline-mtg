@@ -33,7 +33,7 @@ The client may pass automatically after casting, unless **Hold priority** is ena
 
 ## Cards and effects
 
-`cards.js` is the built-in, hand-authored executable registry. `registry.js` validates complete per-game catalogs, rejects unsupported fields/opcodes before play, and freezes them for safe sharing between states. Scryfall metadata is display-only and never interpreted as code. Each supported card declares costs, types, targets, keywords, effects and optional triggers or activated abilities.
+`packages/cards/cards/` is the authoritative versioned source pack. A schema-checked compiler generates the runtime catalog; `cards.js` exposes it and the deck helpers. `registry.js` validates complete per-game catalogs, rejects unsupported fields/opcodes before play, and freezes them for safe sharing between states. Scryfall metadata is display-only and never interpreted as code. Each source card declares characteristics and abilities, optionally referencing shared mechanic templates. Compilation lowers those declarations to the tested runtime instruction set. See [card data](CARD-DATA.md).
 
 `effects.js` resolves the supported opcodes, validates targets again at resolution, and batches pending triggers. Adding Oracle text to the display catalog does **not** make a card playable. Unsupported deck imports fail explicitly.
 

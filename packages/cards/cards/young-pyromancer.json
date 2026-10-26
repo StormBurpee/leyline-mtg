@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5fac139a-07d3-4e6c-98e3-d98b199f7a6f",
+  "name": "Young Pyromancer",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/elemental-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

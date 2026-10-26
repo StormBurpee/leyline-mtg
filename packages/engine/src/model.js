@@ -1,6 +1,6 @@
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.5.0';
+export const VERSION = '0.6.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -57,7 +57,7 @@ export function stats(s, o) {
       power += m.power ?? 0;
       toughness += m.toughness ?? 0;
     }
-  if (d.type === 'creature')
+  if (d.type === 'creature' && o.zone === 'battlefield')
     for (const a of controlled(s, o.controller)) {
       const effect = definition(s, a).static;
       if (effect?.kind === 'anthem') {

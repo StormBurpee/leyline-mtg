@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6fbaa853-48d4-4a3b-b22d-27415cc266d7",
+  "name": "Quaketusk Boar",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Elemental", "Boar"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}{R}",
+    "power": 5,
+    "toughness": 5,
+    "supertypes": []
+  },
+  "rulesText": "Reach, trample, haste",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    }
+  ]
+}

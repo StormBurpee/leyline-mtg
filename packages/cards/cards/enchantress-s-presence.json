@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "795b096a-2bce-4588-a2c9-abc5ea40dc0c",
+  "name": "Enchantress's Presence",
+  "characteristics": {
+    "types": ["enchantment"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "supertypes": []
+  },
+  "rulesText": "Whenever you cast an enchantment spell, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "type": "enchantment"
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

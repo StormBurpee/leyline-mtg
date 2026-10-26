@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c6a3a882-a127-4590-93d7-679ef4313efe",
+  "name": "Elvish Visionary",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "When this creature enters, draw a card.",
+  "abilities": [
+    {
+      "use": "etb.draw",
+      "args": {
+        "cards": 1
+      }
+    }
+  ]
+}

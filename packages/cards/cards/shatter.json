@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "84d32e68-72b9-432d-a023-7bc6a26b8ad0",
+  "name": "Shatter",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "supertypes": []
+  },
+  "rulesText": "Destroy target artifact.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

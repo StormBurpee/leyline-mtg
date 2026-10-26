@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "342199e0-15b6-4824-83da-25caef2592b3",
+  "name": "Hill Giant",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 3,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

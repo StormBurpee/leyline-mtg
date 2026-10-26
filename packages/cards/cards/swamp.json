@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "56719f6a-1a6c-4c0a-8d21-18f7d7350b68",
+  "name": "Swamp",
+  "characteristics": {
+    "types": ["land"],
+    "subtypes": ["Swamp"],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": ["basic"]
+  },
+  "rulesText": "Tap: Add B.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["B"]
+    }
+  ]
+}

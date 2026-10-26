@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "711eea87-0fa3-46e0-a42b-fa5a86455f04",
+  "name": "Shivan Dragon",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}",
+    "power": 5,
+    "toughness": 5,
+    "supertypes": []
+  },
+  "rulesText": "Flying. R: This creature gets +1/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{R}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ],
+      "text": "R: +1/+0 until end of turn."
+    }
+  ]
+}

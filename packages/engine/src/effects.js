@@ -1,3 +1,5 @@
+import { matchesEvent } from './events.js';
+import { targetSpec, matchesFilter } from './selectors.js';
 import { hasType } from './types.js';
 import { costProblem, payCost } from './costs.js';
 import { cardDefinition } from './cards.js';
@@ -18,34 +20,55 @@ import {
 } from './model.js';
 export function legalTarget(s, kind, target, controller) {
   if (!kind) return target == null;
-  if (!target) return false;
+  const spec = targetSpec(kind);
+  if (!spec || !target) return false;
   if (target.kind === 'player')
     return (
       (target.id === 0 || target.id === 1) &&
-      ['any', 'player', 'opponent'].includes(kind) &&
-      (kind !== 'opponent' || target.id !== controller)
+      ['player', 'damageable'].includes(spec.scope) &&
+      matchesFilter({ controller: target.id, owner: target.id }, spec.where, controller)
     );
   if (target.kind === 'stack') {
     const entry = s.stack.find((e) => e.id === target.id);
-    return (
-      !!entry &&
-      entry.kind === 'spell' &&
-      (kind === 'spell' ||
-        (kind === 'noncreatureSpell' && cardDefinition(entry.name, s.catalog).type !== 'creature'))
+    if (!entry || entry.kind !== 'spell' || spec.scope !== 'spell') return false;
+    const d = cardDefinition(entry.name, s.catalog),
+      source = s.objects[entry.source.id];
+    return matchesFilter(
+      {
+        definition: d,
+        controller: entry.controller,
+        owner: source?.owner,
+        manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+        power: d.power,
+        toughness: d.toughness,
+      },
+      spec.where,
+      controller,
     );
   }
-  if (target.kind !== 'object') return false;
+  if (target.kind !== 'object' || !['permanent', 'damageable'].includes(spec.scope)) return false;
   const o = s.objects[target.id];
   if (!o || o.zone !== 'battlefield' || o.incarnation !== target.incarnation) return false;
-  const d = definition(s, o);
-
+  const d = definition(s, o),
+    creature = hasType(d, 'creature');
+  if (spec.scope === 'damageable' && !creature) return false;
   if (hasKeyword(s, o, 'shroud') || (hasKeyword(s, o, 'hexproof') && o.controller !== controller))
     return false;
-  if (['any', 'creature'].includes(kind)) return hasType(d, 'creature');
-  if (kind === 'nonblackCreature') return hasType(d, 'creature') && !d.color.includes('B');
-  if (kind === 'artifactOrEnchantment') return hasType(d, 'artifact') || hasType(d, 'enchantment');
-  if (['artifact', 'enchantment'].includes(kind)) return hasType(d, kind);
-  return kind === 'permanent';
+  const pt = creature ? stats(s, o) : {};
+  return matchesFilter(
+    {
+      definition: d,
+      controller: o.controller,
+      owner: o.owner,
+      token: o.token,
+      tapped: o.tapped,
+      power: pt.power,
+      toughness: pt.toughness,
+      manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+    },
+    spec.where,
+    controller,
+  );
 }
 export function targetsFor(s, kind, p) {
   if (!kind) return [];
@@ -108,38 +131,26 @@ export function enterBattlefield(s, o, controller = o.owner, attachment = null) 
 }
 /** Match declarative trigger predicates against committed game events. */
 export function notifyTriggers(s, event, payload) {
+  const object = payload.object;
+  const d = payload.definition ?? definition(s, object);
+  const pt =
+    object?.zone === 'battlefield' && hasType(d, 'creature')
+      ? stats(s, object)
+      : { power: d.power, toughness: d.toughness };
+  const facts = {
+    id: object?.id,
+    definition: d,
+    controller: payload.player ?? object.controller,
+    owner: object?.owner,
+    token: object?.token,
+    tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
+    power: pt.power,
+    toughness: pt.toughness,
+    manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+  };
   for (const watcher of battlefield(s))
-    for (const trigger of definition(s, watcher).triggers ?? []) {
-      const castType = {
-        controllerCastsArtifact: 'artifact',
-        controllerCastsEnchantment: 'enchantment',
-        controllerCastsCreature: 'creature',
-      }[trigger.event];
-      const match =
-        (event === 'cast' &&
-          watcher.controller === payload.player &&
-          castType &&
-          hasType(payload.definition, castType)) ||
-        (trigger.event === 'selfEnters' &&
-          event === 'enters' &&
-          watcher.id === payload.object.id) ||
-        (trigger.event === 'controllerLandEnters' &&
-          event === 'enters' &&
-          definition(s, payload.object).type === 'land' &&
-          watcher.controller === payload.object.controller) ||
-        (trigger.event === 'otherCreatureEnters' &&
-          event === 'enters' &&
-          definition(s, payload.object).type === 'creature' &&
-          watcher.id !== payload.object.id) ||
-        (event === 'cast' &&
-          watcher.controller === payload.player &&
-          trigger.event === 'controllerCastsNoncreature' &&
-          payload.definition.type !== 'creature') ||
-        (event === 'cast' &&
-          watcher.controller === payload.player &&
-          trigger.event === 'controllerCastsInstantOrSorcery' &&
-          ['instant', 'sorcery'].includes(payload.definition.type));
-      if (match)
+    for (const trigger of definition(s, watcher).triggers ?? [])
+      if (matchesEvent(trigger.event, event === 'enters' ? 'enter' : event, facts, watcher))
         queueTrigger(
           s,
           watcher,
@@ -147,7 +158,6 @@ export function notifyTriggers(s, event, payload) {
           `${watcher.name} · triggered ability`,
           trigger.optional,
         );
-    }
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
 export function dealDamage(s, source, target, amount) {

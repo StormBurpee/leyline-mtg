@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3407fe41-fdd3-4119-8f70-4bc4590a379f",
+  "name": "Negate",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "supertypes": []
+  },
+  "rulesText": "Counter target noncreature spell.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell",
+        "where": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

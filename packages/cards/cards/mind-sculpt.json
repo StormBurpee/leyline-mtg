@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4d8592d7-2e36-4a7a-be9e-7c8f512d5f62",
+  "name": "Mind Sculpt",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "supertypes": []
+  },
+  "rulesText": "Target opponent mills seven cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "target",
+          "amount": 7
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7663ac7c-1de3-4250-b96a-fae9dbd66a27",
+  "name": "Memnite",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Construct"],
+    "colors": [],
+    "manaCost": "{0}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

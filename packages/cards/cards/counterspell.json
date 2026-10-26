@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cc187110-1148-4090-bbb8-e205694a39f5",
+  "name": "Counterspell",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}{U}",
+    "supertypes": []
+  },
+  "rulesText": "Counter target spell.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell"
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

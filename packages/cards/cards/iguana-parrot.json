@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "edd3a3ea-6bde-408c-8b16-85ed3cc312b2",
+  "name": "Iguana Parrot",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Lizard", "Bird", "Pirate"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "Flying, vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "use": "prowess"
+    }
+  ]
+}

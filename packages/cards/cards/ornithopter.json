@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a3a98bc9-caa0-49b7-951c-fe4e4f54e4ba",
+  "name": "Ornithopter",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Thopter"],
+    "colors": [],
+    "manaCost": "{0}",
+    "power": 0,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

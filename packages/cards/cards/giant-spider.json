@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e740ce2f-2134-473c-afa1-1b6d2d1e38ef",
+  "name": "Giant Spider",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 2,
+    "toughness": 4,
+    "supertypes": []
+  },
+  "rulesText": "reach",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    }
+  ]
+}

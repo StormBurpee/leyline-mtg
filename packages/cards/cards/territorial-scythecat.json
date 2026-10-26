@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "75d38954-6148-4d95-bf4b-cb82efcbe8df",
+  "name": "Territorial Scythecat",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Trample. Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

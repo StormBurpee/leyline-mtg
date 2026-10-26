@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "679841ad-f3ac-48e2-ba11-2cf6d78642b4",
+  "name": "Raging Redcap",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Goblin", "Knight"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 1,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "Double strike",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    }
+  ]
+}

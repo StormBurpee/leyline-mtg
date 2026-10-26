@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d8c7cd66-d8bf-4a99-add5-1d5651d4e025",
+  "name": "Tajuru Pathwarden",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Elf", "Warrior", "Ally"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}",
+    "power": 5,
+    "toughness": 4,
+    "supertypes": []
+  },
+  "rulesText": "Vigilance, trample",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    }
+  ]
+}

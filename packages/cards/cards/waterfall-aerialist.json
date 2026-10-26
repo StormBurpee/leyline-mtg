@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "736026b2-84d4-4452-ae0d-5d1b0af0a400",
+  "name": "Waterfall Aerialist",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 3,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Flying. Ward {2}.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    }
+  ]
+}

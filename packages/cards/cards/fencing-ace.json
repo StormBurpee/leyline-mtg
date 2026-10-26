@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2f810936-2ba6-4c2b-84a0-ff4c1deb026b",
+  "name": "Fencing Ace",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "double strike",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    }
+  ]
+}

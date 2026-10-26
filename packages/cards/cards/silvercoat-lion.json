@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e3c0b11e-7340-4e0a-98b7-91b38439d4f9",
+  "name": "Silvercoat Lion",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

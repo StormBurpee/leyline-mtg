@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ef2a24f5-ce5e-4054-843a-2cae0c66318a",
+  "name": "Youthful Knight",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "first strike",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    }
+  ]
+}

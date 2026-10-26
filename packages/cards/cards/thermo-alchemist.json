@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "228fbae1-423e-461d-b8c3-55786938a3cb",
+  "name": "Thermo-Alchemist",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 0,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "Defender. Tap: Deal 1 damage to each opponent. Whenever you cast an instant or sorcery spell, untap this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "defender"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "source"
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        }
+      ],
+      "text": "Tap: Deal 1 damage to each opponent."
+    }
+  ]
+}

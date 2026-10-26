@@ -83,7 +83,7 @@ function cast(s, p, c) {
   });
   s.passes = 0;
   emit(s, 'cast', { player: p, objectId: o.id, name: o.name, target: c.target ?? null });
-  notifyTriggers(s, 'cast', { player: p, definition: d });
+  notifyTriggers(s, 'cast', { player: p, definition: d, object: o });
   notifyTargeted(s, s.stack.at(-1));
 }
 export function abilityProblem(s, p, id, index, target) {
@@ -369,7 +369,7 @@ export function exportReplay(s) {
 export function replay(record) {
   requireRule(
     record &&
-      [VERSION, '0.4.0', '0.3.0', '0.2.0', '0.1.0'].includes(record.version) &&
+      [VERSION, '0.5.0', '0.4.0', '0.3.0', '0.2.0', '0.1.0'].includes(record.version) &&
       (record.schemaVersion === undefined || record.schemaVersion === REPLAY_SCHEMA_VERSION),
     'REPLAY_VERSION',
     'Unsupported replay schema or engine version.',

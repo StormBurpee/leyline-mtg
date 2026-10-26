@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b5ba87f5-3589-4a8b-ad65-2ae2523e98e8",
+  "name": "Thornweald Archer",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Elf", "Archer"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Reach, deathtouch",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    }
+  ]
+}

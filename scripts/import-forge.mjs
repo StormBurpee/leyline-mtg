@@ -33,6 +33,9 @@ const compilerInputs = {};
 for (const path of [
   'packages/forge-import/compile.js',
   'packages/engine/src/registry.js',
+  'packages/engine/src/definition-validation.js',
+  'packages/engine/src/selectors.js',
+  'packages/engine/src/events.js',
   'packages/engine/src/types.js',
 ])
   compilerInputs[path] = createHash('sha256')

@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "387b6b07-a283-412d-94c3-f7f1dc76e858",
+  "name": "Lava Axe",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "supertypes": []
+  },
+  "rulesText": "Deal 5 damage to target player or planeswalker. (This kernel supports players.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 5
+        }
+      ]
+    }
+  ]
+}

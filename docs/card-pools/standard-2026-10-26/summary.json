@@ -1,12 +1,15 @@
 {
   "schemaVersion": 1,
-  "compilerVersion": "0.5.0",
+  "compilerVersion": "0.6.0",
   "compilerInputs": {
-    "packages/forge-import/compile.js": "d78c5587f9cf4b34143dd7aabc0b12420ea2e362087e2911b2169b22d210fbba",
-    "packages/engine/src/registry.js": "2d2019c008304373473b066638d8527f2a54b5815a8f831a52e845defacf6a6a",
+    "packages/forge-import/compile.js": "b66df751a08d6d1ad5934577f4b488780dea98a8afc78d18cbbfdbfc7277ba2b",
+    "packages/engine/src/registry.js": "cb7b1db1914b578979a5cd5b4add27acff389643097267b1c515dc7cf1087085",
+    "packages/engine/src/definition-validation.js": "67eee89fdbf5debc4aa790931b722cbc8ca76fdd13a3c41d89d6cdcf567cc6de",
+    "packages/engine/src/selectors.js": "ff1bc57f433dc26ce29b4dba3a62ed53b342e7e087a5e8280f35b3aadc75c088",
+    "packages/engine/src/events.js": "4988757aed517203eae766e02e39b75734c7a05cda9a49790cb559ab23449acb",
     "packages/engine/src/types.js": "57f8bd1ce75c0bf683c6e9e9e179ff8477594f8ef5a636523f37d9a2bd1467aa"
   },
-  "compilerSourceSha256": "d78c5587f9cf4b34143dd7aabc0b12420ea2e362087e2911b2169b22d210fbba",
+  "compilerSourceSha256": "b66df751a08d6d1ad5934577f4b488780dea98a8afc78d18cbbfdbfc7277ba2b",
   "asOf": "2026-10-26",
   "query": "legal:standard",
   "provider": "Scryfall",

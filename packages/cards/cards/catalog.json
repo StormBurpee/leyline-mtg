@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "965139fb-2e58-4ef2-b639-3ceaa2995c00",
+  "name": "Catalog",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "supertypes": []
+  },
+  "rulesText": "Draw two cards, then discard a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

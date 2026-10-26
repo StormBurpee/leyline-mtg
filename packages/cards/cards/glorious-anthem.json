@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e3886fe8-9b76-4613-8891-4ec74657c087",
+  "name": "Glorious Anthem",
+  "characteristics": {
+    "types": ["enchantment"],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}{W}",
+    "supertypes": []
+  },
+  "rulesText": "Creatures you control get +1/+1.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

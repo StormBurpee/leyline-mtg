@@ -2,3 +2,9 @@
 *.png binary
 *.woff2 binary
 *.ttf binary
+
+packages/engine/src/generated-catalog.js linguist-generated=true
+packages/cards/compiled-manifest.json linguist-generated=true
+docs/card-pools/** linguist-generated=true
+apps/web/card-metadata.json linguist-generated=true
+docs/support.json linguist-generated=true

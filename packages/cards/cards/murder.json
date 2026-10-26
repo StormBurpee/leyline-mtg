@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "938b4e2c-88d9-4637-bc00-e228920c9a78",
+  "name": "Murder",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}{B}",
+    "supertypes": []
+  },
+  "rulesText": "Destroy target creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

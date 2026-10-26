@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9cda6cb8-c254-413a-babd-0e24e7b89cc4",
+  "name": "Jibbirik Omnivore",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Beast"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 3,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "",
+  "abilities": []
+}

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 — Versioned card sources
+
+- Replaced the hand-written JavaScript card list with one schema-versioned JSON file per card.
+- Added bounded data-only mechanic templates, stable identities and all-or-nothing compilation/linking.
+- Generated runtime data is checked against source in CI; all 129 v0.5 definition contracts are preserved.
+- Replaced closed target/event categories with composable predicates, retaining legacy compatibility.
+- Added schema validation and tests for unknown instructions, bad references, malformed data and cyclic templates.
+- Separated runtime-definition validation from catalog loading, so source compilation can bootstrap cleanly.
+- Corrected battlefield Anthem bonuses incorrectly affecting creature cards/spells outside the battlefield.
+
+The core pack remains 126 cards plus three tokens. This is an authoring/runtime architecture milestone, not full Arena coverage.
+
 ## 0.5.0 — Multiple card types and optional abilities
 
 - Artifact creatures and enchantment creatures retain both printed type categories.

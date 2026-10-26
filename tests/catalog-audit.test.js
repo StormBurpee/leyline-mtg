@@ -22,6 +22,9 @@ test('Forge inventory identifies the exact checked-in compiler source', async ()
   for (const path of [
     'packages/forge-import/compile.js',
     'packages/engine/src/registry.js',
+    'packages/engine/src/definition-validation.js',
+    'packages/engine/src/selectors.js',
+    'packages/engine/src/events.js',
     'packages/engine/src/types.js',
   ]) {
     const source = await readFile(new URL(`../${path}`, import.meta.url));

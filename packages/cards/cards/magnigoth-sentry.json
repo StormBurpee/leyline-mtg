@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b52824f9-7897-46b7-a4e5-a0261861cb5b",
+  "name": "Magnigoth Sentry",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Treefolk"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 4,
+    "supertypes": []
+  },
+  "rulesText": "Reach",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    }
+  ]
+}

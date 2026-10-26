@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "50c477c1-8457-40f6-bba9-1a4ba0862178",
+  "name": "Owlin Shieldmage",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["W", "B"],
+    "manaCost": "{3}{W}{B}",
+    "power": 3,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "Flying. Ward—Pay 3 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "life": 3
+      }
+    }
+  ]
+}

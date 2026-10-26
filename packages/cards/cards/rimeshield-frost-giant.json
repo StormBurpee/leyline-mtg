@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ec47cf67-2580-464f-8118-7eabea5be11c",
+  "name": "Rimeshield Frost Giant",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}",
+    "power": 4,
+    "toughness": 5,
+    "supertypes": []
+  },
+  "rulesText": "Ward {3}.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{3}"
+      }
+    }
+  ]
+}

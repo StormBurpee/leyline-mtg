@@ -1,4 +1,13 @@
-export { CARDS, DECKS, expandDeck, validateDeck, parseDeck, cardDefinition } from './cards.js';
+export {
+  CARDS,
+  CARD_IDS,
+  resolveCardName,
+  DECKS,
+  expandDeck,
+  validateDeck,
+  parseDeck,
+  cardDefinition,
+} from './cards.js';
 export {
   VERSION,
   REPLAY_SCHEMA_VERSION,
@@ -33,3 +42,7 @@ export { chooseBotCommand } from './bot.js';
 export { createRegistry, validateDefinition, RegistryError } from './registry.js';
 
 export { hasType, typesOf, primaryType } from './types.js';
+
+export { targetSpec, validateTargetSpec, validateFilter } from './selectors.js';
+
+export { eventSpec, validateEventSpec } from './events.js';

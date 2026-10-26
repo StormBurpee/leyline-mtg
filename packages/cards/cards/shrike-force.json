@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d014b02f-a8b8-4b97-96e0-f588792069f0",
+  "name": "Shrike Force",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Bird", "Knight"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 1,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "Flying, double strike, vigilance",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    }
+  ]
+}

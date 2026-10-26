@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ed206651-3d9b-4546-8d45-0682817192fd",
+  "name": "Bear Cub",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Bear"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "",
+  "abilities": []
+}

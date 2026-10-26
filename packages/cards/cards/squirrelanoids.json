@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "315ddc7a-c39c-43d9-b134-23acbd865e3e",
+  "name": "Squirrelanoids",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Squirrel", "Mutant"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Deathtouch",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    }
+  ]
+}

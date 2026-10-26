@@ -1,0 +1,45 @@
+{
+  "prowess": {
+    "parameters": {},
+    "abilities": [
+      {
+        "kind": "triggered",
+        "on": { "event": "cast", "controller": "you", "filter": { "not": { "type": "creature" } } },
+        "effects": [
+          { "op": "modify", "target": "source", "power": 1, "toughness": 1, "until": "endOfTurn" }
+        ]
+      }
+    ]
+  },
+  "etb.draw": {
+    "parameters": { "cards": { "type": "integer", "min": 0, "max": 1000 } },
+    "abilities": [
+      {
+        "kind": "triggered",
+        "on": { "event": "enter", "object": "source" },
+        "effects": [{ "op": "draw", "target": "controller", "amount": { "$param": "cards" } }]
+      }
+    ]
+  },
+  "landfall.grow": {
+    "parameters": {
+      "power": { "type": "integer", "min": -1000, "max": 1000 },
+      "toughness": { "type": "integer", "min": -1000, "max": 1000 }
+    },
+    "abilities": [
+      {
+        "kind": "triggered",
+        "on": { "event": "enter", "controller": "you", "filter": { "type": "land" } },
+        "effects": [
+          {
+            "op": "modify",
+            "target": "source",
+            "power": { "$param": "power" },
+            "toughness": { "$param": "toughness" },
+            "until": "endOfTurn"
+          }
+        ]
+      }
+    ]
+  }
+}

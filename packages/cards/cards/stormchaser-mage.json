@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "32902854-2c64-431e-9d9c-9a23e52afb1b",
+  "name": "Stormchaser Mage",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["U", "R"],
+    "manaCost": "{U}{R}",
+    "power": 1,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "Flying, haste. Prowess.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "use": "prowess"
+    }
+  ]
+}

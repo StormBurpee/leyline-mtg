@@ -3,7 +3,7 @@ import { primaryType } from '../engine/src/types.js';
  * Conservative Forge-script migration aid. Compiles a finite, explicit grammar
  * to executable-data candidates. It never evaluates Oracle prose or JavaScript.
  */
-import { validateDefinition } from '../engine/src/registry.js';
+import { validateDefinition } from '../engine/src/definition-validation.js';
 const KEYWORDS = new Set([
   'flying',
   'reach',

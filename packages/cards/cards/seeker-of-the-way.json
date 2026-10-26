@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e206842f-139b-490d-bc10-d365705ac720",
+  "name": "Seeker of the Way",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "Prowess. Whenever you cast a noncreature spell, this creature gains lifelink until end of turn.",
+  "abilities": [
+    {
+      "use": "prowess"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["lifelink"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

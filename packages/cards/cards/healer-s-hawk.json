@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "28a52ba1-95da-44e1-8ac5-0dc23c902394",
+  "name": "Healer's Hawk",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Bird"],
+    "colors": ["W"],
+    "manaCost": "{W}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Flying, lifelink",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    }
+  ]
+}

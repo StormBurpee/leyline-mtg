@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "422ef4ec-863a-450e-9577-a0707bc16532",
+  "name": "Brazen Scourge",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Gremlin"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}{R}",
+    "power": 3,
+    "toughness": 3,
+    "supertypes": []
+  },
+  "rulesText": "Haste",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    }
+  ]
+}

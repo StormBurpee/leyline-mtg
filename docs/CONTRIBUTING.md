@@ -19,10 +19,10 @@ Open the address printed by the server. `node scripts/build.mjs` creates a porta
 
 1. Find the current official Oracle text and the rules that its interactions require.
 2. Check `docs/SUPPORT.md`. Do not approximate a missing mechanic to make the card appear supported.
-3. Add a declarative definition to `packages/engine/src/cards.js`. Prefer existing effect opcodes.
+3. Add a versioned JSON definition under `packages/cards/cards/`. Use a verified Oracle ID and prefer existing mechanic templates. See `docs/CARD-DATA.md`.
 4. Add focused tests in `packages/engine/test/`. Test both the expected result and the ways the action should fail. Include a source leaving play, changing zones, losing its target, or interacting with another trigger where relevant.
 5. If the card needs a new opcode, implement and test the opcode separately. Unknown opcodes must throw, never silently do nothing.
-6. Refresh display metadata deliberately with `node scripts/fetch-card-metadata.mjs`. Respect the service's rate limits. Images and Oracle text do not grant executable support.
+6. Run `npm run cards:build`, then `npm run cards:check`. Never hand-edit the generated catalog. Refresh display metadata deliberately with `node scripts/fetch-card-metadata.mjs`. Respect the service's rate limits. Images and Oracle text do not grant executable support.
 7. Run checks and a real browser interaction before updating screenshots or claims.
 
 ## Rules changes
@@ -37,6 +37,8 @@ Use GPL-3.0-or-later-compatible contributions and retain upstream attribution. D
 
 ## Before opening a pull request
 
+- Source files pass JSON Schema checks and compile without unsupported instructions.
+- Generated artifacts match source (`npm run cards:check`).
 - Tests cover the actual change, including rejection behavior.
 - Invalid commands still leave their input unchanged.
 - The same seed and command log replay to the same state.

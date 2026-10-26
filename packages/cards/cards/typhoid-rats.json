@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d6ee6cc1-902d-4f56-afa5-6fa4813bfbbc",
+  "name": "Typhoid Rats",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "deathtouch",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    }
+  ]
+}

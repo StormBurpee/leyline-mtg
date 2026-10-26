@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dafd2713-d1bc-474b-b390-d2ff20b5375e",
+  "name": "Monastery Swiftspear",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 1,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "Haste. Prowess.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "use": "prowess"
+    }
+  ]
+}

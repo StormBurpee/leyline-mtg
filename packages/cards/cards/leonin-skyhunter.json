@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "517c7295-8ba2-47a6-a1c6-aee722f8ca88",
+  "name": "Leonin Skyhunter",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Cat", "Knight"],
+    "colors": ["W"],
+    "manaCost": "{W}{W}",
+    "power": 2,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

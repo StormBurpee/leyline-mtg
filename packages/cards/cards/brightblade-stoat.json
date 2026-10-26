@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f1d2f437-d474-4617-aea6-102daa5e5a15",
+  "name": "Brightblade Stoat",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Weasel", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2,
+    "supertypes": []
+  },
+  "rulesText": "First strike, lifelink",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    }
+  ]
+}

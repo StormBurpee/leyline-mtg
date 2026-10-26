@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "34ff281a-f294-4351-9665-863a5b2e882b",
+  "name": "Colossadactyl",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Dinosaur"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}{G}",
+    "power": 4,
+    "toughness": 5,
+    "supertypes": []
+  },
+  "rulesText": "Reach, trample",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+  "name": "Mountain",
+  "characteristics": {
+    "types": ["land"],
+    "subtypes": ["Mountain"],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": ["basic"]
+  },
+  "rulesText": "Tap: Add R.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["R"]
+    }
+  ]
+}

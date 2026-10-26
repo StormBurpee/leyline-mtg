@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ee8f16ba-cbf0-4286-b26c-d78dd35bee17",
+  "name": "Ankle Biter",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Snake"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Deathtouch",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    }
+  ]
+}

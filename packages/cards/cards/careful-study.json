@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "32e9aa23-fc0a-4b82-82f9-1659c304428c",
+  "name": "Careful Study",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "supertypes": []
+  },
+  "rulesText": "Draw two cards, then discard two cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

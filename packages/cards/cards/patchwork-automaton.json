@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0ba86a50-13df-4b26-8b3a-9e3917ff850f",
+  "name": "Patchwork Automaton",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Construct"],
+    "colors": [],
+    "manaCost": "{2}",
+    "power": 1,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Ward {2}. Whenever you cast an artifact spell, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

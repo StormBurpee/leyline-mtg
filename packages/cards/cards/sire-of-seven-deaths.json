@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a15547d0-bbcb-41ee-a9ae-8325a9e7fe1f",
+  "name": "Sire of Seven Deaths",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{7}",
+    "power": 7,
+    "toughness": 7,
+    "supertypes": []
+  },
+  "rulesText": "First strike, vigilance, menace, trample, reach, lifelink. Ward—Pay 7 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "life": 7
+      }
+    }
+  ]
+}

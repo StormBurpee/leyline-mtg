@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "59e7f2ae-4535-4191-98be-3e65b6b2befa",
+  "name": "Doom Blade",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "supertypes": []
+  },
+  "rulesText": "Destroy target nonblack creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "not": {
+                "color": "B"
+              }
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "95f20067-4471-4bfa-952d-dbbfbb2c2178",
+  "name": "Rearing Embermare",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Horse", "Beast"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 4,
+    "toughness": 5,
+    "supertypes": []
+  },
+  "rulesText": "Reach, haste",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    }
+  ]
+}

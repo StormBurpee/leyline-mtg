@@ -1,0 +1,70 @@
+import { validateFilter, matchesFilter } from './selectors.js';
+const freeze = (value) => {
+  if (value && typeof value === 'object') {
+    Object.values(value).forEach(freeze);
+    Object.freeze(value);
+  }
+  return value;
+};
+export const EVENT_PRESETS = freeze({
+  selfEnters: { event: 'enter', object: 'source' },
+  otherCreatureEnters: { event: 'enter', filter: { type: 'creature' }, excludeSource: true },
+  controllerLandEnters: { event: 'enter', controller: 'you', filter: { type: 'land' } },
+  controllerCastsNoncreature: {
+    event: 'cast',
+    controller: 'you',
+    filter: { not: { type: 'creature' } },
+  },
+  controllerCastsInstantOrSorcery: {
+    event: 'cast',
+    controller: 'you',
+    filter: { any: [{ type: 'instant' }, { type: 'sorcery' }] },
+  },
+  controllerCastsArtifact: { event: 'cast', controller: 'you', filter: { type: 'artifact' } },
+  controllerCastsEnchantment: { event: 'cast', controller: 'you', filter: { type: 'enchantment' } },
+  controllerCastsCreature: { event: 'cast', controller: 'you', filter: { type: 'creature' } },
+});
+const plain = (value) =>
+  value !== null &&
+  typeof value === 'object' &&
+  !Array.isArray(value) &&
+  [Object.prototype, null].includes(Object.getPrototypeOf(value));
+export const eventSpec = (value) =>
+  typeof value === 'string'
+    ? Object.hasOwn(EVENT_PRESETS, value)
+      ? EVENT_PRESETS[value]
+      : null
+    : plain(value)
+      ? value
+      : null;
+export function validateEventSpec(value) {
+  const spec = eventSpec(value);
+  if (!spec) return ['Unknown event predicate.'];
+  const errors = [];
+  if (
+    Object.keys(spec).some(
+      (key) => !['event', 'object', 'controller', 'filter', 'excludeSource'].includes(key),
+    )
+  )
+    errors.push('Unsupported event predicate field.');
+  if (!['enter', 'cast'].includes(spec.event)) errors.push('Unsupported event family.');
+  if (spec.object !== undefined && (spec.object !== 'source' || spec.event !== 'enter'))
+    errors.push('Source identity predicates currently apply to enters events only.');
+  if (spec.controller !== undefined && !['you', 'opponent'].includes(spec.controller))
+    errors.push('Unknown event controller relation.');
+  if (spec.excludeSource !== undefined && typeof spec.excludeSource !== 'boolean')
+    errors.push('excludeSource must be a boolean.');
+  if (spec.object === 'source' && spec.excludeSource)
+    errors.push('An event cannot both require and exclude its source.');
+  if (spec.filter !== undefined) errors.push(...validateFilter(spec.filter));
+  return errors;
+}
+export function matchesEvent(value, event, facts, source) {
+  const spec = eventSpec(value);
+  if (!spec || spec.event !== event) return false;
+  if (spec.object === 'source' && facts.id !== source.id) return false;
+  if (spec.excludeSource && facts.id === source.id) return false;
+  if (spec.controller === 'you' && facts.controller !== source.controller) return false;
+  if (spec.controller === 'opponent' && facts.controller === source.controller) return false;
+  return matchesFilter(facts, spec.filter, source.controller);
+}

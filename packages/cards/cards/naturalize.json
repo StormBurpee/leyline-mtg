@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bdb3ca68-ec1f-4e16-81cc-d23f8f52c728",
+  "name": "Naturalize",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "supertypes": []
+  },
+  "rulesText": "Destroy target artifact or enchantment.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

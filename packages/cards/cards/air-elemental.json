@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7744bae4-a8b7-44a5-9b4c-0048ad4cc448",
+  "name": "Air Elemental",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}",
+    "power": 4,
+    "toughness": 4,
+    "supertypes": []
+  },
+  "rulesText": "flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

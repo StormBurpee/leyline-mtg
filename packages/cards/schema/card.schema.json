@@ -1,0 +1,852 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:leyline:card:1",
+  "title": "Leyline card source v1",
+  "description": "Versioned declarative card data. Structural validity does not imply that every requested mechanic is implemented; compilation is the capability gate.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[a-z][a-z0-9.-]*:[A-Za-z0-9_/-]+)$",
+      "maxLength": 200
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "characteristics": {
+      "type": "object",
+      "properties": {
+        "types": {
+          "type": "array",
+          "items": {
+            "enum": ["land", "creature", "instant", "sorcery", "artifact", "enchantment"]
+          },
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true
+        },
+        "subtypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 20
+        },
+        "colors": {
+          "type": "array",
+          "items": {
+            "enum": ["W", "U", "B", "R", "G"]
+          },
+          "minItems": 0,
+          "maxItems": 5,
+          "uniqueItems": true
+        },
+        "manaCost": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/mana"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "power": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "toughness": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "token": {
+          "type": "boolean"
+        },
+        "supertypes": {
+          "type": "array",
+          "items": {
+            "enum": ["basic", "legendary", "snow", "world"]
+          },
+          "uniqueItems": true,
+          "maxItems": 4
+        }
+      },
+      "required": ["types", "manaCost"],
+      "additionalProperties": false
+    },
+    "rulesText": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "abilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ability"
+      },
+      "minItems": 0,
+      "maxItems": 64
+    }
+  },
+  "required": ["schemaVersion", "id", "name", "characteristics", "abilities"],
+  "additionalProperties": false,
+  "$defs": {
+    "comparison": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "eq": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": ["eq"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ne": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": ["ne"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "lt": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": ["lt"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "lte": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": ["lte"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "gt": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": ["gt"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "gte": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": ["gte"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "predicate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/predicate"
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": ["all"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "any": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/predicate"
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": ["any"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "not": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": ["not"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": ["land", "creature", "instant", "sorcery", "artifact", "enchantment"]
+            }
+          },
+          "required": ["type"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "enum": ["W", "U", "B", "R", "G", "colorless"]
+            }
+          },
+          "required": ["color"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "controller": {
+              "enum": ["you", "opponent"]
+            }
+          },
+          "required": ["controller"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "enum": ["you", "opponent"]
+            }
+          },
+          "required": ["owner"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tapped": {
+              "type": "boolean"
+            }
+          },
+          "required": ["tapped"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "boolean"
+            }
+          },
+          "required": ["token"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "power": {
+              "$ref": "#/$defs/comparison"
+            }
+          },
+          "required": ["power"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "toughness": {
+              "$ref": "#/$defs/comparison"
+            }
+          },
+          "required": ["toughness"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "manaValue": {
+              "$ref": "#/$defs/comparison"
+            }
+          },
+          "required": ["manaValue"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "selector": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "enum": ["permanent", "spell", "player", "damageable"]
+        },
+        "where": {
+          "$ref": "#/$defs/predicate"
+        }
+      },
+      "required": ["scope"],
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "event": {
+          "enum": ["enter", "cast"]
+        },
+        "object": {
+          "const": "source"
+        },
+        "controller": {
+          "enum": ["you", "opponent"]
+        },
+        "filter": {
+          "$ref": "#/$defs/predicate"
+        },
+        "excludeSource": {
+          "type": "boolean"
+        }
+      },
+      "required": ["event"],
+      "additionalProperties": false
+    },
+    "mana": {
+      "type": "string",
+      "pattern": "^(\\{[^{}]+\\})+$",
+      "maxLength": 200
+    },
+    "cost": {
+      "type": "object",
+      "properties": {
+        "mana": {
+          "$ref": "#/$defs/mana"
+        },
+        "tap": {
+          "type": "boolean"
+        },
+        "life": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "effect": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "draw"
+            },
+            "target": {
+              "const": "controller"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "gainLife"
+            },
+            "target": {
+              "const": "controller"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "scry"
+            },
+            "target": {
+              "const": "controller"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "surveil"
+            },
+            "target": {
+              "const": "controller"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "discard"
+            },
+            "target": {
+              "const": "controller"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "damage"
+            },
+            "target": {
+              "enum": ["target", "opponent", "controller"]
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "mill"
+            },
+            "target": {
+              "enum": ["target", "opponent", "controller"]
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "counterSpell"
+            },
+            "target": {
+              "const": "target"
+            }
+          },
+          "required": ["op", "target"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "returnToHand"
+            },
+            "target": {
+              "const": "target"
+            }
+          },
+          "required": ["op", "target"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "destroy"
+            },
+            "target": {
+              "const": "target"
+            }
+          },
+          "required": ["op", "target"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "modify"
+            },
+            "target": {
+              "enum": ["source", "target"]
+            },
+            "power": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "toughness": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "keywords": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "flying",
+                  "reach",
+                  "haste",
+                  "vigilance",
+                  "trample",
+                  "deathtouch",
+                  "lifelink",
+                  "defender",
+                  "first strike",
+                  "double strike",
+                  "flash",
+                  "hexproof",
+                  "shroud",
+                  "indestructible",
+                  "menace"
+                ]
+              },
+              "minItems": 0,
+              "maxItems": 16
+            },
+            "until": {
+              "const": "endOfTurn"
+            }
+          },
+          "required": ["op", "target", "power", "toughness", "until"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "createToken"
+            },
+            "token": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "token", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "addCounters"
+            },
+            "target": {
+              "const": "source"
+            },
+            "counter": {
+              "const": "+1/+1"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["op", "target", "counter", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "untap"
+            },
+            "target": {
+              "const": "source"
+            }
+          },
+          "required": ["op", "target"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ability": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "use": {
+              "type": "string",
+              "minLength": 1
+            },
+            "args": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            }
+          },
+          "required": ["use"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "keyword"
+            },
+            "keyword": {
+              "enum": [
+                "flying",
+                "reach",
+                "haste",
+                "vigilance",
+                "trample",
+                "deathtouch",
+                "lifelink",
+                "defender",
+                "first strike",
+                "double strike",
+                "flash",
+                "hexproof",
+                "shroud",
+                "indestructible",
+                "menace"
+              ]
+            }
+          },
+          "required": ["kind", "keyword"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "keyword"
+            },
+            "keyword": {
+              "const": "ward"
+            },
+            "cost": {
+              "$ref": "#/$defs/cost"
+            }
+          },
+          "required": ["kind", "keyword", "cost"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "mana"
+            },
+            "produces": {
+              "type": "array",
+              "items": {
+                "enum": ["W", "U", "B", "R", "G", "C"]
+              },
+              "minItems": 1,
+              "maxItems": 6,
+              "uniqueItems": true
+            }
+          },
+          "required": ["kind", "produces"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "spell"
+            },
+            "target": {
+              "$ref": "#/$defs/selector"
+            },
+            "effects": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/effect"
+              },
+              "minItems": 0,
+              "maxItems": 64
+            }
+          },
+          "required": ["kind", "effects"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "activated"
+            },
+            "cost": {
+              "$ref": "#/$defs/cost"
+            },
+            "target": {
+              "$ref": "#/$defs/selector"
+            },
+            "effects": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/effect"
+              },
+              "minItems": 0,
+              "maxItems": 64
+            },
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": ["kind", "cost", "effects"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "triggered"
+            },
+            "on": {
+              "$ref": "#/$defs/event"
+            },
+            "optional": {
+              "type": "boolean"
+            },
+            "effects": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/effect"
+              },
+              "minItems": 0,
+              "maxItems": 64
+            }
+          },
+          "required": ["kind", "on", "effects"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "entry"
+            },
+            "tapped": {
+              "const": true
+            }
+          },
+          "required": ["kind", "tapped"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "anthem"
+            },
+            "power": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "toughness": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": ["kind", "power", "toughness"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "aura"
+            },
+            "enchant": {
+              "$ref": "#/$defs/selector"
+            },
+            "restriction": {
+              "const": "cantAttackOrBlock"
+            }
+          },
+          "required": ["kind", "enchant", "restriction"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

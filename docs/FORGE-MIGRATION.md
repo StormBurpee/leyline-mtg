@@ -40,6 +40,6 @@ A later importer should extend this grammar one semantic family at a time. Unsup
 
 ## Reproducible inventory
 
-The pinned upstream snapshot contains 34,131 script files. Adapter 0.5.0 produces 1,831 candidates and explicitly rejects 32,300 files. This is a syntax inventory, not 1,831 verified playable cards. The report records its upstream commit and compiler hash in [forge-audit.json](forge-audit.json); the earlier adapter inventory is retained in [forge-audit-v0.1.json](forge-audit-v0.1.json).
+The pinned upstream snapshot contains 34,131 script files. Adapter 0.6.0 produces 1,831 candidates and explicitly rejects 32,300 files. This is a syntax inventory, not 1,831 verified playable cards. The report records its upstream commit and compiler hash in [forge-audit.json](forge-audit.json); the earlier adapter inventory is retained in [forge-audit-v0.1.json](forge-audit-v0.1.json).
 
 Runtime fixtures execute selected translated cards through Leyline, including private scry, surveil, tap costs, discard continuations and targeted pumps. They do not compare execution against the Forge Java runtime.

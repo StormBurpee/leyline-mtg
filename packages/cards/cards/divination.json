@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "273b339c-964b-4a18-8eb5-ceb8abcdfd9e",
+  "name": "Divination",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "supertypes": []
+  },
+  "rulesText": "Draw two cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

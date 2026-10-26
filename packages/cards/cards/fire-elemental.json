@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3912d21e-1ebc-4a81-9dc9-f404248d564a",
+  "name": "Fire Elemental",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Elemental"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}{R}",
+    "power": 5,
+    "toughness": 4,
+    "supertypes": []
+  },
+  "rulesText": "",
+  "abilities": []
+}

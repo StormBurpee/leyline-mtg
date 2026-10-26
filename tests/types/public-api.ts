@@ -47,3 +47,16 @@ if (context) {
 }
 const policy: Policy = ({ player }) => ({ type: 'concede', player });
 void runEpisode({ policies: [policy, policy], maxDecisions: 100 });
+
+import { compileCard } from '../../packages/cards/compiler.js';
+import { compilePack } from '../../packages/cards/pack.js';
+const compiled = compileCard({ schemaVersion: 1 });
+if (compiled.ok) {
+  const name: string = compiled.definition.name;
+  void name;
+} else {
+  const code: string = compiled.diagnostics[0].code;
+  void code;
+}
+const packResult = compilePack([]);
+if (packResult.ok) createGame({ catalog: packResult.definitions });

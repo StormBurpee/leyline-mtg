@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { reviewedCreatures } from '../src/reviewed-creatures.js';
+import { reviewedCreatures } from './fixtures/reviewed-creatures.js';
 import { CARDS, stats, hasKeyword } from '../src/index.js';
 import { fixture, put, act, resolve } from './helpers.js';
 for (const card of reviewedCreatures)

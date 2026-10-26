@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f84c30e7-2ea8-43ff-9356-1f907558cfd9",
+  "name": "Aegis Turtle",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Turtle"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 0,
+    "toughness": 5,
+    "supertypes": []
+  },
+  "rulesText": "",
+  "abilities": []
+}

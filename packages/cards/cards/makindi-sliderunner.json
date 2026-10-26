@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4754e9c6-1790-4c01-87c2-3a16ce7e65f5",
+  "name": "Makindi Sliderunner",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 1,
+    "supertypes": []
+  },
+  "rulesText": "Trample. Landfall — Whenever a land you control enters, this creature gets +1/+1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "use": "landfall.grow",
+      "args": {
+        "power": 1,
+        "toughness": 1
+      }
+    }
+  ]
+}

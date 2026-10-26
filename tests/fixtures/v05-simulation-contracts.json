@@ -1,0 +1,166 @@
+{
+  "baseline": "v0.5.0",
+  "commit": "f6b3554e83a0a76410cbfe6dda66b6be776fcd7e",
+  "records": [
+    {
+      "seed": 1,
+      "status": "finished",
+      "winner": 1,
+      "turn": 14,
+      "decisions": 337,
+      "commandsSha256": "9bae989335b7153612136067e5cb7a95a1a00fceb5b159b948e0107803d9aced"
+    },
+    {
+      "seed": 2,
+      "status": "finished",
+      "winner": 0,
+      "turn": 13,
+      "decisions": 321,
+      "commandsSha256": "e9232b696d2913f4d6ee4c3c92b18ca9e02dca54f99ebfdfe7ed53c20a0a7094"
+    },
+    {
+      "seed": 3,
+      "status": "finished",
+      "winner": 1,
+      "turn": 16,
+      "decisions": 391,
+      "commandsSha256": "c13be76e8c210634d789e12a1b751a878a84d76414e00c790f1f12602c5c54f9"
+    },
+    {
+      "seed": 4,
+      "status": "finished",
+      "winner": 1,
+      "turn": 18,
+      "decisions": 464,
+      "commandsSha256": "095ea3899ed5e5b44d1a8a312a657bbcef39e21a4be1a164dbec632b3575f2ce"
+    },
+    {
+      "seed": 5,
+      "status": "finished",
+      "winner": 1,
+      "turn": 16,
+      "decisions": 365,
+      "commandsSha256": "8242e42bf30537be944c15f1732527076ac8c1a89fc3e5f37acbe923d9f3380d"
+    },
+    {
+      "seed": 6,
+      "status": "finished",
+      "winner": 0,
+      "turn": 13,
+      "decisions": 353,
+      "commandsSha256": "ec4bfc5a2828f6e8ab158f2d7868d4e50df2423bde34a6ad0598c2cc2197f38b"
+    },
+    {
+      "seed": 7,
+      "status": "finished",
+      "winner": 1,
+      "turn": 20,
+      "decisions": 510,
+      "commandsSha256": "8ddaa71fd2b8fde6a2175a0bea517e9ac6a285b6490200c22ab72290b6a1433d"
+    },
+    {
+      "seed": 8,
+      "status": "finished",
+      "winner": 1,
+      "turn": 24,
+      "decisions": 563,
+      "commandsSha256": "96a95a16c0dec82074abed76d157dac2bf8b2c3313797cef6c0ca87545a9ab42"
+    },
+    {
+      "seed": 9,
+      "status": "finished",
+      "winner": 1,
+      "turn": 20,
+      "decisions": 500,
+      "commandsSha256": "f2fe90154026199628d0078caea7cbce99b5dfa98d7ea2f205dfbaa02e7f7e40"
+    },
+    {
+      "seed": 10,
+      "status": "finished",
+      "winner": 0,
+      "turn": 11,
+      "decisions": 283,
+      "commandsSha256": "fcfe2da110eaa407b30db8732ab8d57e48baaa27a0caac9167e6a14375c79637"
+    },
+    {
+      "seed": 31,
+      "status": "finished",
+      "winner": 0,
+      "turn": 21,
+      "decisions": 465,
+      "commandsSha256": "845a388a2dc4e3ce65a9209723cf3db9f261cd3ff016f59aaa0f439c35d7d999"
+    },
+    {
+      "seed": 73,
+      "status": "finished",
+      "winner": 0,
+      "turn": 23,
+      "decisions": 560,
+      "commandsSha256": "80f94e8556642788f9fc493768d6cb1474346aab43e46efb08ef810844531b92"
+    },
+    {
+      "seed": 101,
+      "status": "finished",
+      "winner": 1,
+      "turn": 24,
+      "decisions": 618,
+      "commandsSha256": "d501f5fa0929bacab0df6946d0c6ae1f0fe1a06b94ac4682766bc5a07f2003af"
+    },
+    {
+      "seed": 211,
+      "status": "finished",
+      "winner": 0,
+      "turn": 15,
+      "decisions": 350,
+      "commandsSha256": "814a8daf88f8a3e8f3da965550a2c3c21149ebd403c6ed0cfe402887bf10c6b7"
+    },
+    {
+      "seed": 409,
+      "status": "finished",
+      "winner": 1,
+      "turn": 24,
+      "decisions": 533,
+      "commandsSha256": "4313fbe4b7dc98a59d9effef30908417f5b989676b6dffc7d18fa1cbc41c4306"
+    },
+    {
+      "seed": 731,
+      "status": "finished",
+      "winner": 0,
+      "turn": 13,
+      "decisions": 303,
+      "commandsSha256": "eb68d362a82a0e56beeef2a2449a8dd911920052ae9ef69ad04266ccd2ab616f"
+    },
+    {
+      "seed": 997,
+      "status": "finished",
+      "winner": 1,
+      "turn": 32,
+      "decisions": 761,
+      "commandsSha256": "74a2fa2e1d1d049f97e4a2e13f86f182e1cb57887fea55b0ca5b7abe326d5c85"
+    },
+    {
+      "seed": 2026,
+      "status": "finished",
+      "winner": 1,
+      "turn": 14,
+      "decisions": 318,
+      "commandsSha256": "b4bbbb080651ce79c95536c1694ac7175b77daf29175156d1c945a58c3daad82"
+    },
+    {
+      "seed": 4096,
+      "status": "finished",
+      "winner": 1,
+      "turn": 28,
+      "decisions": 697,
+      "commandsSha256": "a0037a6a7b6bfa0eb35950c9d18e92076a1f8eaffaf2f210c140229ed2ff06f7"
+    },
+    {
+      "seed": 9876,
+      "status": "finished",
+      "winner": 1,
+      "turn": 20,
+      "decisions": 486,
+      "commandsSha256": "673c82a2124b89ec66274831a967496ddab4e278a62812a1e701221e15390da1"
+    }
+  ]
+}

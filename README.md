@@ -5,6 +5,7 @@
 <p align="center">
   <a href="#start-playing">Start playing</a> ·
   <a href="docs/ARCHITECTURE.md">Architecture</a> ·
+  <a href="docs/CARD-DATA.md">Card format</a> ·
   <a href="docs/SUPPORT.md">Rules & card support</a> ·
   <a href="docs/SIMULATION.md">Simulation</a> ·
   <a href="docs/CONTRIBUTING.md">Contributing</a>
@@ -26,6 +27,8 @@ The target is every non-Alchemy card available on Arena, with complete Standard 
   <img src="docs/assets/tabletop.png" alt="The actual Leyline client inspecting a replayed cast-trigger position" width="100%" />
   <sub>Actual client capture. A saved match, replayed through the engine. Card art belongs to its respective owners.</sub>
 </p>
+
+Cards are versioned JSON, compiled into a validated runtime catalog. Shared mechanics and composable predicates replace per-card JavaScript. [Read the card format.](docs/CARD-DATA.md)
 
 ## Start playing
 
