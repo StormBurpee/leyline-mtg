@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f30aa897-7027-47e7-ae58-73cbc448c1f0",
+  "name": "Environmental Scientist",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Human", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "supertypes": [],
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { validateEventSpec } from './events.js';
-import { validateTargetSpec, effectTargetCompatible } from './selectors.js';
+import { validateTargetSpec, effectTargetCompatible, validateFilter } from './selectors.js';
 import { CARD_TYPES, primaryType } from './types.js';
 
 const TYPES = new Set(CARD_TYPES);
@@ -85,6 +85,12 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
   if (cost.tap !== undefined && typeof cost.tap !== 'boolean')
     errors.push(`${path}.tap: expected a boolean.`);
 }
+function filterOnlyPermanents(where) {
+  if (where?.type) return ['land', 'creature', 'artifact'].includes(where.type);
+  if (where?.all) return where.all.some(filterOnlyPermanents);
+  if (where?.any) return where.any.every(filterOnlyPermanents);
+  return false;
+}
 function validateEffects(effects, path, target, errors) {
   if (!Array.isArray(effects) || effects.length > 64) {
     errors.push(`${path}: expected at most 64 effect instructions.`);
@@ -107,6 +113,7 @@ function validateEffects(effects, path, target, errors) {
       scry: ['count', 'player'],
       surveil: ['count', 'player'],
       discard: ['count', 'player'],
+      searchLibrary: ['count', 'where', 'destination', 'tapped', 'reveal'],
       counter: [],
       bounce: [],
       destroy: [],
@@ -145,6 +152,22 @@ function validateEffects(effects, path, target, errors) {
         (e.player === 'target' && !effectTargetCompatible(e.op, target)))
     )
       errors.push(`${p}.player: expected a compatible player recipient.`);
+    if (e.op === 'searchLibrary') {
+      if (!natural(e.count) || e.count > 1000) errors.push(`${p}.count: expected 0 to 1000.`);
+      if (!['hand', 'battlefield', 'top', 'graveyard'].includes(e.destination))
+        errors.push(`${p}.destination: unsupported search destination.`);
+      if (e.where !== undefined)
+        errors.push(...validateFilter(e.where).map((message) => `${p}.${message}`));
+      if (
+        e.tapped !== undefined &&
+        (e.destination !== 'battlefield' || typeof e.tapped !== 'boolean')
+      )
+        errors.push(`${p}.tapped: only battlefield entry accepts a boolean tapped flag.`);
+      if (e.reveal !== undefined && typeof e.reveal !== 'boolean')
+        errors.push(`${p}.reveal: expected a boolean.`);
+      if (e.destination === 'battlefield' && (!e.where || !filterOnlyPermanents(e.where)))
+        errors.push(`${p}.where: battlefield searches require a permanent-only filter.`);
+    }
     if (e.op === 'moveTarget') {
       if (!['hand', 'battlefield', 'exile'].includes(e.destination))
         errors.push(`${p}.destination: unsupported zone.`);

@@ -51,6 +51,8 @@ export type CardPredicate =
   | { owner: 'you' | 'opponent' }
   | { tapped: boolean }
   | { token: boolean }
+  | { basic: boolean }
+  | { subtype: string }
   | { power: NumericComparison }
   | { toughness: NumericComparison }
   | { manaValue: NumericComparison };
@@ -79,6 +81,14 @@ export type Effect =
       op: 'draw' | 'scry' | 'surveil' | 'discard';
       count: number;
       player?: 'controller' | 'opponent' | 'target';
+    }
+  | {
+      op: 'searchLibrary';
+      count: number;
+      where?: CardPredicate;
+      destination: 'hand' | 'battlefield' | 'top' | 'graveyard';
+      tapped?: boolean;
+      reveal?: boolean;
     }
   | { op: 'mill'; count: number; player: 'controller' | 'opponent' | 'target' }
   | { op: 'counter' | 'bounce' | 'destroy' }
@@ -210,6 +220,17 @@ export type Choice =
       payable: boolean;
     }
   | { kind: 'mulligan' | 'attackers' | 'blockers'; player: PlayerId }
+  | {
+      kind: 'librarySearch';
+      player: PlayerId;
+      cards: string[];
+      min: number;
+      max: number;
+      destination: 'hand' | 'battlefield' | 'top' | 'graveyard';
+      tapped: boolean;
+      reveal: boolean;
+      where: CardPredicate | null;
+    }
   | { kind: 'libraryOrder'; player: PlayerId; action: 'scry' | 'surveil'; cards: string[] }
   | { kind: 'bottom' | 'discard' | 'discardEffect'; player: PlayerId; count: number }
   | {
@@ -300,6 +321,7 @@ export type Action =
   | { type: 'assignDamage'; orders: DamageOrder[] }
   | { type: 'orderTriggers'; ids: string[] }
   | { type: 'chooseTriggerTarget'; target: Target }
+  | { type: 'searchLibrary'; cards: string[] }
   | { type: 'orderLibrary'; top: string[]; rest: string[] };
 export type Command = Action & { player: PlayerId; expectedRevision?: number };
 export type LegalAction =

@@ -139,7 +139,7 @@ test('episode outputs identify the engine, exact ruleset and experiment configur
   assert.match(first.configHash, /^[a-f0-9]{64}$/);
   assert.equal(first.rulesetHash, second.rulesetHash);
   assert.notEqual(first.configHash, second.configHash);
-  assert.equal(first.engineVersion, '0.17.0');
+  assert.equal(first.engineVersion, '0.20.0');
 });
 
 test('target-choice actions use opaque handles and hide trigger-placement continuations', async () => {
@@ -248,4 +248,34 @@ test('a departed trigger source never exposes its concealed raw object ID', asyn
     target: reference,
   });
   assert.equal(result.error.code, 'AGENT_HANDLE');
+});
+
+test('library-search observations expose eligible opaque handles and hide them again afterward', async () => {
+  const { DECKS, expandDeck, chooseBotCommand } = await import('../packages/engine/src/index.js');
+  const session = createSession({
+    seed: 1,
+    decks: [expandDeck(DECKS.roots.cards), expandDeck(DECKS.ember.cards)],
+  });
+  let c;
+  for (let i = 0; i < 300; i++) {
+    c = session.context();
+    assert.ok(c);
+    if (c.observation.choice?.kind === 'librarySearch') break;
+    const command = chooseBotCommand(c.observation, c.player);
+    assert.equal(session.step(command).ok, true);
+  }
+  assert.equal(c.observation.choice.kind, 'librarySearch');
+  assert.equal(/"c\d+"/.test(JSON.stringify(c)), false);
+  const ids = c.observation.choice.cards;
+  assert.ok(ids.length);
+  assert.ok(ids.every((id) => id.startsWith('object:') && c.observation.objects[id]?.name));
+  const command = chooseBotCommand(c.observation, c.player);
+  assert.equal(session.step(command).ok, true);
+  const after = session.context();
+  assert.ok(after);
+  const visible = Object.values(after.observation.objects);
+  assert.equal(
+    visible.some((o) => o.zone === 'library'),
+    false,
+  );
 });

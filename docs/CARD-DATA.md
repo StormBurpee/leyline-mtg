@@ -76,7 +76,7 @@ The current event families are casting and entering the battlefield. For example
 
 ## Limits still matter
 
-This change makes authoring and importing maintainable; it does not implement all of Magic. Quantities are currently literals or compile-time parameters. Variable costs, runtime count expressions, arbitrary event bindings, general layers/replacements, search, multiple targets and multi-face cards still need engine work. Unsupported supertypes can be represented in source but are not flattened into vanilla cards.
+This change makes authoring and importing maintainable; it does not implement all of Magic. Quantities are currently literals or compile-time parameters. Variable costs, runtime count expressions, arbitrary event bindings, general layers/replacements, multi-zone/split-destination search, multiple targets and multi-face cards still need engine work. Unsupported supertypes can be represented in source but are not flattened into vanilla cards.
 
 The compiler lowers into the existing runtime instruction set to preserve tested behavior. That representation is internal; edit source files, not `packages/engine/src/generated-catalog.js`. The Forge adapter is a separate input frontend with its own strict grammar and diagnostics. Its candidates are not automatically promoted into the core pack.
 
@@ -85,3 +85,13 @@ The compiler lowers into the existing runtime instruction set to preserve tested
 A triggered ability can declare the same `target` selector as a spell or activated ability. Targets are selected when the trigger is put on the stack, not when its event happens and not when it resolves. `optional: true` makes the effect optional at resolution; it does not make a required target optional. See [Reclamation Sage](../packages/cards/cards/reclamation-sage.json) and [Sage's Row Denizen](../packages/cards/cards/sages-row-denizen.json).
 
 Graveyard selectors use `scope: "graveyard"`, with ownership/type predicates. `moveTarget` supports recovery to hand, reanimation to the battlefield and exile; zone changes create new incarnations. Draw, discard, life gain and `loseLife` accept controller, opponent or selected-player recipients. Life loss does not trigger lifelink or count as damage. These operations do not imply library search, flashback, multi-target effects or generic Aura reattachment support.
+
+## Library search
+
+The `searchLibrary` instruction searches its controller’s library and then shuffles it. It accepts literal `amount`, optional `where`, `destination` (`hand`, `graveyard`, `battlefield`, or `top`), and optional `reveal`/battlefield-only `tapped` flags. Top selections are set aside during the shuffle and restored in the chosen order. Battlefield filters must constrain results to supported non-Aura permanent types.
+
+A `where` quality allows finding fewer cards, including none. Without a filter, the player must find the requested number or as many as remain. `basic` and exact-case `subtype` predicates supplement the existing type, color, boolean and numeric predicates. These are library characteristics, not battlefield stat modifications.
+
+A pending `librarySearch` exposes legal candidate IDs, minimum and maximum quantities, and destination flags. Submit `{ type: 'searchLibrary', cards: [...] }`; stale, duplicate, foreign and nonmatching selections are rejected without changing state. Resolution continues afterward without an intervening priority window. Optional whole-trigger searches use the existing optional-trigger decision; declining one does not shuffle.
+
+This does not implement opponent libraries, replacement search limits, choosing different destinations for different found cards, variable quantities, or generic Aura attachment on entry. Cards requiring those features remain unsupported rather than receiving partial definitions.

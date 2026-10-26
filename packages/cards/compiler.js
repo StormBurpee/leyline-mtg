@@ -116,6 +116,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'scry',
           'surveil',
           'discard',
+          'searchLibrary',
           'counterSpell',
           'returnToHand',
           'destroy',
@@ -146,6 +147,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         scry: ['target', 'amount'],
         surveil: ['target', 'amount'],
         discard: ['target', 'amount'],
+        searchLibrary: ['amount', 'where', 'destination', 'tapped', 'reveal'],
         counter: ['target'],
         bounce: ['target'],
         destroy: ['target'],
@@ -178,6 +180,13 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
             'Expected controller, opponent or target.',
           );
         else if (effect.target !== 'controller') e.player = effect.target;
+      }
+      if (e.op === 'searchLibrary') {
+        e.count = effect.amount;
+        e.destination = effect.destination;
+        if (effect.where !== undefined) e.where = structuredClone(effect.where);
+        if (effect.tapped !== undefined) e.tapped = effect.tapped;
+        if (effect.reveal !== undefined) e.reveal = effect.reveal;
       }
       if (e.op === 'moveTarget') {
         if (effect.target !== 'target')

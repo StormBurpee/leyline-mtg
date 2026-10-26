@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "991efbf1-299d-4892-aeab-8ff9827f7168",
+  "name": "Transit Mage",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "supertypes": [],
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, you may search your library for an artifact card with mana value 4 or 5, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "type": "artifact"
+              },
+              {
+                "any": [
+                  {
+                    "manaValue": {
+                      "eq": 4
+                    }
+                  },
+                  {
+                    "manaValue": {
+                      "eq": 5
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

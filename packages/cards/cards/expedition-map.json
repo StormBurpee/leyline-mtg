@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8fcf50cd-e6d0-4516-850f-d42ee75dcc3a",
+  "name": "Expedition Map",
+  "characteristics": {
+    "types": ["artifact"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{1}",
+    "supertypes": []
+  },
+  "rulesText": "{2}, {T}, Sacrifice this artifact: Search your library for a land card, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "type": "land"
+          },
+          "reveal": true
+        }
+      ]
+    }
+  ]
+}

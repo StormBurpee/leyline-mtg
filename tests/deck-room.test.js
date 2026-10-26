@@ -10,8 +10,8 @@ import {
 } from '../packages/engine/src/index.js';
 import { readDeckLibrary, deckEntries, deckRoom, deckBuilder } from '../apps/web/deck-room.js';
 
-test('all thirteen starter decks are executable 60-card lists and independent match opponents', () => {
-  assert.equal(Object.keys(DECKS).length, 13);
+test('all fourteen starter decks are executable 60-card lists and independent match opponents', () => {
+  assert.equal(Object.keys(DECKS).length, 14);
   const entries = Object.entries(DECKS);
   for (let i = 0; i < entries.length; i++) {
     const [id, deck] = entries[i],
@@ -52,7 +52,7 @@ test('deck room and builder escape custom titles and clearly gate incomplete lis
     mode: 'bot',
     seed: 7,
   };
-  assert.equal(deckEntries(ui).length, 14);
+  assert.equal(deckEntries(ui).length, 15);
   const room = deckRoom(ui, {});
   assert.ok(room.includes('&lt;script&gt;'));
   assert.ok(room.includes('Needs attention'));

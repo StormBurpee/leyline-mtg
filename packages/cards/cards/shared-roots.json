@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9e0fd3bf-f47a-4f06-8ff1-73f6bf5d1e03",
+  "name": "Shared Roots",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": ["Lesson"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "supertypes": []
+  },
+  "rulesText": "Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

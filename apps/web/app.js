@@ -426,10 +426,45 @@ function showDeck() {
       .join('')}`,
   );
 }
+function showLibrarySearch() {
+  const choice = state.choice;
+  if (choice?.kind !== 'librarySearch' || choice.player !== viewer()) return;
+  if (dialog._searchChoice !== choice) {
+    dialog._searchChoice = choice;
+    dialog._searchCards = [];
+  }
+  const selected = dialog._searchCards;
+  const groups = new Map();
+  for (const id of choice.cards) {
+    const name = state.objects[id].name;
+    if (!groups.has(name)) groups.set(name, []);
+    groups.get(name).push(id);
+  }
+  const chosen = selected
+    .map(
+      (id, index) =>
+        `<div class="search-picked"><span>${choice.destination === 'top' ? `${index + 1}. ` : ''}${escape(state.objects[id].name)}</span>${choice.destination === 'top' ? `<button class="icon-btn" data-action="searchReorder" data-index="${index}" data-direction="-1" aria-label="Move earlier" ${index === 0 ? 'disabled' : ''}>↑</button><button class="icon-btn" data-action="searchReorder" data-index="${index}" data-direction="1" aria-label="Move later" ${index === selected.length - 1 ? 'disabled' : ''}>↓</button>` : ''}<button class="icon-btn" data-action="searchRemove" data-cardid="${id}" aria-label="Remove ${escape(state.objects[id].name)}">×</button></div>`,
+    )
+    .join('');
+  const body = `<p>${choice.min === 0 ? 'You may find fewer cards, including none.' : `Choose exactly ${choice.min} card${choice.min === 1 ? '' : 's'}.`} Your library is shuffled when you confirm. ${choice.destination === 'top' ? 'Selected cards go on top afterward, first card drawn first.' : `Found cards go to ${choice.destination === 'hand' ? 'your hand' : choice.destination === 'graveyard' ? 'your graveyard' : `the battlefield${choice.tapped ? ' tapped' : ''}`}.`}</p><div class="search-picked-list">${chosen || '<p>No cards selected.</p>'}</div><div class="search-options">${
+    [...groups]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([name, ids]) => {
+        const used = ids.filter((id) => selected.includes(id)).length;
+        return `<div class="library-choice"><div class="library-thumb">${metadata[name]?.image ? `<img src="${escape(metadata[name].image)}" alt="" loading="lazy">` : '◇'}</div><div class="library-choice-body"><strong>${escape(name)}</strong><span class="small muted">${ids.length} available · ${used} selected</span><div class="library-choice-actions"><button class="btn" data-action="searchAdd" data-name="${escape(name)}" ${selected.length >= choice.max || used === ids.length ? 'disabled' : ''}>Choose</button><button class="btn quiet" data-action="readSearchCard" data-name="${escape(name)}">Read</button></div></div></div>`;
+      })
+      .join('') || '<p>No matching cards remain.</p>'
+  }</div>`;
+  openDialog(
+    `Search · ${selected.length}/${choice.max} selected`,
+    body,
+    `<button class="btn quiet" data-action="closeDialog">Review table</button><button class="btn primary" data-action="confirmSearch" ${selected.length < choice.min ? 'disabled' : ''}>${selected.length ? 'Find cards & shuffle' : 'Find none & shuffle'}</button>`,
+  );
+}
 function showLibraryOrder() {
-  if (dialog._libraryChoiceRevision !== state.revision) {
+  if (dialog._libraryChoice !== state.choice) {
     dialog._libraryOrder = { top: [...state.choice.cards], rest: [] };
-    dialog._libraryChoiceRevision = state.revision;
+    dialog._libraryChoice = state.choice;
   }
   renderLibraryOrder();
 }
@@ -890,6 +925,56 @@ async function action(name, el) {
     case 'damage':
       send({ type: 'assignDamage', orders: suggestedDamage(state) });
       break;
+    case 'librarySearch':
+      showLibrarySearch();
+      break;
+    case 'searchAdd': {
+      if (
+        state.choice?.kind !== 'librarySearch' ||
+        state.choice.player !== viewer() ||
+        dialog._searchChoice !== state.choice
+      )
+        break;
+      const selected = dialog._searchCards;
+      const id = state.choice.cards.find(
+        (id) => state.objects[id].name === el.dataset.name && !selected.includes(id),
+      );
+      if (id && selected.length < state.choice.max) selected.push(id);
+      showLibrarySearch();
+      break;
+    }
+    case 'searchRemove':
+      if (dialog._searchChoice !== state.choice) break;
+      dialog._searchCards = dialog._searchCards.filter((id) => id !== el.dataset.cardid);
+      showLibrarySearch();
+      break;
+    case 'searchReorder': {
+      if (dialog._searchChoice !== state.choice) break;
+      const i = Number(el.dataset.index),
+        j = i + Number(el.dataset.direction),
+        cards = dialog._searchCards;
+      if (Number.isInteger(i) && j >= 0 && i >= 0 && j < cards.length && i < cards.length)
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      showLibrarySearch();
+      break;
+    }
+    case 'readSearchCard':
+      if (
+        state.choice?.kind !== 'librarySearch' ||
+        state.choice.player !== viewer() ||
+        !state.choice.cards.some((id) => state.objects[id].name === el.dataset.name)
+      )
+        break;
+      openDialog(
+        el.dataset.name,
+        inspect(el.dataset.name, metadata),
+        '<button class="btn primary" data-action="librarySearch">Back to search</button>',
+      );
+      break;
+    case 'confirmSearch':
+      if (dialog._searchChoice !== state.choice) break;
+      if (send({ type: 'searchLibrary', cards: [...dialog._searchCards] })) closeDialog();
+      break;
     case 'libraryOrder':
       showLibraryOrder();
       break;
@@ -1092,6 +1177,7 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleSearchReplay':
     case 'exampleSacrificeReplay':
     case 'exampleBurialReplay':
     case 'exampleTargetReplay':
@@ -1101,19 +1187,21 @@ async function action(name, el) {
     case 'exampleReplay': {
       try {
         const response = await fetch(
-          name === 'exampleSacrificeReplay'
-            ? './example-sacrifice-replay.json'
-            : name === 'exampleBurialReplay'
-              ? './example-burial-replay.json'
-              : name === 'exampleTargetReplay'
-                ? './example-target-replay.json'
-                : name === 'exampleInteractionReplay'
-                  ? './example-interaction-replay.json'
-                  : name === 'exampleOptionalReplay'
-                    ? './example-optional-replay.json'
-                    : name === 'exampleWardReplay'
-                      ? './example-ward-replay.json'
-                      : './example-replay.json',
+          name === 'exampleSearchReplay'
+            ? './example-search-replay.json'
+            : name === 'exampleSacrificeReplay'
+              ? './example-sacrifice-replay.json'
+              : name === 'exampleBurialReplay'
+                ? './example-burial-replay.json'
+                : name === 'exampleTargetReplay'
+                  ? './example-target-replay.json'
+                  : name === 'exampleInteractionReplay'
+                    ? './example-interaction-replay.json'
+                    : name === 'exampleOptionalReplay'
+                      ? './example-optional-replay.json'
+                      : name === 'exampleWardReplay'
+                        ? './example-ward-replay.json'
+                        : './example-replay.json',
         );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();

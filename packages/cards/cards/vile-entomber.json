@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "556dd333-4066-41f7-98f6-41794754de71",
+  "name": "Vile Entomber",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Zombie", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}{B}",
+    "supertypes": [],
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen this creature enters, search your library for a card, put that card into your graveyard, then shuffle.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "graveyard"
+        }
+      ]
+    }
+  ]
+}

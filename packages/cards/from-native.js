@@ -61,6 +61,15 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return { op: 'addCounters', counter: '+1/+1', target: 'source', amount: e.amount };
         case 'untap':
           return { op: 'untap', target: 'source' };
+        case 'searchLibrary':
+          return {
+            op: 'searchLibrary',
+            amount: e.count,
+            destination: e.destination,
+            ...(e.where ? { where: structuredClone(e.where) } : {}),
+            ...(e.tapped !== undefined ? { tapped: e.tapped } : {}),
+            ...(e.reveal !== undefined ? { reveal: e.reveal } : {}),
+          };
         case 'token':
           if (!idsByName[e.definition]) throw new Error(`Missing token identity: ${e.definition}`);
           return { op: 'createToken', token: idsByName[e.definition], amount: e.count };

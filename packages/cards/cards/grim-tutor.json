@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e62f8d69-a559-4f13-a5c9-5fb750b4af2c",
+  "name": "Grim Tutor",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}{B}",
+    "supertypes": []
+  },
+  "rulesText": "Search your library for a card, put that card into your hand, then shuffle. You lose 3 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand"
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

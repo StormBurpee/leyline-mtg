@@ -267,7 +267,7 @@
   {
     "oracleId": "5b8e0913-47e9-4d56-971d-abd91b0f7587",
     "name": "Campus Guide",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "d34a3b58-a905-4e90-b35c-9f5c21149b04",
@@ -2237,7 +2237,7 @@
   {
     "oracleId": "30afacd9-4680-4aac-8c22-584f9418822d",
     "name": "Circuitous Route",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "c9610d33-4cef-4171-bbf4-48d720492d55",
@@ -3192,7 +3192,7 @@
   {
     "oracleId": "b64051c0-e791-4fcb-b79f-4287e1b06468",
     "name": "Compass Gnome",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "6ef464bd-2ed0-4f99-af4a-ebf276f55384",

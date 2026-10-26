@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "11a46cb6-ab01-4630-9541-782db2ef3b91",
+  "name": "Map the Frontier",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "supertypes": []
+  },
+  "rulesText": "Search your library for up to two basic land cards and/or Desert cards, put them onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 2,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "any": [
+                  {
+                    "basic": true
+                  },
+                  {
+                    "subtype": "Desert"
+                  }
+                ]
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

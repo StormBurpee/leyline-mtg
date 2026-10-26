@@ -308,6 +308,28 @@
           },
           "required": ["manaValue"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "basic": {
+              "type": "boolean"
+            }
+          },
+          "required": ["basic"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "subtype": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            }
+          },
+          "required": ["subtype"],
+          "additionalProperties": false
         }
       ]
     },
@@ -679,6 +701,33 @@
             }
           },
           "required": ["op", "target", "destination"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "searchLibrary"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            },
+            "destination": {
+              "enum": ["hand", "battlefield", "top", "graveyard"]
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "tapped": {
+              "type": "boolean"
+            },
+            "reveal": {
+              "type": "boolean"
+            }
+          },
+          "required": ["op", "amount", "destination"],
           "additionalProperties": false
         }
       ]

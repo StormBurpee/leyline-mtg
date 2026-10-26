@@ -4,8 +4,8 @@
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
     "packages/engine/src/registry.js": "cb7b1db1914b578979a5cd5b4add27acff389643097267b1c515dc7cf1087085",
-    "packages/engine/src/definition-validation.js": "d980a16a521f448c21122ec44398e0318023020e9a371cb4e2ebf0e93737097c",
-    "packages/engine/src/selectors.js": "c447a5946c5460c8c95d3d2b7b3c0b494753b96ce0b4c6698f2d500ba6782e96",
+    "packages/engine/src/definition-validation.js": "26d9e61cddf5708e37947e36f51e60b4a2291111da0b572eb69106a3b2501229",
+    "packages/engine/src/selectors.js": "fcb4ec5fcbfbfdbff1587499a22c6aa1053bf0dd0c29eb3586682b822844b52a",
     "packages/engine/src/events.js": "a784e7e5132e1f1b9dc0f9533806dfea746f59efdb305debf3a5809bc9fad14b",
     "packages/engine/src/types.js": "57f8bd1ce75c0bf683c6e9e9e179ff8477594f8ef5a636523f37d9a2bd1467aa"
   },
@@ -23,10 +23,10 @@
     "excluded_alchemy": 3
   },
   "coverage": {
-    "unsupported": 13628,
+    "unsupported": 13599,
     "no_exact_forge_match": 685,
     "compiler_candidate": 597,
-    "curated": 422
+    "curated": 451
   },
   "layouts": {
     "normal": 14416,
@@ -43,8 +43,8 @@
     "case": 12
   },
   "keywordsOnUnimplementedCards": {
-    "Flying": 1530,
-    "Trample": 514,
+    "Flying": 1529,
+    "Trample": 513,
     "Vigilance": 432,
     "Enchant": 401,
     "Flash": 380,
@@ -53,17 +53,17 @@
     "Equip": 333,
     "Haste": 331,
     "Scry": 292,
-    "Reach": 279,
+    "Reach": 278,
     "Lifelink": 271,
     "Menace": 270,
     "Treasure": 234,
     "Cycling": 231,
-    "Deathtouch": 227,
+    "Deathtouch": 226,
     "Surveil": 202,
     "Ward": 139,
     "Crew": 138,
     "Kicker": 137,
-    "First strike": 135,
+    "First strike": 134,
     "Flashback": 119,
     "Food": 118,
     "Defender": 110,
@@ -450,15 +450,15 @@
     "Burning Chains": 1
   },
   "diagnostics": {
-    "Unreferenced or unsupported SVar": 11893,
-    "Unsupported spell field": 9680,
+    "Unreferenced or unsupported SVar": 11891,
+    "Unsupported spell field": 9599,
     "Unsupported spell opcode": 7004,
     "Unsupported trigger field": 4997,
     "unsupported field S.": 3089,
     "Unsupported trigger mode": 3056,
     "Unsupported mana symbol": 2584,
     "Unsupported supertype or card type.": 2454,
-    "Unsupported targeted zone transition.": 1706,
+    "Unsupported targeted zone transition.": 1677,
     "Unsupported ability opcode": 1434,
     "Unsupported target predicate": 1290,
     "Only source +1/+1 counters on abilities are supported.": 990,
@@ -485,8 +485,8 @@
     "unsupported field Loyalty.": 230,
     "unsupported keyword etbCounter": 223,
     "LifeAmount must be a literal nonnegative integer.": 217,
-    "Unsupported player recipient": 199,
-    "Nonbasic land subtypes require intrinsic-ability support.": 183,
+    "Unsupported player recipient": 197,
+    "Nonbasic land subtypes require intrinsic-ability support.": 182,
     "NumAtt must be a literal integer.": 180,
     "Bounce requires a permanent target.": 170,
     "Trigger must watch from the battlefield.": 167,
@@ -494,10 +494,10 @@
     "Unexpected PT on a noncreature.": 160,
     "Only untargeted Defined Player.Opponent damage is supported.": 154,
     "unsupported keyword ETBReplacement": 151,
-    "unsupported field Variant.": 148,
+    "unsupported field Variant.": 147,
     "Unsupported spell-cast trigger restriction.": 146,
     "Pump contains an unsupported keyword.": 144,
-    "This land subset requires an explicit supported mana ability.": 140,
+    "This land subset requires an explicit supported mana ability.": 137,
     "unsupported keyword Kicker": 137,
     "Only a permanent ability untapping its source is supported.": 135,
     "Only the literal ETB tap instruction is supported.": 134,
@@ -588,10 +588,10 @@
     "unsupported keyword Living Weapon.": 9,
     "unsupported keyword Eternalize": 8,
     "ScryNum must be a literal nonnegative integer.": 8,
-    "Only the ability controller can make an optional trigger choice.": 8,
     "unsupported keyword Rebound.": 8,
     "unsupported keyword Escalate": 8,
     "unsupported keyword Hideaway": 8,
+    "Only the ability controller can make an optional trigger choice.": 7,
     "unsupported keyword Compleated.": 7,
     "unsupported keyword Partner.": 7,
     "unsupported field Colors.": 7,
@@ -1115,5 +1115,6 @@
       "fetchedAt": "2026-10-26T00:44:17.780Z",
       "sha256": "22e4f4e89709f3f96d9ea947475ea026c8a8232cbb2cf00e81c13526c986ad23"
     }
-  ]
+  ],
+  "reclassifiedWithEngine": "0.20.0"
 }

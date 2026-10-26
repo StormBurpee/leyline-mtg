@@ -80,7 +80,12 @@ export function validateFilter(filter) {
         errors.push(`${path}.${key}: expected you or opponent.`);
       return;
     }
-    if (key === 'tapped' || key === 'token') {
+    if (key === 'subtype') {
+      if (typeof operand !== 'string' || !operand.trim() || operand.length > 80)
+        errors.push(`${path}.subtype: expected a subtype name.`);
+      return;
+    }
+    if (key === 'tapped' || key === 'token' || key === 'basic') {
       if (typeof operand !== 'boolean') errors.push(`${path}.${key}: expected a boolean.`);
       return;
     }
@@ -128,6 +133,8 @@ export function matchesFilter(facts, filter, you) {
     return (
       Number.isInteger(facts[key]) && (value === 'you' ? facts[key] === you : facts[key] !== you)
     );
+  if (key === 'basic') return !!facts.definition?.basic === value;
+  if (key === 'subtype') return !!facts.definition?.subtypes?.includes(value);
   if (key === 'token' || key === 'tapped') return facts[key] === value;
   if (['power', 'toughness', 'manaValue'].includes(key)) {
     const actual = facts[key];

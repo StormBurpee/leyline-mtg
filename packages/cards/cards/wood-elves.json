@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8973bd99-20f8-4867-90ef-50392147ee1b",
+  "name": "Wood Elves",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Elf", "Scout"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "supertypes": [],
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, search your library for a Forest card, put that card onto the battlefield, then shuffle.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "subtype": "Forest"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

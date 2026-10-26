@@ -5,6 +5,7 @@ Leyline is currently a local game and developer tool. It is not a trusted multip
 - No authentication, payment system, telemetry or account storage is implemented.
 - Imported deck text is parsed as data and rendered with escaping; it is never evaluated.
 - Imported replays are version-checked and re-run through command validation. The browser limits file size to 5 MB and command count to 5,000; the engine limits command count to 10,000. Those limits are not a proof against denial of service.
+- Hidden-zone placeholders in `playerView` are not stable card identities. Use the separate simulation session boundary for player-specific opaque action handles; the local UI still holds full state.
 - Replays and developer views reveal both decks, hands and libraries. Do not share a live competitive game's replay.
 - Card images are requested from Scryfall's image service, which receives ordinary browser request metadata. Engine execution works without those images.
 - The local preview server serves only web assets and engine modules. Do not expose it to the public internet.

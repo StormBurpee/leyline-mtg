@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "63c8f510-eba8-4f00-9f80-fbbc74801a4a",
+  "name": "Scampering Surveyor",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Gnome"],
+    "colors": [],
+    "manaCost": "{4}",
+    "supertypes": [],
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, search your library for a basic land card or Cave card, put it onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "any": [
+                  {
+                    "basic": true
+                  },
+                  {
+                    "subtype": "Cave"
+                  }
+                ]
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { chooseSearchCards } from './library-search.js';
 import {
   actionSafe,
   canPayTargetWard,
@@ -57,6 +58,8 @@ export function chooseBotCommand(s, p) {
           player: p,
           pay: c.payable && (c.cost.life ?? 0) < s.players[p].life,
         };
+      case 'librarySearch':
+        return { type: 'searchLibrary', player: p, cards: chooseSearchCards(s, p) };
       case 'libraryOrder': {
         const canReanimate = s.players[p].hand.some((id) =>
           definition(s, s.objects[id]).effects?.some(
@@ -231,6 +234,20 @@ export function chooseBotCommand(s, p) {
                 ? 4
                 : 0;
       }
+      const search = effect.find((e) => e.op === 'searchLibrary');
+      if (search && libraryCount(s, p) > 0) {
+        const manaSources = controlled(s, p).filter((o) => definition(s, o).mana).length;
+        const reserve = d.type === 'creature' && preserveForDefense(s, source, p) && !threatened;
+        score = reserve
+          ? -10
+          : search.destination === 'battlefield'
+            ? manaSources < 7
+              ? 12
+              : 3
+            : manaSources < 5 || s.players[p].hand.length < 4
+              ? 6
+              : 1;
+      }
       const loss = effect.find((e) => e.op === 'loseLife');
       if (loss && (loss.player === 'opponent' || (loss.player === 'target' && a.target?.id !== p)))
         score = s.players[1 - p].life <= loss.amount ? 100 : threatened ? 8 : 2;
@@ -283,6 +300,18 @@ export function chooseBotCommand(s, p) {
       if (d.type === 'creature' || d.static || d.mana)
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);
       if (d.effects?.some((e) => e.op === 'token')) score = 6;
+      const search = d.effects?.find((e) => e.op === 'searchLibrary');
+      const searchAbility = d.activated?.some((a) =>
+        a.effects.some((e) => e.op === 'searchLibrary'),
+      );
+      if (search && libraryCount(s, p) > 0) score = search.destination === 'battlefield' ? 9 : 6;
+      if (searchAbility) score = Math.max(score, 4);
+      if (
+        d.etb?.some((e) => e.op === 'searchLibrary') ||
+        d.triggers?.some((t) => t.effects.some((e) => e.op === 'searchLibrary'))
+      )
+        score = Math.max(score, 6);
+
       if (d.effects?.some((e) => e.op === 'damageOpponent')) score = Math.max(score, 2);
       if (d.effects?.some((e) => e.op === 'draw')) score = s.players[p].hand.length < 5 ? 5 : 1;
       if (d.type === 'creature' && !s.stack.length && s.active === p && s.step === 'main1') {

@@ -2,7 +2,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.17.0';
+export const VERSION = '0.20.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -370,24 +370,42 @@ export function playerView(state, viewer, { includeEvents = true } = {}) {
   const { rng, seed, config, history, catalog, ...core } = state;
   const s = structuredClone({ ...core, events: includeEvents ? core.events : [] });
   s.catalog = catalog;
-  for (const [id, o] of Object.entries(s.objects))
-    if (
-      (o.zone === 'library' &&
-        !(
-          state.choice?.kind === 'libraryOrder' &&
-          state.choice.player === viewer &&
-          state.choice.cards.includes(id)
-        )) ||
-      (o.zone === 'hand' && o.owner !== viewer)
-    )
-      s.objects[id] = { id, zone: o.zone, owner: o.owner, hidden: true };
-  if (s.choice?.player !== viewer && ['libraryOrder', 'discardEffect'].includes(s.choice?.kind))
+  // Hidden-zone handles are positional placeholders, never stable card IDs.
+  // Otherwise an agent can track a previously inspected card through a shuffle.
+  const hidden = new Set();
+  for (const p of s.players)
+    for (const zone of ['library', 'hand']) {
+      p[zone] = p[zone].map((id, index) => {
+        const o = s.objects[id];
+        const visible =
+          zone === 'hand'
+            ? p.id === viewer
+            : state.choice?.player === viewer &&
+              ((state.choice.kind === 'libraryOrder' && state.choice.cards.includes(id)) ||
+                (state.choice.kind === 'librarySearch' && o.owner === viewer));
+        if (visible) return id;
+        hidden.add(id);
+        delete s.objects[id];
+        const placeholder = `hidden:${p.id}:${zone}:${index}`;
+        s.objects[placeholder] = { id: placeholder, zone, owner: p.id, hidden: true };
+        return placeholder;
+      });
+    }
+  if (
+    s.choice?.player !== viewer &&
+    ['libraryOrder', 'librarySearch', 'discardEffect'].includes(s.choice?.kind)
+  )
     s.choice = { kind: 'opponentChoice', player: s.choice.player };
   s.events = s.events.map((e) => {
     const c = { ...e };
     delete c.seed;
-    if (c.objectId && s.objects[c.objectId]?.hidden) delete c.name;
+    if (hidden.has(c.objectId)) {
+      delete c.name;
+      delete c.objectId;
+    }
     return c;
   });
+  // Public stack source references remain valid historical handles. They do not
+  // identify any positional hidden-zone placeholder in this observation.
   return s;
 }

@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f02682f0-26c0-4032-9df3-273b6a45d0a8",
+  "name": "Solve the Equation",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "supertypes": []
+  },
+  "rulesText": "Search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "any": [
+              {
+                "type": "instant"
+              },
+              {
+                "type": "sorcery"
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ]
+    }
+  ]
+}

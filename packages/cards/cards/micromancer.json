@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d2605782-09f1-4d52-b3e7-5ec1442bd9b5",
+  "name": "Micromancer",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "supertypes": [],
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, you may search your library for an instant or sorcery card with mana value 1, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "any": [
+                  {
+                    "type": "instant"
+                  },
+                  {
+                    "type": "sorcery"
+                  }
+                ]
+              },
+              {
+                "manaValue": {
+                  "eq": 1
+                }
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

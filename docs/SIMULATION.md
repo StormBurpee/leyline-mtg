@@ -66,3 +66,11 @@ Since v0.17, supported modifier spells are compared against declared combat befo
 This is still bounded tactical search plus heuristics. It does not model unknown tricks, draw distributions, full death-trigger resolution, multi-turn strategy, opponent ranges or trained play. Search limits can miss better assignments on wide boards. Its win rates are not reliable evidence of competitive deck strength. Evaluate an external policy through the same observation boundary and record its identity, sampling settings and failures alongside the engine and ruleset fingerprints.
 
 Historical replay/engine regression uses a frozen pre-tactical policy so changes in decision quality do not masquerade as rules changes. Current-policy tests instead check legality, information boundaries, reproducibility and named tactical decisions.
+
+## Library-search decisions and hidden identity
+
+During `librarySearch`, only the searching agent sees its library definitions and eligible opaque handles. Those handles can be submitted through the normal command boundary. After the search, library objects are concealed again; only public results and the agent’s own hand remain visible. Episode continuation and replay retain deterministic shuffle state privately.
+
+The lower-level `playerView` now replaces hidden hand/library IDs with positional `hidden:…` placeholders. These placeholders are not engine command IDs and are not identity-tracking handles. Public historical stack source references remain available without identifying a hidden-zone position. Use `createSession` for the stronger, incarnation-bound agent interface rather than sending full engine state.
+
+The practice bot chooses missing land colours and useful cards from a permitted search. Its tutoring heuristic is bounded and does not establish competitive play strength. The Roots & Relics starter exercises ramp, fetch lands, Gearhulk searches and large-creature tutoring.

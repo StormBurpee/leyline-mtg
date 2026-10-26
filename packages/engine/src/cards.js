@@ -298,6 +298,31 @@ export const DECKS = Object.freeze({
       'Diregraf Ghoul': 4,
     },
   },
+  roots: {
+    name: 'Roots & Relics',
+    colors: ['G', 'W'],
+    art: 'Brightglass Gearhulk',
+    thumbnail: 'Solemn Simulacrum',
+    archetype: 'Search / ramp / toolbox',
+    description:
+      'Find the right lands, recruit small creatures with Gearhulk, then ramp into your finishers.',
+    cards: {
+      Forest: 12,
+      Plains: 8,
+      'Evolving Wilds': 4,
+      'Llanowar Elves': 4,
+      'Savannah Lions': 4,
+      'Shared Roots': 4,
+      'Burnished Hart': 3,
+      'Solemn Simulacrum': 3,
+      'Brightglass Gearhulk': 4,
+      'Fierce Empath': 2,
+      'Reclamation Sage': 2,
+      'Sire of Seven Deaths': 2,
+      Pacifism: 4,
+      'Serra Angel': 4,
+    },
+  },
 });
 export function expandDeck(list) {
   return Object.entries(list).flatMap(([name, count]) => Array.from({ length: count }, () => name));

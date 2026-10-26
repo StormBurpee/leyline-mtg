@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "30afacd9-4680-4aac-8c22-584f9418822d",
+  "name": "Circuitous Route",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "supertypes": []
+  },
+  "rulesText": "Search your library for up to two basic land cards and/or Gate cards, put them onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 2,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "any": [
+                  {
+                    "basic": true
+                  },
+                  {
+                    "subtype": "Gate"
+                  }
+                ]
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

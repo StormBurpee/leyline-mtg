@@ -140,7 +140,11 @@ function completeMulligan(s, p) {
 function handleChoice(s, p, c) {
   const choice = s.choice;
   requireRule(choice.player === p, 'CHOICE_PLAYER', 'The other player must make this choice.');
-  if (['libraryOrder', 'discardEffect', 'payCost', 'optionalEffect'].includes(choice.kind)) {
+  if (
+    ['libraryOrder', 'librarySearch', 'discardEffect', 'payCost', 'optionalEffect'].includes(
+      choice.kind,
+    )
+  ) {
     finishResolutionChoice(s, c);
     return;
   }
@@ -388,6 +392,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.17.0',
         '0.16.0',
         '0.15.0',
         '0.14.0',
