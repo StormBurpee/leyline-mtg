@@ -1,0 +1,38 @@
+name: Version tags
+on:
+  workflow_run:
+    workflows: ['Engine & client']
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: version-tags
+  cancel-in-progress: false
+jobs:
+  tag:
+    if: >-
+      github.repository == 'StormBurpee/leyline-mtg' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+      - name: Verify CI evidence and create immutable version tags
+        run: node scripts/tag-versions.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TESTED_SHA: ${{ github.event.workflow_run.head_sha }}
+          TESTED_RUN_ID: ${{ github.event.workflow_run.id }}
