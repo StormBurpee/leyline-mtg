@@ -48,7 +48,7 @@ class Element extends EventTarget {
     this.captures.delete(id);
   }
 }
-function setup(t, { accepted = true } = {}) {
+function setup(t, { accepted = true, inspection = false, canDrag = true } = {}) {
   const root = new Element(),
     source = new Element(),
     target = new Element();
@@ -73,12 +73,25 @@ function setup(t, { accepted = true } = {}) {
     );
   }
   let commits = 0,
-    ends = 0;
+    ends = 0,
+    holdCallback = null;
+  const inspections = [];
   const drag = installCardDrag(root, {
-    begin: () => ({
-      zones: [{ element: target, command: { type: 'cast' }, label: 'Cast' }],
-      label: 'Drag',
-    }),
+    begin: () =>
+      canDrag
+        ? {
+            zones: [{ element: target, command: { type: 'cast' }, label: 'Cast' }],
+            label: 'Drag',
+          }
+        : null,
+    inspect: inspection ? (id) => inspections.push(id) : undefined,
+    setTimer(callback) {
+      holdCallback = callback;
+      return 1;
+    },
+    clearTimer() {
+      holdCallback = null;
+    },
     commit: () => {
       commits++;
       return accepted;
@@ -104,6 +117,11 @@ function setup(t, { accepted = true } = {}) {
   }
   return {
     root,
+    source,
+    inspections,
+    hold() {
+      holdCallback?.();
+    },
     doc,
     win,
     drag,
@@ -174,4 +192,60 @@ test('a rejected drop cleans up and allows a later drag', (t) => {
   }
   assert.equal(x.commits, 2);
   assert.equal(x.ends, 2);
+});
+
+test('holding an unplayable card inspects it without submitting or clicking it', (t) => {
+  const x = setup(t, { inspection: true, canDrag: false });
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  x.hold();
+  assert.deepEqual(x.inspections, ['card-1']);
+  assert.equal(x.drag.active, false);
+  x.fire(x.doc, 'pointerup');
+  assert.equal(x.commits, 0);
+  assert.equal(x.ends, 1);
+  assert.equal(x.fire(x.doc, 'click', { target: x.source, detail: 1 }).defaultPrevented, true);
+});
+test('a short tap clears inspection without suppressing the normal click', (t) => {
+  const x = setup(t, { inspection: true });
+  x.fire(x.root, 'pointerdown');
+  x.fire(x.doc, 'pointerup');
+  x.hold();
+  assert.deepEqual(x.inspections, []);
+  assert.equal(x.fire(x.doc, 'click', { target: x.source, detail: 1 }).defaultPrevented, false);
+});
+test('touch scrolling cancels inspection and suppresses a delayed synthetic card click', (t) => {
+  const x = setup(t, { inspection: true });
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  x.fire(x.doc, 'pointermove', { clientX: 150, clientY: 22 });
+  x.hold();
+  x.fire(x.doc, 'pointerup');
+  assert.deepEqual(x.inspections, []);
+  assert.equal(x.commits, 0);
+  assert.equal(x.fire(x.doc, 'click', { target: x.source, detail: 1 }).defaultPrevented, true);
+});
+test('a real drag cancels the inspection timer and still commits once', (t) => {
+  const x = setup(t, { inspection: true });
+  x.fire(x.root, 'pointerdown');
+  x.fire(x.doc, 'pointermove', { clientX: 150 });
+  x.hold();
+  x.fire(x.doc, 'pointerup', { clientX: 150 });
+  assert.deepEqual(x.inspections, []);
+  assert.equal(x.commits, 1);
+});
+for (const reason of ['blur', 'pointercancel', 'removed'])
+  test(reason + ' prevents a delayed inspection', (t) => {
+    const x = setup(t, { inspection: true });
+    x.fire(x.root, 'pointerdown');
+    if (reason === 'removed') x.source.isConnected = false;
+    else x.fire(reason === 'blur' ? x.win : x.root, reason);
+    x.hold();
+    assert.deepEqual(x.inspections, []);
+    assert.equal(x.drag.active, false);
+  });
+test('the card context menu reads rather than submits', (t) => {
+  const x = setup(t, { inspection: true });
+  const event = x.fire(x.root, 'contextmenu', { target: x.source, button: 2 });
+  assert.equal(event.defaultPrevented, true);
+  assert.deepEqual(x.inspections, ['card-1']);
+  assert.equal(x.commits, 0);
 });

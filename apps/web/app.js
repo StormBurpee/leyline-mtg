@@ -1,3 +1,4 @@
+import { inspectableCard, readableCard } from './card-inspection.js';
 import { readableHandCard } from './hand-layout.js';
 import { duelShortcut } from './duel-shortcuts.js';
 import { autoCommand, updateYield, stopKey, hasStop } from './priority-policy.js';
@@ -313,6 +314,14 @@ function openDialog(title, body, actions = '') {
   clearTimeout(botTimer);
   dialog.innerHTML = `<div class="dialog-head"><h2>${escape(title)}</h2><button class="icon-btn" data-action="closeDialog" aria-label="Close dialog">×</button></div><div class="dialog-body">${body}</div><div class="dialog-actions">${actions || '<button class="btn" data-action="closeDialog">Done</button>'}</div>`;
   if (!dialog.open) dialog.showModal();
+}
+function showCardReader(id) {
+  const object = inspectableCard(state, id, viewer());
+  if (!object) return false;
+  ui.inspect = object.name;
+  ui.inspectObject = id;
+  openDialog(object.name, inspect(object.name, metadata, state, id));
+  return true;
 }
 function closeDialog() {
   dialog.close();
@@ -972,12 +981,12 @@ async function action(name, el) {
       resetSelection();
       render();
       break;
-    case 'readHandCard': {
-      const id = readableHandCard(state, ui, viewer());
+    case 'readHandCard':
+    case 'readCard': {
+      const id = readableCard(state, ui, viewer());
       if (!id) break;
       cardDrag.cancel();
-      const object = state.objects[id];
-      openDialog(object.name, inspect(object.name, metadata, state, id));
+      showCardReader(id);
       break;
     }
     case 'inspector':
@@ -991,10 +1000,51 @@ async function action(name, el) {
     case 'settings':
       showSettings();
       break;
+    case 'mobileStack':
+      ui.inspectorOpen = ui.sideTab !== 'stack' || !ui.inspectorOpen;
+      ui.sideTab = 'stack';
+      render();
+      break;
+    case 'tableHistory':
+      ui.sideTab = 'log';
+      ui.inspectorOpen = true;
+      closeDialog();
+      render();
+      break;
+    case 'tableView':
+      if (!['cards', 'engine'].includes(el.dataset.view)) break;
+      ui.view = el.dataset.view;
+      closeDialog();
+      render();
+      break;
+    case 'tableControl':
+      if (
+        !['toggleFullControl', 'yieldResponse', 'yieldTurn', 'cancelYield', 'pause'].includes(
+          el.dataset.command,
+        )
+      )
+        break;
+      closeDialog();
+      await action(el.dataset.command, {});
+      break;
+    case 'tableControls':
+      openDialog(
+        'Priority & passing',
+        ui.mode === 'bot'
+          ? `<div class="table-control-menu"><button class="btn" data-action="tableControl" data-command="toggleFullControl">${ui.controlMode === 'full' ? 'Use smart play' : 'Enable full control'}</button><button class="btn" data-action="tableControl" data-command="pause">${ui.paused ? 'Resume opponent' : 'Pause opponent'}</button>${ui.yieldMode ? '<button class="btn" data-action="tableControl" data-command="cancelYield">Stop auto-passing</button>' : '<button class="btn" data-action="tableControl" data-command="yieldResponse">Pass until response</button><button class="btn" data-action="tableControl" data-command="yieldTurn">Pass this turn</button>'}</div><p>Phase stops still interrupt passing. Full control preserves every priority window.</p><button class="btn" data-action="prioritySettings">Automation preferences</button>`
+          : '<p>Local two-player mode is manual. Switch seats when the other player needs to act.</p>',
+      );
+      break;
+    case 'tableZones':
+      openDialog(
+        'Public zones',
+        `<div class="table-zones">${[viewer(), 1 - viewer()].map((player) => `<section><h3>${escape(state.players[player].name)}</h3><p>${state.players[player].library.length} in library · ${state.players[player].hand.length} in hand</p><button class="btn" data-action="zone" data-player="${player}" data-zone="graveyard">Graveyard · ${state.players[player].graveyard.length}</button><button class="btn" data-action="zone" data-player="${player}" data-zone="exile">Exile · ${state.players[player].exile.length}</button></section>`).join('')}</div>`,
+      );
+      break;
     case 'matchMenu':
       openDialog(
         'At this table',
-        '<p>Replays contain the full match, including hidden cards. Local saves never leave your browser.</p>',
+        '<div class="table-menu"><button class="btn" data-action="tableControls">Priority & passing</button><button class="btn" data-action="phaseStops">Phase stops</button><button class="btn" data-action="tableZones">Public zones</button><button class="btn" data-action="tableHistory">Game log</button><button class="btn" data-action="settings">Table preferences</button><button class="btn" data-action="tableView" data-view="cards">Card catalog</button><button class="btn" data-action="tableView" data-view="engine">Engine & replays</button></div><p>Replays contain the full match, including hidden cards. Local saves never leave your browser.</p>',
         '<button class="btn quiet" data-action="leave">Leave table</button><button class="btn" data-action="export">Export replay</button><button class="btn danger" data-action="confirmConcede">Concede</button>',
       );
       break;
@@ -1123,6 +1173,7 @@ function controlledCreatures(p) {
   );
 }
 const cardDrag = installCardDrag(app, {
+  inspect: showCardReader,
   begin(id) {
     if (ui.replayRecord || ui.view !== 'play' || dialog.open) return null;
     const player = viewer(),

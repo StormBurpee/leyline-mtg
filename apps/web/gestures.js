@@ -1,8 +1,21 @@
 import { prefersReducedMotion } from './motion.js';
 /** Pointer gestures own presentation only. The caller supplies legal commands. */
-export function installCardDrag(root, { begin, commit, end, feedback }) {
+export function installCardDrag(
+  root,
+  {
+    begin,
+    commit,
+    end,
+    feedback,
+    inspect,
+    holdDelay = 450,
+    setTimer = setTimeout,
+    clearTimer = clearTimeout,
+  },
+) {
   let gesture = null;
   let suppressClickUntil = 0;
+  let suppressCard = null;
   const reduced = prefersReducedMotion;
   const clean = () => {
     root
@@ -14,11 +27,15 @@ export function installCardDrag(root, { begin, commit, end, feedback }) {
     const g = gesture;
     if (!g) return;
     gesture = null;
+    if (g.holdTimer != null) clearTimer(g.holdTimer);
+    if (g.lifted || g.inspected || g.scrolled) {
+      suppressClickUntil = performance.now() + 350;
+      suppressCard = g.id;
+    }
     if (g.scrollFrame) cancelAnimationFrame(g.scrollFrame);
     clean();
     if (root.hasPointerCapture(g.pointerId)) root.releasePointerCapture(g.pointerId);
     if (g.lifted) {
-      suppressClickUntil = performance.now() + 350;
       const destination = accepted
         ? (root.querySelector(`[data-pending-card="${CSS.escape(g.id)}"]`) ??
           root.querySelector(`[data-motion-card="${CSS.escape(g.id)}"]`))
@@ -50,12 +67,15 @@ export function installCardDrag(root, { begin, commit, end, feedback }) {
   }
   root.addEventListener('pointerdown', (event) => {
     if (event.button !== 0 || !event.isPrimary || gesture) return;
-    const source = event.target.closest('.hand-card[data-card], .permanent[data-card]');
+    const source = event.target.closest(
+      '.hand-card[data-card], .permanent[data-card], .land-card[data-card]',
+    );
     if (!source) return;
     const plan = begin(source.dataset.card);
-    if (!plan) return;
+    if (!plan && !inspect) return;
     gesture = {
-      ...plan,
+      ...(plan ?? { zones: [] }),
+      draggable: !!plan,
       id: source.dataset.card,
       source,
       pointerId: event.pointerId,
@@ -65,6 +85,28 @@ export function installCardDrag(root, { begin, commit, end, feedback }) {
       lifted: false,
       touch: event.pointerType === 'touch',
     };
+    const g = gesture;
+    if (inspect)
+      g.holdTimer = setTimer(() => {
+        if (gesture !== g || g.lifted) return;
+        if (!g.source.isConnected) return finish();
+        g.inspected = true;
+        finish();
+        inspect(g.id);
+      }, holdDelay);
+  });
+  root.addEventListener('contextmenu', (event) => {
+    if (!inspect) return;
+    const source = event.target.closest(
+      '.hand-card[data-card], .permanent[data-card], .land-card[data-card]',
+    );
+    if (!source) return;
+    event.preventDefault();
+    if (gesture) {
+      gesture.inspected = true;
+      finish();
+    }
+    inspect(source.dataset.card);
   });
   document.addEventListener('pointermove', (event) => {
     const g = gesture;
@@ -74,8 +116,11 @@ export function installCardDrag(root, { begin, commit, end, feedback }) {
       dy = event.clientY - g.y;
     if (!g.lifted) {
       if (Math.hypot(dx, dy) < 8) return;
-      // Horizontal touch movement belongs to the scrollable hand, not the card.
-      if (g.touch && Math.abs(dx) > Math.abs(dy)) {
+      if (g.holdTimer != null) clearTimer(g.holdTimer);
+      g.holdTimer = null;
+      // Horizontal touch movement belongs to scrolling, never a delayed card click.
+      g.scrolled = g.touch && Math.abs(dx) > Math.abs(dy);
+      if (!g.draggable || g.scrolled) {
         finish();
         return;
       }
@@ -201,7 +246,12 @@ export function installCardDrag(root, { begin, commit, end, feedback }) {
   document.addEventListener(
     'click',
     (event) => {
-      if (performance.now() < suppressClickUntil && event.detail !== 0 && event.target === root) {
+      if (
+        performance.now() < suppressClickUntil &&
+        event.detail !== 0 &&
+        (event.target === root ||
+          event.target.closest?.('[data-card]')?.dataset.card === suppressCard)
+      ) {
         event.preventDefault();
         event.stopImmediatePropagation();
       }
