@@ -36,9 +36,7 @@ export function chooseLandAction(s, p, actions) {
         },
       },
       players: s.players.map((player, index) =>
-        index === p
-          ? { ...player, hand: player.hand.filter((id) => id !== object.id) }
-          : player,
+        index === p ? { ...player, hand: player.hand.filter((id) => id !== object.id) } : player,
       ),
     };
     const after = available(projected, p);
