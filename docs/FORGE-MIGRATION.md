@@ -14,13 +14,13 @@ The report destination must not already exist. Omit it to print JSON to stdout. 
 
 - The five basic lands and explicit supported nonbasic mana abilities. Flexible sources produce one mana, not every listed color.
 - Unconditional self enters-tapped replacements; conditional and competing replacements are rejected.
-- Single-type creatures with literal power/toughness and supported combat keywords.
+- Single-face permanent types, including artifact/enchantment creatures, with literal characteristics and supported keywords.
 - Prowess, translated to a cast-trigger definition. Menace and single-instance mana/life ward.
 - Direct spell instructions: literal damage, counterspell, untargeted draw, creature destruction, battlefield-creature bounce and temporary pumps.
 - Scry, surveil and mandatory self-discard, including resolution choices.
 - Referenced `SVar:` / `DB$` subability chains with cycle, missing-reference and unused-variable checks.
 - Supported mana/tap activated abilities and single-color tap mana abilities.
-- Selected self-enter, other-creature-enter, landfall and controlled spell-cast triggers.
+- Selected self-enter, other-creature-enter, landfall and controlled spell-cast triggers, including optional controller decisions.
 - Literal mill, life-gain, source-counter and source-untap instructions.
 - Simple colored/generic costs and the supported target predicates.
 
@@ -40,6 +40,6 @@ A later importer should extend this grammar one semantic family at a time. Unsup
 
 ## Reproducible inventory
 
-The pinned upstream snapshot contains 34,131 script files. Adapter 0.4.0 produces 1,585 candidates and explicitly rejects 32,546 files. This is a syntax inventory, not 1,585 verified playable cards. The report records its upstream commit and compiler hash in [forge-audit.json](forge-audit.json); the earlier adapter inventory is retained in [forge-audit-v0.1.json](forge-audit-v0.1.json).
+The pinned upstream snapshot contains 34,131 script files. Adapter 0.5.0 produces 1,831 candidates and explicitly rejects 32,300 files. This is a syntax inventory, not 1,831 verified playable cards. The report records its upstream commit and compiler hash in [forge-audit.json](forge-audit.json); the earlier adapter inventory is retained in [forge-audit-v0.1.json](forge-audit-v0.1.json).
 
 Runtime fixtures execute selected translated cards through Leyline, including private scry, surveil, tap costs, discard continuations and targeted pumps. They do not compare execution against the Forge Java runtime.

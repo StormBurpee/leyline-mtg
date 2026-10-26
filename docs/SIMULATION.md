@@ -36,7 +36,7 @@ The local session translates agent handles back to engine references and rejects
 
 `termination` distinguishes a finished game from a decision limit, cancellation, policy exception or illegal command. A truncated episode is never silently scored as a draw. `winner` is meaningful as a game result only when `termination === 'finished'`.
 
-Deterministic policies with the same configuration reproduce the same episode. A nondeterministic model must supply its own reproducible sampling configuration or save its accepted commands. `includeReplay: true` produces a privileged evaluation artifact containing both decks and the seed. Keep it out of policy inputs.
+Each episode result records the engine version, a SHA-256 ruleset fingerprint and a configuration fingerprint. These are evaluation outputs, not policy inputs. Deterministic policies with the same configuration reproduce the same episode. A nondeterministic model must supply its own reproducible sampling configuration or save its accepted commands. `includeReplay: true` produces a privileged evaluation artifact containing both decks and the seed. Keep it out of policy inputs.
 
 Cancellation is checked between decisions and after an asynchronous policy returns. It cannot interrupt a stuck synchronous callback or an unresolved promise; external workers/timeouts are required for that.
 

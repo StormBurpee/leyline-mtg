@@ -38,6 +38,7 @@ export interface AgentContext {
   readonly actions: readonly (LegalAction & { player: PlayerId })[];
 }
 export interface Summary {
+  engineVersion: string;
   status: GameState['status'];
   winner: PlayerId | null;
   turn: number;

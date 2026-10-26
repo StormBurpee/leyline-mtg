@@ -1742,7 +1742,7 @@
   {
     "oracleId": "87bd0fdb-c5b9-46ea-9858-1a870960351f",
     "name": "Invoke the Divine",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "721c3255-953c-49cd-a5dd-852c3d09eae4",
@@ -1897,7 +1897,7 @@
   {
     "oracleId": "325b4288-fe1b-4e29-ae13-72924b4db3dd",
     "name": "Iron Giant",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "43990801-ed4a-49ff-a96e-03faa302214f",

@@ -69,3 +69,9 @@ A resolving spell or ability has a serializable instruction cursor, separate fro
 Flexible mana sources are modeled as one source with a choice of colors, not one source per color. The pure payment planner reserves floating colored mana, matches remaining colored requirements to unit-capacity sources, then pays generic costs. Tests compare small-source plans with exhaustive assignments. Always-tapped entry is a literal characteristic in this subset; it is not a general replacement/prevention engine.
 
 Annotated version tags are created by the repository workflow only after successful trusted main-branch CI and a matching package version. Existing tags are never moved. Historical tags remain verifiable even after CI log retention expires.
+
+## Printed card types
+
+Definitions retain a `types` array. Use `hasType(definition, type)` for type membership; the legacy scalar `type` is only a validated dispatch category, not the full identity. An artifact creature is one object, can be targeted by artifact or creature removal and triggers both relevant cast predicates. Unsupported land-creature combinations and type-changing continuous effects are rejected rather than flattened.
+
+Optional triggered abilities still enter the stack. Their controller makes the accept/decline decision during resolution; declining does not retrospectively undo the trigger. No priority or state-based-action window is introduced inside that decision.

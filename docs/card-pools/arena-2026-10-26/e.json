@@ -1297,7 +1297,7 @@
   {
     "oracleId": "795b096a-2bce-4588-a2c9-abc5ea40dc0c",
     "name": "Enchantress's Presence",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "d6accaed-ff35-4324-b31b-35e6837bc079",
@@ -2292,7 +2292,7 @@
   {
     "oracleId": "16e48b95-f030-400c-a2b7-c3f3111cc165",
     "name": "Excavated Wall",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "77216636-f76d-4c5e-b1ac-ab1844753f05",
@@ -2577,7 +2577,7 @@
   {
     "oracleId": "c8195fcd-1858-4f23-aa73-b654d25035aa",
     "name": "Expose to Daylight",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f1812d69-c016-4bc3-b899-ed47f5e893e5",

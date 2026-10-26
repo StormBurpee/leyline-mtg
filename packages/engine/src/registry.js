@@ -1,6 +1,7 @@
+import { CARD_TYPES, primaryType } from './types.js';
 import { CARDS } from './cards.js';
 
-const TYPES = new Set(['land', 'creature', 'instant', 'sorcery', 'enchantment', 'artifact']);
+const TYPES = new Set(CARD_TYPES);
 const COLORS = new Set(['W', 'U', 'B', 'R', 'G']);
 const MANA = new Set([...COLORS, 'C', 'generic']);
 const KEYWORDS = new Set([
@@ -28,10 +29,17 @@ const TARGETS = new Set([
   'nonblackCreature',
   'spell',
   'noncreatureSpell',
+  'artifact',
+  'enchantment',
+  'artifactOrEnchantment',
+  'permanent',
 ]);
 const TRIGGERS = new Set([
   'selfEnters',
   'controllerLandEnters',
+  'controllerCastsArtifact',
+  'controllerCastsEnchantment',
+  'controllerCastsCreature',
   'otherCreatureEnters',
   'controllerCastsNoncreature',
   'controllerCastsInstantOrSorcery',
@@ -39,6 +47,7 @@ const TRIGGERS = new Set([
 const FIELDS = new Set([
   'name',
   'type',
+  'types',
   'cost',
   'text',
   'color',
@@ -169,8 +178,22 @@ function validateEffects(effects, path, target, errors) {
     const permitted = {
       damage: ['any', 'player', 'opponent', 'creature', 'nonblackCreature'],
       counter: ['spell', 'noncreatureSpell'],
-      bounce: ['creature', 'nonblackCreature'],
-      destroy: ['creature', 'nonblackCreature'],
+      bounce: [
+        'creature',
+        'nonblackCreature',
+        'artifact',
+        'enchantment',
+        'artifactOrEnchantment',
+        'permanent',
+      ],
+      destroy: [
+        'creature',
+        'nonblackCreature',
+        'artifact',
+        'enchantment',
+        'artifactOrEnchantment',
+        'permanent',
+      ],
       modify: ['creature', 'nonblackCreature'],
     }[e.op];
     if (permitted && e.subject !== 'source' && !permitted.includes(target))
@@ -192,6 +215,30 @@ export function validateDefinition(card) {
   )
     errors.push('Card name must be a nonempty, nonreserved string of at most 200 characters.');
   if (!TYPES.has(card.type)) errors.push(`${name}.type: unsupported card type.`);
+  if (card.types !== undefined) {
+    if (
+      !Array.isArray(card.types) ||
+      !card.types.length ||
+      card.types.length > 3 ||
+      card.types.some((t) => !TYPES.has(t)) ||
+      new Set(card.types).size !== card.types.length
+    )
+      errors.push(`${name}.types: expected distinct supported card types.`);
+    else if (
+      primaryType(card.types) !== card.type ||
+      (card.types.length > 1 && card.types.some((t) => ['land', 'instant', 'sorcery'].includes(t)))
+    )
+      errors.push(`${name}.types: unsupported combination or inconsistent primary type.`);
+  }
+  const permanent = ['land', 'creature', 'artifact', 'enchantment'].includes(card.type);
+  if (permanent && card.effects !== undefined)
+    errors.push(
+      `${name}.effects: permanent spells use enters triggers, not direct spell instructions.`,
+    );
+  if (!permanent)
+    for (const field of ['etb', 'triggers', 'activated', 'static', 'ward', 'mana', 'entersTapped'])
+      if (card[field] !== undefined)
+        errors.push(`${name}.${field}: only battlefield permanents support this field.`);
   validateCost(card.cost, `${name}.cost`, errors);
   if (card.ward !== undefined) validatePaymentCost(card.ward, `${name}.ward`, errors);
   if (card.text !== undefined && typeof card.text !== 'string')
@@ -254,11 +301,13 @@ export function validateDefinition(card) {
         if (
           !plain(t) ||
           !TRIGGERS.has(t.event) ||
-          Object.keys(t).some((k) => !['event', 'effects'].includes(k))
+          Object.keys(t).some((k) => !['event', 'effects', 'optional'].includes(k))
         ) {
           errors.push(`${name}.triggers[${i}]: unsupported trigger predicate or field.`);
           continue;
         }
+        if (t.optional !== undefined && typeof t.optional !== 'boolean')
+          errors.push(`${name}.triggers[${i}].optional: expected a boolean.`);
         validateEffects(t.effects, `${name}.triggers[${i}].effects`, null, errors);
       }
   }
@@ -284,8 +333,12 @@ export function validateDefinition(card) {
   }
   return errors;
 }
+const validatedRegistries = new WeakSet();
+let defaultRegistry;
 /** A registry is immutable, serializable data, never executable callbacks. */
 export function createRegistry(input = CARDS) {
+  if (input === CARDS && defaultRegistry) return defaultRegistry;
+  if (input && typeof input === 'object' && validatedRegistries.has(input)) return input;
   const definitions = Array.isArray(input) ? input : plain(input) ? Object.values(input) : null;
   if (!definitions || definitions.length > 50000)
     throw new RegistryError(['Expected at most 50,000 definitions.']);
@@ -302,6 +355,7 @@ export function createRegistry(input = CARDS) {
     const copy = structuredClone(card);
     registry[copy.name] = {
       ...copy,
+      types: copy.types ?? [copy.type],
       keywords: copy.keywords ?? [],
       subtypes: copy.subtypes ?? [],
       text: copy.text ?? '',
@@ -319,5 +373,8 @@ export function createRegistry(input = CARDS) {
       if (e.op === 'token' && !registry[e.definition]?.token)
         errors.push(`${card.name}: missing token definition ${e.definition}.`);
   if (errors.length) throw new RegistryError(errors.slice(0, 100));
-  return frozen(Object.fromEntries(Object.entries(registry)));
+  const result = frozen(Object.fromEntries(Object.entries(registry)));
+  validatedRegistries.add(result);
+  if (input === CARDS) defaultRegistry = result;
+  return result;
 }

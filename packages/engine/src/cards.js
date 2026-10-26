@@ -32,6 +32,101 @@ const spell = (name, type, cost, effects, target, text) => ({
 });
 const defs = [
   ...reviewedCreatures,
+  creature('Ornithopter', { generic: 0 }, 0, 2, ['flying'], {
+    types: ['artifact', 'creature'],
+    subtypes: ['Thopter'],
+  }),
+  creature('Memnite', { generic: 0 }, 1, 1, [], {
+    types: ['artifact', 'creature'],
+    subtypes: ['Construct'],
+  }),
+  creature('Phyrexian Walker', { generic: 0 }, 0, 3, [], {
+    types: ['artifact', 'creature'],
+    subtypes: ['Phyrexian', 'Construct'],
+  }),
+  creature('Spirited Companion', { generic: 1, W: 1 }, 1, 1, [], {
+    types: ['enchantment', 'creature'],
+    subtypes: ['Dog'],
+    etb: [{ op: 'draw', count: 1 }],
+    text: 'When this creature enters, draw a card.',
+  }),
+  creature('Patchwork Automaton', { generic: 2 }, 1, 1, [], {
+    types: ['artifact', 'creature'],
+    subtypes: ['Construct'],
+    ward: { mana: { generic: 2 } },
+    triggers: [
+      {
+        event: 'controllerCastsArtifact',
+        effects: [{ op: 'counterOn', subject: 'source', amount: 1 }],
+      },
+    ],
+    text: 'Ward {2}. Whenever you cast an artifact spell, put a +1/+1 counter on this creature.',
+  }),
+  creature('Ornithopter of Paradise', { generic: 2 }, 0, 2, ['flying'], {
+    types: ['artifact', 'creature'],
+    subtypes: ['Thopter'],
+    mana: ['W', 'U', 'B', 'R', 'G'],
+    text: 'Flying. Tap: Add one mana of any color.',
+  }),
+  {
+    name: 'Darksteel Ingot',
+    type: 'artifact',
+    cost: { generic: 3 },
+    keywords: ['indestructible'],
+    mana: ['W', 'U', 'B', 'R', 'G'],
+    text: 'Indestructible. Tap: Add one mana of any color.',
+  },
+  {
+    name: "Enchantress's Presence",
+    type: 'enchantment',
+    cost: { generic: 2, G: 1 },
+    triggers: [{ event: 'controllerCastsEnchantment', effects: [{ op: 'draw', count: 1 }] }],
+    text: 'Whenever you cast an enchantment spell, draw a card.',
+  },
+  creature('Mesa Enchantress', { generic: 1, W: 2 }, 0, 2, [], {
+    subtypes: ['Human', 'Druid'],
+    triggers: [
+      { event: 'controllerCastsEnchantment', optional: true, effects: [{ op: 'draw', count: 1 }] },
+    ],
+    text: 'Whenever you cast an enchantment spell, you may draw a card.',
+  }),
+  creature('Beast Whisperer', { generic: 2, G: 2 }, 2, 3, [], {
+    subtypes: ['Elf', 'Druid'],
+    triggers: [{ event: 'controllerCastsCreature', effects: [{ op: 'draw', count: 1 }] }],
+    text: 'Whenever you cast a creature spell, draw a card.',
+  }),
+  spell(
+    'Naturalize',
+    'instant',
+    { generic: 1, G: 1 },
+    [{ op: 'destroy' }],
+    'artifactOrEnchantment',
+    'Destroy target artifact or enchantment.',
+  ),
+  spell(
+    'Disenchant',
+    'instant',
+    { generic: 1, W: 1 },
+    [{ op: 'destroy' }],
+    'artifactOrEnchantment',
+    'Destroy target artifact or enchantment.',
+  ),
+  spell(
+    'Shatter',
+    'instant',
+    { generic: 1, R: 1 },
+    [{ op: 'destroy' }],
+    'artifact',
+    'Destroy target artifact.',
+  ),
+  spell(
+    'Boomerang',
+    'instant',
+    { U: 2 },
+    [{ op: 'bounce' }],
+    'permanent',
+    "Return target permanent to its owner's hand.",
+  ),
   spell(
     'Tome Scour',
     'sorcery',
@@ -479,6 +574,7 @@ export const CARDS = deepFreeze(
       d.name,
       Object.freeze({
         ...d,
+        types: d.types ?? [d.type],
         keywords: d.keywords ?? [],
         subtypes: d.subtypes ?? [],
         text: d.text ?? (d.keywords?.join(', ') || 'No abilities.'),

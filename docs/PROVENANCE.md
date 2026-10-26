@@ -12,7 +12,7 @@ Leyline's engine and client are written in JavaScript for this repository. They 
 - `forge-game/.../trigger/TriggerHandler.java`: pending triggers, distinct from resolution.
 - `forge-gui/res/cardsfolder/l/lightning_bolt.txt` and `c/counterspell.txt`: declarative executable card definitions.
 
-No Forge Java implementation source is distributed in this repository. Thirty-three small Forge card-script fixtures are reproduced in `packages/forge-import/test/fixtures/`, with upstream source links and GPL-3.0-or-later attribution; they test the conservative migration adapter. The comparable rule behavior is implemented directly from the game rules in a separate, smaller architecture. Leyline is licensed **GPL-3.0-or-later**, consistent with an open-source future that can incorporate properly attributed GPL-compatible contributions. This does not make this project an official Forge release. The included license is the unmodified GNU GPL v3 license text.
+No Forge Java implementation source is distributed in this repository. Forty-seven small Forge card-script fixtures are reproduced in `packages/forge-import/test/fixtures/`, with upstream source links and GPL-3.0-or-later attribution; they test the conservative migration adapter. The comparable rule behavior is implemented directly from the game rules in a separate, smaller architecture. Leyline is licensed **GPL-3.0-or-later**, consistent with an open-source future that can incorporate properly attributed GPL-compatible contributions. This does not make this project an official Forge release. The included license is the unmodified GNU GPL v3 license text.
 
 ## Rules and cards
 
@@ -31,3 +31,5 @@ The geometric Leyline mark and README diagrams are original project graphics. Ga
 `docs/card-pools/` records dated Scryfall inventories and implementation status, not executable rules. Queries, retrieval times and source-page hashes are retained. Scryfall availability tags are not a verified export of an Arena client installation. Alchemy-tagged results and auxiliary tokens/emblems are tracked separately rather than counted as playable deck cards.
 
 The adapter recognizes a narrow set of `T:` trigger predicates and unconditional self enters-tapped `R:` replacements. Unused `SVar:BuffedBy` values `Land`, `Creature` and `Card.nonCreature` are treated as AI hints, based on their use in Forge `forge-ai/.../ComputerUtil.java` and `AiController.java`; other unused variables still fail. This is not a general Forge trigger or replacement interpreter.
+
+The exact `AI:RemoveDeck:Random` presentation/deck-generation flag is ignored by the adapter. Forge `forge-core/.../CardRules.java` stores it as a random-deck exclusion, not an in-game rule. Other AI fields remain explicit diagnostics. Optional trigger control comes from `OptionalDecider$ You`; it is preserved as a resolution choice, not dropped.

@@ -622,7 +622,7 @@
   {
     "oracleId": "0844f4e6-2b98-4d09-a5c5-92f0a3b6a517",
     "name": "Mana Geode",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "1ddfa356-9f8e-4052-a427-708bf48fc050",
@@ -637,7 +637,7 @@
   {
     "oracleId": "bd9e416a-89b3-4912-be9b-49fce6a93dc9",
     "name": "Manalith",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "89c83a6d-f6c8-4984-a888-0db62dfb93b1",
@@ -672,7 +672,7 @@
   {
     "oracleId": "95ab1529-0de0-416a-82b4-c5ed9276a9b4",
     "name": "Mandroid Squadron",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ac230f29-6d3b-4fe1-bcb0-6ffab95a1bd7",
@@ -907,7 +907,7 @@
   {
     "oracleId": "acff2573-cf8a-4aee-96a3-28721a4128f6",
     "name": "Mardu Hateblade",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e4b15cba-9cd7-422d-9ca6-39243bf67dca",
@@ -3412,7 +3412,7 @@
   {
     "oracleId": "0b4cb111-ecf7-4ff7-a9e3-c944054f3370",
     "name": "Monoist Sentry",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ace8e88e-ca6a-4bdf-8c6d-1b914fc00259",

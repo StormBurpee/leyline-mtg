@@ -29,7 +29,17 @@ const compilerPackage = JSON.parse(
 const compilerSource = await readFile(
   new URL('../packages/forge-import/compile.js', import.meta.url),
 );
+const compilerInputs = {};
+for (const path of [
+  'packages/forge-import/compile.js',
+  'packages/engine/src/registry.js',
+  'packages/engine/src/types.js',
+])
+  compilerInputs[path] = createHash('sha256')
+    .update(await readFile(new URL(`../${path}`, import.meta.url)))
+    .digest('hex');
 const report = {
+  compilerInputs,
   compilerVersion: compilerPackage.version,
   compilerSourceSha256: createHash('sha256').update(compilerSource).digest('hex'),
   purpose: 'Migration candidates only. No cards were registered or game code changed.',

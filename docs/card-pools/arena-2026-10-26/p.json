@@ -267,7 +267,7 @@
   {
     "oracleId": "82ff4500-b118-4ce7-9f7c-92661328b242",
     "name": "Pardic Wanderer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "24d22bcb-8a77-4c47-a508-6f4bc093c1d0",
@@ -362,7 +362,7 @@
   {
     "oracleId": "0ba86a50-13df-4b26-8b3a-9e3917ff850f",
     "name": "Patchwork Automaton",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "4fb00dbe-1f82-4ba6-b18c-97e816d10d3a",
@@ -1697,7 +1697,7 @@
   {
     "oracleId": "e88a2b71-c90d-4e16-99a3-93d11fe7a968",
     "name": "Poison Dart Frog",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "4b0e5626-0282-42e5-abef-a079b26a8e5f",
@@ -2057,7 +2057,7 @@
   {
     "oracleId": "1ec95969-4a6f-49f3-af23-1680276e7da2",
     "name": "Prakhata Pillar-Bug",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "4505ff9f-97f1-45d1-aea9-5590fefb4a4d",
@@ -2387,7 +2387,7 @@
   {
     "oracleId": "499f1e1e-d96e-481f-a5d9-eb38da927cd7",
     "name": "Primordial Sage",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ab9778da-f5e3-4c17-a3da-ffef6ed7a7a1",
@@ -2687,7 +2687,7 @@
   {
     "oracleId": "eaa1634e-6ba1-41c2-91c0-967b36d13e14",
     "name": "Prophet of the Peak",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c586312d-d04a-4bfb-bbb2-b41186ca178e",

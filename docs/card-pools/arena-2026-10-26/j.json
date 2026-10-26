@@ -202,7 +202,7 @@
   {
     "oracleId": "32d9fd98-142b-41d2-b8f0-40ae1d4cb991",
     "name": "Jalum Tome",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "93036f4e-f553-4cc7-a747-6cd087b0994c",
@@ -667,7 +667,7 @@
   {
     "oracleId": "96eea161-8af0-452f-b992-576efdf58d88",
     "name": "Jousting Dummy",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ab747483-2aa1-4b25-b2fa-cf7372a1b1dc",

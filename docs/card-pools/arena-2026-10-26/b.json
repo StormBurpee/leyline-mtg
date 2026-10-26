@@ -167,7 +167,7 @@
   {
     "oracleId": "37688720-03de-4eca-a82d-a0afe8d58adc",
     "name": "Baleful Strix",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a511772c-3739-469d-a5a2-5827b7ce9b5c",
@@ -697,7 +697,7 @@
   {
     "oracleId": "48a01671-da1f-4875-bcd5-ca99566ff399",
     "name": "Bastion Mastodon",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c7f33cea-2ec8-4081-9208-a5b1d86721b3",
@@ -987,7 +987,7 @@
   {
     "oracleId": "5da7eea8-bb9e-47ce-a554-8a1ee058bd7a",
     "name": "Beast Whisperer",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "7735eeba-693b-47e2-bd51-414379cf1016",
@@ -1592,7 +1592,7 @@
   {
     "oracleId": "d3a0b660-358c-41bd-9cd2-41fbf3491b1a",
     "name": "Birds of Paradise",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "fb81e4d3-1d8c-4779-be62-87cf49277e51",

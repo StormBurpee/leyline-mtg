@@ -17,7 +17,7 @@
   {
     "oracleId": "282d6e61-3240-4f1e-9c2d-8ddb59b03af4",
     "name": "Wakandan Drone Flock",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "4ae15bd1-e0ea-4c1a-a311-dae421381ebc",
@@ -1082,7 +1082,7 @@
   {
     "oracleId": "5d604aff-ba60-4064-b025-b1f3d1c0254e",
     "name": "Weldfast Monitor",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a05bcc3e-25d5-4111-820e-a097189afb7e",
@@ -1222,7 +1222,7 @@
   {
     "oracleId": "6467cbb7-1e4e-482d-a20f-6cb9fc0f1ad1",
     "name": "Whirlwind of Thought",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a4477852-66eb-4a54-b4c1-760cbf624f82",
@@ -2052,7 +2052,7 @@
   {
     "oracleId": "b46adfcd-fd7a-40c5-85f4-1cfee43a4c48",
     "name": "Witness of Tomorrows",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a5f5e71e-83a7-468d-829a-6392b764c76e",
@@ -2412,7 +2412,7 @@
   {
     "oracleId": "8ba5af76-2485-4fd6-bd2e-fe90d1f2691c",
     "name": "Wreckage Wickerfolk",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "181a7b5a-3794-46ae-b6ff-48849ee1470f",
@@ -2427,7 +2427,7 @@
   {
     "oracleId": "4a9e0294-c967-4e90-b776-6d3195034a23",
     "name": "Wrecking Gecko",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "89c89499-23a8-412d-9406-1a7ffc88c64d",
@@ -2472,7 +2472,7 @@
   {
     "oracleId": "628cf9ab-8f8b-49b6-b761-2450088ad03b",
     "name": "Wretched Doll",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "83d0c4bc-aab9-4c14-a7dc-a344fcce4fea",

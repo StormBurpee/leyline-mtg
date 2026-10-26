@@ -1,4 +1,5 @@
 /** Public types for the dependency-free JavaScript engine. */
+export type CardType = 'land' | 'creature' | 'instant' | 'sorcery' | 'artifact' | 'enchantment';
 export type PlayerId = 0 | 1;
 export type Color = 'W' | 'U' | 'B' | 'R' | 'G' | 'C';
 export type ManaCost = Partial<Record<Color | 'generic', number>>;
@@ -28,7 +29,11 @@ export type TargetKind =
   | 'creature'
   | 'nonblackCreature'
   | 'spell'
-  | 'noncreatureSpell';
+  | 'noncreatureSpell'
+  | 'artifact'
+  | 'enchantment'
+  | 'artifactOrEnchantment'
+  | 'permanent';
 export type Effect =
   | { op: 'damage' | 'damageOpponent' | 'gainLife'; amount: number }
   | { op: 'draw' | 'scry' | 'surveil' | 'discard'; count: number }
@@ -40,7 +45,8 @@ export type Effect =
   | { op: 'token'; definition: string; count: number };
 export interface CardDefinition {
   readonly name: string;
-  readonly type: 'land' | 'creature' | 'instant' | 'sorcery' | 'enchantment' | 'artifact';
+  readonly type: CardType;
+  readonly types?: readonly CardType[];
   readonly cost: ManaCost;
   readonly text: string;
   readonly color: readonly string[];
@@ -62,10 +68,14 @@ export interface CardDefinition {
     event:
       | 'selfEnters'
       | 'controllerLandEnters'
+      | 'controllerCastsArtifact'
+      | 'controllerCastsEnchantment'
+      | 'controllerCastsCreature'
       | 'otherCreatureEnters'
       | 'controllerCastsNoncreature'
       | 'controllerCastsInstantOrSorcery';
     effects: readonly Effect[];
+    optional?: boolean;
   }[];
   readonly activated?: readonly {
     cost: { mana?: ManaCost; tap?: boolean; life?: number };
@@ -118,6 +128,7 @@ export interface StackEntry {
   target?: Target | null;
   label?: string;
   relatedStackId?: string;
+  optional?: boolean;
 }
 export interface DamageOrder {
   source: string;
@@ -133,6 +144,7 @@ export interface DamageSource {
   keywords: string[];
 }
 export type Choice =
+  | { kind: 'optionalEffect'; player: PlayerId; name: string }
   | {
       kind: 'payCost';
       player: PlayerId;
@@ -220,6 +232,7 @@ export interface GameState {
   players: PlayerState[];
 }
 export type Action =
+  | { type: 'resolveOptional'; accept: boolean }
   | { type: 'payCost'; pay: boolean }
   | { type: 'pass' | 'concede' | 'keep' | 'mulligan' }
   | { type: 'playLand'; card: string }
@@ -366,3 +379,7 @@ export function validateDefinition(card: unknown): string[];
 export function createRegistry(
   input?: Readonly<Record<string, CardSpec>> | readonly CardSpec[],
 ): Readonly<Record<string, CardDefinition>>;
+
+export function hasType(card: CardDefinition, type: CardType): boolean;
+export function typesOf(card: CardDefinition): readonly CardType[];
+export function primaryType(types: readonly CardType[]): CardType | undefined;

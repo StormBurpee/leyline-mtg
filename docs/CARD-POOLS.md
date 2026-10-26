@@ -11,8 +11,8 @@ The maintenance queries use Scryfall Oracle identities, exclude future printings
 
 | Inventory         | In scope | Curated definitions | Compiler candidates | Unsupported scripts | No exact Forge match |
 | ----------------- | -------: | ------------------: | ------------------: | ------------------: | -------------------: |
-| Standard          |    5,164 |                  63 |                 115 |               4,725 |                  261 |
-| Non-Alchemy Arena |   15,332 |                 104 |                 628 |              13,915 |                  685 |
+| Standard          |    5,164 |                  64 |                 133 |               4,706 |                  261 |
+| Non-Alchemy Arena |   15,332 |                 114 |                 710 |              13,823 |                  685 |
 
 - **Curated:** a definition in the executable registry, subject to the kernel's documented interaction limits. Not a certification of all Magic rules.
 - **Compiler candidate:** the adapter recognizes its syntax. Not installed or counted as playable.

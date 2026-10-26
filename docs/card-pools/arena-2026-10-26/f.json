@@ -462,7 +462,7 @@
   {
     "oracleId": "9e187d43-ae75-4589-81fc-476ae95ba5b9",
     "name": "Fang of Shigeki",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "04166d20-88c9-4c89-be9d-3e422f90959a",
@@ -1192,7 +1192,7 @@
   {
     "oracleId": "e6584e39-099c-437f-9239-fa718cac85af",
     "name": "Field Creeper",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f825c98f-a327-440b-8c0d-ebe02e23bfb7",
@@ -1582,7 +1582,7 @@
   {
     "oracleId": "487de0df-0496-4b5d-8050-27b8e617582b",
     "name": "Firehoof Cavalry",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "2631130e-63e2-43a3-914a-648e76722203",
@@ -2662,7 +2662,7 @@
   {
     "oracleId": "9bd4a0bd-d10c-434a-8254-89f38740aafd",
     "name": "Forgotten Sentinel",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ebb3e2ff-2214-4e11-88fb-e0fa84288cf1",
@@ -3127,7 +3127,7 @@
   {
     "oracleId": "5b865275-4114-44d0-9832-ae5d3b4efba4",
     "name": "Frog Butler",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "66e66543-1f56-4e62-9183-3804843db101",

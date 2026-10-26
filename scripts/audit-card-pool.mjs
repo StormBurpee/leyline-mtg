@@ -51,6 +51,7 @@ const sorted = (o) => Object.fromEntries(Object.entries(o).sort((a, b) => b[1] -
 const summary = {
   schemaVersion: 1,
   compilerVersion: forge.compilerVersion ?? null,
+  compilerInputs: forge.compilerInputs ?? null,
   compilerSourceSha256: forge.compilerSourceSha256 ?? null,
   asOf: pool.asOf,
   query: pool.query,

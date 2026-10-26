@@ -31,3 +31,5 @@ export { canAttack, canBlock, suggestedDamage } from './combat.js';
 export { chooseBotCommand } from './bot.js';
 
 export { createRegistry, validateDefinition, RegistryError } from './registry.js';
+
+export { hasType, typesOf, primaryType } from './types.js';

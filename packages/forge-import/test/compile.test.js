@@ -55,9 +55,9 @@ test('symbolic amounts, hybrid costs and multiple spell abilities require manual
   ])
     assert.equal(compileForgeCard(variant).status, 'unsupported');
 });
-test('legendary and multi-type creatures are not approximated', async () => {
+test('legendary and land-creature combinations are not approximated', async () => {
   const text = await fixture('grizzly_bears');
-  for (const type of ['Legendary Creature Bear', 'Artifact Creature Bear'])
+  for (const type of ['Legendary Creature Bear', 'Land Creature Bear'])
     assert.equal(
       compileForgeCard(text.replace('Types:Creature Bear', `Types:${type}`)).status,
       'unsupported',
@@ -214,8 +214,41 @@ test('conditional tapped lands and unrelated replacement instructions are reject
   for (const text of [
     source.replace('ReplacementResult$ Updated', 'ReplacementResult$ Updated | CheckSVar$ X'),
     source.replace('DB$ Tap', 'DB$ Tap | SubAbility$ Draw'),
-    source.replace('Produced$ Combo W U', 'Produced$ Any'),
+    source.replace('Produced$ Combo W U', 'Produced$ Chosen'),
     source.replace('Types:Land', 'Types:Land Plains Island'),
   ])
     assert.equal(compileForgeCard(text).status, 'unsupported');
+});
+
+for (const name of [
+  'ornithopter',
+  'memnite',
+  'phyrexian_walker',
+  'spirited_companion',
+  'patchwork_automaton',
+  'ornithopter_of_paradise',
+  'darksteel_ingot',
+  'enchantresss_presence',
+  'mesa_enchantress',
+  'beast_whisperer',
+  'naturalize',
+  'disenchant',
+  'shatter',
+  'boomerang',
+])
+  test(`Forge type-aware fixture ${name} retains its supported characteristics`, async () => {
+    const r = compileForgeCard(await fixture(name));
+    assert.equal(r.status, 'candidate', r.diagnostics.join('\n'));
+    assert.equal(r.definition.type, CARDS[r.name].type);
+    assert.deepEqual(r.definition.types, CARDS[r.name].types);
+    if (CARDS[r.name].triggers) assert.deepEqual(r.definition.triggers, CARDS[r.name].triggers);
+    if (CARDS[r.name].effects) assert.deepEqual(r.definition.effects, CARDS[r.name].effects);
+    if (CARDS[r.name].mana) assert.deepEqual(r.definition.mana, CARDS[r.name].mana);
+  });
+test('an optional trigger cannot silently change its deciding player', async () => {
+  const source = await fixture('mesa_enchantress');
+  assert.equal(
+    compileForgeCard(source.replace('OptionalDecider$ You', 'OptionalDecider$ Opponent')).status,
+    'unsupported',
+  );
 });

@@ -216,3 +216,15 @@ test('registry capacity accommodates an Arena-scale catalog without a 5000-card 
   assert.equal(Object.keys(catalog).length, 16000);
   assert.equal(Object.isFrozen(catalog['Catalog fixture 15999']), true);
 });
+
+test('only validated immutable registries are reused across games', () => {
+  const validated = createRegistry(CARDS);
+  assert.equal(createRegistry(validated), validated);
+  assert.equal(createRegistry(CARDS), validated);
+  const mutable = { ...adept };
+  const first = createRegistry([mutable]);
+  mutable.power = 9;
+  const second = createRegistry([mutable]);
+  assert.equal(first[adept.name].power, 1);
+  assert.equal(second[adept.name].power, 9);
+});

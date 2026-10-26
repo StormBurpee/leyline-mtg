@@ -3,6 +3,8 @@ import type { AgentContext, Summary } from './session.js';
 export type Policy = (context: AgentContext) => Command | null | Promise<Command | null>;
 export const heuristicPolicy: Policy;
 export interface EpisodeResult extends Summary {
+  rulesetHash: string;
+  configHash: string;
   schemaVersion: 1;
   termination: 'finished' | 'decision_limit' | 'aborted' | 'policy_error' | 'illegal_command';
   error: null | { player: PlayerId; message: string; code?: string };

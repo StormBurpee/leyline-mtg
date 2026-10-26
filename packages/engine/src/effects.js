@@ -1,3 +1,4 @@
+import { hasType } from './types.js';
 import { costProblem, payCost } from './costs.js';
 import { cardDefinition } from './cards.js';
 import {
@@ -37,22 +38,24 @@ export function legalTarget(s, kind, target, controller) {
   const o = s.objects[target.id];
   if (!o || o.zone !== 'battlefield' || o.incarnation !== target.incarnation) return false;
   const d = definition(s, o);
-  if (d.type !== 'creature') return false;
+
   if (hasKeyword(s, o, 'shroud') || (hasKeyword(s, o, 'hexproof') && o.controller !== controller))
     return false;
-  return (
-    ['any', 'creature'].includes(kind) || (kind === 'nonblackCreature' && !d.color.includes('B'))
-  );
+  if (['any', 'creature'].includes(kind)) return hasType(d, 'creature');
+  if (kind === 'nonblackCreature') return hasType(d, 'creature') && !d.color.includes('B');
+  if (kind === 'artifactOrEnchantment') return hasType(d, 'artifact') || hasType(d, 'enchantment');
+  if (['artifact', 'enchantment'].includes(kind)) return hasType(d, kind);
+  return kind === 'permanent';
 }
 export function targetsFor(s, kind, p) {
   if (!kind) return [];
   return [
     ...s.players.map((p) => ({ kind: 'player', id: p.id })),
-    ...creatures(s).map(ref),
+    ...battlefield(s).map(ref),
     ...s.stack.map((e) => ({ kind: 'stack', id: e.id })),
   ].filter((t) => legalTarget(s, kind, t, p));
 }
-export function queueTrigger(s, source, effects, label) {
+export function queueTrigger(s, source, effects, label, optional = false) {
   s.pendingTriggers.push({
     id: `s${++s.nextId}`,
     kind: 'ability',
@@ -62,6 +65,7 @@ export function queueTrigger(s, source, effects, label) {
     effects: structuredClone(effects),
     sourceKeywords: keywords(s, source),
     label,
+    ...(optional ? { optional: true } : {}),
   });
   emit(s, 'triggered', { objectId: source.id, name: source.name, player: source.controller });
 }
@@ -106,7 +110,16 @@ export function enterBattlefield(s, o, controller = o.owner, attachment = null) 
 export function notifyTriggers(s, event, payload) {
   for (const watcher of battlefield(s))
     for (const trigger of definition(s, watcher).triggers ?? []) {
+      const castType = {
+        controllerCastsArtifact: 'artifact',
+        controllerCastsEnchantment: 'enchantment',
+        controllerCastsCreature: 'creature',
+      }[trigger.event];
       const match =
+        (event === 'cast' &&
+          watcher.controller === payload.player &&
+          castType &&
+          hasType(payload.definition, castType)) ||
         (trigger.event === 'selfEnters' &&
           event === 'enters' &&
           watcher.id === payload.object.id) ||
@@ -126,7 +139,14 @@ export function notifyTriggers(s, event, payload) {
           watcher.controller === payload.player &&
           trigger.event === 'controllerCastsInstantOrSorcery' &&
           ['instant', 'sorcery'].includes(payload.definition.type));
-      if (match) queueTrigger(s, watcher, trigger.effects, `${watcher.name} · triggered ability`);
+      if (match)
+        queueTrigger(
+          s,
+          watcher,
+          trigger.effects,
+          `${watcher.name} · triggered ability`,
+          trigger.optional,
+        );
     }
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
@@ -287,7 +307,15 @@ export function continueResolution(s) {
 }
 export function finishResolutionChoice(s, command) {
   const choice = s.choice;
-  if (choice.kind === 'payCost') {
+  if (choice.kind === 'optionalEffect') {
+    requireRule(
+      command.type === 'resolveOptional' && typeof command.accept === 'boolean',
+      'OPTIONAL_CHOICE',
+      'Choose whether to resolve this optional ability.',
+    );
+    if (!command.accept) s.resolving.index = s.resolving.entry.effects.length;
+    emit(s, 'optionalEffect', { player: choice.player, accepted: command.accept });
+  } else if (choice.kind === 'payCost') {
     requireRule(
       command.type === 'payCost' && typeof command.pay === 'boolean',
       'PAYMENT_CHOICE',
@@ -367,7 +395,9 @@ export function resolveTop(s) {
   } else {
     s.resolving = { entry, index: 0 };
     emit(s, 'resolutionStarted', { name: entry.name, stackId: entry.id });
-    continueResolution(s);
+    if (entry.optional)
+      s.choice = { kind: 'optionalEffect', player: entry.controller, name: entry.name };
+    else continueResolution(s);
   }
 }
 /** All supported state-based actions are computed from one pre-action state. */

@@ -442,7 +442,7 @@
   {
     "oracleId": "6bda307b-1508-4582-952b-c690db85e045",
     "name": "Hermitic Nautilus",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "bccd722a-b610-4017-93bd-313f08448f5e",
@@ -852,7 +852,7 @@
   {
     "oracleId": "931c2153-e5e5-4642-bff0-f9dadcc24c9a",
     "name": "Hullcarver",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "a0a7319d-9441-4aed-a351-9ff3fb3b1d9e",

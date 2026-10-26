@@ -130,3 +130,14 @@ test('an agent receives only relevant public card definitions, not the full glob
   const session = createSession({ decks: [Array(60).fill('Island'), Array(60).fill('Forest')] });
   assert.deepEqual(Object.keys(session.context().observation.catalog), ['Island']);
 });
+
+test('episode outputs identify the engine, exact ruleset and experiment configuration', async () => {
+  const { runEpisode } = await import('../packages/simulation/run.js');
+  const first = await runEpisode({ config: { seed: 1 }, maxDecisions: 1 }),
+    second = await runEpisode({ config: { seed: 2 }, maxDecisions: 1 });
+  assert.match(first.rulesetHash, /^[a-f0-9]{64}$/);
+  assert.match(first.configHash, /^[a-f0-9]{64}$/);
+  assert.equal(first.rulesetHash, second.rulesetHash);
+  assert.notEqual(first.configHash, second.configHash);
+  assert.equal(first.engineVersion, '0.5.0');
+});

@@ -1,0 +1,9 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/o/ornithopter_of_paradise.txt
+Name:Ornithopter of Paradise
+ManaCost:2
+Types:Artifact Creature Thopter
+PT:0/2
+K:Flying
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Flying\n{T}: Add one mana of any color.

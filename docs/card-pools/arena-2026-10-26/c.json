@@ -1232,7 +1232,7 @@
   {
     "oracleId": "f60e831b-1404-437a-a587-ed4f4b596084",
     "name": "Centaur Nurturer",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "495d95cf-dcce-4a15-a544-79aced7ef98d",
@@ -2087,7 +2087,7 @@
   {
     "oracleId": "0e2f8758-7457-4b54-ae61-a9c68cea4a23",
     "name": "Chrome Cat",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "1ac6fabb-71db-442f-8c14-ba9e659f906c",
@@ -3497,7 +3497,7 @@
   {
     "oracleId": "671db0d7-b103-4c13-9914-a444f2ecf9d6",
     "name": "Consulate Skygate",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "14d71432-c2e6-4c81-92ef-cf98e1fcf5f8",

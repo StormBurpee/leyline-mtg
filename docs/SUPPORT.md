@@ -10,7 +10,9 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Main-phase land timing, one land per turn, instant/sorcery timing, priority and LIFO stack.
 - Mana pools, colored and generic costs, mana abilities, flexible single-mana sources and optional automatic source selection. No hybrid, Phyrexian, snow, variable X, alternative or additional costs.
 - Objects changing zones become new incarnations; spells recheck targets at resolution.
-- Creatures, instants, sorceries, basic lands, ten unconditional tapped gain lands, Millstone, Glorious Anthem and Pacifism. No general enchantment system beyond the executable definitions.
+- Creatures, instants, sorceries, basic lands, ten unconditional tapped gain lands, Millstone, Glorious Anthem and Pacifism. Artifact and enchantment creatures retain both types; only the listed executable definitions are supported.
+- Type-aware artifact/enchantment removal and permanent bounce.
+- Optional triggered effects with explicit resolution-time accept/decline choices.
 - Activated abilities with mana, life and tap costs, explicit targets, and stack resolution.
 - Scry, surveil and mandatory discard choices during resolution, with instruction continuations and no intervening priority.
 - Ward triggers for opposing spells and activated abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.

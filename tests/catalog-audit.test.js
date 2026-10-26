@@ -19,6 +19,18 @@ test('Forge inventory identifies the exact checked-in compiler source', async ()
   const report = await json('../docs/forge-audit.json');
   const source = await readFile(new URL('../packages/forge-import/compile.js', import.meta.url));
   assert.equal(report.compilerSourceSha256, createHash('sha256').update(source).digest('hex'));
+  for (const path of [
+    'packages/forge-import/compile.js',
+    'packages/engine/src/registry.js',
+    'packages/engine/src/types.js',
+  ]) {
+    const source = await readFile(new URL(`../${path}`, import.meta.url));
+    assert.equal(
+      report.compilerInputs[path],
+      createHash('sha256').update(source).digest('hex'),
+      path,
+    );
+  }
   assert.equal(report.compilerCandidates + report.rejectedFiles, report.totalFiles);
 });
 for (const pool of ['standard', 'arena'])

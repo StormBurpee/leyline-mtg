@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 — Multiple card types and optional abilities
+
+- Artifact creatures and enchantment creatures retain both printed type categories.
+- Artifact-, enchantment- and creature-cast triggers use the complete type set.
+- Optional triggered effects pause for a real accept/decline decision at resolution.
+- Artifact/enchantment targeting, removal and permanent bounce.
+- Five-color mana artifacts and artifact creatures respect tap costs and summoning sickness.
+- Fourteen additional executable cards; 126 cards total.
+- Registry validation rejects fields that would otherwise be ignored on the wrong card type.
+- Migration reports fingerprint the compiler and its validation/type dependencies.
+
+Land-creature combinations, type-changing continuous effects and full format coverage remain unsupported.
+
 ## 0.4.0 — Trigger migration and flexible mana
 
 - Strict Forge translation for selected enters-the-battlefield, cast and landfall triggers.

@@ -402,7 +402,7 @@
   {
     "oracleId": "a2529491-7389-4cfa-92d2-145eda779603",
     "name": "Darksteel Ingot",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "b5b4cf54-ed5e-42d0-9d98-5fec76b0b0b8",
@@ -562,7 +562,7 @@
   {
     "oracleId": "ed7a2ee0-289d-4e5f-92e0-1539395baf33",
     "name": "Dawnhart Geist",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "e12fb44a-524e-4603-a89c-fad8204fdb2b",
@@ -572,7 +572,7 @@
   {
     "oracleId": "c6e92911-a100-43eb-ab4b-3778b0db1918",
     "name": "Dawnhart Rejuvenator",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0604ed6c-a85f-41da-a163-0c414e57d133",
@@ -852,7 +852,7 @@
   {
     "oracleId": "0c7f9701-c39e-4f14-844a-15f2e3c41ca9",
     "name": "Deathbloom Gardener",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b52148c3-fe97-4cc0-a814-a5a0f5d426f6",
@@ -1492,7 +1492,7 @@
   {
     "oracleId": "fd591199-9f7a-4147-a150-13279dbb4498",
     "name": "Demystify",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "1b82312c-f748-4c36-8934-ecbcfc10cc7d",
@@ -2347,7 +2347,7 @@
   {
     "oracleId": "a7e97fa9-4b72-4548-b854-5be5f18a6f1a",
     "name": "Disenchant",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e4ab986d-662c-4879-b6f1-6887a2ec4d7c",
@@ -2947,7 +2947,7 @@
   {
     "oracleId": "296e79f9-57cb-4af7-9e18-48d2d655b537",
     "name": "Doom's Servo-Guards",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "4a01db2e-cd43-4b1a-a480-169018f82501",
@@ -4102,7 +4102,7 @@
   {
     "oracleId": "abc5ac3e-f196-49df-8a9d-16df3114ffad",
     "name": "Dukhara Peafowl",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "28564d10-bfc5-4beb-b0e2-b9aa5c03f740",

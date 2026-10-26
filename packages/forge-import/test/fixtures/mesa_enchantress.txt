@@ -1,0 +1,11 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/mesa_enchantress.txt
+Name:Mesa Enchantress
+ManaCost:1 W W
+Types:Creature Human Druid
+PT:0/2
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast an enchantment spell, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+DeckNeeds:Type$Enchantment
+Oracle:Whenever you cast an enchantment spell, you may draw a card.

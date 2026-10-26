@@ -1,0 +1,8 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/d/darksteel_ingot.txt
+Name:Darksteel Ingot
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+K:Indestructible
+Oracle:Indestructible\n{T}: Add one mana of any color.

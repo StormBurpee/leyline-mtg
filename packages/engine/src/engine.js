@@ -139,7 +139,7 @@ function completeMulligan(s, p) {
 function handleChoice(s, p, c) {
   const choice = s.choice;
   requireRule(choice.player === p, 'CHOICE_PLAYER', 'The other player must make this choice.');
-  if (['libraryOrder', 'discardEffect', 'payCost'].includes(choice.kind)) {
+  if (['libraryOrder', 'discardEffect', 'payCost', 'optionalEffect'].includes(choice.kind)) {
     finishResolutionChoice(s, c);
     return;
   }
@@ -369,7 +369,7 @@ export function exportReplay(s) {
 export function replay(record) {
   requireRule(
     record &&
-      [VERSION, '0.3.0', '0.2.0', '0.1.0'].includes(record.version) &&
+      [VERSION, '0.4.0', '0.3.0', '0.2.0', '0.1.0'].includes(record.version) &&
       (record.schemaVersion === undefined || record.schemaVersion === REPLAY_SCHEMA_VERSION),
     'REPLAY_VERSION',
     'Unsupported replay schema or engine version.',

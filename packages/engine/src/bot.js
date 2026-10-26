@@ -24,6 +24,13 @@ export function chooseBotCommand(s, p) {
           player: p,
         };
       }
+      case 'optionalEffect': {
+        const drawCount = s.resolving.entry.effects
+          .filter((e) => e.op === 'draw')
+          .reduce((n, e) => n + e.count, 0);
+        const libraryCount = s.players[p].libraryCount ?? s.players[p].library.length;
+        return { type: 'resolveOptional', player: p, accept: drawCount <= libraryCount };
+      }
       case 'payCost':
         return {
           type: 'payCost',
@@ -135,7 +142,7 @@ export function chooseBotCommand(s, p) {
     .map((a) => {
       const d = definition(s, s.objects[a.card]);
       let score = -100;
-      if (d.type === 'creature' || d.static)
+      if (d.type === 'creature' || d.static || d.mana)
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);
       if (d.effects?.some((e) => e.op === 'token')) score = 6;
       if (d.effects?.some((e) => e.op === 'draw')) score = s.players[p].hand.length < 5 ? 5 : 1;

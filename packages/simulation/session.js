@@ -133,6 +133,7 @@ export function createSession(config = {}) {
     context,
     step,
     summary: () => ({
+      engineVersion: state.version,
       status: state.status,
       winner: state.winner,
       turn: state.turn,

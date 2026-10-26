@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -271,6 +271,123 @@
       "type": "creature",
       "keywords": ["deathtouch", "reach"],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ornithopter",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Memnite",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Phyrexian Walker",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Spirited Companion",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Patchwork Automaton",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "ward": {
+        "mana": {
+          "generic": 2
+        }
+      },
+      "triggers": ["controllerCastsArtifact"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ornithopter of Paradise",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Darksteel Ingot",
+      "type": "artifact",
+      "keywords": ["indestructible"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Enchantress's Presence",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": ["controllerCastsEnchantment"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Mesa Enchantress",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": ["controllerCastsEnchantment"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Beast Whisperer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": ["controllerCastsCreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Naturalize",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Disenchant",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Shatter",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Boomerang",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bounce"],
       "triggers": [],
       "activatedAbilities": 0
     },

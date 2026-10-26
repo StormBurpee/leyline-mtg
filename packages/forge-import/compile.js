@@ -1,3 +1,4 @@
+import { primaryType } from '../engine/src/types.js';
 /**
  * Conservative Forge-script migration aid. Compiles a finite, explicit grammar
  * to executable-data candidates. It never evaluates Oracle prose or JavaScript.
@@ -88,17 +89,25 @@ function fields(text, errors) {
 }
 function targetFor(a, errors) {
   const target =
-    a.ValidTgts === 'Any'
-      ? 'any'
-      : a.ValidTgts === 'Player'
-        ? 'player'
-        : a.ValidTgts === 'Opponent'
-          ? 'opponent'
-          : a.ValidTgts === 'Creature'
-            ? 'creature'
-            : a.TargetType === 'Spell' && a.ValidTgts === 'Card'
-              ? 'spell'
-              : null;
+    a.ValidTgts === 'Artifact,Enchantment'
+      ? 'artifactOrEnchantment'
+      : a.ValidTgts === 'Artifact'
+        ? 'artifact'
+        : a.ValidTgts === 'Enchantment'
+          ? 'enchantment'
+          : a.ValidTgts === 'Permanent'
+            ? 'permanent'
+            : a.ValidTgts === 'Any'
+              ? 'any'
+              : a.ValidTgts === 'Player'
+                ? 'player'
+                : a.ValidTgts === 'Opponent'
+                  ? 'opponent'
+                  : a.ValidTgts === 'Creature'
+                    ? 'creature'
+                    : a.TargetType === 'Spell' && a.ValidTgts === 'Card'
+                      ? 'spell'
+                      : null;
   if (a.ValidTgts && !target) errors.push(`Unsupported target predicate: ${a.ValidTgts}`);
   return target;
 }
@@ -204,11 +213,22 @@ function compileInstruction(a, context) {
         ],
       };
     case 'Destroy':
-      if (target !== 'creature') errors.push('Destroy requires ValidTgts Creature in this subset.');
+      if (
+        !['creature', 'artifact', 'enchantment', 'artifactOrEnchantment', 'permanent'].includes(
+          target,
+        )
+      )
+        errors.push('Destroy requires a supported permanent target.');
       return { target, effects: [{ op: 'destroy' }] };
     case 'ChangeZone':
-      if (target !== 'creature' || a.Origin !== 'Battlefield' || a.Destination !== 'Hand')
-        errors.push('Only battlefield-creature-to-hand ChangeZone is supported.');
+      if (
+        !['creature', 'artifact', 'enchantment', 'artifactOrEnchantment', 'permanent'].includes(
+          target,
+        ) ||
+        a.Origin !== 'Battlefield' ||
+        a.Destination !== 'Hand'
+      )
+        errors.push('Only supported battlefield-permanent-to-hand ChangeZone is supported.');
       return { target, effects: [{ op: 'bounce' }] };
     case 'Pump': {
       if (a.Duration !== undefined && a.Duration !== 'UntilEndOfTurn')
@@ -272,7 +292,11 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
     const key = line.slice(0, colon),
       value = line.slice(colon + 1);
     rows.push({ key, value, line: i + 1 });
-    if (!PRESENTATION.has(key) && !['K', 'A', 'T', 'R', 'SVar'].includes(key))
+    if (
+      !PRESENTATION.has(key) &&
+      !['K', 'A', 'T', 'R', 'SVar'].includes(key) &&
+      !(key === 'AI' && value === 'RemoveDeck:Random')
+    )
       errors.push(`Line ${i + 1}: unsupported field ${key}.`);
     if (key === 'SVar') {
       const split = value.indexOf(':');
@@ -297,14 +321,19 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
     primary = tokens.filter((t) =>
       ['Creature', 'Instant', 'Sorcery', 'Land', 'Artifact', 'Enchantment'].includes(t),
     );
-  if (primary.length !== 1 || !['Creature', 'Instant', 'Sorcery', 'Land'].includes(primary[0]))
-    errors.push('Only single-type creatures, instants, sorceries and basic lands are supported.');
+  if (
+    !primary.length ||
+    new Set(primary).size !== primary.length ||
+    (primary.length > 1 && primary.some((t) => ['Land', 'Instant', 'Sorcery'].includes(t)))
+  )
+    errors.push('Unsupported card-type combination.');
   if (tokens.some((t) => ['Legendary', 'Snow', 'World', 'Kindred'].includes(t)))
     errors.push('Unsupported supertype or card type.');
-  const type = primary[0]?.toLowerCase(),
+  const type = primaryType(primary.map((t) => t.toLowerCase())),
     definition = {
       name,
       type,
+      types: primary.map((t) => t.toLowerCase()),
       cost: parseCost(mana, errors),
       keywords: [],
       subtypes: tokens.filter((t) => !primary.includes(t) && t !== 'Basic'),
@@ -377,11 +406,16 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
       }
       if (a.AB === 'Mana') {
         const produced = /^Combo ([WUBRGC](?: [WUBRGC]){1,5})$/.exec(a.Produced ?? '');
-        const mana = produced ? produced[1].split(' ') : a.Produced;
+        const mana =
+          a.Produced === 'Any'
+            ? ['W', 'U', 'B', 'R', 'G']
+            : produced
+              ? produced[1].split(' ')
+              : a.Produced;
         if (
           Object.keys(a).some((k) => !['AB', 'Cost', 'Produced', 'SpellDescription'].includes(k)) ||
           a.Cost !== 'T' ||
-          (!produced && !/^[WUBRGC]$/.test(a.Produced ?? '')) ||
+          (!produced && a.Produced !== 'Any' && !/^[WUBRGC]$/.test(a.Produced ?? '')) ||
           definition.mana
         )
           errors.push('Only one tap ability producing one mana of a listed color is supported.');
@@ -406,9 +440,12 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
       'Execute',
       'TriggerDescription',
       'ValidActivatingPlayer',
+      'OptionalDecider',
     ]);
     for (const key of Object.keys(trigger))
       if (!allowed.has(key)) errors.push(`Unsupported trigger field: ${key}`);
+    if (trigger.OptionalDecider !== undefined && trigger.OptionalDecider !== 'You')
+      errors.push('Only the ability controller can make an optional trigger choice.');
     let event;
     if (trigger.Mode === 'ChangesZone') {
       if (
@@ -434,7 +471,10 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
         trigger.Destination !== undefined
       )
         errors.push('Unsupported spell-cast trigger restriction.');
-      if (trigger.ValidCard === 'Card.nonCreature') event = 'controllerCastsNoncreature';
+      if (trigger.ValidCard === 'Artifact') event = 'controllerCastsArtifact';
+      else if (trigger.ValidCard === 'Enchantment') event = 'controllerCastsEnchantment';
+      else if (trigger.ValidCard === 'Creature') event = 'controllerCastsCreature';
+      else if (trigger.ValidCard === 'Card.nonCreature') event = 'controllerCastsNoncreature';
       else if (trigger.ValidCard === 'Instant,Sorcery') event = 'controllerCastsInstantOrSorcery';
       else errors.push(`Unsupported cast trigger predicate: ${trigger.ValidCard}`);
     } else errors.push(`Unsupported trigger mode: ${trigger.Mode}`);
@@ -445,7 +485,12 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
     used.add(trigger.Execute);
     const result = walk(fields(symbols.get(trigger.Execute), errors), 'TR', [trigger.Execute]);
     if (result.target) errors.push('Targeted triggers require a target-choice implementation.');
-    if (event) (definition.triggers ??= []).push({ event, effects: result.effects });
+    if (event)
+      (definition.triggers ??= []).push({
+        event,
+        effects: result.effects,
+        ...(trigger.OptionalDecider ? { optional: true } : {}),
+      });
   }
   const replacements = rows.filter((r) => r.key === 'R');
   if (replacements.length > 1)
@@ -495,8 +540,8 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
       errors.push(`Unreferenced or unsupported SVar: ${symbol}`);
   if (type !== 'creature' && rows.some((r) => r.key === 'PT'))
     errors.push('Unexpected PT on a noncreature.');
-  if (type !== 'creature' && rows.some((r) => r.key === 'K'))
-    errors.push('Keywords on noncreatures require manual review.');
+  if (['instant', 'sorcery', 'land'].includes(type) && rows.some((r) => r.key === 'K'))
+    errors.push('Keywords on this card type require manual review.');
   if (!errors.length) errors.push(...validateDefinition(definition));
   return errors.length
     ? {

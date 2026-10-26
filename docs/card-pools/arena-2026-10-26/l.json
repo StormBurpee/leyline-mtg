@@ -842,7 +842,7 @@
   {
     "oracleId": "8ca3852a-fa37-46ef-a74d-3c7487ae50fc",
     "name": "Leyline Prowler",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f92aaa00-6ece-4033-b3df-b2fc2c4718d9",
@@ -1617,7 +1617,7 @@
   {
     "oracleId": "d8a04142-1d28-4c2e-b2d5-da88b2199678",
     "name": "Locthwain Gargoyle",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "6fea3c95-9663-4857-983e-eaf522efa1a8",

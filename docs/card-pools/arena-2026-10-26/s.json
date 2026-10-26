@@ -392,7 +392,7 @@
   {
     "oracleId": "c804ac8e-7427-43c6-b496-3ee6de192f03",
     "name": "Sanctify",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "c623bc4b-7fc1-4bc1-84e9-71c301dd402f",
@@ -607,7 +607,7 @@
   {
     "oracleId": "be2ab552-df82-49a0-8f0b-ee66de34e1a7",
     "name": "Sanitation Automaton",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "8bcbae66-1854-480e-a449-33e5389610ab",
@@ -787,7 +787,7 @@
   {
     "oracleId": "aa321138-b1a7-4b8e-a2ca-b9ce65704e92",
     "name": "Satyr Enchanter",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ee7dc820-10ee-429a-a1ef-ecd6a11f5608",
@@ -2897,7 +2897,7 @@
   {
     "oracleId": "84d32e68-72b9-432d-a023-7bc6a26b8ad0",
     "name": "Shatter",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "57f58d52-0014-4cac-94fc-668063cc147a",
@@ -4042,7 +4042,7 @@
   {
     "oracleId": "4da64806-8a1d-4926-a168-695df43309cf",
     "name": "Silver Raven",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "40b82dee-98c7-4b86-88b8-28388cd0331f",
@@ -4662,7 +4662,7 @@
   {
     "oracleId": "974f788a-039f-4310-a2fe-16b14a1e2d35",
     "name": "Skyscanner",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b7cc831c-c1a1-4ea4-ae78-5be2b6173407",
@@ -4922,7 +4922,7 @@
   {
     "oracleId": "a96d0065-b8c1-4843-8752-dce60bf83545",
     "name": "Slice in Twain",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "5482ddb1-7f7d-492a-aa3d-67c037062cc3",
@@ -5157,7 +5157,7 @@
   {
     "oracleId": "b5f4b732-099c-46e7-a03d-d8e4c78245b8",
     "name": "Smelt",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "8bc30bd5-554e-4fcf-9dec-c7634921858a",
@@ -6692,7 +6692,7 @@
   {
     "oracleId": "9c5f0d91-9d86-4e66-94fd-4af93ad01838",
     "name": "Spirited Companion",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "34c572b2-dccf-43d9-a9c4-846653ad22da",
@@ -7707,7 +7707,7 @@
   {
     "oracleId": "3178c1f9-f644-4926-ac9a-d40e4db79955",
     "name": "Sterling Hound",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f893d3d6-efef-4394-8e15-e01deed72b4f",
@@ -8007,7 +8007,7 @@
   {
     "oracleId": "7cfb32af-ac59-4459-ac9e-2762488e9180",
     "name": "Stone Golem",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "8e646a6b-77ba-4f7d-8ee9-b0b084453f77",
@@ -9687,7 +9687,7 @@
   {
     "oracleId": "0594f19c-c4c2-4812-8f4d-5630fc24c47a",
     "name": "Swooping Lookout",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "094689cc-617a-426e-beb9-3f8de692cd5b",
@@ -9822,7 +9822,7 @@
   {
     "oracleId": "13d4c46b-c2d6-44cc-a252-4a991d471854",
     "name": "Sylvan Caryatid",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "92eed395-62ca-4293-882b-8565c40daab5",

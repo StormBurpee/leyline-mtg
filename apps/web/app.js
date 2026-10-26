@@ -444,6 +444,10 @@ async function action(name, el) {
       } else render();
       break;
     }
+    case 'acceptOptional':
+    case 'declineOptional':
+      send({ type: 'resolveOptional', accept: name === 'acceptOptional' });
+      break;
     case 'chooseMana':
       if (
         send(
@@ -606,11 +610,16 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleOptionalReplay':
     case 'exampleWardReplay':
     case 'exampleReplay': {
       try {
         const response = await fetch(
-          name === 'exampleWardReplay' ? './example-ward-replay.json' : './example-replay.json',
+          name === 'exampleOptionalReplay'
+            ? './example-optional-replay.json'
+            : name === 'exampleWardReplay'
+              ? './example-ward-replay.json'
+              : './example-replay.json',
         );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();

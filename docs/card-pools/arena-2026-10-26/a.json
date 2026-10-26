@@ -1047,7 +1047,7 @@
   {
     "oracleId": "bd269d87-5f72-4559-bf2b-270e2ebe6154",
     "name": "A.I.M. Bot",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "b191ae0c-7d54-459f-abe3-aab5d792e514",
@@ -1072,7 +1072,7 @@
   {
     "oracleId": "10916f33-aaa6-43a1-9835-b60fd061161f",
     "name": "A.I.M. Synthoids",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "860d0449-8032-458b-8335-30be238d6689",
@@ -1537,7 +1537,7 @@
   {
     "oracleId": "efb0394c-2a45-4dd8-bca3-08704056fa31",
     "name": "Alloy Myr",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "f15460d9-0133-436c-b0fe-1661989124f0",
@@ -1687,7 +1687,7 @@
   {
     "oracleId": "3c9fcda6-3ebc-4f9d-9f73-2bb4252d9420",
     "name": "Amaranthine Wall",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "0466f23c-d07c-4015-82d5-eab4b226f1ff",
@@ -2372,7 +2372,7 @@
   {
     "oracleId": "d87ebd8c-ad2c-45c9-8c97-f046aeda861c",
     "name": "Anvilwrought Raptor",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "ce690a21-8117-420e-be00-cd6d9923a812",
@@ -2472,7 +2472,7 @@
   {
     "oracleId": "f041b37e-25af-4aff-b7e3-f07a4d5c6f9a",
     "name": "Appetite for the Unnatural",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "93ee2ea1-4f9b-47dd-b7d4-b0ed5a26d719",
@@ -2652,7 +2652,7 @@
   {
     "oracleId": "d91ea728-2d69-42cb-bb5d-e2b058f0d7b1",
     "name": "Arcane Encyclopedia",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "fe1556cc-32d0-4e51-bb15-f3fce669a5e1",
@@ -3972,7 +3972,7 @@
   {
     "oracleId": "eb570331-35da-44b8-b711-ccf7444d8e39",
     "name": "Automatic Librarian",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "3afdc98e-aeeb-43e9-bdcd-0c51da44d2f8",

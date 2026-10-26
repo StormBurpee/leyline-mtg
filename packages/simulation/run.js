@@ -1,6 +1,21 @@
+import { createHash } from 'node:crypto';
 import { createSession } from './session.js';
 import { chooseBotCommand } from '../engine/src/index.js';
 
+const canonical = (value) =>
+  Array.isArray(value)
+    ? value.map(canonical)
+    : value && typeof value === 'object'
+      ? Object.fromEntries(
+          Object.keys(value)
+            .sort()
+            .map((key) => [key, canonical(value[key])]),
+        )
+      : value;
+const fingerprint = (value) =>
+  createHash('sha256')
+    .update(JSON.stringify(canonical(value)))
+    .digest('hex');
 export const heuristicPolicy = ({ observation, player }) => chooseBotCommand(observation, player);
 
 /** Policies receive only their immutable perspective. Limits are truncations, not draws. */
@@ -20,6 +35,9 @@ export async function runEpisode({
   )
     throw new Error('Provide two policy functions.');
   const session = createSession(config);
+  const initial = session.exportReplay().config;
+  const rulesetHash = fingerprint(initial.catalog),
+    configHash = fingerprint(initial);
   let termination = 'decision_limit',
     error = null;
   for (let i = 0; i < maxDecisions; i++) {
@@ -57,6 +75,8 @@ export async function runEpisode({
   }
   return {
     schemaVersion: 1,
+    rulesetHash,
+    configHash,
     termination,
     ...session.summary(),
     error,
