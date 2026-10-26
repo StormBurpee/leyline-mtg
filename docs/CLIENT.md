@@ -77,3 +77,13 @@ The hand chooses a fan only when its measured width leaves a usable exposed stri
 Narrow-screen hand controls have 44px hit areas without shrinking the card faces. Read card opens a read-only dialog for a current card in the viewing player's hand. Closing it preserves any pending target choice. Selection restores the rail's scroll position; switching hand size keeps the inspected card in view.
 
 Chromium checks covered 1180, 768, 376 and 320 CSS-pixel widths, seven-card and twelve-card hands, reaching the last card, compact/expanded switching and keyboard Enter/Escape for inspection. A real Shock targeting flow was preserved across inspection, then paid and placed on the stack against the opponent. Native pointer dragging moved a Mountain from hand to the battlefield exactly once and cleared the drag state. These are desktop-browser responsive checks, not physical iOS or Android certification; the gesture tests separately cover horizontal touch-scroll intent and drag cancellation.
+
+## Mobile match table
+
+The mobile table fits the dynamic viewport and safe areas. Navigation moves into the table menu; phase stops, public zones, priority settings and history remain available there. Short landscape screens keep the primary action and a Read button visible. Empty hands collapse rather than reserving a blank card area.
+
+Hold a visible battlefield card or a card in your own hand for 450 ms to open its reader. Moving, scrolling, cancelling or removing the source cancels the hold. Inspection never plays the card, reveals an opposing hand, or replaces a pending target choice. Card dialogs keep their close/actions fixed while long content scrolls. Hover previews are mouse/keyboard only.
+
+Mobile battlefield tiles use artwork crops with live statistics, not tiny printed rules text. Full printed cards and rules remain in the reader. The power/toughness badge cannot be displaced by a long keyword label. Crowded rows scroll horizontally.
+
+Cloud Chromium checks covered narrow portrait and short landscape windows, crowded replay positions, battlefield/hand inspection, table menus, and a Shock target choice preserved across reading and then committed with payment. Gesture unit tests cover touch-scroll cancellation separately. These are not physical iPhone Safari or Android tests, and do not certify native-device polish.

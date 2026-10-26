@@ -464,3 +464,50 @@
     display: none;
   }
 }
+
+/* Compact battle tiles preserve artwork and live stats instead of shrinking
+   the full printed rules box beneath overlapping labels. Hold for the card. */
+@media (max-width: 900px), (max-width: 1000px) and (max-height: 600px) {
+  .game-layout .field .permanents .permanent {
+    width: clamp(
+      60px,
+      min(
+        calc((100cqw - 64px - (var(--permanent-count) - 1) * 8px) / var(--permanent-count)),
+        calc((100cqh - 12px) * 0.86)
+      ),
+      100px
+    );
+    aspect-ratio: 1 / 1.16;
+  }
+  .game-layout .permanent .battlefield-card-image {
+    object-fit: cover;
+    object-position: center;
+  }
+  .game-layout .permanent-name {
+    bottom: 23px;
+    font-size: 8px;
+    padding: 3px;
+    background: #111b16d9;
+  }
+  .game-layout .permanent-footer {
+    min-height: 23px;
+    gap: 2px;
+    padding: 2px 3px;
+    font-size: 7px;
+  }
+  .game-layout .permanent-footer > span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .game-layout .permanent-footer .pt {
+    flex-shrink: 0;
+    font-size: 13px;
+    letter-spacing: 0;
+    padding: 1px 2px;
+  }
+  .game-layout .permanent.tapped {
+    transform: rotate(12deg);
+  }
+}

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.18.1 — Readable mobile battlefields
+
+- Use responsive artwork crops for compact mobile battlefield tiles; retain the full printed card on desktop and in the reader.
+- Keep live power/toughness badges inside each tile instead of letting long keyword labels push them across neighbouring cards.
+- Preserve useful tile width on crowded boards, with horizontal scrolling rather than microscopic cards. Reduce tapped-card rotation to avoid clipping.
+
 ## 0.18.0 — A table that fits your phone
 
 - Keep the match, battlefield, hand and primary action within the dynamic viewport, including short landscape screens and safe-area insets.

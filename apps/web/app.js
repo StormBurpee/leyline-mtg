@@ -312,6 +312,7 @@ function schedule() {
 }
 function openDialog(title, body, actions = '') {
   clearTimeout(botTimer);
+  duelPresentation.hidePreview();
   dialog.innerHTML = `<div class="dialog-head"><h2>${escape(title)}</h2><button class="icon-btn" data-action="closeDialog" aria-label="Close dialog">×</button></div><div class="dialog-body">${body}</div><div class="dialog-actions">${actions || '<button class="btn" data-action="closeDialog">Done</button>'}</div>`;
   if (!dialog.open) dialog.showModal();
 }
@@ -327,7 +328,10 @@ function closeDialog() {
   dialog.close();
   schedule();
 }
-dialog.addEventListener('close', schedule);
+dialog.addEventListener('close', () => {
+  duelPresentation.hidePreview();
+  schedule();
+});
 dialog.addEventListener('click', (e) => {
   if (e.target === dialog) {
     const r = dialog.getBoundingClientRect();
