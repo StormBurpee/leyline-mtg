@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "createdAt": "2026-10-26T21:32:47.538Z",
+    "commit": "dae135954740ff4d8e50fa6094c31e64e539c275",
+    "policies": [
+      {
+        "name": "current",
+        "sha256": "ca764215e574e34c89f67faa705f8b24aafdf7c84330971445664b301e985e4d",
+        "modules": 23
+      },
+      {
+        "name": "released",
+        "sha256": "f1ffeedaab6859dc54af11ff3f0bf671925e356c851f97052156340822ec8d0e",
+        "modules": 22
+      }
+    ],
+    "workers": 2,
+    "node": "v24.22.1",
+    "platform": "win32",
+    "budgets": {
+      "maxDecisions": 3000,
+      "blockers": 1400,
+      "attackResponse": 96,
+      "counterattack": 64,
+      "mainPhaseNodes": 256
+    },
+    "options": {
+      "decks": "ember,grove,tide,dawn,nightfall,relic,oath,cinder",
+      "seeds": "101,202,303",
+      "workers": "2",
+      "output": "outputs/development-v2.jsonl"
+    },
+    "games": 96
+  },
+  "games": 96,
+  "wins": 49,
+  "losses": 47,
+  "draws": 0,
+  "invalid": 0,
+  "terminations": {
+    "finished": 96
+  },
+  "decks": {
+    "cinder/cinder": {
+      "wins": 7,
+      "losses": 5,
+      "draws": 0,
+      "invalid": 0
+    },
+    "dawn/dawn": {
+      "wins": 8,
+      "losses": 4,
+      "draws": 0,
+      "invalid": 0
+    },
+    "ember/ember": {
+      "wins": 6,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 0
+    },
+    "grove/grove": {
+      "wins": 6,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 0
+    },
+    "nightfall/nightfall": {
+      "wins": 5,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    },
+    "oath/oath": {
+      "wins": 6,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 0
+    },
+    "relic/relic": {
+      "wins": 5,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    },
+    "tide/tide": {
+      "wins": 6,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 0
+    }
+  },
+  "completePairs": 48,
+  "excludedPairs": 0,
+  "pairedScore": 0.5104166666666666,
+  "pairedNormal95": [0.44859018337153633, 0.5722431499617969],
+  "swept": 5,
+  "sweptAgainst": 4,
+  "elapsedMs": 200671.1841
+}
