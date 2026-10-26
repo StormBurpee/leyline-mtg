@@ -1,10 +1,11 @@
 import { beginDamage, assignDamage, canBlock, canAttack } from './combat.js';
 import { stateBasedActions } from './effects.js';
+import { settleCombatPayoffs } from './combat-payoffs.js';
 import { definition, stats, keywords, hasKeyword, isPacified, ref, emptyMana } from './model.js';
 
 /** Bounded, public-board combat search. No hands, library order, seed or RNG are read.
- * Damage uses the actual combat rules. Future draws, combat tricks and triggered
- * ability resolution are outside this tactical horizon, not secretly assumed away.
+ * Damage and life-only death payoffs use the actual rules. Future draws, combat
+ * tricks and other triggered effects remain outside this tactical horizon.
  */
 export function permanentValue(s, o) {
   const d = definition(s, o),
@@ -146,18 +147,28 @@ export function combatOutcome(
       hasKeyword(work, work.objects[id], 'first strike') ||
       hasKeyword(work, work.objects[id], 'double strike'),
   );
+  let omittedTriggers = 0,
+    payoffLimitReached = false;
   for (const phase of first ? ['firstDamage', 'damage'] : ['damage']) {
     if (work.status === 'finished') break;
     work.step = phase;
     beginDamage(work, phase === 'firstDamage');
     while (work.choice?.kind === 'assignDamage') assignDamage(work, tacticalDamage(work));
     for (let i = 0; i < 16 && work.status !== 'finished' && stateBasedActions(work); i++);
+    if (work.status !== 'finished') {
+      const payoffs = settleCombatPayoffs(work);
+      omittedTriggers += payoffs.omitted;
+      payoffLimitReached ||= payoffs.limited;
+      if (payoffs.limited) break;
+    }
   }
   const values = [0, 0];
   for (const o of Object.values(work.objects))
     if (o.zone === 'battlefield') values[o.controller] += permanentValue(work, o);
   return {
     life: work.players.map((p) => p.life),
+    omittedTriggers,
+    payoffLimitReached,
     values,
     alive: Object.values(work.objects)
       .filter((o) => o.zone === 'battlefield')
