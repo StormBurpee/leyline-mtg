@@ -133,3 +133,45 @@ test('an attacking mana creature cannot also pay for its forecast combat trick',
   s.choice = { kind: 'attackers', player: 0 };
   assert.deepEqual(chooseBotCommand(s, 0).cards, []);
 });
+
+test('known-trick attack planning never reads opposing hands or future library identities', () => {
+  const s = fixture();
+  lands(s, 'Forest', 1);
+  put(s, 'Grizzly Bears', 0);
+  put(s, 'Centaur Courser', 1);
+  put(s, 'Giant Growth', 0, 'hand');
+  s.choice = { kind: 'attackers', player: 0 };
+  const expected = chooseBotCommand(s, 0);
+  for (const player of s.players) {
+    player.libraryCount = player.library.length;
+    player.handCount = player.hand.length;
+    Object.defineProperty(player, 'library', {
+      enumerable: false,
+      get() {
+        throw new Error('concealed library');
+      },
+    });
+  }
+  Object.defineProperty(s.players[1], 'hand', {
+    enumerable: false,
+    get() {
+      throw new Error('opposing hand');
+    },
+  });
+  for (const o of Object.values(s.objects))
+    if (o.zone === 'library' || (o.zone === 'hand' && o.owner === 1))
+      Object.defineProperty(o, 'name', {
+        enumerable: false,
+        get() {
+          throw new Error('concealed card identity');
+        },
+      });
+  for (const key of ['seed', 'rng', 'config', 'history', 'events'])
+    Object.defineProperty(s, key, {
+      enumerable: false,
+      get() {
+        throw new Error(`privileged ${key}`);
+      },
+    });
+  assert.deepEqual(chooseBotCommand(s, 0), expected);
+});

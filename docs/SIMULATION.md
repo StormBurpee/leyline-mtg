@@ -124,6 +124,13 @@ and can be unreliable for small samples or zero observed variance. They do not
 establish strength against human players or arbitrary decks. See
 [BOT_STRENGTH.md](BOT_STRENGTH.md) for the measured checkpoint and limitations.
 
+`--opponent=released-safe` explicitly selects the frozen v0.22 policy behind a
+minimal adapter that removes departed/stale public attacker references before
+calling it. The original v0.22 forecast can crash after an attacking Burnished Hart
+sacrifices itself. The native current policy checks those references directly;
+the adapter allows a complete comparison without editing the frozen reference.
+`released` retains the original behavior and is never silently replaced.
+
 ## Library-search decisions and hidden identity
 
 During `librarySearch`, only the searching agent sees its library definitions and eligible opaque handles. Those handles can be submitted through the normal command boundary. After the search, library objects are concealed again; only public results and the agent’s own hand remain visible. Episode continuation and replay retain deterministic shuffle state privately.

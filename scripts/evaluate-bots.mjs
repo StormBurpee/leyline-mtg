@@ -8,15 +8,17 @@ import { performance } from 'node:perf_hooks';
 import { DECKS, expandDeck } from '../packages/engine/src/index.js';
 import { runEpisode } from '../packages/simulation/run.js';
 import { summarizePaired } from '../packages/simulation/evaluation.js';
+import { chooseReleasedSafe } from '../packages/simulation/reference-policies.js';
 import { chooseBotCommand as current } from '../packages/engine/src/bot.js';
 import { chooseBotCommand as released } from '../tests/fixtures/v0.22-policy/bot.js';
 import { chooseBotCommand as legacy } from '../tests/fixtures/pre-tactical-policy.js';
 
-const policies = { current, released, legacy };
+const policies = { current, released, legacy, 'released-safe': chooseReleasedSafe };
 const entries = {
   current: '../packages/engine/src/bot.js',
   released: '../tests/fixtures/v0.22-policy/bot.js',
   legacy: '../tests/fixtures/pre-tactical-policy.js',
+  'released-safe': '../packages/simulation/reference-policies.js',
 };
 function identity(name) {
   const files = new Map();

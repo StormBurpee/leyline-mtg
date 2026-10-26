@@ -12,6 +12,11 @@ import {
   emptyMana,
 } from './model.js';
 
+const liveAttackers = (s) =>
+  s.combat.attackers.filter(
+    (r) => s.objects[r.id]?.zone === 'battlefield' && s.objects[r.id].incarnation === r.incarnation,
+  );
+
 /** Bounded, public-board combat search. No hands, library order, seed or RNG are read.
  * Damage and life-only death payoffs use the actual rules. Future draws, combat
  * tricks and other triggered effects remain outside this tactical horizon.
@@ -161,7 +166,7 @@ export function tacticalDamage(s, choice = s.choice) {
 export function combatOutcome(
   s,
   pairs,
-  { active = s.active, attackers = s.combat.attackers.map((r) => r.id), blocked = null } = {},
+  { active = s.active, attackers = liveAttackers(s).map((r) => r.id), blocked = null } = {},
 ) {
   const work = boardCopy(s, active, pairs, attackers, true);
   const omitted = Object.values(s.objects).filter(
@@ -219,14 +224,14 @@ function utility(result, p) {
   );
 }
 function legalGroups(s, pairs) {
-  return s.combat.attackers.every(
+  return liveAttackers(s).every(
     (a) =>
       !hasKeyword(s, s.objects[a.id], 'menace') ||
       pairs.filter((p) => p.attacker === a.id).length !== 1,
   );
 }
 export function chooseBlocks(s, p, { budget = 1400 } = {}) {
-  const attackers = s.combat.attackers
+  const attackers = liveAttackers(s)
     .map((r) => s.objects[r.id])
     .filter((o) => o?.zone === 'battlefield');
   const blockers = Object.values(s.objects).filter(
@@ -302,7 +307,7 @@ export function preserveForDefense(s, source, p) {
   const enemy = 1 - p;
   const attackers =
     s.active === enemy && s.combat.attackers.length
-      ? s.combat.attackers.map((r) => r.id)
+      ? liveAttackers(s).map((r) => r.id)
       : Object.values(s.objects)
           .filter(
             (o) =>
