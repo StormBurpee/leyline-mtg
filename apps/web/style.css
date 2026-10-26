@@ -2045,3 +2045,53 @@ dialog::backdrop {
   border: 1px solid var(--line);
   border-radius: 4px;
 }
+.library-group {
+  border: 1px solid var(--line);
+  padding: 12px;
+  border-radius: 6px;
+  background: #141e17;
+}
+.library-choice {
+  display: flex;
+  gap: 17px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff0b;
+}
+.library-choice:last-child {
+  border: 0;
+}
+.library-thumb {
+  width: 86px;
+  flex-shrink: 0;
+}
+.library-thumb img {
+  display: block;
+  width: 86px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+.library-choice-body {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+  justify-content: center;
+}
+.library-choice-body strong {
+  font-size: 13px;
+}
+.library-choice-actions {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.library-choice-actions .icon-btn {
+  width: 32px;
+  height: 32px;
+  font-size: 15px;
+}
+.stack-item.resolving {
+  border-color: #a38c51;
+  background: #363723;
+}

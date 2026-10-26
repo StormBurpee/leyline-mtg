@@ -1,5 +1,6 @@
 import {
   CARDS,
+  definition,
   DECKS,
   VERSION,
   createGame,
@@ -58,6 +59,7 @@ function readSave() {
 }
 const ui = {
   view: 'play',
+  catalog: CARDS,
   deck: 'ember',
   mode: 'bot',
   seed: 731,
@@ -121,6 +123,7 @@ function save() {
         replay: exportReplay(state),
         mode: ui.mode,
         deck: ui.deck,
+        customDeck: ui.customDeck,
         autoYield: ui.autoYield,
         holdPriority: ui.holdPriority,
       }),
@@ -226,6 +229,7 @@ function start() {
         expandDeck(DECKS[ui.deck === 'ember' ? 'grove' : 'ember'].cards),
       ],
       seed: ui.seed,
+      catalog: ui.catalog,
       names:
         ui.mode === 'hotseat'
           ? ['Player one', 'Player two']
@@ -266,10 +270,45 @@ function showDeck() {
     )
       .map(
         ([n, c]) =>
-          `<div class="rule-row"><span>${c} × ${escape(n)}</span>${mana(CARDS[n].cost)}</div>`,
+          `<div class="rule-row"><span>${c} × ${escape(n)}</span>${mana((ui.catalog[n] ?? CARDS[n]).cost)}</div>`,
       )
       .join('')}`,
   );
+}
+function showLibraryOrder() {
+  if (dialog._libraryChoiceRevision !== state.revision) {
+    dialog._libraryOrder = { top: [...state.choice.cards], rest: [] };
+    dialog._libraryChoiceRevision = state.revision;
+  }
+  renderLibraryOrder();
+}
+function renderLibraryOrder() {
+  const order = dialog._libraryOrder,
+    choice = state.choice,
+    restLabel = choice.action === 'scry' ? 'Bottom of library' : 'Graveyard';
+  const groups = [
+    ['top', 'Top of library'],
+    ['rest', restLabel],
+  ];
+  const body = `<p>The first card in the top group will be drawn first. Move cards between groups and choose their order.</p>${groups
+    .map(
+      ([key, label]) =>
+        `<h3 style="margin:20px 0 10px">${label}</h3><div class="library-group">${
+          order[key]
+            .map((id, i) => {
+              const o = state.objects[id];
+              return `<div class="library-choice"><div class="library-thumb">${metadata[o.name]?.image ? `<img src="${escape(metadata[o.name].image)}" alt="${escape(o.name)}">` : '◇'}</div><div class="library-choice-body"><strong>${escape(o.name)}</strong><span class="small muted">Position ${i + 1}</span><div class="library-choice-actions"><button class="btn small" data-action="libraryMove" data-cardid="${id}" data-group="${key === 'top' ? 'rest' : 'top'}">${key === 'top' ? restLabel : 'Keep on top'}</button><button class="icon-btn" data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="-1" aria-label="Move ${escape(o.name)} earlier" ${i === 0 ? 'disabled' : ''}>↑</button><button class="icon-btn" data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="1" aria-label="Move ${escape(o.name)} later" ${i === order[key].length - 1 ? 'disabled' : ''}>↓</button></div></div></div>`;
+            })
+            .join('') || '<p class="muted">No cards here.</p>'
+        }</div>`,
+    )
+    .join('')}`;
+  openDialog(
+    choice.action === 'scry' ? 'Scry' : 'Surveil',
+    body,
+    '<button class="btn quiet" data-action="closeDialog">Review table</button><button class="btn primary" data-action="submitLibrary">Confirm arrangement</button>',
+  );
+  dialog._libraryOrder = order;
 }
 function showDamage() {
   const orders = suggestedDamage(state);
@@ -349,6 +388,7 @@ async function action(name, el) {
     case 'selectDeck':
       ui.deck = el.dataset.deck;
       ui.customDeck = null;
+      ui.catalog = CARDS;
       render();
       break;
     case 'start':
@@ -358,8 +398,15 @@ async function action(name, el) {
       try {
         const saved = JSON.parse(readSave());
         state = replay(saved.replay);
+        ui.catalog = state.catalog;
         ui.mode = saved.mode;
-        ui.deck = saved.deck;
+        ui.deck = DECKS[saved.deck] ? saved.deck : 'ember';
+        ui.customDeck =
+          saved.customDeck ??
+          (JSON.stringify(state.config.decks[0]) ===
+          JSON.stringify(expandDeck(DECKS[ui.deck].cards))
+            ? null
+            : state.config.decks[0]);
         ui.autoYield = saved.autoYield ?? true;
         ui.holdPriority = saved.holdPriority ?? false;
         ui.seat = state.choice?.player ?? state.priority;
@@ -382,7 +429,9 @@ async function action(name, el) {
       );
       break;
     case 'validateDeck': {
-      const result = parseDeck(document.querySelector('#deck-input').value);
+      const result = parseDeck(document.querySelector('#deck-input').value, {
+        catalog: ui.catalog,
+      });
       if (result.errors.length) {
         document.querySelector('#deck-errors').textContent = result.errors.join('\n');
         break;
@@ -416,6 +465,31 @@ async function action(name, el) {
     case 'damage':
       send({ type: 'assignDamage', orders: suggestedDamage(state) });
       break;
+    case 'libraryOrder':
+      showLibraryOrder();
+      break;
+    case 'libraryMove': {
+      const order = dialog._libraryOrder,
+        id = el.dataset.cardid;
+      order.top = order.top.filter((x) => x !== id);
+      order.rest = order.rest.filter((x) => x !== id);
+      order[el.dataset.group].push(id);
+      renderLibraryOrder();
+      break;
+    }
+    case 'libraryReorder': {
+      const group = dialog._libraryOrder[el.dataset.group],
+        i = Number(el.dataset.index),
+        j = i + Number(el.dataset.direction);
+      [group[i], group[j]] = [group[j], group[i]];
+      renderLibraryOrder();
+      break;
+    }
+    case 'submitLibrary': {
+      const order = structuredClone(dialog._libraryOrder);
+      if (send({ type: 'orderLibrary', ...order })) closeDialog();
+      break;
+    }
     case 'editDamage':
       showDamage();
       break;
@@ -455,7 +529,7 @@ async function action(name, el) {
     case 'activateAbility': {
       const id = dialog._activationCard,
         index = Number(el.dataset.ability),
-        a = CARDS[state.objects[id].name].activated[index];
+        a = definition(state, state.objects[id]).activated[index];
       closeDialog();
       ui.selected = id;
       ui.activation = index;
@@ -467,7 +541,7 @@ async function action(name, el) {
     }
     case 'playSelected': {
       const o = state.objects[ui.selected],
-        d = CARDS[o.name];
+        d = definition(state, o);
       if (d.type === 'land') send({ type: 'playLand', card: o.id });
       else if (d.target) {
         ui.targeting = true;
@@ -539,6 +613,24 @@ async function action(name, el) {
     case 'loadReplay':
       document.querySelector('#replay-file').click();
       break;
+    case 'takeoverReplay':
+      openDialog(
+        'Continue this position?',
+        '<p>This creates a local branch from the current replay position. The original replay is unchanged. Both hands are available in hotseat mode.</p>',
+        '<button class="btn" data-action="closeDialog">Cancel</button><button class="btn primary" data-action="confirmTakeover">Continue as hotseat</button>',
+      );
+      break;
+    case 'confirmTakeover':
+      ui.replayRecord = null;
+      ui.mode = 'hotseat';
+      ui.catalog = state.catalog;
+      ui.customDeck = state.config.decks[0];
+      ui.seat = state.choice?.player ?? state.priority;
+      resetSelection();
+      closeDialog();
+      save();
+      render();
+      break;
     case 'replaySeat':
       ui.seat = 1 - ui.seat;
       resetSelection();
@@ -585,7 +677,8 @@ async function action(name, el) {
 }
 function controlledCreatures(p) {
   return Object.values(state.objects).filter(
-    (o) => o.zone === 'battlefield' && o.controller === p && CARDS[o.name].type === 'creature',
+    (o) =>
+      o.zone === 'battlefield' && o.controller === p && definition(state, o).type === 'creature',
   );
 }
 function selectCard(id) {
@@ -608,8 +701,8 @@ function selectCard(id) {
       targetsFor(
         state,
         ui.activation !== null
-          ? CARDS[state.objects[ui.selected].name].activated[ui.activation].target
-          : CARDS[state.objects[ui.selected].name].target,
+          ? definition(state, state.objects[ui.selected]).activated[ui.activation].target
+          : definition(state, state.objects[ui.selected]).target,
         p,
       ).some((t) => t.kind === 'object' && t.id === id)
     )
@@ -622,7 +715,7 @@ function selectCard(id) {
     else toast('That is not a legal target.');
     return;
   }
-  if (c?.kind === 'bottom' || c?.kind === 'discard') {
+  if (c?.kind === 'bottom' || c?.kind === 'discard' || c?.kind === 'discardEffect') {
     if (!state.players[p].hand.includes(id)) return;
     ui.chosen = ui.chosen.includes(id) ? ui.chosen.filter((x) => x !== id) : [...ui.chosen, id];
     render();
@@ -638,7 +731,11 @@ function selectCard(id) {
     return;
   }
   if (c?.kind === 'blockers') {
-    if (o.controller === p && o.zone === 'battlefield' && CARDS[o.name].type === 'creature') {
+    if (
+      o.controller === p &&
+      o.zone === 'battlefield' &&
+      definition(state, o).type === 'creature'
+    ) {
       const paired = ui.blocks.find((b) => b.blocker === id);
       if (paired) {
         ui.blocks = ui.blocks.filter((b) => b.blocker !== id);
@@ -658,8 +755,13 @@ function selectCard(id) {
     render();
     return;
   }
-  if (!c && o.zone === 'battlefield' && o.controller === p && CARDS[o.name].activated?.length) {
-    const abilities = CARDS[o.name].activated,
+  if (
+    !c &&
+    o.zone === 'battlefield' &&
+    o.controller === p &&
+    definition(state, o).activated?.length
+  ) {
+    const abilities = definition(state, o).activated,
       legal = legalActions(state, p);
     openDialog(
       o.name,

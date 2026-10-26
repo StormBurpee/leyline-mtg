@@ -12,7 +12,7 @@ Leyline's engine and client are written in JavaScript for this repository. They 
 - `forge-game/.../trigger/TriggerHandler.java`: pending triggers, distinct from resolution.
 - `forge-gui/res/cardsfolder/l/lightning_bolt.txt` and `c/counterspell.txt`: declarative executable card definitions.
 
-No Forge Java implementation source is distributed in this repository. Nine small Forge card-script fixtures are reproduced in `packages/forge-import/test/fixtures/`, with upstream source links and GPL-3.0-or-later attribution; they test the conservative migration adapter. The comparable rule behavior is implemented directly from the game rules in a separate, smaller architecture. Leyline is licensed **GPL-3.0-or-later**, consistent with an open-source future that can incorporate properly attributed GPL-compatible contributions. This does not make this project an official Forge release. The included license is the unmodified GNU GPL v3 license text.
+No Forge Java implementation source is distributed in this repository. Sixteen small Forge card-script fixtures are reproduced in `packages/forge-import/test/fixtures/`, with upstream source links and GPL-3.0-or-later attribution; they test the conservative migration adapter. The comparable rule behavior is implemented directly from the game rules in a separate, smaller architecture. Leyline is licensed **GPL-3.0-or-later**, consistent with an open-source future that can incorporate properly attributed GPL-compatible contributions. This does not make this project an official Forge release. The included license is the unmodified GNU GPL v3 license text.
 
 ## Rules and cards
 

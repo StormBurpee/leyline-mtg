@@ -1,4 +1,3 @@
-import { CARDS } from './cards.js';
 import {
   createGame,
   freezeRecord,
@@ -15,6 +14,7 @@ import {
   RuleError,
   shuffle,
   VERSION,
+  REPLAY_SCHEMA_VERSION,
 } from './model.js';
 import { canTapForMana, pay, planPayment, tapForMana } from './mana.js';
 import {
@@ -24,6 +24,7 @@ import {
   stabilize,
   targetsFor,
   notifyTriggers,
+  finishResolutionChoice,
 } from './effects.js';
 import { assignDamage, canAttack, declareAttackers, declareBlockers } from './combat.js';
 import { advanceStep, finishCleanup } from './turn.js';
@@ -32,7 +33,7 @@ export function castProblem(s, p, id, target, { autoTap = true } = {}) {
   const o = s.objects[id];
   if (!o || o.zone !== 'hand' || o.owner !== p) return 'Card is not in your hand.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
-  const d = definition(o);
+  const d = definition(s, o);
   if (d.type === 'land') return 'Lands are played, not cast.';
   if (
     d.type !== 'instant' &&
@@ -57,14 +58,14 @@ export function canPlayLand(s, p, id) {
     s.players[p].landsPlayed < 1 &&
     o?.zone === 'hand' &&
     o.owner === p &&
-    definition(o).type === 'land'
+    definition(s, o).type === 'land'
   );
 }
 function cast(s, p, c) {
   const problem = castProblem(s, p, c.card, c.target, { autoTap: c.autoTap !== false });
   requireRule(!problem, 'CAST', problem);
   const o = s.objects[c.card],
-    d = definition(o);
+    d = definition(s, o);
   pay(s, p, d.cost, c.autoTap !== false);
   move(s, o, 'stack');
   s.stack.push({
@@ -87,9 +88,9 @@ export function abilityProblem(s, p, id, index, target) {
   if (!o || o.zone !== 'battlefield' || o.controller !== p)
     return 'You do not control that permanent.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
-  const ability = definition(o).activated?.[index];
+  const ability = definition(s, o).activated?.[index];
   if (!ability) return 'That ability does not exist.';
-  if (ability.cost.tap && (o.tapped || (definition(o).type === 'creature' && isSick(s, o))))
+  if (ability.cost.tap && (o.tapped || (definition(s, o).type === 'creature' && isSick(s, o))))
     return 'This creature cannot pay a tap cost now.';
   if (ability.target && !legalTarget(s, ability.target, target, p))
     return 'Choose a legal ability target.';
@@ -101,7 +102,7 @@ function activate(s, p, c) {
   const problem = abilityProblem(s, p, c.card, c.ability, c.target);
   requireRule(!problem, 'ACTIVATE', problem);
   const o = s.objects[c.card],
-    a = definition(o).activated[c.ability];
+    a = definition(s, o).activated[c.ability];
   pay(s, p, a.cost.mana ?? {});
   if (a.cost.tap) o.tapped = true;
   s.stack.push({
@@ -134,6 +135,10 @@ function completeMulligan(s, p) {
 function handleChoice(s, p, c) {
   const choice = s.choice;
   requireRule(choice.player === p, 'CHOICE_PLAYER', 'The other player must make this choice.');
+  if (['libraryOrder', 'discardEffect'].includes(choice.kind)) {
+    finishResolutionChoice(s, c);
+    return;
+  }
   switch (choice.kind) {
     case 'mulligan': {
       requireRule(
@@ -225,8 +230,10 @@ export function dispatch(state, command) {
         'State changed. Refresh your legal actions.',
       );
     command = structuredClone(command);
-    const s = structuredClone({ ...state, events: [], history: [] }),
+    const s = structuredClone({ ...state, events: [], history: [], catalog: null, config: null }),
       p = command.player;
+    s.catalog = state.catalog;
+    s.config = state.config;
     s.events = [...state.events];
     s.history = [...state.history];
     if (command.type === 'concede') {
@@ -295,7 +302,7 @@ export function legalActions(s, p) {
       actions.push({ type: 'playLand', card: id });
       continue;
     }
-    const d = definition(s.objects[id]);
+    const d = definition(s, s.objects[id]);
     if (d.type === 'land') continue;
     const targets = d.target ? targetsFor(s, d.target, p) : [null];
     for (const target of targets)
@@ -305,7 +312,7 @@ export function legalActions(s, p) {
   for (const o of Object.values(s.objects)) {
     if (canTapForMana(s, o, p)) actions.push({ type: 'tapMana', card: o.id });
     if (o.zone !== 'battlefield' || o.controller !== p) continue;
-    for (const [index, a] of (definition(o).activated ?? []).entries())
+    for (const [index, a] of (definition(s, o).activated ?? []).entries())
       for (const target of a.target ? targetsFor(s, a.target, p) : [null])
         if (!abilityProblem(s, p, o.id, index, target))
           actions.push({
@@ -334,7 +341,11 @@ export function assertInvariants(s) {
   for (const o of Object.values(s.objects)) {
     if (['library', 'hand', 'graveyard', 'exile'].includes(o.zone) && !located.has(o.id))
       throw new Error(`Unindexed object ${o.id}`);
-    if (o.zone === 'stack' && !s.stack.some((e) => e.kind === 'spell' && e.source.id === o.id))
+    if (
+      o.zone === 'stack' &&
+      !s.stack.some((e) => e.kind === 'spell' && e.source.id === o.id) &&
+      !(s.resolving?.entry.kind === 'spell' && s.resolving.entry.source.id === o.id)
+    )
       throw new Error(`Unindexed stack card ${o.id}`);
   }
   if (new Set(s.stack.map((e) => e.id)).size !== s.stack.length)
@@ -343,10 +354,21 @@ export function assertInvariants(s) {
   return true;
 }
 export function exportReplay(s) {
-  return structuredClone({ version: VERSION, config: s.config, commands: s.history });
+  return structuredClone({
+    schemaVersion: REPLAY_SCHEMA_VERSION,
+    version: VERSION,
+    config: s.config,
+    commands: s.history,
+  });
 }
 export function replay(record) {
-  requireRule(record?.version === VERSION, 'REPLAY_VERSION', 'Unsupported replay version.');
+  requireRule(
+    record &&
+      [VERSION, '0.1.0'].includes(record.version) &&
+      (record.schemaVersion === undefined || record.schemaVersion === REPLAY_SCHEMA_VERSION),
+    'REPLAY_VERSION',
+    'Unsupported replay schema or engine version.',
+  );
   requireRule(
     Array.isArray(record.commands) && record.commands.length <= 10000,
     'REPLAY',

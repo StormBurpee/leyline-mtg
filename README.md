@@ -17,7 +17,7 @@
 
 Leyline is a local-first Magic rules engine with a playable tabletop, written in JavaScript. The same kernel powers the browser client, the practice opponent and deterministic replays. No Java backend. No rules hidden in click handlers.
 
-**Development preview:** 50 executable cards and three token definitions. A scoped rules kernel, not a complete Forge port or a tournament-ready client. [The boundaries are documented.](docs/SUPPORT.md)
+**Development preview:** 56 executable cards and three token definitions. A scoped rules kernel, not a complete Forge port or a tournament-ready client. [The boundaries are documented.](docs/SUPPORT.md)
 
 <p align="center">
   <img src="docs/assets/tabletop.png" alt="The actual Leyline client inspecting a replayed cast-trigger position" width="100%" />
@@ -78,7 +78,7 @@ if (result.ok) state = result.state;
 const restored = replay(exportReplay(state));
 ```
 
-Public TypeScript declarations are included. The implementation stays JavaScript.
+Public TypeScript declarations are included. The implementation stays JavaScript. Validated registries can be supplied per game; replays embed their complete definition set.
 
 ## Small enough to understand
 
@@ -90,7 +90,7 @@ scripts/              Local server, static build and maintenance utilities
 docs/                 Architecture, support manifest and contribution guide
 ```
 
-The supported pool includes counterspells, prowess, cast triggers, token creation, +1/+1 counters, activated abilities, temporary effects, first/double strike, trample, deathtouch and lifelink. That is not a claim to implement every interaction those mechanics can have in the full game.
+The supported pool includes counterspells, prowess, cast triggers, token creation, +1/+1 counters, activated abilities, scry/surveil and draw/discard continuations, temporary effects, first/double strike, trample, deathtouch and lifelink. That is not a claim to implement every interaction those mechanics can have in the full game.
 
 Commander, multiplayer, general layers/dependencies, replacement-effect ordering and unrestricted card support are still ahead. Unsupported imports fail visibly instead of becoming approximations. The bot is a deterministic sparring partner, not a competitive deck-testing oracle.
 

@@ -1,0 +1,10 @@
+# Forge contributors, GPL-3.0-or-later.
+# Source: https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/merfolk_looter.txt
+Name:Merfolk Looter
+ManaCost:1 U
+Types:Creature Merfolk Rogue
+PT:1/1
+A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+DeckHas:Ability$Discard
+Oracle:{T}: Draw a card, then discard a card.

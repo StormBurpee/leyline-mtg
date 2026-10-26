@@ -58,9 +58,20 @@ export function header(ui) {
     )}</nav><div class="top-right"><span class="version">ENGINE ${VERSION}</span><a class="repo-link" href="https://github.com/StormBurpee/leyline-mtg" target="_blank" rel="noopener">View source ↗</a></div></header>`;
 }
 export function lobby(ui, meta) {
-  const deck = DECKS[ui.deck],
-    art = ui.deck === 'ember' ? 'Lightning Bolt' : 'Serra Angel';
-  return `<main class="page"><div class="lobby-intro"><div><h2>Your next game starts here.</h2><p>Pick a deck. Find a line. Make it yours.</p></div><span class="status-label small">Local play · no account needed</span></div><div class="lobby-grid"><div><section class="deck-feature"><div class="deck-art" ${artStyle(meta, art)}></div><div class="feature-top"><span class="badge">Featured deck · 60 cards</span>${mana(Object.fromEntries(deck.colors.map((c) => [c, 1])))}</div><div class="feature-copy"><div class="eyebrow">${ui.deck === 'ember' ? 'Tempo / spells' : 'Creatures / growth'}</div><h1>${deck.name.replace(' & ', '<br>& ')}</h1><p>${deck.description}</p><div class="feature-bottom"><span class="small muted">A handcrafted introductory deck</span><button class="btn small quiet" data-action="deckList">Explore deck ↗</button></div></div></section><div class="deck-tabs">${Object.entries(
+  const catalog = ui.catalog ?? CARDS;
+  const deck = ui.customDeck
+    ? {
+        name: 'Your imported deck',
+        description: `${ui.customDeck.length} cards, validated against this executable catalog.`,
+        colors: [...new Set(ui.customDeck.flatMap((name) => catalog[name]?.color ?? []))],
+      }
+    : DECKS[ui.deck];
+  const art = ui.customDeck
+    ? (ui.customDeck.find((name) => catalog[name]?.type !== 'land') ?? ui.customDeck[0])
+    : ui.deck === 'ember'
+      ? 'Lightning Bolt'
+      : 'Serra Angel';
+  return `<main class="page"><div class="lobby-intro"><div><h2>Your next game starts here.</h2><p>Pick a deck. Find a line. Make it yours.</p></div><span class="status-label small">Local play · no account needed</span></div><div class="lobby-grid"><div><section class="deck-feature"><div class="deck-art" ${artStyle(meta, art)}></div><div class="feature-top"><span class="badge">${ui.customDeck ? 'Imported deck' : 'Featured deck'} · ${ui.customDeck?.length ?? 60} cards</span>${mana(Object.fromEntries(deck.colors.map((c) => [c, 1])))}</div><div class="feature-copy"><div class="eyebrow">${ui.customDeck ? 'Your list / local play' : ui.deck === 'ember' ? 'Tempo / spells' : 'Creatures / growth'}</div><h1>${deck.name.replace(' & ', '<br>& ')}</h1><p>${deck.description}</p><div class="feature-bottom"><span class="small muted">${ui.customDeck ? 'Validated executable definitions' : 'A handcrafted introductory deck'}</span><button class="btn small quiet" data-action="deckList">Explore deck ↗</button></div></div></section><div class="deck-tabs">${Object.entries(
     DECKS,
   )
     .map(
@@ -69,23 +80,23 @@ export function lobby(ui, meta) {
     )
     .join(
       '',
-    )}</div></div><div class="setup"><section class="setup-panel"><div class="eyebrow" style="margin-bottom:18px">Across the table</div><div class="opponent-row"><div class="avatar">${ui.deck === 'ember' ? 'G' : 'E'}</div><div><strong>${DECKS[ui.deck === 'ember' ? 'grove' : 'ember'].name}</strong><p>Practice opponent · deterministic heuristic</p></div></div><div class="setup-row"><label for="mode">Play mode</label><select id="mode"><option value="bot" ${ui.mode === 'bot' ? 'selected' : ''}>Practice vs. bot</option><option value="hotseat" ${ui.mode === 'hotseat' ? 'selected' : ''}>Local two-player</option></select></div><div class="setup-row"><label for="seed">Shuffle seed</label><input type="number" id="seed" min="0" max="4294967295" value="${ui.seed}" aria-label="Shuffle seed"></div></section><section class="setup-panel"><div class="eyebrow" style="margin-bottom:15px">Real rules. Visible decisions.</div><p class="small muted">Priority passes, the stack, targets and combat are resolved by the same independent engine you can run in Node.</p><div class="options-row"><label class="toggle"><input type="checkbox" id="auto-yield" ${ui.autoYield ? 'checked' : ''}>Yield when no response is available</label><label class="toggle"><input type="checkbox" id="hold-priority" ${ui.holdPriority ? 'checked' : ''}>Hold priority after casting</label></div></section><div class="setup-actions"><button class="btn primary" data-action="start">Enter the battlefield <span>↗</span></button>${ui.saved ? '<button class="btn" data-action="resume">Resume saved match</button>' : ''}<button class="btn quiet" data-action="importDeck">Import a supported deck</button></div><p class="setup-note">This is a <strong>rules-engine preview</strong>, not full Forge parity. ${Object.values(CARDS).filter((d) => !d.token).length} supported cards. No format-legality certification. Your game stays on this device.</p></div></div><div class="support-strip"><span>◇ Open source, by design</span><span>Deterministic replays</span><span>Explicit card support</span><span>Keyboard-friendly controls</span></div>${footer()}</main>`;
+    )}</div></div><div class="setup"><section class="setup-panel"><div class="eyebrow" style="margin-bottom:18px">Across the table</div><div class="opponent-row"><div class="avatar">${ui.deck === 'ember' ? 'G' : 'E'}</div><div><strong>${DECKS[ui.deck === 'ember' ? 'grove' : 'ember'].name}</strong><p>Practice opponent · deterministic heuristic</p></div></div><div class="setup-row"><label for="mode">Play mode</label><select id="mode"><option value="bot" ${ui.mode === 'bot' ? 'selected' : ''}>Practice vs. bot</option><option value="hotseat" ${ui.mode === 'hotseat' ? 'selected' : ''}>Local two-player</option></select></div><div class="setup-row"><label for="seed">Shuffle seed</label><input type="number" id="seed" min="0" max="4294967295" value="${ui.seed}" aria-label="Shuffle seed"></div></section><section class="setup-panel"><div class="eyebrow" style="margin-bottom:15px">Real rules. Visible decisions.</div><p class="small muted">Priority passes, the stack, targets and combat are resolved by the same independent engine you can run in Node.</p><div class="options-row"><label class="toggle"><input type="checkbox" id="auto-yield" ${ui.autoYield ? 'checked' : ''}>Yield when no response is available</label><label class="toggle"><input type="checkbox" id="hold-priority" ${ui.holdPriority ? 'checked' : ''}>Hold priority after casting</label></div></section><div class="setup-actions"><button class="btn primary" data-action="start">Enter the battlefield <span>↗</span></button>${ui.saved ? '<button class="btn" data-action="resume">Resume saved match</button>' : ''}<button class="btn quiet" data-action="importDeck">Import a supported deck</button></div><p class="setup-note">This is a <strong>rules-engine preview</strong>, not full Forge parity. ${Object.values(catalog).filter((d) => !d.token).length} supported cards. No format-legality certification. Your game stays on this device.</p></div></div><div class="support-strip"><span>◇ Open source, by design</span><span>Deterministic replays</span><span>Explicit card support</span><span>Keyboard-friendly controls</span></div>${footer()}</main>`;
 }
 export function footer() {
   return `<footer class="footer">Leyline is an unofficial fan project. Not affiliated with Wizards of the Coast. Card names, text and art belong to their respective owners.<br>Card images served by <a href="https://scryfall.com" target="_blank" rel="noopener">Scryfall</a>. Engine and client source: GPL-3.0-or-later.</footer>`;
 }
-const fallback = (name) =>
-  `<div class="fallback"><strong>${escape(name)}</strong><p>${escape(CARDS[name]?.text)}</p></div>`;
+const fallback = (name, d = CARDS[name]) =>
+  `<div class="fallback"><strong>${escape(name)}</strong><p>${escape(d?.text)}</p></div>`;
 export function handCard(s, id, meta, ui, playable) {
   const o = s.objects[id],
-    d = CARDS[o.name];
-  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" aria-label="${escape(o.name)}${playable ? ', playable' : ''}" title="${escape(o.name)}">${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name)}</button>`;
+    d = definition(s, o);
+  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" aria-label="${escape(o.name)}${playable ? ', playable' : ''}" title="${escape(o.name)}">${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
 }
 function permanent(s, o, meta, ui, targetable) {
-  const d = definition(o),
+  const d = definition(s, o),
     land = d.type === 'land';
   if (land)
-    return `<button class="land-card ${o.tapped ? 'tapped' : ''}" data-card="${o.id}" ${artStyle(meta, o.name)} title="${escape(o.name)}${o.tapped ? ' · tapped' : ''}" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}">${mana({ [d.mana]: 1 })}</button>`;
+    return `<button class="land-card ${o.tapped ? 'tapped' : ''}" data-card="${o.id}" ${artStyle(meta, o.name)} title="${escape(o.name)}${o.tapped ? ' · tapped' : ''}" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}">${d.mana ? mana({ [d.mana]: 1 }) : '—'}</button>`;
   const pt = stats(s, o),
     attacking = s.combat.attackers.some((r) => r.id === o.id),
     blocking =
@@ -109,9 +120,9 @@ export function game(s, ui, meta) {
   const selected = s.objects[ui.selected],
     targetKind = selected
       ? ui.activation !== null
-        ? definition(selected).activated?.[ui.activation]?.target
+        ? definition(s, selected).activated?.[ui.activation]?.target
         : selected.zone === 'hand'
-          ? definition(selected).target
+          ? definition(s, selected).target
           : null
       : null,
     targetList = ui.targeting ? targetsFor(s, targetKind, viewer) : [];
@@ -140,8 +151,8 @@ export function game(s, ui, meta) {
     }</div></div>`;
   const field = (p) => {
     const all = controlled(s, p),
-      lands = all.filter((o) => definition(o).type === 'land'),
-      others = all.filter((o) => definition(o).type !== 'land');
+      lands = all.filter((o) => definition(s, o).type === 'land'),
+      others = all.filter((o) => definition(s, o).type !== 'land');
     return `<section class="field" aria-label="${escape(s.players[p].name)} battlefield"><div class="lands">${lands.map((o) => permanent(s, o, meta, ui, false)).join('') || '<span class="small muted" style="font-size:9px">LANDS</span>'}</div><div class="permanents">${
       others
         .map((o) =>
@@ -157,7 +168,7 @@ export function game(s, ui, meta) {
       '<div class="empty-field"><span class="rune">◇</span><span>Battlefield</span></div>'
     }</div></section>`;
   };
-  return `<main class="game-layout"><section class="arena">${ui.replayRecord ? `<div class="replay-banner"><span class="grow">Replay · ${ui.replayIndex}/${ui.replayRecord.commands.length} commands</span><input id="replay-position" type="range" min="0" max="${ui.replayRecord.commands.length}" value="${ui.replayIndex}" aria-label="Replay position"><button data-action="replayBack">←</button><button data-action="replayNext">Next →</button><button data-action="replaySeat" aria-label="Switch replay viewpoint">Side ${ui.seat + 1}</button><button data-action="exitReplay">Exit replay</button></div>` : ''}<div class="matchbar"><span class="live-dot"></span><span>${ui.mode === 'bot' ? 'PRACTICE' : 'LOCAL TWO-PLAYER'}</span><span class="muted">/</span><span>Turn ${s.turn}</span><div class="right"><button class="btn small quiet" data-action="settings">Options</button><button class="icon-btn mobile-inspector-toggle" data-action="inspector" aria-label="Toggle inspector">◇</button><button class="icon-btn" data-action="matchMenu" aria-label="Match menu">⋯</button></div></div><div class="phase-track">${[
+  return `<main class="game-layout"><section class="arena">${ui.replayRecord ? `<div class="replay-banner"><span class="grow">Replay · ${ui.replayIndex}/${ui.replayRecord.commands.length} commands</span><input id="replay-position" type="range" min="0" max="${ui.replayRecord.commands.length}" value="${ui.replayIndex}" aria-label="Replay position"><button data-action="replayBack">←</button><button data-action="replayNext">Next →</button><button data-action="replaySeat" aria-label="Switch replay viewpoint">Side ${ui.seat + 1}</button><button data-action="takeoverReplay" ${s.status === 'finished' ? 'disabled' : ''}>Continue</button><button data-action="exitReplay">Exit replay</button></div>` : ''}<div class="matchbar"><span class="live-dot"></span><span>${ui.mode === 'bot' ? 'PRACTICE' : 'LOCAL TWO-PLAYER'}</span><span class="muted">/</span><span>Turn ${s.turn}</span><div class="right"><button class="btn small quiet" data-action="settings">Options</button><button class="icon-btn mobile-inspector-toggle" data-action="inspector" aria-label="Toggle inspector">◇</button><button class="icon-btn" data-action="matchMenu" aria-label="Match menu">⋯</button></div></div><div class="phase-track">${[
     ['upkeep', 'Upkeep'],
     ['draw', 'Draw'],
     ['main', 'Main'],
@@ -202,10 +213,11 @@ function actionDock(s, ui, p, actions) {
         buttons = `<button class="btn" data-action="mulligan" ${s.players[p].mulligans >= 7 ? 'disabled' : ''}>Mulligan</button><button class="btn primary" data-action="keep">Keep hand</button>`;
         break;
       case 'bottom':
+      case 'discardEffect':
       case 'discard':
-        title = `Choose ${c.count} card${c.count === 1 ? '' : 's'} to ${c.kind}`;
+        title = `Choose ${c.count} card${c.count === 1 ? '' : 's'} to ${c.kind === 'bottom' ? 'bottom' : 'discard'}`;
         desc = `${ui.chosen.length} selected. Click cards in your hand.`;
-        buttons = `<button class="btn primary" data-action="submitCards" ${ui.chosen.length !== c.count ? 'disabled' : ''}>Confirm ${c.kind}</button>`;
+        buttons = `<button class="btn primary" data-action="submitCards" ${ui.chosen.length !== c.count ? 'disabled' : ''}>Confirm ${c.kind === 'bottom' ? 'bottom' : 'discard'}</button>`;
         break;
       case 'attackers':
         title = 'Declare your attackers';
@@ -218,6 +230,11 @@ function actionDock(s, ui, p, actions) {
           ? 'Now click the attacker to block.'
           : 'Click your blocker, then an attacker. Click a paired blocker to undo.';
         buttons = `<button class="btn primary" data-action="block">${ui.blocks.length ? `Confirm ${ui.blocks.length} blocks` : 'No blocks'} →</button>`;
+        break;
+      case 'libraryOrder':
+        title = `${c.action === 'scry' ? 'Scry' : 'Surveil'} ${c.cards.length}`;
+        desc = 'The spell is still resolving. Arrange the inspected cards before continuing.';
+        buttons = '<button class="btn primary" data-action="libraryOrder">Arrange cards →</button>';
         break;
       case 'assignDamage':
         title = 'Assign combat damage';
@@ -237,7 +254,7 @@ function actionDock(s, ui, p, actions) {
     buttons = '<button class="btn" data-action="cancelSelection">Cancel</button>';
   } else if (ui.selected && s.objects[ui.selected]?.zone === 'hand') {
     const o = s.objects[ui.selected],
-      d = definition(o),
+      d = definition(s, o),
       available = actions.some((a) => a.card === o.id);
     title = o.name;
     desc = available
@@ -252,23 +269,31 @@ function actionDock(s, ui, p, actions) {
   return `<div class="action-dock" aria-live="polite"><div class="action-copy"><strong>${escape(title)}</strong><p>${escape(desc)}</p></div><div class="action-buttons">${buttons}</div></div>`;
 }
 export function inspect(name, meta, state = null, objectId = null) {
-  if (!name || !CARDS[name])
+  if (!name || !(state?.catalog?.[name] ?? CARDS[name]))
     return '<div class="inspect-placeholder"><div><span>◇</span>A closer look.<br>Hover or select any card.</div></div>';
-  const d = CARDS[name],
+  const d = state?.catalog?.[name] ?? CARDS[name],
     m = meta[name];
   return `<div class="inspect-card">${m?.image ? `<img src="${escape(m.image)}" alt="${escape(name)}">` : `<div class="inspect-placeholder"><div><span>◇</span>${escape(name)}</div></div>`}</div><div class="inspect-copy"><h3>${escape(name)}</h3><div class="type">${escape(m?.type_line ?? d.type)}</div><div class="rules">${escape(m?.oracle_text ?? d.text)}</div>${state && state.objects[objectId]?.zone === 'battlefield' ? liveCharacteristics(state, state.objects[objectId]) : ''}<div class="artist">${m?.artist ? `Illustration: ${escape(m.artist)} · ` : ''}Supported executable definition${d.token ? ' · Token' : ''}</div></div>`;
 }
 function stack(s, ui) {
-  return s.stack.length
-    ? s.stack
-        .slice()
-        .reverse()
-        .map(
-          (e, i) =>
-            `<button class="stack-item" data-stack="${e.id}"><small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape(e.kind === 'ability' ? e.label : e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : 'Spell')}</p></button>`,
-        )
-        .join('')
-    : '<div class="empty-stack">The stack is clear.<br>Both players must pass before the game advances.</div>';
+  const resolving = s.resolving
+    ? `<div class="stack-item resolving"><small>RESOLVING · ${escape(s.players[s.resolving.entry.controller].name)}</small><strong>${escape(s.resolving.entry.name)}</strong><p>Waiting for a choice. Priority is not available.</p></div>`
+    : '';
+  return (
+    resolving +
+    (s.stack.length
+      ? s.stack
+          .slice()
+          .reverse()
+          .map(
+            (e, i) =>
+              `<button class="stack-item" data-stack="${e.id}"><small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape(e.kind === 'ability' ? e.label : e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : 'Spell')}</p></button>`,
+          )
+          .join('')
+      : resolving
+        ? ''
+        : '<div class="empty-stack">The stack is clear.<br>Both players must pass before the game advances.</div>')
+  );
 }
 export function eventText(e, s) {
   const name = e.name ?? s.objects[e.objectId]?.name ?? 'a card',
@@ -324,7 +349,7 @@ function log(s) {
     .join('');
 }
 export function catalog(ui, meta) {
-  const cards = Object.values(CARDS).filter(
+  const cards = Object.values(ui.catalog ?? CARDS).filter(
     (d) =>
       !d.token &&
       d.name.toLowerCase().includes(ui.query.toLowerCase()) &&
@@ -354,7 +379,7 @@ export function enginePage(s) {
 }
 
 function liveCharacteristics(s, o) {
-  const d = definition(o),
+  const d = definition(s, o),
     bits = [];
   if (d.type === 'creature') {
     const pt = stats(s, o);

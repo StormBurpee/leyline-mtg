@@ -30,7 +30,7 @@ test('Sprite Dragon remains unsupported rather than dropping its trigger/SVar', 
   assert.equal(result.status, 'unsupported');
   assert.equal(result.definition, null);
   assert.ok(result.diagnostics.some((x) => x.includes('unsupported field T')));
-  assert.ok(result.diagnostics.some((x) => x.includes('unsupported field SVar')));
+  assert.ok(result.diagnostics.some((x) => x.includes('SVar')));
 });
 test('unknown keywords fail closed', async () => {
   const text = (await fixture('grizzly_bears')) + '\nK:Ward:2';
@@ -75,4 +75,44 @@ test('unsupported card text is never interpreted as executable code', () => {
   );
   assert.equal(r.status, 'unsupported');
   assert.equal(r.definition, null);
+});
+
+for (const name of [
+  'opt',
+  'preordain',
+  'consider',
+  'merfolk_looter',
+  'llanowar_elves',
+  'giant_growth',
+  'shivan_dragon',
+])
+  test(`Forge chained/activated fixture ${name} lowers to the current engine`, async () => {
+    const r = compileForgeCard(await fixture(name));
+    assert.equal(r.status, 'candidate', r.diagnostics.join('\n'));
+    const expected = CARDS[r.name];
+    assert.deepEqual(r.definition.cost, expected.cost);
+    if (expected.effects) assert.deepEqual(r.definition.effects, expected.effects);
+    if (expected.mana) assert.equal(r.definition.mana, expected.mana);
+    if (expected.activated) {
+      assert.deepEqual(r.definition.activated[0].cost, expected.activated[0].cost);
+      assert.deepEqual(r.definition.activated[0].effects, expected.activated[0].effects);
+    }
+  });
+test('cyclic and missing SubAbility references are rejected', () => {
+  const head = 'Name:Test\nManaCost:U\nTypes:Instant\nA:SP$ Draw | SubAbility$ Next';
+  for (const suffix of ['', '\nSVar:Next:DB$ Draw | SubAbility$ Next'])
+    assert.equal(compileForgeCard(head + suffix).status, 'unsupported');
+});
+test('unused SVars and dynamic expressions remain visible errors', async () => {
+  const text = await fixture('opt');
+  assert.equal(compileForgeCard(text + '\nSVar:X:Count$Valid Creature').status, 'unsupported');
+  assert.equal(compileForgeCard(text.replace('ScryNum$ 1', 'ScryNum$ X')).status, 'unsupported');
+});
+test('new subability targets and optional effects are not silently translated', async () => {
+  const text = await fixture('opt');
+  for (const extra of [' | ValidTgts$ Player', ' | Optional$ True'])
+    assert.equal(
+      compileForgeCard(text.replace('DB$ Draw', 'DB$ Draw' + extra)).status,
+      'unsupported',
+    );
 });

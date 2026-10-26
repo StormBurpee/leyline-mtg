@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -287,6 +287,54 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Opt",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["scry", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Preordain",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["scry", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Consider",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["surveil", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Catalog",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["draw", "discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Careful Study",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw", "discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Merfolk Looter",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "discard"],
       "triggers": [],
       "activatedAbilities": 1
     },

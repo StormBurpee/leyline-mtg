@@ -598,5 +598,77 @@
     "image": "https://cards.scryfall.io/normal/front/c/f/cf16600a-c2a5-49e4-89e2-260cfaf58b52.jpg?1783927792",
     "art": "https://cards.scryfall.io/art_crop/front/c/f/cf16600a-c2a5-49e4-89e2-260cfaf58b52.jpg?1783927792",
     "scryfall_uri": "https://scryfall.com/card/tsr/180/prodigal-pyromancer?utm_source=api"
+  },
+  "Opt": {
+    "id": "bbc99a51-1501-4525-a3cc-f48249b64bed",
+    "oracle_id": "713332c1-5bd8-400f-bfff-c1ca0697a043",
+    "name": "Opt",
+    "mana_cost": "{U}",
+    "type_line": "Instant",
+    "oracle_text": "Scry 1. (Look at the top card of your library. You may put that card on the bottom.)\nDraw a card.",
+    "artist": "Craig J Spearing",
+    "image": "https://cards.scryfall.io/normal/front/b/b/bbc99a51-1501-4525-a3cc-f48249b64bed.jpg?1783907102",
+    "art": "https://cards.scryfall.io/art_crop/front/b/b/bbc99a51-1501-4525-a3cc-f48249b64bed.jpg?1783907102",
+    "scryfall_uri": "https://scryfall.com/card/tdc/158/opt?utm_source=api"
+  },
+  "Preordain": {
+    "id": "dd29a0e5-c1de-4e8a-8866-715e9f9cde1f",
+    "oracle_id": "ac641490-ca14-48d7-8cc4-b69ce984befa",
+    "name": "Preordain",
+    "mana_cost": "{U}",
+    "type_line": "Sorcery",
+    "oracle_text": "Scry 2, then draw a card. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)",
+    "artist": "Svetlin Velinov",
+    "image": "https://cards.scryfall.io/normal/front/d/d/dd29a0e5-c1de-4e8a-8866-715e9f9cde1f.jpg?1783907099",
+    "art": "https://cards.scryfall.io/art_crop/front/d/d/dd29a0e5-c1de-4e8a-8866-715e9f9cde1f.jpg?1783907099",
+    "scryfall_uri": "https://scryfall.com/card/tdc/161/preordain?utm_source=api"
+  },
+  "Consider": {
+    "id": "4f28e706-c488-4525-ad8a-977a5fa77f80",
+    "oracle_id": "4c9bcba6-87b5-4fb3-97ee-6fe5b739337d",
+    "name": "Consider",
+    "mana_cost": "{U}",
+    "type_line": "Instant",
+    "oracle_text": "Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\nDraw a card.",
+    "artist": "Brian Yuen",
+    "image": "https://cards.scryfall.io/normal/front/4/f/4f28e706-c488-4525-ad8a-977a5fa77f80.jpg?1783904806",
+    "art": "https://cards.scryfall.io/art_crop/front/4/f/4f28e706-c488-4525-ad8a-977a5fa77f80.jpg?1783904806",
+    "scryfall_uri": "https://scryfall.com/card/tle/157/consider?utm_source=api"
+  },
+  "Catalog": {
+    "id": "1b069516-1465-4acf-b4b9-ca7f1238b4fe",
+    "oracle_id": "965139fb-2e58-4ef2-b639-3ceaa2995c00",
+    "name": "Catalog",
+    "mana_cost": "{2}{U}",
+    "type_line": "Instant",
+    "oracle_text": "Draw two cards, then discard a card.",
+    "artist": "Johannes Voss",
+    "image": "https://cards.scryfall.io/normal/front/1/b/1b069516-1465-4acf-b4b9-ca7f1238b4fe.jpg?1783937803",
+    "art": "https://cards.scryfall.io/art_crop/front/1/b/1b069516-1465-4acf-b4b9-ca7f1238b4fe.jpg?1783937803",
+    "scryfall_uri": "https://scryfall.com/card/soi/51/catalog?utm_source=api"
+  },
+  "Careful Study": {
+    "id": "dea15b53-2940-40e7-8d48-8ec11341da83",
+    "oracle_id": "32e9aa23-fc0a-4b82-82f9-1659c304428c",
+    "name": "Careful Study",
+    "mana_cost": "{U}",
+    "type_line": "Sorcery",
+    "oracle_text": "Draw two cards, then discard two cards.",
+    "artist": "Scott M. Fischer",
+    "image": "https://cards.scryfall.io/normal/front/d/e/dea15b53-2940-40e7-8d48-8ec11341da83.jpg?1783945264",
+    "art": "https://cards.scryfall.io/art_crop/front/d/e/dea15b53-2940-40e7-8d48-8ec11341da83.jpg?1783945264",
+    "scryfall_uri": "https://scryfall.com/card/ody/70/careful-study?utm_source=api"
+  },
+  "Merfolk Looter": {
+    "id": "6d740928-bf61-4420-a403-63097538b97d",
+    "oracle_id": "67362406-b1ca-49e2-800d-9050bfe8742a",
+    "name": "Merfolk Looter",
+    "mana_cost": "{1}{U}",
+    "type_line": "Creature — Merfolk Rogue",
+    "oracle_text": "{T}: Draw a card, then discard a card.",
+    "artist": "Tristan Elwell",
+    "image": "https://cards.scryfall.io/normal/front/6/d/6d740928-bf61-4420-a403-63097538b97d.jpg?1783926224",
+    "art": "https://cards.scryfall.io/art_crop/front/6/d/6d740928-bf61-4420-a403-63097538b97d.jpg?1783926224",
+    "scryfall_uri": "https://scryfall.com/card/afc/86/merfolk-looter?utm_source=api"
   }
 }

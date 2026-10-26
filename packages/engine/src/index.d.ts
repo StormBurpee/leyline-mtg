@@ -31,7 +31,7 @@ export type TargetKind =
   | 'noncreatureSpell';
 export type Effect =
   | { op: 'damage' | 'damageOpponent' | 'gainLife'; amount: number }
-  | { op: 'draw'; count: number }
+  | { op: 'draw' | 'scry' | 'surveil' | 'discard'; count: number }
   | { op: 'counter' | 'bounce' | 'destroy' }
   | { op: 'untap'; subject: 'source' }
   | { op: 'counterOn'; subject: 'source'; amount: number }
@@ -61,11 +61,13 @@ export interface CardDefinition {
   }[];
   readonly activated?: readonly {
     cost: { mana?: ManaCost; tap?: boolean };
-    target?: TargetKind;
+    target?: TargetKind | null;
     effects: readonly Effect[];
     text: string;
   }[];
 }
+export type CardSpec = Omit<CardDefinition, 'text' | 'color' | 'keywords' | 'subtypes'> &
+  Partial<Pick<CardDefinition, 'text' | 'color' | 'keywords' | 'subtypes'>>;
 export interface GameObject {
   id: string;
   name: string;
@@ -122,7 +124,8 @@ export interface DamageSource {
 }
 export type Choice =
   | { kind: 'mulligan' | 'attackers' | 'blockers'; player: PlayerId }
-  | { kind: 'bottom' | 'discard'; player: PlayerId; count: number }
+  | { kind: 'libraryOrder'; player: PlayerId; action: 'scry' | 'surveil'; cards: string[] }
+  | { kind: 'bottom' | 'discard' | 'discardEffect'; player: PlayerId; count: number }
   | {
       kind: 'orderTriggers';
       player: PlayerId;
@@ -142,6 +145,7 @@ export interface DamagePacket {
   amount: number;
 }
 export interface GameConfig {
+  catalog?: Readonly<Record<string, CardSpec>> | readonly CardSpec[];
   decks?: string[][];
   seed?: number;
   startingPlayer?: PlayerId;
@@ -157,6 +161,7 @@ export interface GameEvent {
   readonly [key: string]: unknown;
 }
 export interface GameState {
+  catalog: Readonly<Record<string, CardDefinition>>;
   version: string;
   seed: number;
   rng: number;
@@ -183,6 +188,7 @@ export interface GameState {
     expires: number;
   }[];
   choice: Choice | null;
+  resolving: { entry: StackEntry; index: number } | null;
   combat: {
     attackers: ObjectTarget[];
     blocks: Record<string, ObjectTarget[]>;
@@ -200,10 +206,11 @@ export type Action =
   | { type: 'playLand' | 'tapMana'; card: string }
   | { type: 'cast'; card: string; target?: Target; autoTap?: boolean }
   | { type: 'activate'; card: string; ability: number; target?: Target }
-  | { type: 'bottom' | 'discard' | 'attackers'; cards: string[] }
+  | { type: 'bottom' | 'discard' | 'discardEffect' | 'attackers'; cards: string[] }
   | { type: 'blockers'; pairs: { blocker: string; attacker: string }[] }
   | { type: 'assignDamage'; orders: DamageOrder[] }
-  | { type: 'orderTriggers'; ids: string[] };
+  | { type: 'orderTriggers'; ids: string[] }
+  | { type: 'orderLibrary'; top: string[]; rest: string[] };
 export type Command = Action & { player: PlayerId; expectedRevision?: number };
 export type LegalAction =
   | { type: 'pass' | 'concede' }
@@ -218,6 +225,7 @@ export type DispatchResult =
       events: readonly GameEvent[];
     };
 export interface Replay {
+  schemaVersion?: number;
   version: string;
   config: GameConfig;
   commands: readonly Command[];
@@ -228,10 +236,15 @@ export interface RedactedObject {
   owner: PlayerId;
   hidden: true;
 }
-export type PlayerView = Omit<GameState, 'rng' | 'seed' | 'config' | 'history' | 'objects'> & {
+export type PlayerView = Omit<
+  GameState,
+  'rng' | 'seed' | 'config' | 'history' | 'objects' | 'choice'
+> & {
   objects: Record<string, GameObject | RedactedObject>;
+  choice: Choice | { kind: 'opponentChoice'; player: PlayerId } | null;
 };
 export const VERSION: string;
+export const REPLAY_SCHEMA_VERSION: number;
 export const CARDS: Readonly<Record<string, CardDefinition>>;
 export const DECKS: Readonly<
   Record<
@@ -246,11 +259,21 @@ export class RuleError extends Error {
 export function createGame(config?: GameConfig): GameState;
 export function dispatch(state: GameState, command: Command): DispatchResult;
 export function legalActions(state: GameState, player: PlayerId): LegalAction[];
-export function cardDefinition(name: string): CardDefinition;
+export function cardDefinition(
+  name: string,
+  catalog?: Readonly<Record<string, CardDefinition>>,
+): CardDefinition;
 export function definition(object: GameObject): CardDefinition;
+export function definition(state: GameState, object: GameObject): CardDefinition;
 export function expandDeck(list: Record<string, number>): string[];
-export function validateDeck(names: string[], options?: { minimum?: number }): string[];
-export function parseDeck(text: string): { names: string[]; errors: string[] };
+export function validateDeck(
+  names: string[],
+  options?: { minimum?: number; catalog?: Readonly<Record<string, CardDefinition>> },
+): string[];
+export function parseDeck(
+  text: string,
+  options?: { catalog?: Readonly<Record<string, CardDefinition>> },
+): { names: string[]; errors: string[] };
 export function stats(state: GameState, object: GameObject): { power: number; toughness: number };
 export function keywords(state: GameState, object: GameObject): string[];
 export function hasKeyword(state: GameState, object: GameObject, keyword: string): boolean;
@@ -304,3 +327,12 @@ export function assertInvariants(state: GameState): true;
 export function exportReplay(state: GameState): Replay;
 export function replay(record: Replay): GameState;
 export function playerView(state: GameState, viewer: PlayerId): PlayerView;
+
+export class RegistryError extends Error {
+  diagnostics: string[];
+  constructor(diagnostics: string[]);
+}
+export function validateDefinition(card: unknown): string[];
+export function createRegistry(
+  input?: Readonly<Record<string, CardSpec>> | readonly CardSpec[],
+): Readonly<Record<string, CardDefinition>>;

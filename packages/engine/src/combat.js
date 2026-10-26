@@ -17,7 +17,7 @@ export function canAttack(s, o, p) {
   return (
     o.zone === 'battlefield' &&
     o.controller === p &&
-    definition(o).type === 'creature' &&
+    definition(s, o).type === 'creature' &&
     !o.tapped &&
     !isSick(s, o) &&
     !isPacified(s, o) &&
@@ -29,7 +29,7 @@ export function canBlock(s, blocker, attacker, p) {
     blocker?.zone === 'battlefield' &&
     attacker?.zone === 'battlefield' &&
     blocker.controller === p &&
-    definition(blocker).type === 'creature' &&
+    definition(s, blocker).type === 'creature' &&
     !blocker.tapped &&
     !isPacified(s, blocker) &&
     (!hasKeyword(s, attacker, 'flying') ||

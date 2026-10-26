@@ -390,3 +390,27 @@ test('historical event records are immutable and seed is absent from public even
     false,
   );
 });
+
+test('malformed mana-source identifiers reject without throwing or mutating state', () => {
+  const s = fixture();
+  for (const card of ['__proto__', 'constructor', 'missing']) {
+    const r = dispatch(s, { type: 'tapMana', player: 0, card });
+    assert.equal(r.ok, false);
+    assert.equal(r.state, s);
+    assert.equal(r.error.code, 'MANA_SOURCE');
+  }
+});
+test('unknown replay schemas and engine versions fail explicitly', () => {
+  const record = exportReplay(createGame());
+  assert.throws(() => replay({ ...record, schemaVersion: 999 }), /Unsupported replay/);
+  assert.throws(() => replay({ ...record, version: '99.0.0' }), /Unsupported replay/);
+});
+test('legacy 0.1 replay envelopes remain readable', () => {
+  const record = exportReplay(createGame({ seed: 17 }));
+  record.version = '0.1.0';
+  delete record.schemaVersion;
+  delete record.config.catalog;
+  const restored = replay(record);
+  assert.equal(restored.version, '0.2.0');
+  assert.equal(restored.seed, 17);
+});

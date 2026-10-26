@@ -1,5 +1,7 @@
-import { cardDefinition, DECKS, expandDeck, validateDeck } from './cards.js';
-export const VERSION = '0.1.0';
+import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
+import { createRegistry } from './registry.js';
+export const VERSION = '0.2.0';
+export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
   'upkeep',
@@ -27,14 +29,18 @@ export function requireRule(ok, code, message) {
 }
 export const opponent = (p) => 1 - p;
 export const emptyMana = () => Object.fromEntries(COLORS.map((c) => [c, 0]));
-export const definition = (o) => cardDefinition(o.name);
+export function definition(stateOrObject, object) {
+  return object
+    ? cardDefinition(object.name, stateOrObject.catalog)
+    : cardDefinition(stateOrObject.name);
+}
 export const battlefield = (s) => Object.values(s.objects).filter((o) => o.zone === 'battlefield');
-export const creatures = (s) => battlefield(s).filter((o) => definition(o).type === 'creature');
+export const creatures = (s) => battlefield(s).filter((o) => definition(s, o).type === 'creature');
 export const controlled = (s, p) => battlefield(s).filter((o) => o.controller === p);
 export function keywords(s, o) {
   return [
     ...new Set([
-      ...definition(o).keywords,
+      ...definition(s, o).keywords,
       ...s.modifiers
         .filter((m) => m.objectId === o.id && m.incarnation === o.incarnation)
         .flatMap((m) => m.keywords ?? []),
@@ -43,7 +49,7 @@ export function keywords(s, o) {
 }
 export const hasKeyword = (s, o, k) => keywords(s, o).includes(k);
 export function stats(s, o) {
-  const d = definition(o);
+  const d = definition(s, o);
   let power = (d.power ?? 0) + (o.plusCounters ?? 0),
     toughness = (d.toughness ?? 0) + (o.plusCounters ?? 0);
   for (const m of s.modifiers)
@@ -53,7 +59,7 @@ export function stats(s, o) {
     }
   if (d.type === 'creature')
     for (const a of controlled(s, o.controller)) {
-      const effect = definition(a).static;
+      const effect = definition(s, a).static;
       if (effect?.kind === 'anthem') {
         power += effect.power;
         toughness += effect.toughness;
@@ -65,7 +71,7 @@ export const isSick = (s, o) => o.controlledSince >= s.turn && !hasKeyword(s, o,
 export const isPacified = (s, o) =>
   battlefield(s).some(
     (a) =>
-      definition(a).aura === 'pacifism' &&
+      definition(s, a).aura === 'pacifism' &&
       a.attachedTo?.id === o.id &&
       a.attachedTo.incarnation === o.incarnation,
   );
@@ -98,7 +104,7 @@ export function shuffle(s, items) {
   return items;
 }
 export function addObject(s, name, owner, zone = 'library') {
-  const d = cardDefinition(name),
+  const d = cardDefinition(name, s.catalog),
     id = `c${++s.nextId}`;
   s.objects[id] = {
     id,
@@ -160,7 +166,9 @@ export function createGame({
   names = ['You', 'Opponent'],
   mulligan = true,
   minimumDeckSize = 60,
+  catalog = CARDS,
 } = {}) {
+  const rules = createRegistry(catalog);
   requireRule(decks.length === 2, 'PLAYER_COUNT', 'This release supports exactly two players.');
   requireRule(
     startingPlayer === 0 || startingPlayer === 1,
@@ -173,11 +181,12 @@ export function createGame({
     'Seed must be an unsigned 32-bit integer.',
   );
   for (const deck of decks) {
-    const errors = validateDeck(deck, { minimum: minimumDeckSize });
+    const errors = validateDeck(deck, { minimum: minimumDeckSize, catalog: rules });
     requireRule(!errors.length, 'INVALID_DECK', errors.join('\n'));
   }
   const s = {
     version: VERSION,
+    catalog: rules,
     seed,
     rng: seed || 1,
     nextId: 0,
@@ -194,19 +203,21 @@ export function createGame({
     objects: {},
     stack: [],
     pendingTriggers: [],
+    resolving: null,
     modifiers: [],
     choice: null,
     combat: { attackers: [], blocks: {}, blocked: [], firstEligible: [], hasFirst: false },
     events: [],
     history: [],
-    config: {
+    config: freezeRecord({
+      catalog: rules,
       decks: structuredClone(decks),
       seed,
       startingPlayer,
       names: [...names],
       mulligan,
       minimumDeckSize,
-    },
+    }),
     players: [0, 1].map((id) => ({
       id,
       name: names[id] ?? `Player ${id + 1}`,
@@ -240,8 +251,18 @@ export function playerView(state, viewer) {
   delete s.config;
   delete s.history;
   for (const [id, o] of Object.entries(s.objects))
-    if (o.zone === 'library' || (o.zone === 'hand' && o.owner !== viewer))
+    if (
+      (o.zone === 'library' &&
+        !(
+          state.choice?.kind === 'libraryOrder' &&
+          state.choice.player === viewer &&
+          state.choice.cards.includes(id)
+        )) ||
+      (o.zone === 'hand' && o.owner !== viewer)
+    )
       s.objects[id] = { id, zone: o.zone, owner: o.owner, hidden: true };
+  if (s.choice?.player !== viewer && ['libraryOrder', 'discardEffect'].includes(s.choice?.kind))
+    s.choice = { kind: 'opponentChoice', player: s.choice.player };
   s.events = s.events.map((e) => {
     const c = { ...e };
     delete c.seed;

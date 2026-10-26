@@ -1,6 +1,6 @@
 import { COLORS, controlled, definition, isSick, requireRule, emit } from './model.js';
 export function canTapForMana(s, o, p) {
-  const d = definition(o);
+  const d = definition(s, o);
   return (
     o.zone === 'battlefield' &&
     o.controller === p &&
@@ -12,13 +12,13 @@ export function canTapForMana(s, o, p) {
 export function tapForMana(s, id, p) {
   const o = s.objects[id];
   requireRule(
-    o && canTapForMana(s, o, p),
+    Object.hasOwn(s.objects, id) && o && canTapForMana(s, o, p),
     'MANA_SOURCE',
     'That permanent cannot produce mana now.',
   );
   o.tapped = true;
-  s.players[p].mana[definition(o).mana]++;
-  emit(s, 'mana', { player: p, objectId: id, color: definition(o).mana });
+  s.players[p].mana[definition(s, o).mana]++;
+  emit(s, 'mana', { player: p, objectId: id, color: definition(s, o).mana });
 }
 /** Pure payment planner. Colored costs are reserved before generic spending. */
 export function planPayment(s, p, cost, { autoTap = true } = {}) {
@@ -28,7 +28,7 @@ export function planPayment(s, p, cost, { autoTap = true } = {}) {
   const sources = autoTap ? controlled(s, p).filter((o) => canTapForMana(s, o, p)) : [];
   const take = (color, n) => {
     while (pool[color] < n) {
-      const i = sources.findIndex((o) => definition(o).mana === color);
+      const i = sources.findIndex((o) => definition(s, o).mana === color);
       if (i < 0) return false;
       const [o] = sources.splice(i, 1);
       taps.push(o.id);
@@ -49,7 +49,7 @@ export function planPayment(s, p, cost, { autoTap = true } = {}) {
   while (generic > 0) {
     const o = sources.shift();
     if (!o) return null;
-    const color = definition(o).mana;
+    const color = definition(s, o).mana;
     taps.push(o.id);
     spent[color]++;
     generic--;

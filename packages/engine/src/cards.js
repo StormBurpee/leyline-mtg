@@ -176,6 +176,74 @@ const defs = [
     text: 'Tap: This creature deals 1 damage to any target.',
   }),
   spell(
+    'Opt',
+    'instant',
+    { U: 1 },
+    [
+      { op: 'scry', count: 1 },
+      { op: 'draw', count: 1 },
+    ],
+    null,
+    'Scry 1, then draw a card.',
+  ),
+  spell(
+    'Preordain',
+    'sorcery',
+    { U: 1 },
+    [
+      { op: 'scry', count: 2 },
+      { op: 'draw', count: 1 },
+    ],
+    null,
+    'Scry 2, then draw a card.',
+  ),
+  spell(
+    'Consider',
+    'instant',
+    { U: 1 },
+    [
+      { op: 'surveil', count: 1 },
+      { op: 'draw', count: 1 },
+    ],
+    null,
+    'Surveil 1, then draw a card.',
+  ),
+  spell(
+    'Catalog',
+    'instant',
+    { generic: 2, U: 1 },
+    [
+      { op: 'draw', count: 2 },
+      { op: 'discard', count: 1 },
+    ],
+    null,
+    'Draw two cards, then discard a card.',
+  ),
+  spell(
+    'Careful Study',
+    'sorcery',
+    { U: 1 },
+    [
+      { op: 'draw', count: 2 },
+      { op: 'discard', count: 2 },
+    ],
+    null,
+    'Draw two cards, then discard two cards.',
+  ),
+  creature('Merfolk Looter', { generic: 1, U: 1 }, 1, 1, [], {
+    activated: [
+      {
+        cost: { tap: true },
+        effects: [
+          { op: 'draw', count: 1 },
+          { op: 'discard', count: 1 },
+        ],
+        text: 'Tap: Draw a card, then discard a card.',
+      },
+    ],
+    text: 'Tap: Draw a card, then discard a card.',
+  }),
+  spell(
     'Lightning Bolt',
     'instant',
     { R: 1 },
@@ -298,13 +366,13 @@ export const CARDS = deepFreeze(
         keywords: d.keywords ?? [],
         subtypes: d.subtypes ?? [],
         text: d.text ?? (d.keywords?.join(', ') || 'No abilities.'),
-        color: d.color ?? Object.keys(d.cost).filter((k) => k !== 'generic'),
+        color: d.color ?? Object.keys(d.cost).filter((k) => ['W', 'U', 'B', 'R', 'G'].includes(k)),
       }),
     ]),
   ),
 );
-export function cardDefinition(name) {
-  const d = Object.hasOwn(CARDS, name) ? CARDS[name] : undefined;
+export function cardDefinition(name, catalog = CARDS) {
+  const d = Object.hasOwn(catalog, name) ? catalog[name] : undefined;
   if (!d) throw new Error(`Unsupported card: ${name}`);
   return d;
 }
@@ -353,7 +421,7 @@ export const DECKS = Object.freeze({
 export function expandDeck(list) {
   return Object.entries(list).flatMap(([name, count]) => Array.from({ length: count }, () => name));
 }
-export function validateDeck(names, { minimum = 60 } = {}) {
+export function validateDeck(names, { minimum = 60, catalog = CARDS } = {}) {
   const errors = [];
   const counts = {};
   if (!Array.isArray(names)) return ['Deck must be an array of card names.'];
@@ -361,7 +429,7 @@ export function validateDeck(names, { minimum = 60 } = {}) {
     errors.push(`Deck needs at least ${minimum} cards; got ${names.length}.`);
   if (names.length > 250) errors.push('This release caps decks at 250 cards.');
   for (const name of names) {
-    const d = Object.hasOwn(CARDS, name) ? CARDS[name] : undefined;
+    const d = Object.hasOwn(catalog, name) ? catalog[name] : undefined;
     if (!d) {
       errors.push(`Unsupported card: ${name}`);
       continue;
@@ -370,10 +438,10 @@ export function validateDeck(names, { minimum = 60 } = {}) {
     counts[name] = (counts[name] ?? 0) + 1;
   }
   for (const [name, count] of Object.entries(counts))
-    if (count > 4 && !CARDS[name].basic) errors.push(`More than four copies: ${name}`);
+    if (count > 4 && !catalog[name].basic) errors.push(`More than four copies: ${name}`);
   return [...new Set(errors)];
 }
-export function parseDeck(text) {
+export function parseDeck(text, { catalog = CARDS } = {}) {
   const names = [];
   const errors = [];
   for (const [i, raw] of text.split(/\r?\n/).entries()) {
@@ -395,5 +463,5 @@ export function parseDeck(text) {
     }
     names.push(...Array(n).fill(match[2]));
   }
-  return { names, errors: [...errors, ...validateDeck(names)] };
+  return { names, errors: [...errors, ...validateDeck(names, { catalog })] };
 }

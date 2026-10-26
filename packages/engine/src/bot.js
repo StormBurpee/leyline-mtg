@@ -2,7 +2,7 @@ import { legalActions } from './engine.js';
 import { canAttack, canBlock, suggestedDamage } from './combat.js';
 import { controlled, definition, hasKeyword, opponent, stats } from './model.js';
 const value = (s, o) => {
-  const d = definition(o);
+  const d = definition(s, o);
   return d.type === 'creature'
     ? stats(s, o).power + stats(s, o).toughness + d.keywords.length * 1.2
     : Object.values(d.cost).reduce((a, b) => a + b, 0);
@@ -17,21 +17,24 @@ export function chooseBotCommand(s, p) {
     switch (c.kind) {
       case 'mulligan': {
         const lands = s.players[p].hand.filter(
-          (id) => definition(s.objects[id]).type === 'land',
+          (id) => definition(s, s.objects[id]).type === 'land',
         ).length;
         return {
           type: s.players[p].mulligans < 2 && (lands < 2 || lands > 5) ? 'mulligan' : 'keep',
           player: p,
         };
       }
+      case 'libraryOrder':
+        return { type: 'orderLibrary', player: p, top: [...c.cards], rest: [] };
+      case 'discardEffect':
       case 'bottom':
       case 'discard': {
         const cards = [...s.players[p].hand]
           .sort((a, b) => {
-            const da = definition(s.objects[a]),
-              db = definition(s.objects[b]);
+            const da = definition(s, s.objects[a]),
+              db = definition(s, s.objects[b]);
             const landCount = s.players[p].hand.filter(
-              (id) => definition(s.objects[id]).type === 'land',
+              (id) => definition(s, s.objects[id]).type === 'land',
             ).length;
             const score = (d) =>
               d.type === 'land'
@@ -50,7 +53,7 @@ export function chooseBotCommand(s, p) {
         return { type: 'assignDamage', player: p, orders: suggestedDamage(s) };
       case 'attackers': {
         const defenders = controlled(s, opponent(p)).filter(
-          (o) => definition(o).type === 'creature' && !o.tapped,
+          (o) => definition(s, o).type === 'creature' && !o.tapped,
         );
         const cards = controlled(s, p)
           .filter((o) => canAttack(s, o, p))
@@ -73,7 +76,7 @@ export function chooseBotCommand(s, p) {
       }
       case 'blockers': {
         const available = controlled(s, p).filter(
-          (o) => definition(o).type === 'creature' && !o.tapped,
+          (o) => definition(s, o).type === 'creature' && !o.tapped,
         );
         const pairs = [];
         for (const ar of s.combat.attackers) {
@@ -106,14 +109,16 @@ export function chooseBotCommand(s, p) {
     (a) =>
       a.type === 'activate' &&
       (a.target?.kind === 'player' ? a.target.id !== p : !a.target) &&
-      (!definition(s.objects[a.card]).activated[a.ability].effects.some((e) => e.op === 'modify') ||
+      (!definition(s, s.objects[a.card]).activated[a.ability].effects.some(
+        (e) => e.op === 'modify',
+      ) ||
         ['blockers', 'firstDamage'].includes(s.step)),
   );
   if (ability) return { ...ability, player: p };
   const casts = actions
     .filter((a) => a.type === 'cast')
     .map((a) => {
-      const d = definition(s.objects[a.card]);
+      const d = definition(s, s.objects[a.card]);
       let score = -100;
       if (d.type === 'creature' || d.static)
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);

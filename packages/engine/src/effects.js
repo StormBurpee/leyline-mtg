@@ -1,4 +1,4 @@
-import { CARDS } from './cards.js';
+import { cardDefinition } from './cards.js';
 import {
   addObject,
   battlefield,
@@ -12,6 +12,7 @@ import {
   ref,
   stats,
   keywords,
+  requireRule,
 } from './model.js';
 export function legalTarget(s, kind, target, controller) {
   if (!kind) return target == null;
@@ -27,13 +28,14 @@ export function legalTarget(s, kind, target, controller) {
     return (
       !!entry &&
       entry.kind === 'spell' &&
-      (kind === 'spell' || (kind === 'noncreatureSpell' && CARDS[entry.name].type !== 'creature'))
+      (kind === 'spell' ||
+        (kind === 'noncreatureSpell' && cardDefinition(entry.name, s.catalog).type !== 'creature'))
     );
   }
   if (target.kind !== 'object') return false;
   const o = s.objects[target.id];
   if (!o || o.zone !== 'battlefield' || o.incarnation !== target.incarnation) return false;
-  const d = definition(o);
+  const d = definition(s, o);
   if (d.type !== 'creature') return false;
   if (hasKeyword(s, o, 'shroud') || (hasKeyword(s, o, 'hexproof') && o.controller !== controller))
     return false;
@@ -66,14 +68,14 @@ export function enterBattlefield(s, o, controller = o.owner, attachment = null) 
   move(s, o, 'battlefield');
   o.controller = controller;
   o.attachedTo = attachment;
-  const d = definition(o);
+  const d = definition(s, o);
   if (d.etb) queueTrigger(s, o, d.etb, `${o.name} · enters`);
   if (d.type === 'creature') notifyTriggers(s, 'creatureEnters', { object: o });
 }
 /** Match declarative trigger predicates against committed game events. */
 export function notifyTriggers(s, event, payload) {
   for (const watcher of battlefield(s))
-    for (const trigger of definition(watcher).triggers ?? []) {
+    for (const trigger of definition(s, watcher).triggers ?? []) {
       const match =
         (trigger.event === 'otherCreatureEnters' &&
           event === 'creatureEnters' &&
@@ -102,8 +104,10 @@ export function dealDamage(s, source, target, amount) {
   if (source.keywords?.includes('lifelink')) s.players[source.controller].life += amount;
   emit(s, 'damage', { source: source.id, target, amount, controller: source.controller });
 }
-export function resolveEffects(s, entry) {
-  for (const e of entry.effects ?? []) {
+export function resolveEffects(s, entry, startIndex = 0) {
+  const effects = entry.effects ?? [];
+  for (let index = startIndex; index < effects.length; index++) {
+    const e = effects[index];
     const target = e.subject === 'source' ? entry.source : entry.target;
     const candidate = target?.kind === 'object' ? s.objects[target.id] : null;
     const o =
@@ -141,6 +145,25 @@ export function resolveEffects(s, entry) {
       case 'untap':
         if (o) o.tapped = false;
         break;
+      case 'scry':
+      case 'surveil': {
+        if (e.count === 0) break;
+        const cards = s.players[entry.controller].library.slice(0, e.count);
+        if (!cards.length) {
+          emit(s, e.op, { player: entry.controller, requested: e.count, looked: 0 });
+          break;
+        }
+        s.resolving = { entry, index: index + 1 };
+        s.choice = { kind: 'libraryOrder', player: entry.controller, action: e.op, cards };
+        return false;
+      }
+      case 'discard': {
+        const count = Math.min(e.count, s.players[entry.controller].hand.length);
+        if (!count) break;
+        s.resolving = { entry, index: index + 1 };
+        s.choice = { kind: 'discardEffect', player: entry.controller, count };
+        return false;
+      }
       case 'draw':
         draw(s, entry.controller, e.count);
         break;
@@ -186,26 +209,98 @@ export function resolveEffects(s, entry) {
     }
   }
 }
+/** Resume the instruction cursor; choices do not create a priority window. */
+export function continueResolution(s) {
+  const frame = s.resolving;
+  if (!frame) return;
+  if (resolveEffects(s, frame.entry, frame.index) === false) return;
+  const entry = frame.entry,
+    object = s.objects[entry.source?.id];
+  if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
+  emit(s, 'resolved', { name: entry.name, stackId: entry.id });
+  s.resolving = null;
+  s.priority = s.active;
+  s.passes = 0;
+}
+export function finishResolutionChoice(s, command) {
+  const choice = s.choice;
+  if (choice.kind === 'libraryOrder') {
+    requireRule(
+      command.type === 'orderLibrary',
+      'CHOICE',
+      'Order the inspected library cards first.',
+    );
+    requireRule(
+      Array.isArray(command.top) && Array.isArray(command.rest),
+      'LIBRARY_ORDER',
+      'Provide ordered top and remaining card lists.',
+    );
+    const all = [...command.top, ...command.rest];
+    requireRule(
+      all.length === choice.cards.length &&
+        new Set(all).size === all.length &&
+        all.every((id) => choice.cards.includes(id)),
+      'LIBRARY_ORDER',
+      'Place each inspected card exactly once.',
+    );
+    const player = s.players[choice.player],
+      inspected = new Set(choice.cards);
+    if (choice.action === 'surveil')
+      for (const id of command.rest) move(s, s.objects[id], 'graveyard');
+    const remaining = player.library.filter((id) => !inspected.has(id));
+    player.library = [
+      ...command.top,
+      ...remaining,
+      ...(choice.action === 'scry' ? command.rest : []),
+    ];
+    emit(s, choice.action, {
+      player: choice.player,
+      looked: choice.cards.length,
+      kept: command.top.length,
+      moved: command.rest.length,
+    });
+  } else if (choice.kind === 'discardEffect') {
+    requireRule(
+      command.type === 'discardEffect',
+      'CHOICE',
+      'Choose cards to discard before resolution continues.',
+    );
+    requireRule(
+      Array.isArray(command.cards) &&
+        command.cards.length === choice.count &&
+        new Set(command.cards).size === command.cards.length &&
+        command.cards.every((id) => s.players[choice.player].hand.includes(id)),
+      'DISCARD_CHOICE',
+      `Choose exactly ${choice.count} distinct cards from your hand.`,
+    );
+    for (const id of command.cards) move(s, s.objects[id], 'graveyard');
+    emit(s, 'discard', { player: choice.player, count: command.cards.length });
+  } else throw new Error('Unexpected resolution choice.');
+  s.choice = null;
+  continueResolution(s);
+}
 export function resolveTop(s) {
   const entry = s.stack.pop();
   if (!entry) return;
-  const d = CARDS[entry.name],
-    o = s.objects[entry.source?.id];
+  const d = cardDefinition(entry.name, s.catalog),
+    object = s.objects[entry.source?.id];
   if (entry.targetKind && !legalTarget(s, entry.targetKind, entry.target, entry.controller)) {
     emit(s, 'fizzled', { name: entry.name, stackId: entry.id });
-    if (entry.kind === 'spell' && o?.zone === 'stack') move(s, o, 'graveyard');
+    if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
     return;
   }
-  emit(s, 'resolved', { name: entry.name, stackId: entry.id });
-  if (entry.kind === 'spell' && ['creature', 'enchantment', 'artifact'].includes(d.type))
-    enterBattlefield(s, o, entry.controller, entry.target ?? null);
-  else {
-    resolveEffects(s, entry);
-    if (entry.kind === 'spell' && o?.zone === 'stack') move(s, o, 'graveyard');
+  if (entry.kind === 'spell' && ['creature', 'enchantment', 'artifact'].includes(d.type)) {
+    enterBattlefield(s, object, entry.controller, entry.target ?? null);
+    emit(s, 'resolved', { name: entry.name, stackId: entry.id });
+  } else {
+    s.resolving = { entry, index: 0 };
+    emit(s, 'resolutionStarted', { name: entry.name, stackId: entry.id });
+    continueResolution(s);
   }
 }
 /** All supported state-based actions are computed from one pre-action state. */
 export function stateBasedActions(s) {
+  if (s.resolving) return false;
   let changed = false;
   const losers = s.players.filter((p) => p.life <= 0 || p.failedDraw).map((p) => p.id);
   if (losers.length) {
@@ -220,7 +315,7 @@ export function stateBasedActions(s) {
   }
   const toGrave = [];
   for (const o of battlefield(s)) {
-    const d = definition(o);
+    const d = definition(s, o);
     if (d.type === 'creature') {
       const { toughness } = stats(s, o);
       if (
@@ -235,7 +330,7 @@ export function stateBasedActions(s) {
         !target ||
         target.zone !== 'battlefield' ||
         target.incarnation !== o.attachedTo.incarnation ||
-        definition(target).type !== 'creature'
+        definition(s, target).type !== 'creature'
       )
         toGrave.push(o);
     }
@@ -258,6 +353,7 @@ export function stateBasedActions(s) {
 }
 /** Stabilize before priority (CR 117.5). Trigger ordering remains an explicit choice. */
 export function stabilize(s) {
+  if (s.resolving) return;
   let iterations = 0;
   while (s.status === 'playing' && stateBasedActions(s)) {
     if (++iterations > 100) throw new Error('State-based action fixed point did not converge.');

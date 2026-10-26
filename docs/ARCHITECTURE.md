@@ -33,7 +33,7 @@ The client may pass automatically after casting, unless **Hold priority** is ena
 
 ## Cards and effects
 
-`cards.js` is an immutable, hand-authored executable registry. Scryfall metadata is display-only and never interpreted as code. Each supported card declares costs, types, targets, keywords, effects and optional triggers or activated abilities.
+`cards.js` is the built-in, hand-authored executable registry. `registry.js` validates complete per-game catalogs, rejects unsupported fields/opcodes before play, and freezes them for safe sharing between states. Scryfall metadata is display-only and never interpreted as code. Each supported card declares costs, types, targets, keywords, effects and optional triggers or activated abilities.
 
 `effects.js` resolves the supported opcodes, validates targets again at resolution, and batches pending triggers. Adding Oracle text to the display catalog does **not** make a card playable. Unsupported deck imports fail explicitly.
 
@@ -56,6 +56,10 @@ Blocked status remains even if every blocker leaves. Trample can still deal dama
 
 ## Persistence and future multiplayer
 
-A save is a versioned initial configuration plus commands. Import replays those commands through the same validator. JSON snapshots are not accepted as arbitrary authoritative state.
+A save is a versioned initial configuration plus commands, including the complete validated card catalog. Replay schema version 1 is separate from the package version; legacy 0.1 logs remain readable. Import replays those commands through the same validator. JSON snapshots are not accepted as arbitrary authoritative state.
 
 `playerView` redacts opposing hands and library identities for inspection. It is a starting point, not a secure network protocol: the current client is local, owns the full state, and developer/replay tools expose both decks. Before adding multiplayer, put the authoritative engine on a server, make hidden-zone handles unlinkable, authenticate player identity, enforce revision leases, and test information-flow properties. Never send full state to remote players.
+
+## Resolution continuations
+
+A resolving spell or ability has a serializable instruction cursor, separate from the waiting stack. Scry, surveil and effect-discard instructions suspend at a typed choice and resume the same frame after a validated answer. Priority, state-based actions and pending-trigger placement wait until the entire resolution finishes. Hidden library choices are redacted in the other player’s view. The spell remains in the stack zone until completion even though it is no longer a waiting stack item.
