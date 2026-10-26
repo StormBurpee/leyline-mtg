@@ -60,3 +60,10 @@ if (compiled.ok) {
 }
 const packResult = compilePack([]);
 if (packResult.ok) createGame({ catalog: packResult.definitions });
+
+import { spellProfile, spellOptions, castProblem } from '@leyline/engine';
+const modal: Command = { type: 'cast', player: 0, card: 'c2', mode: 1 };
+void modal;
+void spellProfile(CARDS.Abrade, 1);
+void spellOptions(CARDS.Abrade);
+void castProblem(state, 0, 'c2', undefined, { mode: 1 });

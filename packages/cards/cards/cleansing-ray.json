@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "50f1948c-fa27-458d-be14-cb0e09e39f63",
+  "name": "Cleansing Ray",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Choose one —\n• Destroy target Vampire.\n• Destroy target enchantment.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target Vampire.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "subtype": "Vampire"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Destroy target enchantment.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "enchantment"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

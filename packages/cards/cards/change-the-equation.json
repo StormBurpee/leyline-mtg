@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "aba7e9e2-8df8-454e-a332-9abae1d95b6f",
+  "name": "Change the Equation",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Choose one —\n• Counter target spell with mana value 2 or less.\n• Counter target red or green spell with mana value 6 or less.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Counter target spell with mana value 2 or less.",
+          "target": {
+            "scope": "spell",
+            "where": {
+              "manaValue": {
+                "lte": 2
+              }
+            }
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Counter target red or green spell with mana value 6 or less.",
+          "target": {
+            "scope": "spell",
+            "where": {
+              "all": [
+                {
+                  "any": [
+                    {
+                      "color": "R"
+                    },
+                    {
+                      "color": "G"
+                    }
+                  ]
+                },
+                {
+                  "manaValue": {
+                    "lte": 6
+                  }
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

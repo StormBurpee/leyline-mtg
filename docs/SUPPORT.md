@@ -13,7 +13,7 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Objects changing zones become new incarnations; spells recheck targets at resolution.
 - Creatures, instants, sorceries, basic/nonbasic mana lands, supported artifacts and enchantments. Artifact and enchantment creatures retain both types; only the listed executable definitions are supported.
 - Type-aware artifact/enchantment removal, permanent bounce and exile.
-- Attacking/legendary target predicates, target rechecking and targeted permanent untapping.
+- Attacking/legendary/keyword target predicates, target rechecking, targeted +1/+1 counters and permanent untapping. Keyword-only temporary modifiers can affect noncreature permanents.
 - Public graveyard-card targets, recovery to hand and creature/artifact reanimation with fresh incarnations and enters triggers.
 - Player-directed draw/discard/life gain/life loss, including choices made by an opponent during resolution.
 - Triggered abilities choose legal targets when placed on the stack, before priority. Impossible required targets remove the trigger; targets are rechecked on resolution.
@@ -21,6 +21,7 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Optional triggered effects with explicit resolution-time accept/decline choices.
 - Activated abilities with mana, life, tap and self-sacrifice costs, explicit targets, and stack resolution.
 - Scry, surveil and mandatory discard choices during resolution, with instruction continuations and no intervening priority.
+- Choose-one instant/sorcery modes announced at cast time with independent targets/effects, public stack labels and replayed mode indices. Unavailable modes are not legal actions.
 - Own-library search with basic/type/subtype/color/mana-value filters, chosen quantities, explicit reveal flags, hand/graveyard/battlefield/top destinations and deterministic shuffle. Unrestricted searches require the available quantity; quality-restricted searches can fail to find. Multiple searched permanents enter together.
 - Ward triggers for opposing spells and activated/triggered abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.
 - Schema-checked card sources, reusable mechanics, composable target/event predicates and all-or-nothing pack compilation.
@@ -34,7 +35,7 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 
 ## Deliberately not claimed
 
-Commander/Brawl, more than two players, commander tax/damage, planeswalkers, battles, Equipment, general activated costs, graveyard casting, alternative costs, replacement/prevention ordering, general layers/dependencies, continuous control changes, legendary sorcery casting restrictions, modal choices, opponent-library search, replacement search restrictions, split-destination searches, adventures, transforming cards, Sagas, copies, protection, non-mana/non-life ward costs, poison, storm, combat restrictions beyond this pool, and tournament legality are not implemented.
+Commander/Brawl, more than two players, commander tax/damage, planeswalkers, battles, Equipment, general activated costs, graveyard casting, alternative costs, replacement/prevention ordering, general layers/dependencies, continuous control changes, legendary sorcery casting restrictions, multi-mode selection and modal triggered/activated abilities, opponent-library search, replacement search restrictions, split-destination searches, adventures, transforming cards, Sagas, copies, protection, non-mana/non-life ward costs, poison, storm, combat restrictions beyond this pool, and tournament legality are not implemented.
 
 Do not add these cards as “vanilla” approximations. An unsupported card should fail at import time rather than silently change the game.
 
@@ -46,7 +47,7 @@ The current starter lists intentionally exercise stack interaction and creature 
 
 ## Extension sequence
 
-1. Extend the existing choice continuations to modal effects (search and optional-payment continuations are already implemented).
+1. Generalize multi-target/multi-mode announcements and remaining cost choices. Choose-one spell modes are announced during casting, not resolution.
 2. A timestamp/dependency-aware layer evaluator with an interaction fixture suite.
 3. A replacement/prevention proposal-and-choice pipeline, including recursive-event protections.
 4. Broader costs, flexible targets and legal-action generation.

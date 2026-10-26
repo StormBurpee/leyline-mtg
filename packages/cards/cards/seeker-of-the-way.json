@@ -5,7 +5,7 @@
   "name": "Seeker of the Way",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Human", "Warrior"],
     "colors": ["W"],
     "manaCost": "{1}{W}",
     "power": 2,

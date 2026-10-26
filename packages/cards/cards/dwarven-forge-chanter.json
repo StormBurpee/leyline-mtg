@@ -5,7 +5,7 @@
   "name": "Dwarven Forge-Chanter",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Dwarf", "Wizard"],
     "colors": ["R"],
     "manaCost": "{1}{R}",
     "power": 1,

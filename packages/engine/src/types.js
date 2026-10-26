@@ -10,3 +10,21 @@ export const CARD_TYPES = Object.freeze([
 export const typesOf = (card) => card.types ?? [card.type];
 export const hasType = (card, type) => typesOf(card).includes(type);
 export const primaryType = (types) => CARD_TYPES.find((type) => types.includes(type));
+
+export const KEYWORD_NAMES = Object.freeze([
+  'flying',
+  'reach',
+  'haste',
+  'vigilance',
+  'trample',
+  'deathtouch',
+  'lifelink',
+  'defender',
+  'first strike',
+  'double strike',
+  'flash',
+  'hexproof',
+  'shroud',
+  'indestructible',
+  'menace',
+]);

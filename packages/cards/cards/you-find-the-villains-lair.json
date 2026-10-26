@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "41cdeb52-e90f-44f8-94d2-23aa032c4870",
+  "name": "You Find the Villains' Lair",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}{U}"
+  },
+  "rulesText": "Choose one —\n• Foil Their Scheme — Counter target spell.\n• Learn Their Secrets — Draw two cards, then discard two cards.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Foil Their Scheme — Counter target spell.",
+          "target": {
+            "scope": "spell"
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Learn Their Secrets — Draw two cards, then discard two cards.",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 2
+            },
+            {
+              "op": "discard",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

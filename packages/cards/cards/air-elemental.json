@@ -5,7 +5,7 @@
   "name": "Air Elemental",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Elemental"],
     "colors": ["U"],
     "manaCost": "{3}{U}{U}",
     "power": 4,

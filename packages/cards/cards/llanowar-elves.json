@@ -5,7 +5,7 @@
   "name": "Llanowar Elves",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Elf", "Druid"],
     "colors": ["G"],
     "manaCost": "{G}",
     "power": 1,

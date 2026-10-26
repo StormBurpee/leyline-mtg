@@ -5,7 +5,7 @@
   "name": "Wind Drake",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Drake"],
     "colors": ["U"],
     "manaCost": "{2}{U}",
     "power": 2,

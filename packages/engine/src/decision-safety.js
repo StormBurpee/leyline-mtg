@@ -1,3 +1,4 @@
+import { spellProfile } from './spell-modes.js';
 import { definition } from './model.js';
 import { planPayment } from './mana.js';
 
@@ -43,7 +44,9 @@ export function actionEffects(state, action) {
   const object = state.objects[action.card];
   if (!object) return [];
   const card = definition(state, object);
-  return action.type === 'activate' ? card.activated[action.ability].effects : (card.effects ?? []);
+  return action.type === 'activate'
+    ? card.activated[action.ability].effects
+    : (spellProfile(card, action.mode)?.effects ?? []);
 }
 
 function actionCost(state, action) {

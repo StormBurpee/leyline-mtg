@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "83917116-d2d8-4701-a79f-af17486706ae",
+  "name": "Light the Way",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Choose one —\n• Put a +1/+1 counter on target creature or Vehicle. Untap it.\n• Return target permanent you control to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Put a +1/+1 counter on target creature or Vehicle. Untap it.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "subtype": "Vehicle"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "counter": "+1/+1",
+              "amount": 1
+            },
+            {
+              "op": "untap",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Return target permanent you control to its owner's hand.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "controller": "you"
+            }
+          },
+          "effects": [
+            {
+              "op": "returnToHand",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

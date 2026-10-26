@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7db31623-5dea-4165-8593-fbac568bf5b4",
+  "name": "Spellgyre",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}{U}"
+  },
+  "rulesText": "Choose one —\n• Counter target spell.\n• Surveil 2, then draw two cards. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Counter target spell.",
+          "target": {
+            "scope": "spell"
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Surveil 2, then draw two cards.",
+          "effects": [
+            {
+              "op": "surveil",
+              "target": "controller",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

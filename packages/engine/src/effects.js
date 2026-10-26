@@ -77,6 +77,7 @@ export function legalTarget(s, kind, target, controller) {
       token: o.token,
       tapped: o.tapped,
       attacking: isAttacking(s, o),
+      keywords: o.zone === 'battlefield' ? keywords(s, o) : d.keywords,
       power: pt.power,
       toughness: pt.toughness,
       manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),

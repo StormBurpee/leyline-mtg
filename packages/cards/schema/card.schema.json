@@ -350,6 +350,32 @@
           },
           "required": ["attacking"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "keyword": {
+              "enum": [
+                "flying",
+                "reach",
+                "haste",
+                "vigilance",
+                "trample",
+                "deathtouch",
+                "lifelink",
+                "defender",
+                "first strike",
+                "double strike",
+                "flash",
+                "hexproof",
+                "shroud",
+                "indestructible",
+                "menace"
+              ]
+            }
+          },
+          "required": ["keyword"],
+          "additionalProperties": false
         }
       ]
     },
@@ -656,7 +682,7 @@
               "const": "addCounters"
             },
             "target": {
-              "const": "source"
+              "enum": ["source", "target"]
             },
             "counter": {
               "const": "+1/+1"
@@ -959,6 +985,47 @@
             }
           },
           "required": ["kind", "enchant", "restriction"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "modalSpell"
+            },
+            "choose": {
+              "const": 1
+            },
+            "modes": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 180
+                  },
+                  "target": {
+                    "$ref": "#/$defs/selector"
+                  },
+                  "effects": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/effect"
+                    },
+                    "minItems": 0,
+                    "maxItems": 64
+                  }
+                },
+                "required": ["label", "effects"],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["kind", "choose", "modes"],
           "additionalProperties": false
         }
       ]

@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "86214b4c-a3ad-4372-b5fe-8f742a7a3d4c",
+  "name": "Reverent Howl",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Choose one —\n• Target player draws two cards and loses 2 life.\n• Target creature gets +2/+2 and gains lifelink until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target player draws two cards and loses 2 life.",
+          "target": {
+            "scope": "player"
+          },
+          "effects": [
+            {
+              "op": "draw",
+              "target": "target",
+              "amount": 2
+            },
+            {
+              "op": "loseLife",
+              "target": "target",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "Target creature gets +2/+2 and gains lifelink until end of turn.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 2,
+              "toughness": 2,
+              "until": "endOfTurn",
+              "keywords": ["lifelink"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

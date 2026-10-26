@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a4f3df30-383b-47ad-8576-0ee69349faf5",
+  "name": "Go Forth",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{G}"
+  },
+  "rulesText": "Choose one —\n• Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n• Target creature gets +2/+2 until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Search your library for a basic land card, reveal it, put it into your hand, then shuffle.",
+          "effects": [
+            {
+              "op": "searchLibrary",
+              "amount": 1,
+              "where": {
+                "all": [
+                  {
+                    "type": "land"
+                  },
+                  {
+                    "basic": true
+                  }
+                ]
+              },
+              "destination": "hand",
+              "reveal": true
+            }
+          ]
+        },
+        {
+          "label": "Target creature gets +2/+2 until end of turn.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 2,
+              "toughness": 2,
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

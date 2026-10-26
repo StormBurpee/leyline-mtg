@@ -1,0 +1,226 @@
+[
+  {
+    "name": "Alley Evasion",
+    "oracle_id": "b59c7c62-ce2f-4062-9790-566191aded69",
+    "arena_print": "20f6cdcc-85d8-419a-9dd0-7f878912ffc1",
+    "released_at": "2020-11-12",
+    "scryfall_uri": "https://scryfall.com/card/klr/6/alley-evasion?utm_source=api",
+    "oracle_text": "Choose one —\n• Target creature you control gets +1/+2 until end of turn.\n• Return target creature you control to its owner's hand."
+  },
+  {
+    "name": "Deface",
+    "oracle_id": "390290b3-77cc-4180-8e6c-9cb808f6ac7a",
+    "arena_print": "43df9f41-944e-4cf3-ac80-524eadac221d",
+    "released_at": "2019-01-25",
+    "scryfall_uri": "https://scryfall.com/card/rna/98/deface?utm_source=api",
+    "oracle_text": "Choose one —\n• Destroy target artifact.\n• Destroy target creature with defender."
+  },
+  {
+    "name": "Go Forth",
+    "oracle_id": "a4f3df30-383b-47ad-8576-0ee69349faf5",
+    "arena_print": "e4ed67f0-85cc-4b1d-b745-e13e5bea3397",
+    "released_at": "2024-11-15",
+    "scryfall_uri": "https://scryfall.com/card/j25/20/go-forth?utm_source=api",
+    "oracle_text": "Choose one —\n• Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n• Target creature gets +2/+2 until end of turn."
+  },
+  {
+    "name": "Light of Hope",
+    "oracle_id": "5b6f655b-1518-4ab1-8765-3f549819ef3b",
+    "arena_print": "bcb00599-e082-49b0-88f3-ef91b75595e4",
+    "released_at": "2020-04-24",
+    "scryfall_uri": "https://scryfall.com/card/iko/20/light-of-hope?utm_source=api",
+    "oracle_text": "Choose one —\n• You gain 4 life.\n• Destroy target enchantment.\n• Put a +1/+1 counter on target creature."
+  },
+  {
+    "name": "Light the Way",
+    "oracle_id": "83917116-d2d8-4701-a79f-af17486706ae",
+    "arena_print": "3a2fd960-c4ec-4dfa-a61d-f8577b9d3519",
+    "released_at": "2022-02-18",
+    "scryfall_uri": "https://scryfall.com/card/neo/24/light-the-way?utm_source=api",
+    "oracle_text": "Choose one —\n• Put a +1/+1 counter on target creature or Vehicle. Untap it.\n• Return target permanent you control to its owner's hand."
+  },
+  {
+    "name": "Professor's Warning",
+    "oracle_id": "e3c8e552-d315-486d-a176-813b3a300174",
+    "arena_print": "862fded6-e474-4b20-86d8-fd9af5f25b1a",
+    "released_at": "2021-04-23",
+    "scryfall_uri": "https://scryfall.com/card/stx/84/professors-warning?utm_source=api",
+    "oracle_text": "Choose one —\n• Put a +1/+1 counter on target creature.\n• Target creature gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)"
+  },
+  {
+    "name": "Raze the Effigy",
+    "oracle_id": "9286ddc5-8151-4129-aaf6-2a2abe7047e5",
+    "arena_print": "e0dd378c-5050-48c9-9a16-6d91afa62d21",
+    "released_at": "2021-09-24",
+    "scryfall_uri": "https://scryfall.com/card/mid/156/raze-the-effigy?utm_source=api",
+    "oracle_text": "Choose one —\n• Destroy target artifact.\n• Target attacking creature gets +2/+2 until end of turn."
+  },
+  {
+    "name": "Reckless Air Strike",
+    "oracle_id": "89247308-e16f-4f60-a2a2-0b5e297c1fc1",
+    "arena_print": "68391b41-4a17-4450-a8ac-0ce8406fe8c1",
+    "released_at": "2019-07-12",
+    "scryfall_uri": "https://scryfall.com/card/m20/154/reckless-air-strike?utm_source=api",
+    "oracle_text": "Choose one —\n• Reckless Air Strike deals 3 damage to target creature with flying.\n• Destroy target artifact."
+  },
+  {
+    "name": "Abrade",
+    "oracle_id": "f9db72dc-9a5b-48a4-a86e-7464d9a2166a",
+    "arena_print": "548947dc-a5ca-43b5-9531-bcef20fa4ae5",
+    "released_at": "2024-11-15",
+    "scryfall_uri": "https://scryfall.com/card/fdn/188/abrade?utm_source=api",
+    "oracle_text": "Choose one —\n• Abrade deals 3 damage to target creature.\n• Destroy target artifact."
+  },
+  {
+    "name": "Change the Equation",
+    "oracle_id": "aba7e9e2-8df8-454e-a332-9abae1d95b6f",
+    "arena_print": "e98db9ed-b43f-4bc1-b7a9-ce03a534d992",
+    "released_at": "2023-04-21",
+    "scryfall_uri": "https://scryfall.com/card/mom/50/change-the-equation?utm_source=api",
+    "oracle_text": "Choose one —\n• Counter target spell with mana value 2 or less.\n• Counter target red or green spell with mana value 6 or less."
+  },
+  {
+    "name": "Cleansing Ray",
+    "oracle_id": "50f1948c-fa27-458d-be14-cb0e09e39f63",
+    "arena_print": "7bf94184-e745-469a-9d55-af0ddacbb9cf",
+    "released_at": "2018-01-19",
+    "scryfall_uri": "https://scryfall.com/card/rix/4/cleansing-ray?utm_source=api",
+    "oracle_text": "Choose one —\n• Destroy target Vampire.\n• Destroy target enchantment."
+  },
+  {
+    "name": "Destroy Evil",
+    "oracle_id": "b75e667a-1ceb-445a-acf4-ae1fd2dae9e7",
+    "arena_print": "4f7862ef-2c8d-4d28-9e50-7cc41861f245",
+    "released_at": "2022-09-09",
+    "scryfall_uri": "https://scryfall.com/card/dmu/17/destroy-evil?utm_source=api",
+    "oracle_text": "Choose one —\n• Destroy target creature with toughness 4 or greater.\n• Destroy target enchantment."
+  },
+  {
+    "name": "Glimpse the Core",
+    "oracle_id": "fa44fa48-d270-4f0f-b672-d63e1c1942ce",
+    "arena_print": "de7d6aed-3dc8-417d-a190-1660cfc8ee4a",
+    "released_at": "2023-11-17",
+    "scryfall_uri": "https://scryfall.com/card/lci/186/glimpse-the-core?utm_source=api",
+    "oracle_text": "Choose one —\n• Search your library for a basic Forest card, put that card onto the battlefield tapped, then shuffle.\n• Return target Cave card from your graveyard to the battlefield tapped."
+  },
+  {
+    "name": "Glorious Decay",
+    "oracle_id": "ac4277d7-d78a-4d6e-8d6d-11f9e56f8ae7",
+    "arena_print": "a335f396-1004-4fee-842a-a35ff6ba17f2",
+    "released_at": "2026-04-24",
+    "scryfall_uri": "https://scryfall.com/card/sos/150/glorious-decay?utm_source=api",
+    "oracle_text": "Choose one —\n• Destroy target artifact.\n• Glorious Decay deals 4 damage to target creature with flying.\n• Exile target card from a graveyard. Draw a card."
+  },
+  {
+    "name": "Keep Out",
+    "oracle_id": "61cb927a-4cf8-49d6-ab4b-9e882bc08774",
+    "arena_print": "4ab1601c-634c-4f21-8926-ba3cb92008c1",
+    "released_at": "2026-01-23",
+    "scryfall_uri": "https://scryfall.com/card/ecl/19/keep-out?utm_source=api",
+    "oracle_text": "Choose one —\n• Keep Out deals 4 damage to target tapped creature.\n• Destroy target enchantment."
+  },
+  {
+    "name": "Moment of Valor",
+    "oracle_id": "bfac8072-2bbc-43ca-b141-9cd0799840f7",
+    "arena_print": "6f257fd6-24a4-4cc1-89e0-99cf5d821e3a",
+    "released_at": "2023-09-08",
+    "scryfall_uri": "https://scryfall.com/card/woe/20/moment-of-valor?utm_source=api",
+    "oracle_text": "Choose one —\n• Untap target creature. It gets +1/+0 and gains indestructible until end of turn.\n• Destroy target creature with power 4 or greater."
+  },
+  {
+    "name": "Reverent Howl",
+    "oracle_id": "86214b4c-a3ad-4372-b5fe-8f742a7a3d4c",
+    "arena_print": "16765eb2-d497-4cd6-b683-20eac2f10bbf",
+    "released_at": "2026-08-14",
+    "scryfall_uri": "https://scryfall.com/card/hob/81/reverent-howl?utm_source=api",
+    "oracle_text": "Choose one —\n• Target player draws two cards and loses 2 life.\n• Target creature gets +2/+2 and gains lifelink until end of turn."
+  },
+  {
+    "name": "Shredder's Revenge",
+    "oracle_id": "5dd31fcd-72db-4daf-b127-ceb27bf25a94",
+    "arena_print": "72fadf47-2e0b-4b24-b1bc-7c86780716b6",
+    "released_at": "2026-03-06",
+    "scryfall_uri": "https://scryfall.com/card/tmt/76/shredders-revenge?utm_source=api",
+    "oracle_text": "Choose one —\n• Target player discards two cards.\n• Target player draws two cards and loses 2 life."
+  },
+  {
+    "name": "Start from Scratch",
+    "oracle_id": "d8e255ec-7d66-43f6-b5f0-712f5957687f",
+    "arena_print": "55c99486-ae64-4293-81fb-a4b02e8fcae6",
+    "released_at": "2021-04-23",
+    "scryfall_uri": "https://scryfall.com/card/stx/114/start-from-scratch?utm_source=api",
+    "oracle_text": "Choose one —\n• Start from Scratch deals 1 damage to any target.\n• Destroy target artifact."
+  },
+  {
+    "name": "You Find the Villains' Lair",
+    "oracle_id": "41cdeb52-e90f-44f8-94d2-23aa032c4870",
+    "arena_print": "c6704458-6e9e-4795-a56d-25b68fbf9672",
+    "released_at": "2021-07-23",
+    "scryfall_uri": "https://scryfall.com/card/afr/84/you-find-the-villains-lair?utm_source=api",
+    "oracle_text": "Choose one —\n• Foil Their Scheme — Counter target spell.\n• Learn Their Secrets — Draw two cards, then discard two cards."
+  },
+  {
+    "name": "You Happen On a Glade",
+    "oracle_id": "88e5300d-8339-41cb-85bf-325909116b61",
+    "arena_print": "f9ae7693-a6b5-42f8-9f05-c0643b95a710",
+    "released_at": "2021-07-23",
+    "scryfall_uri": "https://scryfall.com/card/afr/214/you-happen-on-a-glade?utm_source=api",
+    "oracle_text": "Choose one —\n• Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n• Make Camp — Return target permanent card from your graveyard to your hand."
+  },
+  {
+    "name": "Repel the Vile",
+    "oracle_id": "aa108554-f1a0-45b6-aa15-597d42be7a8a",
+    "arena_print": "9a37d5b4-af3a-48b0-895f-91b652108ef6",
+    "released_at": "2022-02-18",
+    "scryfall_uri": "https://scryfall.com/card/neo/33/repel-the-vile?utm_source=api",
+    "oracle_text": "Choose one —\n• Exile target creature with power 4 or greater.\n• Exile target enchantment."
+  },
+  {
+    "name": "Spellgyre",
+    "oracle_id": "7db31623-5dea-4165-8593-fbac568bf5b4",
+    "arena_print": "f6f6620a-1d40-429d-9a0c-aaeb62adaa71",
+    "released_at": "2024-08-02",
+    "scryfall_uri": "https://scryfall.com/card/blb/72/spellgyre?utm_source=api",
+    "oracle_text": "Choose one —\n• Counter target spell.\n• Surveil 2, then draw two cards. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"
+  },
+  {
+    "name": "Fiery Intervention",
+    "oracle_id": "a8cd3a52-1056-4664-ae55-eb0ba3a43a15",
+    "arena_print": "67f36a25-3692-4f2e-a25e-84b90656e6a4",
+    "released_at": "2018-04-27",
+    "scryfall_uri": "https://scryfall.com/card/dom/118/fiery-intervention?utm_source=api",
+    "oracle_text": "Choose one —\n• Fiery Intervention deals 5 damage to target creature.\n• Destroy target artifact."
+  },
+  {
+    "name": "Live or Die",
+    "oracle_id": "dc367b23-d1f4-4c5c-b300-a44a726e3f74",
+    "arena_print": "cd81e438-e38f-42a1-b677-202dbcb3837c",
+    "released_at": "2024-09-27",
+    "scryfall_uri": "https://scryfall.com/card/dsk/107/live-or-die?utm_source=api",
+    "oracle_text": "Choose one —\n• Return target creature card from your graveyard to the battlefield.\n• Destroy target creature."
+  },
+  {
+    "name": "School Daze",
+    "oracle_id": "af2275ea-1085-4145-aa6b-36924d53d88a",
+    "arena_print": "e5b61b9d-31a2-4e09-9612-4980bf8de708",
+    "released_at": "2025-09-26",
+    "scryfall_uri": "https://scryfall.com/card/spm/42/school-daze?utm_source=api",
+    "oracle_text": "Choose one —\n• Do Homework — Draw three cards.\n• Fight Crime — Counter target spell. Draw a card."
+  },
+  {
+    "name": "Return to Nature",
+    "oracle_id": "777b8ec4-a783-4297-96b7-4f200d0eb734",
+    "arena_print": "6e25c252-4177-4193-914c-b6933d9c0d7d",
+    "released_at": "2021-09-24",
+    "scryfall_uri": "https://scryfall.com/card/mid/195/return-to-nature?utm_source=api",
+    "oracle_text": "Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Exile target card from a graveyard."
+  },
+  {
+    "name": "Reroute Systems",
+    "oracle_id": "26d2762b-4346-40d0-b93d-b0dbfeb6e2bc",
+    "arena_print": "3bbdba38-2b99-4226-98e3-6d2580345d6d",
+    "released_at": "2025-08-01",
+    "scryfall_uri": "https://scryfall.com/card/eoe/31/reroute-systems?utm_source=api",
+    "oracle_text": "Choose one —\n• Target artifact or creature gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)\n• Reroute Systems deals 2 damage to target tapped creature."
+  }
+]

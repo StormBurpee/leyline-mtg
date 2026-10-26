@@ -1,6 +1,7 @@
 import { readableCard } from './card-inspection.js';
 import { advanceLabel, stopKey } from './priority-policy.js';
 import {
+  spellProfile,
   CARDS,
   DECKS,
   VERSION,
@@ -126,7 +127,7 @@ export function game(s, ui, meta) {
       ? ui.activation !== null
         ? definition(s, selected).activated?.[ui.activation]?.target
         : selected.zone === 'hand'
-          ? definition(s, selected).target
+          ? spellProfile(definition(s, selected), ui.spellMode ?? undefined)?.target
           : null
       : null,
     targetList =
@@ -304,21 +305,22 @@ function actionDock(s, ui, p, actions) {
   } else if (ui.targeting) {
     title = `Target for ${s.objects[ui.selected]?.name}`;
     desc = 'Choose a highlighted target or open the legal-target list.';
-    buttons =
-      '<button class="btn" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="spellTargets">List legal targets →</button>';
+    buttons = `${definition(s, s.objects[ui.selected]).modes ? '<button class="btn" data-action="spellModes">Change mode</button>' : ''}<button class="btn" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="spellTargets">List legal targets →</button>`;
   } else if (ui.selected && s.objects[ui.selected]?.zone === 'hand') {
     const o = s.objects[ui.selected],
       d = definition(s, o),
       available = actions.some((a) => a.card === o.id);
     title = o.name;
     desc = available
-      ? d.target
-        ? 'Choose a target next. Mana is paid automatically.'
-        : d.type === 'land'
-          ? 'Playing a land does not use the stack.'
-          : 'Available mana sources will be tapped automatically.'
+      ? d.modes
+        ? 'Choose one mode, then any required target. Mana is paid when you cast.'
+        : d.target
+          ? 'Choose a target next. Mana is paid automatically.'
+          : d.type === 'land'
+            ? 'Playing a land does not use the stack.'
+            : 'Available mana sources will be tapped automatically.'
       : 'Not playable right now. Check timing, available mana and targets.';
-    buttons = `<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${d.type === 'land' ? 'Play land' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
+    buttons = `<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${d.type === 'land' ? 'Play land' : d.modes ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
   } else
     buttons = `<button class="btn primary advance-button" data-action="pass">${advanceLabel(s, p)} <span>→</span><small>Space</small></button>`;
   return `<div class="action-dock" aria-live="polite"><div class="action-copy"><strong>${escape(title)}</strong><p>${escape(desc)}</p></div><div class="action-buttons"><button class="btn quiet short-read-card" data-action="readCard" ${readableCard(s, ui, p) ? '' : 'disabled'} aria-label="Read selected card">Read</button>${ui.yieldMode ? '<button class="btn short-yield-stop" data-action="cancelYield">Stop passing</button>' : ''}${buttons}</div>${ui.mode === 'bot' && s.status === 'playing' ? `<div class="priority-controls"><button data-action="toggleFullControl" aria-pressed="${ui.controlMode === 'full'}" title="Full control: stop at every priority window (F)">${ui.controlMode === 'full' ? '● Full control' : '○ Smart play'}</button>${ui.yieldMode ? `<button class="yield-active" data-action="cancelYield">Auto-passing · Stop ×</button>` : `<button data-action="yieldResponse" title="Pass until an opponent puts a new effect on the stack (Enter)">Pass until response</button><button data-action="yieldTurn" title="Pass through this turn, including responses (Shift+Enter)">Pass turn</button>`}<button data-action="prioritySettings" aria-label="Priority automation settings">⚙</button></div>` : ''}</div>`;
@@ -342,7 +344,7 @@ function stack(s, ui, meta = {}) {
           .reverse()
           .map(
             (e, i) =>
-              `<button class="stack-item" data-stack="${e.id}" ${e.kind === 'spell' ? `data-motion-card="${e.source.id}" data-motion-zone="stack"` : ''}>${meta[e.name]?.image ? `<img class="stack-card-art" src="${escape(meta[e.name].image)}" alt="" draggable="false">` : ''}<small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape([e.kind === 'ability' ? e.label : !e.target ? 'Spell' : '', e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : ''].filter(Boolean).join(' · '))}</p></button>`,
+              `<button class="stack-item" data-stack="${e.id}" ${e.kind === 'spell' ? `data-motion-card="${e.source.id}" data-motion-zone="stack"` : ''}>${meta[e.name]?.image ? `<img class="stack-card-art" src="${escape(meta[e.name].image)}" alt="" draggable="false">` : ''}<small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape([e.kind === 'ability' ? e.label : e.modeLabel ? `Mode: ${e.modeLabel}` : !e.target ? 'Spell' : '', e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : ''].filter(Boolean).join(' · '))}</p></button>`,
           )
           .join('')
       : resolving
@@ -434,7 +436,7 @@ export function enginePage(s) {
     )
     .join(
       '',
-    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleAttackReplay">Inspect attack triggers</button><button class="btn quiet" data-action="exampleLegendReplay">Inspect legend rule</button><button class="btn quiet" data-action="exampleSearchReplay">Inspect library search</button><button class="btn quiet" data-action="exampleSacrificeReplay">Inspect sacrifice position</button><button class="btn quiet" data-action="exampleBurialReplay">Inspect reanimation position</button><button class="btn quiet" data-action="exampleInteractionReplay">Inspect interactive position</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleTargetReplay">Inspect triggered target</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Versioned card source packs, compiled separately from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
+    )}<p style="margin-top:18px">Rules reference: Wizards’ September 25, 2026 Comprehensive Rules. This release is not a complete implementation or a certified tournament client.</p></section><section class="info-panel"><h3>One command boundary</h3><p>Every click becomes a validated command. Rejected commands leave state untouched. Revision leases reject stale input. The UI and practice bot use the same engine.</p><p style="margin-top:18px">A match can be exported and replayed without a server, Java, an account or a network request. Replays include both players’ hidden cards: share only when the match is finished and you are comfortable revealing both decks.</p><button class="btn" data-action="export" ${!s ? 'disabled' : ''}>Export current replay</button> <button class="btn quiet" data-action="loadReplay">Open replay</button><button class="btn quiet" data-action="exampleModalReplay">Inspect modal spell</button><button class="btn quiet" data-action="exampleAttackReplay">Inspect attack triggers</button><button class="btn quiet" data-action="exampleLegendReplay">Inspect legend rule</button><button class="btn quiet" data-action="exampleSearchReplay">Inspect library search</button><button class="btn quiet" data-action="exampleSacrificeReplay">Inspect sacrifice position</button><button class="btn quiet" data-action="exampleBurialReplay">Inspect reanimation position</button><button class="btn quiet" data-action="exampleInteractionReplay">Inspect interactive position</button><button class="btn quiet" data-action="exampleReplay">Inspect example match</button><button class="btn quiet" data-action="exampleWardReplay">Inspect ward decision</button><button class="btn quiet" data-action="exampleTargetReplay">Inspect triggered target</button><button class="btn quiet" data-action="exampleOptionalReplay">Inspect optional draw</button><button class="btn quiet" data-action="state" ${!s ? 'disabled' : ''}>Inspect local state</button></section><section class="info-panel"><h3>Built for extension</h3><ul><li>Versioned card source packs, compiled separately from display data.</li><li>Effect opcodes with focused regression tests.</li><li>Zone incarnations protect against stale target references.</li><li>Seeded shuffles and complete command histories.</li><li>Node’s built-in test runner; no runtime dependencies.</li></ul></section><section class="info-panel"><h3>Honest boundaries</h3><p>The bot is a deterministic sparring partner, not a competitive opponent. Play is local only. The card catalog is a supported subset, not all of Magic. Official art requires a network connection; the rules do not.</p><p style="margin-top:14px">Forge is the architectural reference. This is a separate JavaScript implementation, not a complete translation of Forge or a wrapper around its Java engine.</p></section></div>${footer()}</main>`;
 }
 
 function liveCharacteristics(s, o) {
@@ -468,6 +470,19 @@ export function legendChoiceBody(state, metadata = {}) {
         d = definition(state, o),
         pt = stats(state, o);
       return `<div class="library-choice"><div class="library-thumb">${metadata[o.name]?.image ? `<img src="${escape(metadata[o.name].image)}" alt="">` : '◇'}</div><div class="library-choice-body"><strong>Copy ${index + 1}: ${escape(o.name)}</strong><span class="small muted">${d.type === 'creature' ? `${pt.power}/${pt.toughness} · ${o.damage} damage · ` : ''}${o.tapped ? 'Tapped' : 'Untapped'}${o.plusCounters ? ` · ${o.plusCounters} +1/+1 counters` : ''}</span><div class="library-choice-actions"><button class="btn primary" data-action="keepLegend" data-cardid="${id}">Keep this copy</button><button class="btn" data-action="readLegend" data-cardid="${id}">Read card</button></div></div></div>`;
+    })
+    .join('')}</div>`;
+}
+
+export function spellModeBody(state, player, id) {
+  const card = definition(state, state.objects[id]);
+  const legal = legalActions(state, player).filter((a) => a.type === 'cast' && a.card === id);
+  return `<p>Choose one mode. Targets and payment are announced before the spell goes onto the stack.</p><div class="target-grid">${(
+    card.modes ?? []
+  )
+    .map((mode, index) => {
+      const available = legal.some((a) => a.mode === index);
+      return `<button class="btn target-option" data-action="chooseSpellMode" data-mode="${index}" ${available ? '' : 'disabled'}><strong>${escape(mode.label)}</strong><span>${available ? (mode.target ? 'Choose target next' : 'Cast this mode') : 'Unavailable: check targets, mana and timing'}</span></button>`;
     })
     .join('')}</div>`;
 }

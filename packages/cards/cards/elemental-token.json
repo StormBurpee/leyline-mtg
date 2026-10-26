@@ -5,7 +5,7 @@
   "name": "Elemental Token",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Elemental"],
     "colors": ["R"],
     "manaCost": null,
     "power": 1,

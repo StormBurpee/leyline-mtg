@@ -3,11 +3,11 @@
   "compilerVersion": "0.12.0",
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
-    "packages/engine/src/registry.js": "cb7b1db1914b578979a5cd5b4add27acff389643097267b1c515dc7cf1087085",
-    "packages/engine/src/definition-validation.js": "dbbc72d4b015b4cd7627f6564cff5633bd727775c15733259f3214fe082a166a",
-    "packages/engine/src/selectors.js": "db76e9f85066c4074b45b9f460189d499fe8711c60647331d0ae85d0c050669c",
+    "packages/engine/src/registry.js": "aa2cfbaa69611a8f05fde056bc4440431462b357148022d98a2d21ccd7a3267b",
+    "packages/engine/src/definition-validation.js": "9a392f0cbc86ec96ebd439f31963287b04f52defbd4fa119575ae8267db6306c",
+    "packages/engine/src/selectors.js": "48b1f7d3f0f4c8b6786f67e6162df0ad52e9c664db34313244bb2ef4286390e5",
     "packages/engine/src/events.js": "b0f1b12654bf88e5c2df115a6992ee88f9bd1bc8a2231a88c46b02a2051a22aa",
-    "packages/engine/src/types.js": "57f8bd1ce75c0bf683c6e9e9e179ff8477594f8ef5a636523f37d9a2bd1467aa"
+    "packages/engine/src/types.js": "f8c6957528dcfb640252c9f94e46b04415c06a6f5ce89a354ebec0ee0b6a4980"
   },
   "compilerSourceSha256": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
   "asOf": "2026-10-26",
@@ -21,8 +21,8 @@
   "excluded": {},
   "coverage": {
     "no_exact_forge_match": 261,
-    "unsupported": 4615,
-    "curated": 288
+    "unsupported": 4604,
+    "curated": 299
   },
   "layouts": {
     "normal": 4823,
@@ -41,7 +41,7 @@
     "Trample": 183,
     "Vigilance": 182,
     "Flash": 154,
-    "Surveil": 154,
+    "Surveil": 153,
     "Equip": 132,
     "Reach": 124,
     "Mill": 122,
@@ -248,8 +248,6 @@
     "Murasame": 1,
     "Battle Cry": 1,
     "Sensational Save": 1,
-    "Do Homework": 1,
-    "Fight Crime": 1,
     "Look Around": 1,
     "Bring Down": 1,
     "Conceal": 1,
@@ -306,9 +304,9 @@
     "Burning Chains": 1
   },
   "diagnostics": {
-    "Unreferenced or unsupported SVar": 4000,
+    "Unreferenced or unsupported SVar": 3971,
     "Unsupported spell field": 3396,
-    "Unsupported spell opcode": 2582,
+    "Unsupported spell opcode": 2571,
     "Unsupported trigger field": 1938,
     "Unsupported trigger mode": 1121,
     "unsupported field S.": 1030,
@@ -323,7 +321,7 @@
     "Unsupported zone-change trigger predicate": 222,
     "Pump needs a creature target or an activated source.": 173,
     "SubAbility references must point to a DB instruction.": 160,
-    "unsupported field Variant.": 146,
+    "unsupported field Variant.": 145,
     "Only one tap ability producing one mana of a listed color is supported.": 141,
     "unsupported keyword Equip": 130,
     "Unsupported cast trigger predicate": 117,
@@ -594,5 +592,5 @@
       "sha256": "57b91dec0d3b810928ff8420c5b5b35d8e2bace62ac89d4afcdeddbda57ef206"
     }
   ],
-  "reclassifiedWithEngine": "0.22.0"
+  "reclassifiedWithEngine": "0.23.0"
 }

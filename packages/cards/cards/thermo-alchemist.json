@@ -5,7 +5,7 @@
   "name": "Thermo-Alchemist",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Human", "Shaman"],
     "colors": ["R"],
     "manaCost": "{1}{R}",
     "power": 0,

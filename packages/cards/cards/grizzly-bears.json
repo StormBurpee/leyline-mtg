@@ -5,7 +5,7 @@
   "name": "Grizzly Bears",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Bear"],
     "colors": ["G"],
     "manaCost": "{1}{G}",
     "power": 2,

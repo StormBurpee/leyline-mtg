@@ -5,7 +5,7 @@
   "name": "Youthful Knight",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Human", "Knight"],
     "colors": ["W"],
     "manaCost": "{1}{W}",
     "power": 2,

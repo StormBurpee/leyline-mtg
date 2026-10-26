@@ -5,7 +5,7 @@
   "name": "Typhoid Rats",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Rat"],
     "colors": ["B"],
     "manaCost": "{B}",
     "power": 1,

@@ -1,3 +1,4 @@
+import { spellProfile, spellOptions } from './spell-modes.js';
 import { costProblem, payCost } from './costs.js';
 import {
   createGame,
@@ -33,11 +34,12 @@ import {
 import { assignDamage, canAttack, declareAttackers, declareBlockers } from './combat.js';
 import { advanceStep, finishCleanup } from './turn.js';
 const main = (s) => ['main1', 'main2'].includes(s.step);
-export function castProblem(s, p, id, target, { autoTap = true } = {}) {
+export function castProblem(s, p, id, target, { autoTap = true, mode } = {}) {
   const o = s.objects[id];
   if (!o || o.zone !== 'hand' || o.owner !== p) return 'Card is not in your hand.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
-  const d = definition(s, o);
+  const d = spellProfile(definition(s, o), mode);
+  if (!d) return 'Choose one valid spell mode.';
   if (d.type === 'land') return 'Lands are played, not cast.';
   if (
     d.type !== 'instant' &&
@@ -66,10 +68,13 @@ export function canPlayLand(s, p, id) {
   );
 }
 function cast(s, p, c) {
-  const problem = castProblem(s, p, c.card, c.target, { autoTap: c.autoTap !== false });
+  const problem = castProblem(s, p, c.card, c.target, {
+    autoTap: c.autoTap !== false,
+    mode: c.mode,
+  });
   requireRule(!problem, 'CAST', problem);
   const o = s.objects[c.card],
-    d = definition(s, o);
+    d = spellProfile(definition(s, o), c.mode);
   pay(s, p, d.cost, c.autoTap !== false);
   move(s, o, 'stack');
   s.stack.push({
@@ -80,11 +85,18 @@ function cast(s, p, c) {
     source: ref(o),
     sourceKeywords: [...d.keywords],
     effects: structuredClone(d.effects ?? []),
+    ...(d.modes ? { mode: c.mode, modeLabel: d.modes[c.mode].label } : {}),
     targetKind: d.target ?? null,
     target: c.target ?? null,
   });
   s.passes = 0;
-  emit(s, 'cast', { player: p, objectId: o.id, name: o.name, target: c.target ?? null });
+  emit(s, 'cast', {
+    player: p,
+    objectId: o.id,
+    name: o.name,
+    target: c.target ?? null,
+    ...(d.modes ? { mode: c.mode, modeLabel: d.modes[c.mode].label } : {}),
+  });
   notifyTriggers(s, 'cast', { player: p, definition: d, object: o });
   notifyTargeted(s, s.stack.at(-1));
 }
@@ -336,10 +348,17 @@ export function legalActions(s, p) {
     }
     const d = definition(s, s.objects[id]);
     if (d.type === 'land') continue;
-    const targets = d.target ? targetsFor(s, d.target, p) : [null];
-    for (const target of targets)
-      if (!castProblem(s, p, id, target))
-        actions.push({ type: 'cast', card: id, ...(target ? { target } : {}) });
+    for (const { mode, profile } of spellOptions(d)) {
+      const targets = profile.target ? targetsFor(s, profile.target, p) : [null];
+      for (const target of targets)
+        if (!castProblem(s, p, id, target, { mode }))
+          actions.push({
+            type: 'cast',
+            card: id,
+            ...(mode !== undefined ? { mode } : {}),
+            ...(target ? { target } : {}),
+          });
+    }
   }
   for (const o of Object.values(s.objects)) {
     if (canTapForMana(s, o, p))
@@ -399,6 +418,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.22.0',
         '0.21.0',
         '0.20.0',
         '0.17.0',

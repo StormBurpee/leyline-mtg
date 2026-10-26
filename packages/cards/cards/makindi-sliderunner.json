@@ -5,7 +5,7 @@
   "name": "Makindi Sliderunner",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Beast"],
     "colors": ["R"],
     "manaCost": "{1}{R}",
     "power": 2,

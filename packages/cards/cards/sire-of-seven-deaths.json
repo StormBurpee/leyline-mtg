@@ -5,7 +5,7 @@
   "name": "Sire of Seven Deaths",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Eldrazi"],
     "colors": [],
     "manaCost": "{7}",
     "power": 7,

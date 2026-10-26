@@ -5,7 +5,7 @@
   "name": "Elvish Visionary",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Elf", "Shaman"],
     "colors": ["G"],
     "manaCost": "{1}{G}",
     "power": 1,

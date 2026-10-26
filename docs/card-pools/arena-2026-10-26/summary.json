@@ -3,11 +3,11 @@
   "compilerVersion": "0.12.0",
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
-    "packages/engine/src/registry.js": "cb7b1db1914b578979a5cd5b4add27acff389643097267b1c515dc7cf1087085",
-    "packages/engine/src/definition-validation.js": "dbbc72d4b015b4cd7627f6564cff5633bd727775c15733259f3214fe082a166a",
-    "packages/engine/src/selectors.js": "db76e9f85066c4074b45b9f460189d499fe8711c60647331d0ae85d0c050669c",
+    "packages/engine/src/registry.js": "aa2cfbaa69611a8f05fde056bc4440431462b357148022d98a2d21ccd7a3267b",
+    "packages/engine/src/definition-validation.js": "9a392f0cbc86ec96ebd439f31963287b04f52defbd4fa119575ae8267db6306c",
+    "packages/engine/src/selectors.js": "48b1f7d3f0f4c8b6786f67e6162df0ad52e9c664db34313244bb2ef4286390e5",
     "packages/engine/src/events.js": "b0f1b12654bf88e5c2df115a6992ee88f9bd1bc8a2231a88c46b02a2051a22aa",
-    "packages/engine/src/types.js": "57f8bd1ce75c0bf683c6e9e9e179ff8477594f8ef5a636523f37d9a2bd1467aa"
+    "packages/engine/src/types.js": "f8c6957528dcfb640252c9f94e46b04415c06a6f5ce89a354ebec0ee0b6a4980"
   },
   "compilerSourceSha256": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
   "asOf": "2026-10-26",
@@ -23,10 +23,10 @@
     "excluded_alchemy": 3
   },
   "coverage": {
-    "unsupported": 13573,
+    "unsupported": 13545,
     "no_exact_forge_match": 685,
     "compiler_candidate": 597,
-    "curated": 477
+    "curated": 505
   },
   "layouts": {
     "normal": 14416,
@@ -59,7 +59,7 @@
     "Treasure": 234,
     "Cycling": 231,
     "Deathtouch": 225,
-    "Surveil": 201,
+    "Surveil": 200,
     "Ward": 139,
     "Crew": 138,
     "Kicker": 137,
@@ -387,8 +387,6 @@
     "Cure Cancer": 1,
     "Turn People into Dinosaurs": 1,
     "Sensational Save": 1,
-    "Do Homework": 1,
-    "Fight Crime": 1,
     "Look Around": 1,
     "Bring Down": 1,
     "Conceal": 1,
@@ -449,9 +447,9 @@
     "Burning Chains": 1
   },
   "diagnostics": {
-    "Unreferenced or unsupported SVar": 11877,
+    "Unreferenced or unsupported SVar": 11810,
     "Unsupported spell field": 9596,
-    "Unsupported spell opcode": 7004,
+    "Unsupported spell opcode": 6976,
     "Unsupported trigger field": 4997,
     "unsupported field S.": 3089,
     "Unsupported trigger mode": 3034,
@@ -493,8 +491,8 @@
     "Unexpected PT on a noncreature.": 160,
     "Only untargeted Defined Player.Opponent damage is supported.": 151,
     "unsupported keyword ETBReplacement": 151,
-    "unsupported field Variant.": 146,
     "Unsupported spell-cast trigger restriction.": 146,
+    "unsupported field Variant.": 145,
     "Pump contains an unsupported keyword.": 144,
     "This land subset requires an explicit supported mana ability.": 137,
     "unsupported keyword Kicker": 137,
@@ -1115,5 +1113,5 @@
       "sha256": "22e4f4e89709f3f96d9ea947475ea026c8a8232cbb2cf00e81c13526c986ad23"
     }
   ],
-  "reclassifiedWithEngine": "0.22.0"
+  "reclassifiedWithEngine": "0.23.0"
 }

@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d8e255ec-7d66-43f6-b5f0-712f5957687f",
+  "name": "Start from Scratch",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": ["Lesson"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "Choose one —\n• Start from Scratch deals 1 damage to any target.\n• Destroy target artifact.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Start from Scratch deals 1 damage to any target.",
+          "target": {
+            "scope": "damageable"
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Destroy target artifact.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

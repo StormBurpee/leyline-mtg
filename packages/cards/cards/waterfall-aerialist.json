@@ -5,7 +5,7 @@
   "name": "Waterfall Aerialist",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Djinn", "Wizard"],
     "colors": ["U"],
     "manaCost": "{3}{U}",
     "power": 3,

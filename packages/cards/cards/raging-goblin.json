@@ -5,7 +5,7 @@
   "name": "Raging Goblin",
   "characteristics": {
     "types": ["creature"],
-    "subtypes": [],
+    "subtypes": ["Goblin", "Berserker"],
     "colors": ["R"],
     "manaCost": "{R}",
     "power": 1,

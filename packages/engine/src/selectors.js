@@ -1,4 +1,4 @@
-import { CARD_TYPES, hasType } from './types.js';
+import { CARD_TYPES, hasType, KEYWORD_NAMES } from './types.js';
 const plain = (value) =>
   value !== null &&
   typeof value === 'object' &&
@@ -80,6 +80,12 @@ export function validateFilter(filter) {
         errors.push(`${path}.${key}: expected you or opponent.`);
       return;
     }
+    if (key === 'keyword') {
+      if (!KEYWORD_NAMES.includes(operand)) errors.push(`${path}.keyword: unsupported keyword.`);
+      return;
+    }
+    if (key === 'keyword')
+      return (facts.keywords ?? facts.definition?.keywords ?? []).includes(value);
     if (key === 'subtype') {
       if (typeof operand !== 'string' || !operand.trim() || operand.length > 80)
         errors.push(`${path}.subtype: expected a subtype name.`);
@@ -134,6 +140,8 @@ export function matchesFilter(facts, filter, you) {
       Number.isInteger(facts[key]) && (value === 'you' ? facts[key] === you : facts[key] !== you)
     );
   if (key === 'basic' || key === 'legendary') return !!facts.definition?.[key] === value;
+  if (key === 'keyword')
+    return (facts.keywords ?? facts.definition?.keywords ?? []).includes(value);
   if (key === 'subtype') return !!facts.definition?.subtypes?.includes(value);
   if (key === 'token' || key === 'tapped' || key === 'attacking') return facts[key] === value;
   if (['power', 'toughness', 'manaValue'].includes(key)) {
@@ -166,7 +174,7 @@ function impliesCreature(filter) {
   if (filter.any) return filter.any.length > 0 && filter.any.every(impliesCreature);
   return false;
 }
-export function effectTargetCompatible(op, value) {
+export function effectTargetCompatible(op, value, effect = null) {
   const spec = targetSpec(value);
   if (!spec) return false;
   if (op === 'damage')
@@ -174,8 +182,12 @@ export function effectTargetCompatible(op, value) {
       ['damageable', 'player'].includes(spec.scope) ||
       (spec.scope === 'permanent' && impliesCreature(spec.where))
     );
-  if (op === 'modify') return spec.scope === 'permanent' && impliesCreature(spec.where);
-  if (op === 'untap') return spec.scope === 'permanent';
+  if (op === 'modify')
+    return (
+      spec.scope === 'permanent' &&
+      (impliesCreature(spec.where) || (effect?.power === 0 && effect?.toughness === 0))
+    );
+  if (op === 'untap' || op === 'counterOn') return spec.scope === 'permanent';
   if (op === 'counter') return spec.scope === 'spell';
   if (['mill', 'draw', 'discard', 'gainLife', 'loseLife', 'scry', 'surveil'].includes(op))
     return spec.scope === 'player';

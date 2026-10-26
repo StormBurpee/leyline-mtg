@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "88e5300d-8339-41cb-85bf-325909116b61",
+  "name": "You Happen On a Glade",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "Choose one —\n• Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n• Make Camp — Return target permanent card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.",
+          "effects": [
+            {
+              "op": "searchLibrary",
+              "amount": 2,
+              "where": {
+                "all": [
+                  {
+                    "type": "land"
+                  },
+                  {
+                    "basic": true
+                  }
+                ]
+              },
+              "destination": "hand",
+              "reveal": true
+            }
+          ]
+        },
+        {
+          "label": "Make Camp — Return target permanent card from your graveyard to your hand.",
+          "target": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "owner": "you"
+                },
+                {
+                  "not": {
+                    "any": [
+                      {
+                        "type": "instant"
+                      },
+                      {
+                        "type": "sorcery"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -13,6 +13,7 @@ const manifest = {
         ...new Set(
           [
             ...(c.effects ?? []),
+            ...(c.modes ?? []).flatMap((mode) => mode.effects),
             ...(c.etb ?? []),
             ...(c.triggers ?? []).flatMap((t) => t.effects),
             ...(c.activated ?? []).flatMap((a) => a.effects),
@@ -20,6 +21,7 @@ const manifest = {
         ),
       ],
       ...(c.ward ? { ward: c.ward } : {}),
+      ...(c.modes ? { modes: c.modes.map((mode) => mode.label) } : {}),
       triggers: (c.triggers ?? []).map((t) => t.event),
       activatedAbilities: c.activated?.length ?? 0,
     })),
