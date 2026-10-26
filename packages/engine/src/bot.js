@@ -424,27 +424,28 @@ export function chooseBotCommand(s, p) {
         )
       )
         score = -100;
-      // Deploy ordinary creatures after combat so known tricks remain available
-      // during blocks. Haste, public static effects, ETBs and cast triggers can
-      // change this combat and are deliberately allowed before it.
-      if (
-        s.active === p &&
-        s.step === 'main1' &&
-        !s.stack.length &&
-        d.type === 'creature' &&
-        !d.mana &&
-        !d.static &&
-        !d.etb?.length &&
-        !d.triggers?.length &&
-        !d.keywords.includes('haste') &&
-        Object.values(s.objects).some((o) => canAttack(s, o, p))
-      )
-        score = -100;
       return { a, score };
     })
     .sort((a, b) => b.score - a.score);
   const sequence = chooseSequence(s, p, casts);
-  if (sequence?.action) return { ...sequence.action, player: p };
-  if (casts[0]?.score > 0) return { ...casts[0].a, player: p };
+  const cast = sequence?.action ?? (casts[0]?.score > 0 ? casts[0].a : null);
+  if (cast) {
+    const d = definition(s, s.objects[cast.card]);
+    // Choose the best play before delaying an ordinary creature until main two.
+    // Removing it from scoring would spend its reserved mana on weaker spells.
+    // Haste, mana, static effects, ETBs and cast triggers can affect this combat.
+    const delay =
+      s.active === p &&
+      s.step === 'main1' &&
+      !s.stack.length &&
+      d.type === 'creature' &&
+      !d.mana &&
+      !d.static &&
+      !d.etb?.length &&
+      !d.triggers?.length &&
+      !d.keywords.includes('haste') &&
+      Object.values(s.objects).some((o) => canAttack(s, o, p));
+    if (!delay) return { ...cast, player: p };
+  }
   return { type: 'pass', player: p };
 }

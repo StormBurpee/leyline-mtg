@@ -91,3 +91,44 @@ export function summarizePaired(records) {
     sweptAgainst,
   };
 }
+
+/** A stricter summary: all decks, seats and starts sharing a seed form one unit.
+ * Exclude an entire seed if any episode/pair is invalid. The t approximation uses
+ * a conservatively rounded critical value of 3 for 5–29 seeds, 2.1 thereafter;
+ * fewer than five seeds are reported without an interval. This is not a
+ * distribution-free confidence bound or evidence about untested deck families.
+ */
+export function summarizeSeeds(records) {
+  const groups = new Map();
+  for (const r of records) {
+    if (r.seed === undefined) continue;
+    if (!groups.has(r.seed)) groups.set(r.seed, []);
+    groups.get(r.seed).push(r);
+  }
+  const seeds = [...groups]
+    .sort((a, b) => a[0] - b[0])
+    .map(([seed, rows]) => {
+      const paired = summarizePaired(rows);
+      const valid = !paired.invalid && !paired.excludedPairs;
+      return { seed, games: rows.length, score: valid ? paired.pairedScore : null };
+    });
+  const scores = seeds.filter((r) => r.score !== null).map((r) => r.score);
+  const mean = scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : null;
+  const se =
+    scores.length > 1
+      ? Math.sqrt(
+          scores.reduce((sum, x) => sum + (x - mean) ** 2, 0) / (scores.length - 1) / scores.length,
+        )
+      : null;
+  const critical = scores.length < 5 ? null : scores.length < 30 ? 3 : 2.1;
+  return {
+    seeds,
+    completeSeeds: scores.length,
+    excludedSeeds: seeds.length - scores.length,
+    score: mean,
+    conservative95:
+      critical === null
+        ? null
+        : [Math.max(0, mean - critical * se), Math.min(1, mean + critical * se)],
+  };
+}

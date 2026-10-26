@@ -1,0 +1,307 @@
+{
+  "source": "docs/benchmarks/verified-v022.jsonl",
+  "sourceSha256": "52ca1d7d60e80e92185f09755e8f0008d49ea877898585109a1d0bd4dd1efcc4",
+  "metadata": {
+    "schemaVersion": 1,
+    "createdAt": "2026-10-26T22:12:47.823Z",
+    "commit": "fdf148c985c146af683f446fbf815ab4743ad8a1",
+    "policies": [
+      {
+        "name": "current",
+        "sha256": "29422aa0a9193e932f6b7ac0128967a01f9babb602dac68640c8dde8101abb36",
+        "modules": 24
+      },
+      {
+        "name": "released-safe",
+        "sha256": "2b069a5a8a9001edf0452c2c4011818dd58eeb255f9075c616e019946c12c43d",
+        "modules": 23
+      }
+    ],
+    "workers": 4,
+    "node": "v24.22.1",
+    "platform": "win32",
+    "budgets": {
+      "maxDecisions": 3000,
+      "maxEpisodeMs": 300000,
+      "policies": {
+        "current": {
+          "blockers": 1400,
+          "attackResponse": 96,
+          "counterattack": 64,
+          "mainPhaseNodes": 256,
+          "mainPhaseDepth": 4,
+          "mainPhaseCandidates": 24,
+          "attackTrickCandidates": 48,
+          "attackTricksPerSet": 8
+        },
+        "released-safe": {
+          "blockers": 1400,
+          "attackResponse": 96,
+          "counterattack": 64,
+          "mainPhaseNodes": 0,
+          "mainPhaseDepth": 0,
+          "mainPhaseCandidates": 0,
+          "attackTrickCandidates": 0,
+          "attackTricksPerSet": 0
+        }
+      }
+    },
+    "options": {
+      "opponent": "released-safe",
+      "suite": "mixed",
+      "seeds": "15485863,32452843,49979687,67867967,86028121",
+      "workers": "4",
+      "output": "docs/benchmarks/verified-v022.jsonl"
+    },
+    "games": 600
+  },
+  "paired": {
+    "games": 600,
+    "wins": 329,
+    "losses": 271,
+    "draws": 0,
+    "invalid": 0,
+    "terminations": {
+      "finished": 600
+    },
+    "decks": {
+      "ember/ember": {
+        "wins": 10,
+        "losses": 10,
+        "draws": 0,
+        "invalid": 0
+      },
+      "grove/grove": {
+        "wins": 11,
+        "losses": 9,
+        "draws": 0,
+        "invalid": 0
+      },
+      "cinder/cinder": {
+        "wins": 11,
+        "losses": 9,
+        "draws": 0,
+        "invalid": 0
+      },
+      "canopy/canopy": {
+        "wins": 16,
+        "losses": 4,
+        "draws": 0,
+        "invalid": 0
+      },
+      "tide/tide": {
+        "wins": 12,
+        "losses": 8,
+        "draws": 0,
+        "invalid": 0
+      },
+      "dawn/dawn": {
+        "wins": 12,
+        "losses": 8,
+        "draws": 0,
+        "invalid": 0
+      },
+      "nightfall/nightfall": {
+        "wins": 12,
+        "losses": 8,
+        "draws": 0,
+        "invalid": 0
+      },
+      "relic/relic": {
+        "wins": 10,
+        "losses": 10,
+        "draws": 0,
+        "invalid": 0
+      },
+      "oath/oath": {
+        "wins": 8,
+        "losses": 12,
+        "draws": 0,
+        "invalid": 0
+      },
+      "spark/spark": {
+        "wins": 13,
+        "losses": 7,
+        "draws": 0,
+        "invalid": 0
+      },
+      "undertow/undertow": {
+        "wins": 9,
+        "losses": 11,
+        "draws": 0,
+        "invalid": 0
+      },
+      "rites/rites": {
+        "wins": 13,
+        "losses": 7,
+        "draws": 0,
+        "invalid": 0
+      },
+      "burial/burial": {
+        "wins": 10,
+        "losses": 10,
+        "draws": 0,
+        "invalid": 0
+      },
+      "roots/roots": {
+        "wins": 13,
+        "losses": 7,
+        "draws": 0,
+        "invalid": 0
+      },
+      "assault/assault": {
+        "wins": 12,
+        "losses": 8,
+        "draws": 0,
+        "invalid": 0
+      },
+      "ember/grove": {
+        "wins": 9,
+        "losses": 11,
+        "draws": 0,
+        "invalid": 0
+      },
+      "grove/cinder": {
+        "wins": 12,
+        "losses": 8,
+        "draws": 0,
+        "invalid": 0
+      },
+      "cinder/canopy": {
+        "wins": 11,
+        "losses": 9,
+        "draws": 0,
+        "invalid": 0
+      },
+      "canopy/tide": {
+        "wins": 11,
+        "losses": 9,
+        "draws": 0,
+        "invalid": 0
+      },
+      "tide/dawn": {
+        "wins": 11,
+        "losses": 9,
+        "draws": 0,
+        "invalid": 0
+      },
+      "dawn/nightfall": {
+        "wins": 12,
+        "losses": 8,
+        "draws": 0,
+        "invalid": 0
+      },
+      "nightfall/relic": {
+        "wins": 8,
+        "losses": 12,
+        "draws": 0,
+        "invalid": 0
+      },
+      "relic/oath": {
+        "wins": 11,
+        "losses": 9,
+        "draws": 0,
+        "invalid": 0
+      },
+      "oath/spark": {
+        "wins": 11,
+        "losses": 9,
+        "draws": 0,
+        "invalid": 0
+      },
+      "spark/undertow": {
+        "wins": 13,
+        "losses": 7,
+        "draws": 0,
+        "invalid": 0
+      },
+      "undertow/rites": {
+        "wins": 10,
+        "losses": 10,
+        "draws": 0,
+        "invalid": 0
+      },
+      "rites/burial": {
+        "wins": 8,
+        "losses": 12,
+        "draws": 0,
+        "invalid": 0
+      },
+      "burial/roots": {
+        "wins": 9,
+        "losses": 11,
+        "draws": 0,
+        "invalid": 0
+      },
+      "roots/assault": {
+        "wins": 10,
+        "losses": 10,
+        "draws": 0,
+        "invalid": 0
+      },
+      "assault/ember": {
+        "wins": 11,
+        "losses": 9,
+        "draws": 0,
+        "invalid": 0
+      }
+    },
+    "completePairs": 300,
+    "excludedPairs": 0,
+    "pairedScore": 0.5483333333333333,
+    "pairedNormal95": [0.5209183428724645, 0.5757483237942022],
+    "completeBlocks": 150,
+    "excludedBlocks": 0,
+    "blockScore": 0.5483333333333333,
+    "blockNormal95": [0.5218285624712995, 0.5748381041953672],
+    "swept": 51,
+    "sweptAgainst": 22
+  },
+  "bySeed": {
+    "seeds": [
+      {
+        "seed": 15485863,
+        "games": 120,
+        "score": 0.5
+      },
+      {
+        "seed": 32452843,
+        "games": 120,
+        "score": 0.5166666666666667
+      },
+      {
+        "seed": 49979687,
+        "games": 120,
+        "score": 0.5583333333333333
+      },
+      {
+        "seed": 67867967,
+        "games": 120,
+        "score": 0.6
+      },
+      {
+        "seed": 86028121,
+        "games": 120,
+        "score": 0.5666666666666667
+      }
+    ],
+    "completeSeeds": 5,
+    "excludedSeeds": 0,
+    "score": 0.5483333333333332,
+    "conservative95": [0.4944816852619882, 0.6021849814046782]
+  },
+  "timing": {
+    "current": {
+      "calls": 163755,
+      "totalMs": 301427.93709999474,
+      "maxMs": 2487.505999999994,
+      "meanMs": 1.8407250899208862
+    },
+    "released-safe": {
+      "calls": 163470,
+      "totalMs": 479928.5995999944,
+      "maxMs": 5565.652900000001,
+      "meanMs": 2.9358818107297635
+    }
+  }
+}

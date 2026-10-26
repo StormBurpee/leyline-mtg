@@ -94,6 +94,18 @@ test('ordinary development waits for main two while a known combat trick stays a
   assert.equal(chooseBotCommand(s, 0).card, handBear.id);
 });
 
+test('delaying a stronger creature does not spend its mana on weaker first-main development', () => {
+  const s = fixture();
+  lands(s, 'Plains', 5);
+  put(s, 'Savannah Lions', 0);
+  put(s, 'Serra Angel', 1);
+  const angel = put(s, 'Serra Angel', 0, 'hand');
+  put(s, 'Solemn Simulacrum', 0, 'hand');
+  assert.equal(chooseBotCommand(s, 0).type, 'pass');
+  s.step = 'main2';
+  assert.equal(chooseBotCommand(s, 0).card, angel.id);
+});
+
 test('attack with the entire evasive group on a wide, stalled ground board', () => {
   const s = fixture();
   for (let i = 0; i < 4; i++) put(s, 'Grizzly Bears', 0);

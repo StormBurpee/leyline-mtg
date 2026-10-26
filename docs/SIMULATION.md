@@ -131,6 +131,21 @@ sacrifices itself. The native current policy checks those references directly;
 the adapter allows a complete comparison without editing the frozen reference.
 `released` retains the original behavior and is never silently replaced.
 
+For a stricter uncertainty analysis, group **all** matchups and starting-player
+variants sharing a seed together:
+
+```sh
+node scripts/summarize-bots.mjs outputs/comparison.jsonl outputs/comparison.analysis.json
+```
+
+This refuses incomplete files and existing output paths, records the raw input's
+SHA-256, and adds per-policy runtime aggregates and a seed-cluster interval. Any
+invalid episode or incomplete seat pair excludes its entire seed. The approximate
+t interval uses a conservatively rounded critical value (3 for 5-29 seeds, 2.1 for
+30 or more); fewer than five seeds have no interval. It is not a distribution-free
+bound. With five seeds, the block interval can exclude 50% while this stricter
+interval includes it. Preserve both and state which supports any strength claim.
+
 ## Library-search decisions and hidden identity
 
 During `librarySearch`, only the searching agent sees its library definitions and eligible opaque handles. Those handles can be submitted through the normal command boundary. After the search, library objects are concealed again; only public results and the agent’s own hand remain visible. Episode continuation and replay retain deterministic shuffle state privately.
