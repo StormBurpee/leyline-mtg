@@ -10,18 +10,21 @@ import {
 } from './decision-safety.js';
 import {
   chooseBlocks,
-  chooseAttacks,
   preserveForDefense,
   tacticalDamage,
+  permanentValue,
 } from './combat-policy.js';
 import { orderLifePayoffs, acceptLifePayoff } from './combat-payoffs.js';
 import { trickScore } from './trick-policy.js';
 import { chooseLandAction } from './development-policy.js';
+import { chooseDiscards, chooseLibraryOrder } from './hand-policy.js';
+import { chooseSequence } from './sequence-policy.js';
+import { choosePlannedAttacks } from './attack-plan-policy.js';
 import { planPayment } from './mana.js';
 import { matchesEvent } from './events.js';
 import { legalActions } from './engine.js';
 import { canAttack, canBlock, suggestedDamage } from './combat.js';
-import { controlled, definition, hasKeyword, opponent, stats } from './model.js';
+import { controlled, definition, hasKeyword, isPacified, opponent, stats } from './model.js';
 const value = (s, o) => {
   const d = definition(s, o);
   return d.type === 'creature'
@@ -87,38 +90,27 @@ export function chooseBotCommand(s, p) {
                 );
               })
             : [];
+        let ordered = chooseLibraryOrder(s, p, rest);
         if (c.action === 'surveil') {
           const entry = s.resolving.entry;
           const remaining = entry.effects.slice(s.resolving.index);
           const draws = drawsFor(remaining, entry.controller, entry.target, p);
-          rest = rest.slice(0, Math.max(0, libraryCount(s, p) - draws));
+          rest = ordered.rest.slice(0, Math.max(0, libraryCount(s, p) - draws));
+          ordered = {
+            top: [...ordered.top, ...ordered.rest.filter((id) => !rest.includes(id))],
+            rest,
+          };
         }
         return {
           type: 'orderLibrary',
           player: p,
-          top: c.cards.filter((id) => !rest.includes(id)),
-          rest,
+          ...ordered,
         };
       }
       case 'discardEffect':
       case 'bottom':
       case 'discard': {
-        const cards = [...s.players[p].hand]
-          .sort((a, b) => {
-            const da = definition(s, s.objects[a]),
-              db = definition(s, s.objects[b]);
-            const landCount = s.players[p].hand.filter(
-              (id) => definition(s, s.objects[id]).type === 'land',
-            ).length;
-            const score = (d) =>
-              d.type === 'land'
-                ? landCount > 3
-                  ? -10
-                  : 10
-                : 8 - Object.values(d.cost).reduce((a, b) => a + b, 0);
-            return score(da) - score(db);
-          })
-          .slice(0, c.count);
+        const cards = chooseDiscards(s, p, c.count);
         return { type: c.kind, player: p, cards };
       }
       case 'triggerTarget': {
@@ -164,7 +156,7 @@ export function chooseBotCommand(s, p) {
       case 'assignDamage':
         return { type: 'assignDamage', player: p, orders: tacticalDamage(s) };
       case 'attackers':
-        return { type: 'attackers', player: p, cards: chooseAttacks(s, p) };
+        return { type: 'attackers', player: p, cards: choosePlannedAttacks(s, p) };
       case 'blockers':
         return { type: 'blockers', player: p, pairs: chooseBlocks(s, p).pairs };
     }
@@ -317,6 +309,22 @@ export function chooseBotCommand(s, p) {
       let score = -100;
       if (d.type === 'creature' || d.static || d.mana)
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);
+      if (d.type === 'creature') {
+        // Printed mana value is a cost, not the amount of board presence gained.
+        // Compare actual bodies/abilities; include known cantrip ETBs and mana
+        // development without assuming what an unknown draw will contain.
+        score = 2 + permanentValue(s, s.objects[a.card]);
+        score += (d.etb ?? []).reduce(
+          (sum, effect) => sum + (effect.op === 'draw' ? effect.count * 3 : 0),
+          0,
+        );
+        if (d.mana && controlled(s, p).filter((o) => definition(s, o).mana).length < 5) score += 3;
+        if (resolutionRisk(s, p, d.etb ?? [], a.target)) score = -100;
+      }
+      if (d.static?.kind === 'anthem')
+        score +=
+          controlled(s, p).filter((o) => definition(s, o).type === 'creature').length *
+          (d.static.power + d.static.toughness);
       if (d.effects?.some((e) => e.op === 'token')) score = 6;
       const search = d.effects?.find((e) => e.op === 'searchLibrary');
       const searchAbility = d.activated?.some((a) =>
@@ -402,6 +410,10 @@ export function chooseBotCommand(s, p) {
           ))
       )
         score = 6 + value(s, target);
+      // A second Pacifism does not neutralize another threat. Existing pacified
+      // bodies can still have relevant abilities, so only reject the redundant
+      // combat restriction, not all removal targeting those permanents.
+      if (d.aura === 'pacifism' && target && isPacified(s, target)) score = -100;
       if (d.effects?.some((e) => e.op === 'modify') && target?.controller === p)
         score = Math.max(score, trickScore(s, p, a));
       // Do not pile redundant damage/removal on the same target while it waits.
@@ -416,6 +428,25 @@ export function chooseBotCommand(s, p) {
       return { a, score };
     })
     .sort((a, b) => b.score - a.score);
-  if (casts[0]?.score > 0) return { ...casts[0].a, player: p };
+  const sequence = chooseSequence(s, p, casts);
+  const cast = sequence?.action ?? (casts[0]?.score > 0 ? casts[0].a : null);
+  if (cast) {
+    const d = definition(s, s.objects[cast.card]);
+    // Choose the best play before delaying an ordinary creature until main two.
+    // Removing it from scoring would spend its reserved mana on weaker spells.
+    // Haste, mana, static effects, ETBs and cast triggers can affect this combat.
+    const delay =
+      s.active === p &&
+      s.step === 'main1' &&
+      !s.stack.length &&
+      d.type === 'creature' &&
+      !d.mana &&
+      !d.static &&
+      !d.etb?.length &&
+      !d.triggers?.length &&
+      !d.keywords.includes('haste') &&
+      Object.values(s.objects).some((o) => canAttack(s, o, p));
+    if (!delay) return { ...cast, player: p };
+  }
   return { type: 'pass', player: p };
 }

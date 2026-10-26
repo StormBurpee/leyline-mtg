@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "createdAt": "2026-10-26T22:02:46.183Z",
+    "commit": "a9e790d5337c409d845e5f796c39fd229761d06e",
+    "policies": [
+      {
+        "name": "current",
+        "sha256": "32463f40bdb865e9c13814714abbd1c72a62d20e50f9e5aef6838bb3af4ca795",
+        "modules": 24
+      },
+      {
+        "name": "legacy",
+        "sha256": "bb6ce6b2fb7cfe6393179fdc0a9e7ba297fc3e02e96efff0d2c16293de29125b",
+        "modules": 16
+      }
+    ],
+    "workers": 2,
+    "node": "v24.22.1",
+    "platform": "win32",
+    "budgets": {
+      "maxDecisions": 3000,
+      "maxEpisodeMs": 300000,
+      "policies": {
+        "current": {
+          "blockers": 1400,
+          "attackResponse": 96,
+          "counterattack": 64,
+          "mainPhaseNodes": 256,
+          "mainPhaseDepth": 4,
+          "mainPhaseCandidates": 24,
+          "attackTrickCandidates": 48,
+          "attackTricksPerSet": 8
+        },
+        "legacy": {
+          "search": false
+        }
+      }
+    },
+    "options": {
+      "opponent": "legacy",
+      "suite": "mixed",
+      "decks": "ember,grove,dawn,nightfall,cinder,tide",
+      "seeds": "263,1597,8191,65537,524287",
+      "workers": "2",
+      "output": "docs/benchmarks/final-legacy.jsonl"
+    },
+    "games": 240
+  },
+  "games": 240,
+  "wins": 166,
+  "losses": 74,
+  "draws": 0,
+  "invalid": 0,
+  "terminations": {
+    "finished": 240
+  },
+  "decks": {
+    "cinder/cinder": {
+      "wins": 18,
+      "losses": 2,
+      "draws": 0,
+      "invalid": 0
+    },
+    "cinder/tide": {
+      "wins": 17,
+      "losses": 3,
+      "draws": 0,
+      "invalid": 0
+    },
+    "dawn/dawn": {
+      "wins": 14,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 0
+    },
+    "dawn/nightfall": {
+      "wins": 13,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    },
+    "ember/ember": {
+      "wins": 12,
+      "losses": 8,
+      "draws": 0,
+      "invalid": 0
+    },
+    "ember/grove": {
+      "wins": 11,
+      "losses": 9,
+      "draws": 0,
+      "invalid": 0
+    },
+    "grove/dawn": {
+      "wins": 13,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    },
+    "grove/grove": {
+      "wins": 13,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    },
+    "nightfall/cinder": {
+      "wins": 10,
+      "losses": 10,
+      "draws": 0,
+      "invalid": 0
+    },
+    "nightfall/nightfall": {
+      "wins": 14,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 0
+    },
+    "tide/ember": {
+      "wins": 14,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 0
+    },
+    "tide/tide": {
+      "wins": 17,
+      "losses": 3,
+      "draws": 0,
+      "invalid": 0
+    }
+  },
+  "completePairs": 120,
+  "excludedPairs": 0,
+  "pairedScore": 0.6916666666666667,
+  "pairedNormal95": [0.6479883266613401, 0.7353450066719932],
+  "completeBlocks": 60,
+  "excludedBlocks": 0,
+  "blockScore": 0.6916666666666667,
+  "blockNormal95": [0.6404115902105385, 0.7429217431227948],
+  "swept": 46,
+  "sweptAgainst": 0,
+  "elapsedMs": 272350.3608
+}

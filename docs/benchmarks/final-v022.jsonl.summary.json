@@ -1,0 +1,257 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "createdAt": "2026-10-26T22:02:44.741Z",
+    "commit": "a9e790d5337c409d845e5f796c39fd229761d06e",
+    "policies": [
+      {
+        "name": "current",
+        "sha256": "32463f40bdb865e9c13814714abbd1c72a62d20e50f9e5aef6838bb3af4ca795",
+        "modules": 24
+      },
+      {
+        "name": "released",
+        "sha256": "4254e0e3fcd3a4b8e624ab4ee1c715da9e6c7a96f2a270bfcd56fb6fd70877fb",
+        "modules": 22
+      }
+    ],
+    "workers": 4,
+    "node": "v24.22.1",
+    "platform": "win32",
+    "budgets": {
+      "maxDecisions": 3000,
+      "maxEpisodeMs": 300000,
+      "policies": {
+        "current": {
+          "blockers": 1400,
+          "attackResponse": 96,
+          "counterattack": 64,
+          "mainPhaseNodes": 256,
+          "mainPhaseDepth": 4,
+          "mainPhaseCandidates": 24,
+          "attackTrickCandidates": 48,
+          "attackTricksPerSet": 8
+        },
+        "released": {
+          "blockers": 1400,
+          "attackResponse": 96,
+          "counterattack": 64,
+          "mainPhaseNodes": 0,
+          "mainPhaseDepth": 0,
+          "mainPhaseCandidates": 0,
+          "attackTrickCandidates": 0,
+          "attackTricksPerSet": 0
+        }
+      }
+    },
+    "options": {
+      "suite": "mixed",
+      "seeds": "15485863,32452843,49979687,67867967,86028121",
+      "workers": "4",
+      "output": "docs/benchmarks/final-v022.jsonl"
+    },
+    "games": 600
+  },
+  "games": 600,
+  "wins": 324,
+  "losses": 269,
+  "draws": 0,
+  "invalid": 7,
+  "terminations": {
+    "finished": 593,
+    "policy_error": 7
+  },
+  "decks": {
+    "assault/assault": {
+      "wins": 12,
+      "losses": 8,
+      "draws": 0,
+      "invalid": 0
+    },
+    "assault/ember": {
+      "wins": 11,
+      "losses": 9,
+      "draws": 0,
+      "invalid": 0
+    },
+    "burial/burial": {
+      "wins": 10,
+      "losses": 10,
+      "draws": 0,
+      "invalid": 0
+    },
+    "burial/roots": {
+      "wins": 9,
+      "losses": 11,
+      "draws": 0,
+      "invalid": 0
+    },
+    "canopy/canopy": {
+      "wins": 16,
+      "losses": 4,
+      "draws": 0,
+      "invalid": 0
+    },
+    "canopy/tide": {
+      "wins": 11,
+      "losses": 9,
+      "draws": 0,
+      "invalid": 0
+    },
+    "cinder/canopy": {
+      "wins": 11,
+      "losses": 9,
+      "draws": 0,
+      "invalid": 0
+    },
+    "cinder/cinder": {
+      "wins": 11,
+      "losses": 9,
+      "draws": 0,
+      "invalid": 0
+    },
+    "dawn/dawn": {
+      "wins": 12,
+      "losses": 8,
+      "draws": 0,
+      "invalid": 0
+    },
+    "dawn/nightfall": {
+      "wins": 12,
+      "losses": 8,
+      "draws": 0,
+      "invalid": 0
+    },
+    "ember/ember": {
+      "wins": 10,
+      "losses": 10,
+      "draws": 0,
+      "invalid": 0
+    },
+    "ember/grove": {
+      "wins": 9,
+      "losses": 11,
+      "draws": 0,
+      "invalid": 0
+    },
+    "grove/cinder": {
+      "wins": 12,
+      "losses": 8,
+      "draws": 0,
+      "invalid": 0
+    },
+    "grove/grove": {
+      "wins": 11,
+      "losses": 9,
+      "draws": 0,
+      "invalid": 0
+    },
+    "nightfall/nightfall": {
+      "wins": 12,
+      "losses": 8,
+      "draws": 0,
+      "invalid": 0
+    },
+    "nightfall/relic": {
+      "wins": 8,
+      "losses": 12,
+      "draws": 0,
+      "invalid": 0
+    },
+    "oath/oath": {
+      "wins": 8,
+      "losses": 12,
+      "draws": 0,
+      "invalid": 0
+    },
+    "oath/spark": {
+      "wins": 11,
+      "losses": 9,
+      "draws": 0,
+      "invalid": 0
+    },
+    "relic/oath": {
+      "wins": 11,
+      "losses": 9,
+      "draws": 0,
+      "invalid": 0
+    },
+    "relic/relic": {
+      "wins": 10,
+      "losses": 10,
+      "draws": 0,
+      "invalid": 0
+    },
+    "rites/burial": {
+      "wins": 8,
+      "losses": 12,
+      "draws": 0,
+      "invalid": 0
+    },
+    "rites/rites": {
+      "wins": 13,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    },
+    "roots/assault": {
+      "wins": 9,
+      "losses": 10,
+      "draws": 0,
+      "invalid": 1
+    },
+    "roots/roots": {
+      "wins": 9,
+      "losses": 5,
+      "draws": 0,
+      "invalid": 6
+    },
+    "spark/spark": {
+      "wins": 13,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    },
+    "spark/undertow": {
+      "wins": 13,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    },
+    "tide/dawn": {
+      "wins": 11,
+      "losses": 9,
+      "draws": 0,
+      "invalid": 0
+    },
+    "tide/tide": {
+      "wins": 12,
+      "losses": 8,
+      "draws": 0,
+      "invalid": 0
+    },
+    "undertow/rites": {
+      "wins": 10,
+      "losses": 10,
+      "draws": 0,
+      "invalid": 0
+    },
+    "undertow/undertow": {
+      "wins": 9,
+      "losses": 11,
+      "draws": 0,
+      "invalid": 0
+    }
+  },
+  "completePairs": 295,
+  "excludedPairs": 5,
+  "pairedScore": 0.5474576271186441,
+  "pairedNormal95": [0.519747357463949, 0.5751678967733392],
+  "completeBlocks": 147,
+  "excludedBlocks": 3,
+  "blockScore": 0.5476190476190477,
+  "blockNormal95": [0.5207222099195262, 0.5745158853185691],
+  "swept": 50,
+  "sweptAgainst": 22,
+  "elapsedMs": 252636.1366
+}

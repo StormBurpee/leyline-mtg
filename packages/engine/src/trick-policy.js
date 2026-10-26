@@ -3,7 +3,7 @@ import { combatOutcome, permanentValue } from './combat-policy.js';
 import { legalTarget, resolveEffects } from './effects.js';
 import { definition, hasKeyword, ref, stats } from './model.js';
 
-function projectedModifiers(s, p, action) {
+export function projectedModifiers(s, p, action) {
   const card = s.objects[action.card];
   const lifeCost =
     action.type === 'activate' ? (definition(s, card).activated[action.ability].cost.life ?? 0) : 0;

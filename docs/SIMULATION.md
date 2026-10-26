@@ -69,6 +69,83 @@ This is still bounded tactical search plus heuristics. It does not model unknown
 
 Historical replay/engine regression uses a frozen pre-tactical policy so changes in decision quality do not masquerade as rules changes. Current-policy tests instead check legality, information boundaries, reproducibility and named tactical decisions.
 
+## Spell planning and paired evaluation
+
+The default bot now searches sequences of currently legal spells during its own
+main phase. The deterministic resource search considers up to 24 candidates,
+four spells and 256 nodes. It uses the actual automatic mana-payment plan, reserves
+ward costs, prevents repeated use of a card/target, and recognizes combined known
+face damage. It replans after every real action. It does **not** install simulated
+permanents, draw hidden cards, assume an opposing hand, resolve arbitrary triggers,
+or run a complete rules rollout. Newly enabled spells and targets are outside this
+horizon. Resource scores still come from heuristics.
+
+Scry, surveil, discard and mulligan-bottom choices compare visible cards against
+known mana needs, reconsidering marginal land value after each discard. Surveil
+retains enough cards for a known following draw. Ordinary creatures can wait until
+the second main phase to preserve combat-trick mana. Redundant Pacifism is rejected.
+Public attack triggers are included in hypothetical return attacks and decisions
+to retain tap-ability blockers. Temporary attack boosts are not valued as permanent
+material gained just by declaring an attack.
+
+Wide-board attack candidates include public evasion and keyword groups, avoiding
+the old gap where only one of several unblocked flyers attacked. A bounded extension
+can consider one known, affordable, pure modifier spell after the predicted
+blocker response (48 candidate evaluations total, eight per attack set). It charges
+for spending the card and accounts for attacking mana creatures becoming tapped.
+The actual bot replans after blocks. Unknown opposing responses, mixed-effect
+tricks and arbitrary spell chains remain outside that forecast.
+
+Run an evaluation through the opaque session boundary:
+
+```sh
+node scripts/evaluate-bots.mjs --candidate=current --opponent=released --suite=mixed --seeds=1229,3253,5501,7919,104729 --workers=4 --output=outputs/comparison.jsonl
+```
+
+The default includes all 15 starter mirrors, both policy seats and both starting
+players. `--suite=mixed` adds each starter against the next starter in registry
+order. `--decks=ember,grove`, `--starting=0`, `--maxDecisions=3000`, and
+`--maxEpisodeMs=300000` can restrict the experiment. The opponents are `released`
+(a frozen v0.22 policy) and `legacy` (the existing pre-tactical policy).
+
+Each JSONL file starts with source hashes, commit, runtime and budget metadata,
+then retains every episode result, including policy errors, illegal actions,
+decision limits and worker wall-time limits. Successful episode records include
+ruleset/configuration fingerprints and per-policy decision timing. A timed-out
+worker is terminated and replaced. Its configured seed/decks/seats remain recorded
+for reproduction; it has no completed episode fingerprint or policy timing.
+Output paths must be new, preventing accidental loss of failed experiments.
+
+The adjacent `.summary.json` reports raw outcomes separately from complete paired
+results. Confidence blocks group both starting-player variants of the same
+matchup/seed, rather than treating reused shuffles as independent samples. Normal
+intervals are approximate, conditional on the scheduled matchup/seed population,
+and can be unreliable for small samples or zero observed variance. They do not
+establish strength against human players or arbitrary decks. See
+[BOT_STRENGTH.md](BOT_STRENGTH.md) for the measured checkpoint and limitations.
+
+`--opponent=released-safe` explicitly selects the frozen v0.22 policy behind a
+minimal adapter that removes departed/stale public attacker references before
+calling it. The original v0.22 forecast can crash after an attacking Burnished Hart
+sacrifices itself. The native current policy checks those references directly;
+the adapter allows a complete comparison without editing the frozen reference.
+`released` retains the original behavior and is never silently replaced.
+
+For a stricter uncertainty analysis, group **all** matchups and starting-player
+variants sharing a seed together:
+
+```sh
+node scripts/summarize-bots.mjs outputs/comparison.jsonl outputs/comparison.analysis.json
+```
+
+This refuses incomplete files and existing output paths, records the raw input's
+SHA-256, and adds per-policy runtime aggregates and a seed-cluster interval. Any
+invalid episode or incomplete seat pair excludes its entire seed. The approximate
+t interval uses a conservatively rounded critical value (3 for 5-29 seeds, 2.1 for
+30 or more); fewer than five seeds have no interval. It is not a distribution-free
+bound. With five seeds, the block interval can exclude 50% while this stricter
+interval includes it. Preserve both and state which supports any strength claim.
+
 ## Library-search decisions and hidden identity
 
 During `librarySearch`, only the searching agent sees its library definitions and eligible opaque handles. Those handles can be submitted through the normal command boundary. After the search, library objects are concealed again; only public results and the agent’s own hand remain visible. Episode continuation and replay retain deterministic shuffle state privately.

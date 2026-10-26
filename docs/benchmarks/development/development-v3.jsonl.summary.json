@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "createdAt": "2026-10-26T21:37:17.857Z",
+    "commit": "dae135954740ff4d8e50fa6094c31e64e539c275",
+    "policies": [
+      {
+        "name": "current",
+        "sha256": "0bfd318e2199c8afa12e9eb68a98a7955cccb95988e43d6d70691ffb3644f940",
+        "modules": 23
+      },
+      {
+        "name": "released",
+        "sha256": "4254e0e3fcd3a4b8e624ab4ee1c715da9e6c7a96f2a270bfcd56fb6fd70877fb",
+        "modules": 22
+      }
+    ],
+    "workers": 4,
+    "node": "v24.22.1",
+    "platform": "win32",
+    "budgets": {
+      "maxDecisions": 3000,
+      "maxEpisodeMs": 300000,
+      "policies": {
+        "current": {
+          "blockers": 1400,
+          "attackResponse": 96,
+          "counterattack": 64,
+          "mainPhaseNodes": 256,
+          "mainPhaseDepth": 4,
+          "mainPhaseCandidates": 24
+        },
+        "released": {
+          "blockers": 1400,
+          "attackResponse": 96,
+          "counterattack": 64,
+          "mainPhaseNodes": 0,
+          "mainPhaseDepth": 0,
+          "mainPhaseCandidates": 0
+        }
+      }
+    },
+    "options": {
+      "decks": "ember,grove,tide,dawn,nightfall,relic,oath,cinder",
+      "seeds": "101,202,303",
+      "workers": "4",
+      "output": "outputs/development-v3.jsonl"
+    },
+    "games": 96
+  },
+  "games": 96,
+  "wins": 50,
+  "losses": 45,
+  "draws": 0,
+  "invalid": 1,
+  "terminations": {
+    "finished": 95,
+    "wall_time_limit": 1
+  },
+  "decks": {
+    "cinder/cinder": {
+      "wins": 8,
+      "losses": 4,
+      "draws": 0,
+      "invalid": 0
+    },
+    "dawn/dawn": {
+      "wins": 8,
+      "losses": 4,
+      "draws": 0,
+      "invalid": 0
+    },
+    "ember/ember": {
+      "wins": 6,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 0
+    },
+    "grove/grove": {
+      "wins": 5,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 1
+    },
+    "nightfall/nightfall": {
+      "wins": 5,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    },
+    "oath/oath": {
+      "wins": 7,
+      "losses": 5,
+      "draws": 0,
+      "invalid": 0
+    },
+    "relic/relic": {
+      "wins": 6,
+      "losses": 6,
+      "draws": 0,
+      "invalid": 0
+    },
+    "tide/tide": {
+      "wins": 5,
+      "losses": 7,
+      "draws": 0,
+      "invalid": 0
+    }
+  },
+  "completePairs": 47,
+  "excludedPairs": 1,
+  "pairedScore": 0.5212765957446809,
+  "pairedNormal95": [0.4549111126259857, 0.587642078863376],
+  "completeBlocks": 23,
+  "excludedBlocks": 1,
+  "blockScore": 0.5217391304347826,
+  "blockNormal95": [0.43508134318271485, 0.6083969176868503],
+  "swept": 6,
+  "sweptAgainst": 4,
+  "elapsedMs": 301677.7912
+}

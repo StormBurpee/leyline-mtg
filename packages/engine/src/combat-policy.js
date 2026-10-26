@@ -12,6 +12,11 @@ import {
   emptyMana,
 } from './model.js';
 
+const liveAttackers = (s) =>
+  s.combat.attackers.filter(
+    (r) => s.objects[r.id]?.zone === 'battlefield' && s.objects[r.id].incarnation === r.incarnation,
+  );
+
 /** Bounded, public-board combat search. No hands, library order, seed or RNG are read.
  * Damage and life-only death payoffs use the actual rules. Future draws, combat
  * tricks and other triggered effects remain outside this tactical horizon.
@@ -27,10 +32,18 @@ export function permanentValue(s, o) {
         (d.activated?.length ?? 0) * 1.2
     : Object.values(d.cost).reduce((a, b) => a + b, 0) + 1;
 }
-function boardCopy(s, active, pairs, attackerIds) {
+function boardCopy(s, active, pairs, attackerIds, compact = false) {
   const objects = Object.fromEntries(
     Object.values(s.objects)
-      .filter((o) => o.zone === 'battlefield')
+      .filter((o) => {
+        if (o.zone !== 'battlefield') return false;
+        const d = definition(s, o);
+        // Plain mana lands cannot participate in this combat-only forecast.
+        // Keep every land with a potentially relevant ability/static effect.
+        return (
+          !compact || d.type !== 'land' || d.triggers?.length || d.static || d.activated?.length
+        );
+      })
       .map((o) => [o.id, structuredClone(o)]),
   );
   const names = new Set(Object.values(objects).map((o) => o.name));
@@ -108,12 +121,18 @@ export function tacticalDamage(s, choice = s.choice) {
       limit = 1 << n;
     let best = null;
     for (let mask = 0; mask < limit; mask++) {
-      let spent = 0,
-        score = 0;
+      let spent = 0;
+      for (let i = 0; i < n; i++) {
+        if (mask & (1 << i)) spent += costs[i];
+        if (spent > source.power) break;
+      }
+      // Reject impossible damage allocations before expensive stat/keyword
+      // valuation. Numeric mask order and tie-breaking remain unchanged.
+      if (spent > source.power) continue;
+      let score = 0;
       const amounts = creatures.map(() => 0);
       for (let i = 0; i < n; i++)
         if (mask & (1 << i)) {
-          spent += costs[i];
           amounts[i] = costs[i];
           const o = s.objects[creatures[i].id];
           if (!hasKeyword(s, o, 'indestructible'))
@@ -125,7 +144,6 @@ export function tacticalDamage(s, choice = s.choice) {
                 ? Math.max(0, stats(s, o).power) * 1.2 + (hasKeyword(s, o, 'deathtouch') ? 5 : 0)
                 : 0);
         }
-      if (spent > source.power) continue;
       const all = creatures.every((_, i) => amounts[i] >= costs[i]);
       const face = player && all ? source.power - spent : 0;
       score += face * 1.5 + (player && face >= s.players[player.id].life ? 10000 : 0);
@@ -148,9 +166,13 @@ export function tacticalDamage(s, choice = s.choice) {
 export function combatOutcome(
   s,
   pairs,
-  { active = s.active, attackers = s.combat.attackers.map((r) => r.id), blocked = null } = {},
+  { active = s.active, attackers = liveAttackers(s).map((r) => r.id), blocked = null } = {},
 ) {
-  const work = boardCopy(s, active, pairs, attackers);
+  const work = boardCopy(s, active, pairs, attackers, true);
+  const omitted = Object.values(s.objects).filter(
+    (o) => o.zone === 'battlefield' && !work.objects[o.id],
+  );
+  const omittedIds = new Set(omitted.map((o) => o.id));
   if (blocked) work.combat.blocked = [...blocked];
   const first = [...attackers, ...pairs.map((p) => p.blocker)].some(
     (id) =>
@@ -173,6 +195,7 @@ export function combatOutcome(
     }
   }
   const values = [0, 0];
+  for (const o of omitted) values[o.controller] += permanentValue(s, o);
   for (const o of Object.values(work.objects))
     if (o.zone === 'battlefield') values[o.controller] += permanentValue(work, o);
   return {
@@ -180,8 +203,8 @@ export function combatOutcome(
     omittedTriggers,
     payoffLimitReached,
     values,
-    alive: Object.values(work.objects)
-      .filter((o) => o.zone === 'battlefield')
+    alive: Object.values(s.objects)
+      .filter((o) => omittedIds.has(o.id) || work.objects[o.id]?.zone === 'battlefield')
       .map((o) => o.id),
     winner: work.winner,
     status: work.status,
@@ -201,14 +224,14 @@ function utility(result, p) {
   );
 }
 function legalGroups(s, pairs) {
-  return s.combat.attackers.every(
+  return liveAttackers(s).every(
     (a) =>
       !hasKeyword(s, s.objects[a.id], 'menace') ||
       pairs.filter((p) => p.attacker === a.id).length !== 1,
   );
 }
 export function chooseBlocks(s, p, { budget = 1400 } = {}) {
-  const attackers = s.combat.attackers
+  const attackers = liveAttackers(s)
     .map((r) => s.objects[r.id])
     .filter((o) => o?.zone === 'battlefield');
   const blockers = Object.values(s.objects).filter(
@@ -284,7 +307,7 @@ export function preserveForDefense(s, source, p) {
   const enemy = 1 - p;
   const attackers =
     s.active === enemy && s.combat.attackers.length
-      ? s.combat.attackers.map((r) => r.id)
+      ? liveAttackers(s).map((r) => r.id)
       : Object.values(s.objects)
           .filter(
             (o) =>
@@ -311,11 +334,15 @@ export function preserveForDefense(s, source, p) {
           ),
         }
       : s;
-  const view = {
+  let view = {
     ...projected,
     active: enemy,
     combat: { ...s.combat, attackers: attackers.map((id) => ref(s.objects[id])) },
   };
+  // Already declared attackers carry their resolved modifiers in the public
+  // board. Only hypothetical declarations should add attack payoffs again.
+  if (!(s.active === enemy && s.combat.attackers.length))
+    view = projectAttackDeclaration(view, enemy, attackers);
   const held = chooseBlocks(view, p, { budget: 180 });
   const tapped = {
     ...view,
@@ -359,7 +386,7 @@ function projectAttackDeclaration(s, p, ids) {
   }
   return work;
 }
-export function chooseAttacks(s, p) {
+export function chooseAttacks(s, p, { improveOutcome } = {}) {
   const eligible = Object.values(s.objects).filter((o) => canAttack(s, o, p));
   if (!eligible.length) return [];
   const sets = [[], eligible.map((o) => o.id)];
@@ -373,9 +400,52 @@ export function chooseAttacks(s, p) {
     }
     const byPower = [...eligible].sort((a, b) => stats(s, b).power - stats(s, a).power);
     for (const count of [2, 3, 4]) sets.push(byPower.slice(0, count).map((o) => o.id));
+    // On wide boards, all/single/largest-power subsets miss entire evasive
+    // attacks (for example two small flyers behind four stalled ground bodies).
+    // Include coherent public ability groups before evaluating defender replies.
+    const defenders = Object.values(s.objects).filter(
+      (o) => o.zone === 'battlefield' && o.controller !== p,
+    );
+    const unopposed = eligible.filter((a) => !defenders.some((b) => canBlock(s, b, a, 1 - p)));
+    sets.push(unopposed.map((o) => o.id));
+    for (const keyword of [
+      'flying',
+      'vigilance',
+      'first strike',
+      'double strike',
+      'lifelink',
+      'trample',
+    ]) {
+      const group = eligible.filter((o) => hasKeyword(s, o, keyword));
+      if (group.length) sets.push(group.map((o) => o.id));
+    }
+    for (const count of [1, 2]) {
+      const selected = new Set([...unopposed, ...byPower.slice(0, count)]);
+      sets.push(eligible.filter((o) => selected.has(o)).map((o) => o.id));
+    }
   }
   let best = { cards: [], score: -Infinity };
+  const hasAttackTriggers = Object.values(s.objects).some(
+    (o) =>
+      o.zone === 'battlefield' &&
+      (definition(s, o).triggers ?? []).some(
+        (t) => t.event === 'selfAttacks' || t.event?.event === 'attack',
+      ),
+  );
+  const stable = { ...s, modifiers: (s.modifiers ?? []).filter((m) => m.expires !== s.turn) };
+  const stableOutcome = (result) => ({
+    ...result,
+    values: [0, 1].map((player) =>
+      result.alive
+        .filter((id) => s.objects[id]?.controller === player)
+        .reduce((sum, id) => sum + permanentValue(stable, s.objects[id]), 0),
+    ),
+  });
+  const seen = new Set();
   for (const cards of sets) {
+    const key = JSON.stringify(cards);
+    if (seen.has(key)) continue;
+    seen.add(key);
     let scenario = {
       ...s,
       active: p,
@@ -387,15 +457,10 @@ export function chooseAttacks(s, p) {
         hasFirst: false,
       },
     };
-    const hasAttackTriggers = Object.values(s.objects).some(
-      (o) =>
-        o.zone === 'battlefield' &&
-        (definition(s, o).triggers ?? []).some(
-          (t) => t.event === 'selfAttacks' || t.event?.event === 'attack',
-        ),
-    );
     if (hasAttackTriggers) scenario = projectAttackDeclaration(scenario, p, cards);
-    const result =
+    const response =
+      scenario.status === 'finished' ? null : chooseBlocks(scenario, 1 - p, { budget: 96 });
+    let result =
       scenario.status === 'finished'
         ? {
             life: scenario.players.map((player) => player.life),
@@ -408,8 +473,22 @@ export function chooseAttacks(s, p) {
               .filter((o) => o.zone === 'battlefield')
               .map((o) => o.id),
           }
-        : chooseBlocks(scenario, 1 - p, { budget: 96 }).outcome;
-    let score = utility(result, p);
+        : response.outcome;
+    let expense = 0;
+    if (response && cards.length && improveOutcome) {
+      const improved = improveOutcome({
+        state: scenario,
+        cards,
+        response,
+        evaluate: (r) => utility(stableOutcome(r), p),
+      });
+      if (improved) {
+        result = improved.outcome;
+        expense = improved.expense;
+      }
+    }
+    // Temporary attack boosts are not permanent material won by attacking.
+    let score = utility(stableOutcome(result), p) - expense;
     if (result.life[p] > 0 && result.life[1 - p] > 0) {
       const alive = new Set(result.alive);
       const objects = Object.fromEntries(
@@ -452,7 +531,16 @@ export function chooseAttacks(s, p) {
         firstEligible: [],
         hasFirst: false,
       };
-      const defense = chooseBlocks(reply, p, { budget: 64 }).outcome;
+      // The opponent's declared-attack payoffs matter on the return attack too.
+      // Evaluate only public deterministic effects, with no invented hand/draw.
+      const responding = hasAttackTriggers
+        ? projectAttackDeclaration(
+            reply,
+            1 - p,
+            incoming.map((o) => o.id),
+          )
+        : reply;
+      const defense = chooseBlocks(responding, p, { budget: 64 }).outcome;
       if (defense.life[p] <= 0) score -= 100_000;
       else if (defense.life[p] <= 4) score -= 12;
     }
