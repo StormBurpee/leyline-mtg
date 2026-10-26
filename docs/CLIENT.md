@@ -46,3 +46,13 @@ The v0.8 target-choice browser check used the shipped Exclusion Mage replay: an 
 For v0.9, a real Poison Dart Frog replay exercised cancelling its ability menu, choosing blue mana, reopening the tapped creature and paying for its separate deathtouch ability. Mana production did not use the stack; the other ability did. The inspector now displays gained keywords after resolution.
 
 Second Burial demonstrates graveyard play. In the shipped reanimation position, Zombify can target Sire of Seven Deaths in its owner's graveyard. The graveyard chooser can be dismissed and reopened without casting; selecting the card pays the spell's mana cost and puts it on the stack. The card returns only after both players pass. Earlier QA matches are preserved as replay exports before replacing preview state.
+
+## Deck room and construction
+
+All 12 starter decks are available in the deck room. Choose the opponent independently, including mirror matches. The starters are exploratory lists, not tournament or format recommendations.
+
+Customize a starter or build a fresh list. The visual builder has card/rules search, color and type filters, click/drag-to-add, quantity controls, live mana curve and validation. Basic lands can exceed four copies; other cards cannot. Lists remain bounded at 250 cards.
+
+Save personal lists locally, export plain-text Arena-style lists, or import main decks. Unsupported cards stay visible in imported drafts, and block playing until removed or supported. Syntax errors and sideboards are rejected rather than silently discarded. Drafts are recoverable from the deck room after a reload. Browser storage is not cloud synchronization; export important lists.
+
+The table uses bounded layout tracks for priority controls, separate art and live-stat overlays, and physical tap rotations. Reduced-motion preferences still apply to all game animations. Deck editing does not change a match already in progress; starting a replacement match requires a separate confirmation.

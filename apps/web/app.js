@@ -1,3 +1,11 @@
+import {
+  deckRoom,
+  deckBuilder,
+  selectedDeck,
+  deckEntries,
+  readDeckLibrary,
+  DECK_LIBRARY_KEY,
+} from './deck-room.js';
 import { cardDropPlan } from './drop-plan.js';
 import { installCardDrag } from './gestures.js';
 import { captureTable, animateTable, renderCombatLinks } from './motion.js';
@@ -22,17 +30,7 @@ import {
   suggestedDamage,
   targetsFor,
 } from '../../packages/engine/src/index.js';
-import {
-  escape,
-  header,
-  lobby,
-  game,
-  catalog,
-  enginePage,
-  inspect,
-  artStyle,
-  mana,
-} from './view.js';
+import { escape, header, game, catalog, enginePage, inspect, artStyle, mana } from './view.js';
 const SAVE_KEY = 'leyline.match.v1';
 const app = document.querySelector('#app'),
   dialog = document.querySelector('#dialog');
@@ -65,6 +63,15 @@ const ui = {
   view: 'play',
   catalog: CARDS,
   deck: 'ember',
+  opponentDeck: 'grove',
+  personalDecks: [],
+  deckQuery: '',
+  deckColor: 'all',
+  deckDraft: null,
+  recoveredDraft: null,
+  builderQuery: '',
+  builderColor: 'all',
+  builderType: 'all',
   mode: 'bot',
   seed: 731,
   autoYield: true,
@@ -88,6 +95,22 @@ const ui = {
   replayRecord: null,
   replayIndex: 0,
 };
+try {
+  ui.personalDecks = readDeckLibrary(localStorage);
+  const draft = JSON.parse(localStorage.getItem('leyline.deck-draft.v1') ?? 'null');
+  if (
+    draft &&
+    typeof draft.name === 'string' &&
+    draft.cards &&
+    typeof draft.cards === 'object' &&
+    !Array.isArray(draft.cards) &&
+    Object.entries(draft.cards).every(
+      ([name, n]) => name.length < 160 && Number.isInteger(n) && n > 0 && n <= 250,
+    ) &&
+    Object.values(draft.cards).reduce((a, b) => a + b, 0) <= 250
+  )
+    ui.recoveredDraft = draft;
+} catch {}
 try {
   ui.reduceMotion = localStorage.getItem('leyline.reduce-motion') === 'true';
 } catch {}
@@ -115,7 +138,7 @@ function render() {
   else if (focused?.dataset.action)
     focusSelector = `[data-action="${CSS.escape(focused.dataset.action)}"]${focused.dataset.view ? `[data-view="${CSS.escape(focused.dataset.view)}"]` : ''}`;
   const wasDock = !!focused?.closest('.action-dock');
-  app.innerHTML = `<div class="shell">${header(ui)}${ui.view === 'cards' ? catalog(ui, metadata) : ui.view === 'engine' ? enginePage(state) : state ? game(state, ui, metadata) : lobby(ui, metadata)}</div>`;
+  app.innerHTML = `<div class="shell">${header(ui)}${ui.view === 'builder' ? deckBuilder(ui, metadata) : ui.view === 'decks' ? deckRoom(ui, metadata) : ui.view === 'cards' ? catalog(ui, metadata) : ui.view === 'engine' ? enginePage(state) : state ? game(state, ui, metadata) : deckRoom(ui, metadata)}</div>`;
   for (const position of scrollPositions) {
     const element = app.querySelector(`[data-scroll-key="${CSS.escape(position.key)}"]`);
     if (element) {
@@ -256,6 +279,18 @@ dialog.addEventListener('click', (e) => {
   }
 });
 function start() {
+  if ((state && state.status !== 'finished' && !ui.replayRecord) || (!state && ui.saved)) {
+    save();
+    openDialog(
+      'Start a new match?',
+      '<p>Your current match will be replaced. Export its replay first if you want to keep it.</p>',
+      '<button class="btn" data-action="export">Export current replay</button><button class="btn" data-action="closeDialog">Cancel</button><button class="btn primary" data-action="confirmStart">Start new match</button>',
+    );
+    return;
+  }
+  startConfirmed();
+}
+function startConfirmed() {
   clearTimeout(botTimer);
   ui.replayRecord = null;
   ui.seat = 0;
@@ -264,15 +299,20 @@ function start() {
   try {
     state = createGame({
       decks: [
-        ui.customDeck ?? expandDeck(DECKS[ui.deck].cards),
-        expandDeck(DECKS[ui.deck === 'ember' ? 'grove' : 'ember'].cards),
+        expandDeck(selectedDeck(ui).cards),
+        expandDeck(
+          (deckEntries(ui).find(([id]) => id === ui.opponentDeck)?.[1] ?? DECKS.grove).cards,
+        ),
       ],
       seed: ui.seed,
-      catalog: ui.catalog,
+      catalog: CARDS,
       names:
         ui.mode === 'hotseat'
           ? ['Player one', 'Player two']
-          : ['You', ui.deck === 'ember' ? 'Grovekeeper' : 'Embermage'],
+          : [
+              selectedDeck(ui).name,
+              (deckEntries(ui).find(([id]) => id === ui.opponentDeck)?.[1] ?? DECKS.grove).name,
+            ],
     });
     ui.view = 'play';
     save();
@@ -283,33 +323,36 @@ function start() {
   }
 }
 function exportMatch() {
-  if (!state) {
-    toast('Start a match first.');
+  let record;
+  try {
+    record = state ? exportReplay(state) : JSON.parse(readSave() ?? 'null')?.replay;
+  } catch {
+    toast('The saved match could not be read.');
     return;
   }
-  const blob = new Blob([JSON.stringify(exportReplay(state), null, 2)], {
-    type: 'application/json',
-  });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  if (!record) {
+    toast('There is no match to export.');
+    return;
+  }
+  const blob = new Blob([JSON.stringify(record, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob),
+    a = document.createElement('a');
   a.href = url;
-  a.download = `leyline-${state.seed}-turn-${state.turn}.json`;
+  a.download = `leyline-match-${Date.now()}.json`;
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
   toast('Replay exported. It contains both players’ full decks and hidden cards.');
 }
 function showDeck() {
-  const list = ui.customDeck
-    ? ui.customDeck.reduce((a, n) => ((a[n] = (a[n] ?? 0) + 1), a), {})
-    : DECKS[ui.deck].cards;
+  const list = selectedDeck(ui).cards;
   openDialog(
-    ui.customDeck ? 'Your imported deck' : DECKS[ui.deck].name,
+    selectedDeck(ui).name,
     `<p style="margin-bottom:16px">${Object.values(list).reduce((a, b) => a + b, 0)} cards · supported local constructed pool</p>${Object.entries(
       list,
     )
       .map(
         ([n, c]) =>
-          `<div class="rule-row"><span>${c} × ${escape(n)}</span>${mana((ui.catalog[n] ?? CARDS[n]).cost)}</div>`,
+          `<div class="rule-row"><span>${c} × ${escape(n)}</span>${mana((ui.catalog[n] ?? CARDS[n])?.cost ?? {})}</div>`,
       )
       .join('')}`,
   );
@@ -433,8 +476,130 @@ function showTargetMenu() {
   dialog._targetCommands = commands;
   dialog._targetRevision = state.revision;
 }
+function preserveDraft() {
+  ui.recoveredDraft = ui.deckDraft;
+  try {
+    localStorage.setItem('leyline.deck-draft.v1', JSON.stringify(ui.deckDraft));
+  } catch {}
+}
+function editDeck(draft) {
+  ui.deckDraft = structuredClone(draft);
+  ui.builderQuery = '';
+  ui.builderColor = 'all';
+  ui.builderType = 'all';
+  ui.view = 'builder';
+  preserveDraft();
+  render();
+  window.scrollTo(0, 0);
+}
+function saveDraft(select = false) {
+  const draft = ui.deckDraft;
+  if (!draft.name.trim()) {
+    toast('Give your deck a name first.');
+    return;
+  }
+  const id = draft.id ?? `personal-${crypto.randomUUID()}`;
+  const next = { id, name: draft.name.trim(), cards: { ...draft.cards } };
+  const library = [...ui.personalDecks.filter((d) => d.id !== id), next];
+  if (library.length > 100) {
+    toast('This device already has 100 saved decks.');
+    return;
+  }
+  try {
+    localStorage.setItem(DECK_LIBRARY_KEY, JSON.stringify(library));
+  } catch {
+    toast('Could not save the deck. Export the list to keep your changes.');
+    return;
+  }
+  ui.personalDecks = library;
+  ui.deckDraft.id = id;
+  preserveDraft();
+  toast('Deck saved on this device.');
+  if (select) {
+    ui.deck = id;
+    ui.customDeck = null;
+    ui.view = 'decks';
+  }
+  render();
+}
 async function action(name, el) {
   switch (name) {
+    case 'resumeDraft':
+      if (ui.recoveredDraft) editDeck(ui.recoveredDraft);
+      break;
+    case 'newDeck':
+      editDeck({ name: 'Untitled deck', cards: {} });
+      break;
+    case 'editDeck': {
+      const deck = selectedDeck(ui);
+      editDeck({
+        name: deck.personal ? deck.name : `${deck.name} — my list`,
+        cards: deck.cards,
+        ...(deck.personal ? { id: ui.deck } : {}),
+      });
+      break;
+    }
+    case 'closeBuilder':
+      preserveDraft();
+      ui.view = 'decks';
+      render();
+      break;
+    case 'deckColor':
+      ui.deckColor = el.dataset.color;
+      render();
+      break;
+    case 'addDraftCard': {
+      const n = el.dataset.name,
+        d = CARDS[n];
+      if (!ui.deckDraft || !d || d.token) break;
+      const count = ui.deckDraft.cards[n] ?? 0;
+      if (
+        Object.values(ui.deckDraft.cards).reduce((a, b) => a + b, 0) >= 250 ||
+        (!d.basic && count >= 4)
+      )
+        break;
+      ui.deckDraft.cards[n] = count + 1;
+      preserveDraft();
+      render();
+      break;
+    }
+    case 'removeDraftCard': {
+      const n = el.dataset.name;
+      if (!ui.deckDraft?.cards[n]) break;
+      if (--ui.deckDraft.cards[n] <= 0) delete ui.deckDraft.cards[n];
+      preserveDraft();
+      render();
+      break;
+    }
+    case 'saveDraft':
+      saveDraft();
+      break;
+    case 'saveAndPlayDraft':
+      saveDraft(true);
+      break;
+    case 'exportDraft': {
+      const blob = new Blob(
+        [
+          'Deck\n' +
+            Object.entries(ui.deckDraft.cards)
+              .map(([n, c]) => `${c} ${n}`)
+              .join('\n'),
+        ],
+        { type: 'text/plain' },
+      );
+      const url = URL.createObjectURL(blob),
+        a = document.createElement('a');
+      a.href = url;
+      a.download = 'leyline-deck.txt';
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      break;
+    }
+    case 'confirmStart':
+      closeDialog();
+      startConfirmed();
+      break;
+
     case 'home':
     case 'newMatch':
       if (state && state.status !== 'finished' && !ui.replayRecord) {
@@ -464,6 +629,7 @@ async function action(name, el) {
       break;
     case 'selectDeck':
       ui.deck = el.dataset.deck;
+      if (!deckEntries(ui).some(([id]) => id === ui.deck)) ui.deck = 'ember';
       ui.customDeck = null;
       ui.catalog = CARDS;
       render();
@@ -502,22 +668,27 @@ async function action(name, el) {
       openDialog(
         'Bring your own deck',
         `<p style="margin-bottom:16px">Paste a 60-card list. Arena-style set codes are accepted. Only executable cards in the catalog are supported. No silent substitutions.</p><textarea id="deck-input" aria-label="Deck list" placeholder="12 Mountain\n12 Island\n4 Lightning Bolt\n…"></textarea><div id="deck-errors" class="error-list"></div>`,
-        '<button class="btn" data-action="closeDialog">Cancel</button><button class="btn primary" data-action="validateDeck">Validate & use deck</button>',
+        '<button class="btn" data-action="closeDialog">Cancel</button><button class="btn primary" data-action="validateDeck">Open in deck builder</button>',
       );
       break;
     case 'validateDeck': {
       const result = parseDeck(document.querySelector('#deck-input').value, {
         catalog: ui.catalog,
       });
-      if (result.errors.length) {
-        document.querySelector('#deck-errors').textContent = result.errors.join('\n');
+      const structural = result.errors.filter((error) => error.startsWith('Line '));
+      if (structural.length || result.names.length > 250 || !result.names.length) {
+        document.querySelector('#deck-errors').textContent =
+          structural.join('\n') || 'Import between 1 and 250 main-deck cards.';
         break;
       }
-      ui.customDeck = result.names;
+      const cards = Object.fromEntries(
+        [...new Set(result.names)].map((name) => [
+          name,
+          result.names.filter((n) => n === name).length,
+        ]),
+      );
       closeDialog();
-      if (state) {
-        toast('Deck imported for your next match. Current match is unchanged.');
-      } else render();
+      editDeck({ name: 'Imported deck', cards });
       break;
     }
     case 'acceptOptional':
@@ -1086,6 +1257,18 @@ app.addEventListener('pointerover', (e) => {
 });
 document.addEventListener('change', (e) => {
   switch (e.target.id) {
+    case 'opponent-deck':
+      ui.opponentDeck = e.target.value;
+      render();
+      break;
+    case 'builder-color':
+      ui.builderColor = e.target.value;
+      render();
+      break;
+    case 'builder-type':
+      ui.builderType = e.target.value;
+      render();
+      break;
     case 'mode':
       ui.mode = e.target.value;
       break;
@@ -1115,6 +1298,22 @@ document.addEventListener('change', (e) => {
   }
 });
 app.addEventListener('input', (e) => {
+  if (e.target.id === 'deck-name') {
+    ui.deckDraft.name = e.target.value;
+    preserveDraft();
+    return;
+  }
+  if (['deck-search', 'builder-search'].includes(e.target.id)) {
+    const id = e.target.id,
+      pos = e.target.selectionStart;
+    ui[id === 'deck-search' ? 'deckQuery' : 'builderQuery'] = e.target.value;
+    render();
+    const input = document.getElementById(id);
+    input.focus();
+    input.setSelectionRange(pos, pos);
+    return;
+  }
+
   if (e.target.id === 'replay-position') {
     replayTo(Number(e.target.value));
     return;
@@ -1130,6 +1329,27 @@ app.addEventListener('input', (e) => {
     } catch {}
   }
 });
+app.addEventListener('dragstart', (e) => {
+  const card = e.target.closest('.builder-card');
+  if (!card || card.disabled) return;
+  e.dataTransfer.setData('text/plain', card.dataset.name);
+  e.dataTransfer.effectAllowed = 'copy';
+  app.querySelector('[data-deck-drop]')?.classList.add('accepting-card');
+});
+app.addEventListener('dragover', (e) => {
+  if (e.target.closest('[data-deck-drop]')) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+  }
+});
+app.addEventListener('drop', (e) => {
+  if (!e.target.closest('[data-deck-drop]')) return;
+  e.preventDefault();
+  action('addDraftCard', { dataset: { name: e.dataTransfer.getData('text/plain') } });
+});
+app.addEventListener('dragend', () =>
+  app.querySelector('[data-deck-drop]')?.classList.remove('accepting-card'),
+);
 document.addEventListener('keydown', (e) => {
   if (e.repeat) return;
   if (dialog.open || ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(e.target.tagName)) return;

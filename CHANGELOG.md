@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.11.0 — The deck room
+
+- Rebuilt the lobby as an art-led deck library with all 12 starter lists and independent opponent selection.
+- Added a visual deck builder: card search, color/type filters, drag-to-add, copy controls, mana curve, local saves, draft recovery and list export.
+- Imports can retain unsupported cards as visibly incomplete drafts; incomplete lists cannot start a game.
+- Reworked the tabletop with printed card silhouettes, live-stat overlays, stronger tap states and explicit layout tracks that keep match controls visible.
+- Added nine new 60-card introductory lists. These are executable demonstrations, not format-certified or competitive lists.
+- Fixed importing more than four copies of an unsupported card throwing instead of returning validation errors.
+
 ## 0.10.0 — Graveyard play and a third deck
 
 - Graveyard targeting, recovery, reanimation and exile removal.
