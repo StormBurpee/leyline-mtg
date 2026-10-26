@@ -165,6 +165,8 @@ if (!isMainThread) {
                 mainPhaseNodes: name === 'current' ? 256 : 0,
                 mainPhaseDepth: name === 'current' ? 4 : 0,
                 mainPhaseCandidates: name === 'current' ? 24 : 0,
+                attackTrickCandidates: name === 'current' ? 48 : 0,
+                attackTricksPerSet: name === 'current' ? 8 : 0,
               },
         ]),
       ),

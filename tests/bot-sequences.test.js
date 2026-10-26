@@ -7,6 +7,7 @@ import { fixture, put, lands, act, resolve } from '../packages/engine/test/helpe
 test('plan two useful spells rather than a single expensive spell that strands mana', () => {
   let s = fixture();
   lands(s, 'Forest', 4);
+  s.players[0].landsPlayed = 1;
   const spider = put(s, 'Giant Spider', 0, 'hand');
   const bear = put(s, 'Grizzly Bears', 0, 'hand');
   const visionary = put(s, 'Elvish Visionary', 0, 'hand');
@@ -16,6 +17,7 @@ test('plan two useful spells rather than a single expensive spell that strands m
   assert.ok([bear.id, visionary.id].includes(first.card));
   assert.deepEqual(s, before);
   s = resolve(act(s, 'cast', first));
+  while (s.stack.length) s = resolve(s);
   const second = chooseBotCommand(s, 0);
   assert.ok([bear.id, visionary.id].includes(second.card));
   assert.notEqual(first.card, second.card);
@@ -32,6 +34,21 @@ test('search recognizes a known two-spell lethal line before nonlethal developme
   const action = chooseBotCommand(s, 0);
   assert.ok([bolt.id, shock.id].includes(action.card));
   assert.deepEqual(action.target, { kind: 'player', id: 1 });
+});
+
+test('creature development values board impact rather than printed mana expenditure', () => {
+  const s = fixture();
+  lands(s, 'Forest', 4);
+  const bear = put(s, 'Grizzly Bears', 0, 'hand');
+  const spider = put(s, 'Giant Spider', 0, 'hand');
+  // Equally affordable fixture bodies: the higher-cost 1/1 must not beat a 4/4.
+  s.catalog = {
+    ...s.catalog,
+    'Grizzly Bears': { ...s.catalog['Grizzly Bears'], power: 4, toughness: 4 },
+    'Giant Spider': { ...s.catalog['Giant Spider'], power: 1, toughness: 1, keywords: [] },
+  };
+  assert.equal(chooseBotCommand(s, 0).card, bear.id);
+  assert.notEqual(chooseBotCommand(s, 0).card, spider.id);
 });
 
 test('resource search follows actual automatic payments rather than summed mana costs', () => {

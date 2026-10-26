@@ -9,15 +9,16 @@ import {
 } from './decision-safety.js';
 import {
   chooseBlocks,
-  chooseAttacks,
   preserveForDefense,
   tacticalDamage,
+  permanentValue,
 } from './combat-policy.js';
 import { orderLifePayoffs, acceptLifePayoff } from './combat-payoffs.js';
 import { trickScore } from './trick-policy.js';
 import { chooseLandAction } from './development-policy.js';
 import { chooseDiscards, chooseLibraryOrder } from './hand-policy.js';
 import { chooseSequence } from './sequence-policy.js';
+import { choosePlannedAttacks } from './attack-plan-policy.js';
 import { planPayment } from './mana.js';
 import { matchesEvent } from './events.js';
 import { legalActions } from './engine.js';
@@ -154,7 +155,7 @@ export function chooseBotCommand(s, p) {
       case 'assignDamage':
         return { type: 'assignDamage', player: p, orders: tacticalDamage(s) };
       case 'attackers':
-        return { type: 'attackers', player: p, cards: chooseAttacks(s, p) };
+        return { type: 'attackers', player: p, cards: choosePlannedAttacks(s, p) };
       case 'blockers':
         return { type: 'blockers', player: p, pairs: chooseBlocks(s, p).pairs };
     }
@@ -307,6 +308,22 @@ export function chooseBotCommand(s, p) {
       let score = -100;
       if (d.type === 'creature' || d.static || d.mana)
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);
+      if (d.type === 'creature') {
+        // Printed mana value is a cost, not the amount of board presence gained.
+        // Compare actual bodies/abilities; include known cantrip ETBs and mana
+        // development without assuming what an unknown draw will contain.
+        score = 2 + permanentValue(s, s.objects[a.card]);
+        score += (d.etb ?? []).reduce(
+          (sum, effect) => sum + (effect.op === 'draw' ? effect.count * 3 : 0),
+          0,
+        );
+        if (d.mana && controlled(s, p).filter((o) => definition(s, o).mana).length < 5) score += 3;
+        if (resolutionRisk(s, p, d.etb ?? [], a.target)) score = -100;
+      }
+      if (d.static?.kind === 'anthem')
+        score +=
+          controlled(s, p).filter((o) => definition(s, o).type === 'creature').length *
+          (d.static.power + d.static.toughness);
       if (d.effects?.some((e) => e.op === 'token')) score = 6;
       const search = d.effects?.find((e) => e.op === 'searchLibrary');
       const searchAbility = d.activated?.some((a) =>

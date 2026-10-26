@@ -93,3 +93,43 @@ test('ordinary development waits for main two while a known combat trick stays a
   s.step = 'main2';
   assert.equal(chooseBotCommand(s, 0).card, handBear.id);
 });
+
+test('attack with the entire evasive group on a wide, stalled ground board', () => {
+  const s = fixture();
+  for (let i = 0; i < 4; i++) put(s, 'Grizzly Bears', 0);
+  const flyers = [put(s, 'Stormchaser Mage', 0), put(s, 'Stormchaser Mage', 0)];
+  for (let i = 0; i < 3; i++) put(s, 'Colossal Dreadmaw', 1);
+  s.players[0].life = 30;
+  s.choice = { kind: 'attackers', player: 0 };
+  assert.equal(released(s, 0).cards.length, 1);
+  assert.deepEqual(
+    chooseBotCommand(s, 0).cards,
+    flyers.map((o) => o.id),
+  );
+});
+
+test('attack into a larger blocker when a known affordable trick wins the exchange', () => {
+  const s = fixture();
+  lands(s, 'Forest', 1);
+  const bear = put(s, 'Grizzly Bears', 0);
+  put(s, 'Centaur Courser', 1);
+  put(s, 'Giant Growth', 0, 'hand');
+  s.choice = { kind: 'attackers', player: 0 };
+  assert.deepEqual(released(s, 0).cards, []);
+  const before = structuredClone(s);
+  assert.deepEqual(chooseBotCommand(s, 0).cards, [bear.id]);
+  assert.deepEqual(s, before);
+  s.objects[
+    Object.values(s.objects).find((o) => o.name === 'Forest' && o.zone === 'battlefield').id
+  ].tapped = true;
+  assert.deepEqual(chooseBotCommand(s, 0).cards, []);
+});
+
+test('an attacking mana creature cannot also pay for its forecast combat trick', () => {
+  const s = fixture();
+  put(s, 'Llanowar Elves', 0);
+  put(s, 'Grizzly Bears', 1);
+  put(s, 'Giant Growth', 0, 'hand');
+  s.choice = { kind: 'attackers', player: 0 };
+  assert.deepEqual(chooseBotCommand(s, 0).cards, []);
+});

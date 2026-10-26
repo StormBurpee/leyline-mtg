@@ -88,6 +88,14 @@ Public attack triggers are included in hypothetical return attacks and decisions
 to retain tap-ability blockers. Temporary attack boosts are not valued as permanent
 material gained just by declaring an attack.
 
+Wide-board attack candidates include public evasion and keyword groups, avoiding
+the old gap where only one of several unblocked flyers attacked. A bounded extension
+can consider one known, affordable, pure modifier spell after the predicted
+blocker response (48 candidate evaluations total, eight per attack set). It charges
+for spending the card and accounts for attacking mana creatures becoming tapped.
+The actual bot replans after blocks. Unknown opposing responses, mixed-effect
+tricks and arbitrary spell chains remain outside that forecast.
+
 Run an evaluation through the opaque session boundary:
 
 ```sh

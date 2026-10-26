@@ -28,13 +28,34 @@ was removed; targeted lethal forecasts and regression fixes remain. These seeds
 are development data, not held-out evidence. Development JSONL artifacts are kept
 locally under `outputs/`, including any failed/truncated episodes.
 
-The larger held-out evaluation will be recorded here before review completion.
+The initial checkpoint (`4d8a839`) scored **294–305 with one wall-time limit** over
+600 games: all 15 starter mirrors and 15 cyclic cross-deck matchups, seeds
+1229/3253/5501/7919/104729, both seats and both starting players. The complete-block
+score was 49.33%, approximate 95% interval 47.35–51.31%. This did **not** demonstrate
+an improvement. All 600 records are retained in `benchmarks/heldout-v022.jsonl`.
+
+Subsequent changes add coherent evasive attack groups, evaluate a known affordable
+modifier spell after projected blocks, and value creature bodies rather than mana
+spent. Combat projections omit inert mana lands internally while restoring them
+in returned outcomes, and reject impossible damage subsets before costly stat
+evaluation. A 70-permanent diagnostic position produced the same attack decision
+in 2.8 seconds versus 12.4 seconds before these optimizations; this is one profile,
+not a general throughput guarantee. Differential fixtures compare complete combat
+outcomes against the frozen implementation.
+
+The slow Grove development episode (seed 101, player 1 starting, candidate seat 1)
+eventually finished at turn 100 / 2605 decisions in a diagnostic rerun of the first
+checkpoint, with player 1 winning. That rerun does not replace the primary timeout.
+The final candidate receives a new seed set before review completion.
 
 ## Scope and review points
 
 - `sequence-policy.js`: capped resource search; exact automatic payments and ward
   reservations; combined direct damage; distinct-card/target constraints. It does
   not resolve triggers, invent future draws or search every payment assignment.
+- `attack-plan-policy.js`: one known pure modifier spell after the projected
+  blocker response, up to 48 candidates total / eight per attack set. Actual play
+  replans after blocks; the forecast assumes that spell resolves and charges a card.
 - `hand-policy.js`: visible-card selection for scry, surveil, bottom and discard.
 - `bot.js`: integration, redundant Pacifism rejection and ordinary creature timing.
   The cast-scoring definition lookup remains the small integration point for the
@@ -54,7 +75,7 @@ The v0.22 policy reference is separately frozen under `tests/fixtures/v0.22-poli
 
 ## Remaining limitations
 
-Opponent hidden-card ranges, unknown tricks, general stack search, payment
+Opponent hidden-card ranges, unknown opposing tricks, general stack search, payment
 optimization, multi-turn draw distributions and training are still absent. The
 spell planner uses static values and can miss newly enabled targets, mana and ETB
 lines. Wide-board combat is bounded and can be slow; some decisions take seconds.
