@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.17.0 — Purposeful combat tricks
+
+- Compare supported modifier spells against the declared combat before spending a card: save a creature, improve a trade, prevent lethal or win now.
+- Hold pure pump when it only adds nonlethal face damage or when combat already wins without it. Value surviving original permanents, not inflated temporary stats.
+- Use toughness, indestructible or hexproof against individual known removal threats when the modifier actually changes the outcome. Toughness does not answer destroy removal.
+- Enable useful targeted pump activations, including Wildheart Invoker, and distinguish spending mana from spending a card.
+- Preserve blocked status after a blocker leaves: without trample, pumping the attacker does not make it unblocked.
+
 ## 0.16.0 — Mana development and removal discipline
 
 - Choose land drops by immediate lethal, newly affordable plays and the colors required by the known hand instead of hand order.
