@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.19.0 — A touch-first deck builder
+
+- Switch between Browse cards and My deck on mobile instead of scrolling past a whole collection to edit the list. Keep search, deck count and save controls reachable.
+- Separate reading from adding: tap card art or a deck-list name to inspect it, then use the explicit Add control to change the deck. Maximum-copy cards remain readable.
+- Enlarge quantity controls, preserve panel scroll positions and keep desktop drag-to-list available.
+- Preserve focus on the exact named control after rerendering rather than moving it to the first matching action.
+
 ## 0.18.1 — Readable mobile battlefields
 
 - Use responsive artwork crops for compact mobile battlefield tiles; retain the full printed card on desktop and in the reader.

@@ -74,6 +74,8 @@ const ui = {
   deckColor: 'all',
   deckDraft: null,
   recoveredDraft: null,
+  builderPanel: 'pool',
+  builderScroll: {},
   builderQuery: '',
   builderColor: 'all',
   builderType: 'all',
@@ -154,8 +156,12 @@ function render() {
   if (focused?.id) focusSelector = `#${CSS.escape(focused.id)}`;
   else if (focused?.dataset.card)
     focusSelector = `[data-card="${CSS.escape(focused.dataset.card)}"]`;
-  else if (focused?.dataset.action)
-    focusSelector = `[data-action="${CSS.escape(focused.dataset.action)}"]${focused.dataset.view ? `[data-view="${CSS.escape(focused.dataset.view)}"]` : ''}`;
+  else if (focused?.dataset.action) {
+    focusSelector = `[data-action="${CSS.escape(focused.dataset.action)}"]`;
+    for (const key of ['view', 'name', 'panel', 'tab', 'player', 'zone', 'command', 'stop'])
+      if (focused.dataset[key] !== undefined)
+        focusSelector += `[data-${key}="${CSS.escape(focused.dataset[key])}"]`;
+  }
   const wasDock = !!focused?.closest('.action-dock');
   app.innerHTML = `<div class="shell">${header(ui)}${ui.view === 'builder' ? deckBuilder(ui, metadata) : ui.view === 'decks' ? deckRoom(ui, metadata) : ui.view === 'cards' ? catalog(ui, metadata) : ui.view === 'engine' ? enginePage(state) : state ? game(state, ui, metadata) : deckRoom(ui, metadata)}</div>`;
   duelPresentation.layoutHand();
@@ -547,6 +553,8 @@ function preserveDraft() {
 }
 function editDeck(draft) {
   ui.deckDraft = structuredClone(draft);
+  ui.builderPanel = 'pool';
+  ui.builderScroll = {};
   ui.builderQuery = '';
   ui.builderColor = 'all';
   ui.builderType = 'all';
@@ -663,6 +671,24 @@ async function action(name, el) {
         cards: deck.cards,
         ...(deck.personal ? { id: ui.deck } : {}),
       });
+      break;
+    }
+    case 'builderPanel': {
+      const panel = el.dataset.panel;
+      if (!['pool', 'list'].includes(panel) || !ui.deckDraft) break;
+      const selector = (p) => (p === 'list' ? '.builder-list-scroll' : '.builder-cards');
+      ui.builderScroll[ui.builderPanel] =
+        app.querySelector(selector(ui.builderPanel))?.scrollTop ?? 0;
+      ui.builderPanel = panel;
+      render();
+      const target = app.querySelector(selector(panel));
+      if (target) target.scrollTop = ui.builderScroll[panel] ?? 0;
+      break;
+    }
+    case 'inspectDraftCard': {
+      const name = el.dataset.name;
+      if (!ui.deckDraft || !CARDS[name]) break;
+      openDialog(name, inspect(name, metadata));
       break;
     }
     case 'closeBuilder':
