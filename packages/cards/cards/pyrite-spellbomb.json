@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2c10cae2-951a-4f4f-94e4-8713b58d07dd",
+  "name": "Pyrite Spellbomb",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "{R}, Sacrifice this artifact: It deals 2 damage to any target.\n{1}, Sacrifice this artifact: Draw a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "mana": "{1}"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "text": "Draw a card."
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "mana": "{R}"
+      },
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ],
+      "text": "It deals 2 damage to any target."
+    }
+  ]
+}

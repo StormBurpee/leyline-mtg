@@ -363,9 +363,12 @@ function parseAbilityCost(text, errors) {
   if (taps > 1) errors.push('Multiple tap-cost symbols are unsupported.');
   const life = tokens.filter((t) => /^PayLife<\d+>$/.test(t));
   if (life.length > 1) errors.push('Multiple life-cost terms require manual migration.');
-  const mana = tokens.filter((t) => t !== 'T' && !life.includes(t));
+  const sacrifices = tokens.filter((t) => t === 'Sac<1/CARDNAME>');
+  if (sacrifices.length > 1) errors.push('Only one self-sacrifice cost is supported.');
+  const mana = tokens.filter((t) => t !== 'T' && !life.includes(t) && !sacrifices.includes(t));
   return {
     ...(taps ? { tap: true } : {}),
+    ...(sacrifices.length ? { sacrificeSelf: true } : {}),
     ...(life.length ? { life: number(life[0].slice(8, -1), 'Life cost', errors) } : {}),
     ...(mana.length ? { mana: parseCost(mana.join(' '), errors) } : {}),
   };
@@ -546,28 +549,70 @@ export function compileForgeCard(text, { source = 'unspecified' } = {}) {
       errors.push('Only the ability controller can make an optional trigger choice.');
     let event;
     if (trigger.Mode === 'ChangesZone') {
-      if (
-        trigger.Destination !== 'Battlefield' ||
-        (trigger.Origin !== undefined && trigger.Origin !== 'Any') ||
-        trigger.ValidActivatingPlayer !== undefined
-      )
-        errors.push('Unsupported zone-change trigger restriction.');
-      if (trigger.ValidCard === 'Card.Self') event = 'selfEnters';
-      else if (trigger.ValidCard === 'Creature.Other') event = 'otherCreatureEnters';
-      else if (trigger.ValidCard === 'Land.YouCtrl') event = 'controllerLandEnters';
-      else if (trigger.ValidCard === 'Creature.Blue+YouCtrl+Other')
-        event = {
-          event: 'enter',
-          controller: 'you',
-          excludeSource: true,
-          filter: { all: [{ type: 'creature' }, { color: 'U' }] },
-        };
-      else errors.push(`Unsupported zone-change trigger predicate: ${trigger.ValidCard}`);
-      if (
-        trigger.TriggerZones !== 'Battlefield' &&
-        !(event === 'selfEnters' && trigger.TriggerZones === undefined)
-      )
-        errors.push('Trigger must watch from the battlefield.');
+      const dies = trigger.Origin === 'Battlefield' && trigger.Destination === 'Graveyard';
+      if (dies) {
+        if (trigger.ValidActivatingPlayer !== undefined)
+          errors.push('Unsupported death-trigger activating-player restriction.');
+        const valid = trigger.ValidCard;
+        if (valid === 'Card.Self' && type === 'creature') event = 'selfDies';
+        else if (valid === 'Creature.Other') event = 'otherCreatureDies';
+        else if (
+          ['Creature', 'Card.Self,Creature.Other'].includes(valid) &&
+          (valid === 'Creature' || type === 'creature')
+        )
+          event = { event: 'dies', filter: { type: 'creature' } };
+        else if (
+          ['Creature.YouCtrl', 'Card.Self,Creature.Other+YouCtrl'].includes(valid) &&
+          (valid === 'Creature.YouCtrl' || type === 'creature')
+        )
+          event = 'controllerCreatureDies';
+        else if (valid === 'Creature.Other+YouCtrl')
+          event = {
+            event: 'dies',
+            controller: 'you',
+            excludeSource: true,
+            filter: { type: 'creature' },
+          };
+        else if (['Creature.YouCtrl+!token', 'Creature.!token+YouCtrl'].includes(valid))
+          event = {
+            event: 'dies',
+            controller: 'you',
+            filter: { all: [{ type: 'creature' }, { token: false }] },
+          };
+        else if (['Creature.!token+Other+YouCtrl', 'Creature.Other+YouCtrl+!token'].includes(valid))
+          event = {
+            event: 'dies',
+            controller: 'you',
+            excludeSource: true,
+            filter: { all: [{ type: 'creature' }, { token: false }] },
+          };
+        else errors.push(`Unsupported dies trigger predicate: ${valid}`);
+        if (trigger.TriggerZones !== undefined && trigger.TriggerZones !== 'Battlefield')
+          errors.push('Death triggers must watch from the battlefield.');
+      } else {
+        if (
+          trigger.Destination !== 'Battlefield' ||
+          (trigger.Origin !== undefined && trigger.Origin !== 'Any') ||
+          trigger.ValidActivatingPlayer !== undefined
+        )
+          errors.push('Unsupported zone-change trigger restriction.');
+        if (trigger.ValidCard === 'Card.Self') event = 'selfEnters';
+        else if (trigger.ValidCard === 'Creature.Other') event = 'otherCreatureEnters';
+        else if (trigger.ValidCard === 'Land.YouCtrl') event = 'controllerLandEnters';
+        else if (trigger.ValidCard === 'Creature.Blue+YouCtrl+Other')
+          event = {
+            event: 'enter',
+            controller: 'you',
+            excludeSource: true,
+            filter: { all: [{ type: 'creature' }, { color: 'U' }] },
+          };
+        else errors.push(`Unsupported zone-change trigger predicate: ${trigger.ValidCard}`);
+        if (
+          trigger.TriggerZones !== 'Battlefield' &&
+          !(event === 'selfEnters' && trigger.TriggerZones === undefined)
+        )
+          errors.push('Trigger must watch from the battlefield.');
+      }
     } else if (trigger.Mode === 'SpellCast') {
       if (
         trigger.ValidActivatingPlayer !== 'You' ||

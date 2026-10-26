@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5863c67b-a47c-4466-8bd1-210ab26e0d3f",
+  "name": "Inspired Insurgent",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Peasant", "Ally"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{1}, Sacrifice this creature: Destroy target artifact or enchantment.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "mana": "{1}"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "text": "Destroy target artifact or enchantment."
+    }
+  ]
+}

@@ -21,7 +21,7 @@ Leyline is a local-first Magic rules engine with a playable tabletop, written in
 
 The target is every non-Alchemy card available on Arena, with complete Standard support first. That target is not yet met. [Track the dated card inventories.](docs/CARD-POOLS.md)
 
-**Development preview:** 346 executable cards and three token definitions. A scoped rules kernel, not a complete Forge port or a tournament-ready client. [The boundaries are documented.](docs/SUPPORT.md)
+**Development preview:** 434 executable cards and three token definitions. A scoped rules kernel, not a complete Forge port or a tournament-ready client. [The boundaries are documented.](docs/SUPPORT.md)
 
 <p align="center">
   <img src="docs/assets/tabletop.png" alt="The actual Leyline client inspecting a replayed reanimation position" width="100%" />
@@ -40,7 +40,7 @@ npm start
 
 Open the local address printed in your terminal. Requires **Node.js 22+**. There are no runtime dependencies to install.
 
-The **Deck room** contains 12 playable starter lists: spells, ramp, flying control, tokens, drain, artifacts, double strike, midrange and reanimation. Choose your own opponent deck. Customize any starter in the visual builder, import a list, or build from the executable card pool. Saved lists and unfinished drafts stay on this device. Play against the practice bot or share a screen in local two-player mode. Drag a card onto your battlefield to play it, or onto a highlighted target to cast it. Select attackers and assign blockers by dragging, then confirm the group. Click and keyboard controls remain available. The stack and game log stay visible.
+The **Deck room** contains 13 playable starter lists: spells, ramp, flying control, tokens, drain, artifacts, double strike, midrange and reanimation. Choose your own opponent deck. Customize any starter in the visual builder, import a list, or build from the executable card pool. Saved lists and unfinished drafts stay on this device. Play against the practice bot or share a screen in local two-player mode. Drag a card onto your battlefield to play it, or onto a highlighted target to cast it. Select attackers and assign blockers by dragging, then confirm the group. Click and keyboard controls remain available. The stack and game log stay visible.
 
 For a position with decisions already on the table, open **Engine → Inspect interactive position → Continue**. It is a real replay branch, not a staged board. [Client controls and verification.](docs/CLIENT.md)
 

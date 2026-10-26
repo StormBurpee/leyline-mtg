@@ -16,8 +16,9 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Public graveyard-card targets, recovery to hand and creature/artifact reanimation with fresh incarnations and enters triggers.
 - Player-directed draw/discard/life gain/life loss, including choices made by an opponent during resolution.
 - Triggered abilities choose legal targets when placed on the stack, before priority. Impossible required targets remove the trigger; targets are rechecked on resolution.
+- Creature-death triggers with pre-event characteristics/controllers and simultaneous death snapshots. Tokens trigger before ceasing to exist.
 - Optional triggered effects with explicit resolution-time accept/decline choices.
-- Activated abilities with mana, life and tap costs, explicit targets, and stack resolution.
+- Activated abilities with mana, life, tap and self-sacrifice costs, explicit targets, and stack resolution.
 - Scry, surveil and mandatory discard choices during resolution, with instruction continuations and no intervening priority.
 - Ward triggers for opposing spells and activated/triggered abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.
 - Schema-checked card sources, reusable mechanics, composable target/event predicates and all-or-nothing pack compilation.

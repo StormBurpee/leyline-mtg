@@ -60,7 +60,7 @@ export interface TargetSpec {
 }
 export type TargetKind = LegacyTargetKind | TargetSpec;
 export interface EventSpec {
-  event: 'enter' | 'cast';
+  event: 'enter' | 'cast' | 'dies';
   object?: 'source';
   controller?: 'you' | 'opponent';
   filter?: CardPredicate;
@@ -111,6 +111,9 @@ export interface CardDefinition {
     event:
       | EventSpec
       | 'selfEnters'
+      | 'selfDies'
+      | 'otherCreatureDies'
+      | 'controllerCreatureDies'
       | 'controllerLandEnters'
       | 'controllerCastsArtifact'
       | 'controllerCastsEnchantment'
@@ -123,7 +126,7 @@ export interface CardDefinition {
     optional?: boolean;
   }[];
   readonly activated?: readonly {
-    cost: { mana?: ManaCost; tap?: boolean; life?: number };
+    cost: { mana?: ManaCost; tap?: boolean; life?: number; sacrificeSelf?: boolean };
     target?: TargetKind | null;
     effects: readonly Effect[];
     text: string;

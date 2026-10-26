@@ -82,9 +82,10 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
     return result;
   };
   const cost = (value, path) => {
-    if (!fields(value, ['mana', 'tap', 'life'], path)) return {};
+    if (!fields(value, ['mana', 'tap', 'life', 'sacrificeSelf'], path)) return {};
     return {
       ...(value.mana !== undefined ? { mana: mana(value.mana, `${path}.mana`) } : {}),
+      ...(value.sacrificeSelf !== undefined ? { sacrificeSelf: value.sacrificeSelf } : {}),
       ...(value.tap !== undefined ? { tap: value.tap } : {}),
       ...(value.life !== undefined ? { life: value.life } : {}),
     };

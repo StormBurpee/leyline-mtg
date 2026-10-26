@@ -1,10 +1,12 @@
-import { matchesEvent } from './events.js';
 import { targetSpec, matchesFilter } from './selectors.js';
 import { hasType } from './types.js';
 import { costProblem, payCost } from './costs.js';
 import { cardDefinition } from './cards.js';
 import {
   addObject,
+  queueTrigger,
+  notifyTriggers,
+  captureDepartureContext,
   battlefield,
   creatures,
   definition,
@@ -89,21 +91,6 @@ export function targetsFor(s, kind, p) {
     ...s.stack.map((e) => ({ kind: 'stack', id: e.id })),
   ].filter((t) => legalTarget(s, kind, t, p));
 }
-export function queueTrigger(s, source, effects, label, optional = false, targetKind = null) {
-  s.pendingTriggers.push({
-    id: `s${++s.nextId}`,
-    kind: 'ability',
-    name: source.name,
-    source: ref(source),
-    controller: source.controller,
-    effects: structuredClone(effects),
-    sourceKeywords: keywords(s, source),
-    label,
-    ...(optional ? { optional: true } : {}),
-    ...(targetKind ? { targetKind: structuredClone(targetKind) } : {}),
-  });
-  emit(s, 'triggered', { objectId: source.id, name: source.name, player: source.controller });
-}
 /** Ward is triggered, not a targeting restriction (CR 702.21). */
 export function notifyTargeted(s, entry) {
   if (entry.target?.kind !== 'object') return;
@@ -145,37 +132,6 @@ export function enterBattlefield(s, o, controller = o.owner, attachment = null, 
   o.tapped = !!d.entersTapped || !!options.tapped;
   if (d.etb) queueTrigger(s, o, d.etb, `${o.name} · enters`);
   notifyTriggers(s, 'enters', { object: o });
-}
-/** Match declarative trigger predicates against committed game events. */
-export function notifyTriggers(s, event, payload) {
-  const object = payload.object;
-  const d = payload.definition ?? definition(s, object);
-  const pt =
-    object?.zone === 'battlefield' && hasType(d, 'creature')
-      ? stats(s, object)
-      : { power: d.power, toughness: d.toughness };
-  const facts = {
-    id: object?.id,
-    definition: d,
-    controller: payload.player ?? object.controller,
-    owner: object?.owner,
-    token: object?.token,
-    tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
-    power: pt.power,
-    toughness: pt.toughness,
-    manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
-  };
-  for (const watcher of battlefield(s))
-    for (const trigger of definition(s, watcher).triggers ?? [])
-      if (matchesEvent(trigger.event, event === 'enters' ? 'enter' : event, facts, watcher))
-        queueTrigger(
-          s,
-          watcher,
-          trigger.effects,
-          `${watcher.name} · triggered ability`,
-          trigger.optional,
-          trigger.target,
-        );
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
 export function dealDamage(s, source, target, amount) {
@@ -492,8 +448,9 @@ export function stateBasedActions(s) {
         toGrave.push(o);
     }
   }
+  const departureContext = toGrave.length ? captureDepartureContext(s) : null;
   for (const o of toGrave) {
-    move(s, o, 'graveyard');
+    move(s, o, 'graveyard', departureContext);
     changed = true;
   }
   // Deathtouch tracks damage since the previous state-based-action check.
@@ -590,3 +547,5 @@ export function finishTriggerTarget(s, target) {
   if (placeOrderedTriggers(s, choice.remainingEntries, choice.remaining))
     placeTriggerGroups(s, choice.remaining);
 }
+
+export { queueTrigger, notifyTriggers } from './model.js';

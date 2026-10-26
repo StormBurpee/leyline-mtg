@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2625fa9c-638c-46d3-966b-1166f440186f",
+  "name": "Goblin Firebomb",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "Flash\n{7}, {T}, Sacrifice this artifact: Destroy target permanent.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true,
+        "mana": "{7}"
+      },
+      "target": {
+        "scope": "permanent"
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "text": "Destroy target permanent."
+    }
+  ]
+}

@@ -552,7 +552,7 @@
   {
     "oracleId": "066e7379-d439-41cb-a8c9-60964040b110",
     "name": "Tattered Mummy",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ba36f27a-08fc-46a5-bc55-2a71091cebcc",
@@ -1017,7 +1017,7 @@
   {
     "oracleId": "8a35f23d-f59a-4677-9736-035c60c22a2b",
     "name": "Temur Banner",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fadf984c-c224-432a-87b9-b34f929b8409",
@@ -3542,7 +3542,7 @@
   {
     "oracleId": "0d7d8f4f-abf3-408b-a289-1dd6a3ebdbf6",
     "name": "Tibalt's Rager",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "6623cb85-fb1e-4561-8b21-0977c25096c2",
@@ -4247,12 +4247,12 @@
   {
     "oracleId": "34e2d6eb-aad4-4776-872e-cebab3938aa0",
     "name": "Torch Courier",
-    "status": "unsupported"
+    "status": "compiler_candidate"
   },
   {
     "oracleId": "15f8049c-f21d-4cd0-aa81-1a533936cf77",
     "name": "Torch Fiend",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "10d33e95-3e5d-447e-ba4a-acd3c33b4045",
@@ -4562,7 +4562,7 @@
   {
     "oracleId": "e90e519d-023e-4d19-85ad-9972a76df3ba",
     "name": "Tramway Station",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "5d641bf6-0f93-4189-8dc1-ec7ea446dade",

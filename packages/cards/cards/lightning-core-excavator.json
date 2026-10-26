@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cdaf3711-5bec-41bf-b333-c5f34ccb12ef",
+  "name": "Lightning-Core Excavator",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Golem"],
+    "colors": [],
+    "manaCost": "{1}",
+    "power": 0,
+    "toughness": 3
+  },
+  "rulesText": "{5}, {T}, Sacrifice this creature: It deals 3 damage to any target.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true,
+        "mana": "{5}"
+      },
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 3
+        }
+      ],
+      "text": "It deals 3 damage to any target."
+    }
+  ]
+}

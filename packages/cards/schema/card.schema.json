@@ -328,7 +328,7 @@
       "type": "object",
       "properties": {
         "event": {
-          "enum": ["enter", "cast"]
+          "enum": ["enter", "cast", "dies"]
         },
         "object": {
           "const": "source"
@@ -364,6 +364,9 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 1000
+        },
+        "sacrificeSelf": {
+          "type": "boolean"
         }
       },
       "required": [],

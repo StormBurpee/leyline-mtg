@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "21613fac-d959-44ba-9bcb-0a30b5e6545e",
+  "name": "Storm God's Oracle",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Shaman"],
+    "colors": ["U", "R"],
+    "manaCost": "{1}{U}{R}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "{1}: This creature gets +1/-1 until end of turn.\nWhen this creature dies, it deals 3 damage to any target.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": -1,
+          "until": "endOfTurn"
+        }
+      ],
+      "text": "Storm God's Oracle gets +1/-1 until end of turn."
+    }
+  ]
+}

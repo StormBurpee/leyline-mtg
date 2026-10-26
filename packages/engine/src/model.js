@@ -1,6 +1,8 @@
+import { matchesEvent } from './events.js';
+import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.11.0';
+export const VERSION = '0.12.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -131,8 +133,101 @@ export function addObject(s, name, owner, zone = 'library') {
 export function ref(o) {
   return { kind: 'object', id: o.id, incarnation: o.incarnation };
 }
-export function move(s, o, to) {
+export function queueTrigger(
+  s,
+  source,
+  effects,
+  label,
+  optional = false,
+  targetKind = null,
+  sourceKeywords = null,
+) {
+  s.pendingTriggers.push({
+    id: `s${++s.nextId}`,
+    kind: 'ability',
+    name: source.name,
+    source: ref(source),
+    controller: source.controller,
+    effects: structuredClone(effects),
+    sourceKeywords: sourceKeywords ?? keywords(s, source),
+    label,
+    ...(optional ? { optional: true } : {}),
+    ...(targetKind ? { targetKind: structuredClone(targetKind) } : {}),
+  });
+  emit(s, 'triggered', { objectId: source.id, name: source.name, player: source.controller });
+}
+/** Match declarative trigger predicates against committed game events. */
+export function notifyTriggers(s, event, payload, context = null) {
+  const object = payload.object;
+  const d = payload.definition ?? definition(s, object);
+  const pt =
+    object?.zone === 'battlefield' && hasType(d, 'creature')
+      ? stats(s, object)
+      : { power: d.power, toughness: d.toughness };
+  const facts = context?.facts?.[object.id] ?? {
+    id: object?.id,
+    definition: d,
+    controller: payload.player ?? object.controller,
+    owner: object?.owner,
+    token: object?.token,
+    tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
+    power: pt.power,
+    toughness: pt.toughness,
+    manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+  };
+  const watchers =
+    context?.watchers ??
+    battlefield(s).map((object) => ({ object, keywords: keywords(s, object) }));
+  for (const { object: watcher, keywords: sourceKeywords } of watchers)
+    for (const trigger of definition(s, watcher).triggers ?? [])
+      if (matchesEvent(trigger.event, event === 'enters' ? 'enter' : event, facts, watcher))
+        queueTrigger(
+          s,
+          watcher,
+          trigger.effects,
+          `${watcher.name} · triggered ability`,
+          trigger.optional,
+          trigger.target,
+          sourceKeywords,
+        );
+}
+/** CR 603.10: leaves-the-battlefield triggers look back before the event.
+ * One shared snapshot is used for an entire simultaneous state-based-action batch.
+ */
+export function captureDepartureContext(s) {
+  const objects = battlefield(s);
+  return {
+    watchers: objects
+      .filter((o) => (definition(s, o).triggers ?? []).length)
+      .map((object) => ({ object: structuredClone(object), keywords: keywords(s, object) })),
+    facts: Object.fromEntries(
+      objects.map((o) => {
+        const d = definition(s, o),
+          pt = stats(s, o);
+        return [
+          o.id,
+          {
+            id: o.id,
+            definition: d,
+            controller: o.controller,
+            owner: o.owner,
+            token: o.token,
+            tapped: o.tapped,
+            power: pt.power,
+            toughness: pt.toughness,
+            manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+          },
+        ];
+      }),
+    ),
+  };
+}
+export function move(s, o, to, departureContext = null) {
   const from = o.zone;
+  const dying =
+    from === 'battlefield' && to === 'graveyard' && hasType(definition(s, o), 'creature');
+  const context = dying ? (departureContext ?? captureDepartureContext(s)) : null;
+  const departed = dying ? structuredClone(o) : null;
   if (from === 'battlefield' || from === 'stack') {
     const entries = [
       ...s.stack,
@@ -171,6 +266,7 @@ export function move(s, o, to) {
   o.attachedTo = null;
   if (s.players[o.owner][to]) s.players[o.owner][to].push(o.id);
   emit(s, 'zoneChange', { objectId: o.id, name: o.name, from, to });
+  if (dying) notifyTriggers(s, 'dies', { object: departed }, context);
   return o;
 }
 export function draw(s, p, count) {

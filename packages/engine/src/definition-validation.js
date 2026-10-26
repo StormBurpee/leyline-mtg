@@ -74,12 +74,14 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
     errors.push(`${path}: expected a cost object.`);
     return;
   }
-  const allowed = allowTap ? ['mana', 'life', 'tap'] : ['mana', 'life'];
+  const allowed = allowTap ? ['mana', 'life', 'tap', 'sacrificeSelf'] : ['mana', 'life'];
   if (Object.keys(cost).some((key) => !allowed.includes(key)))
     errors.push(`${path}: unsupported cost.`);
   if (cost.mana !== undefined) validateCost(cost.mana, `${path}.mana`, errors);
   if (cost.life !== undefined && !natural(cost.life))
     errors.push(`${path}.life: expected a nonnegative safe integer.`);
+  if (cost.sacrificeSelf !== undefined && typeof cost.sacrificeSelf !== 'boolean')
+    errors.push(`${path}.sacrificeSelf: expected a boolean.`);
   if (cost.tap !== undefined && typeof cost.tap !== 'boolean')
     errors.push(`${path}.tap: expected a boolean.`);
 }

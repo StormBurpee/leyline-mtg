@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "637be5f7-ab39-4e3a-a5eb-c6e48fca00a9",
+  "name": "Outlaw Medic",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Rogue"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Lifelink\nWhen this creature dies, draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

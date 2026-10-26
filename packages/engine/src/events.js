@@ -8,6 +8,9 @@ const freeze = (value) => {
 };
 export const EVENT_PRESETS = freeze({
   selfEnters: { event: 'enter', object: 'source' },
+  selfDies: { event: 'dies', object: 'source' },
+  otherCreatureDies: { event: 'dies', filter: { type: 'creature' }, excludeSource: true },
+  controllerCreatureDies: { event: 'dies', controller: 'you', filter: { type: 'creature' } },
   otherCreatureEnters: { event: 'enter', filter: { type: 'creature' }, excludeSource: true },
   controllerLandEnters: { event: 'enter', controller: 'you', filter: { type: 'land' } },
   controllerCastsNoncreature: {
@@ -47,9 +50,12 @@ export function validateEventSpec(value) {
     )
   )
     errors.push('Unsupported event predicate field.');
-  if (!['enter', 'cast'].includes(spec.event)) errors.push('Unsupported event family.');
-  if (spec.object !== undefined && (spec.object !== 'source' || spec.event !== 'enter'))
-    errors.push('Source identity predicates currently apply to enters events only.');
+  if (!['enter', 'cast', 'dies'].includes(spec.event)) errors.push('Unsupported event family.');
+  if (
+    spec.object !== undefined &&
+    (spec.object !== 'source' || !['enter', 'dies'].includes(spec.event))
+  )
+    errors.push('Source identity predicates currently apply to enter and dies events only.');
   if (spec.controller !== undefined && !['you', 'opponent'].includes(spec.controller))
     errors.push('Unknown event controller relation.');
   if (spec.excludeSource !== undefined && typeof spec.excludeSource !== 'boolean')

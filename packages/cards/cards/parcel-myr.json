@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9e660f66-0a94-4694-95e0-25296799b193",
+  "name": "Parcel Myr",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Clue", "Myr"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "{2}, Sacrifice this creature: Draw a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "mana": "{2}"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "text": "Draw a card."
+    }
+  ]
+}

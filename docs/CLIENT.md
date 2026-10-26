@@ -49,7 +49,7 @@ Second Burial demonstrates graveyard play. In the shipped reanimation position, 
 
 ## Deck room and construction
 
-All 12 starter decks are available in the deck room. Choose the opponent independently, including mirror matches. The starters are exploratory lists, not tournament or format recommendations.
+All 13 starter decks are available in the deck room. Choose the opponent independently, including mirror matches. The starters are exploratory lists, not tournament or format recommendations.
 
 Customize a starter or build a fresh list. The visual builder has card/rules search, color and type filters, click/drag-to-add, quantity controls, live mana curve and validation. Basic lands can exceed four copies; other cards cannot. Lists remain bounded at 250 cards.
 

@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d551931d-4ebe-4acc-9e87-6c628897071a",
+  "name": "Archon of Justice",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Archon"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this creature dies, exile target permanent.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ]
+    }
+  ]
+}

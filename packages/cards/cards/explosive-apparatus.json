@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ab8301da-f9f7-4d90-afae-bd7e60834c22",
+  "name": "Explosive Apparatus",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "{3}, {T}, Sacrifice this artifact: It deals 2 damage to any target.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true,
+        "mana": "{3}"
+      },
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ],
+      "text": "It deals 2 damage to any target."
+    }
+  ]
+}

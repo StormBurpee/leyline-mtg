@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fda10ef2-f431-4d9b-96a4-4db4c98d2b0c",
+  "name": "Jeskai Banner",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{3}"
+  },
+  "rulesText": "{T}: Add {U}, {R}, or {W}.\n{U}{R}{W}, {T}, Sacrifice this artifact: Draw a card.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["U", "R", "W"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true,
+        "mana": "{W}{U}{R}"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "text": "Draw a card."
+    }
+  ]
+}

@@ -49,7 +49,7 @@ test('generic cast predicates use spell characteristics rather than battlefield 
 });
 test('unsupported event families and unknown predicates stay explicit', () => {
   for (const value of [
-    { event: 'dies' },
+    { event: 'attacks' },
     { event: 'cast', oncePerTurn: true },
     { event: 'enter', object: 'source', excludeSource: true },
     { event: 'cast', filter: { unknown: true } },

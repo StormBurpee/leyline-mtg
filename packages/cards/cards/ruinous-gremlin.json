@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b88d67c0-ef12-453c-8e58-6642650dffcc",
+  "name": "Ruinous Gremlin",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Gremlin"],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "{2}{R}, Sacrifice this creature: Destroy target artifact.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "mana": "{2}{R}"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "text": "Destroy target artifact."
+    }
+  ]
+}

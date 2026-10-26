@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9625773b-1976-49b3-88d2-93a4befb595c",
+  "name": "Shore Keeper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Trilobite"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 0,
+    "toughness": 3
+  },
+  "rulesText": "{7}{U}, {T}, Sacrifice this creature: Draw three cards.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true,
+        "mana": "{7}{U}"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        }
+      ],
+      "text": "Draw three cards."
+    }
+  ]
+}

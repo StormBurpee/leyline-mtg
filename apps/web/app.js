@@ -881,6 +881,7 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleSacrificeReplay':
     case 'exampleBurialReplay':
     case 'exampleTargetReplay':
     case 'exampleInteractionReplay':
@@ -889,17 +890,19 @@ async function action(name, el) {
     case 'exampleReplay': {
       try {
         const response = await fetch(
-          name === 'exampleBurialReplay'
-            ? './example-burial-replay.json'
-            : name === 'exampleTargetReplay'
-              ? './example-target-replay.json'
-              : name === 'exampleInteractionReplay'
-                ? './example-interaction-replay.json'
-                : name === 'exampleOptionalReplay'
-                  ? './example-optional-replay.json'
-                  : name === 'exampleWardReplay'
-                    ? './example-ward-replay.json'
-                    : './example-replay.json',
+          name === 'exampleSacrificeReplay'
+            ? './example-sacrifice-replay.json'
+            : name === 'exampleBurialReplay'
+              ? './example-burial-replay.json'
+              : name === 'exampleTargetReplay'
+                ? './example-target-replay.json'
+                : name === 'exampleInteractionReplay'
+                  ? './example-interaction-replay.json'
+                  : name === 'exampleOptionalReplay'
+                    ? './example-optional-replay.json'
+                    : name === 'exampleWardReplay'
+                      ? './example-ward-replay.json'
+                      : './example-replay.json',
         );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();
@@ -1181,7 +1184,7 @@ function selectCard(id) {
         abilities
           .map(
             (a, i) =>
-              `<button class="btn primary" data-action="activateAbility" data-ability="${i}" ${legal.some((x) => x.type === 'activate' && x.card === id && x.ability === i) ? '' : 'disabled'}>${escape((a.text ?? 'Activate ability').replaceAll('CARDNAME', o.name))}</button>`,
+              `<button class="btn primary" data-action="activateAbility" data-ability="${i}" ${legal.some((x) => x.type === 'activate' && x.card === id && x.ability === i) ? '' : 'disabled'}>${a.cost.sacrificeSelf ? `<span>⚑ Sacrifice ${escape(o.name)} · </span>` : ''}${escape((a.text ?? 'Activate ability').replaceAll('CARDNAME', o.name))}</button>`,
           )
           .join('') +
         '<button class="btn" data-action="closeDialog">Cancel</button>',

@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7d313958-49ca-4592-97c7-20f12c8468a8",
+  "name": "Ember Hauler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin"],
+    "colors": ["R"],
+    "manaCost": "{R}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{1}, Sacrifice this creature: It deals 2 damage to any target.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "mana": "{1}"
+      },
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ],
+      "text": "It deals 2 damage to any target."
+    }
+  ]
+}

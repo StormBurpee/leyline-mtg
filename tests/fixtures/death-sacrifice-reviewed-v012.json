@@ -1,0 +1,4297 @@
+{
+  "upstream": "https://github.com/Card-Forge/forge",
+  "commit": "e5a0f8156da70ffc7866f923bed371c0111707cd",
+  "asOf": "2026-10-26",
+  "cards": [
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/a/abzan_banner.txt",
+      "definition": {
+        "name": "Abzan Banner",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{T}: Add {W}, {B}, or {G}.\n{W}{B}{G}, {T}, Sacrifice Abzan Banner: Draw a card.",
+        "mana": ["W", "B", "G"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "W": 1,
+                "B": 1,
+                "G": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "46535f8e-1bcd-4588-ac6c-a4bc89c379c8",
+        "printingId": "7855528a-ede9-49a9-8749-795a004fd927",
+        "url": "https://scryfall.com/card/ktk/215/abzan-banner?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:19.985Z",
+        "manaCost": "{3}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{T}: Add {W}, {B}, or {G}.\n{W}{B}{G}, {T}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "8f5f20ce0a9652233c9759c3efc283a42023058ca0bb43d837563a2d7ed4af33"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/a/airship_engine_room.txt",
+      "definition": {
+        "name": "Airship Engine Room",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {U} or {R}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["U", "R"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "01ed9139-293d-4477-a145-3c6fe59266c7",
+        "printingId": "0b98ba34-f251-4bd0-9d75-1d4445be5cfd",
+        "url": "https://scryfall.com/card/tla/265/airship-engine-room?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:22.636Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {U} or {R}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "cce84c1c44c21f5464fe5d8ba334c916a390af090da10bebf8e28ecfac4d42b2"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/a/archon_of_justice.txt",
+      "definition": {
+        "name": "Archon of Justice",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "W": 2
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Archon"],
+        "text": "Flying\nWhen Archon of Justice dies, exile target permanent.",
+        "power": 4,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "exile"
+              }
+            ],
+            "target": "permanent"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "d551931d-4ebe-4acc-9e87-6c628897071a",
+        "printingId": "042b0148-5821-4105-9cda-a0e405eb8bee",
+        "url": "https://scryfall.com/card/jmp/89/archon-of-justice?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:28.127Z",
+        "manaCost": "{3}{W}{W}",
+        "typeLine": "Creature — Archon",
+        "colors": ["W"],
+        "power": "4",
+        "toughness": "4",
+        "text": "Flying\nWhen this creature dies, exile target permanent.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "73d600cac4fe4098a3831a28b708d7e049f6f609ee5930f61f6f340b9c438e6e"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/bear_trap.txt",
+      "definition": {
+        "name": "Bear Trap",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": ["flash"],
+        "subtypes": [],
+        "text": "Flash\n{3}, {T}, Sacrifice Bear Trap: It deals 3 damage to target creature.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 3
+              }
+            },
+            "target": "creature",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 3
+              }
+            ],
+            "text": "It deals 3 damage to target creature."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "f7afb2c3-50ee-40f5-8b14-32f80c2bacd0",
+        "printingId": "e27c27d6-dc3a-4420-bb35-d97dc216e002",
+        "url": "https://scryfall.com/card/dsk/243/bear-trap?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:36.138Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "Flash\n{3}, {T}, Sacrifice this artifact: It deals 3 damage to target creature.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "2a30b51665e8350485faa78b2755a59249c70f5babf4b72ac715384649f089a8"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/blight_keeper.txt",
+      "definition": {
+        "name": "Blight Keeper",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "B": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Bat", "Imp"],
+        "text": "Flying\n{7}{B}, {T}, Sacrifice Blight Keeper: Target opponent loses 4 life and you gain 4 life.",
+        "power": 1,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 7,
+                "B": 1
+              }
+            },
+            "target": "opponent",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 4,
+                "player": "target"
+              },
+              {
+                "op": "gainLife",
+                "amount": 4
+              }
+            ],
+            "text": "Target opponent loses 4 life and you gain 4 life."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "1dc73412-c91c-48c9-bde6-b169add79b37",
+        "printingId": "3bcabe2d-82d2-4c1b-8f28-21dc29c9dbf2",
+        "url": "https://scryfall.com/card/xln/92/blight-keeper?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:38.589Z",
+        "manaCost": "{B}",
+        "typeLine": "Creature — Bat Imp",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Flying\n{7}{B}, {T}, Sacrifice this creature: Target opponent loses 4 life and you gain 4 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "f256e50ce6a1e86ef2a559ecafd93f88032a1c10f6e3d821fc2aecc857e7856f"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/blood_artist.txt",
+      "definition": {
+        "name": "Blood Artist",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Vampire"],
+        "text": "Whenever Blood Artist or another creature dies, target player loses 1 life and you gain 1 life.",
+        "power": 0,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": {
+              "event": "dies",
+              "filter": {
+                "type": "creature"
+              }
+            },
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "target"
+              },
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ],
+            "target": "player"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "310f141c-7f37-4729-aed6-dd9c09db448d",
+        "printingId": "465d8c18-c76b-488a-a4ec-ec0d2267a307",
+        "url": "https://scryfall.com/card/jmp/206/blood-artist?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:38.589Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Vampire",
+        "colors": ["B"],
+        "power": "0",
+        "toughness": "1",
+        "text": "Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "010f5d73f93116a287960c18fa06e01695db0639648e281515f03e7aadd6b1ec"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/boiling_rock_prison.txt",
+      "definition": {
+        "name": "Boiling Rock Prison",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {B} or {R}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["B", "R"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "6caabc45-4644-4941-a2f3-f04ee7b50a89",
+        "printingId": "1c2e2220-54d1-4180-93a0-964e3b0ba8b8",
+        "url": "https://scryfall.com/card/tla/267/boiling-rock-prison?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:41.128Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {B} or {R}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "56cab264703d1961c72cb67b252347c2a7ec79d25b66c90007a65d0d05247103"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/botanical_plaza.txt",
+      "definition": {
+        "name": "Botanical Plaza",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "Botanical Plaza enters tapped.\n{T}: Add {G} or {W}.\n{2}{G}{W}, {T}, Sacrifice Botanical Plaza: Draw a card.",
+        "mana": ["G", "W"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "G": 1,
+                "W": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "19e6ebaf-7148-428f-8c79-1e9e57a4e659",
+        "printingId": "9f8a6f93-1fc8-4690-add4-538763277f8e",
+        "url": "https://scryfall.com/card/snc/247/botanical-plaza?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:41.128Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {G} or {W}.\n{2}{G}{W}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "10319dd948c848e93b723440f18f595d1f65b31e618db96c1e3cc13fc50ed5b7"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/buried_ruin.txt",
+      "definition": {
+        "name": "Buried Ruin",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "{T}: Add {C}.\n{2}, {T}, Sacrifice Buried Ruin: Return target artifact card from your graveyard to your hand.",
+        "mana": "C",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2
+              }
+            },
+            "target": {
+              "scope": "graveyard",
+              "where": {
+                "all": [
+                  {
+                    "type": "artifact"
+                  },
+                  {
+                    "owner": "you"
+                  }
+                ]
+              }
+            },
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "hand"
+              }
+            ],
+            "text": "Return target artifact card from your graveyard to your hand."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "3644f316-f9a3-46c9-9b1e-747f86cf4ead",
+        "printingId": "011bc5b7-c4d5-4c4c-af0d-aa0853d63f3a",
+        "url": "https://scryfall.com/card/jmp/491/buried-ruin?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:46.437Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "95ef83527e63d4aebc055f57aabf8a48b3a634342e37d73bbe33e3ccd99248ef"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/b/burrowing_razormaw.txt",
+      "definition": {
+        "name": "Burrowing Razormaw",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": ["Beast"],
+        "text": "When Burrowing Razormaw dies, mill four cards. (Put the top four cards of your library into your graveyard.)",
+        "power": 4,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "mill",
+                "count": 4,
+                "player": "controller"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "8551e1df-47eb-419e-8dd2-e96b9a450912",
+        "printingId": "a7c8c73c-ee2e-4aa9-aa6c-42cf9d58d9cc",
+        "url": "https://scryfall.com/card/bro/173/burrowing-razormaw?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:46.437Z",
+        "manaCost": "{2}{G}",
+        "typeLine": "Creature — Beast",
+        "colors": ["G"],
+        "power": "4",
+        "toughness": "2",
+        "text": "When this creature dies, mill four cards. (Put the top four cards of your library into your graveyard.)",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "cf2c1c5bba415601d5e41703cfec72036d4224d82d336a7cd17f4995db7d1c91"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/c/candy_trail.txt",
+      "definition": {
+        "name": "Candy Trail",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": [],
+        "subtypes": ["Food", "Clue"],
+        "text": "When Candy Trail enters, scry 2.\n{2}, {T}, Sacrifice Candy Trail: You gain 3 life and draw a card.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "gainLife",
+                "amount": 3
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "You gain 3 life and draw a card."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "scry",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "7c8e4f29-53e0-4242-8ef8-7a9476dce178",
+        "printingId": "1a860925-d912-49e5-9ddc-41ab26916bb3",
+        "url": "https://scryfall.com/card/woe/243/candy-trail?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:46.437Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact — Food Clue",
+        "colors": [],
+        "text": "When this artifact enters, scry 2.\n{2}, {T}, Sacrifice this artifact: You gain 3 life and draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "25e0a49cf3e2335ef0a10805475b9b604554a67829c217a3bd385e6375204a37"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/c/cathar_commando.txt",
+      "definition": {
+        "name": "Cathar Commando",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": ["flash"],
+        "subtypes": ["Human", "Soldier"],
+        "text": "Flash\n{1}, Sacrifice Cathar Commando: Destroy target artifact or enchantment.",
+        "power": 3,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 1
+              }
+            },
+            "target": "artifactOrEnchantment",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target artifact or enchantment."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "774dce79-67e0-4820-8013-c7a7347993ce",
+        "printingId": "19cf024d-edb6-4a79-8676-73f8db0cdf1f",
+        "url": "https://scryfall.com/card/fdn/139/cathar-commando?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:48.959Z",
+        "manaCost": "{1}{W}",
+        "typeLine": "Creature — Human Soldier",
+        "colors": ["W"],
+        "power": "3",
+        "toughness": "1",
+        "text": "Flash\n{1}, Sacrifice this creature: Destroy target artifact or enchantment.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "de8f43af1b3141a162b20046f29a9d125ca08e1e254bc9c14406f043475e6220"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/c/citywatch_sphinx.txt",
+      "definition": {
+        "name": "Citywatch Sphinx",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 5,
+          "U": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Sphinx"],
+        "text": "Flying\nWhen Citywatch Sphinx dies, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+        "power": 5,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "surveil",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "a63e0c27-cea8-408a-8e57-2f077826c50f",
+        "printingId": "9b809f89-13c7-4236-86a5-60745defb271",
+        "url": "https://scryfall.com/card/grn/33/citywatch-sphinx?utm_source=api",
+        "fetchedAt": "2026-10-26T00:40:51.822Z",
+        "manaCost": "{5}{U}",
+        "typeLine": "Creature — Sphinx",
+        "colors": ["U"],
+        "power": "5",
+        "toughness": "4",
+        "text": "Flying\nWhen this creature dies, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "839f2a3cfae405f73012bbc4ed6151308265b6c775be30f2d9fc3bd2fc4ef3a8"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/d/doomed_necromancer.txt",
+      "definition": {
+        "name": "Doomed Necromancer",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Cleric", "Mercenary"],
+        "text": "{B}, {T}, Sacrifice Doomed Necromancer: Return target creature card from your graveyard to the battlefield.",
+        "power": 2,
+        "toughness": 2,
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "B": 1
+              }
+            },
+            "target": {
+              "scope": "graveyard",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "owner": "you"
+                  }
+                ]
+              }
+            },
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "battlefield"
+              }
+            ],
+            "text": "Return target creature card from your graveyard to the battlefield."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "155422a0-a0cd-4399-8ed9-fa68ac2c80a6",
+        "printingId": "c5981913-0e3c-4d1c-ace1-4bbc7c77e50d",
+        "url": "https://scryfall.com/card/j25/426/doomed-necromancer?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:09.657Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Creature — Human Cleric Mercenary",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "2",
+        "text": "{B}, {T}, Sacrifice this creature: Return target creature card from your graveyard to the battlefield.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "d8e341feb509e24ead27414d2ee8f142ae22060377df511f6be0a4ec0abeaa8a"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/e/eidolon_of_philosophy.txt",
+      "definition": {
+        "name": "Eidolon of Philosophy",
+        "type": "creature",
+        "types": ["enchantment", "creature"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Spirit"],
+        "text": "{6}{U}, Sacrifice Eidolon of Philosophy: Draw three cards.",
+        "power": 1,
+        "toughness": 2,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 6,
+                "U": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 3
+              }
+            ],
+            "text": "Draw three cards."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "65acea17-c900-4574-b22f-910285552aa2",
+        "printingId": "d2897635-b387-485d-932f-5655244a381f",
+        "url": "https://scryfall.com/card/thb/48/eidolon-of-philosophy?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:14.908Z",
+        "manaCost": "{U}",
+        "typeLine": "Enchantment Creature — Spirit",
+        "colors": ["U"],
+        "power": "1",
+        "toughness": "2",
+        "text": "{6}{U}, Sacrifice this creature: Draw three cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "bd6b96491a5afde3439554695c073d43c2020c58fbdcc136fe13b217f94e0e72"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/e/ember_hauler.txt",
+      "definition": {
+        "name": "Ember Hauler",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "R": 2
+        },
+        "keywords": [],
+        "subtypes": ["Goblin"],
+        "text": "{1}, Sacrifice Ember Hauler: It deals 2 damage to any target.",
+        "power": 2,
+        "toughness": 2,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 1
+              }
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 2
+              }
+            ],
+            "text": "It deals 2 damage to any target."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "7d313958-49ca-4592-97c7-20f12c8468a8",
+        "printingId": "159d476e-2f20-4f9b-adfd-9c541dc3e199",
+        "url": "https://scryfall.com/card/m20/137/ember-hauler?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:17.534Z",
+        "manaCost": "{R}{R}",
+        "typeLine": "Creature — Goblin",
+        "colors": ["R"],
+        "power": "2",
+        "toughness": "2",
+        "text": "{1}, Sacrifice this creature: It deals 2 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "2316a99a4ade8fd3ed850acc5352322cf52c81c903dcb326214dd6d2f6a9c362"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/e/explosive_apparatus.txt",
+      "definition": {
+        "name": "Explosive Apparatus",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{3}, {T}, Sacrifice Explosive Apparatus: It deals 2 damage to any target.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 3
+              }
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 2
+              }
+            ],
+            "text": "It deals 2 damage to any target."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "ab8301da-f9f7-4d90-afae-bd7e60834c22",
+        "printingId": "608f431b-a05c-4610-94f7-928d87b2c056",
+        "url": "https://scryfall.com/card/m19/233/explosive-apparatus?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:22.832Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{3}, {T}, Sacrifice this artifact: It deals 2 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "9c93ebfdcd7d9f38349170c259c5b078a67b0a8b2f1eadab2755a1a421dac619"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/fanatical_firebrand.txt",
+      "definition": {
+        "name": "Fanatical Firebrand",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "R": 1
+        },
+        "keywords": ["haste"],
+        "subtypes": ["Goblin", "Pirate"],
+        "text": "Haste\n{T}, Sacrifice Fanatical Firebrand: It deals 1 damage to any target.",
+        "power": 1,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 1
+              }
+            ],
+            "text": "It deals 1 damage to any target."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "d36e11f1-6ab3-4273-8114-a8fbbe21c1c3",
+        "printingId": "d1296316-7781-4e98-95e6-7020648be6a5",
+        "url": "https://scryfall.com/card/fdn/195/fanatical-firebrand?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:22.832Z",
+        "manaCost": "{R}",
+        "typeLine": "Creature — Goblin Pirate",
+        "colors": ["R"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Haste (This creature can attack and {T} as soon as it comes under your control.)\n{T}, Sacrifice this creature: It deals 1 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "9ad9b6d9576aecd94de3040e547e0fa7bc7cf5d9e6575bca4d0c97a7dd38fd3f"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/fear_of_lost_teeth.txt",
+      "definition": {
+        "name": "Fear of Lost Teeth",
+        "type": "creature",
+        "types": ["enchantment", "creature"],
+        "cost": {
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Nightmare"],
+        "text": "When Fear of Lost Teeth dies, it deals 1 damage to any target and you gain 1 life.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 1
+              },
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ],
+            "target": "any"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "3724cc42-1bbd-4a11-8469-ab8492ddba52",
+        "printingId": "259045fe-f349-4be1-bf29-465d084ed35e",
+        "url": "https://scryfall.com/card/dsk/97/fear-of-lost-teeth?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:25.327Z",
+        "manaCost": "{B}",
+        "typeLine": "Enchantment Creature — Nightmare",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature dies, it deals 1 damage to any target and you gain 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "f860c70a341dca1fa86453b5fbb80e3190d92ee84330b57e5b4b810810b63b6b"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/felidar_cub.txt",
+      "definition": {
+        "name": "Felidar Cub",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": ["Cat", "Beast"],
+        "text": "Sacrifice Felidar Cub: Destroy target enchantment.",
+        "power": 2,
+        "toughness": 2,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true
+            },
+            "target": "enchantment",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target enchantment."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "cae60cf8-cd64-4595-a4dd-946694cf2bb1",
+        "printingId": "0d61d50b-7ab6-45a9-b207-31d87aa2e555",
+        "url": "https://scryfall.com/card/fdn/573/felidar-cub?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:25.327Z",
+        "manaCost": "{1}{W}",
+        "typeLine": "Creature — Cat Beast",
+        "colors": ["W"],
+        "power": "2",
+        "toughness": "2",
+        "text": "Sacrifice this creature: Destroy target enchantment.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "527ee7a94cbb57e23a9d949d9cffc38fcb04c28fdb0dd01ca9a4c3b18cbea084"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/fireforgers_puzzleknot.txt",
+      "definition": {
+        "name": "Fireforger's Puzzleknot",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "When Fireforger's Puzzleknot enters, it deals 1 damage to any target.\n{2}{R}, Sacrifice Fireforger's Puzzleknot: It deals 1 damage to any target.",
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "R": 1
+              }
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 1
+              }
+            ],
+            "text": "It deals 1 damage to any target."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 1
+              }
+            ],
+            "target": "any"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "0de18ba2-84a7-4e07-84b2-771761d77aaf",
+        "printingId": "88bf82e8-704c-40b9-a01b-aba565cb436f",
+        "url": "https://scryfall.com/card/klr/240/fireforgers-puzzleknot?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:27.907Z",
+        "manaCost": "{2}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "When this artifact enters, it deals 1 damage to any target.\n{2}{R}, Sacrifice this artifact: It deals 1 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "d7087ed2ce0a84e1678193e7426381edfd9f9c38b57bd860c17625959f88c230"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/foggy_bottom_swamp.txt",
+      "definition": {
+        "name": "Foggy Bottom Swamp",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {B} or {G}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["B", "G"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "b56bb8cb-457e-4b85-9bf9-5e891e79f1dd",
+        "printingId": "226af626-873d-4bd2-b889-000f8316786f",
+        "url": "https://scryfall.com/card/tla/269/foggy-bottom-swamp?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:30.505Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {B} or {G}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "a479036a866ea9ccfc7c37457a60eb01d7552dd1bdd6bb1f67911794ff835289"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/f/futurist_forge.txt",
+      "definition": {
+        "name": "Futurist Forge",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "When this artifact enters, draw a card.\n{3}{U}, Sacrifice this artifact: Draw two cards.",
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 3,
+                "U": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 2
+              }
+            ],
+            "text": "Draw two cards."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "0e5f97b5-bb8c-4688-a141-5db4d4eeccf0",
+        "printingId": "a50feebf-c660-43f1-9fae-75294703b346",
+        "url": "https://scryfall.com/card/msh/55/futurist-forge?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:33.111Z",
+        "manaCost": "{1}{U}",
+        "typeLine": "Artifact",
+        "colors": ["U"],
+        "text": "When this artifact enters, draw a card.\n{3}{U}, Sacrifice this artifact: Draw two cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "a17ea90a115da2e60ba2d7a673d73c62d0988177a7d5ae444e3c37bff356cf36"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/g/gates_of_istfell.txt",
+      "definition": {
+        "name": "Gates of Istfell",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "Gates of Istfell enters tapped.\n{T}: Add {W}.\n{2}{W}{U}{U}, {T}, Sacrifice Gates of Istfell: You gain 2 life and draw two cards.",
+        "mana": "W",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "W": 1,
+                "U": 2
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "gainLife",
+                "amount": 2
+              },
+              {
+                "op": "draw",
+                "count": 2
+              }
+            ],
+            "text": "You gain 2 life and draw two cards."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "6f85c26e-3c87-4112-ad1a-8a5708555a93",
+        "printingId": "2627acb7-57d9-4429-9bc5-e7dd444d8d48",
+        "url": "https://scryfall.com/card/khm/256/gates-of-istfell?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:33.111Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {W}.\n{2}{W}{U}{U}, {T}, Sacrifice this land: You gain 2 life and draw two cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "77f6b23203b587db79f15cbf4e8995948a77e6f9e4c433a6dfd9b10fde63e624"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/g/goblin_arsonist.txt",
+      "definition": {
+        "name": "Goblin Arsonist",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": ["Goblin", "Shaman"],
+        "text": "When Goblin Arsonist dies, you may have it deal 1 damage to any target.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 1
+              }
+            ],
+            "target": "any",
+            "optional": true
+          }
+        ]
+      },
+      "oracle": {
+        "id": "c1177f22-a1cf-4da3-a68d-ff954e878403",
+        "printingId": "fa4bf664-3b92-4598-b905-2bc090958c8b",
+        "url": "https://scryfall.com/card/m21/147/goblin-arsonist?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:38.690Z",
+        "manaCost": "{R}",
+        "typeLine": "Creature — Goblin Shaman",
+        "colors": ["R"],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature dies, you may have it deal 1 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "89ef688642038b7daf9b7af8d974d1b702e3f346777574df782b265467b2da21"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/g/goblin_firebomb.txt",
+      "definition": {
+        "name": "Goblin Firebomb",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": ["flash"],
+        "subtypes": [],
+        "text": "Flash\n{7}, {T}, Sacrifice Goblin Firebomb: Destroy target permanent.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 7
+              }
+            },
+            "target": "permanent",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target permanent."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "2625fa9c-638c-46d3-966b-1166f440186f",
+        "printingId": "55ab3f99-9541-4100-818c-5d9e916791e4",
+        "url": "https://scryfall.com/card/fdn/562/goblin-firebomb?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:38.690Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "Flash\n{7}, {T}, Sacrifice this artifact: Destroy target permanent.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "2c5e9f41165b1afe186d6e2de909202a3c6cad86ff9f1ff7e4d93d0b9b3ee6e9"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/g/gristle_grinner.txt",
+      "definition": {
+        "name": "Gristle Grinner",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Zombie"],
+        "text": "Whenever a creature dies, Gristle Grinner gets +2/+2 until end of turn.",
+        "power": 3,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": {
+              "event": "dies",
+              "filter": {
+                "type": "creature"
+              }
+            },
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 2,
+                "toughness": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "419f4648-2ace-4bd4-9ae4-8d456688c089",
+        "printingId": "f1d6e32e-6479-48b3-93ae-da5378c09bb1",
+        "url": "https://scryfall.com/card/jmp/242/gristle-grinner?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:44.008Z",
+        "manaCost": "{4}{B}",
+        "typeLine": "Creature — Zombie",
+        "colors": ["B"],
+        "power": "3",
+        "toughness": "3",
+        "text": "Whenever a creature dies, this creature gets +2/+2 until end of turn.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "8512295e2d4f0372ba06c3d57e9c8c910e011cb396e8f3fb9d986659bca88d47"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/i/illvoi_galeblade.txt",
+      "definition": {
+        "name": "Illvoi Galeblade",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": ["flash", "flying"],
+        "subtypes": ["Jellyfish", "Warrior"],
+        "text": "Flash\nFlying\n{2}, Sacrifice this creature: Draw a card.",
+        "power": 1,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "d6273621-c36c-491b-85ca-37445ed30097",
+        "printingId": "769f7d13-a312-4d79-8639-6ae248452448",
+        "url": "https://scryfall.com/card/eoe/58/illvoi-galeblade?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:55.237Z",
+        "manaCost": "{U}",
+        "typeLine": "Creature — Jellyfish Warrior",
+        "colors": ["U"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Flash\nFlying\n{2}, Sacrifice this creature: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "c870cc7e4f4073e4026e1677adff3ec7854ef60adcfa24ca95c3bff3b7575ea0"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/i/inspired_insurgent.txt",
+      "definition": {
+        "name": "Inspired Insurgent",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Peasant", "Ally"],
+        "text": "{1}, Sacrifice this creature: Destroy target artifact or enchantment.",
+        "power": 2,
+        "toughness": 2,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 1
+              }
+            },
+            "target": "artifactOrEnchantment",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target artifact or enchantment."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "5863c67b-a47c-4466-8bd1-210ab26e0d3f",
+        "printingId": "119d4579-26e6-4985-b232-40d11d60fd96",
+        "url": "https://scryfall.com/card/tle/77/inspired-insurgent?utm_source=api",
+        "fetchedAt": "2026-10-26T00:41:58.067Z",
+        "manaCost": "{1}{W}",
+        "typeLine": "Creature — Human Peasant Ally",
+        "colors": ["W"],
+        "power": "2",
+        "toughness": "2",
+        "text": "{1}, Sacrifice this creature: Destroy target artifact or enchantment.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "e884e4423f80855ee49768cc1dc10587a17f699ec53a1b781b3bf89c59865e90"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/j/jeskai_banner.txt",
+      "definition": {
+        "name": "Jeskai Banner",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{T}: Add {U}, {R}, or {W}.\n{U}{R}{W}, {T}, Sacrifice Jeskai Banner: Draw a card.",
+        "mana": ["U", "R", "W"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "U": 1,
+                "R": 1,
+                "W": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "fda10ef2-f431-4d9b-96a4-4db4c98d2b0c",
+        "printingId": "684dc050-a66b-4364-9880-56f383db6c0a",
+        "url": "https://scryfall.com/card/ktk/222/jeskai-banner?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:03.385Z",
+        "manaCost": "{3}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{T}: Add {U}, {R}, or {W}.\n{U}{R}{W}, {T}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "8ecb22ab1e50900600184e7ab4941249013628083231eaf60487f7bb08827c2e"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/k/keening_apparition.txt",
+      "definition": {
+        "name": "Keening Apparition",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": ["Spirit"],
+        "text": "Sacrifice Keening Apparition: Destroy target enchantment.",
+        "power": 2,
+        "toughness": 2,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true
+            },
+            "target": "enchantment",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target enchantment."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "b9212596-3f65-41c9-9ee8-1f4cec7f0ecf",
+        "printingId": "e28f03a7-2df7-4ef7-9284-7fa7cbd07626",
+        "url": "https://scryfall.com/card/pio/20/keening-apparition?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:06.249Z",
+        "manaCost": "{1}{W}",
+        "typeLine": "Creature — Spirit",
+        "colors": ["W"],
+        "power": "2",
+        "toughness": "2",
+        "text": "Sacrifice this creature: Destroy target enchantment.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "1bdd8b018ec5f4877977d3b2ab4597f9d03f611a46900214415f20dd1dc4b74a"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/k/kyoshi_village.txt",
+      "definition": {
+        "name": "Kyoshi Village",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {G} or {W}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["G", "W"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "da81b78b-89fd-4fc1-9395-b5b01b96be70",
+        "printingId": "8d5f3008-2af8-4e81-8847-1c91f524e747",
+        "url": "https://scryfall.com/card/tla/271/kyoshi-village?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:08.969Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {G} or {W}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "41cf9e1baf92b353d42671120016e926f831cb2616d7dd38e31592b9f44b3ef0"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/l/lightning_core_excavator.txt",
+      "definition": {
+        "name": "Lightning-Core Excavator",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": [],
+        "subtypes": ["Golem"],
+        "text": "{5}, {T}, Sacrifice Lightning-Core Excavator: It deals 3 damage to any target.",
+        "power": 0,
+        "toughness": 3,
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 5
+              }
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 3
+              }
+            ],
+            "text": "It deals 3 damage to any target."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "cdaf3711-5bec-41bf-b333-c5f34ccb12ef",
+        "printingId": "b1b959af-bb23-42e7-8848-7405ed597c8d",
+        "url": "https://scryfall.com/card/jmp/32/lightning-core-excavator?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:14.267Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact Creature — Golem",
+        "colors": [],
+        "power": "0",
+        "toughness": "3",
+        "text": "{5}, {T}, Sacrifice this creature: It deals 3 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "65c4505adb18b5dd3b20a1ada2a8f68dd2aac3a70537850516ecd84b58d06cea"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/malcators_watcher.txt",
+      "definition": {
+        "name": "Malcator's Watcher",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "keywords": ["flying", "vigilance"],
+        "subtypes": ["Phyrexian", "Drone"],
+        "text": "Flying, vigilance\nWhen Malcator's Watcher dies, draw a card.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "b0493924-dc6d-4655-865f-7e9b40f547ea",
+        "printingId": "95a7e5ff-ba81-4b45-933e-0ac747525ab8",
+        "url": "https://scryfall.com/card/one/58/malcators-watcher?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:19.712Z",
+        "manaCost": "{1}{U}",
+        "typeLine": "Artifact Creature — Phyrexian Drone",
+        "colors": ["U"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Flying, vigilance\nWhen this creature dies, draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "a6d48893d6d769a7cc22112e95fbadc33f60e351b3c4edd7308f34e4dc22d458"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/mardu_banner.txt",
+      "definition": {
+        "name": "Mardu Banner",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{T}: Add {R}, {W}, or {B}.\n{R}{W}{B}, {T}, Sacrifice Mardu Banner: Draw a card.",
+        "mana": ["R", "W", "B"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "R": 1,
+                "W": 1,
+                "B": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "9805b7b3-086a-4c91-810f-52c8f8f95f6a",
+        "printingId": "fe10c56d-a8e1-495d-a03a-0b920b44182f",
+        "url": "https://scryfall.com/card/ktk/224/mardu-banner?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:19.712Z",
+        "manaCost": "{3}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{T}: Add {R}, {W}, or {B}.\n{R}{W}{B}, {T}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "28dc3f0e6a54d8e0a7d453e0cecefb17f040c7e334b2fd4bd7dcc426e9f7ef21"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/meditation_pools.txt",
+      "definition": {
+        "name": "Meditation Pools",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {G} or {U}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["G", "U"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "66208129-20fb-4cb4-8f00-8d4574c9c653",
+        "printingId": "cc078fc6-4470-473f-9e24-d2c470e09141",
+        "url": "https://scryfall.com/card/tla/272/meditation-pools?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:22.257Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {G} or {U}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "fe6c5ab7a572b905f537cd6d780c724494ef8d79134af4cbfef1732801c23ad1"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/memorial_to_folly.txt",
+      "definition": {
+        "name": "Memorial to Folly",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "Memorial to Folly enters tapped.\n{T}: Add {B}.\n{2}{B}, {T}, Sacrifice Memorial to Folly: Return target creature card from your graveyard to your hand.",
+        "mana": "B",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "B": 1
+              }
+            },
+            "target": {
+              "scope": "graveyard",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "owner": "you"
+                  }
+                ]
+              }
+            },
+            "effects": [
+              {
+                "op": "moveTarget",
+                "destination": "hand"
+              }
+            ],
+            "text": "Return target creature card from your graveyard to your hand."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "2bc38f14-0314-4351-8138-e2b8bf041404",
+        "printingId": "ebbe56f2-aec5-4e8b-8003-1bf1ca7f5659",
+        "url": "https://scryfall.com/card/dom/242/memorial-to-folly?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:22.257Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {B}.\n{2}{B}, {T}, Sacrifice this land: Return target creature card from your graveyard to your hand.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "1b996de290a576c1764254a00b930a54ef783821c260a56aa31df32253304903"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/memorial_to_genius.txt",
+      "definition": {
+        "name": "Memorial to Genius",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "Memorial to Genius enters tapped.\n{T}: Add {U}.\n{4}{U}, {T}, Sacrifice Memorial to Genius: Draw two cards.",
+        "mana": "U",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4,
+                "U": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 2
+              }
+            ],
+            "text": "Draw two cards."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "81763d7d-3897-4be9-bbf6-f6f5dee366ff",
+        "printingId": "b97bb62e-45cf-4862-b181-5af463a442b5",
+        "url": "https://scryfall.com/card/dom/243/memorial-to-genius?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:22.257Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {U}.\n{4}{U}, {T}, Sacrifice this land: Draw two cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "c8680362565144dae58daf28f3c26c5f05f531f06c61311c87e98d0605bb0665"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/merfolk_coralsmith.txt",
+      "definition": {
+        "name": "Merfolk Coralsmith",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Merfolk"],
+        "text": "{1}: Merfolk Coralsmith gets +1/-1 until end of turn.\nWhen Merfolk Coralsmith dies, scry 2.",
+        "power": 2,
+        "toughness": 3,
+        "activated": [
+          {
+            "cost": {
+              "mana": {
+                "generic": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": -1
+              }
+            ],
+            "text": "CARDNAME gets +1/-1 until end of turn."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "scry",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "05f3638f-3c66-47bb-8a82-ad173e152573",
+        "printingId": "a7f6a79c-aa2f-47d2-a929-1606a61f9341",
+        "url": "https://scryfall.com/card/woe/60/merfolk-coralsmith?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:22.257Z",
+        "manaCost": "{2}{U}",
+        "typeLine": "Creature — Merfolk",
+        "colors": ["U"],
+        "power": "2",
+        "toughness": "3",
+        "text": "{1}: This creature gets +1/-1 until end of turn.\nWhen this creature dies, scry 2.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "550fa282bd5a01f3271ea16fabbcf2080894725d9936e6f1de8f70e698b6acae"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/metalspinners_puzzleknot.txt",
+      "definition": {
+        "name": "Metalspinner's Puzzleknot",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "When Metalspinner's Puzzleknot enters, you draw a card and you lose 1 life.\n{2}{B}, Sacrifice Metalspinner's Puzzleknot: You draw a card and you lose 1 life.",
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "B": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "loseLife",
+                "amount": 1
+              }
+            ],
+            "text": "You draw a card and you lose 1 life."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "loseLife",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "c19d2f54-2c3a-4cbe-8328-061d4b51f574",
+        "printingId": "9b1639c3-f22d-4246-9252-219a4b2b2999",
+        "url": "https://scryfall.com/card/kld/221/metalspinners-puzzleknot?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:22.257Z",
+        "manaCost": "{2}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "When this artifact enters, you draw a card and you lose 1 life.\n{2}{B}, Sacrifice this artifact: You draw a card and you lose 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "671811c6df103b7f5aabb6b1a72905b046e75990c0eab51c7e3a19d757a18743"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/mind_stone.txt",
+      "definition": {
+        "name": "Mind Stone",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{T}: Add {C}.\n{1}, {T}, Sacrifice Mind Stone: Draw a card.",
+        "mana": "C",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "c97361b5-af16-4a7b-af85-a429dbaf4ad2",
+        "printingId": "a92ac7d7-83a3-417e-944f-d7d85c442cf8",
+        "url": "https://scryfall.com/card/ha1/19/mind-stone?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:24.902Z",
+        "manaCost": "{2}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "4ea32eebda9ae9aac0f65311c5b09041307186436f03c4f1af6a4b40cafb3567"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/misty_palms_oasis.txt",
+      "definition": {
+        "name": "Misty Palms Oasis",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {W} or {B}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["W", "B"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "dfd2c57a-4557-4df1-8f6f-da2cbd317f12",
+        "printingId": "7cc29ddb-8f44-4493-985d-2fac35f9f34d",
+        "url": "https://scryfall.com/card/tla/273/misty-palms-oasis?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:27.617Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {W} or {B}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "ed8bd871cc9120ad4d4b5ea19f8ae02e985b1d47a0d96d37eef055fd5672e7ca"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/m/moldervine_reclamation.txt",
+      "definition": {
+        "name": "Moldervine Reclamation",
+        "type": "enchantment",
+        "types": ["enchantment"],
+        "cost": {
+          "generic": 3,
+          "B": 1,
+          "G": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Whenever a creature you control dies, you gain 1 life and draw a card.",
+        "triggers": [
+          {
+            "event": "controllerCreatureDies",
+            "effects": [
+              {
+                "op": "gainLife",
+                "amount": 1
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "68639a3d-2192-4921-8298-c76bb0cd6b02",
+        "printingId": "618d21fe-8e3d-4887-b2e4-b92194ba1902",
+        "url": "https://scryfall.com/card/m20/214/moldervine-reclamation?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:27.617Z",
+        "manaCost": "{3}{B}{G}",
+        "typeLine": "Enchantment",
+        "colors": ["B", "G"],
+        "text": "Whenever a creature you control dies, you gain 1 life and draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "b32331b065dbf8fcb3b3a1e6a5aa7c65b779a2a5d27f694366043e6666aa1c8e"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/n/nocturnal_feeder.txt",
+      "definition": {
+        "name": "Nocturnal Feeder",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Vampire", "Rogue"],
+        "text": "Flying\nWhen Nocturnal Feeder dies, each opponent loses 2 life and you gain 2 life.",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "f71bbaf2-02ea-4fc0-9a39-49d6689b36cd",
+        "printingId": "487aced8-e018-4c93-8e13-bb68b43096a4",
+        "url": "https://scryfall.com/card/jmp/16/nocturnal-feeder?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:35.622Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Creature — Vampire Rogue",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "1",
+        "text": "Flying\nWhen this creature dies, each opponent loses 2 life and you gain 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "4e41792f8721cfa6e4d5a8d914e5277769d9e158ed33c8265e3aa820c81fd455"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/n/north_pole_gates.txt",
+      "definition": {
+        "name": "North Pole Gates",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {W} or {U}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["W", "U"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "3fcd1432-66d0-40e1-85ef-b57a6fa94b7c",
+        "printingId": "bcf7b9da-d35d-4338-b4d9-83e47dc058ee",
+        "url": "https://scryfall.com/card/tla/274/north-pole-gates?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:35.622Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {W} or {U}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "a411cf246208589b07fff0e1ac5d82264abbd0aaff4d478659ca7ad64df432ac"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/n/novice_occultist.txt",
+      "definition": {
+        "name": "Novice Occultist",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Wizard"],
+        "text": "When Novice Occultist dies, you draw a card and you lose 1 life.",
+        "power": 1,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "loseLife",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "e51f5b41-5465-4b1d-b96a-544762657ca5",
+        "printingId": "a541ac79-a969-42b4-b989-f6e37572ec90",
+        "url": "https://scryfall.com/card/mid/117/novice-occultist?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:35.622Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Human Wizard",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "2",
+        "text": "When this creature dies, you draw a card and you lose 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "1c5983f01b5d156f7d083a26265fc6f376e31807b6f9228162c5b647976f86bf"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/o/omashu_city.txt",
+      "definition": {
+        "name": "Omashu City",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {R} or {G}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["R", "G"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "6f9a4bb2-5959-4a5c-83af-c2729e6673df",
+        "printingId": "c21e413b-96ed-4ded-b567-f1647074ce5f",
+        "url": "https://scryfall.com/card/tla/275/omashu-city?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:38.489Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {R} or {G}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "d1ec6e7151d82f3ec33163d7b60a950fca16da3e86df44a84fb487b4a603075d"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/o/outlaw_medic.txt",
+      "definition": {
+        "name": "Outlaw Medic",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": ["lifelink"],
+        "subtypes": ["Human", "Rogue"],
+        "text": "Lifelink\nWhen Outlaw Medic dies, draw a card.",
+        "power": 1,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "637be5f7-ab39-4e3a-a5eb-c6e48fca00a9",
+        "printingId": "2feaa51e-47fb-4849-b420-ee7278f3489a",
+        "url": "https://scryfall.com/card/otj/23/outlaw-medic?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:41.015Z",
+        "manaCost": "{1}{W}",
+        "typeLine": "Creature — Human Rogue",
+        "colors": ["W"],
+        "power": "1",
+        "toughness": "3",
+        "text": "Lifelink\nWhen this creature dies, draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "df17cd3cf89281ea5fd9ca3b13839085dcefe658b1bec7dd322c789635f9ae30"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/parcel_myr.txt",
+      "definition": {
+        "name": "Parcel Myr",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 1,
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Clue", "Myr"],
+        "text": "{2}, Sacrifice Parcel Myr: Draw a card.",
+        "power": 2,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "9e660f66-0a94-4694-95e0-25296799b193",
+        "printingId": "5f61efa3-639e-435e-aaa2-2d8698f305c9",
+        "url": "https://scryfall.com/card/j21/227/parcel-myr?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:41.015Z",
+        "manaCost": "{1}{U}",
+        "typeLine": "Artifact Creature — Clue Myr",
+        "colors": ["U"],
+        "power": "2",
+        "toughness": "1",
+        "text": "{2}, Sacrifice this creature: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "7652b51cce93a5a495a979db5ff6992981580c92ba6c2ed504550bb98c15945a"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/pendulum_of_patterns.txt",
+      "definition": {
+        "name": "Pendulum of Patterns",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "When Pendulum of Patterns enters, you gain 3 life.\n{5}, {T}, Sacrifice Pendulum of Patterns: Draw a card.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 5
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "gainLife",
+                "amount": 3
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "992075d5-f413-4896-b75e-7bb2d589c50e",
+        "printingId": "7ad452a4-be42-4d2f-a161-2b327f423b9c",
+        "url": "https://scryfall.com/card/m19/288/pendulum-of-patterns?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:43.853Z",
+        "manaCost": "{2}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "When this artifact enters, you gain 3 life.\n{5}, {T}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "acc1d55b990b1ef7586b57481e1c56d18bfea24e964790d2854350dc36e4ee11"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/perilous_myr.txt",
+      "definition": {
+        "name": "Perilous Myr",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": [],
+        "subtypes": ["Phyrexian", "Myr"],
+        "text": "When Perilous Myr dies, it deals 2 damage to any target.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 2
+              }
+            ],
+            "target": "any"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "f1e8f746-1837-4ea8-9a07-e57946883353",
+        "printingId": "d0aa3726-038f-4522-a7bd-1877a4fef350",
+        "url": "https://scryfall.com/card/jmp/476/perilous-myr?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:43.853Z",
+        "manaCost": "{2}",
+        "typeLine": "Artifact Creature — Phyrexian Myr",
+        "colors": [],
+        "power": "1",
+        "toughness": "1",
+        "text": "When this creature dies, it deals 2 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "cca758600f0378cddb7e1795c7cf0e34fd4f1f61ce84f2e7c3bcdfb351a7edc6"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/phyrexian_vivisector.txt",
+      "definition": {
+        "name": "Phyrexian Vivisector",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Phyrexian", "Human"],
+        "text": "Whenever a creature you control dies, scry 1. (Look at the top card of your library. You may put that card on the bottom.)",
+        "power": 2,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCreatureDies",
+            "effects": [
+              {
+                "op": "scry",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "9c99ce14-5059-47a9-b874-637b39473062",
+        "printingId": "65617a8f-4bd8-4edb-b5ec-e20b4482390b",
+        "url": "https://scryfall.com/card/dmu/100/phyrexian-vivisector?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:43.853Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Phyrexian Human",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "2",
+        "text": "Whenever a creature you control dies, scry 1. (Look at the top card of your library. You may put that card on the bottom.)",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "070e8b1ee813703f985ecba3e2dbd2427d3a38a9b49bfd6af2e26823f0baad35"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/pitchburn_devils.txt",
+      "definition": {
+        "name": "Pitchburn Devils",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": ["Devil"],
+        "text": "When Pitchburn Devils dies, it deals 3 damage to any target.",
+        "power": 3,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 3
+              }
+            ],
+            "target": "any"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "86e2bbdd-a788-4f76-9ebb-ef48d9bc9dcf",
+        "printingId": "fbd306cf-6625-4414-b9e5-4b909bb1bb13",
+        "url": "https://scryfall.com/card/m21/156/pitchburn-devils?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:43.853Z",
+        "manaCost": "{4}{R}",
+        "typeLine": "Creature — Devil",
+        "colors": ["R"],
+        "power": "3",
+        "toughness": "3",
+        "text": "When this creature dies, it deals 3 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "98a7fb7e5a4b85780584a68ac831d5033cfe66def8404e6c82d586b899afc247"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/poison_tip_archer.txt",
+      "definition": {
+        "name": "Poison-Tip Archer",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "B": 1,
+          "G": 1
+        },
+        "keywords": ["reach", "deathtouch"],
+        "subtypes": ["Elf", "Archer"],
+        "text": "Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhenever another creature dies, each opponent loses 1 life.",
+        "power": 2,
+        "toughness": 3,
+        "triggers": [
+          {
+            "event": "otherCreatureDies",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "opponent"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "d0e810bb-5f38-4045-a718-30d423c05659",
+        "printingId": "5e058ff8-043c-498b-8310-0ca45466ac27",
+        "url": "https://scryfall.com/card/m19/220/poison-tip-archer?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:46.892Z",
+        "manaCost": "{2}{B}{G}",
+        "typeLine": "Creature — Elf Archer",
+        "colors": ["B", "G"],
+        "power": "2",
+        "toughness": "3",
+        "text": "Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhenever another creature dies, each opponent loses 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "fd57b6e52c46b05e7f008a5d7e6f1c677f1f15544812a9d8c236a27971bd4e5b"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/potion_of_healing.txt",
+      "definition": {
+        "name": "Potion of Healing",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "When Potion of Healing enters, draw a card.\n{W}, {T}, Sacrifice Potion of Healing: You gain 3 life.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "W": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "gainLife",
+                "amount": 3
+              }
+            ],
+            "text": "You gain 3 life."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "11fb3fee-ae84-4bf3-b834-63d3b8987df3",
+        "printingId": "d5edb608-c7d7-4fa9-b969-262c9789fc17",
+        "url": "https://scryfall.com/card/afr/34/potion-of-healing?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:46.892Z",
+        "manaCost": "{1}{W}",
+        "typeLine": "Artifact",
+        "colors": ["W"],
+        "text": "When this artifact enters, draw a card.\n{W}, {T}, Sacrifice this artifact: You gain 3 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "83109f6807553a0c60f589d3c762b45f448f2ed6cebbb694c1402a32ef2f36bd"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/pyre_spawn.txt",
+      "definition": {
+        "name": "Pyre Spawn",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 4,
+          "R": 2
+        },
+        "keywords": [],
+        "subtypes": ["Elemental"],
+        "text": "When Pyre Spawn dies, it deals 3 damage to any target.",
+        "power": 6,
+        "toughness": 4,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 3
+              }
+            ],
+            "target": "any"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "13b0a3f3-04a5-465f-898b-13a28f795a16",
+        "printingId": "80255777-de00-4ffa-a8a0-f522bf4198fb",
+        "url": "https://scryfall.com/card/vow/173/pyre-spawn?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:49.484Z",
+        "manaCost": "{4}{R}{R}",
+        "typeLine": "Creature — Elemental",
+        "colors": ["R"],
+        "power": "6",
+        "toughness": "4",
+        "text": "When this creature dies, it deals 3 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "012e3160f6c8210865d5aefd0bd508fe2f6544da5830f5f5b9e91194d6ba5175"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/p/pyrite_spellbomb.txt",
+      "definition": {
+        "name": "Pyrite Spellbomb",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{R}, Sacrifice Pyrite Spellbomb: It deals 2 damage to any target.\n{1}, Sacrifice Pyrite Spellbomb: Draw a card.",
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          },
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "R": 1
+              }
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 2
+              }
+            ],
+            "text": "It deals 2 damage to any target."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "2c10cae2-951a-4f4f-94e4-8713b58d07dd",
+        "printingId": "b94ac8d9-8c53-4b07-aa2a-7db49ffdae25",
+        "url": "https://scryfall.com/card/aa2/21/pyrite-spellbomb?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:49.484Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{R}, Sacrifice this artifact: It deals 2 damage to any target.\n{1}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "371bf0022e04013ad6b91564cf4c9bb586c0fdf9ec46a41cc4e32606c4539f33"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/racers_ring.txt",
+      "definition": {
+        "name": "Racers' Ring",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "Racers' Ring enters tapped.\n{T}: Add {R} or {G}.\n{2}{R}{G}, {T}, Sacrifice Racers' Ring: Draw a card.",
+        "mana": ["R", "G"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "R": 1,
+                "G": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "7e2eb4d5-22a3-43c1-8cf3-e85723da1b61",
+        "printingId": "2a11bdb2-a269-4038-85f3-69fbd02982e9",
+        "url": "https://scryfall.com/card/snc/253/racers-ring?utm_source=api",
+        "fetchedAt": "2026-10-26T00:42:52.388Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {R} or {G}.\n{2}{R}{G}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "72a92914fe4d970a44bb081a2c5b0d77a063396ebdc769d91b419ecfb11c6c56"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/resolute_watchdog.txt",
+      "definition": {
+        "name": "Resolute Watchdog",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "W": 1
+        },
+        "keywords": ["defender"],
+        "subtypes": ["Dog"],
+        "text": "Defender\n{1}, Sacrifice Resolute Watchdog: Target creature you control gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)",
+        "power": 1,
+        "toughness": 3,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 1
+              }
+            },
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              }
+            },
+            "effects": [
+              {
+                "op": "modify",
+                "power": 0,
+                "toughness": 0,
+                "keywords": ["indestructible"]
+              }
+            ],
+            "text": "Target creature you control gains indestructible until end of turn."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "ca2aee09-398d-4eaa-acbb-98663216185b",
+        "printingId": "56d86909-b7f3-4a46-9904-e173853b79f1",
+        "url": "https://scryfall.com/card/rna/19/resolute-watchdog?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:00.384Z",
+        "manaCost": "{W}",
+        "typeLine": "Creature — Dog",
+        "colors": ["W"],
+        "power": "1",
+        "toughness": "3",
+        "text": "Defender\n{1}, Sacrifice this creature: Target creature you control gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "b21f0df0d623be2120c6242f47cb222e9b7a1718f4c4b673cff9b556aed461c6"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/ronom_unicorn.txt",
+      "definition": {
+        "name": "Ronom Unicorn",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "W": 1
+        },
+        "keywords": [],
+        "subtypes": ["Unicorn"],
+        "text": "Sacrifice Ronom Unicorn: Destroy target enchantment.",
+        "power": 2,
+        "toughness": 2,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true
+            },
+            "target": "enchantment",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target enchantment."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "3c6913cc-c543-45f8-ad3b-ccd282efa6f7",
+        "printingId": "cb993412-69bc-4000-ac8f-b2f62161fc55",
+        "url": "https://scryfall.com/card/jmp/131/ronom-unicorn?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:02.987Z",
+        "manaCost": "{1}{W}",
+        "typeLine": "Creature — Unicorn",
+        "colors": ["W"],
+        "power": "2",
+        "toughness": "2",
+        "text": "Sacrifice this creature: Destroy target enchantment.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "e73067245daa913fd4a2328eb79899472b4076c7d79e6695fb695564d4757734"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/r/ruinous_gremlin.txt",
+      "definition": {
+        "name": "Ruinous Gremlin",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": ["Gremlin"],
+        "text": "{2}{R}, Sacrifice Ruinous Gremlin: Destroy target artifact.",
+        "power": 1,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "R": 1
+              }
+            },
+            "target": "artifact",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target artifact."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "b88d67c0-ef12-453c-8e58-6642650dffcc",
+        "printingId": "895ba64d-1310-4f7d-a2ff-1c33ba43d3c2",
+        "url": "https://scryfall.com/card/klr/142/ruinous-gremlin?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:05.621Z",
+        "manaCost": "{R}",
+        "typeLine": "Creature — Gremlin",
+        "colors": ["R"],
+        "power": "1",
+        "toughness": "1",
+        "text": "{2}{R}, Sacrifice this creature: Destroy target artifact.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "10d8cfb395024d321708a4a913b8988621a532826439c6d003078d2addd7c74e"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/sarpadian_simulacrum.txt",
+      "definition": {
+        "name": "Sarpadian Simulacrum",
+        "type": "creature",
+        "types": ["artifact", "creature"],
+        "cost": {
+          "R": 1
+        },
+        "keywords": ["haste"],
+        "subtypes": ["Goblin"],
+        "text": "Haste\n{3}{R}, Sacrifice Sarpadian Simulacrum: It deals 4 damage to target creature.",
+        "power": 1,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 3,
+                "R": 1
+              }
+            },
+            "target": "creature",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 4
+              }
+            ],
+            "text": "It deals 4 damage to target creature."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "b563a578-86ce-41a5-a83e-c70c6a4960e2",
+        "printingId": "099c65d5-9dd3-41d3-9102-3f6cb30c7b8e",
+        "url": "https://scryfall.com/card/mh3/135/sarpadian-simulacrum?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:08.485Z",
+        "manaCost": "{R}",
+        "typeLine": "Artifact Creature — Goblin",
+        "colors": ["R"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Haste\n{3}{R}, Sacrifice this creature: It deals 4 damage to target creature.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "0609517df8ca9173167bdf22abeda5a514a7ee067fd7e1a202260fdd303477b3"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/scalding_cauldron.txt",
+      "definition": {
+        "name": "Scalding Cauldron",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{3}, {T}, Sacrifice Scalding Cauldron: It deals 3 damage to target creature.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 3
+              }
+            },
+            "target": "creature",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 3
+              }
+            ],
+            "text": "It deals 3 damage to target creature."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "dceb96a4-d3c5-43a2-93f6-50316e1e7a1b",
+        "printingId": "710d2782-2b23-441f-9890-6fa9c923b701",
+        "url": "https://scryfall.com/card/eld/229/scalding-cauldron?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:08.485Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{3}, {T}, Sacrifice this artifact: It deals 3 damage to target creature.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "6f32c5ba997f9c604f2892bd9e0cdb26d0a9e95175b87722ae6434733f6096f7"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/scaldkin.txt",
+      "definition": {
+        "name": "Scaldkin",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 3,
+          "U": 1
+        },
+        "keywords": ["flying"],
+        "subtypes": ["Elemental"],
+        "text": "Flying\n{2}{R}, Sacrifice Scaldkin: It deals 2 damage to any target.",
+        "power": 2,
+        "toughness": 2,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "R": 1
+              }
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 2
+              }
+            ],
+            "text": "It deals 2 damage to any target."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "3fb2dbb3-e064-44bf-a8b6-10d58b1174d5",
+        "printingId": "8110eb0a-63dc-43df-b55a-9241f45b1cc6",
+        "url": "https://scryfall.com/card/ktk/52/scaldkin?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:08.485Z",
+        "manaCost": "{3}{U}",
+        "typeLine": "Creature — Elemental",
+        "colors": ["U"],
+        "power": "2",
+        "toughness": "2",
+        "text": "Flying\n{2}{R}, Sacrifice this creature: It deals 2 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "c9043323110bca4a3aa8aca1c779918c1d30c53b41e893e6bbf876ec5003e369"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/serpents_pass.txt",
+      "definition": {
+        "name": "Serpent's Pass",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {U} or {B}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["U", "B"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "f715f701-a735-42ab-b31a-8e1bd04ac5ff",
+        "printingId": "ad87bff5-9b8c-44e4-a6d3-8cc71be9640a",
+        "url": "https://scryfall.com/card/tla/279/serpents-pass?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:14.420Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {U} or {B}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "39d08308a44e096a77538787482242ee9000eb3dd2a805f1dd8dedbff255e27a"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/shore_keeper.txt",
+      "definition": {
+        "name": "Shore Keeper",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": ["Trilobite"],
+        "text": "{7}{U}, {T}, Sacrifice Shore Keeper: Draw three cards.",
+        "power": 0,
+        "toughness": 3,
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 7,
+                "U": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 3
+              }
+            ],
+            "text": "Draw three cards."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "9625773b-1976-49b3-88d2-93a4befb595c",
+        "printingId": "135d1145-8640-44e1-8079-45832fa2556d",
+        "url": "https://scryfall.com/card/xln/77/shore-keeper?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:17.106Z",
+        "manaCost": "{U}",
+        "typeLine": "Creature — Trilobite",
+        "colors": ["U"],
+        "power": "0",
+        "toughness": "3",
+        "text": "{7}{U}, {T}, Sacrifice this creature: Draw three cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "e4497705b7c680a91a64b943334f68b750e77944f1becaec8de04ae2b26734d8"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/silent_dart.txt",
+      "definition": {
+        "name": "Silent Dart",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{4}, {T}, Sacrifice Silent Dart: It deals 3 damage to target creature.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": "creature",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 3
+              }
+            ],
+            "text": "It deals 3 damage to target creature."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "912bc348-9ba3-4001-90a8-104d2bb17527",
+        "printingId": "4e12530d-5509-46f1-8273-dce2c1f60965",
+        "url": "https://scryfall.com/card/m21/237/silent-dart?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:17.106Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{4}, {T}, Sacrifice this artifact: It deals 3 damage to target creature.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "abfd03889127ef5dcf4e6f85328cdad0967b35fbe4d6fc0357779b2d71670159"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/skybridge_towers.txt",
+      "definition": {
+        "name": "Skybridge Towers",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "Skybridge Towers enters tapped.\n{T}: Add {W} or {U}.\n{2}{W}{U}, {T}, Sacrifice Skybridge Towers: Draw a card.",
+        "mana": ["W", "U"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "W": 1,
+                "U": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "46466819-3c8b-4f7e-82c2-93cb0118a6e6",
+        "printingId": "e28c871f-a96a-4e7d-a159-2e93aeb276d4",
+        "url": "https://scryfall.com/card/snc/256/skybridge-towers?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:19.687Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {W} or {U}.\n{2}{W}{U}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "4b6f66ce54b393384945a65e25c7fd81af6225c90b7349b982e72e1d4868adf7"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/spare_supplies.txt",
+      "definition": {
+        "name": "Spare Supplies",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "Spare Supplies enters tapped.\nWhen Spare Supplies enters, draw a card.\n{2}, {T}, Sacrifice Spare Supplies: Draw a card.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "088fb5dc-65eb-42bf-8a32-76fa6b79b79f",
+        "printingId": "a53baf25-1782-427b-a9dd-fc9b8dc6444f",
+        "url": "https://scryfall.com/card/znr/254/spare-supplies?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:25.422Z",
+        "manaCost": "{2}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "This artifact enters tapped.\nWhen this artifact enters, draw a card.\n{2}, {T}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "98ba628d8b0fefbf53b462005834a928e6b672770aaa9b4a410d69ae2543417d"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/spirit_of_malevolence.txt",
+      "definition": {
+        "name": "Spirit of Malevolence",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Spirit"],
+        "text": "When Spirit of Malevolence dies, each opponent loses 1 life and you gain 1 life.",
+        "power": 2,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "15323e45-8260-43dc-b72b-efd661a58d75",
+        "printingId": "cf3765b7-11e2-4837-b5e5-ca24adc0e33c",
+        "url": "https://scryfall.com/card/m21/331/spirit-of-malevolence?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:28.032Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Spirit",
+        "colors": ["B"],
+        "power": "2",
+        "toughness": "1",
+        "text": "When this creature dies, each opponent loses 1 life and you gain 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "f40280e763d182bf2d8baa6dbbef6382699b9d47a6432d7e6a07b92ffe0e3207"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/springjaw_trap.txt",
+      "definition": {
+        "name": "Springjaw Trap",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": ["flash"],
+        "subtypes": [],
+        "text": "Flash\n{4}, {T}, Sacrifice Springjaw Trap: It deals 3 damage to any target.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": "any",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 3
+              }
+            ],
+            "text": "It deals 3 damage to any target."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "3a635b73-692f-4345-9628-cb4f9f0cddad",
+        "printingId": "3741de51-ea92-493a-8058-e0f2000e7701",
+        "url": "https://scryfall.com/card/iko/241/springjaw-trap?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:28.032Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "Flash\n{4}, {T}, Sacrifice this artifact: It deals 3 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "915be64a8bbafc3e636a5c6441571a7ed4c2eaac88ccd36762b2010bb5bd083e"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/storm_gods_oracle.txt",
+      "definition": {
+        "name": "Storm God's Oracle",
+        "type": "creature",
+        "types": ["enchantment", "creature"],
+        "cost": {
+          "generic": 1,
+          "U": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Shaman"],
+        "text": "{1}: Storm God's Oracle gets +1/-1 until end of turn.\nWhen Storm God's Oracle dies, it deals 3 damage to any target.",
+        "power": 1,
+        "toughness": 3,
+        "activated": [
+          {
+            "cost": {
+              "mana": {
+                "generic": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 1,
+                "toughness": -1
+              }
+            ],
+            "text": "CARDNAME gets +1/-1 until end of turn."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 3
+              }
+            ],
+            "target": "any"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "21613fac-d959-44ba-9bcb-0a30b5e6545e",
+        "printingId": "75a91b53-8b67-4f0e-b715-1b736fd4493d",
+        "url": "https://scryfall.com/card/j21/721/storm-gods-oracle?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:30.613Z",
+        "manaCost": "{1}{U}{R}",
+        "typeLine": "Enchantment Creature — Human Shaman",
+        "colors": ["R", "U"],
+        "power": "1",
+        "toughness": "3",
+        "text": "{1}: This creature gets +1/-1 until end of turn.\nWhen this creature dies, it deals 3 damage to any target.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "440d61aeb8220508e252750c2b7bf99035e2445811c5cf38ececafebef57184b"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/sultai_banner.txt",
+      "definition": {
+        "name": "Sultai Banner",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{T}: Add {B}, {G}, or {U}.\n{B}{G}{U}, {T}, Sacrifice Sultai Banner: Draw a card.",
+        "mana": ["B", "G", "U"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "B": 1,
+                "G": 1,
+                "U": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "93b139a5-2678-46a5-b8eb-45344ee3290a",
+        "printingId": "1695cf35-8f7c-4674-bfd3-43520b13d084",
+        "url": "https://scryfall.com/card/ktk/225/sultai-banner?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:33.132Z",
+        "manaCost": "{3}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{T}: Add {B}, {G}, or {U}.\n{B}{G}{U}, {T}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "4140a3f6e757bac39b8e639282d10ae96e698e45eef080aa23c7136e1b36650b"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/sun_blessed_peak.txt",
+      "definition": {
+        "name": "Sun-Blessed Peak",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "This land enters tapped.\n{T}: Add {R} or {W}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "mana": ["R", "W"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "d188a397-c7d9-4f16-bc21-d9e1b5ffc951",
+        "printingId": "ae04c862-095f-41d2-8aef-21036d5a0cdc",
+        "url": "https://scryfall.com/card/tla/280/sun-blessed-peak?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:33.132Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {R} or {W}.\n{4}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "5b5a5ed41f1efd9365fd44218cdacf77382843dd7fab6e983cfa6a69e99ae491"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/s/supply_drop.txt",
+      "definition": {
+        "name": "Supply Drop",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": ["flash"],
+        "subtypes": [],
+        "text": "Flash\nWhen Supply Drop enters, target creature you control gets +2/+2 until end of turn.\n{4}, {T}, Sacrifice Supply Drop: Draw a card.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 4
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "modify",
+                "power": 2,
+                "toughness": 2
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "oracle": {
+        "id": "9594b8e0-a176-447a-a52e-e1a77175b748",
+        "printingId": "82a5d3e9-bada-448b-894d-9d4e7e0463c7",
+        "url": "https://scryfall.com/card/bro/250/supply-drop?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:35.942Z",
+        "manaCost": "{3}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "Flash\nWhen this artifact enters, target creature you control gets +2/+2 until end of turn.\n{4}, {T}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "795658badf0f02a698b045c3f7c2da4b4b16e9a47392257b5fb0c52913e4d1d2"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/t/tattered_mummy.txt",
+      "definition": {
+        "name": "Tattered Mummy",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Zombie", "Jackal"],
+        "text": "When Tattered Mummy dies, each opponent loses 2 life.",
+        "power": 1,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 2,
+                "player": "opponent"
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "066e7379-d439-41cb-a8c9-60964040b110",
+        "printingId": "6a27ce41-69e7-4b86-9b9c-1a724d0728e9",
+        "url": "https://scryfall.com/card/m19/295/tattered-mummy?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:38.507Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Zombie Jackal",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "2",
+        "text": "When this creature dies, each opponent loses 2 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "d96c14528bd0495364c91af35aafe0b5663ed6644ae78cfe7bca9d674ee61268"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/t/temur_banner.txt",
+      "definition": {
+        "name": "Temur Banner",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{T}: Add {G}, {U}, or {R}.\n{G}{U}{R}, {T}, Sacrifice Temur Banner: Draw a card.",
+        "mana": ["G", "U", "R"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "G": 1,
+                "U": 1,
+                "R": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "8a35f23d-f59a-4677-9736-035c60c22a2b",
+        "printingId": "9990bdff-c27a-447f-b530-d8b7614fe9a0",
+        "url": "https://scryfall.com/card/ktk/226/temur-banner?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:41.208Z",
+        "manaCost": "{3}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{T}: Add {G}, {U}, or {R}.\n{G}{U}{R}, {T}, Sacrifice this artifact: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "3ee1776dd137b1ad4a0334d3b6a2bb70953826dcbf404f4bbc71fea95e101d7b"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/t/tibalts_rager.txt",
+      "definition": {
+        "name": "Tibalt's Rager",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": ["Devil"],
+        "text": "When Tibalt's Rager dies, it deals 1 damage to any target.\n{1}{R}: Tibalt's Rager gets +2/+0 until end of turn.",
+        "power": 1,
+        "toughness": 2,
+        "activated": [
+          {
+            "cost": {
+              "mana": {
+                "generic": 1,
+                "R": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "modify",
+                "subject": "source",
+                "power": 2,
+                "toughness": 0
+              }
+            ],
+            "text": "CARDNAME gets +2/+0 until end of turn."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfDies",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 1
+              }
+            ],
+            "target": "any"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "0d7d8f4f-abf3-408b-a289-1dd6a3ebdbf6",
+        "printingId": "2947ad7e-d365-45ff-b107-35819b308f8c",
+        "url": "https://scryfall.com/card/jmp/366/tibalts-rager?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:50.622Z",
+        "manaCost": "{1}{R}",
+        "typeLine": "Creature — Devil",
+        "colors": ["R"],
+        "power": "1",
+        "toughness": "2",
+        "text": "When this creature dies, it deals 1 damage to any target.\n{1}{R}: This creature gets +2/+0 until end of turn.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "27ef6deabadf5d5566eba879cb71402bd08ea4aa88b1021c0da7341695d4670c"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/t/torch_fiend.txt",
+      "definition": {
+        "name": "Torch Fiend",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "R": 1
+        },
+        "keywords": [],
+        "subtypes": ["Devil"],
+        "text": "{R}, Sacrifice Torch Fiend: Destroy target artifact.",
+        "power": 2,
+        "toughness": 1,
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "R": 1
+              }
+            },
+            "target": "artifact",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target artifact."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "15f8049c-f21d-4cd0-aa81-1a533936cf77",
+        "printingId": "60c3aa66-2436-40a3-a541-185f457bd55a",
+        "url": "https://scryfall.com/card/jmp/367/torch-fiend?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:50.622Z",
+        "manaCost": "{1}{R}",
+        "typeLine": "Creature — Devil",
+        "colors": ["R"],
+        "power": "2",
+        "toughness": "1",
+        "text": "{R}, Sacrifice this creature: Destroy target artifact.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "b3b2e925034bf5261ee8acdab11f38e1d027a687b4feec827890fdd5429e6f04"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/t/tramway_station.txt",
+      "definition": {
+        "name": "Tramway Station",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "Tramway Station enters tapped.\n{T}: Add {B} or {R}.\n{2}{B}{R}, {T}, Sacrifice Tramway Station: Draw a card.",
+        "mana": ["B", "R"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "B": 1,
+                "R": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "e90e519d-023e-4d19-85ad-9972a76df3ba",
+        "printingId": "e0532304-da6d-45cd-b1e6-4779d3f3b2bc",
+        "url": "https://scryfall.com/card/snc/258/tramway-station?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:53.459Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {B} or {R}.\n{2}{B}{R}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "eee0ffb511749f4f4950970b394420d647c05324a11eb6e1b489e42d37fa93cb"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/u/universal_solvent.txt",
+      "definition": {
+        "name": "Universal Solvent",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{7}, {T}, Sacrifice Universal Solvent: Destroy target permanent.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 7
+              }
+            },
+            "target": "permanent",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target permanent."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "f34ba913-cf9a-48fe-b5fe-68bf504693b2",
+        "printingId": "4ce92132-9eda-4600-b66c-80d4f74b510d",
+        "url": "https://scryfall.com/card/j25/761/universal-solvent?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:59.498Z",
+        "manaCost": "{1}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{7}, {T}, Sacrifice this artifact: Destroy target permanent.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "cf1ce60f31506f874a1f94231bfea7ed1071a23f6f632ede4b9c24f78fe5c251"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/u/unstable_obelisk.txt",
+      "definition": {
+        "name": "Unstable Obelisk",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 3
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{T}: Add {C}.\n{7}, {T}, Sacrifice Unstable Obelisk: Destroy target permanent.",
+        "mana": "C",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 7
+              }
+            },
+            "target": "permanent",
+            "effects": [
+              {
+                "op": "destroy"
+              }
+            ],
+            "text": "Destroy target permanent."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "060ae1bb-956a-4264-b405-a33151f31493",
+        "printingId": "b7d3681a-78d8-469f-9109-5f8faf04b707",
+        "url": "https://scryfall.com/card/jmp/489/unstable-obelisk?utm_source=api",
+        "fetchedAt": "2026-10-26T00:43:59.498Z",
+        "manaCost": "{3}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{T}: Add {C}.\n{7}, {T}, Sacrifice this artifact: Destroy target permanent.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "641ea8be1afbe09bf423424a7135ef4294a9e12eb82283ea4135c7cd0addbede"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/v/vengeful_bloodwitch.txt",
+      "definition": {
+        "name": "Vengeful Bloodwitch",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Vampire", "Warlock"],
+        "text": "Whenever this creature or another creature you control dies, target opponent loses 1 life and you gain 1 life.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerCreatureDies",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "target"
+              },
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ],
+            "target": "opponent"
+          }
+        ]
+      },
+      "oracle": {
+        "id": "4cdbc466-42fc-471f-beab-397caec18101",
+        "printingId": "bd0c12dd-f138-45c0-9614-d83a1d8e8399",
+        "url": "https://scryfall.com/card/fdn/76/vengeful-bloodwitch?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:02.599Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Vampire Warlock",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Whenever this creature or another creature you control dies, target opponent loses 1 life and you gain 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "7577bcaad24f85a2f5b5ff7c73ed37cae9a3f28b662ecd8316e980720af82859"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/v/vial_of_dragonfire.txt",
+      "definition": {
+        "name": "Vial of Dragonfire",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "generic": 2
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "{2}, {T}, Sacrifice Vial of Dragonfire: It deals 2 damage to target creature.",
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2
+              }
+            },
+            "target": "creature",
+            "effects": [
+              {
+                "op": "damage",
+                "amount": 2
+              }
+            ],
+            "text": "It deals 2 damage to target creature."
+          }
+        ]
+      },
+      "oracle": {
+        "id": "17be934e-1e33-4b95-a984-242fa018e280",
+        "printingId": "57db6ba8-f6c1-41be-8bee-93e573d052d7",
+        "url": "https://scryfall.com/card/m20/241/vial-of-dragonfire?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:02.599Z",
+        "manaCost": "{2}",
+        "typeLine": "Artifact",
+        "colors": [],
+        "text": "{2}, {T}, Sacrifice this artifact: It deals 2 damage to target creature.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "fed421a2bd1f3854b357358c17a1ff628bb832dda18a082f5e2ce65e2e1faaa8"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/w/warteye_witch.txt",
+      "definition": {
+        "name": "Warteye Witch",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 2,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Goblin", "Shaman"],
+        "text": "Whenever Warteye Witch or another creature you control dies, scry 1.",
+        "power": 3,
+        "toughness": 2,
+        "triggers": [
+          {
+            "event": "controllerCreatureDies",
+            "effects": [
+              {
+                "op": "scry",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "594a57f6-7827-41c7-aa37-00b498720b16",
+        "printingId": "4626966f-0216-4af4-a760-59b19f729a31",
+        "url": "https://scryfall.com/card/j21/404/warteye-witch?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:08.546Z",
+        "manaCost": "{2}{B}",
+        "typeLine": "Creature — Goblin Shaman",
+        "colors": ["B"],
+        "power": "3",
+        "toughness": "2",
+        "text": "Whenever this creature or another creature you control dies, scry 1.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "fce249f4d3f0bc460531f103c192e7ba2f1bedeee29ebb0ee7d9931a29b989fa"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/w/waterfront_district.txt",
+      "definition": {
+        "name": "Waterfront District",
+        "type": "land",
+        "types": ["land"],
+        "cost": {},
+        "keywords": [],
+        "subtypes": [],
+        "text": "Waterfront District enters tapped.\n{T}: Add {U} or {B}.\n{2}{U}{B}, {T}, Sacrifice Waterfront District: Draw a card.",
+        "mana": ["U", "B"],
+        "activated": [
+          {
+            "cost": {
+              "tap": true,
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 2,
+                "U": 1,
+                "B": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ],
+            "text": "Draw a card."
+          }
+        ],
+        "entersTapped": true
+      },
+      "oracle": {
+        "id": "18b0b583-d17b-4c67-bc67-c4d9aad155c7",
+        "printingId": "debf7aac-4d31-49b4-955b-79036258df69",
+        "url": "https://scryfall.com/card/snc/259/waterfront-district?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:08.546Z",
+        "manaCost": "",
+        "typeLine": "Land",
+        "colors": [],
+        "text": "This land enters tapped.\n{T}: Add {U} or {B}.\n{2}{U}{B}, {T}, Sacrifice this land: Draw a card.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "9646a0e31a15e0061d302bf0eb6c4780af8b9baf7f2569db6f53773f97198455"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/w/witching_well.txt",
+      "definition": {
+        "name": "Witching Well",
+        "type": "artifact",
+        "types": ["artifact"],
+        "cost": {
+          "U": 1
+        },
+        "keywords": [],
+        "subtypes": [],
+        "text": "When Witching Well enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)\n{3}{U}, Sacrifice Witching Well: Draw two cards.",
+        "activated": [
+          {
+            "cost": {
+              "sacrificeSelf": true,
+              "mana": {
+                "generic": 3,
+                "U": 1
+              }
+            },
+            "target": null,
+            "effects": [
+              {
+                "op": "draw",
+                "count": 2
+              }
+            ],
+            "text": "Draw two cards."
+          }
+        ],
+        "triggers": [
+          {
+            "event": "selfEnters",
+            "effects": [
+              {
+                "op": "scry",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "baadfc17-42fd-4771-aabe-027ef7b3bf69",
+        "printingId": "62d3132f-f897-4a7a-9de4-c6388e83f5ad",
+        "url": "https://scryfall.com/card/eld/74/witching-well?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:14.441Z",
+        "manaCost": "{U}",
+        "typeLine": "Artifact",
+        "colors": ["U"],
+        "text": "When this artifact enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)\n{3}{U}, Sacrifice this artifact: Draw two cards.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "7c114436ead20a824cf860a9d6ff676de8d5d56375d586f43dc2bb4babbeddf7"
+    },
+    {
+      "source": "https://github.com/Card-Forge/forge/blob/e5a0f8156da70ffc7866f923bed371c0111707cd/forge-gui/res/cardsfolder/z/zulaport_cutthroat.txt",
+      "definition": {
+        "name": "Zulaport Cutthroat",
+        "type": "creature",
+        "types": ["creature"],
+        "cost": {
+          "generic": 1,
+          "B": 1
+        },
+        "keywords": [],
+        "subtypes": ["Human", "Rogue", "Ally"],
+        "text": "Whenever Zulaport Cutthroat or another creature you control dies, each opponent loses 1 life and you gain 1 life.",
+        "power": 1,
+        "toughness": 1,
+        "triggers": [
+          {
+            "event": "controllerCreatureDies",
+            "effects": [
+              {
+                "op": "loseLife",
+                "amount": 1,
+                "player": "opponent"
+              },
+              {
+                "op": "gainLife",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "oracle": {
+        "id": "76b003e0-15af-4f22-bdf2-1ade5430964a",
+        "printingId": "08fca446-fee8-4617-91bc-5f1b18daf2ec",
+        "url": "https://scryfall.com/card/pio/121/zulaport-cutthroat?utm_source=api",
+        "fetchedAt": "2026-10-26T00:44:17.780Z",
+        "manaCost": "{1}{B}",
+        "typeLine": "Creature — Human Rogue Ally",
+        "colors": ["B"],
+        "power": "1",
+        "toughness": "1",
+        "text": "Whenever this creature or another creature you control dies, each opponent loses 1 life and you gain 1 life.",
+        "comparison": "self-reference/reminder-normalized match"
+      },
+      "forgeScriptSha256": "336c8ee32a68e357f8c6a5c5228d1d8c2aedf012d77eb1750c0acde6fcfb35ff"
+    }
+  ]
+}

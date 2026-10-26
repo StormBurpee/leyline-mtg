@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "65acea17-c900-4574-b22f-910285552aa2",
+  "name": "Eidolon of Philosophy",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "{6}{U}, Sacrifice this creature: Draw three cards.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "mana": "{6}{U}"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        }
+      ],
+      "text": "Draw three cards."
+    }
+  ]
+}

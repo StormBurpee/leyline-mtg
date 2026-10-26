@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.12.0 — Last Rites
+
+- Death triggers use pre-event characteristics and controllers, including simultaneous creature deaths and tokens.
+- Activated abilities can sacrifice their source as a cost. Costs are paid immediately; the ability remains on the stack independently of its source.
+- Added 88 reviewed definitions, including Blood Artist, Zulaport Cutthroat, Mind Stone, Cathar Commando, Fanatical Firebrand and Doomed Necromancer.
+- Added Last Rites, an introductory black/red death-trigger and self-sacrifice deck.
+- The practice policy can use graveyard-return and removal sacrifice abilities, while avoiding immediately cashing in early mana rocks.
+- Torch Courier was not admitted: its Forge selector does not encode the Oracle “another” restriction in the supported target grammar. Compiler recognition alone is not executable support.
+
+434 executable cards plus three tokens. This does not add arbitrary sacrifice outlets, sacrifice additional spell costs, death replacements or once-per-turn triggers.
+
 ## 0.11.0 — The deck room
 
 - Rebuilt the lobby as an art-led deck library with all 12 starter lists and independent opponent selection.

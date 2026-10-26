@@ -108,7 +108,6 @@ function activate(s, p, c) {
   requireRule(!problem, 'ACTIVATE', problem);
   const o = s.objects[c.card],
     a = definition(s, o).activated[c.ability];
-  payCost(s, p, a.cost, { sourceId: o.id });
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'ability',
@@ -121,6 +120,7 @@ function activate(s, p, c) {
     target: c.target ?? null,
     label: a.text,
   });
+  payCost(s, p, a.cost, { sourceId: o.id });
   s.passes = 0;
   emit(s, 'activated', { player: p, name: o.name, objectId: o.id, ability: c.ability });
   notifyTargeted(s, s.stack.at(-1));

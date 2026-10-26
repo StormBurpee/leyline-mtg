@@ -1,5 +1,5 @@
 {
-  "version": "0.11.0",
+  "version": "0.12.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -17,6 +17,14 @@
       "opcodes": ["surveil"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Abzan Banner",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Acidic Slime",
@@ -57,6 +65,14 @@
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Airship Engine Room",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Alesha's Legacy",
@@ -120,6 +136,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Archon of Justice",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Asgardian Citadel",
       "type": "land",
       "keywords": [],
@@ -174,6 +198,14 @@
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Bear Trap",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Beast Whisperer",
@@ -232,11 +264,34 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Blight Keeper",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Blitzball Shot",
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Blood Artist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [
+        {
+          "event": "dies",
+          "filter": {
+            "type": "creature"
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -280,6 +335,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Boiling Rock Prison",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Boltwave",
       "type": "sorcery",
       "keywords": [],
@@ -302,6 +365,14 @@
       "opcodes": ["bounce"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Botanical Plaza",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Brazen Scourge",
@@ -328,12 +399,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Buried Ruin",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Burrog Banemaker",
       "type": "creature",
       "keywords": ["deathtouch"],
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Burrowing Razormaw",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["mill"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
     },
     {
       "name": "Cadaver Imp",
@@ -352,6 +439,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Candy Trail",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["scry", "gainLife", "draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Careful Study",
       "type": "sorcery",
       "keywords": [],
@@ -366,6 +461,14 @@
       "opcodes": ["draw", "discard"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Cathar Commando",
+      "type": "creature",
+      "keywords": ["flash"],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Centaur Courser",
@@ -389,6 +492,14 @@
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Citywatch Sphinx",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["surveil"],
+      "triggers": ["selfDies"],
       "activatedAbilities": 0
     },
     {
@@ -584,6 +695,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Doomed Necromancer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Dragon Sniper",
       "type": "creature",
       "keywords": ["vigilance", "reach", "deathtouch"],
@@ -627,6 +746,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Eidolon of Philosophy",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Elderfang Disciple",
       "type": "creature",
       "keywords": [],
@@ -657,6 +784,14 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Ember Hauler",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Enchantress's Presence",
@@ -707,6 +842,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Explosive Apparatus",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Fade into Antiquity",
       "type": "sorcery",
       "keywords": [],
@@ -715,12 +858,36 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Fanatical Firebrand",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Fanatical Strength",
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Fear of Lost Teeth",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage", "gainLife"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Felidar Cub",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Fell",
@@ -779,6 +946,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Fireforger's Puzzleknot",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Fisk Tower",
       "type": "land",
       "keywords": [],
@@ -809,6 +984,14 @@
       "opcodes": ["damage"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Foggy Bottom Swamp",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Foot Headquarters",
@@ -859,12 +1042,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Futurist Forge",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Galewind Moose",
       "type": "creature",
       "keywords": ["flash", "vigilance", "reach", "trample"],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Gates of Istfell",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["gainLife", "draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Giant Growth",
@@ -923,6 +1122,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Goblin Arsonist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Goblin Firebomb",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Goblin Instigator",
       "type": "creature",
       "keywords": [],
@@ -960,6 +1175,21 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Gristle Grinner",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [
+        {
+          "event": "dies",
+          "filter": {
+            "type": "creature"
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -1131,6 +1361,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Illvoi Galeblade",
+      "type": "creature",
+      "keywords": ["flash", "flying"],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Imperious Inkmage",
       "type": "creature",
       "keywords": ["vigilance"],
@@ -1153,6 +1391,14 @@
       "opcodes": ["destroy", "loseLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Inspired Insurgent",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Inspiring Overseer",
@@ -1187,6 +1433,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Jeskai Banner",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Jeskai Brushmaster",
       "type": "creature",
       "keywords": ["double strike"],
@@ -1209,6 +1463,14 @@
       "opcodes": ["gainLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Keening Apparition",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Kiln Fiend",
@@ -1243,6 +1505,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Kyoshi Village",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Lava Axe",
       "type": "sorcery",
       "keywords": [],
@@ -1265,6 +1535,14 @@
       "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Lightning-Core Excavator",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Lightning Helix",
@@ -1323,6 +1601,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Malcator's Watcher",
+      "type": "creature",
+      "keywords": ["flying", "vigilance"],
+      "opcodes": ["draw"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Man-o'-War",
       "type": "creature",
       "keywords": [],
@@ -1331,12 +1617,52 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Mardu Banner",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Meditation Pools",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Memnite",
       "type": "creature",
       "keywords": [],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Memorial to Folly",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Memorial to Genius",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Merfolk Coralsmith",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["scry", "modify"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 1
     },
     {
       "name": "Merfolk Looter",
@@ -1353,6 +1679,14 @@
       "opcodes": ["draw"],
       "triggers": ["controllerCastsEnchantment"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Metalspinner's Puzzleknot",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Meteor Golem",
@@ -1384,6 +1718,30 @@
       "keywords": [],
       "opcodes": ["mill"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Mind Stone",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Misty Palms Oasis",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Moldervine Reclamation",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["gainLife", "draw"],
+      "triggers": ["controllerCreatureDies"],
       "activatedAbilities": 0
     },
     {
@@ -1483,11 +1841,35 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Nocturnal Feeder",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Nomad Outpost",
       "type": "land",
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "North Pole Gates",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Novice Occultist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": ["selfDies"],
       "activatedAbilities": 0
     },
     {
@@ -1513,6 +1895,14 @@
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Omashu City",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Ominous Asylum",
@@ -1571,6 +1961,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Outlaw Medic",
+      "type": "creature",
+      "keywords": ["lifelink"],
+      "opcodes": ["draw"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Overflowing Insight",
       "type": "sorcery",
       "keywords": [],
@@ -1614,6 +2012,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Parcel Myr",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Patchwork Automaton",
       "type": "creature",
       "keywords": [],
@@ -1624,6 +2030,22 @@
         }
       },
       "triggers": ["controllerCastsArtifact"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pendulum of Patterns",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["gainLife", "draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Perilous Myr",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": ["selfDies"],
       "activatedAbilities": 0
     },
     {
@@ -1643,6 +2065,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Phyrexian Vivisector",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["scry"],
+      "triggers": ["controllerCreatureDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Phyrexian Walker",
       "type": "creature",
       "keywords": [],
@@ -1656,6 +2086,14 @@
       "keywords": ["flying"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pitchburn Devils",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": ["selfDies"],
       "activatedAbilities": 0
     },
     {
@@ -1687,6 +2125,22 @@
       "type": "creature",
       "keywords": ["reach"],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Poison-Tip Archer",
+      "type": "creature",
+      "keywords": ["reach", "deathtouch"],
+      "opcodes": ["loseLife"],
+      "triggers": ["otherCreatureDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Potion of Healing",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw", "gainLife"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -1723,6 +2177,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Pyre Spawn",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pyrite Spellbomb",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw", "damage"],
+      "triggers": [],
+      "activatedAbilities": 2
+    },
+    {
       "name": "Quakestrider Ceratops",
       "type": "creature",
       "keywords": [],
@@ -1745,6 +2215,14 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Racers' Ring",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Raging Goblin",
@@ -1899,6 +2377,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Resolute Watchdog",
+      "type": "creature",
+      "keywords": ["defender"],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Revoke Existence",
       "type": "sorcery",
       "keywords": [],
@@ -1936,12 +2422,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ronom Unicorn",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Rugged Highlands",
       "type": "land",
       "keywords": [],
       "opcodes": ["gainLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Ruinous Gremlin",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Rune-Sealed Wall",
@@ -2000,6 +2502,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sarpadian Simulacrum",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Savage Mansion",
       "type": "land",
       "keywords": [],
@@ -2022,6 +2532,22 @@
       "opcodes": ["counterOn"],
       "triggers": ["controllerLandEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Scalding Cauldron",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Scaldkin",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Scarblade Scout",
@@ -2064,6 +2590,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Serpent's Pass",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Serra Angel",
       "type": "creature",
       "keywords": ["flying", "vigilance"],
@@ -2104,6 +2638,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Shore Keeper",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Shore Lurker",
       "type": "creature",
       "keywords": ["flying"],
@@ -2134,6 +2676,14 @@
       "opcodes": ["draw", "loseLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Silent Dart",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Silvercoat Lion",
@@ -2177,6 +2727,14 @@
       "opcodes": ["loseLife", "gainLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Skybridge Towers",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Skymarch Bloodletter",
@@ -2235,6 +2793,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Spare Supplies",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Spectacle Summit",
       "type": "land",
       "keywords": [],
@@ -2251,6 +2817,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Spirit of Malevolence",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spirited Companion",
       "type": "creature",
       "keywords": [],
@@ -2265,6 +2839,14 @@
       "opcodes": ["damageOpponent"],
       "triggers": ["controllerLandEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Springjaw Trap",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Sprite Dragon",
@@ -2315,6 +2897,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Storm God's Oracle",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage", "modify"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Stormchaser Mage",
       "type": "creature",
       "keywords": ["flying", "haste"],
@@ -2353,6 +2943,30 @@
       "opcodes": ["modify", "draw"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Sultai Banner",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Sun-Blessed Peak",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Supply Drop",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["modify", "draw"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
     },
     {
       "name": "Sure Strike",
@@ -2400,6 +3014,14 @@
       "keywords": ["vigilance", "trample"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tattered Mummy",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife"],
+      "triggers": ["selfDies"],
       "activatedAbilities": 0
     },
     {
@@ -2491,6 +3113,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Temur Banner",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Territorial Scythecat",
       "type": "creature",
       "keywords": ["trample"],
@@ -2529,6 +3159,14 @@
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Tibalt's Rager",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damage", "modify"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 1
     },
     {
       "name": "Titanic Growth",
@@ -2576,12 +3214,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Torch Fiend",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Toxic Abomination",
       "type": "creature",
       "keywords": [],
       "opcodes": ["loseLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Tramway Station",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Tranquil Cove",
@@ -2616,6 +3270,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Universal Solvent",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "University Campus",
       "type": "land",
       "keywords": [],
@@ -2629,6 +3291,14 @@
       "keywords": ["defender"],
       "opcodes": ["untap", "damageOpponent"],
       "triggers": ["controllerCastsInstantOrSorcery"],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Unstable Obelisk",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
       "activatedAbilities": 1
     },
     {
@@ -2696,6 +3366,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Vengeful Bloodwitch",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["controllerCreatureDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Vial of Dragonfire",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Virus Beetle",
       "type": "creature",
       "keywords": [],
@@ -2720,6 +3406,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Warteye Witch",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["scry"],
+      "triggers": ["controllerCreatureDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Watcher of the Wayside",
       "type": "creature",
       "keywords": [],
@@ -2739,6 +3433,14 @@
       },
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Waterfront District",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Wildheart Invoker",
@@ -2771,6 +3473,14 @@
       "opcodes": ["damage", "gainLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Witching Well",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["scry", "draw"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Wreckage Wickerfolk",
@@ -2823,6 +3533,14 @@
       "keywords": [],
       "opcodes": ["moveTarget"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Zulaport Cutthroat",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["controllerCreatureDies"],
       "activatedAbilities": 0
     }
   ],

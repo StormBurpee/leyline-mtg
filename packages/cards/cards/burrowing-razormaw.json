@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8551e1df-47eb-419e-8dd2-e96b9a450912",
+  "name": "Burrowing Razormaw",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Beast"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "When this creature dies, mill four cards. (Put the top four cards of your library into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 4
+        }
+      ]
+    }
+  ]
+}

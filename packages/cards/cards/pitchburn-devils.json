@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "86e2bbdd-a788-4f76-9ebb-ef48d9bc9dcf",
+  "name": "Pitchburn Devils",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Devil"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "When this creature dies, it deals 3 damage to any target.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

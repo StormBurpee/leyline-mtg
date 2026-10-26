@@ -175,9 +175,80 @@ export function chooseBotCommand(s, p) {
   const actions = legalActions(s, p);
   const land = actions.find((a) => a.type === 'playLand');
   if (land) return { ...land, player: p };
+  // Sacrifice is irreversible: preserve development pieces unless trading up,
+  // responding to removal, or converting spare resources into cards.
+  const sacrifices = actions
+    .filter(
+      (a) =>
+        a.type === 'activate' &&
+        definition(s, s.objects[a.card]).activated[a.ability].cost.sacrificeSelf,
+    )
+    .map((a) => {
+      const source = s.objects[a.card],
+        d = definition(s, source),
+        effect = d.activated[a.ability].effects;
+      const target = a.target?.kind === 'object' ? s.objects[a.target.id] : null;
+      const threatened = s.stack.some(
+        (e) => e.controller !== p && e.target?.kind === 'object' && e.target.id === source.id,
+      );
+      let score = -100;
+      const damage = effect.find((e) => e.op === 'damage');
+      if (damage && a.target?.kind === 'player' && a.target.id !== p)
+        score =
+          s.players[a.target.id].life <= damage.amount
+            ? 100
+            : threatened
+              ? 8
+              : d.type === 'creature'
+                ? -5
+                : 2;
+      if (
+        damage &&
+        target &&
+        target.controller !== p &&
+        stats(s, target).toughness - target.damage <= damage.amount
+      )
+        score = 8 + value(s, target) - value(s, source) / 2;
+      if (effect.some((e) => e.op === 'destroy') && target?.controller !== p && target)
+        score = 8 + value(s, target) - value(s, source) / 2;
+      const movement = effect.find((e) => e.op === 'moveTarget');
+      if (
+        movement &&
+        target?.zone === 'graveyard' &&
+        ['hand', 'battlefield'].includes(movement.destination)
+      )
+        score = 7 + value(s, target);
+      if (effect.some((e) => e.op === 'draw')) {
+        const manaSources = controlled(s, p).filter((o) => definition(s, o).mana).length;
+        score = threatened
+          ? 9
+          : d.mana && manaSources < 5
+            ? -10
+            : d.type === 'creature'
+              ? -5
+              : s.players[p].hand.length < 4
+                ? 4
+                : 0;
+      }
+      const loss = effect.find((e) => e.op === 'loseLife');
+      if (loss && (loss.player === 'opponent' || (loss.player === 'target' && a.target?.id !== p)))
+        score = s.players[1 - p].life <= loss.amount ? 100 : threatened ? 8 : 2;
+      if (
+        a.target &&
+        s.stack.some(
+          (e) =>
+            e.controller === p && e.target?.kind === a.target.kind && e.target.id === a.target.id,
+        )
+      )
+        score = -100;
+      return { a, score };
+    })
+    .sort((a, b) => b.score - a.score);
+  if (sacrifices[0]?.score > 0) return { ...sacrifices[0].a, player: p };
   const ability = actions.find(
     (a) =>
       a.type === 'activate' &&
+      !definition(s, s.objects[a.card]).activated[a.ability].cost.sacrificeSelf &&
       (a.target?.kind === 'player' ? a.target.id !== p : !a.target) &&
       (!definition(s, s.objects[a.card]).activated[a.ability].effects.some(
         (e) => e.op === 'modify',
