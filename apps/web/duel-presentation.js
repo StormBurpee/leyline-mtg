@@ -158,10 +158,14 @@ export function installDuelPresentation(root, context) {
     stackDot.setAttribute('cy', ty);
     stackAim.classList.toggle('opposing', entry.controller !== player);
   }
-  root.addEventListener('scroll', () => {
-    hidePreview();
-    redrawStack();
-  }, true);
+  root.addEventListener(
+    'scroll',
+    () => {
+      hidePreview();
+      redrawStack();
+    },
+    true,
+  );
   root.addEventListener('pointerover', (e) => {
     const card = e.target.closest('[data-card]');
     if (card && !card.contains(e.relatedTarget)) show(card);
