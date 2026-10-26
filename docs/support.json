@@ -1,5 +1,5 @@
 {
-  "version": "0.21.0",
+  "version": "0.22.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -48,6 +48,14 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Agate-Blade Assassin",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -157,6 +165,14 @@
       "keywords": ["reach", "deathtouch"],
       "opcodes": ["modify"],
       "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Audacious Thief",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -359,11 +375,27 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Boomerang, Blade Flinger",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageOpponent", "gainLife"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Boomerang",
       "type": "instant",
       "keywords": [],
       "opcodes": ["bounce"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Borderland Marauder",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -532,6 +564,14 @@
       "keywords": ["flying"],
       "opcodes": ["surveil"],
       "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Civic Gardener",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["untap"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -919,6 +959,14 @@
       "keywords": [],
       "opcodes": ["moveTarget"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Falkenrath Perforator",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageOpponent"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -1321,6 +1369,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hellkite Whelp",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["damage"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Hell's Kitchen",
       "type": "land",
       "keywords": [],
@@ -1334,6 +1390,14 @@
       "keywords": [],
       "opcodes": ["draw"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Herald of Faith",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["gainLife"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -1561,6 +1625,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Jumbo Cactuar",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Jungle Hollow",
       "type": "land",
       "keywords": [],
@@ -1689,6 +1761,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Lothlórien Lookout",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["scry"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Magnigoth Sentry",
       "type": "creature",
       "keywords": ["reach"],
@@ -1702,6 +1782,14 @@
       "keywords": ["trample"],
       "opcodes": ["modify"],
       "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Malamet Brawler",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -1849,6 +1937,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Mirkwood Spider",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Misty Palms Oasis",
       "type": "land",
       "keywords": [],
@@ -1913,6 +2009,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Mysterio's Phantasm",
+      "type": "creature",
+      "keywords": ["flying", "vigilance"],
+      "opcodes": ["mill"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Mystic Monastery",
       "type": "land",
       "keywords": [],
@@ -1958,6 +2062,14 @@
       "keywords": [],
       "opcodes": ["draw", "loseLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Nightveil Sprite",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["surveil"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -2297,6 +2409,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Pulse Tracker",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Pym Technologies",
       "type": "land",
       "keywords": [],
@@ -2630,6 +2750,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sanguine Syphoner",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sanitation Automaton",
       "type": "creature",
       "keywords": [],
@@ -2699,6 +2827,14 @@
       "keywords": ["lifelink"],
       "opcodes": ["mill"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Scorch Spitter",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageOpponent"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -3001,6 +3137,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Spined Megalodon",
+      "type": "creature",
+      "keywords": ["hexproof"],
+      "opcodes": ["scry"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spirit of Malevolence",
       "type": "creature",
       "keywords": [],
@@ -3022,6 +3166,14 @@
       "keywords": [],
       "opcodes": ["damageOpponent"],
       "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Spring Splasher",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -3062,6 +3214,14 @@
       "keywords": [],
       "opcodes": ["gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Steadfast Cathar",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -3574,6 +3734,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Vedalken Mesmerist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Vengeful Bloodwitch",
       "type": "creature",
       "keywords": [],
@@ -3596,6 +3764,14 @@
       "opcodes": ["searchLibrary"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Vicious Conquistador",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
     },
     {
       "name": "Vile Entomber",

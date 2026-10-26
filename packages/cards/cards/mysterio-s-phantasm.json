@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "99419378-8a23-44f3-aebe-e62d6e20e877",
+  "name": "Mysterio's Phantasm",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Illusion", "Villain"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Flying, vigilance\nWhenever this creature attacks, mill a card. (Put the top card of your library into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import {
+  notifyTriggers,
   controlled,
   creatures,
   definition,
@@ -63,6 +64,8 @@ export function declareAttackers(s, ids) {
   s.priority = s.active;
   s.passes = 0;
   emit(s, 'attackers', { player: s.active, ids });
+  // CR 508.1m: only declared attackers trigger. Resolve nothing during declaration.
+  for (const id of ids) notifyTriggers(s, 'attack', { object: s.objects[id] });
 }
 export function declareBlockers(s, pairs) {
   requireRule(Array.isArray(pairs), 'BLOCKERS', 'Block assignments must be an array.');

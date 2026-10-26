@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "26b077df-7a05-459a-b5ff-bf27767bb519",
+  "name": "Vicious Conquistador",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Soldier"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature attacks, each opponent loses 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

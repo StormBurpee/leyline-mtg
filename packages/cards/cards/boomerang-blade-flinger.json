@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bbd84035-3efd-4301-9778-913898efd57a",
+  "name": "Boomerang, Blade Flinger",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Villain"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Whenever Boomerang attacks, he deals 1 damage to each opponent and you gain 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -330,6 +330,26 @@
           },
           "required": ["subtype"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "legendary": {
+              "type": "boolean"
+            }
+          },
+          "required": ["legendary"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "attacking": {
+              "type": "boolean"
+            }
+          },
+          "required": ["attacking"],
+          "additionalProperties": false
         }
       ]
     },
@@ -350,7 +370,7 @@
       "type": "object",
       "properties": {
         "event": {
-          "enum": ["enter", "cast", "dies"]
+          "enum": ["enter", "cast", "dies", "attack"]
         },
         "object": {
           "const": "source"
@@ -657,7 +677,7 @@
               "const": "untap"
             },
             "target": {
-              "const": "source"
+              "enum": ["source", "target"]
             }
           },
           "required": ["op", "target"],

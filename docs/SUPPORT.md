@@ -13,6 +13,7 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Objects changing zones become new incarnations; spells recheck targets at resolution.
 - Creatures, instants, sorceries, basic/nonbasic mana lands, supported artifacts and enchantments. Artifact and enchantment creatures retain both types; only the listed executable definitions are supported.
 - Type-aware artifact/enchantment removal, permanent bounce and exile.
+- Attacking/legendary target predicates, target rechecking and targeted permanent untapping.
 - Public graveyard-card targets, recovery to hand and creature/artifact reanimation with fresh incarnations and enters triggers.
 - Player-directed draw/discard/life gain/life loss, including choices made by an opponent during resolution.
 - Triggered abilities choose legal targets when placed on the stack, before priority. Impossible required targets remove the trigger; targets are rechecked on resolution.
@@ -24,7 +25,7 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Ward triggers for opposing spells and activated/triggered abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.
 - Schema-checked card sources, reusable mechanics, composable target/event predicates and all-or-nothing pack compilation.
 - Immutable per-game catalogs validated before play and embedded in replays.
-- ETB, landfall, noncreature-cast and instant/sorcery-cast triggers. APNAP order and explicit same-controller ordering.
+- ETB, landfall, declared-attacker, noncreature-cast and instant/sorcery-cast triggers. APNAP order and explicit same-controller ordering.
 - Menace, haste, vigilance, flying, reach, defender, first strike, double strike, trample, deathtouch and lifelink in the supported card pool.
 - Prowess-style triggers, persistent +1/+1 counters, temporary stat/keyword modifiers, token creation, card draw, mill, damage, life gain, countering, destroy and bounce.
 - Simultaneous combat damage with player-chosen splits across multiple blockers.

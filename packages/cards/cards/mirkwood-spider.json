@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "07fb2903-b239-43d0-864b-c4437b7a5230",
+  "name": "Mirkwood Spider",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spider"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Deathtouch\nWhenever this creature attacks, target legendary creature you control gains deathtouch until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["deathtouch"]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            },
+            {
+              "legendary": true
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

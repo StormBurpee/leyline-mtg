@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ed839fae-3429-4ac5-997c-286d8e8cf05f",
+  "name": "Lothlórien Lookout",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Scout"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Whenever this creature attacks, scry 1.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "scry",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

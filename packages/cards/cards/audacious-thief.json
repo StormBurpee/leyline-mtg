@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5905c55a-f1d1-4021-a9af-f85b02ae21f3",
+  "name": "Audacious Thief",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Rogue"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature attacks, you draw a card and you lose 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

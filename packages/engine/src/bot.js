@@ -128,6 +128,9 @@ export function chooseBotCommand(s, p) {
             ) ||
             (effect.op === 'moveTarget' && effect.destination === 'exile'),
         );
+        const untapsTarget = c.entry.effects.some(
+          (e) => e.op === 'untap' && e.subject !== 'source',
+        );
         const drawsForTarget = c.entry.effects.some(
           (effect) => effect.op === 'draw' && effect.player === 'target',
         );
@@ -145,7 +148,10 @@ export function chooseBotCommand(s, p) {
                   : s.stack.find((entry) => entry.id === target.id)?.controller;
             return (
               (controller === (harmful && !drawsForTarget ? 1 - p : p) ? 10 : 0) +
-              (target.kind === 'object' ? value(s, s.objects[target.id]) : 0)
+              (target.kind === 'object'
+                ? value(s, s.objects[target.id]) +
+                  (untapsTarget ? (s.objects[target.id].tapped ? 12 : -12) : 0)
+                : 0)
             );
           };
           return score(b) - score(a);

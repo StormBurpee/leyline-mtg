@@ -2,7 +2,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.21.0';
+export const VERSION = '0.22.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -69,6 +69,9 @@ export function stats(s, o) {
     }
   return { power, toughness };
 }
+export const isAttacking = (s, o) =>
+  o.zone === 'battlefield' &&
+  s.combat.attackers.some((r) => r.id === o.id && r.incarnation === o.incarnation);
 // CR 302.6 measures the controller's most recent turn start, not any turn change.
 // Turns alternate in this two-player profile; extra turns are not implemented.
 export const isSick = (s, o) =>
@@ -171,6 +174,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     owner: object?.owner,
     token: object?.token,
     tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
+    attacking: isAttacking(s, object),
     power: pt.power,
     toughness: pt.toughness,
     manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
@@ -213,6 +217,7 @@ export function captureDepartureContext(s) {
             owner: o.owner,
             token: o.token,
             tapped: o.tapped,
+            attacking: isAttacking(s, o),
             power: pt.power,
             toughness: pt.toughness,
             manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),

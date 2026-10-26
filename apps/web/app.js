@@ -1220,6 +1220,7 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleAttackReplay':
     case 'exampleLegendReplay':
     case 'exampleSearchReplay':
     case 'exampleSacrificeReplay':
@@ -1231,23 +1232,25 @@ async function action(name, el) {
     case 'exampleReplay': {
       try {
         const response = await fetch(
-          name === 'exampleLegendReplay'
-            ? './example-legend-replay.json'
-            : name === 'exampleSearchReplay'
-              ? './example-search-replay.json'
-              : name === 'exampleSacrificeReplay'
-                ? './example-sacrifice-replay.json'
-                : name === 'exampleBurialReplay'
-                  ? './example-burial-replay.json'
-                  : name === 'exampleTargetReplay'
-                    ? './example-target-replay.json'
-                    : name === 'exampleInteractionReplay'
-                      ? './example-interaction-replay.json'
-                      : name === 'exampleOptionalReplay'
-                        ? './example-optional-replay.json'
-                        : name === 'exampleWardReplay'
-                          ? './example-ward-replay.json'
-                          : './example-replay.json',
+          name === 'exampleAttackReplay'
+            ? './example-attack-replay.json'
+            : name === 'exampleLegendReplay'
+              ? './example-legend-replay.json'
+              : name === 'exampleSearchReplay'
+                ? './example-search-replay.json'
+                : name === 'exampleSacrificeReplay'
+                  ? './example-sacrifice-replay.json'
+                  : name === 'exampleBurialReplay'
+                    ? './example-burial-replay.json'
+                    : name === 'exampleTargetReplay'
+                      ? './example-target-replay.json'
+                      : name === 'exampleInteractionReplay'
+                        ? './example-interaction-replay.json'
+                        : name === 'exampleOptionalReplay'
+                          ? './example-optional-replay.json'
+                          : name === 'exampleWardReplay'
+                            ? './example-ward-replay.json'
+                            : './example-replay.json',
         );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();

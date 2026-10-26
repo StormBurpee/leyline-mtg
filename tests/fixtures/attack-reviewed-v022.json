@@ -1,0 +1,178 @@
+[
+  {
+    "name": "Pulse Tracker",
+    "oracle_id": "f916f689-a314-4952-8107-41c4c2f2e811",
+    "arena_print": "7bc1441e-7d75-4a74-8733-19077dfa69b2",
+    "released_at": "2026-04-24",
+    "scryfall_uri": "https://scryfall.com/card/fdn/755/pulse-tracker?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, each opponent loses 1 life."
+  },
+  {
+    "name": "Vicious Conquistador",
+    "oracle_id": "26b077df-7a05-459a-b5ff-bf27767bb519",
+    "arena_print": "2a4b6ced-e8d3-47e9-bd27-3e0cb644afe4",
+    "released_at": "2017-09-29",
+    "scryfall_uri": "https://scryfall.com/card/xln/128/vicious-conquistador?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, each opponent loses 1 life."
+  },
+  {
+    "name": "Scorch Spitter",
+    "oracle_id": "4cdc2120-7051-45b8-b877-87ffaf396ee7",
+    "arena_print": "bb701a84-24bd-41ed-9f06-25c8338902a5",
+    "released_at": "2019-07-12",
+    "scryfall_uri": "https://scryfall.com/card/m20/159/scorch-spitter?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, it deals 1 damage to the player or planeswalker it's attacking."
+  },
+  {
+    "name": "Agate-Blade Assassin",
+    "oracle_id": "381a3e8e-71dd-48e4-ab62-53478bde4a14",
+    "arena_print": "39ebb84a-1c52-4b07-9bd0-b360523b3a5b",
+    "released_at": "2024-08-02",
+    "scryfall_uri": "https://scryfall.com/card/blb/82/agate-blade-assassin?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, defending player loses 1 life and you gain 1 life."
+  },
+  {
+    "name": "Boomerang, Blade Flinger",
+    "oracle_id": "bbd84035-3efd-4301-9778-913898efd57a",
+    "arena_print": "6b9f9d5d-a1b6-4e3a-8b65-69eba94ee990",
+    "released_at": "2026-06-26",
+    "scryfall_uri": "https://scryfall.com/card/msc/534/boomerang-blade-flinger?utm_source=api",
+    "oracle_text": "Whenever Boomerang attacks, he deals 1 damage to each opponent and you gain 1 life."
+  },
+  {
+    "name": "Borderland Marauder",
+    "oracle_id": "11fd2650-2150-4e62-8b64-e820d734a231",
+    "arena_print": "e3132919-58a7-429f-8a0f-9210d3c2c734",
+    "released_at": "2020-07-17",
+    "scryfall_uri": "https://scryfall.com/card/jmp/300/borderland-marauder?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, it gets +2/+0 until end of turn."
+  },
+  {
+    "name": "Civic Gardener",
+    "oracle_id": "9eb7f301-b9b6-48c3-9dad-e7df9cc15355",
+    "arena_print": "f58d39d7-62bf-43c8-97b3-0f9069af0e29",
+    "released_at": "2022-04-29",
+    "scryfall_uri": "https://scryfall.com/card/snc/140/civic-gardener?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, untap target creature or land."
+  },
+  {
+    "name": "Falkenrath Perforator",
+    "oracle_id": "6e991808-fea4-46a8-9e87-7b5917f33ce8",
+    "arena_print": "c40998e0-d7d0-4d79-a40a-9a381debd2cb",
+    "released_at": "2021-09-24",
+    "scryfall_uri": "https://scryfall.com/card/mid/136/falkenrath-perforator?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, it deals 1 damage to defending player."
+  },
+  {
+    "name": "Lothlórien Lookout",
+    "oracle_id": "ed839fae-3429-4ac5-997c-286d8e8cf05f",
+    "arena_print": "acc6a5d4-9a04-4a52-b2dc-0b0ab616a110",
+    "released_at": "2026-08-14",
+    "scryfall_uri": "https://scryfall.com/card/hoc/209/lothl%C3%B3rien-lookout?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, scry 1."
+  },
+  {
+    "name": "Nightveil Sprite",
+    "oracle_id": "8ac23863-0aa7-41bc-b9b7-c5f0566172cf",
+    "arena_print": "534d1166-4e01-4ec8-b4d9-e76861ec51b9",
+    "released_at": "2018-10-05",
+    "scryfall_uri": "https://scryfall.com/card/grn/48/nightveil-sprite?utm_source=api",
+    "oracle_text": "Flying\nWhenever this creature attacks, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+  },
+  {
+    "name": "Mysterio's Phantasm",
+    "oracle_id": "99419378-8a23-44f3-aebe-e62d6e20e877",
+    "arena_print": "79aa0a78-80a2-44be-8a79-92bcba9c040f",
+    "released_at": "2025-09-26",
+    "scryfall_uri": "https://scryfall.com/card/spm/38/mysterios-phantasm?utm_source=api",
+    "oracle_text": "Flying, vigilance\nWhenever this creature attacks, mill a card. (Put the top card of your library into your graveyard.)"
+  },
+  {
+    "name": "Sanguine Syphoner",
+    "oracle_id": "b81a748b-f7a6-4ec4-8b18-40a1819745f6",
+    "arena_print": "b1daf5bb-c8e9-4e79-a532-ca92a9a885cd",
+    "released_at": "2024-11-15",
+    "scryfall_uri": "https://scryfall.com/card/fdn/68/sanguine-syphoner?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, each opponent loses 1 life and you gain 1 life."
+  },
+  {
+    "name": "Spring Splasher",
+    "oracle_id": "f1136a22-b202-4688-a44c-a9979c91261a",
+    "arena_print": "b6822d12-1a25-42e7-94cc-71bd29daed93",
+    "released_at": "2024-04-19",
+    "scryfall_uri": "https://scryfall.com/card/otj/69/spring-splasher?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, target creature defending player controls gets -3/-0 until end of turn."
+  },
+  {
+    "name": "Steadfast Cathar",
+    "oracle_id": "00895741-f94f-4d80-8ca4-c436bf3c8d56",
+    "arena_print": "dfe4e0df-2cdf-4342-8741-713a2055830a",
+    "released_at": "2023-03-21",
+    "scryfall_uri": "https://scryfall.com/card/sir/46/steadfast-cathar?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, it gets +0/+2 until end of turn."
+  },
+  {
+    "name": "Vedalken Mesmerist",
+    "oracle_id": "f507f9ba-a7e9-4e45-86dc-8c60a72a6234",
+    "arena_print": "5b5e0a12-2589-473b-90e4-1ee5acc055a2",
+    "released_at": "2018-10-05",
+    "scryfall_uri": "https://scryfall.com/card/grn/57/vedalken-mesmerist?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, target creature an opponent controls gets -2/-0 until end of turn."
+  },
+  {
+    "name": "Audacious Thief",
+    "oracle_id": "5905c55a-f1d1-4021-a9af-f85b02ae21f3",
+    "arena_print": "e1ff5e66-4718-43c3-8a58-1a0a8e788f83",
+    "released_at": "2019-07-12",
+    "scryfall_uri": "https://scryfall.com/card/m20/84/audacious-thief?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, you draw a card and you lose 1 life."
+  },
+  {
+    "name": "Hellkite Whelp",
+    "oracle_id": "a9b1dd4a-2eaf-4448-a767-da705d3ec32b",
+    "arena_print": "65e902e8-bbd5-40fe-a655-45d3d3bc9fde",
+    "released_at": "2018-10-05",
+    "scryfall_uri": "https://scryfall.com/card/grn/106/hellkite-whelp?utm_source=api",
+    "oracle_text": "Flying\nWhenever this creature attacks, it deals 1 damage to target creature defending player controls."
+  },
+  {
+    "name": "Herald of Faith",
+    "oracle_id": "cb97da84-1d13-4795-b68a-2bf111a50067",
+    "arena_print": "2e1705da-dc35-4bcb-82d4-b77712e79af3",
+    "released_at": "2026-04-24",
+    "scryfall_uri": "https://scryfall.com/card/fdn/735/herald-of-faith?utm_source=api",
+    "oracle_text": "Flying\nWhenever this creature attacks, you gain 2 life."
+  },
+  {
+    "name": "Jumbo Cactuar",
+    "oracle_id": "e0bdfbb4-3060-4492-bd9b-0c47e719400a",
+    "arena_print": "db01c222-8795-47e9-a789-e7f749a3ee7d",
+    "released_at": "2025-06-13",
+    "scryfall_uri": "https://scryfall.com/card/fin/191/jumbo-cactuar?utm_source=api",
+    "oracle_text": "10,000 Needles — Whenever this creature attacks, it gets +9999/+0 until end of turn."
+  },
+  {
+    "name": "Spined Megalodon",
+    "oracle_id": "3a124fe5-f525-43e5-9746-501c68a98330",
+    "arena_print": "6d42d3dd-29df-44a1-89b8-994761eda77d",
+    "released_at": "2020-07-03",
+    "scryfall_uri": "https://scryfall.com/card/m21/72/spined-megalodon?utm_source=api",
+    "oracle_text": "Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nWhenever this creature attacks, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+  },
+  {
+    "name": "Mirkwood Spider",
+    "oracle_id": "07fb2903-b239-43d0-864b-c4437b7a5230",
+    "arena_print": "ad961ba1-c74f-4a44-87fe-b30e2b63e378",
+    "released_at": "2023-06-23",
+    "scryfall_uri": "https://scryfall.com/card/ltr/178/mirkwood-spider?utm_source=api",
+    "oracle_text": "Deathtouch\nWhenever this creature attacks, target legendary creature you control gains deathtouch until end of turn."
+  },
+  {
+    "name": "Malamet Brawler",
+    "oracle_id": "06905dfb-b2df-4849-8848-fd3c964aa8c9",
+    "arena_print": "47d2fb65-cc3d-4664-bee0-8cf1cba5d8fa",
+    "released_at": "2023-11-17",
+    "scryfall_uri": "https://scryfall.com/card/lci/199/malamet-brawler?utm_source=api",
+    "oracle_text": "Whenever this creature attacks, target attacking creature gains trample until end of turn."
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6e991808-fea4-46a8-9e87-7b5917f33ce8",
+  "name": "Falkenrath Perforator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Whenever this creature attacks, it deals 1 damage to defending player.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f916f689-a314-4952-8107-41c4c2f2e811",
+  "name": "Pulse Tracker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Rogue"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Whenever this creature attacks, each opponent loses 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a9b1dd4a-2eaf-4448-a767-da705d3ec32b",
+  "name": "Hellkite Whelp",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dragon"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever this creature attacks, it deals 1 damage to target creature defending player controls.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

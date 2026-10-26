@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cb97da84-1d13-4795-b68a-2bf111a50067",
+  "name": "Herald of Faith",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Angel"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever this creature attacks, you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

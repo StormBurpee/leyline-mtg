@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f507f9ba-a7e9-4e45-86dc-8c60a72a6234",
+  "name": "Vedalken Mesmerist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vedalken", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Whenever this creature attacks, target creature an opponent controls gets -2/-0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": -2,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

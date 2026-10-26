@@ -4,6 +4,7 @@ import { hasType } from './types.js';
 import { costProblem, payCost } from './costs.js';
 import { cardDefinition } from './cards.js';
 import {
+  isAttacking,
   addObject,
   queueTrigger,
   notifyTriggers,
@@ -75,6 +76,7 @@ export function legalTarget(s, kind, target, controller) {
       owner: o.owner,
       token: o.token,
       tapped: o.tapped,
+      attacking: isAttacking(s, o),
       power: pt.power,
       toughness: pt.toughness,
       manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),

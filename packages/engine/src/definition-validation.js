@@ -196,10 +196,12 @@ function validateEffects(effects, path, target, errors) {
       )
         errors.push(`${p}.keywords: unsupported keyword.`);
     }
-    if (['counterOn', 'untap'].includes(e.op) && e.subject !== 'source')
+    if (e.op === 'untap' && e.subject !== undefined && e.subject !== 'source')
+      errors.push(`${p}.subject: only source or the chosen target is supported.`);
+    if (e.op === 'counterOn' && e.subject !== 'source')
       errors.push(`${p}.subject: only source is supported.`);
     if (
-      ['damage', 'counter', 'bounce', 'destroy', 'modify', 'moveTarget'].includes(e.op) &&
+      ['damage', 'counter', 'bounce', 'destroy', 'modify', 'moveTarget', 'untap'].includes(e.op) &&
       e.subject !== 'source' &&
       !effectTargetCompatible(e.op, target)
     )
