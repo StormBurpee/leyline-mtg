@@ -1,4 +1,12 @@
 import {
+  actionSafe,
+  canPayTargetWard,
+  directLethal,
+  drawsFor,
+  libraryCount,
+  resolutionRisk,
+} from './decision-safety.js';
+import {
   chooseBlocks,
   chooseAttacks,
   preserveForDefense,
@@ -33,11 +41,12 @@ export function chooseBotCommand(s, p) {
         };
       }
       case 'optionalEffect': {
-        const drawCount = s.resolving.entry.effects
-          .filter((e) => e.op === 'draw')
-          .reduce((n, e) => n + e.count, 0);
-        const libraryCount = s.players[p].libraryCount ?? s.players[p].library.length;
-        return { type: 'resolveOptional', player: p, accept: drawCount <= libraryCount };
+        const entry = s.resolving.entry;
+        return {
+          type: 'resolveOptional',
+          player: p,
+          accept: !resolutionRisk(s, p, entry.effects, entry.target),
+        };
       }
       case 'payCost':
         return {
@@ -51,7 +60,7 @@ export function chooseBotCommand(s, p) {
             (effect) => effect.op === 'moveTarget' && effect.destination === 'battlefield',
           ),
         );
-        const rest =
+        let rest =
           c.action === 'surveil' && canReanimate
             ? c.cards.filter((id) => {
                 const d = definition(s, s.objects[id]);
@@ -60,6 +69,12 @@ export function chooseBotCommand(s, p) {
                 );
               })
             : [];
+        if (c.action === 'surveil') {
+          const entry = s.resolving.entry;
+          const remaining = entry.effects.slice(s.resolving.index);
+          const draws = drawsFor(remaining, entry.controller, entry.target, p);
+          rest = rest.slice(0, Math.max(0, libraryCount(s, p) - draws));
+        }
         return {
           type: 'orderLibrary',
           player: p,
@@ -99,7 +114,11 @@ export function chooseBotCommand(s, p) {
         const drawsForTarget = c.entry.effects.some(
           (effect) => effect.op === 'draw' && effect.player === 'target',
         );
-        const targets = [...c.targets].sort((a, b) => {
+        const safe = c.targets.filter(
+          (target) =>
+            canPayTargetWard(s, p, target) && !resolutionRisk(s, p, c.entry.effects, target),
+        );
+        const targets = [...(safe.length ? safe : c.targets)].sort((a, b) => {
           const score = (target) => {
             const controller =
               target.kind === 'player'
@@ -127,9 +146,27 @@ export function chooseBotCommand(s, p) {
     }
   }
   if (s.priority !== p) return null;
-  const actions = legalActions(s, p);
+  const actions = legalActions(s, p).filter((action) => actionSafe(s, p, action));
+  const lethal = actions.find((action) => directLethal(s, p, action));
+  if (lethal) return { ...lethal, player: p };
   const land = actions.find((a) => a.type === 'playLand');
-  if (land) return { ...land, player: p };
+  if (land) {
+    const landCard = definition(s, s.objects[land.card]);
+    const setup = actions.find((action) => {
+      if (action.type !== 'cast') return false;
+      const card = definition(s, s.objects[action.card]);
+      return (card.triggers ?? []).some((trigger) =>
+        matchesEvent(
+          trigger.event,
+          'enter',
+          { id: land.card, definition: landCard, controller: p, owner: p },
+          { id: action.card, controller: p },
+        ),
+      );
+    });
+    if (setup) return { ...setup, player: p };
+    return { ...land, player: p };
+  }
   // Sacrifice is irreversible: preserve development pieces unless trading up,
   // responding to removal, or converting spare resources into cards.
   const sacrifices = actions
