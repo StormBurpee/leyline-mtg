@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6a7f3e1f-6798-4644-b64c-7765f81f0938",
+  "name": "Vibrant Cityscape",
+  "characteristics": {
+    "types": ["land"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": []
+  },
+  "rulesText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

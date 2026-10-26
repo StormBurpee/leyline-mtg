@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b64051c0-e791-4fcb-b79f-4287e1b06468",
+  "name": "Compass Gnome",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Gnome"],
+    "colors": [],
+    "manaCost": "{2}",
+    "supertypes": [],
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, you may search your library for a basic land card or Cave card, reveal it, then shuffle and put that card on top.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "top",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "any": [
+                  {
+                    "basic": true
+                  },
+                  {
+                    "subtype": "Cave"
+                  }
+                ]
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

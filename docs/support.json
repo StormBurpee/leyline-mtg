@@ -1,5 +1,5 @@
 {
-  "version": "0.17.0",
+  "version": "0.20.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -391,6 +391,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Brightglass Gearhulk",
+      "type": "creature",
+      "keywords": ["first strike", "trample"],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Burglar Rat",
       "type": "creature",
       "keywords": [],
@@ -403,6 +411,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Burnished Hart",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -427,6 +443,14 @@
       "type": "creature",
       "keywords": ["flying"],
       "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Campus Guide",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
@@ -495,6 +519,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Circuitous Route",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Citywatch Sphinx",
       "type": "creature",
       "keywords": ["flying"],
@@ -524,6 +556,14 @@
       "keywords": ["trample"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Compass Gnome",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -810,6 +850,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Environmental Scientist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Erase",
       "type": "instant",
       "keywords": [],
@@ -834,12 +882,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Evolving Wilds",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Exclusion Mage",
       "type": "creature",
       "keywords": [],
       "opcodes": ["bounce"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Expedition Map",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Explosive Apparatus",
@@ -920,6 +984,14 @@
       "opcodes": ["surveil"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Fierce Empath",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
     },
     {
       "name": "Final Death",
@@ -1015,6 +1087,14 @@
       "keywords": [],
       "opcodes": ["surveil"],
       "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Fountainport Bell",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "draw"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 1
     },
     {
@@ -1174,6 +1254,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Grim Tutor",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "loseLife"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1341,6 +1429,14 @@
       "type": "creature",
       "keywords": ["flying"],
       "opcodes": ["draw", "discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Idyllic Tutor",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1617,6 +1713,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Map the Frontier",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Mardu Banner",
       "type": "artifact",
       "keywords": [],
@@ -1693,6 +1797,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["destroy"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Micromancer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
@@ -2169,6 +2281,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Promising Vein",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Pym Technologies",
       "type": "land",
       "keywords": [],
@@ -2446,6 +2566,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Rune-Scarred Demon",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Rune-Sealed Wall",
       "type": "creature",
       "keywords": ["defender"],
@@ -2550,6 +2678,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Scampering Surveyor",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Scarblade Scout",
       "type": "creature",
       "keywords": ["lifelink"],
@@ -2602,6 +2738,14 @@
       "type": "creature",
       "keywords": ["flying", "vigilance"],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Shared Roots",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2694,6 +2838,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Simulacrum Shaper",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "draw"],
+      "triggers": ["selfEnters", "selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sinister Hideout",
       "type": "land",
       "keywords": [],
@@ -2777,6 +2929,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Solemn Simulacrum",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "draw"],
+      "triggers": ["selfEnters", "selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Solve the Equation",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Soul Warden",
       "type": "creature",
       "keywords": [],
@@ -2815,6 +2983,14 @@
       "opcodes": ["loseLife", "gainLife"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Spider-Bot",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
     },
     {
       "name": "Spirit of Malevolence",
@@ -3009,6 +3185,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sylvan Ranger",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Tajuru Pathwarden",
       "type": "creature",
       "keywords": ["vigilance", "trample"],
@@ -3117,6 +3301,14 @@
       "type": "artifact",
       "keywords": [],
       "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Terramorphic Expanse",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -3243,6 +3435,14 @@
       "keywords": [],
       "opcodes": ["gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Transit Mage",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -3382,6 +3582,22 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Vibrant Cityscape",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Vile Entomber",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Virus Beetle",
       "type": "creature",
       "keywords": [],
@@ -3481,6 +3697,22 @@
       "opcodes": ["scry", "draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Wood Elves",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "World Map",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 2
     },
     {
       "name": "Wreckage Wickerfolk",

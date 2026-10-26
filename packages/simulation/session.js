@@ -43,6 +43,11 @@ export function createSession(config = {}) {
       ...(state.choice?.player === player && state.choice.kind === 'libraryOrder'
         ? state.choice.cards
         : []),
+      ...(state.choice?.player === player && state.choice.kind === 'librarySearch'
+        ? [...state.players[player].library].sort((a, b) =>
+            state.objects[a].name.localeCompare(state.objects[b].name),
+          )
+        : []),
       ...state.stack.map((e) => e.source.id),
       ...state.players.flatMap((p) => [...p.graveyard, ...p.exile]),
       ...visible.filter((o) => o.zone === 'battlefield').map((o) => o.id),

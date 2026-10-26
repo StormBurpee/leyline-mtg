@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "57c9ff89-dd30-467b-bb3e-499eeea8cb94",
+  "name": "Idyllic Tutor",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "supertypes": []
+  },
+  "rulesText": "Search your library for an enchantment card, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "type": "enchantment"
+          },
+          "reveal": true
+        }
+      ]
+    }
+  ]
+}

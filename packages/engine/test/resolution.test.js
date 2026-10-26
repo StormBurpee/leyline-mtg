@@ -208,7 +208,8 @@ test('scry looked cards are visible only to the choosing player', () => {
   const { s } = castSpell('Opt');
   const id = s.choice.cards[0];
   assert.ok(playerView(s, 0).objects[id].name);
-  assert.equal(playerView(s, 1).objects[id].hidden, true);
+  assert.equal(playerView(s, 1).objects[id], undefined);
+  assert.equal(playerView(s, 1).objects[playerView(s, 1).players[0].library[0]].hidden, true);
   assert.equal(playerView(s, 1).choice.kind, 'opponentChoice');
 });
 test('a replay paused inside resolution reconstructs the same pending choice', () => {

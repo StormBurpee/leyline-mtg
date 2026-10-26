@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e4bb33b2-adde-4176-9274-7598b559aa6a",
+  "name": "Spider-Bot",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Spider", "Robot", "Scout"],
+    "colors": [],
+    "manaCost": "{2}",
+    "supertypes": [],
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Reach\nWhen this creature enters, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "top",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

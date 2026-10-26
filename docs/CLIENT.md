@@ -87,3 +87,9 @@ Hold a visible battlefield card or a card in your own hand for 450 ms to open it
 Mobile battlefield tiles use artwork crops with live statistics, not tiny printed rules text. Full printed cards and rules remain in the reader. The power/toughness badge cannot be displaced by a long keyword label. Crowded rows scroll horizontally.
 
 Cloud Chromium checks covered narrow portrait and short landscape windows, crowded replay positions, battlefield/hand inspection, table menus, and a Shock target choice preserved across reading and then committed with payment. Gesture unit tests cover touch-scroll cancellation separately. These are not physical iPhone Safari or Android tests, and do not certify native-device polish.
+
+## Library-search picker
+
+A pending library search opens a scrollable, name-grouped picker. Choose copies, remove selections, read the full card without losing selections, and confirm to find cards and shuffle. Top-of-library selections have explicit ordering controls. Review table closes the dialog without resolving or cancelling the pending choice. Engine validation remains authoritative.
+
+The Engine page includes a real seeded search replay. Continue it to make the search choice yourself. This is not a fabricated board state.

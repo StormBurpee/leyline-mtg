@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5104053a-d394-4b00-82a4-60fd9f051a6e",
+  "name": "Fierce Empath",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Elf"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "supertypes": [],
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, you may search your library for a creature card with mana value 6 or greater, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "manaValue": {
+                  "gte": 6
+                }
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

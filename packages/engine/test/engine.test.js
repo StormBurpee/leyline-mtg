@@ -346,8 +346,8 @@ test('replay round trip preserves deterministic state', () => {
 test('public view hides opponent hand, libraries, configuration and RNG', () => {
   const s = createGame(),
     v = playerView(s, 0);
-  assert.ok(v.objects[s.players[1].hand[0]].hidden);
-  assert.equal(v.objects[s.players[1].hand[0]].name, undefined);
+  assert.ok(v.objects[v.players[1].hand[0]].hidden);
+  assert.equal(v.objects[v.players[1].hand[0]].name, undefined);
   assert.equal(v.config, undefined);
   assert.equal(v.rng, undefined);
   assert.equal(v.history, undefined);
@@ -411,6 +411,6 @@ test('legacy 0.1 replay envelopes remain readable', () => {
   delete record.schemaVersion;
   delete record.config.catalog;
   const restored = replay(record);
-  assert.equal(restored.version, '0.17.0');
+  assert.equal(restored.version, '0.20.0');
   assert.equal(restored.seed, 17);
 });

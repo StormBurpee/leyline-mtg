@@ -1562,3 +1562,30 @@ dialog::backdrop {
     grid-template-rows: 32px 26px 22px 36px minmax(85px, 1fr) 18px minmax(85px, 1fr) 36px 155px 52px;
   }
 }
+
+.search-picked-list {
+  margin: 12px 0;
+  padding: 8px;
+  border: 1px solid #b3c3a426;
+  border-radius: 8px;
+}
+.search-picked {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+}
+.search-picked > span {
+  flex: 1;
+  min-width: 0;
+}
+.search-picked .icon-btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+.search-options .library-choice {
+  margin-bottom: 8px;
+}
+.search-options .library-choice .btn {
+  min-height: 44px;
+}

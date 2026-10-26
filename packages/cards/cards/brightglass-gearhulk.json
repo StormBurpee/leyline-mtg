@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0c7019a7-3cca-481a-9af0-abedb89c15ad",
+  "name": "Brightglass Gearhulk",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Construct"],
+    "colors": ["G", "W"],
+    "manaCost": "{G}{G}{W}{W}",
+    "supertypes": [],
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "First strike, trample\nWhen this creature enters, you may search your library for up to two artifact, creature, and/or enchantment cards with mana value 1 or less, reveal them, put them into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 2,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "any": [
+                  {
+                    "type": "artifact"
+                  },
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "type": "enchantment"
+                  }
+                ]
+              },
+              {
+                "manaValue": {
+                  "lte": 1
+                }
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

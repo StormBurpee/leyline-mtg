@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ea4c5b8f-a5ff-47dd-8e47-5ae7b21926b4",
+  "name": "Fountainport Bell",
+  "characteristics": {
+    "types": ["artifact"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{1}",
+    "supertypes": []
+  },
+  "rulesText": "When this artifact enters, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.\n{1}, Sacrifice this artifact: Draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "top",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ],
+      "optional": true
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

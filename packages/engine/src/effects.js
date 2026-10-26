@@ -1,3 +1,4 @@
+import { searchableCards } from './library-search.js';
 import { targetSpec, matchesFilter } from './selectors.js';
 import { hasType } from './types.js';
 import { costProblem, payCost } from './costs.js';
@@ -19,6 +20,7 @@ import {
   stats,
   keywords,
   requireRule,
+  shuffle,
 } from './model.js';
 export function legalTarget(s, kind, target, controller) {
   if (!kind) return target == null;
@@ -120,18 +122,26 @@ function counterEntry(s, id) {
   emit(s, 'countered', { name: entry.name, stackId: entry.id });
 }
 export function enterBattlefield(s, o, controller = o.owner, attachment = null, options = {}) {
-  if (
-    o.zone === 'battlefield' ||
-    !['creature', 'artifact', 'enchantment', 'land'].includes(definition(s, o).type)
-  )
-    return;
-  move(s, o, 'battlefield');
-  o.controller = controller;
-  o.attachedTo = attachment;
-  const d = definition(s, o);
-  o.tapped = !!d.entersTapped || !!options.tapped;
-  if (d.etb) queueTrigger(s, o, d.etb, `${o.name} · enters`);
-  notifyTriggers(s, 'enters', { object: o });
+  enterBattlefieldBatch(s, [{ object: o, controller, attachment, tapped: options.tapped }]);
+}
+/** Move every entrant before observing any enters event, so simultaneous entrants see one another. */
+export function enterBattlefieldBatch(s, entries) {
+  const entering = entries.filter(
+    ({ object }) =>
+      object.zone !== 'battlefield' &&
+      ['creature', 'artifact', 'enchantment', 'land'].includes(definition(s, object).type),
+  );
+  for (const { object, controller = object.owner, attachment = null, tapped = false } of entering) {
+    move(s, object, 'battlefield');
+    object.controller = controller;
+    object.attachedTo = attachment;
+    object.tapped = !!definition(s, object).entersTapped || tapped;
+  }
+  for (const { object } of entering) {
+    const d = definition(s, object);
+    if (d.etb) queueTrigger(s, object, d.etb, `${object.name} · enters`);
+    notifyTriggers(s, 'enters', { object });
+  }
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
 export function dealDamage(s, source, target, amount) {
@@ -216,6 +226,23 @@ export function resolveEffects(s, entry, startIndex = 0) {
         }
         s.resolving = { entry, index: index + 1 };
         s.choice = { kind: 'libraryOrder', player: recipient, action: e.op, cards };
+        return false;
+      }
+      case 'searchLibrary': {
+        const player = entry.controller;
+        const cards = searchableCards(s, player, e.where);
+        s.resolving = { entry, index: index + 1 };
+        s.choice = {
+          kind: 'librarySearch',
+          player,
+          cards,
+          min: e.where ? 0 : Math.min(e.count, cards.length),
+          max: Math.min(e.count, cards.length),
+          destination: e.destination,
+          tapped: !!e.tapped,
+          reveal: !!e.reveal,
+          where: e.where ? structuredClone(e.where) : null,
+        };
         return false;
       }
       case 'discard': {
@@ -335,6 +362,48 @@ export function finishResolutionChoice(s, command) {
     if (command.pay) payCost(s, choice.player, choice.cost);
     else counterEntry(s, choice.stackId);
     emit(s, 'wardPayment', { player: choice.player, paid: command.pay, stackId: choice.stackId });
+  } else if (choice.kind === 'librarySearch') {
+    requireRule(
+      command.type === 'searchLibrary' && Array.isArray(command.cards),
+      'SEARCH_CHOICE',
+      'Choose the cards to find.',
+    );
+    requireRule(
+      command.cards.length >= choice.min &&
+        command.cards.length <= choice.max &&
+        new Set(command.cards).size === command.cards.length,
+      'SEARCH_COUNT',
+      `Choose ${choice.min} to ${choice.max} distinct cards.`,
+    );
+    const legal = searchableCards(s, choice.player, choice.where ?? undefined);
+    requireRule(
+      command.cards.every((id) => choice.cards.includes(id) && legal.includes(id)),
+      'SEARCH_CARD',
+      'A chosen card does not match this library search.',
+    );
+    const found = command.cards.map((id) => s.objects[id]);
+    // Top destinations are set aside while the rest is shuffled (CR 701.24b).
+    if (choice.destination === 'battlefield')
+      enterBattlefieldBatch(
+        s,
+        found.map((object) => ({ object, controller: choice.player, tapped: choice.tapped })),
+      );
+    else if (['hand', 'graveyard'].includes(choice.destination))
+      for (const object of found) move(s, object, choice.destination);
+    const library = s.players[choice.player].library;
+    if (choice.destination === 'top') {
+      const selected = new Set(command.cards);
+      s.players[choice.player].library = library.filter((id) => !selected.has(id));
+    }
+    shuffle(s, s.players[choice.player].library);
+    if (choice.destination === 'top') s.players[choice.player].library.unshift(...command.cards);
+    emit(s, 'librarySearched', {
+      player: choice.player,
+      count: found.length,
+      destination: choice.destination,
+      ...(choice.reveal ? { revealed: found.map((o) => o.name) } : {}),
+    });
+    emit(s, 'libraryShuffled', { player: choice.player });
   } else if (choice.kind === 'libraryOrder') {
     requireRule(
       command.type === 'orderLibrary',

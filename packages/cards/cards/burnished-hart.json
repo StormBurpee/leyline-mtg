@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "893fed41-c144-433f-af88-bc7d419b7fb3",
+  "name": "Burnished Hart",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Elk"],
+    "colors": [],
+    "manaCost": "{3}",
+    "supertypes": [],
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{3}, Sacrifice this creature: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}",
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 2,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1bd3e453-aa21-4ee6-95c2-d6d920ee8e7a",
+  "name": "Terramorphic Expanse",
+  "characteristics": {
+    "types": ["land"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": []
+  },
+  "rulesText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.20.0 — Find the card you need
+
+- Add reusable, schema-checked own-library search with legal quantity choices, printed-characteristic filters, deterministic shuffle and hand/graveyard/battlefield/top destinations. Preserve fail-to-find, explicit reveal and continued-resolution rules.
+- Add 29 reviewed Arena card definitions, 25 in the dated Standard inventory, bringing the executable pool to 463 cards plus three tokens. Add Roots & Relics as the fourteenth starter and a real search replay.
+- Add a touch-friendly library picker with grouped copies, read-only inspection, selected-card removal and top-order controls.
+- Route search choices through the simulation agent boundary and teach the practice policy to use fetch/ramp abilities and choose missing colours.
+- Replace hidden-zone IDs in the lower-level player view with non-identity placeholders; keep public departed-source references valid. Preserve the frozen legacy gameplay traces.
+- Re-run the pinned 34,131-file Forge audit. Its 2,205 grammar candidates remain distinct from playable-card coverage; the adapter does not yet translate the new search instruction.
+
 ## 0.19.0 — A touch-first deck builder
 
 - Switch between Browse cards and My deck on mobile instead of scrolling past a whole collection to edit the list. Keep search, deck count and save controls reachable.
