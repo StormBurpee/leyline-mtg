@@ -13,3 +13,8 @@ test('the inspector shows a granted keyword after an ability resolves', () => {
   state.modifiers = [];
   assert.equal(inspect(frog.name, {}, state, frog.id).includes('Gained: deathtouch'), false);
 });
+
+test('the inspector preserves legendary type information without display metadata', async () => {
+  const html = inspect('Isamaru, Hound of Konda', {});
+  assert.ok(html.includes('Legendary creature'));
+});

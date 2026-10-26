@@ -5,6 +5,7 @@ import { replay, assertInvariants } from '../packages/engine/src/index.js';
 for (const filename of [
   'example-replay.json',
   'example-search-replay.json',
+  'example-legend-replay.json',
   'example-burial-replay.json',
   'example-sacrifice-replay.json',
   'example-target-replay.json',
@@ -18,6 +19,7 @@ for (const filename of [
     );
     const s = replay(record);
     assert.equal(assertInvariants(s), true);
+    if (filename.includes('legend')) assert.equal(s.choice.kind, 'legendRule');
     if (filename.includes('search')) assert.equal(s.choice.kind, 'librarySearch');
     if (filename.includes('target')) assert.equal(s.choice.kind, 'triggerTarget');
     if (filename.includes('optional')) assert.equal(s.choice.kind, 'optionalEffect');

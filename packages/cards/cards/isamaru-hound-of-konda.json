@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cfb756dd-6fe1-430a-8f04-8b10cac62a86",
+  "name": "Isamaru, Hound of Konda",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dog"],
+    "colors": ["W"],
+    "manaCost": "{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "",
+  "abilities": []
+}

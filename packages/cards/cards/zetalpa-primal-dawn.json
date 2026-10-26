@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7da0e5de-3e4c-420a-8685-991206100b9d",
+  "name": "Zetalpa, Primal Dawn",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Elder", "Dinosaur"],
+    "colors": ["W"],
+    "manaCost": "{6}{W}{W}",
+    "power": 4,
+    "toughness": 8
+  },
+  "rulesText": "Flying, double strike, vigilance, trample, indestructible",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "indestructible"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    }
+  ]
+}

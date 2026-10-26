@@ -35,7 +35,17 @@ import {
   suggestedDamage,
   targetsFor,
 } from '../../packages/engine/src/index.js';
-import { escape, header, game, catalog, enginePage, inspect, artStyle, mana } from './view.js';
+import {
+  legendChoiceBody,
+  escape,
+  header,
+  game,
+  catalog,
+  enginePage,
+  inspect,
+  artStyle,
+  mana,
+} from './view.js';
 const SAVE_KEY = 'leyline.match.v1';
 const app = document.querySelector('#app'),
   dialog = document.querySelector('#dialog');
@@ -425,6 +435,16 @@ function showDeck() {
       )
       .join('')}`,
   );
+}
+function showLegendChoice() {
+  const c = state.choice;
+  if (c?.kind !== 'legendRule' || c.player !== viewer()) return;
+  openDialog(
+    'Legend rule: choose one to keep',
+    legendChoiceBody(state, metadata),
+    '<button class="btn quiet" data-action="closeDialog">Review table</button>',
+  );
+  dialog._legendChoice = c;
 }
 function showLibrarySearch() {
   const choice = state.choice;
@@ -925,6 +945,29 @@ async function action(name, el) {
     case 'damage':
       send({ type: 'assignDamage', orders: suggestedDamage(state) });
       break;
+    case 'legendRule':
+      showLegendChoice();
+      break;
+    case 'keepLegend':
+      if (
+        state.choice?.kind === 'legendRule' &&
+        state.choice.player === viewer() &&
+        dialog._legendChoice === state.choice
+      ) {
+        if (send({ type: 'chooseLegend', card: el.dataset.cardid })) closeDialog();
+      }
+      break;
+    case 'readLegend': {
+      if (state.choice?.kind !== 'legendRule' || !state.choice.cards.includes(el.dataset.cardid))
+        break;
+      const o = state.objects[el.dataset.cardid];
+      openDialog(
+        o.name,
+        inspect(o.name, metadata, state, o.id),
+        '<button class="btn primary" data-action="legendRule">Back to legend choice</button>',
+      );
+      break;
+    }
     case 'librarySearch':
       showLibrarySearch();
       break;
@@ -1177,6 +1220,7 @@ async function action(name, el) {
     case 'export':
       exportMatch();
       break;
+    case 'exampleLegendReplay':
     case 'exampleSearchReplay':
     case 'exampleSacrificeReplay':
     case 'exampleBurialReplay':
@@ -1187,21 +1231,23 @@ async function action(name, el) {
     case 'exampleReplay': {
       try {
         const response = await fetch(
-          name === 'exampleSearchReplay'
-            ? './example-search-replay.json'
-            : name === 'exampleSacrificeReplay'
-              ? './example-sacrifice-replay.json'
-              : name === 'exampleBurialReplay'
-                ? './example-burial-replay.json'
-                : name === 'exampleTargetReplay'
-                  ? './example-target-replay.json'
-                  : name === 'exampleInteractionReplay'
-                    ? './example-interaction-replay.json'
-                    : name === 'exampleOptionalReplay'
-                      ? './example-optional-replay.json'
-                      : name === 'exampleWardReplay'
-                        ? './example-ward-replay.json'
-                        : './example-replay.json',
+          name === 'exampleLegendReplay'
+            ? './example-legend-replay.json'
+            : name === 'exampleSearchReplay'
+              ? './example-search-replay.json'
+              : name === 'exampleSacrificeReplay'
+                ? './example-sacrifice-replay.json'
+                : name === 'exampleBurialReplay'
+                  ? './example-burial-replay.json'
+                  : name === 'exampleTargetReplay'
+                    ? './example-target-replay.json'
+                    : name === 'exampleInteractionReplay'
+                      ? './example-interaction-replay.json'
+                      : name === 'exampleOptionalReplay'
+                        ? './example-optional-replay.json'
+                        : name === 'exampleWardReplay'
+                          ? './example-ward-replay.json'
+                          : './example-replay.json',
         );
         if (!response.ok) throw new Error('Example replay is unavailable.');
         const record = await response.json();

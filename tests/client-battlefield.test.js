@@ -47,3 +47,25 @@ test('artwork URL attributes are escaped', () => {
   assert.match(table, /srcset="https:\/\/example.com\/a&quot; onload=&quot;oops"/);
   assert.doesNotMatch(table, /srcset="[^"\n]*" onload=/);
 });
+
+test('legend rule controls distinguish copies with live state and explicit keep buttons', async () => {
+  const { stabilize } = await import('../packages/engine/src/effects.js');
+  const { legendChoiceBody } = await import('../apps/web/view.js');
+  const state = fixture(),
+    a = put(state, 'Isamaru, Hound of Konda'),
+    b = put(state, 'Isamaru, Hound of Konda');
+  a.tapped = true;
+  b.plusCounters = 2;
+  stabilize(state);
+  const html = legendChoiceBody(state, {}),
+    table = game(state, ui(), {});
+  assert.match(table, /data-action="legendRule"/);
+  assert.match(html, /Copy 1:/);
+  assert.match(html, /Copy 2:/);
+  assert.match(html, /4\/4/);
+  assert.match(html, /2 \+1\/\+1 counters/);
+  assert.match(html, /Tapped/);
+  assert.match(html, /Untapped/);
+  assert.equal((html.match(/data-action="keepLegend"/g) || []).length, 2);
+  assert.equal((html.match(/data-action="readLegend"/g) || []).length, 2);
+});

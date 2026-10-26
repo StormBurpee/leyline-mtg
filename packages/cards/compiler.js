@@ -298,14 +298,15 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
   };
   if (
     c.supertypes !== undefined &&
-    (!Array.isArray(c.supertypes) || c.supertypes.some((t) => t !== 'basic'))
+    (!Array.isArray(c.supertypes) || c.supertypes.some((t) => !['basic', 'legendary'].includes(t)))
   )
     problem(
       'UNSUPPORTED_SUPERTYPE',
       'characteristics.supertypes',
-      'Only the basic supertype is implemented in this runtime profile.',
+      'Only basic and legendary supertypes are implemented in this runtime profile.',
     );
   if (c.supertypes?.includes('basic')) d.basic = true;
+  if (c.supertypes?.includes('legendary')) d.legendary = true;
   for (const key of ['power', 'toughness', 'token']) if (c[key] !== undefined) d[key] = c[key];
   const expanded = [];
   let expansionSteps = 0;

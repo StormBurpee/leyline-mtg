@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.0 — One legend stays
+
+- Implement the legend rule for legendary permanents: controller choices before priority, APNAP sequencing, simultaneous state-based departures, and correctly retained enters/death triggers.
+- Add Isamaru, Hound of Konda; Yargle, Glutton of Urborg; Yargle and Multani; and Zetalpa, Primal Dawn. Four Arena cards, two in the dated Standard inventory; 467 executable cards and three tokens total.
+- Add explicit keep/read controls, live copy statistics and a replayable legend-rule example. Bot and opaque simulation handles use the same validated choice command.
+- Reject legendary instants/sorceries until their additional casting restrictions are implemented. No claim of general legend-related exceptions or copy effects.
+- Browser QA for this checkpoint was unavailable because the managed preview timed out. Engine, renderer, schema, replay and aggregate checks are recorded separately.
+
 ## 0.20.0 — Find the card you need
 
 - Add reusable, schema-checked own-library search with legal quantity choices, printed-characteristic filters, deterministic shuffle and hand/graveyard/battlefield/top destinations. Preserve fail-to-find, explicit reveal and continued-resolution rules.

@@ -35,6 +35,17 @@ export function chooseBotCommand(s, p) {
   if (c) {
     if (c.player !== p) return null;
     switch (c.kind) {
+      case 'legendRule':
+        return {
+          type: 'chooseLegend',
+          player: p,
+          card: [...c.cards].sort(
+            (a, b) =>
+              value(s, s.objects[b]) - value(s, s.objects[a]) ||
+              Number(s.objects[a].tapped) - Number(s.objects[b].tapped) ||
+              a.localeCompare(b),
+          )[0],
+        };
       case 'mulligan': {
         const lands = s.players[p].hand.filter(
           (id) => definition(s, s.objects[id]).type === 'land',

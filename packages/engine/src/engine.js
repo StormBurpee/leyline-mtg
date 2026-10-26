@@ -18,6 +18,7 @@ import {
 } from './model.js';
 import { canTapForMana, manaOptions, pay, planPayment, tapForMana } from './mana.js';
 import {
+  finishLegendChoice,
   finishTriggerOrder,
   finishTriggerTarget,
   legalTarget,
@@ -149,6 +150,10 @@ function handleChoice(s, p, c) {
     return;
   }
   switch (choice.kind) {
+    case 'legendRule':
+      requireRule(c.type === 'chooseLegend', 'CHOICE', 'Choose a legendary permanent to keep.');
+      finishLegendChoice(s, c.card);
+      return;
     case 'mulligan': {
       requireRule(
         ['keep', 'mulligan'].includes(c.type),
@@ -308,6 +313,8 @@ export function dispatch(state, command) {
 }
 export function legalActions(s, p) {
   if (s.status === 'finished') return [];
+  if (s.choice?.kind === 'legendRule' && s.choice.player === p)
+    return [...s.choice.cards.map((card) => ({ type: 'chooseLegend', card })), { type: 'concede' }];
   if (s.choice?.kind === 'triggerTarget' && s.choice.player === p)
     return [
       ...s.choice.targets.map((target) => ({
@@ -392,6 +399,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.20.0',
         '0.17.0',
         '0.16.0',
         '0.15.0',

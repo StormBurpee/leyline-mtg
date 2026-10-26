@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "980e1721-3717-4425-95a4-938dbf2ac661",
+  "name": "Yargle and Multani",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Frog", "Spirit", "Elemental"],
+    "colors": ["B", "G"],
+    "manaCost": "{3}{B}{B}{G}",
+    "power": 18,
+    "toughness": 6
+  },
+  "rulesText": "",
+  "abilities": []
+}

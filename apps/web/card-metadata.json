@@ -5554,5 +5554,53 @@
     "scryfall_uri": "https://scryfall.com/card/stx/54/solve-the-equation?utm_source=api",
     "image": "https://cards.scryfall.io/normal/front/6/6/66c04ee2-c1e0-45fb-aaf5-1b4459df80fc.jpg?1783927375",
     "art": "https://cards.scryfall.io/art_crop/front/6/6/66c04ee2-c1e0-45fb-aaf5-1b4459df80fc.jpg?1783927375"
+  },
+  "Isamaru, Hound of Konda": {
+    "id": "6afead32-3542-44c4-82d6-b6a81beb9f90",
+    "oracle_id": "cfb756dd-6fe1-430a-8f04-8b10cac62a86",
+    "name": "Isamaru, Hound of Konda",
+    "mana_cost": "{W}",
+    "type_line": "Legendary Creature — Dog",
+    "oracle_text": "",
+    "artist": "Christopher Moeller",
+    "scryfall_uri": "https://scryfall.com/card/jmp/113/isamaru-hound-of-konda?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/6/a/6afead32-3542-44c4-82d6-b6a81beb9f90.jpg?1783930470",
+    "art": "https://cards.scryfall.io/art_crop/front/6/a/6afead32-3542-44c4-82d6-b6a81beb9f90.jpg?1783930470"
+  },
+  "Yargle, Glutton of Urborg": {
+    "id": "04c816fb-5951-4db1-8834-ed3f0b36bfe1",
+    "oracle_id": "ed66cd31-958f-4b28-82a3-e04acc819afc",
+    "name": "Yargle, Glutton of Urborg",
+    "mana_cost": "{4}{B}",
+    "type_line": "Legendary Creature — Frog Spirit",
+    "oracle_text": "",
+    "artist": "Jehan Choo",
+    "scryfall_uri": "https://scryfall.com/card/fra/241/yargle-glutton-of-urborg?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/0/4/04c816fb-5951-4db1-8834-ed3f0b36bfe1.jpg?1789127722",
+    "art": "https://cards.scryfall.io/art_crop/front/0/4/04c816fb-5951-4db1-8834-ed3f0b36bfe1.jpg?1789127722"
+  },
+  "Yargle and Multani": {
+    "id": "9c15e244-14cc-46a5-abd4-66a58d1c0dd0",
+    "oracle_id": "980e1721-3717-4425-95a4-938dbf2ac661",
+    "name": "Yargle and Multani",
+    "mana_cost": "{3}{B}{B}{G}",
+    "type_line": "Legendary Creature — Frog Spirit Elemental",
+    "oracle_text": "",
+    "artist": "Slawomir Maniak",
+    "scryfall_uri": "https://scryfall.com/card/mom/256/yargle-and-multani?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/9/c/9c15e244-14cc-46a5-abd4-66a58d1c0dd0.jpg?1783916936",
+    "art": "https://cards.scryfall.io/art_crop/front/9/c/9c15e244-14cc-46a5-abd4-66a58d1c0dd0.jpg?1783916936"
+  },
+  "Zetalpa, Primal Dawn": {
+    "id": "694df80e-77d1-4455-b6f1-58d212267d76",
+    "oracle_id": "7da0e5de-3e4c-420a-8685-991206100b9d",
+    "name": "Zetalpa, Primal Dawn",
+    "mana_cost": "{6}{W}{W}",
+    "type_line": "Legendary Creature — Elder Dinosaur",
+    "oracle_text": "Flying, double strike, vigilance, trample, indestructible",
+    "artist": "Chris Rallis",
+    "scryfall_uri": "https://scryfall.com/card/fdn/584/zetalpa-primal-dawn?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/6/9/694df80e-77d1-4455-b6f1-58d212267d76.jpg?1783908937",
+    "art": "https://cards.scryfall.io/art_crop/front/6/9/694df80e-77d1-4455-b6f1-58d212267d76.jpg?1783908937"
   }
 }

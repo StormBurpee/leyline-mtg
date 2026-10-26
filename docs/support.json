@@ -1,5 +1,5 @@
 {
-  "version": "0.20.0",
+  "version": "0.21.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -1516,6 +1516,14 @@
       "name": "Iron Giant",
       "type": "creature",
       "keywords": ["vigilance", "reach", "trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Isamaru, Hound of Konda",
+      "type": "creature",
+      "keywords": [],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -3744,6 +3752,22 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Yargle and Multani",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Yargle, Glutton of Urborg",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Young Pyromancer",
       "type": "creature",
       "keywords": [],
@@ -3755,6 +3779,14 @@
       "name": "Youthful Knight",
       "type": "creature",
       "keywords": ["first strike"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Zetalpa, Primal Dawn",
+      "type": "creature",
+      "keywords": ["flying", "indestructible", "vigilance", "trample", "double strike"],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0

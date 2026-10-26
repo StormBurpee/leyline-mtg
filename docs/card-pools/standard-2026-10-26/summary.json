@@ -4,7 +4,7 @@
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
     "packages/engine/src/registry.js": "cb7b1db1914b578979a5cd5b4add27acff389643097267b1c515dc7cf1087085",
-    "packages/engine/src/definition-validation.js": "26d9e61cddf5708e37947e36f51e60b4a2291111da0b572eb69106a3b2501229",
+    "packages/engine/src/definition-validation.js": "a7a54b8ff586cf16a4c10568717421ba3d32e73397d84605c19d26d325c9c587",
     "packages/engine/src/selectors.js": "fcb4ec5fcbfbfdbff1587499a22c6aa1053bf0dd0c29eb3586682b822844b52a",
     "packages/engine/src/events.js": "a784e7e5132e1f1b9dc0f9533806dfea746f59efdb305debf3a5809bc9fad14b",
     "packages/engine/src/types.js": "57f8bd1ce75c0bf683c6e9e9e179ff8477594f8ef5a636523f37d9a2bd1467aa"
@@ -21,8 +21,8 @@
   "excluded": {},
   "coverage": {
     "no_exact_forge_match": 261,
-    "unsupported": 4625,
-    "curated": 278
+    "unsupported": 4623,
+    "curated": 280
   },
   "layouts": {
     "normal": 4823,
@@ -37,9 +37,9 @@
     "meld": 3
   },
   "keywordsOnUnimplementedCards": {
-    "Flying": 504,
-    "Trample": 184,
-    "Vigilance": 184,
+    "Flying": 503,
+    "Trample": 183,
+    "Vigilance": 183,
     "Flash": 154,
     "Surveil": 154,
     "Equip": 132,
@@ -82,7 +82,7 @@
     "Explore": 26,
     "Manifest": 25,
     "Manifest dread": 25,
-    "Double strike": 25,
+    "Double strike": 24,
     "Waterbend": 24,
     "Power-up": 24,
     "Blight": 24,
@@ -96,7 +96,7 @@
     "Affinity": 20,
     "Collect evidence": 20,
     "Delirium": 20,
-    "Indestructible": 20,
+    "Indestructible": 19,
     "Kicker": 19,
     "Convoke": 19,
     "Changeling": 19,
@@ -313,7 +313,7 @@
     "Unsupported trigger field": 1938,
     "Unsupported trigger mode": 1129,
     "unsupported field S.": 1030,
-    "Unsupported supertype or card type.": 925,
+    "Unsupported supertype or card type.": 923,
     "Unsupported mana symbol": 877,
     "Unsupported targeted zone transition.": 557,
     "Unsupported target predicate": 449,
@@ -595,5 +595,5 @@
       "sha256": "57b91dec0d3b810928ff8420c5b5b35d8e2bace62ac89d4afcdeddbda57ef206"
     }
   ],
-  "reclassifiedWithEngine": "0.20.0"
+  "reclassifiedWithEngine": "0.21.0"
 }
