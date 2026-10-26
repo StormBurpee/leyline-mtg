@@ -30,4 +30,9 @@ jobs:
       - run: npm run cards:check
       - run: npm run check
       - run: npm run format:check
+      - name: Formatting diagnostics
+        if: failure() && matrix.os == 'ubuntu-latest' && matrix.node == 24
+        run: |
+          npm exec prettier -- --write packages/engine/src/decision-safety.js packages/engine/src/bot.js tests/bot-safety.test.js
+          git diff -- packages/engine/src/decision-safety.js packages/engine/src/bot.js tests/bot-safety.test.js
       - run: npm run build
