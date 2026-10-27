@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.27.1 — Reachable card choices at every width
+
+- Keep wide card galleries start-aligned when they overflow, so the first mulligan cards remain reachable on intermediate-width screens.
+- Preserve explicit Read card controls in short landscape layouts rather than hiding the only full-text reader entry point.
+- This is a structural CSS correction; native browser layout validation remains unverified.
+
 ## 0.24.0 — Standard expansion and bot integration
 
 - Add 280 complete-match Standard card definitions from a strict, fail-closed authoring pass, plus 21 token definitions. The catalog now contains 797 playable cards and 24 tokens; dated coverage is 579/5,164 Standard and 785/15,332 non-Alchemy Arena.
