@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9a107e48-3d50-4941-95b1-10f2b29a4245",
+  "name": "Stroke of Midnight",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "Destroy target nonland permanent. Its controller creates a 1/1 white Human creature token.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "not": {
+            "type": "land"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-human-token",
+          "amount": 1,
+          "controller": "targetController"
+        }
+      ]
+    }
+  ]
+}

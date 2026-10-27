@@ -10,7 +10,7 @@ import { matchesEvent, eventSpec } from './events.js';
 import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.59.0';
+export const VERSION = '0.60.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -1030,6 +1030,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     targetingKind: payload.targetingKind,
     targetNumbers: payload.targetNumbers,
     saddleNumber: payload.saddleNumber,
+    hadCounters: object ? counterKinds(object).length > 0 : undefined,
     owner: object?.owner,
     token: object?.token,
     tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
@@ -1230,6 +1231,7 @@ export function captureDepartureContext(s) {
             token: o.token,
             tapped: o.tapped,
             stunCounters: o.stunCounters ?? 0,
+            hadCounters: counterKinds(o).length > 0,
             attacking: isAttacking(s, o),
             blocking: isBlocking(s, o),
             keywords: keywords(s, o),

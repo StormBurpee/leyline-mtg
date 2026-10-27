@@ -268,6 +268,19 @@ export function flushLinkedReturns(s) {
     .sort((a, b) => Number(b.controller === s.active) - Number(a.controller === s.active));
   return enterBattlefieldBatch(s, entries);
 }
+// An immediate blink may pause while its departure first returns linked exiles.
+// Keep only the exact exiled incarnation; entry choices never create priority.
+function returnBlinkedPermanent(s, returning) {
+  const object = s.objects[returning.object.id];
+  if (
+    !object ||
+    object.token ||
+    object.zone !== 'exile' ||
+    object.incarnation !== returning.object.incarnation
+  )
+    return true;
+  return enterBattlefield(s, object, returning.controller);
+}
 function exileUntilSourceLeaves(s, entry, target, departureContext = null) {
   const source = s.objects[entry.source?.id];
   const object = target?.kind === 'object' && s.objects[target.id];
@@ -1849,6 +1862,30 @@ export function resolveEffects(s, entry, startIndex = 0) {
         loseLife(s, recipient, e.amount);
         emit(s, 'lifeLost', { player: recipient, amount: e.amount });
         break;
+      case 'blink': {
+        if (!o) break;
+        move(s, o, 'exile');
+        // CR 610.3: expiry returns happen immediately after the exile event,
+        // before this object's return. They can themselves require entry choices.
+        // CR 111.8/400.7: tokens cannot return, and the exiled card is a new object.
+        const returning =
+          o.zone === 'exile' && !o.token
+            ? { object: ref(o), controller: e.controller === 'you' ? entry.controller : o.owner }
+            : null;
+        if (flushLinkedReturns(s) === false) {
+          s.resolving = {
+            entry,
+            index: index + 1,
+            ...(returning ? { blinkReturn: returning } : {}),
+          };
+          return false;
+        }
+        if (returning && returnBlinkedPermanent(s, returning) === false) {
+          s.resolving = { entry, index: index + 1 };
+          return false;
+        }
+        break;
+      }
       case 'delayedBlink': {
         if (!o) break;
         move(s, o, 'exile');
@@ -2006,6 +2043,22 @@ export function resolveEffects(s, entry, startIndex = 0) {
             return false;
           }
         }
+        break;
+      }
+      case 'animatePermanent': {
+        if (o)
+          addModifier(s, {
+            objectId: o.id,
+            incarnation: o.incarnation,
+            addTypes: ['creature'],
+            animation: {
+              power: e.power,
+              toughness: e.toughness,
+              subtypes: e.subtypes,
+              preserveSubtypes: true,
+            },
+            permanent: true,
+          });
         break;
       }
       case 'animateLand': {
@@ -2329,6 +2382,11 @@ export function continueResolution(s) {
     delete frame.discover;
   }
   if (flushLinkedReturns(s) === false) return;
+  if (frame.blinkReturn) {
+    const returning = frame.blinkReturn;
+    delete frame.blinkReturn;
+    if (returnBlinkedPermanent(s, returning) === false) return;
+  }
   if (resolveEffects(s, frame.entry, frame.index) === false) {
     if (frame.resume) {
       let tail = s.resolving;

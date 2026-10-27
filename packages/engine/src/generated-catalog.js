@@ -4033,6 +4033,19 @@ export const definitions = [
     ],
   },
   {
+    name: 'Bestial Incursion',
+    type: 'sorcery',
+    types: ['sorcery'],
+    cost: { generic: 3, G: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['G'],
+    text: 'Create a 4/4 green Beast creature token with trample.\nFlashback {5}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)',
+    target: null,
+    effects: [{ op: 'token', count: 1, definition: 'Trampling Beast Token' }],
+    flashback: { generic: 5, G: 1 },
+  },
+  {
     name: 'Bestow Greatness',
     type: 'instant',
     types: ['instant'],
@@ -5367,6 +5380,25 @@ export const definitions = [
     },
   },
   {
+    name: 'Boomerang Basics',
+    type: 'sorcery',
+    types: ['sorcery'],
+    cost: { U: 1 },
+    keywords: [],
+    subtypes: ['Lesson'],
+    color: ['U'],
+    text: "Return target nonland permanent to its owner's hand. If you controlled that permanent, draw a card.",
+    target: { scope: 'permanent', where: { not: { type: 'land' } } },
+    effects: [
+      {
+        op: 'conditional',
+        condition: { kind: 'targetMatches', where: { controller: 'you' }, target: 'target' },
+        then: [{ op: 'bounce' }, { op: 'draw', count: 1 }],
+        else: [{ op: 'bounce' }],
+      },
+    ],
+  },
+  {
     name: 'Boomerang, Blade Flinger',
     type: 'creature',
     types: ['creature'],
@@ -5667,6 +5699,21 @@ export const definitions = [
       },
     ],
     saddle: 2,
+  },
+  {
+    name: 'Bovine Intervention',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 1, W: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['W'],
+    text: 'Destroy target artifact or creature. Its controller creates a 2/2 white Ox creature token.',
+    target: { scope: 'permanent', where: { any: [{ type: 'artifact' }, { type: 'creature' }] } },
+    effects: [
+      { op: 'destroy' },
+      { op: 'token', count: 1, player: 'targetController', definition: 'White Ox Token' },
+    ],
   },
   {
     name: 'Brackish Blunder',
@@ -7529,6 +7576,28 @@ export const definitions = [
       },
     ],
     attachmentBonus: { power: 2, toughness: 0, keywords: ['flying'] },
+  },
+  {
+    name: 'Cemetery Recruitment',
+    type: 'sorcery',
+    types: ['sorcery'],
+    cost: { generic: 1, B: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['B'],
+    text: "Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card.",
+    target: { scope: 'graveyard', where: { all: [{ type: 'creature' }, { owner: 'you' }] } },
+    effects: [
+      {
+        op: 'conditional',
+        condition: { kind: 'targetMatches', where: { subtype: 'Zombie' }, target: 'target' },
+        then: [
+          { op: 'moveTarget', destination: 'hand' },
+          { op: 'draw', count: 1 },
+        ],
+        else: [{ op: 'moveTarget', destination: 'hand' }],
+      },
+    ],
   },
   {
     name: 'Cenote Scout',
@@ -11873,6 +11942,74 @@ export const definitions = [
           { op: 'draw', count: 1 },
           { op: 'loseLife', amount: 1 },
         ],
+      },
+    ],
+  },
+  {
+    name: 'Does Machines',
+    type: 'enchantment',
+    types: ['enchantment'],
+    cost: { generic: 1, U: 1 },
+    keywords: [],
+    subtypes: ['Class'],
+    color: ['U'],
+    text: "(Gain the next level as a sorcery to add its ability.)\nWhen this Class enters, mill two cards, draw two cards, then discard two cards.\n{1}{U}: Level 2\nWhen this Class becomes level 2, return up to two target artifact cards from your graveyard to your hand.\n{4}{U}: Level 3\nAt the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it isn't a creature, it becomes a 0/0 Robot creature in addition to its other types.",
+    etb: [
+      { op: 'mill', count: 2, player: 'controller' },
+      { op: 'draw', count: 2 },
+      { op: 'discard', count: 2 },
+    ],
+    classLevels: [
+      {
+        level: 2,
+        cost: { generic: 1, U: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: { event: 'classLevel', object: 'source', classLevel: 2 },
+              effects: [{ op: 'moveTarget', destination: 'hand', targetGroup: 'cards' }],
+              targetGroups: [
+                {
+                  id: 'cards',
+                  label: 'Return up to two artifact cards',
+                  selector: {
+                    scope: 'graveyard',
+                    where: { all: [{ type: 'artifact' }, { owner: 'you' }] },
+                  },
+                  min: 0,
+                  max: 2,
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        level: 3,
+        cost: { generic: 4, U: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: { event: 'step', controller: 'you', step: 'beginCombat' },
+              effects: [
+                { op: 'counterOn', amount: 3 },
+                {
+                  op: 'conditional',
+                  condition: {
+                    kind: 'targetMatches',
+                    target: 'target',
+                    where: { not: { type: 'creature' } },
+                  },
+                  then: [{ op: 'animatePermanent', power: 0, toughness: 0, subtypes: ['Robot'] }],
+                },
+              ],
+              target: {
+                scope: 'permanent',
+                where: { all: [{ type: 'artifact' }, { controller: 'you' }] },
+              },
+            },
+          ],
+        },
       },
     ],
   },
@@ -19550,6 +19687,57 @@ export const definitions = [
     mana: 'G',
   },
   {
+    name: "Gossip's Talent",
+    type: 'enchantment',
+    types: ['enchantment'],
+    cost: { generic: 1, U: 1 },
+    keywords: [],
+    subtypes: ['Class'],
+    color: ['U'],
+    text: "(Gain the next level as a sorcery to add its ability.)\nWhenever a creature you control enters, surveil 1.\n{1}{U}: Level 2\nWhenever you attack, target attacking creature with power 3 or less can't be blocked this turn.\n{3}{U}: Level 3\nWhenever a creature you control deals combat damage to a player, you may exile it, then return it to the battlefield under its owner's control.",
+    triggers: [
+      {
+        event: { event: 'enter', controller: 'you', filter: { type: 'creature' } },
+        effects: [{ op: 'surveil', count: 1 }],
+      },
+    ],
+    classLevels: [
+      {
+        level: 2,
+        cost: { generic: 1, U: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: { event: 'attackGroup', controller: 'you' },
+              effects: [{ op: 'combatRestriction', restriction: 'cannotBeBlocked' }],
+              target: {
+                scope: 'permanent',
+                where: { all: [{ type: 'creature' }, { attacking: true }, { power: { lte: 3 } }] },
+              },
+            },
+          ],
+        },
+      },
+      {
+        level: 3,
+        cost: { generic: 3, U: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: {
+                event: 'combatDamagePlayer',
+                controller: 'you',
+                filter: { type: 'creature' },
+              },
+              effects: [{ op: 'blink', subject: 'eventSource', controller: 'owner' }],
+              optional: true,
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
     name: "Grabby Giant // That's Mine",
     type: 'creature',
     types: ['creature'],
@@ -22435,6 +22623,46 @@ export const definitions = [
         cost: { tap: true },
         target: { scope: 'permanent', where: { type: 'creature' }, excludeSource: true },
         effects: [{ op: 'modify', power: 0, toughness: 0, keywords: ['haste'] }],
+      },
+    ],
+  },
+  {
+    name: 'Hotshot Investigators',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 5, U: 1 },
+    keywords: [],
+    subtypes: ['Vedalken', 'Detective'],
+    color: ['U'],
+    text: 'When this creature enters, return up to one other target creature to its owner\'s hand. If you controlled it, investigate. (Create a Clue token. It\'s an artifact with "{2}, Sacrifice this token: Draw a card.")',
+    power: 4,
+    toughness: 4,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [
+          {
+            op: 'conditional',
+            condition: {
+              kind: 'targetMatches',
+              where: { controller: 'you' },
+              targetGroup: 'returned',
+            },
+            then: [
+              { op: 'bounce', targetGroup: 'returned' },
+              { op: 'token', count: 1, definition: 'Clue Token' },
+            ],
+            else: [{ op: 'bounce', targetGroup: 'returned' }],
+          },
+        ],
+        targetGroups: [
+          {
+            id: 'returned',
+            selector: { scope: 'permanent', where: { type: 'creature' }, excludeSource: true },
+            min: 0,
+            max: 1,
+          },
+        ],
       },
     ],
   },
@@ -26169,6 +26397,60 @@ export const definitions = [
     text: 'Deal 5 damage to target player or planeswalker. (This kernel supports players.)',
     target: 'player',
     effects: [{ op: 'damage', amount: 5 }],
+  },
+  {
+    name: "Leader's Talent",
+    type: 'enchantment',
+    types: ['enchantment'],
+    cost: { generic: 1, W: 1 },
+    keywords: [],
+    subtypes: ['Class'],
+    color: ['W'],
+    text: '(Gain the next level as a sorcery to add its ability.)\nWhenever you attack, put a +1/+1 counter on target attacking creature.\n{2}{W}: Level 2\nWhenever a creature you control leaves the battlefield, if it had a counter on it, you gain 2 life.\n{3}{W}: Level 3\nWhenever you cast a spell, put a +1/+1 counter on each creature you control.',
+    triggers: [
+      {
+        event: { event: 'attackGroup', controller: 'you' },
+        effects: [{ op: 'counterOn', amount: 1 }],
+        target: { scope: 'permanent', where: { all: [{ type: 'creature' }, { attacking: true }] } },
+      },
+    ],
+    classLevels: [
+      {
+        level: 2,
+        cost: { generic: 2, W: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: {
+                event: 'leave',
+                controller: 'you',
+                filter: { type: 'creature' },
+                hadCounters: true,
+              },
+              effects: [{ op: 'gainLife', amount: 2 }],
+            },
+          ],
+        },
+      },
+      {
+        level: 3,
+        cost: { generic: 3, W: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: { event: 'cast', controller: 'you' },
+              effects: [
+                {
+                  op: 'counterAll',
+                  where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+                  amount: 1,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
   },
   {
     name: 'Leaping Ambush',
@@ -33006,6 +33288,35 @@ export const definitions = [
     text: 'No abilities.',
     power: 0,
     toughness: 3,
+  },
+  {
+    name: 'Pia, Aether Ascetic',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, G: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Druid'],
+    color: ['G'],
+    text: 'When Pia enters, you may discard a card. If you do, search your library for an enchantment card, reveal it, put it into your hand, then shuffle.',
+    legendary: true,
+    power: 2,
+    toughness: 2,
+    etb: [
+      {
+        op: 'discardThen',
+        count: 1,
+        optional: true,
+        then: [
+          {
+            op: 'searchLibrary',
+            count: 1,
+            destination: 'hand',
+            where: { type: 'enchantment' },
+            reveal: true,
+          },
+        ],
+      },
+    ],
   },
   {
     name: 'Pia, Determined Rebuilder',
@@ -44270,6 +44581,21 @@ export const definitions = [
     crew: 2,
   },
   {
+    name: 'Stroke of Midnight',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 2, W: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['W'],
+    text: 'Destroy target nonland permanent. Its controller creates a 1/1 white Human creature token.',
+    target: { scope: 'permanent', where: { not: { type: 'land' } } },
+    effects: [
+      { op: 'destroy' },
+      { op: 'token', count: 1, player: 'targetController', definition: 'White Human Token' },
+    ],
+  },
+  {
     name: 'Stromkirk Bloodthief',
     type: 'creature',
     types: ['creature'],
@@ -47802,6 +48128,25 @@ export const definitions = [
     etb: [{ op: 'surveil', count: 1 }],
   },
   {
+    name: 'Thwip!',
+    type: 'instant',
+    types: ['instant'],
+    cost: { W: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['W'],
+    text: "Target creature gets +2/+2 and gains flying until end of turn. If it's a Spider, you gain 2 life.",
+    target: 'creature',
+    effects: [
+      { op: 'modify', power: 2, toughness: 2, keywords: ['flying'] },
+      {
+        op: 'conditional',
+        condition: { kind: 'targetMatches', where: { subtype: 'Spider' }, target: 'target' },
+        then: [{ op: 'gainLife', amount: 2 }],
+      },
+    ],
+  },
+  {
     name: "Tibalt's Rager",
     type: 'creature',
     types: ['creature'],
@@ -48361,6 +48706,19 @@ export const definitions = [
       },
     },
     mana: ['C', 'R', 'G'],
+  },
+  {
+    name: 'Trampling Beast Token',
+    type: 'creature',
+    types: ['creature'],
+    cost: {},
+    keywords: ['trample'],
+    subtypes: ['Beast'],
+    color: ['G'],
+    text: 'Trample',
+    power: 4,
+    toughness: 4,
+    token: true,
   },
   {
     name: 'Tramway Station',
@@ -50342,6 +50700,33 @@ export const definitions = [
           { op: 'loseLife', amount: 1, player: 'target' },
         ],
         target: 'player',
+      },
+    ],
+  },
+  {
+    name: 'Vaultguard Trooper',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 4, R: 1 },
+    keywords: [],
+    subtypes: ['Kavu', 'Soldier'],
+    color: ['R'],
+    text: 'At the beginning of your end step, if you control two or more tapped creatures, you may discard your hand. If you do, draw two cards.',
+    power: 5,
+    toughness: 5,
+    triggers: [
+      {
+        event: { event: 'step', step: 'end', controller: 'you' },
+        effects: [
+          { op: 'discard', count: { kind: 'count', zone: 'hand', player: 'you' } },
+          { op: 'draw', count: 2 },
+        ],
+        condition: {
+          kind: 'controlAtLeast',
+          where: { all: [{ type: 'creature' }, { tapped: true }] },
+          count: 2,
+        },
+        optional: true,
       },
     ],
   },
@@ -52710,6 +53095,19 @@ export const definitions = [
     token: true,
   },
   {
+    name: 'White Ox Token',
+    type: 'creature',
+    types: ['creature'],
+    cost: {},
+    keywords: [],
+    subtypes: ['Ox'],
+    color: ['W'],
+    text: 'No abilities.',
+    power: 2,
+    toughness: 2,
+    token: true,
+  },
+  {
     name: 'White Sheep Token',
     type: 'creature',
     types: ['creature'],
@@ -54556,6 +54954,7 @@ export const cardIds = {
   'c7b6d2cd-9105-404b-88f0-a67037fb2120': 'Besotted Knight // Betroth the Beast',
   '679480aa-f9ad-4a6c-bd79-db9f9f75433d': 'Bespoke Bō',
   'a3ae6694-6314-42e2-bc12-d0e32d49b347': 'Bestial Bloodline',
+  'bc00f29a-e9d2-4b86-bb22-33b686ac4365': 'Bestial Incursion',
   '58a17110-b2a7-4dbc-bba5-5ed3728ad261': 'Bestow Greatness',
   'f1dce3f0-30c8-488f-bbeb-b0533886c655': 'Betrayal at the Vault',
   '84469042-d48d-409f-a2c9-047058f13bc5': 'Bewildering Blizzard',
@@ -54621,6 +55020,7 @@ export const cardIds = {
   '449db6bf-d766-4d09-a7bd-9c45b3d4c4c3': 'Bone-Cairn Butcher',
   'c79cf0e5-52dd-4af3-ab06-6cdaab526c23': 'Bonebind Orator',
   'a08f69f9-de48-46d6-8b75-31886159cf45': 'Boneclub Berserker',
+  'acd881eb-f3b4-4174-9fc2-e3c7c213886b': 'Boomerang Basics',
   'bbd84035-3efd-4301-9778-913898efd57a': 'Boomerang, Blade Flinger',
   'dc4a4996-108a-4aac-850f-2d9f76403446': 'Boomerang',
   'cec10abd-2a2d-4d89-9ecc-ea50c2ac1538': 'Boosted Sloop',
@@ -54635,6 +55035,7 @@ export const cardIds = {
   'd9c29e6e-5949-4599-bf74-b9539e753f76': 'Bounce Off',
   '1189b5d5-ca8f-4b4e-a5f1-91122a485cf3': 'Boundary Lands Ranger',
   'b00f316d-7c82-40e6-80e5-9f36434590a3': 'Bounding Felidar',
+  '7402d98f-6d58-4ff2-a0db-9eec4417a75f': 'Bovine Intervention',
   '4ad34f85-a185-458a-a7a1-eb60f7efce5b': 'Brackish Blunder',
   '104baa4e-a3f3-45dc-979d-4c58b659ba1a': 'Brambleguard Captain',
   '63b0538e-aa94-4e23-adf1-704cbf5bc3e5': "Brass's Bounty",
@@ -54716,6 +55117,7 @@ export const cardIds = {
   '89ca686a-7c72-4d8f-9290-e89635624a83': 'Cavern of Souls',
   'd51136fa-3c13-48a5-83fd-51fe00010a4b': 'Celebrate the Mountain-king',
   '4f1b68d7-7d16-4bb1-af5f-f1708b23ca73': 'Celestial Armor',
+  '07792d72-d5db-41b9-871c-e720e12ce659': 'Cemetery Recruitment',
   'ec3911c0-686f-4c78-838d-a683eed6c01c': 'Cenote Scout',
   '2f5bf099-2e01-4e1c-9ebf-0ce0ac66939e': 'Centaur Courser',
   '1ea71ea2-65ca-4907-b857-dbd1ba8efacd': 'Cerebral Confiscation',
@@ -54921,6 +55323,7 @@ export const cardIds = {
   '7dbb540f-ee96-4115-b6ef-28ffc73da8b7': "Djinn of Fool's Fall",
   'ae91c16c-5267-4957-b36c-5aa787fa6b5e': "Doc Ock's Henchmen",
   '9e4fa592-71f8-4c71-8c91-78e6326cd736': 'Doctor Doom',
+  'df54b79d-f31d-4582-86c0-1d34ec77be0f': 'Does Machines',
   'leyline:token/dog-token': 'Dog Token',
   '10d24900-cd40-4c98-bb1e-b9e66113f703': 'Dog Walker',
   'f84850bc-6348-449e-bd82-bb39e2119bec': 'Donatello, Turtle Techie',
@@ -55276,6 +55679,7 @@ export const cardIds = {
   '8d88facd-cf7e-498e-ab6b-6bd021316162': 'Gollum the Abandoned',
   'ac4e1818-4873-4143-9b99-46f205d006d9': 'Gongaga, Reactor Town',
   'b5c64331-2ba5-43ad-b77c-979875cc39e3': 'Goobbue Gardener',
+  '96e6d220-87db-4dab-abaa-e80c9577d89a': "Gossip's Talent",
   'e6f59807-eaf6-4889-8c89-2ac915afefff': "Grabby Giant // That's Mine",
   '09b71c95-7b5d-4cee-a505-e0dda72715b7': 'Gran Pulse Ochu',
   '37f2ec12-d703-40cd-a155-053ae2e4ddcc': 'Granite Witness',
@@ -55409,6 +55813,7 @@ export const cardIds = {
   'bef3f0a9-4d5c-4469-81df-adbeedeed768': 'Horrid Vigor',
   'cf27f1f8-2d95-4a00-97f8-72a244837f08': 'Hot Dog Cart',
   '3efb64a4-04f6-4b78-be1c-5b6320c02a71': 'Hotfoot Gnome',
+  '288fcf5c-f5aa-4f62-9dd8-ba295df48f7a': 'Hotshot Investigators',
   '2774fcb7-8988-4a18-b5ec-7534dd8b2e05': 'Hour of Defeat',
   '20acb8df-2ea0-48b0-8dcf-54dd0e1f8db8': "Huatli's Final Strike",
   '9f2e7533-cfc1-4dd8-a9b8-09cdc712ef2f': 'Hulking Raptor',
@@ -55576,6 +55981,7 @@ export const cardIds = {
   '15fef45d-f1a9-49b2-abaa-fe77bb9d1afd': 'Lathliss, Dragon Queen',
   'bd7c5a8b-cf62-41e1-a664-b16e3e5d142b': 'Laughing Jasper Flint',
   '387b6b07-a283-412d-94c3-f7f1dc76e858': 'Lava Axe',
+  '134430b7-d566-485a-bd5c-7db8a285f4ca': "Leader's Talent",
   'e920c955-66f5-4c6e-a2a8-8b282f9e456e': 'Leaping Ambush',
   'ee9b606a-a1fe-43c8-84d0-9bf7b012cc75': 'Leatherhead, Swamp Stalker',
   'b18995c2-efe3-46ca-8204-e2dc0e42f6e3': 'Leaves from the Vine',
@@ -55906,6 +56312,7 @@ export const cardIds = {
   'e409c9be-0c9a-43c3-adb4-8c47afc1d551': 'Phyrexian Rager',
   '9c99ce14-5059-47a9-b874-637b39473062': 'Phyrexian Vivisector',
   '7af75024-6c9b-4844-aeb6-81de25464822': 'Phyrexian Walker',
+  '6519dc16-4960-4220-aaa8-7e4279743714': 'Pia, Aether Ascetic',
   'a49c0c64-ea87-44f4-9acf-e7181962aeb2': 'Pia, Determined Rebuilder',
   '9af4a832-d634-47aa-91ed-79d44fe08864': 'Pick Your Poison',
   '4fd74a8c-a4e7-4988-ae02-9a73ab6ec89e': 'Pictures of Spider-Man',
@@ -56439,6 +56846,7 @@ export const cardIds = {
   'e85c6bd2-db15-4052-88c0-3ae25414f0ca': 'Strife Scholar // Awaken the Ages',
   '5a6d01c8-47b6-43e5-a6e9-c48088286007': 'Strix Lookout',
   'e286a191-39d4-4073-b844-11d2aba911b4': 'Strixhaven Skycoach',
+  '9a107e48-3d50-4941-95b1-10f2b29a4245': 'Stroke of Midnight',
   'c85987b4-090e-472e-b9af-1114cce56ffb': 'Stromkirk Bloodthief',
   '24bc7bd5-f262-45a2-8e94-377fef2ba5d5': 'Stubborn Burrowfiend',
   '58b0c737-0a84-4f9a-b3b7-300c5de43874': 'Studious First-Year // Rampant Growth',
@@ -56590,6 +56998,7 @@ export const cardIds = {
   'd9b6656d-d71f-4359-bf6f-b76089741e29': 'Thunderhead Gunner',
   '817464d8-1e2d-4e12-96f8-5c7ec9b3e681': 'Thundering Broodwagon',
   'd2bcff58-7a8a-46ef-b6b3-39501d4c8e6e': 'Thundering Falls',
+  'f7d11254-b48a-4016-a035-c0d6642fdfae': 'Thwip!',
   '0d7d8f4f-abf3-408b-a289-1dd6a3ebdbf6': "Tibalt's Rager",
   '952083c5-9ffa-4cd9-915f-b7de7f3e5326': 'Ticket Tortoise',
   'e75e40a5-a9ae-4789-96c1-0e19d1ce59c5': 'Tidecaller Mentor',
@@ -56618,6 +57027,7 @@ export const cardIds = {
   '1f3b0b15-2c38-4aaa-b527-afbb540a6715': 'Toxin Analysis',
   'bc875500-f6df-4365-b2d6-7cf425daea97': 'Trained Arynx',
   '99c70f4e-de8a-426d-99aa-17b2f87625ba': 'Training Compound',
+  'leyline:token/trampling-beast-token': 'Trampling Beast Token',
   'e90e519d-023e-4d19-85ad-9972a76df3ba': 'Tramway Station',
   '5d641bf6-0f93-4189-8dc1-ec7ea446dade': 'Tranquil Cove',
   '8ec56e2a-380f-4de7-9fb7-52de803008fc': 'Transformative Commons',
@@ -56712,6 +57122,7 @@ export const cardIds = {
   '660de988-b6fb-4f36-8006-42af3e7f908d': 'Vampiric Rites',
   'de4678f8-a441-4e4a-a339-9b62ebfb0100': 'Vanguard of the Rose',
   '80e5d768-cc1f-48f8-b0fe-ed974e4d1a56': 'Vault Plunderer',
+  'e15c78d4-6fb1-4bd3-8219-c66b83fcaba1': 'Vaultguard Trooper',
   '8dcba63c-4701-4dc9-81f5-ca8e8933a3ba': 'Vector, Imperial Capital',
   'f507f9ba-a7e9-4e45-86dc-8c60a72a6234': 'Vedalken Mesmerist',
   'fa123b21-518a-4f1d-9629-c44576d45f21': 'Veloheart Bike',
@@ -56818,6 +57229,7 @@ export const cardIds = {
   'c55a4b25-ccc4-49de-9f98-a829c547a64d': 'White Lotus Reinforcements',
   'leyline:token/white-moogle-token': 'White Moogle Token',
   'leyline:token/white-mouse-token': 'White Mouse Token',
+  'leyline:token/white-ox-token': 'White Ox Token',
   'leyline:token/white-sheep-token': 'White Sheep Token',
   'leyline:token/white-soldier-token': 'White Soldier Token',
   'leyline:token/white-wall-token': 'White Wall Token',
@@ -56895,7 +57307,7 @@ export const cardIds = {
 };
 export const packIdentity = {
   id: 'leyline.core',
-  version: '0.59.0',
+  version: '0.60.0',
   schemaVersion: 1,
-  sourceHash: 'a5f024d57a98243e72fa72773bbea5815a3aa28d465633f0fc710ebf67218db0',
+  sourceHash: 'dafd3b640d48c393da80395a08bc8ce943f069bc69b09994664719ca701891d5',
 };

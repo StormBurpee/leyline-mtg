@@ -257,6 +257,8 @@ export function compileCard(
           'moveTarget',
           'exileUntilSourceLeaves',
           'delayedBlink',
+          'blink',
+          'animatePermanent',
           'draw',
           'mill',
           'scry',
@@ -351,6 +353,8 @@ export function compileCard(
         gainLife: ['target', 'amount'],
         loseLife: ['target', 'amount'],
         exileUntilSourceLeaves: ['target'],
+        blink: ['target', 'controller'],
+        animatePermanent: ['target', 'power', 'toughness', 'subtypes', 'until'],
         delayedBlink: ['target', 'controller'],
         moveTarget: [
           'target',
@@ -590,6 +594,29 @@ export function compileCard(
       }
       if (e.op === 'delayedBlink' && effect.controller !== undefined)
         e.controller = effect.controller;
+      if (e.op === 'blink') {
+        if (!['source', 'eventSource', 'target'].includes(effect.target))
+          problem(
+            'UNSUPPORTED_BINDING',
+            `${p}.target`,
+            'Blink needs source, eventSource or target.',
+          );
+        if (effect.target !== 'target') e.subject = effect.target;
+        if (effect.controller !== undefined) e.controller = effect.controller;
+      }
+      if (e.op === 'animatePermanent') {
+        if (effect.target !== 'target' || effect.until !== 'permanent')
+          problem(
+            'UNSUPPORTED_ANIMATION',
+            p,
+            'This animation requires a permanent target and permanent duration.',
+          );
+        Object.assign(e, {
+          power: effect.power,
+          toughness: effect.toughness,
+          subtypes: effect.subtypes,
+        });
+      }
       if (e.op === 'moveTarget') {
         if (!['source', 'attached', 'target'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'A zone change needs a supported binding.');

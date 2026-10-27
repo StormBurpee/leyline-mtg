@@ -1,5 +1,5 @@
 {
-  "version": "0.59.0",
+  "version": "0.60.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -1697,6 +1697,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Bestial Incursion",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Bestow Greatness",
       "type": "instant",
       "keywords": [],
@@ -2230,6 +2238,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Boomerang Basics",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["conditional", "bounce", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Boomerang, Blade Flinger",
       "type": "creature",
       "keywords": [],
@@ -2355,6 +2371,14 @@
       "keywords": [],
       "opcodes": ["counterAll", "gainLife"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Bovine Intervention",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy", "token"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -3253,6 +3277,14 @@
       "opcodes": ["attachEquipment", "modify"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Cemetery Recruitment",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["conditional", "moveTarget", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Cenote Scout",
@@ -5090,6 +5122,127 @@
           "controller": "you"
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Does Machines",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": [
+        "mill",
+        "draw",
+        "discard",
+        "moveTarget",
+        "counterOn",
+        "conditional",
+        "animatePermanent"
+      ],
+      "classLevels": [
+        {
+          "level": 2,
+          "cost": {
+            "generic": 1,
+            "U": 1
+          },
+          "abilities": {
+            "triggers": [
+              {
+                "event": {
+                  "event": "classLevel",
+                  "object": "source",
+                  "classLevel": 2
+                },
+                "effects": [
+                  {
+                    "op": "moveTarget",
+                    "destination": "hand",
+                    "targetGroup": "cards"
+                  }
+                ],
+                "targetGroups": [
+                  {
+                    "id": "cards",
+                    "label": "Return up to two artifact cards",
+                    "selector": {
+                      "scope": "graveyard",
+                      "where": {
+                        "all": [
+                          {
+                            "type": "artifact"
+                          },
+                          {
+                            "owner": "you"
+                          }
+                        ]
+                      }
+                    },
+                    "min": 0,
+                    "max": 2
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "level": 3,
+          "cost": {
+            "generic": 4,
+            "U": 1
+          },
+          "abilities": {
+            "triggers": [
+              {
+                "event": {
+                  "event": "step",
+                  "controller": "you",
+                  "step": "beginCombat"
+                },
+                "effects": [
+                  {
+                    "op": "counterOn",
+                    "amount": 3
+                  },
+                  {
+                    "op": "conditional",
+                    "condition": {
+                      "kind": "targetMatches",
+                      "target": "target",
+                      "where": {
+                        "not": {
+                          "type": "creature"
+                        }
+                      }
+                    },
+                    "then": [
+                      {
+                        "op": "animatePermanent",
+                        "power": 0,
+                        "toughness": 0,
+                        "subtypes": ["Robot"]
+                      }
+                    ]
+                  }
+                ],
+                "target": {
+                  "scope": "permanent",
+                  "where": {
+                    "all": [
+                      {
+                        "type": "artifact"
+                      },
+                      {
+                        "controller": "you"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -8339,6 +8492,93 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gossip's Talent",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["surveil", "combatRestriction", "blink"],
+      "classLevels": [
+        {
+          "level": 2,
+          "cost": {
+            "generic": 1,
+            "U": 1
+          },
+          "abilities": {
+            "triggers": [
+              {
+                "event": {
+                  "event": "attackGroup",
+                  "controller": "you"
+                },
+                "effects": [
+                  {
+                    "op": "combatRestriction",
+                    "restriction": "cannotBeBlocked"
+                  }
+                ],
+                "target": {
+                  "scope": "permanent",
+                  "where": {
+                    "all": [
+                      {
+                        "type": "creature"
+                      },
+                      {
+                        "attacking": true
+                      },
+                      {
+                        "power": {
+                          "lte": 3
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "level": 3,
+          "cost": {
+            "generic": 3,
+            "U": 1
+          },
+          "abilities": {
+            "triggers": [
+              {
+                "event": {
+                  "event": "combatDamagePlayer",
+                  "controller": "you",
+                  "filter": {
+                    "type": "creature"
+                  }
+                },
+                "effects": [
+                  {
+                    "op": "blink",
+                    "subject": "eventSource",
+                    "controller": "owner"
+                  }
+                ],
+                "optional": true
+              }
+            ]
+          }
+        }
+      ],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "filter": {
+            "type": "creature"
+          }
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Grabby Giant // That's Mine",
       "type": "creature",
       "keywords": ["reach"],
@@ -9534,6 +9774,14 @@
       "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Hotshot Investigators",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["conditional", "bounce", "token"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
     },
     {
       "name": "Hour of Defeat",
@@ -11283,6 +11531,81 @@
       "keywords": [],
       "opcodes": ["damage"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Leader's Talent",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["counterOn", "gainLife", "counterAll"],
+      "classLevels": [
+        {
+          "level": 2,
+          "cost": {
+            "generic": 2,
+            "W": 1
+          },
+          "abilities": {
+            "triggers": [
+              {
+                "event": {
+                  "event": "leave",
+                  "controller": "you",
+                  "filter": {
+                    "type": "creature"
+                  },
+                  "hadCounters": true
+                },
+                "effects": [
+                  {
+                    "op": "gainLife",
+                    "amount": 2
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "level": 3,
+          "cost": {
+            "generic": 3,
+            "W": 1
+          },
+          "abilities": {
+            "triggers": [
+              {
+                "event": {
+                  "event": "cast",
+                  "controller": "you"
+                },
+                "effects": [
+                  {
+                    "op": "counterAll",
+                    "where": {
+                      "all": [
+                        {
+                          "type": "creature"
+                        },
+                        {
+                          "controller": "you"
+                        }
+                      ]
+                    },
+                    "amount": 1
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "triggers": [
+        {
+          "event": "attackGroup",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -14461,6 +14784,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pia, Aether Ascetic",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discardThen", "searchLibrary"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -19301,6 +19632,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Stroke of Midnight",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy", "token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stromkirk Bloodthief",
       "type": "creature",
       "keywords": [],
@@ -20874,6 +21213,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Thwip!",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "conditional", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Tibalt's Rager",
       "type": "creature",
       "keywords": [],
@@ -22010,6 +22357,20 @@
       "keywords": [],
       "opcodes": ["draw", "loseLife"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Vaultguard Trooper",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discard", "draw"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "end",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -23767,6 +24128,7 @@
     "Soldier Token",
     "Sorcerer",
     "Stone Boulder",
+    "Trampling Beast Token",
     "Treasure Token",
     "Two Two Cat Token",
     "Two Two Knight Token",
@@ -23780,6 +24142,7 @@
     "White Human Token",
     "White Moogle Token",
     "White Mouse Token",
+    "White Ox Token",
     "White Sheep Token",
     "White Soldier Token",
     "White Wall Token",

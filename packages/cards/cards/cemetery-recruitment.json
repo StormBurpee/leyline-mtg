@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "07792d72-d5db-41b9-871c-e720e12ce659",
+  "name": "Cemetery Recruitment",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "owner": "you"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "where": {
+              "subtype": "Zombie"
+            },
+            "target": "target"
+          },
+          "then": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand"
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ],
+          "else": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

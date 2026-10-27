@@ -126,6 +126,8 @@ export interface EventSpec {
   classLevel?: 2 | 3;
   /** Actual post-replacement destination; only for leave events. */
   destinations?: Exclude<Zone, 'battlefield'>[];
+  /** Whether the departing permanent had any counter, evaluated from pre-departure LKI. */
+  hadCounters?: boolean;
   spellNumber?: number;
   drawNumber?: number;
   castByController?: boolean;
@@ -174,6 +176,8 @@ export interface TargetGroup {
 export type TargetPlan = Record<string, Target[]>;
 export type Effect = EffectInstruction & { targetGroup?: string };
 type EffectInstruction =
+  | { op: 'blink'; subject?: 'source' | 'eventSource'; controller?: 'owner' | 'you' }
+  | { op: 'animatePermanent'; power: number; toughness: number; subtypes: string[] }
   | { op: 'setClassLevel'; level: 2 | 3 }
   | { op: 'anthemEmblem'; where: CardPredicate; power: number; toughness: number }
   | { op: 'ninjutsuEnter'; defender: Target }
@@ -1061,6 +1065,7 @@ export interface ResolutionFrame {
   index: number;
   revealedPlayer?: PlayerId;
   discover?: { exiled: ObjectTarget[]; amount: number; card: ObjectTarget };
+  blinkReturn?: { object: ObjectTarget; controller: PlayerId };
   resume?: ResolutionFrame;
 }
 export interface GameState {

@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "acd881eb-f3b4-4174-9fc2-e3c7c213886b",
+  "name": "Boomerang Basics",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": ["Lesson"],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Return target nonland permanent to its owner's hand. If you controlled that permanent, draw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "not": {
+            "type": "land"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "where": {
+              "controller": "you"
+            },
+            "target": "target"
+          },
+          "then": [
+            {
+              "op": "returnToHand",
+              "target": "target"
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ],
+          "else": [
+            {
+              "op": "returnToHand",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

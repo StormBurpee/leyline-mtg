@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6519dc16-4960-4220-aaa8-7e4279743714",
+  "name": "Pia, Aether Ascetic",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When Pia enters, you may discard a card. If you do, search your library for an enchantment card, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discardThen",
+          "count": 1,
+          "optional": true,
+          "then": [
+            {
+              "op": "searchLibrary",
+              "amount": 1,
+              "where": {
+                "type": "enchantment"
+              },
+              "destination": "hand",
+              "reveal": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
