@@ -567,6 +567,18 @@ function presentStateChoice() {
   dialog._choiceRevision = state.revision;
   dialog._activeChoice = c;
   ui.dismissedChoiceLease = null;
+  if (c.kind === 'triggerMode') {
+    openChoiceDialog(
+      'Choose one triggered mode',
+      'Choose a mode now, then announce its targets. Neither player gets priority until all triggered abilities are announced.',
+      `<div class="decision-mode-grid">${c.entry.modes.map((mode, index) => `<button class="decision-mode" data-action="chooseTriggerMode" data-mode="${index}" ${c.modes.includes(index) ? '' : 'disabled'}><strong>${escape(mode.label)}</strong><span>${!c.modes.includes(index) ? 'No legal targets for this mode.' : mode.target || mode.targetGroups ? 'Choose this mode, then its targets.' : 'Put this mode on the stack.'}</span></button>`).join('')}</div>`,
+      '',
+      { source: c.entry.name, eyebrow: 'TRIGGERED ABILITY' },
+    );
+    dialog._activeChoice = c;
+    dialog._stageRender = presentStateChoice;
+    return;
+  }
   if (c.kind === 'triggerTargets') {
     showGroupedTargets();
     return;
@@ -1992,6 +2004,18 @@ async function action(name, el) {
     case 'declineEntryLife':
     case 'payEntryLife':
       send({ type: 'payEntryLife', pay: name === 'payEntryLife' });
+      break;
+    case 'triggerModes':
+      presentStateChoice();
+      break;
+    case 'chooseTriggerMode':
+      if (dialog._activeChoice !== state.choice || state.choice?.kind !== 'triggerMode') break;
+      {
+        const mode = Number(el.dataset.mode);
+        const expectedRevision = dialog._choiceRevision;
+        closeDialog();
+        send({ type: 'chooseTriggerMode', mode, expectedRevision }, { autoPass: false });
+      }
       break;
     case 'chooseLandType':
       send({ type: 'chooseLandType', landType: el.dataset.landtype });

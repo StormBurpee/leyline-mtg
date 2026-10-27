@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f56c6c35-d09b-4bee-a685-98e9afed13d1",
+  "name": "Azula Always Lies",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": ["Lesson"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Choose one or both \u2014\n\u2022 Target creature gets -1/-1 until end of turn.\n\u2022 Put a +1/+1 counter on target creature.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": "oneOrMore",
+      "modes": [
+        {
+          "label": "Target creature gets -1/-1 until end of turn.",
+          "additionalCost": "{0}",
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": -1,
+              "toughness": -1,
+              "until": "endOfTurn",
+              "targetGroup": "mode0"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "mode0",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "type": "creature"
+                }
+              },
+              "min": 1,
+              "max": 1
+            }
+          ]
+        },
+        {
+          "label": "Put a +1/+1 counter on target creature.",
+          "additionalCost": "{0}",
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "amount": 1,
+              "counter": "+1/+1",
+              "targetGroup": "mode1"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "mode1",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "type": "creature"
+                }
+              },
+              "min": 1,
+              "max": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

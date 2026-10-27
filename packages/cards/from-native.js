@@ -381,10 +381,12 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       abilities.push({ use: 'prowess' });
     else if (
       t.event === 'controllerLandEnters' &&
+      !t.condition &&
+      !t.triggerCondition &&
       !t.optional &&
       !t.oncePerTurn &&
       !t.target &&
-      t.effects.length === 1 &&
+      t.effects?.length === 1 &&
       t.effects[0].op === 'modify' &&
       t.effects[0].subject === 'source' &&
       !t.effects[0].keywords
@@ -403,7 +405,18 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         ...(t.optional !== undefined ? { optional: t.optional } : {}),
         ...(t.oncePerTurn !== undefined ? { oncePerTurn: t.oncePerTurn } : {}),
         ...(t.condition ? { condition: structuredClone(t.condition) } : {}),
-        effects: effects(t.effects),
+        ...(t.triggerCondition ? { triggerCondition: structuredClone(t.triggerCondition) } : {}),
+        ...(t.modes
+          ? {
+              choose: 1,
+              modes: t.modes.map((mode) => ({
+                label: mode.label,
+                ...(mode.target ? { target: structuredClone(targetSpec(mode.target)) } : {}),
+                ...(mode.targetGroups ? { targetGroups: structuredClone(mode.targetGroups) } : {}),
+                effects: effects(mode.effects),
+              })),
+            }
+          : { effects: effects(t.effects) }),
       });
     }
   }

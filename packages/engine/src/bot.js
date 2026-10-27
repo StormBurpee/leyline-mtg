@@ -336,6 +336,22 @@ export function chooseBotCommand(s, p) {
         candidates.sort((a, b) => value(s, s.objects[b]) - value(s, s.objects[a]));
         return { type: 'chooseResolutionCard', player: p, card: candidates[0] ?? null };
       }
+      case 'triggerMode': {
+        const score = (index) =>
+          c.entry.modes[index].effects.reduce((total, effect) => {
+            if (effect.op === 'token') return total + 3 * (effect.count ?? 1);
+            if (effect.op === 'draw') return total + 2 * (effect.count ?? 1);
+            if (effect.op === 'scry') return total + (effect.count ?? 1);
+            if (effect.op === 'gainLife')
+              return total + (effect.amount ?? 0) * (s.players[p].life < 8 ? 2 : 0.3);
+            return total + 1;
+          }, 0);
+        return {
+          type: 'chooseTriggerMode',
+          player: p,
+          mode: [...c.modes].sort((a, b) => score(b) - score(a) || a - b)[0],
+        };
+      }
       case 'triggerTargets': {
         const plans = targetPlans(
           s,
@@ -1025,7 +1041,11 @@ export function chooseBotCommand(s, p) {
       if (searchAbility) score = Math.max(score, 4);
       if (
         d.etb?.some((e) => e.op === 'searchLibrary') ||
-        d.triggers?.some((t) => t.effects.some((e) => e.op === 'searchLibrary'))
+        d.triggers?.some((t) =>
+          (t.effects ?? t.modes?.flatMap((mode) => mode.effects) ?? []).some(
+            (e) => e.op === 'searchLibrary',
+          ),
+        )
       )
         score = Math.max(score, 6);
 

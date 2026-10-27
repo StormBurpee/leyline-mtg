@@ -1,0 +1,80 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1d5ff280-7f4d-4801-aefd-9b6e6b1f2818",
+  "name": "Ajani, Caller of the Pride",
+  "characteristics": {
+    "types": ["planeswalker"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Ajani"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}{W}",
+    "loyalty": 4
+  },
+  "rulesText": "+1: Put a +1/+1 counter on up to one target creature.\n\u22123: Target creature gains flying and double strike until end of turn.\n\u22128: Create X 2/2 white Cat creature tokens, where X is your life total.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": 1,
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "amount": 1,
+          "counter": "+1/+1",
+          "targetGroup": "chosen"
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": -3,
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["flying", "double strike"]
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": -8,
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/two-two-cat-token",
+          "amount": {
+            "kind": "life",
+            "player": "you"
+          }
+        }
+      ]
+    }
+  ]
+}

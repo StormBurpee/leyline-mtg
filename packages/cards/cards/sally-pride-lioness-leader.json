@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b529f6b0-c6b2-4eb3-bb48-178e1eda75f3",
+  "name": "Sally Pride, Lioness Leader",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Cat", "Mutant", "Rebel"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "When Sally Pride enters, create X 2/2 red Mutant creature tokens, where X is the number of nontoken creatures you control.\nWhenever Sally Pride attacks, put a +1/+1 counter on each creature you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mutant-token",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "token": false
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

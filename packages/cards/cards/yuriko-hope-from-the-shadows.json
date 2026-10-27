@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "983f4fde-ab04-44f0-a294-c3b472de0b19",
+  "name": "Yuriko, Hope from the Shadows",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Ninja"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Flash\nWhen Yuriko enters, choose one —\n• Target creature gets -X/-0 until end of turn, where X is the number of cards in your graveyard.\n• Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target creature gets -X/-0 this turn, where X is your graveyard card count",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": {
+                "kind": "scale",
+                "value": {
+                  "kind": "count",
+                  "zone": "graveyard",
+                  "player": "you"
+                },
+                "factor": -1
+              },
+              "toughness": 0,
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Surveil 2",
+          "effects": [
+            {
+              "op": "surveil",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

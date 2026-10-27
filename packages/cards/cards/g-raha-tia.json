@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0c4603be-d71a-4d33-b62c-04ead1987dbe",
+  "name": "G'raha Tia",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Cat", "Archer"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 3,
+    "toughness": 5
+  },
+  "rulesText": "Reach\nThe Allagan Eye \u2014 Whenever one or more other creatures and/or artifacts you control die, draw a card. This ability triggers only once each turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "battlefieldToGraveyardGroup",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "type": "artifact"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "oncePerTurn": true
+    }
+  ]
+}

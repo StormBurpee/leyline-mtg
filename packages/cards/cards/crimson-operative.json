@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d8863742-6c1c-415a-ad27-7def6d119c6a",
+  "name": "Crimson Operative",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Villain"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.",
+  "abilities": [
+    {
+      "use": "prowess"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 1,
+          "player": "controller",
+          "duration": "nextTurn"
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,11 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.49)
+## Latest coverage (v0.50)
+
+Choose-one triggered modes are announced before their targets, with explicit APNAP/trigger ordering and client decisions. Aggregate death predicates observe actual simultaneous departure batches, not one trigger per creature or one batch per whole resolution. Trigger-time-only conditions are distinct from true intervening-if rechecks. These bounded contracts do not imply generalized multi-mode triggers or all one-or-more event families.
+
+## Previous coverage (v0.49)
 
 Preparation can change through explicit resolving effects and source-prepared conditions; prepared spell X is independently scoped. Graveyard abilities can return their source without a fictitious exile cost. Explicit -1/-1 counters retain normal state-based cancellation and death handling. New games skip the starting player's whole first draw step, while older replay rule revisions preserve their original command timing.
 

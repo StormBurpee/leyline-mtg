@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5cf3727b-eb7b-414e-982c-3acf4c05ddf1",
+  "name": "Shady Informant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Ogre", "Rogue"],
+    "colors": ["B", "R"],
+    "manaCost": "{3}{B}{R}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "When this creature dies, it deals 2 damage to any target.\nDisguise {2}{B/R}{B/R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ],
+      "target": {
+        "scope": "damageable"
+      }
+    },
+    {
+      "kind": "disguise",
+      "cost": "{2}{B/R}{B/R}"
+    }
+  ]
+}

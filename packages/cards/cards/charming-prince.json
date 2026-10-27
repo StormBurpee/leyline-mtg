@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c48d844c-3976-4fa5-8e0d-3f0e535e7619",
+  "name": "Charming Prince",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Noble"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, choose one \u2014\n\u2022 Scry 2.\n\u2022 You gain 3 life.\n\u2022 Exile another target creature you own. Return it to the battlefield under your control at the beginning of the next end step.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Scry 2",
+          "effects": [
+            {
+              "op": "scry",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "You gain 3 life",
+          "effects": [
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "Exile another creature you own; return it under your control next end step",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "owner": "you"
+                }
+              ]
+            },
+            "excludeSource": true
+          },
+          "effects": [
+            {
+              "op": "delayedBlink",
+              "target": "target",
+              "controller": "you"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

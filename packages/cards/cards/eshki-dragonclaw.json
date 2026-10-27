@@ -1,0 +1,85 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "85d87087-48ee-4dc8-a1c0-9c9ccb885adc",
+  "name": "Eshki Dragonclaw",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Warrior"],
+    "colors": ["G", "R", "U"],
+    "manaCost": "{1}{G}{U}{R}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Vigilance, trample, ward {1}\nAt the beginning of combat on your turn, if you've cast both a creature spell and a noncreature spell this turn, draw a card and put two +1/+1 counters on Eshki Dragonclaw.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{1}"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 2,
+          "counter": "+1/+1"
+        }
+      ],
+      "condition": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "spellsCast",
+              "player": "you",
+              "where": {
+                "type": "creature"
+              }
+            },
+            "operator": "gte",
+            "right": 1
+          },
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "spellsCast",
+              "player": "you",
+              "where": {
+                "not": {
+                  "type": "creature"
+                }
+              }
+            },
+            "operator": "gte",
+            "right": 1
+          }
+        ]
+      }
+    }
+  ]
+}

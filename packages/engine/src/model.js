@@ -9,7 +9,7 @@ import { matchesEvent, eventSpec } from './events.js';
 import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.49.0';
+export const VERSION = '0.50.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -850,6 +850,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     }
   }
   const object = payload.object;
+  const aggregate = ['diesGroup', 'battlefieldToGraveyardGroup'].includes(event);
   const d = payload.definition ?? (object ? definition(s, object) : null);
   const pt =
     object && hasType(d, 'creature')
@@ -897,6 +898,14 @@ export function notifyTriggers(s, event, payload, context = null) {
         meetsCondition(
           s,
           watcher.controller,
+          trigger.triggerCondition,
+          [],
+          watcher,
+          payload.manaSpent ?? null,
+        ) &&
+        meetsCondition(
+          s,
+          watcher.controller,
           trigger.condition,
           [],
           watcher,
@@ -921,13 +930,14 @@ export function notifyTriggers(s, event, payload, context = null) {
         queueTrigger(
           s,
           watcher,
-          trigger.effects,
+          trigger.effects ?? [],
           `${watcher.name} · triggered ability`,
           trigger.optional,
           trigger.target,
           sourceKeywords,
         );
         const queued = s.pendingTriggers.at(-1);
+        if (trigger.modes) queued.modes = structuredClone(trigger.modes);
         // Own-death triggers are queued after movement; preserve prebatch anthems.
         const departedStats = context?.facts?.[watcher.id];
         if (departedStats)
@@ -936,6 +946,14 @@ export function notifyTriggers(s, event, payload, context = null) {
             toughness: departedStats.toughness ?? 0,
           };
         if (watcherDefinition) queued.sourceDefinition = structuredClone(watcherDefinition);
+        if (
+          aggregate &&
+          payload.departedObjects?.some(
+            (departed) =>
+              departed.id === watcher.id && departed.incarnation === watcher.incarnation,
+          )
+        )
+          queued.departedSource = ref(s.objects[watcher.id]);
         if (
           ['dies', 'battlefieldToGraveyard'].includes(event) &&
           watcher.id === object?.id &&
@@ -960,12 +978,15 @@ export function notifyTriggers(s, event, payload, context = null) {
           ['dies', 'battlefieldToGraveyard'].includes(event) &&
           watcher.id === object?.id &&
           watcher.incarnation === object.incarnation &&
-          [trigger.target, ...(trigger.targetGroups ?? []).map((group) => group.selector)].some(
-            (selector) => {
+          [trigger, ...(trigger.modes ?? [])]
+            .flatMap((mode) => [
+              mode.target,
+              ...(mode.targetGroups ?? []).map((group) => group.selector),
+            ])
+            .some((selector) => {
               const spec = targetSpec(selector);
               return spec?.scope === 'graveyard' && spec.excludeSource;
-            },
-          )
+            })
         ) {
           queued.targetingSource = ref(s.objects[watcher.id]);
         }
@@ -996,19 +1017,26 @@ export function notifyTriggers(s, event, payload, context = null) {
       }
 }
 /** CR 603.10: leaves-the-battlefield triggers look back before the event.
- * One shared snapshot is used for an entire simultaneous state-based-action batch.
+ * One shared snapshot is used for an entire simultaneous departure batch.
  */
 export function captureDepartureContext(s) {
   const objects = battlefield(s);
+  const watchers = objects
+    .filter((o) => (definition(s, o).triggers ?? []).length)
+    .map((object) => ({
+      object: structuredClone(object),
+      keywords: keywords(s, object),
+      definition: structuredClone(definition(s, object)),
+    }));
+  const aggregate = watchers.some(({ definition }) =>
+    definition.triggers.some((trigger) =>
+      ['diesGroup', 'battlefieldToGraveyardGroup'].includes(eventSpec(trigger.event)?.event),
+    ),
+  );
   return {
+    ...(aggregate ? { aggregateDepartures: [] } : {}),
     exileGraveyardMoves: objects.some((o) => definition(s, o).exileGraveyardMoves),
-    watchers: objects
-      .filter((o) => (definition(s, o).triggers ?? []).length)
-      .map((object) => ({
-        object: structuredClone(object),
-        keywords: keywords(s, object),
-        definition: structuredClone(definition(s, object)),
-      })),
+    watchers,
     facts: Object.fromEntries(
       objects.map((o) => {
         const d = definition(s, o),
@@ -1035,6 +1063,21 @@ export function captureDepartureContext(s) {
     ),
   };
 }
+/** Complete exactly one simultaneous departure event (CR 603.2c, 603.10a).
+ * Context ownership determines the boundary, never resolution or priority:
+ * individual move(), one sacrifice instruction, or one complete SBA batch.
+ * No aggregate watcher means no additional event facts, trigger IDs or logs.
+ */
+export function finishDepartureBatch(s, context) {
+  if (!context?.aggregateDepartures?.length) return;
+  const departedObjects = context.aggregateDepartures;
+  context.aggregateDepartures = [];
+  const objects = departedObjects.map((object) => context.facts[object.id]);
+  const creatures = objects.filter((facts) => hasType(facts.definition, 'creature'));
+  if (creatures.length)
+    notifyTriggers(s, 'diesGroup', { objects: creatures, departedObjects }, context);
+  notifyTriggers(s, 'battlefieldToGraveyardGroup', { objects, departedObjects }, context);
+}
 /** Sacrifice is an action, not a synonym for any battlefield-to-graveyard move.
  * Capture observers and object facts before the entire simultaneous batch (CR 603.10a).
  * Do not use this helper for destruction, legend rules, or zero toughness.
@@ -1051,6 +1094,7 @@ export function sacrificePermanents(s, objects, departureContext = null) {
     emit(s, 'sacrificed', { player: o.controller, objectId: o.id, name: o.name });
     notifyTriggers(s, 'sacrifice', { object: o, player: o.controller }, context);
   }
+  if (!departureContext) finishDepartureBatch(s, context);
 }
 /** CR 603.2e: observe actual battlefield status transitions, after the whole
  * simultaneous batch is tapped. Entry tapped is initialization, not this event.
@@ -1133,7 +1177,7 @@ export function move(s, o, to, departureContext = null) {
       ...s.stack,
       ...s.pendingTriggers,
       ...(s.resolving ? [s.resolving.entry] : []),
-      ...(['triggerTarget', 'triggerTargets'].includes(s.choice?.kind)
+      ...(['triggerMode', 'triggerTarget', 'triggerTargets'].includes(s.choice?.kind)
         ? [
             s.choice.entry,
             ...s.choice.remainingEntries,
@@ -1242,7 +1286,11 @@ export function move(s, o, to, departureContext = null) {
     }
   }
   if (dying) notifyTriggers(s, 'dies', { object: departed }, context);
-  if (toGraveyard) notifyTriggers(s, 'battlefieldToGraveyard', { object: departed }, context);
+  if (toGraveyard) {
+    notifyTriggers(s, 'battlefieldToGraveyard', { object: departed }, context);
+    context.aggregateDepartures?.push(departed);
+    if (!departureContext) finishDepartureBatch(s, context);
+  }
   return o;
 }
 export function draw(s, p, count, { openingHand = false } = {}) {

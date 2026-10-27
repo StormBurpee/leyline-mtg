@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b19c4bbf-258f-4436-8ef9-fc905c283776",
+  "name": "Oltec Archaeologists",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Artificer", "Scout"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, choose one —\n• Return target artifact card from your graveyard to your hand.\n• Scry 3. (Look at the top three cards of your library, then put any number of them on the bottom and the rest on top in any order.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Return target artifact card from your graveyard to your hand",
+          "target": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "owner": "you"
+                },
+                {
+                  "type": "artifact"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand"
+            }
+          ]
+        },
+        {
+          "label": "Scry 3",
+          "effects": [
+            {
+              "op": "scry",
+              "target": "controller",
+              "amount": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

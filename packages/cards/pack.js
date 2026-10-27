@@ -91,7 +91,9 @@ export function compilePack(cards, { mechanics = {} } = {}) {
       ...(d.adventure?.effects ?? []),
       ...(d.modes ?? []).flatMap((mode) => mode.effects),
       ...(d.etb ?? []),
-      ...(d.triggers ?? []).flatMap((t) => t.effects),
+      ...(d.triggers ?? []).flatMap((t) =>
+        t.modes ? t.modes.flatMap((mode) => mode.effects) : t.effects,
+      ),
       ...(d.activated ?? []).flatMap((a) => a.effects),
     ])
       if (['token', 'mobilize', 'empowerJace'].includes(e.op) && !byName[e.definition]?.token)

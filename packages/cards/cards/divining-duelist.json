@@ -1,0 +1,77 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d0ce03fa-2284-4217-85b2-4db6b8a88c94",
+  "name": "Divining Duelist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nWhen this creature enters, choose one \u2014\n\u2022 Tap target creature.\n\u2022 Untap target creature.\n\u2022 Draw a card, then discard a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Tap target creature.",
+          "effects": [
+            {
+              "op": "tap",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          }
+        },
+        {
+          "label": "Untap target creature.",
+          "effects": [
+            {
+              "op": "untap",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          }
+        },
+        {
+          "label": "Draw a card, then discard a card.",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            },
+            {
+              "op": "discard",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

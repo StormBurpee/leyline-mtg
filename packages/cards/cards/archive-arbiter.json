@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "36cb3d18-019c-464d-b591-8c87e1b81f31",
+  "name": "Archive Arbiter",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Sphinx"],
+    "colors": [],
+    "manaCost": "{6}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this creature enters, choose one \u2014\n\u2022 Destroy target noncreature, nonland permanent.\n\u2022 You gain 4 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target noncreature nonland permanent.",
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "not": {
+                    "type": "creature"
+                  }
+                },
+                {
+                  "not": {
+                    "type": "land"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "label": "Gain 4 life.",
+          "effects": [
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 4
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

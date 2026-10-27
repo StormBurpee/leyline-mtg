@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/green-raccoon",
+  "name": "Green Raccoon Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Raccoon"],
+    "colors": ["G"],
+    "manaCost": null,
+    "power": 3,
+    "toughness": 3,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

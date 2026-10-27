@@ -476,7 +476,9 @@
             "enter",
             "cast",
             "dies",
+            "diesGroup",
             "battlefieldToGraveyard",
+            "battlefieldToGraveyardGroup",
             "sacrifice",
             "attack",
             "step",
@@ -2419,15 +2421,104 @@
             "condition": {
               "$ref": "#/$defs/condition"
             },
+            "triggerCondition": {
+              "$ref": "#/$defs/condition"
+            },
             "targetGroups": {
               "$ref": "#/$defs/targetGroups"
             },
             "oncePerTurn": {
               "type": "boolean"
+            },
+            "choose": {
+              "const": 1
+            },
+            "modes": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 180
+                  },
+                  "target": {
+                    "$ref": "#/$defs/selector"
+                  },
+                  "targetGroups": {
+                    "$ref": "#/$defs/targetGroups"
+                  },
+                  "effects": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/effect"
+                    },
+                    "maxItems": 64
+                  }
+                },
+                "required": ["label", "effects"],
+                "additionalProperties": false
+              }
             }
           },
-          "required": ["kind", "on", "effects"],
-          "additionalProperties": false
+          "required": ["kind", "on"],
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "required": ["effects"],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": ["modes"],
+                    "properties": {
+                      "modes": {}
+                    }
+                  },
+                  {
+                    "required": ["choose"],
+                    "properties": {
+                      "choose": {}
+                    }
+                  }
+                ]
+              },
+              "properties": {
+                "effects": {}
+              }
+            },
+            {
+              "required": ["choose", "modes"],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": ["effects"],
+                    "properties": {
+                      "effects": {}
+                    }
+                  },
+                  {
+                    "required": ["target"],
+                    "properties": {
+                      "target": {}
+                    }
+                  },
+                  {
+                    "required": ["targetGroups"],
+                    "properties": {
+                      "targetGroups": {}
+                    }
+                  }
+                ]
+              },
+              "properties": {
+                "choose": {},
+                "modes": {}
+              }
+            }
+          ]
         },
         {
           "type": "object",

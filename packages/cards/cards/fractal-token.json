@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/fractal-token",
+  "name": "Fractal Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Fractal"],
+    "colors": ["U", "G"],
+    "manaCost": null,
+    "power": 0,
+    "toughness": 0,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

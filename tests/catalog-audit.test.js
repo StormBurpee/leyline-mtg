@@ -7,6 +7,17 @@ const json = async (path) => JSON.parse(await readFile(new URL(path, import.meta
 test('support manifest matches the executable registry and engine version', async () => {
   const report = await json('../docs/support.json');
   assert.equal(report.version, VERSION);
+  for (const card of Object.values(CARDS)) {
+    if (card.token) continue;
+    const row = report.cards.find((entry) => entry.name === card.name);
+    for (const trigger of card.triggers ?? [])
+      for (const mode of trigger.modes ?? [])
+        for (const effect of mode.effects)
+          assert.ok(
+            row?.opcodes.includes(effect.op),
+            `${card.name}: missing modal trigger opcode ${effect.op}`,
+          );
+  }
   assert.deepEqual(
     report.cards.map((c) => c.name).sort(),
     Object.values(CARDS)

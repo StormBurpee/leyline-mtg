@@ -1,0 +1,103 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "de70a6bb-32ed-4a89-a522-c2a71f08fb02",
+  "name": "Monoist Circuit-Feeder",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Nautilus"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}{B}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this creature enters, until end of turn, target creature you control gets +X/+0 and target creature an opponent controls gets -0/-X, where X is the number of artifacts you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "toughness": 0,
+          "until": "endOfTurn",
+          "targetGroup": "friendly"
+        },
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": {
+            "kind": "scale",
+            "value": {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "you",
+              "where": {
+                "type": "artifact"
+              }
+            },
+            "factor": -1
+          },
+          "until": "endOfTurn",
+          "targetGroup": "enemy"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "friendly",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "enemy",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

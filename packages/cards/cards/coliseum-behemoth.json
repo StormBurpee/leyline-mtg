@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "076cf4f1-b3d4-4175-b976-938ad851cc0e",
+  "name": "Coliseum Behemoth",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Beast"],
+    "colors": ["G"],
+    "manaCost": "{5}{G}{G}",
+    "power": 7,
+    "toughness": 7
+  },
+  "rulesText": "Trample\nWhen this creature enters, choose one \u2014\n\u2022 Destroy target artifact or enchantment.\n\u2022 Draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target artifact or enchantment.",
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "enchantment"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "label": "Draw a card.",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4c22257e-8a00-40b7-a29b-55fcec7ddbd4",
+  "name": "Crypt Feaster",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Zombie"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)\nThreshold \u2014 Whenever this creature attacks, if there are seven or more cards in your graveyard, this creature gets +2/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 2,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 7
+      }
+    }
+  ]
+}

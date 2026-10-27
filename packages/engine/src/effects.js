@@ -39,6 +39,7 @@ import {
   entryTriggersSuppressed,
   notifyTriggers,
   captureDepartureContext,
+  finishDepartureBatch,
   sacrificePermanents,
   battlefield,
   creatures,
@@ -789,6 +790,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           );
           if (e.trackSource) trackExiledCard(s, entry.source, object);
         }
+        finishDepartureBatch(s, context);
       } else {
         for (const target of targets) {
           if (resolveEffects(s, { ...entry, target, effects: [effect] }) === false) {
@@ -1017,6 +1019,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
               e.op === 'bounceAll' ? 'hand' : e.op === 'exileAll' ? 'exile' : 'graveyard',
               context,
             );
+          finishDepartureBatch(s, context);
         } else if (e.op === 'damageAll') {
           const source = damageSource(s, entry);
           const packets = objects.map((object) => ({
@@ -1890,6 +1893,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
         const context = captureDepartureContext(s);
         for (const object of victims)
           if (!hasKeyword(s, object, 'indestructible')) move(s, object, 'graveyard', context);
+        finishDepartureBatch(s, context);
         break;
       }
       case 'counterAbility': {
@@ -2748,6 +2752,7 @@ function applyStateBasedBatch(s, ids, sagaSacrifices = []) {
     move(s, o, 'graveyard', departureContext);
     changed = true;
   }
+  finishDepartureBatch(s, departureContext);
   // Deathtouch tracks damage since the previous state-based-action check.
   for (const o of battlefield(s)) o.deathtouchDamage = false;
   for (const o of Object.values(s.objects))
@@ -2820,6 +2825,22 @@ function placeTriggerGroups(s, groups) {
 function placeOrderedTriggers(s, entries, remaining) {
   for (let index = 0; index < entries.length; index++) {
     const entry = entries[index];
+    if (entry.modes) {
+      const modes = legalTriggerModes(s, entry);
+      if (!modes.length) {
+        emit(s, 'triggerRemoved', { stackId: entry.id, name: entry.name, reason: 'no legal mode' });
+        continue;
+      }
+      s.choice = {
+        kind: 'triggerMode',
+        player: entry.controller,
+        entry,
+        modes,
+        remainingEntries: entries.slice(index + 1),
+        remaining,
+      };
+      return false;
+    }
     if (entry.targetGroups) {
       // Trigger declarations currently have independent groups, so existence is exact.
       if (
@@ -2874,6 +2895,45 @@ function placeOrderedTriggers(s, entries, remaining) {
     s.stack.push(entry);
   }
   return true;
+}
+/** CR 603.3c/700.2: modes are announced before their targets, never at resolution.
+ * Independent target groups keep this existence check exact, not proposal-budget dependent. */
+export function legalTriggerModes(s, entry) {
+  return (entry.modes ?? []).flatMap((mode, index) => {
+    const source = entry.targetingSource ?? entry.source;
+    const legal = mode.targetGroups
+      ? mode.targetGroups.every(
+          (group) => targetsFor(s, group.selector, entry.controller, source).length >= group.min,
+        )
+      : !mode.target || targetsFor(s, mode.target, entry.controller, source).length > 0;
+    return legal ? [index] : [];
+  });
+}
+export function finishTriggerMode(s, mode) {
+  const choice = s.choice,
+    entry = choice.entry;
+  requireRule(
+    Number.isSafeInteger(mode) && legalTriggerModes(s, entry).includes(mode),
+    'TRIGGER_MODE',
+    'Choose a legal mode for the triggered ability.',
+  );
+  const selected = entry.modes[mode];
+  entry.effects = structuredClone(selected.effects);
+  entry.mode = mode;
+  entry.label = `${entry.name} · ${selected.label}`;
+  entry.modeLabel = selected.label;
+  if (selected.target) entry.targetKind = structuredClone(selected.target);
+  if (selected.targetGroups) entry.targetGroups = structuredClone(selected.targetGroups);
+  delete entry.modes;
+  s.choice = null;
+  emit(s, 'triggerModeChosen', {
+    stackId: entry.id,
+    player: entry.controller,
+    mode,
+    label: selected.label,
+  });
+  if (placeOrderedTriggers(s, [entry, ...choice.remainingEntries], choice.remaining))
+    placeTriggerGroups(s, choice.remaining);
 }
 export function finishTriggerOrder(s, ids) {
   const choice = s.choice,

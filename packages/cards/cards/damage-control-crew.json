@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c0f9e604-a8bf-4c7d-8480-487e8076e1d8",
+  "name": "Damage Control Crew",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Citizen"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, choose one \u2014\n\u2022 Repair \u2014 Return target card with mana value 4 or greater from your graveyard to your hand.\n\u2022 Impound \u2014 Exile target artifact or enchantment.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Return a card with mana value 4 or greater from your graveyard.",
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand"
+            }
+          ],
+          "target": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "owner": "you"
+                },
+                {
+                  "manaValue": {
+                    "gte": 4
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "label": "Exile target artifact or enchantment.",
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "enchantment"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

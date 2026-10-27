@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bae5dc68-1fd1-428d-bee7-c238e07b21ea",
+  "name": "Mouser Attack!",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Create a 1/1 colorless Robot artifact creature token.\n\u2022 Target creature gets +3/+0 and gains first strike until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Create a 1/1 Robot artifact creature token.",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/small-robot-token",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Target creature gets +3/+0 and first strike.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 3,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["first strike"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
