@@ -1,3 +1,5 @@
+import { costManaExclusions } from './activation-sacrifice.js';
+import { activationCost } from './costs.js';
 import { castingPayment } from './casting-sacrifice.js';
 import { predictedEffects } from './conditional-effects.js';
 import { flattenTargets } from './target-groups.js';
@@ -109,11 +111,21 @@ function actionCost(state, player, action) {
   if (action.type === 'ninjutsu') return { mana: card.ninjutsu };
   if (action.type === 'cycle') return { mana: card.cycling };
   if (action.type === 'activate') {
-    const cost = card.activated[action.ability].cost;
-    const payment = planPayment(state, player, cost.mana ?? {}, {
-      excludeSources: cost.tap ? [action.card] : [],
+    const cost = activationCost(state, state.objects[action.card], card.activated[action.ability]);
+    const excludeSources = costManaExclusions(state, cost, {
+      sourceId: action.card,
+      sacrifices: action.sacrifices,
     });
-    return { ...cost, manaLife: payment?.life ?? 0 };
+    const payment = planPayment(state, player, cost.mana ?? {}, {
+      excludeSources,
+    });
+    return {
+      ...cost,
+      sacrifice: undefined,
+      sacrifices: action.sacrifices,
+      excludeSources,
+      manaLife: payment?.life ?? 0,
+    };
   }
   const profile = castingProfile(
     state,
@@ -159,6 +171,8 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
     objects[sourceId] = { ...objects[sourceId], zone: 'graveyard' };
   if (cost.sacrifice)
     objects[cost.sacrifice.id] = { ...objects[cost.sacrifice.id], zone: 'graveyard' };
+  for (const sacrifice of cost.sacrifices ?? [])
+    objects[sacrifice.id] = { ...objects[sacrifice.id], zone: 'graveyard' };
   const projected = {
     ...state,
     objects,

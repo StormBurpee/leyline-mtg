@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3b66d2c2-be7a-4296-9888-f0cfb2975e89",
+  "name": "Seismic Monstrosaur",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}",
+    "power": 6,
+    "toughness": 5
+  },
+  "rulesText": "Trample\n{2}{R}, Sacrifice a land: Draw a card.\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{R}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "land"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Mountain"
+    }
+  ]
+}

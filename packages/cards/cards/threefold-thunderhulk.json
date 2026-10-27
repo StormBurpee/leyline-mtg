@@ -1,0 +1,77 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b8020a8b-557b-465d-865d-b59fecd7abc1",
+  "name": "Threefold Thunderhulk",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Gnome"],
+    "colors": [],
+    "manaCost": "{7}",
+    "power": 0,
+    "toughness": 0
+  },
+  "rulesText": "This creature enters with three +1/+1 counters on it.\nWhenever this creature enters or attacks, create a number of 1/1 colorless Gnome artifact creature tokens equal to its power.\n{2}, Sacrifice another artifact: Put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "entryPlusCounters",
+      "amount": 3
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/artifact-gnome-token",
+          "amount": {
+            "kind": "sourceStat",
+            "stat": "power"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/artifact-gnome-token",
+          "amount": {
+            "kind": "sourceStat",
+            "stat": "power"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "artifact"
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

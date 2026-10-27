@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a3a00b62-f07e-44ef-8d97-22a3e7a06f72",
+  "name": "Eclipsed Merrow",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Scout"],
+    "colors": ["U", "W"],
+    "manaCost": "{W/U}{W/U}{W/U}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, look at the top four cards of your library. You may reveal a Merfolk, Plains, or Island card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 4,
+          "where": {
+            "any": [
+              {
+                "subtype": "Merfolk"
+              },
+              {
+                "subtype": "Plains"
+              },
+              {
+                "subtype": "Island"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "e6f59807-eaf6-4889-8c89-2ac915afefff",
+  "name": "Grabby Giant // That's Mine",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Reach\n{2}{R}, Sacrifice an artifact or land: Draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{R}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "type": "artifact"
+              },
+              {
+                "type": "land"
+              }
+            ]
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Grabby Giant",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/that-s-mine",
+        "name": "That's Mine",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["R"],
+          "manaCost": "{1}{R}"
+        },
+        "rulesText": "Create a Treasure token. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/treasure-token",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

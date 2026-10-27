@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "da554d71-1f13-49ae-9eb2-c778a23df08b",
+  "name": "Living Phone",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Toy"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature dies, look at the top five cards of your library. You may reveal a creature card with power 2 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 5,
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "power": {
+                  "lte": 2
+                }
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

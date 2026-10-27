@@ -95,3 +95,36 @@ A `where` quality allows finding fewer cards, including none. Without a filter, 
 A pending `librarySearch` exposes legal candidate IDs, minimum and maximum quantities, and destination flags. Submit `{ type: 'searchLibrary', cards: [...] }`; stale, duplicate, foreign and nonmatching selections are rejected without changing state. Resolution continues afterward without an intervening priority window. Optional whole-trigger searches use the existing optional-trigger decision; declining one does not shuffle.
 
 This does not implement opponent libraries, replacement search limits, choosing different destinations for different found cards, variable quantities, or generic Aura attachment on entry. Cards requiring those features remain unsupported rather than receiving partial definitions.
+
+### Filtered top-library selection
+
+`lookChooseHand` inspects `amount` cards (or as many as remain), then puts the chosen cards into hand without drawing. `selectCount` defaults to one. Optional `where` uses the existing library-characteristic predicates; the deciding player can see every inspected card, but only matching cards are selectable. Mandatory selection takes the smaller of the requested count and the eligible count. Unlike a quality-restricted **search**, this inspection cannot fail to find a matching card. `optional: true` permits zero through that maximum; it does not skip moving the remainder.
+
+`reveal: true` publicly records the selected identities. `revealAll: true` exposes the whole inspected set during the choice, without moving it out of the library. A normal look remains private. After cards move or are reordered, opposing views use opaque hidden-zone handles again; public reveal events retain names, not trackable hidden-zone IDs. `restDestination` defaults to `bottom` and also supports `graveyard`. `restOrder` defaults to `chosen`; `random` is allowed only for bottom placement and shuffles a canonical unchosen subset with the replay RNG. It cannot be influenced by the submitted remainder order.
+
+The pending `libraryOrder` choice adds `eligibleCards`, `optional`, `reveal`, `revealed` and `restDestination` only when relevant. Submit the existing `{ type: 'orderLibrary', top: [...chosen], rest: [...remaining] }` command; every inspected card must occur exactly once. Decisions continue resolution without priority. Relative filters remain bound to the ability's controller even when another player is the recipient. Rules basis: CR 608.2d, 609.3, 701.20a/b/d/e and the distinct search permission in 701.23b (Comprehensive Rules, effective September 25, 2026).
+
+## Selected sacrifices in activated costs
+
+Activated `cost.sacrifice` describes a mandatory chosen payment, for example
+`{"count":1,"where":{"any":[{"type":"creature"},{"type":"artifact"}]},"excludeSource":true}`.
+`count` is a literal 1–10; `where` is an optional public-state predicate. The
+activating player must currently control every selected battlefield permanent.
+The `activate` command supplies `sacrifices: ObjectTarget[]`, including exact
+incarnations. They are costs, not targets and not resolution-time instructions.
+When `sacrificeSelf` is also present, the source cannot fill the chosen count and
+all sacrifices share one departure snapshot. A source without the new cost keeps
+its old command and replay shape.
+
+Targets are selected before costs; a creature sacrificed as payment cannot be a
+new graveyard target of that same activation. Mana may tap a selected permanent
+first, but cannot sacrifice it and also spend it as the chosen cost. Eligibility
+is checked again after mana abilities, with failed payments rolled back atomically.
+The human choice stage supports large-card reading, cancellation and explicit
+confirmation; bot and opaque-agent proposals carry the same references. Default
+action enumeration bounds multi-permanent subsets to 256; explicit commands accept
+any valid subset. Selected-sacrifice mana abilities, variable quantities and
+resolution effects dependent on sacrificed-object characteristics remain unsupported.
+
+Rules reference: [Comprehensive Rules, effective June 19, 2026](https://media.wizards.com/2026/downloads/MagicCompRules%2020260619.pdf),
+602.2b, 601.2c/f–h and 603.10a.

@@ -4,9 +4,9 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.53.0
+## Implemented progress through v0.54.0
 
-Current dated inventory coverage: **1,999 / 5,164**; **3,165 remain**. This is 1120 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **2,067 / 5,164**; **3,097 remain**. This is 1188 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
 | Delivered feature/card batch                                      | Cards added |
 | ----------------------------------------------------------------- | ----------: |
@@ -67,7 +67,10 @@ Current dated inventory coverage: **1,999 / 5,164**; **3,165 remain**. This is 1
 | Source-only expansion after Saddle                                |          34 |
 | Generic battlefield-departure triggers                            |          13 |
 | Target-bound resolving conditions                                 |          16 |
-| **Total since v0.38.0**                                           |    **1120** |
+| Filtered top-library selection                                    |          27 |
+| Chosen-sacrifice activation costs                                 |          40 |
+| Source-only Agent 13                                              |           1 |
+| **Total since v0.38.0**                                           |    **1188** |
 
 The baseline forecasts below remain unchanged for comparison. They were conservative first-pass probes: several implemented families unlocked more cards than those probes identified. Remaining cards in each family can still require other unsupported behavior.
 

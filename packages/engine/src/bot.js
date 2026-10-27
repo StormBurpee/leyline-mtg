@@ -10,6 +10,7 @@ import { spellProfile } from './spell-modes.js';
 import { chooseSearchCards } from './library-search.js';
 import {
   actionSafe,
+  actionEffects,
   canPayTargetWard,
   directLethal,
   drawsFor,
@@ -665,7 +666,11 @@ export function chooseBotCommand(s, p) {
     }
   }
   if (s.priority !== p) return null;
-  const actions = legalActions(s, p).filter((action) => actionSafe(s, p, action));
+  const sacrificeValue = (action) =>
+    (action.sacrifices ?? []).reduce((n, r) => n + permanentValue(s, s.objects[r.id]), 0);
+  const actions = legalActions(s, p)
+    .filter((action) => actionSafe(s, p, action))
+    .sort((a, b) => sacrificeValue(a) - sacrificeValue(b));
   const saddling = actions.find(
     (a) =>
       a.type === 'saddle' &&
@@ -697,6 +702,7 @@ export function chooseBotCommand(s, p) {
         score:
           groupedSpellScore(s, p, a, ability) -
           (ability.cost.sacrificeSelf ? value(s, source) : 0) -
+          sacrificeValue(a) -
           (ability.cost.life ?? 0),
       };
     })
@@ -706,6 +712,79 @@ export function chooseBotCommand(s, p) {
   if (faceUp) return { ...faceUp, player: p };
   const lethal = actions.find((action) => directLethal(s, p, action));
   if (lethal) return { ...lethal, player: p };
+  const selectedSacrifice = actions
+    .filter((a) => a.type === 'activate' && a.sacrifices && !a.targets)
+    .map((a) => {
+      const source = s.objects[a.card],
+        ability = definition(s, source).activated[a.ability];
+      const sourceSurvives =
+        !ability.cost.sacrificeSelf && !a.sacrifices.some((r) => r.id === source.id);
+      const threatened = s.stack.some((e) => e.controller !== p && e.target?.id === source.id);
+      const effects = actionEffects(s, a);
+      const pendingDraws = s.stack.reduce(
+        (n, e) => n + drawsFor(e.effects ?? [], e.controller, e.target, p, s),
+        0,
+      );
+      if (pendingDraws + drawsFor(effects, p, a.target, p, s) > libraryCount(s, p))
+        return { a, score: -100 };
+      const protectionPending = s.stack.some(
+        (entry) =>
+          entry.source?.id === source.id &&
+          entry.source.incarnation === source.incarnation &&
+          entry.effects?.some(
+            (e) =>
+              e.op === 'modify' &&
+              e.subject === 'source' &&
+              e.keywords?.some((k) => ['indestructible', 'hexproof'].includes(k)),
+          ),
+      );
+      let score =
+        -sacrificeValue(a) -
+        (ability.cost.life ?? 0) -
+        (ability.cost.sacrificeSelf ? value(s, source) : 0);
+      for (const e of effects) {
+        if (e.op === 'draw' && !['opponent', 'target'].includes(e.player)) score += e.count * 4;
+        if (e.op === 'gainLife' && !['opponent', 'target'].includes(e.player) && canGainLife(s))
+          score += e.amount * 0.25;
+        if (e.op === 'surveil' || e.op === 'scry') score += 0.75;
+        if (e.op === 'token') score += e.count * 3;
+        if (
+          e.op === 'counterOn' &&
+          (e.subject === 'source'
+            ? sourceSurvives
+            : a.target?.kind === 'object' &&
+              s.objects[a.target.id]?.controller === p &&
+              !a.sacrifices.some((r) => r.id === a.target.id))
+        )
+          score += e.amount * 1.5;
+        if (
+          e.op === 'modify' &&
+          sourceSurvives &&
+          e.subject === 'source' &&
+          threatened &&
+          !protectionPending &&
+          !e.keywords?.every((k) => hasKeyword(s, source, k)) &&
+          e.keywords?.some((k) => ['indestructible', 'hexproof'].includes(k))
+        )
+          score += value(s, source) + 5;
+        if (
+          e.op === 'damageOpponent' ||
+          (['damage', 'loseLife'].includes(e.op) &&
+            (e.player === 'opponent' || (a.target?.kind === 'player' && a.target.id !== p)))
+        )
+          score += e.amount >= s.players[1 - p].life ? 100 : e.amount * 0.5;
+        if (
+          e.op === 'moveTarget' &&
+          ['hand', 'battlefield'].includes(e.destination) &&
+          a.target?.kind === 'object' &&
+          s.objects[a.target.id]?.owner === p
+        )
+          score += value(s, s.objects[a.target.id]) + 3;
+      }
+      return { a, score };
+    })
+    .sort((a, b) => b.score - a.score);
+  if (selectedSacrifice[0]?.score > 0) return { ...selectedSacrifice[0].a, player: p };
   const landCycling = actions.find(
     (a) =>
       a.type === 'cycle' &&
@@ -814,6 +893,7 @@ export function chooseBotCommand(s, p) {
       (a) =>
         a.type === 'activate' &&
         !a.targets &&
+        !a.sacrifices &&
         definition(s, s.objects[a.card]).activated[a.ability].cost.sacrificeSelf,
     )
     .map((a) => {
@@ -947,7 +1027,7 @@ export function chooseBotCommand(s, p) {
     .sort((a, b) => value(s, s.objects[b.target.id]) - value(s, s.objects[a.target.id]))[0];
   if (equip) return { ...equip, player: p };
   const ability = actions.find((action) => {
-    if (action.type !== 'activate' || action.targets) return false;
+    if (action.type !== 'activate' || action.targets || action.sacrifices) return false;
     const activated = definition(s, s.objects[action.card]).activated[action.ability];
     if (activated.effects.some((e) => e.op === 'earthbend')) {
       const target = s.objects[action.target?.id];

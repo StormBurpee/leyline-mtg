@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ca1dc6f0-3ec2-4f62-a08a-1395201bd93f",
+  "name": "Hardened Tactician",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Warrior"],
+    "colors": ["B", "W"],
+    "manaCost": "{1}{W}{B}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "{1}, Sacrifice a token: Draw a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "token": true
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

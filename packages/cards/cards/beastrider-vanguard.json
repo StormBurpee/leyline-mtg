@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "19a0d191-64c0-4e8a-8cb0-bf680cc681bb",
+  "name": "Beastrider Vanguard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Knight"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{4}{G}: Look at the top three cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{G}"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 3,
+          "where": {
+            "any": [
+              {
+                "type": "artifact"
+              },
+              {
+                "type": "creature"
+              },
+              {
+                "type": "enchantment"
+              },
+              {
+                "type": "land"
+              },
+              {
+                "type": "planeswalker"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true
+        }
+      ]
+    }
+  ]
+}

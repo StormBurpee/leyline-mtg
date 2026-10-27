@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d87be8c6-7a1f-4db8-ada1-b1a030f03877",
+  "name": "Rakshasa's Bargain",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "G", "U"],
+    "manaCost": "{2/B}{2/G}{2/U}"
+  },
+  "rulesText": "Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 4,
+          "selectCount": 2,
+          "restDestination": "graveyard"
+        }
+      ]
+    }
+  ]
+}

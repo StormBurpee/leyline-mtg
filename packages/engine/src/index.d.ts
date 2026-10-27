@@ -261,6 +261,11 @@ type EffectInstruction =
       count: EffectNumericValue;
       selectCount?: EffectNumericValue;
       restOrder?: 'chosen' | 'random';
+      where?: CardPredicate;
+      optional?: boolean;
+      reveal?: boolean;
+      revealAll?: boolean;
+      restDestination?: 'bottom' | 'graveyard';
       player?: 'controller' | 'opponent' | 'target';
     }
   | {
@@ -582,6 +587,7 @@ export interface CardDefinition {
       tap?: boolean;
       life?: number;
       sacrificeSelf?: boolean;
+      sacrifice?: { count: number; where?: CardPredicate; excludeSource?: boolean };
       exileSelf?: boolean;
       discard?: 1;
     };
@@ -913,6 +919,10 @@ export type Choice =
       cards: string[];
       selectCount?: number;
       restOrder?: 'chosen' | 'random';
+      eligibleCards?: string[];
+      optional?: boolean;
+      reveal?: boolean;
+      restDestination?: 'bottom' | 'graveyard';
     }
   | {
       kind: 'sacrifice';
@@ -1083,6 +1093,7 @@ export type Action =
     }
   | {
       type: 'activate';
+      sacrifices?: ObjectTarget[];
       card: string;
       ability: number;
       discardCard?: string;
@@ -1241,6 +1252,7 @@ export function abilityProblem(
   target?: Target | null,
   discardCard?: string,
   targets?: TargetPlan,
+  sacrifices?: ObjectTarget[],
 ): string | null;
 export function legalTarget(
   state: GameState,
@@ -1407,3 +1419,10 @@ export function additionalCostOptions(
   profile: CardDefinition,
   card?: string,
 ): (AdditionalCostPayment | undefined)[];
+
+export function activationSacrificeCandidates(
+  state: GameState,
+  player: PlayerId,
+  cost: NonNullable<CardDefinition['activated']>[number]['cost'],
+  sourceId?: string,
+): GameObject[];

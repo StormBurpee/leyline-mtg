@@ -1252,6 +1252,16 @@ export function resolveEffects(s, entry, startIndex = 0) {
           emit(s, e.op, { player: recipient, requested: e.count, looked: 0 });
           break;
         }
+        const legal =
+          e.op === 'lookChooseHand' && e.where !== undefined
+            ? new Set(searchableCards(s, recipient, e.where, entry.controller))
+            : null;
+        const eligibleCards = legal ? cards.filter((id) => legal.has(id)) : cards;
+        if (e.revealAll)
+          emit(s, 'libraryRevealed', {
+            player: recipient,
+            revealed: cards.map((id) => s.objects[id].name),
+          });
         s.resolving = { entry, index: index + 1 };
         s.choice = {
           kind: 'libraryOrder',
@@ -1260,8 +1270,13 @@ export function resolveEffects(s, entry, startIndex = 0) {
           cards,
           ...(e.op === 'lookChooseHand'
             ? {
-                selectCount: Math.min(e.selectCount ?? 1, cards.length),
+                selectCount: Math.min(e.selectCount ?? 1, eligibleCards.length),
                 restOrder: e.restOrder ?? 'chosen',
+                ...(e.where !== undefined ? { eligibleCards } : {}),
+                ...(e.optional ? { optional: true } : {}),
+                ...(e.reveal ? { reveal: true } : {}),
+                ...(e.revealAll ? { revealed: true } : {}),
+                ...(e.restDestination ? { restDestination: e.restDestination } : {}),
               }
             : {}),
         };
@@ -2402,15 +2417,23 @@ export function finishResolutionChoice(s, command) {
       'LIBRARY_ORDER',
       'Place each inspected card exactly once.',
     );
+    const selectCount = choice.selectCount ?? Math.min(1, choice.cards.length);
     requireRule(
       choice.action !== 'lookChooseHand' ||
-        command.top.length === (choice.selectCount ?? Math.min(1, choice.cards.length)),
+        (choice.optional ? command.top.length <= selectCount : command.top.length === selectCount),
       'LIBRARY_SELECTION',
-      `Choose exactly ${choice.selectCount ?? Math.min(1, choice.cards.length)} inspected cards for your hand.`,
+      `Choose ${choice.optional ? 'up to' : 'exactly'} ${selectCount} inspected cards for your hand.`,
     );
+    requireRule(
+      choice.action !== 'lookChooseHand' ||
+        command.top.every((id) => (choice.eligibleCards ?? choice.cards).includes(id)),
+      'LIBRARY_SELECTION_FILTER',
+      'Choose only eligible inspected cards for your hand.',
+    );
+    const revealed = choice.reveal ? command.top.map((id) => s.objects[id].name) : null;
     const player = s.players[choice.player],
       inspected = new Set(choice.cards);
-    if (['surveil', 'explore'].includes(choice.action))
+    if (['surveil', 'explore'].includes(choice.action) || choice.restDestination === 'graveyard')
       for (const id of command.rest) move(s, s.objects[id], 'graveyard');
     if (choice.action === 'lookChooseHand')
       for (const id of command.top) move(s, s.objects[id], 'hand');
@@ -2427,13 +2450,17 @@ export function finishResolutionChoice(s, command) {
     player.library = [
       ...(choice.action === 'lookChooseHand' ? [] : command.top),
       ...remaining,
-      ...(['scry', 'lookChooseHand'].includes(choice.action) ? rest : []),
+      ...(['scry', 'lookChooseHand'].includes(choice.action) &&
+      choice.restDestination !== 'graveyard'
+        ? rest
+        : []),
     ];
     emit(s, choice.action, {
       player: choice.player,
       looked: choice.cards.length,
       kept: command.top.length,
       moved: command.rest.length,
+      ...(revealed ? { revealed } : {}),
     });
   } else if (choice.kind === 'sacrifice') {
     requireRule(

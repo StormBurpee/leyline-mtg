@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cfaa8b7b-7bfc-4660-bbc7-a717e05df6ef",
+  "name": "Stone-Giant of High Pass",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant"],
+    "colors": ["R"],
+    "manaCost": "{5}{R}{R}",
+    "power": 7,
+    "toughness": 7
+  },
+  "rulesText": "Whenever this creature enters or attacks, create a 3/1 colorless Wall artifact creature token with defender named Stone Boulder.\n{2}{R}, Sacrifice an artifact: This creature deals 4 damage to any target.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/stone-boulder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/stone-boulder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{R}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "artifact"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 4
+        }
+      ],
+      "target": {
+        "scope": "damageable"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/stone-boulder",
+  "name": "Stone Boulder",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Wall"],
+    "colors": [],
+    "supertypes": [],
+    "manaCost": null,
+    "power": 3,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "Defender",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "defender"
+    }
+  ]
+}

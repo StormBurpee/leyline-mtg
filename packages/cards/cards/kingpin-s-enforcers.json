@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "342df67f-44d8-4b0a-b1d7-4241966d0598",
+  "name": "Kingpin's Enforcers",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Villain"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Lifelink\n{2}{B}, Sacrifice an artifact or creature: Draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{B}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "type": "artifact"
+              }
+            ]
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

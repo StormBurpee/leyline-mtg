@@ -158,6 +158,13 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
             ...(e.op === 'lookChooseHand' && e.restOrder !== undefined
               ? { restOrder: e.restOrder }
               : {}),
+            ...(e.op === 'lookChooseHand'
+              ? Object.fromEntries(
+                  ['where', 'optional', 'reveal', 'revealAll', 'restDestination']
+                    .filter((key) => e[key] !== undefined)
+                    .map((key) => [key, structuredClone(e[key])]),
+                )
+              : {}),
           };
         case 'mill':
           return { op: 'mill', target: e.player, amount: e.count };

@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e294d9d2-df91-4410-85d3-8ffb13fb2285",
+  "name": "Master Piandao",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Warrior", "Ally"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "First strike\nWhenever Master Piandao attacks, look at the top four cards of your library. You may reveal an Ally, Equipment, or Lesson card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 4,
+          "selectCount": 1,
+          "where": {
+            "any": [
+              {
+                "subtype": "Ally"
+              },
+              {
+                "subtype": "Equipment"
+              },
+              {
+                "subtype": "Lesson"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

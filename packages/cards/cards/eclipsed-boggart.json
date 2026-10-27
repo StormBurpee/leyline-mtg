@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9cc3b91b-ad70-4b01-b718-fda3819f84d0",
+  "name": "Eclipsed Boggart",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Scout"],
+    "colors": ["B", "R"],
+    "manaCost": "{B/R}{B/R}{B/R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, look at the top four cards of your library. You may reveal a Goblin, Swamp, or Mountain card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 4,
+          "where": {
+            "any": [
+              {
+                "subtype": "Goblin"
+              },
+              {
+                "subtype": "Swamp"
+              },
+              {
+                "subtype": "Mountain"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

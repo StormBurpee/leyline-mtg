@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "48c641df-d511-4e35-b623-9d1fdb5240da",
+  "name": "Eclipsed Flamekin",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Scout"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U/R}{U/R}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, look at the top four cards of your library. You may reveal an Elemental, Island, or Mountain card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 4,
+          "where": {
+            "any": [
+              {
+                "subtype": "Elemental"
+              },
+              {
+                "subtype": "Island"
+              },
+              {
+                "subtype": "Mountain"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

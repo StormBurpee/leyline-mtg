@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "de5c6c9d-04a2-4287-8c6e-fdf56c411507",
+  "name": "Unrooted Ancestor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit", "Cleric"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flash\n{1}, Sacrifice another creature: This creature gains indestructible until end of turn. Tap it. (Damage and effects that say \"destroy\" don't destroy it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "creature"
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["indestructible"]
+        },
+        {
+          "op": "tap",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

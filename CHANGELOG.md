@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.54.0 — Filtered selection and chosen sacrifice costs
+
+- Add 68 complete Standard cards: twenty-seven filtered-library cards, forty chosen-sacrifice activation cards and Agent 13. Catalog: 2285 playable cards and 96 tokens.
+- Extend top-library selection with explicit eligibility, optional selection, selected/all-card reveal, graveyard remainder and seeded random bottom order. Keep inspection distinct from quality-restricted library searching.
+- Pay activated costs with selected controlled permanents, preserving target-before-cost timing, exact incarnations, mana reservation and simultaneous departure facts. Retain source-sacrifice behavior and fail closed on unsupported mana-ability variants.
+- Keep large-card selection, Read/Back, dismissal and duplicate-submission guards across both flows. Snapshot current public stats/keywords for attack-group predicates without exposing face-down characteristics.
+- Correct Iron Hills and Lake-town to match subtype/controller targeting without an extra creature restriction. All eight exact meta decks remain supported.
+- Remove duplicate per-action saving and cache complete immutable catalogs separately from small command/UI snapshots. Preserve full runtime/public catalogs, self-contained exports, legacy saves and recoverable rollback on storage failures. Physical iPhone latency remains unmeasured.
+
 ## 0.53.0 — Battlefield departures and target-bound conditions
 
 - Add 63 complete Standard cards: 34 source-only additions, thirteen battlefield-departure cards and sixteen resolving target-condition cards. Catalog: 2217 playable cards and 95 tokens.

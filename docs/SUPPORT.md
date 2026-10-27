@@ -2,7 +2,11 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.53)
+## Latest coverage (v0.54)
+
+Filtered library inspection supports eligible/optional hand selection, explicit public reveals and bounded remainder policies. Chosen sacrifices in activated costs are paid before resolution with source-incarnation and mana reservations; they are not targets or resolution effects. Chosen-sacrifice mana abilities and sacrificed-object-value contracts remain unsupported. Attack-group predicates use current public declaration snapshots.
+
+## Previous coverage (v0.53)
 
 Generic departure triggers use actual battlefield exit destinations and predeparture facts, independently of linked-exile returns. Resolving target conditions bind only explicitly validated singleton targets/groups and public current characteristics, with safe illegal/missing-target handling. Broader target comparisons, mixed-destination batching and unrelated conditional mechanics remain outside these contracts.
 
@@ -206,3 +210,15 @@ Normal single-face Sagas gain entry and precombat-main lore, queue crossed chapt
 ### Complete selected meta lists (v0.47 release integration)
 
 Every card in the eight dated main decks and sideboards in `apps/web/meta-decks.js` is now executable, with source-exact lists and images. Sideboards are reference-only; no match-level sideboarding workflow is claimed. Prepared copies, transforming Saga/back faces, Kaito ninjutsu/own-turn forms/emblems, Chandra immediate casting/emblems, Spree subsets, harmonize, optional gift/blight/teamwork, explicit additional discard-or-life, power-up and keyword counters use the supported declaration and continuation interfaces. Earthbend uses incarnation-bound delayed return triggers independent of ability loss; graveyard replacement is applied before deciding the final departure event. Ability-loss layers, named-land grants, entry suppression/duplication, top-library permissions, explicit search decline, draw replacement and life-gain prohibitions are covered by the selected complete cards. These are scoped contracts, not a claim that all other cards sharing these mechanics or every Magic rules interaction is implemented. Unsupported clauses continue to reject whole definitions.
+
+### Selected-permanent activation sacrifices
+
+Fixed mandatory sacrifice costs now select controlled battlefield permanents by
+public predicate and exact incarnation, including "another", token/subtype filters,
+and quantities of 1–10. Targets precede costs; mana, tap and sacrifice payments are
+atomic; simultaneous source-plus-other sacrifices preserve predeparture trigger
+facts. Mana-sacrificing resources cannot be spent twice. Human selection, bots,
+replay and opaque-agent commands use the same validated cost path. This does not
+implement selected-sacrifice mana abilities, variable activation costs or effects
+computed from the sacrificed permanent's characteristics. See the
+[authoring contract](CARD-DATA.md#selected-sacrifices-in-activated-costs).

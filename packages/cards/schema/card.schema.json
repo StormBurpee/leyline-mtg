@@ -582,6 +582,24 @@
         },
         "exileSelf": {
           "type": "boolean"
+        },
+        "sacrifice": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            }
+          },
+          "required": ["count"],
+          "additionalProperties": false
         }
       },
       "required": [],
@@ -1283,11 +1301,15 @@
           "additionalProperties": false,
           "oneOf": [
             {
-              "properties": { "sourceGroup": {} },
+              "properties": {
+                "sourceGroup": {}
+              },
               "required": ["sourceGroup"]
             },
             {
-              "properties": { "source": {} },
+              "properties": {
+                "source": {}
+              },
               "required": ["source"]
             }
           ]
@@ -1312,11 +1334,15 @@
           "additionalProperties": false,
           "oneOf": [
             {
-              "properties": { "sourceGroup": {} },
+              "properties": {
+                "sourceGroup": {}
+              },
               "required": ["sourceGroup"]
             },
             {
-              "properties": { "source": {} },
+              "properties": {
+                "source": {}
+              },
               "required": ["source"]
             }
           ]
@@ -1560,6 +1586,21 @@
             },
             "restOrder": {
               "enum": ["chosen", "random"]
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "optional": {
+              "type": "boolean"
+            },
+            "reveal": {
+              "type": "boolean"
+            },
+            "revealAll": {
+              "type": "boolean"
+            },
+            "restDestination": {
+              "enum": ["bottom", "graveyard"]
             }
           },
           "required": ["op", "target", "amount"],

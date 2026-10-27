@@ -416,7 +416,7 @@ function actionDock(s, ui, p, actions) {
       case 'libraryOrder':
         title =
           c.action === 'lookChooseHand'
-            ? `Choose ${c.selectCount ?? 1} card${(c.selectCount ?? 1) === 1 ? '' : 's'} for your hand`
+            ? `Choose ${c.optional ? 'up to ' : ''}${c.selectCount ?? 1} card${(c.selectCount ?? 1) === 1 ? '' : 's'} for your hand`
             : `${c.action === 'explore' ? 'Explore' : c.action === 'scry' ? 'Scry' : 'Surveil'} ${c.cards.length}`;
         desc = 'The spell is still resolving. Arrange the inspected cards before continuing.';
         buttons = '<button class="btn primary" data-action="libraryOrder">Arrange cards →</button>';

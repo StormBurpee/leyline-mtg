@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parseHTML } from 'linkedom';
+import { createMatchStorage } from '../apps/web/match-storage.js';
 import {
   createGame,
   CARDS,
@@ -11,15 +12,22 @@ import {
 } from '../packages/engine/src/index.js';
 
 // DOM lifecycle regression tests, not a substitute for browser/layout screenshots.
-async function mount(saved = null) {
+async function mount(saved = null, savedStorage = null) {
   const { window, document } = parseHTML(
     await readFile(new URL('../apps/web/index.html', import.meta.url), 'utf8'),
   );
   const storage = new Map(
-    saved
-      ? [['leyline.match.v1', JSON.stringify({ replay: saved, mode: 'bot', deck: 'storm-rakdos' })]]
-      : [],
+    savedStorage ??
+      (saved
+        ? [
+            [
+              'leyline.match.v1',
+              JSON.stringify({ replay: saved, mode: 'bot', deck: 'storm-rakdos' }),
+            ],
+          ]
+        : []),
   );
+  const writes = [];
   let active = document.body;
   Object.defineProperty(document, 'activeElement', { get: () => active, configurable: true });
   window.HTMLElement.prototype.focus = function () {
@@ -68,7 +76,10 @@ async function mount(saved = null) {
     CSS: { escape: String },
     localStorage: {
       getItem: (k) => storage.get(k) ?? null,
-      setItem: (k, v) => storage.set(k, v),
+      setItem: (k, v) => {
+        writes.push(k);
+        storage.set(k, v);
+      },
       removeItem: (k) => storage.delete(k),
     },
     matchMedia: () => ({ matches: true, addEventListener() {}, removeEventListener() {} }),
@@ -101,6 +112,8 @@ async function mount(saved = null) {
     document,
     dialog,
     storage,
+    writes,
+    readSaved: () => createMatchStorage(() => globals.localStorage).read(),
     click,
     cleanup() {
       for (const [key, value] of Object.entries(old)) globalThis[key] = value;
@@ -1438,7 +1451,7 @@ test('Bitter Triumph additional cost stage preserves a reviewed discard, support
     assert.equal(casts.length, 1);
     assert.equal(casts[0].additionalCost.discard.id, option.dataset.cardid);
     const { replay } = await import('../packages/engine/src/index.js');
-    assert.doesNotThrow(() => replay(record));
+    assert.doesNotThrow(() => replay(h.readSaved().replay));
   } finally {
     h.cleanup();
   }
@@ -1623,5 +1636,252 @@ test('saddle selection retains multiple payers across inspection, cancels, reope
     assert.equal(page.dialog.open, false);
   } finally {
     page.cleanup();
+  }
+});
+
+test('filtered hand choices keep ineligible faces readable and preserve optional/mandatory decisions through Read, Back and dismissal', async () => {
+  for (const optional of [true, false]) {
+    const name = 'Sleight of Hand';
+    const catalog = {
+      ...CARDS,
+      [name]: {
+        ...CARDS[name],
+        cost: {},
+        effects: [
+          {
+            op: 'lookChooseHand',
+            count: 5,
+            where: { type: 'creature' },
+            optional,
+            reveal: true,
+            restDestination: 'graveyard',
+          },
+        ],
+      },
+    };
+    let s;
+    for (let seed = 1; seed < 100; seed++) {
+      s = createGame({
+        catalog,
+        seed,
+        mulligan: false,
+        decks: [
+          [...Array(4).fill(name), ...Array(4).fill('Grizzly Bears'), ...Array(52).fill('Island')],
+          Array(60).fill('Forest'),
+        ],
+      });
+      const top = s.players[0].library.slice(0, 5).map((id) => s.objects[id].name);
+      if (
+        s.players[0].hand.some((id) => s.objects[id].name === name) &&
+        top.includes('Grizzly Bears') &&
+        top.includes('Island')
+      )
+        break;
+    }
+    while (s.step !== 'main1') s = act(s, 'pass');
+    s = act(s, 'cast', { card: s.players[0].hand.find((id) => s.objects[id].name === name) });
+    s = act(act(s, 'pass'), 'pass');
+    const h = await mount(exportReplay(s));
+    try {
+      h.click('[data-action="resume"]');
+      assert.match(
+        h.dialog.textContent,
+        optional ? /Choose up to 1 card for your hand/ : /Choose 1 card for your hand/,
+      );
+      assert.match(h.dialog.textContent, /into your graveyard/);
+      assert.match(h.dialog.textContent, /Only selected cards will be revealed/);
+      assert.equal(h.dialog.querySelectorAll('.decision-card-face').length, 5);
+      assert.equal(h.dialog.querySelector('[data-action="submitLibrary"]').disabled, !optional);
+      const id = s.choice.cards.find((id) => !s.choice.eligibleCards.includes(id));
+      const button = h.dialog.querySelector(`.decision-card-face[data-cardid="${id}"]`);
+      assert.equal(button.disabled, true);
+      assert.equal(button.hasAttribute('draggable'), false);
+      h.click(`#dialog [data-action="readDecisionCard"][data-cardid="${id}"]`);
+      assert.ok(h.dialog.querySelector('.decision-reader'));
+      h.click('#dialog [data-action="returnDecision"]');
+      h.click('#dialog [data-action="closeDialog"]');
+      h.click('[data-action="reviewDecision"]');
+      assert.equal(h.dialog.querySelector('[data-action="submitLibrary"]').disabled, !optional);
+      h.click(
+        `[data-order-drop="rest"] .decision-card-face[data-cardid="${s.choice.eligibleCards[0]}"]`,
+      );
+      h.click('#dialog [data-action="readDecisionCard"]');
+      h.click('#dialog [data-action="returnDecision"]');
+      assert.equal(h.dialog.querySelector('[data-action="submitLibrary"]').disabled, false);
+      h.click('[data-action="submitLibrary"]');
+      const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+      assert.equal(saved.replay.commands.filter((c) => c.type === 'orderLibrary').length, 1);
+      assert.equal(saved.replay.commands.at(-1).top.length, 1);
+    } finally {
+      h.cleanup();
+    }
+  }
+});
+
+test('chosen activation sacrifice offers deliberate large-card selection, reader/back, cancel, quantity and one submission', async () => {
+  const { activationSacrificePosition } = await import(
+    './helpers/activation-sacrifice-position.js'
+  );
+  for (const count of [1, 2]) {
+    const s = activationSacrificePosition(count),
+      source = Object.values(s.objects).find(
+        (o) => o.zone === 'battlefield' && o.name === 'Chosen Sacrificer',
+      );
+    const h = await mount(exportReplay(s));
+    try {
+      h.click('[data-action="resume"]');
+      h.click(`[data-card="${source.id}"]`);
+      h.click('[data-action="activateAbility"]');
+      assert.match(h.dialog.textContent, /Choose activation sacrifice/);
+      assert.ok(h.dialog.querySelector('[data-action="confirmActivationSacrifice"]').disabled);
+      assert.ok(h.dialog.querySelector('.decision-card-face'));
+      h.click('[data-action="closeDialog"]');
+      assert.equal(h.dialog.open, false);
+      h.click(`[data-card="${source.id}"]`);
+      h.click('[data-action="activateAbility"]');
+      const ids = [...h.dialog.querySelectorAll('[data-action="selectActivationSacrifice"]')]
+        .slice(0, count)
+        .map((e) => e.dataset.cardid);
+      for (const id of ids)
+        h.click(`[data-action="selectActivationSacrifice"][data-cardid="${id}"]`);
+      assert.match(h.dialog.textContent, /Payment is available/);
+      h.click(`[data-action="readDecisionCard"][data-cardid="${ids[0]}"]`);
+      h.click('[data-action="returnDecision"]');
+      assert.equal(
+        h.dialog
+          .querySelector(`[data-action="selectActivationSacrifice"][data-cardid="${ids[0]}"]`)
+          .getAttribute('aria-pressed'),
+        'true',
+      );
+      const stale = h.click('[data-action="confirmActivationSacrifice"]');
+      stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+      const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+      const commands = saved.replay.commands.filter((c) => c.type === 'activate');
+      assert.equal(commands.length, 1);
+      assert.deepEqual(
+        commands[0].sacrifices.map((r) => r.id),
+        ids,
+      );
+    } finally {
+      h.cleanup();
+    }
+  }
+});
+
+test('grouped activation targets are confirmed before the chosen sacrifice stage and never auto-pay a proposal', async () => {
+  const { activationSacrificePosition } = await import(
+    './helpers/activation-sacrifice-position.js'
+  );
+  const s = activationSacrificePosition(1, {
+    ability: {
+      targetGroups: [{ id: 'chosen', selector: 'creature', min: 1, max: 1 }],
+      effects: [{ op: 'counterOn', amount: 1, targetGroup: 'chosen' }],
+    },
+  });
+  const source = Object.values(s.objects).find(
+    (o) => o.zone === 'battlefield' && o.name === 'Chosen Sacrificer',
+  );
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${source.id}"]`);
+    h.click('[data-action="activateAbility"]');
+    assert.ok(h.dialog.querySelector('[data-action="nextTargetGroup"]').disabled);
+    h.click('[data-action="selectGroupTarget"]');
+    assert.equal(h.dialog.querySelector('[data-action="nextTargetGroup"]').disabled, false);
+    h.click('[data-action="nextTargetGroup"]');
+    assert.match(h.dialog.textContent, /Choose activation sacrifice/);
+    assert.match(h.dialog.textContent, /0 of 1 selected/);
+    assert.ok(h.dialog.querySelector('[data-action="confirmActivationSacrifice"]').disabled);
+    h.click('[data-action="selectActivationSacrifice"]');
+    h.click('[data-action="confirmActivationSacrifice"]');
+    const command = JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.at(-1);
+    assert.equal(command.type, 'activate');
+    assert.equal(command.targets.chosen.length, 1);
+    assert.equal(command.sacrifices.length, 1);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('new app matches save full definitions once, resume after reload, and keep the complete collection', async () => {
+  const h = await mount();
+  let persisted;
+  try {
+    h.click('[data-action="start"]');
+    const first = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(first.storageVersion, 1);
+    assert.equal(first.replay.config.catalog, null);
+    assert.ok(h.storage.get(first.catalogKey));
+    const complete = h.readSaved();
+    assert.equal(Object.keys(complete.replay.config.catalog).length, Object.keys(CARDS).length);
+    const writesBefore = h.writes.length;
+    h.click('[data-action="keep"]');
+    assert.equal(
+      h.writes.length,
+      writesBefore + 1,
+      'one accepted command should write one small snapshot',
+    );
+    const next = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(next.catalogKey, first.catalogKey);
+    assert.ok(next.replay.commands.some((command) => command.type === 'keep'));
+    assert.ok(Buffer.byteLength(h.storage.get('leyline.match.v1')) < 10000);
+    persisted = new Map(h.storage);
+  } finally {
+    h.cleanup();
+  }
+  const resumed = await mount(null, persisted);
+  try {
+    resumed.click('[data-action="resume"]');
+    const { replay } = await import('../packages/engine/src/index.js');
+    assert.doesNotThrow(() => replay(resumed.readSaved().replay));
+    resumed.click('[data-action="nav"][data-view="cards"]');
+    assert.equal(
+      resumed.document.querySelectorAll('.catalog-card').length,
+      Object.values(CARDS).filter((card) => !card.token).length,
+    );
+  } finally {
+    resumed.cleanup();
+  }
+});
+
+test('missing split-save definitions fail visibly instead of replacing them with current defaults', async () => {
+  const h = await mount(
+    null,
+    new Map([
+      [
+        'leyline.match.v1',
+        JSON.stringify({
+          storageVersion: 1,
+          catalogKey: 'leyline.match-catalog.v1.0123456789abcdef',
+          replay: { commands: [] },
+        }),
+      ],
+    ]),
+  );
+  try {
+    h.click('[data-action="resume"]');
+    assert.match(h.document.querySelector('#toast').textContent, /missing its card definitions/);
+    assert.equal(h.storage.size, 1);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('a damaged cached catalog reports save failure without overwriting the prior snapshot', async () => {
+  const h = await mount();
+  try {
+    h.click('[data-action="start"]');
+    const prior = h.storage.get('leyline.match.v1');
+    const saved = JSON.parse(prior);
+    h.storage.set(saved.catalogKey, '{}');
+    h.click('[data-action="keep"]');
+    assert.match(
+      h.document.querySelector('#toast').textContent,
+      /Could not save.*definitions conflict.*Export a replay/,
+    );
+    assert.equal(h.storage.get('leyline.match.v1'), prior);
+  } finally {
+    h.cleanup();
   }
 });

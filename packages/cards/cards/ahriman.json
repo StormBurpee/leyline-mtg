@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "37d1d507-25dc-4cd0-b51e-2f1e9b24832c",
+  "name": "Ahriman",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Eye", "Horror"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying, deathtouch\n{3}, Sacrifice another creature or artifact: Draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "type": "artifact"
+              }
+            ]
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

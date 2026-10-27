@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fb8efd6e-b8f8-4da8-ac65-5b745c02d2bb",
+  "name": "Jolene, Plundering Pugilist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Mercenary"],
+    "colors": ["G", "R"],
+    "manaCost": "{1}{R}{G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Whenever you attack with one or more creatures with power 4 or greater, create a Treasure token.\n{1}{R}, Sacrifice a Treasure: Jolene deals 1 damage to any target.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attackGroup",
+        "controller": "you",
+        "filter": {
+          "power": {
+            "gte": 4
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{R}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "subtype": "Treasure"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "damageable"
+      }
+    }
+  ]
+}

@@ -30,6 +30,14 @@ DOM lifecycle tests execute the actual client controls for mulligan, Fireglass, 
 
 Cards lift and return, hands reflow, tapped cards turn, and visible cards transition between zones. Life deltas and combat links explain consequences. These are presentation effects, never replay events. Newly created tokens appear on the battlefield rather than pretending to be drawn from a library. Opponent card identities are not exposed by draw animation.
 
+## Local save cost and integrity
+
+The client keeps the complete immutable match catalog in a private, content-checksummed local-storage record. Each accepted command saves only the seed/deck settings, command history and UI preferences. New matches with the same definitions reuse the record; a human command no longer saves twice. Runtime catalogs, the collection and self-contained replay exports remain complete. In particular, runtime catalogs are **not** narrowed to the two decks, which could reveal concealed deck membership through a public view.
+
+Old inline saves and custom replay definitions remain supported. The small snapshot is committed last; a failed catalog or snapshot write leaves the previous save recoverable. Only a checksum-verified previous app catalog is removed after successful replacement. Missing, evicted, conflicting or damaged definitions fail visibly rather than falling back to the current card pool. A still-open match can recreate an evicted cache from its own exact definitions. The checksum detects accidental corruption; it is not an authentication boundary. Export a replay for a portable backup, rather than copying the private split storage envelope.
+
+For the requested Rakdos deck against Grove, a Node run measured a repeated save after Keep at about **2.4 KB instead of 1.20 MB**; the complete 1.20 MB catalog is written once. In 40 paired samples, previous export/JSON serialization took 43.2 ms median versus 0.17 ms for the new helper using in-memory storage. These numbers are runtime/payload evidence, **not browser localStorage latency or physical iPhone performance**. Focused tests cover all eight tournament presets plus the requested default through 100 commands each, exact save/replay restoration, concealed-information equality, cache integrity, quota failures, legacy migration and DOM save/resume flows. Native-device verification remains outstanding.
+
 ## Implementation
 
 - `drop-plan.js` projects engine legal actions and combat predicates into drop destinations.
@@ -37,6 +45,7 @@ Cards lift and return, hands reflow, tapped cards turn, and visible cards transi
 - `motion.js` snapshots visible DOM positions and animates after accepted state changes.
 - `choice-stage.js` and `choice-stage.css` provide reusable large-card decision presentation.
 - `app.js` owns the command boundary, revision checks, timers and selection state.
+- `match-storage.js` persists complete immutable catalogs separately from frequent command/UI snapshots.
 
 Bot/automatic-yield timers pause while a card is held. A stale revision cannot turn an old target highlight into an accepted command. Gesture selection of attackers/blockers is provisional until the entire declaration is submitted.
 

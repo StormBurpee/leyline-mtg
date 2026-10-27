@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7c89ef4d-b375-4644-ac8b-034effdbe98c",
+  "name": "Eclipsed Elf",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Scout"],
+    "colors": ["B", "G"],
+    "manaCost": "{B/G}{B/G}{B/G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, look at the top four cards of your library. You may reveal an Elf, Swamp, or Forest card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 4,
+          "where": {
+            "any": [
+              {
+                "subtype": "Elf"
+              },
+              {
+                "subtype": "Swamp"
+              },
+              {
+                "subtype": "Forest"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

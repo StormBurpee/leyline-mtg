@@ -90,12 +90,19 @@ export function compileCard(
     return result;
   };
   const cost = (value, path) => {
-    if (!fields(value, ['mana', 'tap', 'life', 'sacrificeSelf', 'exileSelf', 'discard'], path))
+    if (
+      !fields(
+        value,
+        ['mana', 'tap', 'life', 'sacrificeSelf', 'sacrifice', 'exileSelf', 'discard'],
+        path,
+      )
+    )
       return {};
     return {
       ...(value.mana !== undefined ? { mana: mana(value.mana, `${path}.mana`) } : {}),
       ...(value.exileSelf !== undefined ? { exileSelf: value.exileSelf } : {}),
       ...(value.sacrificeSelf !== undefined ? { sacrificeSelf: value.sacrificeSelf } : {}),
+      ...(value.sacrifice !== undefined ? { sacrifice: structuredClone(value.sacrifice) } : {}),
       ...(value.tap !== undefined ? { tap: value.tap } : {}),
       ...(value.discard !== undefined ? { discard: value.discard } : {}),
       ...(value.life !== undefined ? { life: value.life } : {}),
@@ -303,7 +310,17 @@ export function compileCard(
         moveTarget: ['target', 'destination', 'controller', 'tapped', 'trackSource'],
         draw: ['target', 'amount'],
         mill: ['target', 'amount'],
-        lookChooseHand: ['target', 'amount', 'selectCount', 'restOrder'],
+        lookChooseHand: [
+          'target',
+          'amount',
+          'selectCount',
+          'restOrder',
+          'where',
+          'optional',
+          'reveal',
+          'revealAll',
+          'restDestination',
+        ],
         scry: ['target', 'amount'],
         surveil: ['target', 'amount'],
         explore: ['target'],
@@ -413,6 +430,8 @@ export function compileCard(
       if (e.op === 'lookChooseHand') {
         if (effect.selectCount !== undefined) e.selectCount = structuredClone(effect.selectCount);
         if (effect.restOrder !== undefined) e.restOrder = effect.restOrder;
+        for (const key of ['where', 'optional', 'reveal', 'revealAll', 'restDestination'])
+          if (effect[key] !== undefined) e[key] = structuredClone(effect[key]);
       }
       if (e.op === 'explore') {
         if (!['source', 'target'].includes(effect.target))

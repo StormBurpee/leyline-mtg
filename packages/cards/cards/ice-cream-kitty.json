@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f8131dca-ba6e-4ca4-943e-a3d26c75b8b8",
+  "name": "Ice Cream Kitty",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Food", "Cat", "Mutant"],
+    "colors": ["B", "G"],
+    "manaCost": "{1}{B/G}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "{2}, Sacrifice another creature or token: Draw a card. Activate only as a sorcery.\n{2}, {T}, Sacrifice this creature: You gain 3 life.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "token": true
+              }
+            ]
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "timing": "sorcery"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

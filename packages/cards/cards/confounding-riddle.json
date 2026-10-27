@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3df49c4d-a285-4826-824e-b742b0deed3a",
+  "name": "Confounding Riddle",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}"
+  },
+  "rulesText": "Choose one —\n• Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.\n• Counter target spell unless its controller pays {4}.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Look four, put one into hand",
+          "effects": [
+            {
+              "op": "lookChooseHand",
+              "target": "controller",
+              "amount": 4,
+              "restDestination": "graveyard"
+            }
+          ]
+        },
+        {
+          "label": "Counter unless they pay {4}",
+          "target": {
+            "scope": "spell"
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target",
+              "unlessPay": {
+                "generic": 4
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

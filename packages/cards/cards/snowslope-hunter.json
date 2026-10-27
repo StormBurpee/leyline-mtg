@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fdf7f144-56e4-4f88-b81a-b85473922355",
+  "name": "Snowslope Hunter",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Ranger"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Sacrifice another creature or artifact: Exile the top card of your library. You may play it until the end of your next turn. Activate only during your turn and only once each turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{0}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "type": "artifact"
+              }
+            ]
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 1,
+          "player": "controller",
+          "duration": "nextTurn"
+        }
+      ],
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "oncePerTurn": true
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9108fffb-90f4-444e-8d3e-46a3d4ff3681",
+  "name": "Commune with Beavers",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{G}"
+  },
+  "rulesText": "Look at the top three cards of your library. You may reveal an artifact, creature, or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 3,
+          "where": {
+            "any": [
+              {
+                "type": "artifact"
+              },
+              {
+                "type": "creature"
+              },
+              {
+                "type": "land"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true
+        }
+      ]
+    }
+  ]
+}
