@@ -95,13 +95,38 @@ export function compilePack(cards, { mechanics = {} } = {}) {
       ...(d.triggers ?? []).flatMap((t) =>
         t.modes ? t.modes.flatMap((mode) => mode.effects) : t.effects,
       ),
+      ...(d.attachmentTriggers ?? []).flatMap((t) => t.effects),
       ...(d.activated ?? []).flatMap((a) => a.effects),
-    ]))
-      if (['token', 'mobilize', 'empowerJace'].includes(e.op) && !byName[e.definition]?.token)
+    ])) {
+      if (
+        e.attachedToken !== undefined &&
+        (!byName[e.attachedToken]?.token || !byName[e.attachedToken]?.aura)
+      )
+        diagnostics.push({
+          code: 'ATTACHED_TOKEN_REFERENCE',
+          path: d.name,
+          message: 'Return attachment requires an Aura token definition.',
+        });
+      if (
+        ['token', 'attachedToken', 'mobilize', 'empowerJace'].includes(e.op) &&
+        !byName[e.definition]?.token
+      )
         diagnostics.push({
           code: 'TOKEN_REFERENCE',
           path: d.name,
           message: `${e.definition} is not a token definition.`,
+        });
+      else if (e.op === 'token' && byName[e.definition]?.aura)
+        diagnostics.push({
+          code: 'AURA_TOKEN_ENTRY',
+          path: d.name,
+          message: 'Aura token creation requires an explicit attached-token instruction.',
+        });
+      else if (e.op === 'attachedToken' && !byName[e.definition]?.aura)
+        diagnostics.push({
+          code: 'ATTACHED_TOKEN_REFERENCE',
+          path: d.name,
+          message: 'Attached tokens require an Aura token definition.',
         });
       else if (
         e.op === 'mobilize' &&
@@ -114,6 +139,7 @@ export function compilePack(cards, { mechanics = {} } = {}) {
           path: d.name,
           message: 'Mobilize requires a creature token without entry choices.',
         });
+    }
   return diagnostics.length
     ? { ok: false, diagnostics }
     : { ok: true, definitions, index, diagnostics: [] };

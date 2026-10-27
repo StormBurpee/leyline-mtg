@@ -663,7 +663,9 @@ function presentStateChoice() {
               ? 'Choose a card to discard'
               : c.kind === 'exileToGraveyard'
                 ? 'Choose an exiled card'
-                : 'Choose a legend to keep';
+                : c.rule === 'role'
+                  ? 'Choose a Role to keep'
+                  : 'Choose a legend to keep';
     subtitle =
       c.kind === 'behold'
         ? `Choose an ${c.subtype} you control or reveal one from your hand. You may decline.`
@@ -679,12 +681,14 @@ function presentStateChoice() {
                 ? 'Their hand is revealed. Choose a nonland card, or choose none to consider their exile.'
                 : c.kind === 'exileToGraveyard'
                   ? 'You may put a face-up card the opponent owns from exile into their graveyard.'
-                  : 'Keep one copy on the battlefield. The other copies go to their owners’ graveyards.';
+                  : c.rule === 'role'
+                    ? 'These Roles have the same newest timestamp. Keep one; the others go to their owners’ graveyards.'
+                    : 'Keep one copy on the battlefield. The other copies go to their owners’ graveyards.';
     cards = c.cards;
     const optional =
       ['behold', 'bindingNegotiation', 'exileToGraveyard'].includes(c.kind) ||
       (c.kind === 'revealDiscard' && !c.eligibleCards.length);
-    actions = `<span class="choice-selection-summary">${selected.length} of 1 selected<strong>${selected[0] ? escape(state.objects[selected[0]].name) : 'Select a card above'}</strong></span>${optional ? `<button class="btn" data-action="declineDecision">${c.kind === 'revealDiscard' ? 'Continue' : 'Choose none'}</button>` : ''}<button class="btn primary" data-action="confirmDecision" ${selected.length === 1 ? '' : 'disabled'}>${c.kind === 'legendRule' ? 'Keep selected copy' : 'Confirm choice'}</button>`;
+    actions = `<span class="choice-selection-summary">${selected.length} of 1 selected<strong>${selected[0] ? escape(state.objects[selected[0]].name) : 'Select a card above'}</strong></span>${optional ? `<button class="btn" data-action="declineDecision">${c.kind === 'revealDiscard' ? 'Continue' : 'Choose none'}</button>` : ''}<button class="btn primary" data-action="confirmDecision" ${selected.length === 1 ? '' : 'disabled'}>${c.kind === 'legendRule' ? (c.rule === 'role' ? 'Keep selected Role' : 'Keep selected copy') : 'Confirm choice'}</button>`;
   } else if (c.kind === 'removeCounter') {
     title = 'Remove a counter?';
     subtitle =

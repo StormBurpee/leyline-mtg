@@ -237,6 +237,7 @@ type EffectInstruction =
   | { op: 'counterAbility'; removeSourceAbilities?: boolean }
   | { op: 'stripDestroyByManaValue'; amount: NumericValue }
   | { op: 'returnSelfAsEnchantment' | 'shuffleSourceAndTarget' }
+  | { op: 'grantDeathReturn'; attachedToken: string; tapped?: boolean }
   | { op: 'exileGraveyards'; players: 'controller' | 'opponent' | 'all' | 'target' }
   | {
       op: 'chooseExile';
@@ -259,6 +260,7 @@ type EffectInstruction =
       trackSource?: boolean;
       subject?: 'source' | 'attached';
       destination: 'hand' | 'battlefield' | 'exile';
+      attachedToken?: string;
       controller?: 'owner' | 'you';
       tapped?: boolean;
     }
@@ -332,6 +334,7 @@ type EffectInstruction =
   | { op: 'questCounterTrigger'; threshold: number; selector: TargetKind; effects: Effect[] }
   | { op: 'removeCounterTrigger'; selector: TargetKind; effects: Effect[] }
   | { op: 'fightAttached' }
+  | { op: 'attachedToken'; definition: string; subject?: 'source' | 'eventSource' }
   | { op: 'untapSearched' }
   | { op: 'behold'; subtype: string; then: readonly Effect[] }
   | { op: 'doublePower'; subject?: 'source' | 'attached' }
@@ -399,6 +402,7 @@ export type StateCondition =
   | { kind: 'additionalCostPaid' }
   | { kind: 'sourceBargained' }
   | { kind: 'sourceType'; type: CardType }
+  | { kind: 'sourceToughnessAtMost'; count: number }
   | { kind: 'sourcePrepared'; prepared: boolean }
   | { kind: 'sourceExiledCardTypesAtLeast'; count: number }
   | { kind: 'eventManaSpentAtLeast'; count: number }
@@ -552,7 +556,10 @@ export interface CardDefinition {
   }[];
   readonly selfBonus?: { power: NumericValue; toughness: NumericValue };
   readonly aura?: 'pacifism' | 'creature';
+  readonly attachmentTriggers?: CardDefinition['triggers'];
   readonly attachmentBonus?: {
+    baseStats?: { power: number; toughness: number };
+    ward?: { mana?: ManaCost; life?: number };
     noUntap?: boolean;
     maxBlockers?: number;
     power: NumericValue;
@@ -644,6 +651,7 @@ export interface GameObject {
   stunCounters?: number;
   keywordCounterTimestamps?: Record<string, number>;
   layerTimestamp?: number;
+  roleTimestamp?: number;
   damage: number;
   deathtouchDamage: boolean;
   controlledSince: number;
@@ -773,6 +781,7 @@ export interface StackEntry {
     | { op: 'returnEarthbent' }
     | { op: 'returnDelayedBlink'; controller: 'owner' | 'you' }
     | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } }
+    | { op: 'returnDepartedSource'; attachedToken: string; tapped?: boolean }
   )[];
   targetGroups?: TargetGroup[];
   targets?: TargetPlan;
@@ -818,6 +827,8 @@ export type Choice =
         object: ObjectTarget;
         controller?: PlayerId;
         attachment?: ObjectTarget | null;
+        attachedToken?: string;
+        tokenController?: PlayerId;
         tapped?: boolean;
       }[];
     }
@@ -849,6 +860,8 @@ export type Choice =
         object: ObjectTarget;
         controller?: PlayerId;
         attachment?: ObjectTarget | null;
+        attachedToken?: string;
+        tokenController?: PlayerId;
         tapped?: boolean;
       }[];
     }
@@ -864,15 +877,18 @@ export type Choice =
         object: ObjectTarget;
         controller?: PlayerId;
         attachment?: ObjectTarget | null;
+        attachedToken?: string;
+        tokenController?: PlayerId;
         tapped?: boolean;
       }[];
     }
   | {
       kind: 'legendRule';
+      rule?: 'role';
       player: PlayerId;
       name: string;
       cards: string[];
-      remaining: { player: PlayerId; name: string; cards: string[] }[];
+      remaining: { player: PlayerId; name: string; cards: string[]; rule?: 'role' }[];
       toGrave: string[];
       sagaSacrifices?: string[];
     }
@@ -1064,6 +1080,7 @@ export interface GameState {
     timestamp?: number;
     permanent?: true;
     removeAbilities?: true;
+    deathReturn?: { attachedToken: string; tapped: boolean };
     enchantmentOnly?: true;
     untilSourceLeaves?: ObjectTarget;
     landForm?: { mana: Color[] };

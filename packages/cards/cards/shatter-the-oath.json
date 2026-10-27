@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f545870d-b628-4acb-88c7-37c2d72a5a85",
+  "name": "Shatter the Oath",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}{B}"
+  },
+  "rulesText": "Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target",
+          "targetGroup": "destroyed"
+        },
+        {
+          "op": "createAttachedToken",
+          "token": "leyline:token/wicked-role",
+          "target": "target",
+          "targetGroup": "recipient"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "destroyed",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "enchantment"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "recipient",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

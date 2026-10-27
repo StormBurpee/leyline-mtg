@@ -2,7 +2,11 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.55)
+## Latest coverage (v0.56)
+
+Six exact Role Aura tokens attach to legal creature incarnations and obey per-controller newest-Role state-based actions, including mandatory tied-timestamp choices and simultaneous departure facts. Cursed applies timestamped base statistics; Royal grants an additional ward ability; Sorcerer, Young Hero and Hunter’s Axe grant creature-owned attack triggers rather than Aura/Equipment observer triggers. Return Triumphant and Not Dead After All retain the exact returned incarnation through entry choices, respecting ownership, control and ability loss. The 22 admitted cards do not imply support for every Role card, Virtuous Role, token-doubling replacements or arbitrary attachment-granted events. See [Role support](role-token-support.md).
+
+## Previous coverage (v0.55)
 
 Resolution-time effect alternatives pause the same resolving item without reopening priority, adding targets, or turning the choice into a modal spell. Graveyard card-type unions support the admitted Delirium conditions, cost modifiers and conditional combat restrictions. Non-mana Exhaust uses are per ability and object incarnation, consumed on activation and preserved through control changes. Literal Discover supports legal free casting or putting the discovered card into hand, mandatory additional costs, zero X, nested resolution and seeded random bottom order. Unsupported Discover amounts/events and Exhaust mana/reset/discount contracts remain rejected. See [effect choices](effect-choice-support.md), [Delirium](delirium-support.md), [Exhaust](exhaust-support.md) and [Discover](discover-support.md) for exact boundaries.
 
@@ -57,7 +61,7 @@ The dated expansion sections below extend the original kernel scope. The catalog
 - Group destruction/exile, damage, temporary modifiers, counters and tap/untap effects with explicit filters and simultaneous departure snapshots.
 - Treasure/Food/Clue and additional fixed creature tokens; sacrificing mana sources; cycling from hand; upkeep, combat, main-phase and end-step triggers; stable filtered static anthems and intrinsic attack/block restrictions.
 - Own-library search with basic/type/subtype/color/mana-value filters, chosen quantities, explicit reveal flags, hand/graveyard/battlefield/top destinations and deterministic shuffle. Unrestricted searches require the available quantity; quality-restricted searches can fail to find. Multiple searched permanents enter together.
-- Ward triggers for opposing spells and activated/triggered abilities, with optional mana/life payments during resolution. Multiple ward instances and other payment families remain unsupported.
+- Ward triggers for opposing spells and activated/triggered abilities, with optional mana/life payments during resolution. Printed and attachment-granted ward instances trigger independently; other payment families remain unsupported.
 - Schema-checked card sources, reusable mechanics, composable target/event predicates and all-or-nothing pack compilation.
 - Immutable per-game catalogs validated before play and embedded in replays.
 - ETB, landfall, declared-attacker, noncreature-cast and instant/sorcery-cast triggers. APNAP order and explicit same-controller ordering.

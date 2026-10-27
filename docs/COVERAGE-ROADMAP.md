@@ -4,9 +4,9 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.55.0
+## Implemented progress through v0.56.0
 
-Current dated inventory coverage: **2,107 / 5,164**; **3,057 remain**. This is 1228 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **2,129 / 5,164**; **3,035 remain**. This is 1250 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
 | Delivered feature/card batch                                      | Cards added |
 | ----------------------------------------------------------------- | ----------: |
@@ -74,7 +74,8 @@ Current dated inventory coverage: **2,107 / 5,164**; **3,057 remain**. This is 1
 | Graveyard card-type union / Delirium                              |           9 |
 | Non-mana Exhaust activations                                      |          12 |
 | Literal Discover and resolution-time free casting                 |          11 |
-| **Total since v0.38.0**                                           |    **1228** |
+| Role Aura sources, exact returns and creature-owned grants        |          22 |
+| **Total since v0.38.0**                                           |    **1250** |
 
 The baseline forecasts below remain unchanged for comparison. They were conservative first-pass probes: several implemented families unlocked more cards than those probes identified. Remaining cards in each family can still require other unsupported behavior.
 

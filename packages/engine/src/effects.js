@@ -27,6 +27,7 @@ import {
   isBlocking,
   legalEquipmentAttachment,
   legalAuraAttachment,
+  wardCosts,
   addObject,
   queueTrigger,
   queueEntryTrigger,
@@ -224,24 +225,25 @@ export function notifyTargeted(s, entry) {
     targetNumbers: counts,
   });
   if (source.controller === entry.controller) return;
-  const cost = definition(s, source).ward;
-  if (!cost || ignoresCreatureProtection(s, source)) return;
-  s.pendingTriggers.push({
-    id: `s${++s.nextId}`,
-    kind: 'ability',
-    name: source.faceDown ? 'Face-down creature' : source.name,
-    source: ref(source),
-    controller: source.controller,
-    sourceKeywords: keywords(s, source),
-    effects: [{ op: 'wardPayment', cost: structuredClone(cost) }],
-    relatedStackId: entry.id,
-    label: `${source.faceDown ? 'Face-down creature' : source.name} · ward`,
-  });
-  emit(s, 'triggered', {
-    objectId: source.id,
-    name: source.faceDown ? 'Face-down creature' : source.name,
-    player: source.controller,
-  });
+  if (ignoresCreatureProtection(s, source)) return;
+  for (const cost of wardCosts(s, source)) {
+    s.pendingTriggers.push({
+      id: `s${++s.nextId}`,
+      kind: 'ability',
+      name: source.faceDown ? 'Face-down creature' : source.name,
+      source: ref(source),
+      controller: source.controller,
+      sourceKeywords: keywords(s, source),
+      effects: [{ op: 'wardPayment', cost: structuredClone(cost) }],
+      relatedStackId: entry.id,
+      label: `${source.faceDown ? 'Face-down creature' : source.name} · ward`,
+    });
+    emit(s, 'triggered', {
+      objectId: source.id,
+      name: source.faceDown ? 'Face-down creature' : source.name,
+      player: source.controller,
+    });
+  }
 }
 function counterEntry(s, id, destination = 'graveyard') {
   const index = s.stack.findIndex((entry) => entry.id === id);
@@ -284,6 +286,15 @@ function exileUntilSourceLeaves(s, entry, target, departureContext = null) {
   });
   move(s, object, 'exile', departureContext);
 }
+function createAttachedToken(s, name, controller, target) {
+  const object = target?.kind === 'object' && s.objects[target.id];
+  if (!object || object.zone !== 'battlefield' || object.incarnation !== target.incarnation) return;
+  const d = cardDefinition(name, s.catalog);
+  const probe = { name, controller, owner: controller, zone: 'void' };
+  if (!d.token || !d.aura || !legalAuraAttachment(s, probe, object, controller)) return;
+  const token = addObject(s, name, controller, 'void');
+  enterBattlefield(s, token, controller, ref(object));
+}
 export function enterBattlefield(s, o, controller = o.owner, attachment = null, options = {}) {
   return enterBattlefieldBatch(s, [
     {
@@ -292,6 +303,9 @@ export function enterBattlefield(s, o, controller = o.owner, attachment = null, 
       attachment,
       tapped: options.tapped,
       enchantmentOnly: options.enchantmentOnly,
+      ...(options.attachedToken
+        ? { attachedToken: options.attachedToken, tokenController: options.tokenController }
+        : {}),
     },
   ]);
 }
@@ -434,6 +448,12 @@ export function enterBattlefieldBatch(
       }, 0),
     ]),
   );
+  // Role Auras attached in one entry batch have simultaneous timestamps (CR 303.7a, 613.7m).
+  const roleTimestamp = entering.some(
+    ({ object, attachment }) => attachment && definition(s, object).subtypes.includes('Role'),
+  )
+    ? layerTimestamp(s)
+    : null;
   for (const {
     object,
     controller = object.owner,
@@ -475,6 +495,8 @@ export function enterBattlefieldBatch(
       else object.chosenCreatureType = typeChoices[object.id];
     }
     object.attachedTo = attachment;
+    if (attachment && definition(s, object).subtypes.includes('Role'))
+      object.roleTimestamp = roleTimestamp;
     // Entry counters are a replacement, not a triggered effect. move() clears the
     // spell's chosenX, so use its pre-move snapshot (zero for nonstack entry).
     // This runs before entry observers and state-based actions see the permanent.
@@ -533,6 +555,10 @@ export function enterBattlefieldBatch(
       x: castValues.get(object.id),
     });
   }
+  // Run after the entire entry batch and its ETB observations, never before entry
+  // choices. This ref is captured from the object that actually entered (CR 400.7).
+  for (const { object, attachedToken, tokenController } of entering)
+    if (attachedToken) createAttachedToken(s, attachedToken, tokenController, ref(object));
   return true;
 }
 export function finishCreatureTypeChoice(s, command) {
@@ -908,11 +934,13 @@ export function resolveEffects(s, entry, startIndex = 0) {
         ? sourceObject.attachedTo
         : entry.sourceAttachment;
     const target =
-      e.subject === 'source'
-        ? entry.source
-        : e.subject === 'attached'
-          ? sourceAttachment
-          : entry.target;
+      e.subject === 'eventSource'
+        ? entry.eventSource
+        : e.subject === 'source'
+          ? entry.source
+          : e.subject === 'attached'
+            ? sourceAttachment
+            : entry.target;
     const candidate = target?.kind === 'object' ? s.objects[target.id] : null;
     const o =
       candidate?.zone === 'battlefield' && candidate.incarnation === target.incarnation
@@ -1393,6 +1421,32 @@ export function resolveEffects(s, entry, startIndex = 0) {
         };
         return false;
       }
+      case 'grantDeathReturn':
+        if (o)
+          addModifier(s, {
+            objectId: o.id,
+            incarnation: o.incarnation,
+            expires: s.turn,
+            deathReturn: { attachedToken: e.attachedToken, tapped: !!e.tapped },
+          });
+        break;
+      case 'returnDepartedSource': {
+        const source = s.objects[entry.departedSource?.id];
+        if (
+          source?.zone === 'graveyard' &&
+          !source.token &&
+          source.incarnation === entry.departedSource.incarnation &&
+          enterBattlefield(s, source, source.owner, null, {
+            tapped: e.tapped,
+            attachedToken: e.attachedToken,
+            tokenController: entry.controller,
+          }) === false
+        ) {
+          s.resolving = { entry, index: index + 1 };
+          return false;
+        }
+        break;
+      }
       case 'returnSelfAsEnchantment': {
         const source = s.objects[entry.departedSource?.id];
         if (
@@ -1778,7 +1832,11 @@ export function resolveEffects(s, entry, startIndex = 0) {
                 candidate,
                 e.controller === 'you' ? entry.controller : candidate.owner,
                 null,
-                { tapped: e.tapped },
+                {
+                  tapped: e.tapped,
+                  attachedToken: e.attachedToken,
+                  tokenController: entry.controller,
+                },
               ) === false
             ) {
               s.resolving.index = index + 1;
@@ -2123,6 +2181,9 @@ export function resolveEffects(s, entry, startIndex = 0) {
         }
         break;
       }
+      case 'attachedToken':
+        createAttachedToken(s, e.definition, entry.controller, target);
+        break;
       case 'token':
         for (let i = 0; i < (e.countFrom === 'moved' ? (entry.movedCount ?? 0) : e.count); i++) {
           const controller = e.player === 'targetController' ? entry.targetController : recipient;
@@ -2731,6 +2792,7 @@ export function resolveTop(s) {
         ...entry.source,
         questCountersLKI: entry.sourceQuestCounters,
         bargainedLKI: entry.sourceBargained,
+        statsLKI: entry.sourceStats,
       },
       entry.eventManaSpent ?? null,
     )
@@ -2867,7 +2929,7 @@ export function stateBasedActions(s) {
         emit(s, 'detached', { objectId: o.id });
       }
     }
-    if (d.aura) {
+    if (d.subtypes.includes('Aura')) {
       const target = s.objects[o.attachedTo?.id];
       if (
         !target ||
@@ -2880,6 +2942,32 @@ export function stateBasedActions(s) {
   }
   const groups = [];
   for (const player of [s.active, opponent(s.active)]) {
+    const rolesByTarget = new Map();
+    for (const role of battlefield(s)) {
+      if (
+        role.controller !== player ||
+        !definition(s, role).subtypes.includes('Role') ||
+        !role.attachedTo
+      )
+        continue;
+      const key = `${role.attachedTo.id}:${role.attachedTo.incarnation}`;
+      if (!rolesByTarget.has(key)) rolesByTarget.set(key, []);
+      rolesByTarget.get(key).push(role);
+    }
+    for (const roles of rolesByTarget.values()) {
+      if (roles.length < 2) continue;
+      const newest = Math.max(
+        ...roles.map((role) => role.roleTimestamp ?? role.layerTimestamp ?? 0),
+      );
+      const keepers = roles.filter(
+        (role) => (role.roleTimestamp ?? role.layerTimestamp ?? 0) === newest,
+      );
+      toGrave.push(
+        ...roles.filter((role) => (role.roleTimestamp ?? role.layerTimestamp ?? 0) < newest),
+      );
+      if (keepers.length > 1)
+        groups.push({ player, name: 'Role', rule: 'role', cards: keepers.map((role) => role.id) });
+    }
     const byName = new Map();
     for (const o of battlefield(s)) {
       if (o.controller !== player || !definition(s, o).legendary) continue;
@@ -2961,10 +3049,14 @@ export function finishLegendChoice(s, card) {
   requireRule(
     choice?.kind === 'legendRule' && choice.cards.includes(card),
     'LEGEND_CHOICE',
-    'Choose one of these legendary permanents to keep.',
+    'Choose one of these permanents to keep.',
   );
   const toGrave = [...choice.toGrave, ...choice.cards.filter((id) => id !== card)];
-  emit(s, 'legendChosen', { player: choice.player, name: choice.name, objectId: card });
+  emit(s, choice.rule === 'role' ? 'roleChosen' : 'legendChosen', {
+    player: choice.player,
+    name: choice.name,
+    objectId: card,
+  });
   if (choice.remaining.length) {
     const [first, ...remaining] = choice.remaining;
     s.choice = {

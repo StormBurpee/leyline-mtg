@@ -55,6 +55,12 @@ function conditionTarget(s, player, value, context) {
 export function meetsCondition(s, player, value, excludedIds = [], source = null, context = {}) {
   const eventManaSpent = typeof context === 'number' ? context : (context?.eventManaSpent ?? null);
   if (!value) return true;
+  if (value.kind === 'sourceToughnessAtMost') {
+    const current = source && s.objects[source.id];
+    const live = current?.incarnation === source?.incarnation && current.zone === 'battlefield';
+    const toughness = live ? stats(s, current).toughness : source?.statsLKI?.toughness;
+    return toughness !== undefined && toughness <= value.count;
+  }
   if (['targetMatches', 'targetEnteredThisTurn'].includes(value.kind)) {
     const object = conditionTarget(s, player, value, context);
     if (!object) return false;

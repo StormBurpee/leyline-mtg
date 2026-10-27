@@ -1,5 +1,5 @@
 {
-  "version": "0.55.0",
+  "version": "0.56.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -1553,6 +1553,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Become Brutes",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["modify", "attachedToken"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Bedhead Beastie",
       "type": "creature",
       "keywords": ["menace"],
@@ -1599,6 +1607,14 @@
     },
     {
       "name": "Beluna's Gatekeeper // Entry Denied",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Besotted Knight // Betroth the Beast",
       "type": "creature",
       "keywords": [],
       "opcodes": [],
@@ -3062,6 +3078,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Charmed Clothier",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["attachedToken"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Charmed Sleep",
       "type": "enchantment",
       "keywords": [],
@@ -3074,6 +3098,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["scry", "gainLife", "delayedBlink"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Charming Scoundrel",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["discard", "draw", "token", "attachedToken"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
@@ -3431,6 +3463,14 @@
       "name": "Concealed Courtyard",
       "type": "land",
       "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Conceited Witch // Price of Beauty",
+      "type": "creature",
+      "keywords": ["menace"],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -3933,6 +3973,22 @@
       "opcodes": ["gainLife", "destroy"],
       "triggers": ["selfDies"],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Cursed Courtier",
+      "type": "creature",
+      "keywords": ["lifelink"],
+      "opcodes": ["attachedToken"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Cut In",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage", "attachedToken"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Cycle of Renewal",
@@ -4480,6 +4536,14 @@
       "keywords": [],
       "opcodes": ["gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Diminisher Witch",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["attachedToken"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -5451,6 +5515,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Embereth Veteran",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["attachedToken"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Emberheart Challenger",
       "type": "creature",
       "keywords": ["haste"],
@@ -6312,6 +6384,14 @@
           "controller": "you"
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ferocious Werefox // Guard Change",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -9068,6 +9148,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Hunter's Axe",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Hushwood Verge",
       "type": "land",
       "keywords": [],
@@ -10740,6 +10828,14 @@
       ],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Living Lectern",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "attachedToken"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Living Phone",
@@ -12692,6 +12788,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Not Dead After All",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["grantDeathReturn"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Not on My Watch",
       "type": "instant",
       "keywords": [],
@@ -13985,6 +14089,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Protective Parents",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["attachedToken"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Protective Response",
       "type": "instant",
       "keywords": ["convoke"],
@@ -14744,6 +14856,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Redtooth Genealogist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["attachedToken"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Reef Roads",
       "type": "land",
       "keywords": [],
@@ -15036,6 +15156,14 @@
         "Destroy target enchantment.",
         "Exile target card from a graveyard."
       ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Return Triumphant",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -15376,6 +15504,14 @@
       "keywords": [],
       "opcodes": ["tap", "stunOn"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Royal Treatment",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "attachedToken"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -16274,6 +16410,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Shatter the Oath",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["destroy", "attachedToken"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -17403,11 +17547,27 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Spiteful Hexmage",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["attachedToken"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spitfire Lagac",
       "type": "creature",
       "keywords": [],
       "opcodes": ["damageOpponent"],
       "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Splashy Spellcaster",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["attachedToken"],
+      "triggers": ["controllerCastsInstantOrSorcery"],
       "activatedAbilities": 0
     },
     {
@@ -19191,6 +19351,30 @@
       "keywords": ["convoke", "flash", "double strike"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "The Witch's Vanity",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["destroy", "token", "attachedToken"],
+      "triggers": [
+        {
+          "event": "chapter",
+          "object": "source",
+          "chapters": [1]
+        },
+        {
+          "event": "chapter",
+          "object": "source",
+          "chapters": [2]
+        },
+        {
+          "event": "chapter",
+          "object": "source",
+          "chapters": [3]
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -21730,6 +21914,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Witch's Mark",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["chooseEffect", "attachedToken"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Witching Well",
       "type": "artifact",
       "keywords": [],
@@ -22143,6 +22335,7 @@
     "Cat Token",
     "Clue Token",
     "Colorless Golem Token",
+    "Cursed",
     "Detective Token",
     "Dinosaur Dragon Token",
     "Dinosaur Token",
@@ -22186,6 +22379,7 @@
     "Mercenary Token",
     "White and Blue Merfolk Token",
     "Mobilized Warrior Token",
+    "Monster",
     "Munitions Token",
     "Mutagen Token",
     "Mutant Token",
@@ -22200,11 +22394,13 @@
     "Red White Spirit Token",
     "Redwing",
     "Robot Token",
+    "Royal",
     "Scaling Construct Token",
     "Scion of the Deep",
     "Sculpture Treasure Token",
     "Small Robot Token",
     "Soldier Token",
+    "Sorcerer",
     "Stone Boulder",
     "Treasure Token",
     "Two Two Cat Token",
@@ -22221,6 +22417,8 @@
     "White Mouse Token",
     "White Sheep Token",
     "White Soldier Token",
+    "Wicked",
+    "Young Hero",
     "Zabu",
     "Zombie Druid Token",
     "Zombie Token"

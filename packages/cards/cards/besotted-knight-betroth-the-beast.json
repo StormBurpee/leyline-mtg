@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "c7b6d2cd-9105-404b-88f0-a67037fb2120",
+  "name": "Besotted Knight // Betroth the Beast",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Knight"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "",
+  "abilities": [
+    {
+      "kind": "adventure",
+      "mainName": "Besotted Knight",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/betroth-the-beast",
+        "name": "Betroth the Beast",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["W"],
+          "manaCost": "{W}"
+        },
+        "rulesText": "Create a Royal Role token attached to target creature you control. (Enchanted creature gets +1/+1 and has ward {1}.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createAttachedToken",
+                "token": "leyline:token/royal-role",
+                "target": "target"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

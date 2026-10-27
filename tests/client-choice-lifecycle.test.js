@@ -1967,3 +1967,108 @@ test('resolution alternative stage has readable effects, dismissal/reopen, read/
     h.cleanup();
   }
 });
+
+function tiedRoleReplay() {
+  // Test-only non-token Role replicas let existing search/entry commands reach a
+  // simultaneous Role timestamp without claiming a new token-creation mechanic.
+  const bearer = 'Client Role bearer',
+    batch = 'Client Role entry';
+  const catalog = {
+    ...CARDS,
+    [bearer]: { name: bearer, type: 'creature', cost: {}, power: 2, toughness: 2 },
+    [batch]: {
+      name: batch,
+      type: 'sorcery',
+      cost: {},
+      effects: [
+        {
+          op: 'searchLibrary',
+          count: 2,
+          where: { type: 'enchantment' },
+          destination: 'battlefield',
+        },
+      ],
+    },
+    'Client Royal': { ...CARDS.Royal, name: 'Client Royal', token: false },
+    'Client Monster': { ...CARDS.Monster, name: 'Client Monster', token: false },
+  };
+  const deck = ['Client Royal', batch, ...Array(5).fill('Forest'), bearer, 'Client Monster'];
+  let state = createGame({
+    catalog,
+    seed: 1,
+    mulligan: false,
+    minimumDeckSize: 9,
+    decks: [deck, deck],
+  });
+  while (state.step !== 'main1') state = act(state, 'pass');
+  for (const name of [bearer, batch]) {
+    state = act(state, 'cast', {
+      card: state.players[0].hand.find((id) => state.objects[id].name === name),
+    });
+    state = act(state, 'pass');
+    state = act(state, 'pass');
+  }
+  state = act(state, 'searchLibrary', { cards: state.choice.cards });
+  const creature = Object.values(state.objects).find(
+    (o) => o.name === bearer && o.zone === 'battlefield',
+  );
+  while (state.choice?.kind === 'auraEntry')
+    state = act(state, 'chooseAuraAttachment', { card: creature.id });
+  assert.equal(state.choice.kind, 'legendRule');
+  assert.equal(state.choice.rule, 'role');
+  return exportReplay(state);
+}
+
+test('Role keep stage preserves readable fallback, selection, dismissal, Read/Back and one cached-catalog submission', async () => {
+  const record = tiedRoleReplay(),
+    h = await mount(record);
+  try {
+    h.click('[data-action="resume"]');
+    assert.equal(h.dialog.open, true);
+    assert.match(h.dialog.textContent, /Choose a Role to keep/);
+    assert.match(h.dialog.textContent, /same newest timestamp/);
+    assert.equal(h.dialog.querySelectorAll('.decision-card-face').length, 2);
+    assert.match(h.dialog.textContent, /ward \{1\}/);
+    assert.match(h.dialog.textContent, /trample/);
+    assert.equal(h.dialog.querySelector('[data-action="confirmDecision"]').disabled, true);
+    const selected = h.click('#dialog [data-action="selectDecisionCard"]').dataset.cardid;
+    h.click('#dialog [data-action="readDecisionCard"]');
+    assert.ok(h.dialog.querySelector('.decision-reader'));
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.equal(
+      h.dialog.querySelector('.is-selected .decision-card-face').dataset.cardid,
+      selected,
+    );
+    h.click('#dialog [data-action="closeDialog"]');
+    assert.equal(h.dialog.open, false);
+    h.click('[data-action="reviewDecision"]');
+    assert.equal(
+      h.dialog.querySelector('.is-selected .decision-card-face').dataset.cardid,
+      selected,
+    );
+    assert.match(
+      h.dialog.querySelector('[data-action="confirmDecision"]').textContent,
+      /Keep selected Role/,
+    );
+    const cacheWrites = h.writes.filter((key) =>
+      key.startsWith('leyline.match-catalog.v1.'),
+    ).length;
+    assert.equal(cacheWrites, 0);
+    const stale = h.click('#dialog [data-action="confirmDecision"]');
+    assert.equal(h.dialog.open, false);
+    const saved = h.readSaved();
+    assert.equal(saved.replay.commands.length, record.commands.length + 1);
+    assert.equal(saved.replay.commands.at(-1).type, 'chooseLegend');
+    assert.equal(saved.replay.commands.at(-1).card, selected);
+    assert.equal(
+      h.writes.filter((key) => key.startsWith('leyline.match-catalog.v1.')).length,
+      cacheWrites + 1,
+    );
+    h.document.body.append(stale);
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    assert.equal(h.readSaved().replay.commands.length, saved.replay.commands.length);
+    assert.equal(h.writes.filter((key) => key.startsWith('leyline.match-catalog.v1.')).length, 1);
+  } finally {
+    h.cleanup();
+  }
+});

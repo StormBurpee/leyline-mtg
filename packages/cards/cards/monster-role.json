@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/monster-role",
+  "name": "Monster",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura", "Role"],
+    "colors": [],
+    "manaCost": null,
+    "token": true
+  },
+  "rulesText": "Enchant creature\nEnchanted creature gets +1/+1 and has trample.",
+  "abilities": [
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 1,
+      "keywords": ["trample"]
+    }
+  ]
+}

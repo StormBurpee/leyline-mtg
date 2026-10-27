@@ -267,6 +267,8 @@ export function compileCard(
           'modify',
           'combatRestriction',
           'createToken',
+          'createAttachedToken',
+          'grantDeathReturn',
           'mobilize',
           'empowerJace',
           'copyToken',
@@ -300,6 +302,7 @@ export function compileCard(
           counterSpell: 'counter',
           returnToHand: 'bounce',
           createToken: 'token',
+          createAttachedToken: 'attachedToken',
           addCounters: 'counterOn',
           addStunCounters: 'stunOn',
         }[effect.op] ?? effect.op;
@@ -331,7 +334,14 @@ export function compileCard(
         loseLife: ['target', 'amount'],
         exileUntilSourceLeaves: ['target'],
         delayedBlink: ['target', 'controller'],
-        moveTarget: ['target', 'destination', 'controller', 'tapped', 'trackSource'],
+        moveTarget: [
+          'target',
+          'destination',
+          'controller',
+          'tapped',
+          'trackSource',
+          'attachedToken',
+        ],
         draw: ['target', 'amount'],
         mill: ['target', 'amount'],
         lookChooseHand: [
@@ -387,6 +397,8 @@ export function compileCard(
         modify: ['target', 'power', 'toughness', 'keywords', 'until'],
         combatRestriction: ['target', 'restriction', 'until'],
         token: ['token', 'amount', 'controller', 'tapped', 'temporaryKeywords', 'countFrom'],
+        attachedToken: ['token', 'target'],
+        grantDeathReturn: ['target', 'attachedToken', 'tapped', 'until'],
         mobilize: ['token', 'amount'],
         empowerJace: ['token', 'amount'],
         copyToken: ['target', 'count', 'exceptions'],
@@ -566,6 +578,13 @@ export function compileCard(
         if (effect.target !== 'target') e.subject = effect.target;
         e.destination = effect.destination;
         if (effect.trackSource !== undefined) e.trackSource = effect.trackSource;
+        if (effect.attachedToken !== undefined) {
+          e.attachedToken = Object.hasOwn(identities, effect.attachedToken)
+            ? identities[effect.attachedToken]
+            : null;
+          if (!e.attachedToken)
+            problem('UNKNOWN_TOKEN', `${p}.attachedToken`, 'Token identity is not in this pack.');
+        }
         if (effect.controller !== undefined) e.controller = effect.controller;
         if (effect.tapped !== undefined) e.tapped = effect.tapped;
       }
@@ -685,7 +704,30 @@ export function compileCard(
           ...(effect.keywords !== undefined ? { keywords: effect.keywords } : {}),
         });
       }
-      if (['token', 'mobilize', 'empowerJace'].includes(e.op)) {
+      if (e.op === 'grantDeathReturn') {
+        if (effect.target !== 'target' || effect.until !== 'endOfTurn')
+          problem(
+            'UNSUPPORTED_BINDING',
+            p,
+            'Death-return grants require a targeted creature until end of turn.',
+          );
+        e.attachedToken = Object.hasOwn(identities, effect.attachedToken)
+          ? identities[effect.attachedToken]
+          : null;
+        if (!e.attachedToken)
+          problem('UNKNOWN_TOKEN', `${p}.attachedToken`, 'Token identity is not in this pack.');
+        if (effect.tapped !== undefined) e.tapped = effect.tapped;
+      }
+      if (e.op === 'attachedToken') {
+        if (!['target', 'source', 'eventSource'].includes(effect.target))
+          problem(
+            'UNSUPPORTED_BINDING',
+            `${p}.target`,
+            'Attached tokens need an exact creature binding.',
+          );
+        if (effect.target !== 'target') e.subject = effect.target;
+      }
+      if (['token', 'attachedToken', 'mobilize', 'empowerJace'].includes(e.op)) {
         e.definition = Object.hasOwn(identities, effect.token) ? identities[effect.token] : null;
         if (!e.definition)
           problem('UNKNOWN_TOKEN', `${p}.token`, 'Token identity is not in this pack.');
@@ -1206,6 +1248,7 @@ export function compileCard(
           ...(a.loyalty !== undefined ? { loyalty: a.loyalty } : {}),
         });
         break;
+      case 'attachmentTriggered':
       case 'triggered': {
         fields(
           a,
@@ -1260,6 +1303,7 @@ export function compileCard(
         }
         const instructions = modes ? undefined : effects(a.effects, `${path}.effects`);
         if (
+          a.kind !== 'attachmentTriggered' &&
           event === 'selfEnters' &&
           !modes &&
           !a.condition &&
@@ -1272,7 +1316,7 @@ export function compileCard(
         )
           d.etb = instructions;
         else
-          (d.triggers ??= []).push({
+          (d[a.kind === 'attachmentTriggered' ? 'attachmentTriggers' : 'triggers'] ??= []).push({
             event,
             ...(modes ? { modes } : { effects: instructions }),
             ...(a.condition ? { condition: structuredClone(a.condition) } : {}),
@@ -1374,7 +1418,11 @@ export function compileCard(
         );
         break;
       case 'attachmentBonus':
-        fields(a, ['kind', 'power', 'toughness', 'keywords', 'noUntap', 'maxBlockers'], path);
+        fields(
+          a,
+          ['kind', 'power', 'toughness', 'keywords', 'noUntap', 'maxBlockers', 'baseStats', 'ward'],
+          path,
+        );
         if (d.attachmentBonus)
           problem(
             'MULTIPLE_ATTACHMENT_BONUS',
@@ -1389,6 +1437,8 @@ export function compileCard(
           ...(Array.isArray(a.keywords) ? { keywords: [...a.keywords] } : {}),
           ...(a.noUntap !== undefined ? { noUntap: a.noUntap } : {}),
           ...(a.maxBlockers !== undefined ? { maxBlockers: a.maxBlockers } : {}),
+          ...(a.baseStats !== undefined ? { baseStats: structuredClone(a.baseStats) } : {}),
+          ...(a.ward !== undefined ? { ward: cost(a.ward, `${path}.ward`) } : {}),
         };
         break;
       case 'equip':

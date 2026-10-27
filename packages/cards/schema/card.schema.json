@@ -1007,6 +1007,9 @@
             },
             "trackSource": {
               "type": "boolean"
+            },
+            "attachedToken": {
+              "type": "string"
             }
           },
           "required": ["op", "target", "destination"],
@@ -2301,6 +2304,47 @@
           },
           "required": ["op", "options"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "createAttachedToken"
+            },
+            "token": {
+              "type": "string"
+            },
+            "target": {
+              "enum": ["target", "source", "eventSource"]
+            },
+            "targetGroup": {
+              "type": "string"
+            }
+          },
+          "required": ["op", "token", "target"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "grantDeathReturn"
+            },
+            "target": {
+              "const": "target"
+            },
+            "attachedToken": {
+              "type": "string"
+            },
+            "tapped": {
+              "type": "boolean"
+            },
+            "until": {
+              "const": "endOfTurn"
+            }
+          },
+          "required": ["op", "target", "attachedToken", "until"],
+          "additionalProperties": false
         }
       ]
     },
@@ -2971,6 +3015,26 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 16
+            },
+            "baseStats": {
+              "type": "object",
+              "properties": {
+                "power": {
+                  "type": "integer",
+                  "minimum": -1000,
+                  "maximum": 1000
+                },
+                "toughness": {
+                  "type": "integer",
+                  "minimum": -1000,
+                  "maximum": 1000
+                }
+              },
+              "required": ["power", "toughness"],
+              "additionalProperties": false
+            },
+            "ward": {
+              "$ref": "#/$defs/cost"
             }
           },
           "required": ["kind", "power", "toughness"],
@@ -3541,6 +3605,131 @@
           },
           "required": ["kind"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "attachmentTriggered"
+            },
+            "on": {
+              "$ref": "#/$defs/event"
+            },
+            "optional": {
+              "type": "boolean"
+            },
+            "effects": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/effect"
+              },
+              "minItems": 0,
+              "maxItems": 64
+            },
+            "target": {
+              "$ref": "#/$defs/selector"
+            },
+            "condition": {
+              "$ref": "#/$defs/condition"
+            },
+            "triggerCondition": {
+              "$ref": "#/$defs/condition"
+            },
+            "targetGroups": {
+              "$ref": "#/$defs/targetGroups"
+            },
+            "oncePerTurn": {
+              "type": "boolean"
+            },
+            "choose": {
+              "const": 1
+            },
+            "modes": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 180
+                  },
+                  "target": {
+                    "$ref": "#/$defs/selector"
+                  },
+                  "targetGroups": {
+                    "$ref": "#/$defs/targetGroups"
+                  },
+                  "effects": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/effect"
+                    },
+                    "maxItems": 64
+                  }
+                },
+                "required": ["label", "effects"],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["kind", "on"],
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "required": ["effects"],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": ["modes"],
+                    "properties": {
+                      "modes": {}
+                    }
+                  },
+                  {
+                    "required": ["choose"],
+                    "properties": {
+                      "choose": {}
+                    }
+                  }
+                ]
+              },
+              "properties": {
+                "effects": {}
+              }
+            },
+            {
+              "required": ["choose", "modes"],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": ["effects"],
+                    "properties": {
+                      "effects": {}
+                    }
+                  },
+                  {
+                    "required": ["target"],
+                    "properties": {
+                      "target": {}
+                    }
+                  },
+                  {
+                    "required": ["targetGroups"],
+                    "properties": {
+                      "targetGroups": {}
+                    }
+                  }
+                ]
+              },
+              "properties": {
+                "choose": {},
+                "modes": {}
+              }
+            }
+          ]
         }
       ]
     },
@@ -3791,6 +3980,21 @@
             }
           },
           "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "sourceToughnessAtMost"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            }
+          },
+          "required": ["kind", "count"],
           "additionalProperties": false
         }
       ]

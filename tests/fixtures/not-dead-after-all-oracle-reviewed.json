@@ -1,0 +1,14 @@
+{
+  "source": "https://magic.wizards.com/en/news/feature/wilds-of-eldraine-release-notes plus current Oracle inventory",
+  "reviewedAt": "2026-10-27",
+  "cards": [
+    {
+      "name": "Not Dead After All",
+      "oracle_id": "380c367f-73ea-485f-a37b-5af0ba160893",
+      "oracle_text": "Until end of turn, target creature you control gains \"When this creature dies, return it to the battlefield tapped under its owner's control, then create a Wicked Role token attached to it.\" (Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)",
+      "mana_cost": "{B}",
+      "colors": ["B"],
+      "type_line": "Instant"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9eec304d-ffcb-4287-b877-280ac1e4f496",
+  "name": "Charming Scoundrel",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Rogue"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Haste\nWhen this creature enters, choose one \u2014\n\u2022 Discard a card, then draw a card.\n\u2022 Create a Treasure token.\n\u2022 Create a Wicked Role token attached to target creature you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Discard a card, then draw a card.",
+          "effects": [
+            {
+              "op": "discard",
+              "target": "controller",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Create a Treasure token.",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/treasure-token",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Create a Wicked Role on target creature you control.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "createAttachedToken",
+              "token": "leyline:token/wicked-role",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

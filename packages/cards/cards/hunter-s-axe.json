@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d7d59fef-1401-464b-b1bb-ee5da92cde51",
+  "name": "Hunter's Axe",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": ["G"],
+    "manaCost": "{G}"
+  },
+  "rulesText": "Equipped creature gets +2/+0 and has \"Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn.\"\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "equip",
+      "cost": "{2}"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 2,
+      "toughness": 0
+    },
+    {
+      "kind": "attachmentTriggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Gain trample until end of turn",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "until": "endOfTurn",
+                  "keywords": ["trample"]
+                }
+              ]
+            },
+            {
+              "label": "Gain deathtouch until end of turn",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "until": "endOfTurn",
+                  "keywords": ["deathtouch"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
