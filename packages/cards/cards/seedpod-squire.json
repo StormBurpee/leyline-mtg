@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e2f57e48-ff5b-4a42-9b7c-1bd23b0d78ed",
+  "name": "Seedpod Squire",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird", "Scout"],
+    "colors": ["U", "W"],
+    "manaCost": "{3}{W/U}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever this creature attacks, target creature you control without flying gets +1/+1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            },
+            {
+              "not": {
+                "keyword": "flying"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

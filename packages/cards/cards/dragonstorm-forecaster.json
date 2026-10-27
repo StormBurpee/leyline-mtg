@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "02de8fa3-ac8d-47e5-b137-d5a0b7d8e951",
+  "name": "Dragonstorm Forecaster",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Scout"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 0,
+    "toughness": 3
+  },
+  "rulesText": "{2}, {T}: Search your library for a card named Dragonstorm Globe or Boulderborn Dragon, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "reveal": true,
+          "where": {
+            "any": [
+              {
+                "name": "Dragonstorm Globe"
+              },
+              {
+                "name": "Boulderborn Dragon"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -145,3 +145,60 @@ test('source compiler rejects incomplete crew, duplicate crew and unsupported ex
     assert.equal(result.ok, false, JSON.stringify(abilities));
   }
 });
+
+test('Mine Cart cannot tap for mana; its attack creates the Treasure that can', () => {
+  let s = fixture();
+  const cart = put(s, 'Careening Mine Cart');
+  put(s, 'Grizzly Bears');
+  const assertNoMana = () => {
+    assert.equal(
+      legalActions(s, 0).some((a) => a.type === 'tapMana' && a.card === cart.id),
+      false,
+    );
+    for (const color of ['W', 'U', 'B', 'R', 'G']) {
+      const result = dispatch(s, { type: 'tapMana', player: 0, card: cart.id, color });
+      assert.equal(result.ok, false, `Mine Cart must not produce ${color}`);
+    }
+    assert.equal(s.objects[cart.id].tapped, false);
+  };
+  assertNoMana();
+  const crew = legalActions(s, 0).find((a) => a.type === 'crew' && a.card === cart.id);
+  assert.ok(crew);
+  s = settle(act(s, 'crew', crew));
+  assert.equal(definition(s, s.objects[cart.id]).type, 'creature');
+  assertNoMana();
+  s.step = 'attackers';
+  s.choice = { kind: 'attackers', player: 0 };
+  s = settle(act(s, 'attackers', { cards: [cart.id] }));
+  const treasures = Object.values(s.objects).filter(
+    (o) => o.zone === 'battlefield' && o.name === 'Treasure Token',
+  );
+  assert.equal(treasures.length, 1);
+  const treasure = treasures[0];
+  assert.deepEqual(
+    legalActions(s, 0)
+      .filter((a) => a.type === 'tapMana' && a.card === treasure.id)
+      .map((a) => a.color)
+      .sort(),
+    ['B', 'G', 'R', 'U', 'W'],
+  );
+  s = act(s, 'tapMana', { card: treasure.id, color: 'R' });
+  assert.equal(s.players[0].mana.R, 1);
+  assert.notEqual(s.objects[treasure.id]?.zone, 'battlefield');
+  assert.equal(s.objects[cart.id].zone, 'battlefield');
+});
+
+test('audited Vehicle mana comes from their own ability, never token reminder text', () => {
+  const audited = [...names, 'Apocalypse Runner', 'Detention Chariot'];
+  const legitimate = new Set(["Cultivator's Caravan", 'Dependable Quinjet', 'Veloheart Bike']);
+  for (const name of audited) {
+    const s = fixture();
+    const vehicle = put(s, name);
+    const mana = legalActions(s, 0).filter((a) => a.type === 'tapMana' && a.card === vehicle.id);
+    assert.deepEqual(
+      mana.map((a) => a.color).sort(),
+      legitimate.has(name) ? ['B', 'G', 'R', 'U', 'W'] : [],
+      name,
+    );
+  }
+});

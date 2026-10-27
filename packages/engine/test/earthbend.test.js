@@ -222,7 +222,7 @@ test('earthbend delayed ability is counterable and cannot recur after countering
   assert.equal(land.zone, 'graveyard');
   assert.equal(s.earthbendReturns.length, 0);
 });
-test('earthbend does not return a land put in graveyard after it stops being a creature', () => {
+test('earthbend returns a land put in graveyard even after it stops being a creature', () => {
   const s = fixture(),
     land = put(s, 'Forest');
   bend(s, land);
@@ -234,5 +234,8 @@ test('earthbend does not return a land put in graveyard after it stops being a c
   });
   assert.equal(definition(s, land).type, 'land');
   move(s, land, 'graveyard');
-  assert.equal(s.pendingTriggers.length, 0);
+  assert.equal(s.pendingTriggers.length, 1);
+  ret(s);
+  assert.equal(land.zone, 'battlefield');
+  assert.equal(land.tapped, true);
 });

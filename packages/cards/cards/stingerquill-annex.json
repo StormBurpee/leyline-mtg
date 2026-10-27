@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "26e20ae5-4059-4d63-9db5-6e12421d1aba",
+  "name": "Stingerquill Annex",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control a planeswalker.\n{T}: Add {B} or {R}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "type": "planeswalker"
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["B", "R"]
+    }
+  ]
+}

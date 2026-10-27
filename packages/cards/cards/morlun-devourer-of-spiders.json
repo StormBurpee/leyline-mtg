@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "273ad15c-366a-4691-978b-d6028b57005a",
+  "name": "Morlun, Devourer of Spiders",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Vampire", "Villain"],
+    "colors": ["B"],
+    "manaCost": "{X}{B}{B}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Lifelink\nMorlun enters with X +1/+1 counters on him.\nWhen Morlun enters, he deals X damage to target opponent.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "entryPlusCounters",
+      "amount": {
+        "kind": "x"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": {
+            "kind": "x"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -12,7 +12,7 @@
   {
     "oracleId": "a871dfbf-1fb9-4d1c-81bb-e4f0b131a11b",
     "name": "Valgavoth's Faithful",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "660d44a2-391a-416c-b46c-ddcc3739f527",
@@ -52,7 +52,7 @@
   {
     "oracleId": "16e9c452-6288-4da8-813d-2eb6b7a538c3",
     "name": "Valley Mightcaller",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "81c509b2-3164-47e9-94b3-bdba0487d2f1",
@@ -277,7 +277,7 @@
   {
     "oracleId": "29f1484c-91b6-436a-a6be-3ab8b58c0fc1",
     "name": "Veteran Beastrider",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "2313a3f9-3eac-4684-a25e-6a6ae445a723",
@@ -327,7 +327,7 @@
   {
     "oracleId": "e02abbc0-687b-4aef-95b8-bf18e199725a",
     "name": "Vicious Clown",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "90898c76-21f9-4597-88fe-dc9179911cde",
@@ -342,7 +342,7 @@
   {
     "oracleId": "fcb35d42-bcd2-427c-9640-ff3602b79912",
     "name": "Vigorbloom Annex",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "826f17d1-3806-4579-8b1b-2082b7b03d69",
@@ -532,7 +532,7 @@
   {
     "oracleId": "517f84b5-cf99-410d-96ea-910740231dac",
     "name": "Void Extrapolator // Omit Variables",
-    "status": "no_exact_forge_match"
+    "status": "curated"
   },
   {
     "oracleId": "f7afe534-fbb0-4f8b-9e98-aa49d4005465",
@@ -552,7 +552,7 @@
   {
     "oracleId": "ebc3ca0f-35eb-4606-90ab-eb64556f81fe",
     "name": "Volatile Wanderglyph",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "a257426d-70c9-4d58-bd8b-97ec38f6e133",
@@ -562,7 +562,7 @@
   {
     "oracleId": "bf4268e6-170a-445b-b215-718f7494ae28",
     "name": "Volley Veteran",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "5d96840e-f9b3-4c86-8f59-f12e5736318f",

@@ -476,6 +476,7 @@
             "enter",
             "cast",
             "dies",
+            "battlefieldToGraveyard",
             "sacrifice",
             "attack",
             "step",
@@ -484,9 +485,11 @@
             "lifeGain",
             "faceUp",
             "combatDamagePlayer",
+            "tap",
             "targeted",
             "chapter",
-            "librarySearch"
+            "librarySearch",
+            "draw"
           ]
         },
         "object": {
@@ -503,6 +506,11 @@
         },
         "step": {
           "enum": ["upkeep", "beginCombat", "end", "main1", "main2", "draw"]
+        },
+        "drawNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
         },
         "spellNumber": {
           "type": "integer",
@@ -2132,6 +2140,25 @@
           },
           "required": ["op", "threshold", "selector", "effects"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["op", "target"],
+          "properties": {
+            "op": {
+              "const": "delayedBlink"
+            },
+            "target": {
+              "const": "target"
+            },
+            "targetGroup": {
+              "type": "string"
+            },
+            "controller": {
+              "enum": ["owner", "you"]
+            }
+          }
         }
       ]
     },
@@ -2914,8 +2941,15 @@
               "const": "entryPlusCounters"
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0
+              "oneOf": [
+                { "type": "integer", "minimum": 0 },
+                {
+                  "type": "object",
+                  "properties": { "kind": { "const": "x" } },
+                  "required": ["kind"],
+                  "additionalProperties": false
+                }
+              ]
             }
           },
           "required": ["kind", "amount"],

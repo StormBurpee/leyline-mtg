@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d5fca77c-377f-41b4-a9e9-e91a89d351cc",
+  "name": "Mox Jasper",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": ["legendary"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{0}"
+  },
+  "rulesText": "{T}: Add one mana of any color. Activate only if you control a Dragon.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"],
+      "conditions": {
+        "W": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "subtype": "Dragon"
+          }
+        },
+        "U": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "subtype": "Dragon"
+          }
+        },
+        "B": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "subtype": "Dragon"
+          }
+        },
+        "R": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "subtype": "Dragon"
+          }
+        },
+        "G": {
+          "kind": "controlAtLeast",
+          "count": 1,
+          "where": {
+            "subtype": "Dragon"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1ea71ea2-65ca-4907-b857-dbd1ba8efacd",
+  "name": "Cerebral Confiscation",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Target opponent discards two cards.\n\u2022 Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target opponent discards two cards.",
+          "target": {
+            "scope": "player",
+            "where": {
+              "controller": "opponent"
+            }
+          },
+          "effects": [
+            {
+              "op": "discard",
+              "target": "target",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "Choose and discard a nonland card from target opponent hand.",
+          "target": {
+            "scope": "player",
+            "where": {
+              "controller": "opponent"
+            }
+          },
+          "effects": [
+            {
+              "op": "revealDiscard"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

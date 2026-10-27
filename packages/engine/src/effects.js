@@ -1,3 +1,4 @@
+import { tapObjects } from './model.js';
 import { endTurn } from './turn.js';
 import { LAND_CARD_NAMES } from './land-card-names.js';
 import { attackDefenders, validateAttackDefenders } from './combat.js';
@@ -463,8 +464,14 @@ export function enterBattlefieldBatch(
       else object.chosenCreatureType = typeChoices[object.id];
     }
     object.attachedTo = attachment;
+    // Entry counters are a replacement, not a triggered effect. move() clears the
+    // spell's chosenX, so use its pre-move snapshot (zero for nonstack entry).
+    // This runs before entry observers and state-based actions see the permanent.
     object.plusCounters +=
-      (entryCounters.get(object.id) ?? 0) + (definition(s, object).entryPlusCounters ?? 0);
+      (entryCounters.get(object.id) ?? 0) +
+      (definition(s, object).entryPlusCounters?.kind === 'x'
+        ? castValues.get(object.id)
+        : (definition(s, object).entryPlusCounters ?? 0));
     if (definition(s, object).entryKeywordCounters) {
       object.keywordCounters = {};
       object.keywordCounterTimestamps = {};
@@ -741,6 +748,17 @@ export function resolveEffects(s, entry, startIndex = 0) {
           s,
           targets.map((target) => ({ source, target, amount: e.amount })),
         );
+      } else if (e.op === 'tap') {
+        tapObjects(
+          s,
+          targets
+            .filter(
+              (target) =>
+                target.kind === 'object' &&
+                s.objects[target.id]?.incarnation === target.incarnation,
+            )
+            .map((target) => s.objects[target.id]),
+        );
       } else if (['destroy', 'bounce', 'moveTarget', 'exileUntilSourceLeaves'].includes(e.op)) {
         const context = captureDepartureContext(s);
         for (const target of targets) {
@@ -1004,7 +1022,8 @@ export function resolveEffects(s, entry, startIndex = 0) {
             )
               packets.push({ source, target: { kind: 'player', id: player.id }, amount: e.amount });
           dealDamageBatch(s, packets);
-        } else
+        } else if (e.op === 'tapAll') tapObjects(s, objects);
+        else
           for (const object of objects) {
             if (e.op === 'modifyAll')
               addModifier(s, {
@@ -1017,7 +1036,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
               });
             else if (e.op === 'counterAll') object.plusCounters += e.amount;
             else if (e.op === 'untapAll') untapObject(s, object);
-            else object.tapped = true;
+            else tapObjects(s, [object]);
           }
         break;
       }
@@ -1123,7 +1142,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
       case 'untap':
         if (o) {
           if (e.op === 'untap') untapObject(s, o);
-          else o.tapped = true;
+          else tapObjects(s, [o]);
         }
         break;
       case 'impulseChoose': {
@@ -1597,6 +1616,38 @@ export function resolveEffects(s, entry, startIndex = 0) {
         loseLife(s, recipient, e.amount);
         emit(s, 'lifeLost', { player: recipient, amount: e.amount });
         break;
+      case 'delayedBlink': {
+        if (!o) break;
+        move(s, o, 'exile');
+        // Only this exile incarnation can return; tokens cease to exist off battlefield.
+        if (o.zone !== 'exile' || o.token) break;
+        (s.delayedTriggers ??= []).push({
+          kind: 'ability',
+          name: entry.name,
+          controller: entry.controller,
+          source: { ...entry.source },
+          sourceKeywords: [],
+          effects: [{ op: 'returnDelayedBlink', controller: e.controller ?? 'owner' }],
+          delayedObjects: [ref(o)],
+          label: `${entry.name} · return exiled card`,
+        });
+        break;
+      }
+      case 'returnDelayedBlink': {
+        const entering = (entry.delayedObjects ?? []).flatMap((target) => {
+          const object = s.objects[target.id];
+          return object?.zone === 'exile' &&
+            object.incarnation === target.incarnation &&
+            !object.token
+            ? [{ object, controller: e.controller === 'you' ? entry.controller : object.owner }]
+            : [];
+        });
+        if (enterBattlefieldBatch(s, entering) === false) {
+          s.resolving = { entry, index: index + 1 };
+          return false;
+        }
+        break;
+      }
       case 'exileUntilSourceLeaves':
         exileUntilSourceLeaves(s, entry, target);
         break;

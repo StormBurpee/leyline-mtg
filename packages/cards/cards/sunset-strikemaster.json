@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d81ade13-e7c7-4fe3-bb0c-5007ed9f1198",
+  "name": "Sunset Strikemaster",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Monk"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "{T}: Add {R}.\n{2}{R}, {T}, Sacrifice this creature: It deals 6 damage to target creature with flying.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["R"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{R}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 6
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "keyword": "flying"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "afddba56-f9a0-4917-8167-c9fd17ca9954",
+  "name": "Solarium Sentry",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Soldier"],
+    "colors": ["G", "W"],
+    "manaCost": "{G}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Whenever an opponent casts a spell with mana value 2 or less, you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "opponent",
+        "filter": {
+          "manaValue": {
+            "lte": 2
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

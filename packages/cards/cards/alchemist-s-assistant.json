@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2844d274-cb60-46c1-a73b-e763c633e496",
+  "name": "Alchemist's Assistant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Monkey"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Lifelink\nRenew \u2014 {1}{B}, Exile this card from your graveyard: Put a lifelink counter on target creature. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "timing": "sorcery",
+      "cost": {
+        "mana": "{1}{B}",
+        "exileSelf": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "keywordCounters",
+          "keywords": ["lifelink"]
+        }
+      ]
+    }
+  ]
+}

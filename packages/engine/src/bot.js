@@ -84,6 +84,25 @@ function groupedSpellScore(s, p, action, card) {
     if (effect.op === 'token') tempo += effect.count * 2;
     if (effect.op === 'gainLife' && canGainLife(s) && effect.player !== 'opponent')
       tempo += effect.amount * 0.25;
+    if (effect.op === 'delayedBlink') {
+      for (const t of targets) {
+        const d = data(t);
+        if (!d) continue;
+        // Blink is not permanent removal. Recover stolen cards, reuse ETBs, or save a threatened body.
+        const owner = effect.controller === 'you' ? p : d.object.owner;
+        tempo +=
+          owner === p
+            ? 1 +
+              (definition(s, d.object).triggers?.some(
+                (t) =>
+                  t.event === 'selfEnters' ||
+                  (t.event?.event === 'enter' && t.event.object === 'source'),
+              )
+                ? 2
+                : 0)
+            : 0.5;
+      }
+    }
     if (['bounce', 'moveTarget', 'exileUntilSourceLeaves'].includes(effect.op)) {
       for (const t of targets) {
         const d = data(t);

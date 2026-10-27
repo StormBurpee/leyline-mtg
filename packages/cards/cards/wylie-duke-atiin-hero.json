@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b3ac27d6-7e18-404d-9af2-b03897a5f1d9",
+  "name": "Wylie Duke, Atiin Hero",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Ranger"],
+    "colors": ["G", "W"],
+    "manaCost": "{1}{W}{G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Vigilance\nWhenever Wylie Duke becomes tapped, you gain 1 life and draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "tap",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

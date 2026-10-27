@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "73ad7bcd-4ffc-442c-b6b5-d935b9ccaaaf",
+  "name": "Count on Luck",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}{R}{R}"
+  },
+  "rulesText": "At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "upkeep",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 1,
+          "player": "controller",
+          "duration": "turn"
+        }
+      ]
+    }
+  ]
+}

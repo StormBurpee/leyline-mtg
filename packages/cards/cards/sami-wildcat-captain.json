@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c4175a34-70bb-47e5-8406-efdc4d2cd079",
+  "name": "Sami, Wildcat Captain",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Artificer", "Rogue"],
+    "colors": ["R", "W"],
+    "manaCost": "{4}{R}{W}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Double strike, vigilance\nSpells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "you",
+        "where": {
+          "type": "artifact"
+        }
+      }
+    }
+  ]
+}

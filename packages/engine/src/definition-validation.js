@@ -265,13 +265,14 @@ function validateEffects(
           'untap',
           'moveTarget',
           'exileUntilSourceLeaves',
+          'delayedBlink',
           'removeAbilities',
           'counterAbility',
           'keywordCounters',
           'fightAttached',
         ].includes(e.op) ||
         e.subject !== undefined ||
-        (['counter', 'copyToken'].includes(e.op) && group.max !== 1) ||
+        (['counter', 'copyToken', 'delayedBlink'].includes(e.op) && group.max !== 1) ||
         (e.op === 'counter' && e.unlessPay !== undefined) ||
         (e.op === 'moveTarget' && e.destination === 'battlefield')
       ) {
@@ -334,6 +335,7 @@ function validateEffects(
       gainLife: ['amount', 'player'],
       loseLife: ['amount', 'player'],
       exileUntilSourceLeaves: [],
+      delayedBlink: ['controller'],
       moveTarget: ['destination', 'controller', 'tapped', 'subject', 'trackSource'],
       draw: ['count', 'player'],
       mill: ['count', 'player'],
@@ -494,6 +496,12 @@ function validateEffects(
       errors.push(`${p}: invalid player binding.`);
     if (e.rememberMovedCount !== undefined && typeof e.rememberMovedCount !== 'boolean')
       errors.push(`${p}: invalid moved-count flag.`);
+    if (
+      e.op === 'delayedBlink' &&
+      e.controller !== undefined &&
+      !['owner', 'you'].includes(e.controller)
+    )
+      errors.push(`${p}: unsupported return controller.`);
     if (e.op === 'exileUntilSourceLeavesAll')
       errors.push(...validateFilter(e.where).map((error) => `${p}: ${error}`));
     if (
@@ -834,6 +842,7 @@ function validateEffects(
         'combatRestriction',
         'moveTarget',
         'exileUntilSourceLeaves',
+        'delayedBlink',
         'untap',
         'tap',
         'counterOn',
@@ -970,6 +979,7 @@ export function validateDefinition(card) {
     adventure: nestedAdventure,
     triggers,
     etb,
+    entryPlusCounters,
     ...otherFields
   } = card;
   const entryEffects = [etb];
@@ -984,9 +994,9 @@ export function validateDefinition(card) {
   });
   if (hasX(otherFields) || hasX(otherTriggers))
     errors.push(
-      `${name}: X expressions are supported only in spell effects and self-entry effects.`,
+      `${name}: X expressions are supported only in spell effects, self-entry effects and entry counters.`,
     );
-  if ((hasX(spellEffects) || hasX(entryEffects)) && !printedCost?.X)
+  if ((hasX(spellEffects) || hasX(entryEffects) || hasX(entryPlusCounters)) && !printedCost?.X)
     errors.push(`${name}: X expressions require an X mana cost.`);
   if (
     printedCost?.X &&
@@ -1258,8 +1268,16 @@ export function validateDefinition(card) {
       card.entryKeywordCounters.some((k) => !GRANTED_KEYWORDS.has(k)))
   )
     errors.push(`${name}.entryKeywordCounters: expected supported keyword counters.`);
-  if (card.entryPlusCounters !== undefined && !natural(card.entryPlusCounters))
-    errors.push(`${name}.entryPlusCounters: expected a nonnegative safe integer.`);
+  if (
+    card.entryPlusCounters !== undefined &&
+    !natural(card.entryPlusCounters) &&
+    !(
+      plain(card.entryPlusCounters) &&
+      card.entryPlusCounters.kind === 'x' &&
+      Object.keys(card.entryPlusCounters).length === 1
+    )
+  )
+    errors.push(`${name}.entryPlusCounters: expected a nonnegative safe integer or X.`);
   if (card.landNameLock !== undefined && card.landNameLock !== true)
     errors.push(`${name}: landNameLock must be true.`);
   if (card.exileGraveyardMoves !== undefined && card.exileGraveyardMoves !== true)

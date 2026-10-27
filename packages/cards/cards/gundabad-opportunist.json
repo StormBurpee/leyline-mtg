@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "61773534-8da8-48fa-b51a-73c0a9a751c4",
+  "name": "Gundabad Opportunist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Rogue"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 1,
+          "player": "controller",
+          "duration": "nextTurn"
+        }
+      ]
+    }
+  ]
+}

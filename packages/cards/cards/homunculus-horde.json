@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b3c69bf4-880f-4198-a67c-87d23d9c3d41",
+  "name": "Homunculus Horde",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Homunculus"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever you draw your second card each turn, create a token that's a copy of this creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "draw",
+        "controller": "you",
+        "drawNumber": 2
+      },
+      "effects": [
+        {
+          "op": "copyToken",
+          "target": "source",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

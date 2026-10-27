@@ -204,6 +204,7 @@ export function compileCard(
           'loseLife',
           'moveTarget',
           'exileUntilSourceLeaves',
+          'delayedBlink',
           'draw',
           'mill',
           'scry',
@@ -292,6 +293,7 @@ export function compileCard(
         gainLife: ['target', 'amount'],
         loseLife: ['target', 'amount'],
         exileUntilSourceLeaves: ['target'],
+        delayedBlink: ['target', 'controller'],
         moveTarget: ['target', 'destination', 'controller', 'tapped', 'trackSource'],
         draw: ['target', 'amount'],
         mill: ['target', 'amount'],
@@ -504,6 +506,8 @@ export function compileCard(
         if (effect.unlessPay !== undefined) e.unlessPay = structuredClone(effect.unlessPay);
         if (effect.exile !== undefined) e.exile = effect.exile;
       }
+      if (e.op === 'delayedBlink' && effect.controller !== undefined)
+        e.controller = effect.controller;
       if (e.op === 'moveTarget') {
         if (!['source', 'attached', 'target'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'A zone change needs a supported binding.');
@@ -520,6 +524,7 @@ export function compileCard(
           'counter',
           'attachEquipment',
           'exileUntilSourceLeaves',
+          'delayedBlink',
         ].includes(e.op) &&
         effect.target !== 'target'
       )
@@ -958,7 +963,7 @@ export function compileCard(
         break;
       case 'entryPlusCounters':
         fields(a, ['kind', 'amount'], path);
-        d.entryPlusCounters = a.amount;
+        d.entryPlusCounters = structuredClone(a.amount);
         break;
       case 'entryStunCounters':
         fields(a, ['kind', 'amount'], path);

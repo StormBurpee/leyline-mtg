@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9100530e-2bd0-487e-a4eb-13dabd55b678",
+  "name": "Skulduggery",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "Until end of turn, target creature you control gets +1/+1 and target creature an opponent controls gets -1/-1.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn",
+          "targetGroup": "friendly"
+        },
+        {
+          "op": "modify",
+          "target": "target",
+          "power": -1,
+          "toughness": -1,
+          "until": "endOfTurn",
+          "targetGroup": "enemy"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "friendly",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "enemy",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

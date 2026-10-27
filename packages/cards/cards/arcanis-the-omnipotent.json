@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8a7183cc-161c-444d-a889-a17519c8061b",
+  "name": "Arcanis the Omnipotent",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Wizard"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}{U}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "{T}: Draw three cards.\n{2}{U}{U}: Return Arcanis to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{U}{U}"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "source",
+          "destination": "hand"
+        }
+      ]
+    }
+  ]
+}

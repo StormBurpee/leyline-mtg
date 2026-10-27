@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "50d6fd91-23d3-4d32-804f-6233e4386904",
+  "name": "Ouroboroid",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Plant", "Wurm"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}{G}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "At the beginning of combat on your turn, put X +1/+1 counters on each creature you control, where X is this creature's power.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "controller": "you",
+        "step": "beginCombat"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "amount": {
+            "kind": "sourceStat",
+            "stat": "power"
+          }
+        }
+      ]
+    }
+  ]
+}

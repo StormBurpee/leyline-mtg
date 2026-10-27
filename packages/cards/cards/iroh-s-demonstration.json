@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8dd2e73a-d1b4-4d26-857f-9eb8e384c8ff",
+  "name": "Iroh's Demonstration",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": ["Lesson"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Iroh's Demonstration deals 1 damage to each creature your opponents control.\n\u2022 Iroh's Demonstration deals 4 damage to target creature.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Deal 1 damage to each opposing creature.",
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "opponent"
+                  }
+                ]
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Deal 4 damage to target creature.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 4
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

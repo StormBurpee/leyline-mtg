@@ -35,7 +35,10 @@ export function nextTurn(s) {
     }
   // Until your next turn ends before untapping or any turn-start priority.
   s.modifiers = s.modifiers.filter((m) => m.untilNextTurn !== s.active);
-  for (const player of s.players) delete player.spellsCast;
+  for (const player of s.players) {
+    delete player.spellsCast;
+    delete player.cardsDrawn;
+  }
   s.step = 'upkeep';
   s.priority = s.active;
   s.passes = 0;

@@ -1,0 +1,92 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a8c44bd9-6470-47d7-934f-77c76a44a984",
+  "name": "Sanar, Unfinished Genius // Wild Idea",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Goblin", "Sorcerer"],
+    "colors": ["R", "U"],
+    "manaCost": "{U}{R}",
+    "power": 0,
+    "toughness": 4
+  },
+  "rulesText": "Sanar enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\n{T}: Create a Treasure token. Activate only if you've cast an instant or sorcery spell this turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "spellsCast",
+          "player": "you",
+          "where": {
+            "any": [
+              {
+                "type": "instant"
+              },
+              {
+                "type": "sorcery"
+              }
+            ]
+          }
+        },
+        "operator": "gte",
+        "right": 1
+      }
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Sanar, Unfinished Genius",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/wild-idea",
+        "name": "Wild Idea",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["R", "U"],
+          "manaCost": "{3}{U}{R}"
+        },
+        "rulesText": "Search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "searchLibrary",
+                "amount": 1,
+                "destination": "hand",
+                "where": {
+                  "any": [
+                    {
+                      "type": "instant"
+                    },
+                    {
+                      "type": "sorcery"
+                    }
+                  ]
+                },
+                "reveal": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

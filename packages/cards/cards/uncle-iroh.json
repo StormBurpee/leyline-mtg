@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8a98ddac-7341-4118-b188-51d8d03afd1d",
+  "name": "Uncle Iroh",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Noble", "Ally"],
+    "colors": ["G", "R"],
+    "manaCost": "{1}{R/G}{R/G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.)\nLesson spells you cast cost {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "combatMana",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "where": {
+        "subtype": "Lesson"
+      }
+    }
+  ]
+}

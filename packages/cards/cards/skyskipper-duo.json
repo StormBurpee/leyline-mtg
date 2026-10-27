@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a50db36c-948b-4132-a5e5-84aab1f42612",
+  "name": "Skyskipper Duo",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird", "Frog"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhen this creature enters, exile up to one other target creature you control. Return it to the battlefield under its owner's control at the beginning of the next end step.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "blink",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "controller": "you"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "delayedBlink",
+          "target": "target",
+          "targetGroup": "blink"
+        }
+      ]
+    }
+  ]
+}

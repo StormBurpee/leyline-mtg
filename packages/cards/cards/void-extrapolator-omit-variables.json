@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "517f84b5-cf99-410d-96ea-910740231dac",
+  "name": "Void Extrapolator // Omit Variables",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Aetherborn", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\nThreshold \u2014 This creature gets +1/+1 as long as there are seven or more cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 7
+      },
+      "power": 1,
+      "toughness": 1
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Void Extrapolator",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/omit-variables",
+        "name": "Omit Variables",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["B", "U"],
+          "manaCost": "{U/B}"
+        },
+        "rulesText": "Mill three cards. (Put the top three cards of your library into your graveyard.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "mill",
+                "target": "controller",
+                "amount": 3
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

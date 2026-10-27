@@ -56,6 +56,7 @@ export function validateEventSpec(value) {
           'excludeSource',
           'step',
           'spellNumber',
+          'drawNumber',
           'castByController',
           'targetingController',
           'targetingKind',
@@ -71,14 +72,17 @@ export function validateEventSpec(value) {
       'chapter',
       'cast',
       'dies',
+      'battlefieldToGraveyard',
       'sacrifice',
       'attack',
+      'tap',
       'step',
       'faceUp',
       'attackGroup',
       'noncombatDamageToPlayer',
       'lifeGain',
       'librarySearch',
+      'draw',
       'combatDamagePlayer',
       'targeted',
     ].includes(spec.event)
@@ -91,8 +95,10 @@ export function validateEventSpec(value) {
         'enter',
         'chapter',
         'dies',
+        'battlefieldToGraveyard',
         'sacrifice',
         'attack',
+        'tap',
         'faceUp',
         'combatDamagePlayer',
         'targeted',
@@ -100,10 +106,10 @@ export function validateEventSpec(value) {
   )
     errors.push('Source identity predicates are unsupported for this event family.');
   if (
-    ['lifeGain', 'librarySearch'].includes(spec.event) &&
+    ['lifeGain', 'librarySearch', 'draw'].includes(spec.event) &&
     (spec.object !== undefined || spec.filter !== undefined || spec.excludeSource !== undefined)
   )
-    errors.push('Life-gain events identify a player, not an object.');
+    errors.push('This event identifies a player, not an object.');
   if (spec.event === 'step') {
     if (!['upkeep', 'draw', 'beginCombat', 'end', 'main1', 'main2'].includes(spec.step))
       errors.push('Unsupported beginning-of-step trigger.');
@@ -121,6 +127,11 @@ export function validateEventSpec(value) {
     (spec.event !== 'cast' || !Number.isSafeInteger(spec.spellNumber) || spec.spellNumber < 1)
   )
     errors.push('spellNumber requires a cast event and a positive safe integer.');
+  if (
+    spec.drawNumber !== undefined &&
+    (spec.event !== 'draw' || !Number.isSafeInteger(spec.drawNumber) || spec.drawNumber < 1)
+  )
+    errors.push('drawNumber requires a draw event and a positive safe integer.');
   if (
     spec.targetingController !== undefined &&
     (spec.event !== 'targeted' || !['you', 'opponent'].includes(spec.targetingController))
@@ -170,6 +181,7 @@ export function matchesEvent(value, event, facts, source) {
   if (!spec || spec.event !== event) return false;
   if (event === 'chapter' && !spec.chapters.includes(facts.chapterNumber)) return false;
   if (spec.spellNumber !== undefined && facts.spellNumber !== spec.spellNumber) return false;
+  if (spec.drawNumber !== undefined && facts.drawNumber !== spec.drawNumber) return false;
   if (event === 'step' && spec.step !== facts.step) return false;
   if (spec.object === 'source' && facts.id !== source.id) return false;
   if (spec.excludeSource && facts.id === source.id) return false;

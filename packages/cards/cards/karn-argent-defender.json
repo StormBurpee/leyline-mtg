@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "aecc621f-67da-41a7-9d47-05ded302ae35",
+  "name": "Karn, Argent Defender",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Golem"],
+    "colors": [],
+    "manaCost": "{2}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Artifacts and creatures entering the battlefield don't cause abilities to trigger.",
+  "abilities": [
+    {
+      "kind": "suppressEnterTriggers",
+      "where": {
+        "any": [
+          {
+            "type": "artifact"
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      }
+    }
+  ]
+}

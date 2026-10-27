@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "99c70f4e-de8a-426d-99aa-17b2f87625ba",
+  "name": "Training Compound",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {C}.\n{T}: Add {R} or {G}. Activate only if this land entered this turn or if you control a basic land.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C", "R", "G"],
+      "conditions": {
+        "R": {
+          "kind": "any",
+          "conditions": [
+            {
+              "kind": "sourceEnteredThisTurn"
+            },
+            {
+              "kind": "controlAtLeast",
+              "count": 1,
+              "where": {
+                "all": [
+                  {
+                    "type": "land"
+                  },
+                  {
+                    "basic": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "G": {
+          "kind": "any",
+          "conditions": [
+            {
+              "kind": "sourceEnteredThisTurn"
+            },
+            {
+              "kind": "controlAtLeast",
+              "count": 1,
+              "where": {
+                "all": [
+                  {
+                    "type": "land"
+                  },
+                  {
+                    "basic": true
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

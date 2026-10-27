@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c566317e-cd82-46c1-b506-f41256d815f6",
+  "name": "Wingblade Disciple",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Monk"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nFlurry \u2014 Whenever you cast your second spell each turn, create a 1/1 white Bird creature token with flying.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "spellNumber": 2
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-flying-bird-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

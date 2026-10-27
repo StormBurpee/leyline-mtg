@@ -28,3 +28,43 @@ Legal-action enumeration returns one deterministic valid witness rather than enu
 No approximate sources were added for remaining Vehicles. Still unsupported here: alternative crew contributions or prohibitions, history-sensitive crew payoffs, once-per-turn crew restrictions, multiple crew abilities, exhaust/permanent animation, static conditional animation, variable printed Vehicle P/T, copy-dependent Vehicles, face-down Vehicle animation, transform/double-faced Vehicles, and unrelated unimplemented abilities on those cards. No expansion to changeling/copy support is implied. Noncreature printed Vehicles with creature-only CDAs or disguise are rejected by validation. Future copy effects must continue to use copiable, not temporary effective, characteristics.
 
 The event log calls cost payment `crewActivated`; it does not misrepresent payment as a "becomes crewed" trigger. CR 702.122e trigger support remains excluded.
+
+## Source audit (2026-10-27)
+
+Compared all 20 authored Standard Vehicles at repository baseline `4046d88` with the
+2026-10-26 Oracle inventory (`research/standard-expansion/standard.json`, 5,164 cards).
+Reviewed full rules text, ability costs, targets, timing, optionality, token definitions,
+crew values, mana costs, colors, types, and printed power/toughness. This is a bounded
+source audit, not a claim of exhaustive runtime verification for every interaction.
+
+| Vehicle                  | Additional authored abilities checked                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------- |
+| Adventurer's Airship     | Flying; self-attack draw then discard                                                             |
+| Air Response Unit        | Flying, vigilance                                                                                 |
+| Apocalypse Runner        | Tap; your power-2-or-less creature gains lifelink and cannot be blocked this turn                 |
+| Boosted Sloop            | Menace; your attack-group draw then discard (not restricted to this Vehicle attacking)            |
+| Burner Rocket            | Flash; ETB your target creature +2/+0 and trample until end of turn                               |
+| Careening Mine Cart      | Self-attack creates one Treasure; **removed spurious mana ability**                               |
+| Clamorous Ironclad       | Menace; cycling {R}                                                                               |
+| Cultivator's Caravan     | Tap for one mana of any color                                                                     |
+| Debris Beetle            | Trample; ETB opponent loses 3, controller gains 3                                                 |
+| Dependable Quinjet       | Flying; tap for one mana of any color                                                             |
+| Detention Chariot        | ETB exile opponent's target artifact or creature until source leaves; cycling {W}                 |
+| Fire Nation Warship      | Reach; dies creates one Clue                                                                      |
+| Hulldrifter              | Flying; ETB draw two                                                                              |
+| Ripclaw Wrangler         | ETB opponent discards one                                                                         |
+| S.H.I.E.L.D. Helicarrier | Flying; ETB creates two white 1/1 Soldiers                                                        |
+| Skybox Ferry             | Flying; cycling {2}                                                                               |
+| Spotcycle Scouter        | ETB scry two                                                                                      |
+| Strixhaven Skycoach      | Flying; optional ETB basic-land search to hand, revealed, then shuffle                            |
+| Thundering Broodwagon    | Reach, menace; ETB destroy opponent's nonland permanent with mana value at most four; cycling {2} |
+| Veloheart Bike           | ETB gain two life; tap for one mana of any color                                                  |
+
+No additional source/Oracle mismatch was found in this set. "Each opponent" is
+represented by the opposing player in this two-player engine; multiplayer is not
+implied. The Treasure, Clue, and white Soldier token sources were also inspected.
+Mine Cart's Treasure reminder text describes the **token's** mana ability, not an
+ability of Mine Cart. Regression tests reject direct mana activation both before
+and after crew, retain its attack trigger, and verify the resulting Treasure can
+produce mana and is sacrificed. A second regression checks the exact mana-action
+set of all 20 audited Vehicles, retaining all three legitimate mana Vehicles.

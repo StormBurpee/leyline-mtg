@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "02b41d0e-82e7-4307-8cc4-8175ff78ea1f",
+  "name": "Kiora of Fire and Ashes",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Merfolk", "Noble"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When Kiora enters, create a 5/5 red Dragon creature token with flying.\n{8}: Create a 5/5 red Dragon creature token with flying.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/five-five-dragon-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{8}"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/five-five-dragon-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

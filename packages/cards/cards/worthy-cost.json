@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0f8ebf11-b5ec-4f21-8c49-90d569b5a4c5",
+  "name": "Worthy Cost",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "As an additional cost to cast this spell, sacrifice a creature.\nExile target creature or planeswalker.",
+  "abilities": [
+    {
+      "kind": "sacrificeCost",
+      "where": {
+        "type": "creature"
+      }
+    },
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "type": "planeswalker"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

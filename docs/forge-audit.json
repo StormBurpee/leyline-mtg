@@ -2542,16 +2542,16 @@
   ],
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
-    "packages/engine/src/registry.js": "b8df8327e75a1c4857e6da91a284703154c75c848f8d3b91f42b6f8fdb9ffffd",
-    "packages/engine/src/definition-validation.js": "92878e6953d6048643ced0878cf2aa0d3a7d24869156da782949658f7063b7e2",
+    "packages/engine/src/registry.js": "d380428ec73a4f37b483bd890cf48d4b48eb16f8dc6e5dbfb212b4c6376e0c24",
+    "packages/engine/src/definition-validation.js": "b2d7e67e736441d25d3d095b0a0212f0bacdf5309382259186cd368beac8a97d",
     "packages/engine/src/condition-schema.js": "f31288a9f73434ead877da284794456f4d69b1edf01122cd563f179c66a1f3cd",
     "packages/engine/src/target-group-schema.js": "488c4d5141dd2395cb5fcc02303bacd9ec4047abb08e0d8e5c7d9bea78498681",
-    "packages/engine/src/selectors.js": "49a8f1a1341309cef5d6d4c2a56c9defb0a995d50ed6ff900f324004da15398c",
+    "packages/engine/src/selectors.js": "8f516d6875dad0dfcefaada993b3fcad740a4b17dfd8687869a4d7536e2dbb67",
     "packages/engine/src/value-schema.js": "6bfec645240637a832d0bbb339294902ee8b94b927bcf1f748d039f626b7ac2c",
     "packages/engine/src/spell-history.js": "9a615e4f842b5a0cb345497d34f0fa6c4ba8bcad0ff9f3d458d65232070472c7",
-    "packages/engine/src/events.js": "a774e7b89cc9399100bf9bdf7c104c24b0af0820697f49cdd809042be5230741",
+    "packages/engine/src/events.js": "ee759de1c6b05d1bdb30b51f27264f046fb49ebda45ba92d8af829bfad279883",
     "packages/engine/src/types.js": "cd3ad79db1d75dab6abeb564373d213814ab9aeee6d9301fa160cbd57dca8f25",
     "packages/engine/src/creature-types.js": "a9795a0aee66966054a854ece62af6406bc029c2b9e85d83b344e38eeb82a109"
   },
-  "auditedWithEngine": "0.47.0"
+  "auditedWithEngine": "0.48.0"
 }

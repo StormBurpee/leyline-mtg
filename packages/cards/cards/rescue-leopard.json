@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d70ad04a-b940-4bb1-bcdc-408166e91723",
+  "name": "Rescue Leopard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature becomes tapped, you may discard a card. If you do, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "tap",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "optionalDiscardDraw"
+        }
+      ]
+    }
+  ]
+}

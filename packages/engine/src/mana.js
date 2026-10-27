@@ -1,3 +1,4 @@
+import { tapObjects } from './model.js';
 import { hasType } from './types.js';
 import { hasSubtype } from './creature-types.js';
 import { meetsCondition } from './conditions.js';
@@ -68,7 +69,7 @@ export function tapForMana(s, id, p, color) {
     loseLife(s, p, life);
     emit(s, 'lifePaid', { player: p, amount: life, objectId: o.id });
   }
-  o.tapped = true;
+  tapObjects(s, [o]);
   const restriction = manaRestriction(s, o, chosen);
   if (restriction) (s.players[p].restrictedMana ??= []).push(restriction);
   else s.players[p].mana[chosen]++;

@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bd9d3a70-faed-4bc6-97d8-1601b36cdb21",
+  "name": "Quill-Blade Laureate // Twofold Intent",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Cleric"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Double strike\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Quill-Blade Laureate",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/twofold-intent",
+        "name": "Twofold Intent",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["W"],
+          "manaCost": "{1}{W}"
+        },
+        "rulesText": "Target creature gets +1/+0 and gains double strike until end of turn.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "modify",
+                "target": "target",
+                "power": 1,
+                "toughness": 0,
+                "until": "endOfTurn",
+                "keywords": ["double strike"]
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

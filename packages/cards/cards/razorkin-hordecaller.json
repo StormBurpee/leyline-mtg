@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3fc4bdf1-7da3-4f9f-806f-f82cd18ea65f",
+  "name": "Razorkin Hordecaller",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Clown", "Berserker"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Haste\nWhenever you attack, create a 1/1 red Gremlin creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attackGroup",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/red-gremlin-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

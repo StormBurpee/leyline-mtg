@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9a294cbd-df18-4ee0-acaa-e31390a7f508",
+  "name": "Tweeze",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "Tweeze deals 3 damage to any target. You may discard a card. If you do, draw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 3
+        },
+        {
+          "op": "optionalDiscardDraw"
+        }
+      ],
+      "target": {
+        "scope": "damageable"
+      }
+    }
+  ]
+}

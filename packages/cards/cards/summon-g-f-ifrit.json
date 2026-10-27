@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "96d1bfc1-b80f-466f-b07d-df1ab361e8e0",
+  "name": "Summon: G.F. Ifrit",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "supertypes": [],
+    "subtypes": ["Saga", "Demon"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II \u2014 You may discard a card. If you do, draw a card.\nIII, IV \u2014 Add {R}.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [1, 2]
+      },
+      "effects": [
+        {
+          "op": "optionalDiscardDraw"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [3, 4]
+      },
+      "effects": [
+        {
+          "op": "addMana",
+          "mana": "{R}"
+        }
+      ]
+    }
+  ]
+}

@@ -128,6 +128,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return { op: 'gainLife', target: e.player ?? 'controller', amount: e.amount };
         case 'loseLife':
           return { op: 'loseLife', target: e.player ?? 'controller', amount: e.amount };
+        case 'delayedBlink':
+          return { ...e, target: 'target' };
         case 'exileUntilSourceLeaves':
           return { op: e.op, target: 'target' };
         case 'moveTarget':
@@ -254,7 +256,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   if (d.entryKeywordCounters)
     abilities.push({ kind: 'entryKeywordCounters', keywords: [...d.entryKeywordCounters] });
   if (d.entryPlusCounters !== undefined)
-    abilities.push({ kind: 'entryPlusCounters', amount: d.entryPlusCounters });
+    abilities.push({ kind: 'entryPlusCounters', amount: structuredClone(d.entryPlusCounters) });
   if (d.landNameLock) abilities.push({ kind: 'landNameLock' });
   if (d.exileGraveyardMoves) abilities.push({ kind: 'exileGraveyardMoves' });
   if (d.suppressEnterTriggers)
@@ -363,7 +365,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       effects: effects(d.effects),
     });
   if (d.etb) {
-    if (d.etb.length === 1 && d.etb[0].op === 'draw')
+    if (d.etb.length === 1 && d.etb[0].op === 'draw' && Number.isInteger(d.etb[0].count))
       abilities.push({ use: 'etb.draw', args: { cards: d.etb[0].count } });
     else abilities.push({ kind: 'triggered', on: EVENTS.selfEnters, effects: effects(d.etb) });
   }

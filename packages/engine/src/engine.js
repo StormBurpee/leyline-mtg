@@ -1,3 +1,4 @@
+import { tapObjects } from './model.js';
 import { sacrificePermanents } from './model.js';
 import {
   castingPayment,
@@ -182,8 +183,10 @@ function cast(s, p, c) {
       type: 'cast',
       card: d,
     });
-    if (plan.harmonize) s.objects[plan.harmonize.id].tapped = true;
-    for (const choice of plan.choices) s.objects[choice.card].tapped = true;
+    tapObjects(s, [
+      ...(plan.harmonize ? [s.objects[plan.harmonize.id]] : []),
+      ...plan.choices.map((choice) => s.objects[choice.card]),
+    ]);
     if (plan.sacrifice) {
       const sacrificed = s.objects[plan.sacrifice.id];
       sacrificePermanents(s, [sacrificed]);
@@ -455,7 +458,10 @@ function crew(s, p, c) {
   const problem = crewProblem(s, p, c.card, c.cards);
   requireRule(!problem, 'CREW', problem);
   const o = s.objects[c.card];
-  for (const id of c.cards) s.objects[id].tapped = true;
+  tapObjects(
+    s,
+    c.cards.map((id) => s.objects[id]),
+  );
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'ability',
@@ -624,7 +630,7 @@ function handleChoice(s, p, c) {
         );
         for (const id of [...player.hand]) move(s, s.objects[id], 'library');
         shuffle(s, player.library);
-        draw(s, p, 7);
+        draw(s, p, 7, { openingHand: true });
         player.mulligans++;
         emit(s, 'mulligan', { player: p, count: player.mulligans });
       } else if (player.mulligans > 0)
@@ -1078,6 +1084,7 @@ export function replay(record) {
         '0.44.0',
         '0.45.0',
         '0.46.0',
+        '0.47.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

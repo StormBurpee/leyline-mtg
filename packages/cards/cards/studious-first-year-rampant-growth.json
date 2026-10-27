@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "58b0c737-0a84-4f9a-b3b7-300c5de43874",
+  "name": "Studious First-Year // Rampant Growth",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bear", "Wizard"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Studious First-Year",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/rampant-growth",
+        "name": "Rampant Growth",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["G"],
+          "manaCost": "{1}{G}"
+        },
+        "rulesText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "searchLibrary",
+                "amount": 1,
+                "destination": "battlefield",
+                "where": {
+                  "all": [
+                    {
+                      "type": "land"
+                    },
+                    {
+                      "basic": true
+                    }
+                  ]
+                },
+                "tapped": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
