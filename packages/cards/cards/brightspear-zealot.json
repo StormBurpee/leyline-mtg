@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "31a0c9a2-c9bd-47f7-872b-a43fb64d873c",
+  "name": "Brightspear Zealot",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Vigilance\nThis creature gets +2/+0 as long as you've cast two or more spells this turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "spellsCast",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 2
+      },
+      "power": 2,
+      "toughness": 0
+    }
+  ]
+}

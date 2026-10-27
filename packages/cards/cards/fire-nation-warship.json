@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "987aab63-a889-400f-a3bd-feaef978b407",
+  "name": "Fire Nation Warship",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Reach\nWhen this Vehicle dies, create a Clue token. (It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 2
+    }
+  ]
+}

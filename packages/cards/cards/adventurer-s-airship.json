@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e3016295-00f7-4daf-91b0-57653733b103",
+  "name": "Adventurer's Airship",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhenever this Vehicle attacks, draw a card, then discard a card.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "amount": 1,
+          "target": "controller"
+        },
+        {
+          "op": "discard",
+          "amount": 1,
+          "target": "controller"
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 2
+    }
+  ]
+}

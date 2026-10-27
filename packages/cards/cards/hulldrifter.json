@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a0a7319d-9441-4aed-a351-9ff3fb3b1d9e",
+  "name": "Hulldrifter",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhen this Vehicle enters, draw two cards.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "amount": 2,
+          "target": "controller"
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 3
+    }
+  ]
+}

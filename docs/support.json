@@ -1,5 +1,5 @@
 {
-  "version": "0.39.0",
+  "version": "0.40.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -73,6 +73,14 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Adventurer's Airship",
+      "type": "artifact",
+      "keywords": ["flying"],
+      "opcodes": ["draw", "discard"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -167,6 +175,14 @@
       "name": "Air Elemental",
       "type": "creature",
       "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Air Response Unit",
+      "type": "artifact",
+      "keywords": ["flying", "vigilance"],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -965,6 +981,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Boosted Sloop",
+      "type": "artifact",
+      "keywords": ["menace"],
+      "opcodes": ["draw", "discard"],
+      "triggers": [
+        {
+          "event": "attackGroup",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Borderland Marauder",
       "type": "creature",
       "keywords": [],
@@ -1037,6 +1066,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Brightspear Zealot",
+      "type": "creature",
+      "keywords": ["vigilance"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Bumbleflower's Sharepot",
       "type": "artifact",
       "keywords": [],
@@ -1059,6 +1096,14 @@
       "opcodes": ["moveTarget"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Burner Rocket",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["modify"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
     },
     {
       "name": "Burnished Hart",
@@ -1198,6 +1243,14 @@
           }
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Careening Mine Cart",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -1365,6 +1418,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Clamorous Ironclad",
+      "type": "artifact",
+      "keywords": ["menace"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Claws Out",
       "type": "instant",
       "keywords": [],
@@ -1510,6 +1571,20 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Cori Mountain Stalwart",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageOpponent", "gainLife"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 2,
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Corrupt Court Official",
       "type": "creature",
       "keywords": [],
@@ -1627,6 +1702,14 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Cultivator's Caravan",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Cunning Maneuver",
@@ -1806,6 +1889,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Debris Beetle",
+      "type": "artifact",
+      "keywords": ["trample"],
+      "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Deduce",
       "type": "instant",
       "keywords": [],
@@ -1841,6 +1932,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["scry", "draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dependable Quinjet",
+      "type": "artifact",
+      "keywords": ["flying"],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1886,6 +1985,20 @@
         "Destroy target enchantment."
       ],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Devoted Duelist",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["damageOpponent"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 2,
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -2501,6 +2614,20 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Ezekiel Sims, Spider-Totem",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": ["modify"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "beginCombat",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Fade into Antiquity",
       "type": "sorcery",
       "keywords": [],
@@ -2751,6 +2878,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Fire Nation Warship",
+      "type": "artifact",
+      "keywords": ["reach"],
+      "opcodes": ["token"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Fire-Rim Form",
       "type": "enchantment",
       "keywords": ["flash"],
@@ -2903,6 +3038,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Focus the Mind",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["draw", "discard"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -3217,6 +3360,14 @@
     },
     {
       "name": "Gigantosaurus",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Gigastorm Titan",
       "type": "creature",
       "keywords": [],
       "opcodes": [],
@@ -3694,6 +3845,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hearthborn Battler",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["damage"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 2
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Hecteyes",
       "type": "creature",
       "keywords": [],
@@ -3790,6 +3954,14 @@
       "name": "Highborn Vampire",
       "type": "creature",
       "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Highspire Bell-Ringer",
+      "type": "creature",
+      "keywords": ["flying"],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -3932,6 +4104,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hulldrifter",
+      "type": "artifact",
+      "keywords": ["flying"],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Humbling Elder",
       "type": "creature",
       "keywords": ["flash"],
@@ -4028,6 +4208,20 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Illvoi Operative",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 2,
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Impact Tremors",
       "type": "enchantment",
       "keywords": [],
@@ -4104,6 +4298,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Inside Source",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token", "modify"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -4193,6 +4395,20 @@
       "keywords": [],
       "opcodes": ["damage"],
       "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Iron-Fist Pulverizer",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": ["damage", "scry"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 2,
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -4444,6 +4660,20 @@
       "keywords": ["flying", "trample", "indestructible", "haste"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Kraum, Violent Cacophony",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["counterOn", "draw"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 2,
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -4892,6 +5122,20 @@
       "keywords": ["flying", "vigilance"],
       "opcodes": ["draw"],
       "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Malcolm, the Eyes",
+      "type": "creature",
+      "keywords": ["flying", "haste"],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 2,
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -6059,6 +6303,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Poised Practitioner",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn", "scry"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 2,
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Poison Dart Frog",
       "type": "creature",
       "keywords": ["reach"],
@@ -6087,6 +6345,14 @@
       "type": "artifact",
       "keywords": [],
       "opcodes": ["draw", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Potioner's Trove",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["gainLife"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -6760,6 +7026,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ripclaw Wrangler",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Risky Research",
       "type": "sorcery",
       "keywords": [],
@@ -6821,6 +7095,20 @@
       "keywords": [],
       "opcodes": ["bite"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rodeo Pyromancers",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["addMana"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 1,
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -6932,6 +7220,14 @@
     {
       "name": "S.H.I.E.L.D. Deployment Drone",
       "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "S.H.I.E.L.D. Helicarrier",
+      "type": "artifact",
       "keywords": ["flying"],
       "opcodes": ["token"],
       "triggers": [],
@@ -7611,6 +7907,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Skybox Ferry",
+      "type": "artifact",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Skybridge Towers",
       "type": "land",
       "keywords": [],
@@ -7917,6 +8221,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Spotcycle Scouter",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["scry"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spring Splasher",
       "type": "creature",
       "keywords": [],
@@ -8102,6 +8414,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Stoic Sphinx",
+      "type": "creature",
+      "keywords": ["flash", "flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stolen Stark Tech",
       "type": "artifact",
       "keywords": ["flash"],
@@ -8172,6 +8492,14 @@
       "opcodes": ["draw", "discard"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Strixhaven Skycoach",
+      "type": "artifact",
+      "keywords": ["flying"],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
     },
     {
       "name": "Subterranean Cavern",
@@ -8267,6 +8595,20 @@
       "keywords": [],
       "opcodes": ["counterOn", "gainLife"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Sunstar Lightsmith",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn", "draw"],
+      "triggers": [
+        {
+          "event": "cast",
+          "spellNumber": 2,
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -8763,6 +9105,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Thundering Broodwagon",
+      "type": "artifact",
+      "keywords": ["reach", "menace"],
+      "opcodes": ["destroy"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Thundering Falls",
       "type": "land",
       "keywords": [],
@@ -8973,6 +9323,14 @@
       "keywords": [],
       "opcodes": ["draw"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Traxos, Academy Guardian",
+      "type": "creature",
+      "keywords": ["flying", "vigilance"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
       "activatedAbilities": 0
     },
     {
@@ -9300,6 +9658,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Uthros Psionicist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Utrom Scientists",
       "type": "creature",
       "keywords": [],
@@ -9413,6 +9779,14 @@
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Veloheart Bike",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {

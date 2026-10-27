@@ -83,7 +83,15 @@ export interface EventSpec {
   controller?: 'you' | 'opponent';
   filter?: CardPredicate;
   excludeSource?: boolean;
+  spellNumber?: number;
 }
+export type SpellHistoryPredicate =
+  | { type: CardType }
+  | { color: Exclude<Color, 'C'> | 'colorless' }
+  | { subtype: string }
+  | { all: SpellHistoryPredicate[] }
+  | { any: SpellHistoryPredicate[] }
+  | { not: SpellHistoryPredicate };
 export type NumericValue =
   | number
   | {
@@ -93,6 +101,7 @@ export type NumericValue =
       where?: CardPredicate;
       excludeSource?: boolean;
     }
+  | { kind: 'spellsCast'; player: 'you' | 'opponent' | 'all'; where?: SpellHistoryPredicate }
   | { kind: 'life'; player: 'you' | 'opponent' }
   | { kind: 'sum'; values: NumericValue[] }
   | { kind: 'scale'; value: NumericValue; factor: number };
@@ -228,6 +237,7 @@ export interface CardDefinition {
   readonly targetGroups?: readonly TargetGroup[];
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
+  readonly crew?: number;
   readonly cycling?: ManaCost;
   readonly cyclingType?: string;
   readonly flashback?: ManaCost;
@@ -354,6 +364,19 @@ export interface PlayerState {
   speed?: number;
   speedTriggeredTurn?: number;
   lifeLostTurn?: number;
+  spellsCast?: {
+    turn: number;
+    profiles: {
+      definition: {
+        type: CardType;
+        types: CardType[];
+        color: Color[];
+        subtypes: string[];
+        keywords: string[];
+      };
+      count: number;
+    }[];
+  };
   hand: string[];
   library: string[];
   graveyard: string[];
@@ -381,7 +404,11 @@ export interface StackEntry {
   eventAmount?: number;
   damagedPlayer?: PlayerId;
   sourceAttachment?: ObjectTarget | null;
-  effects: (Effect | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } })[];
+  effects: (
+    | Effect
+    | { op: 'animateVehicle' }
+    | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } }
+  )[];
   targetGroups?: TargetGroup[];
   targets?: TargetPlan;
   targetKind?: TargetKind | null;
@@ -546,6 +573,7 @@ export interface GameState {
     power?: number;
     toughness?: number;
     keywords?: string[];
+    addTypes?: CardType[];
     expires: number;
   }[];
   choice: Choice | null;
@@ -568,6 +596,7 @@ export type Action =
   | { type: 'chooseAuraAttachment'; card: string }
   | { type: 'chooseResolutionCard'; card: string | null }
   | { type: 'chooseLegend'; card: string }
+  | { type: 'crew'; card: string; cards: string[] }
   | { type: 'cycle'; card: string }
   | { type: 'resolveOptional'; accept: boolean }
   | { type: 'payCost'; pay: boolean }
@@ -611,6 +640,7 @@ export type LegalAction =
           | 'tapMana'
           | 'cast'
           | 'turnFaceUp'
+          | 'crew'
           | 'cycle'
           | 'activate'
           | 'chooseTriggerTarget'
@@ -787,3 +817,12 @@ export function castingProfile(
   target?: Target | Target[] | null,
   card?: CardDefinition,
 ): CardDefinition | null;
+
+export function crewProblem(
+  state: GameState,
+  player: PlayerId,
+  id: string,
+  cards: string[],
+): string | null;
+export function crewCandidates(state: GameState, player: PlayerId, id: string): GameObject[];
+export function crewPlan(state: GameState, player: PlayerId, id: string): string[] | null;

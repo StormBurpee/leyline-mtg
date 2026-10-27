@@ -21,6 +21,7 @@ export function clearMana(s) {
 export function nextTurn(s) {
   s.active = opponent(s.active);
   s.turn++;
+  for (const player of s.players) delete player.spellsCast;
   s.step = 'upkeep';
   s.priority = s.active;
   s.passes = 0;

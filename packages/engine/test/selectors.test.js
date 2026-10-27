@@ -130,7 +130,7 @@ test('effect validation rejects selectors that cannot be targets for that operat
   for (const [op, target, rest] of [
     ['destroy', { scope: 'player' }, {}],
     ['counter', { scope: 'permanent' }, {}],
-    ['modify', { scope: 'permanent', where: { type: 'artifact' } }, { power: 1, toughness: 1 }],
+    ['modify', { scope: 'player' }, { power: 1, toughness: 1 }],
     ['damage', { scope: 'permanent' }, { amount: 1 }],
   ])
     assert.throws(() =>

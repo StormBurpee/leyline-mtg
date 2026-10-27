@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fa123b21-518a-4f1d-9629-c44576d45f21",
+  "name": "Veloheart Bike",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "When this Vehicle enters, you gain 2 life.\n{T}: Add one mana of any color.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "amount": 2,
+          "target": "controller"
+        }
+      ]
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    },
+    {
+      "kind": "crew",
+      "power": 2
+    }
+  ]
+}

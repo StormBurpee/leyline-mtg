@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6b2ffdb8-3681-4d64-ac03-8c860082e60e",
+  "name": "Ripclaw Wrangler",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "When this Vehicle enters, each opponent discards a card.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "amount": 1,
+          "target": "opponent"
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 2
+    }
+  ]
+}

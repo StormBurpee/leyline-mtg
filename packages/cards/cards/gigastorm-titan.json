@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ef06e10c-553b-45b8-abf0-1d2e87c22128",
+  "name": "Gigastorm Titan",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "This spell costs {3} less to cast if you've cast another spell this turn.",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 3,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "spellsCast",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 1
+      }
+    }
+  ]
+}

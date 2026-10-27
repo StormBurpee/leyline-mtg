@@ -505,6 +505,12 @@ export function enginePage(s) {
 function liveCharacteristics(s, o) {
   const d = definition(s, o),
     bits = [];
+  if (d.crew !== undefined)
+    bits.push(
+      d.type === 'creature'
+        ? 'Artifact creature until end of turn'
+        : `Not a creature · Printed ${d.power}/${d.toughness} · Crew ${d.crew}`,
+    );
   if (d.type === 'creature') {
     const pt = stats(s, o);
     bits.push(`${pt.power}/${pt.toughness} now`);

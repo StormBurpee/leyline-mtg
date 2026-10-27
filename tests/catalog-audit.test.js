@@ -26,6 +26,7 @@ test('Forge inventory identifies the exact checked-in compiler source', async ()
     'packages/engine/src/condition-schema.js',
     'packages/engine/src/target-group-schema.js',
     'packages/engine/src/value-schema.js',
+    'packages/engine/src/spell-history.js',
     'packages/engine/src/selectors.js',
     'packages/engine/src/events.js',
     'packages/engine/src/types.js',

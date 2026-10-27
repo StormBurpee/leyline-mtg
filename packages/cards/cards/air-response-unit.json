@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "18a22d9f-81bc-4ed5-bd83-e3f8ec5e38c8",
+  "name": "Air Response Unit",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying, vigilance\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "crew",
+      "power": 1
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e5cea282-9e61-47da-8c5d-f5fca6a508a4",
+  "name": "Iron-Fist Pulverizer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant", "Warrior"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Reach\nWhenever you cast your second spell each turn, this creature deals 2 damage to target opponent. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "spellNumber": 2,
+        "controller": "you"
+      },
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        },
+        {
+          "op": "scry",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

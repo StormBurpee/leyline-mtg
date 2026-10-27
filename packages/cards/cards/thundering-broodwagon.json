@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "817464d8-1e2d-4e12-96f8-5c7ec9b3e681",
+  "name": "Thundering Broodwagon",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["B", "G"],
+    "manaCost": "{2}{B}{B}{G}{G}",
+    "power": 6,
+    "toughness": 5
+  },
+  "rulesText": "Reach, menace\nWhen this Vehicle enters, destroy target nonland permanent an opponent controls with mana value 4 or less.\nCrew 3\nCycling {2} ({2}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "not": {
+                "type": "land"
+              }
+            },
+            {
+              "controller": "opponent"
+            },
+            {
+              "manaValue": {
+                "lte": 4
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "crew",
+      "power": 3
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}"
+    }
+  ]
+}

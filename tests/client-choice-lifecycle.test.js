@@ -564,3 +564,46 @@ test('landcycling hand action cancels safely; search survives Read, Back, dismis
     h.cleanup();
   }
 });
+
+test('crew selection supports multiple toggles, inspection/back, cancel/reopen and one activation', async () => {
+  const { crewPosition } = await import('./helpers/crew-position.js');
+  const s = crewPosition();
+  const vehicle = Object.values(s.objects).find(
+    (o) => o.name === 'Air Response Unit' && o.zone === 'battlefield',
+  );
+  const pilot = Object.values(s.objects).find(
+    (o) => o.name === 'Savannah Lions' && o.zone === 'battlefield',
+  );
+  const page = await mount(exportReplay(s));
+  try {
+    page.click('[data-action="resume"]');
+    page.click(`[data-card="${vehicle.id}"]`);
+    page.click('[data-action="startCrew"]');
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, true);
+    page.click(`[data-action="toggleCrew"][data-cardid="${pilot.id}"]`);
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, false);
+    page.click(`[data-action="readDecisionCard"][data-cardid="${pilot.id}"]`);
+    page.click('[data-action="returnDecision"]');
+    assert.equal(
+      page.dialog
+        .querySelector(`[data-action="toggleCrew"][data-cardid="${pilot.id}"]`)
+        .getAttribute('aria-pressed'),
+      'true',
+    );
+    page.click(`[data-action="toggleCrew"][data-cardid="${pilot.id}"]`);
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, true);
+    page.click('[data-action="closeDialog"]');
+    assert.equal(page.dialog.open, false);
+    page.click(`[data-card="${vehicle.id}"]`);
+    page.click('[data-action="startCrew"]');
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, true);
+    page.click(`[data-action="toggleCrew"][data-cardid="${pilot.id}"]`);
+    page.click('[data-action="confirmCrew"]');
+    const saved = JSON.parse(page.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.filter((c) => c.type === 'crew').length, 1);
+    assert.deepEqual(saved.replay.commands.find((c) => c.type === 'crew').cards, [pilot.id]);
+    assert.equal(page.dialog.open, false);
+  } finally {
+    page.cleanup();
+  }
+});

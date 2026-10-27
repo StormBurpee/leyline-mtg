@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2b15d571-2f90-44f7-9153-20ed51253045",
+  "name": "Debris Beetle",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["B", "G"],
+    "manaCost": "{2}{B}{G}",
+    "power": 6,
+    "toughness": 6
+  },
+  "rulesText": "Trample\nWhen this Vehicle enters, each opponent loses 3 life and you gain 3 life.\nCrew 2",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "amount": 3,
+          "target": "opponent"
+        },
+        {
+          "op": "gainLife",
+          "amount": 3,
+          "target": "controller"
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 2
+    }
+  ]
+}

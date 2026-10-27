@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6d2d250b-cdce-4075-8724-b52ad31664fb",
+  "name": "Highspire Bell-Ringer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Djinn", "Monk"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nThe second spell you cast each turn costs {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "spellsCast",
+          "player": "you"
+        },
+        "operator": "eq",
+        "right": 1
+      }
+    }
+  ]
+}

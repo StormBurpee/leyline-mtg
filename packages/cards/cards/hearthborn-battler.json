@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "beb02f49-95a6-49bf-b176-4e4b2ab5b651",
+  "name": "Hearthborn Battler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Warlock"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Haste\nWhenever a player casts their second spell each turn, this creature deals 2 damage to target opponent.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "spellNumber": 2
+      },
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

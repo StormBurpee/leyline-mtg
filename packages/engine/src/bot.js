@@ -35,6 +35,7 @@ import {
   definition as rawDefinition,
   hasKeyword,
   isPacified,
+  isSick,
   opponent,
   stats,
 } from './model.js';
@@ -363,6 +364,18 @@ export function chooseBotCommand(s, p) {
   }
   if (s.priority !== p) return null;
   const actions = legalActions(s, p).filter((action) => actionSafe(s, p, action));
+  const crewing = actions.find(
+    (a) =>
+      a.type === 'crew' &&
+      !definition(s, s.objects[a.card]).types?.includes('creature') &&
+      !s.objects[a.card].tapped &&
+      !s.stack.some(
+        (e) => e.source?.id === a.card && e.effects?.some((x) => x.op === 'animateVehicle'),
+      ) &&
+      ((s.active === p && s.step === 'beginCombat' && !isSick(s, s.objects[a.card])) ||
+        (s.active !== p && s.step === 'attackers' && s.combat.attackers.length)),
+  );
+  if (crewing) return { ...crewing, player: p };
   const groupedAbility = actions
     .filter((a) => a.type === 'activate' && a.targets)
     .map((a) => {

@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d604c75e-9d81-49de-80bc-08f4ef3ee975",
+  "name": "Potioner's Trove",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{3}"
+  },
+  "rulesText": "{T}: Add one mana of any color.\n{T}: You gain 2 life. Activate only if you've cast an instant or sorcery spell this turn.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "spellsCast",
+          "player": "you",
+          "where": {
+            "any": [
+              {
+                "type": "instant"
+              },
+              {
+                "type": "sorcery"
+              }
+            ]
+          }
+        },
+        "operator": "gte",
+        "right": 1
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

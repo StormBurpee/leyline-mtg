@@ -47,7 +47,16 @@ export function validateEventSpec(value) {
   const errors = [];
   if (
     Object.keys(spec).some(
-      (key) => !['event', 'object', 'controller', 'filter', 'excludeSource', 'step'].includes(key),
+      (key) =>
+        ![
+          'event',
+          'object',
+          'controller',
+          'filter',
+          'excludeSource',
+          'step',
+          'spellNumber',
+        ].includes(key),
     )
   )
     errors.push('Unsupported event predicate field.');
@@ -91,12 +100,18 @@ export function validateEventSpec(value) {
     errors.push('excludeSource must be a boolean.');
   if (spec.object === 'source' && spec.excludeSource)
     errors.push('An event cannot both require and exclude its source.');
+  if (
+    spec.spellNumber !== undefined &&
+    (spec.event !== 'cast' || !Number.isSafeInteger(spec.spellNumber) || spec.spellNumber < 1)
+  )
+    errors.push('spellNumber requires a cast event and a positive safe integer.');
   if (spec.filter !== undefined) errors.push(...validateFilter(spec.filter));
   return errors;
 }
 export function matchesEvent(value, event, facts, source) {
   const spec = eventSpec(value);
   if (!spec || spec.event !== event) return false;
+  if (spec.spellNumber !== undefined && facts.spellNumber !== spec.spellNumber) return false;
   if (event === 'step' && spec.step !== facts.step) return false;
   if (spec.object === 'source' && facts.id !== source.id) return false;
   if (spec.excludeSource && facts.id === source.id) return false;

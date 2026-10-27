@@ -1,12 +1,13 @@
+import { spellsCastCount } from './spell-history.js';
 import { numericValue } from './numeric-values.js';
 import { FACE_DOWN } from './disguise.js';
 import { meetsCondition } from './conditions.js';
 import { matchesFilter, targetSpec } from './selectors.js';
 import { matchesEvent } from './events.js';
-import { hasType } from './types.js';
+import { hasType, typesOf, primaryType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.39.0';
+export const VERSION = '0.40.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -57,9 +58,23 @@ export function playableCards(s, p) {
 export const emptyMana = () => Object.fromEntries(COLORS.map((c) => [c, 0]));
 export function definition(stateOrObject, object) {
   if ((object ?? stateOrObject).faceDown) return FACE_DOWN;
-  return object
+  const d = object
     ? (object.definitionOverride ?? cardDefinition(object.name, stateOrObject.catalog))
     : (stateOrObject.definitionOverride ?? cardDefinition(stateOrObject.name));
+  // Type-changing effects are not copiable printed characteristics. They are
+  // bounded to this battlefield incarnation and the turn that created them.
+  if (!object || object.zone !== 'battlefield') return d;
+  const additions = (stateOrObject.modifiers ?? [])
+    .filter(
+      (m) =>
+        m.objectId === object.id &&
+        m.incarnation === object.incarnation &&
+        m.expires === stateOrObject.turn,
+    )
+    .flatMap((m) => m.addTypes ?? []);
+  if (!additions.length) return d;
+  const types = [...new Set([...typesOf(d), ...additions])];
+  return { ...d, types, type: primaryType(types) };
 }
 export const battlefield = (s) => Object.values(s.objects).filter((o) => o.zone === 'battlefield');
 export const creatures = (s) => battlefield(s).filter((o) => definition(s, o).type === 'creature');
@@ -173,6 +188,8 @@ export function keywords(s, o) {
 export const hasKeyword = (s, o, k) => keywords(s, o).includes(k);
 export function stats(s, o) {
   const d = definition(s, o);
+  // CR 208.3/301.7: battlefield Vehicles need animation; printed P/T remains outside it.
+  if (o.zone === 'battlefield' && !hasType(d, 'creature')) return { power: 0, toughness: 0 };
   const context = { controller: o.controller, source: ref(o) };
   let power = numericValue(s, d.baseStats?.power ?? d.power ?? 0, context) + (o.plusCounters ?? 0),
     toughness =
@@ -357,12 +374,16 @@ export function notifyTriggers(s, event, payload, context = null) {
   const pt =
     object && hasType(d, 'creature')
       ? stats(s, object)
-      : { power: d?.power, toughness: d?.toughness };
+      : object?.zone === 'battlefield'
+        ? {}
+        : { power: d?.power, toughness: d?.toughness };
   const facts = context?.facts?.[object?.id] ?? {
     id: object?.id,
     definition: d,
     controller: payload.player ?? object?.controller,
     step: payload.step,
+    spellNumber:
+      event === 'cast' ? spellsCastCount(s, [payload.player ?? object.controller]) : undefined,
     objects: payload.objects,
     owner: object?.owner,
     token: object?.token,
@@ -421,7 +442,7 @@ export function captureDepartureContext(s) {
     facts: Object.fromEntries(
       objects.map((o) => {
         const d = definition(s, o),
-          pt = stats(s, o);
+          pt = hasType(d, 'creature') ? stats(s, o) : {};
         return [
           o.id,
           {

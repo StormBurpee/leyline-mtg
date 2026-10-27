@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c1eb530c-dd36-40ae-8617-6bb6969565e1",
+  "name": "Cultivator's Caravan",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "{T}: Add one mana of any color.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    },
+    {
+      "kind": "crew",
+      "power": 3
+    }
+  ]
+}
