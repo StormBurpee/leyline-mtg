@@ -103,3 +103,67 @@ test('plot special-action costs cannot convoke, while later casting can convoke 
     assert.equal(s.objects[card.id].zone, 'stack');
   }
 });
+
+test('mana availability is evaluated after the proposed spell leaves hand', () => {
+  for (const operator of ['eq', 'gte']) {
+    let s = fixture();
+    s.catalog = createRegistry({
+      ...CARDS,
+      'Hand conditional land': {
+        name: 'Hand conditional land',
+        type: 'land',
+        cost: {},
+        mana: ['G'],
+        manaConditions: {
+          G: {
+            kind: 'compare',
+            left: { kind: 'count', zone: 'hand', player: 'you' },
+            right: operator === 'eq' ? 0 : 1,
+            operator,
+          },
+        },
+      },
+      'Hand payment spell': {
+        name: 'Hand payment spell',
+        type: 'sorcery',
+        cost: { G: 1 },
+        effects: [],
+      },
+    });
+    put(s, 'Hand conditional land');
+    const card = put(s, 'Hand payment spell', 0, 'hand');
+    const before = structuredClone(s);
+    const result = dispatch(s, { type: 'cast', player: 0, card: card.id });
+    assert.equal(result.ok, operator === 'eq');
+    assert.deepEqual(s, before);
+  }
+});
+
+import { ref } from '../src/index.js';
+test('a friendly targeted trigger is retained when its creature pays the casting sacrifice cost', () => {
+  let s = fixture();
+  s.catalog = createRegistry({
+    ...CARDS,
+    'Target sacrifice fixture': {
+      name: 'Target sacrifice fixture',
+      type: 'instant',
+      cost: {},
+      target: 'creature',
+      sacrificeCost: { where: { type: 'creature' } },
+      effects: [],
+    },
+  });
+  const creature = put(s, 'Emberheart Challenger'),
+    spell = put(s, 'Target sacrifice fixture', 0, 'hand');
+  s = act(s, 'cast', { card: spell.id, target: ref(creature), sacrifice: ref(creature) });
+  assert.equal(s.objects[creature.id].zone, 'graveyard');
+  assert.equal(s.stack.length, 2);
+  const triggered = s.events.findIndex((e) => e.type === 'triggered' && e.objectId === creature.id);
+  const departed = s.events.findIndex(
+    (e) => e.type === 'zoneChange' && e.objectId === creature.id && e.to === 'graveyard',
+  );
+  assert.ok(triggered >= 0 && departed > triggered);
+  s = resolve(s);
+  assert.equal(s.choice.kind, 'exilePlay');
+  assert.equal(s.choice.cards.length, 1);
+});

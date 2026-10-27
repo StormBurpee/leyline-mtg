@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "11809d9b-30f3-49d5-9119-e45b4de044c8",
+  "name": "Knight Luminary",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Knight"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, create a 1/1 white Human Soldier creature token.\nWarp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/human-soldier-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "warp",
+      "cost": "{1}{W}"
+    }
+  ]
+}

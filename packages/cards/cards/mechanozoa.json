@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1aeb43f7-4d8a-4648-9c13-fd101081b448",
+  "name": "Mechanozoa",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot", "Jellyfish"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}{U}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "When this creature enters, tap target artifact or creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nWarp {2}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        },
+        {
+          "op": "addStunCounters",
+          "target": "target",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "warp",
+      "cost": "{2}{U}"
+    }
+  ]
+}

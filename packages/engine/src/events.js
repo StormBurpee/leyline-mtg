@@ -56,6 +56,9 @@ export function validateEventSpec(value) {
           'excludeSource',
           'step',
           'spellNumber',
+          'targetingController',
+          'targetingKind',
+          'firstEachTurn',
         ].includes(key),
     )
   )
@@ -72,17 +75,16 @@ export function validateEventSpec(value) {
       'noncombatDamageToPlayer',
       'lifeGain',
       'combatDamagePlayer',
+      'targeted',
     ].includes(spec.event)
   )
     errors.push('Unsupported event family.');
   if (
     spec.object !== undefined &&
     (spec.object !== 'source' ||
-      !['enter', 'dies', 'attack', 'faceUp', 'combatDamagePlayer'].includes(spec.event))
+      !['enter', 'dies', 'attack', 'faceUp', 'combatDamagePlayer', 'targeted'].includes(spec.event))
   )
-    errors.push(
-      'Source identity predicates currently apply to enter, dies and attack events only.',
-    );
+    errors.push('Source identity predicates are unsupported for this event family.');
   if (
     spec.event === 'lifeGain' &&
     (spec.object !== undefined || spec.filter !== undefined || spec.excludeSource !== undefined)
@@ -105,6 +107,28 @@ export function validateEventSpec(value) {
     (spec.event !== 'cast' || !Number.isSafeInteger(spec.spellNumber) || spec.spellNumber < 1)
   )
     errors.push('spellNumber requires a cast event and a positive safe integer.');
+  if (
+    spec.targetingController !== undefined &&
+    (spec.event !== 'targeted' || !['you', 'opponent'].includes(spec.targetingController))
+  )
+    errors.push('targetingController requires a targeted event and a controller relation.');
+  if (
+    spec.targetingKind !== undefined &&
+    (spec.event !== 'targeted' || !['spell', 'ability'].includes(spec.targetingKind))
+  )
+    errors.push('targetingKind requires a targeted event and spell or ability.');
+  // First-event history is intentionally bounded to self target events, not generic aggregation.
+  if (
+    spec.firstEachTurn !== undefined &&
+    (spec.firstEachTurn !== true ||
+      spec.event !== 'targeted' ||
+      spec.object !== 'source' ||
+      spec.filter !== undefined ||
+      spec.controller !== undefined)
+  )
+    errors.push(
+      'firstEachTurn requires a self targeted event, true, and no object filter/controller predicate.',
+    );
   if (spec.filter !== undefined) errors.push(...validateFilter(spec.filter));
   return errors;
 }
@@ -115,6 +139,18 @@ export function matchesEvent(value, event, facts, source) {
   if (event === 'step' && spec.step !== facts.step) return false;
   if (spec.object === 'source' && facts.id !== source.id) return false;
   if (spec.excludeSource && facts.id === source.id) return false;
+  if (event === 'targeted') {
+    if (spec.targetingController === 'you' && facts.targetingController !== source.controller)
+      return false;
+    if (spec.targetingController === 'opponent' && facts.targetingController === source.controller)
+      return false;
+    if (spec.targetingKind && spec.targetingKind !== facts.targetingKind) return false;
+    if (spec.firstEachTurn) {
+      const relation = spec.targetingController ?? 'all';
+      const kind = spec.targetingKind ?? 'all';
+      if (facts.targetNumbers?.[`${relation}:${kind}`] !== 1) return false;
+    }
+  }
   if (spec.controller === 'you' && facts.controller !== source.controller) return false;
   if (spec.controller === 'opponent' && facts.controller === source.controller) return false;
   if (event === 'attackGroup')

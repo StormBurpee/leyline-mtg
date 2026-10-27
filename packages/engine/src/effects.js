@@ -119,7 +119,7 @@ export function notifyTargeted(s, entry) {
   if (entry.targetGroups) {
     const seen = new Set();
     for (const target of flattenTargets(entry.targets)) {
-      const key = `${target.kind}:${target.id}:${target.incarnation ?? ''}`;
+      const key = `${target.kind}:${target.id}`;
       if (seen.has(key)) continue;
       seen.add(key);
       notifyTargeted(s, { ...entry, targetGroups: undefined, target });
@@ -128,7 +128,28 @@ export function notifyTargeted(s, entry) {
   }
   if (entry.target?.kind !== 'object') return;
   const source = s.objects[entry.target.id];
-  if (!source || source.zone !== 'battlefield' || source.controller === entry.controller) return;
+  if (
+    !source ||
+    source.zone !== 'battlefield' ||
+    (entry.target.incarnation !== undefined && entry.target.incarnation !== source.incarnation)
+  )
+    return;
+  const stamp = `${s.turn}:${source.incarnation}`;
+  if (source.targetHistory?.stamp !== stamp) source.targetHistory = { stamp, counts: {} };
+  const counts = source.targetHistory.counts;
+  const relation = source.controller === entry.controller ? 'you' : 'opponent';
+  for (const who of ['all', relation])
+    for (const kind of ['all', entry.kind]) {
+      const key = `${who}:${kind}`;
+      counts[key] = (counts[key] ?? 0) + 1;
+    }
+  notifyTriggers(s, 'targeted', {
+    object: source,
+    targetingController: entry.controller,
+    targetingKind: entry.kind,
+    targetNumbers: counts,
+  });
+  if (source.controller === entry.controller) return;
   const cost = definition(s, source).ward;
   if (!cost) return;
   s.pendingTriggers.push({
@@ -247,8 +268,25 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
     ]),
   );
   for (const { object, controller = object.owner, attachment = null, tapped = false } of entering) {
+    const warped = object.zone === 'stack' && object.warpPaid;
     move(s, object, 'battlefield');
     object.controller = controller;
+    // CR 702.185a / 608.3: resolving the warped permanent spell creates this delay.
+    // It survives control changes and ability loss, but refers to this incarnation only.
+    if (warped) {
+      s.delayedTriggers ??= [];
+      s.delayedTriggers.push({
+        kind: 'ability',
+        name: object.name,
+        controller,
+        source: ref(object),
+        sourceDefinition: structuredClone(definition(s, object)),
+        sourceKeywords: [...keywords(s, object)],
+        effects: [],
+        rule: 'warpExile',
+        label: `${object.name} · warp`,
+      });
+    }
     if (typeChoices[object.id]) object.chosenCreatureType = typeChoices[object.id];
     object.attachedTo = attachment;
     object.plusCounters += entryCounters.get(object.id) ?? 0;
@@ -1140,6 +1178,16 @@ export function finishResolutionChoice(s, command) {
 export function resolveTop(s) {
   const entry = s.stack.pop();
   if (!entry) return;
+  if (entry.rule === 'warpExile') {
+    const object = s.objects[entry.source?.id];
+    if (object?.zone === 'battlefield' && object.incarnation === entry.source.incarnation) {
+      move(s, object, 'exile');
+      object.warped = { turn: s.turn, incarnation: object.incarnation };
+      emit(s, 'warpedExiled', { player: object.owner, objectId: object.id, name: object.name });
+    }
+    emit(s, 'resolved', { name: entry.name, stackId: entry.id });
+    return;
+  }
   if (entry.rule === 'increaseSpeed') {
     const player = s.players[entry.controller];
     if (player.speed > 0 && player.speed < 4) {

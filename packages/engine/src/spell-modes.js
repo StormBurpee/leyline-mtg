@@ -2,6 +2,16 @@ import { FACE_DOWN } from './disguise.js';
 /** Choices announced during casting. Kicker/offspring are additional costs, not modal effects. */
 export function castingChoices(card) {
   if (card.modes) return card.modes;
+  if (card.warp)
+    return [
+      { label: 'Cast normally', effects: card.effects ?? [], target: card.target ?? null },
+      {
+        label: 'Cast for warp cost',
+        effects: card.effects ?? [],
+        target: card.target ?? null,
+        warpPaid: true,
+      },
+    ];
   if (card.disguise)
     return [
       { label: 'Cast face up', effects: card.effects ?? [], target: card.target ?? null },
@@ -36,7 +46,7 @@ export function spellProfile(card, mode) {
       disguise: card.disguise,
       castingLabel: selected.label,
     };
-  const cost = { ...card.cost };
+  const cost = { ...(selected.warpPaid ? card.warp : card.cost) };
   for (const [symbol, amount] of Object.entries(selected.additionalCost ?? {}))
     cost[symbol] = (cost[symbol] ?? 0) + amount;
   return {
@@ -45,6 +55,7 @@ export function spellProfile(card, mode) {
     effects: selected.effects,
     target: selected.target ?? null,
     ...(selected.targetGroups ? { targetGroups: selected.targetGroups } : {}),
+    ...(selected.warpPaid ? { warpPaid: true } : {}),
     kicked: !!selected.kicked,
     offspringPaid: !!selected.offspringPaid,
     castingLabel: selected.label,

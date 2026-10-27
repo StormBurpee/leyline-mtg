@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5b4b21ed-c24e-4038-83fb-bd7f3c3426cd",
+  "name": "Emberheart Challenger",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Mouse", "Warrior"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Haste\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nValiant \u2014 Whenever this creature becomes the target of a spell or ability you control for the first time each turn, exile the top card of your library. Until end of turn, you may play that card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "use": "prowess"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "targeted",
+        "object": "source",
+        "targetingController": "you",
+        "firstEachTurn": true
+      },
+      "effects": [
+        {
+          "op": "impulseChoose",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -35,8 +35,9 @@ import { captureTable, animateTable, renderCombatLinks, animateEffects } from '.
 import {
   spellProfile,
   castingProfile,
+  castingPayment,
+  castingSacrificeCandidates,
   convokeCandidates,
-  convokePayment,
   MAX_X,
   CARDS,
   definition,
@@ -276,6 +277,15 @@ function send(command, { autoPass = true, automatic = false } = {}) {
       : {}),
     ...command,
   };
+  if (
+    !automatic &&
+    c.type === 'cast' &&
+    c.sacrifice === undefined &&
+    definition(state, state.objects[c.card]).sacrificeCost
+  ) {
+    showCastingSacrifice(c);
+    return false;
+  }
   if (
     !automatic &&
     c.type === 'cast' &&
@@ -681,6 +691,7 @@ function showCardReader(id) {
 function closeDialog() {
   dialog._crewDraft = null;
   dialog._convokeDraft = null;
+  dialog._castingSacrificeDraft = null;
   if (dialog._activeChoice && state) ui.dismissedChoiceLease = decisionLease(state, viewer());
   dialog.close();
   schedule();
@@ -861,7 +872,7 @@ function showSpellModes() {
   render();
   const choices = castingChoices(definition(state, o)),
     legal = legalActions(state, viewer());
-  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(castingProfile(state, viewer(), o, index).cost)}<br>${mode.target || mode.targetGroups ? 'Choose targets next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
+  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(castingProfile(state, viewer(), o, index)?.cost ?? spellProfile(definition(state, o), index).cost)}<br>${mode.target || mode.targetGroups ? 'Choose targets next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
   openChoiceDialog(
     'Choose how to cast',
     o.name,
@@ -1003,6 +1014,35 @@ function replayTo(index) {
     toast(e.message);
   }
 }
+function showCastingSacrifice(command, sacrifice) {
+  const object = state.objects[command.card];
+  const profile = castingProfile(
+    state,
+    viewer(),
+    object,
+    command.mode,
+    command.targets ? flattenTargets(command.targets) : command.target,
+    undefined,
+    command.x,
+  );
+  if (!profile || command.expectedRevision !== state.revision) {
+    toast('The game changed. Choose this spell again.');
+    return;
+  }
+  const candidates = castingSacrificeCandidates(state, viewer(), profile);
+  const payment = sacrifice && castingPayment(state, viewer(), profile, { ...command, sacrifice });
+  const body = `<p>As an additional casting cost, sacrifice one eligible permanent. This happens before opponents can respond, even if the spell is countered. Mana cost: ${mana(profile.cost)}.</p><div class="decision-card-grid">${candidates.map((o) => `<section>${decisionCard(state, o.id, metadata, { viewer: viewer(), action: 'readDecisionCard', selected: sacrifice?.id === o.id })}<button class="btn ${sacrifice?.id === o.id ? 'primary' : ''}" data-action="selectCastingSacrifice" data-cardid="${o.id}" aria-pressed="${sacrifice?.id === o.id}">Sacrifice ${escape(o.name)}</button></section>`).join('')}</div>`;
+  openChoiceDialog(
+    'Choose additional sacrifice',
+    object.name,
+    body,
+    `<button class="btn" data-action="closeDialog">Cancel</button><span>${sacrifice ? `Sacrifice: ${escape(state.objects[sacrifice.id]?.name ?? '')}. ${payment ? 'Payment is available.' : 'Cannot pay with this selection.'}` : 'Choose one permanent.'}</span><button class="btn primary" data-action="confirmCastingSacrifice" ${payment ? '' : 'disabled'}>Confirm sacrifice and ${profile.keywords.includes('convoke') ? 'choose convoke' : 'cast'}</button>`,
+    { source: object.name },
+  );
+  dialog._castingSacrificeDraft = { command, sacrifice };
+  dialog._activeChoice = null;
+  dialog._stageRender = () => showCastingSacrifice(command, sacrifice);
+}
 function showConvoke(command, choices) {
   const object = state.objects[command.card];
   const profile = castingProfile(
@@ -1018,9 +1058,8 @@ function showConvoke(command, choices) {
     toast('The game changed. Choose this spell again.');
     return;
   }
-  choices ??=
-    convokePayment(state, viewer(), profile, undefined, command.autoTap !== false)?.choices ?? [];
-  const payment = convokePayment(state, viewer(), profile, choices, command.autoTap !== false);
+  choices ??= castingPayment(state, viewer(), profile, command)?.choices ?? [];
+  const payment = castingPayment(state, viewer(), profile, { ...command, convoke: choices });
   const candidates = convokeCandidates(state, viewer());
   const body = `<p>Total locked cost: ${mana(profile.cost)}. Each creature pays one matching colored symbol or one generic mana. Newly entered creatures may convoke.</p><div class="decision-card-grid">${candidates
     .map((o) => {
@@ -1799,6 +1838,20 @@ async function action(name, el) {
         showGroupedTargets();
       }
       break;
+    case 'selectCastingSacrifice': {
+      const draft = dialog._castingSacrificeDraft;
+      if (!draft || draft.command.expectedRevision !== state.revision) break;
+      showCastingSacrifice(draft.command, ref(state.objects[el.dataset.cardid]));
+      break;
+    }
+    case 'confirmCastingSacrifice': {
+      const draft = dialog._castingSacrificeDraft;
+      if (!draft?.sacrifice || draft.command.expectedRevision !== state.revision) break;
+      const command = { ...draft.command, sacrifice: draft.sacrifice };
+      closeDialog();
+      send(command);
+      break;
+    }
     case 'selectConvoke': {
       const draft = dialog._convokeDraft;
       if (!draft || draft.command.expectedRevision !== state.revision) break;

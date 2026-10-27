@@ -547,6 +547,11 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           effects: effects(a.effects, `${path}.effects`),
         };
         break;
+      case 'warp':
+        fields(a, ['kind', 'cost'], path);
+        if (d.warp) problem('DUPLICATE_WARP', path, 'Only one warp ability is supported.');
+        d.warp = mana(a.cost, `${path}.cost`);
+        break;
       case 'plot':
         fields(a, ['kind', 'cost'], path);
         if (d.plot) problem('DUPLICATE_PLOT', path, 'Only one plot ability is supported.');
@@ -694,7 +699,16 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       case 'triggered': {
         fields(
           a,
-          ['kind', 'on', 'optional', 'target', 'targetGroups', 'effects', 'condition'],
+          [
+            'kind',
+            'on',
+            'optional',
+            'target',
+            'targetGroups',
+            'effects',
+            'condition',
+            'oncePerTurn',
+          ],
           path,
         );
         if (a.optional !== undefined && typeof a.optional !== 'boolean')
@@ -707,6 +721,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         if (
           event === 'selfEnters' &&
           !a.condition &&
+          !a.oncePerTurn &&
           !a.optional &&
           !a.target &&
           !a.targetGroups &&
@@ -721,6 +736,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
             ...(a.target !== undefined ? { target: target(a.target, `${path}.target`) } : {}),
             ...(a.targetGroups ? { targetGroups: structuredClone(a.targetGroups) } : {}),
             ...(a.optional !== undefined ? { optional: a.optional } : {}),
+            ...(a.oncePerTurn !== undefined ? { oncePerTurn: a.oncePerTurn } : {}),
           });
         break;
       }
@@ -750,6 +766,12 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
               .map((k) => [k, structuredClone(a[k])]),
           ),
         };
+        break;
+      case 'sacrificeCost':
+        fields(a, ['kind', 'where'], path);
+        if (d.sacrificeCost)
+          problem('DUPLICATE_COST', path, 'Only one sacrifice casting cost is supported.');
+        d.sacrificeCost = { where: structuredClone(a.where) };
         break;
       case 'costModifier':
         fields(a, ['kind', 'scope', 'change', 'amount', 'where', 'targetWhere', 'condition'], path);

@@ -1,5 +1,5 @@
 {
-  "version": "0.42.0",
+  "version": "0.43.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -396,6 +396,14 @@
       "type": "enchantment",
       "keywords": ["flash"],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Arbiter of Woe",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["discard", "loseLife", "draw", "gainLife"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1219,6 +1227,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Bygone Colossus",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Cadaver Imp",
       "type": "creature",
       "keywords": ["flying"],
@@ -1643,6 +1659,14 @@
       "keywords": [],
       "opcodes": ["discard"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Corrupted Conviction",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -2377,6 +2401,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Duty Beyond Death",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modifyAll", "counterAll"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dwarven Castle Guard",
       "type": "creature",
       "keywords": [],
@@ -2558,6 +2590,30 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Emberheart Challenger",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["modify", "impulseChoose"],
+      "triggers": [
+        "controllerCastsNoncreature",
+        {
+          "event": "targeted",
+          "object": "source",
+          "targetingController": "you",
+          "firstEachTurn": true
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Embrace Oblivion",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Enchantress's Presence",
       "type": "enchantment",
       "keywords": [],
@@ -2659,6 +2715,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["gainLife"],
+      "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Eusocial Engineering",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["token"],
       "triggers": ["controllerLandEnters"],
       "activatedAbilities": 0
     },
@@ -2943,6 +3007,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Final Vengeance",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Finch Formation",
       "type": "creature",
       "keywords": ["flying"],
@@ -3120,6 +3192,21 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Flowerfoot Swordmaster",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modifyAll"],
+      "triggers": [
+        {
+          "event": "targeted",
+          "object": "source",
+          "targetingController": "you",
+          "firstEachTurn": true
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -3374,6 +3461,14 @@
       "type": "creature",
       "keywords": ["flying"],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Germinating Wurm",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["gainLife"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -4735,6 +4830,14 @@
       "activatedAbilities": 2
     },
     {
+      "name": "Knight Luminary",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Knockout Maneuver",
       "type": "sorcery",
       "keywords": [],
@@ -5361,6 +5464,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Mechanozoa",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Meditation Pools",
       "type": "land",
       "keywords": [],
@@ -5791,6 +5902,21 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Mouse Trapper",
+      "type": "creature",
+      "keywords": ["flash"],
+      "opcodes": ["tap"],
+      "triggers": [
+        {
+          "event": "targeted",
+          "object": "source",
+          "targetingController": "you",
+          "firstEachTurn": true
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Murder",
       "type": "instant",
       "keywords": [],
@@ -5894,6 +6020,21 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Nettle Guard",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify", "destroy"],
+      "triggers": [
+        {
+          "event": "targeted",
+          "object": "source",
+          "targetingController": "you",
+          "firstEachTurn": true
+        }
+      ],
+      "activatedAbilities": 1
+    },
+    {
       "name": "News Helicopter",
       "type": "creature",
       "keywords": ["flying"],
@@ -5971,6 +6112,14 @@
       "keywords": [],
       "opcodes": ["moveTarget"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Nova Hellkite",
+      "type": "creature",
+      "keywords": ["flying", "haste"],
+      "opcodes": ["damage"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -7035,6 +7184,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Red Tiger Mechan",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Redcap Thief",
       "type": "creature",
       "keywords": [],
@@ -7422,6 +7579,22 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Ruric Thar, Biomagus",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["modify", "draw"],
+      "triggers": [
+        "controllerCastsNoncreature",
+        "controllerCastsNoncreature",
+        {
+          "event": "targeted",
+          "object": "source",
+          "targetingController": "opponent"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "S.H.I.E.L.D. Deployment Drone",
       "type": "creature",
       "keywords": ["flying"],
@@ -7712,6 +7885,21 @@
       "keywords": ["flying"],
       "opcodes": ["damageOpponent", "gainLife"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Seedglaive Mentor",
+      "type": "creature",
+      "keywords": ["vigilance", "haste"],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "targeted",
+          "object": "source",
+          "targetingController": "you",
+          "firstEachTurn": true
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -8051,6 +8239,14 @@
       "keywords": [],
       "opcodes": ["searchLibrary", "draw"],
       "triggers": ["selfEnters", "selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Sinister Cryologist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -8545,6 +8741,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Starbreach Whale",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["surveil"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Starfield Shepherd",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stark Industries Executive",
       "type": "creature",
       "keywords": [],
@@ -8600,6 +8812,22 @@
           "event": "step",
           "step": "beginCombat",
           "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Starwinder",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["drawEventAmount"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "controller": "you",
+          "filter": {
+            "type": "creature"
+          }
         }
       ],
       "activatedAbilities": 0
@@ -10106,6 +10334,21 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Veteran Guardmouse",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify", "scry"],
+      "triggers": [
+        {
+          "event": "targeted",
+          "object": "source",
+          "targetingController": "you",
+          "firstEachTurn": true
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Vial of Dragonfire",
       "type": "artifact",
       "keywords": [],
@@ -10163,6 +10406,14 @@
       "type": "creature",
       "keywords": ["deathtouch"],
       "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Vile Mutilator",
+      "type": "creature",
+      "keywords": ["flying", "trample"],
+      "opcodes": ["sacrifice"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -10414,6 +10665,30 @@
       "keywords": [],
       "opcodes": ["tap", "stunOn"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Weftstalker Ardent",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageOpponent"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "excludeSource": true,
+          "filter": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "type": "artifact"
+              }
+            ]
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -10728,6 +11003,7 @@
     "Gremlin Token",
     "Hero Token",
     "Human Citizen Token",
+    "Human Soldier Token",
     "Inkling Token",
     "Insect Token",
     "Knight Token",
@@ -10738,6 +11014,7 @@
     "Mutant Token",
     "Nonblocking Rat Token",
     "Rabbit Token",
+    "Robot Token",
     "Soldier Token",
     "Treasure Token",
     "Villain Token",

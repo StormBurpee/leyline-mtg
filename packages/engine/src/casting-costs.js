@@ -51,6 +51,32 @@ function targetFacts(state, target) {
     manaValue: manaValue(card),
   };
 }
+/** Read-only proposal used by cost determination and mana-source availability. */
+export function proposedCastingState(state, player, object, x) {
+  const proposed = { ...object, zone: 'stack', controller: player, chosenX: x ?? 0 };
+  return {
+    ...state,
+    objects: { ...state.objects, [object.id]: proposed },
+    players: state.players.map((p, index) => {
+      // Only the known source zone can contain this announced card. Never
+      // inspect an opponent's hand or either concealed library to plan payment.
+      if (
+        index !== object.owner ||
+        !['hand', 'graveyard', 'exile', 'library'].includes(object.zone)
+      )
+        return p;
+      const zone = object.zone;
+      const visible = Object.getOwnPropertyDescriptor(p, zone)?.value;
+      return {
+        ...p,
+        ...(Array.isArray(visible) ? { [zone]: visible.filter((id) => id !== object.id) } : {}),
+        ...(Number.isInteger(p[`${zone}Count`])
+          ? { [`${zone}Count`]: Math.max(0, p[`${zone}Count`] - 1) }
+          : {}),
+      };
+    }),
+  };
+}
 /** Determine, then lock, the mana cost. Increases precede reductions (CR 601.2f). */
 export function castingProfile(
   state,
@@ -68,7 +94,7 @@ export function castingProfile(
         ? { ...base, cost: { ...base.flashback }, flashbackPaid: true }
         : null
       : base;
-  if (!profile) return null;
+  if (!profile || (profile.warpPaid && object.zone !== 'hand')) return null;
   if (object.zone === 'exile' && object.plotted?.incarnation === object.incarnation)
     profile = { ...profile, cost: {}, plottedCast: true };
   if (profile.cost.X) {
@@ -85,20 +111,8 @@ export function castingProfile(
     }))
     .filter((x) => x.modifiers.length);
   if (!intrinsic.length && !sources.length) return profile;
-  // Cost determination sees the proposed spell on the stack, not in its old zone.
-  const proposed = { ...object, zone: 'stack', controller: player, chosenX: x ?? 0 };
-  const projected = {
-    ...state,
-    objects: { ...state.objects, [object.id]: proposed },
-    players: state.players.map((p) => ({
-      ...p,
-      ...Object.fromEntries(
-        ['hand', 'graveyard', 'exile', 'library']
-          .filter((zone) => p[zone]?.includes(object.id))
-          .map((zone) => [zone, p[zone].filter((id) => id !== object.id)]),
-      ),
-    })),
-  };
+  const projected = proposedCastingState(state, player, object, x);
+  const proposed = projected.objects[object.id];
   const spell = {
     definition: profile,
     controller: player,

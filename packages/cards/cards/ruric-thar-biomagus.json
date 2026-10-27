@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "873fa095-5662-407a-bd24-9a1c4712a428",
+  "name": "Ruric Thar, Biomagus",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Ogre", "Crab", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}{U}",
+    "power": 4,
+    "toughness": 6
+  },
+  "rulesText": "Flying\nProwess, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn twice.)\nWhenever Ruric Thar becomes the target of a spell or ability an opponent controls, draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "use": "prowess"
+    },
+    {
+      "use": "prowess"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "targeted",
+        "object": "source",
+        "targetingController": "opponent"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

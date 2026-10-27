@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "be3038ff-b39e-4d2e-97ee-85de074ccfd3",
+  "name": "Sinister Cryologist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Jellyfish", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, target creature an opponent controls gets -3/-0 until end of turn.\nWarp {U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": -3,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "warp",
+      "cost": "{U}"
+    }
+  ]
+}

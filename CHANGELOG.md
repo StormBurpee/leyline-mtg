@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.43.0 — Warp, casting sacrifice costs and targeting triggers
+
+- Add fixed-cost permanent warp, next-end-step exile and owner permission to recast on a later turn. Track exact battlefield and exile incarnations. Add twelve complete Standard cards and two tokens.
+- Add mandatory filtered additional casting sacrifice costs, including mana/convoke payment coordination and explicit UI selection. Add six complete Standard cards.
+- Add permanent-targeting events, first-target history and per-ability once-per-turn limits. Preserve triggers when their source is sacrificed during payment. Add seven complete Standard cards.
+- Plan mana against the proposed spell on the stack, including hand-count conditions. Preserve earlier replay timing and trigger IDs across resume and re-export with an explicit rules revision. Catalog: 1249 playable cards and 36 tokens.
+- Optional or alternative sacrifice costs, generalized changing-target events, crimes and unsupported alternate-cost combinations remain outside this release.
+
 ## 0.42.0 — Convoke, plot and token copies
 
 - Add explicit/automatic convoke payment matching, shared mana/creature capacity, no overpayment, summoning-sickness handling, payment review and replay. Add nine complete cards and one token.

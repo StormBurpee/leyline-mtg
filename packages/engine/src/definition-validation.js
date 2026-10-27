@@ -50,6 +50,7 @@ const FIELDS = new Set([
   'cyclingType',
   'flashback',
   'plot',
+  'warp',
   'kicker',
   'offspring',
   'disguise',
@@ -64,6 +65,7 @@ const FIELDS = new Set([
   'selfBonus',
   'conditionalBonuses',
   'costModifiers',
+  'sacrificeCost',
   'static',
   'triggers',
   'activated',
@@ -588,6 +590,20 @@ export function validateDefinition(card) {
       card.maxSpeedKeywords.some((k) => !GRANTED_KEYWORDS.has(k)))
   )
     errors.push(`${name}.maxSpeedKeywords: unsupported keywords.`);
+  if (card.warp !== undefined) {
+    validateCost(card.warp, `${name}.warp`, errors);
+    if (
+      !['creature', 'artifact', 'enchantment'].includes(card.type) ||
+      card.cost?.X ||
+      card.modes ||
+      card.kicker ||
+      card.offspring ||
+      card.disguise ||
+      card.flashback ||
+      card.plot
+    )
+      errors.push(`${name}.warp: requires a fixed-cost permanent without other casting options.`);
+  }
   if (card.plot !== undefined) {
     validateCost(card.plot, `${name}.plot`, errors);
     if (
@@ -737,6 +753,28 @@ export function validateDefinition(card) {
   }
   if (card.target != null)
     errors.push(...validateTargetSpec(card.target).map((error) => `${name}.target: ${error}`));
+  if (card.sacrificeCost !== undefined) {
+    const cost = card.sacrificeCost;
+    const typeFilter = (v) =>
+      plain(v) &&
+      Object.keys(v).length === 1 &&
+      (['creature', 'artifact', 'enchantment'].includes(v.type) ||
+        (Array.isArray(v.any) &&
+          v.any.length > 0 &&
+          v.any.length <= 3 &&
+          v.any.every(
+            (f) =>
+              plain(f) &&
+              Object.keys(f).length === 1 &&
+              ['creature', 'artifact', 'enchantment'].includes(f.type),
+          )));
+    if (!plain(cost) || Object.keys(cost).some((k) => k !== 'where') || !typeFilter(cost.where))
+      errors.push(
+        `${name}.sacrificeCost: expected one mandatory sacrifice with a creature/artifact/enchantment type filter.`,
+      );
+    if (card.type === 'land' || card.disguise)
+      errors.push(`${name}.sacrificeCost: lands and disguise combinations are unsupported.`);
+  }
   if (card.costModifiers !== undefined) {
     if (
       !Array.isArray(card.costModifiers) ||
@@ -953,7 +991,15 @@ export function validateDefinition(card) {
           !plain(t) ||
           Object.keys(t).some(
             (k) =>
-              !['event', 'effects', 'optional', 'target', 'targetGroups', 'condition'].includes(k),
+              ![
+                'event',
+                'effects',
+                'optional',
+                'target',
+                'targetGroups',
+                'condition',
+                'oncePerTurn',
+              ].includes(k),
           )
         ) {
           errors.push(`${name}.triggers[${i}]: unsupported trigger predicate or field.`);
@@ -962,6 +1008,8 @@ export function validateDefinition(card) {
         errors.push(
           ...validateEventSpec(t.event).map((error) => `${name}.triggers[${i}].event: ${error}`),
         );
+        if (t.oncePerTurn !== undefined && typeof t.oncePerTurn !== 'boolean')
+          errors.push(`${name}.triggers[${i}].oncePerTurn: expected a boolean.`);
         if (t.condition !== undefined) errors.push(...validateCondition(t.condition));
         if (t.optional !== undefined && typeof t.optional !== 'boolean')
           errors.push(`${name}.triggers[${i}].optional: expected a boolean.`);

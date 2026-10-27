@@ -158,3 +158,7 @@ Plot pays a fixed cost and exiles face up as a sorcery-speed special action, not
 ### Permanent token copies
 
 Targeted current-permanent copies use independent copiable snapshots, excluding counters, damage, choices and temporary layers such as crew animation. Current copy overrides and face-down characteristics are respected without exposing hidden identities. Fixed P/T exceptions remove the corresponding CDA; nonlegendary and limited Hero/Coward additions are supported. Copies enter together with resumable Aura/Cavern choices. Existing offspring alone retains separately captured copiable LKI. General graveyard/event/source copy authoring, spell copies, group-target copies, arbitrary exceptions and delayed token exile/sacrifice are unsupported.
+
+### Warp and casting/targeting extensions (v0.43)
+
+Fixed-cost permanent warp supports delayed next-end-step exile and later-turn owner recasting, with incarnation checks preventing stale permissions. Mandatory additional casting sacrifice costs accept one filtered controlled permanent, coordinate mana/convoke payment and require an explicit UI choice. Permanent-targeting events support controller/kind filters, first-target history and once-per-turn ability limits; these occur before payment, so sacrificing the targeted source does not lose its trigger. General changing-target events, crimes, optional/alternative sacrifice payments and unsupported alternate-cost combinations remain rejected.

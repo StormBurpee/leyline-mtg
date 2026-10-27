@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/human-soldier-token",
+  "name": "Human Soldier Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["W"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

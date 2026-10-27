@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2f3f5a1c-8b88-4080-bd80-14db4d6c8c50",
+  "name": "Eusocial Engineering",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{3}{G}{G}"
+  },
+  "rulesText": "Landfall \u2014 Whenever a land you control enters, create a 2/2 colorless Robot artifact creature token.\nWarp {1}{G} (You may cast this card from your hand for its warp cost. Exile this enchantment at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/robot-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "warp",
+      "cost": "{1}{G}"
+    }
+  ]
+}

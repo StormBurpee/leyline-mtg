@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "523d075d-b577-4f24-8c14-9a76761a2eaf",
+  "name": "Flowerfoot Swordmaster",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Mouse", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{W}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nValiant \u2014 Whenever this creature becomes the target of a spell or ability you control for the first time each turn, Mice you control get +1/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "offspring",
+      "cost": "{2}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "targeted",
+        "object": "source",
+        "targetingController": "you",
+        "firstEachTurn": true
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              },
+              {
+                "subtype": "Mouse"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

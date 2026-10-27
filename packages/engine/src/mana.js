@@ -65,14 +65,14 @@ export function planPayment(
   s,
   p,
   cost,
-  { autoTap = true, excludeSources = [], purpose, convoke = false } = {},
+  { autoTap = true, excludeSources = [], purpose, convoke = false, excludeManaSources = [] } = {},
 ) {
   if (cost.X) return null; // X must be announced and expanded before payment.
   const pool = { ...s.players[p].mana };
   const spent = Object.fromEntries(COLORS.map((c) => [c, 0]));
   const canConvoke = (o) => convoke && !o.tapped && hasType(definition(s, o), 'creature');
   const realChoices = (o) =>
-    autoTap && canTapForMana(s, o, p)
+    autoTap && !excludeManaSources.includes(o.id) && canTapForMana(s, o, p)
       ? manaOptions(s, o).filter((color) => manaEligible(manaRestriction(s, o, color), purpose))
       : [];
   let sources = controlled(s, p).filter(
@@ -84,6 +84,7 @@ export function planPayment(
       autoTap,
       purpose,
       convoke,
+      excludeManaSources,
       excludeSources: [...excludeSources, ...sacrificial],
     });
     if (preserve) return preserve;
