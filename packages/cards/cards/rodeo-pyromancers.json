@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "82debe1c-31cb-411f-a353-98a952180666",
+  "name": "Rodeo Pyromancers",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Mercenary"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Whenever you cast your first spell each turn, add {R}{R}.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "spellNumber": 1,
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addMana",
+          "mana": "{R}{R}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "132de6c2-4ca2-41da-9c78-caa59838b641",
+  "name": "Sunstar Lightsmith",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Artificer"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Whenever you cast your second spell each turn, put a +1/+1 counter on this creature and draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "spellNumber": 2,
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

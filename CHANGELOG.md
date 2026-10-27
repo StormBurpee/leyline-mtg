@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.40.0 — Vehicles and public spell history
+
+- Add crew costs and temporary incarnation-bound Vehicle animation, including summoning-sickness rules, explicit crew selection, replay/opaque commands and bounded bot proposals. Preserve printed P/T outside the battlefield and dormant modifiers before animation.
+- Track compact public spell-cast profiles each turn. Add filtered spell-count values and event-time cast ordinals; countered spells remain counted, while lands, cycling and failed casts do not. Face-down identities stay concealed.
+- Add 18 Vehicles, 18 spell-history cards and two subtype-targeted permanent buffs. Catalog: 1189 playable cards and 29 tokens.
+- Preserve earlier replay versions; general type-changing layers, cast-origin queries, filtered-spell ordinals and unsupported Oracle clauses remain outside this release.
+
 ## 0.39.0 — Parallel coverage expansion
 
 - Add player combat-damage events, recorded damage-sized draws, and simultaneous-condition handling. Add 14 complete combat-trigger cards and two existing-engine additions.

@@ -8,7 +8,7 @@ import {
   effectTargetCompatible,
   validateFilter,
 } from './selectors.js';
-import { CARD_TYPES, primaryType, KEYWORD_NAMES, HYBRID_SYMBOLS } from './types.js';
+import { CARD_TYPES, hasType, primaryType, KEYWORD_NAMES, HYBRID_SYMBOLS } from './types.js';
 
 const TYPES = new Set(CARD_TYPES);
 const COLORS = new Set(['W', 'U', 'B', 'R', 'G']);
@@ -45,6 +45,7 @@ const FIELDS = new Set([
   'targetGroups',
   'effects',
   'modes',
+  'crew',
   'cycling',
   'cyclingType',
   'flashback',
@@ -463,6 +464,22 @@ export function validateDefinition(card) {
     for (const field of ['etb', 'triggers', 'activated', 'static', 'ward', 'mana', 'entersTapped'])
       if (card[field] !== undefined)
         errors.push(`${name}.${field}: only battlefield permanents support this field.`);
+  if (
+    card.crew !== undefined &&
+    (!Number.isSafeInteger(card.crew) ||
+      card.crew < 0 ||
+      card.crew > 1000 ||
+      !card.subtypes?.includes('Vehicle') ||
+      !hasType(card, 'artifact') ||
+      hasType(card, 'creature') ||
+      !signed(card.power) ||
+      !signed(card.toughness) ||
+      card.disguise ||
+      card.baseStats)
+  )
+    errors.push(
+      `${name}.crew: requires a noncreature artifact Vehicle with literal power/toughness and crew 0–1000.`,
+    );
   if (card.cycling !== undefined) validateCost(card.cycling, `${name}.cycling`, errors);
   if (
     card.cyclingType !== undefined &&

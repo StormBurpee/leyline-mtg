@@ -441,6 +441,11 @@
         },
         "step": {
           "enum": ["upkeep", "beginCombat", "end", "main1", "main2"]
+        },
+        "spellNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
         }
       },
       "required": ["event"],
@@ -1465,7 +1470,10 @@
             "cost": {
               "$ref": "#/$defs/mana"
             },
-            "type": { "type": "string", "pattern": "^[A-Za-z][A-Za-z -]{0,79}$" }
+            "type": {
+              "type": "string",
+              "pattern": "^[A-Za-z][A-Za-z -]{0,79}$"
+            }
           },
           "required": ["kind", "cost"],
           "additionalProperties": false
@@ -1786,6 +1794,21 @@
           },
           "required": ["kind", "amount"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "crew"
+            },
+            "power": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["kind", "power"],
+          "additionalProperties": false
         }
       ]
     },
@@ -2001,6 +2024,22 @@
           },
           "required": ["kind", "value", "factor"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "spellsCast"
+            },
+            "player": {
+              "enum": ["you", "opponent", "all"]
+            },
+            "where": {
+              "$ref": "#/$defs/spellHistoryPredicate"
+            }
+          },
+          "required": ["kind", "player"],
+          "additionalProperties": false
         }
       ]
     },
@@ -2044,6 +2083,82 @@
         "required": ["id", "selector", "min", "max"],
         "additionalProperties": false
       }
+    },
+    "spellHistoryPredicate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/spellHistoryPredicate"
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": ["all"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "any": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/spellHistoryPredicate"
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": ["any"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "not": {
+              "$ref": "#/$defs/spellHistoryPredicate"
+            }
+          },
+          "required": ["not"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": ["land", "creature", "instant", "sorcery", "artifact", "enchantment"]
+            }
+          },
+          "required": ["type"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "enum": ["W", "U", "B", "R", "G", "colorless"]
+            }
+          },
+          "required": ["color"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "subtype": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            }
+          },
+          "required": ["subtype"],
+          "additionalProperties": false
+        }
+      ]
     }
   }
 }

@@ -1,3 +1,4 @@
+import { validateSpellHistoryFilter } from './spell-history.js';
 import { validateFilter } from './selectors.js';
 const plain = (v) =>
   v !== null &&
@@ -32,6 +33,7 @@ export function validateNumericValue(value) {
     const allowed = {
       count: ['kind', 'zone', 'player', 'where', 'excludeSource'],
       life: ['kind', 'player'],
+      spellsCast: ['kind', 'player', 'where'],
       sum: ['kind', 'values'],
       scale: ['kind', 'value', 'factor'],
     }[v.kind];
@@ -42,10 +44,12 @@ export function validateNumericValue(value) {
     if (Object.keys(v).some((k) => !allowed.includes(k)))
       errors.push('Unexpected numeric expression field.');
     if (
-      ['count', 'life'].includes(v.kind) &&
-      !['you', 'opponent', ...(v.kind === 'count' ? ['all'] : [])].includes(v.player)
+      ['count', 'life', 'spellsCast'].includes(v.kind) &&
+      !['you', 'opponent', ...(v.kind !== 'life' ? ['all'] : [])].includes(v.player)
     )
       errors.push('Expected a player relation.');
+    if (v.kind === 'spellsCast' && v.where !== undefined)
+      errors.push(...validateSpellHistoryFilter(v.where));
     if (v.kind === 'count') {
       if (!['battlefield', 'graveyard', 'exile', 'hand', 'library'].includes(v.zone))
         errors.push('Unsupported counted zone.');

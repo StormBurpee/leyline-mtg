@@ -130,3 +130,11 @@ Printed/current-copy changeling supplies all supported creature types in every z
 ### Flashback
 
 Fixed-mana, nonmodal instant/sorcery flashback uses normal timing/target legality and casting-cost modifiers from the graveyard. Its stack incarnation is exiled whenever it leaves the stack, including countering and failed target resolution. Graveyard actions, cost previews, replay and opaque command handles use the same casting path. Additional unsupported costs, X, duplicate flashback and kicker/offspring/disguise combinations are rejected.
+
+### Vehicles and crew
+
+Crew taps selected other untapped creatures with sufficient current total power, including summoning-sick creatures. The ability uses the stack and animates only the source battlefield incarnation until end of turn. A newly controlled Vehicle still needs haste or sufficient continuous control to attack/tap for its own tap-symbol abilities. Printed P/T applies outside the battlefield; battlefield noncreatures have no operative P/T. Earlier P/T modifiers persist and apply if that incarnation becomes a creature ([CR 208.3a](https://media.wizards.com/2026/downloads/MagicCompRules%2020260619.pdf)). See [implementation boundaries](vehicle-crew-support.md).
+
+### Public spell-cast history
+
+Turn-keyed per-player profile counts retain only public type, color, subtype and changeling characteristics, not identities or hidden face-down information. Successful casts record after payment and before cast triggers; the proposed spell is excluded during cost determination. Event-time spellNumber predicates count all spells by that caster and survive later casts. Filtered spell-count values support public type/color/subtype predicates. Cast-origin history, mana-value history, filtered ordinals and generic resolution-time subtraction of another spell are not implemented.

@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "60105eb8-bdca-44b9-a970-68a7615526e8",
+  "name": "Dependable Quinjet",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\n{T}: Add one mana of any color.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    },
+    {
+      "kind": "crew",
+      "power": 4
+    }
+  ]
+}

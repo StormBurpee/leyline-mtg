@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "322a2d97-cf71-4bfc-b52d-f642f2d0dcbd",
+  "name": "Cori Mountain Stalwart",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Monk"],
+    "colors": ["R", "W"],
+    "manaCost": "{1}{R}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flurry \u2014 Whenever you cast your second spell each turn, this creature deals 2 damage to each opponent and you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "spellNumber": 2,
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 2
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

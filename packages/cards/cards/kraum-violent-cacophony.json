@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1d764f70-985e-4cf0-9482-f30f73b9baf1",
+  "name": "Kraum, Violent Cacophony",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Zombie", "Horror"],
+    "colors": ["R", "U"],
+    "manaCost": "{2}{U}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever you cast your second spell each turn, put a +1/+1 counter on Kraum and draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "spellNumber": 2,
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

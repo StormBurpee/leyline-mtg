@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7b9a574f-6d56-421b-8fbd-94da1e6e3ce1",
+  "name": "Traxos, Academy Guardian",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dragon", "Construct"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 1,
+    "toughness": 5
+  },
+  "rulesText": "This spell costs {2} less to cast if you've cast a noncreature spell this turn.\nFlying, vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 2,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "spellsCast",
+          "player": "you",
+          "where": {
+            "not": {
+              "type": "creature"
+            }
+          }
+        },
+        "operator": "gte",
+        "right": 1
+      }
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

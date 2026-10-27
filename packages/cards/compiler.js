@@ -581,6 +581,14 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           problem('UNSUPPORTED_RESTRICTION', path, 'Unsupported combat restriction.');
         else d[a.restriction] = true;
         break;
+      case 'crew':
+        fields(a, ['kind', 'power'], path);
+        if (!Number.isSafeInteger(a.power) || a.power < 0 || a.power > 1000)
+          problem('INVALID_CREW', path, 'Crew requires an integer power from 0 to 1000.');
+        if (d.crew !== undefined)
+          problem('DUPLICATE_CREW', path, 'Only one crew ability is supported.');
+        d.crew = a.power;
+        break;
       case 'cycling':
         fields(a, ['kind', 'cost', 'type'], path);
         if (a.type !== undefined) d.cyclingType = a.type;

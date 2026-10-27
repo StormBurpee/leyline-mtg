@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0f1ada92-538b-40cb-9bf3-5c415f5325e6",
+  "name": "Spotcycle Scouter",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this Vehicle enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "scry",
+          "amount": 2,
+          "target": "controller"
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 1
+    }
+  ]
+}

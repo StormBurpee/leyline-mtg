@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0f2335bf-6a13-4483-997a-fd19d30c4d48",
+  "name": "S.H.I.E.L.D. Helicarrier",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": [],
+    "manaCost": "{4}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Flying\nWhen this Vehicle enters, create two 1/1 white Soldier creature tokens.\nCrew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/soldier-token",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 6
+    }
+  ]
+}

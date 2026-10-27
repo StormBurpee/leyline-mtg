@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7f51aede-fb86-4b7e-9027-2ba8be62b567",
+  "name": "Uthros Psionicist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Jellyfish", "Scientist"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "The second spell you cast each turn costs {2} less to cast.",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 2,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "spellsCast",
+          "player": "you"
+        },
+        "operator": "eq",
+        "right": 1
+      }
+    }
+  ]
+}

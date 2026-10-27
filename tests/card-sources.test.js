@@ -261,6 +261,7 @@ test('source compilation can bootstrap without a generated runtime catalog', asy
       'packages/engine/src/condition-schema.js',
       'packages/engine/src/target-group-schema.js',
       'packages/engine/src/value-schema.js',
+      'packages/engine/src/spell-history.js',
       'packages/engine/src/types.js',
       'packages/engine/src/creature-types.js',
       'packages/engine/src/selectors.js',

@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a08580da-e5aa-424b-86bf-d4535f3480d1",
+  "name": "Clamorous Ironclad",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 6,
+    "toughness": 3
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)\nCycling {R} ({R}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "crew",
+      "power": 3
+    },
+    {
+      "kind": "cycling",
+      "cost": "{R}"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d924c13e-f266-47b0-9711-ba9a9b9df1cb",
+  "name": "Stoic Sphinx",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Sphinx"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}{U}",
+    "power": 5,
+    "toughness": 3
+  },
+  "rulesText": "Flash\nFlying\nThis creature has hexproof as long as you haven't cast a spell this turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "spellsCast",
+          "player": "you"
+        },
+        "operator": "eq",
+        "right": 0
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["hexproof"]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { spellsCastCount } from './spell-history.js';
 import { definition, isAttacking, isBlocking, requireRule } from './model.js';
 import { matchesFilter } from './selectors.js';
 /** Resolve public-state values once per instruction or continuous-characteristic query. */
@@ -7,6 +8,9 @@ export function numericValue(state, value, { controller, source = null, excluded
   const players =
     value.player === 'all' ? [0, 1] : [value.player === 'opponent' ? 1 - controller : controller];
   switch (value.kind) {
+    case 'spellsCast':
+      result = spellsCastCount(state, players, value.where, controller);
+      break;
     case 'life':
       result = state.players[players[0]].life;
       break;

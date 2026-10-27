@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e08debdc-2db5-4562-8a02-4158bfc0db88",
+  "name": "Poised Practitioner",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Monk"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flurry \u2014 Whenever you cast your second spell each turn, put a +1/+1 counter on this creature. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "spellNumber": 2,
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "scry",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+import { recordSpellCast } from './spell-history.js';
+import { crewProblem, crewPlan } from './crew.js';
 import { cyclingFilter } from './cycling.js';
 import { flattenTargets, targetPlanProblem, targetPlans } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
@@ -119,6 +121,7 @@ function cast(s, p, c) {
     targetKind: d.target ?? null,
     target: c.target ?? null,
   });
+  recordSpellCast(s, p, definition(s, o));
   s.passes = 0;
   emit(s, 'cast', {
     player: p,
@@ -189,6 +192,26 @@ export function cyclingProblem(s, p, id) {
   if (!planPayment(s, p, definition(s, o).cycling))
     return 'Not enough available mana to cycle this card.';
   return null;
+}
+function crew(s, p, c) {
+  const problem = crewProblem(s, p, c.card, c.cards);
+  requireRule(!problem, 'CREW', problem);
+  const o = s.objects[c.card];
+  for (const id of c.cards) s.objects[id].tapped = true;
+  s.stack.push({
+    id: `s${++s.nextId}`,
+    kind: 'ability',
+    name: o.name,
+    controller: p,
+    source: ref(o),
+    sourceKeywords: keywords(s, o),
+    effects: [{ op: 'animateVehicle' }],
+    targetKind: null,
+    target: null,
+    label: `Crew ${definition(s, o).crew}`,
+  });
+  s.passes = 0;
+  emit(s, 'crewActivated', { player: p, objectId: o.id, cards: [...c.cards] });
 }
 function cycle(s, p, c) {
   const problem = cyclingProblem(s, p, c.card);
@@ -434,6 +457,9 @@ export function dispatch(state, command) {
         case 'cast':
           cast(s, p, command);
           break;
+        case 'crew':
+          crew(s, p, command);
+          break;
         case 'activate':
           activate(s, p, command);
           break;
@@ -530,6 +556,10 @@ export function legalActions(s, p) {
     if (canTapForMana(s, o, p))
       for (const color of manaOptions(s, o)) actions.push({ type: 'tapMana', card: o.id, color });
     if (o.zone !== 'battlefield' || o.controller !== p) continue;
+    if (definition(s, o).crew !== undefined) {
+      const cards = crewPlan(s, p, o.id);
+      if (cards) actions.push({ type: 'crew', card: o.id, cards });
+    }
     for (const [index, a] of (definition(s, o).activated ?? []).entries()) {
       if (a.targetGroups) {
         for (const targets of targetPlans(s, a.targetGroups, p))
@@ -600,6 +630,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.39.0',
         '0.38.0',
         '0.37.0',
         '0.36.1',

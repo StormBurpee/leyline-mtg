@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4074e897-82a4-4f57-86c2-4aab3f29ef9b",
+  "name": "Ezekiel Sims, Spider-Totem",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Spider", "Human", "Advisor"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}",
+    "power": 3,
+    "toughness": 5
+  },
+  "rulesText": "Reach\nAt the beginning of combat on your turn, target Spider you control gets +2/+2 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 2,
+          "toughness": 2,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "subtype": "Spider"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

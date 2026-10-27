@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "09726c3d-f700-4bf4-a9e7-326fe41b0a4a",
+  "name": "Skybox Ferry",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": [],
+    "manaCost": "{5}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)\nCycling {2} ({2}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "crew",
+      "power": 2
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}"
+    }
+  ]
+}

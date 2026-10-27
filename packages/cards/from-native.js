@@ -135,6 +135,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   for (const restriction of ['cannotAttack', 'cannotBlock', 'unblockable'])
     if (d[restriction]) abilities.push({ kind: 'combatRestriction', restriction });
   if (d.flashback) abilities.push({ kind: 'flashback', cost: mana(d.flashback) });
+  if (d.crew !== undefined) abilities.push({ kind: 'crew', power: d.crew });
   if (d.cycling)
     abilities.push({
       kind: 'cycling',

@@ -83,7 +83,7 @@ export function legalTarget(s, kind, target, controller) {
     (hasKeyword(s, o, 'shroud') || (hasKeyword(s, o, 'hexproof') && o.controller !== controller))
   )
     return false;
-  const pt = creature ? stats(s, o) : {};
+  const pt = creature || o.zone !== 'battlefield' ? stats(s, o) : {};
   return matchesFilter(
     {
       definition: d,
@@ -771,6 +771,22 @@ export function resolveEffects(s, entry, startIndex = 0) {
       case 'destroy':
         if (o && !hasKeyword(s, o, 'indestructible')) move(s, o, 'graveyard');
         break;
+      case 'animateVehicle': {
+        const source = s.objects[entry.source.id];
+        if (
+          source?.zone === 'battlefield' &&
+          source.incarnation === entry.source.incarnation &&
+          !source.faceDown &&
+          definition(s, source).subtypes.includes('Vehicle')
+        )
+          s.modifiers.push({
+            objectId: source.id,
+            incarnation: source.incarnation,
+            addTypes: ['artifact', 'creature'],
+            expires: s.turn,
+          });
+        break;
+      }
       case 'modify':
         if (o)
           s.modifiers.push({

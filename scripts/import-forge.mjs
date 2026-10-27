@@ -38,6 +38,7 @@ for (const path of [
   'packages/engine/src/target-group-schema.js',
   'packages/engine/src/selectors.js',
   'packages/engine/src/value-schema.js',
+  'packages/engine/src/spell-history.js',
   'packages/engine/src/events.js',
   'packages/engine/src/types.js',
   'packages/engine/src/creature-types.js',
