@@ -22,28 +22,85 @@ const recipient = (effect, controller, target) =>
 export const libraryCount = (state, player) =>
   state.players[player].libraryCount ?? state.players[player].library?.length ?? Infinity;
 
-export function drawsFor(effects, controller, target, player = controller, state = null) {
-  let count = 0,
-    hand = state ? (state.players[player].handCount ?? state.players[player].hand.length) : 0;
+function* boundEffects(effects, target, context) {
+  for (const effect of effects) {
+    if (effect.targetGroup !== undefined) {
+      for (const bound of context.targets?.[effect.targetGroup] ?? [])
+        yield { effect, target: bound };
+    } else yield { effect, target };
+  }
+}
+function drawRecipient(effect, controller, target, state, context) {
+  if (effect.op !== 'connive') return recipient(effect, controller, target);
+  const subject =
+    effect.subject === 'source'
+      ? context.source
+      : effect.subject === 'eventSource'
+        ? context.eventSource
+        : target;
+  const object = subject?.kind === 'object' && state?.objects[subject.id];
+  if (object?.zone === 'battlefield' && object.incarnation === subject.incarnation)
+    return object.controller;
+  return subject?.controller ?? context.sourceController ?? controller;
+}
+
+/** Preview mandatory continuations in instruction order without reading hidden cards.
+ * A filtered continuation is conservatively treated as possible after a discard.
+ * Optional inner payments remain separate decisions and may be declined later.
+ */
+function* riskInstructions(effects, controller, target, player, state, context) {
+  let hand = state ? (state.players[player].handCount ?? state.players[player].hand.length) : 0;
   const bonuses = state
     ? battlefield(state)
         .filter((o) => o.controller === player)
         .map((o) => definition(state, o).drawBonus)
         .filter(Boolean)
     : [];
-  for (const effect of effects) {
-    if (recipient(effect, controller, target) !== player) continue;
-    if (effect.op === 'draw') {
-      const amount =
-        effect.count +
-        (effect.count > 0
-          ? bonuses.filter((b) => hand <= b.handAtMost).reduce((n, b) => n + b.amount, 0)
-          : 0);
-      count += amount;
-      hand += amount;
-    } else if (effect.op === 'discard') hand = Math.max(0, hand - effect.count);
+  const pending = [...boundEffects(effects, target, context)];
+  for (let index = 0; index < pending.length; index++) {
+    const { effect, target: boundTarget } = pending[index];
+    let draws = 0;
+    if (drawRecipient(effect, controller, boundTarget, state, context) === player) {
+      if (['draw', 'connive'].includes(effect.op)) {
+        const baseCount = effect.op === 'connive' ? 1 : effect.count;
+        draws =
+          baseCount +
+          (baseCount > 0
+            ? bonuses.filter((b) => hand <= b.handAtMost).reduce((n, b) => n + b.amount, 0)
+            : 0);
+        hand += draws;
+        if (effect.op === 'connive') hand = Math.max(0, hand - 1);
+      } else if (effect.op === 'discard' || (effect.op === 'discardThen' && !effect.optional)) {
+        const discarded = Math.min(hand, effect.count);
+        hand -= discarded;
+        if (effect.op === 'discardThen' && discarded > 0)
+          pending.splice(
+            index + 1,
+            0,
+            ...boundEffects(
+              predictedEffects(state, effect.then, { ...context, target: boundTarget }),
+              boundTarget,
+              context,
+            ),
+          );
+      }
+    }
+    yield { effect, target: boundTarget, draws };
   }
-  return count;
+}
+
+export function drawsFor(
+  effects,
+  controller,
+  target,
+  player = controller,
+  state = null,
+  context = {},
+) {
+  let draws = 0;
+  for (const instruction of riskInstructions(effects, controller, target, player, state, context))
+    draws += instruction.draws;
+  return draws;
 }
 
 /** A bounded check of known effects, not a claim to solve every triggered interaction.
@@ -59,24 +116,27 @@ export function resolutionRisk(
   eventAmount = 0,
   context = {},
 ) {
-  effects = predictedEffects(state, effects, {
-    ...context,
-    controller: player,
-    source,
-    target,
-    eventAmount,
-  });
+  context = { ...context, controller: player, source, target, eventAmount };
+  effects = predictedEffects(state, effects, context);
   let life = state.players[player].life - lifeCost;
-  for (const effect of effects) {
-    if (effect.op === 'damage' && target?.kind === 'player' && target.id === player)
+  let draws = 0;
+  for (const { effect, target: boundTarget, draws: drawn } of riskInstructions(
+    effects,
+    player,
+    target,
+    player,
+    state,
+    context,
+  )) {
+    draws += drawn;
+    if (effect.op === 'damage' && boundTarget?.kind === 'player' && boundTarget.id === player)
       life -= effect.amount;
-    if (recipient(effect, player, target) !== player) continue;
+    if (recipient(effect, player, boundTarget) !== player) continue;
     if (effect.op === 'loseLife') life -= effect.amount;
     if (effect.op === 'gainLife' && canGainLife(state)) life += effect.amount;
   }
   if (life <= 0) return 'life';
-  if (drawsFor(effects, player, target, player, state) > libraryCount(state, player))
-    return 'library';
+  if (draws > libraryCount(state, player)) return 'library';
   return null;
 }
 
@@ -187,6 +247,8 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
 export function actionSafe(state, player, action) {
   if (!['cast', 'activate'].includes(action.type)) return true;
   const cost = actionCost(state, player, action);
+  const object = state.objects[action.card];
+  const source = { kind: 'object', id: object.id, incarnation: object.incarnation };
   if (action.type === 'cast' && state.objects[action.card]?.zone === 'hand')
     state = {
       ...state,
@@ -220,15 +282,23 @@ export function actionSafe(state, player, action) {
     return (
       life < state.players[player].life &&
       !!payment &&
-      !resolutionRisk(state, player, actionEffects(state, action), null, life)
+      !resolutionRisk(state, player, actionEffects(state, action), null, life, source, 0, {
+        targets: action.targets,
+      })
     );
   }
 
   const totalLife = (cost.life ?? 0) + (cost.manaLife ?? 0);
   if (totalLife >= state.players[player].life) return false;
   return (
-    !resolutionRisk(state, player, actionEffects(state, action), action.target, totalLife) &&
-    canPayTargetWard(state, player, action.target, cost, action.card)
+    !resolutionRisk(
+      state,
+      player,
+      actionEffects(state, action),
+      action.target,
+      totalLife,
+      source,
+    ) && canPayTargetWard(state, player, action.target, cost, action.card)
   );
 }
 

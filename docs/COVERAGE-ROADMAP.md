@@ -4,9 +4,9 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.57.0
+## Implemented progress through v0.59.0
 
-Current dated inventory coverage: **2,146 / 5,164**; **3,018 remain**. This is 1267 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **2,188 / 5,164**; **2,976 remain**. This is 1309 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
 | Delivered feature/card batch                                      | Cards added |
 | ----------------------------------------------------------------- | ----------: |
@@ -76,7 +76,13 @@ Current dated inventory coverage: **2,146 / 5,164**; **3,018 remain**. This is 1
 | Literal Discover and resolution-time free casting                 |          11 |
 | Role Aura sources, exact returns and creature-owned grants        |          22 |
 | Station and continuous charge thresholds                          |          17 |
-| **Total since v0.38.0**                                           |    **1267** |
+| Complete Class cards (Standard-legal subset)                      |           3 |
+| Simultaneous entry-group payoffs                                  |           3 |
+| Source-only choices, grants and recipient bindings                |          18 |
+| Connive, recruit and optional discard-search                      |          18 |
+| **Total since v0.38.0**                                           |    **1309** |
+
+Stormchaser’s Talent is a fourth executable Class but is banned in Standard; it increases Arena coverage only. Elvish Archivist and Enduring Innocence were corrected to grouped entry predicates and are not new cards.
 
 The baseline forecasts below remain unchanged for comparison. They were conservative first-pass probes: several implemented families unlocked more cards than those probes identified. Remaining cards in each family can still require other unsupported behavior.
 

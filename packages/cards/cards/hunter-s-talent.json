@@ -1,0 +1,145 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a8a9b103-0cb8-4810-a2d7-42f6a10f80bd",
+  "name": "Hunter's Talent",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Class"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "(Gain the next level as a sorcery to add its ability.)\nWhen this Class enters, target creature you control deals damage equal to its power to target creature you don't control.\n{1}{G}: Level 2\nWhenever you attack, target attacking creature gets +1/+0 and gains trample until end of turn.\n{3}{G}: Level 3\nAt the beginning of your end step, if you control a creature with power 4 or greater, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "targetGroups": [
+        {
+          "id": "actor",
+          "label": "Choose your creature",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victims",
+          "label": "Choose damage recipients",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "bite",
+          "sourceGroup": "actor",
+          "victimGroup": "victims"
+        }
+      ],
+      "on": {
+        "event": "enter",
+        "object": "source"
+      }
+    },
+    {
+      "kind": "classLevel",
+      "level": 2,
+      "cost": "{1}{G}",
+      "abilities": [
+        {
+          "kind": "triggered",
+          "on": {
+            "event": "attackGroup",
+            "controller": "you"
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 1,
+              "toughness": 0,
+              "keywords": ["trample"],
+              "until": "endOfTurn"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "attacking": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "classLevel",
+      "level": 3,
+      "cost": "{3}{G}",
+      "abilities": [
+        {
+          "kind": "triggered",
+          "on": {
+            "event": "step",
+            "step": "end",
+            "controller": "you"
+          },
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ],
+          "condition": {
+            "kind": "controlAtLeast",
+            "count": 1,
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "power": {
+                    "gte": 4
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

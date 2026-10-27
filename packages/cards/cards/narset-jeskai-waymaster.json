@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1a2a74b8-0689-4959-9348-02cc832194cf",
+  "name": "Narset, Jeskai Waymaster",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Monk"],
+    "colors": ["R", "U", "W"],
+    "manaCost": "{U}{R}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "At the beginning of your end step, you may discard your hand. If you do, draw cards equal to the number of spells you've cast this turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "optional": true,
+      "effects": [
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": {
+            "kind": "count",
+            "zone": "hand",
+            "player": "you"
+          }
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": {
+            "kind": "spellsCast",
+            "player": "you"
+          }
+        }
+      ]
+    }
+  ]
+}

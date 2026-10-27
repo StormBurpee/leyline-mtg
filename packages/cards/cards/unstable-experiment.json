@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5b7bbc76-22cc-482e-8d65-34cff34c93c8",
+  "name": "Unstable Experiment",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Target player draws a card, then up to one target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "player",
+          "selector": {
+            "scope": "player"
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "creature",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "draw",
+          "target": "target",
+          "amount": 1,
+          "targetGroup": "player"
+        },
+        {
+          "op": "connive",
+          "target": "target",
+          "targetGroup": "creature"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4384996f-aeaa-41ac-aa0e-12d72c887731",
+  "name": "Pursue the Past",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "W"],
+    "manaCost": "{R}{W}"
+  },
+  "rulesText": "You gain 2 life. You may discard a card. If you do, draw two cards.\nFlashback {2}{R}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Discard a card and draw 2",
+              "condition": {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "hand",
+                  "player": "you"
+                },
+                "operator": "gt",
+                "right": 0
+              },
+              "effects": [
+                {
+                  "op": "discard",
+                  "target": "controller",
+                  "amount": 1
+                },
+                {
+                  "op": "draw",
+                  "target": "controller",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "label": "Decline",
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "flashback",
+      "cost": "{2}{R}{W}"
+    }
+  ]
+}

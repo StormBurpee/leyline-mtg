@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5cf18398-9552-415e-a61f-2c149e35ec3d",
+  "name": "Zuko's Exile",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": ["Lesson"],
+    "colors": [],
+    "manaCost": "{5}"
+  },
+  "rulesText": "Exile target artifact, creature, or enchantment. Its controller creates a Clue token. (It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "creature"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 1,
+          "controller": "targetController"
+        }
+      ]
+    }
+  ]
+}

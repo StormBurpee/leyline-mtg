@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d4607026-80b2-4fa6-99d5-694cd3b43868",
+  "name": "Great Gilded Boat",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Whenever you attack, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attackGroup",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discardThen",
+          "count": 1,
+          "where": {
+            "not": {
+              "type": "land"
+            }
+          },
+          "then": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/human-soldier-token",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 2
+    }
+  ]
+}

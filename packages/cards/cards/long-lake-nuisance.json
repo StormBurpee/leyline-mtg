@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a833fdf1-db0c-4846-8452-d3b2059c2355",
+  "name": "Long Lake Nuisance",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "Flying\nWhen this creature enters, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discardThen",
+          "count": 1,
+          "where": {
+            "not": {
+              "type": "land"
+            }
+          },
+          "then": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/human-soldier-token",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

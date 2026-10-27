@@ -1,0 +1,94 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c97957a2-8310-4cff-8aad-871b7901d124",
+  "name": "Caretaker's Talent",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Class"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "(Gain the next level as a sorcery to add its ability.)\nWhenever one or more tokens you control enter, draw a card. This ability triggers only once each turn.\n{W}: Level 2\nWhen this Class becomes level 2, create a token that's a copy of target token you control.\n{3}{W}: Level 3\nCreature tokens you control get +2/+2.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enterGroup",
+        "controller": "you",
+        "filter": {
+          "token": true
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "oncePerTurn": true
+    },
+    {
+      "kind": "classLevel",
+      "level": 2,
+      "cost": "{W}",
+      "abilities": [
+        {
+          "kind": "triggered",
+          "on": {
+            "event": "classLevel",
+            "object": "source",
+            "classLevel": 2
+          },
+          "effects": [
+            {
+              "op": "copyToken",
+              "target": "target",
+              "count": 1
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "token": true
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "classLevel",
+      "level": 3,
+      "cost": "{3}{W}",
+      "abilities": [
+        {
+          "kind": "anthem",
+          "power": 2,
+          "toughness": 2,
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "token": true
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

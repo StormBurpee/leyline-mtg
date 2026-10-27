@@ -2,7 +2,23 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.57)
+## Latest coverage (v0.59)
+
+Eighteen complete Standard cards add single-creature connive, recruit, and Formidable Speaker’s optional discard-linked creature search. Connive uses the current or last controller, draws before discarding, and awards a counter only for an actually discarded nonland card on the same battlefield incarnation. Recruit’s Human Soldier token follows an actual nonland discard, even after the source leaves. Abandon Attachments now uses the same paid-discard continuation instead of a hand-count approximation. See [connive and recruit support](CONNIVE-RECRUIT.md).
+
+Nested continuation frames preserve parent target groups and last-known source control without opening priority. Optional discards can be declined in the client; the bot checks known draw risks and grouped recipients. Recursive token validation and support reporting include unselected continuations. Simultaneous multi-permanent connive and general replacement effects remain unsupported.
+
+Total catalog: 2407 playable cards and 106 tokens; dated Standard: 2188 of 5164. Revision 4 Class/entryGroup behavior, legacy revisions 1–3, exact default/meta lists, saved-catalog caching, Station thresholds and Roles remain preserved. DOM/inspector checks are not browser-layout verification.
+
+## Previous coverage (v0.58)
+
+Class levels are noncopiable designations with paid, sequential sorcery-speed activations, stable command slots, real stack resolution, and level-dependent grants that respect ability loss. Hunter’s, Caretaker’s, Builder’s and Stormchaser’s Talents have complete printed behavior; Stormchaser is banned in Standard and counts only in the Arena inventory. Unsupported grant combinations reject instead of overwriting abilities. See [Class support](CLASS-CARDS.md).
+
+Simultaneous `enterGroup` predicates observe one actual batch, with same-member filtering, suppression, additional triggers, staged entry choices and APNAP ordering. Ordinary multi-token instructions now enter together under rules revision 4; prior revisions 1–3 retain historical object/trigger IDs, including the two migrated existing-card predicates. Baron Bertram Graywater, Mister Fantastic and Valley Questcaller add three complete Standard cards. See [grouped-entry support](entry-group-support.md).
+
+Eighteen further complete Standard cards reuse existing optional resolutions, chosen sacrifices, attachment-granted attacks, target-bound effects and recipient binding. Total catalog: 2389 playable cards and 106 tokens; dated Standard: 2170 of 5164. This is not a claim of all Classes, entry-trigger cards, generalized replacement effects or format legality enforcement. Exact default/meta lists, saved-catalog caching and Station/Role behavior remain preserved. DOM/inspector checks are not browser-layout verification.
+
+## Previous coverage (v0.57)
 
 Station taps exactly one other controlled creature as a sorcery and adds charge counters using resolution-time power or exact-incarnation last-known power. Charge thresholds continuously grant their printed abilities and, where specified, creature type and base P/T; they are not end-of-turn animations. Losing creature status immediately removes combat membership, including mid-resolution counter removal. Copies retain definitions, not counters or unlocked characteristics. The 17 admitted cards include complete clauses and are not restricted to their controller’s turn. Ten remaining Station cards and broader counter/modifier contracts are explicitly excluded. See [Station support](STATION.md).
 

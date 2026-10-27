@@ -16,6 +16,7 @@ import {
   decisionGallery,
   choiceHeader,
   decisionReader,
+  discardChoiceSubtitle,
 } from './choice-stage.js';
 import { playableZone, playableCards } from '../../packages/engine/src/model.js';
 import { castingChoices } from '../../packages/engine/src/spell-modes.js';
@@ -647,8 +648,7 @@ function presentStateChoice() {
             ? 'Choose a creature you control to exile. This does not target, destroy, or sacrifice it.'
             : 'Choose permanents you control to sacrifice. This does not target or destroy them.'
           : 'Select the cards to discard, then confirm your choice.';
-    if (c.optional)
-      subtitle = 'You may discard a card to draw a card. Or keep your hand unchanged.';
+    if (c.optional) subtitle = discardChoiceSubtitle(c);
     cards = c.kind === 'sacrifice' ? c.cards : state.players[viewer()].hand;
     actions = `${c.optional ? '<button class="btn" data-action="declineDecision">Keep hand · skip</button>' : ''}<span class="choice-selection-summary">${selected.length} of ${c.count} selected</span><button class="btn primary" data-action="confirmDecision" ${selected.length === c.count ? '' : 'disabled'}>${c.kind === 'bottom' ? 'Put selected cards back' : c.kind === 'sacrifice' ? (c.destination === 'exile' ? 'Exile selected creature' : 'Sacrifice selected permanents') : 'Discard selected cards'}</button>`;
   } else if (

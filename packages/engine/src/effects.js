@@ -40,6 +40,7 @@ import {
   trackExiledCard,
   entryTriggersSuppressed,
   notifyTriggers,
+  notifyEntryGroup,
   captureDepartureContext,
   finishDepartureBatch,
   sacrificePermanents,
@@ -556,6 +557,22 @@ export function enterBattlefieldBatch(
       x: castValues.get(object.id),
     });
   }
+  notifyEntryGroup(
+    s,
+    entering.map(({ object }) => object),
+  );
+  // A token instruction's temporary keywords are granted after the tokens enter,
+  // but before continuing resolution. Keep them across any paused entry choices.
+  for (const { object, temporaryKeywords } of entering)
+    if (temporaryKeywords?.length)
+      addModifier(s, {
+        objectId: object.id,
+        incarnation: object.incarnation,
+        power: 0,
+        toughness: 0,
+        keywords: [...temporaryKeywords],
+        expires: s.turn,
+      });
   // Run after the entire entry batch and its ETB observations, never before entry
   // choices. This ref is captured from the object that actually entered (CR 400.7).
   for (const { object, attachedToken, tokenController } of entering)
@@ -768,6 +785,8 @@ function needsTargetController(effects = [], group) {
         effect.targetGroup === group) ||
       (effect.op === 'conditional' &&
         (needsTargetController(effect.then, group) || needsTargetController(effect.else, group))) ||
+      (['discardThen', 'behold'].includes(effect.op) &&
+        needsTargetController(effect.then, group)) ||
       (effect.op === 'chooseEffect' &&
         effect.options.some((option) => needsTargetController(option.effects, group))),
   );
@@ -850,7 +869,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
         }
         finishDepartureBatch(s, context);
       } else {
-        for (const target of targets) {
+        for (const [targetIndex, target] of targets.entries()) {
           if (
             resolveEffects(s, {
               ...entry,
@@ -861,9 +880,17 @@ export function resolveEffects(s, entry, startIndex = 0) {
               effects: [effect],
             }) === false
           ) {
-            // Single-target modal copy effects may pause for the copy's entry choices.
-            // Keep the remaining parent instructions behind that exact continuation.
-            s.resolving.entry.effects.push(...effects.slice(index + 1));
+            // Retain each target's binding across a child decision, then restore
+            // the parent binding. Appending effects to the child loses later
+            // targets and can accidentally rebind later parent instructions.
+            let resume = { entry, index: index + 1 };
+            for (let j = targets.length - 1; j > targetIndex; j--)
+              resume = {
+                entry: { ...entry, target: targets[j], effects: [structuredClone(effect)] },
+                index: 0,
+                resume,
+              };
+            s.resolving.resume = resume;
             return false;
           }
         }
@@ -948,6 +975,18 @@ export function resolveEffects(s, entry, startIndex = 0) {
         ? candidate
         : null;
     switch (e.op) {
+      case 'setClassLevel': {
+        const source = s.objects[entry.source?.id];
+        if (source?.zone !== 'battlefield' || source.incarnation !== entry.source.incarnation)
+          break;
+        const previous = source.classLevel ?? 1;
+        source.classLevel = e.level;
+        if (previous !== e.level) {
+          emit(s, 'classLevel', { objectId: source.id, player: source.controller, level: e.level });
+          notifyTriggers(s, 'classLevel', { object: source, classLevel: e.level });
+        }
+        break;
+      }
       case 'moveLinkedExileToGraveyard': {
         const links = (s.linkedExiles ?? []).filter(
           (link) =>
@@ -1540,6 +1579,28 @@ export function resolveEffects(s, entry, startIndex = 0) {
         };
         return false;
       }
+      case 'connive': {
+        // CR 701 (Connive), 608.2h, 400.7 (rules profile 2026-09-25): the creature's current/last controller draws
+        // and discards even if the specified nontargeted creature has left.
+        if (!o && !['source', 'eventSource'].includes(e.subject)) break;
+        const player =
+          o?.controller ??
+          (e.subject === 'eventSource'
+            ? entry.eventSource?.controller
+            : damageSource(s, entry).controller);
+        if (player === undefined) break;
+        draw(s, player, 1);
+        if (!s.players[player].hand.length) break;
+        s.resolving = { entry, index: index + 1 };
+        s.choice = {
+          kind: 'discardEffect',
+          player,
+          count: 1,
+          conniving: structuredClone(target),
+        };
+        return false;
+      }
+      case 'discardThen':
       case 'optionalDiscardDraw':
       case 'discardTrigger':
       case 'discard': {
@@ -1547,7 +1608,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           e.op === 'optionalDiscardDraw' ? 1 : e.count,
           s.players[recipient].hand.length,
         );
-        if (!count) break;
+        if (!count || (e.op === 'discardThen' && e.optional && count < e.count)) break;
         s.resolving = { entry, index: index + 1 };
         s.choice = {
           kind: 'discardEffect',
@@ -1555,6 +1616,9 @@ export function resolveEffects(s, entry, startIndex = 0) {
           count,
           ...(e.op === 'optionalDiscardDraw' ? { optional: true, drawOnDiscard: 1 } : {}),
           ...(e.op === 'discardTrigger' ? { reflexive: structuredClone(e) } : {}),
+          ...(e.op === 'discardThen'
+            ? { continuation: structuredClone(e), optional: e.optional ?? false }
+            : {}),
         };
         return false;
       }
@@ -2199,22 +2263,40 @@ export function resolveEffects(s, entry, startIndex = 0) {
       case 'attachedToken':
         createAttachedToken(s, e.definition, entry.controller, target);
         break;
-      case 'token':
-        for (let i = 0; i < (e.countFrom === 'moved' ? (entry.movedCount ?? 0) : e.count); i++) {
-          const controller = e.player === 'targetController' ? entry.targetController : recipient;
-          const token = addObject(s, e.definition, controller, 'void');
-          enterBattlefield(s, token, controller, null, { tapped: e.tapped });
-          if (token.zone === 'battlefield' && e.temporaryKeywords?.length)
-            addModifier(s, {
-              objectId: token.id,
-              incarnation: token.incarnation,
-              power: 0,
-              toughness: 0,
-              keywords: [...e.temporaryKeywords],
-              expires: s.turn,
-            });
+      case 'token': {
+        // Revision 4 makes one token instruction a simultaneous entry. Preserve
+        // historical trigger/object ID interleaving for already-exported games.
+        if ((s.rulesRevision ?? 4) < 4) {
+          for (let i = 0; i < (e.countFrom === 'moved' ? (entry.movedCount ?? 0) : e.count); i++) {
+            const controller = e.player === 'targetController' ? entry.targetController : recipient;
+            const token = addObject(s, e.definition, controller, 'void');
+            enterBattlefield(s, token, controller, null, { tapped: e.tapped });
+            if (token.zone === 'battlefield' && e.temporaryKeywords?.length)
+              addModifier(s, {
+                objectId: token.id,
+                incarnation: token.incarnation,
+                power: 0,
+                toughness: 0,
+                keywords: [...e.temporaryKeywords],
+                expires: s.turn,
+              });
+          }
+          break;
+        }
+        const controller = e.player === 'targetController' ? entry.targetController : recipient;
+        const count = e.countFrom === 'moved' ? (entry.movedCount ?? 0) : e.count;
+        const entries = Array.from({ length: count }, () => ({
+          object: addObject(s, e.definition, controller, 'void'),
+          controller,
+          tapped: e.tapped,
+          temporaryKeywords: e.temporaryKeywords,
+        }));
+        if (enterBattlefieldBatch(s, entries) === false) {
+          s.resolving = { entry, index: index + 1 };
+          return false;
         }
         break;
+      }
       default:
         throw new Error(`Unimplemented effect opcode: ${e.op}`);
     }
@@ -2247,7 +2329,19 @@ export function continueResolution(s) {
     delete frame.discover;
   }
   if (flushLinkedReturns(s) === false) return;
-  if (resolveEffects(s, frame.entry, frame.index) === false) return;
+  if (resolveEffects(s, frame.entry, frame.index) === false) {
+    if (frame.resume) {
+      let tail = s.resolving;
+      while (tail.resume) tail = tail.resume;
+      tail.resume = frame.resume;
+    }
+    return;
+  }
+  if (frame.resume) {
+    s.resolving = frame.resume;
+    continueResolution(s);
+    return;
+  }
   const entry = frame.entry,
     object = s.objects[entry.source?.id];
   if (entry.kind === 'spell' && object?.zone === 'stack') {
@@ -2705,29 +2799,43 @@ export function finishResolutionChoice(s, command) {
     );
     // Snapshot qualifying cards before movement; a reflexive trigger belongs to
     // this resolving ability, even if its source has since left the battlefield.
-    const qualifying = choice.reflexive
-      ? command.cards.filter((id) => {
-          const object = s.objects[id],
-            d = definition(s, object);
-          return matchesFilter(
-            {
-              definition: d,
-              owner: object.owner,
-              controller: object.controller,
-              manaValue: manaValue(d),
-              power: d.power,
-              toughness: d.toughness,
-              keywords: d.keywords,
-            },
-            choice.reflexive.where,
-            choice.player,
-          );
-        }).length
-      : 0;
+    const discardFilter =
+      choice.reflexive?.where ??
+      choice.continuation?.where ??
+      (choice.conniving ? { not: { type: 'land' } } : undefined);
+    const qualifying =
+      choice.reflexive || choice.continuation || choice.conniving
+        ? command.cards.filter((id) => {
+            const object = s.objects[id],
+              d = definition(s, object);
+            return matchesFilter(
+              {
+                definition: d,
+                owner: object.owner,
+                controller: object.controller,
+                manaValue: manaValue(d),
+                power: d.power,
+                toughness: d.toughness,
+                keywords: d.keywords,
+              },
+              discardFilter,
+              choice.player,
+            );
+          }).length
+        : 0;
     for (const id of command.cards) move(s, s.objects[id], 'graveyard');
     emit(s, 'discard', { player: choice.player, count: command.cards.length });
     if (choice.drawOnDiscard && command.cards.length) draw(s, choice.player, choice.drawOnDiscard);
-    if (qualifying) {
+    if (qualifying && choice.conniving) {
+      const creature = s.objects[choice.conniving.id];
+      if (creature?.zone === 'battlefield' && creature.incarnation === choice.conniving.incarnation)
+        putStatCounters(creature, { amount: qualifying });
+    }
+    if (qualifying && choice.continuation) {
+      const frame = s.resolving;
+      frame.entry.effects.splice(frame.index, 0, ...structuredClone(choice.continuation.then));
+    }
+    if (qualifying && choice.reflexive) {
       const parent = s.resolving.entry;
       s.pendingTriggers.push({
         id: `s${++s.nextId}`,

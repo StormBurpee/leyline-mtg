@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b0672aa3-3207-4ff8-af8f-bdabacbb4d04",
+  "name": "Mechanical Mobster",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Robot", "Villain"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, exile up to one target card from a graveyard. Target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "targetGroup": "graveyard",
+          "destination": "exile"
+        },
+        {
+          "op": "connive",
+          "target": "target",
+          "targetGroup": "creature"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "graveyard",
+          "selector": {
+            "scope": "graveyard"
+          },
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "creature",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

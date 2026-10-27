@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "82333385-631f-4abf-b159-bb367f1c6fd9",
+  "name": "Abandon Attachments",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": ["Lesson"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U/R}"
+  },
+  "rulesText": "You may discard a card. If you do, draw two cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "discardThen",
+          "count": 1,
+          "optional": true,
+          "then": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

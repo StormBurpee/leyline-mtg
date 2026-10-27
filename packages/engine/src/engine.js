@@ -320,6 +320,8 @@ export function abilityProblem(s, p, id, index, target, discardCard, targets, sa
   if (!Number.isSafeInteger(index) || index < 0) return 'That ability does not exist.';
   const ability = definition(s, o).activated?.[index];
   if (!ability) return 'That ability does not exist.';
+  if (ability.classLevel !== undefined && (o.classLevel ?? 1) !== ability.classLevel - 1)
+    return `This Class must be level ${ability.classLevel - 1} to gain level ${ability.classLevel}.`;
   if (
     Object.values(s.objects).some(
       (source) =>
@@ -907,7 +909,12 @@ export function legalActions(s, p, { x: exactX } = {}) {
   if (s.choice?.kind === 'discardEffect' && s.choice.optional && s.choice.player === p)
     return [
       { type: 'discardEffect', cards: [] },
-      ...s.players[p].hand.map((id) => ({ type: 'discardEffect', cards: [id] })),
+      ...s.players[p].hand
+        .slice(0, Math.max(0, s.players[p].hand.length - s.choice.count + 1))
+        .map((_, index) => ({
+          type: 'discardEffect',
+          cards: s.players[p].hand.slice(index, index + s.choice.count),
+        })),
       { type: 'concede' },
     ];
   if (s.choice?.kind === 'landType' && s.choice.player === p)
@@ -1185,7 +1192,7 @@ export function exportReplay(s) {
   return structuredClone({
     schemaVersion: REPLAY_SCHEMA_VERSION,
     version: VERSION,
-    rulesRevision: s.rulesRevision ?? 3,
+    rulesRevision: s.rulesRevision ?? 4,
     config: s.config,
     commands: s.history,
   });
@@ -1209,6 +1216,10 @@ export function replay(record) {
         '0.52.0',
         '0.53.0',
         '0.54.0',
+        '0.55.0',
+        '0.56.0',
+        '0.57.0',
+        '0.58.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',
@@ -1259,7 +1270,7 @@ export function replay(record) {
     'Invalid or oversized replay.',
   );
   requireRule(
-    record.rulesRevision === undefined || [1, 2, 3].includes(record.rulesRevision),
+    record.rulesRevision === undefined || [1, 2, 3, 4].includes(record.rulesRevision),
     'REPLAY_VERSION',
     'Unsupported replay rules revision.',
   );
@@ -1268,7 +1279,10 @@ export function replay(record) {
   // published envelopes through v0.42 use the historical timing and ID order.
   const minor = Number(record.version.split('.')[1]);
   // Revision 3 skips the starting player's entire first draw step (v0.49).
-  s.rulesRevision = record.rulesRevision ?? (minor <= 42 ? 1 : minor <= 48 ? 2 : 3);
+  // Revision 4 batches ordinary token creation after v0.57. Older unmarked
+  // exports keep sequential token entries and their original object/trigger IDs.
+  s.rulesRevision =
+    record.rulesRevision ?? (minor <= 42 ? 1 : minor <= 48 ? 2 : minor <= 57 ? 3 : 4);
   for (const [index, c] of record.commands.entries()) {
     const r = dispatch(s, c);
     requireRule(r.ok, 'REPLAY_COMMAND', `Replay command ${index} rejected: ${r.error?.message}`);

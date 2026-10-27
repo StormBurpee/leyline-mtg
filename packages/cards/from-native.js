@@ -40,6 +40,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           selector: structuredClone(targetSpec(e.selector)),
           effects: effects(e.effects),
         };
+      if (e.op === 'discardThen') return { ...structuredClone(e), then: effects(e.then) };
       if (e.op === 'behold') return { ...structuredClone(e), then: effects(e.then) };
       if (e.op === 'chooseEffect')
         return {
@@ -60,6 +61,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         const { targetGroup, ...rest } = e;
         return { ...effects([rest])[0], targetGroup };
       }
+      if (e.op === 'connive') return { op: e.op, target: e.subject ?? 'target' };
       switch (e.op) {
         case 'mobilize':
         case 'empowerJace':
@@ -550,6 +552,38 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       kind: 'aura',
       enchant: structuredClone(targetSpec(d.target)),
       ...(d.aura === 'pacifism' ? { restriction: 'cantAttackOrBlock' } : {}),
+    });
+  }
+  for (const grant of d.classLevels ?? []) {
+    // A fragment borrows characteristics only. Base keywords and unrelated
+    // printed abilities belong above the bars, not in every acquired grant.
+    const base = Object.fromEntries(
+      Object.entries(d).filter(([key]) =>
+        [
+          'name',
+          'type',
+          'types',
+          'cost',
+          'text',
+          'color',
+          'subtypes',
+          'power',
+          'toughness',
+          'loyalty',
+          'basic',
+          'legendary',
+          'token',
+        ].includes(key),
+      ),
+    );
+    abilities.push({
+      kind: 'classLevel',
+      level: grant.level,
+      cost: mana(grant.cost),
+      abilities: sourceFromDefinition(
+        { ...base, keywords: [], ...grant.abilities },
+        { id, idsByName },
+      ).abilities,
     });
   }
   const characteristics = {

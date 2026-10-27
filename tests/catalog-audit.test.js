@@ -13,6 +13,8 @@ test('support manifest matches the executable registry and engine version', asyn
     if (card.station) assert.equal(row.station, true, card.name);
     if (card.stationLevels)
       assert.deepEqual(row.stationLevels, card.stationLevels, `${card.name}: threshold manifest`);
+    if (card.classLevels)
+      assert.deepEqual(row.classLevels, card.classLevels, `${card.name}: complete Class grants`);
     for (const trigger of card.triggers ?? [])
       for (const mode of trigger.modes ?? [])
         for (const effect of mode.effects)
@@ -77,3 +79,16 @@ for (const pool of ['standard', 'arena'])
     }
     assert.deepEqual(counts, report.coverage);
   });
+
+// Continuations are executable even though a choice can leave them unselected.
+test('support manifest includes nested recruit, discard-search and Class grant instructions', async () => {
+  const report = await json('../docs/support.json');
+  for (const [name, expected] of [
+    ['Lake-town Lookout', ['draw', 'discardThen', 'token']],
+    ['Formidable Speaker', ['discardThen', 'searchLibrary', 'untap']],
+    ["Caretaker's Talent", ['draw', 'copyToken']],
+  ]) {
+    const row = report.cards.find((card) => card.name === name);
+    for (const op of expected) assert.ok(row.opcodes.includes(op), `${name}: missing ${op}`);
+  }
+});

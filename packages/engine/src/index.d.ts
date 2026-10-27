@@ -94,8 +94,10 @@ export interface TargetSpec {
 export type TargetKind = LegacyTargetKind | TargetSpec;
 export interface EventSpec {
   event:
+    | 'classLevel'
     | 'chapter'
     | 'enter'
+    | 'enterGroup'
     | 'cast'
     | 'dies'
     | 'leave'
@@ -121,6 +123,7 @@ export interface EventSpec {
   filter?: CardPredicate;
   excludeSource?: boolean;
   chapters?: number[];
+  classLevel?: 2 | 3;
   /** Actual post-replacement destination; only for leave events. */
   destinations?: Exclude<Zone, 'battlefield'>[];
   spellNumber?: number;
@@ -171,6 +174,7 @@ export interface TargetGroup {
 export type TargetPlan = Record<string, Target[]>;
 export type Effect = EffectInstruction & { targetGroup?: string };
 type EffectInstruction =
+  | { op: 'setClassLevel'; level: 2 | 3 }
   | { op: 'anthemEmblem'; where: CardPredicate; power: number; toughness: number }
   | { op: 'ninjutsuEnter'; defender: Target }
   | { op: 'discover' | 'impulseCastOrDamage' | 'castDamageEmblem'; amount: number }
@@ -189,6 +193,8 @@ type EffectInstruction =
       selector: TargetKind;
       effects: Effect[];
     }
+  | { op: 'connive'; subject?: 'source' | 'eventSource' }
+  | { op: 'discardThen'; count: number; optional?: boolean; where?: CardPredicate; then: Effect[] }
   | { op: 'sacrificeSelf' }
   | {
       op: 'sacrifice';
@@ -611,7 +617,17 @@ export interface CardDefinition {
     /** Trigger restriction: checked only when the event occurs. */
     triggerCondition?: StateCondition;
   }[];
+  readonly classLevels?: readonly {
+    level: 2 | 3;
+    cost: ManaCost;
+    abilities: Pick<
+      CardDefinition,
+      'etb' | 'triggers' | 'activated' | 'static' | 'costModifiers' | 'damageBonus'
+    >;
+  }[];
   readonly activated?: readonly {
+    /** Generated Class level-bar activation, with a stable command slot. */
+    classLevel?: 2 | 3;
     powerUp?: true;
     /** Non-mana Exhaust ability: once per ability and source incarnation. */
     exhaust?: true;
@@ -656,6 +672,8 @@ export interface GameObject {
   exhaustUses?: Record<number, number>;
   minusCounters?: number;
   loreCounters?: number;
+  /** Noncopiable Class designation. Omitted means level 1. */
+  classLevel?: number;
   questCounters?: number;
   loyalty?: number;
   loyaltyUsed?: string;
@@ -842,6 +860,7 @@ export type Choice =
         attachment?: ObjectTarget | null;
         attachedToken?: string;
         tokenController?: PlayerId;
+        temporaryKeywords?: string[];
         tapped?: boolean;
       }[];
     }
@@ -875,6 +894,7 @@ export type Choice =
         attachment?: ObjectTarget | null;
         attachedToken?: string;
         tokenController?: PlayerId;
+        temporaryKeywords?: string[];
         tapped?: boolean;
       }[];
     }
@@ -892,6 +912,7 @@ export type Choice =
         attachment?: ObjectTarget | null;
         attachedToken?: string;
         tokenController?: PlayerId;
+        temporaryKeywords?: string[];
         tapped?: boolean;
       }[];
     }
@@ -998,6 +1019,8 @@ export type Choice =
       player: PlayerId;
       count: number;
       reflexive?: Extract<Effect, { op: 'discardTrigger' }>;
+      continuation?: Extract<Effect, { op: 'discardThen' }>;
+      conniving?: ObjectTarget;
     }
   | {
       kind: 'orderTriggers';
@@ -1033,6 +1056,13 @@ export interface GameEvent {
   readonly type: string;
   readonly [key: string]: unknown;
 }
+export interface ResolutionFrame {
+  entry: StackEntry;
+  index: number;
+  revealedPlayer?: PlayerId;
+  discover?: { exiled: ObjectTarget[]; amount: number; card: ObjectTarget };
+  resume?: ResolutionFrame;
+}
 export interface GameState {
   endingTurn?: boolean;
   emblems?: ({ id: string; controller: PlayerId; name: string } & (
@@ -1041,7 +1071,7 @@ export interface GameState {
   ))[];
   damagePreventionDisabledTurn?: number;
   layerClock?: number;
-  rulesRevision: 1 | 2 | 3;
+  rulesRevision: 1 | 2 | 3 | 4;
   catalog: Readonly<Record<string, CardDefinition>>;
   version: string;
   seed: number;
@@ -1099,12 +1129,7 @@ export interface GameState {
     landForm?: { mana: Color[] };
   }[];
   choice: Choice | null;
-  resolving: {
-    entry: StackEntry;
-    index: number;
-    revealedPlayer?: PlayerId;
-    discover?: { exiled: ObjectTarget[]; amount: number; card: ObjectTarget };
-  } | null;
+  resolving: ResolutionFrame | null;
   combat: {
     attackers: ObjectTarget[];
     defenders?: Record<string, Target>;
@@ -1211,7 +1236,7 @@ export type DispatchResult =
       events: readonly GameEvent[];
     };
 export interface Replay {
-  rulesRevision?: 1 | 2 | 3;
+  rulesRevision?: 1 | 2 | 3 | 4;
   schemaVersion?: number;
   version: string;
   config: GameConfig;

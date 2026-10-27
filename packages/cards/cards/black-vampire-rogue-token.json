@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/black-vampire-rogue-token",
+  "name": "Black Vampire Rogue Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Rogue"],
+    "colors": ["B"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "Lifelink",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    }
+  ]
+}

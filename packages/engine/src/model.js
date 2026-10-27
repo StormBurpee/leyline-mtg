@@ -1,3 +1,4 @@
+import { classDefinition } from './class-levels.js';
 import { CREATURE_TYPES } from './creature-types.js';
 import { spellsCastCount } from './spell-history.js';
 import { manaValue } from './mana-value.js';
@@ -9,7 +10,7 @@ import { matchesEvent, eventSpec } from './events.js';
 import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.57.0';
+export const VERSION = '0.59.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -278,7 +279,7 @@ export function definition(
         },
         keywords: [...d.keywords, ...d.turnLoyaltyCreature.keywords],
       }
-    : d;
+    : classDefinition(d, object);
   // CR 721.2 / 613.6: threshold characteristics are continuous, never copy values.
   // The type/P/T effect starts in layer 4 and survives later ability loss.
   const activeStationLevels = (d.stationLevels ?? []).filter(
@@ -907,6 +908,66 @@ export function queueEntryTrigger(s, object, effects, label) {
   for (let i = 0; i < entryTriggerMultiplicity(s, object, object.controller); i++)
     queueTrigger(s, object, effects, label);
 }
+/** One actual simultaneous entry event (CR 603.2c, 603.6a). Entry facts are
+ * public post-entry characteristics, including all the other simultaneous entrants.
+ * Suppressed members cannot cause a trigger, even when another member can.
+ * No observer means no new facts, IDs, or log records. */
+export function notifyEntryGroup(s, objects) {
+  if ((s.rulesRevision ?? 4) < 4) return;
+  if (
+    !objects.length ||
+    !battlefield(s).some((watcher) =>
+      (definition(s, watcher).triggers ?? []).some(
+        (trigger) => eventSpec(trigger.event)?.event === 'enterGroup',
+      ),
+    )
+  )
+    return;
+  const entrants = objects.filter((object) => !entryTriggersSuppressed(s, object));
+  if (!entrants.length) return;
+  const facts = entrants.map((object) => {
+    const d = definition(s, object);
+    const pt = hasType(d, 'creature') ? stats(s, object) : {};
+    return {
+      id: object.id,
+      definition: d,
+      controller: object.controller,
+      owner: object.owner,
+      token: object.token,
+      tapped: object.tapped,
+      stunCounters: object.stunCounters ?? 0,
+      attacking: isAttacking(s, object),
+      blocking: isBlocking(s, object),
+      keywords: keywords(s, object),
+      power: pt.power,
+      toughness: pt.toughness,
+      manaValue: manaValue(d),
+    };
+  });
+  notifyTriggers(s, 'enterGroup', { objects: facts });
+}
+function entryGroupTriggerMultiplicity(s, facts, trigger, source) {
+  const matching = facts.objects.filter((object) =>
+    matchesEvent({ ...eventSpec(trigger.event), event: 'enter' }, 'enter', object, source),
+  );
+  // Each applicable additional-trigger permanent adds one occurrence, not one
+  // per entrant. Distinct doublers may apply to different members of this group.
+  return (
+    1 +
+    battlefield(s).filter((watcher) => {
+      const filter = definition(s, watcher).additionalEnterTrigger;
+      return (
+        filter &&
+        watcher.controller === source.controller &&
+        matching.some(
+          (object) =>
+            object.controller === source.controller &&
+            matchesFilter(object, filter, source.controller),
+        )
+      );
+    }).length
+  );
+}
 /** Match declarative trigger predicates against committed game events. */
 export function notifyTriggers(s, event, payload, context = null) {
   if (
@@ -959,6 +1020,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     controller: payload.player ?? object?.controller,
     step: payload.step,
     chapterNumber: payload.chapterNumber,
+    classLevel: payload.classLevel,
     castPlayer: payload.castPlayer,
     drawNumber: payload.drawNumber,
     spellNumber:
@@ -992,7 +1054,19 @@ export function notifyTriggers(s, event, payload, context = null) {
       (watcherDefinition ?? definition(s, watcher)).triggers ?? []
     ).entries())
       if (
-        matchesEvent(trigger.event, event === 'enters' ? 'enter' : event, facts, watcher) &&
+        matchesEvent(
+          // Historical unembedded replays may load source cards whose once-per-turn
+          // predicates have since migrated to enterGroup. Keep their original
+          // per-entrant observer ordering and IDs under the older rules revision.
+          (s.rulesRevision ?? 4) < 4 &&
+            ['enter', 'enters'].includes(event) &&
+            eventSpec(trigger.event)?.event === 'enterGroup'
+            ? { ...eventSpec(trigger.event), event: 'enter' }
+            : trigger.event,
+          event === 'enters' ? 'enter' : event,
+          facts,
+          watcher,
+        ) &&
         meetsCondition(
           s,
           watcher.controller,
@@ -1103,8 +1177,15 @@ export function notifyTriggers(s, event, payload, context = null) {
             power: facts.power,
             definition: structuredClone(event === 'leave' ? facts.definition : d),
           };
-        if (['enter', 'enters'].includes(event) && !trigger.oncePerTurn)
-          for (let n = 1; n < entryTriggerMultiplicity(s, object, watcher.controller); n++) {
+        if (['enter', 'enters', 'enterGroup'].includes(event) && !trigger.oncePerTurn)
+          for (
+            let n = 1;
+            n <
+            (event === 'enterGroup'
+              ? entryGroupTriggerMultiplicity(s, facts, trigger, watcher)
+              : entryTriggerMultiplicity(s, object, watcher.controller));
+            n++
+          ) {
             s.pendingTriggers.push({ ...structuredClone(queued), id: `s${++s.nextId}` });
             emit(s, 'triggered', {
               objectId: watcher.id,
@@ -1227,6 +1308,11 @@ export function untapObject(s, object) {
   object.tapped = false;
   return true;
 }
+function resolutionEntries(s) {
+  const entries = [];
+  for (let frame = s.resolving; frame; frame = frame.resume) entries.push(frame.entry);
+  return entries;
+}
 export function move(s, o, to, departureContext = null) {
   const from = o.zone;
   // Replacement effects are checked before a move, including simultaneous departure snapshots.
@@ -1275,7 +1361,7 @@ export function move(s, o, to, departureContext = null) {
     const entries = [
       ...s.stack,
       ...s.pendingTriggers,
-      ...(s.resolving ? [s.resolving.entry] : []),
+      ...resolutionEntries(s),
       ...(['triggerMode', 'triggerTarget', 'triggerTargets'].includes(s.choice?.kind)
         ? [
             s.choice.entry,
@@ -1347,6 +1433,7 @@ export function move(s, o, to, departureContext = null) {
   delete o.minusCounters;
   delete o.loyaltyUsed;
   delete o.loreCounters;
+  delete o.classLevel;
   delete o.questCounters;
   delete o.chargeCounters;
   if (to === 'battlefield' && hasType(copiableDefinition(s, o), 'planeswalker'))
@@ -1464,7 +1551,7 @@ export function createGame({
   }
   const s = {
     version: VERSION,
-    rulesRevision: 3,
+    rulesRevision: 4,
     catalog: rules,
     seed,
     rng: seed || 1,

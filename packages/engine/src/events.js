@@ -62,6 +62,7 @@ export function validateEventSpec(value) {
           'targetingKind',
           'firstEachTurn',
           'chapters',
+          'classLevel',
           'destinations',
         ].includes(key),
     )
@@ -70,7 +71,9 @@ export function validateEventSpec(value) {
   if (
     ![
       'enter',
+      'enterGroup',
       'chapter',
+      'classLevel',
       'cast',
       'dies',
       'leave',
@@ -98,7 +101,9 @@ export function validateEventSpec(value) {
     (spec.object !== 'source' ||
       ![
         'enter',
+        'enterGroup',
         'chapter',
+        'classLevel',
         'dies',
         'leave',
         'diesGroup',
@@ -168,6 +173,14 @@ export function validateEventSpec(value) {
     (spec.castByController !== true || spec.event !== 'enter' || spec.object !== 'source')
   )
     errors.push('castByController requires a self-entry event.');
+  if (spec.event === 'classLevel') {
+    if (
+      spec.object !== 'source' ||
+      ![2, 3].includes(spec.classLevel) ||
+      Object.keys(spec).some((key) => !['event', 'object', 'classLevel'].includes(key))
+    )
+      errors.push('Class-level events require source identity and level 2 or 3.');
+  } else if (spec.classLevel !== undefined) errors.push('Only Class-level events take a level.');
   if (spec.event === 'chapter') {
     if (
       spec.object !== 'source' ||
@@ -200,15 +213,21 @@ export function validateEventSpec(value) {
 export function matchesEvent(value, event, facts, source) {
   const spec = eventSpec(value);
   if (!spec || spec.event !== event) return false;
-  // Apply identity, controller and type predicates to the same departed object,
+  // Apply identity, controller and type predicates to the same member object,
   // not to the group or to independently matching members (CR 603.2c).
-  if (['diesGroup', 'battlefieldToGraveyardGroup'].includes(event))
+  if (['enterGroup', 'diesGroup', 'battlefieldToGraveyardGroup'].includes(event))
     return (
       facts.objects?.some((object) =>
-        matchesEvent({ ...spec, event: 'dies' }, 'dies', object, source),
+        matchesEvent(
+          { ...spec, event: event === 'enterGroup' ? 'enter' : 'dies' },
+          event === 'enterGroup' ? 'enter' : 'dies',
+          object,
+          source,
+        ),
       ) ?? false
     );
   if (spec.destinations && !spec.destinations.includes(facts.destination)) return false;
+  if (event === 'classLevel' && spec.classLevel !== facts.classLevel) return false;
   if (event === 'chapter' && !spec.chapters.includes(facts.chapterNumber)) return false;
   if (spec.spellNumber !== undefined && facts.spellNumber !== spec.spellNumber) return false;
   if (spec.drawNumber !== undefined && facts.drawNumber !== spec.drawNumber) return false;

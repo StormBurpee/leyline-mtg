@@ -230,7 +230,8 @@ export function effectTargetCompatible(op, value, effect = null) {
   if (op === 'attachEquipment') return spec.scope === 'permanent' && impliesCreature(spec.where);
   // CR 208.3a: a P/T modifier may be created for a noncreature permanent;
   // it remains dormant unless that same incarnation becomes a creature.
-  if (op === 'explore') return spec.scope === 'permanent' && impliesCreature(spec.where);
+  if (['explore', 'connive'].includes(op))
+    return spec.scope === 'permanent' && impliesCreature(spec.where);
   if (op === 'copyToken') return spec.scope === 'permanent';
   if (op === 'modify' || op === 'combatRestriction') return spec.scope === 'permanent';
   if (['untap', 'tap', 'counterOn', 'prepare', 'unprepare'].includes(op))

@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/white-wall-token",
+  "name": "White Wall Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Wall"],
+    "colors": ["W"],
+    "manaCost": null,
+    "power": 0,
+    "toughness": 4,
+    "token": true
+  },
+  "rulesText": "Defender",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "defender"
+    }
+  ]
+}

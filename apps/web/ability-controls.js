@@ -10,7 +10,9 @@ export function activatedAbilityButtons(state, player, object, legal) {
           action.type === 'activate' && action.card === object.id && action.ability === index,
       );
       const reason =
-        !enabled && ability.exhaust ? abilityProblem(state, player, object.id, index) : null;
+        !enabled && (ability.exhaust || ability.classLevel !== undefined)
+          ? abilityProblem(state, player, object.id, index)
+          : null;
       const description = `ability-problem-${index}`;
       return `<button class="btn primary" data-action="activateAbility" data-ability="${index}" ${enabled ? '' : 'disabled'}${reason ? ` aria-describedby="${description}"` : ''}>${ability.cost.sacrificeSelf ? `<span>⚑ Sacrifice ${escape(object.name)} · </span>` : ''}${escape((ability.text ?? 'Activate ability').replaceAll('CARDNAME', object.name))}</button>${reason ? `<small id="${description}" class="muted">${escape(reason)}</small>` : ''}`;
     })
