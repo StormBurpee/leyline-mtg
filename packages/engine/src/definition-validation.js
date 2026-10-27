@@ -87,6 +87,7 @@ const FIELDS = new Set([
   'disguise',
   'cannotAttack',
   'cannotBlock',
+  'conditionalCombatRestrictions',
   'unblockable',
   'cannotBeBlockedByLowerPower',
   'uncounterable',
@@ -257,6 +258,39 @@ function validateEffects(
       validateEffects(e.then, `${p}.then`, target, errors, groups, budget, depth + 1);
       continue;
     }
+    if (e.op === 'chooseEffect') {
+      if (Object.keys(e).some((key) => !['op', 'player', 'options'].includes(key)))
+        errors.push(`${p}: unsupported resolution-choice field.`);
+      if (e.player !== undefined && !['controller', 'opponent'].includes(e.player))
+        errors.push(`${p}: unsupported resolution chooser.`);
+      if (!Array.isArray(e.options) || e.options.length < 2 || e.options.length > 8) {
+        errors.push(`${p}: expected 2–8 resolution alternatives.`);
+        continue;
+      }
+      for (const [i, option] of e.options.entries()) {
+        const optionPath = `${p}.options[${i}]`;
+        if (!plain(option)) {
+          errors.push(`${optionPath}: expected a resolution alternative.`);
+          continue;
+        }
+        if (Object.keys(option).some((key) => !['label', 'condition', 'effects'].includes(key)))
+          errors.push(`${optionPath}: resolution alternatives cannot declare targets or costs.`);
+        if (typeof option.label !== 'string' || !option.label.trim() || option.label.length > 160)
+          errors.push(`${optionPath}: expected a readable label of at most 160 characters.`);
+        if (option.condition !== undefined)
+          errors.push(...validateCondition(option.condition, { resolving: true, target, groups }));
+        validateEffects(
+          option.effects,
+          `${optionPath}.effects`,
+          target,
+          errors,
+          groups,
+          budget,
+          depth + 1,
+        );
+      }
+      continue;
+    }
     if (e.op === 'conditional') {
       if (Object.keys(e).some((k) => !['op', 'condition', 'then', 'else'].includes(k)))
         errors.push(`${p}: unsupported conditional field.`);
@@ -355,6 +389,7 @@ function validateEffects(
       damageTargetController: ['amount'],
       damageEventPlayer: ['amount'],
       exileTop: ['count', 'player', 'duration', 'castOnly', 'anyMana'],
+      discover: ['amount'],
       impulseCastOrDamage: ['amount'],
       castDamageEmblem: ['amount'],
       anthemEmblem: ['where', 'power', 'toughness'],
@@ -559,7 +594,7 @@ function validateEffects(
       errors.push(...validateFilter(e.where).map((error) => `${p}: ${error}`));
     if (
       e.op === 'keywordCounter' &&
-      (e.keyword !== 'indestructible' ||
+      (!['indestructible', 'double strike'].includes(e.keyword) ||
         !natural(e.amount) ||
         e.amount > 1000 ||
         e.subject !== 'source')
@@ -622,6 +657,8 @@ function validateEffects(
       (!natural(e.amount) || e.amount > 1000)
     )
       errors.push(`${p}: expected bounded literal damage.`);
+    if (e.op === 'discover' && (!natural(e.amount) || e.amount > 1000))
+      errors.push(`${p}.amount: discover requires a literal from 0 to 1000.`);
     if (e.op === 'combatMana' && (!natural(e.count) || e.count > 1000))
       errors.push(`${p}: invalid combat mana count.`);
     if (e.op === 'impulseChoose' && (!natural(e.count) || e.count > 1000))
@@ -1638,6 +1675,27 @@ export function validateDefinition(card) {
           errors.push(`${name}.costModifiers: lands are not cast.`);
       }
   }
+  if (card.conditionalCombatRestrictions !== undefined) {
+    const rules = card.conditionalCombatRestrictions;
+    if (!Array.isArray(rules) || !rules.length || rules.length > 8)
+      errors.push(`${name}.conditionalCombatRestrictions: expected 1–8 restrictions.`);
+    else
+      for (const rule of rules) {
+        if (
+          !plain(rule) ||
+          Object.keys(rule).some((key) => !['restriction', 'condition'].includes(key)) ||
+          !['cannotAttack', 'cannotBlock'].includes(rule.restriction)
+        ) {
+          errors.push(`${name}.conditionalCombatRestrictions: unsupported restriction.`);
+          continue;
+        }
+        errors.push(
+          ...validateCondition(rule.condition).map(
+            (error) => `${name}.conditionalCombatRestrictions: ${error}`,
+          ),
+        );
+      }
+  }
   if (card.conditionalBonuses !== undefined) {
     if (
       !Array.isArray(card.conditionalBonuses) ||
@@ -1981,6 +2039,7 @@ export function validateDefinition(card) {
                 'condition',
                 'oncePerTurn',
                 'powerUp',
+                'exhaust',
                 'loyalty',
               ].includes(k),
           )
@@ -2007,6 +2066,13 @@ export function validateDefinition(card) {
             Object.keys(card.cost).some((k) => k.includes('/')))
         )
           errors.push(`${p}: invalid power-up ability.`);
+        if (
+          a.exhaust !== undefined &&
+          (a.exhaust !== true || a.zone || a.powerUp || a.oncePerTurn || a.loyalty !== undefined)
+        )
+          errors.push(`${p}: invalid exhaust ability.`);
+        if (a.exhaust && contains(a.effects, (effect) => effect.op === 'addMana'))
+          errors.push(`${p}: exhaust mana production is not supported.`);
         if (a.zone !== undefined && a.zone !== 'graveyard')
           errors.push(`${p}.zone: unsupported activation zone.`);
         // CR 113.6m / 602.1a: the zone restriction is not an additional exile cost.
@@ -2053,7 +2119,10 @@ export function validateDefinition(card) {
       (e) =>
         e?.op === 'exileUntilSourceLeaves' ||
         (e?.op === 'conditional' &&
-          (usesLinkedExile(e.then, depth + 1) || usesLinkedExile(e.else, depth + 1))),
+          (usesLinkedExile(e.then, depth + 1) || usesLinkedExile(e.else, depth + 1))) ||
+        (e?.op === 'chooseEffect' &&
+          Array.isArray(e.options) &&
+          e.options.some((option) => usesLinkedExile(option?.effects, depth + 1))),
     );
   const linked =
     usesLinkedExile(card.effects) ||
@@ -2079,7 +2148,10 @@ export function validateDefinition(card) {
       (e) =>
         e?.op === 'becomeLand' ||
         (e?.op === 'conditional' &&
-          (usesLandForm(e.then, depth + 1) || usesLandForm(e.else, depth + 1))),
+          (usesLandForm(e.then, depth + 1) || usesLandForm(e.else, depth + 1))) ||
+        (e?.op === 'chooseEffect' &&
+          Array.isArray(e.options) &&
+          e.options.some((option) => usesLandForm(option?.effects, depth + 1))),
     );
   if (
     card.manaSacrifice &&

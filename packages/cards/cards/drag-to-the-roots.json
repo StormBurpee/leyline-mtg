@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ef4c478c-7019-4ec0-8edf-2a3078a8e97a",
+  "name": "Drag to the Roots",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "G"],
+    "manaCost": "{2}{B}{G}"
+  },
+  "rulesText": "Delirium \u2014 This spell costs {2} less to cast as long as there are four or more card types among cards in your graveyard.\nDestroy target nonland permanent.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "not": {
+            "type": "land"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 2,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "graveyardCardTypes",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 4
+      }
+    }
+  ]
+}

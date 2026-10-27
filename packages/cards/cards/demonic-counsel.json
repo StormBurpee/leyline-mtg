@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "712e3479-722c-40a1-9b61-d5bdde93042b",
+  "name": "Demonic Counsel",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Search your library for a Demon card, reveal it, put it into your hand, then shuffle.\nDelirium \u2014 If there are four or more card types among cards in your graveyard, instead search your library for any card, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "graveyardCardTypes",
+              "player": "you"
+            },
+            "operator": "gte",
+            "right": 4
+          },
+          "then": [
+            {
+              "op": "searchLibrary",
+              "amount": 1,
+              "destination": "hand"
+            }
+          ],
+          "else": [
+            {
+              "op": "searchLibrary",
+              "amount": 1,
+              "destination": "hand",
+              "where": {
+                "subtype": "Demon"
+              },
+              "reveal": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

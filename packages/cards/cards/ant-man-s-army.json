@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "34c0f75d-10a9-428d-b202-3defb3949090",
+  "name": "Ant-Man's Army",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Insect"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, create a Food token or a Treasure token. (A Food token is an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\" A Treasure token is an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Create a Food token",
+              "effects": [
+                {
+                  "op": "createToken",
+                  "token": "leyline:token/food-token",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "label": "Create a Treasure token",
+              "effects": [
+                {
+                  "op": "createToken",
+                  "token": "leyline:token/treasure-token",
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

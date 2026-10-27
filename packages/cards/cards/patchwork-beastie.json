@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6cf995e9-115a-4659-bace-9fbe75898b48",
+  "name": "Patchwork Beastie",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Beast"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Delirium \u2014 This creature can't attack or block unless there are four or more card types among cards in your graveyard.\nAt the beginning of your upkeep, you may mill a card. (You may put the top card of your library into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "combatRestriction",
+      "restriction": "cannotAttack",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "graveyardCardTypes",
+          "player": "you"
+        },
+        "operator": "lt",
+        "right": 4
+      }
+    },
+    {
+      "kind": "combatRestriction",
+      "restriction": "cannotBlock",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "graveyardCardTypes",
+          "player": "you"
+        },
+        "operator": "lt",
+        "right": 4
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "controller": "you",
+        "step": "upkeep"
+      },
+      "optional": true,
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { meetsCondition } from './conditions.js';
 import { tapObjects } from './model.js';
 import { manaValue } from './mana-value.js';
 import { hasType } from './types.js';
@@ -18,6 +19,15 @@ import {
   stats,
 } from './model.js';
 import { dealDamageBatch } from './effects.js';
+// Intrinsic restrictions use current controller/state only at declaration time.
+// Already-declared attacks/blocks are not undone when their condition changes.
+function conditionalRestriction(s, object, restriction) {
+  return definition(s, object).conditionalCombatRestrictions?.some(
+    (rule) =>
+      rule.restriction === restriction &&
+      meetsCondition(s, object.controller, rule.condition, [], object),
+  );
+}
 export function canAttack(s, o, p) {
   return (
     o.zone === 'battlefield' &&
@@ -27,6 +37,7 @@ export function canAttack(s, o, p) {
     !isSick(s, o) &&
     !isPacified(s, o) &&
     !definition(s, o).cannotAttack &&
+    !conditionalRestriction(s, o, 'cannotAttack') &&
     !hasKeyword(s, o, 'defender')
   );
 }
@@ -51,6 +62,7 @@ export function canBlock(s, blocker, attacker, p) {
     definition(s, blocker).type === 'creature' &&
     !blocker.tapped &&
     !definition(s, blocker).cannotBlock &&
+    !conditionalRestriction(s, blocker, 'cannotBlock') &&
     !definition(s, attacker).unblockable &&
     !hasCombatRestriction(s, blocker, 'cannotBlock') &&
     !hasCombatRestriction(s, attacker, 'cannotBeBlocked') &&

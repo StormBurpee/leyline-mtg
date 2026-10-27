@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2d8aa053-289d-40d9-baa7-9bd1c5b8e957",
+  "name": "Greenbelt Guardian",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Ranger"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{G}: Target creature gains trample until end of turn.\nExhaust — {3}{G}: Put three +1/+1 counters on this creature. (Activate each exhaust ability only once.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{G}"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["trample"],
+          "until": "endOfTurn"
+        }
+      ],
+      "text": "{G}: Target creature gains trample until end of turn."
+    },
+    {
+      "kind": "activated",
+      "exhaust": true,
+      "cost": {
+        "mana": "{3}{G}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 3,
+          "counter": "+1/+1"
+        }
+      ],
+      "text": "Exhaust — {3}{G}: Put three +1/+1 counters on this creature."
+    }
+  ]
+}

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.55.0 — Resolution choices, Delirium, Exhaust and Discover
+
+- Add 40 complete Standard cards: eight resolution-choice cards, nine Delirium cards, twelve non-mana Exhaust cards and eleven Discover cards. Catalog: 2325 playable cards and 97 tokens; dated Standard coverage: 2107 of 5164.
+- Choose effect alternatives during resolution without new targets or priority. Validate every nested branch, preserve source/target incarnations, and share legal decisions across human, bot, opaque-agent and replay paths.
+- Count the distinct card types in the relevant graveyard for bounded conditions, cost changes and declaration-time combat restrictions; do not count subtypes or Adventure spell-face characteristics in the graveyard.
+- Consume each Exhaust ability's use on legal activation, not resolution, retaining use through control changes and resetting only on a new object incarnation. Explain exhausted actions in the activation UI without changing chosen-sacrifice selection.
+- Discover with legal resolution-time no-mana-cost casting or a hand outcome, retained additional costs and taxes, zero X, nested casting choices and deterministic random bottom order. Broader Discover and Exhaust families remain explicitly unsupported.
+- Preserve the v0.54 split-save format, legacy saves/replays, rules revision 3, the default deck and all eight exact meta decks. DOM lifecycle tests are not browser/layout verification; managed preview remains unavailable.
+
 ## 0.54.0 — Filtered selection and chosen sacrifice costs
 
 - Add 68 complete Standard cards: twenty-seven filtered-library cards, forty chosen-sacrifice activation cards and Agent 13. Catalog: 2285 playable cards and 96 tokens.

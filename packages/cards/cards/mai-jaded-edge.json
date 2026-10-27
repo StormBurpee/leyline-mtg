@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b5029f21-e0d6-4f22-9afd-79452de26490",
+  "name": "Mai, Jaded Edge",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Noble"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nExhaust — {3}: Put a double strike counter on Mai. (Activate each exhaust ability only once.)",
+  "abilities": [
+    {
+      "use": "prowess"
+    },
+    {
+      "kind": "activated",
+      "exhaust": true,
+      "cost": {
+        "mana": "{3}"
+      },
+      "effects": [
+        {
+          "op": "keywordCounter",
+          "target": "source",
+          "keyword": "double strike",
+          "amount": 1
+        }
+      ],
+      "text": "Exhaust — {3}: Put a double strike counter on Mai."
+    }
+  ]
+}

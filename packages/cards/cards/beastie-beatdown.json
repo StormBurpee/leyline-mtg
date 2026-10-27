@@ -1,0 +1,85 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3da5fbe2-e47b-4a1d-9e73-393f37314fa3",
+  "name": "Beastie Beatdown",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G", "R"],
+    "manaCost": "{R}{G}"
+  },
+  "rulesText": "Choose target creature you control and target creature an opponent controls.\nDelirium \u2014 If there are four or more card types among cards in your graveyard, put two +1/+1 counters on the creature you control.\nThe creature you control deals damage equal to its power to the creature an opponent controls.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "actor",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victim",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "graveyardCardTypes",
+              "player": "you"
+            },
+            "operator": "gte",
+            "right": 4
+          },
+          "then": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "targetGroup": "actor",
+              "counter": "+1/+1",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "op": "bite",
+          "sourceGroup": "actor",
+          "victimGroup": "victim"
+        }
+      ]
+    }
+  ]
+}

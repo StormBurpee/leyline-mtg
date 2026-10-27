@@ -1885,3 +1885,85 @@ test('a damaged cached catalog reports save failure without overwriting the prio
     h.cleanup();
   }
 });
+
+function effectChoiceReplay() {
+  const name = 'Client resolution choice';
+  const catalog = {
+    ...CARDS,
+    [name]: {
+      name,
+      type: 'sorcery',
+      cost: {},
+      text: 'Create a Food token or a Treasure token.',
+      effects: [
+        {
+          op: 'chooseEffect',
+          options: [
+            {
+              label: 'Create a Food token',
+              effects: [{ op: 'token', definition: 'Food Token', count: 1 }],
+            },
+            {
+              label: 'Create a Treasure token',
+              effects: [{ op: 'token', definition: 'Treasure Token', count: 1 }],
+            },
+          ],
+        },
+      ],
+    },
+  };
+  const deck = [...Array(4).fill(name), ...Array(3).fill('Forest')];
+  let state = createGame({ catalog, mulligan: false, minimumDeckSize: 7, decks: [deck, deck] });
+  const apply = (type, extra = {}) => {
+    const result = dispatch(state, {
+      type,
+      player: state.choice?.player ?? state.priority,
+      ...extra,
+    });
+    assert.equal(result.ok, true, JSON.stringify(result.error));
+    state = result.state;
+  };
+  while (state.step !== 'main1') apply('pass');
+  apply('cast', { card: state.players[0].hand.find((id) => state.objects[id].name === name) });
+  apply('pass');
+  apply('pass');
+  assert.equal(state.choice.kind, 'effectChoice');
+  return exportReplay(state);
+}
+
+test('resolution alternative stage has readable effects, dismissal/reopen, read/back and stale-click protection', async () => {
+  const h = await mount(effectChoiceReplay());
+  try {
+    h.click('[data-action="resume"]');
+    assert.equal(h.dialog.open, true);
+    assert.match(h.dialog.textContent, /Choose an effect/);
+    assert.match(h.dialog.textContent, /during resolution/);
+    assert.match(h.dialog.textContent, /Neither player gets priority/);
+    assert.match(h.dialog.textContent, /Create a Food token/);
+    assert.match(h.dialog.textContent, /Create a Treasure token/);
+    assert.ok(h.dialog.querySelector('.resolution-effect-options'));
+    assert.equal(h.dialog.querySelector('.dialog-actions .decision-mode'), null);
+    const before = JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.length;
+    h.click('#dialog [data-action="closeDialog"]');
+    assert.equal(h.dialog.open, false);
+    assert.equal(JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.length, before);
+    h.click('[data-action="reviewDecision"]');
+    h.click('#dialog [data-action="readDecisionCard"]');
+    assert.match(h.dialog.textContent, /Create a Food token or a Treasure token/);
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.equal(h.dialog.querySelectorAll('[data-action="chooseEffect"]').length, 2);
+    const stale = h.click('#dialog [data-action="chooseEffect"][data-option="1"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).type, 'chooseEffect');
+    assert.equal(saved.replay.commands.at(-1).option, 1);
+    assert.equal(h.dialog.open, false);
+    h.document.body.append(stale);
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    assert.equal(
+      JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.length,
+      saved.replay.commands.length,
+    );
+  } finally {
+    h.cleanup();
+  }
+});

@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0ef80a38-f464-4d1f-9e81-d4087d6ecc9b",
+  "name": "Violent Urge",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Target creature gets +1/+0 and gains first strike until end of turn.\nDelirium \u2014 If there are four or more card types among cards in your graveyard, that creature gains double strike until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["first strike"]
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "graveyardCardTypes",
+              "player": "you"
+            },
+            "operator": "gte",
+            "right": 4
+          },
+          "then": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["double strike"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

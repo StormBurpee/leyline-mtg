@@ -147,6 +147,7 @@ export type NumericValue =
       where?: CardPredicate;
       excludeSource?: boolean;
     }
+  | { kind: 'graveyardCardTypes'; player: 'you' | 'opponent' | 'all' }
   | { kind: 'maxManaValue'; player: 'you' | 'opponent' | 'all'; where?: CardPredicate }
   | { kind: 'spellsCast'; player: 'you' | 'opponent' | 'all'; where?: SpellHistoryPredicate }
   | { kind: 'life'; player: 'you' | 'opponent' }
@@ -172,7 +173,7 @@ export type Effect = EffectInstruction & { targetGroup?: string };
 type EffectInstruction =
   | { op: 'anthemEmblem'; where: CardPredicate; power: number; toughness: number }
   | { op: 'ninjutsuEnter'; defender: Target }
-  | { op: 'impulseCastOrDamage' | 'castDamageEmblem'; amount: number }
+  | { op: 'discover' | 'impulseCastOrDamage' | 'castDamageEmblem'; amount: number }
   | { op: 'disableDamagePrevention' }
   | {
       op: 'damageEachPlayer' | 'damageEventPlayer' | 'damageTargetController';
@@ -200,8 +201,18 @@ type EffectInstruction =
   | { op: 'optionalDiscardDraw' | 'distributedCounters' }
   | { op: 'becomeLand'; mana: Color[] }
   | { op: 'conditional'; condition: EffectCondition; then: Effect[]; else?: Effect[] }
+  | {
+      op: 'chooseEffect';
+      player?: 'controller' | 'opponent';
+      options: { label: string; condition?: EffectCondition; effects: Effect[] }[];
+    }
   | { op: 'stunOn'; amount: EffectNumericValue; subject?: 'source' | 'attached' }
-  | { op: 'keywordCounter'; subject: 'source'; keyword: 'indestructible'; amount: number }
+  | {
+      op: 'keywordCounter';
+      subject: 'source';
+      keyword: 'indestructible' | 'double strike';
+      amount: number;
+    }
   | ({ op: 'fight' | 'bite'; victimGroup: string } & (
       | { sourceGroup: string; source?: never }
       | { source: 'source'; sourceGroup?: never }
@@ -502,6 +513,10 @@ export interface CardDefinition {
   readonly damageBonus?: { amount: number; where: CardPredicate };
   readonly cannotAttack?: boolean;
   readonly cannotBlock?: boolean;
+  readonly conditionalCombatRestrictions?: readonly {
+    restriction: 'cannotAttack' | 'cannotBlock';
+    condition: StateCondition;
+  }[];
   readonly unblockable?: boolean;
   readonly uncounterable?: boolean;
   readonly spree?: true;
@@ -581,6 +596,8 @@ export interface CardDefinition {
   }[];
   readonly activated?: readonly {
     powerUp?: true;
+    /** Non-mana Exhaust ability: once per ability and source incarnation. */
+    exhaust?: true;
     loyalty?: number;
     cost: {
       mana?: ManaCost;
@@ -618,6 +635,7 @@ export interface GameObject {
   chosenLandName?: string;
   keywordCounters?: Record<string, number>;
   powerUpUses?: Record<number, number>;
+  exhaustUses?: Record<number, number>;
   minusCounters?: number;
   loreCounters?: number;
   questCounters?: number;
@@ -781,7 +799,10 @@ export interface DamageSource {
   keywords: string[];
 }
 export type Choice =
-  | { kind: 'castExiled'; player: PlayerId; card: string; incarnation: number; amount: number }
+  | ({ kind: 'castExiled'; player: PlayerId; card: string; incarnation: number } & (
+      | { amount: number; discover?: never }
+      | { discover: number; amount?: never }
+    ))
   | { kind: 'manaColor'; player: PlayerId; card: string }
   | {
       kind: 'entryLife';
@@ -888,6 +909,12 @@ export type Choice =
       reflexive: Extract<Effect, { op: 'removeCounterTrigger' }>;
     }
   | { kind: 'optionalEffect'; player: PlayerId; name: string }
+  | {
+      kind: 'effectChoice';
+      player: PlayerId;
+      name: string;
+      options: { index: number; label: string }[];
+    }
   | {
       kind: 'payCost';
       player: PlayerId;
@@ -1042,7 +1069,12 @@ export interface GameState {
     landForm?: { mana: Color[] };
   }[];
   choice: Choice | null;
-  resolving: { entry: StackEntry; index: number; revealedPlayer?: PlayerId } | null;
+  resolving: {
+    entry: StackEntry;
+    index: number;
+    revealedPlayer?: PlayerId;
+    discover?: { exiled: ObjectTarget[]; amount: number; card: ObjectTarget };
+  } | null;
   combat: {
     attackers: ObjectTarget[];
     defenders?: Record<string, Target>;
@@ -1073,6 +1105,7 @@ export type Action =
   | { type: 'cycle'; card: string }
   | { type: 'plot'; card: string }
   | { type: 'resolveOptional'; accept: boolean }
+  | { type: 'chooseEffect'; option: number }
   | { type: 'payCost'; pay: boolean }
   | { type: 'pass' | 'concede' | 'keep' | 'mulligan' }
   | { type: 'playLand'; card: string }

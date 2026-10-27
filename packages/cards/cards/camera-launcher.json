@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b46bac37-5b45-4be5-93d0-76e48dbd9f74",
+  "name": "Camera Launcher",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Construct"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Exhaust — {3}: Put a +1/+1 counter on this creature. Create a 1/1 colorless Thopter artifact creature token with flying. (Activate each exhaust ability only once.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "exhaust": true,
+      "cost": {
+        "mana": "{3}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/flying-thopter-token",
+          "amount": 1
+        }
+      ],
+      "text": "Exhaust — {3}: Put a +1/+1 counter on this creature. Create a 1/1 colorless Thopter artifact creature token with flying."
+    }
+  ]
+}

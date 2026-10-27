@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a9564593-b5a6-4a83-be1e-2af8caf647d7",
+  "name": "Daring Discovery",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{4}{R}"
+  },
+  "rulesText": "Up to three target creatures can't block this turn.\nDiscover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "creatures",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 3
+        }
+      ],
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "targetGroup": "creatures",
+          "restriction": "cannotBlock",
+          "until": "endOfTurn"
+        },
+        {
+          "op": "discover",
+          "amount": 4
+        }
+      ]
+    }
+  ]
+}

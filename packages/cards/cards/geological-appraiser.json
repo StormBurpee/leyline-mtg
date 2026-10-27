@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df",
+  "name": "Geological Appraiser",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Artificer"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, if you cast it, discover 3. (Exile cards from the top of your library until you exile a nonland card with mana value 3 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source",
+        "castByController": true
+      },
+      "effects": [
+        {
+          "op": "discover",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

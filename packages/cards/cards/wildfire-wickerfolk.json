@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "50c7b13d-f217-45de-837c-49f934840368",
+  "name": "Wildfire Wickerfolk",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Scarecrow"],
+    "colors": ["G", "R"],
+    "manaCost": "{R}{G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Haste\nDelirium \u2014 This creature gets +1/+1 and has trample as long as there are four or more card types among cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "graveyardCardTypes",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 4
+      },
+      "power": 1,
+      "toughness": 1,
+      "keywords": ["trample"]
+    }
+  ]
+}

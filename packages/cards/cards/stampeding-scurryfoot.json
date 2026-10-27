@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7b860806-0118-40f8-861b-225a7c1cf151",
+  "name": "Stampeding Scurryfoot",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Mouse"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Exhaust — {3}{G}: Put a +1/+1 counter on this creature. Create a 3/3 green Elephant creature token. (Activate each exhaust ability only once.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "exhaust": true,
+      "cost": {
+        "mana": "{3}{G}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/green-elephant-token",
+          "amount": 1
+        }
+      ],
+      "text": "Exhaust — {3}{G}: Put a +1/+1 counter on this creature. Create a 3/3 green Elephant creature token."
+    }
+  ]
+}

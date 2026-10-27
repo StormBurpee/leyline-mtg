@@ -319,7 +319,7 @@ export function chooseBotCommand(s, p) {
           card: c.cards.find((id) => s.objects[id].zone === 'battlefield') ?? c.cards[0] ?? null,
         };
       case 'castExiled': {
-        if (s.players[opponent(p)].life <= c.amount)
+        if (c.discover === undefined && s.players[opponent(p)].life <= c.amount)
           return { type: 'declineCastExiled', player: p };
         const casts = legalActions(s, p).filter((a) => a.type === 'cast' && actionSafe(s, p, a));
         casts.sort((a, b) => {
@@ -484,6 +484,27 @@ export function chooseBotCommand(s, p) {
           type: s.players[p].mulligans < 2 && (lands < 2 || lands > 5) ? 'mulligan' : 'keep',
           player: p,
         };
+      }
+      case 'effectChoice': {
+        const { entry, index } = s.resolving;
+        const instruction = entry.effects[index - 1];
+        const safe =
+          entry.controller !== p
+            ? c.options
+            : c.options.filter(
+                ({ index: option }) =>
+                  !resolutionRisk(
+                    s,
+                    p,
+                    [...instruction.options[option].effects, ...entry.effects.slice(index)],
+                    entry.target,
+                    0,
+                    entry.source,
+                    entry.eventAmount,
+                    entry,
+                  ),
+              );
+        return { type: 'chooseEffect', player: p, option: (safe[0] ?? c.options[0]).index };
       }
       case 'optionalEffect': {
         const entry = s.resolving.entry;

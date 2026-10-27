@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "56f5ed8d-ef53-4766-9ef3-1e24a10e267b",
+  "name": "Buried Treasure",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Treasure"],
+    "colors": [],
+    "manaCost": "{2}"
+  },
+  "rulesText": "{T}, Sacrifice this artifact: Add one mana of any color.\n{5}, Exile this card from your graveyard: Discover 5. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 5 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"],
+      "sacrificeSelf": true
+    },
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{5}",
+        "exileSelf": true
+      },
+      "timing": "sorcery",
+      "effects": [
+        {
+          "op": "discover",
+          "amount": 5
+        }
+      ]
+    }
+  ]
+}

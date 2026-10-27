@@ -1,0 +1,146 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "25c83d45-581f-48ba-b6bb-feb66e8a65c7",
+  "name": "Sewer-veillance Cam",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Flash\nWhen this artifact enters or leaves the battlefield, you may tap or untap target creature.\n{3}{U}, Sacrifice this artifact: Draw two cards.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Tap",
+              "effects": [
+                {
+                  "op": "tap",
+                  "target": "target"
+                }
+              ],
+              "condition": {
+                "kind": "targetMatches",
+                "target": "target",
+                "where": {
+                  "tapped": false
+                }
+              }
+            },
+            {
+              "label": "Untap",
+              "effects": [
+                {
+                  "op": "untap",
+                  "target": "target"
+                }
+              ],
+              "condition": {
+                "kind": "targetMatches",
+                "target": "target",
+                "where": {
+                  "tapped": true
+                }
+              }
+            },
+            {
+              "label": "Do nothing",
+              "effects": []
+            }
+          ]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "leave",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Tap",
+              "effects": [
+                {
+                  "op": "tap",
+                  "target": "target"
+                }
+              ],
+              "condition": {
+                "kind": "targetMatches",
+                "target": "target",
+                "where": {
+                  "tapped": false
+                }
+              }
+            },
+            {
+              "label": "Untap",
+              "effects": [
+                {
+                  "op": "untap",
+                  "target": "target"
+                }
+              ],
+              "condition": {
+                "kind": "targetMatches",
+                "target": "target",
+                "where": {
+                  "tapped": true
+                }
+              }
+            },
+            {
+              "label": "Do nothing",
+              "effects": []
+            }
+          ]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}{U}",
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

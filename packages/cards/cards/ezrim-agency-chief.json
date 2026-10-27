@@ -1,0 +1,94 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ddcd8a0a-7ac3-4400-a16f-8bb5aa50994e",
+  "name": "Ezrim, Agency Chief",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Archon", "Detective"],
+    "colors": ["U", "W"],
+    "manaCost": "{1}{W}{W}{U}{U}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Flying\nWhen Ezrim enters, investigate twice. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\n{1}, Sacrifice an artifact: Ezrim gains your choice of vigilance, lifelink, or hexproof until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "artifact"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Gain vigilance until end of turn",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "keywords": ["vigilance"],
+                  "until": "endOfTurn"
+                }
+              ]
+            },
+            {
+              "label": "Gain lifelink until end of turn",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "keywords": ["lifelink"],
+                  "until": "endOfTurn"
+                }
+              ]
+            },
+            {
+              "label": "Gain hexproof until end of turn",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "keywords": ["hexproof"],
+                  "until": "endOfTurn"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

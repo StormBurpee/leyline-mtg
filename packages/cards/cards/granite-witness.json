@@ -1,0 +1,86 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "37f2ec12-d703-40cd-a155-053ae2e4ddcc",
+  "name": "Granite Witness",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Gargoyle", "Detective"],
+    "colors": ["U", "W"],
+    "manaCost": "{2}{W}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flying, vigilance\nDisguise {W/U}{W/U} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen this creature is turned face up, you may tap or untap target creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "disguise",
+      "cost": "{W/U}{W/U}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "faceUp",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Tap the target creature",
+              "condition": {
+                "kind": "targetMatches",
+                "target": "target",
+                "where": {
+                  "tapped": false
+                }
+              },
+              "effects": [
+                {
+                  "op": "tap",
+                  "target": "target"
+                }
+              ]
+            },
+            {
+              "label": "Untap the target creature",
+              "condition": {
+                "kind": "targetMatches",
+                "target": "target",
+                "where": {
+                  "tapped": true
+                }
+              },
+              "effects": [
+                {
+                  "op": "untap",
+                  "target": "target"
+                }
+              ]
+            },
+            {
+              "label": "Do nothing",
+              "effects": []
+            }
+          ]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

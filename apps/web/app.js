@@ -6,6 +6,7 @@ import {
 import { crewProblem, crewCandidates, tapPower } from '../../packages/engine/src/crew.js';
 import { saddleProblem, saddleCandidates } from '../../packages/engine/src/saddle.js';
 import { stats } from '../../packages/engine/src/model.js';
+import { activatedAbilityButtons } from './ability-controls.js';
 import { castProblem, abilityProblem } from '../../packages/engine/src/engine.js';
 import {
   CARD_DECISIONS,
@@ -690,6 +691,29 @@ function presentStateChoice() {
       'Choose a counter to remove. Then choose the target for the separate triggered ability, which can be responded to.';
     cards = [c.source.id];
     actions = `<button class="btn" data-action="removeCounter" data-counter="">Keep counters</button>${c.counters.map((counter) => `<button class="btn primary" data-action="removeCounter" data-counter="${escape(counter)}">Remove ${escape(counter)}</button>`).join('')}`;
+  } else if (c.kind === 'effectChoice') {
+    title = 'Choose an effect';
+    subtitle =
+      'Choose an outcome now, during resolution. Targets are already announced. Neither player gets priority until resolution finishes.';
+    const entry = state.resolving?.entry;
+    cards = [
+      ...new Set([
+        entry?.source?.id,
+        entry?.target?.id,
+        ...Object.values(entry?.targets ?? {})
+          .flat()
+          .map((target) => target.id),
+      ]),
+    ].filter((id) => {
+      const object = id && state.objects[id];
+      return (
+        object &&
+        (['battlefield', 'graveyard', 'stack'].includes(object.zone) ||
+          (object.zone === 'exile' && !object.faceDown) ||
+          (object.zone === 'hand' && object.owner === viewer()))
+      );
+    });
+    actions = `<div class="resolution-effect-options">${c.options.map((option) => `<button class="btn" data-action="chooseEffect" data-option="${option.index}"><strong>${escape(option.label)}</strong></button>`).join('')}</div>`;
   } else if (c.kind === 'optionalEffect' || c.kind === 'payCost') {
     const sourceId = state.resolving?.entry.source?.id;
     cards = sourceId && state.objects[sourceId] ? [sourceId] : [];
@@ -712,11 +736,17 @@ function presentStateChoice() {
         ? `<button class="btn" data-action="declineWard">Don't pay</button><button class="btn primary" data-action="payWard" ${c.payable ? '' : 'disabled'}>${c.reason === 'ward' ? 'Pay ward' : 'Pay cost'}</button>`
         : '<button class="btn" data-action="declineOptional">Decline</button><button class="btn primary" data-action="acceptOptional">Resolve effect</button>';
   } else if (c.kind === 'castExiled') {
-    title = 'Cast this card now?';
-    subtitle = `Pay its costs and cast it during this ability's resolution, or leave it in exile and deal ${c.amount} damage to your opponent. Lands cannot be played this way.`;
-    cards = [c.card];
+    const discover = c.discover !== undefined;
+    title = discover ? `Discover ${c.discover}` : 'Cast this card now?';
+    subtitle = discover
+      ? `Cast this card without paying its mana cost, or put it into your hand. The resulting spell must have mana value ${c.discover} or less. Additional costs still apply; X must be 0. The other exiled cards go to the bottom in random order.`
+      : `Pay its costs and cast it during this ability's resolution, or leave it in exile and deal ${c.amount} damage to your opponent. Lands cannot be played this way.`;
+    cards = [
+      c.card,
+      ...(discover ? (state.resolving?.discover?.exiled ?? []).map((r) => r.id) : []),
+    ];
     const canCast = legalActions(state, viewer()).some((a) => a.type === 'cast');
-    actions = `<button class="btn" data-action="declineResolutionCast">Don't cast · deal ${c.amount}</button><button class="btn primary" data-action="beginResolutionCast" ${canCast ? '' : 'disabled'}>Cast now · pay costs</button>`;
+    actions = `<button class="btn" data-action="declineResolutionCast">${discover ? 'Put into hand' : `Don't cast · deal ${c.amount}`}</button><button class="btn primary" data-action="beginResolutionCast" ${canCast ? '' : 'disabled'}>${discover ? 'Cast without mana cost' : 'Cast now · pay costs'}</button>`;
   } else if (c.kind === 'manaColor') {
     title = 'Choose a mana color';
     subtitle = 'Add one mana of the chosen color. Review your hand before deciding.';
@@ -771,6 +801,7 @@ function presentStateChoice() {
       c.kind === 'mulligan' ||
       [
         'optionalEffect',
+        'effectChoice',
         'payCost',
         'creatureType',
         'landType',
@@ -787,11 +818,15 @@ function presentStateChoice() {
         (c.kind === 'revealDiscard' && !c.eligibleCards.includes(id)) ||
         (c.kind === 'bindingNegotiation' && definition(state, state.objects[id]).type === 'land'),
       badge:
-        c.kind === 'legendRule'
-          ? `Copy ${cards.indexOf(id) + 1}`
-          : multi && selected.includes(id)
-            ? `Selected ${selected.indexOf(id) + 1}`
-            : '',
+        c.kind === 'castExiled' && c.discover !== undefined
+          ? id === c.card
+            ? 'Discovered card'
+            : 'Return to bottom'
+          : c.kind === 'legendRule'
+            ? `Copy ${cards.indexOf(id) + 1}`
+            : multi && selected.includes(id)
+              ? `Selected ${selected.indexOf(id) + 1}`
+              : '',
     }),
   });
   if (c.kind === 'landName')
@@ -1046,6 +1081,8 @@ function showDeck() {
   );
 }
 function showXChoice() {
+  const discover = state?.choice?.kind === 'castExiled' && state.choice.discover !== undefined;
+  const maximum = discover ? 0 : MAX_X;
   const o = state?.objects[ui.selected];
   if (!o) return;
   const values = [
@@ -1065,8 +1102,10 @@ function showXChoice() {
   ui.targeting = false;
   openChoiceDialog(
     'Choose X',
-    `${o.name} · Choose X before targets; targets can change the final cost. Implementation range: 0–${MAX_X}.`,
-    `<label>Other X value <input id="cast-x-value" type="number" min="0" max="${MAX_X}" step="1" value="0"></label><button class="btn primary" data-action="chooseX">Use this X</button><div class="decision-mode-grid">${values.map((x) => `<button class="decision-mode" data-action="chooseX" data-x="${x}"><strong>X = ${x}</strong><span>${mana(castingProfile(state, viewer(), o, ui.spellMode ?? undefined, null, undefined, x).cost)}</span></button>`).join('')}</div>`,
+    discover
+      ? `${o.name} · Discover casts without its mana cost, so X must be 0.`
+      : `${o.name} · Choose X before targets; targets can change the final cost. Implementation range: 0–${MAX_X}.`,
+    `<label>Other X value <input id="cast-x-value" type="number" min="0" max="${maximum}" step="1" value="0"></label><button class="btn primary" data-action="chooseX">Use this X</button><div class="decision-mode-grid">${values.map((x) => `<button class="decision-mode" data-action="chooseX" data-x="${x}"><strong>X = ${x}</strong><span>${mana(castingProfile(state, viewer(), o, ui.spellMode ?? undefined, null, undefined, x).cost)}</span></button>`).join('')}</div>`,
     '<button class="btn quiet" data-action="closeDialog">Cancel casting</button>',
     { eyebrow: 'VARIABLE COST' },
   );
@@ -2111,6 +2150,15 @@ async function action(name, el) {
       break;
     case 'triggerModes':
       presentStateChoice();
+      break;
+    case 'chooseEffect':
+      if (dialog._activeChoice !== state.choice || state.choice?.kind !== 'effectChoice') break;
+      {
+        const option = Number(el.dataset.option);
+        const expectedRevision = dialog._choiceRevision;
+        closeDialog();
+        send({ type: 'chooseEffect', option, expectedRevision }, { autoPass: false });
+      }
       break;
     case 'chooseTriggerMode':
       if (dialog._activeChoice !== state.choice || state.choice?.kind !== 'triggerMode') break;
@@ -3281,8 +3329,7 @@ function selectCard(id) {
       definition(state, o).crew !== undefined ||
       definition(state, o).saddle !== undefined)
   ) {
-    const abilities = definition(state, o).activated ?? [],
-      legal = legalActions(state, p);
+    const legal = legalActions(state, p);
     const manaButtons = definition(state, o).mana
       ? manaOptions(state, o)
           .map(
@@ -3301,12 +3348,7 @@ function selectCard(id) {
         (definition(state, o).crew !== undefined
           ? `<button class="btn primary" data-action="startCrew" ${legal.some((a) => a.type === 'crew' && a.card === id) ? '' : 'disabled'}>Crew ${definition(state, o).crew}</button>`
           : '') +
-        abilities
-          .map(
-            (a, i) =>
-              `<button class="btn primary" data-action="activateAbility" data-ability="${i}" ${legal.some((x) => x.type === 'activate' && x.card === id && x.ability === i) ? '' : 'disabled'}>${a.cost.sacrificeSelf ? `<span>⚑ Sacrifice ${escape(o.name)} · </span>` : ''}${escape((a.text ?? 'Activate ability').replaceAll('CARDNAME', o.name))}</button>`,
-          )
-          .join('') +
+        activatedAbilityButtons(state, p, o, legal) +
         '<button class="btn" data-action="closeDialog">Cancel</button>',
     );
     dialog._activationCard = id;
