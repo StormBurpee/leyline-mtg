@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "52c6afc6-aff1-46a8-b1ea-b183facec1ae",
+  "name": "Atmospheric Greenhouse",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Spacecraft"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}"
+  },
+  "rulesText": "When this Spacecraft enters, put a +1/+1 counter on each creature you control.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\n8+ | Flying, trample",
+  "abilities": [
+    {
+      "kind": "station"
+    },
+    {
+      "kind": "stationLevel",
+      "threshold": 8,
+      "power": 5,
+      "toughness": 4,
+      "abilities": [
+        {
+          "kind": "keyword",
+          "keyword": "flying"
+        },
+        {
+          "kind": "keyword",
+          "keyword": "trample"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "amount": 1,
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

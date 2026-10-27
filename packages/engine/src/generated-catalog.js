@@ -2486,6 +2486,27 @@ export const definitions = [
     ],
   },
   {
+    name: 'Atmospheric Greenhouse',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 4, G: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['G'],
+    text: "When this Spacecraft enters, put a +1/+1 counter on each creature you control.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\n8+ | Flying, trample",
+    station: true,
+    stationLevels: [
+      { threshold: 8, power: 5, toughness: 4, grants: { keywords: ['flying', 'trample'] } },
+    ],
+    etb: [
+      {
+        op: 'counterAll',
+        where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+        amount: 1,
+      },
+    ],
+  },
+  {
     name: 'Attentive Sunscribe',
     type: 'creature',
     types: ['artifact', 'creature'],
@@ -10171,6 +10192,44 @@ export const definitions = [
     ],
   },
   {
+    name: 'Dawnsire, Sunstar Dreadnought',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 5 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: [],
+    text: "Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 20+.)\n10+ | Whenever you attack, Dawnsire deals 100 damage to up to one target creature or planeswalker.\n20+ | Flying",
+    legendary: true,
+    station: true,
+    stationLevels: [
+      {
+        threshold: 10,
+        grants: {
+          keywords: [],
+          triggers: [
+            {
+              event: { event: 'attackGroup', controller: 'you' },
+              effects: [{ op: 'damage', amount: 100, targetGroup: 'chosen' }],
+              targetGroups: [
+                {
+                  id: 'chosen',
+                  selector: {
+                    scope: 'permanent',
+                    where: { any: [{ type: 'creature' }, { type: 'planeswalker' }] },
+                  },
+                  min: 0,
+                  max: 1,
+                },
+              ],
+            },
+          ],
+        },
+      },
+      { threshold: 20, power: 20, toughness: 20, grants: { keywords: ['flying'] } },
+    ],
+  },
+  {
     name: 'Dawnwing Marshal',
     type: 'creature',
     types: ['creature'],
@@ -10414,6 +10473,35 @@ export const definitions = [
       { op: 'gainLife', amount: 3 },
     ],
     crew: 2,
+  },
+  {
+    name: 'Debris Field Crusher',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 4, R: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['R'],
+    text: "When this Spacecraft enters, it deals 3 damage to any target.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\n8+ | Flying\n{1}{R}: This Spacecraft gets +2/+0 until end of turn.",
+    station: true,
+    stationLevels: [
+      {
+        threshold: 8,
+        power: 1,
+        toughness: 5,
+        grants: {
+          keywords: ['flying'],
+          activated: [
+            {
+              cost: { mana: { generic: 1, R: 1 } },
+              effects: [{ op: 'modify', subject: 'source', power: 2, toughness: 0, keywords: [] }],
+              text: 'This Spacecraft gets +2/+0 until end of turn.',
+            },
+          ],
+        },
+      },
+    ],
+    triggers: [{ event: 'selfEnters', effects: [{ op: 'damage', amount: 3 }], target: 'any' }],
   },
   {
     name: 'Decoy Ploy',
@@ -14556,6 +14644,27 @@ export const definitions = [
     ],
   },
   {
+    name: 'Extinguisher Battleship',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 8 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: [],
+    text: "When this Spacecraft enters, destroy target noncreature permanent. Then this Spacecraft deals 4 damage to each creature.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 5+.)\n5+ | Flying, trample",
+    station: true,
+    stationLevels: [
+      { threshold: 5, power: 10, toughness: 10, grants: { keywords: ['flying', 'trample'] } },
+    ],
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'destroy' }, { op: 'damageAll', where: { type: 'creature' }, amount: 4 }],
+        target: { scope: 'permanent', where: { not: { type: 'creature' } } },
+      },
+    ],
+  },
+  {
     name: 'Extravagant Replication',
     type: 'enchantment',
     types: ['enchantment'],
@@ -17438,6 +17547,20 @@ export const definitions = [
       ],
     },
     mainName: 'Galvanic Giant',
+  },
+  {
+    name: 'Galvanizing Sawship',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 5, R: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['R'],
+    text: "Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 3+.)\n3+ | Flying, haste",
+    station: true,
+    stationLevels: [
+      { threshold: 3, power: 6, toughness: 5, grants: { keywords: ['flying', 'haste'] } },
+    ],
   },
   {
     name: 'Gangly Stompling',
@@ -22695,6 +22818,83 @@ export const definitions = [
     ],
   },
   {
+    name: 'Infinite Guideline Station',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { W: 1, U: 1, B: 1, R: 1, G: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['B', 'G', 'R', 'U', 'W'],
+    text: "When Infinite Guideline Station enters, create a tapped 2/2 colorless Robot artifact creature token for each multicolored permanent you control.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.)\n12+ | Flying\nWhenever Infinite Guideline Station attacks, draw a card for each multicolored permanent you control.",
+    legendary: true,
+    station: true,
+    stationLevels: [
+      {
+        threshold: 12,
+        power: 7,
+        toughness: 15,
+        grants: {
+          keywords: ['flying'],
+          triggers: [
+            {
+              event: 'selfAttacks',
+              effects: [
+                {
+                  op: 'draw',
+                  count: {
+                    kind: 'count',
+                    zone: 'battlefield',
+                    player: 'you',
+                    where: {
+                      any: [
+                        { all: [{ color: 'W' }, { color: 'U' }] },
+                        { all: [{ color: 'W' }, { color: 'B' }] },
+                        { all: [{ color: 'W' }, { color: 'R' }] },
+                        { all: [{ color: 'W' }, { color: 'G' }] },
+                        { all: [{ color: 'U' }, { color: 'B' }] },
+                        { all: [{ color: 'U' }, { color: 'R' }] },
+                        { all: [{ color: 'U' }, { color: 'G' }] },
+                        { all: [{ color: 'B' }, { color: 'R' }] },
+                        { all: [{ color: 'B' }, { color: 'G' }] },
+                        { all: [{ color: 'R' }, { color: 'G' }] },
+                      ],
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+    etb: [
+      {
+        op: 'token',
+        count: {
+          kind: 'count',
+          zone: 'battlefield',
+          player: 'you',
+          where: {
+            any: [
+              { all: [{ color: 'W' }, { color: 'U' }] },
+              { all: [{ color: 'W' }, { color: 'B' }] },
+              { all: [{ color: 'W' }, { color: 'R' }] },
+              { all: [{ color: 'W' }, { color: 'G' }] },
+              { all: [{ color: 'U' }, { color: 'B' }] },
+              { all: [{ color: 'U' }, { color: 'R' }] },
+              { all: [{ color: 'U' }, { color: 'G' }] },
+              { all: [{ color: 'B' }, { color: 'R' }] },
+              { all: [{ color: 'B' }, { color: 'G' }] },
+              { all: [{ color: 'R' }, { color: 'G' }] },
+            ],
+          },
+        },
+        tapped: true,
+        definition: 'Robot Token',
+      },
+    ],
+  },
+  {
     name: 'Infirmary Healer // Stream of Life',
     type: 'creature',
     types: ['creature'],
@@ -23989,6 +24189,47 @@ export const definitions = [
     power: 1,
     toughness: 3,
     suppressEnterTriggers: { any: [{ type: 'artifact' }, { type: 'creature' }] },
+  },
+  {
+    name: 'Kavaron, Memorial World',
+    type: 'land',
+    types: ['land'],
+    cost: {},
+    keywords: [],
+    subtypes: ['Planet'],
+    color: [],
+    text: 'This land enters tapped.\n{T}: Add {R}.\nStation (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)\n12+ | {1}{R}, {T}, Sacrifice a land: Create a 2/2 colorless Robot artifact creature token, then creatures you control get +1/+0 and gain haste until end of turn.',
+    station: true,
+    stationLevels: [
+      {
+        threshold: 12,
+        grants: {
+          keywords: [],
+          activated: [
+            {
+              cost: {
+                mana: { generic: 1, R: 1 },
+                sacrifice: { count: 1, where: { type: 'land' } },
+                tap: true,
+              },
+              effects: [
+                { op: 'token', count: 1, definition: 'Robot Token' },
+                {
+                  op: 'modifyAll',
+                  where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+                  power: 1,
+                  toughness: 0,
+                  keywords: ['haste'],
+                },
+              ],
+              text: 'Sacrifice a land: Create a Robot, then your creatures get +1/+0 and haste.',
+            },
+          ],
+        },
+      },
+    ],
+    entersTapped: true,
+    mana: 'R',
   },
   {
     name: 'Kavaron Turbodrone',
@@ -26247,6 +26488,27 @@ export const definitions = [
           { op: 'modify', subject: 'source', power: 1, toughness: 1, keywords: ['vigilance'] },
         ],
       },
+    ],
+  },
+  {
+    name: 'Lumen-Class Frigate',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 1, W: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['W'],
+    text: "Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.)\n2+ | Other creatures you control get +1/+1.\n12+ | Flying, lifelink",
+    station: true,
+    stationLevels: [
+      {
+        threshold: 2,
+        grants: {
+          keywords: [],
+          static: { kind: 'anthem', power: 1, toughness: 1, excludeSource: true },
+        },
+      },
+      { threshold: 12, power: 3, toughness: 5, grants: { keywords: ['flying', 'lifelink'] } },
     ],
   },
   {
@@ -32025,6 +32287,32 @@ export const definitions = [
     crewSaddlePowerBonus: 2,
   },
   {
+    name: 'Pinnacle Kill-Ship',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 7 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: [],
+    text: "When this Spacecraft enters, it deals 10 damage to up to one target creature.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.)\n7+ | Flying",
+    station: true,
+    stationLevels: [{ threshold: 7, power: 7, toughness: 7, grants: { keywords: ['flying'] } }],
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'damage', amount: 10, targetGroup: 'chosen' }],
+        targetGroups: [
+          {
+            id: 'chosen',
+            selector: { scope: 'permanent', where: { type: 'creature' } },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Pinnacle Starcage',
     type: 'artifact',
     types: ['artifact'],
@@ -35270,6 +35558,30 @@ export const definitions = [
     toughness: 2,
     triggers: [
       { event: { event: 'tap', object: 'source' }, effects: [{ op: 'optionalDiscardDraw' }] },
+    ],
+  },
+  {
+    name: 'Rescue Skiff',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 5, W: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['W'],
+    text: "When this Spacecraft enters, return target creature or enchantment card from your graveyard to the battlefield.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 10+.)\n10+ | Flying",
+    station: true,
+    stationLevels: [{ threshold: 10, power: 5, toughness: 6, grants: { keywords: ['flying'] } }],
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'moveTarget', destination: 'battlefield', controller: 'you' }],
+        target: {
+          scope: 'graveyard',
+          where: {
+            all: [{ owner: 'you' }, { any: [{ type: 'creature' }, { type: 'enchantment' }] }],
+          },
+        },
+      },
     ],
   },
   {
@@ -40730,6 +41042,47 @@ export const definitions = [
     ],
   },
   {
+    name: 'Specimen Freighter',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 5, U: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['U'],
+    text: "When this Spacecraft enters, return up to two target non-Spacecraft creatures to their owners' hands.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 9+.)\n9+ | Flying\nWhenever this Spacecraft attacks, defending player mills four cards.",
+    station: true,
+    stationLevels: [
+      {
+        threshold: 9,
+        power: 4,
+        toughness: 7,
+        grants: {
+          keywords: ['flying'],
+          triggers: [
+            { event: 'selfAttacks', effects: [{ op: 'mill', count: 4, player: 'opponent' }] },
+          ],
+        },
+      },
+    ],
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'bounce', targetGroup: 'chosen' }],
+        targetGroups: [
+          {
+            id: 'chosen',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { not: { subtype: 'Spacecraft' } }] },
+            },
+            min: 0,
+            max: 2,
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Spectacle Summit',
     type: 'land',
     types: ['land'],
@@ -43821,6 +44174,26 @@ export const definitions = [
     ],
   },
   {
+    name: 'Susurian Dirgecraft',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 4, B: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['B'],
+    text: "When this Spacecraft enters, each opponent sacrifices a nontoken creature of their choice.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.)\n7+ | Flying",
+    station: true,
+    stationLevels: [{ threshold: 7, power: 4, toughness: 3, grants: { keywords: ['flying'] } }],
+    etb: [
+      {
+        op: 'sacrifice',
+        count: 1,
+        player: 'opponent',
+        where: { all: [{ type: 'creature' }, { token: false }] },
+      },
+    ],
+  },
+  {
     name: 'Swab Goblin',
     type: 'creature',
     types: ['creature'],
@@ -45223,6 +45596,52 @@ export const definitions = [
       ],
     },
     frontName: 'The Legend of Roku',
+  },
+  {
+    name: 'The Seriema',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 1, W: 2 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['W'],
+    text: "When The Seriema enters, search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.)\n7+ | Flying\nOther tapped legendary creatures you control have indestructible.",
+    legendary: true,
+    station: true,
+    stationLevels: [
+      {
+        threshold: 7,
+        power: 5,
+        toughness: 5,
+        grants: {
+          keywords: ['flying'],
+          static: {
+            kind: 'anthem',
+            power: 0,
+            toughness: 0,
+            where: {
+              all: [
+                { type: 'creature' },
+                { controller: 'you' },
+                { tapped: true },
+                { legendary: true },
+              ],
+            },
+            excludeSource: true,
+            keywords: ['indestructible'],
+          },
+        },
+      },
+    ],
+    etb: [
+      {
+        op: 'searchLibrary',
+        count: 1,
+        destination: 'hand',
+        where: { all: [{ type: 'creature' }, { legendary: true }] },
+        reveal: true,
+      },
+    ],
   },
   {
     name: 'The Spirit Oasis',
@@ -48217,6 +48636,22 @@ export const definitions = [
     ],
   },
   {
+    name: 'Uthros Scanship',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 3, U: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['U'],
+    text: "When this Spacecraft enters, draw two cards, then discard a card.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\n8+ | Flying",
+    station: true,
+    stationLevels: [{ threshold: 8, power: 4, toughness: 4, grants: { keywords: ['flying'] } }],
+    etb: [
+      { op: 'draw', count: 2 },
+      { op: 'discard', count: 1 },
+    ],
+  },
+  {
     name: 'Utrom Scientists',
     type: 'creature',
     types: ['artifact', 'creature'],
@@ -50229,6 +50664,38 @@ export const definitions = [
     ],
   },
   {
+    name: 'Warmaker Gunship',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 2, R: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['R'],
+    text: "When this Spacecraft enters, it deals damage equal to the number of artifacts you control to target creature an opponent controls.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.)\n6+ | Flying",
+    station: true,
+    stationLevels: [{ threshold: 6, power: 4, toughness: 3, grants: { keywords: ['flying'] } }],
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [
+          {
+            op: 'damage',
+            amount: {
+              kind: 'count',
+              zone: 'battlefield',
+              player: 'you',
+              where: { type: 'artifact' },
+            },
+          },
+        ],
+        target: {
+          scope: 'permanent',
+          where: { all: [{ type: 'creature' }, { controller: 'opponent' }] },
+        },
+      },
+    ],
+  },
+  {
     name: 'Warren Elder',
     type: 'creature',
     types: ['creature'],
@@ -50581,6 +51048,21 @@ export const definitions = [
         amount: 1,
       },
     ],
+  },
+  {
+    name: 'Wedgelight Rammer',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 3, W: 1 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: ['W'],
+    text: "When this Spacecraft enters, create a 2/2 colorless Robot artifact creature token.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 9+.)\n9+ | Flying, first strike",
+    station: true,
+    stationLevels: [
+      { threshold: 9, power: 3, toughness: 4, grants: { keywords: ['flying', 'first strike'] } },
+    ],
+    etb: [{ op: 'token', count: 1, definition: 'Robot Token' }],
   },
   {
     name: 'Weftblade Enhancer',
@@ -51764,6 +52246,19 @@ export const definitions = [
     ],
   },
   {
+    name: 'Wurmwall Sweeper',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 2 },
+    keywords: [],
+    subtypes: ['Spacecraft'],
+    color: [],
+    text: "When this Spacecraft enters, surveil 2.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 4+.)\n4+ | Flying",
+    station: true,
+    stationLevels: [{ threshold: 4, power: 2, toughness: 2, grants: { keywords: ['flying'] } }],
+    etb: [{ op: 'surveil', count: 2 }],
+  },
+  {
     name: 'Wylie Duke, Atiin Hero',
     type: 'creature',
     types: ['creature'],
@@ -52556,6 +53051,7 @@ export const cardIds = {
   'ac10d218-f9a6-4058-9cda-a15ca1b0b7b5': "Assassin's Trophy",
   'ecf574a5-6410-466d-a726-732134f904b2': 'Assert Perfection',
   'e929b730-9aa2-49e1-9a65-50afc0fbe3e0': 'Atlantean Cavalry',
+  '52c6afc6-aff1-46a8-b1ea-b183facec1ae': 'Atmospheric Greenhouse',
   '0f85714b-e731-45a3-aa65-8cd59cd48280': 'Attentive Sunscribe',
   '45d652c4-188e-4f00-acdd-1be014922cbc': 'Attercop',
   '5905c55a-f1d1-4021-a9af-f85b02ae21f3': 'Audacious Thief',
@@ -52907,6 +53403,7 @@ export const cardIds = {
   'cb490f3f-74ed-4d38-8eda-9948c095f3bc': "Davriel's Shadowfugue",
   '1f2d1de6-42e0-4f45-b43d-ce4980146469': "Dawn's Light Archer",
   '57bbd80b-290f-461e-8dc6-26ba4d673fa9': 'Dawnhand Eulogist',
+  'afc9436b-8cad-4916-929d-ff33a37b42d5': 'Dawnsire, Sunstar Dreadnought',
   '6640c234-8863-4670-a61f-ba6f59b60d69': 'Dawnwing Marshal',
   'd0e24797-3e45-4c2b-b4b0-1ef44d42eaee': 'Day of Black Sun',
   'd057289d-5e28-43d5-8ff3-4a1bc723477d': 'Day of Judgment',
@@ -52921,6 +53418,7 @@ export const cardIds = {
   '6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f': 'Deathcap Marionette',
   'cf09b0af-3cf1-4486-8f65-8cfd2410314a': 'Deathmark',
   '2b15d571-2f90-44f7-9153-20ed51253045': 'Debris Beetle',
+  'db0894e1-2644-48d4-8de4-8cc43e940bc1': 'Debris Field Crusher',
   '035cddbc-39c9-42af-9e26-c88419b43b49': 'Decoy Ploy',
   'd4e0749a-e179-4c19-8536-bf8f1a198549': 'Dedicated Commons',
   'eeae4161-9f35-45df-8b3c-c55e37f49cd1': 'Deduce',
@@ -53114,6 +53612,7 @@ export const cardIds = {
   'c844cc98-b8b9-447d-92ee-64f4a4906e7c': 'Explosive Getaway',
   'f1812d69-c016-4bc3-b899-ed47f5e893e5': 'Expressive Firedancer',
   '973fb1e3-83d5-4763-bea8-799b426a8848': 'Extended Absence',
+  'cce3dcc3-57bb-4b95-8b70-337c67bb3c4e': 'Extinguisher Battleship',
   '3a646245-b8b7-4f91-a312-d5eea9a9e49a': 'Extravagant Replication',
   'c8f802ad-4621-4f71-b52d-fbc55853dc88': 'Eye of Jace',
   '4074e897-82a4-4f57-86c2-4aab3f29ef9b': 'Ezekiel Sims, Spider-Totem',
@@ -53251,6 +53750,7 @@ export const cardIds = {
   '4e0ba9d5-4bd6-49a0-ae00-70818738d0ba': 'Gallant Fowlknight',
   '04dcda3b-3401-4523-8b97-b700a14feb36': 'Gallant Strike',
   '48ab8ba0-0e85-4656-a798-ceb961fb02ce': 'Galvanic Giant // Storm Reading',
+  'dfe8f77a-cc26-438b-92ae-2ca7a91f813b': 'Galvanizing Sawship',
   '60206d4e-4301-4d7a-a68e-46a2ad9fc407': 'Gangly Stompling',
   '073f12d1-eaa1-4d08-bc1d-b216a3dc0c67': 'Gargantuan Leech',
   '3127ae9b-a7a7-43ec-89d7-688f8445b33d': "Garruk's Uprising",
@@ -53492,6 +53992,7 @@ export const cardIds = {
   '49f0da4a-e046-4220-b90e-e105a5f2ef00': 'Incinerating Blast',
   '94f0a572-e91c-4b56-a5d1-6cbbeabd210d': 'Infernal Grasp',
   'd398dca3-f3a5-44c9-998f-b4fce9e5c2bf': 'Infestation Sage',
+  'cda39514-86c9-483e-8d95-fd08138ce33a': 'Infinite Guideline Station',
   '4cbbdebc-b807-4d7b-92dd-312637d2a5de': 'Infirmary Healer // Stream of Life',
   '99853d2e-2223-4c05-bbd7-0a746f8f810d': 'Ingenious Leonin',
   'bda098cb-31ec-41a1-a9d7-122877cc69d2': 'Ingris Stingerquill',
@@ -53554,6 +54055,7 @@ export const cardIds = {
   'd6eabbff-cc0c-4000-8feb-4826e1b6bc66': 'Kapow!',
   'df366871-8ed7-4183-8b0c-414ca361a711': 'Kargan Dragonrider',
   'aecc621f-67da-41a7-9d47-05ded302ae35': 'Karn, Argent Defender',
+  '4fa826ca-d361-4391-ad0d-989ebcfa4a91': 'Kavaron, Memorial World',
   '3ebb8542-5d1d-4f0b-92a9-5a98425860fd': 'Kavaron Turbodrone',
   '8cadf9c0-9a63-4cde-a6be-0ae86890c831': 'Keen Buccaneer',
   '46ce3698-e4e6-44e9-8b99-2b12a703e91e': 'Keen-Eyed Curator',
@@ -53657,6 +54159,7 @@ export const cardIds = {
   '1139ee31-cb6e-4ae6-a08b-252c46b2db97': 'Lotusguard Disciple',
   '8cf4ddb0-2a83-4d8f-b636-7ba3c81ea4ca': 'Loxodon Battle Priest',
   '141a2757-8f20-4e10-9866-bb5d612ed62d': 'Loxodon Eavesdropper',
+  '3aa0cda4-fb2d-4fd4-84f6-482089a85547': 'Lumen-Class Frigate',
   'd96141af-313f-4ea9-a249-d9eb22cd2431': 'Luminous Rebuke',
   '34c65c7f-33ab-4f91-84ce-d0c8f4fc5832': 'Lunatic Pandora',
   'b6c7c708-5212-4100-b954-b77855b27915': 'Lupinflower Village',
@@ -53941,6 +54444,7 @@ export const cardIds = {
   '91740570-1a97-4513-8af9-b32c363daf15': 'Pillage the Bog',
   'a39c758d-82be-4d8c-bb3e-8ee8a6c6788b': 'Pillar Launch',
   'leyline:token/pilot-token': 'Pilot Token',
+  'ad556aee-3dbf-4c8b-9f3a-31947e26c6f5': 'Pinnacle Kill-Ship',
   '10e0b563-4dfc-4530-a010-0ba40bdf02ac': 'Pinnacle Starcage',
   '58d87cfe-7402-43c3-81ce-13de8cd04005': 'Piranha Fly',
   '4771a871-576e-4a14-92f0-b5b41c63d615': 'Pirate Peddlers',
@@ -54101,6 +54605,7 @@ export const cardIds = {
   '26d2762b-4346-40d0-b93d-b0dbfeb6e2bc': 'Reroute Systems',
   'df6fc0b4-333b-4f6c-804c-ba6c8e29c88e': 'Rescue Girl, First Responder',
   'd70ad04a-b940-4bb1-bcdc-408166e91723': 'Rescue Leopard',
+  '112aaaf0-3301-4f79-9640-d36c75a0fb30': 'Rescue Skiff',
   '71d6aa12-4888-458d-9dc8-9954b247a246': 'Resentful Revelation',
   'eaaed253-9b11-47e2-8624-0340ab2207f6': 'Resolute Reinforcements',
   'ca2aee09-398d-4eaa-acbb-98663216185b': 'Resolute Watchdog',
@@ -54356,6 +54861,7 @@ export const cardIds = {
   '2ec1860b-89cc-4529-8b8c-fb47f79f2b4b': 'Sower of Chaos',
   '241117a0-8305-48bb-9cb9-9b01e86e08f7': 'Space-Time Anomaly',
   '088fb5dc-65eb-42bf-8a32-76fa6b79b79f': 'Spare Supplies',
+  'fb84b94c-dc8c-4182-9b96-abd092b20981': 'Specimen Freighter',
   '33a4e73d-d93a-4b6f-88ff-cd53f20d178c': 'Spectacle Summit',
   'eed5e0cc-8f88-4779-bf10-6a823c72df7f': 'Spectacular Spider-Man',
   '15948fdf-3f9e-4eed-b85b-c5a554ff0571': 'Spectacular Tactics',
@@ -54499,6 +55005,7 @@ export const cardIds = {
   'ef67c170-68aa-4ada-8cee-261a4dbb1b5d': 'Surly Farrier',
   '7a0fe73f-6e08-4c9a-80e1-c2ead6cebe06': 'Surrak, Elusive Hunter',
   'ea6ee33f-0cba-4e96-817f-dc89c9064ead': 'Suspicious Shambler',
+  'f1d826d1-d2da-46ce-b1db-81393c88d865': 'Susurian Dirgecraft',
   '343ecf2f-0bbc-4840-8fb3-f5f61b26e76f': 'Swab Goblin',
   '56719f6a-1a6c-4c0a-8d21-18f7d7350b68': 'Swamp',
   'fc532d1d-6cf5-4b59-afb3-325d0bc0db77': 'Swampsnare Trap',
@@ -54567,6 +55074,7 @@ export const cardIds = {
   '04a38b92-619e-4fe8-b0cb-6fa31f0824ff': 'The Coming of Galactus',
   'df4ef2f8-2591-4be3-b905-4f9ff9c538ea': "The Crystal's Chosen",
   '2f26f270-26d9-46d3-957f-19f52d51eb03': 'The Legend of Roku // Avatar Roku',
+  'a6bcec1f-f515-4e63-9e84-8eb04cc582ff': 'The Seriema',
   'b677a73c-f179-46bf-83ee-c2b05f9fca67': 'The Spirit Oasis',
   '20bb8c55-4b0b-425f-8201-b54fa2fdde86': 'The Theorist, Jace Beleren',
   '80312910-5d53-44f1-9982-e46dc7532abb': 'The Unbeatable Squirrel Girl',
@@ -54704,6 +55212,7 @@ export const cardIds = {
   'd0a38e8c-c42c-4c99-8a44-d390ff2511ff': 'Unwelcome Sprite',
   'c0b7e989-8194-484c-93aa-a44df0764a77': "Ureni's Rebuff",
   '7f51aede-fb86-4b7e-9027-2ba8be62b567': 'Uthros Psionicist',
+  '7b4c37dc-8cb0-4870-929e-11c2a45952a2': 'Uthros Scanship',
   '89793c8c-98a3-4621-ad3d-cfc5949c65da': 'Utrom Scientists',
   'a871dfbf-1fb9-4d1c-81bb-e4f0b131a11b': "Valgavoth's Faithful",
   '1333d690-a6dc-4ef8-8c57-2ba16727c0a5': 'Valkyrie Aerial Unit',
@@ -54791,6 +55300,7 @@ export const cardIds = {
   'd1663b51-37a1-45a0-b477-2d3e7dd0828e': 'Warg Tactics',
   'leyline:token/wark-bird-token': 'Wark Bird Token',
   'a751c07b-fc21-4854-96e7-f71abf4e86c9': "Warleader's Call",
+  'c947171b-ed9e-4b83-af45-bd595a8d84ee': 'Warmaker Gunship',
   '33fcb05b-246d-4b82-8b0f-44d5f891b612': 'Warren Elder',
   '594a57f6-7827-41c7-aa37-00b498720b16': 'Warteye Witch',
   '448cc829-1596-4aec-b180-c0c1e0566f6b': 'Wary Thespian',
@@ -54809,6 +55319,7 @@ export const cardIds = {
   'e48a8160-cffe-4e00-a3e9-a59d7fc7b3a2': 'Weapons Manufacturing',
   '9b9b086c-d201-4574-a1e9-0d6f8de53d7d': 'Web Up',
   '3b23e4f8-882d-4cce-9b61-171ae2cc3a18': 'Web-Warriors',
+  '03259ab0-caa8-4620-b070-127e2c712252': 'Wedgelight Rammer',
   '4d8ee903-17b3-43c9-9637-ee596955a9f4': 'Weftblade Enhancer',
   '926d52a5-4db1-46ce-9567-17c28bf56ae7': 'Weftstalker Ardent',
   '8e629a31-2e06-4f95-9628-34670dcf68b9': 'Welcome to Sweettooth',
@@ -54861,6 +55372,7 @@ export const cardIds = {
   '8ba5af76-2485-4fd6-bd2e-fe90d1f2691c': 'Wreckage Wickerfolk',
   '4a9e0294-c967-4e90-b776-6d3195034a23': 'Wrecking Gecko',
   '628cf9ab-8f8b-49b6-b761-2450088ad03b': 'Wretched Doll',
+  '320ed2ec-ef06-41fb-ac8a-72579f11544c': 'Wurmwall Sweeper',
   'b3ac27d6-7e18-404d-9af2-b03897a5f1d9': 'Wylie Duke, Atiin Hero',
   '36b5c793-30f6-4f21-8bf6-c18d1c46d732': 'Xande, Dark Mage',
   '980e1721-3717-4425-95a4-938dbf2ac661': 'Yargle and Multani',
@@ -54896,7 +55408,7 @@ export const cardIds = {
 };
 export const packIdentity = {
   id: 'leyline.core',
-  version: '0.56.0',
+  version: '0.57.0',
   schemaVersion: 1,
-  sourceHash: '63d18a3ea8c0f10e697c2f5b21195692a21f7e6b9072f205bad17afc2e7e7a71',
+  sourceHash: '4614b3db76e7aba7e388f17d9329efe2538f82784881c48fb71bd7f28e65dd6f',
 };

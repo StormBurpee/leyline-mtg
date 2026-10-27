@@ -472,6 +472,16 @@ export interface CardDefinition {
   readonly effects?: readonly Effect[];
   readonly crew?: number;
   readonly saddle?: number;
+  readonly station?: true;
+  readonly stationLevels?: ReadonlyArray<{
+    threshold: number;
+    power?: number;
+    toughness?: number;
+    grants: Pick<
+      CardDefinition,
+      'keywords' | 'triggers' | 'activated' | 'static' | 'selfBonus' | 'etb'
+    >;
+  }>;
   readonly crewSaddlePowerBonus?: number;
   readonly ninjutsu?: ManaCost;
   readonly turnLoyaltyCreature?: {
@@ -636,6 +646,7 @@ export interface GameObject {
   zone: Zone;
   incarnation: number;
   tapped: boolean;
+  chargeCounters?: number;
   saddledTurn?: number;
   saddleHistory?: { turn: number; count: number };
   plusCounters: number;
@@ -746,6 +757,8 @@ export interface StackEntry {
   targetingSource?: ObjectTarget;
   sourceDefinition?: CardDefinition;
   sourceStats?: { power: number; toughness: number };
+  stationPayer?: ObjectTarget;
+  stationPower?: number;
   sourceCopyDefinition?: CardDefinition;
   x?: number;
   castingCost?: ManaCost;
@@ -777,7 +790,7 @@ export interface StackEntry {
   sourceAttachment?: ObjectTarget | null;
   effects: (
     | Effect
-    | { op: 'animateVehicle' | 'becomeSaddled' }
+    | { op: 'animateVehicle' | 'becomeSaddled' | 'stationCharge' }
     | { op: 'returnEarthbent' }
     | { op: 'returnDelayedBlink'; controller: 'owner' | 'you' }
     | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } }
@@ -1117,7 +1130,7 @@ export type Action =
   | { type: 'chooseManaColor'; color: Exclude<Color, 'C'> }
   | { type: 'chooseResolutionCard'; card: string | null }
   | { type: 'chooseLegend'; card: string }
-  | { type: 'crew' | 'saddle'; card: string; cards: string[] }
+  | { type: 'crew' | 'saddle' | 'station'; card: string; cards: string[] }
   | { type: 'ninjutsu'; card: string; attacker: ObjectTarget }
   | { type: 'cycle'; card: string }
   | { type: 'plot'; card: string }
@@ -1178,6 +1191,7 @@ export type LegalAction =
           | 'turnFaceUp'
           | 'crew'
           | 'saddle'
+          | 'station'
           | 'cycle'
           | 'plot'
           | 'activate'
@@ -1476,3 +1490,12 @@ export function activationSacrificeCandidates(
   cost: NonNullable<CardDefinition['activated']>[number]['cost'],
   sourceId?: string,
 ): GameObject[];
+
+export function stationProblem(
+  state: GameState,
+  player: PlayerId,
+  id: string,
+  cards: string[],
+): string | null;
+export function stationCandidates(state: GameState, player: PlayerId, id: string): GameObject[];
+export function stationPlan(state: GameState, player: PlayerId, id: string): string[] | null;

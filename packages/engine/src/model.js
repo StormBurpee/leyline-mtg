@@ -9,7 +9,7 @@ import { matchesEvent, eventSpec } from './events.js';
 import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.56.0';
+export const VERSION = '0.57.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -158,6 +158,7 @@ export function counterKinds(object) {
     lore: 'loreCounters',
     loyalty: 'loyalty',
     quest: 'questCounters',
+    charge: 'chargeCounters',
   }))
     if ((object[field] ?? 0) > 0) kinds.push(name);
   kinds.push(
@@ -173,9 +174,19 @@ export function removeOneCounter(object, kind) {
     lore: 'loreCounters',
     loyalty: 'loyalty',
     quest: 'questCounters',
+    charge: 'chargeCounters',
   }[kind];
   if (field) object[field]--;
   else object.keywordCounters[kind]--;
+}
+/** CR 506.4: removing a creature from combat is persistent through reanimation. */
+export function removeFromCombat(s, source) {
+  const same = (r) => r.id === source.id && r.incarnation === source.incarnation;
+  s.combat.attackers = s.combat.attackers.filter((r) => !same(r));
+  delete s.combat.blocks[source.id];
+  if (s.combat.defenders) delete s.combat.defenders[source.id];
+  for (const id of Object.keys(s.combat.blocks))
+    s.combat.blocks[id] = s.combat.blocks[id].filter((r) => !same(r));
 }
 export function trackedExileCards(s, source) {
   if (!source) return [];
@@ -268,6 +279,35 @@ export function definition(
         keywords: [...d.keywords, ...d.turnLoyaltyCreature.keywords],
       }
     : d;
+  // CR 721.2 / 613.6: threshold characteristics are continuous, never copy values.
+  // The type/P/T effect starts in layer 4 and survives later ability loss.
+  const activeStationLevels = (d.stationLevels ?? []).filter(
+    (level) => (object.chargeCounters ?? 0) >= level.threshold,
+  );
+  let stationForm = false;
+  for (const level of activeStationLevels) {
+    if (level.power !== undefined) {
+      stationForm = true;
+      const types = [...new Set([...typesOf(result), 'creature'])];
+      result = {
+        ...result,
+        type: 'creature',
+        types,
+        baseStats: { power: level.power, toughness: level.toughness },
+      };
+    }
+    const grants = level.grants;
+    result = {
+      ...result,
+      ...grants,
+      keywords: [...result.keywords, ...(grants.keywords ?? [])],
+      ...(grants.activated
+        ? { activated: [...(result.activated ?? []), ...grants.activated] }
+        : {}),
+      ...(grants.triggers ? { triggers: [...(result.triggers ?? []), ...grants.triggers] } : {}),
+      ...(grants.etb ? { etb: [...(result.etb ?? []), ...grants.etb] } : {}),
+    };
+  }
   if (d.chooseBasicLandType && object.chosenBasicLandType) {
     const landType = object.chosenBasicLandType;
     result = {
@@ -393,7 +433,7 @@ export function definition(
     stripped.abilitiesRemoved = true;
     if (d.keywords?.includes('changeling'))
       stripped.subtypes = [...new Set([...result.subtypes, ...CREATURE_TYPES])];
-    if (loyaltyForm || modifiers.some((m) => m.animation || m.creatureForm))
+    if (loyaltyForm || stationForm || modifiers.some((m) => m.animation || m.creatureForm))
       stripped.baseStats = result.baseStats;
     result = stripped;
   }
@@ -1253,6 +1293,12 @@ export function move(s, o, to, departureContext = null) {
     const lastController = lastKnown?.controller ?? o.controller;
     const lastDefinition = lastKnown?.definition ?? definition(s, o);
     for (const entry of entries) {
+      if (
+        from === 'battlefield' &&
+        entry.stationPayer?.id === o.id &&
+        entry.stationPayer.incarnation === o.incarnation
+      )
+        entry.stationPower = lastKnown?.power ?? stats(s, o).power;
       if (entry.eventSource?.id === o.id && entry.eventSource.incarnation === o.incarnation) {
         entry.eventSource.keywords = [...lastKeywords];
         entry.eventSource.controller = lastController;
@@ -1302,6 +1348,7 @@ export function move(s, o, to, departureContext = null) {
   delete o.loyaltyUsed;
   delete o.loreCounters;
   delete o.questCounters;
+  delete o.chargeCounters;
   if (to === 'battlefield' && hasType(copiableDefinition(s, o), 'planeswalker'))
     o.loyalty = copiableDefinition(s, o).loyalty;
   else delete o.loyalty;

@@ -2,7 +2,11 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.56)
+## Latest coverage (v0.57)
+
+Station taps exactly one other controlled creature as a sorcery and adds charge counters using resolution-time power or exact-incarnation last-known power. Charge thresholds continuously grant their printed abilities and, where specified, creature type and base P/T; they are not end-of-turn animations. Losing creature status immediately removes combat membership, including mid-resolution counter removal. Copies retain definitions, not counters or unlocked characteristics. The 17 admitted cards include complete clauses and are not restricted to their controller’s turn. Ten remaining Station cards and broader counter/modifier contracts are explicitly excluded. See [Station support](STATION.md).
+
+## Previous coverage (v0.56)
 
 Six exact Role Aura tokens attach to legal creature incarnations and obey per-controller newest-Role state-based actions, including mandatory tied-timestamp choices and simultaneous departure facts. Cursed applies timestamped base statistics; Royal grants an additional ward ability; Sorcerer, Young Hero and Hunter’s Axe grant creature-owned attack triggers rather than Aura/Equipment observer triggers. Return Triumphant and Not Dead After All retain the exact returned incarnation through entry choices, respecting ownership, control and ability loss. The 22 admitted cards do not imply support for every Role card, Virtuous Role, token-doubling replacements or arbitrary attachment-granted events. See [Role support](role-token-support.md).
 

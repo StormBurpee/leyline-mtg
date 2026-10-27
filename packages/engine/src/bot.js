@@ -692,6 +692,15 @@ export function chooseBotCommand(s, p) {
   const actions = legalActions(s, p)
     .filter((action) => actionSafe(s, p, action))
     .sort((a, b) => sacrificeValue(a) - sacrificeValue(b));
+  const stationing = actions.find(
+    (a) =>
+      a.type === 'station' &&
+      stats(s, s.objects[a.cards[0]]).power > 0 &&
+      (definition(s, s.objects[a.card]).stationLevels ?? []).some(
+        (level) => level.threshold > (s.objects[a.card].chargeCounters ?? 0),
+      ),
+  );
+  if (stationing) return { ...stationing, player: p };
   const saddling = actions.find(
     (a) =>
       a.type === 'saddle' &&

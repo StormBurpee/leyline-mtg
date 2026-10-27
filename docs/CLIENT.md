@@ -119,3 +119,7 @@ Cloud Chromium checks covered narrow portrait and short landscape windows, crowd
 A pending library search opens a scrollable, name-grouped picker. Choose copies, remove selections, read the full card without losing selections, and confirm to find cards and shuffle. Top-of-library selections have explicit ordering controls. Review table closes the dialog without resolving or cancelling the pending choice. Engine validation remains authoritative.
 
 The Engine page includes a real seeded search replay. Continue it to make the search choice yourself. This is not a fabricated board state.
+
+## Station decisions (v0.57)
+
+Station shows the current charge count and locked/active thresholds in the battlefield card details. Its payment gallery accepts exactly one other untapped creature, preserves the selected payer through Read/Back, clears an unsubmitted selection on cancellation/reopen, and rejects stale repeated confirmation. It explains that payer power is checked on resolution (or last known if it leaves), not locked at payment, and that Crew/Saddle Pilot bonuses do not apply. DOM lifecycle tests cover these flows; managed browser preview was unavailable, so this is not a claim of visual or physical-phone verification.

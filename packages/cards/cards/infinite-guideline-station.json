@@ -1,0 +1,276 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cda39514-86c9-483e-8d95-fd08138ce33a",
+  "name": "Infinite Guideline Station",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Spacecraft"],
+    "colors": ["B", "G", "R", "U", "W"],
+    "manaCost": "{W}{U}{B}{R}{G}"
+  },
+  "rulesText": "When Infinite Guideline Station enters, create a tapped 2/2 colorless Robot artifact creature token for each multicolored permanent you control.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.)\n12+ | Flying\nWhenever Infinite Guideline Station attacks, draw a card for each multicolored permanent you control.",
+  "abilities": [
+    {
+      "kind": "station"
+    },
+    {
+      "kind": "stationLevel",
+      "threshold": 12,
+      "power": 7,
+      "toughness": 15,
+      "abilities": [
+        {
+          "kind": "keyword",
+          "keyword": "flying"
+        },
+        {
+          "kind": "triggered",
+          "on": {
+            "event": "attack",
+            "object": "source"
+          },
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": {
+                "kind": "count",
+                "zone": "battlefield",
+                "player": "you",
+                "where": {
+                  "any": [
+                    {
+                      "all": [
+                        {
+                          "color": "W"
+                        },
+                        {
+                          "color": "U"
+                        }
+                      ]
+                    },
+                    {
+                      "all": [
+                        {
+                          "color": "W"
+                        },
+                        {
+                          "color": "B"
+                        }
+                      ]
+                    },
+                    {
+                      "all": [
+                        {
+                          "color": "W"
+                        },
+                        {
+                          "color": "R"
+                        }
+                      ]
+                    },
+                    {
+                      "all": [
+                        {
+                          "color": "W"
+                        },
+                        {
+                          "color": "G"
+                        }
+                      ]
+                    },
+                    {
+                      "all": [
+                        {
+                          "color": "U"
+                        },
+                        {
+                          "color": "B"
+                        }
+                      ]
+                    },
+                    {
+                      "all": [
+                        {
+                          "color": "U"
+                        },
+                        {
+                          "color": "R"
+                        }
+                      ]
+                    },
+                    {
+                      "all": [
+                        {
+                          "color": "U"
+                        },
+                        {
+                          "color": "G"
+                        }
+                      ]
+                    },
+                    {
+                      "all": [
+                        {
+                          "color": "B"
+                        },
+                        {
+                          "color": "R"
+                        }
+                      ]
+                    },
+                    {
+                      "all": [
+                        {
+                          "color": "B"
+                        },
+                        {
+                          "color": "G"
+                        }
+                      ]
+                    },
+                    {
+                      "all": [
+                        {
+                          "color": "R"
+                        },
+                        {
+                          "color": "G"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/robot-token",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "any": [
+                {
+                  "all": [
+                    {
+                      "color": "W"
+                    },
+                    {
+                      "color": "U"
+                    }
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "color": "W"
+                    },
+                    {
+                      "color": "B"
+                    }
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "color": "W"
+                    },
+                    {
+                      "color": "R"
+                    }
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "color": "W"
+                    },
+                    {
+                      "color": "G"
+                    }
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "color": "U"
+                    },
+                    {
+                      "color": "B"
+                    }
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "color": "U"
+                    },
+                    {
+                      "color": "R"
+                    }
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "color": "U"
+                    },
+                    {
+                      "color": "G"
+                    }
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "color": "B"
+                    },
+                    {
+                      "color": "R"
+                    }
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "color": "B"
+                    },
+                    {
+                      "color": "G"
+                    }
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "color": "R"
+                    },
+                    {
+                      "color": "G"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

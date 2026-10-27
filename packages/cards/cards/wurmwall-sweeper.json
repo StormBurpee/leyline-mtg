@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "320ed2ec-ef06-41fb-ac8a-72579f11544c",
+  "name": "Wurmwall Sweeper",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Spacecraft"],
+    "colors": [],
+    "manaCost": "{2}"
+  },
+  "rulesText": "When this Spacecraft enters, surveil 2.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 4+.)\n4+ | Flying",
+  "abilities": [
+    {
+      "kind": "station"
+    },
+    {
+      "kind": "stationLevel",
+      "threshold": 4,
+      "power": 2,
+      "toughness": 2,
+      "abilities": [
+        {
+          "kind": "keyword",
+          "keyword": "flying"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

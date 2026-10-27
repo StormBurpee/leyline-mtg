@@ -2072,3 +2072,53 @@ test('Role keep stage preserves readable fallback, selection, dismissal, Read/Ba
     h.cleanup();
   }
 });
+
+test('station selection keeps exactly one payer across inspection, cancellation and stale repeated confirm', async () => {
+  const { stationPosition } = await import('./helpers/station-catalog.js');
+  const { stationCandidates, legalActions } = await import('../packages/engine/src/index.js');
+  const s = stationPosition(2),
+    action = legalActions(s, 0).find((a) => a.type === 'station');
+  const payers = stationCandidates(s, 0, action.card);
+  assert.ok(payers.length >= 2);
+  const page = await mount(exportReplay(s));
+  try {
+    page.click('[data-action="resume"]');
+    page.click(`[data-card="${action.card}"]`);
+    page.click('[data-action="startStation"]');
+    assert.match(page.dialog.textContent, /exactly one other untapped creature/);
+    assert.match(page.dialog.textContent, /Power is checked on resolution/);
+    assert.match(page.dialog.textContent, /0 charge counters now; thresholds: 4\+/);
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, true);
+    page.click(`[data-action="toggleCrew"][data-cardid="${payers[0].id}"]`);
+    page.click(`[data-action="toggleCrew"][data-cardid="${payers[1].id}"]`);
+    assert.equal(
+      page.dialog
+        .querySelector(`[data-action="toggleCrew"][data-cardid="${payers[0].id}"]`)
+        .getAttribute('aria-pressed'),
+      'false',
+    );
+    page.click(`[data-action="readDecisionCard"][data-cardid="${payers[1].id}"]`);
+    page.click('[data-action="returnDecision"]');
+    assert.equal(
+      page.dialog
+        .querySelector(`[data-action="toggleCrew"][data-cardid="${payers[1].id}"]`)
+        .getAttribute('aria-pressed'),
+      'true',
+    );
+    page.click('[data-action="closeDialog"]');
+    assert.equal(page.dialog.open, false);
+    page.click(`[data-card="${action.card}"]`);
+    page.click('[data-action="startStation"]');
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, true);
+    page.click(`[data-action="toggleCrew"][data-cardid="${payers[0].id}"]`);
+    const stale = page.dialog.querySelector('[data-action="confirmCrew"]');
+    page.click('[data-action="confirmCrew"]');
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    const saved = JSON.parse(page.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.filter((c) => c.type === 'station').length, 1);
+    assert.deepEqual(saved.replay.commands.find((c) => c.type === 'station').cards, [payers[0].id]);
+    assert.equal(page.dialog.open, false);
+  } finally {
+    page.cleanup();
+  }
+});

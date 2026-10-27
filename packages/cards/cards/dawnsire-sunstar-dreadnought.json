@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "afc9436b-8cad-4916-929d-ff33a37b42d5",
+  "name": "Dawnsire, Sunstar Dreadnought",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Spacecraft"],
+    "colors": [],
+    "manaCost": "{5}"
+  },
+  "rulesText": "Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 20+.)\n10+ | Whenever you attack, Dawnsire deals 100 damage to up to one target creature or planeswalker.\n20+ | Flying",
+  "abilities": [
+    {
+      "kind": "station"
+    },
+    {
+      "kind": "stationLevel",
+      "threshold": 10,
+      "abilities": [
+        {
+          "kind": "triggered",
+          "on": {
+            "event": "attackGroup",
+            "controller": "you"
+          },
+          "targetGroups": [
+            {
+              "id": "chosen",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "any": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "type": "planeswalker"
+                    }
+                  ]
+                }
+              },
+              "min": 0,
+              "max": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 100,
+              "targetGroup": "chosen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "stationLevel",
+      "threshold": 20,
+      "power": 20,
+      "toughness": 20,
+      "abilities": [
+        {
+          "kind": "keyword",
+          "keyword": "flying"
+        }
+      ]
+    }
+  ]
+}

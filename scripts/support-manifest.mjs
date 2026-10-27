@@ -23,6 +23,18 @@ const manifest = {
           ].map((e) => e.op),
         ),
       ],
+      ...(c.station ? { station: true } : {}),
+      ...(c.stationLevels
+        ? {
+            stationLevels: c.stationLevels.map((level) => ({
+              threshold: level.threshold,
+              ...(level.power !== undefined
+                ? { power: level.power, toughness: level.toughness }
+                : {}),
+              grants: level.grants,
+            })),
+          }
+        : {}),
       ...(c.ward ? { ward: c.ward } : {}),
       ...(c.modes ? { modes: c.modes.map((mode) => mode.label) } : {}),
       triggers: (c.triggers ?? []).map((t) => t.event),

@@ -3730,6 +3730,52 @@
               }
             }
           ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "station"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "stationLevel"
+            },
+            "threshold": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "power": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "toughness": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "abilities": {
+              "type": "array",
+              "maxItems": 64,
+              "items": {
+                "$ref": "#/$defs/ability"
+              }
+            }
+          },
+          "required": ["kind", "threshold", "abilities"],
+          "dependentRequired": {
+            "power": ["toughness"],
+            "toughness": ["power"]
+          },
+          "additionalProperties": false
         }
       ]
     },

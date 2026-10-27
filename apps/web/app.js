@@ -5,6 +5,7 @@ import {
 } from '../../packages/engine/src/target-groups.js';
 import { crewProblem, crewCandidates, tapPower } from '../../packages/engine/src/crew.js';
 import { saddleProblem, saddleCandidates } from '../../packages/engine/src/saddle.js';
+import { stationProblem, stationCandidates } from '../../packages/engine/src/station.js';
 import { stats } from '../../packages/engine/src/model.js';
 import { activatedAbilityButtons } from './ability-controls.js';
 import { castProblem, abilityProblem } from '../../packages/engine/src/engine.js';
@@ -425,32 +426,41 @@ function showCrewSelection() {
   }
   const p = viewer(),
     o = state.objects[draft.card];
-  const saddle = draft.kind === 'saddle',
-    label = saddle ? 'Saddle' : 'Crew';
-  const problem = (saddle ? saddleProblem : crewProblem)(state, p, draft.card, draft.cards);
-  const total = draft.cards.reduce(
-    (sum, id) => sum + tapPower(state, state.objects[id], draft.card, draft.kind),
-    0,
+  const station = draft.kind === 'station',
+    saddle = draft.kind === 'saddle',
+    label = station ? 'Station' : saddle ? 'Saddle' : 'Crew';
+  const problem = (station ? stationProblem : saddle ? saddleProblem : crewProblem)(
+    state,
+    p,
+    draft.card,
+    draft.cards,
   );
-  const body = `<div class="decision-card-gallery decision-many">${(saddle
-    ? saddleCandidates
-    : crewCandidates)(state, p, draft.card)
+  const payerPower = (c) =>
+    station ? stats(state, c).power : tapPower(state, c, draft.card, draft.kind);
+  const total = draft.cards.reduce((sum, id) => sum + payerPower(state.objects[id]), 0);
+  const body = `<div class="decision-card-gallery decision-many">${(station
+    ? stationCandidates
+    : saddle
+      ? saddleCandidates
+      : crewCandidates)(state, p, draft.card)
     .map((c) =>
       decisionCard(state, c.id, metadata, {
         viewer: p,
         action: 'toggleCrew',
         selected: draft.cards.includes(c.id),
-        label: `${label} with ${c.name} (${tapPower(state, c, draft.card, draft.kind)} power)`,
+        label: `${label} with ${c.name} (${payerPower(c)} power)`,
       }),
     )
     .join('')}</div>`;
   openChoiceDialog(
-    `${label} ${definition(state, o)[saddle ? 'saddle' : 'crew']} — ${o.name}`,
-    saddle
-      ? 'Tap other untapped creatures with enough total power. Summoning-sick creatures can saddle. Saddle only as a sorcery; the designation resolves on the stack and lasts until end of turn.'
-      : 'Tap other untapped creatures with enough total power. Summoning-sick creatures can crew. Animation resolves on the stack and lasts until end of turn.',
+    `${label}${station ? '' : ` ${definition(state, o)[saddle ? 'saddle' : 'crew']}`} — ${o.name}`,
+    station
+      ? `Tap exactly one other untapped creature. Summoning-sick creatures can station. Power is checked on resolution (last known power if it leaves); Pilot bonuses do not apply. Station only as a sorcery. ${o.chargeCounters ?? 0} charge counters now; thresholds: ${(definition(state, o).stationLevels ?? []).map((level) => `${level.threshold}+`).join(', ')}.`
+      : saddle
+        ? 'Tap other untapped creatures with enough total power. Summoning-sick creatures can saddle. Saddle only as a sorcery; the designation resolves on the stack and lasts until end of turn.'
+        : 'Tap other untapped creatures with enough total power. Summoning-sick creatures can crew. Animation resolves on the stack and lasts until end of turn.',
     body,
-    `<span>${total} total power${problem ? ` · ${escape(problem)}` : ''}</span><button class="btn primary" data-action="confirmCrew" ${problem ? 'disabled' : ''}>Tap and ${saddle ? 'saddle' : 'crew'}</button><button class="btn" data-action="closeDialog">Cancel</button>`,
+    `<span>${station ? Math.max(0, total) + ' charge counters at current power' : total + ' total power'}${problem ? ` · ${escape(problem)}` : ''}</span><button class="btn primary" data-action="confirmCrew" ${problem ? 'disabled' : ''}>Tap and ${station ? 'station' : saddle ? 'saddle' : 'crew'}</button><button class="btn" data-action="closeDialog">Cancel</button>`,
     { source: o.name },
   );
   dialog._activeChoice = null;
@@ -2633,13 +2643,19 @@ async function action(name, el) {
       resetSelection();
       render();
       break;
+    case 'startStation':
     case 'startSaddle':
     case 'startCrew': {
       dialog._crewDraft = {
         card: dialog._activationCard,
         cards: [],
         revision: state.revision,
-        kind: el.dataset.action === 'startSaddle' ? 'saddle' : 'crew',
+        kind:
+          el.dataset.action === 'startStation'
+            ? 'station'
+            : el.dataset.action === 'startSaddle'
+              ? 'saddle'
+              : 'crew',
       };
       showCrewSelection();
       break;
@@ -2654,7 +2670,9 @@ async function action(name, el) {
       if (!crewCandidates(state, viewer(), draft.card).some((o) => o.id === id)) break;
       draft.cards = draft.cards.includes(id)
         ? draft.cards.filter((x) => x !== id)
-        : [...draft.cards, id];
+        : draft.kind === 'station'
+          ? [id]
+          : [...draft.cards, id];
       showCrewSelection();
       break;
     }
@@ -2664,12 +2682,13 @@ async function action(name, el) {
         closeDialog();
         break;
       }
-      const problem = (draft.kind === 'saddle' ? saddleProblem : crewProblem)(
-        state,
-        viewer(),
-        draft.card,
-        draft.cards,
-      );
+      const problem = (
+        draft.kind === 'station'
+          ? stationProblem
+          : draft.kind === 'saddle'
+            ? saddleProblem
+            : crewProblem
+      )(state, viewer(), draft.card, draft.cards);
       if (problem) {
         toast(problem);
         break;
@@ -3331,7 +3350,8 @@ function selectCard(id) {
         definition(state, o).activated?.some((a) => a.zone === 'graveyard'))) &&
     (definition(state, o).activated?.length ||
       definition(state, o).crew !== undefined ||
-      definition(state, o).saddle !== undefined)
+      definition(state, o).saddle !== undefined ||
+      definition(state, o).station)
   ) {
     const legal = legalActions(state, p);
     const manaButtons = definition(state, o).mana
@@ -3346,6 +3366,9 @@ function selectCard(id) {
       o.name,
       `<p style="margin-bottom:16px">Mana abilities resolve immediately. Other abilities use the stack. Costs are paid when you activate, not when the ability resolves.</p>`,
       manaButtons +
+        (definition(state, o).station
+          ? `<button class="btn primary" data-action="startStation" ${legal.some((a) => a.type === 'station' && a.card === id) ? '' : 'disabled'}>Station · ${o.chargeCounters ?? 0} charge</button>`
+          : '') +
         (definition(state, o).saddle !== undefined
           ? `<button class="btn primary" data-action="startSaddle" ${legal.some((a) => a.type === 'saddle' && a.card === id) ? '' : 'disabled'}>Saddle ${definition(state, o).saddle}</button>`
           : '') +

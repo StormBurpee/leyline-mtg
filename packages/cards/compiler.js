@@ -37,7 +37,13 @@ export const EVENTS = EVENT_PRESETS;
 /** Compile data only. Unsupported behavior is a diagnostic, never a no-op fallback. */
 export function compileCard(
   source,
-  { mechanics = {}, identities = {}, adventureDepth = 0, transformBack = false } = {},
+  {
+    mechanics = {},
+    identities = {},
+    adventureDepth = 0,
+    transformBack = false,
+    stationDepth = 0,
+  } = {},
 ) {
   const invalidJSON = jsonDataProblem(source) ?? jsonDataProblem(mechanics);
   if (invalidJSON)
@@ -1135,6 +1141,55 @@ export function compileCard(
           });
         else d[a.restriction] = true;
         break;
+      case 'station':
+        fields(a, ['kind'], path);
+        if (d.station) problem('DUPLICATE_STATION', path, 'Only one station ability is supported.');
+        d.station = true;
+        break;
+      case 'stationLevel': {
+        fields(a, ['kind', 'threshold', 'power', 'toughness', 'abilities'], path);
+        if (
+          stationDepth ||
+          !Array.isArray(a.abilities) ||
+          a.abilities.some(
+            (ability) =>
+              !['keyword', 'triggered', 'activated', 'anthem', 'selfBonus'].includes(ability?.kind),
+          )
+        ) {
+          problem(
+            'INVALID_STATION_LEVEL',
+            path,
+            'Station levels support nonnested keyword, triggered, activated, anthem and self-bonus abilities.',
+          );
+          break;
+        }
+        const result = compileCard(
+          { ...source, abilities: a.abilities },
+          { mechanics, identities, stationDepth: stationDepth + 1 },
+        );
+        if (!result.ok)
+          diagnostics.push(...result.diagnostics.map((v) => ({ ...v, path: `${path}.${v.path}` })));
+        else {
+          if (result.definition.ward)
+            problem(
+              'UNSUPPORTED_STATION_GRANT',
+              path,
+              'Threshold ward grants are not implemented.',
+            );
+          const grants = Object.fromEntries(
+            ['keywords', 'triggers', 'activated', 'static', 'selfBonus', 'etb']
+              .filter((key) => result.definition[key] !== undefined)
+              .map((key) => [key, result.definition[key]]),
+          );
+          (d.stationLevels ??= []).push({
+            threshold: a.threshold,
+            ...(a.power !== undefined ? { power: a.power } : {}),
+            ...(a.toughness !== undefined ? { toughness: a.toughness } : {}),
+            grants,
+          });
+        }
+        break;
+      }
       case 'saddle':
       case 'crewSaddlePowerBonus':
         fields(a, ['kind', 'power'], path);
