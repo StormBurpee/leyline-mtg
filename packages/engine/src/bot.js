@@ -17,6 +17,7 @@ import {
 } from './decision-safety.js';
 import {
   chooseBlocks,
+  plannedAttackDefenders,
   preserveForDefense,
   tacticalDamage,
   permanentValue,
@@ -248,6 +249,21 @@ export function chooseBotCommand(s, p) {
             [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]?.[0] ?? 'Human',
         };
       }
+      case 'empowerJace':
+        return {
+          type: 'chooseResolutionCard',
+          player: p,
+          card: [...c.cards].sort(
+            (a, b) =>
+              (s.objects[b].loyalty ?? 0) - (s.objects[a].loyalty ?? 0) || a.localeCompare(b),
+          )[0],
+        };
+      case 'attackDefenders':
+        return {
+          type: 'chooseAttackDefenders',
+          player: p,
+          defenders: plannedAttackDefenders(s, p, c.cards),
+        };
       case 'legendRule':
         return {
           type: 'chooseLegend',
@@ -300,6 +316,10 @@ export function chooseBotCommand(s, p) {
               })
             : [];
         let ordered = chooseLibraryOrder(s, p, rest);
+        if (c.action === 'lookChooseHand') {
+          const ranked = [...ordered.top, ...ordered.rest];
+          ordered = { top: ranked.slice(0, 1), rest: ranked.slice(1) };
+        }
         if (c.action === 'surveil') {
           const entry = s.resolving.entry;
           const remaining = predictedEffects(s, entry.effects.slice(s.resolving.index), entry);
@@ -381,8 +401,16 @@ export function chooseBotCommand(s, p) {
         return { type: 'orderTriggers', player: p, ids: orderLifePayoffs(s, c.entries) };
       case 'assignDamage':
         return { type: 'assignDamage', player: p, orders: tacticalDamage(s) };
-      case 'attackers':
-        return { type: 'attackers', player: p, cards: choosePlannedAttacks(s, p) };
+      case 'attackers': {
+        const cards = choosePlannedAttacks(s, p);
+        const defenders = plannedAttackDefenders(s, p, cards);
+        return {
+          type: 'attackers',
+          player: p,
+          cards,
+          ...(Object.keys(defenders).length ? { defenders } : {}),
+        };
+      }
       case 'blockers':
         return { type: 'blockers', player: p, pairs: chooseBlocks(s, p).pairs };
     }
@@ -587,6 +615,22 @@ export function chooseBotCommand(s, p) {
   const ability = actions.find((action) => {
     if (action.type !== 'activate' || action.targets) return false;
     const activated = definition(s, s.objects[action.card]).activated[action.ability];
+    if (activated.effects.some((e) => e.op === 'animateLand')) {
+      const source = s.objects[action.card];
+      const plan = planPayment(s, p, activated.cost.mana ?? {});
+      return (
+        !source.tapped &&
+        !definition(s, source).types?.includes('creature') &&
+        !s.stack.some(
+          (entry) =>
+            entry.source?.id === source.id && entry.effects.some((e) => e.op === 'animateLand'),
+        ) &&
+        !!plan &&
+        !plan.taps.includes(source.id) &&
+        ((s.active === p && s.step === 'beginCombat' && !isSick(s, source)) ||
+          (s.active !== p && s.step === 'attackers' && s.combat.attackers.length > 0))
+      );
+    }
     if (activated.cost.sacrificeSelf || (activated.cost.tap && keepBlocker(action.card)))
       return false;
     if (

@@ -32,6 +32,7 @@ export function validateNumericValue(value) {
     }
     const allowed = {
       x: ['kind'],
+      maxManaValue: ['kind', 'player', 'where'],
       count: ['kind', 'zone', 'player', 'where', 'excludeSource'],
       life: ['kind', 'player'],
       spellsCast: ['kind', 'player', 'where'],
@@ -45,12 +46,18 @@ export function validateNumericValue(value) {
     if (Object.keys(v).some((k) => !allowed.includes(k)))
       errors.push('Unexpected numeric expression field.');
     if (
-      ['count', 'life', 'spellsCast'].includes(v.kind) &&
+      ['count', 'maxManaValue', 'life', 'spellsCast'].includes(v.kind) &&
       !['you', 'opponent', ...(v.kind !== 'life' ? ['all'] : [])].includes(v.player)
     )
       errors.push('Expected a player relation.');
     if (v.kind === 'spellsCast' && v.where !== undefined)
       errors.push(...validateSpellHistoryFilter(v.where));
+    if (v.kind === 'maxManaValue' && v.where !== undefined) {
+      const invalid = validateFilter(v.where);
+      errors.push(...invalid);
+      if (!invalid.length && !stableFilter(v.where))
+        errors.push('Mana-value filters cannot depend on computed characteristics.');
+    }
     if (v.kind === 'count') {
       if (!['battlefield', 'graveyard', 'exile', 'hand', 'library'].includes(v.zone))
         errors.push('Unsupported counted zone.');

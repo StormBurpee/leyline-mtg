@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2ed1879a-83b8-48df-a6d2-fe28e912b4c5",
+  "name": "Slagstorm",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Slagstorm deals 3 damage to each creature.\n\u2022 Slagstorm deals 3 damage to each player.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Deal 3 damage to each creature.",
+          "effects": [
+            {
+              "op": "damageAll",
+              "amount": 3,
+              "where": {
+                "type": "creature"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Deal 3 damage to each player.",
+          "effects": [
+            {
+              "op": "damageAll",
+              "amount": 3,
+              "players": "all"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

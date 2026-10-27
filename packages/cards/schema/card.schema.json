@@ -27,7 +27,15 @@
         "types": {
           "type": "array",
           "items": {
-            "enum": ["land", "creature", "instant", "sorcery", "artifact", "enchantment"]
+            "enum": [
+              "land",
+              "creature",
+              "instant",
+              "sorcery",
+              "artifact",
+              "enchantment",
+              "planeswalker"
+            ]
           },
           "minItems": 1,
           "maxItems": 3,
@@ -80,6 +88,11 @@
           },
           "uniqueItems": true,
           "maxItems": 4
+        },
+        "loyalty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
         }
       },
       "required": ["types", "manaCost"],
@@ -223,7 +236,15 @@
           "type": "object",
           "properties": {
             "type": {
-              "enum": ["land", "creature", "instant", "sorcery", "artifact", "enchantment"]
+              "enum": [
+                "land",
+                "creature",
+                "instant",
+                "sorcery",
+                "artifact",
+                "enchantment",
+                "planeswalker"
+              ]
             }
           },
           "required": ["type"],
@@ -468,6 +489,9 @@
         },
         "firstEachTurn": {
           "const": true
+        },
+        "castByController": {
+          "const": true
         }
       },
       "required": ["event"],
@@ -497,6 +521,9 @@
         },
         "discard": {
           "const": 1
+        },
+        "exileSelf": {
+          "type": "boolean"
         }
       },
       "required": [],
@@ -1293,6 +1320,131 @@
           },
           "required": ["op"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["op", "power", "toughness", "colors", "subtypes", "until"],
+          "properties": {
+            "op": {
+              "const": "animateLand"
+            },
+            "power": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "toughness": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "colors": {
+              "type": "array",
+              "items": {
+                "enum": ["W", "U", "B", "R", "G"]
+              },
+              "uniqueItems": true
+            },
+            "subtypes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "until": {
+              "const": "endOfTurn"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "lookChooseHand"
+            },
+            "target": {
+              "enum": ["controller", "opponent", "target"]
+            },
+            "amount": {
+              "$ref": "#/$defs/numericValue"
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "bounceAll"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            }
+          },
+          "required": ["op", "where"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["op", "amount", "token"],
+          "properties": {
+            "op": {
+              "const": "empowerJace"
+            },
+            "amount": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "token": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "disableDamagePrevention"
+            }
+          },
+          "required": ["op"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "discardTrigger"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 16
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "selector": {
+              "$ref": "#/$defs/selector"
+            },
+            "effects": {
+              "type": "array",
+              "maxItems": 64,
+              "items": {
+                "$ref": "#/$defs/effect"
+              }
+            }
+          },
+          "required": ["op", "count", "where", "selector", "effects"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1492,6 +1644,14 @@
             },
             "targetGroups": {
               "$ref": "#/$defs/targetGroups"
+            },
+            "loyalty": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "zone": {
+              "const": "graveyard"
             }
           },
           "required": ["kind", "cost", "effects"],
@@ -2303,6 +2463,22 @@
           },
           "required": ["kind", "player"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "maxManaValue"
+            },
+            "player": {
+              "enum": ["you", "opponent", "all"]
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": ["kind", "player"],
+          "additionalProperties": false
         }
       ]
     },
@@ -2393,7 +2569,15 @@
           "type": "object",
           "properties": {
             "type": {
-              "enum": ["land", "creature", "instant", "sorcery", "artifact", "enchantment"]
+              "enum": [
+                "land",
+                "creature",
+                "instant",
+                "sorcery",
+                "artifact",
+                "enchantment",
+                "planeswalker"
+              ]
             }
           },
           "required": ["type"],

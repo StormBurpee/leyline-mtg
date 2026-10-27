@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5097f4e6-50af-4641-909f-db44abf0ce32",
+  "name": "Rite of the Dragoncaller",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}"
+  },
+  "rulesText": "Whenever you cast an instant or sorcery spell, create a 5/5 red Dragon creature token with flying.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/five-five-dragon-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

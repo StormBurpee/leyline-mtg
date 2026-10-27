@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c01b221f-3993-43ab-8cde-b42fb344e2a7",
+  "name": "Sunderflock",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental"],
+    "colors": ["U"],
+    "manaCost": "{7}{U}{U}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "This spell costs {X} less to cast, where X is the greatest mana value among Elementals you control.\nFlying\nWhen this creature enters, if you cast it, return all non-Elemental creatures to their owners' hands.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source",
+        "castByController": true
+      },
+      "effects": [
+        {
+          "op": "bounceAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "not": {
+                  "subtype": "Elemental"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": {
+        "kind": "maxManaValue",
+        "player": "you",
+        "where": {
+          "subtype": "Elemental"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "170a5dbc-6a43-4715-9501-178b1eb7b08c",
+  "name": "Helping Hand",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Return target creature card with mana value 3 or less from your graveyard to the battlefield tapped.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "battlefield",
+          "tapped": true
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "type": "creature"
+            },
+            {
+              "manaValue": {
+                "lte": 3
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

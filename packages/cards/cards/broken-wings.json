@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5e316864-d55c-496f-8f46-773567896864",
+  "name": "Broken Wings",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "Destroy target artifact, enchantment, or creature with flying.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            },
+            {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "keyword": "flying"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

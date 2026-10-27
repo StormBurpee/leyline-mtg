@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3c345e24-1726-45ac-91ca-e348d1e7acfe",
+  "name": "Eddymurk Crab",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Crab"],
+    "colors": ["U"],
+    "manaCost": "{5}{U}{U}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Flash\nThis spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nThis creature enters tapped if it's not your turn.\nWhen this creature enters, tap up to two target creatures.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controllerTurn"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 2
+        }
+      ],
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": {
+        "kind": "count",
+        "zone": "graveyard",
+        "player": "you",
+        "where": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

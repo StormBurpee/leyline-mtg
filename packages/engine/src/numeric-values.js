@@ -32,6 +32,33 @@ export function numericValue(
       result =
         value.factor * numericValue(state, value.value, { controller, source, excludedIds, x });
       break;
+    case 'maxManaValue':
+      result = Math.max(
+        0,
+        ...Object.values(state.objects)
+          .filter(
+            (o) =>
+              o.zone === 'battlefield' &&
+              players.includes(o.controller) &&
+              !excludedIds.includes(o.id) &&
+              matchesFilter(
+                {
+                  definition: definition(state, o),
+                  controller: o.controller,
+                  owner: o.owner,
+                  token: o.token,
+                  tapped: o.tapped,
+                  attacking: isAttacking(state, o),
+                  blocking: isBlocking(state, o),
+                  manaValue: manaValue(definition(state, o)),
+                },
+                value.where,
+                controller,
+              ),
+          )
+          .map((o) => manaValue(definition(state, o))),
+      );
+      break;
     case 'count':
       if (['hand', 'library'].includes(value.zone)) {
         result = players.reduce(

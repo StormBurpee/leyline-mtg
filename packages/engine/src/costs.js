@@ -24,6 +24,8 @@ export function costProblem(s, p, cost, { sourceId, autoTap = true, discardCard 
     return 'The source cannot pay a tap cost now.';
   if (cost.sacrificeSelf && (!source || source.zone !== 'battlefield' || source.controller !== p))
     return 'The source cannot be sacrificed now.';
+  if (cost.exileSelf && (!source || source.zone !== 'graveyard' || source.owner !== p))
+    return 'The source cannot be exiled from your graveyard now.';
   if ((cost.life ?? 0) > s.players[p].life) return 'Not enough life to pay this cost.';
   const manaPlan = planPayment(s, p, cost.mana ?? {}, {
     autoTap,
@@ -55,6 +57,11 @@ export function payCost(s, p, cost, options = {}) {
   if (cost.discard) {
     move(s, s.objects[options.discardCard], 'graveyard');
     emit(s, 'discard', { player: p, count: 1 });
+  }
+  if (cost.exileSelf) {
+    const object = s.objects[options.sourceId];
+    move(s, object, 'exile');
+    emit(s, 'exiledAsCost', { player: p, objectId: object.id, name: object.name });
   }
   if (cost.tap) s.objects[options.sourceId].tapped = true;
   if (cost.sacrificeSelf) {

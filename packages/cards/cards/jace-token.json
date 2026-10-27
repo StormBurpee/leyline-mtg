@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/jace",
+  "name": "Jace Token",
+  "characteristics": {
+    "types": ["planeswalker"],
+    "supertypes": [],
+    "subtypes": ["Jace"],
+    "colors": ["U"],
+    "manaCost": null,
+    "token": true,
+    "loyalty": 0
+  },
+  "rulesText": "\u22121: Surveil 1.\n\u22123: Draw a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": -1,
+      "text": "\u22121: Surveil 1",
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": -3,
+      "text": "\u22123: Draw a card",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

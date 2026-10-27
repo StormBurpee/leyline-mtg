@@ -21,6 +21,12 @@ const cost = (value) => ({
 export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const effects = (list) =>
     list.map((e) => {
+      if (e.op === 'discardTrigger')
+        return {
+          ...structuredClone(e),
+          selector: structuredClone(targetSpec(e.selector)),
+          effects: effects(e.effects),
+        };
       if (e.op === 'conditional')
         return {
           op: 'conditional',
@@ -34,8 +40,9 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       }
       switch (e.op) {
         case 'mobilize':
+        case 'empowerJace':
           return {
-            op: 'mobilize',
+            op: e.op,
             amount: e.count,
             token: idsByName[e.definition] ?? e.definition,
           };
@@ -56,9 +63,11 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return { op: 'bindingNegotiation' };
         case 'addMana':
           return { op: 'addMana', mana: mana(e.mana) };
+        case 'disableDamagePrevention':
         case 'drawEventAmount':
         case 'damageEventPowerOpponent':
         case 'damageEventOpponent':
+        case 'bounceAll':
         case 'destroyAll':
         case 'exileAll':
         case 'damageAll':
@@ -91,6 +100,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
             ...(e.tapped !== undefined ? { tapped: e.tapped } : {}),
           };
         case 'draw':
+        case 'lookChooseHand':
         case 'scry':
         case 'surveil':
         case 'discard':
@@ -104,6 +114,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
             op: { counter: 'counterSpell', bounce: 'returnToHand', destroy: 'destroy' }[e.op],
             target: e.subject ?? 'target',
           };
+        case 'animateLand':
+          return { ...structuredClone(e), until: 'endOfTurn' };
         case 'modify':
           return {
             op: 'modify',
@@ -244,6 +256,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   for (const a of d.activated ?? [])
     abilities.push({
       kind: 'activated',
+      ...(a.zone !== undefined ? { zone: a.zone } : {}),
       ...(a.targetGroups ? { targetGroups: structuredClone(a.targetGroups) } : {}),
       cost: cost(a.cost),
       ...(a.target ? { target: structuredClone(targetSpec(a.target)) } : {}),
@@ -252,6 +265,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       ...(a.timing ? { timing: a.timing } : {}),
       ...(a.condition ? { condition: structuredClone(a.condition) } : {}),
       ...(a.oncePerTurn !== undefined ? { oncePerTurn: a.oncePerTurn } : {}),
+      ...(a.loyalty !== undefined ? { loyalty: a.loyalty } : {}),
     });
   if (d.uncounterable) abilities.push({ kind: 'uncounterable' });
   if (d.chooseCreatureType) abilities.push({ kind: 'chooseCreatureType' });
@@ -300,7 +314,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     colors: d.color,
     manaCost: d.type === 'land' || d.token ? null : mana(d.cost),
   };
-  for (const key of ['power', 'toughness', 'token'])
+  for (const key of ['power', 'toughness', 'loyalty', 'token'])
     if (d[key] !== undefined) characteristics[key] = d[key];
   return {
     $schema: '../schema/card.schema.json',

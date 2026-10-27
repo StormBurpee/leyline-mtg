@@ -87,9 +87,11 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
     return result;
   };
   const cost = (value, path) => {
-    if (!fields(value, ['mana', 'tap', 'life', 'sacrificeSelf', 'discard'], path)) return {};
+    if (!fields(value, ['mana', 'tap', 'life', 'sacrificeSelf', 'exileSelf', 'discard'], path))
+      return {};
     return {
       ...(value.mana !== undefined ? { mana: mana(value.mana, `${path}.mana`) } : {}),
+      ...(value.exileSelf !== undefined ? { exileSelf: value.exileSelf } : {}),
       ...(value.sacrificeSelf !== undefined ? { sacrificeSelf: value.sacrificeSelf } : {}),
       ...(value.tap !== undefined ? { tap: value.tap } : {}),
       ...(value.discard !== undefined ? { discard: value.discard } : {}),
@@ -110,6 +112,16 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
       if (!plain(effect)) {
         problem('INVALID_EFFECT', p, 'Expected an effect object.');
         return { op: 'unsupported' };
+      }
+      if (effect.op === 'discardTrigger') {
+        fields(effect, ['op', 'count', 'where', 'selector', 'effects'], p);
+        return {
+          op: 'discardTrigger',
+          count: effect.count,
+          where: structuredClone(effect.where),
+          selector: target(effect.selector, `${p}.selector`),
+          effects: effects(effect.effects, `${p}.effects`),
+        };
       }
       if (effect.op === 'conditional') {
         fields(effect, ['op', 'condition', 'then', 'else'], p);
@@ -135,6 +147,7 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
           'damageEventOpponent',
           'damageEventPowerOpponent',
           'drawEventAmount',
+          'disableDamagePrevention',
           'addMana',
           'impulseChoose',
           'bindingNegotiation',
@@ -146,6 +159,7 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
           'draw',
           'mill',
           'scry',
+          'lookChooseHand',
           'surveil',
           'discard',
           'sacrifice',
@@ -155,14 +169,17 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
           'returnToHand',
           'destroy',
           'attachEquipment',
+          'animateLand',
           'modify',
           'createToken',
           'mobilize',
+          'empowerJace',
           'copyToken',
           'addCounters',
           'addStunCounters',
           'untap',
           'tap',
+          'bounceAll',
           'destroyAll',
           'exileAll',
           'modifyAll',
@@ -189,6 +206,7 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
         damageEventOpponent: ['amount'],
         damageEventPowerOpponent: [],
         drawEventAmount: [],
+        disableDamagePrevention: [],
         addMana: ['mana'],
         impulseChoose: ['amount'],
         bindingNegotiation: [],
@@ -199,6 +217,7 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
         moveTarget: ['target', 'destination', 'controller', 'tapped'],
         draw: ['target', 'amount'],
         mill: ['target', 'amount'],
+        lookChooseHand: ['target', 'amount'],
         scry: ['target', 'amount'],
         surveil: ['target', 'amount'],
         discard: ['target', 'amount'],
@@ -209,14 +228,17 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
         bounce: ['target'],
         destroy: ['target'],
         attachEquipment: ['target'],
+        animateLand: ['power', 'toughness', 'colors', 'subtypes', 'until'],
         modify: ['target', 'power', 'toughness', 'keywords', 'until'],
         token: ['token', 'amount', 'controller', 'tapped', 'temporaryKeywords'],
         mobilize: ['token', 'amount'],
+        empowerJace: ['token', 'amount'],
         copyToken: ['target', 'count', 'exceptions'],
         counterOn: ['target', 'amount', 'counter'],
         stunOn: ['target', 'amount'],
         untap: ['target'],
         tap: ['target'],
+        bounceAll: ['where', 'excludeSource'],
         destroyAll: ['where', 'excludeSource'],
         exileAll: ['where', 'excludeSource'],
         modifyAll: ['where', 'excludeSource', 'power', 'toughness', 'keywords', 'until'],
@@ -260,15 +282,21 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
           'draw',
           'mill',
           'scry',
+          'lookChooseHand',
           'surveil',
           'discard',
           'token',
           'mobilize',
+          'empowerJace',
           'impulseChoose',
         ].includes(e.op)
       )
         e.count = effect.amount;
-      if (['draw', 'gainLife', 'loseLife', 'scry', 'surveil', 'discard'].includes(e.op)) {
+      if (
+        ['draw', 'gainLife', 'loseLife', 'scry', 'lookChooseHand', 'surveil', 'discard'].includes(
+          e.op,
+        )
+      ) {
         if (!['controller', 'opponent', 'target'].includes(effect.target))
           problem(
             'UNSUPPORTED_RECIPIENT',
@@ -279,6 +307,7 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
       }
       if (
         [
+          'bounceAll',
           'destroyAll',
           'exileAll',
           'modifyAll',
@@ -367,6 +396,16 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
         if (['source', 'attached'].includes(effect.target)) e.subject = effect.target;
       }
+      if (e.op === 'animateLand') {
+        if (effect.until !== 'endOfTurn')
+          problem('UNSUPPORTED_DURATION', `${p}.until`, 'Expected endOfTurn.');
+        Object.assign(e, {
+          power: effect.power,
+          toughness: effect.toughness,
+          colors: effect.colors,
+          subtypes: effect.subtypes,
+        });
+      }
       if (e.op === 'modify') {
         if (!['source', 'target', 'attached'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
@@ -383,7 +422,7 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
           ...(effect.keywords !== undefined ? { keywords: effect.keywords } : {}),
         });
       }
-      if (['token', 'mobilize'].includes(e.op)) {
+      if (['token', 'mobilize', 'empowerJace'].includes(e.op)) {
         e.definition = Object.hasOwn(identities, effect.token) ? identities[effect.token] : null;
         if (!e.definition)
           problem('UNKNOWN_TOKEN', `${p}.token`, 'Token identity is not in this pack.');
@@ -413,7 +452,17 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
   if (
     !fields(
       c,
-      ['types', 'supertypes', 'subtypes', 'colors', 'manaCost', 'power', 'toughness', 'token'],
+      [
+        'types',
+        'supertypes',
+        'subtypes',
+        'colors',
+        'manaCost',
+        'power',
+        'toughness',
+        'loyalty',
+        'token',
+      ],
       'characteristics',
     )
   )
@@ -453,7 +502,8 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
     );
   if (c.supertypes?.includes('basic')) d.basic = true;
   if (c.supertypes?.includes('legendary')) d.legendary = true;
-  for (const key of ['power', 'toughness', 'token']) if (c[key] !== undefined) d[key] = c[key];
+  for (const key of ['power', 'toughness', 'loyalty', 'token'])
+    if (c[key] !== undefined) d[key] = c[key];
   const expanded = [];
   let expansionSteps = 0;
   const expand = (list, chain = []) => {
@@ -725,6 +775,7 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
           [
             'kind',
             'cost',
+            'zone',
             'target',
             'targetGroups',
             'effects',
@@ -732,10 +783,12 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
             'timing',
             'condition',
             'oncePerTurn',
+            'loyalty',
           ],
           path,
         );
         (d.activated ??= []).push({
+          ...(a.zone !== undefined ? { zone: a.zone } : {}),
           cost: cost(a.cost, `${path}.cost`),
           ...(a.target !== undefined ? { target: target(a.target, `${path}.target`) } : {}),
           ...(a.targetGroups ? { targetGroups: structuredClone(a.targetGroups) } : {}),
@@ -744,6 +797,7 @@ export function compileCard(source, { mechanics = {}, identities = {}, adventure
           ...(a.timing !== undefined ? { timing: a.timing } : {}),
           ...(a.condition !== undefined ? { condition: structuredClone(a.condition) } : {}),
           ...(a.oncePerTurn !== undefined ? { oncePerTurn: a.oncePerTurn } : {}),
+          ...(a.loyalty !== undefined ? { loyalty: a.loyalty } : {}),
         });
         break;
       case 'triggered': {

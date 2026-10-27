@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fb3a0910-a582-41ef-b5b9-3cda1f1cd5ce",
+  "name": "Walltop Sentries",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier", "Ally"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Reach, deathtouch\nWhen this creature dies, if there's a Lesson card in your graveyard, you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "subtype": "Lesson"
+          }
+        },
+        "operator": "gte",
+        "right": 1
+      }
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import {
   isPacified,
   controlled,
   canAttack,
+  attackDefenders,
   canBlock,
   ref,
   legalActions,
@@ -108,18 +109,21 @@ function permanent(s, o, meta, ui, targetable) {
   const pt = stats(s, o),
     gained = keywords(s, o).filter((keyword) => !d.keywords.includes(keyword)),
     attacking = s.combat.attackers.some((r) => r.id === o.id),
+    defender =
+      s.choice?.kind === 'attackers' ? ui.attackDefenders?.[o.id] : s.combat.defenders?.[o.id],
+    attackLabel = defender?.kind === 'object' ? s.objects[defender.id]?.name : null,
     blocking =
       Object.values(s.combat.blocks)
         .flat()
         .some((r) => r.id === o.id) || ui.blocks.some((b) => b.blocker === o.id);
-  return `<button class="permanent ${o.tapped ? 'tapped' : ''} ${attacking ? 'attacking' : ''} ${blocking ? 'blocking' : ''} ${ui.chosen.includes(o.id) || ui.selected === o.id ? 'selected' : ''} ${targetable ? 'targetable' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" aria-label="${escape(o.name || (o.token ? 'Nameless token' : ''))}${o.tapped ? ' tapped' : ''}${d.type === 'creature' ? `, ${pt.power}/${pt.toughness}` : ''}">${meta[o.name]?.image ? `<picture>${meta[o.name]?.art ? `<source media="(max-width: 900px), (max-width: 1000px) and (max-height: 600px)" srcset="${escape(meta[o.name].art)}">` : ''}<img class="battlefield-card-image" src="${escape(meta[o.name].image)}" alt="" draggable="false"></picture>` : ''}<div class="permanent-art" ${artStyle(meta, o.name)}>${o.damage ? `<span class="damage-marker">−${o.damage}</span>` : ''}${d.type === 'creature' && isSick(s, o) ? '<span class="sick-marker">NEW</span>' : ''}</div><div class="permanent-name">${escape(o.name || (o.token ? 'Nameless token' : ''))}</div><div class="permanent-footer"><span>${
+  return `<button class="permanent ${o.tapped ? 'tapped' : ''} ${attacking ? 'attacking' : ''} ${blocking ? 'blocking' : ''} ${ui.chosen.includes(o.id) || ui.selected === o.id ? 'selected' : ''} ${targetable ? 'targetable' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" aria-label="${escape(o.name || (o.token ? 'Nameless token' : ''))}${o.tapped ? ' tapped' : ''}${d.type === 'creature' ? `, ${pt.power}/${pt.toughness}` : ''}${(d.types ?? [d.type]).includes('planeswalker') ? `, ${o.loyalty ?? 0} loyalty` : ''}">${meta[o.name]?.image ? `<picture>${meta[o.name]?.art ? `<source media="(max-width: 900px), (max-width: 1000px) and (max-height: 600px)" srcset="${escape(meta[o.name].art)}">` : ''}<img class="battlefield-card-image" src="${escape(meta[o.name].image)}" alt="" draggable="false"></picture>` : ''}<div class="permanent-art" ${artStyle(meta, o.name)}>${o.damage ? `<span class="damage-marker">−${o.damage}</span>` : ''}${d.type === 'creature' && isSick(s, o) ? '<span class="sick-marker">NEW</span>' : ''}</div><div class="permanent-name">${escape(o.name || (o.token ? 'Nameless token' : ''))}</div>${attackLabel && (attacking || ui.chosen.includes(o.id)) ? `<span class="attack-destination">→ ${escape(attackLabel)}</span>` : ''}<div class="permanent-footer"><span>${
     isPacified(s, o)
       ? 'PACIFIED'
       : [...gained, ...d.keywords]
           .slice(0, 1)
           .map((k) => k.toUpperCase())
           .join('') || d.type.toUpperCase()
-  }</span>${d.type === 'creature' ? `<strong class="pt">${pt.power}/${pt.toughness}</strong>` : ''}</div></button>`;
+  }</span>${d.type === 'creature' ? `<strong class="pt">${pt.power}/${pt.toughness}</strong>` : ''}${(d.types ?? [d.type]).includes('planeswalker') ? `<strong class="loyalty-badge" aria-label="${o.loyalty ?? 0} loyalty">◆ ${o.loyalty ?? 0}</strong>` : ''}</div></button>`;
 }
 export function game(s, ui, meta) {
   const viewer = ui.mode === 'hotseat' ? ui.seat : 0,
@@ -267,7 +271,14 @@ function actionDock(s, ui, p, actions) {
       case 'attackers':
         title = 'Declare your attackers';
         desc = `${ui.chosen.length} selected. Drag toward your opponent or click creatures, then confirm.`;
-        buttons = `<button class="btn quiet" data-action="allAttack">Select all</button><button class="btn primary" data-action="attack">${ui.chosen.length ? `Attack with ${ui.chosen.length}` : 'No attacks'} →</button>`;
+        buttons = `<button class="btn quiet" data-action="allAttack">Select all</button>${ui.chosen.length && attackDefenders(s, p).length > 1 ? '<button class="btn" data-action="attackDefenders">Attack destinations</button>' : ''}<button class="btn primary" data-action="attack">${ui.chosen.length ? `Attack with ${ui.chosen.length}` : 'No attacks'} →</button>`;
+        break;
+      case 'attackDefenders':
+        title = 'Choose where your new creatures attack';
+        desc =
+          'Each creature can attack your opponent or a planeswalker they control. Finish this choice to continue resolution.';
+        buttons =
+          '<button class="btn primary" data-action="attackDefenders">Choose attack destinations →</button>';
         break;
       case 'blockers':
         title = 'Declare your blockers';
@@ -340,7 +351,10 @@ function actionDock(s, ui, p, actions) {
           '<button class="btn primary" data-action="librarySearch">Search library →</button>';
         break;
       case 'libraryOrder':
-        title = `${c.action === 'scry' ? 'Scry' : 'Surveil'} ${c.cards.length}`;
+        title =
+          c.action === 'lookChooseHand'
+            ? 'Choose a card for your hand'
+            : `${c.action === 'scry' ? 'Scry' : 'Surveil'} ${c.cards.length}`;
         desc = 'The spell is still resolving. Arrange the inspected cards before continuing.';
         buttons = '<button class="btn primary" data-action="libraryOrder">Arrange cards →</button>';
         break;

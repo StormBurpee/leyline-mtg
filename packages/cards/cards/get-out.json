@@ -1,0 +1,81 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b2f3c27e-b646-4449-901a-8b809cdfa84e",
+  "name": "Get Out",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}{U}"
+  },
+  "rulesText": "Choose one —\n• Counter target creature or enchantment spell.\n• Return one or two target creatures and/or enchantments you own to your hand.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Counter target creature or enchantment spell.",
+          "target": {
+            "scope": "spell",
+            "where": {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "enchantment"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Return one or two creatures and/or enchantments you own.",
+          "targetGroups": [
+            {
+              "id": "chosen",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "all": [
+                    {
+                      "owner": "you"
+                    },
+                    {
+                      "any": [
+                        {
+                          "type": "creature"
+                        },
+                        {
+                          "type": "enchantment"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 2
+            }
+          ],
+          "effects": [
+            {
+              "op": "returnToHand",
+              "target": "target",
+              "targetGroup": "chosen"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

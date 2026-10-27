@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "60b03a44-a7bd-48fa-8c8f-1704aed02cd7",
+  "name": "Ancestor Dragon",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dragon"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}{W}",
+    "power": 5,
+    "toughness": 6
+  },
+  "rulesText": "Flying\nWhenever one or more creatures you control attack, you gain 1 life for each attacking creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attackGroup",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "attacking": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

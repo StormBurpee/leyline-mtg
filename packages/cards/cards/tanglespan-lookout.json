@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d6a767c2-8bc8-4686-899a-0ba3a525977a",
+  "name": "Tanglespan Lookout",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Satyr"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Whenever an Aura you control enters, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Aura"
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

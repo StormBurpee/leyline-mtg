@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8281f2b9-e81b-48da-812a-8713b2adf8ab",
+  "name": "Spider Manifestation",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spider", "Avatar"],
+    "colors": ["G", "R"],
+    "manaCost": "{1}{R/G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Reach\n{T}: Add {R} or {G}.\nWhenever you cast a spell with mana value 4 or greater, untap this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "G"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "manaValue": {
+            "gte": 4
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d9b6656d-d71f-4359-bf6f-b76089741e29",
+  "name": "Thunderhead Gunner",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Shark", "Pirate"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Reach\nDiscard a card: Draw a card. Activate only as a sorcery and only once each turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "discard": 1
+      },
+      "timing": "sorcery",
+      "oncePerTurn": true,
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

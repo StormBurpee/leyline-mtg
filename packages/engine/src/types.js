@@ -6,6 +6,7 @@ export const CARD_TYPES = Object.freeze([
   'sorcery',
   'artifact',
   'enchantment',
+  'planeswalker',
 ]);
 export const typesOf = (card) => card.types ?? [card.type];
 export const hasType = (card, type) => typesOf(card).includes(type);

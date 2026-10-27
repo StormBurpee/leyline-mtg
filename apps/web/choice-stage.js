@@ -13,6 +13,7 @@ export const CARD_DECISIONS = new Set([
   'discardEffect',
   'sacrifice',
   'exilePlay',
+  'empowerJace',
   'bindingNegotiation',
   'revealDiscard',
   'exileToGraveyard',

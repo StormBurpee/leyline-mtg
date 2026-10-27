@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5d58aefe-a3df-4e0a-b679-b967cd5fd2c6",
+  "name": "Boggart Cursecrafter",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Warlock"],
+    "colors": ["B", "R"],
+    "manaCost": "{B}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Deathtouch\nWhenever another Goblin you control dies, this creature deals 1 damage to each opponent.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "controller": "you",
+        "filter": {
+          "subtype": "Goblin"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { CREATURE_TYPES } from './creature-types.js';
 import { spellsCastCount } from './spell-history.js';
 import { manaValue } from './mana-value.js';
 import { numericValue } from './numeric-values.js';
@@ -8,7 +9,7 @@ import { matchesEvent } from './events.js';
 import { hasType, typesOf, primaryType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.45.0';
+export const VERSION = '0.46.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -85,17 +86,31 @@ export function definition(stateOrObject, object) {
   // Type-changing effects are not copiable printed characteristics. They are
   // bounded to this battlefield incarnation and the turn that created them.
   if (!object || object.zone !== 'battlefield') return d;
-  const additions = (stateOrObject.modifiers ?? [])
-    .filter(
-      (m) =>
-        m.objectId === object.id &&
-        m.incarnation === object.incarnation &&
-        m.expires === stateOrObject.turn,
-    )
-    .flatMap((m) => m.addTypes ?? []);
-  if (!additions.length) return d;
+  const modifiers = (stateOrObject.modifiers ?? []).filter(
+    (m) =>
+      m.objectId === object.id &&
+      m.incarnation === object.incarnation &&
+      m.expires === stateOrObject.turn,
+  );
+  const additions = modifiers.flatMap((m) => m.addTypes ?? []);
+  const animation = modifiers.filter((m) => m.animation).at(-1)?.animation;
+  if (!additions.length && !animation) return d;
   const types = [...new Set([...typesOf(d), ...additions])];
-  return { ...d, types, type: primaryType(types) };
+  return {
+    ...d,
+    types,
+    type: animation ? 'creature' : primaryType(types),
+    ...(animation
+      ? {
+          color: animation.colors,
+          subtypes: [
+            ...d.subtypes.filter((t) => !CREATURE_TYPES.includes(t)),
+            ...animation.subtypes,
+          ],
+          baseStats: { power: animation.power, toughness: animation.toughness },
+        }
+      : {}),
+  };
 }
 export const battlefield = (s) => Object.values(s.objects).filter((o) => o.zone === 'battlefield');
 export const creatures = (s) => battlefield(s).filter((o) => definition(s, o).type === 'creature');
@@ -316,6 +331,7 @@ export function addObject(s, name, owner, zone = 'library', override = null) {
     incarnation: 0,
     tapped: false,
     plusCounters: 0,
+    ...(zone === 'battlefield' && hasType(d, 'planeswalker') ? { loyalty: d.loyalty } : {}),
     damage: 0,
     deathtouchDamage: false,
     controlledSince: s.turn,
@@ -419,6 +435,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     definition: d,
     controller: payload.player ?? object?.controller,
     step: payload.step,
+    castPlayer: payload.castPlayer,
     spellNumber:
       event === 'cast' ? spellsCastCount(s, [payload.player ?? object.controller]) : undefined,
     objects: payload.objects,
@@ -562,6 +579,7 @@ export function move(s, o, to, departureContext = null) {
   if (to !== 'stack') delete o.flashbackPaid;
   if (to !== 'stack') delete o.warpPaid;
   delete o.chosenX;
+  delete o.castPlayer;
   const dying =
     from === 'battlefield' && to === 'graveyard' && hasType(definition(s, o), 'creature');
   const context = dying ? (departureContext ?? captureDepartureContext(s)) : null;
@@ -619,6 +637,10 @@ export function move(s, o, to, departureContext = null) {
   o.controller = o.owner;
   o.damage = 0;
   o.plusCounters = 0;
+  delete o.loyaltyUsed;
+  if (to === 'battlefield' && hasType(definition(s, o), 'planeswalker'))
+    o.loyalty = definition(s, o).loyalty;
+  else delete o.loyalty;
   delete o.stunCounters;
   o.deathtouchDamage = false;
   o.tapped = false;

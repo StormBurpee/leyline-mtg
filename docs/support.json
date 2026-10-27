@@ -1,5 +1,5 @@
 {
-  "version": "0.45.0",
+  "version": "0.46.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -50,6 +50,14 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Academic Ascent",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "empowerJace"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Acidic Slime",
@@ -116,6 +124,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Aetherize",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bounceAll"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Afterthought Sentry",
       "type": "creature",
       "keywords": [],
@@ -129,6 +145,20 @@
       "keywords": [],
       "opcodes": ["loseLife", "gainLife"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Agent Bishop, Man in Black",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "beginCombat",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -315,6 +345,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ancestor Dragon",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["gainLife"],
+      "triggers": [
+        {
+          "event": "attackGroup",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Ancestors' Aid",
       "type": "instant",
       "keywords": [],
@@ -482,6 +525,14 @@
       "keywords": ["flying"],
       "opcodes": ["gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Armaggon, Future Shark",
+      "type": "creature",
+      "keywords": ["flash"],
+      "opcodes": ["destroy"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -725,6 +776,20 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Battle-Rattle Shaman",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "beginCombat",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -1043,6 +1108,14 @@
       "activatedAbilities": 2
     },
     {
+      "name": "Bloodtithe Collector",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["discard"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Blooming Marsh",
       "type": "land",
       "keywords": [],
@@ -1080,6 +1153,23 @@
       "keywords": ["lifelink"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Boggart Cursecrafter",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": ["damageOpponent"],
+      "triggers": [
+        {
+          "event": "dies",
+          "controller": "you",
+          "filter": {
+            "subtype": "Goblin"
+          },
+          "excludeSource": true
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -1184,6 +1274,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Boros Charm",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage", "modifyAll", "modify"],
+      "modes": [
+        "Deal 4 damage to target player or planeswalker",
+        "Permanents you control gain indestructible",
+        "Target creature gains double strike"
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Boros Guildgate",
       "type": "land",
       "keywords": [],
@@ -1232,6 +1335,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Brazen Blademaster",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Brazen Scourge",
       "type": "creature",
       "keywords": ["haste"],
@@ -1268,6 +1379,14 @@
       "type": "creature",
       "keywords": ["vigilance"],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Broken Wings",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1773,6 +1892,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Conduct Electricity",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2744,6 +2871,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Eddymurk Crab",
+      "type": "creature",
+      "keywords": ["flash"],
+      "opcodes": ["tap"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Eidolon of Philosophy",
       "type": "creature",
       "keywords": [],
@@ -3135,6 +3270,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Fancy Footwork",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["untap", "modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Fate of the Sun-Cryst",
       "type": "instant",
       "keywords": [],
@@ -3401,6 +3544,31 @@
       "opcodes": ["attachEquipment"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Firespitter Whelp",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["damageOpponent"],
+      "triggers": [
+        {
+          "event": "cast",
+          "controller": "you",
+          "filter": {
+            "any": [
+              {
+                "not": {
+                  "type": "creature"
+                }
+              },
+              {
+                "subtype": "Dragon"
+              }
+            ]
+          }
+        }
+      ],
+      "activatedAbilities": 0
     },
     {
       "name": "First-Time Flyer",
@@ -3711,6 +3879,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Fuel the Flames",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damageAll"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Funeral Rites",
       "type": "sorcery",
       "keywords": [],
@@ -3829,6 +4005,18 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Get Out",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counter", "bounce"],
+      "modes": [
+        "Counter target creature or enchantment spell.",
+        "Return one or two creatures and/or enchantments you own."
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -4444,6 +4632,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Harried Spearguard",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["token"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Harrier Strix",
       "type": "creature",
       "keywords": ["flying"],
@@ -4533,6 +4729,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Helping Hand",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -4917,6 +5121,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Impractical Joke",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["disableDamagePrevention", "damage"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Infernal Grasp",
       "type": "instant",
       "keywords": [],
@@ -5050,6 +5262,20 @@
       "keywords": [],
       "opcodes": ["conditional"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Iridescent Tiger",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["addMana"],
+      "triggers": [
+        {
+          "event": "enter",
+          "object": "source",
+          "castByController": true
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -5773,6 +5999,24 @@
       "activatedAbilities": 2
     },
     {
+      "name": "Lurking Lizards",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "cast",
+          "controller": "you",
+          "filter": {
+            "manaValue": {
+              "gte": 4
+            }
+          }
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Lush Portico",
       "type": "land",
       "keywords": [],
@@ -6229,6 +6473,31 @@
       "keywords": [],
       "opcodes": ["token", "modifyAll"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Midnight Reaper",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageAll", "draw"],
+      "triggers": [
+        {
+          "event": "dies",
+          "controller": "you",
+          "filter": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "not": {
+                  "token": true
+                }
+              }
+            ]
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -6746,6 +7015,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "No Admittance",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage", "empowerJace"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Nocturnal Feeder",
       "type": "creature",
       "keywords": ["flying"],
@@ -7066,6 +7343,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ozai's Cruelty",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage", "discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Pacifism",
       "type": "enchantment",
       "keywords": [],
@@ -7265,6 +7550,22 @@
       "keywords": [],
       "opcodes": ["token"],
       "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pileated Provisioner",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["counterOn"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pilfer",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["revealDiscard"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -7500,6 +7801,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Prismari Charm",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["surveil", "draw", "damage", "bounce"],
+      "modes": [
+        "Surveil 2, then draw a card.",
+        "Deal 1 damage to each of one or two targets.",
+        "Return target nonland permanent."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Procrastinate",
       "type": "sorcery",
       "keywords": [],
@@ -7540,6 +7854,14 @@
       "type": "instant",
       "keywords": ["convoke"],
       "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Protege's Awakening",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["empowerJace", "draw"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -7886,6 +8208,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ravenous Giant",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageAll"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "upkeep",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Ravine Raider",
       "type": "creature",
       "keywords": ["menace"],
@@ -8139,6 +8475,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Restless Bivouac",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["counterOn", "animateLand"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Restore with Empathy",
       "type": "instant",
       "keywords": [],
@@ -8254,6 +8598,14 @@
       "keywords": [],
       "opcodes": ["copyToken"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rite of the Dragoncaller",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": ["controllerCastsInstantOrSorcery"],
       "activatedAbilities": 0
     },
     {
@@ -8768,6 +9120,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Seasoned Cryomancer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "discardTrigger"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Seasoned Warrenguard",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Seedglaive Mentor",
       "type": "creature",
       "keywords": ["vigilance", "haste"],
@@ -8799,6 +9167,14 @@
         "Target opponent discards two cards",
         "Creatures your opponents control get -1/-1 until end of turn"
       ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Seismic Rupture",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damageAll"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -9251,6 +9627,15 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Slagstorm",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damageAll"],
+      "modes": ["Deal 3 damage to each creature.", "Deal 3 damage to each player."],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Slash, Reptile Rampager",
       "type": "creature",
       "keywords": [],
@@ -9288,6 +9673,14 @@
       },
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Sleight of Hand",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["lookChooseHand"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Slice from the Shadows",
@@ -9479,6 +9872,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Spicy Oatmeal Pizza",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage", "damageAll", "gainLife"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Spider-Bot",
       "type": "creature",
       "keywords": ["reach"],
@@ -9492,6 +9893,24 @@
       "keywords": [],
       "opcodes": ["bounce"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Spider Manifestation",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": ["untap"],
+      "triggers": [
+        {
+          "event": "cast",
+          "controller": "you",
+          "filter": {
+            "manaValue": {
+              "gte": 4
+            }
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -10056,6 +10475,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sunderflock",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["bounceAll"],
+      "triggers": [
+        {
+          "event": "enter",
+          "object": "source",
+          "castByController": true
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sundial, Dawn Tyrant",
       "type": "creature",
       "keywords": [],
@@ -10218,6 +10651,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Synapse Necromage",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Syphon Fuel",
       "type": "instant",
       "keywords": [],
@@ -10263,6 +10704,22 @@
       "keywords": [],
       "opcodes": ["moveTarget", "conditional"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tanglespan Lookout",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "filter": {
+            "subtype": "Aura"
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -10685,6 +11142,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Thunderhead Gunner",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Thundering Broodwagon",
       "type": "artifact",
       "keywords": ["reach", "menace"],
@@ -10980,6 +11445,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Trick Shot",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Troll Negotiations",
       "type": "sorcery",
       "keywords": [],
@@ -11169,6 +11642,20 @@
       "opcodes": ["destroy"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Undergrowth Recon",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "upkeep",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
     },
     {
       "name": "Undulating Witness",
@@ -11717,6 +12204,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Walltop Sentries",
+      "type": "creature",
+      "keywords": ["reach", "deathtouch"],
+      "opcodes": ["gainLife"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Wander Off",
       "type": "instant",
       "keywords": [],
@@ -12178,6 +12673,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Zealous Lorecaster",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Zetalpa, Primal Dawn",
       "type": "creature",
       "keywords": ["flying", "indestructible", "vigilance", "trample", "double strike"],
@@ -12245,6 +12748,7 @@
     "Elf Token",
     "Elf Warrior Token",
     "Faerie Token",
+    "Five Five Dragon Token",
     "Flying Thopter Token",
     "Food Token",
     "Goblin Token",
@@ -12254,6 +12758,7 @@
     "Human Soldier Token",
     "Inkling Token",
     "Insect Token",
+    "Jace Token",
     "Knight Token",
     "Koma's Coil",
     "Lander Token",
@@ -12263,6 +12768,7 @@
     "White and Blue Merfolk Token",
     "Mobilized Warrior Token",
     "Mutant Token",
+    "Nonblocking Fungus Token",
     "Nonblocking Rat Token",
     "Rabbit Token",
     "Robot Token",

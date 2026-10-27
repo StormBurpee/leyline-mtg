@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "843c8485-21b8-45ef-9a0c-4967f07278bb",
+  "name": "Trick Shot",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{4}{R}"
+  },
+  "rulesText": "Trick Shot deals 6 damage to target creature and 2 damage to up to one other target creature token.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 6,
+          "targetGroup": "primary"
+        },
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2,
+          "targetGroup": "token"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "primary",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "token",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "token": true
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1,
+          "excludeFrom": ["primary"]
+        }
+      ]
+    }
+  ]
+}

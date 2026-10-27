@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/nonblocking-fungus-token",
+  "name": "Nonblocking Fungus Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Fungus"],
+    "colors": ["B"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "This token can't block.",
+  "abilities": [
+    {
+      "kind": "combatRestriction",
+      "restriction": "cannotBlock"
+    }
+  ]
+}

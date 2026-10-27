@@ -1,5 +1,5 @@
 import { manaValue } from './mana-value.js';
-import { beginDamage, assignDamage, canBlock, canAttack } from './combat.js';
+import { beginDamage, assignDamage, canBlock, canAttack, attackDefenders } from './combat.js';
 import { stateBasedActions, stabilize, resolveTop, finishTriggerOrder } from './effects.js';
 import { settleCombatPayoffs } from './combat-payoffs.js';
 import {
@@ -81,6 +81,7 @@ function boardCopy(s, active, pairs, attackerIds, compact = false) {
     nextId: 0,
     combat: {
       attackers: attackerIds.map((id) => ref(objects[id])),
+      ...(s.combat.defenders ? { defenders: structuredClone(s.combat.defenders) } : {}),
       blocks,
       blocked: Object.keys(blocks),
       firstEligible: [],
@@ -93,14 +94,16 @@ function boardCopy(s, active, pairs, attackerIds, compact = false) {
  */
 export function tacticalDamage(s, choice = s.choice) {
   return choice.sources.map((source) => {
-    const creatures = source.targets.filter((t) => t.kind === 'object'),
-      player = source.targets.find((t) => t.kind === 'player');
+    const isDefender = (t) =>
+      source.defender && t.kind === source.defender.kind && t.id === source.defender.id;
+    const creatures = source.targets.filter((t) => t.kind === 'object' && !isDefender(t)),
+      player = source.targets.find((t) => t.kind === 'player' || isDefender(t));
     if (creatures.length <= 1) {
       let left = source.power;
       const assignments = source.targets.map((target, index) => {
         const o = s.objects[target.id];
         let amount = left;
-        if (o && source.targets.length > 1)
+        if (o && !isDefender(target) && source.targets.length > 1)
           amount = Math.min(
             left,
             source.keywords.includes('deathtouch')
@@ -147,7 +150,13 @@ export function tacticalDamage(s, choice = s.choice) {
         }
       const all = creatures.every((_, i) => amounts[i] >= costs[i]);
       const face = player && all ? source.power - spent : 0;
-      score += face * 1.5 + (player && face >= s.players[player.id].life ? 10000 : 0);
+      score +=
+        face * 1.5 +
+        (player?.kind === 'player' && face >= s.players[player.id].life
+          ? 10000
+          : player?.kind === 'object' && face >= (s.objects[player.id]?.loyalty ?? Infinity)
+            ? 12
+            : 0);
       if (!best || score > best.score) best = { amounts, face, spent, score };
     }
     let left = source.power - best.spent - best.face;
@@ -550,4 +559,36 @@ export function chooseAttacks(s, p, { improveOutcome } = {}) {
     }
   }
   return best.cards;
+}
+
+/** A conservative defender choice: take a free planeswalker kill only when no
+ * opposing creature can block and doing so does not give up lethal player damage. */
+export function plannedAttackDefenders(s, player, ids) {
+  const walkers = attackDefenders(s, player).filter((t) => t.kind === 'object');
+  if (!walkers.length || !ids.length) return {};
+  const attackers = ids.map((id) => s.objects[id]);
+  const total = attackers.reduce(
+    (n, o) => n + Math.max(0, stats(s, o).power) * (hasKeyword(s, o, 'double strike') ? 2 : 1),
+    0,
+  );
+  if (total >= s.players[1 - player].life) return {};
+  if (Object.values(s.objects).some((b) => attackers.some((a) => canBlock(s, b, a, 1 - player))))
+    return {};
+  const victim = walkers
+    .filter((t) => (s.objects[t.id].loyalty ?? Infinity) <= total)
+    .sort(
+      (a, b) =>
+        permanentValue(s, s.objects[b.id]) - permanentValue(s, s.objects[a.id]) ||
+        a.id.localeCompare(b.id),
+    )[0];
+  if (!victim) return {};
+  let needed = s.objects[victim.id].loyalty;
+  const result = {};
+  for (const attacker of attackers) {
+    if (needed <= 0) break;
+    result[attacker.id] = victim;
+    needed -=
+      Math.max(0, stats(s, attacker).power) * (hasKeyword(s, attacker, 'double strike') ? 2 : 1);
+  }
+  return result;
 }

@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f82265fd-e772-4347-a27f-37b00ccd416b",
+  "name": "Zealous Lorecaster",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant", "Sorcerer"],
+    "colors": ["R"],
+    "manaCost": "{5}{R}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, return target instant or sorcery card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
