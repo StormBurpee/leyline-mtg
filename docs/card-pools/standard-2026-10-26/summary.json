@@ -7,7 +7,7 @@
     "packages/engine/src/definition-validation.js": "d3055875a1bb2b566028eeea0d88b6d50dceaec767cdad9164c32033483ee5c9",
     "packages/engine/src/condition-schema.js": "5ae7a42619debe71a3aa585ef1b84015ab8b37a4d6c69e1e37180375b647567b",
     "packages/engine/src/selectors.js": "f9cb9729c94ff12848f5bf4703f3cb3ef21ed4389a9c4903fc3b99c209f00709",
-    "packages/engine/src/events.js": "55feeaf1d5af4d76e7faf72aeeb3972e02b937497ecb0f9bc04fa7b3fbd30b89",
+    "packages/engine/src/events.js": "703c8be329d05a8e987bc438413f2d90cdbd2ccb350f8b1b9a475182169b9d70",
     "packages/engine/src/types.js": "00fbf8bea498daa3e56dbfa6d49968a99a7fa3552b4715af84479d599bf7b9b1"
   },
   "compilerSourceSha256": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
@@ -22,8 +22,8 @@
   "excluded": {},
   "coverage": {
     "no_exact_forge_match": 261,
-    "unsupported": 4223,
-    "curated": 680
+    "unsupported": 4211,
+    "curated": 692
   },
   "layouts": {
     "normal": 4823,
@@ -38,10 +38,10 @@
     "meld": 3
   },
   "keywordsOnUnimplementedCards": {
-    "Flying": 466,
-    "Vigilance": 174,
-    "Trample": 171,
-    "Flash": 136,
+    "Flying": 463,
+    "Vigilance": 172,
+    "Trample": 169,
+    "Flash": 135,
     "Equip": 132,
     "Surveil": 130,
     "Mill": 116,
@@ -50,8 +50,8 @@
     "Haste": 99,
     "Enchant": 99,
     "Transform": 88,
-    "Ward": 85,
-    "Lifelink": 85,
+    "Ward": 84,
+    "Lifelink": 83,
     "Treasure": 77,
     "Crew": 76,
     "Deathtouch": 74,
@@ -92,11 +92,11 @@
     "Firebending": 21,
     "Spree": 21,
     "Behold": 21,
-    "Double strike": 20,
     "Bargain": 20,
     "Affinity": 20,
     "Collect evidence": 20,
     "Delirium": 20,
+    "Double strike": 19,
     "Indestructible": 19,
     "Convoke": 19,
     "Changeling": 19,
@@ -121,8 +121,8 @@
     "Solved": 12,
     "Repartee": 12,
     "Infusion": 12,
-    "Offspring": 11,
     "Celebration": 11,
+    "Offspring": 10,
     "Hexproof": 10,
     "Airbend": 10,
     "Endure": 10,
@@ -301,17 +301,17 @@
     "Burning Chains": 1
   },
   "diagnostics": {
-    "Unreferenced or unsupported SVar": 3866,
-    "Unsupported spell field": 3311,
-    "Unsupported spell opcode": 2464,
-    "Unsupported trigger field": 1907,
-    "Unsupported trigger mode": 1090,
-    "unsupported field S.": 1008,
-    "Unsupported supertype or card type.": 891,
+    "Unreferenced or unsupported SVar": 3864,
+    "Unsupported spell field": 3310,
+    "Unsupported spell opcode": 2461,
+    "Unsupported trigger field": 1895,
+    "Unsupported trigger mode": 1079,
+    "unsupported field S.": 1006,
+    "Unsupported supertype or card type.": 886,
     "Unsupported mana symbol": 843,
     "Unsupported targeted zone transition.": 545,
-    "Unsupported target predicate": 406,
-    "Unsupported ability opcode": 399,
+    "Unsupported target predicate": 405,
+    "Unsupported ability opcode": 398,
     "Only source +1/+1 counters on abilities are supported.": 338,
     "Keywords on this card type require manual review.": 236,
     "Unsupported graveyard target predicate": 220,
@@ -353,8 +353,8 @@
     "unsupported keyword Disguise": 35,
     "Unsupported spell-cast trigger restriction.": 33,
     "unsupported keyword Warp": 32,
-    "Only a permanent ability untapping its source is supported.": 31,
     "unsupported keyword Plot": 31,
+    "Only a permanent ability untapping its source is supported.": 30,
     "unsupported keyword Saddle": 30,
     "Power/toughness must be literal nonnegative integers.": 30,
     "Unsupported card-type combination.": 29,
@@ -380,8 +380,8 @@
     "unsupported keyword Teamwork": 12,
     "unsupported keyword Mobilize": 12,
     "Counter requires TargetType Spell and ValidTgts Card.": 11,
-    "unsupported keyword Offspring": 11,
     "unsupported keyword Mayhem": 11,
+    "unsupported keyword Offspring": 10,
     "unsupported keyword Harmonize": 10,
     "unsupported keyword Increment.": 9,
     "unsupported keyword Web-slinging": 9,
@@ -587,5 +587,5 @@
       "sha256": "57b91dec0d3b810928ff8420c5b5b35d8e2bace62ac89d4afcdeddbda57ef206"
     }
   ],
-  "reclassifiedWithEngine": "0.28.0"
+  "reclassifiedWithEngine": "0.29.0"
 }

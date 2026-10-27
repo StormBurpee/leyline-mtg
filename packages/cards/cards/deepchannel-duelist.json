@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c892d28c-4a78-4a7f-b8d5-c3663b819c5e",
+  "name": "Deepchannel Duelist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Soldier"],
+    "colors": ["U", "W"],
+    "manaCost": "{W}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "At the beginning of your end step, untap target Merfolk you control.\nOther Merfolk you control get +1/+1.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "subtype": "Merfolk"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "subtype": "Merfolk"
+          },
+          {
+            "controller": "you"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

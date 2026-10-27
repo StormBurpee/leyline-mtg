@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0fca3328-484f-4050-925e-91840710b5d6",
+  "name": "Lyra, Archangel of Dawn",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Angel", "Knight"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever you gain life, put a +1/+1 counter on each Angel you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "lifeGain",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "amount": 1,
+          "where": {
+            "all": [
+              {
+                "subtype": "Angel"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

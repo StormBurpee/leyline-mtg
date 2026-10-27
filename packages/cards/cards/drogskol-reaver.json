@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "68175b49-f1e6-4b34-aad9-20d61a43d427",
+  "name": "Drogskol Reaver",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit"],
+    "colors": ["U", "W"],
+    "manaCost": "{5}{W}{U}",
+    "power": 3,
+    "toughness": 5
+  },
+  "rulesText": "Flying\nDouble strike (This creature deals both first-strike and regular combat damage.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nWhenever you gain life, draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "lifeGain",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

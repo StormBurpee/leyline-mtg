@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dae20bcd-dc24-4f9d-9400-a6f013b49f14",
+  "name": "Agent Phil Coulson",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Spy", "Hero"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Vigilance\n{T}: Put a +1/+1 counter on each other Hero you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "amount": 1,
+          "where": {
+            "all": [
+              {
+                "subtype": "Hero"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "excludeSource": true
+        }
+      ]
+    }
+  ]
+}

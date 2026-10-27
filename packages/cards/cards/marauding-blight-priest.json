@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "814b87fe-2a75-4ff2-8637-7e69e3fb285b",
+  "name": "Marauding Blight-Priest",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Cleric"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Whenever you gain life, each opponent loses 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "lifeGain",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

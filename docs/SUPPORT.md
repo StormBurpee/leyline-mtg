@@ -76,3 +76,7 @@ The current starter lists intentionally exercise stack interaction and creature 
 6. A validated Forge-script translation subset with an explicit unsupported-opcode report, not automatic Oracle-text interpretation.
 
 This is a dependency order, not a delivery promise. Each step needs regression examples before expanding the supported card count.
+
+### Life-gain events
+
+Positive life gains trigger controller-filtered life-gain abilities. Lifelink damage is grouped by source within each simultaneous damage batch, preserving separate events for separate sources and suppressing zero gains. Trigger ordering and resolution use the normal stack. Dynamic “that much” effects and life-gain replacement/prevention are not yet included. Rules basis: [CR 119.9 and 702.15e](https://media.wizards.com/2026/downloads/MagicCompRules%2020260925.txt).

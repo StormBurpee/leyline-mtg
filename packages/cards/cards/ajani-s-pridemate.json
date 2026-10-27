@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "95e94dea-5ac0-4d6f-adec-ca147aee861f",
+  "name": "Ajani's Pridemate",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever you gain life, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "lifeGain",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "31ca9e12-8ad0-472e-8b2a-b7df26370d8c",
+  "name": "Minwu, White Mage",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Cleric"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Vigilance, lifelink\nWhenever you gain life, put a +1/+1 counter on each Cleric you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "lifeGain",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "amount": 1,
+          "where": {
+            "all": [
+              {
+                "subtype": "Cleric"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

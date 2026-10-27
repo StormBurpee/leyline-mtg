@@ -75,6 +75,7 @@ export interface EventSpec {
     | 'step'
     | 'attackGroup'
     | 'noncombatDamageToPlayer'
+    | 'lifeGain'
     | 'faceUp';
   step?: 'upkeep' | 'beginCombat' | 'end' | 'main1' | 'main2';
   object?: 'source';

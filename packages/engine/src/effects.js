@@ -216,7 +216,7 @@ export function finishCreatureTypeChoice(s, command) {
   if (enterBattlefieldBatch(s, entries, choices) !== false && s.resolving) continueResolution(s);
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
-export function dealDamage(s, source, target, amount, combat = false) {
+export function dealDamage(s, source, target, amount, combat = false, lifeGains = null) {
   if (amount <= 0) return;
   const sourceObject = s.objects[source.id];
   const sourceDefinition = source.definition ?? (sourceObject ? definition(s, sourceObject) : null);
@@ -236,10 +236,28 @@ export function dealDamage(s, source, target, amount, combat = false) {
     o.damage += amount;
     if (source.keywords?.includes('deathtouch')) o.deathtouchDamage = true;
   }
-  if (source.keywords?.includes('lifelink')) s.players[source.controller].life += amount;
+  if (source.keywords?.includes('lifelink')) {
+    s.players[source.controller].life += amount;
+    if (lifeGains) {
+      const key = `${source.id}:${source.incarnation ?? 0}:${source.controller}`;
+      const gain = lifeGains.get(key) ?? { player: source.controller, amount: 0 };
+      gain.amount += amount;
+      lifeGains.set(key, gain);
+    }
+  }
   emit(s, 'damage', { source: source.id, target, amount, controller: source.controller });
+  if (source.keywords?.includes('lifelink') && !lifeGains)
+    notifyTriggers(s, 'lifeGain', { player: source.controller, amount });
   if (!combat && target.kind === 'player')
     notifyTriggers(s, 'noncombatDamageToPlayer', { player: target.id });
+}
+/** CR 119.9 and 702.15e: one gain event per source, not per damage recipient. */
+export function dealDamageBatch(s, packets, combat = false) {
+  const lifeGains = new Map();
+  for (const packet of packets)
+    dealDamage(s, packet.source, packet.target, packet.amount, combat, lifeGains);
+  // All simultaneous damage and life changes precede trigger-condition checks.
+  for (const gain of lifeGains.values()) notifyTriggers(s, 'lifeGain', gain);
 }
 function damageSource(s, entry) {
   const source = s.objects[entry.source?.id];
@@ -249,6 +267,7 @@ function damageSource(s, entry) {
     source.zone === (entry.kind === 'spell' ? 'stack' : 'battlefield');
   return {
     id: entry.source?.id,
+    incarnation: entry.source?.incarnation,
     definition: current
       ? definition(s, source)
       : (entry.sourceDefinition ?? cardDefinition(entry.name, s.catalog)),
@@ -317,14 +336,19 @@ export function resolveEffects(s, entry, startIndex = 0) {
             move(s, object, e.op === 'exileAll' ? 'exile' : 'graveyard', context);
         } else if (e.op === 'damageAll') {
           const source = damageSource(s, entry);
-          for (const object of objects) dealDamage(s, source, ref(object), e.amount);
+          const packets = objects.map((object) => ({
+            source,
+            target: ref(object),
+            amount: e.amount,
+          }));
           for (const player of s.players)
             if (
               e.players === 'all' ||
               (e.players === 'controller' && player.id === entry.controller) ||
               (e.players === 'opponent' && player.id !== entry.controller)
             )
-              dealDamage(s, source, { kind: 'player', id: player.id }, e.amount);
+              packets.push({ source, target: { kind: 'player', id: player.id }, amount: e.amount });
+          dealDamageBatch(s, packets);
         } else
           for (const object of objects) {
             if (e.op === 'modifyAll')
@@ -484,8 +508,11 @@ export function resolveEffects(s, entry, startIndex = 0) {
         draw(s, recipient, e.count);
         break;
       case 'gainLife':
-        s.players[recipient].life += e.amount;
-        emit(s, 'lifeGain', { player: recipient, amount: e.amount });
+        if (e.amount > 0) {
+          s.players[recipient].life += e.amount;
+          emit(s, 'lifeGain', { player: recipient, amount: e.amount });
+          notifyTriggers(s, 'lifeGain', { player: recipient, amount: e.amount });
+        }
         break;
       case 'loseLife':
         loseLife(s, recipient, e.amount);
