@@ -238,7 +238,12 @@ export interface CardDefinition {
   readonly cannotBlock?: boolean;
   readonly unblockable?: boolean;
   readonly uncounterable?: boolean;
-  readonly modes?: readonly { label: string; target?: TargetKind; effects: readonly Effect[] }[];
+  readonly modes?: readonly {
+    label: string;
+    target?: TargetKind;
+    targetGroups?: readonly TargetGroup[];
+    effects: readonly Effect[];
+  }[];
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
   readonly baseStats?: { power?: NumericValue; toughness?: NumericValue };
@@ -290,12 +295,14 @@ export interface CardDefinition {
       | 'controllerCastsInstantOrSorcery';
     effects: readonly Effect[];
     target?: TargetKind;
+    targetGroups?: readonly TargetGroup[];
     optional?: boolean;
     condition?: StateCondition;
   }[];
   readonly activated?: readonly {
     cost: { mana?: ManaCost; tap?: boolean; life?: number; sacrificeSelf?: boolean; discard?: 1 };
     target?: TargetKind | null;
+    targetGroups?: readonly TargetGroup[];
     effects: readonly Effect[];
     text: string;
     timing?: 'sorcery';
@@ -441,6 +448,13 @@ export type Choice =
       remainingEntries: StackEntry[];
       remaining: { player: PlayerId; entries: StackEntry[] }[];
     }
+  | {
+      kind: 'triggerTargets';
+      player: PlayerId;
+      entry: StackEntry;
+      remainingEntries: StackEntry[];
+      remaining: { player: PlayerId; entries: StackEntry[] }[];
+    }
   | { kind: 'optionalEffect'; player: PlayerId; name: string }
   | {
       kind: 'payCost';
@@ -559,11 +573,19 @@ export type Action =
       autoTap?: boolean;
       mode?: number;
     }
-  | { type: 'activate'; card: string; ability: number; discardCard?: string; target?: Target }
+  | {
+      type: 'activate';
+      card: string;
+      ability: number;
+      discardCard?: string;
+      targets?: TargetPlan;
+      target?: Target;
+    }
   | { type: 'bottom' | 'discard' | 'discardEffect' | 'attackers'; cards: string[] }
   | { type: 'blockers'; pairs: { blocker: string; attacker: string }[] }
   | { type: 'assignDamage'; orders: DamageOrder[] }
   | { type: 'orderTriggers'; ids: string[] }
+  | { type: 'chooseTriggerTargets'; targets: TargetPlan }
   | { type: 'chooseTriggerTarget'; target: Target }
   | { type: 'searchLibrary'; cards: string[] }
   | { type: 'orderLibrary'; top: string[]; rest: string[] };
@@ -583,6 +605,7 @@ export type LegalAction =
           | 'cycle'
           | 'activate'
           | 'chooseTriggerTarget'
+          | 'chooseTriggerTargets'
           | 'chooseLegend';
       }
     >
@@ -683,7 +706,9 @@ export function abilityProblem(
   player: PlayerId,
   id: string,
   index: number,
-  target?: Target,
+  target?: Target | null,
+  discardCard?: string,
+  targets?: TargetPlan,
 ): string | null;
 export function legalTarget(
   state: GameState,

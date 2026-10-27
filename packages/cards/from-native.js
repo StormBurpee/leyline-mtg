@@ -145,6 +145,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       choose: 1,
       modes: d.modes.map((mode) => ({
         label: mode.label,
+        ...(mode.targetGroups ? { targetGroups: structuredClone(mode.targetGroups) } : {}),
         ...(mode.target ? { target: structuredClone(targetSpec(mode.target)) } : {}),
         effects: effects(mode.effects),
       })),
@@ -187,6 +188,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       abilities.push({
         kind: 'triggered',
         on: eventSpec(t.event),
+        ...(t.targetGroups ? { targetGroups: structuredClone(t.targetGroups) } : {}),
         ...(t.target ? { target: structuredClone(targetSpec(t.target)) } : {}),
         ...(t.optional !== undefined ? { optional: t.optional } : {}),
         ...(t.condition ? { condition: structuredClone(t.condition) } : {}),
@@ -197,6 +199,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   for (const a of d.activated ?? [])
     abilities.push({
       kind: 'activated',
+      ...(a.targetGroups ? { targetGroups: structuredClone(a.targetGroups) } : {}),
       cost: cost(a.cost),
       ...(a.target ? { target: structuredClone(targetSpec(a.target)) } : {}),
       effects: effects(a.effects),

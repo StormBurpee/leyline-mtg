@@ -1,5 +1,5 @@
 {
-  "version": "0.36.1",
+  "version": "0.37.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -90,6 +90,14 @@
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Afterthought Sentry",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget", "modify"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 1
     },
     {
       "name": "Agate-Blade Assassin",
@@ -247,6 +255,14 @@
       "type": "creature",
       "keywords": ["flash"],
       "opcodes": ["modify"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ambush Wolf",
+      "type": "creature",
+      "keywords": ["flash"],
+      "opcodes": ["moveTarget"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
@@ -1011,6 +1027,18 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Bushwhack",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "fight"],
+      "modes": [
+        "Search your library for a basic land card, reveal it, put it into your hand, then shuffle",
+        "Target creature you control fights target creature you don't control"
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Buzz Bots",
       "type": "creature",
       "keywords": ["flying", "vigilance"],
@@ -1477,6 +1505,14 @@
       "opcodes": ["modify", "token"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Curious Farm Animals",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["gainLife", "destroy"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 1
     },
     {
       "name": "Daggerfang Duo",
@@ -1958,6 +1994,14 @@
       "opcodes": ["modifyAll"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Dubious Delicacy",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["modify", "gainLife", "loseLife"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 2
     },
     {
       "name": "Dusk Legion Zealot",
@@ -2854,6 +2898,18 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Giantfall",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bite", "destroy"],
+      "modes": [
+        "Target creature you control deals damage equal to its power to target creature an opponent controls",
+        "Destroy target artifact"
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Gigantic Big Bear",
       "type": "creature",
       "keywords": ["hexproof", "haste"],
@@ -3385,6 +3441,19 @@
       "keywords": ["flying"],
       "opcodes": ["gainLife"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Heritage Reclamation",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy", "moveTarget", "draw"],
+      "modes": [
+        "Destroy target artifact",
+        "Destroy target enchantment",
+        "Exile up to one target card from a graveyard. Draw a card"
+      ],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -5352,6 +5421,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Peerless Ropemaster",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["bounce"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Pelakka Wurm",
       "type": "creature",
       "keywords": ["trample"],
@@ -5491,6 +5568,18 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Plow Through",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["fight", "destroy"],
+      "modes": [
+        "Target creature you control fights target creature an opponent controls",
+        "Destroy target Vehicle"
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Plumecreed Escort",
       "type": "creature",
       "keywords": ["flash", "flying"],
@@ -5503,6 +5592,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Plunge into Winter",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["tap", "scry", "draw"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6205,6 +6302,14 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rock Soldiers",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -7173,6 +7278,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Spider-Byte, Web Warden",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["bounce"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spider-Rex, Daring Dino",
       "type": "creature",
       "keywords": ["reach", "trample"],
@@ -7350,6 +7463,20 @@
       "opcodes": ["damage", "destroy"],
       "modes": ["Start from Scratch deals 1 damage to any target.", "Destroy target artifact."],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Startled Relic Sloth",
+      "type": "creature",
+      "keywords": ["trample", "lifelink"],
+      "opcodes": ["moveTarget"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "beginCombat",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -8259,6 +8386,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "True Ancestry",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget", "token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "True Love's Kiss",
       "type": "instant",
       "keywords": [],
@@ -8477,6 +8612,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Utrom Scientists",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Valkyrie Aerial Unit",
       "type": "creature",
       "keywords": ["flying"],
@@ -8646,6 +8789,19 @@
       "keywords": [],
       "opcodes": ["loseLife"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Vigorbloom Charm",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "draw", "gainLife", "counterOn", "fight"],
+      "modes": [
+        "Target permanent you control gains hexproof and indestructible until end of turn",
+        "You draw a card and gain 3 life",
+        "Put a +1/+1 counter on target creature you control. Then it fights target creature an opponent controls"
+      ],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -8915,6 +9071,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Wild Pack Squad",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "beginCombat",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Wildheart Invoker",
       "type": "creature",
       "keywords": [],
@@ -9008,6 +9178,14 @@
       "keywords": ["double strike"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Wreck Remover",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget", "gainLife"],
+      "triggers": ["selfEnters", "selfAttacks"],
       "activatedAbilities": 0
     },
     {

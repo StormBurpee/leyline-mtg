@@ -1,0 +1,79 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "09955b4b-6052-4c27-8b63-9548482b3c5c",
+  "name": "Heritage Reclamation",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Destroy target artifact.\n\u2022 Destroy target enchantment.\n\u2022 Exile up to one target card from a graveyard. Draw a card.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target artifact",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Destroy target enchantment",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "enchantment"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Exile up to one target card from a graveyard. Draw a card",
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile",
+              "targetGroup": "chosen"
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "chosen",
+              "label": "Choose up to one target",
+              "selector": {
+                "scope": "graveyard"
+              },
+              "min": 0,
+              "max": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

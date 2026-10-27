@@ -6,7 +6,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.36.1';
+export const VERSION = '0.37.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -392,6 +392,7 @@ export function notifyTriggers(s, event, payload, context = null) {
           sourceKeywords,
         );
         const queued = s.pendingTriggers.at(-1);
+        if (trigger.targetGroups) queued.targetGroups = structuredClone(trigger.targetGroups);
         if (trigger.condition) queued.condition = structuredClone(trigger.condition);
         if (object)
           queued.eventSource = {
@@ -459,7 +460,7 @@ export function move(s, o, to, departureContext = null) {
       ...s.stack,
       ...s.pendingTriggers,
       ...(s.resolving ? [s.resolving.entry] : []),
-      ...(s.choice?.kind === 'triggerTarget'
+      ...(['triggerTarget', 'triggerTargets'].includes(s.choice?.kind)
         ? [
             s.choice.entry,
             ...s.choice.remainingEntries,

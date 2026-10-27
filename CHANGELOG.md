@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.37.0 — Optional targets across abilities and modes
+
+- Extend target groups to triggered and activated abilities and individual choose-one modes. Preserve APNAP ordering, target-before-cost choices and source snapshots while explicit target choices are pending.
+- Add large staged ability targeting, including optional zero-target confirmation, and mode-aware bot scoring. Trigger groups currently require independent selectors; grouped discard-cost abilities remain rejected.
+- Add 18 complete Standard cards, including Bushwhack, Heritage Reclamation, Ambush Wolf, Curious Farm Animals and Utrom Scientists. Catalog: 1079 cards and 27 tokens. Keep the 0.36.1 replay envelope accepted.
+
 ## 0.36.1 — Resume compatibility
 
 - Accept saved replay envelopes from every recent published version (0.27.0–0.36.0, including 0.27.1), preserving each saved catalog. Unknown schemas and engine versions still fail explicitly.

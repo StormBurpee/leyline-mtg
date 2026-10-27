@@ -604,9 +604,10 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         else
           d.modes = a.modes.map((mode, i) => {
             const mp = `${path}.modes[${i}]`;
-            fields(mode, ['label', 'target', 'effects'], mp);
+            fields(mode, ['label', 'target', 'targetGroups', 'effects'], mp);
             return {
               label: mode?.label,
+              ...(mode?.targetGroups ? { targetGroups: structuredClone(mode.targetGroups) } : {}),
               ...(mode?.target !== undefined
                 ? { target: target(mode.target, `${mp}.target`) }
                 : {}),
@@ -617,12 +618,23 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       case 'activated':
         fields(
           a,
-          ['kind', 'cost', 'target', 'effects', 'text', 'timing', 'condition', 'oncePerTurn'],
+          [
+            'kind',
+            'cost',
+            'target',
+            'targetGroups',
+            'effects',
+            'text',
+            'timing',
+            'condition',
+            'oncePerTurn',
+          ],
           path,
         );
         (d.activated ??= []).push({
           cost: cost(a.cost, `${path}.cost`),
           ...(a.target !== undefined ? { target: target(a.target, `${path}.target`) } : {}),
+          ...(a.targetGroups ? { targetGroups: structuredClone(a.targetGroups) } : {}),
           effects: effects(a.effects, `${path}.effects`),
           ...(a.text !== undefined ? { text: a.text } : {}),
           ...(a.timing !== undefined ? { timing: a.timing } : {}),
@@ -631,7 +643,11 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         });
         break;
       case 'triggered': {
-        fields(a, ['kind', 'on', 'optional', 'target', 'effects', 'condition'], path);
+        fields(
+          a,
+          ['kind', 'on', 'optional', 'target', 'targetGroups', 'effects', 'condition'],
+          path,
+        );
         if (a.optional !== undefined && typeof a.optional !== 'boolean')
           problem('INVALID_OPTIONAL', path, 'Optional must be a boolean.');
         for (const error of validateEventSpec(a.on))
@@ -639,7 +655,14 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         const event =
           Object.keys(EVENTS).find((key) => same(EVENTS[key], a.on)) ?? structuredClone(a.on);
         const instructions = effects(a.effects, `${path}.effects`);
-        if (event === 'selfEnters' && !a.condition && !a.optional && !a.target && !d.etb)
+        if (
+          event === 'selfEnters' &&
+          !a.condition &&
+          !a.optional &&
+          !a.target &&
+          !a.targetGroups &&
+          !d.etb
+        )
           d.etb = instructions;
         else
           (d.triggers ??= []).push({
@@ -647,6 +670,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
             effects: instructions,
             ...(a.condition ? { condition: structuredClone(a.condition) } : {}),
             ...(a.target !== undefined ? { target: target(a.target, `${path}.target`) } : {}),
+            ...(a.targetGroups ? { targetGroups: structuredClone(a.targetGroups) } : {}),
             ...(a.optional !== undefined ? { optional: a.optional } : {}),
           });
         break;
