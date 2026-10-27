@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a9d60d80-bcef-45e0-8ded-d70bd3c2780f",
+  "name": "Caradora, Heart of Alacria",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Knight"],
+    "colors": ["G", "W"],
+    "manaCost": "{2}{G}{W}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "When Caradora enters, you may search your library for a Mount or Vehicle card, reveal it, put it into your hand, then shuffle.\nIf one or more +1/+1 counters would be put on a creature or Vehicle you control, that many plus one +1/+1 counters are put on it instead.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "optional": true,
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "where": {
+            "any": [
+              {
+                "subtype": "Mount"
+              },
+              {
+                "subtype": "Vehicle"
+              }
+            ]
+          },
+          "destination": "hand",
+          "amount": 1,
+          "reveal": true
+        }
+      ]
+    },
+    {
+      "kind": "plusCounterBonus",
+      "amount": 1,
+      "scope": "creatureOrVehicleYouControl"
+    }
+  ]
+}

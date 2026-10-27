@@ -42,6 +42,7 @@ import {
   isSick,
   opponent,
   stats,
+  ref,
 } from './model.js';
 // Estimate private-library selection using only public counts, never unknown faces.
 function selectionYield(s, p, effect, source) {
@@ -751,8 +752,32 @@ export function chooseBotCommand(s, p) {
   if (s.priority !== p) return null;
   const sacrificeValue = (action) =>
     (action.sacrifices ?? []).reduce((n, r) => n + permanentValue(s, s.objects[r.id]), 0);
+  const pendingXDraws = s.stack.reduce(
+    (total, entry) =>
+      total +
+      drawsFor(
+        predictedEffects(s, entry.effects ?? [], entry),
+        entry.controller,
+        entry.target,
+        p,
+        s,
+        entry,
+      ),
+    0,
+  );
   const actions = legalActions(s, p)
     .filter((action) => actionSafe(s, p, action))
+    .filter(
+      (action) =>
+        action.type !== 'activate' ||
+        action.x === undefined ||
+        pendingXDraws +
+          drawsFor(actionEffects(s, action), p, action.target, p, s, {
+            ...action,
+            source: ref(s.objects[action.card]),
+          }) <=
+          libraryCount(s, p),
+    )
     .sort((a, b) => sacrificeValue(a) - sacrificeValue(b));
   const stationing = actions.find(
     (a) =>
@@ -788,7 +813,7 @@ export function chooseBotCommand(s, p) {
     .filter((a) => a.type === 'activate' && a.targets)
     .map((a) => {
       const source = s.objects[a.card],
-        ability = definition(s, source, undefined, undefined, undefined, a).activated[a.ability];
+        ability = definition(s, source, a.x ?? 0, undefined, undefined, a).activated[a.ability];
       return {
         a,
         score:
@@ -814,10 +839,14 @@ export function chooseBotCommand(s, p) {
       const threatened = s.stack.some((e) => e.controller !== p && e.target?.id === source.id);
       const effects = actionEffects(s, a);
       const pendingDraws = s.stack.reduce(
-        (n, e) => n + drawsFor(e.effects ?? [], e.controller, e.target, p, s),
+        (n, e) =>
+          n + drawsFor(predictedEffects(s, e.effects ?? [], e), e.controller, e.target, p, s, e),
         0,
       );
-      if (pendingDraws + drawsFor(effects, p, a.target, p, s) > libraryCount(s, p))
+      if (
+        pendingDraws + drawsFor(effects, p, a.target, p, s, { ...a, source: ref(source) }) >
+        libraryCount(s, p)
+      )
         return { a, score: -100 };
       const protectionPending = s.stack.some(
         (entry) =>
@@ -1118,9 +1147,19 @@ export function chooseBotCommand(s, p) {
     })
     .sort((a, b) => value(s, s.objects[b.target.id]) - value(s, s.objects[a.target.id]))[0];
   if (equip) return { ...equip, player: p };
-  const ability = actions.find((action) => {
+  const activationOrder = [...actions].sort((a, b) => (b.x ?? -1) - (a.x ?? -1));
+  const ability = activationOrder.find((action) => {
     if (action.type !== 'activate' || action.targets || action.sacrifices) return false;
-    const activated = definition(s, s.objects[action.card]).activated[action.ability];
+    const activated = definition(
+      s,
+      s.objects[action.card],
+      action.x ?? 0,
+      undefined,
+      undefined,
+      action,
+    ).activated[action.ability];
+    if (action.x !== undefined && !activated.effects.some((e) => (e.amount ?? e.count ?? 1) > 0))
+      return false;
     if (activated.classLevel !== undefined) return true;
     if (activated.effects.some((e) => e.op === 'earthbend')) {
       const target = s.objects[action.target?.id];

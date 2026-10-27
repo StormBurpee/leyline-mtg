@@ -55,11 +55,12 @@ function conditionTarget(s, player, value, context) {
 export function meetsCondition(s, player, value, excludedIds = [], source = null, context = {}) {
   const eventManaSpent = typeof context === 'number' ? context : (context?.eventManaSpent ?? null);
   if (!value) return true;
-  if (value.kind === 'sourceToughnessAtMost') {
+  if (['sourceToughnessAtMost', 'sourcePowerAtMost'].includes(value.kind)) {
     const current = source && s.objects[source.id];
     const live = current?.incarnation === source?.incarnation && current.zone === 'battlefield';
-    const toughness = live ? stats(s, current).toughness : source?.statsLKI?.toughness;
-    return toughness !== undefined && toughness <= value.count;
+    const stat = value.kind === 'sourcePowerAtMost' ? 'power' : 'toughness';
+    const amount = live ? stats(s, current)[stat] : source?.statsLKI?.[stat];
+    return amount !== undefined && amount <= value.count;
   }
   if (['targetMatches', 'targetEnteredThisTurn'].includes(value.kind)) {
     const object = conditionTarget(s, player, value, context);

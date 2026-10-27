@@ -1,0 +1,41 @@
+{
+  "Caradora, Heart of Alacria": {
+    "oracle_id": "a9d60d80-bcef-45e0-8ded-d70bd3c2780f",
+    "oracle_text": "When Caradora enters, you may search your library for a Mount or Vehicle card, reveal it, put it into your hand, then shuffle.\nIf one or more +1/+1 counters would be put on a creature or Vehicle you control, that many plus one +1/+1 counters are put on it instead.",
+    "mana_cost": "{2}{G}{W}",
+    "type_line": "Legendary Creature \u2014 Human Knight",
+    "power": "4",
+    "toughness": "2",
+    "image": "https://cards.scryfall.io/normal/front/1/2/1256d22d-a2a9-41fb-b669-0661ba230bc7.jpg?1783907860",
+    "art": "https://cards.scryfall.io/art_crop/front/1/2/1256d22d-a2a9-41fb-b669-0661ba230bc7.jpg?1783907860",
+    "artist": "Mirko Failoni",
+    "set": "dft",
+    "collector_number": "195"
+  },
+  "Michelangelo, Weirdness to 11": {
+    "oracle_id": "170ab932-9d50-4ce7-9a42-08e1edce7e7c",
+    "oracle_text": "When Michelangelo enters, create a Mutagen token. (It's an artifact with \"{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.\")\nIf one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.",
+    "mana_cost": "{1}{G}",
+    "type_line": "Legendary Creature \u2014 Mutant Ninja Turtle",
+    "power": "1",
+    "toughness": "1",
+    "image": "https://cards.scryfall.io/normal/front/1/8/18477047-218d-4b2a-a086-37431b6a3025.jpg?1783904086",
+    "art": "https://cards.scryfall.io/art_crop/front/1/8/18477047-218d-4b2a-a086-37431b6a3025.jpg?1783904086",
+    "artist": "Jason Kiantoro",
+    "set": "tmt",
+    "collector_number": "121"
+  },
+  "Yoshimaru, Beloved Companion": {
+    "oracle_id": "c00a0be5-d9a9-4263-a87e-7bf2d128ab3a",
+    "oracle_text": "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.\n{6}: Put a +1/+1 counter on target legendary creature.",
+    "mana_cost": "{2}{W}",
+    "type_line": "Legendary Creature \u2014 Dog",
+    "power": "2",
+    "toughness": "2",
+    "image": "https://cards.scryfall.io/normal/front/3/8/384f3b7d-8d7f-41bf-bebd-64e8babe7fca.jpg?1789470881",
+    "art": "https://cards.scryfall.io/art_crop/front/3/8/384f3b7d-8d7f-41bf-bebd-64e8babe7fca.jpg?1789470881",
+    "artist": "Brian Valeza",
+    "set": "fra",
+    "collector_number": "209"
+  }
+}

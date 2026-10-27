@@ -1,3 +1,4 @@
+import { MAX_X } from './mana-value.js';
 import { CLASS_ABILITY_FIELDS } from './class-levels.js';
 import { CREATURE_TYPES } from './creature-types.js';
 import { validateTargetGroups } from './target-group-schema.js';
@@ -43,6 +44,7 @@ const FIELDS = new Set([
   'chooseCreatureType',
   'chooseBasicLandType',
   'entryCounterBonus',
+  'plusCounterBonus',
   'entryKeywordCounters',
   'entryPlusCounters',
   'landNameLock',
@@ -141,7 +143,7 @@ function validateCost(cost, path, errors, allowX = false, allowTwobrid = false) 
     )
       errors.push(`${path}.${key}: unsupported mana symbol or nonnegative integer amount.`);
 }
-function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
+function validatePaymentCost(cost, path, errors, { allowTap = false, allowX = false } = {}) {
   if (!plain(cost)) {
     errors.push(`${path}: expected a cost object.`);
     return;
@@ -151,7 +153,7 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
     : ['mana', 'life'];
   if (Object.keys(cost).some((key) => !allowed.includes(key)))
     errors.push(`${path}: unsupported cost.`);
-  if (cost.mana !== undefined) validateCost(cost.mana, `${path}.mana`, errors);
+  if (cost.mana !== undefined) validateCost(cost.mana, `${path}.mana`, errors, allowX);
   if (cost.life !== undefined && !natural(cost.life))
     errors.push(`${path}.life: expected a nonnegative safe integer.`);
   if (cost.sacrificeSelf !== undefined && typeof cost.sacrificeSelf !== 'boolean')
@@ -1248,6 +1250,7 @@ export function validateDefinition(card) {
     triggers,
     etb,
     entryPlusCounters,
+    activated,
     ...otherFields
   } = card;
   const entryEffects = [etb];
@@ -1262,7 +1265,7 @@ export function validateDefinition(card) {
   });
   if (hasX(otherFields) || hasX(otherTriggers))
     errors.push(
-      `${name}: X expressions are supported only in spell effects, self-entry effects and entry counters.`,
+      `${name}: X expressions are supported only in spell effects, self-entry effects, entry counters and X-cost activated effects.`,
     );
   if ((hasX(spellEffects) || hasX(entryEffects) || hasX(entryPlusCounters)) && !printedCost?.X)
     errors.push(`${name}: X expressions require an X mana cost.`);
@@ -1584,6 +1587,23 @@ export function validateDefinition(card) {
     if (!typesOnly(card.suppressEnterTriggers))
       errors.push(`${name}.suppressEnterTriggers: only type predicates are supported.`);
   }
+  if (card.plusCounterBonus !== undefined) {
+    const b = card.plusCounterBonus;
+    if (
+      !plain(b) ||
+      Object.keys(b).some((key) => !['amount', 'scope'].includes(key)) ||
+      !natural(b.amount) ||
+      b.amount < 1 ||
+      b.amount > 1000 ||
+      !['creatureYouControl', 'creatureOrVehicleYouControl'].includes(b.scope) ||
+      !['creature', 'artifact', 'enchantment', 'land', 'planeswalker'].some((type) =>
+        hasType(card, type),
+      )
+    )
+      errors.push(
+        `${name}.plusCounterBonus: expected a positive additive +1/+1 replacement for creatures or Vehicles you control.`,
+      );
+  }
   if (card.entryCounterBonus !== undefined) {
     const b = card.entryCounterBonus;
     if (
@@ -1844,7 +1864,7 @@ export function validateDefinition(card) {
         if (
           !plain(rule) ||
           Object.keys(rule).some((key) => !['restriction', 'condition'].includes(key)) ||
-          !['cannotAttack', 'cannotBlock'].includes(rule.restriction)
+          !['cannotAttack', 'cannotBlock', 'unblockable'].includes(rule.restriction)
         ) {
           errors.push(`${name}.conditionalCombatRestrictions: unsupported restriction.`);
           continue;
@@ -2316,7 +2336,8 @@ export function validateDefinition(card) {
             a.zone ||
             a.oncePerTurn ||
             a.loyalty !== undefined ||
-            Object.keys(card.cost).some((k) => k.includes('/')))
+            Object.keys(card.cost).some((k) => k.includes('/')) ||
+            Object.keys(a.cost.mana ?? {}).some((k) => k.includes('/')))
         )
           errors.push(`${p}: invalid power-up ability.`);
         if (
@@ -2338,7 +2359,26 @@ export function validateDefinition(card) {
           errors.push(`${p}.oncePerTurn: expected a boolean.`);
         if (a.timing !== undefined && a.timing !== 'sorcery')
           errors.push(`${p}.timing: unsupported timing.`);
-        validatePaymentCost(a.cost, `${p}.cost`, errors, { allowTap: true });
+        validatePaymentCost(a.cost, `${p}.cost`, errors, { allowTap: true, allowX: true });
+        if (
+          a.cost.mana?.X &&
+          !Number.isSafeInteger((a.cost.mana.generic ?? 0) + a.cost.mana.X * MAX_X)
+        )
+          errors.push(`${p}: activated X mana cost exceeds the safe integer budget.`);
+        const { effects: activatedEffects, ...activationFields } = a;
+        if (hasX(activationFields) || (hasX(activatedEffects) && !a.cost.mana?.X))
+          errors.push(
+            `${p}: X expressions require this ability's X mana cost and belong only in its effects.`,
+          );
+        if (contains(activatedEffects, (v) => v.condition && hasX(v.condition)))
+          errors.push(`${p}: X-dependent conditions are not supported.`);
+        if (
+          a.cost.mana?.X &&
+          !a.target &&
+          !a.targetGroups &&
+          contains(activatedEffects, (v) => v.op === 'addMana')
+        )
+          errors.push(`${p}: X-cost mana abilities require unsupported mana payment planning.`);
         if (
           a.cost.sacrifice &&
           !a.target &&

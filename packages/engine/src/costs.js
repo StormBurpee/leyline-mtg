@@ -1,3 +1,4 @@
+import { MAX_X } from './mana-value.js';
 import { activationSacrificeProblem, costManaExclusions } from './activation-sacrifice.js';
 import { tapObjects } from './model.js';
 import {
@@ -104,15 +105,41 @@ export function payCost(s, p, cost, options = {}) {
   }
 }
 
-/** Power-up reduction uses current mana cost, never mana spent casting (CR 702.193). */
-export function activationCost(s, object, ability) {
-  if (!ability.powerUp || object.enteredTurn !== s.turn) return ability.cost;
-  const cost = structuredClone(ability.cost),
-    reduction = definition(s, object).cost;
+/** CR 602.2b / 601.2b: announce X before determining the activation cost. */
+export function activationXProblem(ability, x) {
+  if (!ability.cost.mana?.X) return x === undefined ? null : 'This ability has no X mana cost.';
+  return Number.isSafeInteger(x) && x >= 0 && x <= MAX_X
+    ? null
+    : `Choose an integer X from 0 to ${MAX_X}.`;
+}
+/** CR 602.2b / 601.2f: substitute X, then reduce, then lock before mana abilities.
+ * Power-up reduction uses current mana cost, never mana spent casting (CR 702.193).
+ */
+export function activationCost(s, object, ability, x) {
+  const problem = activationXProblem(ability, x);
+  requireRule(!problem, 'ACTIVATION_X', problem);
+  const cost = structuredClone(ability.cost);
+  if (cost.mana?.X) {
+    cost.mana.generic = (cost.mana.generic ?? 0) + cost.mana.X * x;
+    delete cost.mana.X;
+    requireRule(
+      Number.isSafeInteger(cost.mana.generic),
+      'COST_RANGE',
+      'Mana cost exceeds the safe integer range.',
+    );
+  }
+  if (!ability.powerUp || object.enteredTurn !== s.turn) return cost;
+  const reduction = definition(s, object).cost;
   for (const [symbol, amount] of Object.entries(reduction)) {
     if (symbol === 'X') continue;
-    cost.mana[symbol] = Math.max(0, (cost.mana[symbol] ?? 0) - amount);
+    const matching = Math.min(cost.mana[symbol] ?? 0, amount);
+    cost.mana[symbol] = (cost.mana[symbol] ?? 0) - matching;
     if (!cost.mana[symbol]) delete cost.mana[symbol];
+    // CR 702.193b / 118.7b–d: unused colored/colorless reduction pays generic.
+    if (symbol !== 'generic' && amount > matching) {
+      cost.mana.generic = Math.max(0, (cost.mana.generic ?? 0) - (amount - matching));
+      if (!cost.mana.generic) delete cost.mana.generic;
+    }
   }
   return cost;
 }

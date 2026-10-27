@@ -249,7 +249,7 @@ test('unsupported X contexts fail closed', () => {
       cost: {},
       power: 1,
       toughness: 1,
-      activated: [{ cost: { mana: { X: 1 } }, effects: [{ op: 'draw', count: 1 }] }],
+      activated: [{ cost: { mana: { X: 1 } }, effects: [{ op: 'addMana', mana: { U: 1 } }] }],
     },
     {
       name: 'X stat',

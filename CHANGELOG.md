@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.61.0 — Activated X and bounded counter replacements
+
+- Add six complete Standard cards: Alquist Proft, Master Sleuth; Mindspring Merfolk; Stature, Size Shifter; Caradora, Heart of Alacria; Michelangelo, Weirdness to 11; and Yoshimaru, Beloved Companion. Standard reaches 2206 of 5164; Arena reaches 2413 of 15332. Catalog: 2425 playable cards and 108 tokens. No new tokens or partial definitions.
+- Chosen X in nonmana activated costs locks payment and effect bindings through Power-up, Exhaust, selected sacrifices, source departures and optional continuations. The client chooses X before targets/costs; bots account for grouped pending draws and cancellation clears stale casting intent. Unsupported arithmetic overflow rejects.
+- Bounded additive +1/+1 counter replacements apply once per positive placement, including entry, explore, connive and earthbend, using current recipients and pre-entry sources. Arbitrary counter types, placer conditions, multiplication and noncommuting ordering remain excluded. Preserve all previous definitions, revision 4 and legacy 1–3 behavior, published v0.60 replay envelopes, exact decks and saved-catalog caching.
+
 ## 0.60.0 — Class follow-through and complete Standard definitions
 
 - Add 12 complete Standard cards: Leader's Talent, Gossip's Talent, Does Machines and nine existing-engine definitions. Standard reaches 2200 of 5164; Arena reaches 2407 of 15332. Catalog: 2419 playable cards and 108 tokens.

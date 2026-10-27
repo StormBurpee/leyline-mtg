@@ -1118,6 +1118,16 @@ export function compileCard(
         fields(a, ['kind', 'amount'], path);
         d.entryStunCounters = a.amount;
         break;
+      case 'plusCounterBonus':
+        fields(a, ['kind', 'amount', 'scope'], path);
+        if (d.plusCounterBonus)
+          problem(
+            'MULTIPLE_PLUS_COUNTER_BONUS',
+            path,
+            'Only one counter replacement per definition is supported.',
+          );
+        d.plusCounterBonus = { amount: a.amount, scope: a.scope };
+        break;
       case 'entryCounterBonus':
         fields(a, ['kind', 'amount', 'condition'], path);
         d.entryCounterBonus = { amount: a.amount, condition: structuredClone(a.condition) };

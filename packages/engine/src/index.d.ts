@@ -412,7 +412,7 @@ export type StateCondition =
   | { kind: 'additionalCostPaid' }
   | { kind: 'sourceBargained' }
   | { kind: 'sourceType'; type: CardType }
-  | { kind: 'sourceToughnessAtMost'; count: number }
+  | { kind: 'sourceToughnessAtMost' | 'sourcePowerAtMost'; count: number }
   | { kind: 'sourcePrepared'; prepared: boolean }
   | { kind: 'sourceExiledCardTypesAtLeast'; count: number }
   | { kind: 'eventManaSpentAtLeast'; count: number }
@@ -528,6 +528,10 @@ export interface CardDefinition {
   readonly additionalEnterTrigger?: CardPredicate;
   readonly suppressEnterTriggers?: CardPredicate;
   readonly entryStunCounters?: number;
+  readonly plusCounterBonus?: {
+    amount: number;
+    scope: 'creatureYouControl' | 'creatureOrVehicleYouControl';
+  };
   readonly entryCounterBonus?: { amount: number; condition: StateCondition };
   readonly cantGainLife?: boolean;
   readonly cantPreventDamage?: boolean;
@@ -538,7 +542,7 @@ export interface CardDefinition {
   readonly cannotAttack?: boolean;
   readonly cannotBlock?: boolean;
   readonly conditionalCombatRestrictions?: readonly {
-    restriction: 'cannotAttack' | 'cannotBlock';
+    restriction: 'cannotAttack' | 'cannotBlock' | 'unblockable';
     condition: StateCondition;
   }[];
   readonly unblockable?: boolean;
@@ -784,6 +788,7 @@ export interface StackEntry {
   sourceCopyDefinition?: CardDefinition;
   x?: number;
   castingCost?: ManaCost;
+  activationCost?: NonNullable<CardDefinition['activated']>[number]['cost'];
   distribution?: Record<string, number>;
   convoke?: ConvokeChoice[];
   sacrifice?: ObjectTarget;
@@ -1186,6 +1191,8 @@ export type Action =
     }
   | {
       type: 'activate';
+      x?: number;
+      autoTap?: boolean;
       sacrifices?: ObjectTarget[];
       card: string;
       ability: number;
@@ -1338,6 +1345,12 @@ export function castProblem(
     additionalCost?: AdditionalCostPayment;
   },
 ): string | null;
+export function activationCost(
+  state: GameState,
+  object: GameObject,
+  ability: NonNullable<CardDefinition['activated']>[number],
+  x?: number,
+): NonNullable<CardDefinition['activated']>[number]['cost'];
 export function abilityProblem(
   state: GameState,
   player: PlayerId,
@@ -1347,6 +1360,8 @@ export function abilityProblem(
   discardCard?: string,
   targets?: TargetPlan,
   sacrifices?: ObjectTarget[],
+  x?: number,
+  autoTap?: boolean,
 ): string | null;
 export function legalTarget(
   state: GameState,

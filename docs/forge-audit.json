@@ -2544,8 +2544,8 @@
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
     "packages/engine/src/registry.js": "8426f6d386d583110b57aa2a55bc00ca44d6a55416338384f8df0374b86b7095",
     "packages/engine/src/effect-tree.js": "86a39c9e2e0a428d3195a57e53ba6a054a367702a23ee4805986320012ab3b6b",
-    "packages/engine/src/definition-validation.js": "5bcfaf5b460fe744f015af58632502989011bb98d339f4f252cc6fa505fc3ca3",
-    "packages/engine/src/condition-schema.js": "7ca4630f00234f2af1502c67f4442b5214bfb273061ae7a9ed36740f547ddb76",
+    "packages/engine/src/definition-validation.js": "24a90dc66022eba6d517e0da449df8effbc4480fd8f5f1208a34c04131a1c991",
+    "packages/engine/src/condition-schema.js": "d1c00249f680a7c01e3591eb765cc240f65091be84899dbc61cc35823af415ed",
     "packages/engine/src/target-group-schema.js": "488c4d5141dd2395cb5fcc02303bacd9ec4047abb08e0d8e5c7d9bea78498681",
     "packages/engine/src/selectors.js": "ae4cc83e272d010166aeb18a1db9b623fda373181ea4854ac4fcdbfad24891e9",
     "packages/engine/src/value-schema.js": "9b43c61b96a4fe7434839f5d538fc3fb3e2f5d8c7bbb80b61935eb5d2a016f98",
@@ -2554,5 +2554,5 @@
     "packages/engine/src/types.js": "cd3ad79db1d75dab6abeb564373d213814ab9aeee6d9301fa160cbd57dca8f25",
     "packages/engine/src/creature-types.js": "a9795a0aee66966054a854ece62af6406bc029c2b9e85d83b344e38eeb82a109"
   },
-  "auditedWithEngine": "0.60.0"
+  "auditedWithEngine": "0.61.0"
 }

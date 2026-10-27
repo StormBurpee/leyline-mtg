@@ -527,6 +527,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     abilities.push({ kind: 'maxSpeedKeywords', keywords: [...d.maxSpeedKeywords] });
   if (d.entryStunCounters !== undefined)
     abilities.push({ kind: 'entryStunCounters', amount: d.entryStunCounters });
+  if (d.plusCounterBonus)
+    abilities.push({ kind: 'plusCounterBonus', ...structuredClone(d.plusCounterBonus) });
   if (d.entryCounterBonus)
     abilities.push({ kind: 'entryCounterBonus', ...structuredClone(d.entryCounterBonus) });
   for (const rule of ['cantGainLife', 'cantPreventDamage'])

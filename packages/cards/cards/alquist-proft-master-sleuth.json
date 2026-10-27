@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dd79a994-7dad-49d4-8d8f-62dbedde4a38",
+  "name": "Alquist Proft, Master Sleuth",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Detective"],
+    "colors": ["U", "W"],
+    "manaCost": "{1}{W}{U}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Vigilance\nWhen Alquist Proft enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\n{X}{W}{U}{U}, {T}, Sacrifice a Clue: You draw X cards and gain X life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{X}{W}{U}{U}",
+        "tap": true,
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "subtype": "Clue"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": {
+            "kind": "x"
+          }
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": {
+            "kind": "x"
+          }
+        }
+      ],
+      "text": "{X}{W}{U}{U}, {T}, Sacrifice a Clue: You draw X cards and gain X life."
+    }
+  ]
+}

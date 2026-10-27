@@ -73,9 +73,35 @@ function ignoresCreatureProtection(s, object) {
 }
 // CR 122.1a / 704.5q: placement changes stats immediately; opposing counters
 // cancel only at the next simultaneous SBA batch, never between instructions.
-function putStatCounters(object, effect) {
+function statCounterReplacements(s) {
+  // The deliberately bounded contract is additive, recipient-scoped and
+  // independent of counter counts. Every source applies once; all legal orders
+  // therefore commute. Multipliers/optional replacements need an ordering choice.
+  return battlefield(s).flatMap((source) => {
+    const bonus = definition(s, source).plusCounterBonus;
+    return bonus ? [{ controller: source.controller, ...bonus }] : [];
+  });
+}
+function putStatCounters(s, object, effect, replacements = null) {
+  // A nonpositive instruction is not a counter-placement event (CR 107.1b).
+  if (effect.amount <= 0) return;
   const key = effect.counter === '-1/-1' ? 'minusCounters' : 'plusCounters';
-  const next = (object[key] ?? 0) + effect.amount;
+  let amount = effect.amount;
+  const d = definition(s, object);
+  if (
+    key === 'plusCounters' &&
+    object.zone === 'battlefield' &&
+    // CR 205.1a: Vehicle is an artifact subtype. Do not let a retained
+    // printed subtype on an enchantment-only form grant Vehicle eligibility.
+    (hasType(d, 'creature') || (hasType(d, 'artifact') && d.subtypes.includes('Vehicle')))
+  )
+    for (const replacement of replacements ?? statCounterReplacements(s))
+      if (
+        replacement.controller === object.controller &&
+        (hasType(d, 'creature') || replacement.scope === 'creatureOrVehicleYouControl')
+      )
+        amount += replacement.amount;
+  const next = (object[key] ?? 0) + amount;
   requireRule(Number.isSafeInteger(next), 'COUNTER_RANGE', 'Too many counters.');
   object[key] = next;
 }
@@ -463,6 +489,10 @@ export function enterBattlefieldBatch(
       }, 0),
     ]),
   );
+  // CR 614.12: a general battlefield replacement does not function from
+  // another simultaneous entrant (nor from the entrant itself). Freeze sources
+  // before any moves, then inspect each recipient's prospective characteristics.
+  const counterReplacements = statCounterReplacements(s);
   // Role Auras attached in one entry batch have simultaneous timestamps (CR 303.7a, 613.7m).
   const roleTimestamp = entering.some(
     ({ object, attachment }) => attachment && definition(s, object).subtypes.includes('Role'),
@@ -515,11 +545,18 @@ export function enterBattlefieldBatch(
     // Entry counters are a replacement, not a triggered effect. move() clears the
     // spell's chosenX, so use its pre-move snapshot (zero for nonstack entry).
     // This runs before entry observers and state-based actions see the permanent.
-    object.plusCounters +=
-      (entryCounters.get(object.id) ?? 0) +
-      (definition(s, object).entryPlusCounters?.kind === 'x'
-        ? castValues.get(object.id)
-        : (definition(s, object).entryPlusCounters ?? 0));
+    putStatCounters(
+      s,
+      object,
+      {
+        amount:
+          (entryCounters.get(object.id) ?? 0) +
+          (definition(s, object).entryPlusCounters?.kind === 'x'
+            ? castValues.get(object.id)
+            : (definition(s, object).entryPlusCounters ?? 0)),
+      },
+      counterReplacements,
+    );
     if (definition(s, object).entryKeywordCounters) {
       object.keywordCounters = {};
       object.keywordCounterTimestamps = {};
@@ -1174,7 +1211,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
                 keywords: e.keywords ?? [],
                 expires: s.turn,
               });
-            else if (e.op === 'counterAll') putStatCounters(object, e);
+            else if (e.op === 'counterAll') putStatCounters(s, object, e);
             else if (e.op === 'untapAll') untapObject(s, object);
             else tapObjects(s, [object]);
           }
@@ -1254,11 +1291,10 @@ export function resolveEffects(s, entry, startIndex = 0) {
           : o
             ? [o]
             : [];
-        for (const object of objects) {
-          const next = object.plusCounters * 2;
-          requireRule(Number.isSafeInteger(next), 'COUNTER_RANGE', 'Too many counters.');
-          object.plusCounters = next;
-        }
+        // Doubling puts as many NEW counters as the existing count. Replacement
+        // effects modify that placement, never the counters already present.
+        for (const object of objects)
+          putStatCounters(s, object, { amount: object.plusCounters ?? 0 });
         break;
       }
       case 'doublePower':
@@ -1273,10 +1309,10 @@ export function resolveEffects(s, entry, startIndex = 0) {
           });
         break;
       case 'distributedCounters':
-        if (o) o.plusCounters += entry.distribution?.[target.id] ?? 0;
+        if (o) putStatCounters(s, o, { amount: entry.distribution?.[target.id] ?? 0 });
         break;
       case 'counterOn':
-        if (o) putStatCounters(o, e);
+        if (o) putStatCounters(s, o, e);
         break;
       case 'prepare':
         if (o) preparePermanent(s, o);
@@ -1338,7 +1374,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           move(s, card, 'hand');
           break;
         }
-        if (o) o.plusCounters += 1;
+        if (o) putStatCounters(s, o, { amount: 1 });
         if (!card) break;
         s.resolving = { entry, index: index + 1 };
         s.choice = { kind: 'libraryOrder', player, action: 'explore', cards: [id], revealed: true };
@@ -1992,7 +2028,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           keywords: ['haste'],
           permanent: true,
         });
-        o.plusCounters += e.amount;
+        putStatCounters(s, o, e);
         (s.earthbendReturns ??= []).push({
           object: ref(o),
           kind: 'ability',
@@ -2887,7 +2923,7 @@ export function finishResolutionChoice(s, command) {
     if (qualifying && choice.conniving) {
       const creature = s.objects[choice.conniving.id];
       if (creature?.zone === 'battlefield' && creature.incarnation === choice.conniving.incarnation)
-        putStatCounters(creature, { amount: qualifying });
+        putStatCounters(s, creature, { amount: qualifying });
     }
     if (qualifying && choice.continuation) {
       const frame = s.resolving;
