@@ -31,6 +31,7 @@ export function validateNumericValue(value) {
       return;
     }
     const allowed = {
+      x: ['kind'],
       count: ['kind', 'zone', 'player', 'where', 'excludeSource'],
       life: ['kind', 'player'],
       spellsCast: ['kind', 'player', 'where'],

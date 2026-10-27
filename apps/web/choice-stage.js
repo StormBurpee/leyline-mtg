@@ -11,6 +11,7 @@ export const CARD_DECISIONS = new Set([
   'bottom',
   'discard',
   'discardEffect',
+  'sacrifice',
   'exilePlay',
   'bindingNegotiation',
   'exileToGraveyard',

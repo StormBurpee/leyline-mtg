@@ -252,6 +252,11 @@ function actionDock(s, ui, p, actions) {
         desc = `London mulligan · ${s.players[p].mulligans} taken. Keep seven, then bottom one per mulligan.`;
         buttons = `<button class="btn" data-action="mulligan" ${s.players[p].mulligans >= 7 ? 'disabled' : ''}>Mulligan</button><button class="btn primary" data-action="keep">Keep hand</button>`;
         break;
+      case 'sacrifice':
+        title = `Sacrifice ${c.count} permanent${c.count === 1 ? '' : 's'}`;
+        desc = 'Choose eligible permanents you control in the decision panel.';
+        buttons = '';
+        break;
       case 'bottom':
       case 'discardEffect':
       case 'discard':

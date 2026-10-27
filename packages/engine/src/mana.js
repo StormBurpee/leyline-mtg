@@ -61,6 +61,7 @@ export function tapForMana(s, id, p, color) {
 }
 /** Pure unit-capacity matching. Flexible sources must not strand a colored cost. */
 export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], purpose } = {}) {
+  if (cost.X) return null; // X must be announced and expanded before payment.
   const pool = { ...s.players[p].mana };
   const spent = Object.fromEntries(COLORS.map((c) => [c, 0]));
   let sources = autoTap

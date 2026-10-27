@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.41.0 — Chosen X and real sacrifice effects
+
+- Announce X explicitly, including repeated-X payment, locked cost modifiers and correct stack/nonstack mana value. Add chosen-X values, numeric UI, bounded policy proposals and opaque/replay transport.
+- Add mandatory filtered sacrifice choices and source self-sacrifice. Stage APNAP choices before simultaneous departures; preserve death snapshots and resolution continuation. Indestructible and targeting protections do not prevent sacrifice.
+- Add 10 complete X spells, seven sacrifice cards and four functional tokens. Catalog: 1206 playable cards and 33 tokens.
+- Manual X is bounded to 0–1000 as an implementation budget; default proposals are bounded separately. Permanent/activated/static X, unsupported alternate-cost combinations, delayed sacrifice scheduling, extra casting costs and linked sacrifice outcomes remain rejected.
+
 ## 0.40.0 — Vehicles and public spell history
 
 - Add crew costs and temporary incarnation-bound Vehicle animation, including summoning-sickness rules, explicit crew selection, replay/opaque commands and bounded bot proposals. Preserve printed P/T outside the battlefield and dormant modifiers before animation.

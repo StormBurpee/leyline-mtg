@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9af4a832-d634-47aa-91ed-79d44fe08864",
+  "name": "Pick Your Poison",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{G}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Each opponent sacrifices an artifact of their choice.\n\u2022 Each opponent sacrifices an enchantment of their choice.\n\u2022 Each opponent sacrifices a creature with flying of their choice.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Each opponent sacrifices an artifact.",
+          "effects": [
+            {
+              "op": "sacrifice",
+              "player": "opponent",
+              "count": 1,
+              "where": {
+                "type": "artifact"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Each opponent sacrifices an enchantment.",
+          "effects": [
+            {
+              "op": "sacrifice",
+              "player": "opponent",
+              "count": 1,
+              "where": {
+                "type": "enchantment"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Each opponent sacrifices a creature with flying.",
+          "effects": [
+            {
+              "op": "sacrifice",
+              "player": "opponent",
+              "count": 1,
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "keyword": "flying"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

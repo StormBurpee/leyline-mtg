@@ -11,7 +11,7 @@ import { spellProfile } from './spell-modes.js';
 import { matchesFilter } from './selectors.js';
 import { numericValue } from './numeric-values.js';
 import { meetsCondition } from './conditions.js';
-const manaValue = (card) => Object.values(card.cost).reduce((a, b) => a + b, 0);
+import { manaValue, MAX_X } from './mana-value.js';
 function targetFacts(state, target) {
   if (target?.kind === 'player') return { controller: target.id, owner: target.id };
   if (target?.kind === 'stack') {
@@ -24,7 +24,7 @@ function targetFacts(state, target) {
           definition: card,
           controller: entry.controller,
           owner: object?.owner,
-          manaValue: manaValue(card),
+          manaValue: manaValue(card, entry.x ?? 0),
           keywords: card.keywords,
           ...(object ? stats(state, object) : {}),
         }
@@ -59,15 +59,22 @@ export function castingProfile(
   mode,
   target = null,
   card = definition(state, object),
+  x,
 ) {
   const base = spellProfile(card, mode);
-  const profile =
+  let profile =
     object.zone === 'graveyard'
       ? base?.flashback
         ? { ...base, cost: { ...base.flashback }, flashbackPaid: true }
         : null
       : base;
   if (!profile) return null;
+  if (profile.cost.X) {
+    if (!Number.isSafeInteger(x) || x < 0 || x > MAX_X) return null;
+    const cost = { ...profile.cost, generic: (profile.cost.generic ?? 0) + profile.cost.X * x };
+    delete cost.X;
+    profile = { ...profile, cost, chosenX: x };
+  } else if (x !== undefined) return null;
   const intrinsic = (profile.costModifiers ?? []).filter((m) => m.scope === 'self');
   const sources = battlefield(state)
     .map((source) => ({
@@ -77,7 +84,7 @@ export function castingProfile(
     .filter((x) => x.modifiers.length);
   if (!intrinsic.length && !sources.length) return profile;
   // Cost determination sees the proposed spell on the stack, not in its old zone.
-  const proposed = { ...object, zone: 'stack', controller: player };
+  const proposed = { ...object, zone: 'stack', controller: player, chosenX: x ?? 0 };
   const projected = {
     ...state,
     objects: { ...state.objects, [object.id]: proposed },
@@ -94,7 +101,7 @@ export function castingProfile(
     definition: profile,
     controller: player,
     owner: object.owner,
-    manaValue: profile.faceDownCast ? 0 : manaValue(card),
+    manaValue: profile.faceDownCast ? 0 : manaValue(card, x ?? 0),
     keywords: profile.keywords,
     ...(profile.faceDownCast ? { power: 2, toughness: 2 } : stats(projected, proposed)),
   };

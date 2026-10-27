@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "07b28ed7-eab8-4560-9994-3befcba876d3",
+  "name": "Choco-Comet",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["R"],
+    "supertypes": [],
+    "manaCost": "{X}{R}{R}"
+  },
+  "rulesText": "Choco-Comet deals X damage to any target.\nCreate a 2/2 green Bird creature token with \"Whenever a land you control enters, this token gets +1/+0 until end of turn.\"",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": {
+            "kind": "x"
+          }
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/landfall-bird-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

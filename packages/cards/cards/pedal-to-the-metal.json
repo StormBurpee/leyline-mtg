@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "22196948-9f30-4fcd-b43b-c7f81a0f4f36",
+  "name": "Pedal to the Metal",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{X}{R}"
+  },
+  "rulesText": "Target creature gets +X/+0 and gains first strike until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "x"
+          },
+          "toughness": 0,
+          "keywords": ["first strike"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

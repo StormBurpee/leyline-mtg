@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3428287b-cfd5-45bc-b5f9-1e3f5a425a68",
+  "name": "Mind Spring",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{X}{U}{U}"
+  },
+  "rulesText": "Draw X cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": {
+            "kind": "x"
+          }
+        }
+      ]
+    }
+  ]
+}

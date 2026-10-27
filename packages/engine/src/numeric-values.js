@@ -1,8 +1,13 @@
 import { spellsCastCount } from './spell-history.js';
+import { manaValue } from './mana-value.js';
 import { definition, isAttacking, isBlocking, requireRule } from './model.js';
 import { matchesFilter } from './selectors.js';
 /** Resolve public-state values once per instruction or continuous-characteristic query. */
-export function numericValue(state, value, { controller, source = null, excludedIds = [] } = {}) {
+export function numericValue(
+  state,
+  value,
+  { controller, source = null, excludedIds = [], x = 0 } = {},
+) {
   if (typeof value === 'number') return value;
   let result = 0;
   const players =
@@ -11,17 +16,21 @@ export function numericValue(state, value, { controller, source = null, excluded
     case 'spellsCast':
       result = spellsCastCount(state, players, value.where, controller);
       break;
+    case 'x':
+      result = x;
+      break;
     case 'life':
       result = state.players[players[0]].life;
       break;
     case 'sum':
       result = value.values.reduce(
-        (n, v) => n + numericValue(state, v, { controller, source, excludedIds }),
+        (n, v) => n + numericValue(state, v, { controller, source, excludedIds, x }),
         0,
       );
       break;
     case 'scale':
-      result = value.factor * numericValue(state, value.value, { controller, source, excludedIds });
+      result =
+        value.factor * numericValue(state, value.value, { controller, source, excludedIds, x });
       break;
     case 'count':
       if (['hand', 'library'].includes(value.zone)) {
@@ -56,7 +65,7 @@ export function numericValue(state, value, { controller, source = null, excluded
             tapped: o.tapped,
             attacking: isAttacking(state, o),
             blocking: isBlocking(state, o),
-            manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+            manaValue: manaValue(d),
           },
           value.where,
           controller,
@@ -76,7 +85,7 @@ export function numericValue(state, value, { controller, source = null, excluded
 export function effectValues(state, effect, entry) {
   if (effect.op === 'drawEventAmount')
     return { op: 'draw', count: Math.max(0, entry.eventAmount ?? 0) };
-  const context = { controller: entry.controller, source: entry.source };
+  const context = { controller: entry.controller, source: entry.source, x: entry.x ?? 0 };
   let result = effect;
   for (const key of ['amount', 'count', 'power', 'toughness'])
     if (effect[key] !== null && typeof effect[key] === 'object') {

@@ -1,4 +1,5 @@
 import { spellsCastCount } from './spell-history.js';
+import { manaValue } from './mana-value.js';
 import { numericValue } from './numeric-values.js';
 import { FACE_DOWN } from './disguise.js';
 import { meetsCondition } from './conditions.js';
@@ -7,7 +8,7 @@ import { matchesEvent } from './events.js';
 import { hasType, typesOf, primaryType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.40.0';
+export const VERSION = '0.41.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -94,7 +95,7 @@ function staticApplies(s, source, object, effect) {
       tapped: object.tapped,
       attacking: isAttacking(s, object),
       blocking: isBlocking(s, object),
-      manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+      manaValue: manaValue(d),
     },
     effect.where,
     source.controller,
@@ -130,7 +131,7 @@ export function legalAuraAttachment(s, aura, target, controller = aura?.controll
       tapped: target.tapped,
       attacking: isAttacking(s, target),
       blocking: isBlocking(s, target),
-      manaValue: Object.values(t.cost).reduce((a, b) => a + b, 0),
+      manaValue: manaValue(t),
     },
     targetSpec(d.target)?.where,
     controller,
@@ -393,7 +394,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     keywords: object?.zone === 'battlefield' ? keywords(s, object) : d?.keywords,
     power: pt.power,
     toughness: pt.toughness,
-    manaValue: Object.values(d?.cost ?? {}).reduce((a, b) => a + b, 0),
+    manaValue: manaValue(d, object?.zone === 'stack' ? (object.chosenX ?? 0) : 0),
   };
   const watchers =
     context?.watchers ??
@@ -457,7 +458,7 @@ export function captureDepartureContext(s) {
             keywords: keywords(s, o),
             power: pt.power,
             toughness: pt.toughness,
-            manaValue: Object.values(d?.cost ?? {}).reduce((a, b) => a + b, 0),
+            manaValue: manaValue(d),
           },
         ];
       }),
@@ -480,6 +481,7 @@ export function move(s, o, to, departureContext = null) {
   // CR 702.34a: replace every departure, not just successful resolution.
   if (from === 'stack' && to !== 'stack' && o.flashbackPaid) to = 'exile';
   if (to !== 'stack') delete o.flashbackPaid;
+  delete o.chosenX;
   const dying =
     from === 'battlefield' && to === 'graveyard' && hasType(definition(s, o), 'creature');
   const context = dying ? (departureContext ?? captureDepartureContext(s)) : null;

@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8923462f-0540-41e8-931e-97b5f1dadd51",
+  "name": "Form a Posse",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["R", "W"],
+    "supertypes": [],
+    "manaCost": "{X}{R}{W}"
+  },
+  "rulesText": "Create X 1/1 red Mercenary creature tokens with \"{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.\"",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mercenary-token",
+          "amount": {
+            "kind": "x"
+          }
+        }
+      ]
+    }
+  ]
+}

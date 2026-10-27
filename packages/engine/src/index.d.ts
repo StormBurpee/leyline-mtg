@@ -3,7 +3,7 @@ export type CardType = 'land' | 'creature' | 'instant' | 'sorcery' | 'artifact' 
 export type PlayerId = 0 | 1;
 export type Color = 'W' | 'U' | 'B' | 'R' | 'G' | 'C';
 export type HybridSymbol = `${Exclude<Color, 'C'>}/${Exclude<Color, 'C'>}`;
-export type ManaCost = Partial<Record<Color | 'generic' | HybridSymbol, number>>;
+export type ManaCost = Partial<Record<Color | 'generic' | 'X' | HybridSymbol, number>>;
 export type Zone = 'library' | 'hand' | 'battlefield' | 'stack' | 'graveyard' | 'exile' | 'void';
 export type Step =
   | 'upkeep'
@@ -93,6 +93,7 @@ export type SpellHistoryPredicate =
   | { any: SpellHistoryPredicate[] }
   | { not: SpellHistoryPredicate };
 export type NumericValue =
+  | { kind: 'x' }
   | number
   | {
       kind: 'count';
@@ -116,6 +117,13 @@ export interface TargetGroup {
 export type TargetPlan = Record<string, Target[]>;
 export type Effect = EffectInstruction & { targetGroup?: string };
 type EffectInstruction =
+  | { op: 'sacrificeSelf' }
+  | {
+      op: 'sacrifice';
+      count: number;
+      player: 'controller' | 'opponent' | 'target' | 'all';
+      where?: CardPredicate;
+    }
   | { op: 'drawEventAmount' }
   | { op: 'conditional'; condition: StateCondition; then: Effect[]; else?: Effect[] }
   | { op: 'stunOn'; amount: NumericValue; subject?: 'source' | 'attached' }
@@ -347,6 +355,7 @@ export interface GameObject {
   flashbackPaid?: boolean;
   definitionOverride?: CardDefinition;
   chosenCreatureType?: string;
+  chosenX?: number;
   abilityUses?: Record<number, string>;
   playPermission?: { player: PlayerId; turn: number; incarnation: number };
 }
@@ -393,6 +402,8 @@ export interface StackEntry {
   controller: PlayerId;
   source: ObjectTarget | null;
   sourceDefinition?: CardDefinition;
+  x?: number;
+  castingCost?: ManaCost;
   rule?: 'increaseSpeed';
   flashbackPaid?: boolean;
   kicked?: boolean;
@@ -513,6 +524,15 @@ export type Choice =
       where: CardPredicate | null;
     }
   | { kind: 'libraryOrder'; player: PlayerId; action: 'scry' | 'surveil'; cards: string[] }
+  | {
+      kind: 'sacrifice';
+      player: PlayerId;
+      count: number;
+      cards: string[];
+      refs: ObjectTarget[];
+      remaining: Array<{ player: PlayerId; count: number; cards: string[]; refs: ObjectTarget[] }>;
+      selected: Array<ObjectTarget & { player: PlayerId }>;
+    }
   | { kind: 'bottom' | 'discard' | 'discardEffect'; player: PlayerId; count: number }
   | {
       kind: 'orderTriggers';
@@ -609,6 +629,7 @@ export type Action =
       targets?: TargetPlan;
       target?: Target;
       autoTap?: boolean;
+      x?: number;
       mode?: number;
     }
   | {
@@ -619,7 +640,7 @@ export type Action =
       targets?: TargetPlan;
       target?: Target;
     }
-  | { type: 'bottom' | 'discard' | 'discardEffect' | 'attackers'; cards: string[] }
+  | { type: 'bottom' | 'discard' | 'discardEffect' | 'sacrifice' | 'attackers'; cards: string[] }
   | { type: 'blockers'; pairs: { blocker: string; attacker: string }[] }
   | { type: 'assignDamage'; orders: DamageOrder[] }
   | { type: 'orderTriggers'; ids: string[] }
@@ -699,7 +720,11 @@ export class RuleError extends Error {
 }
 export function createGame(config?: GameConfig): GameState;
 export function dispatch(state: GameState, command: Command): DispatchResult;
-export function legalActions(state: GameState, player: PlayerId): LegalAction[];
+export function legalActions(
+  state: GameState,
+  player: PlayerId,
+  options?: { x?: number },
+): LegalAction[];
 export function cardDefinition(
   name: string,
   catalog?: Readonly<Record<string, CardDefinition>>,
@@ -738,7 +763,7 @@ export function castProblem(
   player: PlayerId,
   id: string,
   target?: Target,
-  options?: { autoTap?: boolean; mode?: number; targets?: TargetPlan },
+  options?: { autoTap?: boolean; mode?: number; targets?: TargetPlan; x?: number },
 ): string | null;
 export function abilityProblem(
   state: GameState,
@@ -816,6 +841,7 @@ export function castingProfile(
   mode?: number,
   target?: Target | Target[] | null,
   card?: CardDefinition,
+  x?: number,
 ): CardDefinition | null;
 
 export function crewProblem(
@@ -826,3 +852,5 @@ export function crewProblem(
 ): string | null;
 export function crewCandidates(state: GameState, player: PlayerId, id: string): GameObject[];
 export function crewPlan(state: GameState, player: PlayerId, id: string): string[] | null;
+export function manaValue(card: CardDefinition, x?: number): number;
+export const MAX_X: number;

@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5f4d0c87-7d59-41d5-9910-86765a0c144b",
+  "name": "Song of Totentanz",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["R"],
+    "supertypes": [],
+    "manaCost": "{X}{R}"
+  },
+  "rulesText": "Create X 1/1 black Rat creature tokens with \"This token can't block.\" Creatures you control gain haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/nonblocking-rat-token",
+          "amount": {
+            "kind": "x"
+          }
+        },
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["haste"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

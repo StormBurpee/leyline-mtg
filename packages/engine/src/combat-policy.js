@@ -1,3 +1,4 @@
+import { manaValue } from './mana-value.js';
 import { beginDamage, assignDamage, canBlock, canAttack } from './combat.js';
 import { stateBasedActions, stabilize, resolveTop, finishTriggerOrder } from './effects.js';
 import { settleCombatPayoffs } from './combat-payoffs.js';
@@ -30,7 +31,7 @@ export function permanentValue(s, o) {
         keywords(s, o).length * 0.8 +
         (d.triggers?.length ?? 0) * 1.8 +
         (d.activated?.length ?? 0) * 1.2
-    : Object.values(d.cost).reduce((a, b) => a + b, 0) + 1;
+    : manaValue(d) + 1;
 }
 function boardCopy(s, active, pairs, attackerIds, compact = false) {
   const objects = Object.fromEntries(

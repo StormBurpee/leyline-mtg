@@ -1157,6 +1157,37 @@
           },
           "required": ["op"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "sacrifice"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            },
+            "player": {
+              "enum": ["controller", "opponent", "target", "all"]
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": ["op", "count", "player"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "sacrificeSelf"
+            }
+          },
+          "required": ["op"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1951,6 +1982,12 @@
     },
     "numericValue": {
       "oneOf": [
+        {
+          "type": "object",
+          "properties": { "kind": { "const": "x" } },
+          "required": ["kind"],
+          "additionalProperties": false
+        },
         {
           "type": "integer"
         },
