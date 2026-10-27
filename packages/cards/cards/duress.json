@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "34c3a894-ee75-4db9-a69f-711bb3cc150a",
+  "name": "Duress",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "revealDiscard",
+          "where": {
+            "not": {
+              "type": "creature"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

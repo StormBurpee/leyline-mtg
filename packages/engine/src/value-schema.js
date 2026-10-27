@@ -14,7 +14,7 @@ const stableFilter = (v) =>
         : !['power', 'toughness', 'keyword'].includes(key),
   );
 /** Closed, bounded data expressions. No callbacks or code evaluation. */
-export function validateNumericValue(value) {
+export function validateNumericValue(value, { effect = false } = {}) {
   const errors = [];
   let nodes = 0;
   const visit = (v, depth = 0) => {
@@ -32,12 +32,14 @@ export function validateNumericValue(value) {
     }
     const allowed = {
       x: ['kind'],
+      sourceStat: ['kind', 'stat'],
       maxManaValue: ['kind', 'player', 'where'],
       count: ['kind', 'zone', 'player', 'where', 'excludeSource'],
       life: ['kind', 'player'],
       spellsCast: ['kind', 'player', 'where'],
       sum: ['kind', 'values'],
       scale: ['kind', 'value', 'factor'],
+      floorDivide: ['kind', 'value', 'divisor'],
     }[v.kind];
     if (!allowed) {
       errors.push('Unknown numeric expression kind.');
@@ -50,6 +52,10 @@ export function validateNumericValue(value) {
       !['you', 'opponent', ...(v.kind !== 'life' ? ['all'] : [])].includes(v.player)
     )
       errors.push('Expected a player relation.');
+    if (v.kind === 'sourceStat') {
+      if (!effect) errors.push('Source statistics are only supported in resolving effects.');
+      if (!['power', 'toughness'].includes(v.stat)) errors.push('Expected power or toughness.');
+    }
     if (v.kind === 'spellsCast' && v.where !== undefined)
       errors.push(...validateSpellHistoryFilter(v.where));
     if (v.kind === 'maxManaValue' && v.where !== undefined) {
@@ -77,6 +83,11 @@ export function validateNumericValue(value) {
         errors.push('Sum needs 1–8 values.');
       else v.values.forEach((x) => visit(x, depth + 1));
     }
+    if (v.kind === 'floorDivide') {
+      if (!Number.isSafeInteger(v.divisor) || v.divisor < 1 || v.divisor > 1000)
+        errors.push('Divisor must be an integer from 1 to 1000.');
+      visit(v.value, depth + 1);
+    }
     if (v.kind === 'scale') {
       if (!Number.isSafeInteger(v.factor) || Math.abs(v.factor) > 1000)
         errors.push('Scale factor must be an integer from -1000 to 1000.');
@@ -88,8 +99,8 @@ export function validateNumericValue(value) {
 }
 export const validNumericValue = (
   value,
-  { nonnegative = false, limit = Number.MAX_SAFE_INTEGER } = {},
+  { nonnegative = false, limit = Number.MAX_SAFE_INTEGER, effect = false } = {},
 ) =>
   typeof value === 'number'
     ? Number.isSafeInteger(value) && (!nonnegative || value >= 0) && Math.abs(value) <= limit
-    : validateNumericValue(value).length === 0;
+    : validateNumericValue(value, { effect }).length === 0;

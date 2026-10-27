@@ -60,6 +60,7 @@ export function validateEventSpec(value) {
           'targetingController',
           'targetingKind',
           'firstEachTurn',
+          'chapters',
         ].includes(key),
     )
   )
@@ -67,6 +68,7 @@ export function validateEventSpec(value) {
   if (
     ![
       'enter',
+      'chapter',
       'cast',
       'dies',
       'sacrifice',
@@ -76,6 +78,7 @@ export function validateEventSpec(value) {
       'attackGroup',
       'noncombatDamageToPlayer',
       'lifeGain',
+      'librarySearch',
       'combatDamagePlayer',
       'targeted',
     ].includes(spec.event)
@@ -86,6 +89,7 @@ export function validateEventSpec(value) {
     (spec.object !== 'source' ||
       ![
         'enter',
+        'chapter',
         'dies',
         'sacrifice',
         'attack',
@@ -96,12 +100,12 @@ export function validateEventSpec(value) {
   )
     errors.push('Source identity predicates are unsupported for this event family.');
   if (
-    spec.event === 'lifeGain' &&
+    ['lifeGain', 'librarySearch'].includes(spec.event) &&
     (spec.object !== undefined || spec.filter !== undefined || spec.excludeSource !== undefined)
   )
     errors.push('Life-gain events identify a player, not an object.');
   if (spec.event === 'step') {
-    if (!['upkeep', 'beginCombat', 'end', 'main1', 'main2'].includes(spec.step))
+    if (!['upkeep', 'draw', 'beginCombat', 'end', 'main1', 'main2'].includes(spec.step))
       errors.push('Unsupported beginning-of-step trigger.');
     if (spec.object !== undefined || spec.filter !== undefined || spec.excludeSource !== undefined)
       errors.push('Step events have no object filter.');
@@ -144,12 +148,27 @@ export function validateEventSpec(value) {
     (spec.castByController !== true || spec.event !== 'enter' || spec.object !== 'source')
   )
     errors.push('castByController requires a self-entry event.');
+  if (spec.event === 'chapter') {
+    if (
+      spec.object !== 'source' ||
+      Object.keys(spec).some((key) => !['event', 'object', 'chapters'].includes(key)) ||
+      !Array.isArray(spec.chapters) ||
+      !spec.chapters.length ||
+      spec.chapters.length > 20 ||
+      spec.chapters.some((n) => !Number.isInteger(n) || n < 1 || n > 20) ||
+      new Set(spec.chapters).size !== spec.chapters.length
+    )
+      errors.push(
+        'Chapter events require source identity and unique chapter numbers from 1 to 20.',
+      );
+  } else if (spec.chapters !== undefined) errors.push('Only chapter events take chapter numbers.');
   if (spec.filter !== undefined) errors.push(...validateFilter(spec.filter));
   return errors;
 }
 export function matchesEvent(value, event, facts, source) {
   const spec = eventSpec(value);
   if (!spec || spec.event !== event) return false;
+  if (event === 'chapter' && !spec.chapters.includes(facts.chapterNumber)) return false;
   if (spec.spellNumber !== undefined && facts.spellNumber !== spec.spellNumber) return false;
   if (event === 'step' && spec.step !== facts.step) return false;
   if (spec.object === 'source' && facts.id !== source.id) return false;

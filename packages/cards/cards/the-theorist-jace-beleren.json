@@ -1,0 +1,116 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "20bb8c55-4b0b-425f-8201-b54fa2fdde86",
+  "name": "The Theorist, Jace Beleren",
+  "characteristics": {
+    "types": ["planeswalker"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Jace"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}{U}",
+    "loyalty": 3
+  },
+  "rulesText": "At the beginning of each opponent's draw step, you draw a card.\n+1: Create a 1/1 blue Illusion creature token.\n\u22122: For each opponent, return up to one target artifact or creature that player controls to its owner's hand.\n\u22126: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "draw",
+        "controller": "opponent"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": 1,
+      "text": "+1: Create a 1/1 blue Illusion creature token.",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/jace-illusion",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": -2,
+      "text": "\u22122: Return up to one target artifact or creature each opponent controls to its owner's hand.",
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "controller": "opponent"
+                },
+                {
+                  "any": [
+                    {
+                      "type": "artifact"
+                    },
+                    {
+                      "type": "creature"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": -6,
+      "text": "\u22126: Draw three cards. Put X +1/+1 counters on each creature you control, where X is your hand size.",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        },
+        {
+          "op": "counterAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          },
+          "amount": {
+            "kind": "count",
+            "zone": "hand",
+            "player": "you"
+          }
+        }
+      ]
+    }
+  ]
+}

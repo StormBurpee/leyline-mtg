@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7a7d9887-3cc4-4fb9-9109-1315903ace45",
+  "name": "Confusticate and Bebother",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Counter target spell unless its controller pays {4}.\n\u2022 Draw two cards, then discard a card.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Counter unless they pay {4}",
+          "target": {
+            "scope": "spell"
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target",
+              "unlessPay": {
+                "generic": 4
+              }
+            }
+          ]
+        },
+        {
+          "label": "Draw two, then discard a card",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 2
+            },
+            {
+              "op": "discard",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

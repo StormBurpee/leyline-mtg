@@ -31,6 +31,36 @@ export function castingChoices(card) {
       ...(card.targetGroups ? { targetGroups: card.targetGroups } : {}),
     }));
   }
+  if (card.spree)
+    return Array.from({ length: 2 ** card.modes.length - 1 }, (_, index) => {
+      const selected = card.modes.filter((_, i) => (index + 1) & (1 << i));
+      const additionalCost = {};
+      for (const mode of selected)
+        for (const [symbol, amount] of Object.entries(mode.additionalCost))
+          additionalCost[symbol] = (additionalCost[symbol] ?? 0) + amount;
+      const targetGroups = selected.flatMap((mode) => mode.targetGroups ?? []);
+      return {
+        label: selected.map((mode) => mode.label).join(' + '),
+        additionalCost,
+        effects: selected.flatMap((mode) => mode.effects),
+        ...(targetGroups.length ? { targetGroups } : {}),
+        spreeModes: selected.map((mode) => card.modes.indexOf(mode)),
+      };
+    });
+  if (card.gift)
+    return [
+      { label: 'Do not promise a gift', effects: card.effects ?? [], target: card.target ?? null },
+      {
+        label: 'Promise opponent a Treasure',
+        effects: [
+          { op: 'token', definition: card.gift.definition, count: 1, player: 'opponent' },
+          ...(card.effects ?? []),
+          ...card.gift.effects,
+        ],
+        target: card.target ?? null,
+        giftPromised: true,
+      },
+    ];
   if (card.modes) return card.modes;
   if (card.adventure)
     return [
@@ -106,7 +136,9 @@ export function spellProfile(card, mode) {
     ...(selected.warpPaid ? { warpPaid: true } : {}),
     kicked: !!selected.kicked,
     offspringPaid: !!selected.offspringPaid,
+    giftPromised: !!selected.giftPromised,
     castingLabel: selected.label,
+    ...(selected.additionalCost ? { modeAdditionalMana: selected.additionalCost } : {}),
   };
 }
 export const spellOptions = (card) =>

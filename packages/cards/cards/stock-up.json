@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2251e34e-4ce8-4452-9dc6-d8cce8583996",
+  "name": "Stock Up",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}"
+  },
+  "rulesText": "Look at the top five cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 5,
+          "selectCount": 2
+        }
+      ]
+    }
+  ]
+}

@@ -970,3 +970,476 @@ test('Cryomancer graveyard ability is reachable from large-card reader, pays exi
     h.cleanup();
   }
 });
+
+test('multi-card hand selection stage enforces two choices, survives reader, and labels random bottom', async () => {
+  for (const name of ['Stock Up', 'Consult the Star Charts']) {
+    // Zero-cost fixture isolates the real cards' five-card/two-card choice UI.
+    const effect = {
+      op: 'lookChooseHand',
+      count: 5,
+      selectCount: 2,
+      ...(name === 'Consult the Star Charts' ? { restOrder: 'random' } : {}),
+    };
+    const catalog = { ...CARDS, [name]: { ...CARDS[name], cost: {}, effects: [effect] } };
+    let s;
+    for (let seed = 1; seed < 100; seed++) {
+      s = createGame({
+        catalog,
+        seed,
+        mulligan: false,
+        decks: [[...Array(4).fill(name), ...Array(56).fill('Island')], Array(60).fill('Forest')],
+      });
+      if (s.players[0].hand.some((id) => s.objects[id].name === name)) break;
+    }
+    while (s.step !== 'main1') s = act(s, 'pass');
+    s = act(s, 'cast', { card: s.players[0].hand.find((id) => s.objects[id].name === name) });
+    s = act(act(s, 'pass'), 'pass');
+    const h = await mount(exportReplay(s));
+    try {
+      h.click('[data-action="resume"]');
+      assert.match(h.dialog.textContent, /Choose 2 cards for your hand/);
+      assert.equal(h.dialog.querySelectorAll('.decision-card-face').length, 5);
+      assert.equal(h.dialog.querySelector('[data-action="submitLibrary"]').disabled, true);
+      h.click('[data-order-drop="rest"] [data-action="libraryMove"]');
+      assert.equal(h.dialog.querySelector('[data-action="submitLibrary"]').disabled, true);
+      h.click('[data-order-drop="rest"] [data-action="libraryMove"]');
+      assert.equal(h.dialog.querySelector('[data-action="submitLibrary"]').disabled, false);
+      h.click('#dialog [data-action="readDecisionCard"]');
+      h.click('#dialog [data-action="returnDecision"]');
+      assert.equal(h.dialog.querySelector('[data-action="submitLibrary"]').disabled, false);
+      if (name === 'Consult the Star Charts') {
+        assert.match(h.dialog.textContent, /in a random order/);
+        assert.ok(
+          [
+            ...h.dialog.querySelectorAll('[data-order-drop="rest"] [data-action="libraryReorder"]'),
+          ].every((b) => b.disabled),
+        );
+      }
+      h.click('[data-action="submitLibrary"]');
+      const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+      const command = saved.replay.commands.at(-1);
+      assert.equal(command.type, 'orderLibrary');
+      assert.equal(command.top.length, 2);
+      assert.equal(command.rest.length, 3);
+    } finally {
+      h.cleanup();
+    }
+  }
+});
+
+test('counter-unless payment displays both spells, never labels it ward, and remains actionable', async () => {
+  const catalog = {
+    ...CARDS,
+    'Free Bolt': { ...CARDS['Lightning Bolt'], name: 'Free Bolt', cost: {} },
+    'Free Counter': { ...CARDS['No More Lies'], name: 'Free Counter', cost: {} },
+  };
+  let state = createGame({
+    mulligan: false,
+    catalog,
+    minimumDeckSize: 8,
+    decks: [
+      [...Array(4).fill('Free Bolt'), ...Array(4).fill('Mountain')],
+      [...Array(4).fill('Free Counter'), ...Array(4).fill('Island')],
+    ],
+  });
+  const act = (command) => {
+    const r = dispatch(state, { player: state.choice?.player ?? state.priority, ...command });
+    assert.equal(r.ok, true, r.error?.message);
+    state = r.state;
+  };
+  while (state.step !== 'main1') act({ type: 'pass' });
+  const bolt = state.players[0].hand.find((id) => state.objects[id].name === 'Free Bolt');
+  act({ type: 'cast', card: bolt, target: { kind: 'player', id: 1 } });
+  act({ type: 'pass' });
+  const counter = state.players[1].hand.find((id) => state.objects[id].name === 'Free Counter');
+  act({ type: 'cast', card: counter, target: { kind: 'stack', id: state.stack[0].id } });
+  act({ type: 'pass' });
+  act({ type: 'pass' });
+  const h = await mount(exportReplay(state));
+  try {
+    h.click('[data-action="resume"]');
+    assert.equal(h.dialog.open, true);
+    assert.match(h.dialog.textContent, /Pay to protect your spell/);
+    assert.doesNotMatch(h.dialog.textContent, /Pay (for )?ward/);
+    assert.equal(h.dialog.querySelectorAll('.decision-card-face').length, 2);
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    h.click('#dialog [data-action="declineWard"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).type, 'payCost');
+    assert.equal(saved.replay.commands.at(-1).pay, false);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('explore reveals a large card with graveyard/top destinations and survives review without a hidden tiny prompt', async () => {
+  let saved;
+  for (let seed = 1; seed < 80 && !saved; seed++) {
+    let s = createGame({
+      seed,
+      mulligan: false,
+      decks: [
+        [
+          ...Array(52).fill('Forest'),
+          ...Array(4).fill('Cenote Scout'),
+          ...Array(4).fill('Pathfinding Axejaw'),
+        ],
+        Array(60).fill('Forest'),
+      ],
+    });
+    for (let i = 0; i < 250 && s.status !== 'finished'; i++) {
+      if (s.choice?.action === 'explore') {
+        saved = exportReplay(s);
+        break;
+      }
+      const c = chooseBotCommand(s, s.choice?.player ?? s.priority);
+      if (!c) break;
+      s = act(s, c.type, c);
+    }
+  }
+  assert.ok(saved, 'Reached real explore decision');
+  const h = await mount(saved);
+  try {
+    h.click('[data-action="resume"]');
+    assert.equal(h.dialog.open, true);
+    assert.match(h.dialog.textContent, /Explore/);
+    assert.match(h.dialog.textContent, /Graveyard/);
+    assert.doesNotMatch(h.dialog.textContent, /Bottom of library/);
+    assert.equal(h.dialog.querySelectorAll('.decision-card-face').length, 1);
+    h.click('#dialog [data-action="closeDialog"]');
+    h.click('[data-action="reviewDecision"]');
+    h.click('#dialog [data-action="libraryMove"][data-group="rest"]');
+    h.click('#dialog [data-action="submitLibrary"]');
+    assert.equal(h.dialog.open, false);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('Multiversal Passage presents land type then life payment, with reader and reopen lifecycle', async () => {
+  let s;
+  for (let seed = 1; seed < 80; seed++) {
+    s = createGame({
+      seed,
+      mulligan: false,
+      decks: [
+        [...Array(4).fill('Multiversal Passage'), ...Array(56).fill('Forest')],
+        Array(60).fill('Island'),
+      ],
+    });
+    if (s.players[0].hand.some((id) => s.objects[id].name === 'Multiversal Passage')) break;
+  }
+  while (s.step !== 'main1') s = act(s, 'pass');
+  s = act(s, 'playLand', {
+    card: s.players[0].hand.find((id) => s.objects[id].name === 'Multiversal Passage'),
+  });
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    assert.match(h.dialog.textContent, /Choose a basic land type/);
+    assert.equal(h.dialog.querySelectorAll('[data-action="chooseLandType"]').length, 5);
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    h.click('#dialog [data-action="chooseLandType"][data-landtype="Forest"]');
+    assert.match(h.dialog.textContent, /Pay 2 life/);
+    h.click('#dialog [data-action="closeDialog"]');
+    h.click('[data-action="reviewDecision"]');
+    h.click('#dialog [data-action="declineEntryLife"]');
+    assert.equal(h.dialog.open, false);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('Otter Adventure flows mode to X to large-card distribution, preserves draft, and casts once', async () => {
+  const name = "Elusive Otter // Grove's Bounty";
+  const catalog = {
+    ...CARDS,
+    [name]: {
+      ...CARDS[name],
+      adventure: {
+        ...CARDS[name].adventure,
+        cost: { X: 1 },
+        costModifiers: [{ scope: 'self', change: 'reduce', amount: 5 }],
+      },
+    },
+    'Grizzly Bears': { ...CARDS['Grizzly Bears'], cost: {} },
+  };
+  let s;
+  for (let seed = 1; seed < 200; seed++) {
+    s = createGame({
+      seed,
+      mulligan: false,
+      catalog,
+      decks: [
+        [...Array(4).fill(name), ...Array(4).fill('Grizzly Bears'), ...Array(52).fill('Forest')],
+        Array(60).fill('Island'),
+      ],
+    });
+    if (
+      [name, 'Grizzly Bears'].every((n) => s.players[0].hand.some((id) => s.objects[id].name === n))
+    )
+      break;
+  }
+  while (s.step !== 'main1') s = act(s, 'pass');
+  const bear = s.players[0].hand.find((id) => s.objects[id].name === 'Grizzly Bears'),
+    id = s.players[0].hand.find((id) => s.objects[id].name === name);
+  s = act(s, 'cast', { card: bear });
+  s = act(s, 'pass');
+  s = act(s, 'pass');
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${id}"]`);
+    h.click('[data-action="playSelected"]');
+    h.click('#dialog [data-action="chooseSpellMode"][data-mode="1"]');
+    assert.match(h.dialog.textContent, /Choose X/);
+    h.click('#dialog [data-action="chooseX"][data-x="2"]');
+    assert.match(h.dialog.textContent, /Distribute/);
+    assert.equal(h.dialog.querySelector('[data-action="confirmDistribution"]').disabled, true);
+    h.click('#dialog [data-action="changeDistribution"][data-delta="1"]');
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.match(h.dialog.textContent, /1 of 2 counters/);
+    h.click('#dialog [data-action="changeDistribution"][data-delta="1"]');
+    const stale = h.click('#dialog [data-action="confirmDistribution"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.filter(
+      (c) => c.type === 'cast' && c.card === id,
+    );
+    assert.equal(saved.length, 1);
+    assert.equal(saved[0].mode, 1);
+    assert.equal(saved[0].x, 2);
+    assert.equal(saved[0].distribution[bear], 2);
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    assert.equal(
+      JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.filter(
+        (c) => c.type === 'cast' && c.card === id,
+      ).length,
+      1,
+    );
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('Petrified Hamlet land-name stage is searchable, preserves Read/Back selection and submits guarded replay', async () => {
+  let state = createGame({
+    mulligan: false,
+    minimumDeckSize: 8,
+    decks: [
+      [
+        'Petrified Hamlet',
+        'Petrified Hamlet',
+        'Petrified Hamlet',
+        'Petrified Hamlet',
+        'Island',
+        'Island',
+        'Island',
+        'Island',
+      ],
+      Array(8).fill('Island'),
+    ],
+  });
+  const act = (command) => {
+    const r = dispatch(state, { player: state.choice?.player ?? state.priority, ...command });
+    assert.equal(r.ok, true, r.error?.message);
+    state = r.state;
+  };
+  while (state.step !== 'main1') act({ type: 'pass' });
+  const card = state.players[0].hand.find((id) => state.objects[id].name === 'Petrified Hamlet');
+  act({ type: 'playLand', card });
+  act({ type: 'pass' });
+  act({ type: 'pass' });
+  assert.equal(state.choice.kind, 'landName');
+  const h = await mount(exportReplay(state));
+  try {
+    h.click('[data-action="resume"]');
+    assert.equal(h.dialog.open, true);
+    assert.ok(h.dialog.querySelector('.decision-card-face'));
+    const input = h.document.querySelector('#chosen-land-name');
+    input.value = "Agna Qel'a";
+    input.dispatchEvent(new window.Event('change', { bubbles: true }));
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.equal(h.document.querySelector('#chosen-land-name').value, "Agna Qel'a");
+    h.click('[data-action="chooseLandName"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).name, "Agna Qel'a");
+    assert.equal(saved.replay.commands.at(-1).type, 'chooseLandName');
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('ninjutsu hand action presents large return-cost cards, inspect/back, cancel and exactly one activation', async () => {
+  const { kaitoPosition } = await import('./helpers/kaito-position.js');
+  const { legalActions } = await import('../packages/engine/src/index.js');
+  const s = kaitoPosition();
+  const command = legalActions(s, 0).find((a) => a.type === 'ninjutsu');
+  const page = await mount(exportReplay(s));
+  try {
+    page.click('[data-action="resume"]');
+    page.click(`[data-card="${command.card}"]`);
+    page.click('[data-action="ninjutsuSelected"]');
+    assert.match(page.dialog.textContent, /return an unblocked attacker/i);
+    assert.ok(page.dialog.querySelector('.decision-card-gallery'));
+    page.click(`[data-action="readDecisionCard"][data-cardid="${command.attacker.id}"]`);
+    page.click('[data-action="returnDecision"]');
+    assert.ok(page.dialog.querySelector('[data-action="payNinjutsu"]'));
+    page.click('[data-action="closeDialog"]');
+    page.click('[data-action="ninjutsuSelected"]');
+    page.click('[data-action="payNinjutsu"]');
+    const saved = JSON.parse(page.storage.get('leyline.match.v1'));
+    const paid = saved.replay.commands.filter((c) => c.type === 'ninjutsu');
+    assert.equal(paid.length, 1);
+    assert.deepEqual(paid[0].attacker, command.attacker);
+    assert.equal(page.dialog.open, false);
+  } finally {
+    page.cleanup();
+  }
+});
+
+test('harmonize uses large payment cards, preserves inspect/back choice, cancels safely and casts once', async () => {
+  const catalog = {
+    ...CARDS,
+    'Wild Ride': { ...CARDS['Wild Ride'], cost: {}, harmonize: { generic: 2 } },
+    'Grizzly Bears': { ...CARDS['Grizzly Bears'], cost: {} },
+  };
+  let s;
+  for (let seed = 1; seed < 100; seed++) {
+    s = createGame({
+      seed,
+      mulligan: false,
+      catalog,
+      decks: [
+        [
+          ...Array(4).fill('Wild Ride'),
+          ...Array(4).fill('Grizzly Bears'),
+          ...Array(52).fill('Forest'),
+        ],
+        Array(60).fill('Island'),
+      ],
+    });
+    if (
+      ['Wild Ride', 'Grizzly Bears'].every((n) =>
+        s.players[0].hand.some((id) => s.objects[id].name === n),
+      )
+    )
+      break;
+  }
+  while (s.step !== 'main1') s = act(s, 'pass');
+  const bear = s.players[0].hand.find((id) => s.objects[id].name === 'Grizzly Bears');
+  const spell = s.players[0].hand.find((id) => s.objects[id].name === 'Wild Ride');
+  s = act(s, 'cast', { card: bear });
+  s = act(s, 'pass');
+  s = act(s, 'pass');
+  const target = { kind: 'object', id: bear, incarnation: s.objects[bear].incarnation };
+  s = act(s, 'cast', { card: spell, target });
+  s = act(s, 'pass');
+  s = act(s, 'pass');
+  assert.equal(s.objects[spell].zone, 'graveyard');
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    assert.match(h.document.querySelector(`[data-card="${spell}"]`).textContent, /Harmonize/);
+    h.click(`[data-card="${spell}"]`);
+    h.click(`[data-card="${bear}"]`);
+    assert.match(h.dialog.textContent, /Harmonize · choose payment/);
+    assert.ok(h.dialog.querySelector('.decision-card-face'));
+    h.click(`[data-action="selectHarmonize"][data-cardid="${bear}"]`);
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.ok(
+      h.dialog
+        .querySelector(`[data-action="selectHarmonize"][data-cardid="${bear}"]`)
+        .classList.contains('primary'),
+    );
+    h.click('#dialog [data-action="closeDialog"]');
+    assert.equal(
+      JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.filter(
+        (c) => c.type === 'cast' && c.card === spell,
+      ).length,
+      1,
+    );
+    h.click(`[data-card="${bear}"]`);
+    h.click(`[data-action="selectHarmonize"][data-cardid="${bear}"]`);
+    const stale = h.click('[data-action="confirmHarmonize"]');
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    const casts = JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.filter(
+      (c) => c.type === 'cast' && c.card === spell,
+    );
+    assert.equal(casts.length, 2);
+    assert.deepEqual(casts[1].harmonize, target);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('Bitter Triumph additional cost stage preserves a reviewed discard, supports life payment and records one explicit cost', async () => {
+  const catalog = {
+    ...CARDS,
+    'Bitter Triumph': { ...CARDS['Bitter Triumph'], cost: {} },
+    'Llanowar Elves': { ...CARDS['Llanowar Elves'], cost: {} },
+  };
+  let s;
+  for (let seed = 1; seed < 200; seed++) {
+    s = createGame({
+      seed,
+      mulligan: false,
+      catalog,
+      decks: [
+        [
+          ...Array(52).fill('Forest'),
+          ...Array(4).fill('Bitter Triumph'),
+          ...Array(4).fill('Llanowar Elves'),
+        ],
+        Array(60).fill('Forest'),
+      ],
+    });
+    if (
+      ['Bitter Triumph', 'Llanowar Elves'].every((name) =>
+        s.players[0].hand.some((id) => s.objects[id].name === name),
+      )
+    )
+      break;
+  }
+  while (s.step !== 'main1') s = act(s, 'pass');
+  const target = s.players[0].hand.find((id) => s.objects[id].name === 'Llanowar Elves');
+  s = act(s, 'cast', { card: target });
+  s = act(s, 'pass');
+  s = act(s, 'pass');
+  const card = s.players[0].hand.find((id) => s.objects[id].name === 'Bitter Triumph');
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${card}"]`);
+    h.click(`[data-card="${target}"]`);
+    assert.match(h.dialog.textContent, /Additional casting cost/);
+    assert.ok(h.dialog.querySelector('[data-action="confirmAdditionalCost"]').disabled);
+    h.click('[data-action="chooseAdditionalCostLife"]');
+    assert.match(h.dialog.textContent, /Pay 3 life/);
+    const option = h.dialog.querySelector('[data-action="selectAdditionalCostCard"]');
+    h.click(`[data-action="selectAdditionalCostCard"][data-cardid="${option.dataset.cardid}"]`);
+    h.click(`[data-action="readDecisionCard"][data-cardid="${option.dataset.cardid}"]`);
+    h.click('[data-action="returnDecision"]');
+    assert.equal(
+      h.dialog
+        .querySelector(
+          `[data-action="selectAdditionalCostCard"][data-cardid="${option.dataset.cardid}"]`,
+        )
+        .getAttribute('aria-pressed'),
+      'true',
+    );
+    const stale = h.click('[data-action="confirmAdditionalCost"]');
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    const record = JSON.parse(h.storage.get('leyline.match.v1')).replay;
+    const casts = record.commands.filter((c) => c.type === 'cast' && c.card === card);
+    assert.equal(casts.length, 1);
+    assert.equal(casts[0].additionalCost.discard.id, option.dataset.cardid);
+    const { replay } = await import('../packages/engine/src/index.js');
+    assert.doesNotThrow(() => replay(record));
+  } finally {
+    h.cleanup();
+  }
+});

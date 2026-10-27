@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.47.0 — Complete tournament deck coverage
+
+- Complete every main-deck and sideboard card across all eight sourced Standard presets: 146 unique required names, no substitutions or missing definitions/images. Keep the requested Storm deck as default. Sideboards remain reference-only; this does not introduce a best-of-three sideboarding workflow.
+- Add Sagas, source-excluding targets, conditional counters, multi-card library selection, prepared spells, transforming Roku, ninjutsu Kaito, Spree, harmonize, power-up, gift, behold, blight/teamwork and discard-or-life costs, end-turn resolution, earthbend, graveyard replacement, ability-loss layers and the required card-specific infrastructure.
+- Add source-stat/copy support, explore/Map tokens, temporary blocking restrictions and the completed meta-deck cards. Catalog: 1589 playable cards and 57 tokens.
+- All eight exact lists completed real games with matching deterministic replays. Add a hard regression gate for every main/sideboard definition, image and original list, plus actual mobile decision-stage lifecycle checks and cross-lane rules tests.
+- Preserve legacy replay timing, independent prepared permissions, source/LKI snapshots and cost reservations. Distinguish mode additional mana from additional payment choices and retain dynamic counter timestamps.
+
 ## 0.46.0 — Playable Izzet and Boros, planeswalker foundations
 
 - Complete the exact Izzet Cryomancer and Boros Burn tournament main decks alongside Rakdos. Three full cross-archetype bot matches finished without rejected commands, and replay checks matched. Other incomplete presets remain blocked; sideboards remain reference-only.

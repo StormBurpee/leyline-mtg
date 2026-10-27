@@ -38,7 +38,7 @@ test('invalid definitions fail before game construction', () => {
   for (const bad of [
     { ...adept, keywords: ['ward 2'] },
     { ...adept, unknownMechanic: true },
-    { ...adept, cost: { X: 1 } },
+    { ...adept, cost: { X: -1 } },
     { ...adept, activated: [{ cost: { sacrifice: true }, effects: [] }] },
   ])
     assert.throws(() => createGame({ catalog: [...Object.values(CARDS), bad] }), RegistryError);
@@ -227,4 +227,10 @@ test('only validated immutable registries are reused across games', () => {
   const second = createRegistry([mutable]);
   assert.equal(first[adept.name].power, 1);
   assert.equal(second[adept.name].power, 9);
+});
+
+test('X-cost permanents are valid while malformed X costs remain rejected', () => {
+  const card = { ...adept, cost: { X: 1 } };
+  assert.deepEqual(validateDefinition(card), []);
+  assert.equal(createRegistry([card])[card.name].cost.X, 1);
 });

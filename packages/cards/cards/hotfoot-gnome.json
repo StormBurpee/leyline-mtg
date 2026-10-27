@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3efb64a4-04f6-4b78-be1c-5b6320c02a71",
+  "name": "Hotfoot Gnome",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Gnome"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "Haste\n{T}: Another target creature gains haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["haste"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { canAttack, canBlock } from './combat.js';
 import { effectValues } from './numeric-values.js';
 import { actionEffects } from './decision-safety.js';
 import { combatOutcome, permanentValue } from './combat-policy.js';
@@ -21,12 +22,23 @@ export function projectedModifiers(s, p, action) {
     controller: p,
     source: ref(card),
     target: action.target,
-    effects: actionEffects(s, action).filter((effect) => effect.op === 'modify'),
+    effects: actionEffects(s, action).filter((effect) =>
+      ['modify', 'combatRestriction'].includes(effect.op),
+    ),
   });
   return projected;
 }
 function threatens(s, entry, target) {
-  if (!legalTarget(s, entry.targetKind, entry.target, entry.controller)) return false;
+  if (
+    !legalTarget(
+      s,
+      entry.targetKind,
+      entry.target,
+      entry.controller,
+      entry.targetingSource ?? entry.source,
+    )
+  )
+    return false;
   const effects =
     entry.x === undefined
       ? (entry.effects ?? [])
@@ -123,5 +135,37 @@ export function trickScore(s, p, action) {
   if (improvement > 0) score = Math.max(score, 8 + improvement);
   if (action.type === 'activate' && after.life[1 - p] < before.life[1 - p])
     score = Math.max(score, 4 + before.life[1 - p] - after.life[1 - p]);
+  return score;
+}
+
+/** Restriction effects only help before blockers are declared. Use the same
+ * legality predicate as command validation, UI drops and block planning. */
+export function combatRestrictionScore(s, p, action) {
+  if (s.active !== p || s.stack.length || !['main1', 'beginCombat', 'attackers'].includes(s.step))
+    return -100;
+  const effects = actionEffects(s, action).filter((e) => e.op === 'combatRestriction');
+  let score = -100;
+  const attackers = Object.values(s.objects).filter((o) =>
+    s.step === 'attackers'
+      ? s.combat.attackers.some((r) => r.id === o.id && r.incarnation === o.incarnation)
+      : canAttack(s, o, p) &&
+        !(
+          action.type === 'activate' &&
+          o.id === action.card &&
+          definition(s, o).activated[action.ability].cost.tap
+        ),
+  );
+  for (const e of effects) {
+    const target = s.objects[e.subject === 'source' ? action.card : action.target?.id];
+    if (!target || target.zone !== 'battlefield') continue;
+    if (
+      e.restriction === 'cannotBeBlocked' &&
+      attackers.includes(target) &&
+      Object.values(s.objects).some((b) => canBlock(s, b, target, 1 - p))
+    )
+      score = Math.max(score, 4 + Math.max(0, stats(s, target).power));
+    if (e.restriction === 'cannotBlock' && attackers.some((a) => canBlock(s, target, a, 1 - p)))
+      score = Math.max(score, 4 + permanentValue(s, target) * 0.4);
+  }
   return score;
 }

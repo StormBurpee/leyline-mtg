@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8896c74b-d466-4c25-94cf-82b5e2b1fdef",
+  "name": "Rinoa Heartilly",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Rebel", "Warlock"],
+    "colors": ["G", "W"],
+    "manaCost": "{3}{G}{W}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When Rinoa Heartilly enters, create Angelo, a legendary 1/1 green and white Dog creature token.\nAngelo Cannon \u2014 Whenever Rinoa Heartilly attacks, another target creature you control gets +1/+1 until end of turn for each creature you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/angelo",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "toughness": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    }
+  ]
+}

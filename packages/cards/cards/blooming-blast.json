@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2e5b8973-4f6e-4abe-bbbe-81fdca784997",
+  "name": "Blooming Blast",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "Gift a Treasure (You may promise an opponent a gift as you cast this spell. If you do, they create a Treasure token before its other effects. It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nBlooming Blast deals 2 damage to target creature. If the gift was promised, Blooming Blast also deals 3 damage to that creature's controller.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "gift",
+      "token": "leyline:token/treasure-token",
+      "effects": [
+        {
+          "op": "damageTargetController",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

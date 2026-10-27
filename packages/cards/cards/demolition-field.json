@@ -1,0 +1,85 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "93953926-a644-49bb-9b5a-4c8f19114c7e",
+  "name": "Demolition Field",
+  "characteristics": {
+    "types": ["land"],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": [],
+    "subtypes": []
+  },
+  "rulesText": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You may search your library for a basic land card, put it onto the battlefield, then shuffle.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true,
+        "mana": "{2}"
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        },
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": false,
+          "optional": true,
+          "player": "targetController"
+        },
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": false,
+          "optional": true
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "land"
+            },
+            {
+              "basic": false
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

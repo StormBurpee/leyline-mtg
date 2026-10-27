@@ -1,6 +1,6 @@
 # Standard meta testing presets
 
-Checked 27 October 2026 against the Standard meta overview and linked tournament lists. These are exact 60-card main decks with original 15-card sideboards preserved for reference. No substitutions. Adventure card names use the engine’s combined-face identity (the same physical card). All names were matched to the 26 October Standard inventory. This is not a claim that every list is currently executable.
+Checked 27 October 2026 against the Standard meta overview and linked tournament lists. These are exact 60-card main decks with original 15-card sideboards preserved for reference. No substitutions. Adventure card names use the engine’s combined-face identity (the same physical card). All names were matched to the 26 October Standard inventory. As of v0.47.0, all eight main decks and all 146 unique main/sideboard card names are executable. No listed card remains blocked.
 
 The deck room derives availability from the executable catalog: unsupported main decks cannot start a game or be selected as opponents. Each pending name is shown. Supported lists unlock automatically. Sideboarding is not implemented; matches use the main deck only. Storm’s requested Rakdos default is unchanged.
 

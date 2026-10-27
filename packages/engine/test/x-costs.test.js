@@ -243,7 +243,6 @@ test('bots propose explicit payable useful X without mutation', () => {
 
 test('unsupported X contexts fail closed', () => {
   for (const definition of [
-    { name: 'X creature', type: 'creature', cost: { X: 1 }, power: 1, toughness: 1 },
     {
       name: 'X ability',
       type: 'creature',

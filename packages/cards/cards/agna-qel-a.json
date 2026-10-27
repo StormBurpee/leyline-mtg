@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "22d0a848-2126-48f0-9050-38daaf93b1d0",
+  "name": "Agna Qel'a",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control a basic land.\n{T}: Add {U}.\n{2}{U}, {T}: Draw a card, then discard a card.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "all": [
+            {
+              "type": "land"
+            },
+            {
+              "basic": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["U"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{U}",
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

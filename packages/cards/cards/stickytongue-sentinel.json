@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "899f0931-4e9b-4fa8-9f6d-d13a7de05334",
+  "name": "Stickytongue Sentinel",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Frog", "Warrior"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Reach\nWhen this creature enters, return up to one other target permanent you control to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "controller": "you"
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

@@ -73,3 +73,16 @@ export function payCost(s, p, cost, options = {}) {
     emit(s, 'lifePaid', { player: p, amount: cost.life });
   }
 }
+
+/** Power-up reduction uses current mana cost, never mana spent casting (CR 702.193). */
+export function activationCost(s, object, ability) {
+  if (!ability.powerUp || object.enteredTurn !== s.turn) return ability.cost;
+  const cost = structuredClone(ability.cost),
+    reduction = definition(s, object).cost;
+  for (const [symbol, amount] of Object.entries(reduction)) {
+    if (symbol === 'X') continue;
+    cost.mana[symbol] = Math.max(0, (cost.mana[symbol] ?? 0) - amount);
+    if (!cost.mana[symbol]) delete cost.mana[symbol];
+  }
+  return cost;
+}

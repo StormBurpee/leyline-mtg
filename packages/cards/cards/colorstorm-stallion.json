@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "47ee6837-2e2f-4344-ab9f-6b8887874f77",
+  "name": "Colorstorm Stallion",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Horse"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U}{R}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Ward {1}, haste\nOpus \u2014 Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, create a token that's a copy of this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{1}"
+      }
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn"
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "eventManaSpentAtLeast",
+            "count": 5
+          },
+          "then": [
+            {
+              "op": "copyToken",
+              "target": "source",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

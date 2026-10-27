@@ -1,16 +1,22 @@
 import { sacrificePermanents } from './model.js';
-import { castingPayment, castingSacrificeCandidates } from './casting-sacrifice.js';
+import {
+  castingPayment,
+  castingSacrificeCandidates,
+  harmonizeCandidates,
+  additionalCostOptions,
+  payAdditionalCost,
+} from './casting-sacrifice.js';
 import { convokeCandidates } from './convoke.js';
 import { recordSpellCast } from './spell-history.js';
 import { crewProblem, crewPlan } from './crew.js';
 import { MAX_X, manaValue } from './mana-value.js';
 import { cyclingFilter } from './cycling.js';
 import { flattenTargets, targetPlanProblem, targetPlans } from './target-groups.js';
-import { castingProfile } from './casting-costs.js';
+import { castingProfile, distributionProblem } from './casting-costs.js';
 import { cardDefinition } from './cards.js';
 import { meetsCondition } from './conditions.js';
 import { spellProfile, spellOptions } from './spell-modes.js';
-import { costProblem, payCost } from './costs.js';
+import { costProblem, payCost, activationCost } from './costs.js';
 import {
   createGame,
   playableZone,
@@ -18,10 +24,12 @@ import {
   revealFaceDownAtEnd,
   freezeRecord,
   definition,
+  copiableDefinition,
   draw,
   emit,
   hasKeyword,
   keywords,
+  stats,
   move,
   opponent,
   ref,
@@ -33,6 +41,7 @@ import {
 } from './model.js';
 import { canTapForMana, manaOptions, pay, planPayment, tapForMana } from './mana.js';
 import {
+  continueResolution,
   finishLegendChoice,
   finishCreatureTypeChoice,
   finishAuraEntryChoice,
@@ -51,18 +60,34 @@ import {
   enterBattlefield,
 } from './effects.js';
 import { assignDamage, canAttack, declareAttackers, declareBlockers } from './combat.js';
-import { advanceStep, finishCleanup } from './turn.js';
+import { advanceStep, finishCleanup, finishEndingTurn } from './turn.js';
 const main = (s) => ['main1', 'main2'].includes(s.step);
 export function castProblem(
   s,
   p,
   id,
   target,
-  { autoTap = true, mode, targets, x, convoke, sacrifice } = {},
+  {
+    autoTap = true,
+    mode,
+    targets,
+    x,
+    convoke,
+    sacrifice,
+    harmonize,
+    distribution,
+    additionalCost,
+  } = {},
 ) {
   const o = s.objects[id];
   if (!playableZone(s, o, p)) return 'You cannot play this card from its current zone.';
-  if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
+  const resolutionCast =
+    s.choice?.kind === 'castExiled' &&
+    s.choice.player === p &&
+    s.choice.card === id &&
+    s.choice.incarnation === o.incarnation;
+  if (s.status !== 'playing' || (!resolutionCast && (s.choice || s.priority !== p)))
+    return 'You do not have priority.';
   const d = castingProfile(s, p, o, mode, targets ? flattenTargets(targets) : target, undefined, x);
   if (!d) return `Choose a valid spell mode and X value (0–${MAX_X} for X spells).`;
   if (o.warped?.incarnation === o.incarnation && s.turn <= o.warped.turn)
@@ -70,18 +95,23 @@ export function castProblem(
   if (d.type === 'land') return 'Lands are played, not cast.';
   if (d.plottedCast && s.turn <= o.plotted.turn) return 'Cast a plotted card only on a later turn.';
   if (
+    !resolutionCast &&
     (d.plottedCast || (d.type !== 'instant' && !d.keywords.includes('flash'))) &&
     !(s.active === p && main(s) && s.stack.length === 0)
   )
     return 'Cast this only during your main phase with an empty stack.';
+  const divisionProblem = distributionProblem(d, targets, distribution);
+  if (divisionProblem) return divisionProblem;
   if (d.targetGroups) {
     if (target != null) return 'Use grouped targets for this spell.';
-    const problem = targetPlanProblem(s, d.targetGroups, targets, p);
+    const problem = targetPlanProblem(s, d.targetGroups, targets, p, ref(o));
     if (problem) return problem;
   } else if (targets !== undefined) return 'This spell has no target groups.';
-  if (d.target && !legalTarget(s, d.target, target, p)) return 'Choose a legal target.';
+  if (d.target && !legalTarget(s, d.target, target, p, ref(o))) return 'Choose a legal target.';
   if (!d.target && target != null) return 'This spell has no targets.';
-  if (!castingPayment(s, p, d, { card: id, convoke, autoTap, sacrifice }))
+  if (
+    !castingPayment(s, p, d, { card: id, convoke, autoTap, sacrifice, harmonize, additionalCost })
+  )
     return 'Cannot pay the casting cost with the selected mana, convoke creatures, and additional sacrifice.';
   return null;
 }
@@ -96,6 +126,7 @@ export function canPlayLand(s, p, id) {
     !s.stack.length &&
     s.players[p].landsPlayed < 1 &&
     playableZone(s, o, p) &&
+    !(o.zone === 'exile' && o.playPermission?.castOnly) &&
     definition(s, o).type === 'land'
   );
 }
@@ -106,6 +137,9 @@ function cast(s, p, c) {
     x: c.x,
     convoke: c.convoke,
     sacrifice: c.sacrifice,
+    harmonize: c.harmonize,
+    distribution: c.distribution,
+    additionalCost: c.additionalCost,
     targets: c.targets,
   });
   requireRule(!problem, 'CAST', problem);
@@ -124,6 +158,21 @@ function cast(s, p, c) {
     'CAST',
     'Choose a permanent to sacrifice as an additional cost.',
   );
+  requireRule(
+    !d.harmonizePaid || c.harmonize !== undefined,
+    'CAST',
+    'Choose whether to tap a creature for harmonize.',
+  );
+  const parentResolution = s.choice?.kind === 'castExiled' ? s.resolving : null;
+  if (parentResolution) {
+    s.choice = null;
+    s.resolving = null;
+  }
+  requireRule(
+    !d.additionalCost || c.additionalCost !== undefined,
+    'CAST',
+    'Choose whether and how to pay the additional cost.',
+  );
   const plan = castingPayment(s, p, d, c);
   // Legacy saves bind trigger choices to sequential stack IDs. Keep their
   // original cost/target timing throughout resume and subsequent re-exports.
@@ -133,11 +182,13 @@ function cast(s, p, c) {
       type: 'cast',
       card: d,
     });
+    if (plan.harmonize) s.objects[plan.harmonize.id].tapped = true;
     for (const choice of plan.choices) s.objects[choice.card].tapped = true;
     if (plan.sacrifice) {
       const sacrificed = s.objects[plan.sacrifice.id];
       sacrificePermanents(s, [sacrificed]);
     }
+    payAdditionalCost(s, p, d, plan.additionalCost);
     return payment;
   };
   const legacyPayment = legacyTiming ? payCastingCost() : null;
@@ -147,6 +198,7 @@ function cast(s, p, c) {
   o.castPlayer = p;
   if (c.x !== undefined) o.chosenX = c.x;
   if (d.flashbackPaid) o.flashbackPaid = true;
+  if (d.harmonizePaid) o.harmonizePaid = true;
   if (d.warpPaid) o.warpPaid = true;
   if (d.adventureCast) o.adventureCast = true;
   delete o.castingFaceDown;
@@ -154,8 +206,8 @@ function cast(s, p, c) {
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'spell',
-    ...(c.x !== undefined || d.keywords.includes('convoke') || d.sacrificeCost
-      ? { castingCost: structuredClone(d.cost) }
+    ...(c.x !== undefined || d.keywords.includes('convoke') || d.sacrificeCost || d.harmonizePaid
+      ? { castingCost: structuredClone(d.harmonizePaid ? plan.cost : d.cost) }
       : {}),
     uncounterable: !!d.uncounterable,
     name: o.faceDown ? 'Face-down creature' : d.name,
@@ -163,16 +215,21 @@ function cast(s, p, c) {
     source: ref(o),
     sourceKeywords: [...d.keywords],
     sourceDefinition: structuredClone(definition(s, o)),
+    sourceStats: structuredClone(stats(s, o)),
     effects: structuredClone(d.effects ?? []),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
     ...(c.x !== undefined ? { x: c.x } : {}),
+    ...(c.distribution !== undefined ? { distribution: structuredClone(c.distribution) } : {}),
     ...(d.keywords.includes('convoke') ? { convoke: structuredClone(plan.choices) } : {}),
     ...(plan.sacrifice ? { sacrifice: structuredClone(plan.sacrifice) } : {}),
+    ...(d.additionalCost ? { additionalCost: structuredClone(plan.additionalCost) } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
+    ...(d.harmonizePaid ? { harmonizePaid: true, harmonize: structuredClone(plan.harmonize) } : {}),
     ...(d.warpPaid ? { warpPaid: true } : {}),
     ...(d.adventureCast ? { adventureCast: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
+    ...(d.giftPromised ? { giftPromised: true } : {}),
     ...(d.targetGroups
       ? { targetGroups: structuredClone(d.targetGroups), targets: structuredClone(c.targets) }
       : {}),
@@ -185,11 +242,26 @@ function cast(s, p, c) {
   if (!legacyTiming) notifyTargeted(s, entry);
   const payment = legacyPayment ?? payCastingCost();
   entry.uncounterable ||= payment.uncounterable;
-  s.castingCompletion = { player: p, command: c, profile: d, stackId: entry.id, plan };
+  entry.manaSpent = Object.values(plan.cost).reduce((n, amount) => n + amount, 0);
+  s.castingCompletion = {
+    player: p,
+    command: c,
+    profile: d,
+    stackId: entry.id,
+    plan,
+    ...(parentResolution ? { parentResolution } : {}),
+  };
   if (flushLinkedReturns(s) !== false) finishCasting(s);
 }
 function finishCasting(s) {
-  const { player: p, command: c, profile: d, stackId, plan } = s.castingCompletion;
+  const {
+    player: p,
+    command: c,
+    profile: d,
+    stackId,
+    plan,
+    parentResolution,
+  } = s.castingCompletion;
   const entry = s.stack.find((item) => item.id === stackId),
     o = s.objects[c.card];
   delete s.castingCompletion;
@@ -203,16 +275,29 @@ function finishCasting(s) {
     ...(d.targetGroups ? { targets: structuredClone(c.targets) } : {}),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
     ...(c.x !== undefined ? { x: c.x } : {}),
+    ...(c.distribution !== undefined ? { distribution: structuredClone(c.distribution) } : {}),
     ...(d.keywords.includes('convoke') ? { convoke: structuredClone(plan.choices) } : {}),
     ...(plan.sacrifice ? { sacrifice: structuredClone(plan.sacrifice) } : {}),
+    ...(d.additionalCost ? { additionalCost: structuredClone(plan.additionalCost) } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
+    ...(d.harmonizePaid ? { harmonizePaid: true, harmonize: structuredClone(plan.harmonize) } : {}),
     ...(d.warpPaid ? { warpPaid: true } : {}),
     ...(d.adventureCast ? { adventureCast: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
+    ...(d.giftPromised ? { giftPromised: true } : {}),
   });
-  notifyTriggers(s, 'cast', { player: p, definition: definition(s, o), object: o });
+  notifyTriggers(s, 'cast', {
+    player: p,
+    definition: definition(s, o),
+    object: o,
+    manaSpent: entry.manaSpent,
+  });
   if (s.rulesRevision === 1) notifyTargeted(s, entry);
+  if (parentResolution) {
+    s.resolving = parentResolution;
+    continueResolution(s);
+  }
 }
 export function abilityProblem(s, p, id, index, target, discardCard, targets) {
   const o = s.objects[id];
@@ -222,6 +307,15 @@ export function abilityProblem(s, p, id, index, target, discardCard, targets) {
   const ability = definition(s, o).activated?.[index];
   if (!ability) return 'That ability does not exist.';
   if (
+    Object.values(s.objects).some(
+      (source) =>
+        source.zone === 'battlefield' &&
+        source.chosenLandName === definition(s, o).name &&
+        definition(s, source).landNameLock,
+    )
+  )
+    return 'Activated abilities with this chosen name cannot be activated.';
+  if (
     ability.zone === 'graveyard'
       ? o.zone !== 'graveyard' || o.owner !== p
       : o.zone !== 'battlefield' || o.controller !== p
@@ -229,6 +323,8 @@ export function abilityProblem(s, p, id, index, target, discardCard, targets) {
     return 'That ability is not available from this zone.';
   if (!meetsCondition(s, p, ability.condition, [], o))
     return 'The activation condition is not met.';
+  if (ability.powerUp && o.powerUpUses?.[index] === o.incarnation)
+    return 'This power-up ability has already been activated.';
   if (ability.oncePerTurn && o.abilityUses?.[index] === `${s.turn}:${o.incarnation}`)
     return 'This ability has already been activated this turn.';
   if (ability.loyalty !== undefined) {
@@ -244,15 +340,66 @@ export function abilityProblem(s, p, id, index, target, discardCard, targets) {
 
   if (ability.targetGroups) {
     if (target != null) return 'Use grouped ability targets.';
-    const problem = targetPlanProblem(s, ability.targetGroups, targets, p);
+    const problem = targetPlanProblem(s, ability.targetGroups, targets, p, ref(o));
     if (problem) return problem;
   } else if (targets !== undefined) return 'This ability has no target groups.';
-  if (ability.target && !legalTarget(s, ability.target, target, p))
+  if (ability.target && !legalTarget(s, ability.target, target, p, ref(o)))
     return 'Choose a legal ability target.';
   if (!ability.target && target != null) return 'This ability has no targets.';
-  const payment = costProblem(s, p, ability.cost, { sourceId: id, discardCard });
+  const payment = costProblem(s, p, activationCost(s, o, ability), { sourceId: id, discardCard });
   if (payment) return payment;
   return null;
+}
+export function ninjutsuProblem(s, p, id, attacker) {
+  const o = s.objects[id],
+    a = s.objects[attacker?.id];
+  if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
+  if (!o || o.zone !== 'hand' || o.owner !== p || !definition(s, o).ninjutsu)
+    return 'Ninjutsu is available only from your hand.';
+  if (s.active !== p || !['blockers', 'firstDamage', 'damage', 'endCombat'].includes(s.step))
+    return 'Activate ninjutsu only after blockers have been declared.';
+  if (
+    attacker?.kind !== 'object' ||
+    !a ||
+    a.zone !== 'battlefield' ||
+    a.controller !== p ||
+    a.incarnation !== attacker.incarnation ||
+    definition(s, a).type !== 'creature' ||
+    !s.combat.attackers.some((r) => r.id === a.id && r.incarnation === a.incarnation) ||
+    s.combat.blocked.includes(a.id)
+  )
+    return 'Return an unblocked attacker you control.';
+  if (!planPayment(s, p, definition(s, o).ninjutsu))
+    return 'Not enough available mana for ninjutsu.';
+  return null;
+}
+function ninjutsu(s, p, c) {
+  const problem = ninjutsuProblem(s, p, c.card, c.attacker);
+  requireRule(!problem, 'NINJUTSU', problem);
+  const o = s.objects[c.card],
+    a = s.objects[c.attacker.id];
+  // Store the declared defender, including a vanished planeswalker. Never retarget.
+  const defender = structuredClone(
+    s.combat.defenders?.[a.id] ?? { kind: 'player', id: opponent(p) },
+  );
+  s.stack.push({
+    id: `s${++s.nextId}`,
+    kind: 'ability',
+    name: o.name,
+    controller: p,
+    source: ref(o),
+    sourceKeywords: [],
+    sourceDefinition: structuredClone(definition(s, o)),
+    effects: [{ op: 'ninjutsuEnter', defender }],
+    targetKind: null,
+    target: null,
+    label: 'Ninjutsu',
+  });
+  emit(s, 'revealed', { player: p, objectId: o.id, name: o.name });
+  pay(s, p, definition(s, o).ninjutsu);
+  move(s, a, 'hand');
+  s.passes = 0;
+  emit(s, 'activated', { player: p, name: o.name, objectId: o.id, ability: 'ninjutsu' });
 }
 export function turnFaceUpProblem(s, p, id) {
   const o = s.objects[id];
@@ -337,6 +484,7 @@ function cycle(s, p, c) {
     source: ref(o),
     sourceKeywords: keywords(s, o),
     sourceDefinition: structuredClone(definition(s, o)),
+    sourceStats: structuredClone(stats(s, o)),
     ...(o.attachedTo ? { sourceAttachment: structuredClone(o.attachedTo) } : {}),
     effects: d.cyclingType
       ? [
@@ -371,7 +519,9 @@ function activate(s, p, c) {
     source: ref(o),
     sourceKeywords: keywords(s, o),
     sourceDefinition: structuredClone(definition(s, o)),
+    sourceStats: structuredClone(stats(s, o)),
     ...(o.attachedTo ? { sourceAttachment: structuredClone(o.attachedTo) } : {}),
+    sourceCopyDefinition: structuredClone(copiableDefinition(s, o)),
     effects: structuredClone(a.effects),
     ...(a.targetGroups
       ? { targetGroups: structuredClone(a.targetGroups), targets: structuredClone(c.targets) }
@@ -381,12 +531,14 @@ function activate(s, p, c) {
     label: a.text,
   });
   if (s.rulesRevision !== 1) notifyTargeted(s, s.stack.at(-1));
+  const lockedCost = activationCost(s, o, a);
+  if (a.powerUp) (o.powerUpUses ??= {})[c.ability] = o.incarnation;
   if (a.oncePerTurn) (o.abilityUses ??= {})[c.ability] = `${s.turn}:${o.incarnation}`;
   if (a.loyalty !== undefined) {
     o.loyalty = (o.loyalty ?? 0) + a.loyalty;
     o.loyaltyUsed = `${s.turn}:${o.incarnation}`;
   }
-  payCost(s, p, a.cost, { sourceId: o.id, discardCard: c.discardCard });
+  payCost(s, p, lockedCost, { sourceId: o.id, discardCard: c.discardCard });
   s.passes = 0;
   emit(s, 'activated', { player: p, name: o.name, objectId: o.id, ability: c.ability });
   if (s.rulesRevision === 1) notifyTargeted(s, s.stack.at(-1));
@@ -406,15 +558,24 @@ function completeMulligan(s, p) {
 function handleChoice(s, p, c) {
   const choice = s.choice;
   requireRule(choice.player === p, 'CHOICE_PLAYER', 'The other player must make this choice.');
+  if (choice.kind === 'castExiled' && c.type === 'cast') {
+    cast(s, p, c);
+    return;
+  }
   if (
     [
+      'castExiled',
       'libraryOrder',
       'librarySearch',
+      'landName',
       'discardEffect',
       'sacrifice',
       'payCost',
+      'removeCounter',
+      'behold',
       'optionalEffect',
       'attackDefenders',
+      'manaColor',
       'exilePlay',
       'empowerJace',
       'bindingNegotiation',
@@ -440,6 +601,7 @@ function handleChoice(s, p, c) {
     case 'auraEntry':
       finishAuraEntryChoice(s, c);
       return;
+    case 'landType':
     case 'creatureType':
       finishCreatureTypeChoice(s, c);
       return;
@@ -579,6 +741,9 @@ export function dispatch(state, command) {
         case 'plot':
           plot(s, p, command.card);
           break;
+        case 'ninjutsu':
+          ninjutsu(s, p, command);
+          break;
         case 'cycle':
           cycle(s, p, command);
           break;
@@ -607,6 +772,7 @@ export function dispatch(state, command) {
       }
     }
     if (s.status === 'playing' && !s.choice) {
+      if (s.endingTurn) finishEndingTurn(s);
       if (flushLinkedReturns(s) !== false && s.castingCompletion) finishCasting(s);
       if (!s.choice) stabilize(s);
     }
@@ -625,6 +791,26 @@ export function dispatch(state, command) {
  */
 export function legalActions(s, p, { x: exactX } = {}) {
   if (s.status === 'finished') return [];
+  const resolutionCast = s.choice?.kind === 'castExiled' && s.choice.player === p;
+  if (s.choice?.kind === 'manaColor' && s.choice.player === p)
+    return ['W', 'U', 'B', 'R', 'G'].map((color) => ({ type: 'chooseManaColor', color }));
+  if (s.choice?.kind === 'payCost' && s.choice.player === p)
+    return [
+      { type: 'payCost', pay: false },
+      ...(s.choice.payable ? [{ type: 'payCost', pay: true }] : []),
+      { type: 'concede' },
+    ];
+  if (s.choice?.kind === 'discardEffect' && s.choice.optional && s.choice.player === p)
+    return [
+      { type: 'discardEffect', cards: [] },
+      ...s.players[p].hand.map((id) => ({ type: 'discardEffect', cards: [id] })),
+      { type: 'concede' },
+    ];
+  if (s.choice?.kind === 'landType' && s.choice.player === p)
+    return [
+      ...s.choice.types.map((landType) => ({ type: 'chooseLandType', landType })),
+      { type: 'concede' },
+    ];
   if (s.choice?.kind === 'entryLife' && s.choice.player === p)
     return [
       { type: 'payEntryLife', pay: false },
@@ -640,7 +826,13 @@ export function legalActions(s, p, { x: exactX } = {}) {
     return [...s.choice.cards.map((card) => ({ type: 'chooseLegend', card })), { type: 'concede' }];
   if (s.choice?.kind === 'triggerTargets' && s.choice.player === p)
     return [
-      ...targetPlans(s, s.choice.entry.targetGroups, p).map((targets) => ({
+      ...targetPlans(
+        s,
+        s.choice.entry.targetGroups,
+        p,
+        256,
+        s.choice.entry.targetingSource ?? s.choice.entry.source,
+      ).map((targets) => ({
         type: 'chooseTriggerTargets',
         targets,
       })),
@@ -654,15 +846,21 @@ export function legalActions(s, p, { x: exactX } = {}) {
       })),
       { type: 'concede' },
     ];
-  if (s.choice)
+  if (s.choice && !resolutionCast)
     return s.choice.player === p
       ? [{ type: 'choice', kind: s.choice.kind }, { type: 'concede' }]
       : [{ type: 'concede' }];
-  if (s.priority !== p) return [{ type: 'concede' }];
-  const actions = [{ type: 'pass' }, { type: 'concede' }];
-  for (const id of playableCards(s, p)) {
+  if (s.priority !== p && !resolutionCast) return [{ type: 'concede' }];
+  const actions = resolutionCast
+    ? [{ type: 'declineCastExiled' }]
+    : [{ type: 'pass' }, { type: 'concede' }];
+  for (const id of resolutionCast ? [s.choice.card] : playableCards(s, p)) {
     if (!plotProblem(s, p, id)) actions.push({ type: 'plot', card: id });
     if (!cyclingProblem(s, p, id)) actions.push({ type: 'cycle', card: id });
+    if (definition(s, s.objects[id]).ninjutsu)
+      for (const attacker of s.combat.attackers)
+        if (!ninjutsuProblem(s, p, id, attacker))
+          actions.push({ type: 'ninjutsu', card: id, attacker: structuredClone(attacker) });
     if (canPlayLand(s, p, id)) {
       actions.push({ type: 'playLand', card: id });
       continue;
@@ -703,37 +901,91 @@ export function legalActions(s, p, { x: exactX } = {}) {
             ]
               .filter((x) => x >= 0 && x <= MAX_X)
               .sort((a, b) => a - b);
-      for (const sacrifice of profile.sacrificeCost
-        ? castingSacrificeCandidates(s, p, profile).map(ref)
-        : [undefined])
-        for (const x of proposals) {
-          if (profile.targetGroups) {
-            for (const targets of targetPlans(s, profile.targetGroups, p))
-              if (!castProblem(s, p, id, null, { mode, targets, x, sacrifice }))
-                actions.push({
-                  type: 'cast',
-                  card: id,
-                  ...(sacrifice ? { sacrifice } : {}),
-                  ...(mode !== undefined ? { mode } : {}),
-                  ...(x !== undefined ? { x } : {}),
-                  targets,
-                });
-            continue;
-          }
-          const targets = profile.target ? targetsFor(s, profile.target, p) : [null];
-          for (const target of targets)
-            if (!castProblem(s, p, id, target, { mode, x, sacrifice }))
-              actions.push({
-                type: 'cast',
-                card: id,
-                ...(sacrifice ? { sacrifice } : {}),
-                ...(mode !== undefined ? { mode } : {}),
-                ...(x !== undefined ? { x } : {}),
-                ...(target ? { target } : {}),
-              });
-        }
+      for (const additionalCost of additionalCostOptions(s, p, profile, id))
+        for (const sacrifice of profile.sacrificeCost
+          ? castingSacrificeCandidates(s, p, profile).map(ref)
+          : [undefined])
+          for (const harmonize of s.objects[id].zone === 'graveyard' && profile.harmonize
+            ? [null, ...harmonizeCandidates(s, p).map(ref)]
+            : [undefined])
+            for (const x of proposals) {
+              if (profile.distributedCounters) {
+                const candidates = targetsFor(
+                  s,
+                  profile.distributedCounters,
+                  p,
+                  ref(s.objects[id]),
+                );
+                const plans = x === 0 ? [[]] : candidates.map((t) => [t]);
+                if (x > 1 && candidates.length > 1) plans.push(candidates.slice(0, x));
+                for (const selected of plans) {
+                  const targets = { distributed: selected },
+                    distribution = Object.fromEntries(
+                      selected.map((t, i) => [t.id, i === 0 ? x - selected.length + 1 : 1]),
+                    );
+                  if (!castProblem(s, p, id, null, { mode, x, targets, distribution }))
+                    actions.push({
+                      type: 'cast',
+                      card: id,
+                      ...(mode !== undefined ? { mode } : {}),
+                      x,
+                      targets,
+                      distribution,
+                    });
+                }
+                continue;
+              }
+              if (profile.targetGroups) {
+                for (const targets of targetPlans(
+                  s,
+                  profile.targetGroups,
+                  p,
+                  256,
+                  ref(s.objects[id]),
+                ))
+                  if (
+                    !castProblem(s, p, id, null, {
+                      mode,
+                      targets,
+                      x,
+                      sacrifice,
+                      harmonize,
+                      additionalCost,
+                    })
+                  )
+                    actions.push({
+                      type: 'cast',
+                      card: id,
+                      ...(sacrifice ? { sacrifice } : {}),
+                      ...(harmonize !== undefined ? { harmonize } : {}),
+                      ...(profile.additionalCost ? { additionalCost } : {}),
+                      ...(mode !== undefined ? { mode } : {}),
+                      ...(x !== undefined ? { x } : {}),
+                      targets,
+                    });
+                continue;
+              }
+              const targets = profile.target
+                ? targetsFor(s, profile.target, p, ref(s.objects[id]))
+                : [null];
+              for (const target of targets)
+                if (
+                  !castProblem(s, p, id, target, { mode, x, sacrifice, harmonize, additionalCost })
+                )
+                  actions.push({
+                    type: 'cast',
+                    card: id,
+                    ...(sacrifice ? { sacrifice } : {}),
+                    ...(harmonize !== undefined ? { harmonize } : {}),
+                    ...(profile.additionalCost ? { additionalCost } : {}),
+                    ...(mode !== undefined ? { mode } : {}),
+                    ...(x !== undefined ? { x } : {}),
+                    ...(target ? { target } : {}),
+                  });
+            }
     }
   }
+  if (resolutionCast) return actions;
   for (const o of Object.values(s.objects)) {
     if (!turnFaceUpProblem(s, p, o.id)) actions.push({ type: 'turnFaceUp', card: o.id });
     if (canTapForMana(s, o, p))
@@ -751,7 +1003,7 @@ export function legalActions(s, p, { x: exactX } = {}) {
     }
     for (const [index, a] of (definition(s, o).activated ?? []).entries()) {
       if (a.targetGroups) {
-        for (const targets of targetPlans(s, a.targetGroups, p))
+        for (const targets of targetPlans(s, a.targetGroups, p, 256, ref(o)))
           for (const discardCard of a.cost.discard ? s.players[p].hand : [undefined])
             if (!abilityProblem(s, p, o.id, index, null, discardCard, targets))
               actions.push({
@@ -763,7 +1015,7 @@ export function legalActions(s, p, { x: exactX } = {}) {
               });
         continue;
       }
-      for (const target of a.target ? targetsFor(s, a.target, p) : [null])
+      for (const target of a.target ? targetsFor(s, a.target, p, ref(o)) : [null])
         for (const discardCard of a.cost.discard ? s.players[p].hand : [undefined])
           if (!abilityProblem(s, p, o.id, index, target, discardCard))
             actions.push({
@@ -825,6 +1077,7 @@ export function replay(record) {
         '0.43.0',
         '0.44.0',
         '0.45.0',
+        '0.46.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "10e0b563-4dfc-4530-a010-0ba40bdf02ac",
+  "name": "Pinnacle Starcage",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}{W}"
+  },
+  "rulesText": "When this artifact enters, exile all artifacts and creatures with mana value 2 or less until this artifact leaves the battlefield.\n{6}{W}{W}: Put each card exiled with this artifact into its owner's graveyard, then create a 2/2 colorless Robot artifact creature token for each card put into a graveyard this way. Sacrifice this artifact.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeavesAll",
+          "where": {
+            "all": [
+              {
+                "any": [
+                  {
+                    "type": "artifact"
+                  },
+                  {
+                    "type": "creature"
+                  }
+                ]
+              },
+              {
+                "manaValue": {
+                  "lte": 2
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{6}{W}{W}"
+      },
+      "effects": [
+        {
+          "op": "moveLinkedExileToGraveyard"
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/robot-token",
+          "amount": 0,
+          "countFrom": "moved"
+        },
+        {
+          "op": "sacrificeSelf"
+        }
+      ]
+    }
+  ]
+}

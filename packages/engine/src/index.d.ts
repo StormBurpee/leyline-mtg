@@ -65,24 +65,36 @@ export type CardPredicate =
   | { controller: 'you' | 'opponent' }
   | { owner: 'you' | 'opponent' }
   | { tapped: boolean }
+  | { stunned: boolean }
   | { token: boolean }
   | { basic: boolean }
   | { legendary: boolean }
   | { adventure: boolean }
   | { attacking: boolean }
   | { blocking: boolean }
+  | { name: string }
   | { subtype: string }
   | { keyword: string }
   | { power: NumericComparison }
   | { toughness: NumericComparison }
   | { manaValue: NumericComparison };
 export interface TargetSpec {
-  scope: 'permanent' | 'spell' | 'player' | 'damageable' | 'graveyard' | 'playerOrPlaneswalker';
+  /** Exclude this exact source incarnation; source context is required. */
+  excludeSource?: boolean;
+  scope:
+    | 'permanent'
+    | 'ability'
+    | 'spell'
+    | 'player'
+    | 'damageable'
+    | 'graveyard'
+    | 'playerOrPlaneswalker';
   where?: CardPredicate;
 }
 export type TargetKind = LegacyTargetKind | TargetSpec;
 export interface EventSpec {
   event:
+    | 'chapter'
     | 'enter'
     | 'cast'
     | 'dies'
@@ -92,14 +104,16 @@ export interface EventSpec {
     | 'attackGroup'
     | 'noncombatDamageToPlayer'
     | 'combatDamagePlayer'
+    | 'librarySearch'
     | 'lifeGain'
     | 'faceUp'
     | 'targeted';
-  step?: 'upkeep' | 'beginCombat' | 'end' | 'main1' | 'main2';
+  step?: 'draw' | 'upkeep' | 'beginCombat' | 'end' | 'main1' | 'main2';
   object?: 'source';
   controller?: 'you' | 'opponent';
   filter?: CardPredicate;
   excludeSource?: boolean;
+  chapters?: number[];
   spellNumber?: number;
   castByController?: boolean;
   targetingController?: 'you' | 'opponent';
@@ -127,7 +141,14 @@ export type NumericValue =
   | { kind: 'spellsCast'; player: 'you' | 'opponent' | 'all'; where?: SpellHistoryPredicate }
   | { kind: 'life'; player: 'you' | 'opponent' }
   | { kind: 'sum'; values: NumericValue[] }
-  | { kind: 'scale'; value: NumericValue; factor: number };
+  | { kind: 'scale'; value: NumericValue; factor: number }
+  | { kind: 'floorDivide'; value: NumericValue; divisor: number };
+export type EffectNumericValue =
+  | NumericValue
+  | { kind: 'sourceStat'; stat: 'power' | 'toughness' }
+  | { kind: 'sum'; values: EffectNumericValue[] }
+  | { kind: 'scale'; value: EffectNumericValue; factor: number }
+  | { kind: 'floorDivide'; value: EffectNumericValue; divisor: number };
 export interface TargetGroup {
   id: string;
   label?: string;
@@ -139,7 +160,17 @@ export interface TargetGroup {
 export type TargetPlan = Record<string, Target[]>;
 export type Effect = EffectInstruction & { targetGroup?: string };
 type EffectInstruction =
+  | { op: 'anthemEmblem'; where: CardPredicate; power: number; toughness: number }
+  | { op: 'ninjutsuEnter'; defender: Target }
+  | { op: 'impulseCastOrDamage' | 'castDamageEmblem'; amount: number }
   | { op: 'disableDamagePrevention' }
+  | {
+      op: 'damageEachPlayer' | 'damageEventPlayer' | 'damageTargetController';
+      amount: NumericValue;
+    }
+  | { op: 'exileGraveyards'; players: 'all' | 'controller' | 'opponent' }
+  | { op: 'chooseLandName' }
+  | { op: 'endTurn' }
   | {
       op: 'discardTrigger';
       count: number;
@@ -155,86 +186,145 @@ type EffectInstruction =
       where?: CardPredicate;
     }
   | { op: 'drawEventAmount' }
+  | { op: 'creatureForm'; power: number; toughness: number; subtypes: string[] }
+  | { op: 'optionalDiscardDraw' | 'distributedCounters' }
+  | { op: 'becomeLand'; mana: Color[] }
   | { op: 'conditional'; condition: StateCondition; then: Effect[]; else?: Effect[] }
-  | { op: 'stunOn'; amount: NumericValue; subject?: 'source' | 'attached' }
+  | { op: 'stunOn'; amount: EffectNumericValue; subject?: 'source' | 'attached' }
+  | { op: 'keywordCounter'; subject: 'source'; keyword: 'indestructible'; amount: number }
   | { op: 'fight' | 'bite'; sourceGroup: string; victimGroup: string }
   | { op: 'damageEventPowerOpponent' }
+  | {
+      op: 'exileTop';
+      count: NumericValue;
+      player: 'controller' | 'target';
+      duration: 'turn' | 'nextTurn';
+      castOnly?: boolean;
+      anyMana?: boolean;
+    }
+  | { op: 'returnTransformed' | 'chooseMana' }
+  | { op: 'combatMana'; count: number }
   | { op: 'impulseChoose'; count: number }
   | { op: 'bindingNegotiation' }
-  | { op: 'revealDiscard' }
+  | { op: 'revealDiscard'; where?: CardPredicate }
+  | { op: 'explore'; subject?: 'source' }
+  | { op: 'keywordCounters'; keywords: string[] }
+  | { op: 'removeAbilities'; until: 'endOfTurn' | 'sourceLeaves' }
+  | { op: 'counterAbility'; removeSourceAbilities?: boolean }
+  | { op: 'stripDestroyByManaValue'; amount: NumericValue }
+  | { op: 'returnSelfAsEnchantment' | 'shuffleSourceAndTarget' }
+  | { op: 'exileGraveyards'; players: 'controller' | 'opponent' | 'all' | 'target' }
+  | {
+      op: 'chooseExile';
+      count: number;
+      player: 'controller' | 'opponent' | 'target' | 'all';
+      where?: CardPredicate;
+    }
   | { op: 'empowerJace'; definition: string; count: number }
-  | { op: 'mobilize'; definition: string; count: NumericValue }
+  | { op: 'mobilize'; definition: string; count: EffectNumericValue }
   | { op: 'addMana'; mana: ManaCost }
-  | { op: 'damageEventOpponent'; amount: NumericValue }
-  | { op: 'damage' | 'damageOpponent'; amount: NumericValue }
+  | { op: 'damageEventOpponent'; amount: EffectNumericValue }
+  | { op: 'damage' | 'damageOpponent'; amount: EffectNumericValue }
   | {
       op: 'gainLife' | 'loseLife';
-      amount: NumericValue;
+      amount: EffectNumericValue;
       player?: 'controller' | 'opponent' | 'target';
     }
   | {
       op: 'moveTarget';
+      trackSource?: boolean;
       subject?: 'source' | 'attached';
       destination: 'hand' | 'battlefield' | 'exile';
       controller?: 'owner' | 'you';
       tapped?: boolean;
     }
   | {
-      op: 'draw' | 'lookChooseHand' | 'scry' | 'surveil' | 'discard';
-      count: NumericValue;
+      op: 'draw' | 'scry' | 'surveil' | 'discard';
+      count: EffectNumericValue;
+      player?: 'controller' | 'opponent' | 'target';
+    }
+  | {
+      op: 'lookChooseHand';
+      count: EffectNumericValue;
+      selectCount?: EffectNumericValue;
+      restOrder?: 'chosen' | 'random';
       player?: 'controller' | 'opponent' | 'target';
     }
   | {
       op: 'searchLibrary';
       count: number;
+      player?: 'controller' | 'opponent' | 'target' | 'targetController';
+      optional?: boolean;
+      countFrom?: 'moved';
       where?: CardPredicate;
       destination: 'hand' | 'battlefield' | 'top' | 'graveyard';
       tapped?: boolean;
       reveal?: boolean;
     }
-  | { op: 'mill'; count: NumericValue; player: 'controller' | 'opponent' | 'target' }
-  | { op: 'counter' | 'attachEquipment' }
-  | { op: 'exileUntilSourceLeaves' }
+  | { op: 'mill'; count: EffectNumericValue; player: 'controller' | 'opponent' | 'target' }
+  | { op: 'counter'; unlessPay?: ManaCost; exile?: boolean }
+  | { op: 'attachEquipment' }
+  | { op: 'exileUntilSourceLeaves' | 'moveLinkedExileToGraveyard' }
+  | { op: 'exileUntilSourceLeavesAll'; where: CardPredicate }
   | { op: 'bounce' | 'destroy'; subject?: 'source' | 'attached' }
   | { op: 'untap' | 'tap'; subject?: 'source' | 'attached' }
   | {
       op: 'bounceAll' | 'destroyAll' | 'exileAll' | 'tapAll' | 'untapAll';
+      player?: 'controller' | 'opponent' | 'target';
+      rememberMovedCount?: boolean;
       where: CardPredicate;
       excludeSource?: boolean;
     }
-  | { op: 'counterAll'; where: CardPredicate; amount: NumericValue; excludeSource?: boolean }
+  | { op: 'counterAll'; where: CardPredicate; amount: EffectNumericValue; excludeSource?: boolean }
   | {
       op: 'modifyAll';
       where: CardPredicate;
-      power: NumericValue;
-      toughness: NumericValue;
+      power: EffectNumericValue;
+      toughness: EffectNumericValue;
       keywords?: readonly string[];
       excludeSource?: boolean;
     }
   | {
       op: 'damageAll';
       where?: CardPredicate;
-      amount: NumericValue;
+      amount: EffectNumericValue;
       players?: 'none' | 'controller' | 'opponent' | 'all';
       excludeSource?: boolean;
     }
-  | { op: 'counterOn'; subject?: 'source' | 'attached'; amount: NumericValue }
+  | { op: 'doubleCounters'; subject?: 'source' | 'attached'; where?: CardPredicate }
+  | { op: 'earthbend'; amount: number }
+  | { op: 'questCounterTrigger'; threshold: number; selector: TargetKind; effects: Effect[] }
+  | { op: 'removeCounterTrigger'; selector: TargetKind; effects: Effect[] }
+  | { op: 'fightAttached' }
+  | { op: 'untapSearched' }
+  | { op: 'behold'; subtype: string; then: readonly Effect[] }
+  | { op: 'doublePower'; subject?: 'source' | 'attached' }
+  | { op: 'counterOn'; subject?: 'source' | 'attached'; amount: EffectNumericValue }
   | {
       op: 'animateLand';
+      keywords?: string[];
+      permanent?: true;
+      allCreatureTypes?: true;
       power: number;
       toughness: number;
-      colors: Color[];
+      colors?: Color[];
       subtypes: string[];
+    }
+  | {
+      op: 'combatRestriction';
+      subject?: 'source' | 'attached';
+      restriction: 'cannotBlock' | 'cannotBeBlocked';
     }
   | {
       op: 'modify';
       subject?: 'source' | 'attached';
-      power: NumericValue;
-      toughness: NumericValue;
+      power: EffectNumericValue;
+      toughness: EffectNumericValue;
       keywords?: string[];
     }
   | {
       op: 'copyToken';
+      subject?: 'source';
       count: number;
       exceptions?: {
         power?: number;
@@ -245,13 +335,29 @@ type EffectInstruction =
     }
   | {
       op: 'token';
+      countFrom?: 'moved';
       definition: string;
-      count: NumericValue;
+      count: EffectNumericValue;
       temporaryKeywords?: string[];
       player?: 'controller' | 'opponent' | 'target' | 'targetController';
       tapped?: boolean;
     };
+export type AdditionalCastingCost =
+  | { kind: 'discardOrLife'; life: number }
+  | { kind: 'blight'; amount: number }
+  | { kind: 'teamwork'; power: number };
+export type AdditionalCostPayment =
+  | null
+  | { life: true }
+  | { discard: ObjectTarget }
+  | { blight: ObjectTarget }
+  | { teamwork: ObjectTarget[] };
 export type StateCondition =
+  | { kind: 'sourceQuestCountersAtLeast'; count: number }
+  | { kind: 'additionalCostPaid' }
+  | { kind: 'sourceType'; type: CardType }
+  | { kind: 'sourceExiledCardTypesAtLeast'; count: number }
+  | { kind: 'eventManaSpentAtLeast'; count: number }
   | {
       kind:
         | 'opponentLostLifeThisTurn'
@@ -290,9 +396,11 @@ export interface CardDefinition {
   readonly token?: boolean;
   readonly mana?: Color | readonly Color[];
   readonly manaSacrifice?: boolean;
+  readonly manaFromTrackedExile?: boolean;
   readonly manaLifeCosts?: Partial<Record<Color, number>>;
   readonly entryLifePayment?: number;
   readonly chooseCreatureType?: boolean;
+  readonly chooseBasicLandType?: boolean;
   readonly manaRestrictions?: Partial<Record<Color, 'creature' | 'chosenCreatureType'>>;
   readonly entersTapped?: boolean;
   readonly entersTappedUnless?: StateCondition;
@@ -301,26 +409,55 @@ export interface CardDefinition {
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
   readonly crew?: number;
+  readonly ninjutsu?: ManaCost;
+  readonly turnLoyaltyCreature?: {
+    power: number;
+    toughness: number;
+    subtypes: string[];
+    keywords: string[];
+  };
   readonly cycling?: ManaCost;
   readonly cyclingType?: string;
   readonly flashback?: ManaCost;
+  readonly harmonize?: ManaCost;
+  readonly distributedCounters?: TargetKind;
+  readonly cannotBeBlockedByLowerPower?: boolean;
   readonly plot?: ManaCost;
   readonly warp?: ManaCost;
   readonly mainName?: string;
+  readonly backFace?: CardDefinition;
+  readonly frontName?: string;
+  readonly frontFaceCost?: ManaCost;
   readonly adventure?: CardDefinition;
   readonly kicker?: { cost: ManaCost; effects: readonly Effect[] };
   readonly offspring?: ManaCost;
   readonly disguise?: ManaCost;
   readonly startEngines?: boolean;
   readonly maxSpeedKeywords?: readonly string[];
+  readonly entryKeywordCounters?: string[];
+  readonly entryPlusCounters?: number;
+  readonly landNameLock?: true;
+  readonly exileGraveyardMoves?: true;
+  readonly prepareSpell?: CardDefinition;
+  readonly entersPrepared?: boolean;
+  readonly libraryTopAccess?: { play: CardPredicate };
+  readonly additionalEnterTrigger?: CardPredicate;
+  readonly suppressEnterTriggers?: CardPredicate;
   readonly entryStunCounters?: number;
   readonly entryCounterBonus?: { amount: number; condition: StateCondition };
+  readonly cantGainLife?: boolean;
+  readonly cantPreventDamage?: boolean;
+  readonly foreignCreatureSubtype?: string;
+  readonly gift?: { definition: string; effects: readonly Effect[] };
+  readonly drawBonus?: { amount: number; handAtMost: number };
   readonly damageBonus?: { amount: number; where: CardPredicate };
   readonly cannotAttack?: boolean;
   readonly cannotBlock?: boolean;
   readonly unblockable?: boolean;
   readonly uncounterable?: boolean;
+  readonly spree?: true;
   readonly modes?: readonly {
+    additionalCost?: ManaCost;
     label: string;
     target?: TargetKind;
     targetGroups?: readonly TargetGroup[];
@@ -328,6 +465,9 @@ export interface CardDefinition {
   }[];
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
+  readonly additionalCost?: AdditionalCastingCost;
+  readonly opponentCreatureProtectionBypass?: true;
+  readonly abilitiesRemoved?: true;
   readonly baseStats?: { power?: NumericValue; toughness?: NumericValue };
   readonly sacrificeCost?: { where: CardPredicate };
   readonly costModifiers?: readonly {
@@ -349,6 +489,7 @@ export interface CardDefinition {
   readonly aura?: 'pacifism' | 'creature';
   readonly attachmentBonus?: {
     noUntap?: boolean;
+    maxBlockers?: number;
     power: NumericValue;
     toughness: NumericValue;
     keywords?: readonly string[];
@@ -357,6 +498,7 @@ export interface CardDefinition {
     kind: 'anthem';
     power: NumericValue;
     toughness: NumericValue;
+    /** Keyword predicates use effective abilities; permitted only without keyword grants. */
     where?: CardPredicate;
     excludeSource?: boolean;
     keywords?: readonly string[];
@@ -384,6 +526,7 @@ export interface CardDefinition {
     condition?: StateCondition;
   }[];
   readonly activated?: readonly {
+    powerUp?: true;
     loyalty?: number;
     cost: {
       mana?: ManaCost;
@@ -414,9 +557,17 @@ export interface GameObject {
   incarnation: number;
   tapped: boolean;
   plusCounters: number;
+  chosenLandName?: string;
+  keywordCounters?: Record<string, number>;
+  powerUpUses?: Record<number, number>;
+  minusCounters?: number;
+  loreCounters?: number;
+  questCounters?: number;
   loyalty?: number;
   loyaltyUsed?: string;
   stunCounters?: number;
+  keywordCounterTimestamps?: Record<string, number>;
+  layerTimestamp?: number;
   damage: number;
   deathtouchDamage: boolean;
   controlledSince: number;
@@ -425,10 +576,18 @@ export interface GameObject {
   attachedTo: ObjectTarget | null;
   faceDown?: boolean;
   flashbackPaid?: boolean;
+  harmonizePaid?: boolean;
+  harmonize?: ObjectTarget | null;
   warpPaid?: boolean;
+  transformed?: boolean;
   adventureCast?: boolean;
+  trackedExile?: ObjectTarget[];
+  preparedCopy?: ObjectTarget;
+  preparedFrom?: ObjectTarget;
+  spellCopy?: boolean;
   definitionOverride?: CardDefinition;
   chosenCreatureType?: string;
+  chosenBasicLandType?: string;
   chosenX?: number;
   castPlayer?: PlayerId;
   abilityUses?: Record<number, string>;
@@ -437,7 +596,15 @@ export interface GameObject {
   plotted?: { turn: number; incarnation: number };
   warped?: { turn: number; incarnation: number };
   adventured?: { player: PlayerId; incarnation: number };
-  playPermission?: { player: PlayerId; turn: number; incarnation: number };
+  playPermission?: {
+    castOnly?: boolean;
+    anyMana?: boolean;
+    player: PlayerId;
+    turn: number;
+    incarnation: number;
+    untilNextTurn?: PlayerId;
+    nextTurnStarted?: boolean;
+  };
 }
 export interface PlayerState {
   id: PlayerId;
@@ -446,9 +613,10 @@ export interface PlayerState {
   mana: Record<Color, number>;
   restrictedMana?: {
     color: Color;
-    restriction: 'creature' | 'chosenCreatureType';
+    restriction?: 'creature' | 'chosenCreatureType';
+    duration?: 'combat';
     creatureType?: string;
-    uncounterable: boolean;
+    uncounterable?: boolean;
   }[];
   speed?: number;
   speedTriggeredTurn?: number;
@@ -476,34 +644,50 @@ export interface PlayerState {
   kept: boolean;
 }
 export interface StackEntry {
+  targetController?: PlayerId;
+  movedCount?: number;
+  emblem?: boolean;
+  sagaChapter?: number;
   id: string;
   kind: 'spell' | 'ability';
   name: string;
   controller: PlayerId;
   source: ObjectTarget | null;
+  /** One-time post-zone-change source reference used only for target exclusion. */
+  targetingSource?: ObjectTarget;
   sourceDefinition?: CardDefinition;
+  sourceStats?: { power: number; toughness: number };
   sourceCopyDefinition?: CardDefinition;
   x?: number;
   castingCost?: ManaCost;
+  distribution?: Record<string, number>;
   convoke?: ConvokeChoice[];
   sacrifice?: ObjectTarget;
-  rule?: 'increaseSpeed' | 'warpExile' | 'mobilizeSacrifice';
+  harmonize?: ObjectTarget | null;
+  rule?: 'increaseSpeed' | 'warpExile' | 'mobilizeSacrifice' | 'earthbendReturn';
+  sourceQuestCounters?: number;
+  additionalCost?: AdditionalCostPayment;
   delayedObjects?: ObjectTarget[];
   flashbackPaid?: boolean;
+  harmonizePaid?: boolean;
   warpPaid?: boolean;
   adventureCast?: boolean;
   kicked?: boolean;
   offspringPaid?: boolean;
+  giftPromised?: boolean;
   uncounterable?: boolean;
   condition?: StateCondition;
   sourceKeywords: string[];
   sourceController?: PlayerId;
   eventAmount?: number;
+  eventManaSpent?: number;
+  manaSpent?: number;
   damagedPlayer?: PlayerId;
   sourceAttachment?: ObjectTarget | null;
   effects: (
     | Effect
     | { op: 'animateVehicle' }
+    | { op: 'returnEarthbent' }
     | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } }
   )[];
   targetGroups?: TargetGroup[];
@@ -531,6 +715,8 @@ export interface DamageSource {
   keywords: string[];
 }
 export type Choice =
+  | { kind: 'castExiled'; player: PlayerId; card: string; incarnation: number; amount: number }
+  | { kind: 'manaColor'; player: PlayerId; card: string }
   | {
       kind: 'entryLife';
       player: PlayerId;
@@ -580,7 +766,7 @@ export type Choice =
       }[];
     }
   | {
-      kind: 'creatureType';
+      kind: 'creatureType' | 'landType';
       lifeChoices?: Record<string, boolean>;
       auraChoices?: Record<string, ObjectTarget>;
       player: PlayerId;
@@ -601,6 +787,7 @@ export type Choice =
       cards: string[];
       remaining: { player: PlayerId; name: string; cards: string[] }[];
       toGrave: string[];
+      sagaSacrifices?: string[];
     }
   | {
       kind: 'triggerTarget';
@@ -618,18 +805,29 @@ export type Choice =
       remaining: { player: PlayerId; entries: StackEntry[] }[];
     }
   | { kind: 'attackDefenders'; player: PlayerId; cards: string[] }
+  | { kind: 'behold'; player: PlayerId; cards: string[]; subtype: string; then: readonly Effect[] }
+  | {
+      kind: 'removeCounter';
+      player: PlayerId;
+      source: ObjectTarget;
+      counters: string[];
+      reflexive: Extract<Effect, { op: 'removeCounterTrigger' }>;
+    }
   | { kind: 'optionalEffect'; player: PlayerId; name: string }
   | {
       kind: 'payCost';
       player: PlayerId;
       cost: { mana?: ManaCost; life?: number };
       stackId: string;
-      reason: 'ward';
+      reason: 'ward' | 'counterUnless';
+      counterDestination?: 'graveyard' | 'exile';
       payable: boolean;
     }
+  | { kind: 'landName'; player: PlayerId; card: string; names: string[] }
   | { kind: 'mulligan' | 'attackers' | 'blockers'; player: PlayerId }
   | {
       kind: 'librarySearch';
+      optional?: boolean;
       player: PlayerId;
       cards: string[];
       min: number;
@@ -642,11 +840,15 @@ export type Choice =
   | {
       kind: 'libraryOrder';
       player: PlayerId;
-      action: 'scry' | 'surveil' | 'lookChooseHand';
+      action: 'scry' | 'surveil' | 'lookChooseHand' | 'explore';
+      revealed?: boolean;
       cards: string[];
+      selectCount?: number;
+      restOrder?: 'chosen' | 'random';
     }
   | {
       kind: 'sacrifice';
+      destination?: 'exile';
       player: PlayerId;
       count: number;
       cards: string[];
@@ -657,6 +859,8 @@ export type Choice =
   | { kind: 'bottom' | 'discard'; player: PlayerId; count: number }
   | {
       kind: 'discardEffect';
+      optional?: boolean;
+      drawOnDiscard?: number;
       player: PlayerId;
       count: number;
       reflexive?: Extract<Effect, { op: 'discardTrigger' }>;
@@ -696,7 +900,13 @@ export interface GameEvent {
   readonly [key: string]: unknown;
 }
 export interface GameState {
+  endingTurn?: boolean;
+  emblems?: ({ id: string; controller: PlayerId; name: string } & (
+    | { kind?: 'castDamage'; amount: number }
+    | { kind: 'anthem'; where: CardPredicate; power: number; toughness: number }
+  ))[];
   damagePreventionDisabledTurn?: number;
+  layerClock?: number;
   rulesRevision: 1 | 2;
   catalog: Readonly<Record<string, CardDefinition>>;
   version: string;
@@ -717,9 +927,11 @@ export interface GameState {
   stack: StackEntry[];
   pendingTriggers: StackEntry[];
   delayedTriggers?: Omit<StackEntry, 'id'>[];
+  earthbendReturns?: (Omit<StackEntry, 'id'> & { object: ObjectTarget })[];
   linkedExiles?: { source: ObjectTarget; cards: ObjectTarget[] }[];
   pendingLinkedReturns?: ObjectTarget[];
   castingCompletion?: {
+    parentResolution?: NonNullable<GameState['resolving']>;
     player: PlayerId;
     command: Command;
     profile: CardDefinition;
@@ -733,8 +945,23 @@ export interface GameState {
     toughness?: number;
     keywords?: string[];
     addTypes?: CardType[];
-    animation?: { power: number; toughness: number; colors: Color[]; subtypes: string[] };
-    expires: number;
+    combatRestriction?: 'cannotBlock' | 'cannotBeBlocked';
+    creatureForm?: { power: number; toughness: number; subtypes: string[] };
+    animation?: {
+      power: number;
+      toughness: number;
+      colors?: Color[];
+      subtypes: string[];
+      preserveSubtypes?: boolean;
+    };
+    expires?: number;
+    untilNextTurn?: PlayerId;
+    timestamp?: number;
+    permanent?: true;
+    removeAbilities?: true;
+    enchantmentOnly?: true;
+    untilSourceLeaves?: ObjectTarget;
+    landForm?: { mana: Color[] };
   }[];
   choice: Choice | null;
   resolving: { entry: StackEntry; index: number; revealedPlayer?: PlayerId } | null;
@@ -744,6 +971,7 @@ export interface GameState {
     blocks: Record<string, ObjectTarget[]>;
     blocked: string[];
     firstEligible: string[];
+    firstIncarnations?: Record<string, number>;
     hasFirst: boolean;
   };
   events: readonly GameEvent[];
@@ -754,11 +982,16 @@ export interface GameState {
 export type Action =
   | { type: 'turnFaceUp'; card: string }
   | { type: 'payEntryLife'; pay: boolean }
+  | { type: 'chooseLandType'; landType: string }
+  | { type: 'chooseCounter'; counter: string | null }
   | { type: 'chooseCreatureType'; creatureType: string }
   | { type: 'chooseAuraAttachment'; card: string }
+  | { type: 'declineCastExiled' }
+  | { type: 'chooseManaColor'; color: Exclude<Color, 'C'> }
   | { type: 'chooseResolutionCard'; card: string | null }
   | { type: 'chooseLegend'; card: string }
   | { type: 'crew'; card: string; cards: string[] }
+  | { type: 'ninjutsu'; card: string; attacker: ObjectTarget }
   | { type: 'cycle'; card: string }
   | { type: 'plot'; card: string }
   | { type: 'resolveOptional'; accept: boolean }
@@ -770,10 +1003,13 @@ export type Action =
       type: 'cast';
       card: string;
       targets?: TargetPlan;
+      distribution?: Record<string, number>;
       target?: Target;
       autoTap?: boolean;
       convoke?: ConvokeChoice[];
       sacrifice?: ObjectTarget;
+      harmonize?: ObjectTarget | null;
+      additionalCost?: AdditionalCostPayment;
       x?: number;
       mode?: number;
     }
@@ -783,6 +1019,7 @@ export type Action =
       ability: number;
       discardCard?: string;
       targets?: TargetPlan;
+      distribution?: Record<string, number>;
       target?: Target;
     }
   | { type: 'bottom' | 'discard' | 'discardEffect' | 'sacrifice'; cards: string[] }
@@ -793,7 +1030,8 @@ export type Action =
   | { type: 'orderTriggers'; ids: string[] }
   | { type: 'chooseTriggerTargets'; targets: TargetPlan }
   | { type: 'chooseTriggerTarget'; target: Target }
-  | { type: 'searchLibrary'; cards: string[] }
+  | { type: 'chooseLandName'; name: string }
+  | { type: 'searchLibrary'; cards: string[]; decline?: boolean }
   | { type: 'orderLibrary'; top: string[]; rest: string[] };
 export type Command = Action & { player: PlayerId; expectedRevision?: number };
 export type LegalAction =
@@ -916,9 +1154,12 @@ export function castProblem(
     autoTap?: boolean;
     mode?: number;
     targets?: TargetPlan;
+    distribution?: Record<string, number>;
     x?: number;
     convoke?: ConvokeChoice[];
     sacrifice?: ObjectTarget;
+    harmonize?: ObjectTarget | null;
+    additionalCost?: AdditionalCostPayment;
   },
 ): string | null;
 export function abilityProblem(
@@ -935,8 +1176,14 @@ export function legalTarget(
   kind: TargetKind | null,
   target: Target | null,
   controller: PlayerId,
+  source?: ObjectTarget | null,
 ): boolean;
-export function targetsFor(state: GameState, kind: TargetKind, player: PlayerId): Target[];
+export function targetsFor(
+  state: GameState,
+  kind: TargetKind,
+  player: PlayerId,
+  source?: ObjectTarget | null,
+): Target[];
 export function planPayment(
   state: GameState,
   player: PlayerId,
@@ -990,6 +1237,12 @@ export function spellProfile(card: CardDefinition, mode?: number): CardDefinitio
 export function spellOptions(card: CardDefinition): { mode?: number; profile: CardDefinition }[];
 
 export function plotProblem(state: GameState, player: PlayerId, id: string): string | null;
+export function ninjutsuProblem(
+  state: GameState,
+  player: PlayerId,
+  id: string,
+  attacker: ObjectTarget,
+): string | null;
 export function cyclingProblem(state: GameState, player: PlayerId, id: string): string | null;
 
 export function castingProfile(
@@ -1028,6 +1281,7 @@ export function convokePayment(
   mana: { activations: { card: string; color: Color }[] };
 } | null;
 
+export function harmonizeCandidates(state: GameState, player: PlayerId): GameObject[];
 export function castingSacrificeCandidates(
   state: GameState,
   player: PlayerId,
@@ -1040,10 +1294,31 @@ export function castingPayment(
   options?: {
     card?: string;
     sacrifice?: ObjectTarget;
+    harmonize?: ObjectTarget | null;
+    additionalCost?: AdditionalCostPayment;
     convoke?: ConvokeChoice[];
     autoTap?: boolean;
   },
-): (NonNullable<ReturnType<typeof convokePayment>> & { sacrifice?: ObjectTarget }) | null;
+):
+  | (NonNullable<ReturnType<typeof convokePayment>> & {
+      sacrifice?: ObjectTarget;
+      harmonize?: ObjectTarget | null;
+      additionalCost?: AdditionalCostPayment;
+    })
+  | null;
 
 export function attackDefenders(state: GameState, player?: PlayerId): Target[];
 export function attackDefender(state: GameState, attacker: string): Target | null;
+
+export function additionalCostCandidates(
+  state: GameState,
+  player: PlayerId,
+  profile: CardDefinition,
+  card?: string,
+): GameObject[];
+export function additionalCostOptions(
+  state: GameState,
+  player: PlayerId,
+  profile: CardDefinition,
+  card?: string,
+): (AdditionalCostPayment | undefined)[];

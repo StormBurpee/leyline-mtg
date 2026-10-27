@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "17770eeb-ecbf-4510-af2d-acececfbe146",
+  "name": "Multiversal Passage",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped.\nThis land is the chosen type.",
+  "abilities": [
+    {
+      "kind": "chooseBasicLandType"
+    },
+    {
+      "kind": "entry",
+      "tapped": true,
+      "payLife": 2
+    }
+  ]
+}

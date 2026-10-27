@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b6565da9-773c-49b1-85f5-e34f07ba84cb",
+  "name": "Kinjalli's Dawnrunner",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Scout"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Double strike\nWhen this creature enters, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "explore",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

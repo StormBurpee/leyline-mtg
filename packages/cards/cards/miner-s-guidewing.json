@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eb161d0b-e534-463c-b1d1-7210bfba5d28",
+  "name": "Miner's Guidewing",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird"],
+    "colors": ["W"],
+    "manaCost": "{W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Flying, vigilance\nWhen this creature dies, target creature you control explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "explore",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

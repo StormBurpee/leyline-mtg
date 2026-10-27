@@ -25,6 +25,7 @@ export function manaRestriction(s, o, color) {
 export function manaEligible(unit, purpose) {
   return (
     !unit ||
+    unit.duration === 'combat' ||
     (!!purpose &&
       purpose.type === 'cast' &&
       purpose.card?.type === 'creature' &&
@@ -41,6 +42,7 @@ export function manaOptions(s, o) {
   );
 }
 export function canTapForMana(s, o, p) {
+  if (o.zone !== 'battlefield' || o.controller !== p) return false;
   const d = definition(s, o);
   return (
     o.zone === 'battlefield' &&
@@ -88,6 +90,7 @@ export function planPayment(
   )
     return null; // X must be announced and expanded before payment.
   if (
+    purpose?.card?.manaAsAnyType ||
     controlled(s, p).some(
       (o) => definition(s, o).manaLifeCosts && !o.tapped && !excludeSources.includes(o.id),
     )
@@ -288,7 +291,12 @@ function planLifePayment(s, p, cost, options) {
     units.map(
       (u) =>
         u.options
-          .filter((o) => symbol === 'generic' || symbol.split('/').includes(o.color))
+          .filter(
+            (o) =>
+              symbol === 'generic' ||
+              symbol.split('/').includes(o.color) ||
+              (purpose?.card?.manaAsAnyType && o.mode !== 'convoke'),
+          )
           .sort(
             (a, b) =>
               a.life - b.life || Number(a.mode === 'convoke') - Number(b.mode === 'convoke'),

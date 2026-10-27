@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "679480aa-f9ad-4a6c-bd79-db9f9f75433d",
+  "name": "Bespoke B\u014d",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}"
+  },
+  "rulesText": "When this Equipment enters, return up to one other target nonland permanent to its owner's hand.\nEquipped creature gets +2/+1 and has vigilance.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "not": {
+                "type": "land"
+              }
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 2,
+      "toughness": 1,
+      "keywords": ["vigilance"]
+    },
+    {
+      "kind": "equip",
+      "cost": "{3}"
+    }
+  ]
+}

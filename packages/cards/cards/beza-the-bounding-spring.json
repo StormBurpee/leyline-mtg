@@ -1,0 +1,133 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "020de6d7-f5a2-4036-ad25-451e5977b4d4",
+  "name": "Beza, the Bounding Spring",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Elemental", "Elk"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}{W}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "When Beza enters, create a Treasure token if an opponent controls more lands than you. You gain 4 life if an opponent has more life than you. Create two 1/1 blue Fish creature tokens if an opponent controls more creatures than you. Draw a card if an opponent has more cards in hand than you.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "operator": "gt",
+            "left": {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "opponent",
+              "where": {
+                "type": "land"
+              }
+            },
+            "right": {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "you",
+              "where": {
+                "type": "land"
+              }
+            }
+          },
+          "then": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/treasure-token",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "operator": "gt",
+            "left": {
+              "kind": "life",
+              "player": "opponent"
+            },
+            "right": {
+              "kind": "life",
+              "player": "you"
+            }
+          },
+          "then": [
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 4
+            }
+          ]
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "operator": "gt",
+            "left": {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "opponent",
+              "where": {
+                "type": "creature"
+              }
+            },
+            "right": {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "you",
+              "where": {
+                "type": "creature"
+              }
+            }
+          },
+          "then": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/blue-fish-token",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "operator": "gt",
+            "left": {
+              "kind": "count",
+              "zone": "hand",
+              "player": "opponent"
+            },
+            "right": {
+              "kind": "count",
+              "zone": "hand",
+              "player": "you"
+            }
+          },
+          "then": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

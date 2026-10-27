@@ -102,7 +102,13 @@ export function installDuelPresentation(root, context) {
                 state,
                 player,
                 id,
-                d.target ? targetsFor(state, d.target, player)[0] : null,
+                d.target
+                  ? targetsFor(state, d.target, player, {
+                      kind: 'object',
+                      id: o.id,
+                      incarnation: o.incarnation,
+                    })[0]
+                  : null,
               ) ?? 'Not playable now');
       payment(id);
     }

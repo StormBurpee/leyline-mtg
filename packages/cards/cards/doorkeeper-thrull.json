@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0eaea4fd-a377-4541-9bdd-14921034a975",
+  "name": "Doorkeeper Thrull",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Thrull"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nFlying\nArtifacts and creatures entering don't cause abilities to trigger.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "suppressEnterTriggers",
+      "where": {
+        "any": [
+          {
+            "type": "artifact"
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      }
+    }
+  ]
+}

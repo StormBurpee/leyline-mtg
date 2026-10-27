@@ -21,12 +21,26 @@ const cost = (value) => ({
 export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const effects = (list) =>
     list.map((e) => {
+      if (e.op === 'earthbend') return structuredClone(e);
+      if (e.op === 'questCounterTrigger')
+        return {
+          ...structuredClone(e),
+          selector: structuredClone(targetSpec(e.selector)),
+          effects: effects(e.effects),
+        };
+      if (e.op === 'removeCounterTrigger')
+        return {
+          ...structuredClone(e),
+          selector: structuredClone(targetSpec(e.selector)),
+          effects: effects(e.effects),
+        };
       if (e.op === 'discardTrigger')
         return {
           ...structuredClone(e),
           selector: structuredClone(targetSpec(e.selector)),
           effects: effects(e.effects),
         };
+      if (e.op === 'behold') return { ...structuredClone(e), then: effects(e.then) };
       if (e.op === 'conditional')
         return {
           op: 'conditional',
@@ -46,8 +60,25 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
             amount: e.count,
             token: idsByName[e.definition] ?? e.definition,
           };
-        case 'copyToken':
-          return { ...structuredClone(e), target: 'target' };
+        case 'copyToken': {
+          const { subject, ...rest } = structuredClone(e);
+          return { ...rest, target: subject ?? 'target' };
+        }
+        case 'damageTargetController':
+        case 'damageEachPlayer':
+        case 'damageEventPlayer':
+        case 'exileGraveyards':
+        case 'optionalDiscardDraw':
+        case 'chooseExile':
+        case 'returnSelfAsEnchantment':
+        case 'shuffleSourceAndTarget':
+        case 'impulseCastOrDamage':
+        case 'castDamageEmblem':
+        case 'anthemEmblem':
+        case 'exileTop':
+        case 'returnTransformed':
+        case 'chooseMana':
+        case 'combatMana':
         case 'sacrifice':
         case 'sacrificeSelf':
         case 'fight':
@@ -57,12 +88,18 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return { op: 'impulseChoose', amount: e.count };
         case 'attachEquipment':
           return { op: 'attachEquipment', target: 'target' };
+        case 'explore':
+          return { op: 'explore', target: e.subject ?? 'target' };
         case 'revealDiscard':
-          return { op: 'revealDiscard' };
+          return structuredClone(e);
         case 'bindingNegotiation':
           return { op: 'bindingNegotiation' };
         case 'addMana':
           return { op: 'addMana', mana: mana(e.mana) };
+        case 'moveLinkedExileToGraveyard':
+        case 'exileUntilSourceLeavesAll':
+        case 'endTurn':
+        case 'chooseLandName':
         case 'disableDamagePrevention':
         case 'drawEventAmount':
         case 'damageEventPowerOpponent':
@@ -77,6 +114,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return structuredClone(e);
         case 'modifyAll':
           return { ...structuredClone(e), until: 'endOfTurn' };
+        case 'keywordCounter':
+          return { op: e.op, target: e.subject, keyword: e.keyword, amount: e.amount };
         case 'stunOn':
           return { op: 'addStunCounters', target: e.subject ?? 'target', amount: e.amount };
         case 'tap':
@@ -98,24 +137,55 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
             destination: e.destination,
             ...(e.controller !== undefined ? { controller: e.controller } : {}),
             ...(e.tapped !== undefined ? { tapped: e.tapped } : {}),
+            ...(e.trackSource !== undefined ? { trackSource: e.trackSource } : {}),
           };
         case 'draw':
         case 'lookChooseHand':
         case 'scry':
         case 'surveil':
         case 'discard':
-          return { op: e.op, target: e.player ?? 'controller', amount: e.count };
+          return {
+            op: e.op,
+            target: e.player ?? 'controller',
+            amount: e.count,
+            ...(e.op === 'lookChooseHand' && e.selectCount !== undefined
+              ? { selectCount: structuredClone(e.selectCount) }
+              : {}),
+            ...(e.op === 'lookChooseHand' && e.restOrder !== undefined
+              ? { restOrder: e.restOrder }
+              : {}),
+          };
         case 'mill':
           return { op: 'mill', target: e.player, amount: e.count };
         case 'counter':
         case 'bounce':
         case 'destroy':
           return {
+            ...(e.unlessPay !== undefined ? { unlessPay: structuredClone(e.unlessPay) } : {}),
+            ...(e.exile !== undefined ? { exile: e.exile } : {}),
             op: { counter: 'counterSpell', bounce: 'returnToHand', destroy: 'destroy' }[e.op],
             target: e.subject ?? 'target',
           };
-        case 'animateLand':
-          return { ...structuredClone(e), until: 'endOfTurn' };
+        case 'becomeLand':
+          return { ...structuredClone(e), until: 'yourNextTurn' };
+        case 'creatureForm':
+          return { ...structuredClone(e), target: 'target', until: 'endOfTurn' };
+        case 'combatRestriction':
+          return {
+            op: e.op,
+            target: e.subject ?? 'target',
+            restriction: e.restriction,
+            until: 'endOfTurn',
+          };
+        case 'animateLand': {
+          const { permanent, ...rest } = e;
+          return { ...structuredClone(rest), until: permanent ? 'permanent' : 'endOfTurn' };
+        }
+        case 'removeAbilities':
+        case 'counterAbility':
+        case 'stripDestroyByManaValue':
+        case 'keywordCounters':
+          return structuredClone(e);
         case 'modify':
           return {
             op: 'modify',
@@ -124,6 +194,16 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
             toughness: e.toughness,
             ...(e.keywords !== undefined ? { keywords: e.keywords } : {}),
             until: 'endOfTurn',
+          };
+        case 'fightAttached':
+          return { op: e.op, target: 'target' };
+        case 'untapSearched':
+          return { op: e.op };
+        case 'doubleCounters':
+        case 'doublePower':
+          return {
+            op: e.op,
+            ...(e.where ? { where: structuredClone(e.where) } : { target: e.subject ?? 'target' }),
           };
         case 'counterOn':
           return {
@@ -142,11 +222,17 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
             ...(e.where ? { where: structuredClone(e.where) } : {}),
             ...(e.tapped !== undefined ? { tapped: e.tapped } : {}),
             ...(e.reveal !== undefined ? { reveal: e.reveal } : {}),
+            ...Object.fromEntries(
+              ['player', 'optional', 'countFrom']
+                .filter((k) => e[k] !== undefined)
+                .map((k) => [k, e[k]]),
+            ),
           };
         case 'token':
           if (!idsByName[e.definition]) throw new Error(`Missing token identity: ${e.definition}`);
           return {
             op: 'createToken',
+            ...(e.countFrom !== undefined ? { countFrom: e.countFrom } : {}),
             token: idsByName[e.definition],
             ...(e.temporaryKeywords ? { temporaryKeywords: [...e.temporaryKeywords] } : {}),
             amount: e.count,
@@ -158,8 +244,55 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       }
     });
   const abilities = d.keywords.map((keyword) => ({ kind: 'keyword', keyword }));
-  for (const restriction of ['cannotAttack', 'cannotBlock', 'unblockable'])
+  for (const restriction of [
+    'cannotAttack',
+    'cannotBlock',
+    'unblockable',
+    'cannotBeBlockedByLowerPower',
+  ])
     if (d[restriction]) abilities.push({ kind: 'combatRestriction', restriction });
+  if (d.entryKeywordCounters)
+    abilities.push({ kind: 'entryKeywordCounters', keywords: [...d.entryKeywordCounters] });
+  if (d.entryPlusCounters !== undefined)
+    abilities.push({ kind: 'entryPlusCounters', amount: d.entryPlusCounters });
+  if (d.landNameLock) abilities.push({ kind: 'landNameLock' });
+  if (d.exileGraveyardMoves) abilities.push({ kind: 'exileGraveyardMoves' });
+  if (d.suppressEnterTriggers)
+    abilities.push({
+      kind: 'suppressEnterTriggers',
+      where: structuredClone(d.suppressEnterTriggers),
+    });
+  if (d.libraryTopAccess)
+    abilities.push({ kind: 'libraryTopAccess', play: structuredClone(d.libraryTopAccess.play) });
+  if (d.additionalEnterTrigger)
+    abilities.push({
+      kind: 'additionalEnterTrigger',
+      where: structuredClone(d.additionalEnterTrigger),
+    });
+  if (d.manaFromTrackedExile) abilities.push({ kind: 'manaFromTrackedExile' });
+  if (d.prepareSpell)
+    abilities.push({
+      kind: 'prepare',
+      mainName: d.mainName,
+      entersPrepared: d.entersPrepared,
+      spell: sourceFromDefinition(d.prepareSpell, {
+        id: `leyline:prepare/${d.prepareSpell.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+        idsByName,
+      }),
+    });
+  if (d.distributedCounters)
+    abilities.push({
+      kind: 'distributedCounters',
+      selector: structuredClone(targetSpec(d.distributedCounters)),
+    });
+  if (d.backFace) {
+    const back = sourceFromDefinition(d.backFace, {
+      id: `leyline:back/${d.backFace.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+      idsByName,
+    });
+    if (!Object.keys(d.backFace.cost).length) back.characteristics.manaCost = null;
+    abilities.push({ kind: 'transformFace', frontName: d.frontName, back });
+  }
   if (d.adventure)
     abilities.push({
       kind: 'adventure',
@@ -169,8 +302,14 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         idsByName,
       }),
     });
+  if (d.ninjutsu) abilities.push({ kind: 'ninjutsu', cost: mana(d.ninjutsu) });
+  if (d.turnLoyaltyCreature)
+    abilities.push({ kind: 'turnLoyaltyCreature', ...d.turnLoyaltyCreature });
+  if (d.additionalCost)
+    abilities.push({ kind: 'additionalCost', cost: structuredClone(d.additionalCost) });
   if (d.warp) abilities.push({ kind: 'warp', cost: mana(d.warp) });
   if (d.plot) abilities.push({ kind: 'plot', cost: mana(d.plot) });
+  if (d.harmonize) abilities.push({ kind: 'harmonize', cost: mana(d.harmonize) });
   if (d.flashback) abilities.push({ kind: 'flashback', cost: mana(d.flashback) });
   if (d.crew !== undefined) abilities.push({ kind: 'crew', power: d.crew });
   if (d.cycling)
@@ -179,6 +318,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       cost: mana(d.cycling),
       ...(d.cyclingType ? { type: d.cyclingType } : {}),
     });
+  if (d.opponentCreatureProtectionBypass)
+    abilities.push({ kind: 'opponentCreatureProtectionBypass' });
   if (d.ward) abilities.push({ kind: 'keyword', keyword: 'ward', cost: cost(d.ward) });
   if (d.entryLifePayment)
     abilities.push({ kind: 'entry', tapped: true, payLife: d.entryLifePayment });
@@ -194,18 +335,27 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       produces: Array.isArray(d.mana) ? d.mana : [d.mana],
       ...(d.manaSacrifice ? { sacrificeSelf: true } : {}),
     });
+  if (d.foreignCreatureSubtype)
+    abilities.push({ kind: 'foreignCreatureSubtype', subtype: d.foreignCreatureSubtype });
+  if (d.gift)
+    abilities.push({
+      kind: 'gift',
+      token: idsByName[d.gift.definition] ?? d.gift.definition,
+      effects: effects(d.gift.effects),
+    });
   if (d.modes)
     abilities.push({
       kind: 'modalSpell',
-      choose: 1,
+      choose: d.spree ? 'oneOrMore' : 1,
       modes: d.modes.map((mode) => ({
         label: mode.label,
+        ...(mode.additionalCost !== undefined ? { additionalCost: mana(mode.additionalCost) } : {}),
         ...(mode.targetGroups ? { targetGroups: structuredClone(mode.targetGroups) } : {}),
         ...(mode.target ? { target: structuredClone(targetSpec(mode.target)) } : {}),
         effects: effects(mode.effects),
       })),
     });
-  if (d.effects)
+  if (d.effects && !d.distributedCounters)
     abilities.push({
       kind: 'spell',
       ...(d.targetGroups ? { targetGroups: structuredClone(d.targetGroups) } : {}),
@@ -265,9 +415,11 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       ...(a.timing ? { timing: a.timing } : {}),
       ...(a.condition ? { condition: structuredClone(a.condition) } : {}),
       ...(a.oncePerTurn !== undefined ? { oncePerTurn: a.oncePerTurn } : {}),
+      ...(a.powerUp !== undefined ? { powerUp: a.powerUp } : {}),
       ...(a.loyalty !== undefined ? { loyalty: a.loyalty } : {}),
     });
   if (d.uncounterable) abilities.push({ kind: 'uncounterable' });
+  if (d.chooseBasicLandType) abilities.push({ kind: 'chooseBasicLandType' });
   if (d.chooseCreatureType) abilities.push({ kind: 'chooseCreatureType' });
   if (d.kicker)
     abilities.push({
@@ -284,6 +436,9 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     abilities.push({ kind: 'entryStunCounters', amount: d.entryStunCounters });
   if (d.entryCounterBonus)
     abilities.push({ kind: 'entryCounterBonus', ...structuredClone(d.entryCounterBonus) });
+  for (const rule of ['cantGainLife', 'cantPreventDamage'])
+    if (d[rule]) abilities.push({ kind: 'globalRule', rule });
+  if (d.drawBonus) abilities.push({ kind: 'drawBonus', ...structuredClone(d.drawBonus) });
   if (d.damageBonus) abilities.push({ kind: 'damageBonus', ...structuredClone(d.damageBonus) });
   if (d.static) {
     if (d.static.kind !== 'anthem') throw new Error('Unsupported continuous rule.');

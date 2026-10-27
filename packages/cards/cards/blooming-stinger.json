@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ab282bb1-900e-40b8-9821-8e2de88927bc",
+  "name": "Blooming Stinger",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Plant", "Scorpion"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Deathtouch\nWhen this creature enters, another target creature you control gains deathtouch until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["deathtouch"]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "270d14b2-07bc-46bc-918f-658102265ccf",
+  "name": "Empyrean Eagle",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird", "Spirit"],
+    "colors": ["U", "W"],
+    "manaCost": "{1}{W}{U}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nOther creatures you control with flying get +1/+1.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "type": "creature"
+          },
+          {
+            "keyword": "flying"
+          }
+        ]
+      },
+      "power": 1,
+      "toughness": 1,
+      "excludeSource": true
+    }
+  ]
+}

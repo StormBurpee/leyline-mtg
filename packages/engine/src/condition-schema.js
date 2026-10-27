@@ -1,3 +1,4 @@
+import { CARD_TYPES } from './types.js';
 import { validateFilter } from './selectors.js';
 import { validateNumericValue } from './value-schema.js';
 const plain = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -23,8 +24,13 @@ export function validateCondition(value, { continuous = false } = {}) {
     }
     const fields = {
       opponentLostLifeThisTurn: ['kind'],
+      additionalCostPaid: ['kind'],
       controllerLostLifeThisTurn: ['kind'],
       controllerTurn: ['kind'],
+      sourceType: ['kind', 'type'],
+      sourceQuestCountersAtLeast: ['kind', 'count'],
+      sourceExiledCardTypesAtLeast: ['kind', 'count'],
+      eventManaSpentAtLeast: ['kind', 'count'],
       controllerFirstTurns: ['kind', 'count'],
       opponentTurn: ['kind'],
       sourceAttacking: ['kind'],
@@ -39,13 +45,32 @@ export function validateCondition(value, { continuous = false } = {}) {
       return;
     }
     if (Object.keys(v).some((k) => !fields.includes(k))) errors.push('Unexpected condition field.');
-    if (['sourceAttacking', 'sourceEnteredThisTurn'].includes(v.kind) && !continuous)
+    if (v.kind === 'additionalCostPaid' && continuous)
+      errors.push('Additional-cost conditions are resolution-only.');
+    if (v.kind === 'sourceAttacking' && !continuous)
       errors.push('Source-state conditions are supported for continuous bonuses only.');
     if (
       v.kind === 'controllerFirstTurns' &&
       (!Number.isSafeInteger(v.count) || v.count < 1 || v.count > 1000)
     )
       errors.push('Invalid first-turn count.');
+    if (
+      v.kind === 'sourceExiledCardTypesAtLeast' &&
+      (!Number.isInteger(v.count) || v.count < 0 || v.count > 9)
+    )
+      errors.push('Invalid linked card type count.');
+    if (
+      v.kind === 'eventManaSpentAtLeast' &&
+      (!Number.isSafeInteger(v.count) || v.count < 0 || v.count > 1000 || continuous)
+    )
+      errors.push('Invalid event mana condition.');
+    if (
+      v.kind === 'sourceQuestCountersAtLeast' &&
+      (!Number.isSafeInteger(v.count) || v.count < 1 || v.count > 1000)
+    )
+      errors.push('Invalid quest counter count.');
+    if (v.kind === 'sourceType' && !CARD_TYPES.includes(v.type))
+      errors.push('Invalid source type.');
     if (v.kind === 'controlAtLeast') {
       const filterErrors = validateFilter(v.where);
       errors.push(...filterErrors);

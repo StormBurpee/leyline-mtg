@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eae15f7d-1f6e-4dfc-afea-7698b93cd145",
+  "name": "Goblin Smuggler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Rogue"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Haste (This creature can attack and {T} as soon as it comes under your control.)\n{T}: Another target creature with power 2 or less can't be blocked this turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "power": {
+                "lte": 2
+              }
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

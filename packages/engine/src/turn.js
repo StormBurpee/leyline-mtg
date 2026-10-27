@@ -1,5 +1,8 @@
 import {
+  move,
   notifyTriggers,
+  sagaFinalChapter,
+  addLoreCounters,
   untapObject,
   skipsUntap,
   controlled,
@@ -11,16 +14,27 @@ import {
   STEPS,
 } from './model.js';
 import { beginDamage, combatants } from './combat.js';
-import { stabilize, stateBasedActions } from './effects.js';
+import { stabilize, stateBasedActions, flushLinkedReturns } from './effects.js';
 export function clearMana(s) {
   for (const p of s.players) {
     p.mana = emptyMana();
-    p.restrictedMana = [];
+    p.restrictedMana = (p.restrictedMana ?? []).filter(
+      (unit) =>
+        unit.duration === 'combat' &&
+        ['beginCombat', 'attackers', 'blockers', 'firstDamage', 'damage'].includes(s.step),
+    );
   }
 }
 export function nextTurn(s) {
   s.active = opponent(s.active);
   s.turn++;
+  for (const o of Object.values(s.objects))
+    if (o.playPermission?.untilNextTurn === s.active) {
+      o.playPermission.turn = s.turn;
+      o.playPermission.nextTurnStarted = true;
+    }
+  // Until your next turn ends before untapping or any turn-start priority.
+  s.modifiers = s.modifiers.filter((m) => m.untilNextTurn !== s.active);
   for (const player of s.players) delete player.spellsCast;
   s.step = 'upkeep';
   s.priority = s.active;
@@ -34,7 +48,11 @@ export function nextTurn(s) {
 export function finishCleanup(s) {
   for (const o of Object.values(s.objects)) {
     o.damage = 0;
-    delete o.playPermission;
+    if (
+      o.playPermission &&
+      (o.playPermission.untilNextTurn === undefined || o.playPermission.nextTurnStarted)
+    )
+      delete o.playPermission;
     o.deathtouchDamage = false;
   }
   delete s.damagePreventionDisabledTurn;
@@ -81,6 +99,10 @@ export function advanceStep(s) {
   emit(s, 'step', { step: s.step, player: s.active });
   const enteredStep = s.step;
   switch (s.step) {
+    case 'main1':
+      for (const object of controlled(s, s.active))
+        if (sagaFinalChapter(s, object)) addLoreCounters(s, object);
+      break;
     case 'draw':
       if (!(s.turn === 1 && s.active === s.startingPlayer)) draw(s, s.active, 1);
       break;
@@ -103,4 +125,37 @@ export function advanceStep(s) {
       break;
   }
   if (s.step === enteredStep) notifyTriggers(s, 'step', { player: s.active, step: enteredStep });
+}
+
+/** CR 723: discard waiting triggers, exile the stack, remove combat, then SBA and cleanup. */
+export function endTurn(s, entry) {
+  s.pendingTriggers = [];
+  const entries = [...s.stack, entry];
+  s.stack = [];
+  s.resolving = null;
+  for (const item of entries) {
+    const object = s.objects[item.source?.id];
+    if (
+      item.kind === 'spell' &&
+      object?.zone === 'stack' &&
+      object.incarnation === item.source.incarnation
+    )
+      move(s, object, 'exile');
+  }
+  s.combat = { attackers: [], blocks: {}, blocked: [], firstEligible: [], hasFirst: false };
+  s.endingTurn = true;
+  emit(s, 'resolved', { name: entry.name, stackId: entry.id });
+  emit(s, 'turnEnded', { player: s.active });
+  finishEndingTurn(s);
+}
+export function finishEndingTurn(s) {
+  if (!s.endingTurn || s.choice) return;
+  let iterations = 0;
+  while (s.status === 'playing' && !s.choice && stateBasedActions(s)) {
+    if (++iterations > 100) throw new Error('End-turn state-based actions did not converge.');
+    if (flushLinkedReturns(s) === false) return;
+  }
+  if (s.choice || flushLinkedReturns(s) === false) return;
+  delete s.endingTurn;
+  if (s.status === 'playing') cleanup(s);
 }

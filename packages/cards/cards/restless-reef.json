@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8a8121c9-2480-419c-aa9c-5b8b55f65014",
+  "name": "Restless Reef",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {U} or {B}.\n{2}{U}{B}: Until end of turn, this land becomes a 4/4 blue and black Shark creature with deathtouch. It's still a land.\nWhenever this land attacks, target player mills four cards.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["U", "B"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{U}{B}"
+      },
+      "text": "{2}{U}{B}: Become a 4/4 blue and black Shark with deathtouch until end of turn. Still a land.",
+      "effects": [
+        {
+          "op": "animateLand",
+          "power": 4,
+          "toughness": 4,
+          "colors": ["U", "B"],
+          "subtypes": ["Shark"],
+          "keywords": ["deathtouch"],
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "target",
+          "amount": 4
+        }
+      ]
+    }
+  ]
+}

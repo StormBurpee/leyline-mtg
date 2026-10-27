@@ -1,0 +1,88 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "840659ee-1493-4190-a514-c2c9ae14e331",
+  "name": "Summon: Esper Ramuh",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "supertypes": [],
+    "subtypes": ["Saga", "Wizard"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Judgment Bolt — This creature deals damage equal to the number of noncreature, nonland cards in your graveyard to target creature an opponent controls.\nII, III — Wizards you control get +1/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [1]
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you",
+            "where": {
+              "not": {
+                "any": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "type": "land"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [2, 3]
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "subtype": "Wizard"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

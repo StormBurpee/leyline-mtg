@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ad99e430-e13f-4819-a2ee-bf3332ef517d",
+  "name": "Rimekin Recluse",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, return up to one other target creature to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

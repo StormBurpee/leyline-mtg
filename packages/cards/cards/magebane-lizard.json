@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0c38f159-367b-4e4b-94cd-bf1b0721c3a8",
+  "name": "Magebane Lizard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Whenever a player casts a noncreature spell, this creature deals damage to that player equal to the number of noncreature spells they've cast this turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "damageEventPlayer",
+          "amount": {
+            "kind": "spellsCast",
+            "player": "you",
+            "where": {
+              "not": {
+                "type": "creature"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

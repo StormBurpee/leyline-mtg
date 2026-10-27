@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a1ac6d5c-b2d0-4ca4-8af8-16fd3dd3b3b5",
+  "name": "Razzle-Dazzler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Whenever you cast your second spell each turn, put a +1/+1 counter on this creature. It can't be blocked this turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "spellNumber": 2
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "combatRestriction",
+          "target": "source",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

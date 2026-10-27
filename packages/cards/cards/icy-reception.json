@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "612c7807-be70-4e2f-afd2-3d3c03eddbbe",
+  "name": "Icy Reception",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Counter target creature or legendary spell unless its controller pays {3}.\n\u2022 Target creature gets -5/-0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Counter unless they pay {3}",
+          "target": {
+            "scope": "spell",
+            "where": {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "legendary": true
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target",
+              "unlessPay": {
+                "generic": 3
+              }
+            }
+          ]
+        },
+        {
+          "label": "Creature gets -5/-0",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": -5,
+              "toughness": 0,
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

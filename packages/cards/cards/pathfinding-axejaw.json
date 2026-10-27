@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "54452df0-560c-4561-9dd2-3903ae49c91b",
+  "name": "Pathfinding Axejaw",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "explore",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

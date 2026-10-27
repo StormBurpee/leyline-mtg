@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d5ee2ced-29f4-430f-962e-2f930b92624c",
+  "name": "Werefox Bodyguard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Fox", "Knight"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nWhen this creature enters, exile up to one other target non-Fox creature until this creature leaves the battlefield.\n{1}{W}, Sacrifice this creature: You gain 2 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "not": {
+                    "subtype": "Fox"
+                  }
+                }
+              ]
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{W}",
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "67554654-e751-4679-9e92-f3588525ae4f",
+  "name": "Enter the Enigma",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Target creature can't be blocked this turn.\nDraw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

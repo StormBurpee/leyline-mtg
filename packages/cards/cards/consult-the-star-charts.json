@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e921839f-9d91-41a9-bc89-016af3c757aa",
+  "name": "Consult the Star Charts",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nLook at the top X cards of your library, where X is the number of lands you control. Put one of those cards into your hand. If this spell was kicked, put two of those cards into your hand instead. Put the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "land"
+            }
+          },
+          "selectCount": 1,
+          "restOrder": "random"
+        }
+      ]
+    },
+    {
+      "kind": "kicker",
+      "cost": "{1}{U}",
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "land"
+            }
+          },
+          "selectCount": 2,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

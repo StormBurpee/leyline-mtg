@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "97a2cd39-6b54-496b-b3ac-dab9dfed7edc",
+  "name": "Elven Passage",
+  "characteristics": {
+    "types": ["land"],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": [],
+    "subtypes": []
+  },
+  "rulesText": "{T}, Pay 1 life, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. You may behold an Elf. If you do, untap that land. (To behold an Elf, choose an Elf you control or reveal an Elf card from your hand.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true,
+        "life": 1
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": true
+        },
+        {
+          "op": "behold",
+          "subtype": "Elf",
+          "then": [
+            {
+              "op": "untapSearched"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

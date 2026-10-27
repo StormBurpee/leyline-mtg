@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c79cf0e5-52dd-4af3-ab06-6cdaab526c23",
+  "name": "Bonebind Orator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Squirrel", "Warlock", "Bard"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{3}{B}, Exile this card from your graveyard: Return another target creature card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{3}{B}",
+        "exileSelf": true
+      },
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "owner": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ]
+    }
+  ]
+}

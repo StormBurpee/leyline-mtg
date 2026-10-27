@@ -37,7 +37,9 @@ import {
   spellProfile,
   castingProfile,
   castingPayment,
+  harmonizeCandidates,
   castingSacrificeCandidates,
+  additionalCostCandidates,
   convokeCandidates,
   MAX_X,
   CARDS,
@@ -269,7 +271,10 @@ function save() {
     toast('Local storage is full or unavailable. Export a replay to save this match.');
   }
 }
-function send(command, { autoPass = true, automatic = false } = {}) {
+function send(
+  command,
+  { autoPass = true, automatic = false, additionalCostConfirmed = false } = {},
+) {
   if (ui.replayRecord) {
     toast('Exit replay inspection before playing.');
     return false;
@@ -282,6 +287,25 @@ function send(command, { autoPass = true, automatic = false } = {}) {
       : {}),
     ...command,
   };
+  if (
+    !automatic &&
+    c.type === 'cast' &&
+    c.harmonize === undefined &&
+    state.objects[c.card]?.zone === 'graveyard' &&
+    definition(state, state.objects[c.card]).harmonize
+  ) {
+    showHarmonize(c);
+    return false;
+  }
+  if (
+    !automatic &&
+    c.type === 'cast' &&
+    !additionalCostConfirmed &&
+    definition(state, state.objects[c.card]).additionalCost
+  ) {
+    showAdditionalCost(c);
+    return false;
+  }
   if (
     !automatic &&
     c.type === 'cast' &&
@@ -538,6 +562,7 @@ function presentStateChoice() {
     dialog._choiceLease = lease;
     dialog._choiceQuery = '';
     dialog._creatureType = 'Lizard';
+    dialog._landName = c.kind === 'landName' ? c.names[0] : '';
   }
   dialog._choiceRevision = state.revision;
   dialog._activeChoice = c;
@@ -579,19 +604,24 @@ function presentStateChoice() {
       c.kind === 'bottom'
         ? `Put ${c.count} card${c.count === 1 ? '' : 's'} back`
         : c.kind === 'sacrifice'
-          ? `Sacrifice ${c.count} permanent${c.count === 1 ? '' : 's'}`
+          ? `${c.destination === 'exile' ? 'Exile' : 'Sacrifice'} ${c.count} permanent${c.count === 1 ? '' : 's'}`
           : `Discard ${c.count} card${c.count === 1 ? '' : 's'}`;
     subtitle =
       c.kind === 'bottom'
         ? 'Choose cards for the bottom of your library. Nothing moves until you confirm.'
         : c.kind === 'sacrifice'
-          ? 'Choose permanents you control to sacrifice. This does not target or destroy them.'
+          ? c.destination === 'exile'
+            ? 'Choose a creature you control to exile. This does not target, destroy, or sacrifice it.'
+            : 'Choose permanents you control to sacrifice. This does not target or destroy them.'
           : 'Select the cards to discard, then confirm your choice.';
+    if (c.optional)
+      subtitle = 'You may discard a card to draw a card. Or keep your hand unchanged.';
     cards = c.kind === 'sacrifice' ? c.cards : state.players[viewer()].hand;
-    actions = `<span class="choice-selection-summary">${selected.length} of ${c.count} selected</span><button class="btn primary" data-action="confirmDecision" ${selected.length === c.count ? '' : 'disabled'}>${c.kind === 'bottom' ? 'Put selected cards back' : c.kind === 'sacrifice' ? 'Sacrifice selected permanents' : 'Discard selected cards'}</button>`;
+    actions = `${c.optional ? '<button class="btn" data-action="declineDecision">Keep hand · skip</button>' : ''}<span class="choice-selection-summary">${selected.length} of ${c.count} selected</span><button class="btn primary" data-action="confirmDecision" ${selected.length === c.count ? '' : 'disabled'}>${c.kind === 'bottom' ? 'Put selected cards back' : c.kind === 'sacrifice' ? (c.destination === 'exile' ? 'Exile selected creature' : 'Sacrifice selected permanents') : 'Discard selected cards'}</button>`;
   } else if (
     [
       'empowerJace',
+      'behold',
       'exilePlay',
       'bindingNegotiation',
       'revealDiscard',
@@ -600,46 +630,81 @@ function presentStateChoice() {
     ].includes(c.kind)
   ) {
     title =
-      c.kind === 'empowerJace'
-        ? 'Empower Jace'
-        : c.kind === 'exilePlay'
-          ? 'Choose one'
-          : ['bindingNegotiation', 'revealDiscard'].includes(c.kind)
-            ? 'Choose a card to discard'
-            : c.kind === 'exileToGraveyard'
-              ? 'Choose an exiled card'
-              : 'Choose a legend to keep';
-    subtitle =
-      c.kind === 'empowerJace'
-        ? `Choose a Jace token to receive ${c.count} loyalty counter${c.count === 1 ? '' : 's'}.`
-        : c.kind === 'exilePlay'
-          ? 'You may play the chosen card until the end of this turn. Normal timing and mana costs still apply.'
-          : c.kind === 'revealDiscard'
-            ? c.eligibleCards.length
-              ? 'Their hand is revealed. You must choose one of the nonland cards to discard.'
-              : 'Their hand contains no nonland card. Review it, then continue.'
-            : c.kind === 'bindingNegotiation'
-              ? 'Their hand is revealed. Choose a nonland card, or choose none to consider their exile.'
+      c.kind === 'behold'
+        ? `Behold an ${c.subtype}?`
+        : c.kind === 'empowerJace'
+          ? 'Empower Jace'
+          : c.kind === 'exilePlay'
+            ? 'Choose one'
+            : ['bindingNegotiation', 'revealDiscard'].includes(c.kind)
+              ? 'Choose a card to discard'
               : c.kind === 'exileToGraveyard'
-                ? 'You may put a face-up card the opponent owns from exile into their graveyard.'
-                : 'Keep one copy on the battlefield. The other copies go to their owners’ graveyards.';
+                ? 'Choose an exiled card'
+                : 'Choose a legend to keep';
+    subtitle =
+      c.kind === 'behold'
+        ? `Choose an ${c.subtype} you control or reveal one from your hand. You may decline.`
+        : c.kind === 'empowerJace'
+          ? `Choose a Jace token to receive ${c.count} loyalty counter${c.count === 1 ? '' : 's'}.`
+          : c.kind === 'exilePlay'
+            ? 'You may play the chosen card until the end of this turn. Normal timing and mana costs still apply.'
+            : c.kind === 'revealDiscard'
+              ? c.eligibleCards.length
+                ? 'Their hand is revealed. You must choose one of the eligible cards to discard.'
+                : 'Their hand contains no eligible card. Review it, then continue.'
+              : c.kind === 'bindingNegotiation'
+                ? 'Their hand is revealed. Choose a nonland card, or choose none to consider their exile.'
+                : c.kind === 'exileToGraveyard'
+                  ? 'You may put a face-up card the opponent owns from exile into their graveyard.'
+                  : 'Keep one copy on the battlefield. The other copies go to their owners’ graveyards.';
     cards = c.cards;
     const optional =
-      ['bindingNegotiation', 'exileToGraveyard'].includes(c.kind) ||
+      ['behold', 'bindingNegotiation', 'exileToGraveyard'].includes(c.kind) ||
       (c.kind === 'revealDiscard' && !c.eligibleCards.length);
     actions = `<span class="choice-selection-summary">${selected.length} of 1 selected<strong>${selected[0] ? escape(state.objects[selected[0]].name) : 'Select a card above'}</strong></span>${optional ? `<button class="btn" data-action="declineDecision">${c.kind === 'revealDiscard' ? 'Continue' : 'Choose none'}</button>` : ''}<button class="btn primary" data-action="confirmDecision" ${selected.length === 1 ? '' : 'disabled'}>${c.kind === 'legendRule' ? 'Keep selected copy' : 'Confirm choice'}</button>`;
+  } else if (c.kind === 'removeCounter') {
+    title = 'Remove a counter?';
+    subtitle =
+      'Choose a counter to remove. Then choose the target for the separate triggered ability, which can be responded to.';
+    cards = [c.source.id];
+    actions = `<button class="btn" data-action="removeCounter" data-counter="">Keep counters</button>${c.counters.map((counter) => `<button class="btn primary" data-action="removeCounter" data-counter="${escape(counter)}">Remove ${escape(counter)}</button>`).join('')}`;
   } else if (c.kind === 'optionalEffect' || c.kind === 'payCost') {
     const sourceId = state.resolving?.entry.source?.id;
     cards = sourceId && state.objects[sourceId] ? [sourceId] : [];
-    title = c.kind === 'payCost' ? 'Pay for ward?' : 'Resolve this ability?';
+    title =
+      c.kind === 'payCost'
+        ? c.reason === 'ward'
+          ? 'Pay for ward?'
+          : 'Pay to protect your spell?'
+        : 'Resolve this ability?';
+    if (c.kind === 'payCost') {
+      const affected = state.stack.find((entry) => entry.id === c.stackId)?.source?.id;
+      if (affected && state.objects[affected] && !cards.includes(affected)) cards.push(affected);
+    }
     subtitle =
       c.kind === 'payCost'
-        ? `Pay ${[...Object.entries(c.cost.mana ?? {}).map(([k, n]) => (k === 'generic' ? `${n} mana` : `${n}${k}`)), ...(c.cost.life ? [`${c.cost.life} life`] : [])].join(' + ')} or the affected spell or ability will be countered.`
+        ? `Pay ${[...Object.entries(c.cost.mana ?? {}).map(([k, n]) => (k === 'generic' ? `${n} mana` : `${n}${k}`)), ...(c.cost.life ? [`${c.cost.life} life`] : [])].join(' + ')} or the affected spell or ability will be countered if able.${c.counterDestination === 'exile' ? ' If countered this way, it goes to exile.' : ''}`
         : 'This effect is optional. Review the card before choosing.';
     actions =
       c.kind === 'payCost'
-        ? `<button class="btn" data-action="declineWard">Don't pay</button><button class="btn primary" data-action="payWard" ${c.payable ? '' : 'disabled'}>Pay ward</button>`
+        ? `<button class="btn" data-action="declineWard">Don't pay</button><button class="btn primary" data-action="payWard" ${c.payable ? '' : 'disabled'}>${c.reason === 'ward' ? 'Pay ward' : 'Pay cost'}</button>`
         : '<button class="btn" data-action="declineOptional">Decline</button><button class="btn primary" data-action="acceptOptional">Resolve effect</button>';
+  } else if (c.kind === 'castExiled') {
+    title = 'Cast this card now?';
+    subtitle = `Pay its costs and cast it during this ability's resolution, or leave it in exile and deal ${c.amount} damage to your opponent. Lands cannot be played this way.`;
+    cards = [c.card];
+    const canCast = legalActions(state, viewer()).some((a) => a.type === 'cast');
+    actions = `<button class="btn" data-action="declineResolutionCast">Don't cast · deal ${c.amount}</button><button class="btn primary" data-action="beginResolutionCast" ${canCast ? '' : 'disabled'}>Cast now · pay costs</button>`;
+  } else if (c.kind === 'manaColor') {
+    title = 'Choose a mana color';
+    subtitle = 'Add one mana of the chosen color. Review your hand before deciding.';
+    cards = state.objects[c.card] ? [c.card] : [];
+    actions = ['W', 'U', 'B', 'R', 'G']
+      .map(
+        (color) =>
+          `<button class="btn primary" data-action="chooseResolutionMana" data-color="${color}">${mana({ [color]: 1 })} Add ${color}</button>`,
+      )
+      .join('');
   } else if (c.kind === 'entryLife') {
     title = `How should ${state.objects[c.card].name} enter?`;
     subtitle = c.forcedTapped
@@ -653,6 +718,23 @@ function presentStateChoice() {
       'This Aura is entering without being cast. Choose a legal permanent; this does not target it.';
     cards = c.cards;
     actions = `<button class="btn primary" data-action="confirmDecision" ${selected.length !== 1 ? 'disabled' : ''}>Attach Aura</button>`;
+  } else if (c.kind === 'landType') {
+    title = 'Choose a basic land type';
+    subtitle =
+      'Choose the mana color for Multiversal Passage. Next, choose whether to pay 2 life to enter untapped.';
+    cards = [c.card];
+    actions = c.types
+      .map(
+        (type) =>
+          `<button class="btn" data-action="chooseLandType" data-landtype="${escape(type)}">${escape(type)} · ${{ Plains: 'W', Island: 'U', Swamp: 'B', Mountain: 'R', Forest: 'G' }[type]}</button>`,
+      )
+      .join('');
+  } else if (c.kind === 'landName') {
+    title = 'Choose a land card name';
+    subtitle =
+      'Nonmana activated abilities with this name will be disabled. Lands with this name can still tap for colorless mana.';
+    cards = [c.card];
+    actions = '<button class="btn primary" data-action="chooseLandName">Confirm land name</button>';
   } else if (c.kind === 'creatureType') {
     title = 'Choose a creature type';
     subtitle =
@@ -665,14 +747,23 @@ function presentStateChoice() {
     viewer: viewer(),
     action:
       c.kind === 'mulligan' ||
-      ['optionalEffect', 'payCost', 'creatureType', 'entryLife'].includes(c.kind)
+      [
+        'optionalEffect',
+        'payCost',
+        'creatureType',
+        'landType',
+        'landName',
+        'entryLife',
+        'manaColor',
+        'castExiled',
+      ].includes(c.kind)
         ? 'readDecisionCard'
         : 'selectDecisionCard',
     forCard: (id) => ({
       selected: selected.includes(id),
       disabled:
-        ['bindingNegotiation', 'revealDiscard'].includes(c.kind) &&
-        definition(state, state.objects[id]).type === 'land',
+        (c.kind === 'revealDiscard' && !c.eligibleCards.includes(id)) ||
+        (c.kind === 'bindingNegotiation' && definition(state, state.objects[id]).type === 'land'),
       badge:
         c.kind === 'legendRule'
           ? `Copy ${cards.indexOf(id) + 1}`
@@ -681,6 +772,8 @@ function presentStateChoice() {
             : '',
     }),
   });
+  if (c.kind === 'landName')
+    body = `<div class="choice-type-layout">${body}<input class="choice-type-select" id="chosen-land-name" list="land-card-names" value="${escape(dialog._landName)}" placeholder="Type a land card name" aria-label="Land card name"><datalist id="land-card-names">${c.names.map((name) => `<option value="${escape(name)}"></option>`).join('')}</datalist></div>`;
   if (c.kind === 'creatureType')
     body = `<div class="choice-type-layout">${body}<select class="choice-type-select" id="entry-creature-type" aria-label="Creature type">${c.types.map((type) => `<option value="${escape(type)}" ${type === dialog._creatureType ? 'selected' : ''}>${escape(type)}</option>`).join('')}</select></div>`;
   openChoiceDialog(title, subtitle, body, actions, {
@@ -697,8 +790,8 @@ function selectDecisionCard(id) {
   const allowed = multi && c.kind !== 'sacrifice' ? state.players[viewer()].hand : c.cards;
   if (
     !allowed?.includes(id) ||
-    (['bindingNegotiation', 'revealDiscard'].includes(c.kind) &&
-      definition(state, state.objects[id]).type === 'land')
+    (c.kind === 'revealDiscard' && !c.eligibleCards.includes(id)) ||
+    (c.kind === 'bindingNegotiation' && definition(state, state.objects[id]).type === 'land')
   )
     return;
   if (multi) {
@@ -716,7 +809,7 @@ function confirmDecision(decline = false) {
   if (dialog._choiceLease !== decisionLease(state, viewer()) || c?.player !== viewer()) return;
   let command;
   if (['bottom', 'discard', 'discardEffect', 'sacrifice'].includes(c.kind))
-    command = { type: c.kind, cards: [...ui.chosen] };
+    command = { type: c.kind, cards: decline && c.optional ? [] : [...ui.chosen] };
   else if (c.kind === 'auraEntry')
     command = { type: 'chooseAuraAttachment', card: dialog._selectedCards[0] };
   else if (c.kind === 'legendRule')
@@ -763,7 +856,10 @@ function showCardReader(id) {
 function closeDialog() {
   dialog._crewDraft = null;
   dialog._convokeDraft = null;
+  dialog._harmonizeDraft = null;
+  dialog._distributionDraft = null;
   dialog._castingSacrificeDraft = null;
+  dialog._additionalCostDraft = null;
   if (dialog._activeChoice && state) ui.dismissedChoiceLease = decisionLease(state, viewer());
   dialog.close();
   schedule();
@@ -786,6 +882,21 @@ dialog.addEventListener('input', (event) => {
     tile.hidden = !tile.dataset.search.includes(query);
 });
 dialog.addEventListener('change', (event) => {
+  if (event.target.dataset.distributionCard) {
+    const draft = dialog._distributionDraft,
+      value = Number(event.target.value);
+    if (
+      draft?.command.expectedRevision === state.revision &&
+      Number.isSafeInteger(value) &&
+      value >= 0 &&
+      value <= draft.command.x
+    )
+      showDistribution(draft.command, {
+        ...draft.amounts,
+        [event.target.dataset.distributionCard]: value,
+      });
+  }
+  if (event.target.id === 'chosen-land-name') dialog._landName = event.target.value;
   if (event.target.id === 'entry-creature-type') dialog._creatureType = event.target.value;
 });
 dialog.addEventListener(
@@ -917,7 +1028,13 @@ function showXChoice() {
   const values = [
     ...new Set(
       legalActions(state, viewer())
-        .filter((a) => a.type === 'cast' && a.card === o.id && a.x !== undefined)
+        .filter(
+          (a) =>
+            a.type === 'cast' &&
+            a.card === o.id &&
+            a.x !== undefined &&
+            a.mode === (ui.spellMode ?? undefined),
+        )
         .map((a) => a.x),
     ),
   ];
@@ -926,7 +1043,7 @@ function showXChoice() {
   openChoiceDialog(
     'Choose X',
     `${o.name} · Choose X before targets; targets can change the final cost. Implementation range: 0–${MAX_X}.`,
-    `<label>Other X value <input id="cast-x-value" type="number" min="0" max="${MAX_X}" step="1" value="0"></label><button class="btn primary" data-action="chooseX">Use this X</button><div class="decision-mode-grid">${values.map((x) => `<button class="decision-mode" data-action="chooseX" data-x="${x}"><strong>X = ${x}</strong><span>${mana(castingProfile(state, viewer(), o, undefined, null, undefined, x).cost)}</span></button>`).join('')}</div>`,
+    `<label>Other X value <input id="cast-x-value" type="number" min="0" max="${MAX_X}" step="1" value="0"></label><button class="btn primary" data-action="chooseX">Use this X</button><div class="decision-mode-grid">${values.map((x) => `<button class="decision-mode" data-action="chooseX" data-x="${x}"><strong>X = ${x}</strong><span>${mana(castingProfile(state, viewer(), o, ui.spellMode ?? undefined, null, undefined, x).cost)}</span></button>`).join('')}</div>`,
     '<button class="btn quiet" data-action="closeDialog">Cancel casting</button>',
     { eyebrow: 'VARIABLE COST' },
   );
@@ -944,10 +1061,12 @@ function showSpellModes() {
   render();
   const choices = castingChoices(definition(state, o)),
     legal = legalActions(state, viewer());
-  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(castingProfile(state, viewer(), o, index)?.cost ?? spellProfile(definition(state, o), index).cost)}<br>${escape(spellProfile(definition(state, o), index).type)}<br>${escape(spellProfile(definition(state, o), index).text ?? '')}<br>${mode.target || mode.targetGroups ? 'Choose targets next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
+  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(castingProfile(state, viewer(), o, index)?.cost ?? spellProfile(definition(state, o), index).cost)}<br>${escape(spellProfile(definition(state, o), index).type)}<br>${escape(definition(state, o).spree ? 'Resolve the selected effects in printed order.' : (spellProfile(definition(state, o), index).text ?? ''))}<br>${mode.target || mode.targetGroups ? 'Choose targets next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
   openChoiceDialog(
-    'Choose how to cast',
-    o.name,
+    definition(state, o).spree ? 'Choose your Spree effects' : 'Choose how to cast',
+    definition(state, o).spree
+      ? `${o.name} · Choose one or more. The price includes every selected effect.`
+      : o.name,
     body,
     '<button class="btn quiet" data-action="closeDialog">Cancel casting</button>',
     { eyebrow: 'CASTING OPTIONS', closeLabel: 'View battlefield' },
@@ -1008,7 +1127,7 @@ function showLibrarySearch() {
     'Search your library',
     `Choose ${choice.min === choice.max ? choice.max : `up to ${choice.max}`} card${choice.max === 1 ? '' : 's'} to put ${destination}. Your library will be shuffled.`,
     body,
-    `<span class="choice-selection-summary">${selected.length} of ${choice.max} selected</span><button class="btn primary" data-action="confirmSearch" ${selected.length < choice.min ? 'disabled' : ''}>${selected.length ? 'Confirm cards & shuffle' : 'Find none & shuffle'}</button>`,
+    `<span class="choice-selection-summary">${selected.length} of ${choice.max} selected</span>${choice.optional ? '<button class="btn" data-action="declineSearch">Decline search</button>' : ''}<button class="btn primary" data-action="confirmSearch" ${selected.length < choice.min ? 'disabled' : ''}>${selected.length ? 'Confirm cards & shuffle' : 'Find none & shuffle'}</button>`,
     { source: state.resolving?.entry.name ?? '' },
   );
   dialog._activeChoice = choice;
@@ -1029,7 +1148,11 @@ function renderLibraryOrder() {
     choice = state.choice;
   if (choice?.kind !== 'libraryOrder' || dialog._libraryChoice !== choice) return;
   const selectHand = choice.action === 'lookChooseHand';
-  const restLabel = choice.action !== 'surveil' ? 'Bottom of library' : 'Graveyard';
+  const selectCount = choice.selectCount ?? Math.min(1, choice.cards.length);
+  const randomRest = choice.restOrder === 'random';
+  const restLabel = !['surveil', 'explore'].includes(choice.action)
+    ? 'Bottom of library'
+    : 'Graveyard';
   const topLabel = selectHand ? 'Put into your hand' : 'Top of library';
   const body = `<div class="decision-order-lanes">${[
     ['top', topLabel],
@@ -1037,18 +1160,20 @@ function renderLibraryOrder() {
   ]
     .map(
       ([key, label]) =>
-        `<section class="decision-order-lane" data-order-drop="${key}"><h3>${label}</h3><p>${key === 'top' ? (selectHand ? 'Choose exactly one card.' : 'Leftmost card will be drawn first.') : choice.action !== 'surveil' ? 'These cards go below the rest of your library.' : 'These cards go to your graveyard.'}</p><div class="decision-card-gallery" style="--choice-count:${Math.max(1, order[key].length)}">${order[key].map((id, i) => decisionCard(state, id, metadata, { viewer: viewer(), action: 'libraryMove', extra: `data-group="${key === 'top' ? 'rest' : 'top'}"`, draggable: true, badge: key === 'top' ? (selectHand ? 'To hand' : i === 0 ? 'Draw first' : `Draw ${i + 1}`) : restLabel, label: `Move ${state.objects[id].name} to ${key === 'top' ? restLabel : topLabel}` }).replace('</article>', `<div class="decision-order-controls"><button data-action="libraryMove" data-cardid="${id}" data-group="${key === 'top' ? 'rest' : 'top'}">${key === 'top' ? (choice.action !== 'surveil' ? 'Bottom' : 'Graveyard') : selectHand ? 'Choose for hand' : 'Keep on top'}</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="-1" aria-label="Move ${escape(state.objects[id].name)} earlier" ${i === 0 ? 'disabled' : ''}>←</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="1" aria-label="Move ${escape(state.objects[id].name)} later" ${i === order[key].length - 1 ? 'disabled' : ''}>→</button></div></article>`)).join('') || '<div class="decision-empty"><span>◇</span><p>Move cards here</p></div>'}</div></section>`,
+        `<section class="decision-order-lane" data-order-drop="${key}"><h3>${label}</h3><p>${key === 'top' ? (selectHand ? `Choose exactly ${selectCount} card${selectCount === 1 ? '' : 's'}.` : 'Leftmost card will be drawn first.') : !['surveil', 'explore'].includes(choice.action) ? (randomRest ? 'These cards go below the rest of your library in a random order.' : 'These cards go below the rest of your library in the order shown.') : 'These cards go to your graveyard.'}</p><div class="decision-card-gallery" style="--choice-count:${Math.max(1, order[key].length)}">${order[key].map((id, i) => decisionCard(state, id, metadata, { viewer: viewer(), action: 'libraryMove', extra: `data-group="${key === 'top' ? 'rest' : 'top'}"`, draggable: true, badge: key === 'top' ? (selectHand ? 'To hand' : i === 0 ? 'Draw first' : `Draw ${i + 1}`) : restLabel, label: `Move ${state.objects[id].name} to ${key === 'top' ? restLabel : topLabel}` }).replace('</article>', `<div class="decision-order-controls"><button data-action="libraryMove" data-cardid="${id}" data-group="${key === 'top' ? 'rest' : 'top'}">${key === 'top' ? (!['surveil', 'explore'].includes(choice.action) ? 'Bottom' : 'Graveyard') : selectHand ? 'Choose for hand' : 'Keep on top'}</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="-1" aria-label="Move ${escape(state.objects[id].name)} earlier" ${i === 0 || (selectHand && key === 'top') || (randomRest && key === 'rest') ? 'disabled' : ''}>←</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="1" aria-label="Move ${escape(state.objects[id].name)} later" ${i === order[key].length - 1 || (selectHand && key === 'top') || (randomRest && key === 'rest') ? 'disabled' : ''}>→</button></div></article>`)).join('') || '<div class="decision-empty"><span>◇</span><p>Move cards here</p></div>'}</div></section>`,
     )
     .join('')}</div>`;
   openChoiceDialog(
     selectHand
-      ? 'Choose a card for your hand'
-      : `${choice.action === 'scry' ? 'Scry' : 'Surveil'} ${choice.cards.length}`,
+      ? `Choose ${selectCount} card${selectCount === 1 ? '' : 's'} for your hand`
+      : `${choice.action === 'explore' ? 'Explore' : choice.action === 'scry' ? 'Scry' : 'Surveil'} ${choice.cards.length}`,
     selectHand
-      ? 'Put one card into your hand and the rest on the bottom of your library.'
-      : 'Click a card to move it between destinations, or drag it. Use the arrows to set the draw order.',
+      ? `Put ${selectCount} card${selectCount === 1 ? '' : 's'} into your hand and the rest on the bottom ${randomRest ? 'in a random order' : 'in any order'}.`
+      : choice.action === 'explore'
+        ? 'This revealed nonland card gave your creature a +1/+1 counter if it is still on the battlefield. Keep the card on top or put it into your graveyard.'
+        : 'Click a card to move it between destinations, or drag it. Use the arrows to set the draw order.',
     body,
-    `<span class="choice-selection-summary">${order.top.length} ${selectHand ? 'to hand' : 'on top'} · ${order.rest.length} ${choice.action !== 'surveil' ? 'on bottom' : 'to graveyard'}</span><button class="btn primary" data-action="submitLibrary" ${selectHand && order.top.length !== 1 ? 'disabled' : ''}>Confirm arrangement</button>`,
+    `<span class="choice-selection-summary">${order.top.length} ${selectHand ? 'to hand' : 'on top'} · ${order.rest.length} ${!['surveil', 'explore'].includes(choice.action) ? 'on bottom' : 'to graveyard'}</span><button class="btn primary" data-action="submitLibrary" ${selectHand && order.top.length !== selectCount ? 'disabled' : ''}>Confirm arrangement</button>`,
     { source: state.resolving?.entry.name ?? '' },
   );
   dialog._libraryOrder = order;
@@ -1094,6 +1219,116 @@ function replayTo(index) {
   } catch (e) {
     toast(e.message);
   }
+}
+function showDistribution(command, amounts = {}) {
+  const object = state.objects[command.card];
+  const profile = castingProfile(state, viewer(), object, command.mode, null, undefined, command.x);
+  if (!profile?.distributedCounters || command.expectedRevision !== state.revision) {
+    toast('The game changed. Choose this spell again.');
+    return;
+  }
+  const candidates = targetsFor(state, profile.distributedCounters, viewer(), ref(object));
+  const selected = candidates.filter((t) => (amounts[t.id] ?? 0) > 0);
+  const distribution = Object.fromEntries(selected.map((t) => [t.id, amounts[t.id]]));
+  const targets = { distributed: selected };
+  const total = Object.values(distribution).reduce((n, v) => n + v, 0);
+  const problem = castProblem(state, viewer(), object.id, null, {
+    ...command,
+    targets,
+    distribution,
+  });
+  const body = `<div class="decision-card-grid">${candidates.map((t) => `<section>${decisionCard(state, t.id, metadata, { viewer: viewer(), action: 'readDecisionCard', selected: (amounts[t.id] ?? 0) > 0 })}<div class="choice-distribution-control"><button class="btn" data-action="changeDistribution" data-cardid="${t.id}" data-delta="-1" ${(amounts[t.id] ?? 0) > 0 ? '' : 'disabled'}>−</button><label>+1/+1 counters <input type="number" min="0" max="${command.x}" step="1" data-distribution-card="${t.id}" value="${amounts[t.id] ?? 0}"></label><button class="btn" data-action="changeDistribution" data-cardid="${t.id}" data-delta="1" ${total < command.x ? '' : 'disabled'}>+</button></div></section>`).join('')}</div>`;
+  openChoiceDialog(
+    'Distribute +1/+1 counters',
+    `${profile.name} · X = ${command.x}. Each targeted creature must receive at least one. Shares stay fixed if a target becomes illegal.`,
+    body,
+    `<button class="btn" data-action="closeDialog">Cancel</button><button class="btn" data-action="distributionBack">Change X</button><span>${total} of ${command.x} counters assigned · ${selected.length} targets · ${mana(profile.cost)}</span><button class="btn primary" data-action="confirmDistribution" ${problem ? 'disabled' : ''}>Confirm distribution and cast</button>`,
+    { source: object.name },
+  );
+  dialog._distributionDraft = { command, amounts, targets, distribution };
+  dialog._activeChoice = null;
+  dialog._stageRender = () => showDistribution(command, amounts);
+}
+function showAdditionalCost(command, choice) {
+  const object = state.objects[command.card];
+  const profile = castingProfile(
+    state,
+    viewer(),
+    object,
+    command.mode,
+    command.targets ? flattenTargets(command.targets) : command.target,
+    undefined,
+    command.x,
+  );
+  if (!profile?.additionalCost || command.expectedRevision !== state.revision) {
+    toast('The game changed. Choose this spell again.');
+    return;
+  }
+  const cost = profile.additionalCost;
+  if (choice === undefined && cost.kind !== 'discardOrLife') choice = null;
+  const candidates = additionalCostCandidates(state, viewer(), profile, command.card);
+  const selected =
+    choice?.teamwork?.map((r) => r.id) ??
+    [choice?.discard?.id ?? choice?.blight?.id].filter(Boolean);
+  const payment =
+    choice !== undefined &&
+    castingPayment(state, viewer(), profile, { ...command, additionalCost: choice });
+  const verb =
+    cost.kind === 'discardOrLife' ? 'Discard' : cost.kind === 'blight' ? 'Blight' : 'Tap';
+  const text =
+    cost.kind === 'discardOrLife'
+      ? `Discard one other card or pay ${cost.life} life. This is paid before opponents can respond, even if the spell is countered.`
+      : cost.kind === 'blight'
+        ? `Optionally put ${cost.amount} −1/−1 counter on a creature you control as a casting cost. Paying the cost enables the spell's bonus.`
+        : `Optionally tap any number of untapped creatures you control with total power ${cost.power} or more. Summoning sickness does not prevent teamwork. These creatures cannot also provide mana for this spell.`;
+  const power = (choice?.teamwork ?? []).reduce(
+    (n, r) => n + stats(state, state.objects[r.id]).power,
+    0,
+  );
+  const body = `<p>${escape(text)}</p><div class="decision-card-grid">${candidates.map((o) => `<section>${decisionCard(state, o.id, metadata, { viewer: viewer(), action: 'readDecisionCard', selected: selected.includes(o.id) })}<button class="btn ${selected.includes(o.id) ? 'primary' : ''}" data-action="selectAdditionalCostCard" data-cardid="${o.id}" aria-pressed="${selected.includes(o.id)}">${verb} ${escape(o.name)}</button></section>`).join('')}</div>`;
+  const alternative =
+    cost.kind === 'discardOrLife'
+      ? `<button class="btn ${choice?.life ? 'primary' : ''}" data-action="chooseAdditionalCostLife">Pay ${cost.life} life</button>`
+      : `<button class="btn ${choice === null ? 'primary' : ''}" data-action="declineAdditionalCost">Do not pay optional cost</button>`;
+  openChoiceDialog(
+    'Additional casting cost',
+    object.name,
+    body,
+    `<button class="btn" data-action="closeDialog">Cancel</button>${alternative}<span>${cost.kind === 'teamwork' ? `${selected.length} selected · ${power}/${cost.power} power` : choice?.life ? `Pay ${cost.life} life` : selected.length ? `${verb} ${escape(state.objects[selected[0]].name)}` : choice === null ? 'Optional cost declined' : 'Choose a payment'} · ${payment ? 'Payment available' : 'Cannot cast with this selection'}</span><button class="btn primary" data-action="confirmAdditionalCost" ${payment ? '' : 'disabled'}>Confirm and cast</button>`,
+    { source: object.name },
+  );
+  dialog._additionalCostDraft = { command, choice };
+  dialog._activeChoice = null;
+  dialog._stageRender = () => showAdditionalCost(command, choice);
+}
+function showHarmonize(command, selected = null) {
+  const object = state.objects[command.card];
+  const profile = castingProfile(
+    state,
+    viewer(),
+    object,
+    command.mode,
+    command.target,
+    undefined,
+    command.x,
+  );
+  if (!profile?.harmonizePaid || command.expectedRevision !== state.revision) {
+    toast('The game changed. Choose this spell again.');
+    return;
+  }
+  const payment = castingPayment(state, viewer(), profile, { ...command, harmonize: selected });
+  const candidates = harmonizeCandidates(state, viewer());
+  const body = `<p>Tap up to one creature to reduce generic mana by its power. Newly entered creatures may help. The spell will be exiled when it leaves the stack.</p><div class="decision-card-grid">${candidates.map((o) => `<section>${decisionCard(state, o.id, metadata, { viewer: viewer(), action: 'readDecisionCard', selected: selected?.id === o.id })}<button class="btn ${selected?.id === o.id ? 'primary' : ''}" data-action="selectHarmonize" data-cardid="${o.id}">Tap ${escape(o.name)} · power ${stats(state, o).power}</button></section>`).join('')}</div>`;
+  openChoiceDialog(
+    'Harmonize · choose payment',
+    object.name,
+    body,
+    `<button class="btn" data-action="closeDialog">Cancel</button><button class="btn ${selected === null ? 'primary' : ''}" data-action="selectHarmonize">Do not tap a creature</button><span>${payment ? `Pay ${mana(payment.cost)}` : 'Cannot pay with this selection'}</span><button class="btn primary" data-action="confirmHarmonize" ${payment ? '' : 'disabled'}>Confirm and cast</button>`,
+    { source: object.name },
+  );
+  dialog._harmonizeDraft = { command, selected };
+  dialog._activeChoice = null;
+  dialog._stageRender = () => showHarmonize(command, selected);
 }
 function showCastingSacrifice(command, sacrifice) {
   const object = state.objects[command.card];
@@ -1192,7 +1427,14 @@ function groupedTargetContext() {
   return { choice, object, ability, profile, command, name: choice?.entry.name ?? object.name };
 }
 function groupedTargetProblem(context, plan) {
-  if (context.choice) return targetPlanProblem(state, context.profile.targetGroups, plan, viewer());
+  if (context.choice)
+    return targetPlanProblem(
+      state,
+      context.profile.targetGroups,
+      plan,
+      viewer(),
+      context.choice.entry.targetingSource ?? context.choice.entry.source,
+    );
   if (context.ability)
     return abilityProblem(state, viewer(), context.object.id, ui.activation, null, undefined, plan);
   return castProblem(state, viewer(), context.object.id, null, {
@@ -1215,7 +1457,14 @@ function showGroupedTargets() {
   const index = dialog._groupIndex,
     group = groups[index],
     plan = dialog._groupPlan;
-  const candidates = targetGroupCandidates(state, groups, group.id, viewer(), plan);
+  const candidates = targetGroupCandidates(
+    state,
+    groups,
+    group.id,
+    viewer(),
+    plan,
+    choice?.entry.targetingSource ?? choice?.entry.source ?? ref(object),
+  );
   const chosen = plan[group.id];
   const matches = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   const body = `<div class="decision-toolbar"><span>Step ${index + 1} of ${groups.length} · Choose ${group.min === group.max ? group.min : `${group.min}–${group.max}`}</span></div><div class="decision-card-gallery ${candidates.length <= 3 ? 'decision-hero' : 'decision-many'}" style="--choice-count:${Math.max(1, candidates.length)}">${
@@ -1708,6 +1957,22 @@ async function action(name, el) {
     case 'declineOptional':
       send({ type: 'resolveOptional', accept: name === 'acceptOptional' });
       break;
+    case 'declineResolutionCast':
+      send({
+        type: 'declineCastExiled',
+        expectedRevision: dialog._choiceRevision ?? state.revision,
+      });
+      break;
+    case 'beginResolutionCast':
+      if (state.choice?.kind !== 'castExiled') break;
+      resetSelection();
+      ui.selected = state.choice.card;
+      closeDialog();
+      action('playSelected', el);
+      break;
+    case 'chooseResolutionMana':
+      send({ type: 'chooseManaColor', color: el.dataset.color });
+      break;
     case 'chooseMana':
       if (
         send(
@@ -1727,6 +1992,22 @@ async function action(name, el) {
     case 'declineEntryLife':
     case 'payEntryLife':
       send({ type: 'payEntryLife', pay: name === 'payEntryLife' });
+      break;
+    case 'chooseLandType':
+      send({ type: 'chooseLandType', landType: el.dataset.landtype });
+      break;
+    case 'chooseLandName':
+      if (dialog._activeChoice !== state.choice || state.choice?.kind !== 'landName') break;
+      {
+        const name = document.getElementById('chosen-land-name')?.value;
+        const expectedRevision = dialog._choiceRevision;
+        closeDialog();
+        send({ type: 'chooseLandName', name, expectedRevision });
+      }
+      break;
+    case 'removeCounter':
+      closeDialog();
+      send({ type: 'chooseCounter', counter: el.dataset.counter || null });
       break;
     case 'chooseCreatureType':
       send({
@@ -1868,6 +2149,14 @@ async function action(name, el) {
         '<button class="btn primary" data-action="librarySearch">Back to search</button>',
       );
       break;
+    case 'declineSearch':
+      if (dialog._searchChoice !== state.choice || !state.choice?.optional) break;
+      {
+        const expectedRevision = dialog._choiceRevision;
+        closeDialog();
+        send({ type: 'searchLibrary', cards: [], decline: true, expectedRevision });
+      }
+      break;
     case 'confirmSearch':
       if (dialog._searchChoice !== state.choice) break;
       {
@@ -1962,6 +2251,86 @@ async function action(name, el) {
         showGroupedTargets();
       }
       break;
+    case 'distributionBack':
+      closeDialog();
+      showXChoice();
+      break;
+    case 'changeDistribution': {
+      const draft = dialog._distributionDraft;
+      if (draft?.command.expectedRevision !== state.revision) break;
+      const amounts = {
+        ...draft.amounts,
+        [el.dataset.cardid]: (draft.amounts[el.dataset.cardid] ?? 0) + Number(el.dataset.delta),
+      };
+      showDistribution(draft.command, amounts);
+      break;
+    }
+    case 'confirmDistribution': {
+      const draft = dialog._distributionDraft;
+      if (draft?.command.expectedRevision !== state.revision) break;
+      const command = {
+        ...draft.command,
+        targets: draft.targets,
+        distribution: draft.distribution,
+      };
+      closeDialog();
+      send(command);
+      break;
+    }
+    case 'selectHarmonize': {
+      const draft = dialog._harmonizeDraft;
+      if (draft?.command.expectedRevision !== state.revision) break;
+      showHarmonize(
+        draft.command,
+        el.dataset.cardid ? ref(state.objects[el.dataset.cardid]) : null,
+      );
+      break;
+    }
+    case 'confirmHarmonize': {
+      const draft = dialog._harmonizeDraft;
+      if (draft?.command.expectedRevision !== state.revision) break;
+      const command = { ...draft.command, harmonize: draft.selected };
+      closeDialog();
+      send(command);
+      break;
+    }
+    case 'selectAdditionalCostCard': {
+      const draft = dialog._additionalCostDraft;
+      if (!draft || draft.command.expectedRevision !== state.revision) break;
+      const cost = definition(state, state.objects[draft.command.card]).additionalCost;
+      const object = state.objects[el.dataset.cardid];
+      if (!object) break;
+      let choice;
+      if (cost.kind === 'teamwork') {
+        const old = draft.choice?.teamwork ?? [];
+        choice = {
+          teamwork: old.some((r) => r.id === object.id)
+            ? old.filter((r) => r.id !== object.id)
+            : [...old, ref(object)],
+        };
+      } else choice = cost.kind === 'blight' ? { blight: ref(object) } : { discard: ref(object) };
+      showAdditionalCost(draft.command, choice);
+      break;
+    }
+    case 'chooseAdditionalCostLife':
+    case 'declineAdditionalCost': {
+      const draft = dialog._additionalCostDraft;
+      if (draft && draft.command.expectedRevision === state.revision)
+        showAdditionalCost(
+          draft.command,
+          name === 'chooseAdditionalCostLife' ? { life: true } : null,
+        );
+      break;
+    }
+    case 'confirmAdditionalCost': {
+      const draft = dialog._additionalCostDraft;
+      if (!draft || draft.choice === undefined || draft.command.expectedRevision !== state.revision)
+        break;
+      const command = { ...draft.command, additionalCost: draft.choice };
+      closeDialog();
+      send(command, { additionalCostConfirmed: true });
+      break;
+    }
     case 'selectCastingSacrifice': {
       const draft = dialog._castingSacrificeDraft;
       if (!draft || draft.command.expectedRevision !== state.revision) break;
@@ -2122,7 +2491,7 @@ async function action(name, el) {
         ui.targeting = true;
         render();
         if (
-          targetsFor(state, a.target, viewer()).some(
+          targetsFor(state, a.target, viewer(), ref(state.objects[id])).some(
             (target) => state.objects[target.id]?.zone === 'graveyard',
           )
         )
@@ -2157,7 +2526,11 @@ async function action(name, el) {
       }
       if (
         !legalActions(state, viewer(), { x }).some(
-          (a) => a.type === 'cast' && a.card === o.id && a.x === x,
+          (a) =>
+            a.type === 'cast' &&
+            a.card === o.id &&
+            a.x === x &&
+            a.mode === (ui.spellMode ?? undefined),
         )
       ) {
         toast(`Choose a payable integer X from 0 to ${MAX_X} with legal targets.`);
@@ -2206,6 +2579,37 @@ async function action(name, el) {
     case 'plotSelected':
       if (ui.selected) send({ type: 'plot', card: ui.selected });
       break;
+    case 'ninjutsuSelected': {
+      const id = ui.selected;
+      const choices = legalActions(state, viewer()).filter(
+        (c) => c.type === 'ninjutsu' && c.card === id,
+      );
+      if (!choices.length) break;
+      dialog._ninjutsuActions = choices;
+      dialog._ninjutsuRevision = state.revision;
+      const body = `<div class="decision-card-gallery ${choices.length <= 3 ? 'decision-hero' : 'decision-many'}" style="--choice-count:${choices.length}">${choices.map((c, i) => decisionCard(state, c.attacker.id, metadata, { viewer: viewer(), action: 'payNinjutsu', extra: `data-index="${i}"`, label: `Return ${state.objects[c.attacker.id].name} to hand for ninjutsu` })).join('')}</div>`;
+      const reopen = () => {
+        openChoiceDialog(
+          'Ninjutsu — return an unblocked attacker',
+          'Choose a creature to return to your hand now as the cost. Kaito enters tapped and attacking the same defender when this ability resolves.',
+          body,
+          '<button class="btn" data-action="closeDialog">Cancel activation</button>',
+          { source: state.objects[id].name },
+        );
+        dialog._stageRender = reopen;
+        dialog._activeChoice = null;
+      };
+      reopen();
+      break;
+    }
+    case 'payNinjutsu': {
+      const command = dialog._ninjutsuActions?.[Number(el.dataset.index)];
+      if (command && dialog._ninjutsuRevision === state.revision) {
+        closeDialog();
+        send({ ...command, expectedRevision: state.revision });
+      } else closeDialog();
+      break;
+    }
     case 'cycleSelected':
       if (ui.selected) send({ type: 'cycle', card: ui.selected });
       break;
@@ -2227,18 +2631,28 @@ async function action(name, el) {
         break;
       }
       if (d.type === 'land') send({ type: 'playLand', card: o.id });
-      else if (d.targetGroups) {
+      else if (d.distributedCounters) {
+        showDistribution({
+          type: 'cast',
+          card: o.id,
+          mode: ui.spellMode ?? undefined,
+          x: ui.x,
+          expectedRevision: state.revision,
+        });
+      } else if (d.targetGroups) {
         showGroupedTargets();
       } else if (d.target) {
         ui.targeting = true;
-        ui.sideTab = targetsFor(state, d.target, viewer()).some((target) => target.kind === 'stack')
+        ui.sideTab = targetsFor(state, d.target, viewer(), ref(o)).some(
+          (target) => target.kind === 'stack',
+        )
           ? 'stack'
           : ui.sideTab;
-        if (targetsFor(state, d.target, viewer()).some((target) => target.kind === 'stack'))
+        if (targetsFor(state, d.target, viewer(), ref(o)).some((target) => target.kind === 'stack'))
           ui.inspectorOpen = true;
         render();
         if (
-          targetsFor(state, d.target, viewer()).some(
+          targetsFor(state, d.target, viewer(), ref(o)).some(
             (target) => state.objects[target.id]?.zone === 'graveyard',
           )
         )
@@ -2602,6 +3016,7 @@ function selectCard(id) {
           : spellProfile(definition(state, state.objects[ui.selected]), ui.spellMode ?? undefined)
               ?.target,
         p,
+        ref(state.objects[ui.selected]),
       ).some((t) => t.kind === 'object' && t.id === id)
     )
       send({

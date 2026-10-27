@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dbf9feb3-0751-47bd-a8dc-ed1c076cf8c7",
+  "name": "Broadside Barrage",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U}{R}"
+  },
+  "rulesText": "Broadside Barrage deals 5 damage to target creature or planeswalker. Draw a card, then discard a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "type": "planeswalker"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 5
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

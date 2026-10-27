@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3f008b57-6471-4785-9571-3b90193da7e2",
+  "name": "Ashroot Animist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Druid"],
+    "colors": ["G", "R"],
+    "manaCost": "{2}{R}{G}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Trample\nWhenever this creature attacks, another target creature you control gains trample and gets +X/+X until end of turn, where X is this creature's power.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "sourceStat",
+            "stat": "power"
+          },
+          "toughness": {
+            "kind": "sourceStat",
+            "stat": "power"
+          },
+          "keywords": ["trample"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

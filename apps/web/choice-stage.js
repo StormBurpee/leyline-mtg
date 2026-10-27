@@ -12,6 +12,10 @@ export const CARD_DECISIONS = new Set([
   'discard',
   'discardEffect',
   'sacrifice',
+  'removeCounter',
+  'behold',
+  'castExiled',
+  'manaColor',
   'exilePlay',
   'empowerJace',
   'bindingNegotiation',
@@ -23,6 +27,8 @@ export const CARD_DECISIONS = new Set([
   'optionalEffect',
   'payCost',
   'creatureType',
+  'landType',
+  'landName',
   'auraEntry',
   'entryLife',
   'triggerTargets',
@@ -58,7 +64,7 @@ export function decisionCard(
   if (!object) return '';
   const concealed = object.faceDown && object.controller !== viewer;
   const d = definition(state, object),
-    name = concealed ? 'Face-down creature' : object.name,
+    name = concealed ? 'Face-down creature' : object.transformed ? d.name : object.name,
     m = concealed ? {} : metadata[name];
   const image = m?.image;
   const details =
@@ -90,7 +96,7 @@ export function decisionReader(state, id, metadata, viewer) {
   if (!o) return '';
   const concealed = o.faceDown && o.controller !== viewer;
   const d = definition(state, o),
-    name = concealed ? 'Face-down creature' : o.name,
+    name = concealed ? 'Face-down creature' : o.transformed ? d.name : o.name,
     m = concealed ? {} : metadata[name];
   return `<div class="decision-reader">${decisionCard(state, id, metadata, { action: 'returnDecision', label: 'Back to cards', viewer })}<div class="decision-reader-copy"><span class="eyebrow">${esc(m?.type_line ?? d.type)}</span><h3>${esc(name)}</h3><p>${esc(concealed ? d.text : (m?.oracle_text ?? d.text))}</p>${d.type === 'creature' ? `<span class="decision-reader-stats">${stats(state, o).power} / ${stats(state, o).toughness}</span>` : ''}</div></div>`;
 }

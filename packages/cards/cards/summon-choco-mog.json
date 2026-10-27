@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "00546117-018a-4286-bc20-b5446c5be56f",
+  "name": "Summon: Choco/Mog",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "supertypes": [],
+    "subtypes": ["Saga", "Bird", "Moogle"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III, IV — Stampede! — Other creatures you control get +1/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [1, 2, 3, 4]
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "excludeSource": true,
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "52124954-b0b6-492c-8d03-fe54c220facc",
+  "name": "Stress Dream",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "U"],
+    "manaCost": "{3}{U}{R}"
+  },
+  "rulesText": "Stress Dream deals 5 damage to up to one target creature. Look at the top two cards of your library. Put one of those cards into your hand and the other on the bottom of your library.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "targetGroup": "chosen",
+          "amount": 5
+        },
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 2,
+          "selectCount": 1
+        }
+      ]
+    }
+  ]
+}

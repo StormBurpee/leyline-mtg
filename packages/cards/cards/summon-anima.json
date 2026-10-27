@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "aa4f6703-21f8-4c29-ad5a-5afb54188ade",
+  "name": "Summon: Anima",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "supertypes": [],
+    "subtypes": ["Saga", "Horror"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}{B}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Pain — You draw a card and you lose 1 life.\nIV — Oblivion — Each opponent sacrifices a creature of their choice and loses 3 life.\nMenace",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [1, 2, 3]
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [4]
+      },
+      "effects": [
+        {
+          "op": "sacrifice",
+          "count": 1,
+          "player": "opponent",
+          "where": {
+            "type": "creature"
+          }
+        },
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

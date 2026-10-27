@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/firebending-dragon-token",
+  "name": "Firebending Dragon Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dragon"],
+    "colors": ["R"],
+    "manaCost": null,
+    "power": 4,
+    "toughness": 4,
+    "token": true
+  },
+  "rulesText": "Flying\nFirebending 4 (Whenever this creature attacks, add {R}{R}{R}{R}. This mana lasts until end of combat.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "combatMana",
+          "count": 4
+        }
+      ]
+    }
+  ]
+}

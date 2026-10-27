@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "46ce3698-e4e6-44e9-8b99-2b12a703e91e",
+  "name": "Keen-Eyed Curator",
+  "characteristics": {
+    "types": ["creature"],
+    "colors": ["G"],
+    "manaCost": "{G}{G}",
+    "supertypes": [],
+    "subtypes": ["Raccoon", "Scout"],
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "As long as there are four or more card types among cards exiled with this creature, it gets +4/+4 and has trample.\n{1}: Exile target card from a graveyard.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "condition": {
+        "kind": "sourceExiledCardTypesAtLeast",
+        "count": 4
+      },
+      "power": 4,
+      "toughness": 4,
+      "keywords": ["trample"],
+      "affects": "self"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}"
+      },
+      "target": {
+        "scope": "graveyard"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile",
+          "trackSource": true
+        }
+      ]
+    }
+  ]
+}

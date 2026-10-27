@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8c93a0f6-5e50-4dda-9ff6-da741fb839ff",
+  "name": "Qarsi Revenant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}{B}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying, deathtouch, lifelink\nRenew \u2014 {2}{B}, Exile this card from your graveyard: Put a flying counter, a deathtouch counter, and a lifelink counter on target creature. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "timing": "sorcery",
+      "cost": {
+        "mana": "{2}{B}",
+        "exileSelf": true
+      },
+      "text": "Renew \u2014 {2}{B}, Exile this card from your graveyard: Put flying, deathtouch, and lifelink counters on target creature. Activate only as a sorcery.",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "keywordCounters",
+          "keywords": ["flying", "deathtouch", "lifelink"]
+        }
+      ]
+    }
+  ]
+}

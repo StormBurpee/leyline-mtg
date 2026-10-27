@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "636b44dc-f7e4-42d2-abf6-ae49432b6052",
+  "name": "Pym Particles",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Target creature gains vigilance until end of turn and can't be blocked this turn.\nDraw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["vigilance"],
+          "until": "endOfTurn"
+        },
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

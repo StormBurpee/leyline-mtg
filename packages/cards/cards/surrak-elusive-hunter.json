@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7a0fe73f-6e08-4c9a-80e1-c2ead6cebe06",
+  "name": "Surrak, Elusive Hunter",
+  "characteristics": {
+    "types": ["creature"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 4,
+    "toughness": 3,
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Warrior"]
+  },
+  "rulesText": "This spell can't be countered.\nTrample\nWhenever a creature you control or a creature spell you control becomes the target of a spell or ability an opponent controls, draw a card.",
+  "abilities": [
+    {
+      "kind": "uncounterable"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "targeted",
+        "controller": "you",
+        "targetingController": "opponent",
+        "filter": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

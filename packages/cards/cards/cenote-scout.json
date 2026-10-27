@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ec3911c0-686f-4c78-838d-a683eed6c01c",
+  "name": "Cenote Scout",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Scout"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "explore",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

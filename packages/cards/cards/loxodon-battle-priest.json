@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8cf4ddb0-2a83-4d8f-b636-7ba3c81ea4ca",
+  "name": "Loxodon Battle Priest",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elephant", "Cleric"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 3,
+    "toughness": 5
+  },
+  "rulesText": "At the beginning of combat on your turn, put a +1/+1 counter on another target creature you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    }
+  ]
+}

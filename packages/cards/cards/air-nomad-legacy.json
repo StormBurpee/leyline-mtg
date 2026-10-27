@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9e830359-ab92-4bfd-82b3-d9c67ac80cf7",
+  "name": "Air Nomad Legacy",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U", "W"],
+    "manaCost": "{W}{U}"
+  },
+  "rulesText": "When this enchantment enters, create a Clue token. (It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nCreatures you control with flying get +1/+1.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "type": "creature"
+          },
+          {
+            "keyword": "flying"
+          }
+        ]
+      },
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

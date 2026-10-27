@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/jace-illusion",
+  "name": "Jace Illusion Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Illusion"],
+    "colors": ["U"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "",
+  "abilities": []
+}

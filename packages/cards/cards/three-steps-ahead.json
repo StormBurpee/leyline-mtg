@@ -1,0 +1,100 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "282dfeaa-6243-4f92-838a-5cb54fa85184",
+  "name": "Three Steps Ahead",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Spree (Choose one or more additional costs.)\n+ {1}{U} \u2014 Counter target spell.\n+ {3} \u2014 Create a token that's a copy of target artifact or creature you control.\n+ {2} \u2014 Draw two cards, then discard a card.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": "oneOrMore",
+      "modes": [
+        {
+          "label": "Counter target spell",
+          "additionalCost": "{1}{U}",
+          "targetGroups": [
+            {
+              "id": "counter",
+              "label": "Spell to counter",
+              "selector": {
+                "scope": "spell"
+              },
+              "min": 1,
+              "max": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target",
+              "targetGroup": "counter"
+            }
+          ]
+        },
+        {
+          "label": "Copy your artifact or creature",
+          "additionalCost": "{3}",
+          "targetGroups": [
+            {
+              "id": "copy",
+              "label": "Artifact or creature to copy",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "all": [
+                    {
+                      "controller": "you"
+                    },
+                    {
+                      "any": [
+                        {
+                          "type": "artifact"
+                        },
+                        {
+                          "type": "creature"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "copyToken",
+              "target": "target",
+              "count": 1,
+              "targetGroup": "copy"
+            }
+          ]
+        },
+        {
+          "label": "Draw two, then discard one",
+          "additionalCost": "{2}",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 2
+            },
+            {
+              "op": "discard",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

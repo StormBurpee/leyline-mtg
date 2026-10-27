@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f21b0fb7-91b6-403f-a81a-562665961276",
+  "name": "Requiting Hex",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.)\nDestroy target creature with mana value 2 or less. If this spell's additional cost was paid, you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "additionalCost",
+      "cost": {
+        "kind": "blight",
+        "amount": 1
+      }
+    },
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "manaValue": {
+                "lte": 2
+              }
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "additionalCostPaid"
+          },
+          "then": [
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

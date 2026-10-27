@@ -1,0 +1,71 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0056fc91-4398-471c-b561-7ff99750ac8a",
+  "name": "Escape Tunnel",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\n{T}, Sacrifice this land: Target creature with power 2 or less can't be blocked this turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "power": {
+                "lte": 2
+              }
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

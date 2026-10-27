@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7d070a95-49ea-4aea-b512-dbb0006a00ee",
+  "name": "Elvenking's Harper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Bard"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{4}{U}: Target creature can't be blocked this turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{U}"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

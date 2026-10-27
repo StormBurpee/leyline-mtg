@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cba9d6a2-1772-42dc-9bfb-c933a092be19",
+  "name": "Seeker of Sunlight",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Scout"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "{2}{G}: This creature explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{G}"
+      },
+      "timing": "sorcery",
+      "effects": [
+        {
+          "op": "explore",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

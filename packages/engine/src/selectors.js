@@ -34,6 +34,7 @@ const PRESETS = freeze({
 const SCOPES = new Set([
   'permanent',
   'spell',
+  'ability',
   'player',
   'damageable',
   'graveyard',
@@ -94,13 +95,27 @@ export function validateFilter(filter) {
     }
     if (key === 'keyword')
       return (facts.keywords ?? facts.definition?.keywords ?? []).includes(value);
+    if (key === 'name') {
+      if (typeof operand !== 'string' || !operand.trim() || operand.length > 200)
+        errors.push(`${path}.name: expected an exact card name.`);
+      return;
+    }
     if (key === 'subtype') {
       if (typeof operand !== 'string' || !operand.trim() || operand.length > 80)
         errors.push(`${path}.subtype: expected a subtype name.`);
       return;
     }
     if (
-      ['tapped', 'token', 'basic', 'legendary', 'attacking', 'blocking', 'adventure'].includes(key)
+      [
+        'tapped',
+        'token',
+        'basic',
+        'legendary',
+        'attacking',
+        'blocking',
+        'adventure',
+        'stunned',
+      ].includes(key)
     ) {
       if (typeof operand !== 'boolean') errors.push(`${path}.${key}: expected a boolean.`);
       return;
@@ -124,8 +139,15 @@ export function validateTargetSpec(value) {
   const spec = targetSpec(value);
   if (!spec) return ['Unknown target selector.'];
   const errors = [];
-  if (Object.keys(spec).some((key) => !['scope', 'where'].includes(key)))
+  if (Object.keys(spec).some((key) => !['scope', 'where', 'excludeSource'].includes(key)))
     errors.push('Unsupported target selector field.');
+  if (spec.excludeSource !== undefined && typeof spec.excludeSource !== 'boolean')
+    errors.push('excludeSource must be a boolean.');
+  if (
+    spec.excludeSource &&
+    !['permanent', 'graveyard', 'damageable', 'playerOrPlaneswalker'].includes(spec.scope)
+  )
+    errors.push('Source exclusion requires an object target scope.');
   if (!SCOPES.has(spec.scope)) errors.push('Unsupported target scope.');
   if (spec.where !== undefined) errors.push(...validateFilter(spec.where));
   return errors;
@@ -149,11 +171,13 @@ export function matchesFilter(facts, filter, you) {
     return (
       Number.isInteger(facts[key]) && (value === 'you' ? facts[key] === you : facts[key] !== you)
     );
+  if (key === 'stunned') return (facts.stunCounters ?? 0) > 0 === value;
   if (key === 'adventure')
     return !!(facts.definition?.adventure || facts.definition?.adventureCast) === value;
   if (key === 'basic' || key === 'legendary') return !!facts.definition?.[key] === value;
   if (key === 'keyword')
     return (facts.keywords ?? facts.definition?.keywords ?? []).includes(value);
+  if (key === 'name') return facts.definition?.name === value;
   if (key === 'subtype') return hasSubtype(facts.definition, value);
   if (key === 'token' || key === 'tapped' || key === 'attacking' || key === 'blocking')
     return facts[key] === value;
@@ -202,11 +226,13 @@ export function effectTargetCompatible(op, value, effect = null) {
       ['damageable', 'player', 'playerOrPlaneswalker'].includes(spec.scope) ||
       (spec.scope === 'permanent' && impliesDamageable(spec.where))
     );
+  if (op === 'creatureForm') return spec.scope === 'permanent' && impliesCreature(spec.where);
   if (op === 'attachEquipment') return spec.scope === 'permanent' && impliesCreature(spec.where);
   // CR 208.3a: a P/T modifier may be created for a noncreature permanent;
   // it remains dormant unless that same incarnation becomes a creature.
+  if (op === 'explore') return spec.scope === 'permanent' && impliesCreature(spec.where);
   if (op === 'copyToken') return spec.scope === 'permanent';
-  if (op === 'modify') return spec.scope === 'permanent';
+  if (op === 'modify' || op === 'combatRestriction') return spec.scope === 'permanent';
   if (op === 'untap' || op === 'tap' || op === 'counterOn') return spec.scope === 'permanent';
   if (op === 'counter') return spec.scope === 'spell';
   if (['mill', 'draw', 'discard', 'gainLife', 'loseLife', 'scry', 'surveil'].includes(op))

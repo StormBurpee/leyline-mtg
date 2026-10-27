@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "522dd417-364b-44ab-8ca9-fb55db5f26a6",
+  "name": "Get Lost",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Destroy target creature, enchantment, or planeswalker. Its controller creates two Map tokens. (They're artifacts with \"{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.\")",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "type": "enchantment"
+            },
+            {
+              "type": "planeswalker"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/map-token",
+          "amount": 2,
+          "controller": "targetController"
+        }
+      ]
+    }
+  ]
+}

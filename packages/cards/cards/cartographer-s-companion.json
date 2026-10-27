@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "460c0f0b-bbf4-4307-9b44-350175d83bfe",
+  "name": "Cartographer's Companion",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Gnome"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, create a Map token. (It's an artifact with \"{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/map-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

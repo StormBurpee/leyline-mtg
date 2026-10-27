@@ -1,0 +1,93 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fa43077b-5d8b-4fb1-8dda-2a9185e6715e",
+  "name": "Kaito, Bane of Nightmares",
+  "characteristics": {
+    "types": ["planeswalker"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Kaito"],
+    "colors": ["U", "B"],
+    "manaCost": "{2}{U}{B}",
+    "loyalty": 4
+  },
+  "rulesText": "Ninjutsu {1}{U}{B} ({1}{U}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nDuring your turn, as long as Kaito has one or more loyalty counters on him, he's a 3/4 Ninja creature and has hexproof.\n+1: You get an emblem with \"Ninjas you control get +1/+1.\"\n0: Surveil 2. Then draw a card for each opponent who lost life this turn.\n−2: Tap target creature. Put two stun counters on it.",
+  "abilities": [
+    {
+      "kind": "ninjutsu",
+      "cost": "{1}{U}{B}"
+    },
+    {
+      "kind": "turnLoyaltyCreature",
+      "power": 3,
+      "toughness": 4,
+      "subtypes": ["Ninja"],
+      "keywords": ["hexproof"]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": 1,
+      "text": "+1: You get an emblem with “Ninjas you control get +1/+1.”",
+      "effects": [
+        {
+          "op": "anthemEmblem",
+          "where": {
+            "subtype": "Ninja"
+          },
+          "power": 1,
+          "toughness": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": 0,
+      "text": "0: Surveil 2. Then draw a card for each opponent who lost life this turn.",
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "opponentLostLifeThisTurn"
+          },
+          "then": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": -2,
+      "text": "−2: Tap target creature. Put two stun counters on it.",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        },
+        {
+          "op": "addStunCounters",
+          "target": "target",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

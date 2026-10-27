@@ -1,3 +1,5 @@
+import { endTurn } from './turn.js';
+import { LAND_CARD_NAMES } from './land-card-names.js';
 import { attackDefenders, validateAttackDefenders } from './combat.js';
 import { manaValue } from './mana-value.js';
 import {
@@ -6,7 +8,7 @@ import {
   targetPlanProblem,
   targetPlans,
 } from './target-groups.js';
-import { effectValues } from './numeric-values.js';
+import { effectValues, numericValue } from './numeric-values.js';
 import { CREATURE_TYPES } from './creature-types.js';
 import { meetsCondition } from './conditions.js';
 import { searchableCards } from './library-search.js';
@@ -16,12 +18,23 @@ import { costProblem, payCost } from './costs.js';
 import { cardDefinition } from './cards.js';
 import {
   untapObject,
+  addModifier,
+  layerTimestamp,
+  sagaFinalChapter,
+  addLoreCounters,
   isAttacking,
   isBlocking,
   legalEquipmentAttachment,
   legalAuraAttachment,
   addObject,
   queueTrigger,
+  queueEntryTrigger,
+  counterKinds,
+  removeOneCounter,
+  preparePermanent,
+  preparedSource,
+  trackExiledCard,
+  entryTriggersSuppressed,
   notifyTriggers,
   captureDepartureContext,
   sacrificePermanents,
@@ -42,10 +55,33 @@ import {
   requireRule,
   shuffle,
 } from './model.js';
-export function legalTarget(s, kind, target, controller) {
+function ignoresCreatureProtection(s, object) {
+  return (
+    hasType(definition(s, object), 'creature') &&
+    battlefield(s).some(
+      (source) =>
+        source.controller !== object.controller &&
+        definition(s, source).opponentCreatureProtectionBypass,
+    )
+  );
+}
+export function legalTarget(s, kind, target, controller, sourceRef = null) {
   if (!kind) return target == null;
   const spec = targetSpec(kind);
   if (!spec || !target) return false;
+  // "Another" identifies the exact source object, never every object sharing its ID
+  // or controller. Missing context fails closed rather than offering the source.
+  if (
+    spec.excludeSource &&
+    (!sourceRef ||
+      sourceRef.kind !== 'object' ||
+      typeof sourceRef.id !== 'string' ||
+      !Number.isSafeInteger(sourceRef.incarnation) ||
+      (target.kind === 'object' &&
+        target.id === sourceRef.id &&
+        target.incarnation === sourceRef.incarnation))
+  )
+    return false;
   if (target.kind === 'player')
     return (
       (target.id === 0 || target.id === 1) &&
@@ -54,9 +90,13 @@ export function legalTarget(s, kind, target, controller) {
     );
   if (target.kind === 'stack') {
     const entry = s.stack.find((e) => e.id === target.id);
-    if (!entry || entry.kind !== 'spell' || spec.scope !== 'spell') return false;
+    if (!entry || !['spell', 'ability'].includes(spec.scope) || entry.kind !== spec.scope)
+      return false;
     const source = s.objects[entry.source.id],
-      d = definition(s, source);
+      d =
+        entry.kind === 'spell'
+          ? definition(s, source)
+          : (entry.sourceDefinition ?? (source ? definition(s, source) : {}));
     return matchesFilter(
       {
         definition: d,
@@ -89,7 +129,10 @@ export function legalTarget(s, kind, target, controller) {
   if (spec.scope === 'playerOrPlaneswalker' && !planeswalker) return false;
   if (
     o.zone === 'battlefield' &&
-    (hasKeyword(s, o, 'shroud') || (hasKeyword(s, o, 'hexproof') && o.controller !== controller))
+    (hasKeyword(s, o, 'shroud') ||
+      (hasKeyword(s, o, 'hexproof') &&
+        o.controller !== controller &&
+        !ignoresCreatureProtection(s, o)))
   )
     return false;
   const pt = creature || o.zone !== 'battlefield' ? stats(s, o) : {};
@@ -100,6 +143,7 @@ export function legalTarget(s, kind, target, controller) {
       owner: o.owner,
       token: o.token,
       tapped: o.tapped,
+      stunCounters: o.stunCounters ?? 0,
       attacking: isAttacking(s, o),
       blocking: isBlocking(s, o),
       keywords: o.zone === 'battlefield' ? keywords(s, o) : d.keywords,
@@ -111,7 +155,7 @@ export function legalTarget(s, kind, target, controller) {
     controller,
   );
 }
-export function targetsFor(s, kind, p) {
+export function targetsFor(s, kind, p, sourceRef = null) {
   if (!kind) return [];
   return [
     ...s.players.map((p) => ({ kind: 'player', id: p.id })),
@@ -119,7 +163,7 @@ export function targetsFor(s, kind, p) {
       .filter((object) => ['battlefield', 'graveyard'].includes(object.zone))
       .map(ref),
     ...s.stack.map((e) => ({ kind: 'stack', id: e.id })),
-  ].filter((t) => legalTarget(s, kind, t, p));
+  ].filter((t) => legalTarget(s, kind, t, p, sourceRef));
 }
 /** Ward is triggered, not a targeting restriction (CR 702.21). */
 export function notifyTargeted(s, entry) {
@@ -131,6 +175,17 @@ export function notifyTargeted(s, entry) {
       seen.add(key);
       notifyTargeted(s, { ...entry, targetGroups: undefined, target });
     }
+    return;
+  }
+  if (entry.target?.kind === 'stack') {
+    const targeted = s.stack.find((item) => item.id === entry.target.id && item.kind === 'spell');
+    const spell = targeted && s.objects[targeted.source?.id];
+    if (spell?.zone === 'stack' && spell.incarnation === targeted.source.incarnation)
+      notifyTriggers(s, 'targeted', {
+        object: spell,
+        targetingController: entry.controller,
+        targetingKind: entry.kind,
+      });
     return;
   }
   if (entry.target?.kind !== 'object') return;
@@ -158,7 +213,7 @@ export function notifyTargeted(s, entry) {
   });
   if (source.controller === entry.controller) return;
   const cost = definition(s, source).ward;
-  if (!cost) return;
+  if (!cost || ignoresCreatureProtection(s, source)) return;
   s.pendingTriggers.push({
     id: `s${++s.nextId}`,
     kind: 'ability',
@@ -176,13 +231,13 @@ export function notifyTargeted(s, entry) {
     player: source.controller,
   });
 }
-function counterEntry(s, id) {
+function counterEntry(s, id, destination = 'graveyard') {
   const index = s.stack.findIndex((entry) => entry.id === id);
   if (index < 0) return;
   if (s.stack[index].uncounterable) return;
   const [entry] = s.stack.splice(index, 1);
   const source = s.objects[entry.source.id];
-  if (entry.kind === 'spell' && source?.zone === 'stack') move(s, source, 'graveyard');
+  if (entry.kind === 'spell' && source?.zone === 'stack') move(s, source, destination);
   emit(s, 'countered', { name: entry.name, stackId: entry.id });
 }
 /** One-shot duration expiry, not a triggered ability (CR 610.3). */
@@ -197,7 +252,7 @@ export function flushLinkedReturns(s) {
     .sort((a, b) => Number(b.controller === s.active) - Number(a.controller === s.active));
   return enterBattlefieldBatch(s, entries);
 }
-function exileUntilSourceLeaves(s, entry, target) {
+function exileUntilSourceLeaves(s, entry, target, departureContext = null) {
   const source = s.objects[entry.source?.id];
   const object = target?.kind === 'object' && s.objects[target.id];
   // The duration must not already have ended when the first one-shot effect resolves.
@@ -215,10 +270,18 @@ function exileUntilSourceLeaves(s, entry, target) {
     source: ref(source),
     cards: [{ ...ref(object), incarnation: object.incarnation + 1 }],
   });
-  move(s, object, 'exile');
+  move(s, object, 'exile', departureContext);
 }
 export function enterBattlefield(s, o, controller = o.owner, attachment = null, options = {}) {
-  return enterBattlefieldBatch(s, [{ object: o, controller, attachment, tapped: options.tapped }]);
+  return enterBattlefieldBatch(s, [
+    {
+      object: o,
+      controller,
+      attachment,
+      tapped: options.tapped,
+      enchantmentOnly: options.enchantmentOnly,
+    },
+  ]);
 }
 /** Move every entrant before observing any enters event, so simultaneous entrants see one another. */
 export function enterBattlefieldBatch(
@@ -238,6 +301,19 @@ export function enterBattlefieldBatch(
   const ready = [];
   for (const item of entering) {
     const { object, controller = object.owner } = item;
+    if (definition(s, object).chooseBasicLandType && !typeChoices[object.id]) {
+      s.choice = {
+        kind: 'landType',
+        player: controller,
+        card: object.id,
+        entries: entering.map(({ object, ...rest }) => ({ ...rest, object: ref(object) })),
+        typeChoices,
+        auraChoices,
+        lifeChoices,
+        types: ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest'],
+      };
+      return false;
+    }
     if (definition(s, object).entryLifePayment && !Object.hasOwn(lifeChoices, object.id)) {
       const amount = definition(s, object).entryLifePayment;
       s.choice = {
@@ -318,6 +394,9 @@ export function enterBattlefieldBatch(
           !meetsCondition(s, controller, definition(s, object).entersTappedUnless, [], object)),
     ]),
   );
+  const castValues = new Map(
+    entering.map(({ object }) => [object.id, object.zone === 'stack' ? (object.chosenX ?? 0) : 0]),
+  );
   const castPlayers = new Map(
     entering.map(({ object }) => [
       object.id,
@@ -325,7 +404,7 @@ export function enterBattlefieldBatch(
     ]),
   );
   const entryCounters = new Map(
-    entering.map(({ object, controller = object.owner }) => [
+    entering.map(({ object, controller = object.owner, enchantmentOnly }) => [
       object.id,
       battlefield(s).reduce((n, source) => {
         const bonus = definition(s, source).entryCounterBonus;
@@ -334,6 +413,7 @@ export function enterBattlefieldBatch(
           (bonus &&
           source.controller === controller &&
           source.id !== object.id &&
+          !enchantmentOnly &&
           hasType(definition(s, object), 'creature') &&
           meetsCondition(s, controller, bonus.condition, [], source)
             ? bonus.amount
@@ -348,10 +428,19 @@ export function enterBattlefieldBatch(
     attachment = null,
     tapped = false,
     attacking = false,
+    enchantmentOnly = false,
+    defender,
   } of entering) {
     const warped = object.zone === 'stack' && object.warpPaid;
     move(s, object, 'battlefield');
     object.controller = controller;
+    if (enchantmentOnly)
+      addModifier(s, {
+        objectId: object.id,
+        incarnation: object.incarnation,
+        enchantmentOnly: true,
+        permanent: true,
+      });
     // CR 702.185a / 608.3: resolving the warped permanent spell creates this delay.
     // It survives control changes and ability loss, but refers to this incarnation only.
     if (warped) {
@@ -368,37 +457,79 @@ export function enterBattlefieldBatch(
         label: `${object.name} · warp`,
       });
     }
-    if (typeChoices[object.id]) object.chosenCreatureType = typeChoices[object.id];
+    if (typeChoices[object.id]) {
+      if (definition(s, object).chooseBasicLandType)
+        object.chosenBasicLandType = typeChoices[object.id];
+      else object.chosenCreatureType = typeChoices[object.id];
+    }
     object.attachedTo = attachment;
-    object.plusCounters += entryCounters.get(object.id) ?? 0;
+    object.plusCounters +=
+      (entryCounters.get(object.id) ?? 0) + (definition(s, object).entryPlusCounters ?? 0);
+    if (definition(s, object).entryKeywordCounters) {
+      object.keywordCounters = {};
+      object.keywordCounterTimestamps = {};
+      const timestamp = layerTimestamp(s);
+      for (const keyword of definition(s, object).entryKeywordCounters) {
+        object.keywordCounters[keyword] = (object.keywordCounters[keyword] ?? 0) + 1;
+        object.keywordCounterTimestamps[keyword] = timestamp;
+      }
+    }
     if (definition(s, object).entryStunCounters)
       object.stunCounters = definition(s, object).entryStunCounters;
     object.tapped = !!tappedReplacements.get(object.id) || tapped;
     // Entering attacking is not declaring an attacker and causes no attack event.
     if (
       attacking &&
+      hasType(definition(s, object), 'creature') &&
+      (!defender ||
+        attackDefenders(s, controller).some(
+          (target) =>
+            target.kind === defender.kind &&
+            target.id === defender.id &&
+            (target.kind !== 'object' || target.incarnation === defender.incarnation),
+        )) &&
       controller === s.active &&
       ['beginCombat', 'attackers', 'blockers', 'firstDamage', 'damage', 'endCombat'].includes(
         s.step,
       )
-    )
+    ) {
       s.combat.attackers.push(ref(object));
+      if (defender) (s.combat.defenders ??= {})[object.id] = structuredClone(defender);
+    }
   }
+  for (const { object } of entering)
+    if (definition(s, object).entersPrepared) preparePermanent(s, object);
+  // All simultaneous entrants exist before any chapter/entry triggers are collected.
+  for (const { object } of entering)
+    if (definition(s, object).subtypes?.includes('Saga')) addLoreCounters(s, object);
   for (const { object } of entering) {
     const d = definition(s, object);
-    if (d.etb) queueTrigger(s, object, d.etb, `${object.name} · enters`);
-    notifyTriggers(s, 'enters', { object, castPlayer: castPlayers.get(object.id) });
+    if (d.etb && !entryTriggersSuppressed(s, object)) {
+      const start = s.pendingTriggers.length;
+      queueEntryTrigger(s, object, d.etb, `${object.name} · enters`);
+      for (const queued of s.pendingTriggers.slice(start)) queued.x = castValues.get(object.id);
+    }
+    notifyTriggers(s, 'enters', {
+      object,
+      castPlayer: castPlayers.get(object.id),
+      x: castValues.get(object.id),
+    });
   }
   return true;
 }
 export function finishCreatureTypeChoice(s, command) {
   const choice = s.choice;
   requireRule(
-    command.type === 'chooseCreatureType' && CREATURE_TYPES.includes(command.creatureType),
+    choice.kind === 'landType'
+      ? command.type === 'chooseLandType' && choice.types.includes(command.landType)
+      : command.type === 'chooseCreatureType' && CREATURE_TYPES.includes(command.creatureType),
     'CREATURE_TYPE',
     'Choose a valid creature type.',
   );
-  const choices = { ...choice.typeChoices, [choice.card]: command.creatureType };
+  const choices = {
+    ...choice.typeChoices,
+    [choice.card]: choice.kind === 'landType' ? command.landType : command.creatureType,
+  };
   const entries = choice.entries.map(({ object, ...rest }) => ({
     ...rest,
     object: s.objects[object.id],
@@ -474,7 +605,13 @@ export function finishAuraEntryChoice(s, command) {
 /** Damage is marked before state-based actions. Caller batches combat packets. */
 // All prevention implementations must consult this global turn rule before preventing damage.
 export function damageCanBePrevented(s) {
-  return s.damagePreventionDisabledTurn !== s.turn;
+  return (
+    s.damagePreventionDisabledTurn !== s.turn &&
+    !battlefield(s).some((o) => definition(s, o).cantPreventDamage)
+  );
+}
+export function canGainLife(s) {
+  return !battlefield(s).some((o) => definition(s, o).cantGainLife);
 }
 export function dealDamage(
   s,
@@ -509,7 +646,8 @@ export function dealDamage(
       if (source.keywords?.includes('deathtouch')) o.deathtouchDamage = true;
     }
   }
-  if (source.keywords?.includes('lifelink')) {
+  const gainsLife = source.keywords?.includes('lifelink') && canGainLife(s);
+  if (gainsLife) {
     s.players[source.controller].life += amount;
     if (lifeGains) {
       const key = `${source.id}:${source.incarnation ?? 0}:${source.controller}`;
@@ -519,8 +657,7 @@ export function dealDamage(
     }
   }
   emit(s, 'damage', { source: source.id, target, amount, controller: source.controller });
-  if (source.keywords?.includes('lifelink') && !lifeGains)
-    notifyTriggers(s, 'lifeGain', { player: source.controller, amount });
+  if (gainsLife && !lifeGains) notifyTriggers(s, 'lifeGain', { player: source.controller, amount });
   if (!combat && target.kind === 'player')
     notifyTriggers(s, 'noncombatDamageToPlayer', { player: target.id });
   if (combat && target.kind === 'player' && sourceObject) {
@@ -545,6 +682,8 @@ export function dealDamageBatch(s, packets, combat = false) {
   for (const payload of combatEvents) notifyTriggers(s, 'combatDamagePlayer', payload);
 }
 function damageSource(s, entry) {
+  if (entry.emblem)
+    return { id: entry.source.id, controller: entry.controller, keywords: [], definition: null };
   const source = s.objects[entry.source?.id];
   const current =
     source &&
@@ -562,6 +701,7 @@ function damageSource(s, entry) {
 }
 function copyToken(s, base, controller, exceptions = {}) {
   const copied = structuredClone(base);
+  delete copied.frontFaceCost;
   if (exceptions.power !== undefined) {
     copied.power = exceptions.power;
     copied.toughness = exceptions.toughness;
@@ -579,7 +719,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
   for (let index = startIndex; index < effects.length; index++) {
     const e = effectValues(s, effects[index], entry);
     if (e.op === 'conditional') {
-      const branch = meetsCondition(s, entry.controller, e.condition, [], entry.source)
+      const branch = meetsCondition(s, entry.controller, e.condition, [], entry.source, entry)
         ? e.then
         : (e.else ?? []);
       // Expand once at this instruction. Pausing children retain the chosen branch.
@@ -619,9 +759,17 @@ export function resolveEffects(s, entry, startIndex = 0) {
             e.op === 'destroy' ? 'graveyard' : e.op === 'bounce' ? 'hand' : e.destination,
             context,
           );
+          if (e.trackSource) trackExiledCard(s, entry.source, object);
         }
       } else {
-        for (const target of targets) resolveEffects(s, { ...entry, target, effects: [effect] });
+        for (const target of targets) {
+          if (resolveEffects(s, { ...entry, target, effects: [effect] }) === false) {
+            // Single-target modal copy effects may pause for the copy's entry choices.
+            // Keep the remaining parent instructions behind that exact continuation.
+            s.resolving.entry.effects.push(...effects.slice(index + 1));
+            return false;
+          }
+        }
       }
       if (flushLinkedReturns(s) === false) {
         s.resolving = { entry, index: index + 1 };
@@ -695,6 +843,93 @@ export function resolveEffects(s, entry, startIndex = 0) {
         ? candidate
         : null;
     switch (e.op) {
+      case 'moveLinkedExileToGraveyard': {
+        const links = (s.linkedExiles ?? []).filter(
+          (link) =>
+            link.source.id === entry.source?.id &&
+            link.source.incarnation === entry.source.incarnation,
+        );
+        const cards = links
+          .flatMap((link) => link.cards)
+          .map((r) => {
+            const o = s.objects[r.id];
+            return o && !o.token && o.zone === 'exile' && o.incarnation === r.incarnation
+              ? o
+              : null;
+          })
+          .filter(Boolean);
+        s.linkedExiles = (s.linkedExiles ?? []).filter((link) => !links.includes(link));
+        entry.movedCount = 0;
+        for (const object of cards) {
+          move(s, object, 'graveyard');
+          if (object.zone === 'graveyard') entry.movedCount++;
+        }
+        break;
+      }
+      case 'endTurn':
+        endTurn(s, entry);
+        return false;
+      case 'chooseLandName':
+        s.resolving = { entry, index: index + 1 };
+        s.choice = {
+          kind: 'landName',
+          player: entry.controller,
+          card: entry.source.id,
+          names: [
+            ...new Set([
+              ...LAND_CARD_NAMES,
+              ...Object.values(s.catalog)
+                .filter((d) => hasType(d, 'land') && !d.token)
+                .map((d) => d.name),
+            ]),
+          ].sort(),
+        };
+        return false;
+      case 'damageTargetController':
+        if (entry.targetController !== undefined)
+          dealDamage(
+            s,
+            damageSource(s, entry),
+            { kind: 'player', id: entry.targetController },
+            e.amount,
+          );
+        break;
+      case 'damageEachPlayer':
+        dealDamageBatch(
+          s,
+          s.players.map((player) => ({
+            source: damageSource(s, entry),
+            target: { kind: 'player', id: player.id },
+            amount: numericValue(s, e.amount, { controller: player.id, source: entry.source }),
+          })),
+        );
+        break;
+      case 'damageEventPlayer':
+        if (entry.eventSource?.controller !== undefined)
+          dealDamage(
+            s,
+            damageSource(s, entry),
+            { kind: 'player', id: entry.eventSource.controller },
+            e.amount,
+          );
+        break;
+      case 'exileGraveyards': {
+        const players =
+          e.players === 'all'
+            ? s.players
+            : [
+                s.players[
+                  e.players === 'target'
+                    ? entry.target.id
+                    : e.players === 'opponent'
+                      ? opponent(entry.controller)
+                      : entry.controller
+                ],
+              ];
+        for (const id of players.flatMap((player) => [...player.graveyard]))
+          move(s, s.objects[id], 'exile');
+        break;
+      }
       case 'disableDamagePrevention':
         s.damagePreventionDisabledTurn = s.turn;
         emit(s, 'damagePreventionDisabled', { turn: s.turn });
@@ -702,6 +937,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
       case 'bounceAll':
       case 'destroyAll':
       case 'exileAll':
+      case 'exileUntilSourceLeavesAll':
       case 'modifyAll':
       case 'damageAll':
       case 'counterAll':
@@ -715,6 +951,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
                 object.incarnation === entry.source.incarnation
               )
                 return false;
+              if (e.player !== undefined && object.controller !== recipient) return false;
               const d = definition(s, object),
                 pt = stats(s, object);
               return matchesFilter(
@@ -724,6 +961,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
                   owner: object.owner,
                   token: object.token,
                   tapped: object.tapped,
+                  stunCounters: object.stunCounters ?? 0,
                   attacking: isAttacking(s, object),
                   blocking: isBlocking(s, object),
                   keywords: keywords(s, object),
@@ -735,10 +973,14 @@ export function resolveEffects(s, entry, startIndex = 0) {
               );
             })
           : [];
-        if (e.op === 'bounceAll' || e.op === 'destroyAll' || e.op === 'exileAll') {
+        if (e.op === 'exileUntilSourceLeavesAll') {
+          const context = captureDepartureContext(s);
+          for (const object of objects) exileUntilSourceLeaves(s, entry, ref(object), context);
+        } else if (e.op === 'bounceAll' || e.op === 'destroyAll' || e.op === 'exileAll') {
           const victims = objects.filter(
             (object) => e.op !== 'destroyAll' || !hasKeyword(s, object, 'indestructible'),
           );
+          if (e.rememberMovedCount) entry.movedCount = victims.length;
           const context = victims.length ? captureDepartureContext(s) : null;
           for (const object of victims)
             move(
@@ -765,7 +1007,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
         } else
           for (const object of objects) {
             if (e.op === 'modifyAll')
-              s.modifiers.push({
+              addModifier(s, {
                 objectId: object.id,
                 incarnation: object.incarnation,
                 power: e.power,
@@ -787,6 +1029,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           legalEquipmentAttachment(s, source, o)
         ) {
           source.attachedTo = ref(o);
+          source.layerTimestamp = layerTimestamp(s);
           emit(s, 'attached', { objectId: source.id, target: ref(o) });
         }
         break;
@@ -816,12 +1059,62 @@ export function resolveEffects(s, entry, startIndex = 0) {
           e.amount,
         );
         break;
+      case 'keywordCounter':
+        if (o) {
+          (o.keywordCounters ??= {})[e.keyword] = (o.keywordCounters?.[e.keyword] ?? 0) + e.amount;
+          (o.keywordCounterTimestamps ??= {})[e.keyword] = layerTimestamp(s);
+        }
+        break;
       case 'stunOn':
         if (o) {
           const next = (o.stunCounters ?? 0) + e.amount;
           requireRule(Number.isSafeInteger(next), 'COUNTER_RANGE', 'Too many stun counters.');
           o.stunCounters = next;
         }
+        break;
+      case 'doubleCounters': {
+        const objects = e.where
+          ? battlefield(s).filter((object) =>
+              matchesFilter(
+                {
+                  definition: definition(s, object),
+                  controller: object.controller,
+                  owner: object.owner,
+                  token: object.token,
+                  tapped: object.tapped,
+                  attacking: isAttacking(s, object),
+                  blocking: isBlocking(s, object),
+                  manaValue: manaValue(definition(s, object)),
+                  ...stats(s, object),
+                  keywords: keywords(s, object),
+                },
+                e.where,
+                entry.controller,
+              ),
+            )
+          : o
+            ? [o]
+            : [];
+        for (const object of objects) {
+          const next = object.plusCounters * 2;
+          requireRule(Number.isSafeInteger(next), 'COUNTER_RANGE', 'Too many counters.');
+          object.plusCounters = next;
+        }
+        break;
+      }
+      case 'doublePower':
+        if (o)
+          addModifier(s, {
+            objectId: o.id,
+            incarnation: o.incarnation,
+            power: stats(s, o).power,
+            toughness: 0,
+            keywords: [],
+            expires: s.turn,
+          });
+        break;
+      case 'distributedCounters':
+        if (o) o.plusCounters += entry.distribution?.[target.id] ?? 0;
         break;
       case 'counterOn':
         if (o) o.plusCounters += e.amount;
@@ -849,14 +1142,41 @@ export function resolveEffects(s, entry, startIndex = 0) {
           player: entry.controller,
           ...(e.op === 'revealDiscard'
             ? {
-                eligibleCards: s.players[entry.target.id].hand.filter(
-                  (id) => definition(s, s.objects[id]).type !== 'land',
-                ),
+                eligibleCards: s.players[entry.target.id].hand.filter((id) => {
+                  const d = definition(s, s.objects[id]);
+                  return (
+                    !hasType(d, 'land') &&
+                    matchesFilter({ definition: d }, e.where, entry.controller)
+                  );
+                }),
               }
             : {}),
           cards: [...s.players[entry.target.id].hand],
           targetPlayer: entry.target.id,
         };
+        return false;
+      }
+      case 'explore': {
+        // Explore: a specified source still explores using its last controller
+        // after leaving; a targeted creature must remain legal at resolution.
+        if (!o && e.subject !== 'source') break;
+        const player = o?.controller ?? damageSource(s, entry).controller;
+        const id = s.players[player].library[0];
+        const card = id ? s.objects[id] : null;
+        const land = card && hasType(definition(s, card), 'land');
+        emit(s, 'exploreRevealed', {
+          player,
+          creature: o?.name ?? entry.name,
+          ...(card ? { revealed: card.name } : {}),
+        });
+        if (land) {
+          move(s, card, 'hand');
+          break;
+        }
+        if (o) o.plusCounters += 1;
+        if (!card) break;
+        s.resolving = { entry, index: index + 1 };
+        s.choice = { kind: 'libraryOrder', player, action: 'explore', cards: [id], revealed: true };
         return false;
       }
       case 'lookChooseHand':
@@ -869,25 +1189,141 @@ export function resolveEffects(s, entry, startIndex = 0) {
           break;
         }
         s.resolving = { entry, index: index + 1 };
-        s.choice = { kind: 'libraryOrder', player: recipient, action: e.op, cards };
+        s.choice = {
+          kind: 'libraryOrder',
+          player: recipient,
+          action: e.op,
+          cards,
+          ...(e.op === 'lookChooseHand'
+            ? {
+                selectCount: Math.min(e.selectCount ?? 1, cards.length),
+                restOrder: e.restOrder ?? 'chosen',
+              }
+            : {}),
+        };
+        return false;
+      }
+      case 'removeCounterTrigger': {
+        const source = s.objects[entry.source?.id];
+        if (source?.zone !== 'battlefield' || source.incarnation !== entry.source.incarnation)
+          break;
+        s.resolving = { entry, index: index + 1 };
+        s.choice = {
+          kind: 'removeCounter',
+          player: entry.controller,
+          source: ref(source),
+          counters: counterKinds(source),
+          reflexive: structuredClone(e),
+        };
+        return false;
+      }
+      case 'fightAttached': {
+        const actor = sourceAttachment?.kind === 'object' && s.objects[sourceAttachment.id];
+        if (
+          actor?.zone !== 'battlefield' ||
+          actor.incarnation !== sourceAttachment.incarnation ||
+          !hasType(definition(s, actor), 'creature') ||
+          !o ||
+          !hasType(definition(s, o), 'creature')
+        )
+          break;
+        const damageSource = (object) => ({
+          ...ref(object),
+          controller: object.controller,
+          definition: definition(s, object),
+          keywords: keywords(s, object),
+        });
+        dealDamageBatch(s, [
+          {
+            source: damageSource(actor),
+            target: ref(o),
+            amount: Math.max(0, stats(s, actor).power),
+          },
+          { source: damageSource(o), target: ref(actor), amount: Math.max(0, stats(s, o).power) },
+        ]);
+        break;
+      }
+      case 'untapSearched':
+        for (const r of entry.searchedObjects ?? []) {
+          const found = s.objects[r.id];
+          if (found?.zone === 'battlefield' && found.incarnation === r.incarnation)
+            untapObject(s, found);
+        }
+        break;
+      case 'behold': {
+        const cards = Object.values(s.objects)
+          .filter(
+            (object) =>
+              ((object.zone === 'battlefield' && object.controller === entry.controller) ||
+                (object.zone === 'hand' && object.owner === entry.controller)) &&
+              matchesFilter(
+                { definition: definition(s, object) },
+                { subtype: e.subtype },
+                entry.controller,
+              ),
+          )
+          .map((o) => o.id);
+        s.resolving = { entry, index: index + 1 };
+        s.choice = {
+          kind: 'behold',
+          player: entry.controller,
+          cards,
+          subtype: e.subtype,
+          then: structuredClone(e.then),
+        };
         return false;
       }
       case 'searchLibrary': {
-        const player = entry.controller;
+        const player = e.player === 'targetController' ? entry.targetController : recipient;
+        if (player !== 0 && player !== 1) break;
+        entry.searchedObjects = [];
+        const count = e.countFrom === 'moved' ? (entry.movedCount ?? 0) : e.count;
         const cards = searchableCards(s, player, e.where);
         s.resolving = { entry, index: index + 1 };
         s.choice = {
           kind: 'librarySearch',
           player,
           cards,
-          min: e.where ? 0 : Math.min(e.count, cards.length),
-          max: Math.min(e.count, cards.length),
+          min: e.where || e.optional ? 0 : Math.min(count, cards.length),
+          max: Math.min(count, cards.length),
+          ...(e.optional ? { optional: true } : {}),
           destination: e.destination,
           tapped: !!e.tapped,
           reveal: !!e.reveal,
           where: e.where ? structuredClone(e.where) : null,
         };
         return false;
+      }
+      case 'returnSelfAsEnchantment': {
+        const source = s.objects[entry.departedSource?.id];
+        if (
+          source?.zone === 'graveyard' &&
+          !source.token &&
+          source.incarnation === entry.departedSource.incarnation
+        )
+          enterBattlefield(s, source, source.owner, null, { enchantmentOnly: true });
+        break;
+      }
+      case 'shuffleSourceAndTarget': {
+        const source = s.objects[entry.source?.id];
+        const objects = [
+          ...new Map(
+            [
+              ...(o ? [o] : []),
+              ...(source?.zone === 'battlefield' && source.incarnation === entry.source.incarnation
+                ? [source]
+                : []),
+            ].map((object) => [object.id, object]),
+          ).values(),
+        ];
+        const owners = new Set(objects.map((object) => object.owner));
+        const context = captureDepartureContext(s);
+        for (const object of objects) move(s, object, 'library', context);
+        for (const owner of owners) {
+          shuffle(s, s.players[owner].library);
+          emit(s, 'libraryShuffled', { player: owner });
+        }
+        break;
       }
       case 'sacrificeSelf': {
         const source = s.objects[entry.source?.id];
@@ -900,6 +1336,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
         }
         break;
       }
+      case 'chooseExile':
       case 'sacrifice': {
         // CR 101.4: every player chooses in APNAP order before any departure.
         const players = e.player === 'all' ? [s.active, opponent(s.active)] : [recipient];
@@ -917,6 +1354,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
                     owner: object.owner,
                     token: object.token,
                     tapped: object.tapped,
+                    stunCounters: object.stunCounters ?? 0,
                     attacking: isAttacking(s, object),
                     blocking: isBlocking(s, object),
                     keywords: keywords(s, object),
@@ -939,18 +1377,29 @@ export function resolveEffects(s, entry, startIndex = 0) {
         if (!choices.length) break;
         const [first, ...remaining] = choices;
         s.resolving = { entry, index: index + 1 };
-        s.choice = { kind: 'sacrifice', ...first, remaining, selected: [] };
+        s.choice = {
+          kind: 'sacrifice',
+          ...first,
+          remaining,
+          selected: [],
+          ...(e.op === 'chooseExile' ? { destination: 'exile' } : {}),
+        };
         return false;
       }
+      case 'optionalDiscardDraw':
       case 'discardTrigger':
       case 'discard': {
-        const count = Math.min(e.count, s.players[recipient].hand.length);
+        const count = Math.min(
+          e.op === 'optionalDiscardDraw' ? 1 : e.count,
+          s.players[recipient].hand.length,
+        );
         if (!count) break;
         s.resolving = { entry, index: index + 1 };
         s.choice = {
           kind: 'discardEffect',
           player: recipient,
           count,
+          ...(e.op === 'optionalDiscardDraw' ? { optional: true, drawOnDiscard: 1 } : {}),
           ...(e.op === 'discardTrigger' ? { reflexive: structuredClone(e) } : {}),
         };
         return false;
@@ -968,14 +1417,15 @@ export function resolveEffects(s, entry, startIndex = 0) {
         break;
       }
       case 'copyToken': {
-        const source = entry.target?.kind === 'object' && s.objects[entry.target.id];
-        if (
-          !source ||
-          source.zone !== 'battlefield' ||
-          source.incarnation !== entry.target.incarnation
-        )
-          break;
-        const base = copiableDefinition(s, source);
+        const bound = e.subject === 'source' ? entry.source : entry.target;
+        const source = bound?.kind === 'object' && s.objects[bound.id];
+        const base =
+          source?.zone === 'battlefield' && source.incarnation === bound.incarnation
+            ? copiableDefinition(s, source)
+            : e.subject === 'source'
+              ? entry.sourceCopyDefinition
+              : null;
+        if (!base) break;
         const entries = Array.from({ length: e.count }, () => ({
           object: copyToken(s, base, entry.controller, e.exceptions),
           controller: entry.controller,
@@ -1000,6 +1450,116 @@ export function resolveEffects(s, entry, startIndex = 0) {
         }
         break;
       }
+      case 'ninjutsuEnter': {
+        const object = s.objects[entry.source?.id];
+        if (object?.zone === 'hand' && object.incarnation === entry.source.incarnation)
+          enterBattlefieldBatch(s, [
+            {
+              object,
+              controller: entry.controller,
+              tapped: true,
+              attacking: true,
+              defender: e.defender,
+            },
+          ]);
+        break;
+      }
+      case 'anthemEmblem': {
+        const emblem = {
+          id: `emblem${++s.nextId}`,
+          kind: 'anthem',
+          controller: entry.controller,
+          name: `${entry.name} emblem`,
+          where: structuredClone(e.where),
+          power: e.power,
+          toughness: e.toughness,
+        };
+        (s.emblems ??= []).push(emblem);
+        emit(s, 'emblemCreated', { ...emblem });
+        break;
+      }
+      case 'castDamageEmblem': {
+        const emblem = {
+          id: `emblem${++s.nextId}`,
+          controller: entry.controller,
+          name: `${entry.name} emblem`,
+          amount: e.amount,
+        };
+        (s.emblems ??= []).push(emblem);
+        emit(s, 'emblemCreated', { ...emblem });
+        break;
+      }
+      case 'impulseCastOrDamage': {
+        const id = s.players[entry.controller].library[0];
+        if (!id) {
+          dealDamage(
+            s,
+            damageSource(s, entry),
+            { kind: 'player', id: opponent(entry.controller) },
+            e.amount,
+          );
+          break;
+        }
+        const card = s.objects[id];
+        move(s, card, 'exile');
+        s.resolving = { entry, index: index + 1 };
+        s.choice = {
+          kind: 'castExiled',
+          player: entry.controller,
+          card: id,
+          incarnation: card.incarnation,
+          amount: e.amount,
+        };
+        return false;
+      }
+      case 'exileTop': {
+        const player = e.player === 'target' ? entry.target.id : entry.controller;
+        const cards = s.players[player].library.slice(0, e.count);
+        for (const id of cards) {
+          const object = s.objects[id];
+          move(s, object, 'exile');
+          object.playPermission = {
+            player: entry.controller,
+            turn: s.turn,
+            incarnation: object.incarnation,
+            ...(e.castOnly ? { castOnly: true } : {}),
+            ...(e.anyMana ? { anyMana: true } : {}),
+            ...(e.duration === 'nextTurn'
+              ? { untilNextTurn: entry.controller, nextTurnStarted: false }
+              : {}),
+          };
+        }
+        break;
+      }
+      case 'returnTransformed': {
+        const object = s.objects[entry.source.id];
+        if (
+          !object ||
+          object.zone !== 'battlefield' ||
+          object.incarnation !== entry.source.incarnation ||
+          !definition(s, object).backFace
+        )
+          break;
+        move(s, object, 'exile');
+        if (object.token || !cardDefinition(object.name, s.catalog).backFace) break;
+        object.transformed = true;
+        if (enterBattlefield(s, object, entry.controller) === false) {
+          s.resolving = { entry, index: index + 1 };
+          return false;
+        }
+        break;
+      }
+      case 'chooseMana':
+        s.resolving = { entry, index: index + 1 };
+        s.choice = { kind: 'manaColor', player: entry.controller, card: entry.source.id };
+        return false;
+      case 'combatMana':
+        for (let n = 0; n < e.count; n++)
+          (s.players[entry.controller].restrictedMana ??= []).push({
+            color: 'R',
+            duration: 'combat',
+          });
+        break;
       case 'addMana':
         for (const [color, amount] of Object.entries(e.mana))
           s.players[entry.controller].mana[color] += amount;
@@ -1027,7 +1587,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
         draw(s, recipient, e.count);
         break;
       case 'gainLife':
-        if (e.amount > 0) {
+        if (e.amount > 0 && canGainLife(s)) {
           s.players[recipient].life += e.amount;
           emit(s, 'lifeGain', { player: recipient, amount: e.amount });
           notifyTriggers(s, 'lifeGain', { player: recipient, amount: e.amount });
@@ -1059,7 +1619,10 @@ export function resolveEffects(s, entry, startIndex = 0) {
               s.resolving.index = index + 1;
               return false;
             }
-          } else move(s, candidate, e.destination);
+          } else {
+            move(s, candidate, e.destination);
+            if (e.trackSource) trackExiledCard(s, entry.source, candidate);
+          }
         }
         break;
       case 'bounce':
@@ -1068,6 +1631,100 @@ export function resolveEffects(s, entry, startIndex = 0) {
       case 'destroy':
         if (o && !hasKeyword(s, o, 'indestructible')) move(s, o, 'graveyard');
         break;
+      case 'becomeLand': {
+        const source = s.objects[entry.source.id];
+        if (source?.zone === 'battlefield' && source.incarnation === entry.source.incarnation) {
+          addModifier(s, {
+            objectId: source.id,
+            incarnation: source.incarnation,
+            landForm: { mana: e.mana },
+            untilNextTurn: entry.controller,
+          });
+          // CR 506.4: a permanent that stops being a creature leaves combat,
+          // even if another effect animates it again before combat ends.
+          const same = (r) => r.id === source.id && r.incarnation === source.incarnation;
+          s.combat.attackers = s.combat.attackers.filter((r) => !same(r));
+          delete s.combat.blocks[source.id];
+          if (s.combat.defenders) delete s.combat.defenders[source.id];
+          for (const id of Object.keys(s.combat.blocks))
+            s.combat.blocks[id] = s.combat.blocks[id].filter((r) => !same(r));
+        }
+        break;
+      }
+      case 'keywordCounters':
+        for (const object of o ? [o] : []) {
+          object.keywordCounters ??= {};
+          object.keywordCounterTimestamps ??= {};
+          const timestamp = layerTimestamp(s);
+          for (const keyword of e.keywords) {
+            object.keywordCounters[keyword] = (object.keywordCounters[keyword] ?? 0) + 1;
+            object.keywordCounterTimestamps[keyword] = timestamp;
+          }
+        }
+        break;
+      case 'earthbend': {
+        if (!o || !hasType(definition(s, o), 'land')) break;
+        addModifier(s, {
+          objectId: o.id,
+          incarnation: o.incarnation,
+          addTypes: ['creature'],
+          animation: { power: 0, toughness: 0, subtypes: [], preserveSubtypes: true },
+          keywords: ['haste'],
+          permanent: true,
+        });
+        o.plusCounters += e.amount;
+        (s.earthbendReturns ??= []).push({
+          object: ref(o),
+          kind: 'ability',
+          name: entry.name,
+          source: structuredClone(entry.source),
+          controller: entry.controller,
+          effects: [],
+          sourceDefinition: entry.sourceDefinition,
+          sourceKeywords: [...(entry.sourceKeywords ?? [])],
+          label: `${entry.name} · earthbend return`,
+        });
+        emit(s, 'earthbent', { objectId: o.id, player: entry.controller, amount: e.amount });
+        break;
+      }
+      case 'questCounterTrigger': {
+        const source = s.objects[entry.source.id];
+        if (source?.zone !== 'battlefield' || source.incarnation !== entry.source.incarnation)
+          break;
+        source.questCounters = (source.questCounters ?? 0) + 1;
+        emit(s, 'questCounters', { objectId: source.id, amount: source.questCounters });
+        const condition = { kind: 'sourceQuestCountersAtLeast', count: e.threshold };
+        if (meetsCondition(s, entry.controller, condition, [], entry.source)) {
+          queueTrigger(
+            s,
+            { ...source, controller: entry.controller },
+            e.effects,
+            `${source.name} · quest counter`,
+            false,
+            e.selector,
+          );
+          s.pendingTriggers.at(-1).condition = condition;
+        }
+        break;
+      }
+      case 'returnEarthbent': {
+        const target = entry.delayedObjects?.[0],
+          object = s.objects[target?.id];
+        if (
+          object &&
+          ['graveyard', 'exile'].includes(object.zone) &&
+          object.incarnation === target.incarnation
+        ) {
+          if (
+            enterBattlefieldBatch(s, [{ object, controller: entry.controller, tapped: true }]) ===
+            false
+          ) {
+            s.resolving = { entry, index: index + 1 };
+            return false;
+          }
+        }
+        break;
+      }
       case 'animateLand': {
         const source = s.objects[entry.source.id];
         if (
@@ -1075,7 +1732,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           source.incarnation === entry.source.incarnation &&
           hasType(definition(s, source), 'land')
         )
-          s.modifiers.push({
+          addModifier(s, {
             objectId: source.id,
             incarnation: source.incarnation,
             addTypes: ['creature'],
@@ -1083,9 +1740,10 @@ export function resolveEffects(s, entry, startIndex = 0) {
               power: e.power,
               toughness: e.toughness,
               colors: e.colors,
-              subtypes: e.subtypes,
+              subtypes: e.allCreatureTypes ? [...CREATURE_TYPES] : e.subtypes,
             },
-            expires: s.turn,
+            ...(e.keywords ? { keywords: [...e.keywords] } : {}),
+            ...(e.permanent ? { permanent: true } : { expires: s.turn }),
           });
         break;
       }
@@ -1097,7 +1755,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           !source.faceDown &&
           definition(s, source).subtypes.includes('Vehicle')
         )
-          s.modifiers.push({
+          addModifier(s, {
             objectId: source.id,
             incarnation: source.incarnation,
             addTypes: ['artifact', 'creature'],
@@ -1105,9 +1763,27 @@ export function resolveEffects(s, entry, startIndex = 0) {
           });
         break;
       }
-      case 'modify':
+      case 'combatRestriction':
         if (o)
           s.modifiers.push({
+            objectId: o.id,
+            incarnation: o.incarnation,
+            combatRestriction: e.restriction,
+            expires: s.turn,
+          });
+        break;
+      case 'creatureForm':
+        if (o)
+          s.modifiers.push({
+            objectId: o.id,
+            incarnation: o.incarnation,
+            creatureForm: { power: e.power, toughness: e.toughness, subtypes: e.subtypes },
+            expires: s.turn,
+          });
+        break;
+      case 'modify':
+        if (o)
+          addModifier(s, {
             objectId: o.id,
             incarnation: o.incarnation,
             power: e.power,
@@ -1116,14 +1792,80 @@ export function resolveEffects(s, entry, startIndex = 0) {
             expires: s.turn,
           });
         break;
+      case 'removeAbilities': {
+        const source = s.objects[entry.source?.id];
+        if (
+          o &&
+          (e.until === 'endOfTurn' ||
+            (source?.zone === 'battlefield' && source.incarnation === entry.source.incarnation))
+        )
+          addModifier(s, {
+            objectId: o.id,
+            incarnation: o.incarnation,
+            removeAbilities: true,
+            ...(e.until === 'endOfTurn'
+              ? { expires: s.turn }
+              : { untilSourceLeaves: { ...entry.source } }),
+          });
+        break;
+      }
+      case 'stripDestroyByManaValue': {
+        const victims = creatures(s).filter(
+          (object) => manaValue(definition(s, object)) <= e.amount,
+        );
+        for (const object of victims)
+          addModifier(s, {
+            objectId: object.id,
+            incarnation: object.incarnation,
+            removeAbilities: true,
+            expires: s.turn,
+          });
+        const context = captureDepartureContext(s);
+        for (const object of victims)
+          if (!hasKeyword(s, object, 'indestructible')) move(s, object, 'graveyard', context);
+        break;
+      }
+      case 'counterAbility': {
+        const affected = s.stack.find(
+          (item) => item.id === entry.target?.id && item.kind === 'ability',
+        );
+        if (!affected || affected.uncounterable) break;
+        const original = affected.source,
+          source = s.objects[original?.id];
+        counterEntry(s, affected.id);
+        if (
+          e.removeSourceAbilities &&
+          source?.zone === 'battlefield' &&
+          source.incarnation === original.incarnation &&
+          ['artifact', 'creature', 'planeswalker'].some((type) =>
+            hasType(definition(s, source), type),
+          )
+        )
+          resolveEffects(s, {
+            ...entry,
+            target: ref(source),
+            effects: [{ op: 'removeAbilities', until: 'sourceLeaves' }],
+          });
+        break;
+      }
       case 'counter': {
-        const i = s.stack.findIndex((x) => x.id === entry.target.id);
-        if (i >= 0 && !s.stack[i].uncounterable) {
-          const [countered] = s.stack.splice(i, 1);
-          const card = s.objects[countered.source.id];
-          if (card?.zone === 'stack') move(s, card, 'graveyard');
-          emit(s, 'countered', { name: countered.name, stackId: countered.id });
+        const affected = s.stack.find((item) => item.id === entry.target?.id);
+        if (!affected) break;
+        if (e.unlessPay !== undefined) {
+          const cost = { mana: structuredClone(e.unlessPay) };
+          s.resolving = { entry, index: index + 1 };
+          s.choice = {
+            kind: 'payCost',
+            player: affected.controller,
+            cost,
+            stackId: affected.id,
+            reason: 'counterUnless',
+            counterDestination: e.exile ? 'exile' : 'graveyard',
+            payable: !costProblem(s, affected.controller, cost),
+          };
+          return false;
         }
+        counterEntry(s, affected.id, e.exile ? 'exile' : 'graveyard');
         break;
       }
       case 'empowerJace': {
@@ -1195,12 +1937,12 @@ export function resolveEffects(s, entry, startIndex = 0) {
         break;
       }
       case 'token':
-        for (let i = 0; i < e.count; i++) {
+        for (let i = 0; i < (e.countFrom === 'moved' ? (entry.movedCount ?? 0) : e.count); i++) {
           const controller = e.player === 'targetController' ? entry.targetController : recipient;
           const token = addObject(s, e.definition, controller, 'void');
           enterBattlefield(s, token, controller, null, { tapped: e.tapped });
           if (token.zone === 'battlefield' && e.temporaryKeywords?.length)
-            s.modifiers.push({
+            addModifier(s, {
               objectId: token.id,
               incarnation: token.incarnation,
               power: 0,
@@ -1264,6 +2006,33 @@ export function finishResolutionChoice(s, command) {
     continueResolution(s);
     return;
   }
+  if (choice.kind === 'castExiled') {
+    requireRule(
+      command.type === 'declineCastExiled',
+      'CAST_EXILED',
+      'Cast the exiled card now or decline.',
+    );
+    dealDamage(
+      s,
+      damageSource(s, s.resolving.entry),
+      { kind: 'player', id: opponent(choice.player) },
+      choice.amount,
+    );
+    s.choice = null;
+    continueResolution(s);
+    return;
+  }
+  if (choice.kind === 'manaColor') {
+    requireRule(
+      command.type === 'chooseManaColor' && ['W', 'U', 'B', 'R', 'G'].includes(command.color),
+      'MANA_COLOR',
+      'Choose a mana color.',
+    );
+    s.players[choice.player].mana[command.color]++;
+    s.choice = null;
+    continueResolution(s);
+    return;
+  }
   if (choice.kind === 'attackDefenders') {
     requireRule(
       command.type === 'chooseAttackDefenders',
@@ -1306,7 +2075,8 @@ export function finishResolutionChoice(s, command) {
         requireRule(
           s.objects[id].zone === 'hand' &&
             s.objects[id].owner === choice.targetPlayer &&
-            definition(s, s.objects[id]).type !== 'land',
+            !hasType(definition(s, s.objects[id]), 'land') &&
+            (choice.kind !== 'revealDiscard' || choice.eligibleCards.includes(id)),
           'DISCARD_CHOICE',
           'Choose a nonland from the revealed hand.',
         );
@@ -1334,7 +2104,91 @@ export function finishResolutionChoice(s, command) {
     continueResolution(s);
     return;
   }
-  if (choice.kind === 'optionalEffect') {
+  if (choice.kind === 'removeCounter') {
+    requireRule(
+      command.type === 'chooseCounter' &&
+        (command.counter === null || choice.counters.includes(command.counter)),
+      'COUNTER_CHOICE',
+      'Choose an offered counter or decline.',
+    );
+    if (command.counter !== null) {
+      const source = s.objects[choice.source.id];
+      requireRule(
+        source?.zone === 'battlefield' &&
+          source.incarnation === choice.source.incarnation &&
+          counterKinds(source).includes(command.counter),
+        'COUNTER_CHOICE',
+        'That counter is no longer available.',
+      );
+      removeOneCounter(source, command.counter);
+      emit(s, 'counterRemoved', {
+        objectId: source.id,
+        counter: command.counter,
+        player: choice.player,
+      });
+      queueTrigger(
+        s,
+        { ...source, controller: choice.player },
+        choice.reflexive.effects,
+        `${source.name} · counter removed`,
+        false,
+        choice.reflexive.selector,
+      );
+    }
+    s.choice = null;
+    continueResolution(s);
+    return;
+  }
+  if (choice.kind === 'behold') {
+    requireRule(
+      command.type === 'chooseResolutionCard' &&
+        (command.card === null || choice.cards.includes(command.card)),
+      'BEHOLD_CHOICE',
+      'Choose an offered card or decline.',
+    );
+    if (command.card !== null) {
+      const object = s.objects[command.card];
+      requireRule(
+        object &&
+          ((object.zone === 'hand' && object.owner === choice.player) ||
+            (object.zone === 'battlefield' && object.controller === choice.player)) &&
+          matchesFilter(
+            { definition: definition(s, object) },
+            { subtype: choice.subtype },
+            choice.player,
+          ),
+        'BEHOLD_CHOICE',
+        'Choose a matching card in your hand or permanent you control.',
+      );
+      if (object.zone === 'hand')
+        emit(s, 'revealed', {
+          objectId: object.id,
+          name: object.name,
+          revealed: [object.name],
+          player: choice.player,
+        });
+      emit(s, 'beheld', { objectId: object.id, player: choice.player, subtype: choice.subtype });
+      const { entry, index } = s.resolving;
+      entry.effects.splice(index, 0, ...structuredClone(choice.then));
+    }
+    s.choice = null;
+    continueResolution(s);
+    return;
+  }
+  if (choice.kind === 'landName') {
+    requireRule(
+      command.type === 'chooseLandName' && choice.names.includes(command.name),
+      'LAND_NAME',
+      'Choose a land card name.',
+    );
+    const source = s.objects[s.resolving.entry.source.id];
+    if (
+      source?.zone === 'battlefield' &&
+      source.incarnation === s.resolving.entry.source.incarnation
+    )
+      source.chosenLandName = command.name;
+    emit(s, 'landNameChosen', { player: choice.player, objectId: choice.card, name: command.name });
+  } else if (choice.kind === 'optionalEffect') {
     requireRule(
       command.type === 'resolveOptional' && typeof command.accept === 'boolean',
       'OPTIONAL_CHOICE',
@@ -1346,53 +2200,71 @@ export function finishResolutionChoice(s, command) {
     requireRule(
       command.type === 'payCost' && typeof command.pay === 'boolean',
       'PAYMENT_CHOICE',
-      'Choose whether to pay the ward cost.',
+      'Choose whether to pay this cost.',
     );
     if (command.pay) payCost(s, choice.player, choice.cost);
-    else counterEntry(s, choice.stackId);
-    emit(s, 'wardPayment', { player: choice.player, paid: command.pay, stackId: choice.stackId });
+    else counterEntry(s, choice.stackId, choice.counterDestination);
+    emit(s, choice.reason === 'ward' ? 'wardPayment' : 'counterPayment', {
+      player: choice.player,
+      paid: command.pay,
+      stackId: choice.stackId,
+    });
   } else if (choice.kind === 'librarySearch') {
     requireRule(
       command.type === 'searchLibrary' && Array.isArray(command.cards),
       'SEARCH_CHOICE',
       'Choose the cards to find.',
     );
-    requireRule(
-      command.cards.length >= choice.min &&
-        command.cards.length <= choice.max &&
-        new Set(command.cards).size === command.cards.length,
-      'SEARCH_COUNT',
-      `Choose ${choice.min} to ${choice.max} distinct cards.`,
-    );
-    const legal = searchableCards(s, choice.player, choice.where ?? undefined);
-    requireRule(
-      command.cards.every((id) => choice.cards.includes(id) && legal.includes(id)),
-      'SEARCH_CARD',
-      'A chosen card does not match this library search.',
-    );
-    const found = command.cards.map((id) => s.objects[id]);
-    // Top destinations are set aside while the rest is shuffled (CR 701.24b).
-    if (choice.destination === 'battlefield')
-      enterBattlefieldBatch(
-        s,
-        found.map((object) => ({ object, controller: choice.player, tapped: choice.tapped })),
+    if (command.decline) {
+      requireRule(
+        choice.optional && command.cards.length === 0,
+        'SEARCH_DECLINE',
+        'Only optional searches may be declined.',
       );
-    else if (['hand', 'graveyard'].includes(choice.destination))
-      for (const object of found) move(s, object, choice.destination);
-    const library = s.players[choice.player].library;
-    if (choice.destination === 'top') {
-      const selected = new Set(command.cards);
-      s.players[choice.player].library = library.filter((id) => !selected.has(id));
+      emit(s, 'librarySearchDeclined', { player: choice.player });
+    } else {
+      requireRule(
+        command.cards.length >= choice.min &&
+          command.cards.length <= choice.max &&
+          new Set(command.cards).size === command.cards.length,
+        'SEARCH_COUNT',
+        `Choose ${choice.min} to ${choice.max} distinct cards.`,
+      );
+      const legal = searchableCards(s, choice.player, choice.where ?? undefined);
+      requireRule(
+        command.cards.every((id) => choice.cards.includes(id) && legal.includes(id)),
+        'SEARCH_CARD',
+        'A chosen card does not match this library search.',
+      );
+      const found = command.cards.map((id) => s.objects[id]);
+      s.resolving.entry.searchedObjects = found.map((object) => ({
+        ...ref(object),
+        incarnation: object.incarnation + (choice.destination === 'top' ? 0 : 1),
+      }));
+      // Top destinations are set aside while the rest is shuffled (CR 701.24b).
+      if (choice.destination === 'battlefield')
+        enterBattlefieldBatch(
+          s,
+          found.map((object) => ({ object, controller: choice.player, tapped: choice.tapped })),
+        );
+      else if (['hand', 'graveyard'].includes(choice.destination))
+        for (const object of found) move(s, object, choice.destination);
+      const library = s.players[choice.player].library;
+      if (choice.destination === 'top') {
+        const selected = new Set(command.cards);
+        s.players[choice.player].library = library.filter((id) => !selected.has(id));
+      }
+      shuffle(s, s.players[choice.player].library);
+      if (choice.destination === 'top') s.players[choice.player].library.unshift(...command.cards);
+      notifyTriggers(s, 'librarySearch', { player: choice.player });
+      emit(s, 'librarySearched', {
+        player: choice.player,
+        count: found.length,
+        destination: choice.destination,
+        ...(choice.reveal ? { revealed: found.map((o) => o.name) } : {}),
+      });
+      emit(s, 'libraryShuffled', { player: choice.player });
     }
-    shuffle(s, s.players[choice.player].library);
-    if (choice.destination === 'top') s.players[choice.player].library.unshift(...command.cards);
-    emit(s, 'librarySearched', {
-      player: choice.player,
-      count: found.length,
-      destination: choice.destination,
-      ...(choice.reveal ? { revealed: found.map((o) => o.name) } : {}),
-    });
-    emit(s, 'libraryShuffled', { player: choice.player });
   } else if (choice.kind === 'libraryOrder') {
     requireRule(
       command.type === 'orderLibrary',
@@ -1413,21 +2285,31 @@ export function finishResolutionChoice(s, command) {
       'Place each inspected card exactly once.',
     );
     requireRule(
-      choice.action !== 'lookChooseHand' || command.top.length === Math.min(1, choice.cards.length),
+      choice.action !== 'lookChooseHand' ||
+        command.top.length === (choice.selectCount ?? Math.min(1, choice.cards.length)),
       'LIBRARY_SELECTION',
-      'Choose exactly one inspected card for your hand.',
+      `Choose exactly ${choice.selectCount ?? Math.min(1, choice.cards.length)} inspected cards for your hand.`,
     );
     const player = s.players[choice.player],
       inspected = new Set(choice.cards);
-    if (choice.action === 'surveil')
+    if (['surveil', 'explore'].includes(choice.action))
       for (const id of command.rest) move(s, s.objects[id], 'graveyard');
     if (choice.action === 'lookChooseHand')
       for (const id of command.top) move(s, s.objects[id], 'hand');
     const remaining = player.library.filter((id) => !inspected.has(id));
+    // Canonicalize the unchosen subset before shuffling: submitted ordering must not
+    // let a chooser control a random-bottom instruction or change seeded replay.
+    const rest =
+      choice.restOrder === 'random'
+        ? shuffle(
+            s,
+            choice.cards.filter((id) => !command.top.includes(id)),
+          )
+        : command.rest;
     player.library = [
       ...(choice.action === 'lookChooseHand' ? [] : command.top),
       ...remaining,
-      ...(['scry', 'lookChooseHand'].includes(choice.action) ? command.rest : []),
+      ...(['scry', 'lookChooseHand'].includes(choice.action) ? rest : []),
     ];
     emit(s, choice.action, {
       player: choice.player,
@@ -1439,7 +2321,8 @@ export function finishResolutionChoice(s, command) {
     requireRule(
       command.type === 'sacrifice' &&
         Array.isArray(command.cards) &&
-        command.cards.length === choice.count &&
+        (command.cards.length === choice.count ||
+          (choice.optional && command.cards.length === 0)) &&
         new Set(command.cards).size === choice.count &&
         command.cards.every((id) =>
           choice.refs.some(
@@ -1462,7 +2345,13 @@ export function finishResolutionChoice(s, command) {
     ];
     if (choice.remaining.length) {
       const [first, ...remaining] = choice.remaining;
-      s.choice = { kind: 'sacrifice', ...first, remaining, selected };
+      s.choice = {
+        kind: 'sacrifice',
+        ...first,
+        remaining,
+        selected,
+        ...(choice.destination ? { destination: choice.destination } : {}),
+      };
       return;
     }
     const sacrificed = selected
@@ -1475,7 +2364,10 @@ export function finishResolutionChoice(s, command) {
           : null;
       })
       .filter(Boolean);
-    sacrificePermanents(s, sacrificed);
+    if (choice.destination === 'exile') {
+      const context = captureDepartureContext(s);
+      for (const object of sacrificed) move(s, object, 'exile', context);
+    } else sacrificePermanents(s, sacrificed);
   } else if (choice.kind === 'discardEffect') {
     requireRule(
       command.type === 'discardEffect',
@@ -1484,7 +2376,8 @@ export function finishResolutionChoice(s, command) {
     );
     requireRule(
       Array.isArray(command.cards) &&
-        command.cards.length === choice.count &&
+        (command.cards.length === choice.count ||
+          (choice.optional && command.cards.length === 0)) &&
         new Set(command.cards).size === command.cards.length &&
         command.cards.every((id) => s.players[choice.player].hand.includes(id)),
       'DISCARD_CHOICE',
@@ -1513,6 +2406,7 @@ export function finishResolutionChoice(s, command) {
       : 0;
     for (const id of command.cards) move(s, s.objects[id], 'graveyard');
     emit(s, 'discard', { player: choice.player, count: command.cards.length });
+    if (choice.drawOnDiscard && command.cards.length) draw(s, choice.player, choice.drawOnDiscard);
     if (qualifying) {
       const parent = s.resolving.entry;
       s.pendingTriggers.push({
@@ -1522,6 +2416,7 @@ export function finishResolutionChoice(s, command) {
         source: structuredClone(parent.source),
         controller: parent.controller,
         sourceKeywords: structuredClone(parent.sourceKeywords ?? []),
+        ...(parent.sourceStats ? { sourceStats: structuredClone(parent.sourceStats) } : {}),
         ...(parent.sourceDefinition
           ? { sourceDefinition: structuredClone(parent.sourceDefinition) }
           : {}),
@@ -1550,6 +2445,7 @@ export function finishResolutionChoice(s, command) {
 export function resolveTop(s) {
   const entry = s.stack.pop();
   if (!entry) return;
+  if (entry.rule === 'earthbendReturn') entry.effects = [{ op: 'returnEarthbent' }];
   if (entry.rule === 'mobilizeSacrifice') {
     const objects = (entry.delayedObjects ?? []).flatMap((target) => {
       const object = s.objects[target.id];
@@ -1581,25 +2477,52 @@ export function resolveTop(s) {
     }
     return;
   }
-  if (entry.condition && !meetsCondition(s, entry.controller, entry.condition, [], entry.source))
+  if (
+    entry.condition &&
+    !meetsCondition(
+      s,
+      entry.controller,
+      entry.condition,
+      [],
+      { ...entry.source, questCountersLKI: entry.sourceQuestCounters },
+      entry.eventManaSpent ?? null,
+    )
+  )
     return;
   const object = s.objects[entry.source?.id],
     d = entry.kind === 'spell' && object ? definition(s, object) : null;
   if (entry.targetGroups) {
     const originalCount = flattenTargets(entry.targets).length;
-    entry.targets = survivingTargets(s, entry.targetGroups, entry.targets, entry.controller);
+    entry.targets = survivingTargets(
+      s,
+      entry.targetGroups,
+      entry.targets,
+      entry.controller,
+      entry.targetingSource ?? entry.source,
+    );
     if (originalCount && !flattenTargets(entry.targets).length) {
       emit(s, 'fizzled', { name: entry.name, stackId: entry.id });
       if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
       return;
     }
   }
-  if (entry.targetKind && !legalTarget(s, entry.targetKind, entry.target, entry.controller)) {
+  if (
+    entry.targetKind &&
+    !legalTarget(
+      s,
+      entry.targetKind,
+      entry.target,
+      entry.controller,
+      entry.targetingSource ?? entry.source,
+    )
+  ) {
     emit(s, 'fizzled', { name: entry.name, stackId: entry.id });
     if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
     return;
   }
-  if (entry.effects?.some((e) => e.op === 'token' && e.player === 'targetController'))
+  if (
+    entry.effects?.some((e) => e.player === 'targetController' || e.op === 'damageTargetController')
+  )
     entry.targetController =
       entry.target?.kind === 'player'
         ? entry.target.id
@@ -1612,7 +2535,7 @@ export function resolveTop(s) {
   ) {
     enterBattlefield(s, object, entry.controller, entry.target ?? null);
     if (entry.offspringPaid)
-      queueTrigger(s, object, [{ op: 'offspringCopy' }], `${object.name} · offspring`);
+      queueEntryTrigger(s, object, [{ op: 'offspringCopy' }], `${object.name} · offspring`);
     emit(s, 'resolved', { name: entry.name, stackId: entry.id });
   } else {
     s.resolving = { entry, index: 0 };
@@ -1637,6 +2560,23 @@ export function stateBasedActions(s) {
     });
     return true;
   }
+  // Chapter triggers awaiting ordering/targets still count as pending. Never
+  // complete a Saga while its chapter is resolving or a choice is outstanding.
+  const completedSagas = s.choice
+    ? []
+    : battlefield(s).filter((object) => {
+        const final = sagaFinalChapter(s, object);
+        return (
+          final &&
+          (object.loreCounters ?? 0) >= final &&
+          ![...s.pendingTriggers, ...s.stack].some(
+            (entry) =>
+              entry.sagaChapter &&
+              entry.source?.id === object.id &&
+              entry.source.incarnation === object.incarnation,
+          )
+        );
+      });
   let speedStarted = false;
   let detached = false;
   for (const object of battlefield(s)) {
@@ -1700,6 +2640,7 @@ export function stateBasedActions(s) {
       ...first,
       remaining,
       toGrave: [...new Set(toGrave.map((o) => o.id))],
+      ...(completedSagas.length ? { sagaSacrifices: completedSagas.map((o) => o.id) } : {}),
     };
     return false;
   }
@@ -1707,23 +2648,46 @@ export function stateBasedActions(s) {
     applyStateBasedBatch(
       s,
       toGrave.map((o) => o.id),
+      completedSagas.map((o) => o.id),
     ) ||
     speedStarted ||
     detached
   );
 }
-function applyStateBasedBatch(s, ids) {
+function applyStateBasedBatch(s, ids, sagaSacrifices = []) {
   let changed = false;
   const toGrave = [...new Set(ids)].map((id) => s.objects[id]);
-  const departureContext = toGrave.length ? captureDepartureContext(s) : null;
-  for (const o of toGrave) {
+  const departureContext =
+    toGrave.length || sagaSacrifices.length ? captureDepartureContext(s) : null;
+  // Counter cancellation is simultaneous with departures: preserve pre-SBA LKI.
+  for (const object of battlefield(s)) {
+    const cancel = Math.min(object.plusCounters ?? 0, object.minusCounters ?? 0);
+    if (cancel) {
+      object.plusCounters -= cancel;
+      object.minusCounters -= cancel;
+      changed = true;
+    }
+  }
+  // Sacrifice and ordinary SBA deaths share the same pre-departure snapshot.
+  if (sagaSacrifices.length) {
+    sacrificePermanents(
+      s,
+      sagaSacrifices.map((id) => s.objects[id]),
+      departureContext,
+    );
+    changed = true;
+  }
+  for (const o of toGrave.filter((object) => !sagaSacrifices.includes(object.id))) {
     move(s, o, 'graveyard', departureContext);
     changed = true;
   }
   // Deathtouch tracks damage since the previous state-based-action check.
   for (const o of battlefield(s)) o.deathtouchDamage = false;
   for (const o of Object.values(s.objects))
-    if (o.token && o.zone !== 'battlefield') {
+    if (
+      (o.token && o.zone !== 'battlefield') ||
+      (o.spellCopy && o.zone !== 'stack' && !(o.zone === 'exile' && preparedSource(s, o)))
+    ) {
       for (const p of s.players)
         for (const zone of ['hand', 'graveyard', 'exile', 'library'])
           p[zone] = p[zone].filter((id) => id !== o.id);
@@ -1745,15 +2709,21 @@ export function finishLegendChoice(s, card) {
   emit(s, 'legendChosen', { player: choice.player, name: choice.name, objectId: card });
   if (choice.remaining.length) {
     const [first, ...remaining] = choice.remaining;
-    s.choice = { kind: 'legendRule', ...first, remaining, toGrave };
+    s.choice = {
+      kind: 'legendRule',
+      ...first,
+      remaining,
+      toGrave,
+      ...(choice.sagaSacrifices ? { sagaSacrifices: choice.sagaSacrifices } : {}),
+    };
     return;
   }
   s.choice = null;
-  applyStateBasedBatch(s, toGrave);
+  applyStateBasedBatch(s, toGrave, choice.sagaSacrifices);
 }
 /** Stabilize before priority (CR 117.5). Trigger ordering remains an explicit choice. */
 export function stabilize(s) {
-  if (s.resolving || s.choice) return;
+  if (s.resolving || s.choice || s.endingTurn) return;
   if (flushLinkedReturns(s) === false) return;
   let iterations = 0;
   while (s.status === 'playing' && !s.choice && stateBasedActions(s)) {
@@ -1766,6 +2736,8 @@ export function stabilize(s) {
     .filter((g) => g.entries.length);
   s.pendingTriggers = [];
   placeTriggerGroups(s, groups);
+  // Removing an unplaceable final chapter can now complete its Saga.
+  if (!s.choice && stateBasedActions(s)) stabilize(s);
 }
 function placeTriggerGroups(s, groups) {
   for (let index = 0; index < groups.length; index++) {
@@ -1784,7 +2756,11 @@ function placeOrderedTriggers(s, entries, remaining) {
     if (entry.targetGroups) {
       // Trigger declarations currently have independent groups, so existence is exact.
       if (
-        entry.targetGroups.some((g) => targetsFor(s, g.selector, entry.controller).length < g.min)
+        entry.targetGroups.some(
+          (g) =>
+            targetsFor(s, g.selector, entry.controller, entry.targetingSource ?? entry.source)
+              .length < g.min,
+        )
       ) {
         emit(s, 'triggerRemoved', {
           stackId: entry.id,
@@ -1803,7 +2779,12 @@ function placeOrderedTriggers(s, entries, remaining) {
       return false;
     }
     if (entry.targetKind) {
-      const targets = targetsFor(s, entry.targetKind, entry.controller);
+      const targets = targetsFor(
+        s,
+        entry.targetKind,
+        entry.controller,
+        entry.targetingSource ?? entry.source,
+      );
       if (!targets.length) {
         // CR 603.3d: a trigger with no legal required choice is removed, not deferred.
         emit(s, 'triggerRemoved', {
@@ -1843,7 +2824,13 @@ export function finishTriggerOrder(s, ids) {
 export function finishTriggerTargets(s, targets) {
   const choice = s.choice,
     entry = choice.entry;
-  const problem = targetPlanProblem(s, entry.targetGroups, targets, choice.player);
+  const problem = targetPlanProblem(
+    s,
+    entry.targetGroups,
+    targets,
+    choice.player,
+    entry.targetingSource ?? entry.source,
+  );
   requireRule(!problem, 'TRIGGER_TARGETS', problem);
   entry.targets = structuredClone(targets);
   s.stack.push(entry);
@@ -1856,7 +2843,7 @@ export function finishTriggerTarget(s, target) {
   const choice = s.choice,
     entry = choice.entry;
   requireRule(
-    legalTarget(s, entry.targetKind, target, choice.player),
+    legalTarget(s, entry.targetKind, target, choice.player, entry.targetingSource ?? entry.source),
     'TRIGGER_TARGET',
     'Choose a legal target for the triggered ability.',
   );

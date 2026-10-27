@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/wark-bird-token",
+  "name": "Wark Bird Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird"],
+    "colors": ["G"],
+    "manaCost": null,
+    "power": 2,
+    "toughness": 2,
+    "token": true
+  },
+  "rulesText": "Whenever a land you control enters, this token gets +1/+0 until end of turn.",
+  "abilities": [
+    {
+      "use": "landfall.grow",
+      "args": {
+        "power": 1,
+        "toughness": 0
+      }
+    }
+  ]
+}

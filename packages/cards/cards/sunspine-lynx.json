@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "479adf64-f42c-4cb6-bf25-648c044bca8b",
+  "name": "Sunspine Lynx",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Cat"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Players can't gain life.\nDamage can't be prevented.\nWhen this creature enters, it deals damage to each player equal to the number of nonbasic lands that player controls.",
+  "abilities": [
+    {
+      "kind": "globalRule",
+      "rule": "cantGainLife"
+    },
+    {
+      "kind": "globalRule",
+      "rule": "cantPreventDamage"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damageEachPlayer",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "all": [
+                {
+                  "type": "land"
+                },
+                {
+                  "not": {
+                    "basic": true
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

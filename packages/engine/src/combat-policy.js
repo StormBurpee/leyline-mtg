@@ -3,6 +3,7 @@ import { beginDamage, assignDamage, canBlock, canAttack, attackDefenders } from 
 import { stateBasedActions, stabilize, resolveTop, finishTriggerOrder } from './effects.js';
 import { settleCombatPayoffs } from './combat-payoffs.js';
 import {
+  maximumBlockers,
   notifyTriggers,
   definition,
   stats,
@@ -236,8 +237,9 @@ function utility(result, p) {
 function legalGroups(s, pairs) {
   return liveAttackers(s).every(
     (a) =>
-      !hasKeyword(s, s.objects[a.id], 'menace') ||
-      pairs.filter((p) => p.attacker === a.id).length !== 1,
+      pairs.filter((p) => p.attacker === a.id).length <= maximumBlockers(s, s.objects[a.id]) &&
+      (!hasKeyword(s, s.objects[a.id], 'menace') ||
+        pairs.filter((p) => p.attacker === a.id).length !== 1),
   );
 }
 export function chooseBlocks(s, p, { budget = 1400 } = {}) {
@@ -261,7 +263,7 @@ export function chooseBlocks(s, p, { budget = 1400 } = {}) {
     const all = blockers
       .filter((b) => canBlock(s, b, attacker, p))
       .map((b) => ({ blocker: b.id, attacker: attacker.id }));
-    if (all.length && (!hasKeyword(s, attacker, 'menace') || all.length >= 2)) {
+    if (all.length && legalGroups(s, all)) {
       const trial = evaluate(all);
       count++;
       if (trial.score > best.score) best = trial;
@@ -272,7 +274,7 @@ export function chooseBlocks(s, p, { budget = 1400 } = {}) {
       eligible = blockers.filter((b) => canBlock(s, b, a, p));
     const groups = Array.from({ length: 1 << eligible.length }, (_, mask) =>
       eligible.filter((_, i) => mask & (1 << i)).map((b) => ({ blocker: b.id, attacker: a.id })),
-    ).filter((g) => !hasKeyword(s, a, 'menace') || g.length !== 1);
+    ).filter((g) => legalGroups(s, g));
     // Prioritize varied group sizes if an unusually wide board exhausts the budget.
     groups.sort((a, b) => a.length - b.length);
     for (const pairs of groups) {
@@ -289,6 +291,8 @@ export function chooseBlocks(s, p, { budget = 1400 } = {}) {
         for (const a of attackers.filter((a) => canBlock(s, blocker, a, p))) {
           if (count++ >= budget) break;
           const pairs = [...node.pairs, { blocker: blocker.id, attacker: a.id }];
+          if (pairs.filter((pair) => pair.attacker === a.id).length > maximumBlockers(s, a))
+            continue;
           const complete = legalGroups(s, pairs);
           const partial = pairs.filter(
             (pair) =>

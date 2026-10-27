@@ -176,7 +176,7 @@ test('search definitions reject unsupported fields, filters and unsafe battlefie
     { op: 'searchLibrary', count: 1, destination: 'battlefield', where: { type: 'instant' } },
     { op: 'searchLibrary', count: 1, destination: 'hand', tapped: true },
     { op: 'searchLibrary', count: 1, destination: 'hand', where: { unknown: true } },
-    { op: 'searchLibrary', count: 1, destination: 'hand', player: 'opponent' },
+    { op: 'searchLibrary', count: 1, destination: 'hand', player: 'all' },
   ])
     assert.ok(
       validateDefinition({

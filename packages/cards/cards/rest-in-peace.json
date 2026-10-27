@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "087f9ad7-e74f-40e2-8102-1ed2925d0418",
+  "name": "Rest in Peace",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "When this enchantment enters, exile all graveyards.\nIf a card or token would be put into a graveyard from anywhere, exile it instead.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "exileGraveyards",
+          "players": "all"
+        }
+      ]
+    },
+    {
+      "kind": "exileGraveyardMoves"
+    }
+  ]
+}

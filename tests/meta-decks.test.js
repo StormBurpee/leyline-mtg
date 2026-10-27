@@ -83,7 +83,7 @@ test('the exact tournament Rakdos main deck is fully executable after its blocke
 });
 
 test('Boros Burn and the Cryomancer Izzet variant are complete executable tournament presets', () => {
-  for (const id of ['meta-boros-burn', 'meta-izzet-cryomancer']) {
+  for (const id of ['meta-boros-burn', 'meta-izzet-cryomancer', 'meta-izzet-spellementals']) {
     const deck = META_DECKS[id];
     assert.deepEqual(deckProblems(deck), []);
     const cards = Object.entries(deck.cards).flatMap(([name, count]) => Array(count).fill(name));
@@ -92,4 +92,14 @@ test('Boros Burn and the Cryomancer Izzet variant are complete executable tourna
     const { document } = parseHTML(deckRoom({ ...ui, deck: id }, {}));
     assert.equal(document.querySelector('[data-action="start"]').hasAttribute('disabled'), false);
   }
+});
+
+// Release gate: never ship a source-exact preset with unsupported board cards.
+test('every tournament main deck and sideboard card has an executable definition', () => {
+  const missing = [];
+  for (const [id, deck] of Object.entries(META_DECKS))
+    for (const zone of ['cards', 'sideboard'])
+      for (const name of Object.keys(deck[zone]))
+        if (!CARDS[name]) missing.push(`${id} ${zone}: ${name}`);
+  assert.deepEqual(missing, []);
 });

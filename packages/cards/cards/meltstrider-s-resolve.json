@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6f9bc0c6-1792-4771-a839-95a22d9c699a",
+  "name": "Meltstrider's Resolve",
+  "characteristics": {
+    "types": ["enchantment"],
+    "subtypes": ["Aura"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "supertypes": []
+  },
+  "rulesText": "Enchant creature you control\nWhen this Aura enters, enchanted creature fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)\nEnchanted creature gets +0/+2 and can't be blocked by more than one creature.",
+  "abilities": [
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 0,
+      "toughness": 2,
+      "maxBlockers": 1
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "victim",
+          "min": 0,
+          "max": 1,
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "effects": [
+        {
+          "op": "fightAttached",
+          "target": "target",
+          "targetGroup": "victim"
+        }
+      ]
+    }
+  ]
+}

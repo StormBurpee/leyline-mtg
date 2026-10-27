@@ -530,3 +530,28 @@
     transform: rotate(12deg);
   }
 }
+
+/* Card-sized allocation controls stay comfortably tappable on touch screens. */
+.choice-distribution-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.choice-distribution-control label {
+  display: grid;
+  gap: 4px;
+  text-align: center;
+}
+.choice-distribution-control input {
+  width: 100%;
+  max-width: 110px;
+  min-height: 44px;
+  font-size: 16px;
+  text-align: center;
+}
+.choice-distribution-control .btn {
+  min-width: 44px;
+  min-height: 44px;
+}

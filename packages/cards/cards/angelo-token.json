@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/angelo",
+  "name": "Angelo",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dog"],
+    "colors": ["G", "W"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "",
+  "abilities": []
+}

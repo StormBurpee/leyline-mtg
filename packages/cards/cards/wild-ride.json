@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "61978202-538b-4f92-acfc-e95f4a6ce466",
+  "name": "Wild Ride",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Target creature gets +3/+0 and gains haste until end of turn.\nHarmonize {4}{R} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 3,
+          "toughness": 0,
+          "keywords": ["haste"],
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "harmonize",
+      "cost": "{4}{R}"
+    }
+  ]
+}

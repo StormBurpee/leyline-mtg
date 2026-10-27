@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "33e3793c-098f-4897-88f3-9f9ce9081e0f",
+  "name": "Pompous Battlemage // Improvised Act",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Sorcerer"],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Prowess\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "use": "prowess"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Pompous Battlemage",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/improvised-act",
+        "name": "Improvised Act",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["R"],
+          "manaCost": "{R}"
+        },
+        "rulesText": "You may discard a card. If you do, draw a card.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "optionalDiscardDraw"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

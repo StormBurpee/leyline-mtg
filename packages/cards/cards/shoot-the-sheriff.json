@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "180d6528-c524-4bb8-8a72-b3775cd2c177",
+  "name": "Shoot the Sheriff",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Destroy target non-outlaw creature. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Everyone else is fair game.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "not": {
+                "any": [
+                  {
+                    "subtype": "Assassin"
+                  },
+                  {
+                    "subtype": "Mercenary"
+                  },
+                  {
+                    "subtype": "Pirate"
+                  },
+                  {
+                    "subtype": "Rogue"
+                  },
+                  {
+                    "subtype": "Warlock"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

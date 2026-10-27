@@ -1,3 +1,4 @@
+import { canGainLife } from './effects.js';
 import { manaValue } from './mana-value.js';
 import { subtypesOf } from './creature-types.js';
 import { predictedEffects } from './conditional-effects.js';
@@ -23,9 +24,9 @@ import {
   permanentValue,
 } from './combat-policy.js';
 import { orderLifePayoffs, acceptLifePayoff } from './combat-payoffs.js';
-import { trickScore } from './trick-policy.js';
+import { trickScore, combatRestrictionScore } from './trick-policy.js';
 import { chooseLandAction } from './development-policy.js';
-import { chooseDiscards, chooseLibraryOrder } from './hand-policy.js';
+import { chooseDiscards, chooseLibraryOrder, chooseLibrarySelection } from './hand-policy.js';
 import { chooseSequence } from './sequence-policy.js';
 import { choosePlannedAttacks } from './attack-plan-policy.js';
 import { planPayment } from './mana.js';
@@ -41,6 +42,11 @@ import {
   opponent,
   stats,
 } from './model.js';
+// Estimate private-library selection using only public counts, never unknown faces.
+function selectionYield(s, p, effect, source) {
+  const e = effectValues(s, effect, { controller: p, source });
+  return Math.min(e.count, e.selectCount ?? 1, libraryCount(s, p));
+}
 function groupedSpellScore(s, p, action, card) {
   const adjusted = new Map();
   let tempo = 0;
@@ -59,9 +65,25 @@ function groupedSpellScore(s, p, action, card) {
       source: card.source ?? { id: action.card, incarnation: s.objects[action.card]?.incarnation },
     });
     const targets = action.targets[effect.targetGroup] ?? [];
+    if (effect.op === 'counterAbility') {
+      for (const target of targets) {
+        const entry = s.stack.find((e) => e.id === target.id && e.kind === 'ability');
+        if (entry && !entry.uncounterable)
+          tempo += (entry.controller === p ? -1 : 1) * (5 + (effect.removeSourceAbilities ? 3 : 0));
+      }
+    }
+    if (effect.op === 'removeAbilities') {
+      for (const target of targets) {
+        const object = s.objects[target.id];
+        if (object) tempo += (object.controller === p ? -1 : 1) * (2 + keywords(s, object).length);
+      }
+    }
     if (effect.op === 'draw' && effect.player !== 'opponent') tempo += effect.count * 3;
+    if (effect.op === 'lookChooseHand' && !['opponent', 'target'].includes(effect.player))
+      tempo += selectionYield(s, p, effect, s.objects[action.card]) * 3;
     if (effect.op === 'token') tempo += effect.count * 2;
-    if (effect.op === 'gainLife' && effect.player !== 'opponent') tempo += effect.amount * 0.25;
+    if (effect.op === 'gainLife' && canGainLife(s) && effect.player !== 'opponent')
+      tempo += effect.amount * 0.25;
     if (['bounce', 'moveTarget', 'exileUntilSourceLeaves'].includes(effect.op)) {
       for (const t of targets) {
         const d = data(t);
@@ -82,6 +104,17 @@ function groupedSpellScore(s, p, action, card) {
           (d.object.controller === p ? -1 : 1) *
           ((d.object.stunCounters ?? 0) > 0 ? 0.5 : 2 + value(s, d.object) * 0.4);
       }
+    }
+    if (effect.op === 'distributedCounters') {
+      for (const t of targets) {
+        const d = data(t),
+          amount = action.distribution?.[t.id] ?? 0;
+        if (!d) continue;
+        tempo += (d.object.controller === p ? 1 : -1) * amount * 1.5;
+        d.power += amount;
+        d.toughness += amount;
+      }
+      if (card.adventureCast) tempo += 1;
     }
     if (effect.op === 'modify' || effect.op === 'counterOn') {
       for (const t of targets) {
@@ -131,9 +164,14 @@ function groupedSpellScore(s, p, action, card) {
   return score;
 }
 
-function definition(s, o, x = o.zone === 'stack' ? (o.chosenX ?? 0) : 0) {
+function definition(s, o, x = o.zone === 'stack' ? (o.chosenX ?? 0) : 0, additionalCost = null) {
   const d = rawDefinition(s, o),
-    entry = { controller: o.controller, source: { id: o.id, incarnation: o.incarnation }, x };
+    entry = {
+      controller: o.controller,
+      source: { id: o.id, incarnation: o.incarnation },
+      x,
+      additionalCost,
+    };
   const effects = (list) => (list ? predictedEffects(s, list, entry) : list);
   const activeAttached = (d.conditionalBonuses ?? []).filter(
     (b) => b.affects === 'attached' && meetsCondition(s, o.controller, b.condition, [], o),
@@ -194,26 +232,114 @@ export function chooseBotCommand(s, p) {
   if (c) {
     if (c.player !== p) return null;
     switch (c.kind) {
+      case 'removeCounter': {
+        const canUseTrigger =
+          targetPlans(
+            s,
+            [{ id: 'reflexive', selector: c.reflexive.selector, min: 1, max: 1 }],
+            p,
+            1,
+            c.source,
+          ).length > 0;
+        return {
+          type: 'chooseCounter',
+          player: p,
+          counter: c.counters.includes('stun')
+            ? 'stun'
+            : !canUseTrigger
+              ? null
+              : c.counters.includes('hexproof')
+                ? 'hexproof'
+                : (c.counters[0] ?? null),
+        };
+      }
+      case 'behold':
+        return {
+          type: 'chooseResolutionCard',
+          player: p,
+          card: c.cards.find((id) => s.objects[id].zone === 'battlefield') ?? c.cards[0] ?? null,
+        };
+      case 'castExiled': {
+        if (s.players[opponent(p)].life <= c.amount)
+          return { type: 'declineCastExiled', player: p };
+        const casts = legalActions(s, p).filter((a) => a.type === 'cast' && actionSafe(s, p, a));
+        casts.sort((a, b) => {
+          const score = (a) =>
+            a.targets
+              ? groupedSpellScore(
+                  s,
+                  p,
+                  a,
+                  castingProfile(
+                    s,
+                    p,
+                    s.objects[a.card],
+                    a.mode,
+                    flattenTargets(a.targets),
+                    undefined,
+                    a.x,
+                  ),
+                )
+              : a.target?.kind === 'player'
+                ? a.target.id === opponent(p)
+                  ? 4
+                  : -4
+                : a.target?.kind === 'object'
+                  ? s.objects[a.target.id]?.controller === opponent(p)
+                    ? 3
+                    : 0
+                  : 2;
+          return score(b) - score(a);
+        });
+        return { ...(casts[0] ?? { type: 'declineCastExiled' }), player: p };
+      }
+      case 'manaColor': {
+        const need = { W: 0, U: 0, B: 0, R: 0, G: 0 };
+        for (const id of s.players[p].hand)
+          for (const color of Object.keys(need))
+            need[color] += definition(s, s.objects[id]).cost?.[color] ?? 0;
+        const color = Object.keys(need).sort((a, b) => need[b] - need[a])[0];
+        return { type: 'chooseManaColor', player: p, color };
+      }
       case 'exilePlay':
       case 'bindingNegotiation':
       case 'revealDiscard':
       case 'exileToGraveyard': {
-        const candidates = c.cards.filter(
-          (id) =>
-            !['bindingNegotiation', 'revealDiscard'].includes(c.kind) ||
-            definition(s, s.objects[id]).type !== 'land',
+        const candidates = c.cards.filter((id) =>
+          c.kind === 'revealDiscard'
+            ? c.eligibleCards.includes(id)
+            : c.kind !== 'bindingNegotiation' || definition(s, s.objects[id]).type !== 'land',
         );
         candidates.sort((a, b) => value(s, s.objects[b]) - value(s, s.objects[a]));
         return { type: 'chooseResolutionCard', player: p, card: candidates[0] ?? null };
       }
       case 'triggerTargets': {
-        const plans = targetPlans(s, c.entry.targetGroups, p);
+        const plans = targetPlans(
+          s,
+          c.entry.targetGroups,
+          p,
+          256,
+          c.entry.targetingSource ?? c.entry.source,
+        );
         plans.sort(
           (a, b) =>
             groupedSpellScore(s, p, { targets: b }, c.entry) -
             groupedSpellScore(s, p, { targets: a }, c.entry),
         );
         return { type: 'chooseTriggerTargets', player: p, targets: plans[0] ?? {} };
+      }
+      case 'landType': {
+        const mapping = { Plains: 'W', Island: 'U', Swamp: 'B', Mountain: 'R', Forest: 'G' };
+        const score = (type) =>
+          s.players[p].hand.reduce(
+            (n, id) => n + (definition(s, s.objects[id]).cost?.[mapping[type]] ?? 0),
+            0,
+          );
+        return {
+          type: 'chooseLandType',
+          player: p,
+          landType: [...c.types].sort((a, b) => score(b) - score(a))[0],
+        };
       }
       case 'entryLife':
         return {
@@ -298,8 +424,31 @@ export function chooseBotCommand(s, p) {
         return {
           type: 'payCost',
           player: p,
-          pay: c.payable && (c.cost.life ?? 0) < s.players[p].life,
+          pay:
+            c.payable &&
+            !s.stack.find((entry) => entry.id === c.stackId)?.uncounterable &&
+            (c.cost.life ?? 0) + (planPayment(s, p, c.cost.mana ?? {})?.life ?? 0) <
+              s.players[p].life,
         };
+      case 'landName': {
+        const candidates = Object.values(s.objects).filter(
+          (o) =>
+            o.zone === 'battlefield' &&
+            o.controller !== p &&
+            definition(s, o).type === 'land' &&
+            definition(s, o).activated?.length,
+        );
+        candidates.sort(
+          (a, b) =>
+            (definition(s, b).activated?.length ?? 0) - (definition(s, a).activated?.length ?? 0) ||
+            a.name.localeCompare(b.name),
+        );
+        return {
+          type: 'chooseLandName',
+          player: p,
+          name: candidates[0]?.name ?? s.choice.names[0],
+        };
+      }
       case 'librarySearch':
         return { type: 'searchLibrary', player: p, cards: chooseSearchCards(s, p) };
       case 'libraryOrder': {
@@ -309,7 +458,7 @@ export function chooseBotCommand(s, p) {
           ),
         );
         let rest =
-          c.action === 'surveil' && canReanimate
+          ['surveil', 'explore'].includes(c.action) && canReanimate
             ? c.cards.filter((id) => {
                 const d = definition(s, s.objects[id]);
                 return d.type === 'creature' && manaValue(d) >= 5;
@@ -317,13 +466,13 @@ export function chooseBotCommand(s, p) {
             : [];
         let ordered = chooseLibraryOrder(s, p, rest);
         if (c.action === 'lookChooseHand') {
-          const ranked = [...ordered.top, ...ordered.rest];
-          ordered = { top: ranked.slice(0, 1), rest: ranked.slice(1) };
+          const count = c.selectCount ?? Math.min(1, c.cards.length);
+          ordered = chooseLibrarySelection(s, p, count);
         }
-        if (c.action === 'surveil') {
+        if (['surveil', 'explore'].includes(c.action)) {
           const entry = s.resolving.entry;
           const remaining = predictedEffects(s, entry.effects.slice(s.resolving.index), entry);
-          const draws = drawsFor(remaining, entry.controller, entry.target, p);
+          const draws = drawsFor(remaining, entry.controller, entry.target, p, s);
           rest = ordered.rest.slice(0, Math.max(0, libraryCount(s, p) - draws));
           ordered = {
             top: [...ordered.top, ...ordered.rest.filter((id) => !rest.includes(id))],
@@ -345,6 +494,8 @@ export function chooseBotCommand(s, p) {
             .slice(0, c.count),
         };
       case 'discardEffect':
+        if (c.optional && libraryCount(s, p) === 0)
+          return { type: 'discardEffect', player: p, cards: [] };
       case 'bottom':
       case 'discard': {
         const cards = chooseDiscards(s, p, c.count);
@@ -389,7 +540,12 @@ export function chooseBotCommand(s, p) {
               (controller === (harmful && !drawsForTarget ? 1 - p : p) ? 10 : 0) +
               (target.kind === 'object'
                 ? value(s, s.objects[target.id]) +
-                  (untapsTarget ? (s.objects[target.id].tapped ? 12 : -12) : 0)
+                  (untapsTarget ? (s.objects[target.id].tapped ? 12 : -12) : 0) +
+                  (c.entry.effects.some((e) => e.op === 'earthbend')
+                    ? definition(s, s.objects[target.id]).types?.includes('creature')
+                      ? -stats(s, s.objects[target.id]).power
+                      : 10
+                    : 0)
                 : 0)
             );
           };
@@ -480,6 +636,75 @@ export function chooseBotCommand(s, p) {
     if (setup) return { ...setup, player: p };
     return { ...land, player: p };
   }
+  const ninjutsu = actions
+    .filter((a) => a.type === 'ninjutsu')
+    .filter(
+      (a) =>
+        !s.stack.some(
+          (e) => e.source?.id === a.card && e.effects?.some((f) => f.op === 'ninjutsuEnter'),
+        ),
+    )
+    .map((a) => {
+      const attacker = s.objects[a.attacker.id];
+      const form = definition(s, s.objects[a.card]).turnLoyaltyCreature;
+      const threatened = s.stack.some((e) => e.controller !== p && e.target?.id === attacker.id);
+      // Prefer converting small evasive bodies, or saving a threatened attacker.
+      // After damage there is no immediate damage opportunity to sacrifice.
+      const damageRemaining = ['blockers', 'firstDamage'].includes(s.step);
+      return {
+        a,
+        score:
+          (threatened ? 15 : 0) +
+          5 -
+          value(s, attacker) / 3 +
+          (damageRemaining ? (form?.power ?? 0) - stats(s, attacker).power : 0),
+      };
+    })
+    .sort((a, b) => b.score - a.score)[0];
+  if (ninjutsu?.score > 0) return { ...ninjutsu.a, player: p };
+  const loyalty = actions
+    .filter(
+      (a) =>
+        a.type === 'activate' &&
+        definition(s, s.objects[a.card]).activated[a.ability].loyalty !== undefined,
+    )
+    .map((a) => {
+      const ability = definition(s, s.objects[a.card]).activated[a.ability];
+      let score = 0;
+      for (const e of ability.effects) {
+        if (e.op === 'castDamageEmblem') score += 20;
+        if (e.op === 'anthemEmblem')
+          score +=
+            4 + controlled(s, p).filter((o) => definition(s, o).subtypes.includes('Ninja')).length;
+        if (
+          e.op === 'conditional' &&
+          e.condition?.kind === 'opponentLostLifeThisTurn' &&
+          s.players[opponent(p)].lifeLostTurn === s.turn
+        )
+          score += 4;
+        if (e.op === 'stunOn' && a.target?.kind === 'object') {
+          const target = s.objects[a.target.id];
+          if (target.controller !== p)
+            score += 5 + Math.min(4, value(s, target) / 3) - (target.stunCounters ?? 0);
+          else score -= 100;
+        }
+        if (e.op === 'impulseCastOrDamage')
+          score += s.players[opponent(p)].life <= e.amount ? 100 : 6;
+        if (e.op === 'draw' || e.op === 'surveil' || e.op === 'scry') score += 3;
+        if (e.op === 'damage' && a.target?.kind === 'object') {
+          const target = s.objects[a.target.id];
+          if (
+            target.controller !== p &&
+            !hasKeyword(s, target, 'indestructible') &&
+            stats(s, target).toughness - target.damage <= e.amount
+          )
+            score += 10 + value(s, target);
+        }
+      }
+      return { a, score };
+    })
+    .sort((a, b) => b.score - a.score)[0];
+  if (loyalty?.score > 0) return { ...loyalty.a, player: p };
   // Sacrifice is irreversible: preserve development pieces unless trading up,
   // responding to removal, or converting spare resources into cards.
   const sacrifices = actions
@@ -541,6 +766,13 @@ export function chooseBotCommand(s, p) {
               : s.players[p].hand.length < 4
                 ? 4
                 : 0;
+      }
+      const selection = effect.find((e) => e.op === 'lookChooseHand');
+      if (selection && !['opponent', 'target'].includes(selection.player)) {
+        const gained = selectionYield(s, p, selection, source);
+        score = gained
+          ? Math.max(score, gained * 3 - (d.activated[a.ability].cost?.discard ?? 0) * 2)
+          : -100;
       }
       const search = effect.find((e) => e.op === 'searchLibrary');
       if (search && libraryCount(s, p) > 0) {
@@ -615,6 +847,13 @@ export function chooseBotCommand(s, p) {
   const ability = actions.find((action) => {
     if (action.type !== 'activate' || action.targets) return false;
     const activated = definition(s, s.objects[action.card]).activated[action.ability];
+    if (activated.effects.some((e) => e.op === 'earthbend')) {
+      const target = s.objects[action.target?.id];
+      if (!target || target.controller !== p) return false;
+      const amount = activated.effects.find((e) => e.op === 'earthbend').amount;
+      const existing = stats(s, target);
+      return !definition(s, target).types?.includes('creature') || amount > existing.power;
+    }
     if (activated.effects.some((e) => e.op === 'animateLand')) {
       const source = s.objects[action.card];
       const plan = planPayment(s, p, activated.cost.mana ?? {});
@@ -631,6 +870,11 @@ export function chooseBotCommand(s, p) {
           (s.active !== p && s.step === 'attackers' && s.combat.attackers.length > 0))
       );
     }
+    if (activated.effects.some((effect) => effect.op === 'explore'))
+      return (
+        activated.effects.every((effect) => effect.op === 'explore') &&
+        (action.target ? s.objects[action.target.id]?.controller === p : true)
+      );
     if (activated.cost.sacrificeSelf || (activated.cost.tap && keepBlocker(action.card)))
       return false;
     if (
@@ -660,8 +904,16 @@ export function chooseBotCommand(s, p) {
         return target.controller !== p && !target.tapped;
       return false;
     }
+    const selection = activated.effects.find((effect) => effect.op === 'lookChooseHand');
+    if (selection)
+      return (
+        !['opponent', 'target'].includes(selection.player) &&
+        selectionYield(s, p, selection, s.objects[action.card]) > 0
+      );
     if (activated.effects.some((effect) => effect.op === 'untap' && effect.subject === 'source'))
       return !!s.objects[action.card].tapped;
+    if (activated.effects.some((effect) => effect.op === 'combatRestriction'))
+      return combatRestrictionScore(s, p, action) > 0;
     if (activated.effects.some((effect) => effect.op === 'modify'))
       return trickScore(s, p, action) > 0;
     return action.target?.kind === 'player' ? action.target.id !== p : !action.target;
@@ -676,7 +928,7 @@ export function chooseBotCommand(s, p) {
         s.objects[a.card],
         a.mode,
         a.targets ? flattenTargets(a.targets) : a.target,
-        definition(s, s.objects[a.card], a.x),
+        definition(s, s.objects[a.card], a.x, a.additionalCost),
         a.x,
       );
       const d = { ...profile };
@@ -689,7 +941,8 @@ export function chooseBotCommand(s, p) {
       if (valuedEffects) d.effects = valuedEffects;
       let score = -100;
       if (d.targetGroups) return { a, score: groupedSpellScore(s, p, a, d) };
-      if (d.type === 'creature' || d.static || d.mana) score = 5 + manaValue(d);
+      if (d.type === 'creature' || d.type === 'planeswalker' || d.static || d.mana)
+        score = 5 + manaValue(d);
       if (d.type === 'creature') {
         // Printed mana value is a cost, not the amount of board presence gained.
         // Compare actual bodies/abilities; include known cantrip ETBs and mana
@@ -702,6 +955,10 @@ export function chooseBotCommand(s, p) {
         if (d.mana && controlled(s, p).filter((o) => definition(s, o).mana).length < 5) score += 3;
         if (resolutionRisk(s, p, d.etb ?? [], a.target)) score = -100;
       }
+      // Sagas are developing permanents, not inert enchantments. Chapter
+      // choices still use the same public-information trigger target policies.
+      const chapters = (d.triggers ?? []).filter((t) => t.event?.event === 'chapter');
+      if (chapters.length) score = Math.max(score, 5 + chapters.length);
       if (d.attachmentBonus)
         score = controlled(s, p).some((o) => definition(s, o).type === 'creature')
           ? 4 + d.attachmentBonus.power + d.attachmentBonus.toughness
@@ -710,7 +967,7 @@ export function chooseBotCommand(s, p) {
         score +=
           controlled(s, p).filter((o) => definition(s, o).type === 'creature').length *
           (d.static.power + d.static.toughness);
-      if (d.effects?.some((e) => e.op === 'token')) score = 6;
+      if (d.effects?.some((e) => e.op === 'token' && e.player !== 'targetController')) score = 6;
       const search = d.effects?.find((e) => e.op === 'searchLibrary');
       const searchAbility = d.activated?.some((a) =>
         a.effects.some((e) => e.op === 'searchLibrary'),
@@ -759,6 +1016,17 @@ export function chooseBotCommand(s, p) {
         else if (movement.destination === 'exile')
           score = target.controller !== p ? 8 + value(s, target) : -100;
       }
+      const selection = d.effects?.find((effect) => effect.op === 'lookChooseHand');
+      if (selection) {
+        const helpful =
+          selection.player !== 'opponent' && (selection.player !== 'target' || a.target?.id === p);
+        const gained = selectionYield(s, p, selection, s.objects[a.card]);
+        score = helpful && gained ? Math.max(score, 2 + gained * 3) : -100;
+      }
+      if (d.effects?.some((e) => e.op === 'explore') && target?.controller === p)
+        score = Math.max(score, 3 + value(s, target) * 0.2);
+      if (d.effects?.some((e) => e.op === 'optionalDiscardDraw'))
+        score = s.players[p].hand.length > 0 && libraryCount(s, p) > 0 ? 4 : -1;
       const drawEffect = d.effects?.find((effect) => effect.op === 'draw');
       if (drawEffect?.player === 'target' && a.target?.id !== p) score = -50;
       const discardEffect = d.effects?.find((effect) => effect.op === 'discard');
@@ -789,7 +1057,10 @@ export function chooseBotCommand(s, p) {
       }
       if (d.effects?.some((e) => e.op === 'counter')) {
         const entry = s.stack.find((e) => e.id === a.target.id);
-        if (entry?.controller !== p) score = 12;
+        if (entry?.controller !== p) {
+          const counter = d.effects.find((e) => e.op === 'counter');
+          score = counter.unlessPay && planPayment(s, entry.controller, counter.unlessPay) ? 3 : 12;
+        }
       }
       if (
         target &&
@@ -819,6 +1090,8 @@ export function chooseBotCommand(s, p) {
       if (d.aura === 'pacifism' && target && isPacified(s, target)) score = -100;
       if (d.effects?.some((e) => e.op === 'modify') && target?.controller === p)
         score = Math.max(score, trickScore(s, p, a));
+      if (d.effects?.some((e) => e.op === 'combatRestriction'))
+        score = Math.max(score, combatRestrictionScore(s, p, a));
       // Do not pile redundant damage/removal on the same target while it waits.
       if (
         a.target &&
@@ -840,7 +1113,19 @@ export function chooseBotCommand(s, p) {
     })
     .map(({ a, score }) => ({
       a,
-      score: score - (a.sacrifice ? permanentValue(s, s.objects[a.sacrifice.id]) : 0),
+      score:
+        score -
+        (a.sacrifice ? permanentValue(s, s.objects[a.sacrifice.id]) : 0) -
+        (a.additionalCost?.life ? (s.players[p].life <= 5 ? 20 : 1.5) : 0) -
+        (a.additionalCost?.discard
+          ? value(s, s.objects[a.additionalCost.discard.id]) * 0.5 + 1
+          : 0) -
+        (a.additionalCost?.blight
+          ? stats(s, s.objects[a.additionalCost.blight.id]).toughness <= 1
+            ? permanentValue(s, s.objects[a.additionalCost.blight.id]) + 2
+            : 0.5
+          : 0) -
+        (a.additionalCost?.teamwork?.length ?? 0) * 0.5,
     }))
     .sort((a, b) => b.score - a.score);
   const sequence = chooseSequence(s, p, casts);

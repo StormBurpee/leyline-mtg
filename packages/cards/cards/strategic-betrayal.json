@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "95617742-548d-464a-bb89-a858ffa9018f",
+  "name": "Strategic Betrayal",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Target opponent exiles a creature they control and their graveyard.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "chooseExile",
+          "count": 1,
+          "player": "target",
+          "where": {
+            "type": "creature"
+          }
+        },
+        {
+          "op": "exileGraveyards",
+          "players": "target"
+        }
+      ]
+    }
+  ]
+}

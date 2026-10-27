@@ -1,0 +1,83 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a6a62aa3-8edb-4000-8ebd-15ec4b00eed7",
+  "name": "Floodpits Drowner",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Flash\nVigilance\nWhen this creature enters, tap target creature an opponent controls and put a stun counter on it.\n{1}{U}, {T}: Shuffle this creature and target creature with a stun counter on it into their owners' libraries.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "opponent"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        },
+        {
+          "op": "addStunCounters",
+          "target": "target",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{U}",
+        "tap": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "stunned": true
+            }
+          ]
+        }
+      },
+      "text": "{1}{U}, {T}: Shuffle this creature and target creature with a stun counter into their owners\u2019 libraries.",
+      "effects": [
+        {
+          "op": "shuffleSourceAndTarget"
+        }
+      ]
+    }
+  ]
+}

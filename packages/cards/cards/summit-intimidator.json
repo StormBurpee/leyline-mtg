@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b772d35a-d365-47ce-b1dd-a2ba574c74ea",
+  "name": "Summit Intimidator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Yeti"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Reach\nWhen this creature enters, target creature can't block this turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBlock",
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

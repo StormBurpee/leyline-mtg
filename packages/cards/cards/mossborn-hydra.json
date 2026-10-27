@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "84122d81-9634-4d3f-85a5-f6cf4303691a",
+  "name": "Mossborn Hydra",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Hydra"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 0,
+    "toughness": 0
+  },
+  "rulesText": "Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nThis creature enters with a +1/+1 counter on it.\nLandfall \u2014 Whenever a land you control enters, double the number of +1/+1 counters on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "entryPlusCounters",
+      "amount": 1
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "doubleCounters",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

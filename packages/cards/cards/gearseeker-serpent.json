@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fdbd8a95-1dc8-4df2-bab0-a93d1941a405",
+  "name": "Gearseeker Serpent",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Serpent"],
+    "colors": ["U"],
+    "manaCost": "{5}{U}{U}",
+    "power": 5,
+    "toughness": 6
+  },
+  "rulesText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\n{5}{U}: This creature can't be blocked this turn.",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "you",
+        "where": {
+          "type": "artifact"
+        }
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{5}{U}"
+      },
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "source",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

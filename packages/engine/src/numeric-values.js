@@ -1,18 +1,31 @@
 import { spellsCastCount } from './spell-history.js';
 import { manaValue } from './mana-value.js';
-import { definition, isAttacking, isBlocking, requireRule } from './model.js';
+import { definition, isAttacking, isBlocking, stats, requireRule } from './model.js';
 import { matchesFilter } from './selectors.js';
 /** Resolve public-state values once per instruction or continuous-characteristic query. */
 export function numericValue(
   state,
   value,
-  { controller, source = null, excludedIds = [], x = 0 } = {},
+  { controller, source = null, excludedIds = [], x = 0, sourceStats = null, effect = false } = {},
 ) {
   if (typeof value === 'number') return value;
   let result = 0;
   const players =
     value.player === 'all' ? [0, 1] : [value.player === 'opponent' ? 1 - controller : controller];
   switch (value.kind) {
+    // CR 608.2h / 208.3: read this incarnation's effective characteristics,
+    // otherwise its last public-zone snapshot, never a newly returned object.
+    case 'sourceStat': {
+      requireRule(effect, 'VALUE_CONTEXT', 'Source statistics require a resolving effect.');
+      const object = state.objects[source?.id];
+      const current =
+        object &&
+        object.incarnation === source?.incarnation &&
+        !object.hidden &&
+        ['battlefield', 'stack', 'graveyard', 'exile'].includes(object.zone);
+      result = (current ? stats(state, object) : sourceStats)?.[value.stat] ?? 0;
+      break;
+    }
     case 'spellsCast':
       result = spellsCastCount(state, players, value.where, controller);
       break;
@@ -24,13 +37,34 @@ export function numericValue(
       break;
     case 'sum':
       result = value.values.reduce(
-        (n, v) => n + numericValue(state, v, { controller, source, excludedIds, x }),
+        (n, v) =>
+          n + numericValue(state, v, { controller, source, excludedIds, x, sourceStats, effect }),
         0,
+      );
+      break;
+    case 'floorDivide':
+      result = Math.floor(
+        numericValue(state, value.value, {
+          controller,
+          source,
+          excludedIds,
+          x,
+          sourceStats,
+          effect,
+        }) / value.divisor,
       );
       break;
     case 'scale':
       result =
-        value.factor * numericValue(state, value.value, { controller, source, excludedIds, x });
+        value.factor *
+        numericValue(state, value.value, {
+          controller,
+          source,
+          excludedIds,
+          x,
+          sourceStats,
+          effect,
+        });
       break;
     case 'maxManaValue':
       result = Math.max(
@@ -48,6 +82,7 @@ export function numericValue(
                   owner: o.owner,
                   token: o.token,
                   tapped: o.tapped,
+                  stunCounters: o.stunCounters ?? 0,
                   attacking: isAttacking(state, o),
                   blocking: isBlocking(state, o),
                   manaValue: manaValue(definition(state, o)),
@@ -90,6 +125,7 @@ export function numericValue(
             owner: o.owner,
             token: o.token,
             tapped: o.tapped,
+            stunCounters: o.stunCounters ?? 0,
             attacking: isAttacking(state, o),
             blocking: isBlocking(state, o),
             manaValue: manaValue(d),
@@ -112,13 +148,23 @@ export function numericValue(
 export function effectValues(state, effect, entry) {
   if (effect.op === 'drawEventAmount')
     return { op: 'draw', count: Math.max(0, entry.eventAmount ?? 0) };
-  const context = { controller: entry.controller, source: entry.source, x: entry.x ?? 0 };
+  if (effect.op === 'damageEachPlayer') return effect;
+  const context = {
+    controller:
+      effect.op === 'damageEventPlayer'
+        ? (entry.eventSource?.controller ?? entry.controller)
+        : entry.controller,
+    source: entry.source,
+    x: entry.x ?? 0,
+    sourceStats: entry.sourceStats,
+    effect: true,
+  };
   let result = effect;
-  for (const key of ['amount', 'count', 'power', 'toughness'])
+  for (const key of ['amount', 'count', 'selectCount', 'power', 'toughness'])
     if (effect[key] !== null && typeof effect[key] === 'object') {
       if (result === effect) result = { ...effect };
       const value = numericValue(state, effect[key], context);
-      result[key] = ['amount', 'count'].includes(key) ? Math.max(0, value) : value;
+      result[key] = ['amount', 'count', 'selectCount'].includes(key) ? Math.max(0, value) : value;
       if (key === 'count' && ['token', 'mobilize'].includes(effect.op))
         requireRule(
           result[key] <= 1000,
@@ -126,5 +172,11 @@ export function effectValues(state, effect, entry) {
           'A single token instruction is limited to 1000 objects.',
         );
     }
+  if (effect.op === 'lookChooseHand')
+    requireRule(
+      (result.selectCount ?? 1) <= 1000,
+      'VALUE_BUDGET',
+      'Selection is limited to 1000 cards.',
+    );
   return result;
 }

@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "de1ae205-ca5b-4d26-8194-ca85f1406e53",
+  "name": "Ba Sing Se",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control a basic land.\n{T}: Add {G}.\n{2}{G}, {T}: Earthbend 2. Activate only as a sorcery. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "all": [
+            {
+              "type": "land"
+            },
+            {
+              "basic": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{G}",
+        "tap": true
+      },
+      "timing": "sorcery",
+      "text": "Earthbend 2.",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "land"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "earthbend",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

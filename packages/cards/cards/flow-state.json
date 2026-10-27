@@ -1,0 +1,71 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e7194bca-0cf4-4a86-8b84-d2f9219a08b3",
+  "name": "Flow State",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. If there is an instant card and a sorcery card in your graveyard, instead put two of them into your hand and the rest on the bottom of your library in any order.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "all",
+            "conditions": [
+              {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "graveyard",
+                  "player": "you",
+                  "where": {
+                    "type": "instant"
+                  }
+                },
+                "operator": "gte",
+                "right": 1
+              },
+              {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "graveyard",
+                  "player": "you",
+                  "where": {
+                    "type": "sorcery"
+                  }
+                },
+                "operator": "gte",
+                "right": 1
+              }
+            ]
+          },
+          "then": [
+            {
+              "op": "lookChooseHand",
+              "target": "controller",
+              "amount": 3,
+              "selectCount": 2
+            }
+          ],
+          "else": [
+            {
+              "op": "lookChooseHand",
+              "target": "controller",
+              "amount": 3,
+              "selectCount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
