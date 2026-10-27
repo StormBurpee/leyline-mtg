@@ -1,5 +1,5 @@
 {
-  "version": "0.29.0",
+  "version": "0.30.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -426,6 +426,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Basilisk Collar",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Bear Cub",
       "type": "creature",
       "keywords": [],
@@ -627,6 +635,14 @@
       "opcodes": ["loseLife", "gainLife"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Bloodthorn Flail",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 2
     },
     {
       "name": "Blossoming Defense",
@@ -957,6 +973,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Celestial Armor",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["attachEquipment", "modify"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Centaur Courser",
       "type": "creature",
       "keywords": [],
@@ -1120,6 +1144,14 @@
       "opcodes": ["surveil", "draw"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Coral Sword",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["attachEquipment", "modify"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
     },
     {
       "name": "Corrupt Court Official",
@@ -2119,6 +2151,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Fireshrieker",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Fisk Tower",
       "type": "land",
       "keywords": [],
@@ -2547,6 +2587,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gold Pan",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["token", "attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Golgari Guildgate",
       "type": "land",
       "keywords": [],
@@ -2737,6 +2785,14 @@
       "opcodes": ["modify", "scry"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Hard-Won Jitte",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Harrier Strix",
@@ -3041,6 +3097,14 @@
       "keywords": ["flash", "flying"],
       "opcodes": ["draw"],
       "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Illvoi Light Jammer",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["attachEquipment", "modify"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 1
     },
     {
@@ -3522,6 +3586,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Lion Heart",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage", "attachEquipment"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Live or Die",
       "type": "instant",
       "keywords": [],
@@ -3717,6 +3789,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Malamet Scythe",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["attachEquipment"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Malamet War Scribe",
       "type": "creature",
       "keywords": [],
@@ -3823,6 +3903,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Meltstrider's Gear",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Memnite",
       "type": "creature",
       "keywords": [],
@@ -3893,6 +3981,14 @@
       "opcodes": ["destroy"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Meteor Sword",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["destroy", "attachEquipment"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
     },
     {
       "name": "Meticulous Archive",
@@ -5886,6 +5982,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Short Bow",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Shredder's Revenge",
       "type": "sorcery",
       "keywords": [],
@@ -6006,6 +6110,14 @@
       },
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Skateboard",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["tap", "attachEquipment"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
     },
     {
       "name": "Skeleton Archer",
@@ -6301,6 +6413,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Squire's Lightblade",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["attachEquipment", "modify"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Squirrelanoids",
       "type": "creature",
       "keywords": ["deathtouch"],
@@ -6414,6 +6534,14 @@
       ],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Stolen Stark Tech",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["attachEquipment", "modify"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
     },
     {
       "name": "Stony-Voiced Goblins",
@@ -6620,12 +6748,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Swiftfoot Boots",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Swiftwater Cliffs",
       "type": "land",
       "keywords": [],
       "opcodes": ["gainLife"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Sword of Vengeance",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Sylvan Ranger",
@@ -6882,6 +7026,14 @@
       "opcodes": ["untap", "damageOpponent"],
       "triggers": ["controllerCastsInstantOrSorcery"],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Thinking Cap",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 2
     },
     {
       "name": "Thistledown Players",
@@ -7158,6 +7310,14 @@
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Twin Blades",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["attachEquipment", "modify"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
     },
     {
       "name": "Typhoid Rats",
@@ -7441,6 +7601,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Vibranium Energy Daggers",
+      "type": "artifact",
+      "keywords": ["indestructible"],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Vibrant Cityscape",
       "type": "land",
       "keywords": [],
@@ -7655,6 +7823,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Well-Worn Spatula",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["gainLife", "attachEquipment"],
       "triggers": [],
       "activatedAbilities": 1
     },

@@ -8,6 +8,7 @@ import { cardDefinition } from './cards.js';
 import {
   isAttacking,
   isBlocking,
+  legalEquipmentAttachment,
   addObject,
   queueTrigger,
   notifyTriggers,
@@ -363,6 +364,18 @@ export function resolveEffects(s, entry, startIndex = 0) {
             else if (e.op === 'counterAll') object.plusCounters += e.amount;
             else object.tapped = e.op === 'tapAll';
           }
+        break;
+      }
+      case 'attachEquipment': {
+        const source = s.objects[entry.source?.id];
+        if (
+          source?.incarnation === entry.source?.incarnation &&
+          o &&
+          legalEquipmentAttachment(s, source, o)
+        ) {
+          source.attachedTo = ref(o);
+          emit(s, 'attached', { objectId: source.id, target: ref(o) });
+        }
         break;
       }
       case 'wardPayment': {
@@ -825,6 +838,7 @@ export function stateBasedActions(s) {
     return true;
   }
   let speedStarted = false;
+  let detached = false;
   for (const object of battlefield(s)) {
     const player = s.players[object.controller];
     if (!player.speed && definition(s, object).startEngines) {
@@ -843,6 +857,17 @@ export function stateBasedActions(s) {
         (!hasKeyword(s, o, 'indestructible') && (o.damage >= toughness || o.deathtouchDamage))
       )
         toGrave.push(o);
+    }
+    if (d.subtypes.includes('Equipment') && o.attachedTo) {
+      const target = s.objects[o.attachedTo.id];
+      if (
+        !legalEquipmentAttachment(s, o, target) ||
+        target.incarnation !== o.attachedTo.incarnation
+      ) {
+        o.attachedTo = null;
+        detached = true;
+        emit(s, 'detached', { objectId: o.id });
+      }
     }
     if (d.aura) {
       const target = s.objects[o.attachedTo?.id];
@@ -880,7 +905,9 @@ export function stateBasedActions(s) {
     applyStateBasedBatch(
       s,
       toGrave.map((o) => o.id),
-    ) || speedStarted
+    ) ||
+    speedStarted ||
+    detached
   );
 }
 function applyStateBasedBatch(s, ids) {

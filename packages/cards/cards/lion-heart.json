@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bd4151cc-743a-40f0-9e51-1f67555d9ab3",
+  "name": "Lion Heart",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": [],
+    "manaCost": "{4}"
+  },
+  "rulesText": "When this Equipment enters, it deals 2 damage to any target.\nEquipped creature gets +2/+1.\nEquip {2}",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ],
+      "target": {
+        "scope": "damageable"
+      }
+    },
+    {
+      "kind": "equip",
+      "cost": "{2}"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 2,
+      "toughness": 1
+    }
+  ]
+}

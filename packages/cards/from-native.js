@@ -24,6 +24,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       switch (e.op) {
         case 'impulseChoose':
           return { op: 'impulseChoose', amount: e.count };
+        case 'attachEquipment':
+          return { op: 'attachEquipment', target: 'target' };
         case 'bindingNegotiation':
           return { op: 'bindingNegotiation' };
         case 'addMana':
@@ -213,6 +215,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     if (d.static.kind !== 'anthem') throw new Error('Unsupported continuous rule.');
     abilities.push(structuredClone(d.static));
   }
+  if (d.attachmentBonus)
+    abilities.push({ kind: 'attachmentBonus', ...structuredClone(d.attachmentBonus) });
   if (d.aura) {
     if (d.aura !== 'pacifism') throw new Error('Unsupported aura.');
     abilities.push({

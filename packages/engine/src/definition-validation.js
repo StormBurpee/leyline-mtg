@@ -49,6 +49,7 @@ const FIELDS = new Set([
   'uncounterable',
   'etb',
   'aura',
+  'attachmentBonus',
   'static',
   'triggers',
   'activated',
@@ -133,6 +134,7 @@ function validateEffects(effects, path, target, errors) {
       counter: [],
       bounce: [],
       destroy: [],
+      attachEquipment: [],
       modify: ['subject', 'power', 'toughness', 'keywords'],
       token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords'],
       counterOn: ['subject', 'amount'],
@@ -296,6 +298,7 @@ function validateEffects(effects, path, target, errors) {
         'counter',
         'bounce',
         'destroy',
+        'attachEquipment',
         'modify',
         'moveTarget',
         'untap',
@@ -478,6 +481,19 @@ export function validateDefinition(card) {
   if (card.basic && card.type !== 'land') errors.push(`${name}: only lands can be basic.`);
   if (card.target != null)
     errors.push(...validateTargetSpec(card.target).map((error) => `${name}.target: ${error}`));
+  if (card.attachmentBonus !== undefined) {
+    const b = card.attachmentBonus;
+    if (
+      !plain(b) ||
+      !signed(b.power) ||
+      !signed(b.toughness) ||
+      Object.keys(b).some((k) => !['power', 'toughness', 'keywords'].includes(k)) ||
+      (b.keywords !== undefined &&
+        (!Array.isArray(b.keywords) || b.keywords.some((k) => !KEYWORDS.has(k)))) ||
+      !card.subtypes?.includes('Equipment')
+    )
+      errors.push(`${name}.attachmentBonus: expected a supported Equipment bonus.`);
+  }
   if (
     card.aura !== undefined &&
     (card.aura !== 'pacifism' || card.type !== 'enchantment' || card.target !== 'creature')

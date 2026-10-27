@@ -130,6 +130,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'counterSpell',
           'returnToHand',
           'destroy',
+          'attachEquipment',
           'modify',
           'createToken',
           'addCounters',
@@ -174,6 +175,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         counter: ['target'],
         bounce: ['target'],
         destroy: ['target'],
+        attachEquipment: ['target'],
         modify: ['target', 'power', 'toughness', 'keywords', 'until'],
         token: ['token', 'amount', 'controller', 'tapped', 'temporaryKeywords'],
         counterOn: ['target', 'amount', 'counter'],
@@ -270,7 +272,10 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         if (effect.controller !== undefined) e.controller = effect.controller;
         if (effect.tapped !== undefined) e.tapped = effect.tapped;
       }
-      if (['damage', 'counter', 'bounce', 'destroy'].includes(e.op) && effect.target !== 'target')
+      if (
+        ['damage', 'counter', 'bounce', 'destroy', 'attachEquipment'].includes(e.op) &&
+        effect.target !== 'target'
+      )
         problem(
           'UNSUPPORTED_BINDING',
           `${p}.target`,
@@ -651,6 +656,44 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
               .map((k) => [k, structuredClone(a[k])]),
           ),
         };
+        break;
+      case 'attachmentBonus':
+        fields(a, ['kind', 'power', 'toughness', 'keywords'], path);
+        if (d.attachmentBonus)
+          problem(
+            'MULTIPLE_ATTACHMENT_BONUS',
+            path,
+            'Combine attachment bonuses into one instruction.',
+          );
+        d.attachmentBonus = {
+          power: a.power,
+          toughness: a.toughness,
+          ...(a.keywords ? { keywords: [...a.keywords] } : {}),
+        };
+        break;
+      case 'equip':
+        fields(a, ['kind', 'cost', 'where'], path);
+        if (!d.subtypes.includes('Equipment'))
+          problem('EQUIP_TYPE', path, 'Equip requires Equipment.');
+        (d.activated ??= []).push({
+          cost:
+            typeof a.cost === 'string'
+              ? { mana: mana(a.cost, `${path}.cost`) }
+              : cost(a.cost, `${path}.cost`),
+          timing: 'sorcery',
+          target: {
+            scope: 'permanent',
+            where: {
+              all: [
+                { type: 'creature' },
+                { controller: 'you' },
+                ...(a.where ? [structuredClone(a.where)] : []),
+              ],
+            },
+          },
+          effects: [{ op: 'attachEquipment' }],
+          text: 'Equip',
+        });
         break;
       case 'aura':
         fields(a, ['kind', 'enchant', 'restriction'], path);

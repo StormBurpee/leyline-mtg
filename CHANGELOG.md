@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.30.0 — Equipment foundation
+
+- Add Equip using normal activated abilities, costs, sorcery timing, targeting, stack resolution and zone-incarnation checks. Support typed equip and literal alternative discard costs.
+- Apply equipped power/toughness and keyword bonuses continuously. Equipment survives wearer departures, becomes unattached when illegal, and keeps its own controller.
+- Add 22 complete Standard Equipment cards, including Basilisk Collar, Swiftfoot Boots, Sword of Vengeance, Celestial Armor and Gold Pan. The bot can cast and equip these cards without repetitive re-equip loops.
+- Catalog: 932 cards and 26 tokens. Granted activated/triggered abilities, dynamic Equipment bonuses, living weapon, reconfigure and other unimplemented clauses remain rejected.
+
 ## 0.29.0 — Life-gain triggers
 
 - Implement positive life-gain events, including lifelink batching by damage source. Separate sources trigger separately; split damage from one source triggers once. Zero gain does not trigger.

@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ce5f5ff9-13f7-41eb-ada0-7f73de42acef",
+  "name": "Short Bow",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": [],
+    "manaCost": "{2}"
+  },
+  "rulesText": "Equipped creature gets +1/+1 and has reach and vigilance.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "equip",
+      "cost": "{1}"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 1,
+      "keywords": ["reach", "vigilance"]
+    }
+  ]
+}

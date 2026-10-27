@@ -190,6 +190,7 @@ export function effectTargetCompatible(op, value, effect = null) {
       ['damageable', 'player', 'playerOrPlaneswalker'].includes(spec.scope) ||
       (spec.scope === 'permanent' && impliesCreature(spec.where))
     );
+  if (op === 'attachEquipment') return spec.scope === 'permanent' && impliesCreature(spec.where);
   if (op === 'modify')
     return (
       spec.scope === 'permanent' &&

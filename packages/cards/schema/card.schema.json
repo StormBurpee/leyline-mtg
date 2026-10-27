@@ -1053,6 +1053,19 @@
           },
           "required": ["op"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "attachEquipment"
+            },
+            "target": {
+              "const": "target"
+            }
+          },
+          "required": ["op", "target"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1501,6 +1514,57 @@
             }
           },
           "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "attachmentBonus"
+            },
+            "power": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "toughness": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": ["kind", "power", "toughness"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "equip"
+            },
+            "cost": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                {
+                  "$ref": "#/$defs/cost"
+                }
+              ]
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": ["kind", "cost"],
           "additionalProperties": false
         }
       ]
