@@ -64,10 +64,10 @@ test('cannot choose duplicate mulligan bottoms', () => {
   const id = s.players[0].hand[0];
   assert.equal(dispatch(s, { type: 'bottom', player: 0, cards: [id, id] }).ok, false);
 });
-test('starting player skips first draw; second player does not', () => {
+test('starting player skips the first draw step; second player does not', () => {
   let s = createGame({ mulligan: false });
   s = resolve(s);
-  assert.equal(s.step, 'draw');
+  assert.equal(s.step, 'main1');
   assert.equal(s.players[0].hand.length, 7);
   s.turn = 2;
   s.active = 1;
@@ -411,7 +411,7 @@ test('legacy 0.1 replay envelopes remain readable', () => {
   delete record.schemaVersion;
   delete record.config.catalog;
   const restored = replay(record);
-  assert.equal(restored.version, '0.48.0');
+  assert.equal(restored.version, '0.49.0');
   assert.equal(restored.seed, 17);
 });
 

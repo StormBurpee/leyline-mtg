@@ -1,0 +1,85 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "58b27a79-ba63-45d4-84ee-423ce0d91f6b",
+  "name": "Projektor Inspector",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Detective"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature or another Detective you control enters and whenever a Detective you control is turned face up, you may draw a card. If you do, discard a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "optional": true
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "subtype": "Detective"
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "optional": true
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "faceUp",
+        "controller": "you",
+        "filter": {
+          "subtype": "Detective"
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

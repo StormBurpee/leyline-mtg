@@ -263,6 +263,8 @@ function validateEffects(
           'stunOn',
           'tap',
           'untap',
+          'prepare',
+          'unprepare',
           'moveTarget',
           'exileUntilSourceLeaves',
           'delayedBlink',
@@ -343,6 +345,8 @@ function validateEffects(
       scry: ['count', 'player'],
       surveil: ['count', 'player'],
       explore: ['subject'],
+      prepare: ['subject'],
+      unprepare: ['subject'],
       discard: ['count', 'player'],
       optionalDiscardDraw: [],
       distributedCounters: [],
@@ -393,7 +397,7 @@ function validateEffects(
       untapSearched: [],
       doubleCounters: ['subject', 'where'],
       doublePower: ['subject'],
-      counterOn: ['subject', 'amount'],
+      counterOn: ['subject', 'amount', 'counter'],
       untap: ['subject'],
       tap: ['subject'],
       bounceAll: ['where', 'excludeSource'],
@@ -401,7 +405,7 @@ function validateEffects(
       exileAll: ['where', 'excludeSource', 'player', 'rememberMovedCount'],
       modifyAll: ['where', 'excludeSource', 'power', 'toughness', 'keywords'],
       damageAll: ['where', 'excludeSource', 'amount', 'players'],
-      counterAll: ['where', 'excludeSource', 'amount'],
+      counterAll: ['where', 'excludeSource', 'amount', 'counter'],
       tapAll: ['where', 'excludeSource'],
       untapAll: ['where', 'excludeSource'],
     }[e.op];
@@ -791,13 +795,19 @@ function validateEffects(
     )
       errors.push(`${p}.subject: unsupported binding.`);
     if (
-      ['untap', 'tap'].includes(e.op) &&
+      ['untap', 'tap', 'prepare', 'unprepare'].includes(e.op) &&
       e.subject !== undefined &&
       !['source', 'attached'].includes(e.subject)
     )
       errors.push(
         `${p}.subject: only source, attached permanent or the chosen target is supported.`,
       );
+    if (
+      ['counterOn', 'counterAll'].includes(e.op) &&
+      e.counter !== undefined &&
+      e.counter !== '-1/-1'
+    )
+      errors.push(`${p}.counter: expected -1/-1 or omitted for +1/+1 counters.`);
     if (
       ['counterOn', 'stunOn'].includes(e.op) &&
       e.subject !== undefined &&
@@ -841,6 +851,8 @@ function validateEffects(
         'modify',
         'combatRestriction',
         'moveTarget',
+        'prepare',
+        'unprepare',
         'exileUntilSourceLeaves',
         'delayedBlink',
         'untap',
@@ -977,6 +989,7 @@ export function validateDefinition(card) {
     effects: spellEffects,
     cost: printedCost,
     adventure: nestedAdventure,
+    prepareSpell: nestedPrepareSpell,
     triggers,
     etb,
     entryPlusCounters,
@@ -1849,6 +1862,7 @@ export function validateDefinition(card) {
         if (
           a.loyalty !== undefined &&
           (!hasType(card, 'planeswalker') ||
+            a.zone !== undefined ||
             !signed(a.loyalty) ||
             Math.abs(a.loyalty) > 1000 ||
             Object.keys(a.cost).length)
@@ -1868,10 +1882,9 @@ export function validateDefinition(card) {
           errors.push(`${p}: invalid power-up ability.`);
         if (a.zone !== undefined && a.zone !== 'graveyard')
           errors.push(`${p}.zone: unsupported activation zone.`);
-        if (a.zone === 'graveyard' && (a.cost.tap || a.cost.sacrificeSelf || !a.cost.exileSelf))
-          errors.push(
-            `${p}: graveyard abilities require exileSelf and cannot tap or sacrifice their source.`,
-          );
+        // CR 113.6m / 602.1a: the zone restriction is not an additional exile cost.
+        if (a.zone === 'graveyard' && (a.cost.tap || a.cost.sacrificeSelf))
+          errors.push(`${p}: graveyard abilities cannot tap or sacrifice their source.`);
         if (a.cost.exileSelf && a.zone !== 'graveyard')
           errors.push(`${p}: exileSelf requires a graveyard ability.`);
         if (a.condition !== undefined) errors.push(...validateCondition(a.condition));

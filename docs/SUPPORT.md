@@ -2,7 +2,11 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.48)
+## Latest coverage (v0.49)
+
+Preparation can change through explicit resolving effects and source-prepared conditions; prepared spell X is independently scoped. Graveyard abilities can return their source without a fictitious exile cost. Explicit -1/-1 counters retain normal state-based cancellation and death handling. New games skip the starting player's whole first draw step, while older replay rule revisions preserve their original command timing.
+
+## Previous coverage (v0.48)
 
 The dated expansion sections below extend the original kernel scope. The catalog now includes actual draw events with per-turn counts, actual tap transitions, bounded next-end-step blink returns, and chosen-X entry counters. Aggregate draw/tap events, first-tap-per-creature predicates and general mass-blink return batching remain unsupported. These features do not imply support for every card using them.
 

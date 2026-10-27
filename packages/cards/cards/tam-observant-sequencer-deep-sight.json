@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "702e871d-90d8-4468-8f69-5ae42af2c9d3",
+  "name": "Tam, Observant Sequencer // Deep Sight",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Gorgon", "Wizard"],
+    "colors": ["U", "G"],
+    "manaCost": "{2}{G}{U}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Landfall \u2014 Whenever a land you control enters, Tam becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Tam, Observant Sequencer",
+      "entersPrepared": false,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/deep-sight",
+        "name": "Deep Sight",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["U", "G"],
+          "manaCost": "{G}{U}"
+        },
+        "rulesText": "You draw a card and gain 1 life.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "draw",
+                "target": "controller",
+                "amount": 1
+              },
+              {
+                "op": "gainLife",
+                "target": "controller",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "prepare",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

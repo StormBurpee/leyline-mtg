@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/white-moogle-token",
+  "name": "White Moogle Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Moogle"],
+    "colors": ["W"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 2,
+    "token": true
+  },
+  "rulesText": "Lifelink",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    }
+  ]
+}

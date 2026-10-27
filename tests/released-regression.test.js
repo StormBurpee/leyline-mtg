@@ -10,6 +10,8 @@ test('the frozen policy preserves twenty released v0.5 game traces through the c
   );
   for (const expected of baseline.records) {
     let state = createGame({ seed: expected.seed });
+    // These frozen v0.5 traces use the legacy step sequence and target timing.
+    state.rulesRevision = 1;
     while (state.status !== 'finished' && state.revision < 3000) {
       const r = dispatch(state, chooseBotCommand(state, state.choice?.player ?? state.priority));
       assert.equal(r.ok, true, JSON.stringify(r.error));

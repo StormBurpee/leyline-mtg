@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a66d8dc6-ced4-4b24-b0c2-3557b2a851be",
+  "name": "Vial Smasher, Gleeful Grenadier",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Goblin", "Mercenary"],
+    "colors": ["B", "R"],
+    "manaCost": "{B}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Whenever another outlaw you control enters, Vial Smasher deals 1 damage to target opponent. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "any": [
+            {
+              "subtype": "Assassin"
+            },
+            {
+              "subtype": "Mercenary"
+            },
+            {
+              "subtype": "Pirate"
+            },
+            {
+              "subtype": "Rogue"
+            },
+            {
+              "subtype": "Warlock"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      }
+    }
+  ]
+}

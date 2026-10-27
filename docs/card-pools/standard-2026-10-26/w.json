@@ -92,7 +92,7 @@
   {
     "oracleId": "c1348afe-4dc7-41bb-9d3f-1e8751abd7db",
     "name": "Wanted Griffin",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "021b495d-236f-4274-988d-2dfd7103c9ef",
@@ -117,7 +117,7 @@
   {
     "oracleId": "d9bc6841-9f71-46af-ac1f-a01caee290c1",
     "name": "War Effort",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "a7736614-cdd3-43bd-ab3e-461e3e24ed40",
@@ -447,7 +447,7 @@
   {
     "oracleId": "cb1e1acc-3805-418b-bed1-65838ddb1d62",
     "name": "Whiskerquill Scribe",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "861e427f-cbb4-4ed5-8356-747ac638ac34",
@@ -737,7 +737,7 @@
   {
     "oracleId": "fbb04a21-e513-4317-aac8-fa6df91c3438",
     "name": "Witherbloom, the Balancer",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fddd1c39-bdf8-4aee-897c-666498cc4dd3",
@@ -802,7 +802,7 @@
   {
     "oracleId": "f3ed157f-a09b-405f-aec4-0e7a81d80fc8",
     "name": "Woodwork Prodigy // Soul Tether",
-    "status": "no_exact_forge_match"
+    "status": "curated"
   },
   {
     "oracleId": "51d4f95e-aad2-4e5f-9f15-a68bbdf9ab3e",

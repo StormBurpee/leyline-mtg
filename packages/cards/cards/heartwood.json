@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/heartwood",
+  "name": "Heartwood",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Heartwood"],
+    "colors": ["R", "G"],
+    "manaCost": null,
+    "token": true
+  },
+  "rulesText": "{T}: Add {R} or {G}.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["R", "G"]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "1bf505a7-292e-4642-83b6-8ff41ebe5d51",
+  "name": "Blazing Firesinger // Seething Song",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dwarf", "Bard"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Blazing Firesinger",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:prepare/seething-song",
+        "name": "Seething Song",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["R"],
+          "manaCost": "{2}{R}"
+        },
+        "rulesText": "Add {R}{R}{R}{R}{R}.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "addMana",
+                "mana": "{R}{R}{R}{R}{R}"
+              }
+            ]
+          }
+        ]
+      },
+      "entersPrepared": true
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

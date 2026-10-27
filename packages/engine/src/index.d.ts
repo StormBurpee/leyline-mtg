@@ -272,7 +272,7 @@ type EffectInstruction =
   | { op: 'delayedBlink'; controller?: 'owner' | 'you' }
   | { op: 'exileUntilSourceLeavesAll'; where: CardPredicate }
   | { op: 'bounce' | 'destroy'; subject?: 'source' | 'attached' }
-  | { op: 'untap' | 'tap'; subject?: 'source' | 'attached' }
+  | { op: 'untap' | 'tap' | 'prepare' | 'unprepare'; subject?: 'source' | 'attached' }
   | {
       op: 'bounceAll' | 'destroyAll' | 'exileAll' | 'tapAll' | 'untapAll';
       player?: 'controller' | 'opponent' | 'target';
@@ -280,7 +280,13 @@ type EffectInstruction =
       where: CardPredicate;
       excludeSource?: boolean;
     }
-  | { op: 'counterAll'; where: CardPredicate; amount: EffectNumericValue; excludeSource?: boolean }
+  | {
+      op: 'counterAll';
+      where: CardPredicate;
+      amount: EffectNumericValue;
+      excludeSource?: boolean;
+      counter?: '-1/-1';
+    }
   | {
       op: 'modifyAll';
       where: CardPredicate;
@@ -304,7 +310,12 @@ type EffectInstruction =
   | { op: 'untapSearched' }
   | { op: 'behold'; subtype: string; then: readonly Effect[] }
   | { op: 'doublePower'; subject?: 'source' | 'attached' }
-  | { op: 'counterOn'; subject?: 'source' | 'attached'; amount: EffectNumericValue }
+  | {
+      op: 'counterOn';
+      subject?: 'source' | 'attached';
+      amount: EffectNumericValue;
+      counter?: '-1/-1';
+    }
   | {
       op: 'animateLand';
       keywords?: string[];
@@ -361,6 +372,7 @@ export type StateCondition =
   | { kind: 'sourceQuestCountersAtLeast'; count: number }
   | { kind: 'additionalCostPaid' }
   | { kind: 'sourceType'; type: CardType }
+  | { kind: 'sourcePrepared'; prepared: boolean }
   | { kind: 'sourceExiledCardTypesAtLeast'; count: number }
   | { kind: 'eventManaSpentAtLeast'; count: number }
   | {
@@ -541,6 +553,7 @@ export interface CardDefinition {
       exileSelf?: boolean;
       discard?: 1;
     };
+    /** Owner-activated from the graveyard; exileSelf is optional, not an implicit cost. */
     zone?: 'graveyard';
     target?: TargetKind | null;
     targetGroups?: readonly TargetGroup[];
@@ -914,7 +927,7 @@ export interface GameState {
   ))[];
   damagePreventionDisabledTurn?: number;
   layerClock?: number;
-  rulesRevision: 1 | 2;
+  rulesRevision: 1 | 2 | 3;
   catalog: Readonly<Record<string, CardDefinition>>;
   version: string;
   seed: number;
@@ -1072,7 +1085,7 @@ export type DispatchResult =
       events: readonly GameEvent[];
     };
 export interface Replay {
-  rulesRevision?: 1 | 2;
+  rulesRevision?: 1 | 2 | 3;
   schemaVersion?: number;
   version: string;
   config: GameConfig;

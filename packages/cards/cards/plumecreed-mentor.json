@@ -1,0 +1,99 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0eb8983e-4e44-4bfe-81dd-ddb41007a166",
+  "name": "Plumecreed Mentor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird", "Scout"],
+    "colors": ["U", "W"],
+    "manaCost": "{1}{W}{U}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever this creature or another creature you control with flying enters, put a +1/+1 counter on target creature you control without flying.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            },
+            {
+              "not": {
+                "keyword": "flying"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "keyword": "flying"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            },
+            {
+              "not": {
+                "keyword": "flying"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

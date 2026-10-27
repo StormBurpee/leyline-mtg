@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fbf2653e-9cc4-442f-bc73-6e2ba6e067cb",
+  "name": "Early Winter",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{4}{B}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Exile target creature.\n\u2022 Target opponent exiles an enchantment they control.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Exile target creature.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            }
+          ]
+        },
+        {
+          "label": "Target opponent exiles an enchantment they control.",
+          "target": {
+            "scope": "player",
+            "where": {
+              "controller": "opponent"
+            }
+          },
+          "effects": [
+            {
+              "op": "chooseExile",
+              "count": 1,
+              "player": "target",
+              "where": {
+                "type": "enchantment"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

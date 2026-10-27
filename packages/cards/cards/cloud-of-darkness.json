@@ -1,0 +1,91 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "525f57df-7d4d-4089-9003-4b01005558dc",
+  "name": "Cloud of Darkness",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Avatar"],
+    "colors": ["B", "G"],
+    "manaCost": "{2}{B}{G}{G}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nParticle Beam \u2014 When Cloud of Darkness enters, target creature an opponent controls gets -X/-X until end of turn, where X is the number of permanent cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "scale",
+            "factor": -1,
+            "value": {
+              "kind": "count",
+              "zone": "graveyard",
+              "player": "you",
+              "where": {
+                "not": {
+                  "any": [
+                    {
+                      "type": "instant"
+                    },
+                    {
+                      "type": "sorcery"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "toughness": {
+            "kind": "scale",
+            "factor": -1,
+            "value": {
+              "kind": "count",
+              "zone": "graveyard",
+              "player": "you",
+              "where": {
+                "not": {
+                  "any": [
+                    {
+                      "type": "instant"
+                    },
+                    {
+                      "type": "sorcery"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

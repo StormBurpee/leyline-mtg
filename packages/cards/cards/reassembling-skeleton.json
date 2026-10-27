@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9dbc3530-b278-4c8d-b2cc-a09dfac9d5e5",
+  "name": "Reassembling Skeleton",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Skeleton", "Warrior"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "{1}{B}: Return this card from your graveyard to the battlefield tapped.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{1}{B}"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "source",
+          "destination": "battlefield",
+          "tapped": true
+        }
+      ],
+      "text": "{1}{B}: Return this card from your graveyard to the battlefield tapped."
+    }
+  ]
+}

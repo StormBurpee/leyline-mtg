@@ -136,6 +136,7 @@ function groupedSpellScore(s, p, action, card) {
       if (card.adventureCast) tempo += 1;
     }
     if (effect.op === 'modify' || effect.op === 'counterOn') {
+      const counters = effect.amount * (effect.counter === '-1/-1' ? -1 : 1);
       for (const t of targets) {
         const d = data(t);
         if (!d) continue;
@@ -143,9 +144,10 @@ function groupedSpellScore(s, p, action, card) {
           tempo +=
             effect.op === 'modify'
               ? Math.max(0, effect.power + effect.toughness) * 0.25 + (effect.keywords?.length ?? 0)
-              : effect.amount;
-        d.power += effect.op === 'modify' ? effect.power : effect.amount;
-        d.toughness += effect.op === 'modify' ? effect.toughness : effect.amount;
+              : counters;
+        else if (effect.op === 'counterOn' && counters < 0) tempo -= counters;
+        d.power += effect.op === 'modify' ? effect.power : counters;
+        d.toughness += effect.op === 'modify' ? effect.toughness : counters;
       }
     }
     if (effect.op === 'fight' || effect.op === 'bite') {
@@ -263,13 +265,15 @@ export function chooseBotCommand(s, p) {
         return {
           type: 'chooseCounter',
           player: p,
-          counter: c.counters.includes('stun')
-            ? 'stun'
-            : !canUseTrigger
-              ? null
-              : c.counters.includes('hexproof')
-                ? 'hexproof'
-                : (c.counters[0] ?? null),
+          counter: c.counters.includes('-1/-1')
+            ? '-1/-1'
+            : c.counters.includes('stun')
+              ? 'stun'
+              : !canUseTrigger
+                ? null
+                : c.counters.includes('hexproof')
+                  ? 'hexproof'
+                  : (c.counters[0] ?? null),
         };
       }
       case 'behold':
@@ -534,7 +538,8 @@ export function chooseBotCommand(s, p) {
               'sacrifice',
               'exileUntilSourceLeaves',
             ].includes(effect.op) ||
-            (effect.op === 'moveTarget' && effect.destination === 'exile'),
+            (effect.op === 'moveTarget' && effect.destination === 'exile') ||
+            (effect.op === 'counterOn' && effect.counter === '-1/-1'),
         );
         const untapsTarget = c.entry.effects.some(
           (e) => e.op === 'untap' && e.subject !== 'source',
@@ -896,6 +901,31 @@ export function chooseBotCommand(s, p) {
       );
     if (activated.cost.sacrificeSelf || (activated.cost.tap && keepBlocker(action.card)))
       return false;
+    // Self-recursion is not a battlefield rescue. Paying again for the same
+    // graveyard incarnation while its return is pending only wastes mana.
+    if (
+      activated.zone === 'graveyard' &&
+      activated.effects.length > 0 &&
+      activated.effects.every(
+        (effect) =>
+          effect.op === 'moveTarget' &&
+          effect.subject === 'source' &&
+          ['hand', 'battlefield'].includes(effect.destination),
+      )
+    ) {
+      const source = s.objects[action.card];
+      return !s.stack.some(
+        (entry) =>
+          entry.source?.id === source.id &&
+          entry.source.incarnation === source.incarnation &&
+          entry.effects.some(
+            (effect) =>
+              effect.op === 'moveTarget' &&
+              effect.subject === 'source' &&
+              ['hand', 'battlefield'].includes(effect.destination),
+          ),
+      );
+    }
     if (
       activated.effects.some(
         (effect) =>
@@ -1028,6 +1058,18 @@ export function chooseBotCommand(s, p) {
         d.effects?.some((e) => ['tap', 'stunOn'].includes(e.op))
       )
         score = (target.stunCounters ?? 0) > 0 ? -1 : 2 + value(s, target) * 0.4;
+      const negativeCounters = d.effects?.find(
+        (effect) => effect.op === 'counterOn' && effect.counter === '-1/-1',
+      );
+      if (negativeCounters && target)
+        score =
+          target.controller === p
+            ? -100
+            : stats(s, target).toughness <= negativeCounters.amount ||
+                (!hasKeyword(s, target, 'indestructible') &&
+                  stats(s, target).toughness - target.damage <= negativeCounters.amount)
+              ? 8 + value(s, target)
+              : negativeCounters.amount;
       const movement = d.effects?.find((effect) => effect.op === 'moveTarget');
       if (movement && target) {
         if (target.zone === 'graveyard' && ['hand', 'battlefield'].includes(movement.destination))

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "d1af8018-35b5-4b6f-93c8-1ed6bd8c92b1",
+  "name": "Hallway Heckler // Vicious Verse",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Sorcerer"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\n{T}, Discard a card: Draw a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "discard": 1
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Hallway Heckler",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:prepare/vicious-verse",
+        "name": "Vicious Verse",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["B", "R"],
+          "manaCost": "{B/R}"
+        },
+        "rulesText": "Vicious Verse deals 1 damage to target opponent.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "damage",
+                "target": "target",
+                "amount": 1
+              }
+            ],
+            "target": {
+              "scope": "player",
+              "where": {
+                "controller": "opponent"
+              }
+            }
+          }
+        ]
+      },
+      "entersPrepared": true
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

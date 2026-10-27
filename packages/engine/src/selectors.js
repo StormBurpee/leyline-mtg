@@ -233,7 +233,8 @@ export function effectTargetCompatible(op, value, effect = null) {
   if (op === 'explore') return spec.scope === 'permanent' && impliesCreature(spec.where);
   if (op === 'copyToken') return spec.scope === 'permanent';
   if (op === 'modify' || op === 'combatRestriction') return spec.scope === 'permanent';
-  if (op === 'untap' || op === 'tap' || op === 'counterOn') return spec.scope === 'permanent';
+  if (['untap', 'tap', 'counterOn', 'prepare', 'unprepare'].includes(op))
+    return spec.scope === 'permanent';
   if (op === 'counter') return spec.scope === 'spell';
   if (['mill', 'draw', 'discard', 'gainLife', 'loseLife', 'scry', 'surveil'].includes(op))
     return spec.scope === 'player';

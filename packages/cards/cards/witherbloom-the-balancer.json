@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fbb04a21-e513-4317-aac8-fa6df91c3438",
+  "name": "Witherbloom, the Balancer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Elder", "Dragon"],
+    "colors": ["B", "G"],
+    "manaCost": "{6}{B}{G}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Affinity for creatures (This spell costs {1} less to cast for each creature you control.)\nFlying, deathtouch\nInstant and sorcery spells you cast have affinity for creatures.",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "you",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "you",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "where": {
+        "any": [
+          {
+            "type": "instant"
+          },
+          {
+            "type": "sorcery"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4cbbdebc-b807-4d7b-92dd-312637d2a5de",
+  "name": "Infirmary Healer // Stream of Life",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Cleric"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Infirmary Healer",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/stream-of-life",
+        "name": "Stream of Life",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["G"],
+          "manaCost": "{X}{G}"
+        },
+        "rulesText": "Target player gains X life.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "player"
+            },
+            "effects": [
+              {
+                "op": "gainLife",
+                "target": "target",
+                "amount": {
+                  "kind": "x"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

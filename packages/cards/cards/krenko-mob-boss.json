@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "68418069-f615-40ef-ae0d-764192acae00",
+  "name": "Krenko, Mob Boss",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Goblin", "Warrior"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/goblin-token",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "subtype": "Goblin"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

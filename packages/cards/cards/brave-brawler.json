@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a1a791be-71e6-4c1f-8717-08ca62d40de2",
+  "name": "Brave Brawler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Warrior", "Hero"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Lifelink\nPower-up \u2014 {4}{W}: Put two +1/+1 counters on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "activated",
+      "powerUp": true,
+      "cost": {
+        "mana": "{4}{W}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 2,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

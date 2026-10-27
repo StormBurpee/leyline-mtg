@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c8259b0e-131f-44f0-86d4-7c4d711b328d",
+  "name": "Old Thrush",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird"],
+    "colors": [],
+    "manaCost": "{2}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhen this creature enters, you gain 2 life. You may search your library for a basic land card, reveal it, then shuffle and put that card on top.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "top",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "reveal": true,
+          "optional": true
+        }
+      ]
+    }
+  ]
+}

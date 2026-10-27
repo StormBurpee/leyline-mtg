@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f3ed157f-a09b-405f-aec4-0e7a81d80fc8",
+  "name": "Woodwork Prodigy // Soul Tether",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Druid"],
+    "colors": ["R", "G"],
+    "manaCost": "{2}{R/G}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Woodwork Prodigy",
+      "entersPrepared": false,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/soul-tether",
+        "name": "Soul Tether",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["R", "G"],
+          "manaCost": "{2}{R/G}"
+        },
+        "rulesText": "Create a Heartwood token. (It's a red and green artifact with \"{T}: Add {R} or {G}.\")",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/heartwood",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "upkeep",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "prepare",
+          "target": "source"
+        }
+      ],
+      "condition": {
+        "kind": "sourcePrepared",
+        "prepared": false
+      }
+    }
+  ]
+}

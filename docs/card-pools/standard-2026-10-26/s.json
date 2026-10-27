@@ -52,7 +52,7 @@
   {
     "oracleId": "00f1d167-c143-471d-bd52-da2a65d087c4",
     "name": "Sagu Pummeler",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "7cee6d43-5dec-4989-85ec-c635ec783ec7",
@@ -62,7 +62,7 @@
   {
     "oracleId": "24310f49-2156-4c0d-b3b1-40ca3182474f",
     "name": "Sahagin",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "dfa95c0e-393d-4b22-9de3-45a7efc0ba14",
@@ -212,7 +212,7 @@
   {
     "oracleId": "e92185f8-579c-4645-9cb8-ef5deb9eebc8",
     "name": "Sandworm",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "a70d9645-7c25-4fcb-9d16-fb73ce8b55e2",
@@ -382,7 +382,7 @@
   {
     "oracleId": "2796c3d9-9e56-40f2-8398-7a131c4657ff",
     "name": "Scathing Shadelock // Venomous Words",
-    "status": "no_exact_forge_match"
+    "status": "curated"
   },
   {
     "oracleId": "7e97a242-0bac-4f18-9228-e98ecca36254",
@@ -777,7 +777,7 @@
   {
     "oracleId": "556f127f-6131-4171-b1ed-11420c21d345",
     "name": "Serpent Specialist",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "4b7ac066-e5c7-43e6-9e7e-2739b24a905d",
@@ -897,7 +897,7 @@
   {
     "oracleId": "709b9f76-0ea5-456c-b1db-2cf517370fde",
     "name": "Shattered Wings",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "f545870d-b628-4acb-88c7-37c2d72a5a85",
@@ -1262,7 +1262,7 @@
   {
     "oracleId": "60ad7aaa-8ce6-4449-8e8d-4ccf925010db",
     "name": "Sizzling Changeling",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "decfde5e-ea53-4b15-8f69-51da7ef39d15",
@@ -1307,7 +1307,7 @@
   {
     "oracleId": "2c53a913-8a99-4a15-9c47-e79af026dc05",
     "name": "Skybeast Tracker",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "09726c3d-f700-4bf4-a9e7-326fe41b0a4a",
@@ -1322,7 +1322,7 @@
   {
     "oracleId": "2ac2b815-2d72-48e6-b43a-18884a74bf95",
     "name": "Skycoach Waypoint",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "2343ebff-edf4-4132-ad9e-7800f8014072",
@@ -1497,7 +1497,7 @@
   {
     "oracleId": "c53b7602-5e36-4900-896c-844bf6eac22e",
     "name": "Smaug the Magnificent",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "20535126-f811-4386-bdce-d73f30691724",
@@ -1532,7 +1532,7 @@
   {
     "oracleId": "d2b1c5eb-06f0-4ec4-9446-791faac099a7",
     "name": "Snarling Gorehound",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "3b6fb13b-f126-4697-90a1-64b14ffcecd6",
@@ -2372,7 +2372,7 @@
   {
     "oracleId": "04e615e6-4088-4170-904c-f2d4bcebed59",
     "name": "Starry-Eyed Skyrider",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802",
@@ -2552,12 +2552,12 @@
   {
     "oracleId": "e8f755f7-ec93-4d2e-bffc-c719984fa13d",
     "name": "Stingerquill Voxmancer // Vicious Verse",
-    "status": "no_exact_forge_match"
+    "status": "curated"
   },
   {
     "oracleId": "a9a35c77-637f-4d56-afa2-6c8a4ded4838",
     "name": "Stinging Cave Crawler",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "624cf822-0b4e-4f0c-9893-a53cb094f616",
@@ -2642,7 +2642,7 @@
   {
     "oracleId": "dbb1690a-f6f5-459c-9d7f-cb6541fb6688",
     "name": "Stone Docent",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "cfaa8b7b-7bfc-4660-bbc7-a717e05df6ef",
@@ -2907,7 +2907,7 @@
   {
     "oracleId": "697b14c6-fe6a-4880-9cf2-b6602a52ca0b",
     "name": "Summoned Dromedary",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "d4453b3e-733e-4038-81da-135a6a03079c",
@@ -3052,7 +3052,7 @@
   {
     "oracleId": "2d961997-4f5f-4ce2-b062-11411147e2f7",
     "name": "Sun-Spider, Nimble Webber",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "479adf64-f42c-4cb6-bf25-648c044bca8b",

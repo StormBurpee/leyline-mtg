@@ -1,0 +1,79 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "40961b23-b153-434a-aeb9-b9c2ff613dcb",
+  "name": "Konstrari Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G", "R"],
+    "manaCost": "{R}{G}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Konstrari Charm deals 6 damage to target creature with flying.\n\u2022 Put two +1/+1 counters on target creature. It gains trample until end of turn.\n\u2022 Add {C}{C}{C}.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Deal 6 damage to target flying creature.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "keyword": "flying"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 6
+            }
+          ]
+        },
+        {
+          "label": "Two +1/+1 counters and trample until end of turn.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "amount": 2,
+              "counter": "+1/+1"
+            },
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["trample"]
+            }
+          ]
+        },
+        {
+          "label": "Add three colorless mana.",
+          "effects": [
+            {
+              "op": "addMana",
+              "mana": "{C}{C}{C}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

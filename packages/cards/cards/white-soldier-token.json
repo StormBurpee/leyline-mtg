@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/white-soldier-token",
+  "name": "White Soldier Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Soldier"],
+    "colors": ["W"],
+    "manaCost": null,
+    "power": 2,
+    "toughness": 2,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

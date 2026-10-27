@@ -1068,7 +1068,7 @@ export function exportReplay(s) {
   return structuredClone({
     schemaVersion: REPLAY_SCHEMA_VERSION,
     version: VERSION,
-    rulesRevision: s.rulesRevision ?? 2,
+    rulesRevision: s.rulesRevision ?? 3,
     config: s.config,
     commands: s.history,
   });
@@ -1085,6 +1085,7 @@ export function replay(record) {
         '0.45.0',
         '0.46.0',
         '0.47.0',
+        '0.48.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',
@@ -1135,14 +1136,16 @@ export function replay(record) {
     'Invalid or oversized replay.',
   );
   requireRule(
-    record.rulesRevision === undefined || [1, 2].includes(record.rulesRevision),
+    record.rulesRevision === undefined || [1, 2, 3].includes(record.rulesRevision),
     'REPLAY_VERSION',
     'Unsupported replay rules revision.',
   );
   let s = createGame(record.config);
   // Revision 2 introduced announcement-time targeting in v0.43. Unmarked
   // published envelopes through v0.42 use the historical timing and ID order.
-  s.rulesRevision = record.rulesRevision ?? (Number(record.version.split('.')[1]) <= 42 ? 1 : 2);
+  const minor = Number(record.version.split('.')[1]);
+  // Revision 3 skips the starting player's entire first draw step (v0.49).
+  s.rulesRevision = record.rulesRevision ?? (minor <= 42 ? 1 : minor <= 48 ? 2 : 3);
   for (const [index, c] of record.commands.entries()) {
     const r = dispatch(s, c);
     requireRule(r.ok, 'REPLAY_COMMAND', `Replay command ${index} rejected: ${r.error?.message}`);

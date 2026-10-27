@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a3435757-d049-4aaf-a2cb-897dd4940997",
+  "name": "Darkness Descends",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}{B}"
+  },
+  "rulesText": "Put two -1/-1 counters on each creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "counterAll",
+          "counter": "-1/-1",
+          "amount": 2,
+          "where": {
+            "type": "creature"
+          }
+        }
+      ]
+    }
+  ]
+}

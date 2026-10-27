@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d32c9439-4c97-412b-83cc-6d9acb48be3c",
+  "name": "Exhibition Tidecaller",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Djinn", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 0,
+    "toughness": 2
+  },
+  "rulesText": "Opus \u2014 Whenever you cast an instant or sorcery spell, target player mills three cards. If five or more mana was spent to cast that spell, that player mills ten cards instead.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "eventManaSpentAtLeast",
+            "count": 5
+          },
+          "then": [
+            {
+              "op": "mill",
+              "target": "target",
+              "amount": 10
+            }
+          ],
+          "else": [
+            {
+              "op": "mill",
+              "target": "target",
+              "amount": 3
+            }
+          ]
+        }
+      ],
+      "target": {
+        "scope": "player"
+      }
+    }
+  ]
+}

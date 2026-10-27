@@ -118,8 +118,10 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return { op: e.op, target: e.subject, keyword: e.keyword, amount: e.amount };
         case 'stunOn':
           return { op: 'addStunCounters', target: e.subject ?? 'target', amount: e.amount };
+        case 'prepare':
+        case 'unprepare':
         case 'tap':
-          return { op: 'tap', target: e.subject ?? 'target' };
+          return { op: e.op, target: e.subject ?? 'target' };
         case 'damage':
           return { op: 'damage', target: 'target', amount: e.amount };
         case 'damageOpponent':
@@ -210,7 +212,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         case 'counterOn':
           return {
             op: 'addCounters',
-            counter: '+1/+1',
+            counter: e.counter ?? '+1/+1',
             target: e.subject ?? 'target',
             amount: e.amount,
           };

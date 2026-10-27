@@ -9,7 +9,7 @@ import { matchesEvent, eventSpec } from './events.js';
 import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.48.0';
+export const VERSION = '0.49.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -49,12 +49,21 @@ export function preparedSource(s, copy) {
 export function preparePermanent(s, object) {
   if (object.zone !== 'battlefield' || object.preparedCopy) return;
   const spell = definition(s, object).prepareSpell;
-  if (!spell) return;
+  if (!spell || !hasType(definition(s, object), 'creature')) return;
   const copy = addObject(s, spell.name, object.controller, 'exile', spell);
   copy.spellCopy = true;
   copy.preparedFrom = ref(object);
   object.preparedCopy = ref(copy);
   emit(s, 'prepared', { objectId: object.id, copyId: copy.id, player: object.controller });
+}
+/** CR 722: preparation is a designation, independent of the permanent's abilities. */
+export function unpreparePermanent(s, object) {
+  if (object.zone !== 'battlefield' || !object.preparedCopy) return;
+  const prepared = object.preparedCopy;
+  const copy = s.objects[prepared.id];
+  delete object.preparedCopy;
+  if (copy?.zone === 'exile' && copy.incarnation === prepared.incarnation) move(s, copy, 'void');
+  emit(s, 'unprepared', { objectId: object.id, player: object.controller });
 }
 export function topLibraryVisible(s, player) {
   if (s.castingCompletion) return false;
@@ -144,6 +153,7 @@ export function counterKinds(object) {
   const kinds = [];
   for (const [name, field] of Object.entries({
     '+1/+1': 'plusCounters',
+    '-1/-1': 'minusCounters',
     stun: 'stunCounters',
     lore: 'loreCounters',
     loyalty: 'loyalty',
@@ -158,6 +168,7 @@ export function counterKinds(object) {
 export function removeOneCounter(object, kind) {
   const field = {
     '+1/+1': 'plusCounters',
+    '-1/-1': 'minusCounters',
     stun: 'stunCounters',
     lore: 'loreCounters',
     loyalty: 'loyalty',
@@ -1292,7 +1303,7 @@ export function createGame({
   }
   const s = {
     version: VERSION,
-    rulesRevision: 2,
+    rulesRevision: 3,
     catalog: rules,
     seed,
     rng: seed || 1,

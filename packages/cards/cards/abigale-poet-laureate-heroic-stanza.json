@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2f5f46ed-b8aa-4864-bd20-17281d4632bf",
+  "name": "Abigale, Poet Laureate // Heroic Stanza",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Bird", "Bard"],
+    "colors": ["W", "B"],
+    "manaCost": "{1}{W}{B}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever you cast a creature spell, Abigale becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Abigale, Poet Laureate",
+      "entersPrepared": false,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/heroic-stanza",
+        "name": "Heroic Stanza",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["W", "B"],
+          "manaCost": "{1}{W/B}"
+        },
+        "rulesText": "Put a +1/+1 counter on target creature.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            },
+            "effects": [
+              {
+                "op": "addCounters",
+                "target": "target",
+                "counter": "+1/+1",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "prepare",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

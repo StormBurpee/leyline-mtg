@@ -4,9 +4,9 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.48.0
+## Implemented progress through v0.49.0
 
-Current dated inventory coverage: **1,571 / 5,164**; **3,593 remain**. This is 692 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **1,685 / 5,164**; **3,479 remain**. This is 806 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
 | Delivered feature/card batch                                      | Cards added |
 | ----------------------------------------------------------------- | ----------: |
@@ -52,7 +52,11 @@ Current dated inventory coverage: **1,571 / 5,164**; **3,593 remain**. This is 6
 | Actual tap-event triggers                                         |          15 |
 | Next-end-step blink returns                                       |           3 |
 | Chosen-X entry counters                                           |           3 |
-| **Total since v0.38.0**                                           |     **692** |
+| Further source-only definitions                                   |          92 |
+| Graveyard self-return activations                                 |           7 |
+| Negative-counter effects                                          |           4 |
+| Resolving preparation and nested prepared X                       |          11 |
+| **Total since v0.38.0**                                           |     **806** |
 
 The baseline forecasts below remain unchanged for comparison. They were conservative first-pass probes: several implemented families unlocked more cards than those probes identified. Remaining cards in each family can still require other unsupported behavior.
 

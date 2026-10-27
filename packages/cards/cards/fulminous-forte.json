@@ -1,0 +1,71 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2a29d028-d1a4-413f-9c01-d6842294420a",
+  "name": "Fulminous Forte",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Fulminous Forte deals 1 damage to each creature and planeswalker your opponents control.\n\u2022 Fulminous Forte deals 5 damage to target creature or planeswalker.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Deal 1 damage to opposing creatures and planeswalkers.",
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "all": [
+                  {
+                    "any": [
+                      {
+                        "type": "creature"
+                      },
+                      {
+                        "type": "planeswalker"
+                      }
+                    ]
+                  },
+                  {
+                    "controller": "opponent"
+                  }
+                ]
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Deal 5 damage to target creature or planeswalker.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "planeswalker"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

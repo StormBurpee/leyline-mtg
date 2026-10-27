@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e8f755f7-ec93-4d2e-bffc-c719984fa13d",
+  "name": "Stingerquill Voxmancer // Vicious Verse",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Sorcerer"],
+    "colors": ["B", "R"],
+    "manaCost": "{B/R}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Stingerquill Voxmancer",
+      "entersPrepared": false,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/vicious-verse",
+        "name": "Vicious Verse",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["B", "R"],
+          "manaCost": "{B/R}"
+        },
+        "rulesText": "Vicious Verse deals 1 damage to target opponent.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "player",
+              "where": {
+                "controller": "opponent"
+              }
+            },
+            "effects": [
+              {
+                "op": "damage",
+                "target": "target",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "upkeep",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "prepare",
+          "target": "source"
+        }
+      ],
+      "condition": {
+        "kind": "sourcePrepared",
+        "prepared": false
+      }
+    }
+  ]
+}

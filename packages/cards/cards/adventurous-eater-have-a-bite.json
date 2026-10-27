@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "02125db4-4507-467a-ac0c-406de2c7d533",
+  "name": "Adventurous Eater // Have a Bite",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Adventurous Eater",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:prepare/have-a-bite",
+        "name": "Have a Bite",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["B"],
+          "manaCost": "{B}"
+        },
+        "rulesText": "Put a +1/+1 counter on target creature. You gain 1 life.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "addCounters",
+                "target": "target",
+                "amount": 1,
+                "counter": "+1/+1"
+              },
+              {
+                "op": "gainLife",
+                "target": "controller",
+                "amount": 1
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            }
+          }
+        ]
+      },
+      "entersPrepared": true
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

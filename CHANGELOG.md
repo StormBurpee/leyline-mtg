@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.49.0 — Preparation, graveyard activations and negative counters
+
+- Add 114 complete Standard cards: 92 source-only additions, seven graveyard self-return cards, four negative-counter cards and eleven preparation cards. Catalog: 1903 playable cards and 67 tokens.
+- Support genuine graveyard self-return activations without inventing an exile cost. Preserve source incarnation, ownership, timing and payment; prevent the bot from spending repeatedly on a pending return.
+- Preserve explicit -1/-1 counter effects through authoring, compilation and resolution, including simultaneous state-based actions, generic counter removal and signed target evaluation.
+- Add prepare/unprepare effects and incarnation-bound prepared-state conditions, preserving prepared permissions through ability loss. Validate prepared spell X independently from the parent permanent.
+- Skip the starting player's entire initial draw step under explicit rules revision 3, while retaining old replay step sequences. Correct printed face colors on twelve new prepared/Adventure definitions and the Heartwood token subtype.
+
 ## 0.48.0 — Draw, tap and delayed-return coverage
 
 - Add 200 complete Standard cards: 164 existing-engine definitions, 15 actual-draw payoffs, 15 tap-event cards, three delayed-blink cards and three X-entry creatures. Catalog: 1789 playable cards and 62 tokens.

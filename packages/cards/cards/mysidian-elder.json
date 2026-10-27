@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "10039992-d51a-47e7-9a70-02fe2227c163",
+  "name": "Mysidian Elder",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, create a 0/1 black Wizard creature token with \"Whenever you cast a noncreature spell, this token deals 1 damage to each opponent.\"",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/black-wizard-spellslinger-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

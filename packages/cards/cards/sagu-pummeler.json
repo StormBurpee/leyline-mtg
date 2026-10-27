@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "00f1d167-c143-471d-bd52-da2a65d087c4",
+  "name": "Sagu Pummeler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Beast"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Reach\nRenew \u2014 {4}{G}, Exile this card from your graveyard: Put two +1/+1 counters and a reach counter on target creature. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{G}",
+        "exileSelf": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 2
+        },
+        {
+          "op": "keywordCounters",
+          "keywords": ["reach"]
+        }
+      ],
+      "zone": "graveyard",
+      "timing": "sorcery",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

@@ -302,7 +302,7 @@ test('grouped source-excluding trigger choice, bot and resolution round-trip thr
     mulligan: false,
   });
   s = resolve(s);
-  s = resolve(s);
+  assert.equal(s.step, 'main1');
   const first = s.players[0].hand.find((id) => s.objects[id].name === card.name);
   s = resolve(act(s, 'cast', { card: first }));
   assert.equal(s.choice.kind, 'triggerTargets');

@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a257426d-70c9-4d58-bd8b-97ec38f6e133",
+  "name": "Volcanic Villain",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Villain"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Haste\nPower-up \u2014 {5}{R}: Put two +1/+1 counters on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{5}{R}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 2
+        }
+      ],
+      "powerUp": true
+    }
+  ]
+}

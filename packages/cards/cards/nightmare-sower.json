@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4121b7d9-5fbe-40e2-a2a6-d7633f423b5f",
+  "name": "Nightmare Sower",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Assassin"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flying, lifelink\nWhenever you cast a spell during an opponent's turn, put a -1/-1 counter on up to one target creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you"
+      },
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "-1/-1",
+          "amount": 1,
+          "targetGroup": "chosen"
+        }
+      ],
+      "condition": {
+        "kind": "opponentTurn"
+      }
+    }
+  ]
+}

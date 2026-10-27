@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5963eef1-1022-42b1-8a0c-fc9850bfc2a3",
+  "name": "Emeritus of Conflict // Lightning Bolt",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "First strike\nWhenever you cast your third spell each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Emeritus of Conflict",
+      "entersPrepared": false,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/lightning-bolt",
+        "name": "Lightning Bolt",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["R"],
+          "manaCost": "{R}"
+        },
+        "rulesText": "Lightning Bolt deals 3 damage to any target.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "damageable"
+            },
+            "effects": [
+              {
+                "op": "damage",
+                "target": "target",
+                "amount": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "spellNumber": 3
+      },
+      "effects": [
+        {
+          "op": "prepare",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

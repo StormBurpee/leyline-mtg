@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "15fef45d-f1a9-49b2-abaa-fe77bb9d1afd",
+  "name": "Lathliss, Dragon Queen",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dragon"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}",
+    "power": 6,
+    "toughness": 6
+  },
+  "rulesText": "Flying\nWhenever another nontoken Dragon you control enters, create a 5/5 red Dragon creature token with flying.\n{1}{R}: Dragons you control get +1/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "all": [
+            {
+              "subtype": "Dragon"
+            },
+            {
+              "not": {
+                "token": true
+              }
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/five-five-dragon-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{R}"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "subtype": "Dragon"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}
