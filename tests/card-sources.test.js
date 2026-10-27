@@ -249,29 +249,29 @@ test('unsupported supertypes remain represented in source but cannot become vani
 test('source compilation can bootstrap without a generated runtime catalog', async () => {
   const { mkdtemp, mkdir, writeFile, cp, rm } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
-  const { join, dirname } = await import('node:path');
+  const { join } = await import('node:path');
   const { spawnSync } = await import('node:child_process');
   const dir = await mkdtemp(join(tmpdir(), 'leyline-source-bootstrap-'));
   try {
     await writeFile(join(dir, 'package.json'), '{"type":"module"}');
-    for (const path of [
-      'packages/cards/compiler.js',
-      'packages/cards/json-data.js',
-      'packages/engine/src/definition-validation.js',
-      'packages/engine/src/class-levels.js',
-      'packages/engine/src/condition-schema.js',
-      'packages/engine/src/target-group-schema.js',
-      'packages/engine/src/value-schema.js',
-      'packages/engine/src/spell-history.js',
-      'packages/engine/src/types.js',
-      'packages/engine/src/creature-types.js',
-      'packages/engine/src/selectors.js',
-      'packages/engine/src/events.js',
-    ]) {
-      const dest = join(dir, path);
-      await mkdir(dirname(dest), { recursive: true });
-      await cp(new URL(`../${path}`, import.meta.url), dest);
+    // Copy module trees rather than a hand-maintained dependency list. The
+    // generated runtime catalog remains deliberately absent: importing the
+    // runtime registry from the compiler still breaks this isolated bootstrap.
+    async function copyModules(source, destination) {
+      await mkdir(destination, { recursive: true });
+      for (const entry of await readdir(source, { withFileTypes: true })) {
+        const child = new URL(entry.name + (entry.isDirectory() ? '/' : ''), source);
+        const dest = join(destination, entry.name);
+        if (entry.isDirectory()) await copyModules(child, dest);
+        else if (/\.m?js$/.test(entry.name) && entry.name !== 'generated-catalog.js')
+          await cp(child, dest);
+      }
     }
+    for (const directory of ['packages/cards', 'packages/engine/src'])
+      await copyModules(new URL(`../${directory}/`, import.meta.url), join(dir, directory));
+    await assert.rejects(readFile(join(dir, 'packages/engine/src/generated-catalog.js')), {
+      code: 'ENOENT',
+    });
     await writeFile(
       join(dir, 'run.mjs'),
       `import {compileCard} from './packages/cards/compiler.js';const result=compileCard(${JSON.stringify(example([]))});if(!result.ok)throw new Error(JSON.stringify(result.diagnostics));`,

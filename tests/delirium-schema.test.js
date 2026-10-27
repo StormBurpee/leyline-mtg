@@ -85,7 +85,9 @@ test('conditional combat restrictions reject unsupported bindings, fields, kinds
       restriction: 'cannotAttack',
       condition: { kind: 'targetMatches', target: 'target', where: { type: 'creature' } },
     },
-    { restriction: 'unblockable', condition: { kind: 'controllerTurn' } },
+    { restriction: 'cannotBeBlockedByLowerPower', condition: { kind: 'controllerTurn' } },
+    { restriction: 'unblockable', condition: { kind: 'sourcePowerAtMost', count: 1001 } },
+    { restriction: 'unblockable', condition: { kind: 'sourcePowerAtMost', count: 1.5 } },
     { restriction: 'cannotBlock', condition: { kind: 'arbitraryCode' } },
     { restriction: 'cannotBlock', condition: { kind: 'controllerTurn' }, player: 'opponent' },
   ]) {
@@ -94,6 +96,23 @@ test('conditional combat restrictions reject unsupported bindings, fields, kinds
   for (const rules of [[], Array(9).fill(native.conditionalCombatRestrictions[0]), null])
     assert.throws(() => createRegistry([{ ...native, conditionalCombatRestrictions: rules }]));
   const source = structuredClone(sources.find((s) => s.name === 'Patchwork Beastie'));
-  source.abilities[0].restriction = 'unblockable';
+  source.abilities[0].restriction = 'cannotBeBlockedByLowerPower';
   assert.equal(compileCard(source).ok, false);
+});
+
+test('conditional unblockability accepts supported turn and bounded source-power conditions', () => {
+  for (const condition of [{ kind: 'controllerTurn' }, { kind: 'sourcePowerAtMost', count: 1 }]) {
+    const source = structuredClone(sources.find((s) => s.name === 'Patchwork Beastie'));
+    source.abilities = [{ kind: 'combatRestriction', restriction: 'unblockable', condition }];
+    assert.equal(validate(source), true, JSON.stringify(validate.errors));
+    const result = compileCard(source);
+    assert.equal(result.ok, true, JSON.stringify(result.diagnostics));
+    assert.deepEqual(result.definition.conditionalCombatRestrictions, [
+      { restriction: 'unblockable', condition },
+    ]);
+    assert.doesNotThrow(() => createRegistry([result.definition]));
+    const round = compileCard(sourceFromDefinition(result.definition, { id: source.id }));
+    assert.equal(round.ok, true, JSON.stringify(round.diagnostics));
+    assert.deepEqual(canonical(round.definition), canonical(result.definition));
+  }
 });
