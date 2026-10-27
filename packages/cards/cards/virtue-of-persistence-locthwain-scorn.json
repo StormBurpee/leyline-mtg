@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "fae36da0-bf9c-484f-b2fe-dd8ab2effc5c",
+  "name": "Virtue of Persistence // Locthwain Scorn",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{5}{B}{B}"
+  },
+  "rulesText": "At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "upkeep",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "battlefield",
+          "controller": "you"
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Virtue of Persistence",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/locthwain-scorn",
+        "name": "Locthwain Scorn",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["B"],
+          "manaCost": "{1}{B}"
+        },
+        "rulesText": "Target creature gets -3/-3 until end of turn. You gain 2 life.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "modify",
+                "target": "target",
+                "power": -3,
+                "toughness": -3,
+                "until": "endOfTurn"
+              },
+              {
+                "op": "gainLife",
+                "target": "controller",
+                "amount": 2
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "52fd9309-b849-419a-8d19-5882c00a72b4",
+  "name": "Beluna's Gatekeeper // Entry Denied",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant", "Soldier"],
+    "colors": ["U"],
+    "manaCost": "{5}{U}",
+    "power": 6,
+    "toughness": 5
+  },
+  "rulesText": "",
+  "abilities": [
+    {
+      "kind": "adventure",
+      "mainName": "Beluna's Gatekeeper",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/entry-denied",
+        "name": "Entry Denied",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["U"],
+          "manaCost": "{1}{U}"
+        },
+        "rulesText": "Return target creature you don't control with mana value 3 or less to its owner's hand. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "returnToHand",
+                "target": "target"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "opponent"
+                  },
+                  {
+                    "manaValue": {
+                      "lte": 3
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "73864fcc-1bde-4bc0-831e-2b93e546e417",
+  "name": "Godless Shrine",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Plains", "Swamp"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "({T}: Add {W} or {B}.)\nAs this land enters, you may pay 2 life. If you don't, it enters tapped.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "payLife": 2
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "B"]
+    }
+  ]
+}

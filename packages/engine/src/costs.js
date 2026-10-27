@@ -25,16 +25,16 @@ export function costProblem(s, p, cost, { sourceId, autoTap = true, discardCard 
   if (cost.sacrificeSelf && (!source || source.zone !== 'battlefield' || source.controller !== p))
     return 'The source cannot be sacrificed now.';
   if ((cost.life ?? 0) > s.players[p].life) return 'Not enough life to pay this cost.';
-  if (
-    !planPayment(s, p, cost.mana ?? {}, {
-      autoTap,
-      excludeSources:
-        cost.tap || (cost.sacrificeSelf && source && definition(s, source).manaSacrifice)
-          ? [sourceId]
-          : [],
-    })
-  )
-    return 'Not enough available mana.';
+  const manaPlan = planPayment(s, p, cost.mana ?? {}, {
+    autoTap,
+    excludeSources:
+      cost.tap || (cost.sacrificeSelf && source && definition(s, source).manaSacrifice)
+        ? [sourceId]
+        : [],
+  });
+  if (!manaPlan) return 'Not enough available mana.';
+  if ((cost.life ?? 0) + (manaPlan.life ?? 0) > s.players[p].life)
+    return 'Not enough life for mana abilities and this cost.';
   return null;
 }
 export function payCost(s, p, cost, options = {}) {

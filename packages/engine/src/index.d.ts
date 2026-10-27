@@ -7,7 +7,10 @@ export type CardType = 'land' | 'creature' | 'instant' | 'sorcery' | 'artifact' 
 export type PlayerId = 0 | 1;
 export type Color = 'W' | 'U' | 'B' | 'R' | 'G' | 'C';
 export type HybridSymbol = `${Exclude<Color, 'C'>}/${Exclude<Color, 'C'>}`;
-export type ManaCost = Partial<Record<Color | 'generic' | 'X' | HybridSymbol, number>>;
+export type TwobridSymbol = `2/${Exclude<Color, 'C'>}`;
+export type ManaCost = Partial<
+  Record<Color | 'generic' | 'X' | HybridSymbol | TwobridSymbol, number>
+>;
 export type Zone = 'library' | 'hand' | 'battlefield' | 'stack' | 'graveyard' | 'exile' | 'void';
 export type Step =
   | 'upkeep'
@@ -58,6 +61,7 @@ export type CardPredicate =
   | { token: boolean }
   | { basic: boolean }
   | { legendary: boolean }
+  | { adventure: boolean }
   | { attacking: boolean }
   | { blocking: boolean }
   | { subtype: string }
@@ -140,6 +144,7 @@ type EffectInstruction =
   | { op: 'damageEventPowerOpponent' }
   | { op: 'impulseChoose'; count: number }
   | { op: 'bindingNegotiation' }
+  | { op: 'revealDiscard' }
   | { op: 'mobilize'; definition: string; count: NumericValue }
   | { op: 'addMana'; mana: ManaCost }
   | { op: 'damageEventOpponent'; amount: NumericValue }
@@ -229,6 +234,7 @@ export type StateCondition =
         | 'controllerTurn'
         | 'opponentTurn';
     }
+  | { kind: 'controllerFirstTurns'; count: number }
   | { kind: 'controlAtLeast'; count: number; where: CardPredicate }
   | {
       kind: 'compare';
@@ -258,6 +264,8 @@ export interface CardDefinition {
   readonly token?: boolean;
   readonly mana?: Color | readonly Color[];
   readonly manaSacrifice?: boolean;
+  readonly manaLifeCosts?: Partial<Record<Color, number>>;
+  readonly entryLifePayment?: number;
   readonly chooseCreatureType?: boolean;
   readonly manaRestrictions?: Partial<Record<Color, 'creature' | 'chosenCreatureType'>>;
   readonly entersTapped?: boolean;
@@ -272,6 +280,8 @@ export interface CardDefinition {
   readonly flashback?: ManaCost;
   readonly plot?: ManaCost;
   readonly warp?: ManaCost;
+  readonly mainName?: string;
+  readonly adventure?: CardDefinition;
   readonly kicker?: { cost: ManaCost; effects: readonly Effect[] };
   readonly offspring?: ManaCost;
   readonly disguise?: ManaCost;
@@ -379,6 +389,7 @@ export interface GameObject {
   faceDown?: boolean;
   flashbackPaid?: boolean;
   warpPaid?: boolean;
+  adventureCast?: boolean;
   definitionOverride?: CardDefinition;
   chosenCreatureType?: string;
   chosenX?: number;
@@ -387,6 +398,7 @@ export interface GameObject {
   targetHistory?: { stamp: string; counts: Record<string, number> };
   plotted?: { turn: number; incarnation: number };
   warped?: { turn: number; incarnation: number };
+  adventured?: { player: PlayerId; incarnation: number };
   playPermission?: { player: PlayerId; turn: number; incarnation: number };
 }
 export interface PlayerState {
@@ -441,6 +453,7 @@ export interface StackEntry {
   delayedObjects?: ObjectTarget[];
   flashbackPaid?: boolean;
   warpPaid?: boolean;
+  adventureCast?: boolean;
   kicked?: boolean;
   offspringPaid?: boolean;
   uncounterable?: boolean;
@@ -480,13 +493,33 @@ export interface DamageSource {
 }
 export type Choice =
   | {
-      kind: 'exilePlay' | 'bindingNegotiation' | 'exileToGraveyard';
+      kind: 'entryLife';
+      player: PlayerId;
+      card: string;
+      amount: number;
+      payable: boolean;
+      forcedTapped: boolean;
+      typeChoices: Record<string, string>;
+      auraChoices: Record<string, ObjectTarget>;
+      lifeChoices: Record<string, boolean>;
+      entries: {
+        object: ObjectTarget;
+        controller?: PlayerId;
+        attachment?: ObjectTarget | null;
+        tapped?: boolean;
+      }[];
+    }
+  | {
+      kind: 'exilePlay' | 'bindingNegotiation' | 'revealDiscard' | 'exileToGraveyard';
+      eligibleCards?: string[];
+
       player: PlayerId;
       cards: string[];
       targetPlayer?: PlayerId;
     }
   | {
       kind: 'auraEntry';
+      lifeChoices?: Record<string, boolean>;
       player: PlayerId;
       card: string;
       cards: string[];
@@ -502,6 +535,7 @@ export type Choice =
     }
   | {
       kind: 'creatureType';
+      lifeChoices?: Record<string, boolean>;
       auraChoices?: Record<string, ObjectTarget>;
       player: PlayerId;
       card: string;
@@ -658,6 +692,7 @@ export interface GameState {
 }
 export type Action =
   | { type: 'turnFaceUp'; card: string }
+  | { type: 'payEntryLife'; pay: boolean }
   | { type: 'chooseCreatureType'; creatureType: string }
   | { type: 'chooseAuraAttachment'; card: string }
   | { type: 'chooseResolutionCard'; card: string | null }
@@ -845,6 +880,7 @@ export function planPayment(
   cost: ManaCost,
   options?: { autoTap?: boolean; excludeSources?: string[] },
 ): {
+  life?: number;
   taps: string[];
   activations: { card: string; color: Color }[];
   spent: Record<Color, number>;

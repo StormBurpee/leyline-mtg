@@ -88,6 +88,16 @@ export function castingProfile(
   x,
 ) {
   const base = spellProfile(card, mode);
+  // The permission from a resolved Adventure permits only its main face.
+  const adventurePermission =
+    object.zone === 'exile' &&
+    object.adventured?.incarnation === object.incarnation &&
+    object.adventured.player === player;
+  const otherPermission =
+    object.playPermission?.player === player &&
+    object.playPermission.turn === state.turn &&
+    object.playPermission.incarnation === object.incarnation;
+  if (base?.adventureCast && adventurePermission && !otherPermission) return null;
   let profile =
     object.zone === 'graveyard'
       ? base?.flashback
@@ -117,7 +127,7 @@ export function castingProfile(
     definition: profile,
     controller: player,
     owner: object.owner,
-    manaValue: profile.faceDownCast ? 0 : manaValue(card, x ?? 0),
+    manaValue: profile.faceDownCast ? 0 : manaValue(profile.adventureCast ? profile : card, x ?? 0),
     keywords: profile.keywords,
     ...(profile.faceDownCast ? { power: 2, toughness: 2 } : stats(projected, proposed)),
   };

@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "45181cb8-2090-4471-ba90-e5a8f04d525f",
+  "name": "Sacred Foundry",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Mountain", "Plains"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "({T}: Add {R} or {W}.)\nAs this land enters, you may pay 2 life. If you don't, it enters tapped.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "payLife": 2
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "W"]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "version": "0.44.0",
+  "version": "0.45.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -809,6 +809,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Beluna's Gatekeeper // Entry Denied",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Bestow Greatness",
       "type": "instant",
       "keywords": [],
@@ -846,6 +854,14 @@
       "keywords": [],
       "opcodes": ["bounce"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Bilbo Baggins, Burglar // Take a Glance",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -995,6 +1011,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Blood Crypt",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Bloodfell Caves",
       "type": "land",
       "keywords": [],
@@ -1048,6 +1072,14 @@
       "keywords": [],
       "opcodes": ["counterOn"],
       "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Bofur, Reliable Guardian // Concerted Care",
+      "type": "creature",
+      "keywords": ["lifelink"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1203,6 +1235,14 @@
       "name": "Brazen Scourge",
       "type": "creature",
       "keywords": ["haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Breeding Pool",
+      "type": "land",
+      "keywords": [],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -1908,6 +1948,14 @@
       "opcodes": ["sacrifice", "attachEquipment"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Cruel Somnophage // Can't Wake Up",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Cruel Truths",
@@ -3600,6 +3648,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Frolicking Familiar // Blow Off Steam",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsInstantOrSorcery"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Front Porch Sentries",
       "type": "creature",
       "keywords": [],
@@ -3700,6 +3756,24 @@
       "keywords": [],
       "opcodes": ["destroy"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Galvanic Giant // Storm Reading",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": [
+        {
+          "event": "cast",
+          "controller": "you",
+          "filter": {
+            "manaValue": {
+              "gte": 5
+            }
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -3862,11 +3936,33 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gingerbread Hunter // Puny Snack",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Give In to Violence",
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Glóin the Mighty // Easy Pickings",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["addMana"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "main1",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -4033,6 +4129,14 @@
     {
       "name": "Goblin Tomb Raider",
       "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Godless Shrine",
+      "type": "land",
       "keywords": [],
       "opcodes": [],
       "triggers": [],
@@ -4303,6 +4407,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hallowed Fountain",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Hamato Guardian Stance",
       "type": "instant",
       "keywords": [],
@@ -4359,6 +4471,14 @@
       "name": "Healer's Hawk",
       "type": "creature",
       "keywords": ["flying", "lifelink"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Hearth Elemental // Stoke Genius",
+      "type": "creature",
+      "keywords": [],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -4749,6 +4869,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Imodane's Recruiter // Train Troops",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modifyAll"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Impact Tremors",
       "type": "enchantment",
       "keywords": [],
@@ -5121,6 +5249,14 @@
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": ["controllerCastsInstantOrSorcery"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Kin-Tree Severance",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -6183,6 +6319,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Minecart Daredevil // Ride the Rails",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Mineshaft Spider",
       "type": "creature",
       "keywords": ["reach"],
@@ -6707,6 +6851,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Obyra's Attendants // Desperate Parry",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Octopus Form",
       "type": "instant",
       "keywords": [],
@@ -6872,6 +7024,14 @@
     },
     {
       "name": "Overgrown Farmland",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Overgrown Tomb",
       "type": "land",
       "keywords": [],
       "opcodes": [],
@@ -7225,6 +7385,14 @@
       "keywords": ["reach", "deathtouch"],
       "opcodes": ["loseLife"],
       "triggers": ["otherCreatureDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pollen-Shield Hare // Hare Raising",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -7686,6 +7854,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ratcatcher Trainee // Pest Problem",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Raucous Carnival",
       "type": "land",
       "keywords": [],
@@ -7878,6 +8054,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Reigning Victor",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["mobilize", "modify"],
+      "triggers": ["selfAttacks", "selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Release the Dogs",
       "type": "sorcery",
       "keywords": [],
@@ -7916,6 +8100,14 @@
       "opcodes": ["moveTarget"],
       "modes": ["Exile target creature with power 4 or greater.", "Exile target enchantment."],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Reputable Merchant",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": ["selfEnters", "selfDies"],
       "activatedAbilities": 0
     },
     {
@@ -8281,6 +8473,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sacred Foundry",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sage's Row Denizen",
       "type": "creature",
       "keywords": [],
@@ -8419,6 +8619,24 @@
       "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Scalding Viper // Steam Clean",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["damageOpponent"],
+      "triggers": [
+        {
+          "event": "cast",
+          "controller": "opponent",
+          "filter": {
+            "manaValue": {
+              "lte": 3
+            }
+          }
+        }
+      ],
+      "activatedAbilities": 0
     },
     {
       "name": "Scaldkin",
@@ -8843,6 +9061,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Shrouded Shepherd // Cleave Shadows",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Shroudstomper",
       "type": "creature",
       "keywords": ["deathtouch"],
@@ -9077,6 +9303,14 @@
       "keywords": ["flying", "haste"],
       "opcodes": ["modify"],
       "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Smaug, the Great Calamity // Spew Flame",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -9489,6 +9723,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Starting Town",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Startled Relic Sloth",
       "type": "creature",
       "keywords": ["trample", "lifelink"],
@@ -9532,6 +9774,14 @@
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Steam Vents",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -9580,6 +9830,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Stinging Vitriol",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage", "revealDiscard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stockman, Mad Fly-entist",
       "type": "creature",
       "keywords": ["flying"],
@@ -9602,6 +9860,14 @@
       "opcodes": ["attachEquipment", "modify"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Stomping Ground",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Stony-Voiced Goblins",
@@ -10087,6 +10353,32 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Tempest Hart // Scan the Clouds",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "cast",
+          "controller": "you",
+          "filter": {
+            "manaValue": {
+              "gte": 5
+            }
+          }
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Temple Garden",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Temple of Abandon",
       "type": "land",
       "keywords": [],
@@ -10175,6 +10467,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Temur Tawnyback",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Tender Wildguide",
       "type": "creature",
       "keywords": [],
@@ -10244,6 +10544,20 @@
       "keywords": [],
       "opcodes": ["surveil"],
       "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "The Arkenstone // Seek the Heart",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "end",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -10339,12 +10653,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Thought-Stalker Warlock",
+      "type": "creature",
+      "keywords": ["menace"],
+      "opcodes": ["conditional"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Thrashing Brontodon",
       "type": "creature",
       "keywords": [],
       "opcodes": ["destroy"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Threadbind Clique // Rip the Seams",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Three Tree Rootweaver",
@@ -10748,6 +11078,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Two-Headed Hunter // Twice the Rage",
+      "type": "creature",
+      "keywords": ["menace"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Typhoid Rats",
       "type": "creature",
       "keywords": ["deathtouch"],
@@ -11098,6 +11436,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Velvetwing Butterflies // Gaze in Wonder",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Venerated Stormsinger",
       "type": "creature",
       "keywords": [],
@@ -11251,6 +11597,34 @@
       "keywords": [],
       "opcodes": ["token"],
       "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Virtue of Loyalty // Ardenvale Fealty",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["counterAll", "untapAll"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "end",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Virtue of Persistence // Locthwain Scorn",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "upkeep",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -11470,6 +11844,14 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Watery Grave",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Waylaying Pirates",
@@ -11845,6 +12227,7 @@
     }
   ],
   "tokens": [
+    "Adventure Vigilant Knight Token",
     "Ally Token",
     "Artifact Gnome Token",
     "Beast Token",

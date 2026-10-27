@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "de52b262-418e-418c-b2aa-8d5a776e3a75",
+  "name": "Shrouded Shepherd // Cleave Shadows",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit", "Warrior"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, target creature you control gets +2/+2 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 2,
+          "toughness": 2,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Shrouded Shepherd",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/cleave-shadows",
+        "name": "Cleave Shadows",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["B"],
+          "manaCost": "{1}{B}"
+        },
+        "rulesText": "Creatures your opponents control get -1/-1 until end of turn. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "modifyAll",
+                "where": {
+                  "all": [
+                    {
+                      "controller": "opponent"
+                    },
+                    {
+                      "type": "creature"
+                    }
+                  ]
+                },
+                "power": -1,
+                "toughness": -1,
+                "until": "endOfTurn"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

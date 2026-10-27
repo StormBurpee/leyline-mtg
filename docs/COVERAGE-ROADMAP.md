@@ -4,9 +4,9 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.44.0
+## Implemented progress through v0.45.0
 
-Current dated inventory coverage: **1,116 / 5,164**; **4,048 remain**. This is 237 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **1,157 / 5,164**; **4,007 remain**. This is 278 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
 | Delivered feature/card batch            | Cards added |
 | --------------------------------------- | ----------: |
@@ -28,7 +28,11 @@ Current dated inventory coverage: **1,116 / 5,164**; **4,048 remain**. This is 2
 | Flashback                               |           5 |
 | Plot                                    |           5 |
 | Targeted permanent token copies         |           4 |
-| **Total since v0.38.0**                 |     **237** |
+| Adventure pairs                         |          24 |
+| Shocklands and Starting Town            |          11 |
+| Twobrid payment choices                 |           4 |
+| Mandatory revealed-hand discard         |           2 |
+| **Total since v0.38.0**                 |     **278** |
 
 The baseline forecasts below remain unchanged for comparison. They were conservative first-pass probes: several implemented families unlocked more cards than those probes identified. Remaining cards in each family can still require other unsupported behavior.
 

@@ -25,6 +25,7 @@ export function validateCondition(value, { continuous = false } = {}) {
       opponentLostLifeThisTurn: ['kind'],
       controllerLostLifeThisTurn: ['kind'],
       controllerTurn: ['kind'],
+      controllerFirstTurns: ['kind', 'count'],
       opponentTurn: ['kind'],
       sourceAttacking: ['kind'],
       sourceEnteredThisTurn: ['kind'],
@@ -40,6 +41,11 @@ export function validateCondition(value, { continuous = false } = {}) {
     if (Object.keys(v).some((k) => !fields.includes(k))) errors.push('Unexpected condition field.');
     if (['sourceAttacking', 'sourceEnteredThisTurn'].includes(v.kind) && !continuous)
       errors.push('Source-state conditions are supported for continuous bonuses only.');
+    if (
+      v.kind === 'controllerFirstTurns' &&
+      (!Number.isSafeInteger(v.count) || v.count < 1 || v.count > 1000)
+    )
+      errors.push('Invalid first-turn count.');
     if (v.kind === 'controlAtLeast') {
       const filterErrors = validateFilter(v.where);
       errors.push(...filterErrors);

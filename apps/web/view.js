@@ -97,7 +97,7 @@ const fallback = (name, d = CARDS[name]) =>
 export function handCard(s, id, meta, ui, playable, index = 0) {
   const o = s.objects[id],
     d = definition(s, o);
-  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="${o.zone}" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${o.warped ? ', warped in exile' : o.plotted ? ', plotted in exile' : o.zone === 'graveyard' ? ', flashback from graveyard' : ''}${playable ? ', playable' : ''}" aria-description="${escape(d.text)}" title="${escape(o.name)}">${o.warped ? '<span class="flashback-label">Warped · exile</span>' : o.plotted ? '<span class="flashback-label">Plotted · exile</span>' : o.zone === 'graveyard' ? '<span class="flashback-label">Flashback · graveyard</span>' : ''}${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
+  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="${o.zone}" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${o.adventured ? ', on an adventure in exile' : o.warped ? ', warped in exile' : o.plotted ? ', plotted in exile' : o.zone === 'graveyard' ? ', flashback from graveyard' : ''}${playable ? ', playable' : ''}" aria-description="${escape(d.text)}" title="${escape(o.name)}">${o.adventured ? '<span class="flashback-label">Adventure · exile</span>' : o.warped ? '<span class="flashback-label">Warped · exile</span>' : o.plotted ? '<span class="flashback-label">Plotted · exile</span>' : o.zone === 'graveyard' ? '<span class="flashback-label">Flashback · graveyard</span>' : ''}${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
 }
 function permanent(s, o, meta, ui, targetable) {
   if (o.faceDown) o = { ...o, name: 'Face-down creature' };
@@ -292,11 +292,12 @@ function actionDock(s, ui, p, actions) {
         break;
       case 'exilePlay':
       case 'bindingNegotiation':
+      case 'revealDiscard':
       case 'exileToGraveyard': {
         title =
           c.kind === 'exilePlay'
             ? 'Choose an exiled card to play this turn'
-            : c.kind === 'bindingNegotiation'
+            : ['bindingNegotiation', 'revealDiscard'].includes(c.kind)
               ? 'Revealed hand: choose a nonland to discard'
               : 'Put one of their face-up exiled cards into their graveyard?';
         desc = 'Finish this choice before resolution continues.';
@@ -304,10 +305,10 @@ function actionDock(s, ui, p, actions) {
           c.cards
             .map(
               (id) =>
-                `<button class="btn" data-action="chooseResolutionCard" data-cardid="${escape(id)}" ${c.kind === 'bindingNegotiation' && definition(s, s.objects[id]).type === 'land' ? 'disabled' : ''}>${escape(s.objects[id].name)}</button>`,
+                `<button class="btn" data-action="chooseResolutionCard" data-cardid="${escape(id)}" ${['bindingNegotiation', 'revealDiscard'].includes(c.kind) && definition(s, s.objects[id]).type === 'land' ? 'disabled' : ''}>${escape(s.objects[id].name)}</button>`,
             )
             .join('') +
-          (c.kind !== 'exilePlay'
+          (c.kind !== 'exilePlay' && (c.kind !== 'revealDiscard' || !c.eligibleCards.length)
             ? '<button class="btn" data-action="skipResolutionCard">Choose none</button>'
             : '');
         break;
@@ -370,19 +371,21 @@ function actionDock(s, ui, p, actions) {
       d = definition(s, o),
       available = actions.some((a) => a.card === o.id && ['cast', 'playLand'].includes(a.type));
     title = o.name;
-    desc = o.warped
-      ? 'Warped: cast for its normal cost after the turn it was exiled. Normal timing and taxes apply.'
-      : o.plotted
-        ? 'Plotted: cast without paying its mana cost on a later turn, only during your main phase with an empty stack. Additional taxes still apply.'
-        : available
-          ? castingChoices(d)
-            ? 'Choose one mode, then any required target. Mana is paid when you cast.'
-            : d.target
-              ? 'Choose a target next. Mana is paid automatically.'
-              : d.type === 'land'
-                ? 'Playing a land does not use the stack.'
-                : 'Available mana sources will be tapped automatically.'
-          : 'Not playable right now. Check timing, available mana and targets.';
+    desc = o.adventured
+      ? 'Adventure resolved. Cast the main face from exile at its normal cost and timing.'
+      : o.warped
+        ? 'Warped: cast for its normal cost after the turn it was exiled. Normal timing and taxes apply.'
+        : o.plotted
+          ? 'Plotted: cast without paying its mana cost on a later turn, only during your main phase with an empty stack. Additional taxes still apply.'
+          : available
+            ? castingChoices(d)
+              ? 'Choose one mode, then any required target. Mana is paid when you cast.'
+              : d.target
+                ? 'Choose a target next. Mana is paid automatically.'
+                : d.type === 'land'
+                  ? 'Playing a land does not use the stack.'
+                  : 'Available mana sources will be tapped automatically.'
+            : 'Not playable right now. Check timing, available mana and targets.';
     buttons = `${actions.some((a) => a.type === 'plot' && a.card === o.id) ? `<button class="btn" data-action="plotSelected">Plot ${mana(d.plot)}</button>` : ''}${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">${d.cyclingType ? `${escape(d.cyclingType)}cycling` : 'Cycle'} ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${o.zone === 'graveyard' ? `Flashback ${mana(d.flashback)}` : d.type === 'land' ? 'Play land' : castingChoices(d) ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
   } else
     buttons = `<button class="btn primary advance-button" data-action="pass">${advanceLabel(s, p)} <span>→</span><small>Space</small></button>`;

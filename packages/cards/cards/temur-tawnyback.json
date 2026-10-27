@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "889d26d6-9e6c-4cc0-8e8e-dd932f705a20",
+  "name": "Temur Tawnyback",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Beast"],
+    "colors": ["G", "R", "U"],
+    "manaCost": "{2/G}{2/U}{2/R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, draw a card, then discard a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

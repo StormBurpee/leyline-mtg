@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0f222f3d-f02b-42b9-aedf-fb7ed92d4889",
+  "name": "Two-Headed Hunter // Twice the Rage",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Two-Headed Hunter",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/twice-the-rage",
+        "name": "Twice the Rage",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["R"],
+          "manaCost": "{1}{R}"
+        },
+        "rulesText": "Target creature gains double strike until end of turn. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            },
+            "effects": [
+              {
+                "op": "modify",
+                "target": "target",
+                "power": 0,
+                "toughness": 0,
+                "keywords": ["double strike"],
+                "until": "endOfTurn"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

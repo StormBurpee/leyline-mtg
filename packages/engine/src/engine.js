@@ -36,6 +36,7 @@ import {
   finishLegendChoice,
   finishCreatureTypeChoice,
   finishAuraEntryChoice,
+  finishEntryLifeChoice,
   finishTriggerOrder,
   finishTriggerTarget,
   finishTriggerTargets,
@@ -69,7 +70,7 @@ export function castProblem(
   if (d.type === 'land') return 'Lands are played, not cast.';
   if (d.plottedCast && s.turn <= o.plotted.turn) return 'Cast a plotted card only on a later turn.';
   if (
-    (d.plottedCast || (d.type !== 'instant' && !hasKeyword(s, o, 'flash'))) &&
+    (d.plottedCast || (d.type !== 'instant' && !d.keywords.includes('flash'))) &&
     !(s.active === p && main(s) && s.stack.length === 0)
   )
     return 'Cast this only during your main phase with an empty stack.';
@@ -146,6 +147,7 @@ function cast(s, p, c) {
   if (c.x !== undefined) o.chosenX = c.x;
   if (d.flashbackPaid) o.flashbackPaid = true;
   if (d.warpPaid) o.warpPaid = true;
+  if (d.adventureCast) o.adventureCast = true;
   delete o.castingFaceDown;
   if (d.faceDownCast) o.faceDown = true;
   s.stack.push({
@@ -155,7 +157,7 @@ function cast(s, p, c) {
       ? { castingCost: structuredClone(d.cost) }
       : {}),
     uncounterable: !!d.uncounterable,
-    name: o.faceDown ? 'Face-down creature' : o.name,
+    name: o.faceDown ? 'Face-down creature' : d.name,
     controller: p,
     source: ref(o),
     sourceKeywords: [...d.keywords],
@@ -167,6 +169,7 @@ function cast(s, p, c) {
     ...(plan.sacrifice ? { sacrifice: structuredClone(plan.sacrifice) } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
     ...(d.warpPaid ? { warpPaid: true } : {}),
+    ...(d.adventureCast ? { adventureCast: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
     ...(d.targetGroups
@@ -194,7 +197,7 @@ function finishCasting(s) {
   emit(s, 'cast', {
     player: p,
     objectId: o.id,
-    name: o.faceDown ? 'Face-down creature' : o.name,
+    name: o.faceDown ? 'Face-down creature' : d.name,
     target: c.target ?? null,
     ...(d.targetGroups ? { targets: structuredClone(c.targets) } : {}),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
@@ -203,6 +206,7 @@ function finishCasting(s) {
     ...(plan.sacrifice ? { sacrifice: structuredClone(plan.sacrifice) } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
     ...(d.warpPaid ? { warpPaid: true } : {}),
+    ...(d.adventureCast ? { adventureCast: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
   });
@@ -392,6 +396,7 @@ function handleChoice(s, p, c) {
       'optionalEffect',
       'exilePlay',
       'bindingNegotiation',
+      'revealDiscard',
       'exileToGraveyard',
     ].includes(choice.kind)
   ) {
@@ -406,6 +411,9 @@ function handleChoice(s, p, c) {
         'Choose the triggered ability targets.',
       );
       finishTriggerTargets(s, c.targets);
+      return;
+    case 'entryLife':
+      finishEntryLifeChoice(s, c);
       return;
     case 'auraEntry':
       finishAuraEntryChoice(s, c);
@@ -595,6 +603,12 @@ export function dispatch(state, command) {
  */
 export function legalActions(s, p, { x: exactX } = {}) {
   if (s.status === 'finished') return [];
+  if (s.choice?.kind === 'entryLife' && s.choice.player === p)
+    return [
+      { type: 'payEntryLife', pay: false },
+      ...(s.choice.payable ? [{ type: 'payEntryLife', pay: true }] : []),
+      { type: 'concede' },
+    ];
   if (s.choice?.kind === 'auraEntry' && s.choice.player === p)
     return [
       ...s.choice.cards.map((card) => ({ type: 'chooseAuraAttachment', card })),
@@ -781,6 +795,7 @@ export function replay(record) {
         '0.41.0',
         '0.42.0',
         '0.43.0',
+        '0.44.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

@@ -33,6 +33,8 @@ const FIELDS = new Set([
   'mana',
   'manaSacrifice',
   'manaConditions',
+  'manaLifeCosts',
+  'entryLifePayment',
   'manaRestrictions',
   'chooseCreatureType',
   'entryCounterBonus',
@@ -51,6 +53,8 @@ const FIELDS = new Set([
   'flashback',
   'plot',
   'warp',
+  'adventure',
+  'mainName',
   'kicker',
   'offspring',
   'disguise',
@@ -86,13 +90,18 @@ export class RegistryError extends Error {
     this.diagnostics = diagnostics;
   }
 }
-function validateCost(cost, path, errors, allowX = false) {
+function validateCost(cost, path, errors, allowX = false, allowTwobrid = false) {
   if (!plain(cost)) {
     errors.push(`${path}: expected a mana-cost object.`);
     return;
   }
   for (const [key, n] of Object.entries(cost))
-    if ((!MANA.has(key) && !(allowX && key === 'X' && n > 0 && n <= 10)) || !natural(n))
+    if (
+      (!MANA.has(key) &&
+        !(allowTwobrid && /^2\/[WUBRG]$/.test(key)) &&
+        !(allowX && key === 'X' && n > 0 && n <= 10)) ||
+      !natural(n)
+    )
       errors.push(`${path}.${key}: unsupported mana symbol or nonnegative integer amount.`);
 }
 function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
@@ -213,6 +222,7 @@ function validateEffects(
       addMana: ['mana'],
       impulseChoose: ['count'],
       bindingNegotiation: [],
+      revealDiscard: [],
       gainLife: ['amount', 'player'],
       loseLife: ['amount', 'player'],
       exileUntilSourceLeaves: [],
@@ -324,7 +334,10 @@ function validateEffects(
     }
     if (e.op === 'impulseChoose' && (!natural(e.count) || e.count > 1000))
       errors.push(`${p}.count: invalid count.`);
-    if (e.op === 'bindingNegotiation' && targetSpec(target)?.scope !== 'player')
+    if (
+      ['bindingNegotiation', 'revealDiscard'].includes(e.op) &&
+      targetSpec(target)?.scope !== 'player'
+    )
       errors.push(`${p}: requires a player target.`);
     if (e.op === 'addMana') {
       validateCost(e.mana, `${p}.mana`, errors);
@@ -538,7 +551,26 @@ export function validateDefinition(card) {
       !/^[A-Za-z][A-Za-z -]{0,79}$/.test(card.cyclingType))
   )
     errors.push(`${name}.cyclingType: expected a type name and a cycling cost.`);
-  validateCost(card.cost, `${name}.cost`, errors, true);
+  validateCost(card.cost, `${name}.cost`, errors, true, true);
+  const twobridCount = Object.entries(card.cost ?? {})
+    .filter(([symbol]) => /^2\/[WUBRG]$/.test(symbol))
+    .reduce((n, [, count]) => n + count, 0);
+  if (
+    twobridCount &&
+    (twobridCount > 5 ||
+      card.type === 'land' ||
+      card.cost.X ||
+      card.modes ||
+      card.kicker ||
+      card.offspring ||
+      card.disguise ||
+      card.flashback ||
+      card.plot ||
+      card.warp)
+  )
+    errors.push(
+      `${name}.cost: twobrid supports at most five symbols without other casting options.`,
+    );
   const contains = (value, predicate, seen = new Set(), depth = 0) => {
     if (!value || typeof value !== 'object' || seen.has(value)) return false;
     if (depth > 16) return true; // Reject rather than recurse into unbounded input.
@@ -594,6 +626,51 @@ export function validateDefinition(card) {
       card.maxSpeedKeywords.some((k) => !GRANTED_KEYWORDS.has(k)))
   )
     errors.push(`${name}.maxSpeedKeywords: unsupported keywords.`);
+  if (
+    card.mainName !== undefined &&
+    (!card.adventure ||
+      typeof card.mainName !== 'string' ||
+      !card.mainName.trim() ||
+      card.mainName.length > 200)
+  )
+    errors.push(`${name}.mainName: requires an Adventure and a valid main-face name.`);
+  if (card.adventure !== undefined) {
+    const adventure = card.adventure;
+    const forbidden = [
+      'adventure',
+      'mainName',
+      'modes',
+      'kicker',
+      'offspring',
+      'disguise',
+      'flashback',
+      'plot',
+      'warp',
+    ];
+    if (
+      !['creature', 'artifact', 'enchantment'].includes(card.type) ||
+      !card.mainName ||
+      card.token ||
+      card.cost?.X ||
+      Object.keys(card.cost ?? {}).some((key) => key.startsWith('2/')) ||
+      forbidden.slice(2).some((key) => card[key] !== undefined)
+    )
+      errors.push(
+        `${name}.adventure: requires a fixed-cost permanent without other casting options.`,
+      );
+    if (
+      !plain(adventure) ||
+      !['instant', 'sorcery'].includes(adventure.type) ||
+      adventure.cost?.X ||
+      Object.keys(adventure.cost ?? {}).some((key) => key.startsWith('2/')) ||
+      forbidden.some((key) => adventure[key] !== undefined)
+    )
+      errors.push(`${name}.adventure: requires a nonnested fixed-cost instant or sorcery.`);
+    else
+      errors.push(
+        ...validateDefinition(adventure).map((message) => `${name}.adventure: ${message}`),
+      );
+  }
   if (card.warp !== undefined) {
     validateCost(card.warp, `${name}.warp`, errors);
     if (
@@ -696,6 +773,27 @@ export function validateDefinition(card) {
         if (restriction === 'chosenCreatureType' && !card.chooseCreatureType)
           errors.push(`${name}: restricted mana requires a type choice.`);
       }
+  }
+  if (
+    card.entryLifePayment !== undefined &&
+    (card.type !== 'land' ||
+      card.token ||
+      !Number.isSafeInteger(card.entryLifePayment) ||
+      card.entryLifePayment < 1 ||
+      card.entryLifePayment > 1000)
+  )
+    errors.push(`${name}.entryLifePayment: expected 1–1000 life on a land.`);
+  if (card.manaLifeCosts !== undefined) {
+    if (!plain(card.manaLifeCosts)) errors.push(`${name}.manaLifeCosts: expected an object.`);
+    else
+      for (const [color, amount] of Object.entries(card.manaLifeCosts))
+        if (
+          !(Array.isArray(card.mana) ? card.mana : [card.mana]).includes(color) ||
+          !Number.isSafeInteger(amount) ||
+          amount < 1 ||
+          amount > 1000
+        )
+          errors.push(`${name}.manaLifeCosts: invalid production color or life amount.`);
   }
   if (card.manaConditions !== undefined) {
     if (!plain(card.manaConditions)) errors.push(`${name}.manaConditions: expected an object.`);

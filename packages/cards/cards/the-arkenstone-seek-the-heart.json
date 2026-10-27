@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "id": "09f09d0a-6054-4545-b81e-0295773cc5f0",
+  "name": "The Arkenstone // Seek the Heart",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": ["legendary"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{5}"
+  },
+  "rulesText": "Creatures you control get +1/+1.\nAt the beginning of your end step, draw a card.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "type": "creature"
+          },
+          {
+            "controller": "you"
+          }
+        ]
+      },
+      "power": 1,
+      "toughness": 1
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "adventure",
+      "mainName": "The Arkenstone",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/seek-the-heart",
+        "name": "Seek the Heart",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["W"],
+          "manaCost": "{2}{W}"
+        },
+        "rulesText": "Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle. (Then exile this card. You may cast the artifact later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "searchLibrary",
+                "amount": 1,
+                "where": {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "legendary": true
+                    }
+                  ]
+                },
+                "destination": "hand",
+                "reveal": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "id": "f61f4307-4eec-476a-97e5-d4d3da2b54c3",
+  "name": "Virtue of Loyalty // Ardenvale Fealty",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}"
+  },
+  "rulesText": "At the beginning of your end step, put a +1/+1 counter on each creature you control. Untap those creatures.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "amount": 1
+        },
+        {
+          "op": "untapAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Virtue of Loyalty",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/ardenvale-fealty",
+        "name": "Ardenvale Fealty",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["W"],
+          "manaCost": "{1}{W}"
+        },
+        "rulesText": "Create a 2/2 white Knight creature token with vigilance. (Then exile this card. You may cast the enchantment later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/adventure-vigilant-knight",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

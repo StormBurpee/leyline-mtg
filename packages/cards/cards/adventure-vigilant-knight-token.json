@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/adventure-vigilant-knight",
+  "name": "Adventure Vigilant Knight Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Knight"],
+    "colors": ["W"],
+    "manaCost": null,
+    "power": 2,
+    "toughness": 2,
+    "token": true
+  },
+  "rulesText": "Vigilance",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    }
+  ]
+}

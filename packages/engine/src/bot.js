@@ -195,9 +195,12 @@ export function chooseBotCommand(s, p) {
     switch (c.kind) {
       case 'exilePlay':
       case 'bindingNegotiation':
+      case 'revealDiscard':
       case 'exileToGraveyard': {
         const candidates = c.cards.filter(
-          (id) => c.kind !== 'bindingNegotiation' || definition(s, s.objects[id]).type !== 'land',
+          (id) =>
+            !['bindingNegotiation', 'revealDiscard'].includes(c.kind) ||
+            definition(s, s.objects[id]).type !== 'land',
         );
         candidates.sort((a, b) => value(s, s.objects[b]) - value(s, s.objects[a]));
         return { type: 'chooseResolutionCard', player: p, card: candidates[0] ?? null };
@@ -211,6 +214,12 @@ export function chooseBotCommand(s, p) {
         );
         return { type: 'chooseTriggerTargets', player: p, targets: plans[0] ?? {} };
       }
+      case 'entryLife':
+        return {
+          type: 'payEntryLife',
+          player: p,
+          pay: c.payable && !c.forcedTapped && s.players[p].life > c.amount + 3,
+        };
       case 'auraEntry': {
         const d = definition(s, s.objects[c.card]);
         const harmful =

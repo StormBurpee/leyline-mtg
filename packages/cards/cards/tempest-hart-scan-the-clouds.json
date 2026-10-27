@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "id": "5005df36-a100-492d-89b9-e221793cfb56",
+  "name": "Tempest Hart // Scan the Clouds",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Elk"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Trample\nWhenever you cast a spell with mana value 5 or greater, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "manaValue": {
+            "gte": 5
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Tempest Hart",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/scan-the-clouds",
+        "name": "Scan the Clouds",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["U"],
+          "manaCost": "{1}{U}"
+        },
+        "rulesText": "Draw two cards, then discard two cards. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "draw",
+                "target": "controller",
+                "amount": 2
+              },
+              {
+                "op": "discard",
+                "target": "controller",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

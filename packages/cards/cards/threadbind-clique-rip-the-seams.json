@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bd575e82-99e7-44c7-ab93-d33f5678e1ad",
+  "name": "Threadbind Clique // Rip the Seams",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Threadbind Clique",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/rip-the-seams",
+        "name": "Rip the Seams",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["W"],
+          "manaCost": "{2}{W}"
+        },
+        "rulesText": "Destroy target tapped creature. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "tapped": true
+                  },
+                  {
+                    "type": "creature"
+                  }
+                ]
+              }
+            },
+            "effects": [
+              {
+                "op": "destroy",
+                "target": "target"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

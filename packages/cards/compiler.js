@@ -35,7 +35,7 @@ const LEGACY_TARGETS = [
 ];
 export const EVENTS = EVENT_PRESETS;
 /** Compile data only. Unsupported behavior is a diagnostic, never a no-op fallback. */
-export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
+export function compileCard(source, { mechanics = {}, identities = {}, adventureDepth = 0 } = {}) {
   const invalidJSON = jsonDataProblem(source) ?? jsonDataProblem(mechanics);
   if (invalidJSON)
     return {
@@ -73,6 +73,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         else result.generic = (result.generic ?? 0) + amount;
       } else if (
         /^[WUBRGCX]$/.test(symbol) ||
+        /^2\/[WUBRG]$/.test(symbol) ||
         (/^[WUBRG]\/[WUBRG]$/.test(symbol) && symbol[0] !== symbol[2])
       )
         result[symbol] = (result[symbol] ?? 0) + 1;
@@ -137,6 +138,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'addMana',
           'impulseChoose',
           'bindingNegotiation',
+          'revealDiscard',
           'gainLife',
           'loseLife',
           'moveTarget',
@@ -190,6 +192,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         addMana: ['mana'],
         impulseChoose: ['amount'],
         bindingNegotiation: [],
+        revealDiscard: [],
         gainLife: ['target', 'amount'],
         loseLife: ['target', 'amount'],
         exileUntilSourceLeaves: ['target'],
@@ -564,6 +567,31 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           effects: effects(a.effects, `${path}.effects`),
         };
         break;
+      case 'adventure': {
+        fields(a, ['kind', 'mainName', 'spell'], path);
+        if (d.adventure) problem('DUPLICATE_ADVENTURE', path, 'Only one Adventure is supported.');
+        if (
+          adventureDepth > 0 ||
+          a.spell?.abilities?.some((ability) => ability.kind === 'adventure')
+        ) {
+          problem('NESTED_ADVENTURE', path, 'An Adventure cannot itself contain an Adventure.');
+          break;
+        }
+        const result = compileCard(a.spell, {
+          mechanics,
+          identities,
+          adventureDepth: adventureDepth + 1,
+        });
+        if (!result.ok)
+          diagnostics.push(
+            ...result.diagnostics.map((v) => ({ ...v, path: `${path}.spell.${v.path}` })),
+          );
+        else {
+          d.adventure = result.definition;
+          d.mainName = a.mainName;
+        }
+        break;
+      }
       case 'warp':
         fields(a, ['kind', 'cost'], path);
         if (d.warp) problem('DUPLICATE_WARP', path, 'Only one warp ability is supported.');
@@ -641,7 +669,12 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         d.cycling = mana(a.cost, `${path}.cost`);
         break;
       case 'mana':
-        fields(a, ['kind', 'produces', 'sacrificeSelf', 'conditions', 'restrictions'], path);
+        fields(
+          a,
+          ['kind', 'produces', 'sacrificeSelf', 'conditions', 'restrictions', 'lifeCosts'],
+          path,
+        );
+        if (a.lifeCosts !== undefined) d.manaLifeCosts = structuredClone(a.lifeCosts);
         if (a.restrictions !== undefined) d.manaRestrictions = structuredClone(a.restrictions);
         if (a.conditions !== undefined) d.manaConditions = structuredClone(a.conditions);
         if (a.sacrificeSelf !== undefined) d.manaSacrifice = a.sacrificeSelf;
@@ -758,12 +791,17 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         break;
       }
       case 'entry':
-        fields(a, ['kind', 'tapped', 'unless'], path);
+        fields(a, ['kind', 'tapped', 'unless', 'payLife'], path);
+        if (a.payLife !== undefined) {
+          if (a.unless !== undefined)
+            problem('UNSUPPORTED_ENTRY', path, 'Life entry and unless cannot share one clause.');
+          d.entryLifePayment = a.payLife;
+        }
         if (a.unless !== undefined) d.entersTappedUnless = structuredClone(a.unless);
         if (a.tapped !== true)
           problem('UNSUPPORTED_ENTRY', path, 'Only unconditional tapped entry is implemented.');
         if (d.entersTapped) problem('DUPLICATE_ENTRY', path, 'Entry replacement is repeated.');
-        if (a.unless === undefined) d.entersTapped = true;
+        if (a.unless === undefined && a.payLife === undefined) d.entersTapped = true;
         break;
       case 'anthem':
         fields(a, ['kind', 'power', 'toughness', 'where', 'excludeSource', 'keywords'], path);

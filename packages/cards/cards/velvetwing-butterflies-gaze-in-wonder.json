@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "70a702fe-1dd6-4d7b-a85a-45744ecad741",
+  "name": "Velvetwing Butterflies // Gaze in Wonder",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Insect"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Velvetwing Butterflies",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/gaze-in-wonder",
+        "name": "Gaze in Wonder",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["W"],
+          "manaCost": "{1}{W}"
+        },
+        "rulesText": "Tap one or two target creatures. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "tap",
+                "target": "target",
+                "targetGroup": "creatures"
+              }
+            ],
+            "targetGroups": [
+              {
+                "id": "creatures",
+                "selector": {
+                  "scope": "permanent",
+                  "where": {
+                    "type": "creature"
+                  }
+                },
+                "min": 1,
+                "max": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

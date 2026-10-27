@@ -1,0 +1,35 @@
+.meta-deck-details {
+  margin: 16px 0;
+  font-size: 12px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.meta-deck-details .meta-deck-source {
+  font-size: 12px;
+  margin: 0 0 12px;
+}
+.meta-deck-source a {
+  color: #d4be87;
+  text-underline-offset: 3px;
+}
+.meta-deck-details details {
+  border-top: 1px solid #ffffff20;
+  padding: 10px 0;
+}
+.meta-deck-details summary {
+  cursor: pointer;
+  color: #e1d6be;
+}
+.meta-deck-details ul {
+  padding-left: 20px;
+  margin: 8px 0;
+  max-height: 140px;
+  overflow-y: auto;
+}
+.meta-deck-details details p {
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+.meta-deck-blockers summary {
+  color: #e1b58b;
+}

@@ -16,6 +16,9 @@ export function meetsCondition(s, player, value, excludedIds = [], source = null
   if (value.kind === 'opponentLostLifeThisTurn')
     return s.players[1 - player].lifeLostTurn === s.turn;
   if (value.kind === 'controllerLostLifeThisTurn') return s.players[player].lifeLostTurn === s.turn;
+  // Extra turns are outside this two-player rules profile.
+  if (value.kind === 'controllerFirstTurns')
+    return s.active === player && Math.ceil(s.turn / 2) <= value.count;
   if (value.kind === 'controllerTurn') return s.active === player;
   if (value.kind === 'opponentTurn') return s.active !== player;
   if (['sourceAttacking', 'sourceEnteredThisTurn'].includes(value.kind)) {

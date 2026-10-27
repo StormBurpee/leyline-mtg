@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "997bdec5-f67b-4822-a3ba-c636e2685e8a",
+  "name": "Cruel Somnophage // Can't Wake Up",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Nightmare"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 0,
+    "toughness": 0
+  },
+  "rulesText": "Cruel Somnophage's power and toughness are each equal to the number of creature cards in all graveyards.",
+  "abilities": [
+    {
+      "kind": "baseStats",
+      "power": {
+        "kind": "count",
+        "zone": "graveyard",
+        "player": "all",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "graveyard",
+        "player": "all",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Cruel Somnophage",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/can-t-wake-up",
+        "name": "Can't Wake Up",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["U"],
+          "manaCost": "{1}{U}"
+        },
+        "rulesText": "Target player mills four cards. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "mill",
+                "target": "target",
+                "amount": 4
+              }
+            ],
+            "target": {
+              "scope": "player"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}
