@@ -92,3 +92,7 @@ Fixed attached stat/keyword bonuses, combat restrictions, no-untap restrictions,
 ### State-derived numeric values
 
 A closed expression language supports public-zone counts with stable filters, public hand/library counts, life totals, bounded sums and scaling. Effects evaluate when each instruction resolves; continuous and characteristic-defining statistics evaluate from live state. Numeric operations reject unsafe integer results. Token creation is bounded to 1,000 tokens per instruction. Hidden-zone characteristic queries and filters dependent on computed power, toughness or keywords are rejected to avoid information leaks and unsupported dependency cycles. Cast-time X choices and dynamic mana generation are not implemented. Fixed-stat copy exceptions omit corresponding characteristic-defining abilities under [CR 707.9d](https://media.wizards.com/2026/downloads/MagicCompRules%2020260925.txt).
+
+### Conditional continuous bonuses
+
+Self and attached bonuses support stable public-state comparisons, controlled-permanent thresholds, turn ownership, attacking status and source entry-turn state. Source-state conditions are currently continuous-only; computed-keyword/statistic dependency cycles are rejected. Attackers and blockers remain in combat through the end-of-combat priority window under [CR 511.3](https://media.wizards.com/2026/downloads/MagicCompRules%2020260925.txt). Nonbattlefield card counts exclude tokens. Conditional casting permissions and spell-history counters are not implemented.

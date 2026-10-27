@@ -1,3 +1,4 @@
+import { meetsCondition } from './conditions.js';
 import { effectValues, numericValue } from './numeric-values.js';
 import { spellProfile } from './spell-modes.js';
 import { chooseSearchCards } from './library-search.js';
@@ -37,6 +38,23 @@ function definition(s, o) {
   const d = rawDefinition(s, o),
     entry = { controller: o.controller, source: { id: o.id, incarnation: o.incarnation } };
   const effects = (list) => list?.map((e) => effectValues(s, e, entry));
+  const activeAttached = (d.conditionalBonuses ?? []).filter(
+    (b) => b.affects === 'attached' && meetsCondition(s, o.controller, b.condition, [], o),
+  );
+  const attachment = activeAttached.length
+    ? {
+        ...d.attachmentBonus,
+        power: numericValue(s, d.attachmentBonus?.power ?? 0, entry),
+        toughness: numericValue(s, d.attachmentBonus?.toughness ?? 0, entry),
+        keywords: [...(d.attachmentBonus?.keywords ?? [])],
+      }
+    : null;
+  if (attachment)
+    for (const bonus of activeAttached) {
+      attachment.power += numericValue(s, bonus.power, entry);
+      attachment.toughness += numericValue(s, bonus.toughness, entry);
+      attachment.keywords.push(...(bonus.keywords ?? []));
+    }
   return {
     ...d,
     ...(d.effects ? { effects: effects(d.effects) } : {}),
@@ -62,6 +80,7 @@ function definition(s, o) {
           },
         }
       : {}),
+    ...(attachment ? { attachmentBonus: attachment } : {}),
   };
 }
 const value = (s, o) => {

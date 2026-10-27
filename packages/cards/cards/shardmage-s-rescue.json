@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "406247ee-2b86-4068-b5fa-65cdc83a82f4",
+  "name": "Shardmage's Rescue",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura"],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Flash\nEnchant creature you control\nAs long as this Aura entered this turn, enchanted creature has hexproof.\nEnchanted creature gets +1/+1.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "attached",
+      "condition": {
+        "kind": "sourceEnteredThisTurn"
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["hexproof"]
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

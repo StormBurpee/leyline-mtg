@@ -660,6 +660,16 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           ),
         };
         break;
+      case 'conditionalBonus':
+        fields(a, ['kind', 'affects', 'condition', 'power', 'toughness', 'keywords'], path);
+        (d.conditionalBonuses ??= []).push(
+          Object.fromEntries(
+            ['affects', 'condition', 'power', 'toughness', 'keywords']
+              .filter((k) => a[k] !== undefined)
+              .map((k) => [k, structuredClone(a[k])]),
+          ),
+        );
+        break;
       case 'baseStats':
       case 'selfBonus':
         fields(a, ['kind', 'power', 'toughness'], path);

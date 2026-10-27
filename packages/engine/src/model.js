@@ -6,7 +6,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.32.0';
+export const VERSION = '0.33.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -130,6 +130,15 @@ function attachmentApplies(s, equipment, target) {
       : legalEquipmentAttachment(s, equipment, target))
   );
 }
+function conditionalApplies(s, source, target, bonus) {
+  return (
+    target.zone === 'battlefield' &&
+    (bonus.affects === 'self'
+      ? source.id === target.id && source.incarnation === target.incarnation
+      : attachmentApplies(s, source, target)) &&
+    meetsCondition(s, source.controller, bonus.condition, [], source)
+  );
+}
 export function skipsUntap(s, object) {
   return battlefield(s).some(
     (source) =>
@@ -149,6 +158,9 @@ export function keywords(s, o) {
             ? (d.attachmentBonus.keywords ?? [])
             : []),
           ...(e?.kind === 'anthem' && staticApplies(s, source, o, e) ? (e.keywords ?? []) : []),
+          ...(d.conditionalBonuses ?? []).flatMap((bonus) =>
+            conditionalApplies(s, source, o, bonus) ? (bonus.keywords ?? []) : [],
+          ),
         ];
       }),
       ...s.modifiers
@@ -186,6 +198,14 @@ export function stats(s, o) {
           source: ref(a),
         });
       }
+      for (const bonus of d.conditionalBonuses ?? [])
+        if (conditionalApplies(s, a, o, bonus)) {
+          power += numericValue(s, bonus.power, { controller: a.controller, source: ref(a) });
+          toughness += numericValue(s, bonus.toughness, {
+            controller: a.controller,
+            source: ref(a),
+          });
+        }
       const effect = d.static;
       if (effect?.kind === 'anthem' && staticApplies(s, a, o, effect)) {
         power += numericValue(s, effect.power, { controller: a.controller, source: ref(a) });
@@ -260,6 +280,7 @@ export function addObject(s, name, owner, zone = 'library') {
     damage: 0,
     deathtouchDamage: false,
     controlledSince: s.turn,
+    ...(zone === 'battlefield' ? { enteredTurn: s.turn } : {}),
     token: !!d.token,
     attachedTo: null,
   };
@@ -359,7 +380,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     for (const trigger of definition(s, watcher).triggers ?? [])
       if (
         matchesEvent(trigger.event, event === 'enters' ? 'enter' : event, facts, watcher) &&
-        meetsCondition(s, watcher.controller, trigger.condition)
+        meetsCondition(s, watcher.controller, trigger.condition, [], watcher)
       ) {
         queueTrigger(
           s,
@@ -470,6 +491,8 @@ export function move(s, o, to, departureContext = null) {
   o.deathtouchDamage = false;
   o.tapped = false;
   o.controlledSince = s.turn;
+  if (to === 'battlefield') o.enteredTurn = s.turn;
+  else delete o.enteredTurn;
   o.attachedTo = null;
   delete o.chosenCreatureType;
   delete o.playPermission;

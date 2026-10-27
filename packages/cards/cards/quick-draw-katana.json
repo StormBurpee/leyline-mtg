@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "604ef241-df8f-48f8-8680-f9ed77ff30ae",
+  "name": "Quick-Draw Katana",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": [],
+    "manaCost": "{2}"
+  },
+  "rulesText": "During your turn, equipped creature gets +2/+0 and has first strike. (It deals combat damage before creatures without first strike.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "equip",
+      "cost": "{2}"
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "attached",
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "power": 2,
+      "toughness": 0,
+      "keywords": ["first strike"]
+    }
+  ]
+}

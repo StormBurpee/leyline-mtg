@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "34bdeca4-b1e0-4fa3-afe4-bec743a080b8",
+  "name": "Gaelicat",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Flying, vigilance\nAs long as you control two or more artifacts, this creature gets +2/+0.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "artifact"
+              }
+            ]
+          }
+        },
+        "right": 2,
+        "operator": "gte"
+      },
+      "power": 2,
+      "toughness": 0
+    }
+  ]
+}

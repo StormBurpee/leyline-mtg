@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6103f294-f920-4307-af80-d44cc71167fd",
+  "name": "Kitesail Corsair",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Pirate"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "This creature has flying as long as it's attacking.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "sourceAttacking"
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["flying"]
+    }
+  ]
+}

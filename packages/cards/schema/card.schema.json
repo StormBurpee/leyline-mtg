@@ -1573,6 +1573,35 @@
               "required": ["toughness"]
             }
           ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "conditionalBonus"
+            },
+            "affects": {
+              "enum": ["self", "attached"]
+            },
+            "condition": {
+              "$ref": "#/$defs/condition"
+            },
+            "power": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "toughness": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": ["kind", "affects", "condition", "power", "toughness"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1604,6 +1633,101 @@
             }
           },
           "required": ["kind", "count", "where"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "controllerLostLifeThisTurn"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "controllerTurn"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "sourceAttacking"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "sourceEnteredThisTurn"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "compare"
+            },
+            "left": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "right": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "operator": {
+              "enum": ["eq", "ne", "lt", "lte", "gt", "gte"]
+            }
+          },
+          "required": ["kind", "left", "right", "operator"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "all"
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/condition"
+              },
+              "minItems": 1,
+              "maxItems": 8
+            }
+          },
+          "required": ["kind", "conditions"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "any"
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/condition"
+              },
+              "minItems": 1,
+              "maxItems": 8
+            }
+          },
+          "required": ["kind", "conditions"],
           "additionalProperties": false
         }
       ]

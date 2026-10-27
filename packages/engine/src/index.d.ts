@@ -169,8 +169,20 @@ export type Effect =
       tapped?: boolean;
     };
 export type StateCondition =
-  | { kind: 'opponentLostLifeThisTurn' }
-  | { kind: 'controlAtLeast'; count: NumericValue; where: CardPredicate };
+  | { kind: 'opponentLostLifeThisTurn' | 'controllerLostLifeThisTurn' | 'controllerTurn' }
+  | { kind: 'controlAtLeast'; count: number; where: CardPredicate }
+  | {
+      kind: 'compare';
+      left: NumericValue;
+      right: NumericValue;
+      operator: 'eq' | 'ne' | 'lt' | 'lte' | 'gt' | 'gte';
+    }
+  | { kind: 'all' | 'any'; conditions: StateCondition[] };
+export type ContinuousCondition =
+  | StateCondition
+  | { kind: 'sourceAttacking' | 'sourceEnteredThisTurn' }
+  | { kind: 'all' | 'any'; conditions: ContinuousCondition[] };
+
 export interface CardDefinition {
   readonly name: string;
   readonly type: CardType;
@@ -210,6 +222,13 @@ export interface CardDefinition {
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
   readonly baseStats?: { power?: NumericValue; toughness?: NumericValue };
+  readonly conditionalBonuses?: readonly {
+    affects: 'self' | 'attached';
+    condition: ContinuousCondition;
+    power: NumericValue;
+    toughness: NumericValue;
+    keywords?: readonly string[];
+  }[];
   readonly selfBonus?: { power: NumericValue; toughness: NumericValue };
   readonly aura?: 'pacifism' | 'creature';
   readonly attachmentBonus?: {
@@ -270,6 +289,7 @@ export interface GameObject {
   damage: number;
   deathtouchDamage: boolean;
   controlledSince: number;
+  enteredTurn?: number;
   token: boolean;
   attachedTo: ObjectTarget | null;
   faceDown?: boolean;

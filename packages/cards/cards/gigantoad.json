@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fa5e4aa5-e2cb-4c8c-91cb-554bec0f21d4",
+  "name": "Gigantoad",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Frog"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "As long as you control seven or more lands, this creature gets +2/+2.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "land"
+              }
+            ]
+          }
+        },
+        "right": 7,
+        "operator": "gte"
+      },
+      "power": 2,
+      "toughness": 2
+    }
+  ]
+}

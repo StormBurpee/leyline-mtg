@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fd0980ae-eabf-45da-98e7-23d81bfa185a",
+  "name": "Echo of Dusk",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Spirit"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Descend 4 \u2014 As long as there are four or more permanent cards in your graveyard, this creature gets +1/+1 and has lifelink.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "not": {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            }
+          }
+        },
+        "right": 4,
+        "operator": "gte"
+      },
+      "power": 1,
+      "toughness": 1,
+      "keywords": ["lifelink"]
+    }
+  ]
+}

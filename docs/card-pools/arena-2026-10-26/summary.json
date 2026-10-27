@@ -4,8 +4,8 @@
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
     "packages/engine/src/registry.js": "282e2a6da52197795ab6c7eea9972106f6a16eb638b1df78038c2da23042c3ac",
-    "packages/engine/src/definition-validation.js": "90395f7762ed4a45f0a5893f380c4fb0b09e0e6c1bf29cabd6d864b0d69c9270",
-    "packages/engine/src/condition-schema.js": "5ae7a42619debe71a3aa585ef1b84015ab8b37a4d6c69e1e37180375b647567b",
+    "packages/engine/src/definition-validation.js": "44bf988068ae2524db0f597a02916567ae61088e606668adafdc214424ea129d",
+    "packages/engine/src/condition-schema.js": "249a5c1a2ea6554fe4151d06809b82983234ac734dd09e5ef4c7635b9da2481e",
     "packages/engine/src/selectors.js": "aed0814cc9f5248e16f7f54a62c2c6ac34181ec8fdcaf708eeb11afba9dddfc3",
     "packages/engine/src/value-schema.js": "0cedbdb46ae39b9426932244b5e9d9b6bce2d2605eb321c01e4256c0b8bcdfd9",
     "packages/engine/src/events.js": "703c8be329d05a8e987bc438413f2d90cdbd2ccb350f8b1b9a475182169b9d70",
@@ -25,10 +25,10 @@
     "excluded_alchemy": 3
   },
   "coverage": {
-    "unsupported": 13088,
+    "unsupported": 13067,
     "no_exact_forge_match": 685,
     "compiler_candidate": 597,
-    "curated": 962
+    "curated": 983
   },
   "layouts": {
     "normal": 14416,
@@ -45,15 +45,15 @@
     "case": 12
   },
   "keywordsOnUnimplementedCards": {
-    "Flying": 1480,
+    "Flying": 1476,
     "Trample": 493,
-    "Vigilance": 419,
-    "Enchant": 383,
+    "Vigilance": 418,
+    "Enchant": 382,
     "Transform": 365,
-    "Flash": 346,
+    "Flash": 345,
     "Mill": 333,
     "Haste": 322,
-    "Equip": 311,
+    "Equip": 309,
     "Scry": 289,
     "Reach": 267,
     "Menace": 266,
@@ -152,7 +152,6 @@
     "Teamwork": 17,
     "Suspect": 16,
     "Storm": 16,
-    "Descend": 16,
     "Coven": 16,
     "Converge": 16,
     "Constellation": 16,
@@ -175,6 +174,7 @@
     "Morbid": 13,
     "Exploit": 13,
     "Undergrowth": 13,
+    "Descend": 12,
     "Outlast": 12,
     "Renew": 12,
     "Cleave": 12,
@@ -445,16 +445,16 @@
     "Burning Chains": 1
   },
   "diagnostics": {
-    "Unreferenced or unsupported SVar": 11658,
+    "Unreferenced or unsupported SVar": 11653,
     "Unsupported spell field": 9508,
     "Unsupported spell opcode": 6848,
-    "Unsupported trigger field": 4952,
-    "unsupported field S.": 3014,
-    "Unsupported trigger mode": 2991,
+    "Unsupported trigger field": 4951,
+    "unsupported field S.": 2992,
+    "Unsupported trigger mode": 2990,
     "Unsupported mana symbol": 2550,
     "Unsupported supertype or card type.": 2408,
     "Unsupported targeted zone transition.": 1664,
-    "Unsupported ability opcode": 1416,
+    "Unsupported ability opcode": 1415,
     "Unsupported target predicate": 1243,
     "Only source +1/+1 counters on abilities are supported.": 968,
     "Keywords on this card type require manual review.": 681,
@@ -463,12 +463,12 @@
     "Pump needs a creature target or an activated source.": 476,
     "SubAbility references must point to a DB instruction.": 447,
     "Unsupported cast trigger predicate": 412,
-    "unsupported keyword Enchant": 363,
+    "unsupported keyword Enchant": 362,
     "Only one tap ability producing one mana of a listed color is supported.": 354,
     "Only an unconditional self enters-tapped replacement is supported.": 352,
     "DealDamage requires a supported target predicate.": 349,
     "unsupported field AI.": 317,
-    "unsupported keyword Equip": 312,
+    "unsupported keyword Equip": 310,
     "NumDmg must be a literal nonnegative integer.": 293,
     "CounterNum must be a literal nonnegative integer.": 261,
     "Only Defined Self is supported for source pumps.": 251,
@@ -1110,5 +1110,5 @@
       "sha256": "22e4f4e89709f3f96d9ea947475ea026c8a8232cbb2cf00e81c13526c986ad23"
     }
   ],
-  "reclassifiedWithEngine": "0.32.0"
+  "reclassifiedWithEngine": "0.33.0"
 }

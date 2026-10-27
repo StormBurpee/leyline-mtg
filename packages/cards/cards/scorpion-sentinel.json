@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5e53fe9f-9995-47ff-85e9-f09b70d7af15",
+  "name": "Scorpion Sentinel",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot", "Scorpion"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "As long as you control seven or more lands, this creature gets +3/+0.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "land"
+              }
+            ]
+          }
+        },
+        "right": 7,
+        "operator": "gte"
+      },
+      "power": 3,
+      "toughness": 0
+    }
+  ]
+}

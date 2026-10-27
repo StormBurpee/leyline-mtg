@@ -1,7 +1,7 @@
 import { definition, isAttacking, isBlocking, requireRule } from './model.js';
 import { matchesFilter } from './selectors.js';
 /** Resolve public-state values once per instruction or continuous-characteristic query. */
-export function numericValue(state, value, { controller, source = null } = {}) {
+export function numericValue(state, value, { controller, source = null, excludedIds = [] } = {}) {
   if (typeof value === 'number') return value;
   let result = 0;
   const players =
@@ -11,22 +11,28 @@ export function numericValue(state, value, { controller, source = null } = {}) {
       result = state.players[players[0]].life;
       break;
     case 'sum':
-      result = value.values.reduce((n, v) => n + numericValue(state, v, { controller, source }), 0);
+      result = value.values.reduce(
+        (n, v) => n + numericValue(state, v, { controller, source, excludedIds }),
+        0,
+      );
       break;
     case 'scale':
-      result = value.factor * numericValue(state, value.value, { controller, source });
+      result = value.factor * numericValue(state, value.value, { controller, source, excludedIds });
       break;
     case 'count':
       if (['hand', 'library'].includes(value.zone)) {
         result = players.reduce(
           (n, p) =>
             n +
-            (state.players[p][value.zone]?.length ?? state.players[p][`${value.zone}Count`] ?? 0),
+            (state.players[p][value.zone]?.filter((id) => !state.objects[id]?.token).length ??
+              state.players[p][`${value.zone}Count`] ??
+              0),
           0,
         );
         break;
       }
       result = Object.values(state.objects).filter((o) => {
+        if (excludedIds.includes(o.id) || (value.zone !== 'battlefield' && o.token)) return false;
         if (
           o.zone !== value.zone ||
           !players.includes(value.zone === 'battlefield' ? o.controller : o.owner)

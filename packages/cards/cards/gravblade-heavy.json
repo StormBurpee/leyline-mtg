@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "67821712-e58f-4fee-81af-021059ac72ea",
+  "name": "Gravblade Heavy",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "As long as you control an artifact, this creature gets +1/+0 and has deathtouch.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "artifact"
+              }
+            ]
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      },
+      "power": 1,
+      "toughness": 0,
+      "keywords": ["deathtouch"]
+    }
+  ]
+}

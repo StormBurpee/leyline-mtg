@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.33.0 — Conditional continuous bonuses
+
+- Add self and attached continuous bonuses with public comparisons, turn ownership, source attacking/entry-turn state, and stable controlled-permanent conditions. Avoid evaluating unnecessary derived facts and reject dependency cycles.
+- Add 21 full-text Standard cards, including Goblin Tomb Raider, Twinblade Paladin, Knife and Shardmage’s Rescue. Catalog: 995 cards and 27 tokens.
+- Keep combat membership until the end-of-combat step ends. Exclude tokens temporarily outside the battlefield from card counts.
+- Conditional casting permissions, spell-count history and unsupported card clauses remain rejected.
+
 ## 0.32.0 — State-derived values and creature statistics
 
 - Add bounded, data-only numeric expressions for public zone counts, life totals, sums and scaling. Resolve instruction values at resolution and continuous bonuses against live state. Hidden zones expose counts only, not characteristic queries.
