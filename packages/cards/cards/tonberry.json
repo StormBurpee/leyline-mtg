@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a26f3cbb-39b5-4688-92f7-26534613a9f3",
+  "name": "Tonberry",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Salamander", "Horror"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "This creature enters tapped with a stun counter on it. (If it would become untapped, remove a stun counter from it instead.)\nChef's Knife \u2014 During your turn, this creature has first strike and deathtouch.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "entryStunCounters",
+      "amount": 1
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["first strike", "deathtouch"]
+    }
+  ]
+}

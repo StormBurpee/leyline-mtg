@@ -1,5 +1,6 @@
 import {
   notifyTriggers,
+  untapObject,
   skipsUntap,
   controlled,
   draw,
@@ -25,7 +26,7 @@ export function nextTurn(s) {
   s.passes = 0;
   s.combat = { attackers: [], blocks: {}, blocked: [], firstEligible: [], hasFirst: false };
   s.players[s.active].landsPlayed = 0;
-  for (const o of controlled(s, s.active)) if (!skipsUntap(s, o)) o.tapped = false;
+  for (const o of controlled(s, s.active)) if (!skipsUntap(s, o)) untapObject(s, o);
   emit(s, 'turn', { player: s.active });
   notifyTriggers(s, 'step', { player: s.active, step: 'upkeep' });
 }

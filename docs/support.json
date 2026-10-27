@@ -1,5 +1,5 @@
 {
-  "version": "0.35.0",
+  "version": "0.36.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -218,6 +218,28 @@
       "keywords": [],
       "opcodes": ["draw", "loseLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ambling Stormshell",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["stunOn", "draw", "untap"],
+      "ward": {
+        "mana": {
+          "generic": 2
+        }
+      },
+      "triggers": [
+        "selfAttacks",
+        {
+          "event": "cast",
+          "controller": "you",
+          "filter": {
+            "subtype": "Turtle"
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -2621,10 +2643,26 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Fractal Mascot",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Frantic Strength",
       "type": "enchantment",
       "keywords": ["flash"],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Freeze in Place",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn", "scry"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -3046,6 +3084,14 @@
       "keywords": [],
       "opcodes": ["destroy", "gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Grappling Kraken",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": ["controllerLandEnters"],
       "activatedAbilities": 0
     },
     {
@@ -5173,6 +5219,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Out Cold",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn", "token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Out of Air",
       "type": "instant",
       "keywords": [],
@@ -6208,6 +6262,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Rowdy Snowballers",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Rugged Highlands",
       "type": "land",
       "keywords": [],
@@ -6941,6 +7003,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sleep-Cursed Faerie",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["untap"],
+      "ward": {
+        "mana": {
+          "generic": 2
+        }
+      },
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Smaug's Fury",
       "type": "instant",
       "keywords": [],
@@ -7216,6 +7291,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Stall Out",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stand Up for Yourself",
       "type": "instant",
       "keywords": [],
@@ -7393,6 +7476,14 @@
       "opcodes": ["surveil"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Succumb to the Cold",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Sudden Strike",
@@ -8052,6 +8143,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["mill"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tonberry",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -8782,6 +8881,14 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Waylaying Pirates",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
     },
     {
       "name": "Well-Worn Spatula",

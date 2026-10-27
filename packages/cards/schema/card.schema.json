@@ -1094,6 +1094,25 @@
           },
           "required": ["op", "sourceGroup", "victimGroup"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "addStunCounters"
+            },
+            "target": {
+              "enum": ["source", "attached", "target"]
+            },
+            "targetGroup": {
+              "type": "string"
+            },
+            "amount": {
+              "$ref": "#/$defs/numericValue"
+            }
+          },
+          "required": ["op", "target", "amount"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1688,6 +1707,21 @@
             }
           },
           "required": ["kind", "scope", "change", "amount"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "entryStunCounters"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "required": ["kind", "amount"],
           "additionalProperties": false
         }
       ]

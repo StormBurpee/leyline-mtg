@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a17633aa-b1a7-4ae5-b051-6747975d8a2f",
+  "name": "Sleep-Cursed Faerie",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying, ward {2}\nThis creature enters tapped with three stun counters on it. (If it would become untapped, remove a stun counter from it instead.)\n{1}{U}: Untap this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{U}"
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "source"
+        }
+      ]
+    },
+    {
+      "kind": "entryStunCounters",
+      "amount": 3
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.36.0 — Stun counters
+
+- Apply stun-counter replacement to normal, explicit and group untaps. Consume only one counter per actual untap event; leave counters on already untapped permanents and when another effect skips untapping. Clear counters on zone changes.
+- Support entering with stun counters and targeted/source/group counter placement. Show stun counts in card inspection and score grouped tempo spells in the bot.
+- Add 11 complete Standard cards, including Sleep-Cursed Faerie, Out Cold, Ambling Stormshell and Succumb to the Cold. Catalog: 1061 cards and 27 tokens.
+
 ## 0.35.0 — Grouped targets and creature fights
 
 - Add ordered target groups with cardinality, distinctness and cross-group exclusions. Check legality per target at resolution, resolve partially legal spells and trigger ward once per targeted permanent.

@@ -58,7 +58,7 @@ export function decisionCard(
   const image = m?.image;
   const details =
     object.zone === 'battlefield' && d.type === 'creature'
-      ? `${stats(state, object).power}/${stats(state, object).toughness}${object.tapped ? ' · Tapped' : ' · Untapped'}${object.plusCounters ? ` · ${object.plusCounters} +1/+1 counters` : ''}`
+      ? `${stats(state, object).power}/${stats(state, object).toughness}${object.tapped ? ' · Tapped' : ' · Untapped'}${object.plusCounters ? ` · ${object.plusCounters} +1/+1 counters` : ''}${object.stunCounters ? ` · ${object.stunCounters} stun counters` : ''}`
       : (m?.type_line ?? d.type);
   const rules = concealed ? 'Colorless 2/2 creature with ward {2}.' : (m?.oracle_text ?? d.text);
   return `<article class="decision-card-tile ${selected ? 'is-selected' : ''} ${disabled ? 'is-ineligible' : ''}" data-search="${esc(name.toLowerCase())}">
