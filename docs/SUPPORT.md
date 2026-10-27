@@ -35,6 +35,12 @@ This is a small executable kernel, not a full Magic implementation. A name appea
 - Legendary permanents: explicit controller choices in APNAP order, simultaneous graveyard placement alongside other state-based actions, and retained death/enter triggers. Indestructible does not prevent the legend rule.
 - State-based loss from life or empty-library draw, lethal/zero-toughness/deathtouch deaths, token cleanup and invalid Aura attachments.
 
+## Further Standard expansion (v0.27)
+
+- Two-color hybrid mana symbols reserve fixed colored costs, select actual payment colors and consume floating mana only once. Monocolored-hybrid ({2/W}), Phyrexian and variable-X costs remain unsupported.
+- Intrinsically uncounterable spells use the same counter prevention as Cavern-paid creatures. They still require legal targets and can fail to resolve if all targets become illegal.
+- New authored definitions include Impact Tremors, Warleader's Call, Primeval Bounty, Tatyova, Spell Snare, Disdainful Stroke, Pyroclasm, Pond Prophet and other hybrid creatures. Complete rules-text matches are compiled; no partial vanilla definitions are admitted.
+
 ## Requested Rakdos deck (v0.25)
 
 The exact 60-card default in `docs/decks/storm-rakdos.txt` is executable. This adds all 18 formerly missing nonbasic definitions, not substitute cards.

@@ -6,11 +6,11 @@ import {
   effectTargetCompatible,
   validateFilter,
 } from './selectors.js';
-import { CARD_TYPES, primaryType, KEYWORD_NAMES } from './types.js';
+import { CARD_TYPES, primaryType, KEYWORD_NAMES, HYBRID_SYMBOLS } from './types.js';
 
 const TYPES = new Set(CARD_TYPES);
 const COLORS = new Set(['W', 'U', 'B', 'R', 'G']);
-const MANA = new Set([...COLORS, 'C', 'generic']);
+const MANA = new Set([...COLORS, 'C', 'generic', ...HYBRID_SYMBOLS]);
 const KEYWORDS = new Set(KEYWORD_NAMES);
 const FIELDS = new Set([
   'name',
@@ -46,6 +46,7 @@ const FIELDS = new Set([
   'cannotAttack',
   'cannotBlock',
   'unblockable',
+  'uncounterable',
   'etb',
   'aura',
   'static',
@@ -218,7 +219,9 @@ function validateEffects(effects, path, target, errors) {
       errors.push(`${p}: requires a player target.`);
     if (e.op === 'addMana') {
       validateCost(e.mana, `${p}.mana`, errors);
-      if (e.mana?.generic !== undefined)
+      if (
+        Object.keys(e.mana ?? {}).some((symbol) => !['W', 'U', 'B', 'R', 'G', 'C'].includes(symbol))
+      )
         errors.push(`${p}.mana: mana production cannot be generic.`);
     }
     if (e.op === 'token') {
@@ -464,6 +467,7 @@ export function validateDefinition(card) {
     'cannotAttack',
     'cannotBlock',
     'unblockable',
+    'uncounterable',
   ])
     if (card[key] !== undefined && typeof card[key] !== 'boolean')
       errors.push(`${name}.${key}: expected a boolean.`);

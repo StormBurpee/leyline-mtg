@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/beast-token",
+  "name": "Beast Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Beast"],
+    "colors": ["G"],
+    "manaCost": null,
+    "power": 3,
+    "toughness": 3,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

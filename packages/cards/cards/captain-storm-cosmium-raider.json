@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "431e85e3-15e6-471b-ba71-6058394c9a96",
+  "name": "Captain Storm, Cosmium Raider",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Pirate"],
+    "colors": ["R", "U"],
+    "manaCost": "{U}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever an artifact you control enters, put a +1/+1 counter on target Pirate you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "subtype": "Pirate"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

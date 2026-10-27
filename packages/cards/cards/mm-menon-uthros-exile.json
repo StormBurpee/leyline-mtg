@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6c05b882-51d9-43d8-93b8-c3317590f76a",
+  "name": "Mm'menon, Uthros Exile",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Jellyfish", "Advisor"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U}{R}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever an artifact you control enters, put a +1/+1 counter on target creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

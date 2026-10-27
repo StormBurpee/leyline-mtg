@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9a18fb98-796a-43b1-8157-e3afca53a1c0",
+  "name": "Eject",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{3}{U}"
+  },
+  "rulesText": "This spell can't be countered.\nReturn target nonland permanent to its owner's hand.\nDraw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "not": {
+            "type": "land"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target"
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "uncounterable"
+    }
+  ]
+}

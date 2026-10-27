@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a0037ff8-64db-45dd-bba1-db5c49095083",
+  "name": "Masked Meower",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spider", "Cat", "Hero"],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Haste\nDiscard a card, Sacrifice this creature: Draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true,
+        "discard": 1
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

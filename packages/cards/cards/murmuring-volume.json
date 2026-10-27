@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4baa7847-dfcc-4aa3-aa64-2deeaa3f013b",
+  "name": "Murmuring Volume",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Book"],
+    "colors": [],
+    "manaCost": "{3}"
+  },
+  "rulesText": "{T}: Add one mana of any color.\n{2}, {T}, Discard a card: Draw a card.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["W", "U", "B", "R", "G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{2}",
+        "discard": 1
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dfb13eca-55fd-4ac6-aee3-2bdbfe9e1c4e",
+  "name": "Punk Frogs",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Frog", "Mutant", "Rebel"],
+    "colors": ["G", "U"],
+    "manaCost": "{3}{G/U}{G/U}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{3}"
+      }
+    }
+  ]
+}

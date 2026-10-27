@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fefef024-3a05-4221-bb74-419ee08716e5",
+  "name": "Pretending Poxbearers",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Citizen", "Ally"],
+    "colors": ["B", "W"],
+    "manaCost": "{1}{W/B}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature dies, create a 1/1 white Ally creature token.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/ally-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

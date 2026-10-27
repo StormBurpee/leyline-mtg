@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f6abdf34-cfdc-465c-b067-cdebb659406e",
+  "name": "Elfsworn Giant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}{G}",
+    "power": 5,
+    "toughness": 3
+  },
+  "rulesText": "Reach (This creature can block creatures with flying.)\nLandfall — Whenever a land you control enters, create a 1/1 green Elf Warrior creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/elf-warrior-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

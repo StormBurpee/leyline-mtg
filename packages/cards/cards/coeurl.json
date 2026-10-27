@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "00d1596a-c3e2-4109-86da-388934a0c652",
+  "name": "Coeurl",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Beast"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{1}{W}, {T}: Tap target nonenchantment creature.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "mana": "{1}{W}"
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "not": {
+                "type": "enchantment"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6eabebdf-c1a3-4789-a67f-859f0957c5df",
+  "name": "Pond Prophet",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Frog", "Advisor"],
+    "colors": ["G", "U"],
+    "manaCost": "{G/U}{G/U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

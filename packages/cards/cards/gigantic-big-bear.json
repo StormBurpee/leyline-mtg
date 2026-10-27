@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "88d7bd11-7b1d-426c-8552-01448531c6ad",
+  "name": "Gigantic Big Bear",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bear"],
+    "colors": ["G"],
+    "manaCost": "{5}{G}{G}",
+    "power": 10,
+    "toughness": 7
+  },
+  "rulesText": "This spell can't be countered.\nHexproof, haste",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "hexproof"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "uncounterable"
+    }
+  ]
+}

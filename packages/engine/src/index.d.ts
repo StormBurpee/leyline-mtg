@@ -2,7 +2,8 @@
 export type CardType = 'land' | 'creature' | 'instant' | 'sorcery' | 'artifact' | 'enchantment';
 export type PlayerId = 0 | 1;
 export type Color = 'W' | 'U' | 'B' | 'R' | 'G' | 'C';
-export type ManaCost = Partial<Record<Color | 'generic', number>>;
+export type HybridSymbol = `${Exclude<Color, 'C'>}/${Exclude<Color, 'C'>}`;
+export type ManaCost = Partial<Record<Color | 'generic' | HybridSymbol, number>>;
 export type Zone = 'library' | 'hand' | 'battlefield' | 'stack' | 'graveyard' | 'exile' | 'void';
 export type Step =
   | 'upkeep'
@@ -178,6 +179,7 @@ export interface CardDefinition {
   readonly cannotAttack?: boolean;
   readonly cannotBlock?: boolean;
   readonly unblockable?: boolean;
+  readonly uncounterable?: boolean;
   readonly modes?: readonly { label: string; target?: TargetKind; effects: readonly Effect[] }[];
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };

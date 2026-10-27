@@ -59,7 +59,7 @@ test('legend rule controls distinguish copies with live state and explicit keep 
   stabilize(state);
   const html = legendChoiceBody(state, {}),
     table = game(state, ui(), {});
-  assert.match(table, /data-action="legendRule"/);
+  assert.match(table, /data-action="reviewDecision"/);
   assert.match(html, /Copy 1:/);
   assert.match(html, /Copy 2:/);
   assert.match(html, /4\/4/);

@@ -71,7 +71,11 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         if (!Number.isSafeInteger(amount) || amount > 1000)
           problem('MANA_LIMIT', path, 'Literal mana amounts must be at most 1000.');
         else result.generic = (result.generic ?? 0) + amount;
-      } else if (/^[WUBRGC]$/.test(symbol)) result[symbol] = (result[symbol] ?? 0) + 1;
+      } else if (
+        /^[WUBRGC]$/.test(symbol) ||
+        (/^[WUBRG]\/[WUBRG]$/.test(symbol) && symbol[0] !== symbol[2])
+      )
+        result[symbol] = (result[symbol] ?? 0) + 1;
       else
         problem(
           'UNSUPPORTED_MANA',
@@ -478,6 +482,10 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       continue;
     }
     switch (a.kind) {
+      case 'uncounterable':
+        fields(a, ['kind'], path);
+        d.uncounterable = true;
+        break;
       case 'chooseCreatureType':
         fields(a, ['kind'], path);
         d.chooseCreatureType = true;

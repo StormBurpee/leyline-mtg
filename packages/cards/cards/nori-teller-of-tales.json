@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "03253076-9add-4efb-9227-b0a062c86534",
+  "name": "Nori, Teller of Tales",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dwarf", "Bard"],
+    "colors": ["R", "W"],
+    "manaCost": "{1}{R/W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever Nori attacks, target attacking creature gains first strike until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["first strike"],
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "attacking": true
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

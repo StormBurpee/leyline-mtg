@@ -59,6 +59,7 @@ export function installDuelPresentation(root, context) {
       o = state?.objects[id];
     if (
       !o ||
+      (o.faceDown && o.controller !== player) ||
       document.querySelector('dialog[open]') ||
       ui.targeting ||
       state.choice?.kind === 'triggerTarget' ||
@@ -92,8 +93,8 @@ export function installDuelPresentation(root, context) {
       payment(id);
     }
     preview.innerHTML = `${m?.image ? `<img src="${escape(m.image)}" alt="">` : `<div class="preview-fallback"><h3>${escape(o.name)}</h3><p>${escape(d.text)}</p></div>`}<div class="preview-caption">${escape(hint || o.name)}</div>`;
-    const width = Math.min(270, window.innerWidth - 32),
-      height = Math.min(422, window.innerHeight - 94);
+    const width = Math.min(340, (window.innerHeight - 160) * 0.716, window.innerWidth - 32),
+      height = Math.min(width / 0.716 + 64, window.innerHeight - 80);
     let x = r.right + 14;
     if (x + width > window.innerWidth - 16) x = r.left - width - 14;
     if (x < 16) x = Math.max(16, Math.min(window.innerWidth - width - 16, r.left));

@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "194af2be-50c7-484b-bdd3-402bad70335b",
+  "name": "Donatello, Way with Machines",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Mutant", "Ninja", "Turtle"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhenever an artifact you control enters, put a +1/+1 counter on Donatello.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

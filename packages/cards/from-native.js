@@ -6,6 +6,10 @@ const equal = (a, b) => JSON.stringify(canonical(a)) === JSON.stringify(canonica
 const mana = (cost) => {
   const result = [];
   if (Object.hasOwn(cost, 'generic')) result.push(`{${cost.generic}}`);
+  for (const [symbol, n] of Object.entries(cost)
+    .filter(([symbol]) => symbol.includes('/'))
+    .sort())
+    for (let i = 0; i < n; i++) result.push(`{${symbol}}`);
   for (const color of ['W', 'U', 'B', 'R', 'G', 'C'])
     for (let i = 0; i < (cost[color] ?? 0); i++) result.push(`{${color}}`);
   return result.join('') || '{0}';
@@ -189,6 +193,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       ...(a.condition ? { condition: structuredClone(a.condition) } : {}),
       ...(a.oncePerTurn !== undefined ? { oncePerTurn: a.oncePerTurn } : {}),
     });
+  if (d.uncounterable) abilities.push({ kind: 'uncounterable' });
   if (d.chooseCreatureType) abilities.push({ kind: 'chooseCreatureType' });
   if (d.kicker)
     abilities.push({

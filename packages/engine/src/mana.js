@@ -93,15 +93,30 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], p
     if (remaining > sources.length - demand.length) return null;
     for (let i = 0; i < remaining; i++) demand.push(color);
   }
+  const hybrids = Object.entries(cost).filter(([symbol]) => symbol.includes('/'));
+  if (hybrids.length) {
+    const hybridTotal = hybrids.reduce((n, [, amount]) => n + amount, 0);
+    if (hybridTotal > 1000) return null;
+    const floating = COLORS.flatMap((color) =>
+      Array.from({ length: Math.min(pool[color], hybridTotal) }, () => ({ floatingColor: color })),
+    );
+    sources = [...floating, ...sources];
+    for (const [symbol, amount] of hybrids) for (let i = 0; i < amount; i++) demand.push(symbol);
+  }
   const choices = sources.map((o) =>
-      o.unit
-        ? [o.unit.color]
-        : manaOptions(s, o).filter((color) => manaEligible(manaRestriction(s, o, color), purpose)),
+      o.floatingColor
+        ? [o.floatingColor]
+        : o.unit
+          ? [o.unit.color]
+          : manaOptions(s, o).filter((color) =>
+              manaEligible(manaRestriction(s, o, color), purpose),
+            ),
     ),
     assigned = Array(sources.length).fill(-1);
   const match = (slot, visited) => {
     for (let i = 0; i < sources.length; i++) {
-      if (visited.has(i) || !choices[i].includes(demand[slot])) continue;
+      if (visited.has(i) || !choices[i].some((color) => demand[slot].split('/').includes(color)))
+        continue;
       visited.add(i);
       if (assigned[i] < 0 || match(assigned[i], visited)) {
         assigned[i] = slot;
@@ -116,6 +131,11 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], p
     restrictedSources = [];
   let uncounterable = false;
   const consume = (source, color) => {
+    if (source.floatingColor) {
+      spent[color]++;
+      pool[color]--;
+      return;
+    }
     const unit = source.unit ?? manaRestriction(s, source, color);
     if (source.unit) restrictedSpent.push(source.index);
     else {
@@ -127,7 +147,7 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], p
   };
   for (let i = 0; i < sources.length; i++)
     if (assigned[i] >= 0) {
-      const color = demand[assigned[i]];
+      const color = choices[i].find((color) => demand[assigned[i]].split('/').includes(color));
       consume(sources[i], color);
     }
   let generic = cost.generic ?? 0;
@@ -138,7 +158,7 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], p
     generic -= n;
   }
   for (let i = 0; i < sources.length && generic > 0; i++)
-    if (assigned[i] < 0) {
+    if (assigned[i] < 0 && !sources[i].floatingColor) {
       const color = choices[i][0];
       consume(sources[i], color);
       generic--;
