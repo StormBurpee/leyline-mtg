@@ -20648,7 +20648,7 @@ export const cardIds = {
 };
 export const packIdentity = {
   id: 'leyline.core',
-  version: '0.36.0',
+  version: '0.36.1',
   schemaVersion: 1,
-  sourceHash: 'adb33298e811c2b71df43f10c29342feaff5ba67b062aeda4f7ccda6e2234a2c',
+  sourceHash: 'feebdefa558c2ad584b5d0fa8acae1508ee6bd2f7d856d94fe4c77e99f74b89d',
 };

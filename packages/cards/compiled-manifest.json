@@ -2,11 +2,11 @@
   "format": "leyline-card-pack",
   "schemaVersion": 1,
   "id": "leyline.core",
-  "version": "0.36.0",
+  "version": "0.36.1",
   "rulesReference": "2026-09-25",
   "license": "GPL-3.0-or-later",
   "notice": "Card names and rules text remain Wizards of the Coast property. This pack is not full Standard or Arena coverage.",
-  "sourceHash": "adb33298e811c2b71df43f10c29342feaff5ba67b062aeda4f7ccda6e2234a2c",
+  "sourceHash": "feebdefa558c2ad584b5d0fa8acae1508ee6bd2f7d856d94fe4c77e99f74b89d",
   "cards": 1061,
   "tokens": 27,
   "identities": {
