@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "186efd85-83d4-40cc-b617-76f32dbe99ce",
+  "name": "Radiant Strike",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{3}{W}"
+  },
+  "rulesText": "Destroy target artifact or tapped creature. You gain 3 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "tapped": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

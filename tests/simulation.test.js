@@ -139,7 +139,7 @@ test('episode outputs identify the engine, exact ruleset and experiment configur
   assert.match(first.configHash, /^[a-f0-9]{64}$/);
   assert.equal(first.rulesetHash, second.rulesetHash);
   assert.notEqual(first.configHash, second.configHash);
-  assert.equal(first.engineVersion, '0.27.0');
+  assert.equal(first.engineVersion, '0.28.0');
 });
 
 test('target-choice actions use opaque handles and hide trigger-placement continuations', async () => {
