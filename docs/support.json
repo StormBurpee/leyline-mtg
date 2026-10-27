@@ -1,5 +1,5 @@
 {
-  "version": "0.54.0",
+  "version": "0.55.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -698,6 +698,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["counter"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ant-Man's Army",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["chooseEffect"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1518,6 +1526,14 @@
       "keywords": [],
       "opcodes": ["draw"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Beastie Beatdown",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["conditional", "bite"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -2518,6 +2534,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Buried Treasure",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["discover"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Burn, Burn, Tree and Fern",
       "type": "enchantment",
       "keywords": [],
@@ -2713,6 +2737,14 @@
       "opcodes": ["damageAll", "token"],
       "triggers": ["selfDies"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Camera Launcher",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn", "token"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Campus Composer // Aqueous Aria",
@@ -3968,6 +4000,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Daring Discovery",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["combatRestriction", "discover"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Daring Mechanic",
       "type": "creature",
       "keywords": [],
@@ -4271,6 +4311,14 @@
       "opcodes": ["destroy", "searchLibrary"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Demonic Counsel",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Demonic Ruckus",
@@ -4662,11 +4710,27 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Draconautics Engineer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modifyAll", "counterOn", "token"],
+      "triggers": [],
+      "activatedAbilities": 2
+    },
+    {
       "name": "Dracosaur Auxiliary",
       "type": "creature",
       "keywords": ["flying", "haste"],
       "opcodes": ["damage"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Drag to the Roots",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -5744,6 +5808,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Etali's Favor",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["discover"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Etched Cornfield",
       "type": "land",
       "keywords": [],
@@ -5920,6 +5992,14 @@
         }
       ],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Ezrim, Agency Chief",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["token", "chooseEffect"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Fabled Passage",
@@ -7185,6 +7265,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Geological Appraiser",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discover"],
+      "triggers": [
+        {
+          "event": "enter",
+          "object": "source",
+          "castByController": true
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Germinating Wurm",
       "type": "creature",
       "keywords": [],
@@ -7739,6 +7833,19 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Granite Witness",
+      "type": "creature",
+      "keywords": ["flying", "vigilance"],
+      "opcodes": ["chooseEffect"],
+      "triggers": [
+        {
+          "event": "faceUp",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Grapple with Death",
       "type": "sorcery",
       "keywords": [],
@@ -7848,6 +7955,14 @@
       "opcodes": ["scry", "token"],
       "triggers": ["selfDies"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Greenbelt Guardian",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify", "counterOn"],
+      "triggers": [],
+      "activatedAbilities": 2
     },
     {
       "name": "Greenbelt Radical",
@@ -8173,6 +8288,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hand That Feeds",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Hapatra, the Desert Frost",
       "type": "creature",
       "keywords": [],
@@ -8311,6 +8434,14 @@
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Hazard of the Dunes",
+      "type": "creature",
+      "keywords": ["reach", "trample"],
+      "opcodes": ["counterOn"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Hazardroot Herbalist",
@@ -8538,12 +8669,52 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hidden Cataract",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["discover"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Hidden Courtyard",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["discover"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Hidden Lair",
       "type": "land",
       "keywords": [],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Hidden Necropolis",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["discover"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Hidden Nursery",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["discover"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Hidden Volcano",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["discover"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Hierophant's Chalice",
@@ -8881,6 +9052,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hungering Puppetbeast",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token", "counterOn", "chooseEffect"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Hungry Ghoul",
       "type": "creature",
       "keywords": [],
@@ -9118,6 +9297,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["modify", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Impossible Inferno",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage", "conditional"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -9679,6 +9866,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Keen Buccaneer",
+      "type": "creature",
+      "keywords": ["vigilance"],
+      "opcodes": ["draw", "discard", "counterOn"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -10446,6 +10641,30 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Liliana the Repentant",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["mill", "moveTarget", "counterOn"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "filter": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "type": "planeswalker"
+              }
+            ]
+          },
+          "excludeSource": true
+        }
+      ],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Liminal Hold",
       "type": "enchantment",
       "keywords": [],
@@ -10910,6 +11129,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Mai, Jaded Edge",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify", "keywordCounter"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Make a Stand",
       "type": "instant",
       "keywords": [],
@@ -11017,6 +11244,20 @@
       "keywords": [],
       "opcodes": ["bounce"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Manifold Mouse",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["chooseEffect"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "beginCombat",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -12943,6 +13184,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Pacesetter Paragon",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn", "modify"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Pacifism",
       "type": "enchantment",
       "keywords": [],
@@ -13002,6 +13251,20 @@
         }
       },
       "triggers": ["controllerCastsArtifact"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Patchwork Beastie",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["mill"],
+      "triggers": [
+        {
+          "event": "step",
+          "controller": "you",
+          "step": "upkeep"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -13581,6 +13844,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Primordial Gnawer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["discover"],
+      "triggers": [
+        {
+          "event": "battlefieldToGraveyard",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Primordial Pachyderm",
       "type": "creature",
       "keywords": ["reach", "trample"],
@@ -13723,6 +13999,14 @@
       "opcodes": ["empowerJace", "draw"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Prowcatcher Specialist",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["counterOn"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Psychic Whorl",
@@ -14356,6 +14640,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Rebellious Captives",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn", "earthbend"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -15335,6 +15627,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Sanctuary Wall",
+      "type": "creature",
+      "keywords": ["defender"],
+      "opcodes": ["tap", "chooseEffect"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Sandbenders' Storm",
       "type": "instant",
       "keywords": [],
@@ -15924,6 +16224,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sewer-veillance Cam",
+      "type": "artifact",
+      "keywords": ["flash"],
+      "opcodes": ["chooseEffect", "draw"],
+      "triggers": [
+        "selfEnters",
+        {
+          "event": "leave",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Shadowy Backstreet",
       "type": "land",
       "keywords": [],
@@ -16475,6 +16789,14 @@
       "opcodes": ["delayedBlink"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Skystreak Engineer",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["counterOn"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Slagdrill Scrapper",
@@ -17041,6 +17363,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Spineseeker Centipede",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spinewoods Paladin",
       "type": "creature",
       "keywords": ["trample"],
@@ -17193,6 +17523,14 @@
       "opcodes": ["tap", "stunOn"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Stampeding Scurryfoot",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn", "token"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Stand Up for Yourself",
@@ -20550,6 +20888,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Violent Urge",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Virtue of Loyalty // Ardenvale Fealty",
       "type": "enchantment",
       "keywords": [],
@@ -20763,6 +21109,14 @@
       "type": "creature",
       "keywords": ["flying"],
       "opcodes": ["scry"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Walk with the Ancestors",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget", "discover"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -21221,6 +21575,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Wildfire Wickerfolk",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Wildheart Invoker",
       "type": "creature",
       "keywords": [],
@@ -21288,6 +21650,24 @@
           "controller": "you",
           "spellNumber": 2
         }
+      ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Wingnut, Bat on the Belfry",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["chooseEffect", "modifyAll"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "filter": {
+            "type": "creature"
+          },
+          "excludeSource": true
+        },
+        "selfAttacks"
       ],
       "activatedAbilities": 0
     },
@@ -21764,6 +22144,7 @@
     "Clue Token",
     "Colorless Golem Token",
     "Detective Token",
+    "Dinosaur Dragon Token",
     "Dinosaur Token",
     "Dog Token",
     "Doombot",

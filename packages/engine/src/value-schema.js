@@ -35,6 +35,7 @@ export function validateNumericValue(value, { effect = false } = {}) {
       sourceStat: ['kind', 'stat'],
       maxManaValue: ['kind', 'player', 'where'],
       count: ['kind', 'zone', 'player', 'where', 'excludeSource'],
+      graveyardCardTypes: ['kind', 'player'],
       life: ['kind', 'player'],
       spellsCast: ['kind', 'player', 'where'],
       sum: ['kind', 'values'],
@@ -48,7 +49,7 @@ export function validateNumericValue(value, { effect = false } = {}) {
     if (Object.keys(v).some((k) => !allowed.includes(k)))
       errors.push('Unexpected numeric expression field.');
     if (
-      ['count', 'maxManaValue', 'life', 'spellsCast'].includes(v.kind) &&
+      ['count', 'maxManaValue', 'life', 'spellsCast', 'graveyardCardTypes'].includes(v.kind) &&
       !['you', 'opponent', ...(v.kind !== 'life' ? ['all'] : [])].includes(v.player)
     )
       errors.push('Expected a player relation.');

@@ -324,6 +324,13 @@ function actionDock(s, ui, p, actions) {
         desc = 'Choose a counter or keep them all.';
         buttons = `<button class="btn" data-action="removeCounter" data-counter="">Decline</button>${c.counters.map((counter) => `<button class="btn primary" data-action="removeCounter" data-counter="${escape(counter)}">Remove ${escape(counter)}</button>`).join('')}`;
         break;
+      case 'effectChoice':
+        title = `${c.name}: choose an effect`;
+        desc =
+          'Choose an outcome during resolution. Targets are already announced; neither player has priority.';
+        buttons =
+          '<button class="btn primary" data-action="reviewDecision">Choose effect →</button>';
+        break;
       case 'optionalEffect':
         title = `${c.name}: optional ability`;
         desc =
@@ -333,8 +340,11 @@ function actionDock(s, ui, p, actions) {
         break;
       case 'castExiled':
         title = ui.targeting ? 'Choose a target for the exiled spell' : 'Cast the exiled card now?';
-        desc = `Pay normal costs or decline to deal ${c.amount} damage. No priority is passed during this decision.`;
-        buttons = `<button class="btn" data-action="declineResolutionCast">Don't cast · deal ${c.amount}</button>${ui.targeting ? '<button class="btn primary" data-action="spellTargets">Choose target →</button>' : '<button class="btn primary" data-action="beginResolutionCast">Review casting options →</button>'}`;
+        desc =
+          c.discover !== undefined
+            ? `Discover ${c.discover}: cast without its mana cost or put it into your hand. Additional costs still apply; X must be 0. No priority is passed during this decision.`
+            : `Pay normal costs or decline to deal ${c.amount} damage. No priority is passed during this decision.`;
+        buttons = `<button class="btn" data-action="declineResolutionCast">${c.discover !== undefined ? 'Put into hand' : `Don't cast · deal ${c.amount}`}</button>${ui.targeting ? '<button class="btn" data-action="cancelSelection">Cancel casting</button><button class="btn primary" data-action="spellTargets">Choose target →</button>' : '<button class="btn primary" data-action="beginResolutionCast">Review casting options →</button>'}`;
         break;
       case 'manaColor':
         title = 'Choose a mana color';
@@ -470,7 +480,12 @@ function actionDock(s, ui, p, actions) {
     buttons = `${actions.some((a) => a.type === 'ninjutsu' && a.card === o.id) ? `<button class="btn primary" data-action="ninjutsuSelected">Ninjutsu ${mana(d.ninjutsu)} →</button>` : ''}${actions.some((a) => a.type === 'plot' && a.card === o.id) ? `<button class="btn" data-action="plotSelected">Plot ${mana(d.plot)}</button>` : ''}${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">${d.cyclingType ? `${escape(d.cyclingType)}cycling` : 'Cycle'} ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${o.zone === 'graveyard' ? `${d.harmonize ? 'Harmonize' : 'Flashback'} ${mana(d.harmonize ?? d.flashback)}` : d.type === 'land' ? 'Play land' : castingChoices(d) ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
   } else
     buttons = `<button class="btn primary advance-button" data-action="pass">${advanceLabel(s, p)} <span>→</span><small>Space</small></button>`;
-  if (c && c.player === p && CARD_DECISIONS.has(c.kind))
+  if (
+    c &&
+    c.player === p &&
+    CARD_DECISIONS.has(c.kind) &&
+    !(c.kind === 'castExiled' && ui.targeting)
+  )
     buttons =
       '<button class="btn primary" data-action="reviewDecision">View cards & choose →</button>';
   return `<div class="action-dock" aria-live="polite"><div class="action-copy"><strong>${escape(title)}</strong><p>${escape(desc)}</p></div><div class="action-buttons"><button class="btn quiet short-read-card" data-action="readCard" ${readableCard(s, ui, p) ? '' : 'disabled'} aria-label="Read selected card">Read</button>${ui.yieldMode ? '<button class="btn short-yield-stop" data-action="cancelYield">Stop passing</button>' : ''}${buttons}</div>${ui.mode === 'bot' && s.status === 'playing' ? `<div class="priority-controls"><button data-action="toggleFullControl" aria-pressed="${ui.controlMode === 'full'}" title="Full control: stop at every priority window (F)">${ui.controlMode === 'full' ? '● Full control' : '○ Smart play'}</button>${ui.yieldMode ? `<button class="yield-active" data-action="cancelYield">Auto-passing · Stop ×</button>` : `<button data-action="yieldResponse" title="Pass until an opponent puts a new effect on the stack (Enter)">Pass until response</button><button data-action="yieldTurn" title="Pass through this turn, including responses (Shift+Enter)">Pass turn</button>`}<button data-action="prioritySettings" aria-label="Priority automation settings">⚙</button></div>` : ''}</div>`;
@@ -533,6 +548,8 @@ export function eventText(e, s) {
       return `${e.amount} damage to ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? 'a creature')}.`;
     case 'draw':
       return `${p} drew a card.`;
+    case 'discovered':
+      return `${p} discovered ${e.amount}.`;
     case 'lifeGain':
       return `${p} gained ${e.amount} life.`;
     case 'attackers':

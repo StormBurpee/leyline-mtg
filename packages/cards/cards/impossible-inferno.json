@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fa7c8092-94da-4147-aa90-0a951d2a8be8",
+  "name": "Impossible Inferno",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{4}{R}"
+  },
+  "rulesText": "Impossible Inferno deals 6 damage to target creature.\nDelirium \u2014 If there are four or more card types among cards in your graveyard, exile the top card of your library. You may play it until the end of your next turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 6
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "graveyardCardTypes",
+              "player": "you"
+            },
+            "operator": "gte",
+            "right": 4
+          },
+          "then": [
+            {
+              "op": "exileTop",
+              "count": 1,
+              "player": "controller",
+              "duration": "nextTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dcfa0476-e88f-43b4-8011-d78a3de97f2a",
+  "name": "Spineseeker Centipede",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Insect"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nDelirium \u2014 This creature gets +1/+2 and has vigilance as long as there are four or more card types among cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ]
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "graveyardCardTypes",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 4
+      },
+      "power": 1,
+      "toughness": 2,
+      "keywords": ["vigilance"]
+    }
+  ]
+}

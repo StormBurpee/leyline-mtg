@@ -1,0 +1,104 @@
+{
+  "inventorySha256": "3a7d6a2dab3877d60e84408528a463f50bf488d643aaeaaa148b58f7713f259c",
+  "cards": [
+    {
+      "name": "Wildfire Wickerfolk",
+      "oracle_id": "50c7b13d-f217-45de-837c-49f934840368",
+      "mana_cost": "{R}{G}",
+      "type_line": "Artifact Creature \u2014 Scarecrow",
+      "oracle_text": "Haste\nDelirium \u2014 This creature gets +1/+1 and has trample as long as there are four or more card types among cards in your graveyard.",
+      "colors": ["G", "R"],
+      "power": "3",
+      "toughness": "2",
+      "scryfall_uri": "https://scryfall.com/card/dsk/239/wildfire-wickerfolk?utm_source=api"
+    },
+    {
+      "name": "Spineseeker Centipede",
+      "oracle_id": "dcfa0476-e88f-43b4-8011-d78a3de97f2a",
+      "mana_cost": "{2}{G}",
+      "type_line": "Creature \u2014 Insect",
+      "oracle_text": "When this creature enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nDelirium \u2014 This creature gets +1/+2 and has vigilance as long as there are four or more card types among cards in your graveyard.",
+      "colors": ["G"],
+      "power": "2",
+      "toughness": "1",
+      "scryfall_uri": "https://scryfall.com/card/dsk/199/spineseeker-centipede?utm_source=api"
+    },
+    {
+      "name": "Patchwork Beastie",
+      "oracle_id": "6cf995e9-115a-4659-bace-9fbe75898b48",
+      "mana_cost": "{G}",
+      "type_line": "Artifact Creature \u2014 Beast",
+      "oracle_text": "Delirium \u2014 This creature can't attack or block unless there are four or more card types among cards in your graveyard.\nAt the beginning of your upkeep, you may mill a card. (You may put the top card of your library into your graveyard.)",
+      "colors": ["G"],
+      "power": "3",
+      "toughness": "3",
+      "scryfall_uri": "https://scryfall.com/card/dsk/195/patchwork-beastie?utm_source=api"
+    },
+    {
+      "name": "Violent Urge",
+      "oracle_id": "0ef80a38-f464-4d1f-9e81-d4087d6ecc9b",
+      "mana_cost": "{R}",
+      "type_line": "Instant",
+      "oracle_text": "Target creature gets +1/+0 and gains first strike until end of turn.\nDelirium \u2014 If there are four or more card types among cards in your graveyard, that creature gains double strike until end of turn.",
+      "colors": ["R"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/dsk/164/violent-urge?utm_source=api"
+    },
+    {
+      "name": "Beastie Beatdown",
+      "oracle_id": "3da5fbe2-e47b-4a1d-9e73-393f37314fa3",
+      "mana_cost": "{R}{G}",
+      "type_line": "Sorcery",
+      "oracle_text": "Choose target creature you control and target creature an opponent controls.\nDelirium \u2014 If there are four or more card types among cards in your graveyard, put two +1/+1 counters on the creature you control.\nThe creature you control deals damage equal to its power to the creature an opponent controls.",
+      "colors": ["G", "R"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/dsk/210/beastie-beatdown?utm_source=api"
+    },
+    {
+      "name": "Hand That Feeds",
+      "oracle_id": "6b348051-3ba8-4aa0-b337-b42d8ef8cbba",
+      "mana_cost": "{1}{R}",
+      "type_line": "Creature \u2014 Mutant",
+      "oracle_text": "Delirium \u2014 Whenever this creature attacks while there are four or more card types among cards in your graveyard, it gets +2/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)",
+      "colors": ["R"],
+      "power": "2",
+      "toughness": "2",
+      "scryfall_uri": "https://scryfall.com/card/dsk/139/hand-that-feeds?utm_source=api"
+    },
+    {
+      "name": "Drag to the Roots",
+      "oracle_id": "ef4c478c-7019-4ec0-8edf-2a3078a8e97a",
+      "mana_cost": "{2}{B}{G}",
+      "type_line": "Instant",
+      "oracle_text": "Delirium \u2014 This spell costs {2} less to cast as long as there are four or more card types among cards in your graveyard.\nDestroy target nonland permanent.",
+      "colors": ["B", "G"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/dsk/213/drag-to-the-roots?utm_source=api"
+    },
+    {
+      "name": "Demonic Counsel",
+      "oracle_id": "712e3479-722c-40a1-9b61-d5bdde93042b",
+      "mana_cost": "{1}{B}",
+      "type_line": "Sorcery",
+      "oracle_text": "Search your library for a Demon card, reveal it, put it into your hand, then shuffle.\nDelirium \u2014 If there are four or more card types among cards in your graveyard, instead search your library for any card, put it into your hand, then shuffle.",
+      "colors": ["B"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/dsk/92/demonic-counsel?utm_source=api"
+    },
+    {
+      "name": "Impossible Inferno",
+      "oracle_id": "fa7c8092-94da-4147-aa90-0a951d2a8be8",
+      "mana_cost": "{4}{R}",
+      "type_line": "Instant",
+      "oracle_text": "Impossible Inferno deals 6 damage to target creature.\nDelirium \u2014 If there are four or more card types among cards in your graveyard, exile the top card of your library. You may play it until the end of your next turn.",
+      "colors": ["R"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/dsk/140/impossible-inferno?utm_source=api"
+    }
+  ]
+}

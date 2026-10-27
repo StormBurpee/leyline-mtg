@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "83856c3a-652e-4afc-9dc0-0072324ac36f",
+  "name": "Sanctuary Wall",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Wall"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 0,
+    "toughness": 4
+  },
+  "rulesText": "Defender\n{2}{W}, {T}: Tap target creature. You may put a stun counter on it. If you do, put a stun counter on this creature. (If a permanent with a stun counter would become untapped, remove one from it instead.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "defender"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{W}",
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        },
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Do not add stun counters",
+              "effects": []
+            },
+            {
+              "label": "Put a stun counter on the target and Sanctuary Wall",
+              "effects": [
+                {
+                  "op": "addStunCounters",
+                  "target": "target",
+                  "amount": 1
+                },
+                {
+                  "op": "addStunCounters",
+                  "target": "source",
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

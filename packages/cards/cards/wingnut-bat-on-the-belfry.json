@@ -1,0 +1,101 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "392a71c7-8f6d-46b8-bcc3-613e086d86ed",
+  "name": "Wingnut, Bat on the Belfry",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Bat", "Mutant"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Alliance \u2014 Whenever another creature you control enters, Wingnut gains your choice of flying, menace, or haste until end of turn.\nWhenever Wingnut attacks, each other attacking creature gets +1/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "creature"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Flying",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "until": "endOfTurn",
+                  "keywords": ["flying"]
+                }
+              ]
+            },
+            {
+              "label": "Menace",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "until": "endOfTurn",
+                  "keywords": ["menace"]
+                }
+              ]
+            },
+            {
+              "label": "Haste",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "until": "endOfTurn",
+                  "keywords": ["haste"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "attacking": true
+              }
+            ]
+          },
+          "excludeSource": true,
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

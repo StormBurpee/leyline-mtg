@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6b348051-3ba8-4aa0-b337-b42d8ef8cbba",
+  "name": "Hand That Feeds",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Mutant"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Delirium \u2014 Whenever this creature attacks while there are four or more card types among cards in your graveyard, it gets +2/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "triggerCondition": {
+        "kind": "compare",
+        "left": {
+          "kind": "graveyardCardTypes",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 4
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 2,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["menace"]
+        }
+      ]
+    }
+  ]
+}

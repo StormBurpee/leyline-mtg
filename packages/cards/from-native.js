@@ -41,6 +41,14 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           effects: effects(e.effects),
         };
       if (e.op === 'behold') return { ...structuredClone(e), then: effects(e.then) };
+      if (e.op === 'chooseEffect')
+        return {
+          ...structuredClone(e),
+          options: e.options.map((option) => ({
+            ...structuredClone(option),
+            effects: effects(option.effects),
+          })),
+        };
       if (e.op === 'conditional')
         return {
           op: 'conditional',
@@ -72,6 +80,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         case 'chooseExile':
         case 'returnSelfAsEnchantment':
         case 'shuffleSourceAndTarget':
+        case 'discover':
         case 'impulseCastOrDamage':
         case 'castDamageEmblem':
         case 'anthemEmblem':
@@ -255,6 +264,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       }
     });
   const abilities = d.keywords.map((keyword) => ({ kind: 'keyword', keyword }));
+  for (const rule of d.conditionalCombatRestrictions ?? [])
+    abilities.push({ kind: 'combatRestriction', ...structuredClone(rule) });
   for (const restriction of [
     'cannotAttack',
     'cannotBlock',
@@ -442,6 +453,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       ...(a.condition ? { condition: structuredClone(a.condition) } : {}),
       ...(a.oncePerTurn !== undefined ? { oncePerTurn: a.oncePerTurn } : {}),
       ...(a.powerUp !== undefined ? { powerUp: a.powerUp } : {}),
+      ...(a.exhaust !== undefined ? { exhaust: a.exhaust } : {}),
       ...(a.loyalty !== undefined ? { loyalty: a.loyalty } : {}),
     });
   if (d.uncounterable) abilities.push({ kind: 'uncounterable' });

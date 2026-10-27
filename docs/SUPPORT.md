@@ -2,7 +2,11 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.54)
+## Latest coverage (v0.55)
+
+Resolution-time effect alternatives pause the same resolving item without reopening priority, adding targets, or turning the choice into a modal spell. Graveyard card-type unions support the admitted Delirium conditions, cost modifiers and conditional combat restrictions. Non-mana Exhaust uses are per ability and object incarnation, consumed on activation and preserved through control changes. Literal Discover supports legal free casting or putting the discovered card into hand, mandatory additional costs, zero X, nested resolution and seeded random bottom order. Unsupported Discover amounts/events and Exhaust mana/reset/discount contracts remain rejected. See [effect choices](effect-choice-support.md), [Delirium](delirium-support.md), [Exhaust](exhaust-support.md) and [Discover](discover-support.md) for exact boundaries.
+
+## Previous coverage (v0.54)
 
 Filtered library inspection supports eligible/optional hand selection, explicit public reveals and bounded remainder policies. Chosen sacrifices in activated costs are paid before resolution with source-incarnation and mana reservations; they are not targets or resolution effects. Chosen-sacrifice mana abilities and sacrificed-object-value contracts remain unsupported. Attack-group predicates use current public declaration snapshots.
 

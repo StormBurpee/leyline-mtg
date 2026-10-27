@@ -740,13 +740,33 @@ function needsTargetController(effects = [], group) {
       ((effect.player === 'targetController' || effect.op === 'damageTargetController') &&
         effect.targetGroup === group) ||
       (effect.op === 'conditional' &&
-        (needsTargetController(effect.then, group) || needsTargetController(effect.else, group))),
+        (needsTargetController(effect.then, group) || needsTargetController(effect.else, group))) ||
+      (effect.op === 'chooseEffect' &&
+        effect.options.some((option) => needsTargetController(option.effects, group))),
   );
 }
 export function resolveEffects(s, entry, startIndex = 0) {
   let effects = entry.effects ?? [];
   for (let index = startIndex; index < effects.length; index++) {
     const e = effectValues(s, effects[index], entry);
+    // CR 608.2d: inline alternatives are chosen only as this instruction resolves.
+    // The chooser is independent of the effect controller and announced bindings.
+    if (e.op === 'chooseEffect') {
+      const options = e.options.flatMap((option, optionIndex) =>
+        meetsCondition(s, entry.controller, option.condition, [], entry.source, entry)
+          ? [{ index: optionIndex, label: option.label }]
+          : [],
+      );
+      if (!options.length) continue;
+      s.resolving = { entry, index: index + 1 };
+      s.choice = {
+        kind: 'effectChoice',
+        player: e.player === 'opponent' ? opponent(entry.controller) : entry.controller,
+        name: entry.name,
+        options,
+      };
+      return false;
+    }
     if (e.op === 'conditional') {
       const branch = meetsCondition(s, entry.controller, e.condition, [], entry.source, entry)
         ? e.then
@@ -1568,6 +1588,40 @@ export function resolveEffects(s, entry, startIndex = 0) {
         emit(s, 'emblemCreated', { ...emblem });
         break;
       }
+      case 'discover': {
+        // Discover exiles publicly, one at a time. It never draws or searches.
+        const player = entry.controller,
+          exiled = [];
+        let found = null;
+        while (s.players[player].library.length) {
+          const object = s.objects[s.players[player].library[0]];
+          move(s, object, 'exile');
+          const card = definition(s, object);
+          if (!hasType(card, 'land') && manaValue(card) <= e.amount) {
+            found = object;
+            break;
+          }
+          exiled.push(ref(object));
+        }
+        if (!found) {
+          bottomDiscoveredRemainder(s, exiled);
+          emit(s, 'discovered', { player, amount: e.amount, objectId: null });
+          break;
+        }
+        s.resolving = {
+          entry,
+          index: index + 1,
+          discover: { exiled, amount: e.amount, card: ref(found) },
+        };
+        s.choice = {
+          kind: 'castExiled',
+          player,
+          card: found.id,
+          incarnation: found.incarnation,
+          discover: e.amount,
+        };
+        return false;
+      }
       case 'impulseCastOrDamage': {
         const id = s.players[entry.controller].library[0];
         if (!id) {
@@ -2094,10 +2148,28 @@ export function resolveEffects(s, entry, startIndex = 0) {
     }
   }
 }
+/** Return only the same still-exiled objects, using the replay's seeded RNG. */
+function bottomDiscoveredRemainder(s, references) {
+  const cards = references.filter((r) => {
+    const o = s.objects[r.id];
+    return o?.zone === 'exile' && o.incarnation === r.incarnation;
+  });
+  shuffle(s, cards);
+  for (const r of cards) move(s, s.objects[r.id], 'library');
+}
 /** Resume the instruction cursor; choices do not create a priority window. */
 export function continueResolution(s) {
   const frame = s.resolving;
   if (!frame) return;
+  if (frame.discover) {
+    bottomDiscoveredRemainder(s, frame.discover.exiled);
+    emit(s, 'discovered', {
+      player: frame.entry.controller,
+      amount: frame.discover.amount,
+      objectId: frame.discover.card.id,
+    });
+    delete frame.discover;
+  }
   if (flushLinkedReturns(s) === false) return;
   if (resolveEffects(s, frame.entry, frame.index) === false) return;
   const entry = frame.entry,
@@ -2120,6 +2192,28 @@ export function continueResolution(s) {
 }
 export function finishResolutionChoice(s, command) {
   const choice = s.choice;
+  if (choice.kind === 'effectChoice') {
+    const { entry, index } = s.resolving;
+    const instruction = entry.effects[index - 1];
+    requireRule(
+      command.type === 'chooseEffect' &&
+        Number.isSafeInteger(command.option) &&
+        choice.options.some((option) => option.index === command.option),
+      'EFFECT_CHOICE',
+      'Choose one of the offered resolution alternatives.',
+    );
+    const option = instruction.options[command.option];
+    requireRule(
+      meetsCondition(s, entry.controller, option.condition, [], entry.source, entry),
+      'EFFECT_CHOICE',
+      'That resolution alternative is no longer available.',
+    );
+    entry.effects.splice(index, 0, ...structuredClone(option.effects));
+    emit(s, 'effectChosen', { player: choice.player, option: command.option, label: option.label });
+    s.choice = null;
+    continueResolution(s);
+    return;
+  }
   if (choice.kind === 'empowerJace') {
     const object = s.objects[command.card];
     requireRule(
@@ -2145,12 +2239,16 @@ export function finishResolutionChoice(s, command) {
       'CAST_EXILED',
       'Cast the exiled card now or decline.',
     );
-    dealDamage(
-      s,
-      damageSource(s, s.resolving.entry),
-      { kind: 'player', id: opponent(choice.player) },
-      choice.amount,
-    );
+    if (choice.discover !== undefined) {
+      const card = s.objects[choice.card];
+      if (card?.zone === 'exile' && card.incarnation === choice.incarnation) move(s, card, 'hand');
+    } else
+      dealDamage(
+        s,
+        damageSource(s, s.resolving.entry),
+        { kind: 'player', id: opponent(choice.player) },
+        choice.amount,
+      );
     s.choice = null;
     continueResolution(s);
     return;

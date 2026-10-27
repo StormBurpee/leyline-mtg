@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "380d8d64-9aec-4656-b5b8-d336ebf803c8",
+  "name": "Draconautics Engineer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Artificer"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Exhaust — {R}: Other creatures you control gain haste until end of turn. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)\nExhaust — {3}{R}: Create a 4/4 red Dinosaur Dragon creature token with flying.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "exhaust": true,
+      "cost": {
+        "mana": "{R}"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "excludeSource": true,
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["haste"],
+          "until": "endOfTurn"
+        },
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ],
+      "text": "Exhaust — {R}: Other creatures you control gain haste until end of turn. Put a +1/+1 counter on this creature."
+    },
+    {
+      "kind": "activated",
+      "exhaust": true,
+      "cost": {
+        "mana": "{3}{R}"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/dinosaur-dragon-token",
+          "amount": 1
+        }
+      ],
+      "text": "Exhaust — {3}{R}: Create a 4/4 red Dinosaur Dragon creature token with flying."
+    }
+  ]
+}

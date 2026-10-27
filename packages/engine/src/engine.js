@@ -213,7 +213,11 @@ function cast(s, p, c) {
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'spell',
-    ...(c.x !== undefined || d.keywords.includes('convoke') || d.sacrificeCost || d.harmonizePaid
+    ...(c.x !== undefined ||
+    d.discoveredCast ||
+    d.keywords.includes('convoke') ||
+    d.sacrificeCost ||
+    d.harmonizePaid
       ? { castingCost: structuredClone(d.harmonizePaid ? plan.cost : d.cost) }
       : {}),
     uncounterable: !!d.uncounterable,
@@ -334,6 +338,8 @@ export function abilityProblem(s, p, id, index, target, discardCard, targets, sa
     return 'The activation condition is not met.';
   if (ability.powerUp && o.powerUpUses?.[index] === o.incarnation)
     return 'This power-up ability has already been activated.';
+  if (ability.exhaust && o.exhaustUses?.[index] === o.incarnation)
+    return 'This exhaust ability has already been activated.';
   if (ability.oncePerTurn && o.abilityUses?.[index] === `${s.turn}:${o.incarnation}`)
     return 'This ability has already been activated this turn.';
   if (ability.loyalty !== undefined) {
@@ -581,6 +587,8 @@ function activate(s, p, c) {
   if (s.rulesRevision !== 1) notifyTargeted(s, s.stack.at(-1));
   const lockedCost = activationCost(s, o, a);
   if (a.powerUp) (o.powerUpUses ??= {})[c.ability] = o.incarnation;
+  // CR 702.177a / 602.5b: activation, not resolution, consumes this ability's use.
+  if (a.exhaust) (o.exhaustUses ??= {})[c.ability] = o.incarnation;
   if (a.oncePerTurn) (o.abilityUses ??= {})[c.ability] = `${s.turn}:${o.incarnation}`;
   if (a.loyalty !== undefined) {
     o.loyalty = (o.loyalty ?? 0) + a.loyalty;
@@ -626,6 +634,7 @@ function handleChoice(s, p, c) {
       'removeCounter',
       'behold',
       'optionalEffect',
+      'effectChoice',
       'attackDefenders',
       'manaColor',
       'exilePlay',
@@ -855,6 +864,11 @@ export function dispatch(state, command) {
 export function legalActions(s, p, { x: exactX } = {}) {
   if (s.status === 'finished') return [];
   const resolutionCast = s.choice?.kind === 'castExiled' && s.choice.player === p;
+  if (s.choice?.kind === 'effectChoice' && s.choice.player === p)
+    return [
+      ...s.choice.options.map(({ index }) => ({ type: 'chooseEffect', option: index })),
+      { type: 'concede' },
+    ];
   if (s.choice?.kind === 'manaColor' && s.choice.player === p)
     return ['W', 'U', 'B', 'R', 'G'].map((color) => ({ type: 'chooseManaColor', color }));
   if (s.choice?.kind === 'payCost' && s.choice.player === p)
@@ -947,28 +961,30 @@ export function legalActions(s, p, { x: exactX } = {}) {
         : 0;
       const proposals = !profile.cost.X
         ? [undefined]
-        : exactX !== undefined
-          ? [exactX]
-          : [
-              ...new Set([
-                ...Array.from({ length: 11 }, (_, i) => i),
-                16,
-                20,
-                32,
-                50,
-                64,
-                100,
-                128,
-                200,
-                256,
-                500,
-                1000,
-                Math.floor((available - manaValue(profile)) / profile.cost.X),
-                Math.floor(available / profile.cost.X),
-              ]),
-            ]
-              .filter((x) => x >= 0 && x <= MAX_X)
-              .sort((a, b) => a - b);
+        : resolutionCast && s.choice.discover !== undefined
+          ? [exactX ?? 0]
+          : exactX !== undefined
+            ? [exactX]
+            : [
+                ...new Set([
+                  ...Array.from({ length: 11 }, (_, i) => i),
+                  16,
+                  20,
+                  32,
+                  50,
+                  64,
+                  100,
+                  128,
+                  200,
+                  256,
+                  500,
+                  1000,
+                  Math.floor((available - manaValue(profile)) / profile.cost.X),
+                  Math.floor(available / profile.cost.X),
+                ]),
+              ]
+                .filter((x) => x >= 0 && x <= MAX_X)
+                .sort((a, b) => a - b);
       for (const additionalCost of additionalCostOptions(s, p, profile, id))
         for (const sacrifice of profile.sacrificeCost
           ? castingSacrificeCandidates(s, p, profile).map(ref)
@@ -1161,6 +1177,7 @@ export function replay(record) {
         '0.51.0',
         '0.52.0',
         '0.53.0',
+        '0.54.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

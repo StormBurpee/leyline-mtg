@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961",
+  "name": "Hidden Nursery",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Cave"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {G}.\n{4}{G}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{G}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "timing": "sorcery",
+      "effects": [
+        {
+          "op": "discover",
+          "amount": 4
+        }
+      ]
+    }
+  ]
+}

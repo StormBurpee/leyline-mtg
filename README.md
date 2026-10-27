@@ -21,7 +21,7 @@ Leyline is a local-first Magic rules engine with a playable tabletop, written in
 
 The target is every non-Alchemy card available on Arena, with complete Standard support first. That target is not yet met. [Track the dated card inventories.](docs/CARD-POOLS.md)
 
-**Development preview:** 2285 executable cards and 96 token definitions. A scoped rules kernel, not a complete Forge port or a tournament-ready client. [The boundaries are documented.](docs/SUPPORT.md)
+**Development preview:** 2325 executable cards and 97 token definitions. A scoped rules kernel, not a complete Forge port or a tournament-ready client. [The boundaries are documented.](docs/SUPPORT.md)
 
 <p align="center">
   <img src="docs/assets/tabletop.png" alt="The actual Leyline client selecting a spell target in a resumed match" width="100%" />

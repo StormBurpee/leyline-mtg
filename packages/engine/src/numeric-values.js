@@ -1,3 +1,4 @@
+import { typesOf } from './types.js';
 import { spellsCastCount } from './spell-history.js';
 import { manaValue } from './mana-value.js';
 import { definition, isAttacking, isBlocking, stats, requireRule } from './model.js';
@@ -94,6 +95,25 @@ export function numericValue(
           .map((o) => manaValue(definition(state, o))),
       );
       break;
+    case 'graveyardCardTypes': {
+      // CR 205.2b: union card types, not cards, subtypes or supertypes.
+      // CR 715.4: definition() reads the main Adventure face off the stack.
+      const types = new Set();
+      for (const object of Object.values(state.objects)) {
+        if (
+          object.zone !== 'graveyard' ||
+          !players.includes(object.owner) ||
+          object.hidden ||
+          object.token ||
+          object.spellCopy ||
+          excludedIds.includes(object.id)
+        )
+          continue;
+        for (const type of typesOf(definition(state, object))) types.add(type);
+      }
+      result = types.size;
+      break;
+    }
     case 'count':
       if (['hand', 'library'].includes(value.zone)) {
         result = players.reduce(

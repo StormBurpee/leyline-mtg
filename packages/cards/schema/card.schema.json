@@ -516,7 +516,9 @@
           "minItems": 1,
           "maxItems": 6,
           "uniqueItems": true,
-          "items": { "enum": ["graveyard", "exile", "hand", "library", "stack", "void"] }
+          "items": {
+            "enum": ["graveyard", "exile", "hand", "library", "stack", "void"]
+          }
         },
         "drawNumber": {
           "type": "integer",
@@ -1874,7 +1876,7 @@
               "const": "source"
             },
             "keyword": {
-              "const": "indestructible"
+              "enum": ["indestructible", "double strike"]
             },
             "amount": {
               "type": "integer",
@@ -2140,7 +2142,7 @@
           "type": "object",
           "properties": {
             "op": {
-              "const": "impulseCastOrDamage"
+              "enum": ["discover", "impulseCastOrDamage"]
             },
             "amount": {
               "type": "integer",
@@ -2258,6 +2260,46 @@
             }
           },
           "required": ["op", "target"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "chooseEffect"
+            },
+            "player": {
+              "enum": ["controller", "opponent"]
+            },
+            "options": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 160
+                  },
+                  "condition": {
+                    "$ref": "#/$defs/effectCondition"
+                  },
+                  "effects": {
+                    "type": "array",
+                    "maxItems": 64,
+                    "items": {
+                      "$ref": "#/$defs/effect"
+                    }
+                  }
+                },
+                "required": ["label", "effects"],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["op", "options"],
           "additionalProperties": false
         }
       ]
@@ -2468,6 +2510,9 @@
               "const": "graveyard"
             },
             "powerUp": {
+              "const": true
+            },
+            "exhaust": {
               "const": true
             }
           },
@@ -2737,6 +2782,9 @@
             },
             "restriction": {
               "enum": ["cannotAttack", "cannotBlock", "unblockable", "cannotBeBlockedByLowerPower"]
+            },
+            "condition": {
+              "$ref": "#/$defs/condition"
             }
           },
           "required": ["kind", "restriction"],
@@ -3895,6 +3943,19 @@
           },
           "required": ["kind", "value", "divisor"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "graveyardCardTypes"
+            },
+            "player": {
+              "enum": ["you", "opponent", "all"]
+            }
+          },
+          "required": ["kind", "player"],
+          "additionalProperties": false
         }
       ]
     },
@@ -4032,6 +4093,19 @@
             }
           },
           "required": ["kind", "value", "divisor"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "graveyardCardTypes"
+            },
+            "player": {
+              "enum": ["you", "opponent", "all"]
+            }
+          },
+          "required": ["kind", "player"],
           "additionalProperties": false
         }
       ]

@@ -170,6 +170,28 @@ export function compileCard(
         fields(effect, ['op', 'subtype', 'then'], p);
         return { op: 'behold', subtype: effect.subtype, then: effects(effect.then, `${p}.then`) };
       }
+      if (effect.op === 'chooseEffect') {
+        fields(effect, ['op', 'player', 'options'], p);
+        if (!Array.isArray(effect.options)) {
+          problem('INVALID_EFFECT', p, 'Expected resolution alternatives.');
+          return { op: 'unsupported' };
+        }
+        return {
+          op: 'chooseEffect',
+          ...(effect.player !== undefined ? { player: effect.player } : {}),
+          options: effect.options.map((option, j) => {
+            if (!fields(option, ['label', 'condition', 'effects'], `${p}.options[${j}]`))
+              return { label: '', effects: [] };
+            return {
+              label: option.label,
+              ...(option.condition !== undefined
+                ? { condition: structuredClone(option.condition) }
+                : {}),
+              effects: effects(option.effects, `${p}.options[${j}].effects`),
+            };
+          }),
+        };
+      }
       if (effect.op === 'conditional') {
         fields(effect, ['op', 'condition', 'then', 'else'], p);
         return {
@@ -200,6 +222,7 @@ export function compileCard(
           'chooseLandName',
           'exileGraveyards',
           'disableDamagePrevention',
+          'discover',
           'impulseCastOrDamage',
           'castDamageEmblem',
           'anthemEmblem',
@@ -293,6 +316,7 @@ export function compileCard(
         disableDamagePrevention: [],
         exileGraveyards: ['players'],
         exileTop: ['count', 'player', 'duration', 'castOnly', 'anyMana'],
+        discover: ['amount'],
         impulseCastOrDamage: ['amount'],
         castDamageEmblem: ['amount'],
         anthemEmblem: ['where', 'power', 'toughness'],
@@ -397,6 +421,7 @@ export function compileCard(
       fields(effect, ['op', ...allowed], p);
       if (
         [
+          'discover',
           'impulseCastOrDamage',
           'castDamageEmblem',
           'anthemEmblem',
@@ -1054,13 +1079,18 @@ export function compileCard(
         d.effects = [{ op: 'distributedCounters' }];
         break;
       case 'combatRestriction':
-        fields(a, ['kind', 'restriction'], path);
+        fields(a, ['kind', 'restriction', 'condition'], path);
         if (
           !['cannotAttack', 'cannotBlock', 'unblockable', 'cannotBeBlockedByLowerPower'].includes(
             a.restriction,
           )
         )
           problem('UNSUPPORTED_RESTRICTION', path, 'Unsupported combat restriction.');
+        else if (a.condition !== undefined)
+          (d.conditionalCombatRestrictions ??= []).push({
+            restriction: a.restriction,
+            condition: structuredClone(a.condition),
+          });
         else d[a.restriction] = true;
         break;
       case 'saddle':
@@ -1156,6 +1186,7 @@ export function compileCard(
             'condition',
             'oncePerTurn',
             'powerUp',
+            'exhaust',
             'loyalty',
           ],
           path,
@@ -1171,6 +1202,7 @@ export function compileCard(
           ...(a.condition !== undefined ? { condition: structuredClone(a.condition) } : {}),
           ...(a.oncePerTurn !== undefined ? { oncePerTurn: a.oncePerTurn } : {}),
           ...(a.powerUp !== undefined ? { powerUp: a.powerUp } : {}),
+          ...(a.exhaust !== undefined ? { exhaust: a.exhaust } : {}),
           ...(a.loyalty !== undefined ? { loyalty: a.loyalty } : {}),
         });
         break;

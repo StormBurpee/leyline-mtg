@@ -1,0 +1,115 @@
+{
+  "inventory": "October 26, 2026 local Standard inventory",
+  "cards": [
+    {
+      "name": "Buried Treasure",
+      "oracle_id": "56f5ed8d-ef53-4766-9ef3-1e24a10e267b",
+      "oracle_text": "{T}, Sacrifice this artifact: Add one mana of any color.\n{5}, Exile this card from your graveyard: Discover 5. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 5 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "{2}",
+      "type_line": "Artifact \u2014 Treasure",
+      "colors": [],
+      "power": null,
+      "toughness": null
+    },
+    {
+      "name": "Daring Discovery",
+      "oracle_id": "a9564593-b5a6-4a83-be1e-2af8caf647d7",
+      "oracle_text": "Up to three target creatures can't block this turn.\nDiscover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "{4}{R}",
+      "type_line": "Sorcery",
+      "colors": ["R"],
+      "power": null,
+      "toughness": null
+    },
+    {
+      "name": "Etali's Favor",
+      "oracle_id": "df98b93b-0aa6-4bea-9d8d-798ebc795b0b",
+      "oracle_text": "Enchant creature you control\nWhen this Aura enters, discover 3. (Exile cards from the top of your library until you exile a nonland card with mana value 3 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)\nEnchanted creature gets +1/+1 and has trample.",
+      "mana_cost": "{2}{R}",
+      "type_line": "Enchantment \u2014 Aura",
+      "colors": ["R"],
+      "power": null,
+      "toughness": null
+    },
+    {
+      "name": "Geological Appraiser",
+      "oracle_id": "a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df",
+      "oracle_text": "When this creature enters, if you cast it, discover 3. (Exile cards from the top of your library until you exile a nonland card with mana value 3 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "{2}{R}{R}",
+      "type_line": "Creature \u2014 Human Artificer",
+      "colors": ["R"],
+      "power": "3",
+      "toughness": "2"
+    },
+    {
+      "name": "Hidden Cataract",
+      "oracle_id": "927979d7-9b5c-4448-aef0-baf2907a89f1",
+      "oracle_text": "This land enters tapped.\n{T}: Add {U}.\n{4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "",
+      "type_line": "Land \u2014 Cave",
+      "colors": [],
+      "power": null,
+      "toughness": null
+    },
+    {
+      "name": "Hidden Courtyard",
+      "oracle_id": "e19d5071-4ea1-4883-b067-a21e553f96e0",
+      "oracle_text": "This land enters tapped.\n{T}: Add {W}.\n{4}{W}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "",
+      "type_line": "Land \u2014 Cave",
+      "colors": [],
+      "power": null,
+      "toughness": null
+    },
+    {
+      "name": "Hidden Necropolis",
+      "oracle_id": "f780ee53-62b0-4c32-b5b7-047651f48e5f",
+      "oracle_text": "This land enters tapped.\n{T}: Add {B}.\n{4}{B}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "",
+      "type_line": "Land \u2014 Cave",
+      "colors": [],
+      "power": null,
+      "toughness": null
+    },
+    {
+      "name": "Hidden Nursery",
+      "oracle_id": "1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961",
+      "oracle_text": "This land enters tapped.\n{T}: Add {G}.\n{4}{G}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "",
+      "type_line": "Land \u2014 Cave",
+      "colors": [],
+      "power": null,
+      "toughness": null
+    },
+    {
+      "name": "Hidden Volcano",
+      "oracle_id": "a1c7cd7a-0795-4135-b787-effeb981d95b",
+      "oracle_text": "This land enters tapped.\n{T}: Add {R}.\n{4}{R}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "",
+      "type_line": "Land \u2014 Cave",
+      "colors": [],
+      "power": null,
+      "toughness": null
+    },
+    {
+      "name": "Primordial Gnawer",
+      "oracle_id": "80ca6596-9763-4310-b30b-7153ade9f567",
+      "oracle_text": "When this creature dies, discover 3. (Exile cards from the top of your library until you exile a nonland card with mana value 3 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "{4}{B}",
+      "type_line": "Creature \u2014 Insect Horror",
+      "colors": ["B"],
+      "power": "5",
+      "toughness": "2"
+    },
+    {
+      "name": "Walk with the Ancestors",
+      "oracle_id": "ce657a2e-461b-45fd-ab98-35b5c8512777",
+      "oracle_text": "Return up to one target permanent card from your graveyard to your hand. Discover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+      "mana_cost": "{4}{G}",
+      "type_line": "Sorcery",
+      "colors": ["G"],
+      "power": null,
+      "toughness": null
+    }
+  ]
+}

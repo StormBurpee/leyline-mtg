@@ -1,0 +1,50 @@
+{
+  "inventory": "research/standard-expansion/standard.json",
+  "reviewed": "2026-10-27",
+  "cards": [
+    {
+      "name": "Ant-Man's Army",
+      "oracle_id": "34c0f75d-10a9-428d-b202-3defb3949090",
+      "oracle_text": "When this creature enters, create a Food token or a Treasure token. (A Food token is an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\" A Treasure token is an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+      "type_line": "Creature — Insect",
+      "mana_cost": "{2}{G}",
+      "colors": ["G"],
+      "power": "3",
+      "toughness": "2",
+      "scryfall_uri": "https://scryfall.com/card/msh/161/ant-mans-army?utm_source=api"
+    },
+    {
+      "name": "Ezrim, Agency Chief",
+      "oracle_id": "ddcd8a0a-7ac3-4400-a16f-8bb5aa50994e",
+      "oracle_text": "Flying\nWhen Ezrim enters, investigate twice. (To investigate, create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\n{1}, Sacrifice an artifact: Ezrim gains your choice of vigilance, lifelink, or hexproof until end of turn.",
+      "type_line": "Legendary Creature — Archon Detective",
+      "mana_cost": "{1}{W}{W}{U}{U}",
+      "colors": ["U", "W"],
+      "power": "5",
+      "toughness": "5",
+      "scryfall_uri": "https://scryfall.com/card/mkm/202/ezrim-agency-chief?utm_source=api"
+    },
+    {
+      "name": "Hungering Puppetbeast",
+      "oracle_id": "690ae865-87bd-46b2-8e65-c53bd80c1a18",
+      "oracle_text": "When this creature enters, create a Heartwood token. (It's a red and green artifact with \"{T}: Add {R} or {G}.\")\n{1}, Sacrifice another artifact: Put a +1/+1 counter on this creature. It gains your choice of trample, hexproof, or haste until end of turn.",
+      "type_line": "Artifact Creature — Beast Construct",
+      "mana_cost": "{3}{G}{G}",
+      "colors": ["G"],
+      "power": "5",
+      "toughness": "5",
+      "scryfall_uri": "https://scryfall.com/card/fra/107/hungering-puppetbeast?utm_source=api"
+    },
+    {
+      "name": "Sanctuary Wall",
+      "oracle_id": "83856c3a-652e-4afc-9dc0-0072324ac36f",
+      "oracle_text": "Defender\n{2}{W}, {T}: Tap target creature. You may put a stun counter on it. If you do, put a stun counter on this creature. (If a permanent with a stun counter would become untapped, remove one from it instead.)",
+      "type_line": "Artifact Creature — Wall",
+      "mana_cost": "{1}{W}",
+      "colors": ["W"],
+      "power": "0",
+      "toughness": "4",
+      "scryfall_uri": "https://scryfall.com/card/mkm/32/sanctuary-wall?utm_source=api"
+    }
+  ]
+}

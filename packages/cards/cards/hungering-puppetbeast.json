@@ -1,0 +1,97 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "690ae865-87bd-46b2-8e65-c53bd80c1a18",
+  "name": "Hungering Puppetbeast",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Beast", "Construct"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}{G}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "When this creature enters, create a Heartwood token. (It's a red and green artifact with \"{T}: Add {R} or {G}.\")\n{1}, Sacrifice another artifact: Put a +1/+1 counter on this creature. It gains your choice of trample, hexproof, or haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/heartwood",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "artifact"
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Gain trample until end of turn",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "keywords": ["trample"],
+                  "until": "endOfTurn"
+                }
+              ]
+            },
+            {
+              "label": "Gain hexproof until end of turn",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "keywords": ["hexproof"],
+                  "until": "endOfTurn"
+                }
+              ]
+            },
+            {
+              "label": "Gain haste until end of turn",
+              "effects": [
+                {
+                  "op": "modify",
+                  "target": "source",
+                  "power": 0,
+                  "toughness": 0,
+                  "keywords": ["haste"],
+                  "until": "endOfTurn"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

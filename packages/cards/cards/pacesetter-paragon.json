@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1acb289f-fb7f-4d83-aaef-4e7b9462c593",
+  "name": "Pacesetter Paragon",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Pilot"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Exhaust — {2}{R}: Put a +1/+1 counter on this creature. It gains double strike until end of turn. (Activate each exhaust ability only once.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "exhaust": true,
+      "cost": {
+        "mana": "{2}{R}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        },
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["double strike"],
+          "until": "endOfTurn"
+        }
+      ],
+      "text": "Exhaust — {2}{R}: Put a +1/+1 counter on this creature. It gains double strike until end of turn."
+    }
+  ]
+}

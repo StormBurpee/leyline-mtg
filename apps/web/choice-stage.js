@@ -25,6 +25,7 @@ export const CARD_DECISIONS = new Set([
   'librarySearch',
   'legendRule',
   'optionalEffect',
+  'effectChoice',
   'payCost',
   'creatureType',
   'landType',

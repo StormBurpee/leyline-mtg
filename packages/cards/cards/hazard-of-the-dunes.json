@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "799664fc-279c-40c1-8e40-44a68c38801b",
+  "name": "Hazard of the Dunes",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Wurm"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Reach, trample\nExhaust — {6}{G}: Put three +1/+1 counters on this creature. (Activate each exhaust ability only once.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "activated",
+      "exhaust": true,
+      "cost": {
+        "mana": "{6}{G}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 3,
+          "counter": "+1/+1"
+        }
+      ],
+      "text": "Exhaust — {6}{G}: Put three +1/+1 counters on this creature."
+    }
+  ]
+}

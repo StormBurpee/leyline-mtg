@@ -1,3 +1,4 @@
+import { effectInstructions } from './effect-tree.js';
 import { CARDS } from './cards.js';
 import { validateDefinition, RegistryError } from './definition-validation.js';
 export { validateDefinition, RegistryError };
@@ -107,7 +108,7 @@ export function createRegistry(input = CARDS) {
   }
   if (errors.length) throw new RegistryError(errors.slice(0, 100));
   for (const card of Object.values(registry))
-    for (const e of [
+    for (const e of effectInstructions([
       ...(card.effects ?? []),
       ...(card.adventure?.effects ?? []),
       ...(card.prepareSpell?.effects ?? []),
@@ -127,7 +128,7 @@ export function createRegistry(input = CARDS) {
         t.modes ? t.modes.flatMap((mode) => mode.effects) : t.effects,
       ),
       ...(card.activated ?? []).flatMap((a) => a.effects),
-    ]) {
+    ])) {
       if (
         e.op === 'empowerJace' &&
         (registry[e.definition]?.type !== 'planeswalker' ||

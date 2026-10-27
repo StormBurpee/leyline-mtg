@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "80ca6596-9763-4310-b30b-7153ade9f567",
+  "name": "Primordial Gnawer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Insect", "Horror"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}",
+    "power": 5,
+    "toughness": 2
+  },
+  "rulesText": "When this creature dies, discover 3. (Exile cards from the top of your library until you exile a nonland card with mana value 3 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "battlefieldToGraveyard",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discover",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

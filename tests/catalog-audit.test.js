@@ -33,6 +33,7 @@ test('Forge inventory identifies the exact checked-in compiler source', async ()
   for (const path of [
     'packages/forge-import/compile.js',
     'packages/engine/src/registry.js',
+    'packages/engine/src/effect-tree.js',
     'packages/engine/src/definition-validation.js',
     'packages/engine/src/condition-schema.js',
     'packages/engine/src/target-group-schema.js',

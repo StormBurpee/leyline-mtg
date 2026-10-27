@@ -155,6 +155,32 @@ export function castingProfile(
     profile = { ...profile, manaAsAnyType: true };
   if (object.zone === 'exile' && object.plotted?.incarnation === object.incarnation)
     profile = { ...profile, cost: {}, plottedCast: true };
+  const discover =
+    state.choice?.kind === 'castExiled' &&
+    state.choice.player === player &&
+    state.choice.card === object.id &&
+    state.choice.incarnation === object.incarnation &&
+    object.zone === 'exile'
+      ? state.choice.discover
+      : undefined;
+  if (discover !== undefined) {
+    // CR 701.57 / 118.9: check the resulting spell's printed mana value, not
+    // its discounted payment. Discover is itself an alternative cost.
+    const face = base.adventureCast ? card.adventure : card;
+    if (
+      base.faceDownCast ||
+      base.warpPaid ||
+      manaValue(face) > discover ||
+      (face.cost.X ? x !== 0 : x !== undefined)
+    )
+      return null;
+    profile = {
+      ...profile,
+      cost: { ...base.modeAdditionalMana },
+      discoveredCast: true,
+      ...(face.cost.X ? { chosenX: 0 } : {}),
+    };
+  }
   // Alternative/free base costs never erase mandatory Spree additional costs.
   if (base?.spree && (profile.flashbackPaid || profile.plottedCast)) {
     const cost = { ...profile.cost };
@@ -167,7 +193,7 @@ export function castingProfile(
     const cost = { ...profile.cost, generic: (profile.cost.generic ?? 0) + profile.cost.X * x };
     delete cost.X;
     profile = { ...profile, cost, chosenX: x };
-  } else if (x !== undefined) return null;
+  } else if (x !== undefined && !(profile.discoveredCast && base.cost.X && x === 0)) return null;
   if (profile.distributedCounters)
     profile = {
       ...profile,
@@ -197,7 +223,11 @@ export function castingProfile(
     definition: profile,
     controller: player,
     owner: object.owner,
-    manaValue: profile.faceDownCast ? 0 : manaValue(profile.adventureCast ? profile : card, x ?? 0),
+    // The chosen face's printed cost defines mana value, even when Discover
+    // replaces its payment cost (CR 202.3 / 118.9c).
+    manaValue: profile.faceDownCast
+      ? 0
+      : manaValue(profile.adventureCast ? card.adventure : card, x ?? 0),
     keywords: profile.keywords,
     ...(profile.faceDownCast ? { power: 2, toughness: 2 } : stats(projected, proposed)),
   };

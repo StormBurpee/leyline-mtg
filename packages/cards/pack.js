@@ -1,3 +1,4 @@
+import { effectInstructions } from '../engine/src/effect-tree.js';
 import { jsonDataProblem } from './json-data.js';
 import { compileCard } from './compiler.js';
 /** A pack is all-or-nothing. No card silently disappears after a failed compilation. */
@@ -86,7 +87,7 @@ export function compilePack(cards, { mechanics = {} } = {}) {
   }
   const byName = Object.fromEntries(definitions.map((d) => [d.name, d]));
   for (const d of definitions)
-    for (const e of [
+    for (const e of effectInstructions([
       ...(d.effects ?? []),
       ...(d.adventure?.effects ?? []),
       ...(d.modes ?? []).flatMap((mode) => mode.effects),
@@ -95,7 +96,7 @@ export function compilePack(cards, { mechanics = {} } = {}) {
         t.modes ? t.modes.flatMap((mode) => mode.effects) : t.effects,
       ),
       ...(d.activated ?? []).flatMap((a) => a.effects),
-    ])
+    ]))
       if (['token', 'mobilize', 'empowerJace'].includes(e.op) && !byName[e.definition]?.token)
         diagnostics.push({
           code: 'TOKEN_REFERENCE',

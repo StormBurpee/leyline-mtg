@@ -59,6 +59,7 @@ test('automatic ordering never makes target or optional-effect choices', () => {
   for (const kind of [
     'triggerTarget',
     'optionalEffect',
+    'effectChoice',
     'attackers',
     'blockers',
     'discardEffect',
