@@ -8,6 +8,7 @@ import {
   exportReplay,
   replay,
   chooseBotCommand,
+  VERSION,
 } from '../packages/engine/src/index.js';
 
 const legacyWard = JSON.parse(
@@ -79,6 +80,17 @@ test('published v0.55–v0.57 envelopes preserve revision 3 with and without exp
 test('published v0.58 envelopes preserve revision 4 with and without explicit marker', () => {
   const state = createGame({ mulligan: false });
   const record = { ...exportReplay(state), version: '0.58.0' };
+  assert.deepEqual(replay(record), state);
+  delete record.rulesRevision;
+  assert.deepEqual(replay(record), state);
+});
+
+// Each release must continue admitting the just-published predecessor, not only
+// earlier hard-coded aliases. This catches a version bump without its save migration.
+test('the previous minor release envelope preserves revision 4 and its cached catalog', () => {
+  const [major, minor] = VERSION.split('.').map(Number);
+  const state = createGame({ mulligan: false });
+  const record = { ...exportReplay(state), version: `${major}.${minor - 1}.0` };
   assert.deepEqual(replay(record), state);
   delete record.rulesRevision;
   assert.deepEqual(replay(record), state);
