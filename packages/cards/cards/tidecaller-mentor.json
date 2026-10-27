@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e75e40a5-a9ae-4789-96c1-0e19d1ce59c5",
+  "name": "Tidecaller Mentor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rat", "Wizard"],
+    "colors": ["B", "U"],
+    "manaCost": "{1}{U}{B}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Menace\nThreshold \u2014 When this creature enters, if there are seven or more cards in your graveyard, return up to one target nonland permanent to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "not": {
+                "type": "land"
+              }
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 7
+      }
+    }
+  ]
+}

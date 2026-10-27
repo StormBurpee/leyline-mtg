@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2d961997-4f5f-4ce2-b062-11411147e2f7",
+  "name": "Sun-Spider, Nimble Webber",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Spider", "Human", "Hero"],
+    "colors": ["U", "W"],
+    "manaCost": "{3}{W/U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "During your turn, Sun-Spider has flying.\nWhen Sun-Spider enters, search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["flying"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "any": [
+              {
+                "subtype": "Aura"
+              },
+              {
+                "subtype": "Equipment"
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ]
+    }
+  ]
+}

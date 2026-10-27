@@ -517,7 +517,7 @@
   {
     "oracleId": "c8259b0e-131f-44f0-86d4-7c4d711b328d",
     "name": "Old Thrush",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "186b2256-4af3-48cb-96b0-b0e80a7ee6dc",
@@ -832,7 +832,7 @@
   {
     "oracleId": "c1c5f9da-1396-4406-b803-b64f66b8e49d",
     "name": "Ooze Spill",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "a5375366-7ddc-4bd5-91c9-dc08f8beb3f6",
@@ -1487,7 +1487,7 @@
   {
     "oracleId": "204f9afe-c20b-4933-b5cd-aa572784762a",
     "name": "Overrun",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ed4cd3a1-688b-4c05-948d-39d3336e00c0",

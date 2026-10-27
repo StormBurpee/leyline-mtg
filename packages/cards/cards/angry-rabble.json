@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cf6dc79e-840c-4d47-8f94-c8623528acd2",
+  "name": "Angry Rabble",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Citizen"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Trample\nWhenever you cast a spell with mana value 4 or greater, this creature deals 1 damage to each opponent.\n{5}{R}: Put two +1/+1 counters on this creature. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "manaValue": {
+            "gte": 4
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{5}{R}"
+      },
+      "timing": "sorcery",
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 2,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

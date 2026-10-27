@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "98d20908-6d68-4d31-b719-207f93c9b402",
+  "name": "Goblin-town",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {B} or {R}.\n{2}{B}{R}, {T}, Sacrifice this land: Put two +1/+1 counters on target Goblin or Orc you control. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["B", "R"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{B}{R}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "timing": "sorcery",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "any": [
+                {
+                  "subtype": "Goblin"
+                },
+                {
+                  "subtype": "Orc"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "amount": 2,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

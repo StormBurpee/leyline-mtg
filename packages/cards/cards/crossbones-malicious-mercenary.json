@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ac950d10-e373-42d3-907b-ee56e45a2084",
+  "name": "Crossbones, Malicious Mercenary",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Mercenary", "Villain"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Deathtouch\nWhenever another Villain you control enters, put a +1/+1 counter on Crossbones. He deals 2 damage to each opponent. This ability triggers only once each turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Villain"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        },
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 2
+        }
+      ],
+      "oncePerTurn": true
+    }
+  ]
+}

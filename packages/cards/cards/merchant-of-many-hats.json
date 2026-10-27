@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "23820b45-2f3a-4b6e-99ea-d84caccb7e37",
+  "name": "Merchant of Many Hats",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Peasant", "Ally"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{2}{B}: Return this card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{2}{B}"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "source",
+          "destination": "hand"
+        }
+      ],
+      "text": "{2}{B}: Return this card from your graveyard to your hand."
+    }
+  ]
+}

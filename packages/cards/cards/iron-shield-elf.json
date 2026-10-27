@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1c77b4da-b580-4ce9-b127-76de674f5694",
+  "name": "Iron-Shield Elf",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Warrior"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "Discard a card: This creature gains indestructible until end of turn. Tap it. (Damage and effects that say \"destroy\" don't destroy it. If its toughness is 0 or less, it still dies.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "discard": 1
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["indestructible"]
+        },
+        {
+          "op": "tap",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

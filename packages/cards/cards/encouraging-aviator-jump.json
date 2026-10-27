@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d6accaed-ff35-4324-b31b-35e6837bc079",
+  "name": "Encouraging Aviator // Jump",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever this creature attacks, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Encouraging Aviator",
+      "entersPrepared": false,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/jump",
+        "name": "Jump",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["U"],
+          "manaCost": "{U}"
+        },
+        "rulesText": "Target creature gains flying until end of turn.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            },
+            "effects": [
+              {
+                "op": "modify",
+                "target": "target",
+                "power": 0,
+                "toughness": 0,
+                "keywords": ["flying"],
+                "until": "endOfTurn"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "prepare",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

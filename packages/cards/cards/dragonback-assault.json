@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "413fb2db-f1a1-4d22-ac37-a52821d35ca2",
+  "name": "Dragonback Assault",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G", "R", "U"],
+    "manaCost": "{3}{G}{U}{R}"
+  },
+  "rulesText": "When this enchantment enters, it deals 3 damage to each creature and each planeswalker.\nLandfall \u2014 Whenever a land you control enters, create a 4/4 red Dragon creature token with flying.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damageAll",
+          "where": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "type": "planeswalker"
+              }
+            ]
+          },
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/dragon-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -54,10 +54,10 @@ test('legacy ward resume, decisions, export and replay preserve compatibility ac
 
 test('new games explicitly export announcement-time rules even under older envelope aliases', () => {
   const state = createGame({ mulligan: false });
-  assert.equal(state.rulesRevision, 2);
+  assert.equal(state.rulesRevision, 3);
   const record = exportReplay(state);
-  assert.equal(record.rulesRevision, 2);
+  assert.equal(record.rulesRevision, 3);
   assert.deepEqual(replay(record), state);
   assert.deepEqual(replay({ ...record, version: '0.3.0' }), state);
-  assert.throws(() => replay({ ...record, rulesRevision: 3 }), /Unsupported replay rules revision/);
+  assert.throws(() => replay({ ...record, rulesRevision: 4 }), /Unsupported replay rules revision/);
 });

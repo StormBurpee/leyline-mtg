@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d89aa87a-d59a-41e2-b92f-15c9bc6d3d13",
+  "name": "Project Deathlok Soldier",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Zombie", "Soldier"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "{2}{B}: Return this card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{2}{B}"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "source",
+          "destination": "hand"
+        }
+      ],
+      "text": "{2}{B}: Return this card from your graveyard to your hand."
+    }
+  ]
+}

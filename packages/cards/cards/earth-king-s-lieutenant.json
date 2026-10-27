@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9da9248d-1201-447f-b6c2-2b64af4f71c4",
+  "name": "Earth King's Lieutenant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier", "Ally"],
+    "colors": ["G", "W"],
+    "manaCost": "{G}{W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Trample\nWhen this creature enters, put a +1/+1 counter on each other Ally creature you control.\nWhenever another Ally you control enters, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              },
+              {
+                "subtype": "Ally"
+              }
+            ]
+          },
+          "excludeSource": true,
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Ally"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

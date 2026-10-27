@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2c53a913-8a99-4a15-9c47-e79af026dc05",
+  "name": "Skybeast Tracker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant", "Archer"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Reach\nWhenever you cast a spell with mana value 5 or greater, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "manaValue": {
+            "gte": 5
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/food-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

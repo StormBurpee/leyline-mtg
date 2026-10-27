@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c4c6083a-b0b5-4c6b-9f11-9f4fe38417c2",
+  "name": "Pyrewood Gearhulk",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Construct"],
+    "colors": ["G", "R"],
+    "manaCost": "{2}{R}{R}{G}{G}",
+    "power": 7,
+    "toughness": 7
+  },
+  "rulesText": "Vigilance, menace\nWhen this creature enters, other creatures you control get +2/+2 and gain vigilance and menace until end of turn. Damage can't be prevented this turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "excludeSource": true,
+          "power": 2,
+          "toughness": 2,
+          "keywords": ["vigilance", "menace"],
+          "until": "endOfTurn"
+        },
+        {
+          "op": "disableDamagePrevention"
+        }
+      ]
+    }
+  ]
+}

@@ -56,6 +56,15 @@ export function meetsCondition(s, player, value, excludedIds = [], source = null
       ? isAttacking(s, object)
       : object.enteredTurn === s.turn;
   }
+  if (value.kind === 'sourcePrepared') {
+    const object = source && s.objects[source.id];
+    return (
+      !!object &&
+      object.zone === 'battlefield' &&
+      object.incarnation === source.incarnation &&
+      !!object.preparedCopy === value.prepared
+    );
+  }
   if (value.kind === 'sourceType') {
     const object = source && s.objects[source.id];
     return (

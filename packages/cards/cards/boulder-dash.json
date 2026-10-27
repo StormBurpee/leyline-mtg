@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "30a9ad0e-1b23-41ce-bacc-3b27f78ef628",
+  "name": "Boulder Dash",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "Boulder Dash deals 2 damage to any target and 1 damage to any other target.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2,
+          "targetGroup": "first"
+        },
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1,
+          "targetGroup": "second"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "first",
+          "selector": {
+            "scope": "damageable"
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "second",
+          "selector": {
+            "scope": "damageable"
+          },
+          "min": 1,
+          "max": 1,
+          "excludeFrom": ["first"]
+        }
+      ]
+    }
+  ]
+}

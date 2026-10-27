@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "59a10335-72df-44a5-a514-5bac392cd282",
+  "name": "Professor Zei, Anthropologist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Advisor", "Ally"],
+    "colors": ["R", "U"],
+    "manaCost": "{U/R}{U/R}",
+    "power": 0,
+    "toughness": 3
+  },
+  "rulesText": "{T}, Discard a card: Draw a card.\n{1}, {T}, Sacrifice Professor Zei: Return target instant or sorcery card from your graveyard to your hand. Activate only during your turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true,
+        "discard": 1
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ],
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

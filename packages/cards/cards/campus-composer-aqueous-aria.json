@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "9b3155c1-c662-4ff1-80e2-4064e6233dc5",
+  "name": "Campus Composer // Aqueous Aria",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Bard"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Ward {2}\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Campus Composer",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:prepare/aqueous-aria",
+        "name": "Aqueous Aria",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["U"],
+          "manaCost": "{4}{U}"
+        },
+        "rulesText": "Create a 3/3 blue and red Elemental creature token with flying.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/blue-red-flying-elemental-token",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "entersPrepared": true
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

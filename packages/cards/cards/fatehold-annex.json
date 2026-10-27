@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d35876a3-e891-43d3-a50c-69e8469497e0",
+  "name": "Fatehold Annex",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control a planeswalker.\n{T}: Add {W} or {U}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "type": "planeswalker"
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "U"]
+    }
+  ]
+}

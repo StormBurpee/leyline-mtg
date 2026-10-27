@@ -132,7 +132,7 @@ test('bounded reflexive instruction and graveyard cost combinations fail closed'
   for (const changes of [
     { activated: [{ ...CARDS[name].activated[0], zone: 'exile' }] },
     { activated: [{ ...CARDS[name].activated[0], cost: { tap: true, exileSelf: true } }] },
-    { activated: [{ ...CARDS[name].activated[0], cost: {} }] },
+    { activated: [{ ...CARDS[name].activated[0], cost: { sacrificeSelf: true } }] },
     {
       etb: [
         {

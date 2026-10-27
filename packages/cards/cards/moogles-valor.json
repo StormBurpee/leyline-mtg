@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9627ed9a-5ade-412d-bf8d-f0705b1c9405",
+  "name": "Moogles' Valor",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}"
+  },
+  "rulesText": "For each creature you control, create a 1/2 white Moogle creature token with lifelink. Then creatures you control gain indestructible until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-moogle-token",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "creature"
+            }
+          }
+        },
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["indestructible"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

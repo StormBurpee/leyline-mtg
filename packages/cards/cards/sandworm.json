@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e92185f8-579c-4645-9cb8-ef5deb9eebc8",
+  "name": "Sandworm",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Worm"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Haste\nWhen this creature enters, destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        },
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "player": "targetController",
+          "optional": true,
+          "tapped": true
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "land"
+        }
+      }
+    }
+  ]
+}

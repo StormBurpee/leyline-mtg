@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a7fe7621-9bb1-4d0d-8b50-c179c685d79d",
+  "name": "Proctor's Gaze",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G", "U"],
+    "manaCost": "{2}{G}{U}"
+  },
+  "rulesText": "Return up to one target nonland permanent to its owner's hand. Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target",
+          "targetGroup": "chosen"
+        },
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "not": {
+                "type": "land"
+              }
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

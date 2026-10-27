@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4ce8e0d0-6a3e-4c47-a7b7-c1b1ea1b9426",
+  "name": "Prickly Pair",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Plant", "Mercenary"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, create a 1/1 red Mercenary creature token with \"{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.\"",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mercenary-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

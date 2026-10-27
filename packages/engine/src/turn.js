@@ -97,6 +97,16 @@ export function advanceStep(s) {
     );
     if (!first) index = STEPS.indexOf('damage');
   }
+  // In a two-player game the starting player skips the whole first draw step,
+  // including priority and beginning-of-draw-step triggers. Historical replays
+  // retain the old step sequence through rules revision 2.
+  if (
+    (s.rulesRevision ?? 3) >= 3 &&
+    s.turn === 1 &&
+    s.active === s.startingPlayer &&
+    STEPS[index] === 'draw'
+  )
+    index = STEPS.indexOf('main1');
   s.step = STEPS[index];
   s.priority = s.active;
   emit(s, 'step', { step: s.step, player: s.active });

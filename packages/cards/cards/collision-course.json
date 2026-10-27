@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "49ca0ca8-0733-4aa9-bd0c-1c661725b81b",
+  "name": "Collision Course",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Collision Course deals X damage to target creature, where X is the number of permanents you control that are creatures and/or Vehicles.\n\u2022 Destroy target artifact.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Damage equal to creatures and Vehicles you control.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": {
+                "kind": "count",
+                "zone": "battlefield",
+                "player": "you",
+                "where": {
+                  "any": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "subtype": "Vehicle"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "label": "Destroy target artifact.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

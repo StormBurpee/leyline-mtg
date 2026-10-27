@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "925cacdc-6d09-4fbd-9258-9f0539da180c",
+  "name": "Thr\u00f3r's Map",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": ["legendary"],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{2}"
+  },
+  "rulesText": "When Thr\u00f3r's Map enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n{2}, {T}: Draw a card, then discard a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

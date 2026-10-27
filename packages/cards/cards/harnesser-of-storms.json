@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fb8f7047-280b-464f-aca2-6add3e21df8f",
+  "name": "Harnesser of Storms",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Otter", "Wizard"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Whenever you cast a noncreature or Otter spell, you may exile the top card of your library. Until end of turn, you may play that card. This ability triggers only once each turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "not": {
+                "type": "creature"
+              }
+            },
+            {
+              "subtype": "Otter"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 1,
+          "player": "controller",
+          "duration": "turn"
+        }
+      ],
+      "optional": true,
+      "oncePerTurn": true
+    }
+  ]
+}

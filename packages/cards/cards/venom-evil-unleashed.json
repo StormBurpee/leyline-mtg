@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6731d861-cc52-4a2e-8c33-154681fd50e4",
+  "name": "Venom, Evil Unleashed",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Symbiote", "Villain"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Deathtouch\n{2}{B}, Exile this card from your graveyard: Put two +1/+1 counters on target creature. It gains deathtouch until end of turn. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{B}",
+        "exileSelf": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 2
+        },
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["deathtouch"]
+        }
+      ],
+      "zone": "graveyard",
+      "timing": "sorcery",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

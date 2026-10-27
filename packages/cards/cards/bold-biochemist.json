@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "45ddfa35-7b3c-4916-b231-dc721b7b56d9",
+  "name": "Bold Biochemist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Scientist"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Power-up \u2014 {5}{U}: Put a +1/+1 counter on this creature and draw two cards. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "powerUp": true,
+      "cost": {
+        "mana": "{5}{U}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5a651557-ce08-46ba-aecd-0e4fbfdef3c0",
+  "name": "Bile-Vial Boggart",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Assassin"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature dies, put a -1/-1 counter on up to one target creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "-1/-1",
+          "amount": 1,
+          "targetGroup": "chosen"
+        }
+      ]
+    }
+  ]
+}

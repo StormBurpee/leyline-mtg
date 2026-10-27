@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "697b14c6-fe6a-4880-9cf2-b6602a52ca0b",
+  "name": "Summoned Dromedary",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit", "Camel"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Vigilance\n{1}{W}: Return this card from your graveyard to your hand. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{1}{W}"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "source",
+          "destination": "hand"
+        }
+      ],
+      "text": "{1}{W}: Return this card from your graveyard to your hand. Activate only as a sorcery.",
+      "timing": "sorcery"
+    }
+  ]
+}

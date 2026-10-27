@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a9a35c77-637f-4d56-afa2-6c8a4ded4838",
+  "name": "Stinging Cave Crawler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Insect", "Horror"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Deathtouch\nDescend 4 \u2014 Whenever this creature attacks, if there are four or more permanent cards in your graveyard, you draw a card and you lose 1 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "not": {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            }
+          }
+        },
+        "operator": "gte",
+        "right": 4
+      }
+    }
+  ]
+}

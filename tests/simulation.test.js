@@ -139,7 +139,7 @@ test('episode outputs identify the engine, exact ruleset and experiment configur
   assert.match(first.configHash, /^[a-f0-9]{64}$/);
   assert.equal(first.rulesetHash, second.rulesetHash);
   assert.notEqual(first.configHash, second.configHash);
-  assert.equal(first.engineVersion, '0.48.0');
+  assert.equal(first.engineVersion, '0.49.0');
 });
 
 test('target-choice actions use opaque handles and hide trigger-placement continuations', async () => {
@@ -216,7 +216,8 @@ test('a departed trigger source never exposes its concealed raw object ID', asyn
     const result = session.step({ player: c.player, ...command });
     assert.equal(result.ok, true, JSON.stringify(result.error));
   };
-  for (let i = 0; i < 4; i++) step({ type: 'pass' });
+  // First player skips the entire draw step.
+  for (let i = 0; i < 2; i++) step({ type: 'pass' });
   let c = session.context();
   step(
     c.actions.find((a) => a.type === 'cast' && c.observation.objects[a.card].name === source.name),

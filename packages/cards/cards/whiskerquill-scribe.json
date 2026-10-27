@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cb1e1acc-3805-418b-bed1-65838ddb1d62",
+  "name": "Whiskerquill Scribe",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Mouse", "Citizen"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Valiant \u2014 Whenever this creature becomes the target of a spell or ability you control for the first time each turn, you may discard a card. If you do, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "targeted",
+        "object": "source",
+        "targetingController": "you",
+        "firstEachTurn": true
+      },
+      "effects": [
+        {
+          "op": "optionalDiscardDraw"
+        }
+      ]
+    }
+  ]
+}

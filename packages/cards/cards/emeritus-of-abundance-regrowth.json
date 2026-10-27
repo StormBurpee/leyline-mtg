@@ -1,0 +1,79 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e5152e8d-9f55-493d-a0fc-753cc72ee299",
+  "name": "Emeritus of Abundance // Regrowth",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Vigilance\nThis creature enters prepared.\nWhenever this creature attacks, if you control eight or more lands, this creature becomes prepared.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Emeritus of Abundance",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/regrowth",
+        "name": "Regrowth",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["G"],
+          "manaCost": "{1}{G}"
+        },
+        "rulesText": "Return target card from your graveyard to your hand.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "graveyard",
+              "where": {
+                "owner": "you"
+              }
+            },
+            "effects": [
+              {
+                "op": "moveTarget",
+                "target": "target",
+                "destination": "hand"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "prepare",
+          "target": "source"
+        }
+      ],
+      "condition": {
+        "kind": "controlAtLeast",
+        "where": {
+          "type": "land"
+        },
+        "count": 8
+      }
+    }
+  ]
+}

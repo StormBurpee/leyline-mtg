@@ -33,6 +33,7 @@ import {
   counterKinds,
   removeOneCounter,
   preparePermanent,
+  unpreparePermanent,
   preparedSource,
   trackExiledCard,
   entryTriggersSuppressed,
@@ -66,6 +67,15 @@ function ignoresCreatureProtection(s, object) {
     )
   );
 }
+// CR 122.1a / 704.5q: placement changes stats immediately; opposing counters
+// cancel only at the next simultaneous SBA batch, never between instructions.
+function putStatCounters(object, effect) {
+  const key = effect.counter === '-1/-1' ? 'minusCounters' : 'plusCounters';
+  const next = (object[key] ?? 0) + effect.amount;
+  requireRule(Number.isSafeInteger(next), 'COUNTER_RANGE', 'Too many counters.');
+  object[key] = next;
+}
+
 export function legalTarget(s, kind, target, controller, sourceRef = null) {
   if (!kind) return target == null;
   const spec = targetSpec(kind);
@@ -1034,7 +1044,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
                 keywords: e.keywords ?? [],
                 expires: s.turn,
               });
-            else if (e.op === 'counterAll') object.plusCounters += e.amount;
+            else if (e.op === 'counterAll') putStatCounters(object, e);
             else if (e.op === 'untapAll') untapObject(s, object);
             else tapObjects(s, [object]);
           }
@@ -1136,7 +1146,13 @@ export function resolveEffects(s, entry, startIndex = 0) {
         if (o) o.plusCounters += entry.distribution?.[target.id] ?? 0;
         break;
       case 'counterOn':
-        if (o) o.plusCounters += e.amount;
+        if (o) putStatCounters(o, e);
+        break;
+      case 'prepare':
+        if (o) preparePermanent(s, o);
+        break;
+      case 'unprepare':
+        if (o) unpreparePermanent(s, o);
         break;
       case 'tap':
       case 'untap':

@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0a8e5c48-885d-4ea8-9c68-a3e9213d4289",
+  "name": "Tunnel Rats",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rat"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{4}{B}: Return this card from your graveyard to the battlefield tapped.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{4}{B}"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "source",
+          "destination": "battlefield",
+          "tapped": true
+        }
+      ],
+      "text": "{4}{B}: Return this card from your graveyard to the battlefield tapped."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dbb1690a-f6f5-459c-9d7f-cb6541fb6688",
+  "name": "Stone Docent",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit", "Chimera"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "{W}, Exile this card from your graveyard: You gain 2 life. Surveil 1. Activate only as a sorcery. (Look at the top card of your library. You may put it into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{W}",
+        "exileSelf": true
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "zone": "graveyard",
+      "timing": "sorcery"
+    }
+  ]
+}

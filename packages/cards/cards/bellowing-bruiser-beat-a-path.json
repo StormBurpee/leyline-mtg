@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "id": "cdb84830-faf2-4beb-8d57-ad696d75876b",
+  "name": "Bellowing Bruiser // Beat a Path",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Ogre"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Haste",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Bellowing Bruiser",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/beat-a-path",
+        "name": "Beat a Path",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["R"],
+          "manaCost": "{2}{R}"
+        },
+        "rulesText": "Up to two target creatures can't block this turn. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "combatRestriction",
+                "restriction": "cannotBlock",
+                "target": "target",
+                "until": "endOfTurn",
+                "targetGroup": "chosen"
+              }
+            ],
+            "targetGroups": [
+              {
+                "id": "chosen",
+                "selector": {
+                  "scope": "permanent",
+                  "where": {
+                    "type": "creature"
+                  }
+                },
+                "min": 0,
+                "max": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

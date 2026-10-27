@@ -909,7 +909,7 @@
               "enum": ["source", "target", "attached"]
             },
             "counter": {
-              "const": "+1/+1"
+              "enum": ["+1/+1", "-1/-1"]
             },
             "amount": {
               "$ref": "#/$defs/effectNumericValue"
@@ -1119,6 +1119,9 @@
             },
             "excludeSource": {
               "type": "boolean"
+            },
+            "counter": {
+              "enum": ["+1/+1", "-1/-1"]
             },
             "amount": {
               "$ref": "#/$defs/effectNumericValue"
@@ -2159,6 +2162,22 @@
               "enum": ["owner", "you"]
             }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "enum": ["prepare", "unprepare"]
+            },
+            "target": {
+              "enum": ["source", "target", "attached"]
+            },
+            "targetGroup": {
+              "type": "string"
+            }
+          },
+          "required": ["op", "target"],
+          "additionalProperties": false
         }
       ]
     },
@@ -2942,10 +2961,17 @@
             },
             "amount": {
               "oneOf": [
-                { "type": "integer", "minimum": 0 },
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
                 {
                   "type": "object",
-                  "properties": { "kind": { "const": "x" } },
+                  "properties": {
+                    "kind": {
+                      "const": "x"
+                    }
+                  },
                   "required": ["kind"],
                   "additionalProperties": false
                 }
@@ -3514,6 +3540,19 @@
             }
           },
           "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "sourcePrepared"
+            },
+            "prepared": {
+              "type": "boolean"
+            }
+          },
+          "required": ["kind", "prepared"],
           "additionalProperties": false
         }
       ]

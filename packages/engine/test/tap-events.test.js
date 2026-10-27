@@ -208,7 +208,8 @@ test('public tap commands preserve exact replay, with normal stacked rather than
     minimumDeckSize: 7,
     mulligan: false,
   });
-  s = resolve(resolve(s));
+  s = resolve(s);
+  assert.equal(s.step, 'main1');
   const id = s.players[0].hand.find((id) => s.objects[id].name === free.name);
   s = resolve(act(s, 'cast', { card: id }));
   const result = dispatch(s, { type: 'tapMana', player: 0, card: id, color: 'G' });

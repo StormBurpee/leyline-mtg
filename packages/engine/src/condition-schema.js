@@ -28,6 +28,7 @@ export function validateCondition(value, { continuous = false } = {}) {
       controllerLostLifeThisTurn: ['kind'],
       controllerTurn: ['kind'],
       sourceType: ['kind', 'type'],
+      sourcePrepared: ['kind', 'prepared'],
       sourceQuestCountersAtLeast: ['kind', 'count'],
       sourceExiledCardTypesAtLeast: ['kind', 'count'],
       eventManaSpentAtLeast: ['kind', 'count'],
@@ -69,6 +70,8 @@ export function validateCondition(value, { continuous = false } = {}) {
       (!Number.isSafeInteger(v.count) || v.count < 1 || v.count > 1000)
     )
       errors.push('Invalid quest counter count.');
+    if (v.kind === 'sourcePrepared' && typeof v.prepared !== 'boolean')
+      errors.push('Preparation conditions require a boolean prepared state.');
     if (v.kind === 'sourceType' && !CARD_TYPES.includes(v.type))
       errors.push('Invalid source type.');
     if (v.kind === 'controlAtLeast') {

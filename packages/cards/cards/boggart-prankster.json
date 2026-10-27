@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1bcac664-835a-4474-8ca4-263801bde08e",
+  "name": "Boggart Prankster",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Warrior"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Whenever you attack, target attacking Goblin you control gets +1/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attackGroup",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "attacking": true
+            },
+            {
+              "subtype": "Goblin"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

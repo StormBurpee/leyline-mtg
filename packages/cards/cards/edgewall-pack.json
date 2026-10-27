@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ef702a1a-4ace-43e0-8e86-dcceb0b1e4d5",
+  "name": "Edgewall Pack",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dog"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhen this creature enters, create a 1/1 black Rat creature token with \"This token can't block.\"",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/nonblocking-rat-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

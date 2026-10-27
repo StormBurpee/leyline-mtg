@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "5ba7abbc-f6e8-40c2-800b-11efd10cca5b",
+  "name": "Landscape Painter // Vibrant Idea",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Landscape Painter",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:prepare/vibrant-idea",
+        "name": "Vibrant Idea",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["U"],
+          "manaCost": "{4}{U}"
+        },
+        "rulesText": "Draw two cards.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "draw",
+                "target": "controller",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      },
+      "entersPrepared": true
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

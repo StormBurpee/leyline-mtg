@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "04e615e6-4088-4170-904c-f2d4bcebed59",
+  "name": "Starry-Eyed Skyrider",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Scout"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever this creature attacks, another target creature you control gains flying until end of turn.\nAttacking tokens you control have flying.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["flying"]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "attacking": true
+          },
+          {
+            "token": true
+          }
+        ]
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["flying"]
+    }
+  ]
+}

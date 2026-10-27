@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "24310f49-2156-4c0d-b3b1-40ca3182474f",
+  "name": "Sahagin",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Warrior"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Whenever you cast a noncreature spell, if at least four mana was spent to cast it, put a +1/+1 counter on this creature and it can't be blocked this turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "combatRestriction",
+          "target": "source",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        }
+      ],
+      "condition": {
+        "kind": "eventManaSpentAtLeast",
+        "count": 4
+      }
+    }
+  ]
+}

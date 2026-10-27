@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "45873747-f2a4-4d83-9492-bfc97df7b605",
+  "name": "Ravenous Robots",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Whenever you cast an artifact spell, create a 1/1 colorless Robot artifact creature token.\n{R}, {T}: Creature tokens you control gain haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/small-robot-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{R}",
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              },
+              {
+                "token": true
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["haste"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

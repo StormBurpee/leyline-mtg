@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d6d9b5d2-0ab6-4637-a468-5149b7c7d0cf",
+  "name": "Fleeting Effigy",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental"],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Haste\nAt the beginning of your end step, return this creature to its owner's hand. (Return it only if it's on the battlefield.)\n{2}{R}: This creature gets +2/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "source",
+          "destination": "hand"
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{R}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 2,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2ac2b815-2d72-48e6-b43a-18884a74bf95",
+  "name": "Skycoach Waypoint",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {C}.\n{3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepared.)",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}",
+        "tap": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "prepare",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

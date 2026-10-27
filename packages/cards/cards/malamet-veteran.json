@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "25a9c864-59c6-4230-a234-bf78bf1ef24c",
+  "name": "Malamet Veteran",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Warrior"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Trample\nDescend 4 \u2014 Whenever this creature attacks, if there are four or more permanent cards in your graveyard, put a +1/+1 counter on target creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "not": {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            }
+          }
+        },
+        "operator": "gte",
+        "right": 4
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

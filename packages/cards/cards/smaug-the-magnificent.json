@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c53b7602-5e36-4900-896c-844bf6eac22e",
+  "name": "Smaug the Magnificent",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dragon"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Flying, haste\nWhenever Smaug attacks, he deals damage equal to the number of Treasures you control to any target.\nAt the beginning of your upkeep, create a Treasure token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "subtype": "Treasure"
+            }
+          }
+        }
+      ],
+      "target": {
+        "scope": "damageable"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "controller": "you",
+        "step": "upkeep"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

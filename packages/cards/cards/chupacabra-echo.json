@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "68c56db4-c97a-4c1b-a6f6-096392488e21",
+  "name": "Chupacabra Echo",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Beast", "Horror", "Spirit"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Fathomless descent \u2014 When this creature enters, target creature an opponent controls gets -X/-X until end of turn, where X is the number of permanent cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "scale",
+            "factor": -1,
+            "value": {
+              "kind": "count",
+              "zone": "graveyard",
+              "player": "you",
+              "where": {
+                "not": {
+                  "any": [
+                    {
+                      "type": "instant"
+                    },
+                    {
+                      "type": "sorcery"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "toughness": {
+            "kind": "scale",
+            "factor": -1,
+            "value": {
+              "kind": "count",
+              "zone": "graveyard",
+              "player": "you",
+              "where": {
+                "not": {
+                  "any": [
+                    {
+                      "type": "instant"
+                    },
+                    {
+                      "type": "sorcery"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

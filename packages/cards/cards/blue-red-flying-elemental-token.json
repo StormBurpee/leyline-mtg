@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/blue-red-flying-elemental-token",
+  "name": "Blue Red Flying Elemental Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental"],
+    "colors": ["U", "R"],
+    "manaCost": null,
+    "power": 3,
+    "toughness": 3,
+    "token": true
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

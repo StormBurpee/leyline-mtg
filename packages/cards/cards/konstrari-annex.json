@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "31ea4f3f-392a-4319-a95b-eb28790a80e6",
+  "name": "Konstrari Annex",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control a planeswalker.\n{T}: Add {R} or {G}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "type": "planeswalker"
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "G"]
+    }
+  ]
+}

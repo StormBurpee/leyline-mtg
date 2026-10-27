@@ -245,6 +245,8 @@ export function compileCard(
           'addStunCounters',
           'untap',
           'tap',
+          'prepare',
+          'unprepare',
           'bounceAll',
           'destroyAll',
           'exileAll',
@@ -352,12 +354,14 @@ export function compileCard(
         stunOn: ['target', 'amount'],
         untap: ['target'],
         tap: ['target'],
+        prepare: ['target'],
+        unprepare: ['target'],
         bounceAll: ['where', 'excludeSource'],
         destroyAll: ['where', 'excludeSource'],
         exileAll: ['where', 'excludeSource', 'player', 'rememberMovedCount'],
         modifyAll: ['where', 'excludeSource', 'power', 'toughness', 'keywords', 'until'],
         damageAll: ['where', 'excludeSource', 'amount', 'players'],
-        counterAll: ['where', 'excludeSource', 'amount'],
+        counterAll: ['where', 'excludeSource', 'amount', 'counter'],
         tapAll: ['where', 'excludeSource'],
         untapAll: ['where', 'excludeSource'],
       }[nativeOp];
@@ -558,14 +562,20 @@ export function compileCard(
           if (effect.target !== 'target') e.subject = effect.target;
         }
       }
-      if (e.op === 'counterOn' && effect.counter !== '+1/+1')
-        problem('UNSUPPORTED_COUNTER', `${p}.counter`, 'Only +1/+1 counters are implemented.');
+      if (['counterOn', 'counterAll'].includes(e.op)) {
+        const counter =
+          e.op === 'counterAll' && effect.counter === undefined ? '+1/+1' : effect.counter;
+        if (!['+1/+1', '-1/-1'].includes(counter))
+          problem('UNSUPPORTED_COUNTER', `${p}.counter`, 'Expected +1/+1 or -1/-1 counters.');
+        // Keep the existing implicit +1/+1 native contract and replay representation.
+        if (counter === '-1/-1') e.counter = counter;
+      }
       if (e.op === 'counterOn' || e.op === 'stunOn') {
         if (!['source', 'target', 'attached'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
         if (['source', 'attached'].includes(effect.target)) e.subject = effect.target;
       }
-      if (e.op === 'untap' || e.op === 'tap') {
+      if (['untap', 'tap', 'prepare', 'unprepare'].includes(e.op)) {
         if (!['source', 'target', 'attached'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
         if (['source', 'attached'].includes(effect.target)) e.subject = effect.target;

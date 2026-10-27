@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8e3f4987-6f31-4bc5-8bcd-6adb0440ee7c",
+  "name": "Ghitu Lavarunner",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "As long as there are two or more instant and/or sorcery cards in your graveyard, this creature gets +1/+0 and has haste. (It can attack and {T} as soon as it comes under your control.)",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "any": [
+              {
+                "type": "instant"
+              },
+              {
+                "type": "sorcery"
+              }
+            ]
+          }
+        },
+        "operator": "gte",
+        "right": 2
+      },
+      "power": 1,
+      "toughness": 0,
+      "keywords": ["haste"]
+    }
+  ]
+}

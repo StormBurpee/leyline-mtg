@@ -313,8 +313,8 @@ test('copy resolution and a paused copied-Cavern choice replay deterministically
     minimumDeckSize: 7,
     mulligan: false,
   });
-  s = resolve(s);
-  s = resolve(s); // upkeep, draw -> main1
+  s = resolve(s); // The starting player skips the entire first draw step.
+  assert.equal(s.step, 'main1');
   const land = s.players[0].hand.find((id) => s.objects[id].name === cavern.name);
   s = act(s, 'playLand', { card: land });
   s = act(s, 'chooseCreatureType', { creatureType: 'Elf' });

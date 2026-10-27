@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f24efc60-fdac-4a5d-bcbc-784ec5ae6d96",
+  "name": "Aerial Doombot",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot", "Villain"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Flying\nPower-up \u2014 {5}{U}: Put three +1/+1 counters on this creature. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "activated",
+      "powerUp": true,
+      "cost": {
+        "mana": "{5}{U}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 3,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

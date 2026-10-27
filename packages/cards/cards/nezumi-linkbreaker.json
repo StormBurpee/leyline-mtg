@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5d24fb6b-7176-407c-b917-6c88a6da40df",
+  "name": "Nezumi Linkbreaker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rat", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature dies, create a 1/1 red Mercenary creature token with \"{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.\"",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mercenary-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

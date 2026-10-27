@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cf5b1cf9-dcd3-44d1-b8b2-338651ebb2a1",
+  "name": "Blight Rot",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Put four -1/-1 counters on target creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "-1/-1",
+          "amount": 4
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "cd61c26b-8d3c-4730-92f2-0d94d961bafd",
+  "name": "Blossom-Blessed Angel // Seed Suture",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Angel", "Cleric"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Flying, vigilance\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Blossom-Blessed Angel",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:prepare/seed-suture",
+        "name": "Seed Suture",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["G", "W"],
+          "manaCost": "{G/W}"
+        },
+        "rulesText": "Put a +1/+1 counter on target creature. You gain 1 life.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "addCounters",
+                "target": "target",
+                "amount": 1,
+                "counter": "+1/+1"
+              },
+              {
+                "op": "gainLife",
+                "target": "controller",
+                "amount": 1
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            }
+          }
+        ]
+      },
+      "entersPrepared": true
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

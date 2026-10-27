@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "bad2e3b2-ad47-4e17-b35e-0fcc13e82937",
+  "name": "Konstrari Improviser // Soul Tether",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Artificer"],
+    "colors": ["R", "G"],
+    "manaCost": "{1}{R/G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Konstrari Improviser",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:prepare/soul-tether",
+        "name": "Soul Tether",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["R", "G"],
+          "manaCost": "{2}{R/G}"
+        },
+        "rulesText": "Create a Heartwood token. (It's a red and green artifact with \"{T}: Add {R} or {G}.\")",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/heartwood",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "entersPrepared": true
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}
