@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a0dd3eb4-f6f1-4bfb-935c-032dd5af3811",
+  "name": "Call the Mountain Chocobo",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{3}{R}"
+  },
+  "rulesText": "Search your library for a Mountain card, reveal it, put it into your hand, then shuffle. Create a 2/2 green Bird creature token with \"Whenever a land you control enters, this token gets +1/+0 until end of turn.\"\nFlashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "where": {
+            "subtype": "Mountain"
+          },
+          "amount": 1,
+          "destination": "hand",
+          "reveal": true
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/landfall-bird-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "flashback",
+      "cost": "{5}{R}"
+    }
+  ]
+}

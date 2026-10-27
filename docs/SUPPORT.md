@@ -2,7 +2,11 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.52)
+## Latest coverage (v0.53)
+
+Generic departure triggers use actual battlefield exit destinations and predeparture facts, independently of linked-exile returns. Resolving target conditions bind only explicitly validated singleton targets/groups and public current characteristics, with safe illegal/missing-target handling. Broader target comparisons, mixed-destination batching and unrelated conditional mechanics remain outside these contracts.
+
+## Previous coverage (v0.52)
 
 Saddle is a sorcery-speed activated ability that taps other creatures, uses printed/current power plus only applicable cost bonuses, and grants an incarnation-bound designation until turn end on resolution. It is distinct from crew animation. Contributor-history-dependent cards and other unsupported Saddle clauses are not admitted. Designation-gain triggers are separate from repeated resolution audit events.
 

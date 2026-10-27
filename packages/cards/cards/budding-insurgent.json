@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "723669e0-4a04-45ec-8c76-b1a369aa6892",
+  "name": "Budding Insurgent",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dryad", "Scout"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Vigilance\nSacrifice this creature: Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "activated",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      },
+      "cost": {
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "target": "target",
+            "where": {
+              "all": [
+                {
+                  "type": "enchantment"
+                },
+                {
+                  "legendary": true
+                }
+              ]
+            }
+          },
+          "then": [
+            {
+              "op": "destroy",
+              "target": "target"
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ],
+          "else": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ],
+      "timing": "sorcery"
+    }
+  ]
+}

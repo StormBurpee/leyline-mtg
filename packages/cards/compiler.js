@@ -117,7 +117,11 @@ export function compileCard(
         return { op: 'unsupported' };
       }
       if (['damageEachPlayer', 'damageEventPlayer', 'damageTargetController'].includes(effect.op)) {
-        fields(effect, ['op', 'amount'], p);
+        fields(
+          effect,
+          ['op', 'amount', ...(effect.op === 'damageTargetController' ? ['targetGroup'] : [])],
+          p,
+        );
         return structuredClone(effect);
       }
       if (effect.op === 'exileGraveyards') {

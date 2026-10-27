@@ -1,0 +1,103 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "00b50215-e832-417f-9c80-2bc3050b6ebb",
+  "name": "Spider-Ham, Peter Porker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Spider", "Boar", "Hero"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When Spider-Ham enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\nAnimal May-Ham \u2014 Other Spiders, Boars, Bats, Bears, Birds, Cats, Dogs, Frogs, Jackals, Lizards, Mice, Otters, Rabbits, Raccoons, Rats, Squirrels, Turtles, and Wolves you control get +1/+1.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/food-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "any": [
+              {
+                "subtype": "Spider"
+              },
+              {
+                "subtype": "Boar"
+              },
+              {
+                "subtype": "Bat"
+              },
+              {
+                "subtype": "Bear"
+              },
+              {
+                "subtype": "Bird"
+              },
+              {
+                "subtype": "Cat"
+              },
+              {
+                "subtype": "Dog"
+              },
+              {
+                "subtype": "Frog"
+              },
+              {
+                "subtype": "Jackal"
+              },
+              {
+                "subtype": "Lizard"
+              },
+              {
+                "subtype": "Mouse"
+              },
+              {
+                "subtype": "Otter"
+              },
+              {
+                "subtype": "Rabbit"
+              },
+              {
+                "subtype": "Raccoon"
+              },
+              {
+                "subtype": "Rat"
+              },
+              {
+                "subtype": "Squirrel"
+              },
+              {
+                "subtype": "Turtle"
+              },
+              {
+                "subtype": "Wolf"
+              }
+            ]
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

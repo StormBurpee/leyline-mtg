@@ -1,0 +1,96 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c6fcf3c1-0626-4d53-92c0-caa22fa61e9a",
+  "name": "Molten Man, Inferno Incarnate",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Elemental", "Villain"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 0,
+    "toughness": 0
+  },
+  "rulesText": "When Molten Man enters, search your library for a basic Mountain card, put it onto the battlefield tapped, then shuffle.\nMolten Man gets +1/+1 for each Mountain you control.\nWhen Molten Man leaves the battlefield, sacrifice a land.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              },
+              {
+                "subtype": "Mountain"
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    },
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "subtype": "Mountain"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "subtype": "Mountain"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "leave",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "sacrifice",
+          "player": "controller",
+          "count": 1,
+          "where": {
+            "type": "land"
+          }
+        }
+      ]
+    }
+  ]
+}

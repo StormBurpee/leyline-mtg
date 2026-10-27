@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CARDS, createRegistry, dispatch, planPayment, legalActions } from '../src/index.js';
+import {
+  CARDS,
+  createGame,
+  createRegistry,
+  dispatch,
+  planPayment,
+  legalActions,
+} from '../src/index.js';
 import { fixture, put, act, resolve } from './helpers.js';
 function source(s, name, colors) {
   s.catalog = createRegistry({
@@ -68,9 +75,16 @@ test('literal cost plans agree with exhaustive small-source assignments', () => 
     return rng % n;
   };
   const colors = ['W', 'U', 'B'];
+  // This exhaustive oracle compares literal mana assignments, not card-pack
+  // completeness. A small valid catalog avoids revalidating thousands of
+  // unrelated definitions for every generated source in every trial.
+  const catalog = createRegistry([CARDS.Plains]);
+  const deck = Array(60).fill('Plains');
   for (let trial = 0; trial < 120; trial++) {
-    const s = fixture(),
+    const s = createGame({ catalog, decks: [deck, deck], mulligan: false }),
       options = [];
+    s.step = 'main1';
+    s.turn = 3;
     for (let i = 0; i < 4; i++) {
       const list = colors.filter(() => random(2));
       if (!list.length) list.push(colors[random(3)]);

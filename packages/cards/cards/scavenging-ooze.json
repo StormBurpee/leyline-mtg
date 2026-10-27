@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1ff25f67-36a7-4cfa-a2b1-2135b5b6fb67",
+  "name": "Scavenging Ooze",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Ooze"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on this creature and you gain 1 life.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "target": {
+        "scope": "graveyard"
+      },
+      "cost": {
+        "mana": "{G}"
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "target": "target",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "then": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            },
+            {
+              "op": "addCounters",
+              "target": "source",
+              "counter": "+1/+1",
+              "amount": 1
+            },
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 1
+            }
+          ],
+          "else": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

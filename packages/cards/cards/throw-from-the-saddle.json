@@ -1,0 +1,93 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d6780d29-0dd7-4f04-95b8-4ca6a55308f2",
+  "name": "Throw from the Saddle",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Target creature you control gets +1/+1 until end of turn. Put a +1/+1 counter on it instead if it's a Mount. Then it deals damage equal to its power to target creature you don't control.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "actor",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victim",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "targetGroup": "actor",
+            "where": {
+              "subtype": "Mount"
+            }
+          },
+          "then": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "counter": "+1/+1",
+              "amount": 1,
+              "targetGroup": "actor"
+            }
+          ],
+          "else": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 1,
+              "toughness": 1,
+              "until": "endOfTurn",
+              "targetGroup": "actor"
+            }
+          ]
+        },
+        {
+          "op": "bite",
+          "sourceGroup": "actor",
+          "victimGroup": "victim"
+        }
+      ]
+    }
+  ]
+}

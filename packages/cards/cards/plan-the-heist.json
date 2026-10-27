@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a9471b33-b5b0-408a-9900-6964e5fe42da",
+  "name": "Plan the Heist",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}{U}"
+  },
+  "rulesText": "Surveil 3 if you have no cards in hand. Then draw three cards. (To surveil 3, look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nPlot {3}{U} (You may pay {3}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "count",
+              "zone": "hand",
+              "player": "you"
+            },
+            "operator": "eq",
+            "right": 0
+          },
+          "then": [
+            {
+              "op": "surveil",
+              "target": "controller",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "plot",
+      "cost": "{3}{U}"
+    }
+  ]
+}

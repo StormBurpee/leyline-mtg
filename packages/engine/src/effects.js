@@ -732,15 +732,15 @@ function copyToken(s, base, controller, exceptions = {}) {
   copied.token = true;
   return addObject(s, copied.name, controller, 'void', copied);
 }
-// Bind the primary target's controller before effects move it. Conditional branches
-// are inspected only for this dependency; their conditions still resolve in order.
-function needsTargetController(effects = []) {
+// Bind the primary or explicitly grouped target controller before effects move it.
+// Conditional branches are scanned only for dependencies, not evaluated early.
+function needsTargetController(effects = [], group) {
   return effects.some(
     (effect) =>
-      effect.player === 'targetController' ||
-      effect.op === 'damageTargetController' ||
+      ((effect.player === 'targetController' || effect.op === 'damageTargetController') &&
+        effect.targetGroup === group) ||
       (effect.op === 'conditional' &&
-        (needsTargetController(effect.then) || needsTargetController(effect.else))),
+        (needsTargetController(effect.then, group) || needsTargetController(effect.else, group))),
   );
 }
 export function resolveEffects(s, entry, startIndex = 0) {
@@ -790,7 +790,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           if (!zone.includes(object.zone)) continue;
           if (e.op === 'destroy' && hasKeyword(s, object, 'indestructible')) continue;
           if (e.op === 'exileUntilSourceLeaves') {
-            exileUntilSourceLeaves(s, entry, target);
+            exileUntilSourceLeaves(s, entry, target, context);
             continue;
           }
           move(
@@ -804,7 +804,16 @@ export function resolveEffects(s, entry, startIndex = 0) {
         finishDepartureBatch(s, context);
       } else {
         for (const target of targets) {
-          if (resolveEffects(s, { ...entry, target, effects: [effect] }) === false) {
+          if (
+            resolveEffects(s, {
+              ...entry,
+              target,
+              ...(e.op === 'damageTargetController'
+                ? { targetController: entry.targetControllers?.[targetGroup] }
+                : {}),
+              effects: [effect],
+            }) === false
+          ) {
             // Single-target modal copy effects may pause for the copy's entry choices.
             // Keep the remaining parent instructions behind that exact continuation.
             s.resolving.entry.effects.push(...effects.slice(index + 1));
@@ -2632,6 +2641,18 @@ export function resolveTop(s) {
     emit(s, 'fizzled', { name: entry.name, stackId: entry.id });
     if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
     return;
+  }
+  entry.targetsRechecked = true;
+  if (entry.targetGroups) {
+    entry.targetControllers = Object.fromEntries(
+      entry.targetGroups
+        .filter((group) => group.max === 1 && needsTargetController(entry.effects, group.id))
+        .flatMap((group) => {
+          const target = entry.targets[group.id]?.[0];
+          const object = target?.kind === 'object' && s.objects[target.id];
+          return object ? [[group.id, object.controller]] : [];
+        }),
+    );
   }
   if (needsTargetController(entry.effects))
     entry.targetController =

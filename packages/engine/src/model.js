@@ -9,7 +9,7 @@ import { matchesEvent, eventSpec } from './events.js';
 import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.52.0';
+export const VERSION = '0.53.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -859,7 +859,7 @@ export function notifyTriggers(s, event, payload, context = null) {
       : object?.zone === 'battlefield'
         ? {}
         : { power: d?.power, toughness: d?.toughness };
-  const facts = context?.facts?.[object?.id] ?? {
+  const eventFacts = context?.facts?.[object?.id] ?? {
     id: object?.id,
     definition: d,
     controller: payload.player ?? object?.controller,
@@ -884,6 +884,8 @@ export function notifyTriggers(s, event, payload, context = null) {
     toughness: pt.toughness,
     manaValue: manaValue(d, object?.zone === 'stack' ? (object.chosenX ?? 0) : 0),
   };
+  const facts =
+    event === 'leave' ? { ...eventFacts, destination: payload.destination } : eventFacts;
   const watchers =
     context?.watchers ??
     battlefield(s).map((object) => ({ object, keywords: keywords(s, object) }));
@@ -957,7 +959,7 @@ export function notifyTriggers(s, event, payload, context = null) {
         )
           queued.departedSource = ref(s.objects[watcher.id]);
         if (
-          ['dies', 'battlefieldToGraveyard'].includes(event) &&
+          ['dies', 'battlefieldToGraveyard', 'leave'].includes(event) &&
           watcher.id === object?.id &&
           watcher.incarnation === object.incarnation
         )
@@ -977,7 +979,7 @@ export function notifyTriggers(s, event, payload, context = null) {
         // but use this one-time snapshot for "another" target exclusion. Never
         // chase that ID through a later move or return to the battlefield.
         if (
-          ['dies', 'battlefieldToGraveyard'].includes(event) &&
+          ['dies', 'battlefieldToGraveyard', 'leave'].includes(event) &&
           watcher.id === object?.id &&
           watcher.incarnation === object.incarnation &&
           [trigger, ...(trigger.modes ?? [])]
@@ -1005,7 +1007,7 @@ export function notifyTriggers(s, event, payload, context = null) {
             controller: facts.controller,
             keywords: facts.keywords ?? [],
             power: facts.power,
-            definition: structuredClone(d),
+            definition: structuredClone(event === 'leave' ? facts.definition : d),
           };
         if (['enter', 'enters'].includes(event) && !trigger.oncePerTurn)
           for (let n = 1; n < entryTriggerMultiplicity(s, object, watcher.controller); n++) {
@@ -1169,11 +1171,11 @@ export function move(s, o, to, departureContext = null) {
   delete o.chosenX;
   delete o.castPlayer;
   const toGraveyard = from === 'battlefield' && to === 'graveyard';
-  const context = toGraveyard ? (departureContext ?? captureDepartureContext(s)) : null;
+  const context = leaving ? (departureContext ?? captureDepartureContext(s)) : null;
   // Preserve the historic creature-only dies family for existing definitions
   // and replay catalogs. The explicit zone event also observes noncreatures.
   const dying = toGraveyard && hasType(definition(s, o), 'creature');
-  const departed = toGraveyard ? structuredClone(o) : null;
+  const departed = leaving ? structuredClone(o) : null;
   if (!(from === 'stack' && to === 'battlefield')) delete o.bargained;
   if (from === 'battlefield' || from === 'stack') {
     const entries = [
@@ -1290,6 +1292,9 @@ export function move(s, o, to, departureContext = null) {
       emit(s, 'triggered', { objectId: oldRef.id, name: entry.name, player: entry.controller });
     }
   }
+  // Generic departures use the same pre-move observers as deaths, but match
+  // the actual destination after replacement. Linked exile returns stay separate.
+  if (leaving) notifyTriggers(s, 'leave', { object: departed, destination: to }, context);
   if (dying) notifyTriggers(s, 'dies', { object: departed }, context);
   if (toGraveyard) {
     notifyTriggers(s, 'battlefieldToGraveyard', { object: departed }, context);

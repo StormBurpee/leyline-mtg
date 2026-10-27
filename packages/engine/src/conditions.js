@@ -1,5 +1,7 @@
 import { hasType, typesOf } from './types.js';
-import { matchesFilter } from './selectors.js';
+import { matchesFilter, targetSpec } from './selectors.js';
+import { legalTarget } from './effects.js';
+import { manaValue } from './mana-value.js';
 import { numericValue } from './numeric-values.js';
 import {
   trackedExileCards,
@@ -20,10 +22,67 @@ const uses = (filter, keys) =>
         ? value.some((v) => uses(v, keys))
         : key === 'not' && uses(value, keys)),
   );
+// Resolution keeps only legal targets once (CR 608.2b). Later instructions read
+// this exact surviving incarnation without retargeting or consulting hidden zones.
+// Policy previews have not crossed that boundary, so they recheck independently.
+function conditionTarget(s, player, value, context) {
+  const group =
+    value.targetGroup === undefined
+      ? null
+      : context?.targetGroups?.find((g) => g.id === value.targetGroup && g.max === 1);
+  const target =
+    value.target === 'target' && value.targetGroup === undefined
+      ? context?.target
+      : value.target === undefined && group
+        ? context?.targets?.[group.id]?.[0]
+        : null;
+  const selector = group?.selector ?? context?.targetKind;
+  const spec = targetSpec(selector);
+  if (target?.kind !== 'object' || !['permanent', 'graveyard'].includes(spec?.scope)) return null;
+  const object = s.objects[target.id];
+  if (
+    !object ||
+    object.hidden ||
+    object.incarnation !== target.incarnation ||
+    object.zone !== (spec.scope === 'graveyard' ? 'graveyard' : 'battlefield') ||
+    (!context.targetsRechecked &&
+      !legalTarget(s, selector, target, player, context.targetingSource ?? context.source))
+  )
+    return null;
+  return object;
+}
 /** Public conditions; derived facts are evaluated only when the predicate needs them. */
 export function meetsCondition(s, player, value, excludedIds = [], source = null, context = {}) {
   const eventManaSpent = typeof context === 'number' ? context : (context?.eventManaSpent ?? null);
   if (!value) return true;
+  if (['targetMatches', 'targetEnteredThisTurn'].includes(value.kind)) {
+    const object = conditionTarget(s, player, value, context);
+    if (!object) return false;
+    if (value.kind === 'targetEnteredThisTurn')
+      return object.zone === 'battlefield' && object.enteredTurn === s.turn;
+    const d = definition(s, object);
+    return matchesFilter(
+      {
+        definition: d,
+        controller: object.controller,
+        owner: object.owner,
+        token: object.token,
+        tapped: object.tapped,
+        stunCounters: object.stunCounters ?? 0,
+        attacking: isAttacking(s, object),
+        blocking: isBlocking(s, object),
+        manaValue: manaValue(d),
+        ...(hasType(d, 'creature') && uses(value.where, ['power', 'toughness'])
+          ? stats(s, object)
+          : {}),
+        ...(uses(value.where, ['keyword'])
+          ? { keywords: object.zone === 'battlefield' ? keywords(s, object) : d.keywords }
+          : {}),
+      },
+      value.where,
+      player,
+    );
+  }
   if (value.kind === 'additionalCostPaid') return !!context?.additionalCost;
   if (value.kind === 'sourceBargained') {
     if (context?.bargained || context?.sourceBargained || source?.bargainedLKI) return true;

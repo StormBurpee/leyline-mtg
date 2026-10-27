@@ -1,0 +1,84 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8af57b80-bbc6-47ce-83f6-34ae8e2f5bd5",
+  "name": "Battle Menu",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Attack \u2014 Create a 2/2 white Knight creature token.\n\u2022 Ability \u2014 Target creature gets +0/+4 until end of turn.\n\u2022 Magic \u2014 Destroy target creature with power 4 or greater.\n\u2022 Item \u2014 You gain 4 life.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Attack \u2014 Create a 2/2 white Knight.",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/two-two-knight-token",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Ability \u2014 Target creature gets +0/+4.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 4,
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Magic \u2014 Destroy target creature with power 4 or greater.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "power": {
+                    "gte": 4
+                  }
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Item \u2014 Gain 4 life.",
+          "effects": [
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 4
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

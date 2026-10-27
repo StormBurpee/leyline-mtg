@@ -62,6 +62,7 @@ export function validateEventSpec(value) {
           'targetingKind',
           'firstEachTurn',
           'chapters',
+          'destinations',
         ].includes(key),
     )
   )
@@ -72,6 +73,7 @@ export function validateEventSpec(value) {
       'chapter',
       'cast',
       'dies',
+      'leave',
       'diesGroup',
       'battlefieldToGraveyard',
       'battlefieldToGraveyardGroup',
@@ -98,6 +100,7 @@ export function validateEventSpec(value) {
         'enter',
         'chapter',
         'dies',
+        'leave',
         'diesGroup',
         'battlefieldToGraveyard',
         'battlefieldToGraveyardGroup',
@@ -179,6 +182,18 @@ export function validateEventSpec(value) {
         'Chapter events require source identity and unique chapter numbers from 1 to 20.',
       );
   } else if (spec.chapters !== undefined) errors.push('Only chapter events take chapter numbers.');
+  if (
+    spec.destinations !== undefined &&
+    (spec.event !== 'leave' ||
+      !Array.isArray(spec.destinations) ||
+      !spec.destinations.length ||
+      spec.destinations.length > 6 ||
+      new Set(spec.destinations).size !== spec.destinations.length ||
+      spec.destinations.some(
+        (zone) => !['graveyard', 'exile', 'hand', 'library', 'stack', 'void'].includes(zone),
+      ))
+  )
+    errors.push('destinations requires a leave event and unique nonbattlefield zones.');
   if (spec.filter !== undefined) errors.push(...validateFilter(spec.filter));
   return errors;
 }
@@ -193,6 +208,7 @@ export function matchesEvent(value, event, facts, source) {
         matchesEvent({ ...spec, event: 'dies' }, 'dies', object, source),
       ) ?? false
     );
+  if (spec.destinations && !spec.destinations.includes(facts.destination)) return false;
   if (event === 'chapter' && !spec.chapters.includes(facts.chapterNumber)) return false;
   if (spec.spellNumber !== undefined && facts.spellNumber !== spec.spellNumber) return false;
   if (spec.drawNumber !== undefined && facts.drawNumber !== spec.drawNumber) return false;

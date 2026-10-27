@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4ad34f85-a185-458a-a7a1-eb60f7efce5b",
+  "name": "Brackish Blunder",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Return target creature to its owner's hand. If it was tapped, create a Map token. (It's an artifact with \"{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.\")",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "target": "target",
+            "where": {
+              "tapped": true
+            }
+          },
+          "then": [
+            {
+              "op": "returnToHand",
+              "target": "target"
+            },
+            {
+              "op": "createToken",
+              "token": "leyline:token/map-token",
+              "amount": 1
+            }
+          ],
+          "else": [
+            {
+              "op": "returnToHand",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

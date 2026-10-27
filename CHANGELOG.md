@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.53.0 — Battlefield departures and target-bound conditions
+
+- Add 63 complete Standard cards: 34 source-only additions, thirteen battlefield-departure cards and sixteen resolving target-condition cards. Catalog: 2217 playable cards and 95 tokens.
+- Observe actual leaves-the-battlefield events across destinations using predeparture abilities, controller and public last-known facts. Respect replacements, simultaneous batches and token departure; keep linked-exile immediate returns separate.
+- Add closed, resolution-only target predicates for public characteristics and entry history. Recheck target legality/incarnation, retain partial-target behavior and snapshot conditional branches before movement only when the card requires it.
+- Bind target-controller follow-through for supported singleton target groups. Preserve allocation-lowered Adventure profiles and paid Bargain state in target-aware bot previews.
+- Preserve self-identity for Three Tree Scribe and Al Bhed Salvagers departure triggers after type-only changes, without double-counting normal creature or artifact departures.
+- Retain all eight complete meta decks and previous replay versions; source/feature limits remain explicit.
+
 ## 0.52.0 — Saddle and broader Standard coverage
 
 - Add 87 complete Standard cards: 66 source-only definitions and twenty-one Mounts. Catalog: 2154 playable cards and 92 tokens.

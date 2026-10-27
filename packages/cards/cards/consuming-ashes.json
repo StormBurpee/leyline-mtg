@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9ef676f0-53c5-4efe-9341-e960d00dbc69",
+  "name": "Consuming Ashes",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}{B}"
+  },
+  "rulesText": "Exile target creature. If it had mana value 3 or less, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "target": "target",
+            "where": {
+              "manaValue": {
+                "lte": 3
+              }
+            }
+          },
+          "then": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            },
+            {
+              "op": "surveil",
+              "target": "controller",
+              "amount": 2
+            }
+          ],
+          "else": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5591efbc-1b2c-489a-b4f3-935c9b6bd71a",
+  "name": "Dai Li Indoctrination",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": ["Lesson"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.\n\u2022 Earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Opponent reveals and discards a nonland permanent card.",
+          "target": {
+            "scope": "player",
+            "where": {
+              "controller": "opponent"
+            }
+          },
+          "effects": [
+            {
+              "op": "revealDiscard",
+              "where": {
+                "any": [
+                  {
+                    "type": "artifact"
+                  },
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "type": "enchantment"
+                  },
+                  {
+                    "type": "planeswalker"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Earthbend 2.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "land"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "earthbend",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

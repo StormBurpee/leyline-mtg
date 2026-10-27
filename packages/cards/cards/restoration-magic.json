@@ -1,0 +1,82 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ddbe0d17-5cac-417c-afc0-e4aebae83205",
+  "name": "Restoration Magic",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Tiered (Choose one additional cost.)\n\u2022 Cure \u2014 {0} \u2014 Target permanent gains hexproof and indestructible until end of turn.\n\u2022 Cura \u2014 {1} \u2014 Target permanent gains hexproof and indestructible until end of turn. You gain 3 life.\n\u2022 Curaga \u2014 {3}{W} \u2014 Permanents you control gain hexproof and indestructible until end of turn. You gain 6 life.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Cure",
+          "additionalCost": "{0}",
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["hexproof", "indestructible"]
+            }
+          ],
+          "target": {
+            "scope": "permanent"
+          }
+        },
+        {
+          "label": "Cura",
+          "additionalCost": "{1}",
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["hexproof", "indestructible"]
+            },
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 3
+            }
+          ],
+          "target": {
+            "scope": "permanent"
+          }
+        },
+        {
+          "label": "Curaga",
+          "additionalCost": "{3}{W}",
+          "effects": [
+            {
+              "op": "modifyAll",
+              "where": {
+                "controller": "you"
+              },
+              "power": 0,
+              "toughness": 0,
+              "keywords": ["hexproof", "indestructible"],
+              "until": "endOfTurn"
+            },
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 6
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -55,8 +55,15 @@ export function resolutionRisk(
   lifeCost = 0,
   source = null,
   eventAmount = 0,
+  context = {},
 ) {
-  effects = predictedEffects(state, effects, { controller: player, source, target, eventAmount });
+  effects = predictedEffects(state, effects, {
+    ...context,
+    controller: player,
+    source,
+    target,
+    eventAmount,
+  });
   let life = state.players[player].life - lifeCost;
   for (const effect of effects) {
     if (effect.op === 'damage' && target?.kind === 'player' && target.id === player)
@@ -77,15 +84,17 @@ export function actionEffects(state, action) {
   const card = definition(state, object);
   if (action.type === 'plot' || action.type === 'ninjutsu') return [];
   if (action.type === 'cycle') return [{ op: 'draw', count: 1 }];
-  const effects =
-    action.type === 'activate'
-      ? card.activated[action.ability].effects
-      : (spellProfile(card, action.mode)?.effects ?? []);
+  const profile =
+    action.type === 'activate' ? card.activated[action.ability] : spellProfile(card, action.mode);
+  const effects = profile?.effects ?? [];
   const entry = {
     controller:
       action.type === 'cast' ? (object.playPermission?.player ?? object.owner) : object.controller,
-    source: { id: object.id, incarnation: object.incarnation },
+    source: { kind: 'object', id: object.id, incarnation: object.incarnation },
     target: action.target,
+    targetKind: profile?.target,
+    targetGroups: profile?.targetGroups,
+    targets: action.targets,
     x: action.x ?? 0,
     additionalCost: action.additionalCost,
     bargained: action.type === 'cast' && !!spellProfile(card, action.mode)?.bargained,

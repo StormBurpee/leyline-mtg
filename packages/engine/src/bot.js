@@ -58,7 +58,21 @@ function groupedSpellScore(s, p, action, card) {
       adjusted.set(object.id, { object, ...stats(s, object), damage: object.damage, death: false });
     return adjusted.get(object.id);
   };
-  for (const raw of card.effects ?? []) {
+  // Keep the lowered casting-profile instructions, including distributed shares.
+  // Only resolve their conditions with the now-announced target bindings.
+  const effects = predictedEffects(s, card.effects ?? [], {
+    ...card,
+    controller: p,
+    source: card.source ?? {
+      kind: 'object',
+      id: action.card,
+      incarnation: s.objects[action.card]?.incarnation,
+    },
+    targets: action.targets,
+    additionalCost: action.additionalCost,
+    x: action.x ?? 0,
+  });
+  for (const raw of effects) {
     const effect = effectValues(s, raw, {
       controller: p,
       x: action.x ?? 0,
@@ -195,16 +209,26 @@ function definition(
   x = o.zone === 'stack' ? (o.chosenX ?? 0) : 0,
   additionalCost = null,
   bargained = !!o.bargained,
+  action = {},
 ) {
   const d = rawDefinition(s, o),
     entry = {
       controller: o.controller,
-      source: { id: o.id, incarnation: o.incarnation },
+      source: { kind: 'object', id: o.id, incarnation: o.incarnation },
+      target: action.target,
+      targets: action.targets,
       x,
       additionalCost,
       bargained,
     };
-  const effects = (list) => (list ? predictedEffects(s, list, entry) : list);
+  const effects = (list, holder = d) =>
+    list
+      ? predictedEffects(s, list, {
+          ...entry,
+          targetKind: holder.target,
+          targetGroups: holder.targetGroups,
+        })
+      : list;
   const activeAttached = (d.conditionalBonuses ?? []).filter(
     (b) => b.affects === 'attached' && meetsCondition(s, o.controller, b.condition, [], o),
   );
@@ -227,7 +251,7 @@ function definition(
     ...(d.effects ? { effects: effects(d.effects) } : {}),
     ...(d.etb ? { etb: effects(d.etb) } : {}),
     ...(d.activated
-      ? { activated: d.activated.map((a) => ({ ...a, effects: effects(a.effects) })) }
+      ? { activated: d.activated.map((a) => ({ ...a, effects: effects(a.effects, a) })) }
       : {}),
     ...(d.attachmentBonus
       ? {
@@ -467,7 +491,16 @@ export function chooseBotCommand(s, p) {
           player: p,
           accept:
             acceptLifePayoff(s, entry) ??
-            !resolutionRisk(s, p, entry.effects, entry.target, 0, entry.source, entry.eventAmount),
+            !resolutionRisk(
+              s,
+              p,
+              entry.effects,
+              entry.target,
+              0,
+              entry.source,
+              entry.eventAmount,
+              entry,
+            ),
         };
       }
       case 'payCost':
@@ -577,7 +610,16 @@ export function chooseBotCommand(s, p) {
         const safe = c.targets.filter(
           (target) =>
             canPayTargetWard(s, p, target) &&
-            !resolutionRisk(s, p, c.entry.effects, target, 0, c.entry.source),
+            !resolutionRisk(
+              s,
+              p,
+              c.entry.effects,
+              target,
+              0,
+              c.entry.source,
+              c.entry.eventAmount,
+              c.entry,
+            ),
         );
         const targets = [...(safe.length ? safe : c.targets)].sort((a, b) => {
           const score = (target) => {
@@ -649,7 +691,7 @@ export function chooseBotCommand(s, p) {
     .filter((a) => a.type === 'activate' && a.targets)
     .map((a) => {
       const source = s.objects[a.card],
-        ability = definition(s, source).activated[a.ability];
+        ability = definition(s, source, undefined, undefined, undefined, a).activated[a.ability];
       return {
         a,
         score:
@@ -1019,6 +1061,7 @@ export function chooseBotCommand(s, p) {
           a.x,
           a.additionalCost,
           !!spellProfile(rawDefinition(s, s.objects[a.card]), a.mode)?.bargained,
+          a,
         ),
         a.x,
       );
