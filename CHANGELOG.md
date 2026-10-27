@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.57.0 — Station and continuous charge thresholds
+
+- Add 17 complete Standard cards with their full entry, threshold, attack and activation clauses. Catalog: 2364 playable cards and 103 tokens; dated Standard coverage: 2146 of 5164.
+- Activate Station with exactly one other untapped creature at sorcery speed. Check payer power on resolution, retaining exact-incarnation last-known power through simultaneous departures; Pilot Crew/Saddle bonuses do not apply.
+- Derive charge thresholds continuously with noncopyable counters, threshold-only creature statistics and correctly ordered ability loss/animation. Threshold loss removes combat membership immediately, even when counters return during the same resolution.
+- Preserve Role Aura legality, creature-owned attachment grants, additive ward, recursive effect alternatives, Exhaust controls, selected costs and cached saved catalogs. Keep the default and all eight exact meta decks unchanged.
+- Show charge counts, locked/active thresholds and a one-payer selection gallery with Read/Back, cancellation and stale-confirm guards. DOM lifecycle verification is not visual-browser verification; managed preview remains unavailable.
+
 ## 0.56.0 — Role Auras and creature-owned attachment abilities
 
 - Add 22 complete Standard cards and six exact Role Aura tokens. Catalog: 2347 playable cards and 103 tokens; dated Standard coverage: 2129 of 5164.

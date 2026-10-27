@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3aa0cda4-fb2d-4fd4-84f6-482089a85547",
+  "name": "Lumen-Class Frigate",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Spacecraft"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.)\n2+ | Other creatures you control get +1/+1.\n12+ | Flying, lifelink",
+  "abilities": [
+    {
+      "kind": "station"
+    },
+    {
+      "kind": "stationLevel",
+      "threshold": 2,
+      "abilities": [
+        {
+          "kind": "anthem",
+          "power": 1,
+          "toughness": 1,
+          "excludeSource": true
+        }
+      ]
+    },
+    {
+      "kind": "stationLevel",
+      "threshold": 12,
+      "power": 3,
+      "toughness": 5,
+      "abilities": [
+        {
+          "kind": "keyword",
+          "keyword": "flying"
+        },
+        {
+          "kind": "keyword",
+          "keyword": "lifelink"
+        }
+      ]
+    }
+  ]
+}

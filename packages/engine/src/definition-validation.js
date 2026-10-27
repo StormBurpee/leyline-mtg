@@ -66,6 +66,8 @@ const FIELDS = new Set([
   'modes',
   'crew',
   'saddle',
+  'station',
+  'stationLevels',
   'crewSaddlePowerBonus',
   'cycling',
   'ninjutsu',
@@ -1062,6 +1064,73 @@ export function validateDefinition(card) {
         !hasType(card, 'creature'))
     )
       errors.push(`${name}.${field}: requires a creature and an integer from 0 to 1000.`);
+  if (card.station !== undefined && (card.station !== true || !permanent))
+    errors.push(`${name}.station: expected a permanent with station true.`);
+  if (card.stationLevels !== undefined) {
+    if (
+      !permanent ||
+      !Array.isArray(card.stationLevels) ||
+      !card.stationLevels.length ||
+      card.stationLevels.length > 8
+    )
+      errors.push(`${name}.stationLevels: expected 1–8 permanent thresholds.`);
+    else
+      for (const [i, level] of card.stationLevels.entries()) {
+        const path = `${name}.stationLevels[${i}]`;
+        if (
+          !plain(level) ||
+          Object.keys(level).some(
+            (k) => !['threshold', 'power', 'toughness', 'grants'].includes(k),
+          ) ||
+          !Number.isSafeInteger(level.threshold) ||
+          level.threshold < 1 ||
+          level.threshold > 1000 ||
+          (i && level.threshold <= card.stationLevels[i - 1]?.threshold)
+        ) {
+          errors.push(`${path}: expected increasing thresholds from 1 to 1000.`);
+          continue;
+        }
+        if (
+          (level.power !== undefined || level.toughness !== undefined) &&
+          (!signed(level.power) || !signed(level.toughness))
+        )
+          errors.push(`${path}: power and toughness must both be bounded integers.`);
+        if (
+          Array.isArray(level.grants?.keywords) &&
+          level.grants.keywords.some((keyword) => !GRANTED_KEYWORDS.has(keyword))
+        )
+          errors.push(`${path}.grants.keywords: unsupported threshold keyword grant.`);
+        const fields = ['keywords', 'triggers', 'activated', 'static', 'selfBonus', 'etb'];
+        if (!plain(level.grants) || Object.keys(level.grants).some((k) => !fields.includes(k)))
+          errors.push(`${path}.grants: unsupported station ability.`);
+        else {
+          const base = Object.fromEntries(
+            ['name', 'type', 'types', 'cost', 'text', 'color', 'subtypes']
+              .filter((k) => card[k] !== undefined)
+              .map((k) => [k, card[k]]),
+          );
+          errors.push(
+            ...validateDefinition({ ...base, keywords: [], ...level.grants }).map(
+              (error) => `${path}: ${error}`,
+            ),
+          );
+        }
+      }
+    if (card.power !== undefined || card.toughness !== undefined)
+      errors.push(`${name}: station P/T belongs to its threshold, not the card characteristics.`);
+    const statics =
+      (card.static ? 1 : 0) +
+      (Array.isArray(card.stationLevels)
+        ? card.stationLevels.filter((v) => v?.grants?.static).length
+        : 0);
+    if (statics > 1) errors.push(`${name}: multiple static anthem grants are unsupported.`);
+    const bonuses =
+      (card.selfBonus ? 1 : 0) +
+      (Array.isArray(card.stationLevels)
+        ? card.stationLevels.filter((v) => v?.grants?.selfBonus).length
+        : 0);
+    if (bonuses > 1) errors.push(`${name}: multiple self-bonus grants are unsupported.`);
+  }
   if (card.ninjutsu !== undefined) validateCost(card.ninjutsu, `${name}.ninjutsu`, errors);
   if (card.turnLoyaltyCreature !== undefined) {
     const f = card.turnLoyaltyCreature;

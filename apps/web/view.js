@@ -634,6 +634,14 @@ function liveCharacteristics(s, o) {
       `${d.type === 'creature' ? 'Land creature' : 'Land'} until player ${form.untilNextTurn + 1}’s next turn · Gained: Tap: Add ${form.landForm.mana.join(' or ')}`,
     );
   if (o.saddledTurn === s.turn) bits.push('Saddled until end of turn');
+  if (d.station || o.chargeCounters !== undefined) {
+    bits.push(`${o.chargeCounters ?? 0} charge counter${o.chargeCounters === 1 ? '' : 's'}`);
+    for (const level of d.stationLevels ?? [])
+      bits.push(
+        `${level.threshold}+ ${(o.chargeCounters ?? 0) >= level.threshold ? 'active' : 'locked'}${level.power !== undefined ? ` · creature ${level.power}/${level.toughness}` : ''}`,
+      );
+    if (d.station && d.type !== 'creature') bits.push('Not a creature');
+  }
   if (d.saddle !== undefined) bits.push(`Saddle ${d.saddle}`);
   if (d.crew !== undefined)
     bits.push(

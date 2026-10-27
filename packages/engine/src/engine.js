@@ -12,6 +12,7 @@ import { convokeCandidates } from './convoke.js';
 import { recordSpellCast } from './spell-history.js';
 import { crewProblem, crewPlan } from './crew.js';
 import { saddleProblem, saddlePlan } from './saddle.js';
+import { stationProblem, stationPlan } from './station.js';
 import { MAX_X, manaValue } from './mana-value.js';
 import { cyclingFilter } from './cycling.js';
 import { flattenTargets, targetPlanProblem, targetPlans } from './target-groups.js';
@@ -470,6 +471,29 @@ export function cyclingProblem(s, p, id) {
     return 'Not enough available mana to cycle this card.';
   return null;
 }
+function station(s, p, c) {
+  const problem = stationProblem(s, p, c.card, c.cards);
+  requireRule(!problem, 'STATION', problem);
+  const o = s.objects[c.card],
+    payer = s.objects[c.cards[0]];
+  s.stack.push({
+    id: `s${++s.nextId}`,
+    kind: 'ability',
+    name: o.name,
+    controller: p,
+    source: ref(o),
+    sourceKeywords: keywords(s, o),
+    stationPayer: ref(payer),
+    stationPower: stats(s, payer).power,
+    effects: [{ op: 'stationCharge' }],
+    targetKind: null,
+    target: null,
+    label: 'Station',
+  });
+  tapObjects(s, [payer]);
+  s.passes = 0;
+  emit(s, 'stationActivated', { player: p, objectId: o.id, cards: [...c.cards] });
+}
 function saddle(s, p, c) {
   const problem = saddleProblem(s, p, c.card, c.cards);
   requireRule(!problem, 'SADDLE', problem);
@@ -819,6 +843,9 @@ export function dispatch(state, command) {
         case 'cast':
           cast(s, p, command);
           break;
+        case 'station':
+          station(s, p, command);
+          break;
         case 'saddle':
           saddle(s, p, command);
           break;
@@ -1081,6 +1108,10 @@ export function legalActions(s, p, { x: exactX } = {}) {
       )
     )
       continue;
+    if (o.zone === 'battlefield' && definition(s, o).station) {
+      const cards = stationPlan(s, p, o.id);
+      if (cards) actions.push({ type: 'station', card: o.id, cards });
+    }
     if (o.zone === 'battlefield' && definition(s, o).saddle !== undefined) {
       const cards = saddlePlan(s, p, o.id);
       if (cards) actions.push({ type: 'saddle', card: o.id, cards });

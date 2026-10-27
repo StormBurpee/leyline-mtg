@@ -97,6 +97,13 @@ export function compilePack(cards, { mechanics = {} } = {}) {
       ),
       ...(d.attachmentTriggers ?? []).flatMap((t) => t.effects),
       ...(d.activated ?? []).flatMap((a) => a.effects),
+      ...(d.stationLevels ?? []).flatMap((level) => [
+        ...(level.grants.etb ?? []),
+        ...(level.grants.triggers ?? []).flatMap((t) =>
+          t.modes ? t.modes.flatMap((m) => m.effects) : t.effects,
+        ),
+        ...(level.grants.activated ?? []).flatMap((a) => a.effects),
+      ]),
     ])) {
       if (
         e.attachedToken !== undefined &&

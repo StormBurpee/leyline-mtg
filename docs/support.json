@@ -1,5 +1,5 @@
 {
-  "version": "0.56.0",
+  "version": "0.57.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -1075,6 +1075,25 @@
           "drawNumber": 2
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Atmospheric Greenhouse",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["counterAll"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 8,
+          "power": 5,
+          "toughness": 4,
+          "grants": {
+            "keywords": ["flying", "trample"]
+          }
+        }
+      ],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -4160,6 +4179,66 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Dawnsire, Sunstar Dreadnought",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": [],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 10,
+          "grants": {
+            "keywords": [],
+            "triggers": [
+              {
+                "event": {
+                  "event": "attackGroup",
+                  "controller": "you"
+                },
+                "effects": [
+                  {
+                    "op": "damage",
+                    "amount": 100,
+                    "targetGroup": "chosen"
+                  }
+                ],
+                "targetGroups": [
+                  {
+                    "id": "chosen",
+                    "selector": {
+                      "scope": "permanent",
+                      "where": {
+                        "any": [
+                          {
+                            "type": "creature"
+                          },
+                          {
+                            "type": "planeswalker"
+                          }
+                        ]
+                      }
+                    },
+                    "min": 0,
+                    "max": 1
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "threshold": 20,
+          "power": 20,
+          "toughness": 20,
+          "grants": {
+            "keywords": ["flying"]
+          }
+        }
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dawnwing Marshal",
       "type": "creature",
       "keywords": ["flying"],
@@ -4282,6 +4361,45 @@
       "keywords": ["trample"],
       "opcodes": ["loseLife", "gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Debris Field Crusher",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 8,
+          "power": 1,
+          "toughness": 5,
+          "grants": {
+            "keywords": ["flying"],
+            "activated": [
+              {
+                "cost": {
+                  "mana": {
+                    "generic": 1,
+                    "R": 1
+                  }
+                },
+                "effects": [
+                  {
+                    "op": "modify",
+                    "subject": "source",
+                    "power": 2,
+                    "toughness": 0,
+                    "keywords": []
+                  }
+                ],
+                "text": "This Spacecraft gets +2/+0 until end of turn."
+              }
+            ]
+          }
+        }
+      ],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -6024,6 +6142,25 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Extinguisher Battleship",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["destroy", "damageAll"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 5,
+          "power": 10,
+          "toughness": 10,
+          "grants": {
+            "keywords": ["flying", "trample"]
+          }
+        }
+      ],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Extravagant Replication",
       "type": "enchantment",
       "keywords": [],
@@ -7223,6 +7360,25 @@
           }
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Galvanizing Sawship",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": [],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 3,
+          "power": 6,
+          "toughness": 5,
+          "grants": {
+            "keywords": ["flying", "haste"]
+          }
+        }
+      ],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -9429,6 +9585,144 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Infinite Guideline Station",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["token"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 12,
+          "power": 7,
+          "toughness": 15,
+          "grants": {
+            "keywords": ["flying"],
+            "triggers": [
+              {
+                "event": "selfAttacks",
+                "effects": [
+                  {
+                    "op": "draw",
+                    "count": {
+                      "kind": "count",
+                      "zone": "battlefield",
+                      "player": "you",
+                      "where": {
+                        "any": [
+                          {
+                            "all": [
+                              {
+                                "color": "W"
+                              },
+                              {
+                                "color": "U"
+                              }
+                            ]
+                          },
+                          {
+                            "all": [
+                              {
+                                "color": "W"
+                              },
+                              {
+                                "color": "B"
+                              }
+                            ]
+                          },
+                          {
+                            "all": [
+                              {
+                                "color": "W"
+                              },
+                              {
+                                "color": "R"
+                              }
+                            ]
+                          },
+                          {
+                            "all": [
+                              {
+                                "color": "W"
+                              },
+                              {
+                                "color": "G"
+                              }
+                            ]
+                          },
+                          {
+                            "all": [
+                              {
+                                "color": "U"
+                              },
+                              {
+                                "color": "B"
+                              }
+                            ]
+                          },
+                          {
+                            "all": [
+                              {
+                                "color": "U"
+                              },
+                              {
+                                "color": "R"
+                              }
+                            ]
+                          },
+                          {
+                            "all": [
+                              {
+                                "color": "U"
+                              },
+                              {
+                                "color": "G"
+                              }
+                            ]
+                          },
+                          {
+                            "all": [
+                              {
+                                "color": "B"
+                              },
+                              {
+                                "color": "R"
+                              }
+                            ]
+                          },
+                          {
+                            "all": [
+                              {
+                                "color": "B"
+                              },
+                              {
+                                "color": "G"
+                              }
+                            ]
+                          },
+                          {
+                            "all": [
+                              {
+                                "color": "R"
+                              },
+                              {
+                                "color": "G"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Infirmary Healer // Stream of Life",
       "type": "creature",
       "keywords": [],
@@ -9946,6 +10240,64 @@
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Kavaron, Memorial World",
+      "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 12,
+          "grants": {
+            "keywords": [],
+            "activated": [
+              {
+                "cost": {
+                  "mana": {
+                    "generic": 1,
+                    "R": 1
+                  },
+                  "sacrifice": {
+                    "count": 1,
+                    "where": {
+                      "type": "land"
+                    }
+                  },
+                  "tap": true
+                },
+                "effects": [
+                  {
+                    "op": "token",
+                    "count": 1,
+                    "definition": "Robot Token"
+                  },
+                  {
+                    "op": "modifyAll",
+                    "where": {
+                      "all": [
+                        {
+                          "type": "creature"
+                        },
+                        {
+                          "controller": "you"
+                        }
+                      ]
+                    },
+                    "power": 1,
+                    "toughness": 0,
+                    "keywords": ["haste"]
+                  }
+                ],
+                "text": "Sacrifice a land: Create a Robot, then your creatures get +1/+0 and haste."
+              }
+            ]
+          }
+        }
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -11008,6 +11360,37 @@
           "drawNumber": 2
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Lumen-Class Frigate",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": [],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 2,
+          "grants": {
+            "keywords": [],
+            "static": {
+              "kind": "anthem",
+              "power": 1,
+              "toughness": 1,
+              "excludeSource": true
+            }
+          }
+        },
+        {
+          "threshold": 12,
+          "power": 3,
+          "toughness": 5,
+          "grants": {
+            "keywords": ["flying", "lifelink"]
+          }
+        }
+      ],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -13625,6 +14008,25 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Pinnacle Kill-Ship",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 7,
+          "power": 7,
+          "toughness": 7,
+          "grants": {
+            "keywords": ["flying"]
+          }
+        }
+      ],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Pinnacle Starcage",
       "type": "artifact",
       "keywords": [],
@@ -15031,6 +15433,25 @@
           "object": "source"
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rescue Skiff",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 10,
+          "power": 5,
+          "toughness": 6,
+          "grants": {
+            "keywords": ["flying"]
+          }
+        }
+      ],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -17305,6 +17726,37 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Specimen Freighter",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["bounce"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 9,
+          "power": 4,
+          "toughness": 7,
+          "grants": {
+            "keywords": ["flying"],
+            "triggers": [
+              {
+                "event": "selfAttacks",
+                "effects": [
+                  {
+                    "op": "mill",
+                    "count": 4,
+                    "player": "opponent"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spectacle Summit",
       "type": "land",
       "keywords": [],
@@ -18654,6 +19106,25 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Susurian Dirgecraft",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["sacrifice"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 7,
+          "power": 4,
+          "toughness": 3,
+          "grants": {
+            "keywords": ["flying"]
+          }
+        }
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Swab Goblin",
       "type": "creature",
       "keywords": [],
@@ -19296,6 +19767,48 @@
           "chapters": [3]
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "The Seriema",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 7,
+          "power": 5,
+          "toughness": 5,
+          "grants": {
+            "keywords": ["flying"],
+            "static": {
+              "kind": "anthem",
+              "power": 0,
+              "toughness": 0,
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  },
+                  {
+                    "tapped": true
+                  },
+                  {
+                    "legendary": true
+                  }
+                ]
+              },
+              "excludeSource": true,
+              "keywords": ["indestructible"]
+            }
+          }
+        }
+      ],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -20582,6 +21095,25 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Uthros Scanship",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw", "discard"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 8,
+          "power": 4,
+          "toughness": 4,
+          "grants": {
+            "keywords": ["flying"]
+          }
+        }
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Utrom Scientists",
       "type": "creature",
       "keywords": [],
@@ -21439,6 +21971,25 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Warmaker Gunship",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 6,
+          "power": 4,
+          "toughness": 3,
+          "grants": {
+            "keywords": ["flying"]
+          }
+        }
+      ],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Warren Elder",
       "type": "creature",
       "keywords": [],
@@ -21606,6 +22157,25 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["counterAll"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Wedgelight Rammer",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["token"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 9,
+          "power": 3,
+          "toughness": 4,
+          "grants": {
+            "keywords": ["flying", "first strike"]
+          }
+        }
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -22049,6 +22619,25 @@
       "opcodes": ["surveil"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Wurmwall Sweeper",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["surveil"],
+      "station": true,
+      "stationLevels": [
+        {
+          "threshold": 4,
+          "power": 2,
+          "toughness": 2,
+          "grants": {
+            "keywords": ["flying"]
+          }
+        }
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Wylie Duke, Atiin Hero",

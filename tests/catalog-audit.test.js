@@ -10,6 +10,9 @@ test('support manifest matches the executable registry and engine version', asyn
   for (const card of Object.values(CARDS)) {
     if (card.token) continue;
     const row = report.cards.find((entry) => entry.name === card.name);
+    if (card.station) assert.equal(row.station, true, card.name);
+    if (card.stationLevels)
+      assert.deepEqual(row.stationLevels, card.stationLevels, `${card.name}: threshold manifest`);
     for (const trigger of card.triggers ?? [])
       for (const mode of trigger.modes ?? [])
         for (const effect of mode.effects)

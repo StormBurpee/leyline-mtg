@@ -129,12 +129,20 @@ export function createRegistry(input = CARDS) {
       ),
       ...(card.attachmentTriggers ?? []).flatMap((t) => t.effects),
       ...(card.activated ?? []).flatMap((a) => a.effects),
+      ...(card.stationLevels ?? []).flatMap((level) => [
+        ...(level.grants.etb ?? []),
+        ...(level.grants.triggers ?? []).flatMap((t) =>
+          t.modes ? t.modes.flatMap((m) => m.effects) : t.effects,
+        ),
+        ...(level.grants.activated ?? []).flatMap((a) => a.effects),
+      ]),
     ])) {
       if (
         e.attachedToken !== undefined &&
         (!registry[e.attachedToken]?.token || !registry[e.attachedToken]?.aura)
       )
         errors.push(`${card.name}: return attachment requires an Aura token definition.`);
+
       if (
         e.op === 'empowerJace' &&
         (registry[e.definition]?.type !== 'planeswalker' ||

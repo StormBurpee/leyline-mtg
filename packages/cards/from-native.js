@@ -355,6 +355,26 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   if (d.flashback) abilities.push({ kind: 'flashback', cost: mana(d.flashback) });
   for (const kind of ['saddle', 'crewSaddlePowerBonus'])
     if (d[kind] !== undefined) abilities.push({ kind, power: d[kind] });
+  if (d.station) abilities.push({ kind: 'station' });
+  for (const level of d.stationLevels ?? []) {
+    const base = {
+      name: d.name,
+      type: d.type,
+      ...(d.types ? { types: d.types } : {}),
+      cost: d.cost,
+      text: '',
+      color: d.color,
+      subtypes: d.subtypes,
+      keywords: [],
+      ...level.grants,
+    };
+    abilities.push({
+      kind: 'stationLevel',
+      threshold: level.threshold,
+      ...(level.power !== undefined ? { power: level.power, toughness: level.toughness } : {}),
+      abilities: sourceFromDefinition(base, { id, idsByName }).abilities,
+    });
+  }
   if (d.crew !== undefined) abilities.push({ kind: 'crew', power: d.crew });
   if (d.cycling)
     abilities.push({

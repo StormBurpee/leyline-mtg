@@ -33,6 +33,7 @@ import {
   queueEntryTrigger,
   counterKinds,
   removeOneCounter,
+  removeFromCombat,
   preparePermanent,
   unpreparePermanent,
   preparedSource,
@@ -1865,12 +1866,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           });
           // CR 506.4: a permanent that stops being a creature leaves combat,
           // even if another effect animates it again before combat ends.
-          const same = (r) => r.id === source.id && r.incarnation === source.incarnation;
-          s.combat.attackers = s.combat.attackers.filter((r) => !same(r));
-          delete s.combat.blocks[source.id];
-          if (s.combat.defenders) delete s.combat.defenders[source.id];
-          for (const id of Object.keys(s.combat.blocks))
-            s.combat.blocks[id] = s.combat.blocks[id].filter((r) => !same(r));
+          removeFromCombat(s, source);
         }
         break;
       }
@@ -1968,6 +1964,25 @@ export function resolveEffects(s, entry, startIndex = 0) {
             ...(e.keywords ? { keywords: [...e.keywords] } : {}),
             ...(e.permanent ? { permanent: true } : { expires: s.turn }),
           });
+        break;
+      }
+      case 'stationCharge': {
+        const source = s.objects[entry.source.id],
+          payer = s.objects[entry.stationPayer?.id];
+        // Resolve on this permanent even if it lost station or its printed subtype.
+        if (source?.zone !== 'battlefield' || source.incarnation !== entry.source.incarnation)
+          break;
+        const power =
+          payer?.zone === 'battlefield' && payer.incarnation === entry.stationPayer.incarnation
+            ? stats(s, payer).power
+            : (entry.stationPower ?? 0);
+        const amount = Math.max(0, power),
+          next = (source.chargeCounters ?? 0) + amount;
+        requireRule(Number.isSafeInteger(next), 'COUNTER_RANGE', 'Too many charge counters.');
+        if (amount) {
+          source.chargeCounters = next;
+          emit(s, 'chargeCounters', { objectId: source.id, amount, total: next });
+        }
         break;
       }
       case 'becomeSaddled': {
@@ -2413,6 +2428,7 @@ export function finishResolutionChoice(s, command) {
         'That counter is no longer available.',
       );
       removeOneCounter(source, command.counter);
+      if (!hasType(definition(s, source), 'creature')) removeFromCombat(s, source);
       emit(s, 'counterRemoved', {
         objectId: source.id,
         counter: command.counter,
@@ -2867,6 +2883,17 @@ export function resolveTop(s) {
 /** All supported state-based actions are computed from one pre-action state. */
 export function stateBasedActions(s) {
   if (s.resolving || s.choice?.kind === 'legendRule') return false;
+  // Reconcile continuous type changes before priority; explicit counter removals
+  // also remove combat membership immediately, before their next instruction.
+  for (const r of [...s.combat.attackers, ...Object.values(s.combat.blocks).flat()]) {
+    const object = s.objects[r.id];
+    if (
+      object?.zone === 'battlefield' &&
+      object.incarnation === r.incarnation &&
+      !hasType(definition(s, object), 'creature')
+    )
+      removeFromCombat(s, object);
+  }
   const losers = s.players.filter((p) => p.life <= 0 || p.failedDraw).map((p) => p.id);
   if (losers.length) {
     s.status = 'finished';
