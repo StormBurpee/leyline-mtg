@@ -1,5 +1,5 @@
 {
-  "version": "0.37.0",
+  "version": "0.38.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -1855,6 +1855,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Donatello, Turtle Techie",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Donatello, Way with Machines",
       "type": "creature",
       "keywords": ["flying"],
@@ -2004,6 +2012,14 @@
       "activatedAbilities": 2
     },
     {
+      "name": "Dundoolin Weaver",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dusk Legion Zealot",
       "type": "creature",
       "keywords": [],
@@ -2037,6 +2053,14 @@
       "opcodes": ["modifyAll"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Dwynen's Elite",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
     },
     {
       "name": "Eager Glyphmage",
@@ -2313,6 +2337,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Failed Fording",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bounce", "conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Falkenrath Perforator",
       "type": "creature",
       "keywords": [],
@@ -2393,6 +2425,14 @@
       "type": "enchantment",
       "keywords": ["flash"],
       "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Feed the Cauldron",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy", "conditional"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2631,6 +2671,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Flight-Deck Coordinator",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["gainLife"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "end",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Floodfarm Verge",
       "type": "land",
       "keywords": [],
@@ -2748,6 +2802,20 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Frontline War-Rager",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "end",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -3465,6 +3533,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Hero in Training",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Hierophant's Chalice",
       "type": "artifact",
       "keywords": [],
@@ -3858,6 +3934,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Invasive Maneuvers",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Iridescent Vinelasher",
       "type": "creature",
       "keywords": [],
@@ -4139,6 +4223,20 @@
       "keywords": ["flying"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Leonin Vanguard",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify", "gainLife"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "beginCombat",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -4715,6 +4813,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Might of the Meek",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "conditional", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Mighty Mutanimals",
       "type": "creature",
       "keywords": [],
@@ -5025,6 +5131,20 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Nasty Little Rabbit",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "beginCombat",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -5845,6 +5965,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Rabbit Response",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modifyAll", "conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Rabid Bite",
       "type": "sorcery",
       "keywords": [],
@@ -5971,6 +6099,14 @@
           "excludeSource": true
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rapier Wit",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["tap", "conditional", "draw"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -6596,6 +6732,14 @@
       "keywords": [],
       "opcodes": ["modify"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Scalestorm Summoner",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["conditional"],
+      "triggers": ["selfAttacks"],
       "activatedAbilities": 0
     },
     {
@@ -7825,10 +7969,26 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Take the Fall",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["conditional", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Take Up the Shield",
       "type": "instant",
       "keywords": [],
       "opcodes": ["counterOn", "modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Taken by Nightmares",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget", "conditional"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -9266,6 +9426,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "You're Not Alone",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Young Pyromancer",
       "type": "creature",
       "keywords": [],
@@ -9329,6 +9497,7 @@
     "Cat Token",
     "Clue Token",
     "Detective Token",
+    "Dinosaur Token",
     "Dog Token",
     "Dragon Token",
     "Elemental Token",

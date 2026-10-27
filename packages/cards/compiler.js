@@ -110,6 +110,15 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         problem('INVALID_EFFECT', p, 'Expected an effect object.');
         return { op: 'unsupported' };
       }
+      if (effect.op === 'conditional') {
+        fields(effect, ['op', 'condition', 'then', 'else'], p);
+        return {
+          op: 'conditional',
+          condition: structuredClone(effect.condition),
+          then: effects(effect.then, `${p}.then`),
+          ...(effect.else !== undefined ? { else: effects(effect.else, `${p}.else`) } : {}),
+        };
+      }
       if (effect.targetGroup !== undefined) {
         const { targetGroup, ...rest } = effect;
         const native = effects([rest], p)[0];

@@ -1,0 +1,74 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "28564d10-bfc5-4beb-b0e2-b9aa5c03f740",
+  "name": "Dundoolin Weaver",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Kithkin", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, if you control three or more creatures, return target permanent card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "not": {
+                "any": [
+                  {
+                    "type": "instant"
+                  },
+                  {
+                    "type": "sorcery"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          }
+        },
+        "right": 3,
+        "operator": "gte"
+      }
+    }
+  ]
+}

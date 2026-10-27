@@ -1,3 +1,4 @@
+import { predictedEffects } from './conditional-effects.js';
 import { flattenTargets } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { effectValues } from './numeric-values.js';
@@ -30,9 +31,7 @@ export function drawsFor(effects, controller, target, player = controller) {
  * Life may reach zero during one resolution and recover before state-based actions.
  */
 export function resolutionRisk(state, player, effects, target, lifeCost = 0, source = null) {
-  effects = effects.map((effect) =>
-    effectValues(state, effect, { controller: player, source, target }),
-  );
+  effects = predictedEffects(state, effects, { controller: player, source, target });
   let life = state.players[player].life - lifeCost;
   for (const effect of effects) {
     if (effect.op === 'damage' && target?.kind === 'player' && target.id === player)
@@ -60,7 +59,7 @@ export function actionEffects(state, action) {
     source: { id: object.id, incarnation: object.incarnation },
     target: action.target,
   };
-  return effects.map((effect) => effectValues(state, effect, entry));
+  return predictedEffects(state, effects, entry);
 }
 
 function actionCost(state, player, action) {

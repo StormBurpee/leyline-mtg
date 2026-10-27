@@ -106,6 +106,7 @@ export interface TargetGroup {
 export type TargetPlan = Record<string, Target[]>;
 export type Effect = EffectInstruction & { targetGroup?: string };
 type EffectInstruction =
+  | { op: 'conditional'; condition: StateCondition; then: Effect[]; else?: Effect[] }
   | { op: 'stunOn'; amount: NumericValue; subject?: 'source' | 'attached' }
   | { op: 'fight' | 'bite'; sourceGroup: string; victimGroup: string }
   | { op: 'damageEventPowerOpponent' }

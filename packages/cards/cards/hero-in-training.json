@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "87f1a840-021c-4699-a2c4-f2926daf98eb",
+  "name": "Hero in Training",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Hero"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, draw a card. If you control another Hero, you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "all",
+              "where": {
+                "all": [
+                  {
+                    "subtype": "Hero"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              },
+              "excludeSource": true
+            },
+            "right": 1,
+            "operator": "gte"
+          },
+          "then": [
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

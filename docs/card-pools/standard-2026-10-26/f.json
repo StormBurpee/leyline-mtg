@@ -47,7 +47,7 @@
   {
     "oracleId": "fe4bbe82-1d6b-4f3d-8cc0-f6df22d9e9fb",
     "name": "Failed Fording",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ad01df89-29fe-44c7-a133-91425f8ff09c",
@@ -292,7 +292,7 @@
   {
     "oracleId": "21153db6-552a-4956-a53a-a9dfb6968629",
     "name": "Feed the Cauldron",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "c338eedb-9b70-4b77-b5d6-8ea74b7bea3e",
@@ -697,7 +697,7 @@
   {
     "oracleId": "57927909-11a9-44ef-989d-1dcca1f6e23f",
     "name": "Flight-Deck Coordinator",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "9148f2cb-5594-463c-a21b-a67706ec46d1",
@@ -1082,7 +1082,7 @@
   {
     "oracleId": "610d006a-3ceb-4136-b92b-a500c74d06b0",
     "name": "Frontline War-Rager",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "b39f03cf-3d1a-42ad-903f-e3b3542878b0",

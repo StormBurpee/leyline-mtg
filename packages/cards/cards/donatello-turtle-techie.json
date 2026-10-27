@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f84850bc-6348-449e-bd82-bb39e2119bec",
+  "name": "Donatello, Turtle Techie",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Mutant", "Ninja", "Turtle"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "When Donatello enters, if you control an artifact, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "controlAtLeast",
+        "where": {
+          "type": "artifact"
+        },
+        "count": 1
+      }
+    }
+  ]
+}

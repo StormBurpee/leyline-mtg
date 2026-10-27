@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e5557c9f-e4c2-41af-9fcc-371409e1dec6",
+  "name": "Taken by Nightmares",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}{B}"
+  },
+  "rulesText": "Exile target creature. If you control an enchantment, scry 2.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "controlAtLeast",
+            "where": {
+              "type": "enchantment"
+            },
+            "count": 1
+          },
+          "then": [
+            {
+              "op": "scry",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

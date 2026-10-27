@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9f7abd7d-1087-495c-8a52-2a2368cc1032",
+  "name": "Rabbit Response",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}{W}"
+  },
+  "rulesText": "Creatures you control get +2/+1 until end of turn. If you control a Rabbit, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          },
+          "power": 2,
+          "toughness": 1,
+          "until": "endOfTurn"
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "controlAtLeast",
+            "where": {
+              "subtype": "Rabbit"
+            },
+            "count": 1
+          },
+          "then": [
+            {
+              "op": "scry",
+              "target": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
