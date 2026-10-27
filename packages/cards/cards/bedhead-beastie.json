@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7143d82a-931a-4918-bb14-37bc5b9a4d99",
+  "name": "Bedhead Beastie",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Beast"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}",
+    "power": 5,
+    "toughness": 6
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Mountain"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
+import { playableZone } from '../../packages/engine/src/model.js';
 import { installHandLayout } from './hand-layout.js';
 import {
   definition,
+  castingProfile,
   planPayment,
   legalActions,
   castProblem,
@@ -46,10 +48,14 @@ export function installDuelPresentation(root, context) {
       .forEach((el) => el.classList.remove('payment-preview'));
     const { state, ui, player } = context(),
       object = state?.objects[id];
-    if (!object || object.zone !== 'hand' || object.owner !== player || state.choice) return;
+    if (!playableZone(state, object, player) || state.choice) return;
     const d = definition(state, object);
     if (d.type === 'land') return;
-    const plan = planPayment(state, player, d.cost);
+    const profile = castingProfile(state, player, object, ui.spellMode ?? undefined);
+    if (!profile) return;
+    const plan = planPayment(state, player, profile.cost, {
+      purpose: { type: 'cast', card: profile },
+    });
     for (const source of plan?.taps ?? [])
       root.querySelector(`[data-card="${CSS.escape(source)}"]`)?.classList.add('payment-preview');
   }
@@ -70,7 +76,7 @@ export function installDuelPresentation(root, context) {
       m = metadata[o.name],
       r = element.getBoundingClientRect();
     let hint = '';
-    if (o.zone === 'hand' && o.owner === player) {
+    if (playableZone(state, o, player)) {
       const playable = legalActions(state, player).some(
         (a) => a.card === id && ['playLand', 'cast'].includes(a.type),
       );

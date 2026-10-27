@@ -300,7 +300,15 @@ export function finishAuraEntryChoice(s, command) {
     continueResolution(s);
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
-export function dealDamage(s, source, target, amount, combat = false, lifeGains = null) {
+export function dealDamage(
+  s,
+  source,
+  target,
+  amount,
+  combat = false,
+  lifeGains = null,
+  combatEvents = null,
+) {
   if (amount <= 0) return;
   const sourceObject = s.objects[source.id];
   const sourceDefinition = source.definition ?? (sourceObject ? definition(s, sourceObject) : null);
@@ -334,14 +342,26 @@ export function dealDamage(s, source, target, amount, combat = false, lifeGains 
     notifyTriggers(s, 'lifeGain', { player: source.controller, amount });
   if (!combat && target.kind === 'player')
     notifyTriggers(s, 'noncombatDamageToPlayer', { player: target.id });
+  if (combat && target.kind === 'player' && sourceObject) {
+    const payload = {
+      object: sourceObject,
+      definition: sourceDefinition,
+      amount,
+      damagedPlayer: target.id,
+    };
+    if (combatEvents) combatEvents.push(payload);
+    else notifyTriggers(s, 'combatDamagePlayer', payload);
+  }
 }
 /** CR 119.9 and 702.15e: one gain event per source, not per damage recipient. */
 export function dealDamageBatch(s, packets, combat = false) {
-  const lifeGains = new Map();
+  const lifeGains = new Map(),
+    combatEvents = [];
   for (const packet of packets)
-    dealDamage(s, packet.source, packet.target, packet.amount, combat, lifeGains);
+    dealDamage(s, packet.source, packet.target, packet.amount, combat, lifeGains, combatEvents);
   // All simultaneous damage and life changes precede trigger-condition checks.
   for (const gain of lifeGains.values()) notifyTriggers(s, 'lifeGain', gain);
+  for (const payload of combatEvents) notifyTriggers(s, 'combatDamagePlayer', payload);
 }
 function damageSource(s, entry) {
   const source = s.objects[entry.source?.id];

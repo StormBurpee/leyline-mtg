@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/komas-coil",
+  "name": "Koma's Coil",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Serpent"],
+    "supertypes": [],
+    "colors": ["U"],
+    "manaCost": null,
+    "power": 3,
+    "toughness": 3,
+    "token": true
+  },
+  "rulesText": "",
+  "abilities": []
+}

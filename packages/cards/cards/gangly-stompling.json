@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "60206d4e-4301-4d7a-a68e-46a2ad9fc407",
+  "name": "Gangly Stompling",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Shapeshifter"],
+    "colors": ["G", "R"],
+    "manaCost": "{2}{R/G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Changeling (This card is every creature type.)\nTrample",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "changeling"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    }
+  ]
+}

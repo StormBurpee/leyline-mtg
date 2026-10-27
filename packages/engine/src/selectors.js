@@ -1,3 +1,4 @@
+import { hasSubtype } from './creature-types.js';
 import { CARD_TYPES, hasType, KEYWORD_NAMES } from './types.js';
 const plain = (value) =>
   value !== null &&
@@ -149,7 +150,7 @@ export function matchesFilter(facts, filter, you) {
   if (key === 'basic' || key === 'legendary') return !!facts.definition?.[key] === value;
   if (key === 'keyword')
     return (facts.keywords ?? facts.definition?.keywords ?? []).includes(value);
-  if (key === 'subtype') return !!facts.definition?.subtypes?.includes(value);
+  if (key === 'subtype') return hasSubtype(facts.definition, value);
   if (key === 'token' || key === 'tapped' || key === 'attacking' || key === 'blocking')
     return facts[key] === value;
   if (['power', 'toughness', 'manaValue'].includes(key)) {

@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3dc73517-0767-46ae-bc8d-ee378237a509",
+  "name": "Rooftop Percher",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Shapeshifter"],
+    "supertypes": [],
+    "colors": [],
+    "manaCost": "{5}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Changeling (This card is every creature type.)\nFlying\nWhen this creature enters, exile up to two target cards from graveyards. You gain 3 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "changeling"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "cards",
+          "selector": {
+            "scope": "graveyard"
+          },
+          "min": 0,
+          "max": 2
+        }
+      ],
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "targetGroup": "cards",
+          "destination": "exile"
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

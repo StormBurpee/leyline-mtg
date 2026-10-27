@@ -62,12 +62,14 @@ export function validateEventSpec(value) {
       'attackGroup',
       'noncombatDamageToPlayer',
       'lifeGain',
+      'combatDamagePlayer',
     ].includes(spec.event)
   )
     errors.push('Unsupported event family.');
   if (
     spec.object !== undefined &&
-    (spec.object !== 'source' || !['enter', 'dies', 'attack', 'faceUp'].includes(spec.event))
+    (spec.object !== 'source' ||
+      !['enter', 'dies', 'attack', 'faceUp', 'combatDamagePlayer'].includes(spec.event))
   )
     errors.push(
       'Source identity predicates currently apply to enter, dies and attack events only.',

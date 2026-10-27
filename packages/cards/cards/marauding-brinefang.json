@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cbbd507e-06da-4b47-befc-61db8c92539e",
+  "name": "Marauding Brinefang",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["U"],
+    "manaCost": "{5}{U}{U}",
+    "power": 6,
+    "toughness": 7
+  },
+  "rulesText": "Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{3}"
+      }
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Island"
+    }
+  ]
+}

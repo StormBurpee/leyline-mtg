@@ -30,8 +30,16 @@ export function drawsFor(effects, controller, target, player = controller) {
 /** A bounded check of known effects, not a claim to solve every triggered interaction.
  * Life may reach zero during one resolution and recover before state-based actions.
  */
-export function resolutionRisk(state, player, effects, target, lifeCost = 0, source = null) {
-  effects = predictedEffects(state, effects, { controller: player, source, target });
+export function resolutionRisk(
+  state,
+  player,
+  effects,
+  target,
+  lifeCost = 0,
+  source = null,
+  eventAmount = 0,
+) {
+  effects = predictedEffects(state, effects, { controller: player, source, target, eventAmount });
   let life = state.players[player].life - lifeCost;
   for (const effect of effects) {
     if (effect.op === 'damage' && target?.kind === 'player' && target.id === player)

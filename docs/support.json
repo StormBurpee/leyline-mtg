@@ -1,5 +1,5 @@
 {
-  "version": "0.38.0",
+  "version": "0.39.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -331,11 +331,32 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Apex Witchstalker",
+      "type": "creature",
+      "keywords": ["menace"],
+      "opcodes": ["gainLife"],
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Appendage Amalgam",
       "type": "creature",
       "keywords": ["flash"],
       "opcodes": ["surveil"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "April, Reporter of the Weird",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["drawEventAmount", "discard"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -408,6 +429,30 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Arni, Humble Scribe",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["untap", "draw", "discard"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "filter": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "token": false
+              }
+            ]
+          },
+          "excludeSource": true
+        }
+      ],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Artifist Acumen",
       "type": "sorcery",
       "keywords": [],
@@ -445,6 +490,14 @@
       "keywords": [],
       "opcodes": ["draw", "loseLife"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Auron's Inspiration",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modifyAll"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -496,6 +549,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Balamb T-Rexaur",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Ballyrush Banneret",
       "type": "creature",
       "keywords": [],
@@ -533,6 +594,19 @@
       "keywords": [],
       "opcodes": ["discard", "gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Basilica Stalker",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["gainLife", "surveil"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -598,6 +672,22 @@
       "keywords": [],
       "opcodes": ["draw"],
       "triggers": ["controllerCastsCreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Bebop, Warthog Warrior",
+      "type": "creature",
+      "keywords": ["menace"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Bedhead Beastie",
+      "type": "creature",
+      "keywords": ["menace"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1087,6 +1177,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Canyon Crawler",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Captain Storm, Cosmium Raider",
       "type": "creature",
       "keywords": [],
@@ -1187,6 +1285,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Changeling Wayfinder",
+      "type": "creature",
+      "keywords": ["changeling"],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Charging Strifeknight",
       "type": "creature",
       "keywords": ["haste"],
@@ -1216,6 +1322,22 @@
       "keywords": [],
       "opcodes": ["modify", "fight"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Chitinous Graspling",
+      "type": "creature",
+      "keywords": ["changeling", "reach"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Chomping Changeling",
+      "type": "creature",
+      "keywords": ["changeling"],
+      "opcodes": ["destroy"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -1265,6 +1387,14 @@
       "keywords": ["flying"],
       "opcodes": ["gainLife", "draw"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Cloudbound Moogle",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["counterOn"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -1523,6 +1653,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Daggermaw Megalodon",
+      "type": "creature",
+      "keywords": ["vigilance"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Daring Mechanic",
       "type": "creature",
       "keywords": [],
@@ -1759,6 +1897,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Dig Site Inventory",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["counterOn", "modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dimension X",
       "type": "land",
       "keywords": [],
@@ -1911,6 +2057,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Dragon Mage",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["discard", "draw"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dragon's Prey",
       "type": "instant",
       "keywords": [],
@@ -1963,6 +2122,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dreams of Laguna",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["surveil", "draw"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2068,6 +2235,19 @@
       "keywords": [],
       "opcodes": ["token"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Eager Trufflesnout",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -2405,6 +2585,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Fear of Failed Tests",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["drawEventAmount"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Fear of Lost Teeth",
       "type": "creature",
       "keywords": [],
@@ -2433,6 +2626,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["destroy", "conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Feisty Spikeling",
+      "type": "creature",
+      "keywords": ["changeling"],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2467,6 +2668,19 @@
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Festerleech",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["mill", "modify"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 1
     },
     {
       "name": "Festival Crasher",
@@ -2875,6 +3089,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gangly Stompling",
+      "type": "creature",
+      "keywords": ["changeling", "trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Gargantuan Leech",
       "type": "creature",
       "keywords": ["lifelink"],
@@ -3243,6 +3465,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Graveshifter",
+      "type": "creature",
+      "keywords": ["changeling"],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Gravkill",
       "type": "instant",
       "keywords": [],
@@ -3573,6 +3803,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Hill Gigas",
+      "type": "creature",
+      "keywords": ["trample", "haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Hinterland Sanctifier",
       "type": "creature",
       "keywords": [],
@@ -3707,6 +3945,14 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ice Flan",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -3990,6 +4236,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Jennika, Bad Apple Big Sister",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Jeong Jeong's Deserters",
       "type": "creature",
       "keywords": [],
@@ -4011,6 +4265,19 @@
       "keywords": ["double strike"],
       "opcodes": ["modify"],
       "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Jeskai Shrinekeeper",
+      "type": "creature",
+      "keywords": ["flying", "haste"],
+      "opcodes": ["gainLife", "draw"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -4122,6 +4389,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Kindlespark Duo",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["untap", "damage"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Kitesail Corsair",
       "type": "creature",
       "keywords": [],
@@ -4146,6 +4421,24 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Koma, World-Eater",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["token"],
+      "ward": {
+        "mana": {
+          "generic": 4
+        }
+      },
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Krang, Utrom Warlord",
       "type": "creature",
       "keywords": ["flying", "trample", "indestructible", "haste"],
@@ -4159,6 +4452,14 @@
       "keywords": ["flying", "vigilance"],
       "opcodes": ["modify"],
       "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Kree Sentinel",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -4363,6 +4664,19 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Locke Cole",
+      "type": "creature",
+      "keywords": ["deathtouch", "lifelink"],
+      "opcodes": ["draw", "discard"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -4607,6 +4921,19 @@
           "controller": "you"
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Marauding Brinefang",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "ward": {
+        "mana": {
+          "generic": 3
+        }
+      },
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -4920,6 +5247,14 @@
       "keywords": ["deathtouch"],
       "opcodes": ["modify"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Mischievous Sneakling",
+      "type": "creature",
+      "keywords": ["changeling", "flash"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -5780,6 +6115,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Prideful Feastling",
+      "type": "creature",
+      "keywords": ["changeling", "lifelink"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Prideful Parent",
       "type": "creature",
       "keywords": ["vigilance"],
@@ -6058,6 +6401,14 @@
       "keywords": [],
       "opcodes": ["discard", "mill"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rampaging Spiketail",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -6489,6 +6840,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Rooftop Percher",
+      "type": "creature",
+      "keywords": ["changeling", "flying"],
+      "opcodes": ["moveTarget", "gainLife"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Rosa, Resolute White Mage",
       "type": "creature",
       "keywords": ["reach"],
@@ -6575,6 +6934,14 @@
       "type": "creature",
       "keywords": ["flying"],
       "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Saber-Tooth Moose-Lion",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6669,6 +7036,14 @@
       "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Savage Land Dinosaur",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Savage Mansion",
@@ -6808,6 +7183,19 @@
       "keywords": [],
       "opcodes": ["gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Scream Puff",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -6959,6 +7347,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Shepherding Spirits",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Shinra Reinforcements",
       "type": "creature",
       "keywords": [],
@@ -7037,6 +7433,19 @@
       "keywords": [],
       "opcodes": ["modify", "untap"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Shoreline Looter",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "conditional"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -7252,6 +7661,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Slavering Branchsnapper",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sleep-Cursed Faerie",
       "type": "creature",
       "keywords": ["flying"],
@@ -7301,6 +7718,14 @@
       "type": "creature",
       "keywords": ["vigilance"],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Soaring Sandwing",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["gainLife"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -7669,6 +8094,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Stockman, Mad Fly-entist",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["draw", "discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stolen Stark Tech",
       "type": "artifact",
       "keywords": ["flash"],
@@ -7714,6 +8147,14 @@
       "keywords": ["flying", "haste"],
       "opcodes": ["modify"],
       "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Stratosoarer",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["modify"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -8009,6 +8450,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Taurean Mauler",
+      "type": "creature",
+      "keywords": ["changeling"],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "cast",
+          "controller": "opponent"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Taxi Driver",
       "type": "creature",
       "keywords": [],
@@ -8233,6 +8687,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Think Twice",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Thinking Cap",
       "type": "artifact",
       "keywords": [],
@@ -8426,6 +8888,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Tome Blast",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Tome Scour",
       "type": "sorcery",
       "keywords": [],
@@ -8437,6 +8907,14 @@
       "name": "Tonberry",
       "type": "creature",
       "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Topiary Panther",
+      "type": "creature",
+      "keywords": ["trample"],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -8570,6 +9048,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Trygon Predator",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["destroy"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Turtle Power!",
       "type": "enchantment",
       "keywords": ["flash"],
@@ -8623,6 +9114,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ultimecia, Temporal Threat",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tapAll", "draw"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "controller": "you",
+          "filter": {
+            "type": "creature"
+          }
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Unauthorized Exit",
       "type": "instant",
       "keywords": [],
@@ -8647,6 +9154,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Undercover Crocodelf",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Underground Mortuary",
       "type": "land",
       "keywords": [],
@@ -8659,6 +9179,14 @@
       "type": "creature",
       "keywords": ["vigilance"],
       "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Undulating Witness",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -8978,6 +9506,14 @@
       "keywords": [],
       "opcodes": ["loseLife", "destroyAll"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Vinelasher Adept",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": ["counterOn"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -9512,6 +10048,7 @@
     "Inkling Token",
     "Insect Token",
     "Knight Token",
+    "Koma's Coil",
     "Mutant Token",
     "Rabbit Token",
     "Soldier Token",

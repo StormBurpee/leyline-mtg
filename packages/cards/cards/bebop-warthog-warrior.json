@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "39c813e1-0e26-440a-b9bd-e781f7576b8b",
+  "name": "Bebop, Warthog Warrior",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Boar", "Mutant", "Warrior"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)\nRhinos you control have menace.\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "anthem",
+      "power": 0,
+      "toughness": 0,
+      "where": {
+        "all": [
+          {
+            "subtype": "Rhino"
+          },
+          {
+            "controller": "you"
+          }
+        ]
+      },
+      "keywords": ["menace"]
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Swamp"
+    }
+  ]
+}

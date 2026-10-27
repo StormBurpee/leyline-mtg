@@ -75,6 +75,7 @@ export interface EventSpec {
     | 'step'
     | 'attackGroup'
     | 'noncombatDamageToPlayer'
+    | 'combatDamagePlayer'
     | 'lifeGain'
     | 'faceUp';
   step?: 'upkeep' | 'beginCombat' | 'end' | 'main1' | 'main2';
@@ -106,6 +107,7 @@ export interface TargetGroup {
 export type TargetPlan = Record<string, Target[]>;
 export type Effect = EffectInstruction & { targetGroup?: string };
 type EffectInstruction =
+  | { op: 'drawEventAmount' }
   | { op: 'conditional'; condition: StateCondition; then: Effect[]; else?: Effect[] }
   | { op: 'stunOn'; amount: NumericValue; subject?: 'source' | 'attached' }
   | { op: 'fight' | 'bite'; sourceGroup: string; victimGroup: string }
@@ -227,6 +229,8 @@ export interface CardDefinition {
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
   readonly cycling?: ManaCost;
+  readonly cyclingType?: string;
+  readonly flashback?: ManaCost;
   readonly kicker?: { cost: ManaCost; effects: readonly Effect[] };
   readonly offspring?: ManaCost;
   readonly disguise?: ManaCost;
@@ -330,6 +334,7 @@ export interface GameObject {
   token: boolean;
   attachedTo: ObjectTarget | null;
   faceDown?: boolean;
+  flashbackPaid?: boolean;
   definitionOverride?: CardDefinition;
   chosenCreatureType?: string;
   abilityUses?: Record<number, string>;
@@ -366,12 +371,15 @@ export interface StackEntry {
   source: ObjectTarget | null;
   sourceDefinition?: CardDefinition;
   rule?: 'increaseSpeed';
+  flashbackPaid?: boolean;
   kicked?: boolean;
   offspringPaid?: boolean;
   uncounterable?: boolean;
   condition?: StateCondition;
   sourceKeywords: string[];
   sourceController?: PlayerId;
+  eventAmount?: number;
+  damagedPlayer?: PlayerId;
   sourceAttachment?: ObjectTarget | null;
   effects: (Effect | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } })[];
   targetGroups?: TargetGroup[];

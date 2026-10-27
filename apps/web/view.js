@@ -97,7 +97,7 @@ const fallback = (name, d = CARDS[name]) =>
 export function handCard(s, id, meta, ui, playable, index = 0) {
   const o = s.objects[id],
     d = definition(s, o);
-  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="hand" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${playable ? ', playable' : ''}" aria-description="${escape(d.text)}" title="${escape(o.name)}">${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
+  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="${o.zone}" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${o.zone === 'graveyard' ? ', flashback from graveyard' : ''}${playable ? ', playable' : ''}" aria-description="${escape(d.text)}" title="${escape(o.name)}">${o.zone === 'graveyard' ? '<span class="flashback-label">Flashback · graveyard</span>' : ''}${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
 }
 function permanent(s, o, meta, ui, targetable) {
   if (o.faceDown) o = { ...o, name: 'Face-down creature' };
@@ -374,7 +374,7 @@ function actionDock(s, ui, p, actions) {
             ? 'Playing a land does not use the stack.'
             : 'Available mana sources will be tapped automatically.'
       : 'Not playable right now. Check timing, available mana and targets.';
-    buttons = `${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">Cycle ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${d.type === 'land' ? 'Play land' : castingChoices(d) ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
+    buttons = `${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">${d.cyclingType ? `${escape(d.cyclingType)}cycling` : 'Cycle'} ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${o.zone === 'graveyard' ? `Flashback ${mana(d.flashback)}` : d.type === 'land' ? 'Play land' : castingChoices(d) ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
   } else
     buttons = `<button class="btn primary advance-button" data-action="pass">${advanceLabel(s, p)} <span>→</span><small>Space</small></button>`;
   if (c && c.player === p && CARD_DECISIONS.has(c.kind))

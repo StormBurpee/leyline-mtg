@@ -1,0 +1,150 @@
+{
+  "asOf": "2026-10-27T07:27:00Z",
+  "engineBaseline": "0.38.0",
+  "sourceCommit": "d8d468fd7b3d42c1c24db0f0775c1e21c10f27e8",
+  "inventoryAsOf": "2026-10-26",
+  "methodology": "First-pass structural and named-mechanic tagging. Not a complete per-card dependency graph. Feature counts overlap. Probe candidates had only an exact standalone keyword line removed in an audit copy; the rest passed strict authoring, schema and native compilation. This is a conservative implementation lead, not a rules-tested or shipped card.",
+  "total": 5164,
+  "implemented": 879,
+  "missing": 4285,
+  "layouts": {
+    "transform": 77,
+    "normal": 3944,
+    "prepare": 57,
+    "adventure": 88,
+    "saga": 52,
+    "class": 14,
+    "split": 28,
+    "modal_dfc": 10,
+    "case": 12,
+    "meld": 3
+  },
+  "planeswalkers": 29,
+  "features": {
+    "Vehicles / crew": 76,
+    "Flashback": 45,
+    "Plot": 37,
+    "Warp": 32,
+    "Saddle": 30,
+    "Station": 27,
+    "Convoke": 19,
+    "Changeling": 19,
+    "Craft": 19,
+    "Discover": 22,
+    "Explore": 26,
+    "Connive": 18,
+    "Manifest / cloak": 30,
+    "Gift": 23,
+    "Bargain": 20,
+    "Collect evidence": 20,
+    "Spree": 21,
+    "Exhaust": 35,
+    "Land / typecycling": 39,
+    "Mobilize": 12,
+    "Renew / harmonize": 22,
+    "Earth / water / fire / air bending": 80,
+    "X mana costs": 78
+  },
+  "exclusive": {
+    "structural": 369,
+    "named_mechanic": 896,
+    "other": 3020
+  },
+  "probeCandidates": {
+    "Crew": [
+      "Air Response Unit",
+      "Clamorous Ironclad",
+      "Cultivator's Caravan",
+      "Dependable Quinjet",
+      "Skybox Ferry"
+    ],
+    "Land/typecycling": [
+      "Apex Witchstalker",
+      "Balamb T-Rexaur",
+      "Bebop, Warthog Warrior",
+      "Bedhead Beastie",
+      "Canyon Crawler",
+      "Cloudbound Moogle",
+      "Daggermaw Megalodon",
+      "Hill Gigas",
+      "Ice Flan",
+      "Jennika, Bad Apple Big Sister",
+      "Kree Sentinel",
+      "Marauding Brinefang",
+      "Rampaging Spiketail",
+      "Saber-Tooth Moose-Lion",
+      "Savage Land Dinosaur",
+      "Shepherding Spirits",
+      "Slavering Branchsnapper",
+      "Soaring Sandwing",
+      "Stockman, Mad Fly-entist",
+      "Stratosoarer",
+      "Topiary Panther",
+      "Undulating Witness",
+      "Vinelasher Adept"
+    ],
+    "Flashback": [
+      "Auron's Inspiration",
+      "Dig Site Inventory",
+      "Dreams of Laguna",
+      "Think Twice",
+      "Tome Blast"
+    ],
+    "Plot": [
+      "Beastbond Outcaster",
+      "Djinn of Fool's Fall",
+      "Slickshot Show-Off",
+      "Spinewoods Paladin",
+      "Stingerback Terror"
+    ],
+    "Warp": [
+      "Bygone Colossus",
+      "Germinating Wurm",
+      "Knight Luminary",
+      "Mechanozoa",
+      "Red Tiger Mechan",
+      "Sinister Cryologist",
+      "Starbreach Whale"
+    ],
+    "Changeling": [
+      "Chitinous Graspling",
+      "Chomping Changeling",
+      "Gangly Stompling",
+      "Graveshifter",
+      "Mischievous Sneakling",
+      "Prideful Feastling"
+    ],
+    "Mobilize": [
+      "Dalkovan Packbeasts",
+      "Dragonback Lancer",
+      "Nightblade Brigade",
+      "Shock Brigade",
+      "Zurgo's Vanguard"
+    ],
+    "Convoke": [
+      "Merrow Skyswimmer",
+      "Sun-Dappled Celebrant",
+      "The Wandering Rescuer",
+      "Unexpected Assistance",
+      "Vote Out",
+      "Winter, Team Player"
+    ]
+  },
+  "ruleFamilyTextCohorts": {
+    "variable_amounts": 899,
+    "turn_history_frequency": 686,
+    "sacrifice_text": 630,
+    "library_selection": 626,
+    "linked_delayed_zones": 449,
+    "control_type_ability_changes": 328,
+    "copying": 220,
+    "combat_damage_triggers": 129
+  },
+  "cautions": [
+    "Rule-family cohorts are text matches, not proven independent blockers.",
+    "Existing engine support covers basic forms of several listed families.",
+    "Structural counts overlap by one planeswalker.",
+    "A zero or absent probe result does not prove no cards can be unlocked.",
+    "Forge importer diagnostics are not a current native-engine capability matrix."
+  ]
+}

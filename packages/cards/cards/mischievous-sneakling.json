@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fe7a4361-561a-4bab-921e-d01bab19dad3",
+  "name": "Mischievous Sneakling",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Shapeshifter"],
+    "colors": ["B", "U"],
+    "manaCost": "{1}{U/B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Changeling (This card is every creature type.)\nFlash",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "changeling"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    }
+  ]
+}

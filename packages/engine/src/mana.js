@@ -1,3 +1,4 @@
+import { hasSubtype } from './creature-types.js';
 import { meetsCondition } from './conditions.js';
 import { COLORS, controlled, definition, isSick, requireRule, emit, move } from './model.js';
 export function manaRestriction(s, o, color) {
@@ -18,8 +19,7 @@ export function manaEligible(unit, purpose) {
       purpose.type === 'cast' &&
       purpose.card?.type === 'creature' &&
       (unit.restriction === 'creature' ||
-        (unit.restriction === 'chosenCreatureType' &&
-          purpose.card.subtypes?.includes(unit.creatureType))))
+        (unit.restriction === 'chosenCreatureType' && hasSubtype(purpose.card, unit.creatureType))))
   );
 }
 export function manaOptions(s, o) {

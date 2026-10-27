@@ -1,3 +1,4 @@
+import { subtypesOf } from './creature-types.js';
 import { predictedEffects } from './conditional-effects.js';
 import { flattenTargets, targetPlans } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
@@ -226,7 +227,7 @@ export function chooseBotCommand(s, p) {
         const counts = new Map();
         for (const o of Object.values(s.objects))
           if (o.owner === p && o.name)
-            for (const type of definition(s, o).subtypes ?? [])
+            for (const type of subtypesOf(definition(s, o)))
               if (c.types.includes(type)) counts.set(type, (counts.get(type) ?? 0) + 1);
         return {
           type: 'chooseCreatureType',
@@ -262,7 +263,7 @@ export function chooseBotCommand(s, p) {
           player: p,
           accept:
             acceptLifePayoff(s, entry) ??
-            !resolutionRisk(s, p, entry.effects, entry.target, 0, entry.source),
+            !resolutionRisk(s, p, entry.effects, entry.target, 0, entry.source, entry.eventAmount),
         };
       }
       case 'payCost':
@@ -291,7 +292,7 @@ export function chooseBotCommand(s, p) {
         let ordered = chooseLibraryOrder(s, p, rest);
         if (c.action === 'surveil') {
           const entry = s.resolving.entry;
-          const remaining = entry.effects.slice(s.resolving.index);
+          const remaining = predictedEffects(s, entry.effects.slice(s.resolving.index), entry);
           const draws = drawsFor(remaining, entry.controller, entry.target, p);
           rest = ordered.rest.slice(0, Math.max(0, libraryCount(s, p) - draws));
           ordered = {
@@ -381,6 +382,20 @@ export function chooseBotCommand(s, p) {
   if (faceUp) return { ...faceUp, player: p };
   const lethal = actions.find((action) => directLethal(s, p, action));
   if (lethal) return { ...lethal, player: p };
+  const landCycling = actions.find(
+    (a) =>
+      a.type === 'cycle' &&
+      ['Basic land', 'Plains', 'Island', 'Swamp', 'Mountain', 'Forest', 'Land'].includes(
+        definition(s, s.objects[a.card]).cyclingType,
+      ) &&
+      !actions.some((cast) => cast.type === 'cast' && cast.card === a.card),
+  );
+  if (
+    landCycling &&
+    controlled(s, p).filter((o) => definition(s, o).mana).length < 5 &&
+    !s.players[p].hand.some((id) => definition(s, s.objects[id]).type === 'land')
+  )
+    return { ...landCycling, player: p };
   const land = chooseLandAction(s, p, actions);
   if (land) {
     const landCard = definition(s, s.objects[land.card]);

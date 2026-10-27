@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "34fd461b-a913-4a60-9477-ce2bd5c6fc5a",
+  "name": "Fear of Failed Tests",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "supertypes": [],
+    "subtypes": ["Nightmare"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 2,
+    "toughness": 7
+  },
+  "rulesText": "Whenever this creature deals combat damage to a player, draw that many cards.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "combatDamagePlayer",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "drawEventAmount"
+        }
+      ]
+    }
+  ]
+}

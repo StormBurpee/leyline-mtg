@@ -60,7 +60,13 @@ export function castingProfile(
   target = null,
   card = definition(state, object),
 ) {
-  const profile = spellProfile(card, mode);
+  const base = spellProfile(card, mode);
+  const profile =
+    object.zone === 'graveyard'
+      ? base?.flashback
+        ? { ...base, cost: { ...base.flashback }, flashbackPaid: true }
+        : null
+      : base;
   if (!profile) return null;
   const intrinsic = (profile.costModifiers ?? []).filter((m) => m.scope === 'self');
   const sources = battlefield(state)

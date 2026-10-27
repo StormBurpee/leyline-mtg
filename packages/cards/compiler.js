@@ -133,6 +133,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'damage',
           'damageEventOpponent',
           'damageEventPowerOpponent',
+          'drawEventAmount',
           'addMana',
           'impulseChoose',
           'bindingNegotiation',
@@ -180,6 +181,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         damageOpponent: ['amount'],
         damageEventOpponent: ['amount'],
         damageEventPowerOpponent: [],
+        drawEventAmount: [],
         addMana: ['mana'],
         impulseChoose: ['amount'],
         bindingNegotiation: [],
@@ -527,6 +529,12 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           effects: effects(a.effects, `${path}.effects`),
         };
         break;
+      case 'flashback':
+        fields(a, ['kind', 'cost'], path);
+        if (d.flashback)
+          problem('DUPLICATE_FLASHBACK', path, 'Only one flashback ability is supported.');
+        d.flashback = mana(a.cost, `${path}.cost`);
+        break;
       case 'disguise':
         fields(a, ['kind', 'cost'], path);
         d.disguise = mana(a.cost, `${path}.cost`);
@@ -574,7 +582,8 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         else d[a.restriction] = true;
         break;
       case 'cycling':
-        fields(a, ['kind', 'cost'], path);
+        fields(a, ['kind', 'cost', 'type'], path);
+        if (a.type !== undefined) d.cyclingType = a.type;
         if (d.cycling) problem('DUPLICATE_CYCLING', path, 'Only one cycling ability is supported.');
         d.cycling = mana(a.cost, `${path}.cost`);
         break;

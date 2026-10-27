@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dc638413-c4f8-4f6a-a003-5ce8a10a8f94",
+  "name": "Daggermaw Megalodon",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Shark"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}{U}",
+    "power": 5,
+    "toughness": 7
+  },
+  "rulesText": "Vigilance\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Island"
+    }
+  ]
+}

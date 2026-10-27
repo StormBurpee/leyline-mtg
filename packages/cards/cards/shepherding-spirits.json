@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e8ff3e99-eca9-44a5-baac-99ee34df3c36",
+  "name": "Shepherding Spirits",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}{W}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Flying\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Plains"
+    }
+  ]
+}

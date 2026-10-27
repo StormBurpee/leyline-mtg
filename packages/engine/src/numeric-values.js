@@ -70,6 +70,8 @@ export function numericValue(state, value, { controller, source = null, excluded
   return result;
 }
 export function effectValues(state, effect, entry) {
+  if (effect.op === 'drawEventAmount')
+    return { op: 'draw', count: Math.max(0, entry.eventAmount ?? 0) };
   const context = { controller: entry.controller, source: entry.source };
   let result = effect;
   for (const key of ['amount', 'count', 'power', 'toughness'])

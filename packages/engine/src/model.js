@@ -6,7 +6,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.38.0';
+export const VERSION = '0.39.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -38,6 +38,7 @@ export function playableZone(s, o, p) {
   return (
     !!o &&
     ((o.zone === 'hand' && o.owner === p) ||
+      (o.zone === 'graveyard' && o.owner === p && !!definition(s, o).flashback) ||
       (o.zone === 'exile' &&
         o.playPermission?.player === p &&
         o.playPermission.turn === s.turn &&
@@ -48,7 +49,7 @@ export function playableCards(s, p) {
   return [
     ...s.players[p].hand,
     ...Object.values(s.objects)
-      .filter((o) => o.zone === 'exile' && playableZone(s, o, p))
+      .filter((o) => ['exile', 'graveyard'].includes(o.zone) && playableZone(s, o, p))
       .map((o) => o.id),
   ];
 }
@@ -392,6 +393,10 @@ export function notifyTriggers(s, event, payload, context = null) {
           sourceKeywords,
         );
         const queued = s.pendingTriggers.at(-1);
+        if (event === 'combatDamagePlayer') {
+          queued.eventAmount = payload.amount;
+          queued.damagedPlayer = payload.damagedPlayer;
+        }
         if (trigger.targetGroups) queued.targetGroups = structuredClone(trigger.targetGroups);
         if (trigger.condition) queued.condition = structuredClone(trigger.condition);
         if (object)
@@ -451,6 +456,9 @@ export function untapObject(s, object) {
 }
 export function move(s, o, to, departureContext = null) {
   const from = o.zone;
+  // CR 702.34a: replace every departure, not just successful resolution.
+  if (from === 'stack' && to !== 'stack' && o.flashbackPaid) to = 'exile';
+  if (to !== 'stack') delete o.flashbackPaid;
   const dying =
     from === 'battlefield' && to === 'graveyard' && hasType(definition(s, o), 'creature');
   const context = dying ? (departureContext ?? captureDepartureContext(s)) : null;

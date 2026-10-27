@@ -505,3 +505,62 @@ test('optional trigger groups auto-open and preserve an empty choice through Rea
     h.cleanup();
   }
 });
+
+test('landcycling hand action cancels safely; search survives Read, Back, dismissal, and resume', async () => {
+  const catalog = { ...CARDS, 'Bedhead Beastie': { ...CARDS['Bedhead Beastie'], cycling: {} } };
+  let state;
+  for (let seed = 1; seed < 100; seed++) {
+    state = createGame({
+      seed,
+      mulligan: false,
+      catalog,
+      decks: [
+        [...Array(4).fill('Bedhead Beastie'), ...Array(56).fill('Mountain')],
+        Array(60).fill('Forest'),
+      ],
+    });
+    if (state.players[0].hand.some((id) => state.objects[id].name === 'Bedhead Beastie')) break;
+  }
+  while (state.step !== 'main1') state = act(state, 'pass');
+  const id = state.players[0].hand.find((id) => state.objects[id].name === 'Bedhead Beastie');
+  let h = await mount(exportReplay(state));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${id}"]`);
+    assert.match(
+      h.document.querySelector('[data-action="cycleSelected"]').textContent,
+      /Mountaincycling/,
+    );
+    h.click('[data-action="cancelSelection"]');
+    assert.equal(h.document.querySelector('[data-action="cycleSelected"]'), null);
+    h.click(`[data-card="${id}"]`);
+    h.click('[data-action="cycleSelected"]');
+    assert.equal(h.document.querySelector('[data-action="cycleSelected"]'), null);
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).type, 'cycle');
+  } finally {
+    h.cleanup();
+  }
+  state = act(state, 'cycle', { card: id });
+  state = act(state, 'pass');
+  state = act(state, 'pass');
+  assert.equal(state.choice.kind, 'librarySearch');
+  h = await mount(exportReplay(state));
+  try {
+    h.click('[data-action="resume"]');
+    h.click('#dialog [data-action="searchAdd"]:not(:disabled)');
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.ok(h.dialog.querySelector('[data-action="searchRemove"]'));
+    h.dialog.close();
+    h.click('[data-action="reviewDecision"]');
+    assert.ok(h.dialog.querySelector('[data-action="searchRemove"]'));
+    h.click('#dialog [data-action="confirmSearch"]');
+    assert.equal(h.dialog.open, false);
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).type, 'searchLibrary');
+    assert.equal(saved.replay.commands.at(-1).cards.length, 1);
+  } finally {
+    h.cleanup();
+  }
+});

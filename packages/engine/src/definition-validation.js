@@ -14,6 +14,8 @@ const TYPES = new Set(CARD_TYPES);
 const COLORS = new Set(['W', 'U', 'B', 'R', 'G']);
 const MANA = new Set([...COLORS, 'C', 'generic', ...HYBRID_SYMBOLS]);
 const KEYWORDS = new Set(KEYWORD_NAMES);
+// Dynamic CDA grants require type-layer/dependency handling, not just layer-6 keywords.
+const GRANTED_KEYWORDS = new Set(KEYWORD_NAMES.filter((keyword) => keyword !== 'changeling'));
 const FIELDS = new Set([
   'name',
   'type',
@@ -44,6 +46,8 @@ const FIELDS = new Set([
   'effects',
   'modes',
   'cycling',
+  'cyclingType',
+  'flashback',
   'kicker',
   'offspring',
   'disguise',
@@ -200,6 +204,7 @@ function validateEffects(
       damageOpponent: ['amount'],
       damageEventOpponent: ['amount'],
       damageEventPowerOpponent: [],
+      drawEventAmount: [],
       addMana: ['mana'],
       impulseChoose: ['count'],
       bindingNegotiation: [],
@@ -312,7 +317,8 @@ function validateEffects(
     if (e.op === 'token') {
       if (
         e.temporaryKeywords !== undefined &&
-        (!Array.isArray(e.temporaryKeywords) || e.temporaryKeywords.some((k) => !KEYWORDS.has(k)))
+        (!Array.isArray(e.temporaryKeywords) ||
+          e.temporaryKeywords.some((k) => !GRANTED_KEYWORDS.has(k)))
       )
         errors.push(`${p}.temporaryKeywords: unsupported keyword.`);
       if (
@@ -372,7 +378,7 @@ function validateEffects(
         );
       if (
         e.keywords !== undefined &&
-        (!Array.isArray(e.keywords) || e.keywords.some((k) => !KEYWORDS.has(k)))
+        (!Array.isArray(e.keywords) || e.keywords.some((k) => !GRANTED_KEYWORDS.has(k)))
       )
         errors.push(`${p}.keywords: unsupported keyword.`);
     }
@@ -458,6 +464,13 @@ export function validateDefinition(card) {
       if (card[field] !== undefined)
         errors.push(`${name}.${field}: only battlefield permanents support this field.`);
   if (card.cycling !== undefined) validateCost(card.cycling, `${name}.cycling`, errors);
+  if (
+    card.cyclingType !== undefined &&
+    (!card.cycling ||
+      typeof card.cyclingType !== 'string' ||
+      !/^[A-Za-z][A-Za-z -]{0,79}$/.test(card.cyclingType))
+  )
+    errors.push(`${name}.cyclingType: expected a type name and a cycling cost.`);
   validateCost(card.cost, `${name}.cost`, errors);
   if (card.ward !== undefined) validatePaymentCost(card.ward, `${name}.ward`, errors);
   if (card.text !== undefined && typeof card.text !== 'string')
@@ -483,9 +496,21 @@ export function validateDefinition(card) {
     errors.push(`${name}.startEngines: expected boolean.`);
   if (
     card.maxSpeedKeywords !== undefined &&
-    (!Array.isArray(card.maxSpeedKeywords) || card.maxSpeedKeywords.some((k) => !KEYWORDS.has(k)))
+    (!Array.isArray(card.maxSpeedKeywords) ||
+      card.maxSpeedKeywords.some((k) => !GRANTED_KEYWORDS.has(k)))
   )
     errors.push(`${name}.maxSpeedKeywords: unsupported keywords.`);
+  if (card.flashback !== undefined) {
+    validateCost(card.flashback, `${name}.flashback`, errors);
+    if (
+      !['instant', 'sorcery'].includes(card.type) ||
+      card.modes ||
+      card.kicker ||
+      card.offspring ||
+      card.disguise
+    )
+      errors.push(`${name}.flashback: requires a fixed-cost nonmodal instant or sorcery.`);
+  }
   if (card.disguise !== undefined) {
     validateCost(card.disguise, `${name}.disguise`, errors);
     if (card.type !== 'creature' || card.modes || card.kicker || card.offspring)
@@ -661,7 +686,8 @@ export function validateDefinition(card) {
           !validNumericValue(bonus.power) ||
           !validNumericValue(bonus.toughness) ||
           (bonus.keywords !== undefined &&
-            (!Array.isArray(bonus.keywords) || bonus.keywords.some((k) => !KEYWORDS.has(k))))
+            (!Array.isArray(bonus.keywords) ||
+              bonus.keywords.some((k) => !GRANTED_KEYWORDS.has(k))))
         )
           errors.push(`${name}.conditionalBonuses: unsupported bonus.`);
         errors.push(
@@ -696,7 +722,7 @@ export function validateDefinition(card) {
       !validNumericValue(b.toughness) ||
       Object.keys(b).some((k) => !['power', 'toughness', 'keywords', 'noUntap'].includes(k)) ||
       (b.keywords !== undefined &&
-        (!Array.isArray(b.keywords) || b.keywords.some((k) => !KEYWORDS.has(k)))) ||
+        (!Array.isArray(b.keywords) || b.keywords.some((k) => !GRANTED_KEYWORDS.has(k)))) ||
       (!card.subtypes?.includes('Equipment') && !card.aura)
     )
       errors.push(`${name}.attachmentBonus: expected a supported Equipment or Aura bonus.`);
@@ -755,7 +781,7 @@ export function validateDefinition(card) {
       errors.push(`${name}.static.excludeSource: expected boolean.`);
     if (
       e.keywords !== undefined &&
-      (!Array.isArray(e.keywords) || e.keywords.some((k) => !KEYWORDS.has(k)))
+      (!Array.isArray(e.keywords) || e.keywords.some((k) => !GRANTED_KEYWORDS.has(k)))
     )
       errors.push(`${name}.static.keywords: unsupported keyword.`);
   }
