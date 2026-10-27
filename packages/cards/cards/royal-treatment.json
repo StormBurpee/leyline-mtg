@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fd0f8fdc-4065-41f4-b8fb-ecb8f185774d",
+  "name": "Royal Treatment",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{G}"
+  },
+  "rulesText": "Target creature you control gains hexproof until end of turn. Create a Royal Role token attached to that creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has ward {1}.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["hexproof"]
+        },
+        {
+          "op": "createAttachedToken",
+          "token": "leyline:token/royal-role",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

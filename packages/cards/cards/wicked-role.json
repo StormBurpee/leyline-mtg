@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/wicked-role",
+  "name": "Wicked",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura", "Role"],
+    "colors": [],
+    "manaCost": null,
+    "token": true
+  },
+  "rulesText": "Enchant creature\nEnchanted creature gets +1/+1.\nWhen this Aura is put into a graveyard from the battlefield, each opponent loses 1 life.",
+  "abilities": [
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 1
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "battlefieldToGraveyard",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

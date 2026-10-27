@@ -1,0 +1,81 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "00807825-88e5-4b88-8527-a49f553a91be",
+  "name": "Witch's Mark",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "You may discard a card. If you do, draw two cards.\nCreate a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Discard a card and draw two cards",
+              "condition": {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "hand",
+                  "player": "you"
+                },
+                "operator": "gt",
+                "right": 0
+              },
+              "effects": [
+                {
+                  "op": "discard",
+                  "target": "controller",
+                  "amount": 1
+                },
+                {
+                  "op": "draw",
+                  "target": "controller",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "label": "Do not discard",
+              "effects": []
+            }
+          ]
+        },
+        {
+          "op": "createAttachedToken",
+          "token": "leyline:token/wicked-role",
+          "target": "target",
+          "targetGroup": "recipient"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "recipient",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

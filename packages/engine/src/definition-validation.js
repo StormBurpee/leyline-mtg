@@ -94,6 +94,7 @@ const FIELDS = new Set([
   'etb',
   'aura',
   'attachmentBonus',
+  'attachmentTriggers',
   'baseStats',
   'selfBonus',
   'conditionalBonuses',
@@ -326,6 +327,7 @@ function validateEffects(
           'counterAbility',
           'keywordCounters',
           'fightAttached',
+          'attachedToken',
         ].includes(e.op) ||
         e.subject !== undefined ||
         (['counter', 'copyToken', 'delayedBlink', 'damageTargetController'].includes(e.op) &&
@@ -404,7 +406,14 @@ function validateEffects(
       loseLife: ['amount', 'player'],
       exileUntilSourceLeaves: [],
       delayedBlink: ['controller'],
-      moveTarget: ['destination', 'controller', 'tapped', 'subject', 'trackSource'],
+      moveTarget: [
+        'destination',
+        'controller',
+        'tapped',
+        'subject',
+        'trackSource',
+        'attachedToken',
+      ],
       draw: ['count', 'player'],
       mill: ['count', 'player'],
       lookChooseHand: [
@@ -464,6 +473,8 @@ function validateEffects(
       modify: ['subject', 'power', 'toughness', 'keywords'],
       combatRestriction: ['subject', 'restriction'],
       token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords', 'countFrom'],
+      attachedToken: ['definition', 'subject'],
+      grantDeathReturn: ['attachedToken', 'tapped'],
       mobilize: ['definition', 'count'],
       empowerJace: ['definition', 'count'],
       copyToken: ['subject', 'count', 'exceptions'],
@@ -625,6 +636,22 @@ function validateEffects(
     if (e.op === 'fightAttached' && !effectTargetCompatible('attachEquipment', target))
       errors.push(`${p}: fightAttached requires a creature target.`);
     if (e.op === 'moveTarget') {
+      if (
+        e.attachedToken !== undefined &&
+        (typeof e.attachedToken !== 'string' ||
+          !e.attachedToken.length ||
+          e.destination !== 'battlefield' ||
+          e.subject !== undefined ||
+          e.targetGroup !== undefined ||
+          targetSpec(target)?.scope !== 'graveyard' ||
+          !effectTargetCompatible('attachEquipment', {
+            scope: 'permanent',
+            where: targetSpec(target)?.where,
+          }))
+      )
+        errors.push(
+          `${p}.attachedToken: requires one targeted graveyard creature returned to the battlefield.`,
+        );
       if (
         e.trackSource !== undefined &&
         (typeof e.trackSource !== 'boolean' || e.destination !== 'exile')
@@ -831,6 +858,23 @@ function validateEffects(
         e.subtypes.some((t) => !CREATURE_TYPES.includes(t))
       )
         errors.push(`${p}: invalid animation creature subtypes.`);
+    }
+    if (
+      e.op === 'grantDeathReturn' &&
+      (typeof e.attachedToken !== 'string' ||
+        !e.attachedToken.length ||
+        (e.tapped !== undefined && typeof e.tapped !== 'boolean') ||
+        !effectTargetCompatible('attachEquipment', target))
+    )
+      errors.push(`${p}: death-return grants require an Aura token name and creature target.`);
+    if (e.op === 'attachedToken') {
+      if (
+        typeof e.definition !== 'string' ||
+        !e.definition.length ||
+        (e.subject !== undefined && !['source', 'eventSource'].includes(e.subject)) ||
+        (e.subject === undefined && !effectTargetCompatible('attachEquipment', target))
+      )
+        errors.push(`${p}: attached token requires a token name and exact creature binding.`);
     }
     if (e.op === 'combatRestriction') {
       if (!['cannotBlock', 'cannotBeBlocked'].includes(e.restriction))
@@ -1743,8 +1787,43 @@ export function validateDefinition(card) {
       )
         errors.push(`${name}.${field}: expected supported creature stat values.`);
     }
+  if (card.attachmentTriggers !== undefined) {
+    const grants = card.attachmentTriggers;
+    if (
+      (!card.aura && !card.subtypes?.includes('Equipment')) ||
+      !Array.isArray(grants) ||
+      grants.length > 8
+    )
+      errors.push(
+        `${name}.attachmentTriggers: expected at most eight attached-creature attack triggers.`,
+      );
+    else {
+      for (const trigger of grants)
+        if (
+          !plain(trigger) ||
+          Object.keys(trigger).some((k) => !['event', 'effects', 'condition'].includes(k)) ||
+          eventSpec(trigger.event)?.event !== 'attack' ||
+          eventSpec(trigger.event)?.object !== 'source'
+        )
+          errors.push(
+            `${name}.attachmentTriggers: only source attack triggers without once-per-turn tracking are supported.`,
+          );
+      const { attachmentTriggers, ...base } = card;
+      errors.push(...validateDefinition({ ...base, triggers: grants }));
+    }
+  }
   if (card.attachmentBonus !== undefined) {
     const b = card.attachmentBonus;
+    if (b?.ward !== undefined) validatePaymentCost(b.ward, `${name}.attachmentBonus.ward`, errors);
+    if (
+      b?.baseStats !== undefined &&
+      (!plain(b.baseStats) ||
+        Object.keys(b.baseStats).some((k) => !['power', 'toughness'].includes(k)) ||
+        !['power', 'toughness'].every(
+          (k) => Number.isSafeInteger(b.baseStats[k]) && Math.abs(b.baseStats[k]) <= 1000,
+        ))
+    )
+      errors.push(`${name}.attachmentBonus.baseStats: expected bounded base statistics.`);
     if (
       b?.maxBlockers !== undefined &&
       (!Number.isInteger(b.maxBlockers) || b.maxBlockers < 1 || b.maxBlockers > 16)
@@ -1757,7 +1836,16 @@ export function validateDefinition(card) {
       !validNumericValue(b.power) ||
       !validNumericValue(b.toughness) ||
       Object.keys(b).some(
-        (k) => !['power', 'toughness', 'keywords', 'noUntap', 'maxBlockers'].includes(k),
+        (k) =>
+          ![
+            'power',
+            'toughness',
+            'keywords',
+            'noUntap',
+            'maxBlockers',
+            'baseStats',
+            'ward',
+          ].includes(k),
       ) ||
       (b.keywords !== undefined &&
         (!Array.isArray(b.keywords) || b.keywords.some((k) => !GRANTED_KEYWORDS.has(k)))) ||

@@ -1,0 +1,14 @@
+{
+  "source": "Scryfall Oracle inventory reviewed 2026-10-27; official WOE release notes and CR 400.7/303.4i for attachment lifecycle",
+  "reviewedAt": "2026-10-27",
+  "cards": [
+    {
+      "name": "Return Triumphant",
+      "oracle_id": "a4814615-ffa2-4692-86bc-3a1b7fc2acc8",
+      "oracle_text": "Return target creature card with mana value 3 or less from your graveyard to the battlefield. Create a Young Hero Role token attached to it. (Enchanted creature has \"Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.\" If you put another Role on the creature later, put this one into the graveyard.)",
+      "mana_cost": "{1}{W}",
+      "colors": ["W"],
+      "type_line": "Sorcery"
+    }
+  ]
+}

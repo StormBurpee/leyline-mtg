@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.56.0 — Role Auras and creature-owned attachment abilities
+
+- Add 22 complete Standard cards and six exact Role Aura tokens. Catalog: 2347 playable cards and 103 tokens; dated Standard coverage: 2129 of 5164.
+- Create Roles attached to exact legal creature incarnations, with per-controller newest-Role state-based actions and explicit tied-timestamp decisions. Preserve simultaneous departure facts and Wicked triggers.
+- Apply Cursed base statistics in their proper layer, grant additive Royal ward abilities, and make Sorcerer, Young Hero and Hunter’s Axe attack abilities belong to the enchanted/equipped creature. Respect current control, ability removal, timestamps and noncopyable grants.
+- Bind Return Triumphant to the actual returned object and Not Dead After All to a temporary creature-owned death trigger, including ownership/control splits, entry choices, stale objects and duplicate-return prevention.
+- Keep recursive effect-choice and attachment-grant validation together; reject generic Aura-token creation that lacks an explicit attachment contract. Preserve saved-catalog caching, activated-cost UI, all eight exact meta decks and deterministic replays.
+- Provide readable Role fallback faces instead of ambiguous combined token artwork. DOM lifecycle checks are not browser/layout verification; managed preview remains unavailable.
+
 ## 0.55.0 — Resolution choices, Delirium, Exhaust and Discover
 
 - Add 40 complete Standard cards: eight resolution-choice cards, nine Delirium cards, twelve non-mana Exhaust cards and eleven Discover cards. Catalog: 2325 playable cards and 97 tokens; dated Standard coverage: 2107 of 5164.

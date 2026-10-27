@@ -414,8 +414,10 @@ function actionDock(s, ui, p, actions) {
       case 'legendRule':
         title = `Choose one ${c.name} to keep`;
         desc =
-          'The legend rule applies before anyone gets priority. Review the copies and choose which stays.';
-        buttons = '<button class="btn primary" data-action="legendRule">Choose a copy →</button>';
+          c.rule === 'role'
+            ? 'These Roles have the same newest timestamp. Choose which stays before anyone gets priority.'
+            : 'The legend rule applies before anyone gets priority. Review the copies and choose which stays.';
+        buttons = `<button class="btn primary" data-action="legendRule">${c.rule === 'role' ? 'Choose a Role' : 'Choose a copy'} →</button>`;
         break;
       case 'librarySearch':
         title = 'Search your library';

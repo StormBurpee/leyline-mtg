@@ -1,0 +1,91 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ad2793f3-a36f-4a09-a38f-eb98ce0a2b79",
+  "name": "The Witch's Vanity",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Saga"],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI \u2014 Destroy target creature an opponent controls with mana value 2 or less.\nII \u2014 Create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\nIII \u2014 Create a Wicked Role token attached to target creature you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [1]
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            },
+            {
+              "manaValue": {
+                "lte": 2
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [2]
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/food-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [3]
+      },
+      "effects": [
+        {
+          "op": "createAttachedToken",
+          "token": "leyline:token/wicked-role",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

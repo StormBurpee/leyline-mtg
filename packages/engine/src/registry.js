@@ -127,8 +127,14 @@ export function createRegistry(input = CARDS) {
       ...(card.triggers ?? []).flatMap((t) =>
         t.modes ? t.modes.flatMap((mode) => mode.effects) : t.effects,
       ),
+      ...(card.attachmentTriggers ?? []).flatMap((t) => t.effects),
       ...(card.activated ?? []).flatMap((a) => a.effects),
     ])) {
+      if (
+        e.attachedToken !== undefined &&
+        (!registry[e.attachedToken]?.token || !registry[e.attachedToken]?.aura)
+      )
+        errors.push(`${card.name}: return attachment requires an Aura token definition.`);
       if (
         e.op === 'empowerJace' &&
         (registry[e.definition]?.type !== 'planeswalker' ||
@@ -138,8 +144,17 @@ export function createRegistry(input = CARDS) {
           registry[e.definition]?.aura)
       )
         errors.push(`${card.name}: Empower requires a zero-loyalty Jace planeswalker token.`);
-      if (['token', 'mobilize', 'empowerJace'].includes(e.op) && !registry[e.definition]?.token)
+      if (
+        ['token', 'attachedToken', 'mobilize', 'empowerJace'].includes(e.op) &&
+        !registry[e.definition]?.token
+      )
         errors.push(`${card.name}: missing token definition ${e.definition}.`);
+      else if (e.op === 'token' && registry[e.definition]?.aura)
+        errors.push(
+          `${card.name}: Aura token creation requires an explicit attached-token instruction.`,
+        );
+      else if (e.op === 'attachedToken' && !registry[e.definition]?.aura)
+        errors.push(`${card.name}: attached tokens require an Aura token definition.`);
       else if (
         e.op === 'mobilize' &&
         (registry[e.definition].type !== 'creature' ||

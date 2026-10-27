@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ad0e6b12-a6bd-4860-9eac-68b2492d9567",
+  "name": "Charmed Clothier",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Advisor"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhen this creature enters, create a Royal Role token attached to another target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has ward {1}.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createAttachedToken",
+          "token": "leyline:token/royal-role",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    }
+  ]
+}

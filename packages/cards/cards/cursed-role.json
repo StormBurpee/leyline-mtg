@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/cursed-role",
+  "name": "Cursed",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura", "Role"],
+    "colors": [],
+    "manaCost": null,
+    "token": true
+  },
+  "rulesText": "Enchant creature\nEnchanted creature has base power and toughness 1/1.",
+  "abilities": [
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 0,
+      "toughness": 0,
+      "baseStats": {
+        "power": 1,
+        "toughness": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "fef67393-9b7b-495d-8b03-865537386d42",
+  "name": "Ferocious Werefox // Guard Change",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Fox", "Warrior"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Trample",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Ferocious Werefox",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/guard-change",
+        "name": "Guard Change",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["G"],
+          "manaCost": "{1}{G}"
+        },
+        "rulesText": "Create a Monster Role token attached to target creature you control. (Enchanted creature gets +1/+1 and has trample.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createAttachedToken",
+                "token": "leyline:token/monster-role",
+                "target": "target"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "789e034c-7f4a-4fd5-9dd8-48313742126e",
+  "name": "Become Brutes",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "One or two target creatures each gain haste until end of turn. For each of those creatures, create a Monster Role token attached to it. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "targetGroup": "chosen",
+          "keywords": ["haste"]
+        },
+        {
+          "op": "createAttachedToken",
+          "token": "leyline:token/monster-role",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 1,
+          "max": 2
+        }
+      ]
+    }
+  ]
+}

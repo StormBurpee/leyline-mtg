@@ -144,6 +144,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         case 'exileUntilSourceLeaves':
           return { op: e.op, target: 'target' };
         case 'moveTarget':
+          if (e.attachedToken && !idsByName[e.attachedToken])
+            throw new Error(`Missing token identity: ${e.attachedToken}`);
           return {
             op: 'moveTarget',
             target: e.subject ?? 'target',
@@ -151,6 +153,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
             ...(e.controller !== undefined ? { controller: e.controller } : {}),
             ...(e.tapped !== undefined ? { tapped: e.tapped } : {}),
             ...(e.trackSource !== undefined ? { trackSource: e.trackSource } : {}),
+            ...(e.attachedToken ? { attachedToken: idsByName[e.attachedToken] } : {}),
           };
         case 'draw':
         case 'lookChooseHand':
@@ -247,6 +250,23 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
                 .filter((k) => e[k] !== undefined)
                 .map((k) => [k, e[k]]),
             ),
+          };
+        case 'grantDeathReturn':
+          if (!idsByName[e.attachedToken])
+            throw new Error(`Missing token identity: ${e.attachedToken}`);
+          return {
+            op: e.op,
+            target: 'target',
+            attachedToken: idsByName[e.attachedToken],
+            until: 'endOfTurn',
+            ...(e.tapped !== undefined ? { tapped: e.tapped } : {}),
+          };
+        case 'attachedToken':
+          if (!idsByName[e.definition]) throw new Error(`Missing token identity: ${e.definition}`);
+          return {
+            op: 'createAttachedToken',
+            token: idsByName[e.definition],
+            target: e.subject ?? 'target',
           };
         case 'token':
           if (!idsByName[e.definition]) throw new Error(`Missing token identity: ${e.definition}`);
@@ -391,6 +411,13 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       abilities.push({ use: 'etb.draw', args: { cards: d.etb[0].count } });
     else abilities.push({ kind: 'triggered', on: EVENTS.selfEnters, effects: effects(d.etb) });
   }
+  for (const t of d.attachmentTriggers ?? [])
+    abilities.push({
+      kind: 'attachmentTriggered',
+      on: eventSpec(t.event),
+      effects: effects(t.effects),
+      ...(t.condition ? { condition: structuredClone(t.condition) } : {}),
+    });
   for (const t of d.triggers ?? []) {
     if (
       equal(t, {
@@ -492,7 +519,11 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   for (const kind of ['baseStats', 'selfBonus'])
     if (d[kind]) abilities.push({ kind, ...structuredClone(d[kind]) });
   if (d.attachmentBonus)
-    abilities.push({ kind: 'attachmentBonus', ...structuredClone(d.attachmentBonus) });
+    abilities.push({
+      kind: 'attachmentBonus',
+      ...structuredClone(d.attachmentBonus),
+      ...(d.attachmentBonus.ward ? { ward: cost(d.attachmentBonus.ward) } : {}),
+    });
   if (d.aura) {
     if (!['pacifism', 'creature'].includes(d.aura)) throw new Error('Unsupported aura.');
     abilities.push({

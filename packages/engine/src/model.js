@@ -9,7 +9,7 @@ import { matchesEvent, eventSpec } from './events.js';
 import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.55.0';
+export const VERSION = '0.56.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -227,7 +227,11 @@ export function abilityLossTimestamp(s, o) {
       .map((m) => m.timestamp ?? 0),
   );
 }
-export function definition(stateOrObject, object, { skipNamedLandGrants = false } = {}) {
+export function definition(
+  stateOrObject,
+  object,
+  { skipNamedLandGrants = false, skipAttachmentGrants = false } = {},
+) {
   const d = (object ?? stateOrObject).faceDown
     ? FACE_DOWN
     : printedFace(
@@ -389,7 +393,8 @@ export function definition(stateOrObject, object, { skipNamedLandGrants = false 
     stripped.abilitiesRemoved = true;
     if (d.keywords?.includes('changeling'))
       stripped.subtypes = [...new Set([...result.subtypes, ...CREATURE_TYPES])];
-    if (loyaltyForm || modifiers.some((m) => m.animation)) stripped.baseStats = result.baseStats;
+    if (loyaltyForm || modifiers.some((m) => m.animation || m.creatureForm))
+      stripped.baseStats = result.baseStats;
     result = stripped;
   }
   if (
@@ -415,6 +420,45 @@ export function definition(stateOrObject, object, { skipNamedLandGrants = false 
         result[field] = { ...result[field] };
         delete result[field].C;
       }
+  }
+  // 'This creature' identifies this source, not a type condition (CR 201.5).
+  // The granted own-death trigger observes its battlefield-to-graveyard move
+  // even after a type-only effect makes that same permanent a noncreature.
+  const lostAt = abilityLossTimestamp(stateOrObject, object);
+  for (const modifier of modifiers)
+    if (modifier.deathReturn && (modifier.timestamp ?? 0) > lostAt)
+      result = {
+        ...result,
+        triggers: [
+          ...(result.triggers ?? []),
+          {
+            event: { event: 'battlefieldToGraveyard', object: 'source' },
+            effects: [{ op: 'returnDepartedSource', ...modifier.deathReturn }],
+          },
+        ],
+      };
+  if (!skipAttachmentGrants && hasType(result, 'creature')) {
+    const lostAt = abilityLossTimestamp(stateOrObject, object);
+    let baseTimestamp = Math.max(
+      loyaltyForm ? (object.layerTimestamp ?? 0) : -1,
+      ...modifiers.filter((m) => m.animation || m.creatureForm).map((m) => m.timestamp ?? 0),
+    );
+    for (const attachment of battlefield(stateOrObject)) {
+      if (
+        attachment.attachedTo?.id !== object.id ||
+        attachment.attachedTo.incarnation !== object.incarnation
+      )
+        continue;
+      const grant = definition(stateOrObject, attachment, { skipAttachmentGrants: true });
+      if (!attachmentApplies(stateOrObject, attachment, object)) continue;
+      const timestamp = attachment.layerTimestamp ?? 0;
+      if (grant.attachmentBonus?.baseStats && timestamp > baseTimestamp) {
+        result = { ...result, baseStats: grant.attachmentBonus.baseStats };
+        baseTimestamp = timestamp;
+      }
+      if (timestamp > lostAt && grant.attachmentTriggers?.length)
+        result = { ...result, triggers: [...(result.triggers ?? []), ...grant.attachmentTriggers] };
+    }
   }
   return result;
 }
@@ -457,17 +501,17 @@ export function legalEquipmentAttachment(s, equipment, target) {
     target.zone !== 'battlefield'
   )
     return false;
-  const d = definition(s, equipment);
+  const d = definition(s, equipment, { skipAttachmentGrants: true });
   return (
     d.subtypes.includes('Equipment') &&
     !hasType(d, 'creature') &&
-    hasType(definition(s, target), 'creature')
+    hasType(definition(s, target, { skipAttachmentGrants: true }), 'creature')
   );
 }
 export function legalAuraAttachment(s, aura, target, controller = aura?.controller) {
   if (!aura || !target || aura.id === target.id || target.zone !== 'battlefield') return false;
-  const d = definition(s, aura),
-    t = definition(s, target);
+  const d = definition(s, aura, { skipAttachmentGrants: true }),
+    t = definition(s, target, { skipAttachmentGrants: true });
   if (!d.aura || hasType(d, 'creature') || !hasType(t, 'creature')) return false;
   return matchesFilter(
     {
@@ -490,7 +534,7 @@ function attachmentApplies(s, equipment, target) {
     equipment.attachedTo?.id === target.id &&
     equipment.attachedTo.incarnation === target.incarnation &&
     equipment.zone === 'battlefield' &&
-    (definition(s, equipment).aura
+    (definition(s, equipment, { skipAttachmentGrants: true }).aura
       ? legalAuraAttachment(s, equipment, target)
       : legalEquipmentAttachment(s, equipment, target))
   );
@@ -547,6 +591,16 @@ export function keywords(s, o) {
         .flatMap((m) => m.keywords ?? []),
     ]),
   ];
+}
+export function wardCosts(s, object) {
+  const costs = definition(s, object).ward ? [definition(s, object).ward] : [];
+  const lostAt = abilityLossTimestamp(s, object);
+  for (const source of battlefield(s)) {
+    const ward = definition(s, source).attachmentBonus?.ward;
+    if (ward && (source.layerTimestamp ?? 0) > lostAt && attachmentApplies(s, source, object))
+      costs.push(ward);
+  }
+  return costs;
 }
 export const hasKeyword = (s, o, k) => keywords(s, o).includes(k);
 export function stats(s, o) {
@@ -1265,6 +1319,7 @@ export function move(s, o, to, departureContext = null) {
     o.layerTimestamp = layerTimestamp(s);
   } else delete o.enteredTurn;
   o.attachedTo = null;
+  delete o.roleTimestamp;
   delete o.chosenCreatureType;
   delete o.chosenBasicLandType;
   delete o.trackedExile;

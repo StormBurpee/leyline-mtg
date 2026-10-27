@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d07e0d88-8b7f-423d-97b7-cf7b80d8924c",
+  "name": "Spiteful Hexmage",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, create a Cursed Role token attached to target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createAttachedToken",
+          "token": "leyline:token/cursed-role",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

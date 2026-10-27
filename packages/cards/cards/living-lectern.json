@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "061e7fb2-2c04-4845-b60a-0e2512a2dec1",
+  "name": "Living Lectern",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Construct"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 0,
+    "toughness": 4
+  },
+  "rulesText": "{1}, Sacrifice this creature: Draw a card. Create a Sorcerer Role token attached to up to one other target creature you control. Activate only as a sorcery. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has \"Whenever this creature attacks, scry 1.\")",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "sacrificeSelf": true
+      },
+      "timing": "sorcery",
+      "targetGroups": [
+        {
+          "id": "recipient",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "createAttachedToken",
+          "token": "leyline:token/sorcerer-role",
+          "target": "target",
+          "targetGroup": "recipient"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/young-hero-role",
+  "name": "Young Hero",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura", "Role"],
+    "colors": [],
+    "manaCost": null,
+    "token": true
+  },
+  "rulesText": "Enchant creature\nEnchanted creature has \"Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.\"",
+  "abilities": [
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 0,
+      "toughness": 0
+    },
+    {
+      "kind": "attachmentTriggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ],
+      "condition": {
+        "kind": "sourceToughnessAtMost",
+        "count": 3
+      }
+    }
+  ]
+}

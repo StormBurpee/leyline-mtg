@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "1c751201-24ba-4e5c-bf44-71c3e4693a92",
+  "name": "Conceited Witch // Price of Beauty",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Conceited Witch",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/price-of-beauty",
+        "name": "Price of Beauty",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["B"],
+          "manaCost": "{B}"
+        },
+        "rulesText": "Create a Wicked Role token attached to target creature you control. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createAttachedToken",
+                "token": "leyline:token/wicked-role",
+                "target": "target"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}
