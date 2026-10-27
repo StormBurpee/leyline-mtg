@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c56cd2ec-5907-4282-9162-d93b7dfd63b5",
+  "name": "Lakeside Shack",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless a player has 13 or less life.\n{T}: Add {G} or {U}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "any",
+        "conditions": [
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "you"
+            },
+            "operator": "lte",
+            "right": 13
+          },
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "opponent"
+            },
+            "operator": "lte",
+            "right": 13
+          }
+        ]
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["G", "U"]
+    }
+  ]
+}

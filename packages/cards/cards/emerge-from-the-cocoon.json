@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fed2127c-7174-4863-ad6a-1847c96bbd3f",
+  "name": "Emerge from the Cocoon",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{4}{W}"
+  },
+  "rulesText": "Return target creature card from your graveyard to the battlefield. You gain 3 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "battlefield"
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "owner": "you"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c997afb7-82cb-4579-885e-3628cb1b51e4",
+  "name": "Rapturous Moment",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "U"],
+    "manaCost": "{4}{U}{R}"
+  },
+  "rulesText": "Draw three cards, then discard two cards. Add {U}{U}{R}{R}{R}.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "addMana",
+          "mana": "{U}{U}{R}{R}{R}"
+        }
+      ]
+    }
+  ]
+}

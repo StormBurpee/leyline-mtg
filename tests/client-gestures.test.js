@@ -1,11 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { installCardDrag } from '../apps/web/gestures.js';
 
 class Element extends EventTarget {
   constructor() {
     super();
     this.dataset = {};
+    this.children = [];
     this.style = {};
     this.isConnected = true;
     this.classList = { add() {}, remove() {}, toggle() {} };
@@ -19,7 +21,9 @@ class Element extends EventTarget {
   }
   removeAttribute() {}
   setAttribute() {}
-  append() {}
+  append(...elements) {
+    this.children.push(...elements);
+  }
   remove() {
     this.isConnected = false;
   }
@@ -48,11 +52,20 @@ class Element extends EventTarget {
     this.captures.delete(id);
   }
 }
-function setup(t, { accepted = true, inspection = false, canDrag = true } = {}) {
+function setup(
+  t,
+  { accepted = true, inspection = false, canDrag = true, scrollableHand = true } = {},
+) {
   const root = new Element(),
     source = new Element(),
     target = new Element();
   source.dataset.card = 'card-1';
+  const rail = new Element();
+  rail.scrollWidth = 900;
+  rail.clientWidth = 300;
+  rail.scrollLeft = 180;
+  rail.style.scrollSnapType = 'x proximity';
+  source.closest = (selector) => (selector === '.hand' ? (scrollableHand ? rail : null) : source);
   const doc = new Element(),
     win = new Element();
   doc.body = new Element();
@@ -119,6 +132,7 @@ function setup(t, { accepted = true, inspection = false, canDrag = true } = {}) 
     root,
     source,
     inspections,
+    rail,
     hold() {
       holdCallback?.();
     },
@@ -248,4 +262,104 @@ test('the card context menu reads rather than submits', (t) => {
   assert.equal(event.defaultPrevented, true);
   assert.deepEqual(x.inspections, ['card-1']);
   assert.equal(x.commits, 0);
+});
+
+test('touch captures at contact, tolerates finger jitter, and vertical drag commits once', (t) => {
+  const x = setup(t);
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  assert.equal(x.source.hasPointerCapture(1), true);
+  x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 14, clientY: 24 });
+  assert.equal(x.commits, 0);
+  const move = x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 150, clientY: 240 });
+  assert.equal(move.defaultPrevented, true);
+  x.fire(x.doc, 'pointerup', { pointerType: 'touch', clientX: 150, clientY: 240 });
+  assert.equal(x.commits, 1);
+  assert.equal(x.source.hasPointerCapture(1), false);
+});
+test('ordinary diagonal touch movement is a card drag, not a cancelled horizontal scroll', (t) => {
+  const x = setup(t);
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 150, clientY: 140 });
+  x.fire(x.doc, 'pointerup', { pointerType: 'touch', clientX: 150, clientY: 140 });
+  assert.equal(x.commits, 1);
+  assert.equal(x.rail.scrollLeft, 180);
+});
+test('sideways hand scrolling stays locked and restores rail snapping without casting', (t) => {
+  const x = setup(t, { inspection: true });
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 80, clientY: 22 });
+  assert.equal(x.rail.scrollLeft, 110);
+  assert.equal(x.rail.style.scrollSnapType, 'none');
+  x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 150, clientY: 180 });
+  assert.equal(x.rail.scrollLeft, 40);
+  x.hold();
+  x.fire(x.doc, 'pointerup', { pointerType: 'touch', clientX: 150, clientY: 180 });
+  assert.equal(x.rail.style.scrollSnapType, 'x proximity');
+  assert.equal(x.commits, 0);
+  assert.deepEqual(x.inspections, []);
+});
+test('battlefield and nonoverflowing-hand cards can drag horizontally on touch', (t) => {
+  const x = setup(t, { scrollableHand: false });
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 150, clientY: 22 });
+  x.fire(x.doc, 'pointerup', { pointerType: 'touch', clientX: 150, clientY: 22 });
+  assert.equal(x.commits, 1);
+});
+test('unrelated pointer cancellation cannot abort the active finger', (t) => {
+  const x = setup(t);
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 150, clientY: 200 });
+  x.fire(x.root, 'pointercancel', { pointerId: 2 });
+  x.fire(x.root, 'lostpointercapture', { pointerId: 2 });
+  assert.equal(x.drag.active, true);
+  x.fire(x.doc, 'pointerup', { pointerType: 'touch', clientX: 150, clientY: 200 });
+  assert.equal(x.commits, 1);
+});
+test('a synthesized click on the drop target is suppressed but keyboard activation remains', (t) => {
+  const x = setup(t);
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 150, clientY: 200 });
+  x.fire(x.doc, 'pointerup', { pointerType: 'touch', clientX: 150, clientY: 200 });
+  const target = new Element();
+  assert.equal(
+    x.fire(x.doc, 'click', { target, detail: 1, clientX: 150, clientY: 200 }).defaultPrevented,
+    true,
+  );
+  assert.equal(
+    x.fire(x.doc, 'click', { target, detail: 0, clientX: 150, clientY: 200 }).defaultPrevented,
+    false,
+  );
+});
+
+test('touch taps keep capture on the card so native click targets are not redirected to the table', (t) => {
+  const x = setup(t);
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  assert.equal(x.source.hasPointerCapture(1), true);
+  assert.equal(x.root.hasPointerCapture(1), false);
+  x.fire(x.doc, 'pointerup', { pointerType: 'touch' });
+  assert.equal(x.source.hasPointerCapture(1), false);
+  assert.equal(x.fire(x.doc, 'click', { target: x.source, detail: 1 }).defaultPrevented, false);
+  assert.equal(x.commits, 0);
+});
+
+test('touch preview is larger, above the finger, and inside viewport edges', (t) => {
+  const x = setup(t);
+  x.fire(x.root, 'pointerdown', { pointerType: 'touch' });
+  x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 150, clientY: 260 });
+  const ghost = x.doc.body.children.find((e) => e.className?.includes('touch-drag-ghost'));
+  assert.ok(ghost);
+  assert.ok(parseFloat(ghost.style.width) > 100);
+  assert.ok(parseFloat(ghost.style.top) + parseFloat(ghost.style.height) < 260);
+  x.fire(x.doc, 'pointermove', { pointerType: 'touch', clientX: 1, clientY: 5 });
+  assert.ok(parseFloat(ghost.style.top) >= 8);
+  assert.ok(parseFloat(ghost.style.left) >= 8);
+  x.drag.cancel();
+});
+test('card touch-action is reserved before pointer movement, not applied after cancellation', async () => {
+  const css = await readFile(new URL('../apps/web/style.css', import.meta.url), 'utf8');
+  assert.match(css, /\.hand-card\s*\{[^}]*touch-action: none/s);
+  assert.match(
+    css,
+    /\.permanent\[data-card\],\s*\.land-card\[data-card\]\s*\{[^}]*touch-action: none/s,
+  );
 });

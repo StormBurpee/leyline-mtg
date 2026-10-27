@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "449db6bf-d766-4d09-a7bd-9c45b3d4c4c3",
+  "name": "Bone-Cairn Butcher",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Demon"],
+    "colors": ["B", "R", "W"],
+    "manaCost": "{1}{R}{W}{B}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)\nAttacking tokens you control have deathtouch.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "power": 0,
+      "toughness": 0,
+      "where": {
+        "all": [
+          {
+            "token": true
+          },
+          {
+            "attacking": true
+          },
+          {
+            "controller": "you"
+          }
+        ]
+      },
+      "keywords": ["deathtouch"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mobilize",
+          "amount": 2,
+          "token": "leyline:token/mobilized-warrior"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "58916455-844c-4d97-908f-8205bdc117c0",
+  "name": "Exorcise",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Exile target artifact, enchantment, or creature with power 4 or greater.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            },
+            {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "power": {
+                    "gte": 4
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

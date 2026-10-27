@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2091eb7e-2357-4ef8-b15e-1e6f82176340",
+  "name": "Mold Adder",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Fungus", "Snake"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Whenever an opponent casts a blue or black spell, you may put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "opponent",
+        "filter": {
+          "any": [
+            {
+              "color": "U"
+            },
+            {
+              "color": "B"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

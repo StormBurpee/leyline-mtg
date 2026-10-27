@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6d37ba4b-ff56-4eec-9dc2-2d7f357dc9c9",
+  "name": "Youthful Valkyrie",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Angel"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever another Angel you control enters, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Angel"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

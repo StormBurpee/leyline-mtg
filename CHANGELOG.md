@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.44.0 — Mobile play fixes and broader card coverage
+
+- Fix iOS viewport clipping of the action dock: remove the legacy viewport-height minimum, fit the visible browser viewport, respect safe areas and keep a touch-sized primary action visible.
+- Give touch card gestures explicit pointer ownership, reliable diagonal dragging, direction-locked hand browsing, above-finger previews and cancellation/click suppression. Synthetic interaction checks pass; physical iOS visual verification remains unperformed.
+- Add 48 complete cards using existing mechanics: 15 conditional-entry lands and 33 spells/permanents, plus seven exact tokens.
+- Add mobilize, tapped attacking token entry without attack declarations, and next-end-step incarnation-bound sacrifice. Add nine complete cards and one token.
+- Distinguish actual sacrifice events from deaths and ordinary zone movement across costs, mana abilities, resolving effects and delayed mobilize sacrifices. Preserve simultaneous pre-departure observers and per-turn limits. Add eight complete cards and a functional Lander token.
+- Add linked battlefield exile until the exact source leaves, immediate non-stack returns and staged Aura/type entry choices. Resume paused casting completion before cast events without paying twice. Add twenty complete cards.
+- Catalog: 1334 playable cards and 45 tokens. Standard inventory: 1116 of 5164. General linked hand exile, sacrifice aggregation/reflexive outcomes and unsupported combinations remain rejected.
+
 ## 0.43.0 — Warp, casting sacrifice costs and targeting triggers
 
 - Add fixed-cost permanent warp, next-end-step exile and owner permission to recast on a later turn. Track exact battlefield and exile incarnations. Add twelve complete Standard cards and two tokens.

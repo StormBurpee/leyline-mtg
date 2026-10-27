@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dca7102e-c020-4fdc-9b59-f186e3e615a5",
+  "name": "Dusk Rose Reliquary",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "As an additional cost to cast this spell, sacrifice an artifact or creature.\nWard {2}\nWhen this artifact enters, exile target artifact or creature an opponent controls until this artifact leaves the battlefield.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "sacrificeCost",
+      "where": {
+        "any": [
+          {
+            "type": "artifact"
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      }
+    }
+  ]
+}

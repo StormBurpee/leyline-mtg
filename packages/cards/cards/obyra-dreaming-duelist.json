@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4162e60f-9d70-4b8c-a838-df57b83c208d",
+  "name": "Obyra, Dreaming Duelist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Faerie", "Warrior"],
+    "colors": ["B", "U"],
+    "manaCost": "{U}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nFlying\nWhenever another Faerie you control enters, each opponent loses 1 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Faerie"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

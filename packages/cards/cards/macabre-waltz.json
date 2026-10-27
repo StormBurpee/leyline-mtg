@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cf75dbd8-b65a-48d9-b96b-4afb43f336d1",
+  "name": "Macabre Waltz",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Return up to two target creature cards from your graveyard to your hand, then discard a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "targetGroup": "chosen",
+          "destination": "hand"
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "owner": "you"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 2
+        }
+      ]
+    }
+  ]
+}

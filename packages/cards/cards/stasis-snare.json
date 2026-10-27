@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6a83768e-672e-4fec-8931-853f5e96d43d",
+  "name": "Stasis Snare",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}{W}"
+  },
+  "rulesText": "Flash (You may cast this spell any time you could cast an instant.)\nWhen this enchantment enters, exile target creature an opponent controls until this enchantment leaves the battlefield.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

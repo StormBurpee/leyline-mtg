@@ -68,6 +68,7 @@ export function validateEventSpec(value) {
       'enter',
       'cast',
       'dies',
+      'sacrifice',
       'attack',
       'step',
       'faceUp',
@@ -82,7 +83,15 @@ export function validateEventSpec(value) {
   if (
     spec.object !== undefined &&
     (spec.object !== 'source' ||
-      !['enter', 'dies', 'attack', 'faceUp', 'combatDamagePlayer', 'targeted'].includes(spec.event))
+      ![
+        'enter',
+        'dies',
+        'sacrifice',
+        'attack',
+        'faceUp',
+        'combatDamagePlayer',
+        'targeted',
+      ].includes(spec.event))
   )
     errors.push('Source identity predicates are unsupported for this event family.');
   if (

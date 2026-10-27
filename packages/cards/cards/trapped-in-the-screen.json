@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "20f2fc0e-b1d4-4f80-9c7a-a9fb25fef7b8",
+  "name": "Trapped in the Screen",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "Ward {2} (Whenever this enchantment becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhen this enchantment enters, exile target artifact, creature, or enchantment an opponent controls until this enchantment leaves the battlefield.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "enchantment"
+                }
+              ]
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

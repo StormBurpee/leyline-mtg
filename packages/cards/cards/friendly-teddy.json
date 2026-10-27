@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "02a8b849-e708-427c-92fe-9a41bb0ec7fe",
+  "name": "Friendly Teddy",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Bear", "Toy"],
+    "colors": [],
+    "manaCost": "{2}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature dies, each player draws a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

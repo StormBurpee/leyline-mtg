@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0ea2c5ad-2982-4041-8c9d-a1d31ced11aa",
+  "name": "Detention Chariot",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}{W}",
+    "power": 6,
+    "toughness": 6
+  },
+  "rulesText": "When this Vehicle enters, exile target artifact or creature an opponent controls until this Vehicle leaves the battlefield.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)\nCycling {W} ({W}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "crew",
+      "power": 3
+    },
+    {
+      "kind": "cycling",
+      "cost": "{W}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

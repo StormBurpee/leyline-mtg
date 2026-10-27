@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7b0d9d79-2e86-4079-8db3-500483c8807e",
+  "name": "Avatar Enthusiasts",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Peasant", "Ally"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever another Ally you control enters, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Ally"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/black-red-goblin-token",
+  "name": "Black Red Goblin Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Goblin"],
+    "supertypes": [],
+    "colors": ["B", "R"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

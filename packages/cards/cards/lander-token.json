@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/lander-token",
+  "name": "Lander Token",
+  "characteristics": {
+    "types": ["artifact"],
+    "subtypes": ["Lander"],
+    "colors": [],
+    "manaCost": null,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2d3e6549-6cc6-434f-a189-ba3b55e64c34",
+  "name": "Rampaging Baloths",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Beast"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}{G}",
+    "power": 6,
+    "toughness": 6
+  },
+  "rulesText": "Trample\nLandfall \u2014 Whenever a land you control enters, create a 4/4 green Beast creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/large-green-beast-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

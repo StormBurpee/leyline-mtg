@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4ad9c550-5605-4ffe-8e27-e9f2d9ada000",
+  "name": "Stormplain Detainment",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "not": {
+                "type": "land"
+              }
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

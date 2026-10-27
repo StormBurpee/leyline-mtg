@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1e03aad2-6426-4d18-a0e5-bc3d8e6b7b11",
+  "name": "Preposterous Proportions",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{5}{G}{G}"
+  },
+  "rulesText": "Creatures you control get +10/+10 and gain vigilance until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 10,
+          "toughness": 10,
+          "keywords": ["vigilance"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

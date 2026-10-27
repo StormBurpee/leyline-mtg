@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "24a97436-ba61-4ebc-a560-a6c027ccfdf3",
+  "name": "Raucous Carnival",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless a player has 13 or less life.\n{T}: Add {R} or {W}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "any",
+        "conditions": [
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "you"
+            },
+            "operator": "lte",
+            "right": 13
+          },
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "opponent"
+            },
+            "operator": "lte",
+            "right": 13
+          }
+        ]
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "W"]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8f69bd3a-244e-42d8-bfac-5a426f4b54b4",
+  "name": "Razortrap Gorge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless a player has 13 or less life.\n{T}: Add {B} or {R}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "any",
+        "conditions": [
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "you"
+            },
+            "operator": "lte",
+            "right": 13
+          },
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "opponent"
+            },
+            "operator": "lte",
+            "right": 13
+          }
+        ]
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["B", "R"]
+    }
+  ]
+}

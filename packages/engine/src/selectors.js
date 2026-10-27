@@ -201,6 +201,7 @@ export function effectTargetCompatible(op, value, effect = null) {
   if (['mill', 'draw', 'discard', 'gainLife', 'loseLife', 'scry', 'surveil'].includes(op))
     return spec.scope === 'player';
   if (op === 'moveTarget') return ['permanent', 'graveyard'].includes(spec.scope);
-  if (['destroy', 'bounce'].includes(op)) return spec.scope === 'permanent';
+  if (['destroy', 'bounce', 'exileUntilSourceLeaves'].includes(op))
+    return spec.scope === 'permanent';
   return true;
 }

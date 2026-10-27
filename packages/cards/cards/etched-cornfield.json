@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6ccca5c2-66c3-495a-8d9e-1a9805569e52",
+  "name": "Etched Cornfield",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless a player has 13 or less life.\n{T}: Add {G} or {W}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "any",
+        "conditions": [
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "you"
+            },
+            "operator": "lte",
+            "right": 13
+          },
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "opponent"
+            },
+            "operator": "lte",
+            "right": 13
+          }
+        ]
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["G", "W"]
+    }
+  ]
+}

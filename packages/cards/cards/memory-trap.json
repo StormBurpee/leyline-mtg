@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "70616a8c-9b6c-408e-8f3e-2c348ec136d8",
+  "name": "Memory Trap",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "not": {
+                "type": "land"
+              }
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

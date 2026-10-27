@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2d899466-b1eb-4901-b626-1f2fb09b786d",
+  "name": "Concealed Courtyard",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {W} or {B}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "you",
+          "where": {
+            "type": "land"
+          },
+          "excludeSource": true
+        },
+        "operator": "lte",
+        "right": 2
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "B"]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9b9b086c-d201-4574-a1e9-0d6f8de53d7d",
+  "name": "Web Up",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "not": {
+                "type": "land"
+              }
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

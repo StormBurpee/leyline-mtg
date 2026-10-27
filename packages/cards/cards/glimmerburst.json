@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a26820b9-3bec-41b2-9812-99e4a2211297",
+  "name": "Glimmerburst",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{3}{U}"
+  },
+  "rulesText": "Draw two cards. Create a 1/1 white Glimmer enchantment creature token.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-glimmer-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "66dc3237-3543-4fc2-96f1-c8d1eff7c04c",
+  "name": "Rimefur Reindeer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elk"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Whenever an enchantment you control enters, tap target creature an opponent controls.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "enchantment"
+        }
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

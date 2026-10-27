@@ -23,6 +23,7 @@ import {
   queueTrigger,
   notifyTriggers,
   captureDepartureContext,
+  sacrificePermanents,
   battlefield,
   creatures,
   definition,
@@ -178,6 +179,38 @@ function counterEntry(s, id) {
   if (entry.kind === 'spell' && source?.zone === 'stack') move(s, source, 'graveyard');
   emit(s, 'countered', { name: entry.name, stackId: entry.id });
 }
+/** One-shot duration expiry, not a triggered ability (CR 610.3). */
+export function flushLinkedReturns(s) {
+  if (!s.pendingLinkedReturns?.length) return true;
+  const refs = s.pendingLinkedReturns;
+  s.pendingLinkedReturns = [];
+  const entries = refs
+    .map((r) => s.objects[r.id])
+    .filter((o, i) => o && !o.token && o.zone === 'exile' && o.incarnation === refs[i].incarnation)
+    .map((object) => ({ object, controller: object.owner }))
+    .sort((a, b) => Number(b.controller === s.active) - Number(a.controller === s.active));
+  return enterBattlefieldBatch(s, entries);
+}
+function exileUntilSourceLeaves(s, entry, target) {
+  const source = s.objects[entry.source?.id];
+  const object = target?.kind === 'object' && s.objects[target.id];
+  // The duration must not already have ended when the first one-shot effect resolves.
+  if (
+    !source ||
+    source.zone !== 'battlefield' ||
+    source.incarnation !== entry.source.incarnation ||
+    !object ||
+    object.zone !== 'battlefield' ||
+    object.incarnation !== target.incarnation
+  )
+    return;
+  // Register before the move: a source exiling itself also ends its duration immediately.
+  (s.linkedExiles ??= []).push({
+    source: ref(source),
+    cards: [{ ...ref(object), incarnation: object.incarnation + 1 }],
+  });
+  move(s, object, 'exile');
+}
 export function enterBattlefield(s, o, controller = o.owner, attachment = null, options = {}) {
   return enterBattlefieldBatch(s, [{ object: o, controller, attachment, tapped: options.tapped }]);
 }
@@ -188,24 +221,21 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
       object.zone !== 'battlefield' &&
       ['creature', 'artifact', 'enchantment', 'land'].includes(definition(s, object).type),
   );
-  const chooser = entering.find(
-    ({ object }) => definition(s, object).chooseCreatureType && !typeChoices[object.id],
-  );
-  if (chooser) {
-    s.choice = {
-      kind: 'creatureType',
-      player: chooser.controller ?? chooser.object.owner,
-      card: chooser.object.id,
-      entries: entering.map(({ object, ...rest }) => ({ ...rest, object: ref(object) })),
-      typeChoices,
-      auraChoices,
-      types: CREATURE_TYPES,
-    };
-    return false;
-  }
   const ready = [];
   for (const item of entering) {
     const { object, controller = object.owner } = item;
+    if (definition(s, object).chooseCreatureType && !typeChoices[object.id]) {
+      s.choice = {
+        kind: 'creatureType',
+        player: controller,
+        card: object.id,
+        entries: entering.map(({ object, ...rest }) => ({ ...rest, object: ref(object) })),
+        typeChoices,
+        auraChoices,
+        types: CREATURE_TYPES,
+      };
+      return false;
+    }
     if (!definition(s, object).aura) {
       ready.push(item);
       continue;
@@ -267,7 +297,13 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
       }, 0),
     ]),
   );
-  for (const { object, controller = object.owner, attachment = null, tapped = false } of entering) {
+  for (const {
+    object,
+    controller = object.owner,
+    attachment = null,
+    tapped = false,
+    attacking = false,
+  } of entering) {
     const warped = object.zone === 'stack' && object.warpPaid;
     move(s, object, 'battlefield');
     object.controller = controller;
@@ -293,6 +329,15 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
     if (definition(s, object).entryStunCounters)
       object.stunCounters = definition(s, object).entryStunCounters;
     object.tapped = !!tappedReplacements.get(object.id) || tapped;
+    // Entering attacking is not declaring an attacker and causes no attack event.
+    if (
+      attacking &&
+      controller === s.active &&
+      ['beginCombat', 'attackers', 'blockers', 'firstDamage', 'damage', 'endCombat'].includes(
+        s.step,
+      )
+    )
+      s.combat.attackers.push(ref(object));
   }
   for (const { object } of entering) {
     const d = definition(s, object);
@@ -460,7 +505,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           s,
           targets.map((target) => ({ source, target, amount: e.amount })),
         );
-      } else if (['destroy', 'bounce', 'moveTarget'].includes(e.op)) {
+      } else if (['destroy', 'bounce', 'moveTarget', 'exileUntilSourceLeaves'].includes(e.op)) {
         const context = captureDepartureContext(s);
         for (const target of targets) {
           const object = s.objects[target.id];
@@ -468,6 +513,10 @@ export function resolveEffects(s, entry, startIndex = 0) {
           const zone = e.op === 'moveTarget' ? ['battlefield', 'graveyard'] : ['battlefield'];
           if (!zone.includes(object.zone)) continue;
           if (e.op === 'destroy' && hasKeyword(s, object, 'indestructible')) continue;
+          if (e.op === 'exileUntilSourceLeaves') {
+            exileUntilSourceLeaves(s, entry, target);
+            continue;
+          }
           move(
             s,
             object,
@@ -477,6 +526,10 @@ export function resolveEffects(s, entry, startIndex = 0) {
         }
       } else {
         for (const target of targets) resolveEffects(s, { ...entry, target, effects: [effect] });
+      }
+      if (flushLinkedReturns(s) === false) {
+        s.resolving = { entry, index: index + 1 };
+        return false;
       }
       continue;
     }
@@ -728,8 +781,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
           source.incarnation === entry.source.incarnation &&
           source.controller === entry.controller
         ) {
-          move(s, source, 'graveyard', captureDepartureContext(s));
-          emit(s, 'sacrificed', { player: entry.controller, objectId: source.id });
+          sacrificePermanents(s, [source]);
         }
         break;
       }
@@ -864,6 +916,9 @@ export function resolveEffects(s, entry, startIndex = 0) {
         loseLife(s, recipient, e.amount);
         emit(s, 'lifeLost', { player: recipient, amount: e.amount });
         break;
+      case 'exileUntilSourceLeaves':
+        exileUntilSourceLeaves(s, entry, target);
+        break;
       case 'moveTarget':
         if (
           candidate &&
@@ -929,6 +984,35 @@ export function resolveEffects(s, entry, startIndex = 0) {
         }
         break;
       }
+      case 'mobilize': {
+        const tokens = Array.from({ length: e.count }, () =>
+          addObject(s, e.definition, entry.controller, 'void'),
+        );
+        enterBattlefieldBatch(
+          s,
+          tokens.map((object) => ({
+            object,
+            controller: entry.controller,
+            tapped: true,
+            attacking: true,
+          })),
+        );
+        if (tokens.length) {
+          (s.delayedTriggers ??= []).push({
+            kind: 'ability',
+            name: entry.name,
+            controller: entry.controller,
+            source: structuredClone(entry.source),
+            sourceDefinition: structuredClone(entry.sourceDefinition),
+            sourceKeywords: [],
+            effects: [],
+            rule: 'mobilizeSacrifice',
+            delayedObjects: tokens.filter((o) => o.zone === 'battlefield').map(ref),
+            label: `${entry.name} · sacrifice mobilized tokens`,
+          });
+        }
+        break;
+      }
       case 'token':
         for (let i = 0; i < e.count; i++) {
           const controller = e.player === 'targetController' ? entry.targetController : recipient;
@@ -948,12 +1032,17 @@ export function resolveEffects(s, entry, startIndex = 0) {
       default:
         throw new Error(`Unimplemented effect opcode: ${e.op}`);
     }
+    if (flushLinkedReturns(s) === false) {
+      s.resolving = { entry, index: index + 1 };
+      return false;
+    }
   }
 }
 /** Resume the instruction cursor; choices do not create a priority window. */
 export function continueResolution(s) {
   const frame = s.resolving;
   if (!frame) return;
+  if (flushLinkedReturns(s) === false) return;
   if (resolveEffects(s, frame.entry, frame.index) === false) return;
   const entry = frame.entry,
     object = s.objects[entry.source?.id];
@@ -1142,18 +1231,17 @@ export function finishResolutionChoice(s, command) {
       s.choice = { kind: 'sacrifice', ...first, remaining, selected };
       return;
     }
-    const context = captureDepartureContext(s);
-    for (const r of selected) {
-      const object = s.objects[r.id];
-      if (
-        object?.zone !== 'battlefield' ||
-        object.incarnation !== r.incarnation ||
-        object.controller !== r.player
-      )
-        continue;
-      move(s, object, 'graveyard', context);
-      emit(s, 'sacrificed', { player: r.player, objectId: r.id });
-    }
+    const sacrificed = selected
+      .map((r) => {
+        const object = s.objects[r.id];
+        return object?.zone === 'battlefield' &&
+          object.incarnation === r.incarnation &&
+          object.controller === r.player
+          ? object
+          : null;
+      })
+      .filter(Boolean);
+    sacrificePermanents(s, sacrificed);
   } else if (choice.kind === 'discardEffect') {
     requireRule(
       command.type === 'discardEffect',
@@ -1178,6 +1266,19 @@ export function finishResolutionChoice(s, command) {
 export function resolveTop(s) {
   const entry = s.stack.pop();
   if (!entry) return;
+  if (entry.rule === 'mobilizeSacrifice') {
+    const objects = (entry.delayedObjects ?? []).flatMap((target) => {
+      const object = s.objects[target.id];
+      return object?.zone === 'battlefield' &&
+        object.incarnation === target.incarnation &&
+        object.controller === entry.controller
+        ? [object]
+        : [];
+    });
+    sacrificePermanents(s, objects);
+    emit(s, 'resolved', { name: entry.name, stackId: entry.id });
+    return;
+  }
   if (entry.rule === 'warpExile') {
     const object = s.objects[entry.source?.id];
     if (object?.zone === 'battlefield' && object.incarnation === entry.source.incarnation) {
@@ -1340,6 +1441,7 @@ function applyStateBasedBatch(s, ids) {
       delete s.objects[o.id];
       changed = true;
     }
+  flushLinkedReturns(s);
   return changed;
 }
 /** APNAP choices precede one simultaneous state-based-action batch (CR 101.4, 704). */
@@ -1362,13 +1464,13 @@ export function finishLegendChoice(s, card) {
 }
 /** Stabilize before priority (CR 117.5). Trigger ordering remains an explicit choice. */
 export function stabilize(s) {
-  if (s.resolving) return;
+  if (s.resolving || s.choice) return;
+  if (flushLinkedReturns(s) === false) return;
   let iterations = 0;
-  while (s.status === 'playing' && stateBasedActions(s)) {
+  while (s.status === 'playing' && !s.choice && stateBasedActions(s)) {
     if (++iterations > 100) throw new Error('State-based action fixed point did not converge.');
   }
-  if (s.status !== 'playing' || s.choice?.kind === 'legendRule' || !s.pendingTriggers.length)
-    return;
+  if (s.status !== 'playing' || s.choice || !s.pendingTriggers.length) return;
   // Each player's simultaneous triggers must be ordered by that player, APNAP.
   const groups = [s.active, opponent(s.active)]
     .map((p) => ({ player: p, entries: s.pendingTriggers.filter((t) => t.controller === p) }))

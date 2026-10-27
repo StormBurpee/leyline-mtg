@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ebc70734-bf1a-4754-8094-bcbb4db91f30",
+  "name": "Envoy of Okinec Ahau",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Advisor"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "{4}{W}: Create a 1/1 colorless Gnome artifact creature token.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/artifact-gnome-token",
+          "amount": 1
+        }
+      ],
+      "cost": {
+        "mana": "{4}{W}"
+      }
+    }
+  ]
+}

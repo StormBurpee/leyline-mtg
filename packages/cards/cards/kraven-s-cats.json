@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "976db753-9887-448a-8e67-ec7937b6505c",
+  "name": "Kraven's Cats",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Villain"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "{2}{G}: This creature gets +2/+2 until end of turn. Activate only once each turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 2,
+          "toughness": 2,
+          "until": "endOfTurn"
+        }
+      ],
+      "cost": {
+        "mana": "{2}{G}"
+      },
+      "oncePerTurn": true
+    }
+  ]
+}

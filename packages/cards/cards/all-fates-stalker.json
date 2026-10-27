@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "da9ec010-8b42-4927-b602-4e96bced4e99",
+  "name": "All-Fates Stalker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Drix", "Assassin"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, exile up to one target non-Assassin creature until this creature leaves the battlefield.\nWarp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+  "abilities": [
+    {
+      "kind": "warp",
+      "cost": "{1}{W}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "exile",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "not": {
+                    "subtype": "Assassin"
+                  }
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target",
+          "targetGroup": "exile"
+        }
+      ]
+    }
+  ]
+}

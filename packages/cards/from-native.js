@@ -33,6 +33,12 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         return { ...effects([rest])[0], targetGroup };
       }
       switch (e.op) {
+        case 'mobilize':
+          return {
+            op: 'mobilize',
+            amount: e.count,
+            token: idsByName[e.definition] ?? e.definition,
+          };
         case 'copyToken':
           return { ...structuredClone(e), target: 'target' };
         case 'sacrifice':
@@ -72,6 +78,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return { op: 'gainLife', target: e.player ?? 'controller', amount: e.amount };
         case 'loseLife':
           return { op: 'loseLife', target: e.player ?? 'controller', amount: e.amount };
+        case 'exileUntilSourceLeaves':
+          return { op: e.op, target: 'target' };
         case 'moveTarget':
           return {
             op: 'moveTarget',

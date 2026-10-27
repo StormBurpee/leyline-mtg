@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5d1d9914-3ef2-45c5-b1cb-cb85d2f7394c",
+  "name": "Tolls of War",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "W"],
+    "manaCost": "{W}{B}"
+  },
+  "rulesText": "When this enchantment enters, create a Clue token. (It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you sacrifice a permanent during your turn, create a 1/1 white Ally creature token. This ability triggers only once each turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "sacrifice",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/ally-token",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "oncePerTurn": true
+    }
+  ]
+}

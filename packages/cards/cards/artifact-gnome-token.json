@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/artifact-gnome-token",
+  "name": "Artifact Gnome Token",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Gnome"],
+    "supertypes": [],
+    "colors": [],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

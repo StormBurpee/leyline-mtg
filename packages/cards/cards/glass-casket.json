@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d9167046-7908-4d16-8cc1-3eb02d1ba547",
+  "name": "Glass Casket",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "When this artifact enters, exile target creature an opponent controls with mana value 3 or less until this artifact leaves the battlefield.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "manaValue": {
+                    "lte": 3
+                  }
+                }
+              ]
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

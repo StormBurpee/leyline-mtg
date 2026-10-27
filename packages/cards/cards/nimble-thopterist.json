@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "01813091-75e8-431b-ba3f-b1ea1ba20a3b",
+  "name": "Nimble Thopterist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vedalken", "Artificer"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, create a 1/1 colorless Thopter artifact creature token with flying.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/flying-thopter-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

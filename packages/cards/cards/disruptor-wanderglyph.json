@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "81dda1a8-72ac-4e69-8367-4f72c445197c",
+  "name": "Disruptor Wanderglyph",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Golem"],
+    "colors": [],
+    "manaCost": "{4}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Whenever this creature attacks, exile target card from an opponent's graveyard.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "owner": "opponent"
+        }
+      }
+    }
+  ]
+}

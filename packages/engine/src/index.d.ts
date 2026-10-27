@@ -75,6 +75,7 @@ export interface EventSpec {
     | 'enter'
     | 'cast'
     | 'dies'
+    | 'sacrifice'
     | 'attack'
     | 'step'
     | 'attackGroup'
@@ -139,6 +140,7 @@ type EffectInstruction =
   | { op: 'damageEventPowerOpponent' }
   | { op: 'impulseChoose'; count: number }
   | { op: 'bindingNegotiation' }
+  | { op: 'mobilize'; definition: string; count: NumericValue }
   | { op: 'addMana'; mana: ManaCost }
   | { op: 'damageEventOpponent'; amount: NumericValue }
   | { op: 'damage' | 'damageOpponent'; amount: NumericValue }
@@ -169,6 +171,7 @@ type EffectInstruction =
     }
   | { op: 'mill'; count: NumericValue; player: 'controller' | 'opponent' | 'target' }
   | { op: 'counter' | 'attachEquipment' }
+  | { op: 'exileUntilSourceLeaves' }
   | { op: 'bounce' | 'destroy'; subject?: 'source' | 'attached' }
   | { op: 'untap' | 'tap'; subject?: 'source' | 'attached' }
   | {
@@ -434,7 +437,8 @@ export interface StackEntry {
   castingCost?: ManaCost;
   convoke?: ConvokeChoice[];
   sacrifice?: ObjectTarget;
-  rule?: 'increaseSpeed' | 'warpExile';
+  rule?: 'increaseSpeed' | 'warpExile' | 'mobilizeSacrifice';
+  delayedObjects?: ObjectTarget[];
   flashbackPaid?: boolean;
   warpPaid?: boolean;
   kicked?: boolean;
@@ -620,6 +624,15 @@ export interface GameState {
   stack: StackEntry[];
   pendingTriggers: StackEntry[];
   delayedTriggers?: Omit<StackEntry, 'id'>[];
+  linkedExiles?: { source: ObjectTarget; cards: ObjectTarget[] }[];
+  pendingLinkedReturns?: ObjectTarget[];
+  castingCompletion?: {
+    player: PlayerId;
+    command: Command;
+    profile: CardDefinition;
+    stackId: string;
+    plan: { choices: ConvokeChoice[]; sacrifice?: ObjectTarget };
+  };
   modifiers: {
     objectId: string;
     incarnation: number;

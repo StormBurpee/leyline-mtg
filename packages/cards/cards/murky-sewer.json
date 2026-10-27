@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c2cdefeb-3176-4faf-be54-a62d31f777a5",
+  "name": "Murky Sewer",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless a player has 13 or less life.\n{T}: Add {U} or {B}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "any",
+        "conditions": [
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "you"
+            },
+            "operator": "lte",
+            "right": 13
+          },
+          {
+            "kind": "compare",
+            "left": {
+              "kind": "life",
+              "player": "opponent"
+            },
+            "operator": "lte",
+            "right": 13
+          }
+        ]
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["U", "B"]
+    }
+  ]
+}

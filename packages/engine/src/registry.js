@@ -59,8 +59,15 @@ export function createRegistry(input = CARDS) {
       ...(card.triggers ?? []).flatMap((t) => t.effects),
       ...(card.activated ?? []).flatMap((a) => a.effects),
     ])
-      if (e.op === 'token' && !registry[e.definition]?.token)
+      if (['token', 'mobilize'].includes(e.op) && !registry[e.definition]?.token)
         errors.push(`${card.name}: missing token definition ${e.definition}.`);
+      else if (
+        e.op === 'mobilize' &&
+        (registry[e.definition].type !== 'creature' ||
+          registry[e.definition].chooseCreatureType ||
+          registry[e.definition].aura)
+      )
+        errors.push(`${card.name}: mobilize requires a creature token without entry choices.`);
   if (errors.length) throw new RegistryError(errors.slice(0, 100));
   const result = frozen(Object.fromEntries(Object.entries(registry)));
   validatedRegistries.add(result);

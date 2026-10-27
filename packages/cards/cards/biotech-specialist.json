@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "78de77ef-c325-4342-869f-042921229577",
+  "name": "Biotech Specialist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Insect", "Scientist"],
+    "colors": ["G", "R"],
+    "manaCost": "{R}{G}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, create a Lander token. (It's an artifact with \"{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\")\nWhenever you sacrifice an artifact, this creature deals 2 damage to target opponent.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/lander-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "sacrifice",
+        "controller": "you",
+        "filter": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ],
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      }
+    }
+  ]
+}

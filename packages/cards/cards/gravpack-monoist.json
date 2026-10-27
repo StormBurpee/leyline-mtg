@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9c009b3f-6580-4ab8-84e8-d4cf7a456a02",
+  "name": "Gravpack Monoist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Scout"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Flying\nWhen this creature dies, create a tapped 2/2 colorless Robot artifact creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/robot-token",
+          "amount": 1,
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

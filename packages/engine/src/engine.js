@@ -1,3 +1,4 @@
+import { sacrificePermanents } from './model.js';
 import { castingPayment, castingSacrificeCandidates } from './casting-sacrifice.js';
 import { convokeCandidates } from './convoke.js';
 import { recordSpellCast } from './spell-history.js';
@@ -40,6 +41,7 @@ import {
   finishTriggerTargets,
   legalTarget,
   resolveTop,
+  flushLinkedReturns,
   stabilize,
   targetsFor,
   notifyTriggers,
@@ -133,8 +135,7 @@ function cast(s, p, c) {
     for (const choice of plan.choices) s.objects[choice.card].tapped = true;
     if (plan.sacrifice) {
       const sacrificed = s.objects[plan.sacrifice.id];
-      move(s, sacrificed, 'graveyard');
-      emit(s, 'sacrificed', { player: p, objectId: sacrificed.id, name: sacrificed.name });
+      sacrificePermanents(s, [sacrificed]);
     }
     return payment;
   };
@@ -180,6 +181,14 @@ function cast(s, p, c) {
   if (!legacyTiming) notifyTargeted(s, entry);
   const payment = legacyPayment ?? payCastingCost();
   entry.uncounterable ||= payment.uncounterable;
+  s.castingCompletion = { player: p, command: c, profile: d, stackId: entry.id, plan };
+  if (flushLinkedReturns(s) !== false) finishCasting(s);
+}
+function finishCasting(s) {
+  const { player: p, command: c, profile: d, stackId, plan } = s.castingCompletion;
+  const entry = s.stack.find((item) => item.id === stackId),
+    o = s.objects[c.card];
+  delete s.castingCompletion;
   recordSpellCast(s, p, definition(s, o));
   s.passes = 0;
   emit(s, 'cast', {
@@ -198,7 +207,7 @@ function cast(s, p, c) {
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
   });
   notifyTriggers(s, 'cast', { player: p, definition: definition(s, o), object: o });
-  if (legacyTiming) notifyTargeted(s, entry);
+  if (s.rulesRevision === 1) notifyTargeted(s, entry);
 }
 export function abilityProblem(s, p, id, index, target, discardCard, targets) {
   const o = s.objects[id];
@@ -567,7 +576,10 @@ export function dispatch(state, command) {
           throw new RuleError('COMMAND_TYPE', `Unsupported command: ${command.type}`);
       }
     }
-    if (s.status === 'playing' && !s.choice) stabilize(s);
+    if (s.status === 'playing' && !s.choice) {
+      if (flushLinkedReturns(s) !== false && s.castingCompletion) finishCasting(s);
+      if (!s.choice) stabilize(s);
+    }
     s.revision++;
     s.history.push(freezeRecord(structuredClone(command)));
     assertInvariants(s);
@@ -768,6 +780,7 @@ export function replay(record) {
         VERSION,
         '0.41.0',
         '0.42.0',
+        '0.43.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

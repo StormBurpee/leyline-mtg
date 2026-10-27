@@ -36,6 +36,7 @@ function threatens(s, entry, target) {
     effects.some(
       (effect) =>
         effect.op === 'bounce' ||
+        effect.op === 'exileUntilSourceLeaves' ||
         (effect.op === 'moveTarget' && effect.destination !== 'battlefield'),
     )
   )

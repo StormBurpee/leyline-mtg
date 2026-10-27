@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7875c063-19c3-4e6e-81d8-1a378a4e16e5",
+  "name": "Dragonback Lancer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nMobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mobilize",
+          "amount": 1,
+          "token": "leyline:token/mobilized-warrior"
+        }
+      ]
+    }
+  ]
+}

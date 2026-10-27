@@ -419,6 +419,7 @@
             "enter",
             "cast",
             "dies",
+            "sacrifice",
             "attack",
             "step",
             "attackGroup",
@@ -1239,6 +1240,39 @@
           },
           "required": ["op", "target", "count"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["op", "amount", "token"],
+          "properties": {
+            "op": {
+              "const": "mobilize"
+            },
+            "amount": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "token": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["op", "target"],
+          "properties": {
+            "op": {
+              "const": "exileUntilSourceLeaves"
+            },
+            "target": {
+              "const": "target"
+            },
+            "targetGroup": {
+              "type": "string"
+            }
+          }
         }
       ]
     },

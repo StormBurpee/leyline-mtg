@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cb2d222c-df42-41a7-a517-0a41e47a4280",
+  "name": "Knightfisher",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird", "Knight"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Flying\nWhenever another nontoken Bird you control enters, create a 1/1 blue Fish creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "all": [
+            {
+              "subtype": "Bird"
+            },
+            {
+              "not": {
+                "token": true
+              }
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/blue-fish-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c5373026-8b43-42a7-aa69-a1b0f1619795",
+  "name": "Pull from the Grave",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Return up to two target creature cards from your graveyard to your hand. You gain 2 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "targetGroup": "chosen",
+          "destination": "hand"
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "owner": "you"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 2
+        }
+      ]
+    }
+  ]
+}

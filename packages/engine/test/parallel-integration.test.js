@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { CARDS, createRegistry } from '../src/index.js';
 import { fixture, put, act, resolve } from './helpers.js';
+import { declareAttackers } from '../src/combat.js';
+import { notifyTriggers } from '../src/model.js';
+import { resolveTop, stabilize } from '../src/effects.js';
 
 test('typecycling searches recognize changeling creature types in the library', () => {
   let s = fixture();
@@ -166,4 +169,31 @@ test('a friendly targeted trigger is retained when its creature pays the casting
   s = resolve(s);
   assert.equal(s.choice.kind, 'exilePlay');
   assert.equal(s.choice.cards.length, 1);
+});
+
+test('mobilize delayed sacrifices notify once-per-turn sacrifice observers', () => {
+  const s = fixture();
+  const pack = put(s, 'Dalkovan Packbeasts');
+  put(s, 'Tolls of War');
+  s.step = 'attackers';
+  declareAttackers(s, [pack.id]);
+  stabilize(s);
+  resolveTop(s);
+  assert.equal(
+    Object.values(s.objects).filter(
+      (o) => o.name === 'Mobilized Warrior Token' && o.zone === 'battlefield',
+    ).length,
+    3,
+  );
+  s.step = 'end';
+  notifyTriggers(s, 'step', { player: 0, step: 'end' });
+  stabilize(s);
+  resolveTop(s);
+  assert.equal(s.pendingTriggers.filter((t) => t.name === 'Tolls of War').length, 1);
+  assert.equal(
+    Object.values(s.objects).filter(
+      (o) => o.name === 'Mobilized Warrior Token' && o.zone === 'battlefield',
+    ).length,
+    0,
+  );
 });

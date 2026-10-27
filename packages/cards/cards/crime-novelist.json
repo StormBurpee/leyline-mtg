@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5996b1d0-7fe3-4fec-8730-9db901d887b1",
+  "name": "Crime Novelist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Bard"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Whenever you sacrifice an artifact, put a +1/+1 counter on this creature and add {R}.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "sacrifice",
+        "controller": "you",
+        "filter": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "addMana",
+          "mana": "{R}"
+        }
+      ]
+    }
+  ]
+}

@@ -41,7 +41,13 @@
     overscroll-behavior: none;
   }
   .shell:has(.game-layout) {
-    height: 100dvh;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: var(--table-viewport-height, 100dvh);
+    min-height: 0;
+    max-height: var(--table-viewport-height, 100dvh);
+    box-sizing: border-box;
     overflow: hidden;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
       env(safe-area-inset-left);
@@ -53,13 +59,13 @@
     height: 100%;
     min-height: 0;
     --hand-height: clamp(145px, 26dvh, 213px);
-    --dock-height: 84px;
+    --dock-height: 80px;
   }
   .game-layout.hand-compact {
     --hand-height: clamp(127px, 21dvh, 176px);
   }
   .game-layout:has(.priority-controls) {
-    --dock-height: 128px;
+    --dock-height: 80px;
   }
   .game-layout .arena,
   .game-layout .arena:has(.replay-banner) {
@@ -244,12 +250,12 @@
   .game-layout .action-dock {
     grid-area: dock;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: 28px 44px;
+    grid-template-rows: 24px 44px;
     gap: 2px;
     padding: 4px 8px;
   }
   .game-layout .action-dock:has(.priority-controls) {
-    grid-template-rows: 28px 44px 44px;
+    grid-template-rows: 24px 44px;
   }
   .game-layout .action-copy {
     grid-column: 1;
@@ -271,16 +277,29 @@
   }
   .game-layout .action-buttons {
     display: flex;
-    gap: 8px;
+    min-width: 0;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
   .game-layout .action-buttons .btn {
     min-height: 44px;
     min-width: 44px;
+    line-height: 1.2;
+    white-space: normal;
   }
   .game-layout .action-buttons .primary {
-    flex: 1;
+    order: -1;
+    flex: 1 0 min(160px, 48vw);
+  }
+  .game-layout .advance-button small {
+    display: none;
+  }
+  .game-layout .short-yield-stop {
+    display: inline-flex;
   }
   .game-layout .priority-controls {
+    display: none;
     grid-column: 1;
     margin: 0;
     overflow-x: auto;
