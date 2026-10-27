@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a02e1ca7-23c5-41e3-a744-72fc9e9dd8ba",
+  "name": "Fireshrieker",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": [],
+    "manaCost": "{3}"
+  },
+  "rulesText": "Equipped creature has double strike. (It deals both first-strike and regular combat damage.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "equip",
+      "cost": "{2}"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["double strike"]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "be0b86fc-8450-41d4-9836-6de11cecb857",
+  "name": "Vibranium Energy Daggers",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "Indestructible (Effects that say \"destroy\" don't destroy this Equipment.)\nEquipped creature gets +2/+2.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "indestructible"
+    },
+    {
+      "kind": "equip",
+      "cost": "{3}"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 2,
+      "toughness": 2
+    }
+  ]
+}

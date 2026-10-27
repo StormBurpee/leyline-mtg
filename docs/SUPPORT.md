@@ -80,3 +80,7 @@ This is a dependency order, not a delivery promise. Each step needs regression e
 ### Life-gain events
 
 Positive life gains trigger controller-filtered life-gain abilities. Lifelink damage is grouped by source within each simultaneous damage batch, preserving separate events for separate sources and suppressing zero gains. Trigger ordering and resolution use the normal stack. Dynamic “that much” effects and life-gain replacement/prevention are not yet included. Rules basis: [CR 119.9 and 702.15e](https://media.wizards.com/2026/downloads/MagicCompRules%2020260925.txt).
+
+### Equipment
+
+Equipment uses normal stack-based activated abilities with sorcery timing and controller-filtered creature targets. Fixed attached power/toughness and keyword bonuses, typed equip restrictions, literal mana/discard costs, and target-based enters-trigger attachment are supported. Zone-incarnation checks prevent stale attachments. An illegal attachment detaches without destroying the Equipment. Equipment and wearer controllers remain independent. Dynamic bonuses and granted activated/triggered abilities are still unsupported. See [CR 301.5 and 702.6](https://media.wizards.com/2026/downloads/MagicCompRules%2020260925.txt).

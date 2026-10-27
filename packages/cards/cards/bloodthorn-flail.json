@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "01ab7724-1967-4da6-aebd-3729983d6a0e",
+  "name": "Bloodthorn Flail",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "Equipped creature gets +2/+1.\nEquip\u2014Pay {3} or discard a card.",
+  "abilities": [
+    {
+      "kind": "equip",
+      "cost": "{3}"
+    },
+    {
+      "kind": "equip",
+      "cost": {
+        "discard": 1
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 2,
+      "toughness": 1
+    }
+  ]
+}

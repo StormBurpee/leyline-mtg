@@ -4,9 +4,9 @@
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
     "packages/engine/src/registry.js": "282e2a6da52197795ab6c7eea9972106f6a16eb638b1df78038c2da23042c3ac",
-    "packages/engine/src/definition-validation.js": "d3055875a1bb2b566028eeea0d88b6d50dceaec767cdad9164c32033483ee5c9",
+    "packages/engine/src/definition-validation.js": "f7a33c6156ade6f23ba09b0270bd0cdf09c9effa8dd5a85e036cb27d423d280d",
     "packages/engine/src/condition-schema.js": "5ae7a42619debe71a3aa585ef1b84015ab8b37a4d6c69e1e37180375b647567b",
-    "packages/engine/src/selectors.js": "f9cb9729c94ff12848f5bf4703f3cb3ef21ed4389a9c4903fc3b99c209f00709",
+    "packages/engine/src/selectors.js": "aed0814cc9f5248e16f7f54a62c2c6ac34181ec8fdcaf708eeb11afba9dddfc3",
     "packages/engine/src/events.js": "703c8be329d05a8e987bc438413f2d90cdbd2ccb350f8b1b9a475182169b9d70",
     "packages/engine/src/types.js": "00fbf8bea498daa3e56dbfa6d49968a99a7fa3552b4715af84479d599bf7b9b1"
   },
@@ -24,10 +24,10 @@
     "excluded_alchemy": 3
   },
   "coverage": {
-    "unsupported": 13152,
+    "unsupported": 13130,
     "no_exact_forge_match": 685,
     "compiler_candidate": 597,
-    "curated": 898
+    "curated": 920
   },
   "layouts": {
     "normal": 14416,
@@ -49,17 +49,17 @@
     "Vigilance": 420,
     "Enchant": 401,
     "Transform": 365,
-    "Flash": 361,
+    "Flash": 354,
     "Mill": 334,
-    "Equip": 333,
     "Haste": 324,
+    "Equip": 311,
     "Scry": 289,
     "Reach": 267,
     "Menace": 266,
     "Lifelink": 265,
     "Cycling": 223,
     "Deathtouch": 218,
-    "Treasure": 212,
+    "Treasure": 211,
     "Surveil": 177,
     "Crew": 138,
     "Ward": 134,
@@ -70,7 +70,7 @@
     "Defender": 108,
     "Fight": 104,
     "Landfall": 98,
-    "Indestructible": 79,
+    "Indestructible": 78,
     "Double": 76,
     "Investigate": 66,
     "Proliferate": 66,
@@ -446,9 +446,9 @@
   "diagnostics": {
     "Unreferenced or unsupported SVar": 11703,
     "Unsupported spell field": 9510,
-    "Unsupported spell opcode": 6866,
+    "Unsupported spell opcode": 6856,
     "Unsupported trigger field": 4954,
-    "unsupported field S.": 3065,
+    "unsupported field S.": 3043,
     "Unsupported trigger mode": 2992,
     "Unsupported mana symbol": 2550,
     "Unsupported supertype or card type.": 2412,
@@ -459,18 +459,18 @@
     "Keywords on this card type require manual review.": 681,
     "Unsupported graveyard target predicate": 668,
     "Unsupported zone-change trigger predicate": 531,
-    "Pump needs a creature target or an activated source.": 488,
+    "Pump needs a creature target or an activated source.": 482,
     "SubAbility references must point to a DB instruction.": 447,
     "Unsupported cast trigger predicate": 412,
     "unsupported keyword Enchant": 381,
     "Only an unconditional self enters-tapped replacement is supported.": 354,
     "Only one tap ability producing one mana of a listed color is supported.": 354,
     "DealDamage requires a supported target predicate.": 349,
-    "unsupported keyword Equip": 335,
     "unsupported field AI.": 317,
+    "unsupported keyword Equip": 312,
     "NumDmg must be a literal nonnegative integer.": 294,
-    "Only Defined Self is supported for source pumps.": 263,
     "CounterNum must be a literal nonnegative integer.": 261,
+    "Only Defined Self is supported for source pumps.": 257,
     "Unsupported card-type combination.": 248,
     "Destroy requires a supported permanent target.": 245,
     "Unsupported dies trigger predicate": 234,
@@ -1109,5 +1109,5 @@
       "sha256": "22e4f4e89709f3f96d9ea947475ea026c8a8232cbb2cf00e81c13526c986ad23"
     }
   ],
-  "reclassifiedWithEngine": "0.29.0"
+  "reclassifiedWithEngine": "0.30.0"
 }

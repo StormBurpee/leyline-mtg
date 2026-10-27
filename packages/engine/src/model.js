@@ -5,7 +5,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.29.0';
+export const VERSION = '0.30.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -83,14 +83,43 @@ function staticApplies(s, source, object, effect) {
     source.controller,
   );
 }
+export function legalEquipmentAttachment(s, equipment, target) {
+  if (
+    !equipment ||
+    !target ||
+    equipment.id === target.id ||
+    equipment.zone !== 'battlefield' ||
+    target.zone !== 'battlefield'
+  )
+    return false;
+  const d = definition(s, equipment);
+  return (
+    d.subtypes.includes('Equipment') &&
+    !hasType(d, 'creature') &&
+    hasType(definition(s, target), 'creature')
+  );
+}
+function attachmentApplies(s, equipment, target) {
+  return (
+    equipment.attachedTo?.id === target.id &&
+    equipment.attachedTo.incarnation === target.incarnation &&
+    legalEquipmentAttachment(s, equipment, target)
+  );
+}
 export function keywords(s, o) {
   return [
     ...new Set([
       ...definition(s, o).keywords,
       ...(s.players[o.controller].speed === 4 ? (definition(s, o).maxSpeedKeywords ?? []) : []),
       ...battlefield(s).flatMap((source) => {
-        const e = definition(s, source).static;
-        return e?.kind === 'anthem' && staticApplies(s, source, o, e) ? (e.keywords ?? []) : [];
+        const d = definition(s, source);
+        const e = d.static;
+        return [
+          ...(d.attachmentBonus && attachmentApplies(s, source, o)
+            ? (d.attachmentBonus.keywords ?? [])
+            : []),
+          ...(e?.kind === 'anthem' && staticApplies(s, source, o, e) ? (e.keywords ?? []) : []),
+        ];
       }),
       ...s.modifiers
         .filter((m) => m.objectId === o.id && m.incarnation === o.incarnation)
@@ -110,7 +139,12 @@ export function stats(s, o) {
     }
   if (d.type === 'creature' && o.zone === 'battlefield')
     for (const a of battlefield(s)) {
-      const effect = definition(s, a).static;
+      const d = definition(s, a);
+      if (d.attachmentBonus && attachmentApplies(s, a, o)) {
+        power += d.attachmentBonus.power;
+        toughness += d.attachmentBonus.toughness;
+      }
+      const effect = d.static;
       if (effect?.kind === 'anthem' && staticApplies(s, a, o, effect)) {
         power += effect.power;
         toughness += effect.toughness;

@@ -111,7 +111,7 @@ export type Effect =
       reveal?: boolean;
     }
   | { op: 'mill'; count: number; player: 'controller' | 'opponent' | 'target' }
-  | { op: 'counter' | 'bounce' | 'destroy' }
+  | { op: 'counter' | 'bounce' | 'destroy' | 'attachEquipment' }
   | { op: 'untap' | 'tap'; subject?: 'source' }
   | {
       op: 'destroyAll' | 'exileAll' | 'tapAll' | 'untapAll';
@@ -186,6 +186,7 @@ export interface CardDefinition {
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
   readonly aura?: 'pacifism';
+  readonly attachmentBonus?: { power: number; toughness: number; keywords?: readonly string[] };
   readonly static?: {
     kind: 'anthem';
     power: number;

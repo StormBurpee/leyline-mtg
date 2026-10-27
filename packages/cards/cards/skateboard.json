@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "decfde5e-ea53-4b15-8f69-51da7ef39d15",
+  "name": "Skateboard",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "When this Equipment enters, tap target permanent.\nEquipped creature gets +1/+0 and has haste.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent"
+      }
+    },
+    {
+      "kind": "equip",
+      "cost": "{1}"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 0,
+      "keywords": ["haste"]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "leyline-mtg",
-  "version": "0.29.0",
+  "version": "0.30.0",
   "private": true,
   "description": "A deterministic JavaScript Magic rules kernel and a modern tabletop client.",
   "type": "module",

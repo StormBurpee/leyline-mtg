@@ -316,6 +316,28 @@ export function chooseBotCommand(s, p) {
     if (!defenseCache.has(id)) defenseCache.set(id, preserveForDefense(s, s.objects[id], p));
     return defenseCache.get(id);
   };
+  const equip = actions
+    .filter((action) => {
+      if (action.type !== 'activate' || action.target?.kind !== 'object') return false;
+      const object = s.objects[action.card],
+        d = definition(s, object),
+        ability = d.activated[action.ability];
+      if (!ability.effects.some((effect) => effect.op === 'attachEquipment')) return false;
+      const attached = object.attachedTo && s.objects[object.attachedTo.id];
+      if (
+        attached?.zone === 'battlefield' &&
+        attached.incarnation === object.attachedTo.incarnation
+      )
+        return false;
+      const bonus = d.attachmentBonus;
+      return (
+        bonus &&
+        (bonus.power + bonus.toughness > 0 || bonus.keywords?.length) &&
+        stats(s, s.objects[action.target.id]).toughness + bonus.toughness > 0
+      );
+    })
+    .sort((a, b) => value(s, s.objects[b.target.id]) - value(s, s.objects[a.target.id]))[0];
+  if (equip) return { ...equip, player: p };
   const ability = actions.find((action) => {
     if (action.type !== 'activate') return false;
     const activated = definition(s, s.objects[action.card]).activated[action.ability];
@@ -345,6 +367,10 @@ export function chooseBotCommand(s, p) {
         if (d.mana && controlled(s, p).filter((o) => definition(s, o).mana).length < 5) score += 3;
         if (resolutionRisk(s, p, d.etb ?? [], a.target)) score = -100;
       }
+      if (d.attachmentBonus)
+        score = controlled(s, p).some((o) => definition(s, o).type === 'creature')
+          ? 4 + d.attachmentBonus.power + d.attachmentBonus.toughness
+          : 0.5;
       if (d.static?.kind === 'anthem')
         score +=
           controlled(s, p).filter((o) => definition(s, o).type === 'creature').length *

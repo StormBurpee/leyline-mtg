@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "91415d12-b13d-4b5c-bb60-6ec6f4fdde6e",
+  "name": "Gold Pan",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": [],
+    "manaCost": "{2}"
+  },
+  "rulesText": "When this Equipment enters, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")\nEquipped creature gets +1/+1.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "equip",
+      "cost": "{1}"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

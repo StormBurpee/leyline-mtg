@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3cc333a1-c854-4b7c-8002-910e48222371",
+  "name": "Well-Worn Spatula",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "When this Equipment enters, you gain 2 life.\nEquipped creature gets +1/+1.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "equip",
+      "cost": "{1}"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

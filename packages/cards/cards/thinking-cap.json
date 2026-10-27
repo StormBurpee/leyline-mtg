@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a54fb3de-0581-461e-be33-dc4f4d16a33e",
+  "name": "Thinking Cap",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment"],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "Equipped creature gets +1/+2.\nEquip Detective {1}\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "equip",
+      "cost": "{1}",
+      "where": {
+        "subtype": "Detective"
+      }
+    },
+    {
+      "kind": "equip",
+      "cost": "{3}"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 2
+    }
+  ]
+}
