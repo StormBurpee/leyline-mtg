@@ -1,3 +1,4 @@
+import { effectValues, numericValue } from './numeric-values.js';
 import { spellProfile } from './spell-modes.js';
 import { chooseSearchCards } from './library-search.js';
 import {
@@ -24,7 +25,45 @@ import { planPayment } from './mana.js';
 import { matchesEvent } from './events.js';
 import { legalActions } from './engine.js';
 import { canAttack, canBlock, suggestedDamage } from './combat.js';
-import { controlled, definition, hasKeyword, isPacified, opponent, stats } from './model.js';
+import {
+  controlled,
+  definition as rawDefinition,
+  hasKeyword,
+  isPacified,
+  opponent,
+  stats,
+} from './model.js';
+function definition(s, o) {
+  const d = rawDefinition(s, o),
+    entry = { controller: o.controller, source: { id: o.id, incarnation: o.incarnation } };
+  const effects = (list) => list?.map((e) => effectValues(s, e, entry));
+  return {
+    ...d,
+    ...(d.effects ? { effects: effects(d.effects) } : {}),
+    ...(d.etb ? { etb: effects(d.etb) } : {}),
+    ...(d.activated
+      ? { activated: d.activated.map((a) => ({ ...a, effects: effects(a.effects) })) }
+      : {}),
+    ...(d.attachmentBonus
+      ? {
+          attachmentBonus: {
+            ...d.attachmentBonus,
+            power: numericValue(s, d.attachmentBonus.power, entry),
+            toughness: numericValue(s, d.attachmentBonus.toughness, entry),
+          },
+        }
+      : {}),
+    ...(d.static
+      ? {
+          static: {
+            ...d.static,
+            power: numericValue(s, d.static.power, entry),
+            toughness: numericValue(s, d.static.toughness, entry),
+          },
+        }
+      : {}),
+  };
+}
 const value = (s, o) => {
   const d = definition(s, o);
   return d.type === 'creature'
@@ -101,7 +140,9 @@ export function chooseBotCommand(s, p) {
         return {
           type: 'resolveOptional',
           player: p,
-          accept: acceptLifePayoff(s, entry) ?? !resolutionRisk(s, p, entry.effects, entry.target),
+          accept:
+            acceptLifePayoff(s, entry) ??
+            !resolutionRisk(s, p, entry.effects, entry.target, 0, entry.source),
         };
       }
       case 'payCost':
@@ -166,7 +207,8 @@ export function chooseBotCommand(s, p) {
         );
         const safe = c.targets.filter(
           (target) =>
-            canPayTargetWard(s, p, target) && !resolutionRisk(s, p, c.entry.effects, target),
+            canPayTargetWard(s, p, target) &&
+            !resolutionRisk(s, p, c.entry.effects, target, 0, c.entry.source),
         );
         const targets = [...(safe.length ? safe : c.targets)].sort((a, b) => {
           const score = (target) => {

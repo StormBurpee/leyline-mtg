@@ -1,3 +1,4 @@
+import { effectValues } from './numeric-values.js';
 import { spellProfile } from './spell-modes.js';
 import { definition } from './model.js';
 import { planPayment } from './mana.js';
@@ -26,7 +27,10 @@ export function drawsFor(effects, controller, target, player = controller) {
 /** A bounded check of known effects, not a claim to solve every triggered interaction.
  * Life may reach zero during one resolution and recover before state-based actions.
  */
-export function resolutionRisk(state, player, effects, target, lifeCost = 0) {
+export function resolutionRisk(state, player, effects, target, lifeCost = 0, source = null) {
+  effects = effects.map((effect) =>
+    effectValues(state, effect, { controller: player, source, target }),
+  );
   let life = state.players[player].life - lifeCost;
   for (const effect of effects) {
     if (effect.op === 'damage' && target?.kind === 'player' && target.id === player)
@@ -45,9 +49,16 @@ export function actionEffects(state, action) {
   if (!object) return [];
   const card = definition(state, object);
   if (action.type === 'cycle') return [{ op: 'draw', count: 1 }];
-  return action.type === 'activate'
-    ? card.activated[action.ability].effects
-    : (spellProfile(card, action.mode)?.effects ?? []);
+  const effects =
+    action.type === 'activate'
+      ? card.activated[action.ability].effects
+      : (spellProfile(card, action.mode)?.effects ?? []);
+  const entry = {
+    controller: object.controller,
+    source: { id: object.id, incarnation: object.incarnation },
+    target: action.target,
+  };
+  return effects.map((effect) => effectValues(state, effect, entry));
 }
 
 function actionCost(state, action) {

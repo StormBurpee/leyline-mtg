@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "241117a0-8305-48bb-9cb9-9b01e86e08f7",
+  "name": "Space-Time Anomaly",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U", "W"],
+    "manaCost": "{2}{W}{U}"
+  },
+  "rulesText": "Target player mills cards equal to your life total.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "target",
+          "amount": {
+            "kind": "life",
+            "player": "you"
+          }
+        }
+      ]
+    }
+  ]
+}

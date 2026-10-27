@@ -660,6 +660,16 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           ),
         };
         break;
+      case 'baseStats':
+      case 'selfBonus':
+        fields(a, ['kind', 'power', 'toughness'], path);
+        if (d[a.kind]) problem('MULTIPLE_STAT_RULE', path, 'Combine stat rules into one ability.');
+        d[a.kind] = Object.fromEntries(
+          ['power', 'toughness']
+            .filter((k) => a[k] !== undefined)
+            .map((k) => [k, structuredClone(a[k])]),
+        );
+        break;
       case 'attachmentBonus':
         fields(a, ['kind', 'power', 'toughness', 'keywords', 'noUntap'], path);
         if (d.attachmentBonus)

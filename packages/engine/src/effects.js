@@ -1,3 +1,4 @@
+import { effectValues } from './numeric-values.js';
 import { CREATURE_TYPES } from './creature-types.js';
 import { meetsCondition } from './conditions.js';
 import { searchableCards } from './library-search.js';
@@ -342,7 +343,7 @@ function damageSource(s, entry) {
 export function resolveEffects(s, entry, startIndex = 0) {
   const effects = entry.effects ?? [];
   for (let index = startIndex; index < effects.length; index++) {
-    const e = effects[index];
+    const e = effectValues(s, effects[index], entry);
     const recipient =
       e.player === 'target'
         ? entry.target?.id
@@ -563,6 +564,8 @@ export function resolveEffects(s, entry, startIndex = 0) {
           toughness: 1,
           token: true,
         };
+        // A fixed 1/1 copy exception does not copy a power/toughness-defining ability.
+        delete token.definitionOverride.baseStats;
         token.token = true;
         enterBattlefield(s, token, entry.controller);
         break;

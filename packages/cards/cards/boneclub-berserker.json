@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a08f69f9-de48-46d6-8b75-31886159cf45",
+  "name": "Boneclub Berserker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Berserker"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "This creature gets +2/+0 for each other Goblin you control.",
+  "abilities": [
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "scale",
+        "value": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "subtype": "Goblin"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "excludeSource": true
+        },
+        "factor": 2
+      },
+      "toughness": 0
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.32.0 — State-derived values and creature statistics
+
+- Add bounded, data-only numeric expressions for public zone counts, life totals, sums and scaling. Resolve instruction values at resolution and continuous bonuses against live state. Hidden zones expose counts only, not characteristic queries.
+- Add characteristic-defining creature statistics in every zone, source bonuses and scaling Aura/anthem bonuses. Library searches use derived characteristics; fixed 1/1 offspring exceptions omit copied power/toughness-defining abilities.
+- Add 26 full-text Standard cards and one Gremlin token definition. Catalog: 974 cards and 27 tokens. Includes Regal Bunnicorn, Enigma Drake, Ethereal Armor, Blanchwood Armor and Rumbling Rockslide.
+- Cast-time X selection, dependent-characteristic count filters and dynamic mana production remain unsupported. A token-creation instruction retains the 1,000-token resource ceiling.
+
 ## 0.31.0 — Creature Auras and attachment choices
 
 - Add fixed creature Aura stat/keyword bonuses, attached-subject effects, no-untap restrictions and legal-attachment state-based checks without incorrectly treating hexproof as an ongoing enchant restriction.

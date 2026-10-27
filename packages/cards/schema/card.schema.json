@@ -485,9 +485,7 @@
               "enum": ["controller", "opponent", "target"]
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "target", "amount"],
@@ -503,9 +501,7 @@
               "enum": ["controller", "opponent", "target"]
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "target", "amount"],
@@ -521,9 +517,7 @@
               "enum": ["controller", "opponent", "target"]
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "target", "amount"],
@@ -539,9 +533,7 @@
               "enum": ["controller", "opponent", "target"]
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "target", "amount"],
@@ -557,9 +549,7 @@
               "enum": ["controller", "opponent", "target"]
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "target", "amount"],
@@ -575,9 +565,7 @@
               "enum": ["target", "opponent", "controller"]
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "target", "amount"],
@@ -593,9 +581,7 @@
               "enum": ["target", "opponent", "controller"]
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "target", "amount"],
@@ -650,14 +636,10 @@
               "enum": ["source", "target", "attached"]
             },
             "power": {
-              "type": "integer",
-              "minimum": -9007199254740991,
-              "maximum": 9007199254740991
+              "$ref": "#/$defs/numericValue"
             },
             "toughness": {
-              "type": "integer",
-              "minimum": -9007199254740991,
-              "maximum": 9007199254740991
+              "$ref": "#/$defs/numericValue"
             },
             "keywords": {
               "type": "array",
@@ -700,9 +682,7 @@
               "type": "string"
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             },
             "controller": {
               "enum": ["controller", "opponent", "target", "targetController"]
@@ -752,9 +732,7 @@
               "const": "+1/+1"
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "target", "counter", "amount"],
@@ -783,9 +761,7 @@
               "enum": ["controller", "opponent", "target"]
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "target", "amount"],
@@ -885,10 +861,10 @@
               "type": "boolean"
             },
             "power": {
-              "type": "integer"
+              "$ref": "#/$defs/numericValue"
             },
             "toughness": {
-              "type": "integer"
+              "$ref": "#/$defs/numericValue"
             },
             "keywords": {
               "type": "array",
@@ -916,8 +892,7 @@
               "type": "boolean"
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0
+              "$ref": "#/$defs/numericValue"
             },
             "players": {
               "enum": ["none", "controller", "opponent", "all"]
@@ -939,8 +914,7 @@
               "type": "boolean"
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "where", "amount"],
@@ -998,9 +972,7 @@
               "const": "damageEventOpponent"
             },
             "amount": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             }
           },
           "required": ["op", "amount"],
@@ -1279,14 +1251,10 @@
               "const": "anthem"
             },
             "power": {
-              "type": "integer",
-              "minimum": -9007199254740991,
-              "maximum": 9007199254740991
+              "$ref": "#/$defs/numericValue"
             },
             "toughness": {
-              "type": "integer",
-              "minimum": -9007199254740991,
-              "maximum": 9007199254740991
+              "$ref": "#/$defs/numericValue"
             },
             "where": {
               "$ref": "#/$defs/predicate"
@@ -1523,14 +1491,10 @@
               "const": "attachmentBonus"
             },
             "power": {
-              "type": "integer",
-              "minimum": -1000,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             },
             "toughness": {
-              "type": "integer",
-              "minimum": -1000,
-              "maximum": 1000
+              "$ref": "#/$defs/numericValue"
             },
             "keywords": {
               "type": "array",
@@ -1569,6 +1533,46 @@
           },
           "required": ["kind", "cost"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "selfBonus"
+            },
+            "power": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "toughness": {
+              "$ref": "#/$defs/numericValue"
+            }
+          },
+          "required": ["kind", "power", "toughness"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "baseStats"
+            },
+            "power": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "toughness": {
+              "$ref": "#/$defs/numericValue"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false,
+          "anyOf": [
+            {
+              "required": ["power"]
+            },
+            {
+              "required": ["toughness"]
+            }
+          ]
         }
       ]
     },
@@ -1600,6 +1604,84 @@
             }
           },
           "required": ["kind", "count", "where"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "numericValue": {
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "count"
+            },
+            "zone": {
+              "enum": ["battlefield", "graveyard", "exile", "hand", "library"]
+            },
+            "player": {
+              "enum": ["you", "opponent", "all"]
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "excludeSource": {
+              "type": "boolean"
+            }
+          },
+          "required": ["kind", "zone", "player"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "life"
+            },
+            "player": {
+              "enum": ["you", "opponent"]
+            }
+          },
+          "required": ["kind", "player"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "sum"
+            },
+            "values": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/numericValue"
+              },
+              "minItems": 1,
+              "maxItems": 8
+            }
+          },
+          "required": ["kind", "values"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "scale"
+            },
+            "value": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "factor": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            }
+          },
+          "required": ["kind", "value", "factor"],
           "additionalProperties": false
         }
       ]

@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b94c233e-11d3-4556-a1da-bd193e58b663",
+  "name": "Tempest Djinn",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Djinn"],
+    "colors": ["U"],
+    "manaCost": "{U}{U}{U}",
+    "power": 0,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nThis creature gets +1/+0 for each basic Island you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "basic": true
+            },
+            {
+              "all": [
+                {
+                  "subtype": "Island"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "toughness": 0
+    }
+  ]
+}

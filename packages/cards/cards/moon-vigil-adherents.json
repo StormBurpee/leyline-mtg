@@ -1,0 +1,81 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d0fa43f6-d8f6-4674-b538-6d546b7dcf40",
+  "name": "Moon-Vigil Adherents",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}{G}",
+    "power": 0,
+    "toughness": 0
+  },
+  "rulesText": "Trample\nThis creature gets +1/+1 for each creature you control and each creature card in your graveyard.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "sum",
+        "values": [
+          {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "all",
+            "where": {
+              "all": [
+                {
+                  "controller": "you"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you",
+            "where": {
+              "type": "creature"
+            }
+          }
+        ]
+      },
+      "toughness": {
+        "kind": "sum",
+        "values": [
+          {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "all",
+            "where": {
+              "all": [
+                {
+                  "controller": "you"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you",
+            "where": {
+              "type": "creature"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

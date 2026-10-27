@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0909cbce-b4a0-42bb-8a97-47eeb99606c0",
+  "name": "Rumbling Rockslide",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{3}{R}"
+  },
+  "rulesText": "Rumbling Rockslide deals damage to target creature equal to the number of lands you control.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "all",
+            "where": {
+              "all": [
+                {
+                  "controller": "you"
+                },
+                {
+                  "type": "land"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

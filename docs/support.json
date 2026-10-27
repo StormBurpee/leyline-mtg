@@ -1,5 +1,5 @@
 {
-  "version": "0.31.0",
+  "version": "0.32.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -56,6 +56,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Adelbert Steiner",
+      "type": "creature",
+      "keywords": ["lifelink"],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -330,6 +338,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Archway Angel",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Artifist Acumen",
       "type": "sorcery",
       "keywords": [],
@@ -539,6 +555,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Biosynthic Burst",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counterOn", "modify", "untap"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Birnin Zana Plaza",
       "type": "land",
       "keywords": [],
@@ -566,6 +590,14 @@
           "controller": "you"
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Blanchwood Armor",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -705,6 +737,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Boneclub Berserker",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -850,6 +890,14 @@
       "keywords": ["flash"],
       "opcodes": ["modify"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Burrowguard Mentor",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1210,6 +1258,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Cosmic Spider-Man",
+      "type": "creature",
+      "keywords": ["flying", "first strike", "trample", "lifelink", "haste"],
+      "opcodes": ["modifyAll"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "beginCombat",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Cosmium Blast",
       "type": "instant",
       "keywords": [],
@@ -1271,6 +1333,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["surveil", "draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Crusader of Odric",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1767,6 +1837,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Earthshaker Dreadmaw",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "East Wind Avatar",
       "type": "creature",
       "keywords": ["flying", "vigilance"],
@@ -1880,6 +1958,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Enigma Drake",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Environmental Scientist",
       "type": "creature",
       "keywords": [],
@@ -1942,6 +2028,14 @@
       "keywords": [],
       "opcodes": ["moveTarget"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ethereal Armor",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -2455,6 +2549,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Get a Leg Up",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Gev, Scaled Scorch",
       "type": "creature",
       "keywords": [],
@@ -2699,6 +2801,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gran Pulse Ochu",
+      "type": "creature",
+      "keywords": ["deathtouch"],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Grapple with Death",
       "type": "sorcery",
       "keywords": [],
@@ -2851,6 +2961,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Guidelight Synergist",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Guttersnipe",
       "type": "creature",
       "keywords": [],
@@ -2873,6 +2991,19 @@
       "opcodes": ["attachEquipment"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Harmonious Grovestrider",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "ward": {
+        "mana": {
+          "generic": 2
+        }
+      },
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Harrier Strix",
@@ -3504,6 +3635,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Krang, Utrom Warlord",
+      "type": "creature",
+      "keywords": ["flying", "trample", "indestructible", "haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Kree Commandos",
       "type": "creature",
       "keywords": ["flying", "vigilance"],
@@ -4079,11 +4218,27 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Meticulous Artisan",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token", "modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Micromancer",
       "type": "creature",
       "keywords": [],
       "opcodes": ["searchLibrary"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Midnight Mayhem",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["token", "modifyAll"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -4187,6 +4342,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Mirkwood Pathmaker",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Mirkwood Spider",
       "type": "creature",
       "keywords": ["deathtouch"],
@@ -4280,6 +4443,14 @@
       "name": "Monoist Sentry",
       "type": "creature",
       "keywords": ["defender"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Moon-Vigil Adherents",
+      "type": "creature",
+      "keywords": ["trample"],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -5380,6 +5551,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Regal Bunnicorn",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Regal Imperiosaur",
       "type": "creature",
       "keywords": [],
@@ -5621,6 +5800,14 @@
         "Ruinous Rampage deals 3 damage to each opponent",
         "Exile all artifacts with mana value 3 or less"
       ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rumbling Rockslide",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6298,6 +6485,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Snow Villiers",
+      "type": "creature",
+      "keywords": ["vigilance"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Solemn Simulacrum",
       "type": "creature",
       "keywords": [],
@@ -6326,6 +6521,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["loseLife", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Space-Time Anomaly",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["mill"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6953,6 +7156,14 @@
       "keywords": [],
       "opcodes": ["counterOn"],
       "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tempest Djinn",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -7753,6 +7964,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Villainous Wrath",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["loseLife", "destroyAll"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Vinereap Mentor",
       "type": "creature",
       "keywords": [],
@@ -8215,6 +8434,7 @@
     "Faerie Token",
     "Food Token",
     "Goblin Token",
+    "Gremlin Token",
     "Hero Token",
     "Human Citizen Token",
     "Inkling Token",

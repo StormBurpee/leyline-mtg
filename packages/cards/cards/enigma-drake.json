@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "62007675-8a0d-4211-83b2-0daf3641dedc",
+  "name": "Enigma Drake",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Drake"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U}{R}",
+    "power": 0,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nEnigma Drake's power is equal to the number of instant and sorcery cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "baseStats",
+      "power": {
+        "kind": "count",
+        "zone": "graveyard",
+        "player": "you",
+        "where": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

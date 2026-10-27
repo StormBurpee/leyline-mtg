@@ -259,6 +259,7 @@ test('source compilation can bootstrap without a generated runtime catalog', asy
       'packages/cards/json-data.js',
       'packages/engine/src/definition-validation.js',
       'packages/engine/src/condition-schema.js',
+      'packages/engine/src/value-schema.js',
       'packages/engine/src/types.js',
       'packages/engine/src/selectors.js',
       'packages/engine/src/events.js',

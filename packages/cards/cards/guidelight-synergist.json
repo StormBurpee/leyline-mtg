@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c0bc3704-9bf9-4039-b3f8-205c1e5eb6e9",
+  "name": "Guidelight Synergist",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot", "Artificer"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 0,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nThis creature gets +1/+0 for each artifact you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "artifact"
+            }
+          ]
+        }
+      },
+      "toughness": 0
+    }
+  ]
+}

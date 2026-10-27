@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f2cf087a-d89a-4145-9394-945ce41c8cca",
+  "name": "Archway Angel",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Angel"],
+    "colors": ["W"],
+    "manaCost": "{5}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this creature enters, you gain 2 life for each Gate you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": {
+            "kind": "scale",
+            "value": {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "all",
+              "where": {
+                "all": [
+                  {
+                    "subtype": "Gate"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              }
+            },
+            "factor": 2
+          }
+        }
+      ]
+    }
+  ]
+}

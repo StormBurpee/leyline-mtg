@@ -1,5 +1,5 @@
 import { matchesFilter } from './selectors.js';
-import { definition } from './model.js';
+import { definition, stats } from './model.js';
 
 /** Searching looks at printed library characteristics, not battlefield modifiers. */
 export function searchableCards(state, player, where) {
@@ -13,8 +13,7 @@ export function searchableCards(state, player, where) {
         controller: object.owner,
         token: false,
         tapped: false,
-        power: card.power,
-        toughness: card.toughness,
+        ...stats(state, object),
         manaValue: Object.values(card.cost).reduce((a, b) => a + b, 0),
       },
       where,
