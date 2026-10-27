@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d13f0907-de39-4a90-940a-831740d7aa9b",
+  "name": "Pilfer",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "revealDiscard"
+        }
+      ],
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      }
+    }
+  ]
+}

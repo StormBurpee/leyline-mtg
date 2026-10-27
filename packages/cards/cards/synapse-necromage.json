@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f5eace41-0f53-4084-8bec-1e079c04287b",
+  "name": "Synapse Necromage",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Fungus", "Wizard"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "When this creature dies, create two 1/1 black Fungus creature tokens with \"This token can't block.\"",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/nonblocking-fungus-token",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

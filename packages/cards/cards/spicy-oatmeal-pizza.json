@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9665f940-c0a4-4d3e-b889-8049cf549a4f",
+  "name": "Spicy Oatmeal Pizza",
+  "characteristics": {
+    "types": ["artifact"],
+    "subtypes": ["Food"],
+    "supertypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "When this artifact enters, it deals 4 damage to any target and 3 damage to you.\n{2}, {T}, Sacrifice this artifact: You gain 3 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 4
+        },
+        {
+          "op": "damageAll",
+          "players": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

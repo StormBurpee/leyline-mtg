@@ -3,7 +3,14 @@ export type ConvokeChoice = {
   symbol: Exclude<Color, 'C'> | 'generic' | HybridSymbol;
 };
 /** Public types for the dependency-free JavaScript engine. */
-export type CardType = 'land' | 'creature' | 'instant' | 'sorcery' | 'artifact' | 'enchantment';
+export type CardType =
+  | 'land'
+  | 'creature'
+  | 'instant'
+  | 'sorcery'
+  | 'artifact'
+  | 'enchantment'
+  | 'planeswalker';
 export type PlayerId = 0 | 1;
 export type Color = 'W' | 'U' | 'B' | 'R' | 'G' | 'C';
 export type HybridSymbol = `${Exclude<Color, 'C'>}/${Exclude<Color, 'C'>}`;
@@ -94,6 +101,7 @@ export interface EventSpec {
   filter?: CardPredicate;
   excludeSource?: boolean;
   spellNumber?: number;
+  castByController?: boolean;
   targetingController?: 'you' | 'opponent';
   targetingKind?: 'spell' | 'ability';
   firstEachTurn?: true;
@@ -115,6 +123,7 @@ export type NumericValue =
       where?: CardPredicate;
       excludeSource?: boolean;
     }
+  | { kind: 'maxManaValue'; player: 'you' | 'opponent' | 'all'; where?: CardPredicate }
   | { kind: 'spellsCast'; player: 'you' | 'opponent' | 'all'; where?: SpellHistoryPredicate }
   | { kind: 'life'; player: 'you' | 'opponent' }
   | { kind: 'sum'; values: NumericValue[] }
@@ -130,6 +139,14 @@ export interface TargetGroup {
 export type TargetPlan = Record<string, Target[]>;
 export type Effect = EffectInstruction & { targetGroup?: string };
 type EffectInstruction =
+  | { op: 'disableDamagePrevention' }
+  | {
+      op: 'discardTrigger';
+      count: number;
+      where: CardPredicate;
+      selector: TargetKind;
+      effects: Effect[];
+    }
   | { op: 'sacrificeSelf' }
   | {
       op: 'sacrifice';
@@ -145,6 +162,7 @@ type EffectInstruction =
   | { op: 'impulseChoose'; count: number }
   | { op: 'bindingNegotiation' }
   | { op: 'revealDiscard' }
+  | { op: 'empowerJace'; definition: string; count: number }
   | { op: 'mobilize'; definition: string; count: NumericValue }
   | { op: 'addMana'; mana: ManaCost }
   | { op: 'damageEventOpponent'; amount: NumericValue }
@@ -162,7 +180,7 @@ type EffectInstruction =
       tapped?: boolean;
     }
   | {
-      op: 'draw' | 'scry' | 'surveil' | 'discard';
+      op: 'draw' | 'lookChooseHand' | 'scry' | 'surveil' | 'discard';
       count: NumericValue;
       player?: 'controller' | 'opponent' | 'target';
     }
@@ -180,7 +198,7 @@ type EffectInstruction =
   | { op: 'bounce' | 'destroy'; subject?: 'source' | 'attached' }
   | { op: 'untap' | 'tap'; subject?: 'source' | 'attached' }
   | {
-      op: 'destroyAll' | 'exileAll' | 'tapAll' | 'untapAll';
+      op: 'bounceAll' | 'destroyAll' | 'exileAll' | 'tapAll' | 'untapAll';
       where: CardPredicate;
       excludeSource?: boolean;
     }
@@ -201,6 +219,13 @@ type EffectInstruction =
       excludeSource?: boolean;
     }
   | { op: 'counterOn'; subject?: 'source' | 'attached'; amount: NumericValue }
+  | {
+      op: 'animateLand';
+      power: number;
+      toughness: number;
+      colors: Color[];
+      subtypes: string[];
+    }
   | {
       op: 'modify';
       subject?: 'source' | 'attached';
@@ -257,6 +282,7 @@ export interface CardDefinition {
   readonly color: readonly string[];
   readonly keywords: readonly string[];
   readonly subtypes: readonly string[];
+  readonly loyalty?: number;
   readonly power?: number;
   readonly toughness?: number;
   readonly basic?: boolean;
@@ -358,7 +384,16 @@ export interface CardDefinition {
     condition?: StateCondition;
   }[];
   readonly activated?: readonly {
-    cost: { mana?: ManaCost; tap?: boolean; life?: number; sacrificeSelf?: boolean; discard?: 1 };
+    loyalty?: number;
+    cost: {
+      mana?: ManaCost;
+      tap?: boolean;
+      life?: number;
+      sacrificeSelf?: boolean;
+      exileSelf?: boolean;
+      discard?: 1;
+    };
+    zone?: 'graveyard';
     target?: TargetKind | null;
     targetGroups?: readonly TargetGroup[];
     effects: readonly Effect[];
@@ -379,6 +414,8 @@ export interface GameObject {
   incarnation: number;
   tapped: boolean;
   plusCounters: number;
+  loyalty?: number;
+  loyaltyUsed?: string;
   stunCounters?: number;
   damage: number;
   deathtouchDamage: boolean;
@@ -393,6 +430,7 @@ export interface GameObject {
   definitionOverride?: CardDefinition;
   chosenCreatureType?: string;
   chosenX?: number;
+  castPlayer?: PlayerId;
   abilityUses?: Record<number, string>;
   triggerUses?: Record<number, string>;
   targetHistory?: { stamp: string; counts: Record<string, number> };
@@ -487,6 +525,7 @@ export interface DamageSource {
   controller: PlayerId;
   power: number;
   targets: Target[];
+  defender?: Target;
   trample: boolean;
   blockers: ObjectTarget[];
   keywords: string[];
@@ -508,6 +547,13 @@ export type Choice =
         attachment?: ObjectTarget | null;
         tapped?: boolean;
       }[];
+    }
+  | {
+      kind: 'empowerJace';
+      player: PlayerId;
+      cards: string[];
+      objects: ObjectTarget[];
+      count: number;
     }
   | {
       kind: 'exilePlay' | 'bindingNegotiation' | 'revealDiscard' | 'exileToGraveyard';
@@ -571,6 +617,7 @@ export type Choice =
       remainingEntries: StackEntry[];
       remaining: { player: PlayerId; entries: StackEntry[] }[];
     }
+  | { kind: 'attackDefenders'; player: PlayerId; cards: string[] }
   | { kind: 'optionalEffect'; player: PlayerId; name: string }
   | {
       kind: 'payCost';
@@ -592,7 +639,12 @@ export type Choice =
       reveal: boolean;
       where: CardPredicate | null;
     }
-  | { kind: 'libraryOrder'; player: PlayerId; action: 'scry' | 'surveil'; cards: string[] }
+  | {
+      kind: 'libraryOrder';
+      player: PlayerId;
+      action: 'scry' | 'surveil' | 'lookChooseHand';
+      cards: string[];
+    }
   | {
       kind: 'sacrifice';
       player: PlayerId;
@@ -602,7 +654,13 @@ export type Choice =
       remaining: Array<{ player: PlayerId; count: number; cards: string[]; refs: ObjectTarget[] }>;
       selected: Array<ObjectTarget & { player: PlayerId }>;
     }
-  | { kind: 'bottom' | 'discard' | 'discardEffect'; player: PlayerId; count: number }
+  | { kind: 'bottom' | 'discard'; player: PlayerId; count: number }
+  | {
+      kind: 'discardEffect';
+      player: PlayerId;
+      count: number;
+      reflexive?: Extract<Effect, { op: 'discardTrigger' }>;
+    }
   | {
       kind: 'orderTriggers';
       player: PlayerId;
@@ -638,6 +696,7 @@ export interface GameEvent {
   readonly [key: string]: unknown;
 }
 export interface GameState {
+  damagePreventionDisabledTurn?: number;
   rulesRevision: 1 | 2;
   catalog: Readonly<Record<string, CardDefinition>>;
   version: string;
@@ -674,12 +733,14 @@ export interface GameState {
     toughness?: number;
     keywords?: string[];
     addTypes?: CardType[];
+    animation?: { power: number; toughness: number; colors: Color[]; subtypes: string[] };
     expires: number;
   }[];
   choice: Choice | null;
   resolving: { entry: StackEntry; index: number; revealedPlayer?: PlayerId } | null;
   combat: {
     attackers: ObjectTarget[];
+    defenders?: Record<string, Target>;
     blocks: Record<string, ObjectTarget[]>;
     blocked: string[];
     firstEligible: string[];
@@ -724,7 +785,9 @@ export type Action =
       targets?: TargetPlan;
       target?: Target;
     }
-  | { type: 'bottom' | 'discard' | 'discardEffect' | 'sacrifice' | 'attackers'; cards: string[] }
+  | { type: 'bottom' | 'discard' | 'discardEffect' | 'sacrifice'; cards: string[] }
+  | { type: 'chooseAttackDefenders'; defenders: Record<string, Target> }
+  | { type: 'attackers'; cards: string[]; defenders?: Record<string, Target> }
   | { type: 'blockers'; pairs: { blocker: string; attacker: string }[] }
   | { type: 'assignDamage'; orders: DamageOrder[] }
   | { type: 'orderTriggers'; ids: string[] }
@@ -981,3 +1044,6 @@ export function castingPayment(
     autoTap?: boolean;
   },
 ): (NonNullable<ReturnType<typeof convokePayment>> & { sacrifice?: ObjectTarget }) | null;
+
+export function attackDefenders(state: GameState, player?: PlayerId): Target[];
+export function attackDefender(state: GameState, attacker: string): Target | null;

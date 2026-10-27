@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "05a039ad-1689-4d13-b393-6c1219583b5d",
+  "name": "Sleight of Hand",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

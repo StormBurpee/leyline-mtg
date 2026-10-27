@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.46.0 — Playable Izzet and Boros, planeswalker foundations
+
+- Complete the exact Izzet Cryomancer and Boros Burn tournament main decks alongside Rakdos. Three full cross-archetype bot matches finished without rejected commands, and replay checks matched. Other incomplete presets remain blocked; sideboards remain reference-only.
+- Add planeswalker loyalty, once-per-turn sorcery activations, loyalty damage/state-based actions, declared attack defenders and normal blocking/trample handling. Add Empower Jace, three complete spells and the Jace token with verified official artwork.
+- Add seven Izzet cards using mandatory top-library selection, public maximum mana value, captured cast-entry history, global damage-prevention denial, discard-linked reflexive triggers and graveyard exile-self activation.
+- Add Restless Bivouac temporary land animation and two Boros spells. Add 34 further complete existing-engine cards and two exact tokens.
+- Catalog: 1422 playable cards and 49 tokens; Standard inventory 1204 of 5164. Native planeswalker cards with unsupported abilities are not marked playable. Generic prevention effects, arbitrary graveyard activations and broader reflexive outcomes remain outside the supported subset.
+
 ## 0.45.0 — Tournament presets, Adventures and meta mana
 
 - Add eight exact dated Standard tournament presets with provenance, original sideboards as reference-only, and explicit missing-card blockers. The Rakdos Lizards main deck is fully executable; incomplete lists cannot launch or be selected as opponents. Keep the requested Storm deck as default.

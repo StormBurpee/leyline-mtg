@@ -81,3 +81,15 @@ test('the exact tournament Rakdos main deck is fully executable after its blocke
   const { document } = parseHTML(deckRoom({ ...ui, deck: 'meta-rakdos-lizards' }, {}));
   assert.equal(document.querySelector('[data-action="start"]').hasAttribute('disabled'), false);
 });
+
+test('Boros Burn and the Cryomancer Izzet variant are complete executable tournament presets', () => {
+  for (const id of ['meta-boros-burn', 'meta-izzet-cryomancer']) {
+    const deck = META_DECKS[id];
+    assert.deepEqual(deckProblems(deck), []);
+    const cards = Object.entries(deck.cards).flatMap(([name, count]) => Array(count).fill(name));
+    assert.equal(cards.length, 60);
+    assert.equal(createGame({ decks: [cards, cards], seed: 48 }).players.length, 2);
+    const { document } = parseHTML(deckRoom({ ...ui, deck: id }, {}));
+    assert.equal(document.querySelector('[data-action="start"]').hasAttribute('disabled'), false);
+  }
+});

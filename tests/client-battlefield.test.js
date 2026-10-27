@@ -69,3 +69,27 @@ test('legend rule controls distinguish copies with live state and explicit keep 
   assert.equal((html.match(/data-action="keepLegend"/g) || []).length, 2);
   assert.equal((html.match(/data-action="readLegend"/g) || []).length, 2);
 });
+
+test('planeswalker loyalty and explicit attacker destinations stay visible', async () => {
+  const { definition, ref } = await import('../packages/engine/src/model.js');
+  const state = fixture(),
+    attacker = put(state, 'Grizzly Bears'),
+    walker = put(state, 'Grizzly Bears', 1);
+  walker.definitionOverride = {
+    ...definition(state, walker),
+    type: 'planeswalker',
+    types: ['planeswalker'],
+  };
+  walker.loyalty = 4;
+  state.choice = { kind: 'attackers', player: 0 };
+  const html = game(
+    state,
+    { ...ui(), chosen: [attacker.id], attackDefenders: { [attacker.id]: ref(walker) } },
+    {},
+  );
+  assert.match(html, /aria-label="4 loyalty"/);
+  assert.match(html, /data-action="attackDefenders"/);
+  assert.match(html, /class="attack-destination"/);
+  state.choice = { kind: 'attackDefenders', player: 0, cards: [attacker.id] };
+  assert.match(game(state, ui(), {}), /Choose where your new creatures attack/);
+});

@@ -94,7 +94,7 @@ export function compilePack(cards, { mechanics = {} } = {}) {
       ...(d.triggers ?? []).flatMap((t) => t.effects),
       ...(d.activated ?? []).flatMap((a) => a.effects),
     ])
-      if (['token', 'mobilize'].includes(e.op) && !byName[e.definition]?.token)
+      if (['token', 'mobilize', 'empowerJace'].includes(e.op) && !byName[e.definition]?.token)
         diagnostics.push({
           code: 'TOKEN_REFERENCE',
           path: d.name,

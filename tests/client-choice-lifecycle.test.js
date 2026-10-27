@@ -920,3 +920,53 @@ test('shockland entry offers readable life/tapped choices and survives card insp
     h.cleanup();
   }
 });
+
+test('Cryomancer graveyard ability is reachable from large-card reader, pays exile once, and remains replayable', async () => {
+  const name = 'Seasoned Cryomancer';
+  const catalog = {
+    ...CARDS,
+    [name]: {
+      ...CARDS[name],
+      cost: {},
+      activated: [{ ...CARDS[name].activated[0], cost: { exileSelf: true } }],
+    },
+  };
+  let state, copies;
+  for (let seed = 1; seed < 200; seed++) {
+    state = createGame({
+      catalog,
+      seed,
+      mulligan: false,
+      decks: [[...Array(4).fill(name), ...Array(56).fill('Island')], Array(60).fill('Forest')],
+    });
+    copies = state.players[0].hand.filter((id) => state.objects[id].name === name);
+    if (copies.length >= 2) break;
+  }
+  assert.ok(copies.length >= 2);
+  while (state.step !== 'main1') state = act(state, 'pass');
+  state = act(state, 'cast', { card: copies[0] });
+  for (let i = 0; i < 4; i++) state = act(state, 'pass');
+  state = act(state, 'discardEffect', {
+    cards: [copies[1], state.players[0].hand.find((id) => state.objects[id].name === 'Island')],
+  });
+  state = act(state, 'chooseTriggerTargets', { targets: { chosen: [] } });
+  state = act(state, 'pass');
+  state = act(state, 'pass');
+  const h = await mount(exportReplay(state));
+  try {
+    h.click('[data-action="resume"]');
+    h.click('[data-action="zone"][data-player="0"][data-zone="graveyard"]');
+    h.click(`#dialog [data-action="readDecisionCard"][data-cardid="${copies[1]}"]`);
+    assert.ok(h.dialog.querySelector('.decision-reader'));
+    h.click('[data-action="inspectGraveyardAbilities"]');
+    assert.match(h.dialog.textContent, /Exile this card from your graveyard/);
+    h.click('[data-action="activateAbility"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).type, 'activate');
+    assert.equal(saved.replay.commands.at(-1).card, copies[1]);
+    assert.equal(saved.replay.commands.filter((c) => c.type === 'activate').length, 1);
+    assert.equal(h.dialog.open, false);
+  } finally {
+    h.cleanup();
+  }
+});

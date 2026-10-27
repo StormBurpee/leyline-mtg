@@ -1,3 +1,4 @@
+import { attackDefenders, validateAttackDefenders } from './combat.js';
 import { manaValue } from './mana-value.js';
 import {
   flattenTargets,
@@ -69,7 +70,10 @@ export function legalTarget(s, kind, target, controller) {
       controller,
     );
   }
-  if (target.kind !== 'object' || !['permanent', 'damageable', 'graveyard'].includes(spec.scope))
+  if (
+    target.kind !== 'object' ||
+    !['permanent', 'damageable', 'playerOrPlaneswalker', 'graveyard'].includes(spec.scope)
+  )
     return false;
   const o = s.objects[target.id];
   if (
@@ -80,7 +84,9 @@ export function legalTarget(s, kind, target, controller) {
     return false;
   const d = definition(s, o),
     creature = hasType(d, 'creature');
-  if (spec.scope === 'damageable' && !creature) return false;
+  const planeswalker = hasType(d, 'planeswalker');
+  if (spec.scope === 'damageable' && !creature && !planeswalker) return false;
+  if (spec.scope === 'playerOrPlaneswalker' && !planeswalker) return false;
   if (
     o.zone === 'battlefield' &&
     (hasKeyword(s, o, 'shroud') || (hasKeyword(s, o, 'hexproof') && o.controller !== controller))
@@ -225,7 +231,9 @@ export function enterBattlefieldBatch(
   let entering = entries.filter(
     ({ object }) =>
       object.zone !== 'battlefield' &&
-      ['creature', 'artifact', 'enchantment', 'land'].includes(definition(s, object).type),
+      ['creature', 'artifact', 'enchantment', 'land', 'planeswalker'].includes(
+        definition(s, object).type,
+      ),
   );
   const ready = [];
   for (const item of entering) {
@@ -310,6 +318,12 @@ export function enterBattlefieldBatch(
           !meetsCondition(s, controller, definition(s, object).entersTappedUnless, [], object)),
     ]),
   );
+  const castPlayers = new Map(
+    entering.map(({ object }) => [
+      object.id,
+      object.zone === 'stack' ? object.castPlayer : undefined,
+    ]),
+  );
   const entryCounters = new Map(
     entering.map(({ object, controller = object.owner }) => [
       object.id,
@@ -373,7 +387,7 @@ export function enterBattlefieldBatch(
   for (const { object } of entering) {
     const d = definition(s, object);
     if (d.etb) queueTrigger(s, object, d.etb, `${object.name} · enters`);
-    notifyTriggers(s, 'enters', { object });
+    notifyTriggers(s, 'enters', { object, castPlayer: castPlayers.get(object.id) });
   }
   return true;
 }
@@ -458,6 +472,10 @@ export function finishAuraEntryChoice(s, command) {
     continueResolution(s);
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
+// All prevention implementations must consult this global turn rule before preventing damage.
+export function damageCanBePrevented(s) {
+  return s.damagePreventionDisabledTurn !== s.turn;
+}
 export function dealDamage(
   s,
   source,
@@ -483,8 +501,13 @@ export function dealDamage(
   else {
     const o = s.objects[target.id];
     if (!o || o.zone !== 'battlefield' || o.incarnation !== target.incarnation) return;
-    o.damage += amount;
-    if (source.keywords?.includes('deathtouch')) o.deathtouchDamage = true;
+    const d = definition(s, o);
+    if (!hasType(d, 'creature') && !hasType(d, 'planeswalker')) return;
+    if (hasType(d, 'planeswalker')) o.loyalty = Math.max(0, (o.loyalty ?? 0) - amount);
+    if (hasType(d, 'creature')) {
+      o.damage += amount;
+      if (source.keywords?.includes('deathtouch')) o.deathtouchDamage = true;
+    }
   }
   if (source.keywords?.includes('lifelink')) {
     s.players[source.controller].life += amount;
@@ -672,6 +695,11 @@ export function resolveEffects(s, entry, startIndex = 0) {
         ? candidate
         : null;
     switch (e.op) {
+      case 'disableDamagePrevention':
+        s.damagePreventionDisabledTurn = s.turn;
+        emit(s, 'damagePreventionDisabled', { turn: s.turn });
+        break;
+      case 'bounceAll':
       case 'destroyAll':
       case 'exileAll':
       case 'modifyAll':
@@ -707,13 +735,18 @@ export function resolveEffects(s, entry, startIndex = 0) {
               );
             })
           : [];
-        if (e.op === 'destroyAll' || e.op === 'exileAll') {
+        if (e.op === 'bounceAll' || e.op === 'destroyAll' || e.op === 'exileAll') {
           const victims = objects.filter(
-            (object) => e.op === 'exileAll' || !hasKeyword(s, object, 'indestructible'),
+            (object) => e.op !== 'destroyAll' || !hasKeyword(s, object, 'indestructible'),
           );
           const context = victims.length ? captureDepartureContext(s) : null;
           for (const object of victims)
-            move(s, object, e.op === 'exileAll' ? 'exile' : 'graveyard', context);
+            move(
+              s,
+              object,
+              e.op === 'bounceAll' ? 'hand' : e.op === 'exileAll' ? 'exile' : 'graveyard',
+              context,
+            );
         } else if (e.op === 'damageAll') {
           const source = damageSource(s, entry);
           const packets = objects.map((object) => ({
@@ -826,6 +859,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
         };
         return false;
       }
+      case 'lookChooseHand':
       case 'scry':
       case 'surveil': {
         if (e.count === 0) break;
@@ -908,11 +942,17 @@ export function resolveEffects(s, entry, startIndex = 0) {
         s.choice = { kind: 'sacrifice', ...first, remaining, selected: [] };
         return false;
       }
+      case 'discardTrigger':
       case 'discard': {
         const count = Math.min(e.count, s.players[recipient].hand.length);
         if (!count) break;
         s.resolving = { entry, index: index + 1 };
-        s.choice = { kind: 'discardEffect', player: recipient, count };
+        s.choice = {
+          kind: 'discardEffect',
+          player: recipient,
+          count,
+          ...(e.op === 'discardTrigger' ? { reflexive: structuredClone(e) } : {}),
+        };
         return false;
       }
       case 'mill': {
@@ -1028,6 +1068,27 @@ export function resolveEffects(s, entry, startIndex = 0) {
       case 'destroy':
         if (o && !hasKeyword(s, o, 'indestructible')) move(s, o, 'graveyard');
         break;
+      case 'animateLand': {
+        const source = s.objects[entry.source.id];
+        if (
+          source?.zone === 'battlefield' &&
+          source.incarnation === entry.source.incarnation &&
+          hasType(definition(s, source), 'land')
+        )
+          s.modifiers.push({
+            objectId: source.id,
+            incarnation: source.incarnation,
+            addTypes: ['creature'],
+            animation: {
+              power: e.power,
+              toughness: e.toughness,
+              colors: e.colors,
+              subtypes: e.subtypes,
+            },
+            expires: s.turn,
+          });
+        break;
+      }
       case 'animateVehicle': {
         const source = s.objects[entry.source.id];
         if (
@@ -1065,6 +1126,33 @@ export function resolveEffects(s, entry, startIndex = 0) {
         }
         break;
       }
+      case 'empowerJace': {
+        let candidates = battlefield(s).filter(
+          (object) =>
+            object.controller === entry.controller &&
+            object.token &&
+            hasType(definition(s, object), 'planeswalker') &&
+            definition(s, object).subtypes.includes('Jace'),
+        );
+        if (!candidates.length) {
+          const object = addObject(s, e.definition, entry.controller, 'void');
+          enterBattlefieldBatch(s, [{ object, controller: entry.controller }]);
+          candidates = [object];
+        }
+        if (candidates.length === 1) candidates[0].loyalty += e.count;
+        else {
+          s.choice = {
+            kind: 'empowerJace',
+            player: entry.controller,
+            cards: candidates.map((o) => o.id),
+            objects: candidates.map(ref),
+            count: e.count,
+          };
+          s.resolving = { entry, index: index + 1 };
+          return false;
+        }
+        break;
+      }
       case 'mobilize': {
         const tokens = Array.from({ length: e.count }, () =>
           addObject(s, e.definition, entry.controller, 'void'),
@@ -1091,6 +1179,18 @@ export function resolveEffects(s, entry, startIndex = 0) {
             delayedObjects: tokens.filter((o) => o.zone === 'battlefield').map(ref),
             label: `${entry.name} · sacrifice mobilized tokens`,
           });
+        }
+        const attacking = tokens.filter(
+          (o) => o.zone === 'battlefield' && s.combat.attackers.some((r) => r.id === o.id),
+        );
+        if (attacking.length && attackDefenders(s, entry.controller).length > 1) {
+          s.resolving = { entry, index: index + 1 };
+          s.choice = {
+            kind: 'attackDefenders',
+            player: entry.controller,
+            cards: attacking.map((o) => o.id),
+          };
+          return false;
         }
         break;
       }
@@ -1145,6 +1245,37 @@ export function continueResolution(s) {
 }
 export function finishResolutionChoice(s, command) {
   const choice = s.choice;
+  if (choice.kind === 'empowerJace') {
+    const object = s.objects[command.card];
+    requireRule(
+      command.type === 'chooseResolutionCard' &&
+        object &&
+        choice.objects.some((r) => r.id === object.id && r.incarnation === object.incarnation) &&
+        object.zone === 'battlefield' &&
+        object.controller === choice.player &&
+        object.token &&
+        hasType(definition(s, object), 'planeswalker') &&
+        definition(s, object).subtypes.includes('Jace'),
+      'EMPOWER_JACE',
+      'Choose an offered Jace planeswalker token.',
+    );
+    object.loyalty += choice.count;
+    s.choice = null;
+    continueResolution(s);
+    return;
+  }
+  if (choice.kind === 'attackDefenders') {
+    requireRule(
+      command.type === 'chooseAttackDefenders',
+      'DEFENDERS',
+      'Choose attack destinations for the new creatures.',
+    );
+    validateAttackDefenders(s, choice.cards, command.defenders);
+    s.combat.defenders = { ...s.combat.defenders, ...structuredClone(command.defenders ?? {}) };
+    s.choice = null;
+    continueResolution(s);
+    return;
+  }
   if (
     ['exilePlay', 'bindingNegotiation', 'revealDiscard', 'exileToGraveyard'].includes(choice.kind)
   ) {
@@ -1281,15 +1412,22 @@ export function finishResolutionChoice(s, command) {
       'LIBRARY_ORDER',
       'Place each inspected card exactly once.',
     );
+    requireRule(
+      choice.action !== 'lookChooseHand' || command.top.length === Math.min(1, choice.cards.length),
+      'LIBRARY_SELECTION',
+      'Choose exactly one inspected card for your hand.',
+    );
     const player = s.players[choice.player],
       inspected = new Set(choice.cards);
     if (choice.action === 'surveil')
       for (const id of command.rest) move(s, s.objects[id], 'graveyard');
+    if (choice.action === 'lookChooseHand')
+      for (const id of command.top) move(s, s.objects[id], 'hand');
     const remaining = player.library.filter((id) => !inspected.has(id));
     player.library = [
-      ...command.top,
+      ...(choice.action === 'lookChooseHand' ? [] : command.top),
       ...remaining,
-      ...(choice.action === 'scry' ? command.rest : []),
+      ...(['scry', 'lookChooseHand'].includes(choice.action) ? command.rest : []),
     ];
     emit(s, choice.action, {
       player: choice.player,
@@ -1352,8 +1490,58 @@ export function finishResolutionChoice(s, command) {
       'DISCARD_CHOICE',
       `Choose exactly ${choice.count} distinct cards from your hand.`,
     );
+    // Snapshot qualifying cards before movement; a reflexive trigger belongs to
+    // this resolving ability, even if its source has since left the battlefield.
+    const qualifying = choice.reflexive
+      ? command.cards.filter((id) => {
+          const object = s.objects[id],
+            d = definition(s, object);
+          return matchesFilter(
+            {
+              definition: d,
+              owner: object.owner,
+              controller: object.controller,
+              manaValue: manaValue(d),
+              power: d.power,
+              toughness: d.toughness,
+              keywords: d.keywords,
+            },
+            choice.reflexive.where,
+            choice.player,
+          );
+        }).length
+      : 0;
     for (const id of command.cards) move(s, s.objects[id], 'graveyard');
     emit(s, 'discard', { player: choice.player, count: command.cards.length });
+    if (qualifying) {
+      const parent = s.resolving.entry;
+      s.pendingTriggers.push({
+        id: `s${++s.nextId}`,
+        kind: 'ability',
+        name: parent.name,
+        source: structuredClone(parent.source),
+        controller: parent.controller,
+        sourceKeywords: structuredClone(parent.sourceKeywords ?? []),
+        ...(parent.sourceDefinition
+          ? { sourceDefinition: structuredClone(parent.sourceDefinition) }
+          : {}),
+        effects: structuredClone(choice.reflexive.effects),
+        targetGroups: [
+          {
+            id: 'chosen',
+            selector: structuredClone(choice.reflexive.selector),
+            min: 0,
+            max: qualifying,
+          },
+        ],
+        label: 'Discard-linked ability',
+      });
+      emit(s, 'triggered', {
+        objectId: parent.source.id,
+        name: parent.name,
+        player: parent.controller,
+      });
+    }
   } else throw new Error('Unexpected resolution choice.');
   if (s.choice !== choice) return;
   s.choice = null;
@@ -1418,7 +1606,10 @@ export function resolveTop(s) {
         : entry.target?.kind === 'stack'
           ? s.stack.find((v) => v.id === entry.target.id)?.controller
           : s.objects[entry.target?.id]?.controller;
-  if (entry.kind === 'spell' && ['creature', 'enchantment', 'artifact'].includes(d.type)) {
+  if (
+    entry.kind === 'spell' &&
+    ['creature', 'enchantment', 'artifact', 'planeswalker'].includes(d.type)
+  ) {
     enterBattlefield(s, object, entry.controller, entry.target ?? null);
     if (entry.offspringPaid)
       queueTrigger(s, object, [{ op: 'offspringCopy' }], `${object.name} · offspring`);
@@ -1459,6 +1650,7 @@ export function stateBasedActions(s) {
   const toGrave = [];
   for (const o of battlefield(s)) {
     const d = definition(s, o);
+    if (hasType(d, 'planeswalker') && (o.loyalty ?? 0) <= 0) toGrave.push(o);
     if (d.type === 'creature') {
       const { toughness } = stats(s, o);
       if (

@@ -77,8 +77,17 @@ export function createRegistry(input = CARDS) {
       ...(card.etb ?? []),
       ...(card.triggers ?? []).flatMap((t) => t.effects),
       ...(card.activated ?? []).flatMap((a) => a.effects),
-    ])
-      if (['token', 'mobilize'].includes(e.op) && !registry[e.definition]?.token)
+    ]) {
+      if (
+        e.op === 'empowerJace' &&
+        (registry[e.definition]?.type !== 'planeswalker' ||
+          !registry[e.definition]?.subtypes.includes('Jace') ||
+          registry[e.definition]?.loyalty !== 0 ||
+          registry[e.definition]?.chooseCreatureType ||
+          registry[e.definition]?.aura)
+      )
+        errors.push(`${card.name}: Empower requires a zero-loyalty Jace planeswalker token.`);
+      if (['token', 'mobilize', 'empowerJace'].includes(e.op) && !registry[e.definition]?.token)
         errors.push(`${card.name}: missing token definition ${e.definition}.`);
       else if (
         e.op === 'mobilize' &&
@@ -87,6 +96,7 @@ export function createRegistry(input = CARDS) {
           registry[e.definition].aura)
       )
         errors.push(`${card.name}: mobilize requires a creature token without entry choices.`);
+    }
   if (errors.length) throw new RegistryError(errors.slice(0, 100));
   const result = frozen(Object.fromEntries(Object.entries(registry)));
   validatedRegistries.add(result);

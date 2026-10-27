@@ -53,6 +53,7 @@ import {
   replay,
   chooseBotCommand,
   canAttack,
+  attackDefenders,
   canBlock,
   canTapForMana,
   manaOptions,
@@ -136,6 +137,7 @@ const ui = {
   spellMode: null,
   x: null,
   chosen: [],
+  attackDefenders: {},
   blocks: [],
   inspect: null,
   inspectObject: null,
@@ -238,6 +240,7 @@ function resetSelection() {
   ui.spellMode = null;
   ui.x = null;
   ui.chosen = [];
+  ui.attackDefenders = {};
   ui.blocks = [];
 }
 function save() {
@@ -430,6 +433,32 @@ function openDialog(title, body, actions = '') {
   if (!dialog.open) dialog.showModal();
 }
 
+function showAttackDefenders() {
+  if (
+    !['attackers', 'attackDefenders'].includes(state.choice?.kind) ||
+    state.choice.player !== viewer()
+  )
+    return;
+  const options = attackDefenders(state, viewer());
+  const label = (target) =>
+    target.kind === 'player'
+      ? state.players[target.id].name
+      : `${state.objects[target.id].name} · ${state.objects[target.id].loyalty ?? 0} loyalty`;
+  openDialog(
+    'Choose attack destinations',
+    `<p>Choose who each selected creature attacks. This is not targeting, and your opponent can block normally.</p>` +
+      (state.choice.kind === 'attackDefenders' ? state.choice.cards : ui.chosen)
+        .map(
+          (id) =>
+            `<label class="attack-defender-row"><strong>${escape(state.objects[id].name)}</strong><select data-attack-defender="${escape(id)}" aria-label="Attack destination for ${escape(state.objects[id].name)}">${options.map((target, index) => `<option value="${index}" ${target.kind === ui.attackDefenders[id]?.kind && target.id === ui.attackDefenders[id]?.id ? 'selected' : ''}>${escape(label(target))}</option>`).join('')}</select></label>`,
+        )
+        .join(''),
+    '<button class="btn primary" data-action="confirmAttackDefenders">Confirm destinations</button>',
+  );
+  dialog._attackRevision = state.revision;
+  dialog._attackOptions = options;
+}
+
 function openChoiceDialog(title, subtitle, body, actions, options = {}) {
   clearTimeout(botTimer);
   duelPresentation.hidePreview();
@@ -561,30 +590,39 @@ function presentStateChoice() {
     cards = c.kind === 'sacrifice' ? c.cards : state.players[viewer()].hand;
     actions = `<span class="choice-selection-summary">${selected.length} of ${c.count} selected</span><button class="btn primary" data-action="confirmDecision" ${selected.length === c.count ? '' : 'disabled'}>${c.kind === 'bottom' ? 'Put selected cards back' : c.kind === 'sacrifice' ? 'Sacrifice selected permanents' : 'Discard selected cards'}</button>`;
   } else if (
-    ['exilePlay', 'bindingNegotiation', 'revealDiscard', 'exileToGraveyard', 'legendRule'].includes(
-      c.kind,
-    )
+    [
+      'empowerJace',
+      'exilePlay',
+      'bindingNegotiation',
+      'revealDiscard',
+      'exileToGraveyard',
+      'legendRule',
+    ].includes(c.kind)
   ) {
     title =
-      c.kind === 'exilePlay'
-        ? 'Choose one'
-        : ['bindingNegotiation', 'revealDiscard'].includes(c.kind)
-          ? 'Choose a card to discard'
-          : c.kind === 'exileToGraveyard'
-            ? 'Choose an exiled card'
-            : 'Choose a legend to keep';
-    subtitle =
-      c.kind === 'exilePlay'
-        ? 'You may play the chosen card until the end of this turn. Normal timing and mana costs still apply.'
-        : c.kind === 'revealDiscard'
-          ? c.eligibleCards.length
-            ? 'Their hand is revealed. You must choose one of the nonland cards to discard.'
-            : 'Their hand contains no nonland card. Review it, then continue.'
-          : c.kind === 'bindingNegotiation'
-            ? 'Their hand is revealed. Choose a nonland card, or choose none to consider their exile.'
+      c.kind === 'empowerJace'
+        ? 'Empower Jace'
+        : c.kind === 'exilePlay'
+          ? 'Choose one'
+          : ['bindingNegotiation', 'revealDiscard'].includes(c.kind)
+            ? 'Choose a card to discard'
             : c.kind === 'exileToGraveyard'
-              ? 'You may put a face-up card the opponent owns from exile into their graveyard.'
-              : 'Keep one copy on the battlefield. The other copies go to their owners’ graveyards.';
+              ? 'Choose an exiled card'
+              : 'Choose a legend to keep';
+    subtitle =
+      c.kind === 'empowerJace'
+        ? `Choose a Jace token to receive ${c.count} loyalty counter${c.count === 1 ? '' : 's'}.`
+        : c.kind === 'exilePlay'
+          ? 'You may play the chosen card until the end of this turn. Normal timing and mana costs still apply.'
+          : c.kind === 'revealDiscard'
+            ? c.eligibleCards.length
+              ? 'Their hand is revealed. You must choose one of the nonland cards to discard.'
+              : 'Their hand contains no nonland card. Review it, then continue.'
+            : c.kind === 'bindingNegotiation'
+              ? 'Their hand is revealed. Choose a nonland card, or choose none to consider their exile.'
+              : c.kind === 'exileToGraveyard'
+                ? 'You may put a face-up card the opponent owns from exile into their graveyard.'
+                : 'Keep one copy on the battlefield. The other copies go to their owners’ graveyards.';
     cards = c.cards;
     const optional =
       ['bindingNegotiation', 'exileToGraveyard'].includes(c.kind) ||
@@ -689,6 +727,19 @@ function confirmDecision(decline = false) {
   send(command);
 }
 
+function graveyardAbilityButton(id) {
+  const object = state?.objects[id];
+  if (
+    !object ||
+    object.zone !== 'graveyard' ||
+    object.owner !== viewer() ||
+    !definition(state, object).activated?.some((ability) => ability.zone === 'graveyard')
+  )
+    return '';
+  const available =
+    !state.choice && !ui.targeting && !ui.replayRecord && state.priority === viewer();
+  return `<button class="btn primary" data-action="inspectGraveyardAbilities" data-cardid="${id}" ${available ? '' : 'disabled'}>Graveyard abilities</button>`;
+}
 function showCardReader(id) {
   const object = inspectableCard(state, id, viewer());
   if (!object) return false;
@@ -701,7 +752,8 @@ function showCardReader(id) {
       'data-action="returnDecision"',
       'data-action="closeDialog"',
     ),
-    '<button class="btn primary" data-action="closeDialog">Back to battlefield</button>',
+    graveyardAbilityButton(id) +
+      '<button class="btn primary" data-action="closeDialog">Back to battlefield</button>',
     { eyebrow: 'CARD DETAILS' },
   );
   dialog._activeChoice = null;
@@ -964,7 +1016,10 @@ function showLibrarySearch() {
 }
 function showLibraryOrder() {
   if (dialog._libraryChoice !== state.choice) {
-    dialog._libraryOrder = { top: [...state.choice.cards], rest: [] };
+    dialog._libraryOrder =
+      state.choice.action === 'lookChooseHand'
+        ? { top: [], rest: [...state.choice.cards] }
+        : { top: [...state.choice.cards], rest: [] };
     dialog._libraryChoice = state.choice;
   }
   renderLibraryOrder();
@@ -973,21 +1028,27 @@ function renderLibraryOrder() {
   const order = dialog._libraryOrder,
     choice = state.choice;
   if (choice?.kind !== 'libraryOrder' || dialog._libraryChoice !== choice) return;
-  const restLabel = choice.action === 'scry' ? 'Bottom of library' : 'Graveyard';
+  const selectHand = choice.action === 'lookChooseHand';
+  const restLabel = choice.action !== 'surveil' ? 'Bottom of library' : 'Graveyard';
+  const topLabel = selectHand ? 'Put into your hand' : 'Top of library';
   const body = `<div class="decision-order-lanes">${[
-    ['top', 'Top of library'],
+    ['top', topLabel],
     ['rest', restLabel],
   ]
     .map(
       ([key, label]) =>
-        `<section class="decision-order-lane" data-order-drop="${key}"><h3>${label}</h3><p>${key === 'top' ? 'Leftmost card will be drawn first.' : choice.action === 'scry' ? 'These cards go below the rest of your library.' : 'These cards go to your graveyard.'}</p><div class="decision-card-gallery" style="--choice-count:${Math.max(1, order[key].length)}">${order[key].map((id, i) => decisionCard(state, id, metadata, { viewer: viewer(), action: 'libraryMove', extra: `data-group="${key === 'top' ? 'rest' : 'top'}"`, draggable: true, badge: key === 'top' ? (i === 0 ? 'Draw first' : `Draw ${i + 1}`) : restLabel, label: `Move ${state.objects[id].name} to ${key === 'top' ? restLabel : 'top of library'}` }).replace('</article>', `<div class="decision-order-controls"><button data-action="libraryMove" data-cardid="${id}" data-group="${key === 'top' ? 'rest' : 'top'}">${key === 'top' ? (choice.action === 'scry' ? 'Bottom' : 'Graveyard') : 'Keep on top'}</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="-1" aria-label="Move ${escape(state.objects[id].name)} earlier" ${i === 0 ? 'disabled' : ''}>←</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="1" aria-label="Move ${escape(state.objects[id].name)} later" ${i === order[key].length - 1 ? 'disabled' : ''}>→</button></div></article>`)).join('') || '<div class="decision-empty"><span>◇</span><p>Move cards here</p></div>'}</div></section>`,
+        `<section class="decision-order-lane" data-order-drop="${key}"><h3>${label}</h3><p>${key === 'top' ? (selectHand ? 'Choose exactly one card.' : 'Leftmost card will be drawn first.') : choice.action !== 'surveil' ? 'These cards go below the rest of your library.' : 'These cards go to your graveyard.'}</p><div class="decision-card-gallery" style="--choice-count:${Math.max(1, order[key].length)}">${order[key].map((id, i) => decisionCard(state, id, metadata, { viewer: viewer(), action: 'libraryMove', extra: `data-group="${key === 'top' ? 'rest' : 'top'}"`, draggable: true, badge: key === 'top' ? (selectHand ? 'To hand' : i === 0 ? 'Draw first' : `Draw ${i + 1}`) : restLabel, label: `Move ${state.objects[id].name} to ${key === 'top' ? restLabel : topLabel}` }).replace('</article>', `<div class="decision-order-controls"><button data-action="libraryMove" data-cardid="${id}" data-group="${key === 'top' ? 'rest' : 'top'}">${key === 'top' ? (choice.action !== 'surveil' ? 'Bottom' : 'Graveyard') : selectHand ? 'Choose for hand' : 'Keep on top'}</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="-1" aria-label="Move ${escape(state.objects[id].name)} earlier" ${i === 0 ? 'disabled' : ''}>←</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="1" aria-label="Move ${escape(state.objects[id].name)} later" ${i === order[key].length - 1 ? 'disabled' : ''}>→</button></div></article>`)).join('') || '<div class="decision-empty"><span>◇</span><p>Move cards here</p></div>'}</div></section>`,
     )
     .join('')}</div>`;
   openChoiceDialog(
-    `${choice.action === 'scry' ? 'Scry' : 'Surveil'} ${choice.cards.length}`,
-    'Click a card to move it between destinations, or drag it. Use the arrows to set the draw order.',
+    selectHand
+      ? 'Choose a card for your hand'
+      : `${choice.action === 'scry' ? 'Scry' : 'Surveil'} ${choice.cards.length}`,
+    selectHand
+      ? 'Put one card into your hand and the rest on the bottom of your library.'
+      : 'Click a card to move it between destinations, or drag it. Use the arrows to set the draw order.',
     body,
-    `<span class="choice-selection-summary">${order.top.length} on top · ${order.rest.length} ${choice.action === 'scry' ? 'on bottom' : 'to graveyard'}</span><button class="btn primary" data-action="submitLibrary">Confirm arrangement</button>`,
+    `<span class="choice-selection-summary">${order.top.length} ${selectHand ? 'to hand' : 'on top'} · ${order.rest.length} ${choice.action !== 'surveil' ? 'on bottom' : 'to graveyard'}</span><button class="btn primary" data-action="submitLibrary" ${selectHand && order.top.length !== 1 ? 'disabled' : ''}>Confirm arrangement</button>`,
     { source: state.resolving?.entry.name ?? '' },
   );
   dialog._libraryOrder = order;
@@ -998,7 +1059,7 @@ function showDamage() {
   const orders = suggestedDamage(state);
   openDialog(
     'Assign combat damage',
-    `<p style="margin-bottom:18px">Assign each creature’s full power. Trample can reach the player only after every blocker is assigned lethal damage.</p><div id="damage-orders">${orders.map((o, i) => `<h3 style="margin:16px 0 10px">${escape(state.objects[o.source].name)}</h3>${o.assignments.map((a, j) => `<div class="choice-row"><strong>${escape(a.target.kind === 'player' ? state.players[a.target.id].name : state.objects[a.target.id].name)}</strong><label>Damage<input type="number" min="0" step="1" value="${a.amount}" data-damage="${i}:${j}"></label></div>`).join('')}`).join('')}</div>`,
+    `<p style="margin-bottom:18px">Assign each creature’s full power. Trample can reach the attacked player or planeswalker only after every blocker is assigned lethal damage.</p><div id="damage-orders">${orders.map((o, i) => `<h3 style="margin:16px 0 10px">${escape(state.objects[o.source].name)}</h3>${o.assignments.map((a, j) => `<div class="choice-row"><strong>${escape(a.target.kind === 'player' ? state.players[a.target.id].name : state.objects[a.target.id].name)}</strong><label>Damage<input type="number" min="0" step="1" value="${a.amount}" data-damage="${i}:${j}"></label></div>`).join('')}`).join('')}</div>`,
     '<button class="btn" data-action="closeDialog">Cancel</button><button class="btn primary" data-action="submitDamage">Assign damage</button>',
   );
   dialog._orders = orders;
@@ -1624,13 +1685,18 @@ async function action(name, el) {
     case 'declineDecision':
       confirmDecision(true);
       break;
+    case 'inspectGraveyardAbilities':
+      closeDialog();
+      selectCard(el.dataset.cardid);
+      break;
     case 'readDecisionCard': {
       const restore = dialog._stageRender;
       openChoiceDialog(
         'A closer look',
         'Read the card, then return to your decision.',
         decisionReader(state, el.dataset.cardid, metadata, viewer()),
-        '<button class="btn primary" data-action="returnDecision">Back to cards</button>',
+        graveyardAbilityButton(el.dataset.cardid) +
+          '<button class="btn primary" data-action="returnDecision">Back to cards</button>',
       );
       dialog._returnStage = restore;
       break;
@@ -1685,8 +1751,42 @@ async function action(name, el) {
         .map((o) => o.id);
       render();
       break;
+    case 'attackDefenders':
+      showAttackDefenders();
+      break;
+    case 'confirmAttackDefenders':
+      if (
+        !['attackers', 'attackDefenders'].includes(state.choice?.kind) ||
+        state.revision !== dialog._attackRevision
+      )
+        break;
+      for (const select of dialog.querySelectorAll('[data-attack-defender]')) {
+        const defender = dialog._attackOptions[Number(select.value)];
+        if (defender) ui.attackDefenders[select.dataset.attackDefender] = defender;
+      }
+      closeDialog();
+      if (state.choice.kind === 'attackDefenders')
+        send({
+          type: 'chooseAttackDefenders',
+          defenders: Object.fromEntries(
+            state.choice.cards.map((id) => [
+              id,
+              ui.attackDefenders[id] ?? { kind: 'player', id: 1 - viewer() },
+            ]),
+          ),
+        });
+      else render();
+      break;
     case 'attack':
-      send({ type: 'attackers', cards: [...ui.chosen] });
+      send({
+        type: 'attackers',
+        cards: [...ui.chosen],
+        defenders: Object.fromEntries(
+          ui.chosen
+            .filter((id) => ui.attackDefenders[id])
+            .map((id) => [id, ui.attackDefenders[id]]),
+        ),
+      });
       break;
     case 'block':
       send({ type: 'blockers', pairs: [...ui.blocks] });
@@ -2381,7 +2481,7 @@ const cardDrag = installCardDrag(app, {
       const label = ['chooseMode', 'chooseX'].includes(plan.kind)
         ? `Release to choose ${plan.kind === 'chooseX' ? 'X' : 'a mode'} for ${object.name}`
         : plan.kind === 'attack'
-          ? `Release to select ${object.name} as an attacker`
+          ? `Release to attack ${destination.defender?.kind === 'object' ? state.objects[destination.defender.id]?.name : state.players[1 - viewer()].name} with ${object.name}`
           : plan.kind === 'block'
             ? `Release to assign ${object.name} as a blocker`
             : target
@@ -2446,6 +2546,10 @@ const cardDrag = installCardDrag(app, {
       return true;
     }
     if (gesture.kind === 'attack') {
+      ui.attackDefenders[gesture.id] = zone.command.defender ?? {
+        kind: 'player',
+        id: 1 - viewer(),
+      };
       ui.chosen = ui.chosen.includes(gesture.id) ? ui.chosen : [...ui.chosen, gesture.id];
       render();
       return true;
@@ -2586,8 +2690,10 @@ function selectCard(id) {
   }
   if (
     !c &&
-    o.zone === 'battlefield' &&
-    o.controller === p &&
+    ((o.zone === 'battlefield' && o.controller === p) ||
+      (o.zone === 'graveyard' &&
+        o.owner === p &&
+        definition(state, o).activated?.some((a) => a.zone === 'graveyard'))) &&
     (definition(state, o).activated?.length || definition(state, o).crew !== undefined)
   ) {
     const abilities = definition(state, o).activated ?? [],

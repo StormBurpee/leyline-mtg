@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c3c25a2c-f71c-4cb7-9117-0bcda9248bfd",
+  "name": "Prismari Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U", "R"],
+    "manaCost": "{U}{R}"
+  },
+  "rulesText": "Choose one —\n• Surveil 2, then draw a card.\n• Prismari Charm deals 1 damage to each of one or two targets.\n• Return target nonland permanent to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Surveil 2, then draw a card.",
+          "effects": [
+            {
+              "op": "surveil",
+              "target": "controller",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Deal 1 damage to each of one or two targets.",
+          "targetGroups": [
+            {
+              "id": "chosen",
+              "selector": {
+                "scope": "damageable"
+              },
+              "min": 1,
+              "max": 2
+            }
+          ],
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 1,
+              "targetGroup": "chosen"
+            }
+          ]
+        },
+        {
+          "label": "Return target nonland permanent.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "not": {
+                "type": "land"
+              }
+            }
+          },
+          "effects": [
+            {
+              "op": "returnToHand",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

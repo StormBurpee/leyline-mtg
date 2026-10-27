@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "43c92618-0aae-41f8-aa39-393e5d6b5ff7",
+  "name": "Brazen Blademaster",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Orc", "Pirate"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Whenever this creature attacks while you control two or more artifacts, it gets +2/+1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 2,
+          "toughness": 1,
+          "until": "endOfTurn"
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "you",
+          "where": {
+            "type": "artifact"
+          }
+        },
+        "operator": "gte",
+        "right": 2
+      }
+    }
+  ]
+}

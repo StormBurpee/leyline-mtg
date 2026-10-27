@@ -1,3 +1,4 @@
+import { CREATURE_TYPES } from './creature-types.js';
 import { validateTargetGroups } from './target-group-schema.js';
 import { validNumericValue } from './value-schema.js';
 import { validateCondition } from './condition-schema.js';
@@ -27,6 +28,7 @@ const FIELDS = new Set([
   'subtypes',
   'power',
   'toughness',
+  'loyalty',
   'basic',
   'legendary',
   'token',
@@ -109,7 +111,9 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
     errors.push(`${path}: expected a cost object.`);
     return;
   }
-  const allowed = allowTap ? ['mana', 'life', 'tap', 'sacrificeSelf', 'discard'] : ['mana', 'life'];
+  const allowed = allowTap
+    ? ['mana', 'life', 'tap', 'sacrificeSelf', 'exileSelf', 'discard']
+    : ['mana', 'life'];
   if (Object.keys(cost).some((key) => !allowed.includes(key)))
     errors.push(`${path}: unsupported cost.`);
   if (cost.mana !== undefined) validateCost(cost.mana, `${path}.mana`, errors);
@@ -117,13 +121,16 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
     errors.push(`${path}.life: expected a nonnegative safe integer.`);
   if (cost.sacrificeSelf !== undefined && typeof cost.sacrificeSelf !== 'boolean')
     errors.push(`${path}.sacrificeSelf: expected a boolean.`);
+  if (cost.exileSelf !== undefined && typeof cost.exileSelf !== 'boolean')
+    errors.push(`${path}.exileSelf: expected a boolean.`);
   if (cost.discard !== undefined && cost.discard !== 1)
     errors.push(`${path}.discard: only a single-card discard cost is supported.`);
   if (cost.tap !== undefined && typeof cost.tap !== 'boolean')
     errors.push(`${path}.tap: expected a boolean.`);
 }
 function filterOnlyPermanents(where) {
-  if (where?.type) return ['land', 'creature', 'artifact', 'enchantment'].includes(where.type);
+  if (where?.type)
+    return ['land', 'creature', 'artifact', 'enchantment', 'planeswalker'].includes(where.type);
   if (where?.all) return where.all.some(filterOnlyPermanents);
   if (where?.any) return where.any.every(filterOnlyPermanents);
   return false;
@@ -160,6 +167,24 @@ function validateEffects(
     }
     if (!plain(e)) {
       errors.push(`${p}: expected an effect object.`);
+      continue;
+    }
+    if (e.op === 'discardTrigger') {
+      if (Object.keys(e).some((k) => !['op', 'count', 'where', 'selector', 'effects'].includes(k)))
+        errors.push(`${p}: unsupported discard-trigger field.`);
+      if (!Number.isSafeInteger(e.count) || e.count < 1 || e.count > 16)
+        errors.push(`${p}.count: expected 1–16 cards.`);
+      errors.push(...validateFilter(e.where).map((error) => `${p}.where: ${error}`));
+      errors.push(...validateTargetSpec(e.selector).map((error) => `${p}.selector: ${error}`));
+      validateEffects(
+        e.effects,
+        `${p}.effects`,
+        null,
+        errors,
+        [{ id: 'chosen', selector: e.selector, min: 0, max: e.count }],
+        budget,
+        depth + 1,
+      );
       continue;
     }
     if (e.op === 'conditional') {
@@ -213,12 +238,15 @@ function validateEffects(
         errors.push(`${p}: fight/bite requires creature target groups and exactly one source.`);
       continue;
     }
+    if (e.op === 'empowerJace' && (!natural(e.count) || e.count > 1000))
+      errors.push(`${p}.count: Empower requires a literal from 0 to 1000.`);
     const schema = {
       damage: ['amount'],
       damageOpponent: ['amount'],
       damageEventOpponent: ['amount'],
       damageEventPowerOpponent: [],
       drawEventAmount: [],
+      disableDamagePrevention: [],
       addMana: ['mana'],
       impulseChoose: ['count'],
       bindingNegotiation: [],
@@ -229,6 +257,7 @@ function validateEffects(
       moveTarget: ['destination', 'controller', 'tapped', 'subject'],
       draw: ['count', 'player'],
       mill: ['count', 'player'],
+      lookChooseHand: ['count', 'player'],
       scry: ['count', 'player'],
       surveil: ['count', 'player'],
       discard: ['count', 'player'],
@@ -239,14 +268,17 @@ function validateEffects(
       bounce: ['subject'],
       destroy: ['subject'],
       attachEquipment: [],
+      animateLand: ['power', 'toughness', 'colors', 'subtypes'],
       modify: ['subject', 'power', 'toughness', 'keywords'],
       token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords'],
       mobilize: ['definition', 'count'],
+      empowerJace: ['definition', 'count'],
       copyToken: ['count', 'exceptions'],
       stunOn: ['subject', 'amount'],
       counterOn: ['subject', 'amount'],
       untap: ['subject'],
       tap: ['subject'],
+      bounceAll: ['where', 'excludeSource'],
       destroyAll: ['where', 'excludeSource'],
       exileAll: ['where', 'excludeSource'],
       modifyAll: ['where', 'excludeSource', 'power', 'toughness', 'keywords'],
@@ -276,7 +308,17 @@ function validateEffects(
     )
       errors.push(`${p}.amount: expected a nonnegative safe integer.`);
     if (
-      ['draw', 'mill', 'token', 'mobilize', 'scry', 'surveil', 'discard'].includes(e.op) &&
+      [
+        'draw',
+        'mill',
+        'token',
+        'mobilize',
+        'empowerJace',
+        'scry',
+        'lookChooseHand',
+        'surveil',
+        'discard',
+      ].includes(e.op) &&
       !validNumericValue(e.count, { nonnegative: true, limit: 1000 })
     )
       errors.push(`${p}.count: expected a literal count from 0 to 1000.`);
@@ -287,7 +329,9 @@ function validateEffects(
     )
       errors.push(`${p}: mill requires a supported player selector and compatible target.`);
     if (
-      ['draw', 'discard', 'gainLife', 'loseLife', 'scry', 'surveil'].includes(e.op) &&
+      ['draw', 'discard', 'gainLife', 'loseLife', 'scry', 'lookChooseHand', 'surveil'].includes(
+        e.op,
+      ) &&
       e.player !== undefined &&
       (!['controller', 'opponent', 'target'].includes(e.player) ||
         (e.player === 'target' && !effectTargetCompatible(e.op, target)))
@@ -399,10 +443,14 @@ function validateEffects(
       if (e.tapped !== undefined && typeof e.tapped !== 'boolean')
         errors.push(`${p}.tapped: expected boolean.`);
     }
-    if (['token', 'mobilize'].includes(e.op) && (typeof e.definition !== 'string' || !e.definition))
+    if (
+      ['token', 'mobilize', 'empowerJace'].includes(e.op) &&
+      (typeof e.definition !== 'string' || !e.definition)
+    )
       errors.push(`${p}.definition: expected a token definition name.`);
     if (
       [
+        'bounceAll',
         'destroyAll',
         'exileAll',
         'modifyAll',
@@ -431,6 +479,23 @@ function validateEffects(
         if (e.where && !effectTargetCompatible('damage', { scope: 'permanent', where: e.where }))
           errors.push(`${p}: group damage requires a creature filter.`);
       }
+    }
+    if (e.op === 'animateLand') {
+      if (
+        !Number.isSafeInteger(e.power) ||
+        !Number.isSafeInteger(e.toughness) ||
+        Math.abs(e.power) > 1000 ||
+        Math.abs(e.toughness) > 1000
+      )
+        errors.push(`${p}: animation requires bounded integer base power/toughness.`);
+      if (!Array.isArray(e.colors) || e.colors.some((c) => !['W', 'U', 'B', 'R', 'G'].includes(c)))
+        errors.push(`${p}: invalid animation colors.`);
+      if (
+        !Array.isArray(e.subtypes) ||
+        !e.subtypes.length ||
+        e.subtypes.some((t) => !CREATURE_TYPES.includes(t))
+      )
+        errors.push(`${p}: invalid animation creature subtypes.`);
     }
     if (e.op === 'modify' || e.op === 'modifyAll') {
       if (!validNumericValue(e.power) || !validNumericValue(e.toughness))
@@ -518,7 +583,9 @@ export function validateDefinition(card) {
     )
       errors.push(`${name}.types: unsupported combination or inconsistent primary type.`);
   }
-  const permanent = ['land', 'creature', 'artifact', 'enchantment'].includes(card.type);
+  const permanent = ['land', 'creature', 'artifact', 'enchantment', 'planeswalker'].includes(
+    card.type,
+  );
   if (permanent && card.effects !== undefined)
     errors.push(
       `${name}.effects: permanent spells use enters triggers, not direct spell instructions.`,
@@ -601,6 +668,10 @@ export function validateDefinition(card) {
   if (card.ward !== undefined) validatePaymentCost(card.ward, `${name}.ward`, errors);
   if (card.text !== undefined && typeof card.text !== 'string')
     errors.push(`${name}.text: expected a string.`);
+  if (hasType(card, 'planeswalker') && (!natural(card.loyalty) || card.loyalty > 1000))
+    errors.push(`${name}.loyalty: expected initial loyalty from 0 to 1000.`);
+  if (!hasType(card, 'planeswalker') && card.loyalty !== undefined)
+    errors.push(`${name}.loyalty: requires planeswalker type.`);
   if (card.type === 'creature' && (!signed(card.power) || !signed(card.toughness)))
     errors.push(`${name}: creatures require literal safe-integer power/toughness.`);
   if (
@@ -836,7 +907,7 @@ export function validateDefinition(card) {
     card.entryStunCounters !== undefined &&
     (!natural(card.entryStunCounters) ||
       card.entryStunCounters > 1000 ||
-      !['creature', 'artifact', 'enchantment', 'land'].includes(card.type))
+      !['creature', 'artifact', 'enchantment', 'land', 'planeswalker'].includes(card.type))
   )
     errors.push(`${name}.entryStunCounters: expected 0–1000 counters on a permanent.`);
   if (card.targetGroups !== undefined) {
@@ -1150,6 +1221,7 @@ export function validateDefinition(card) {
             (k) =>
               ![
                 'cost',
+                'zone',
                 'effects',
                 'target',
                 'targetGroups',
@@ -1157,10 +1229,29 @@ export function validateDefinition(card) {
                 'timing',
                 'condition',
                 'oncePerTurn',
+                'loyalty',
               ].includes(k),
           )
         )
           errors.push(`${p}: unsupported ability field.`);
+        if (
+          a.loyalty !== undefined &&
+          (!hasType(card, 'planeswalker') ||
+            !signed(a.loyalty) ||
+            Math.abs(a.loyalty) > 1000 ||
+            Object.keys(a.cost).length)
+        )
+          errors.push(
+            `${p}.loyalty: requires a planeswalker, integer loyalty cost and no other costs.`,
+          );
+        if (a.zone !== undefined && a.zone !== 'graveyard')
+          errors.push(`${p}.zone: unsupported activation zone.`);
+        if (a.zone === 'graveyard' && (a.cost.tap || a.cost.sacrificeSelf || !a.cost.exileSelf))
+          errors.push(
+            `${p}: graveyard abilities require exileSelf and cannot tap or sacrifice their source.`,
+          );
+        if (a.cost.exileSelf && a.zone !== 'graveyard')
+          errors.push(`${p}: exileSelf requires a graveyard ability.`);
         if (a.condition !== undefined) errors.push(...validateCondition(a.condition));
         if (a.oncePerTurn !== undefined && typeof a.oncePerTurn !== 'boolean')
           errors.push(`${p}.oncePerTurn: expected a boolean.`);
@@ -1199,7 +1290,7 @@ export function validateDefinition(card) {
     (Array.isArray(card.activated) && card.activated.some((a) => usesLinkedExile(a.effects)));
   if (
     linked &&
-    (!['creature', 'artifact', 'enchantment', 'land'].includes(card.type) ||
+    (!['creature', 'artifact', 'enchantment', 'land', 'planeswalker'].includes(card.type) ||
       card.manaSacrifice ||
       (Array.isArray(card.activated) &&
         card.activated.some((a) => a.cost?.sacrificeSelf && a.cost?.life)))

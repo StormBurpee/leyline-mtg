@@ -144,6 +144,7 @@ function cast(s, p, c) {
   if (d.faceDownCast) o.castingFaceDown = true;
   move(s, o, 'stack');
   o.controller = p;
+  o.castPlayer = p;
   if (c.x !== undefined) o.chosenX = c.x;
   if (d.flashbackPaid) o.flashbackPaid = true;
   if (d.warpPaid) o.warpPaid = true;
@@ -215,17 +216,30 @@ function finishCasting(s) {
 }
 export function abilityProblem(s, p, id, index, target, discardCard, targets) {
   const o = s.objects[id];
-  if (!o || o.zone !== 'battlefield' || o.controller !== p)
-    return 'You do not control that permanent.';
+  if (!o) return 'That ability source does not exist.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
   if (!Number.isSafeInteger(index) || index < 0) return 'That ability does not exist.';
   const ability = definition(s, o).activated?.[index];
   if (!ability) return 'That ability does not exist.';
+  if (
+    ability.zone === 'graveyard'
+      ? o.zone !== 'graveyard' || o.owner !== p
+      : o.zone !== 'battlefield' || o.controller !== p
+  )
+    return 'That ability is not available from this zone.';
   if (!meetsCondition(s, p, ability.condition, [], o))
     return 'The activation condition is not met.';
   if (ability.oncePerTurn && o.abilityUses?.[index] === `${s.turn}:${o.incarnation}`)
     return 'This ability has already been activated this turn.';
-  if (ability.timing === 'sorcery' && !(s.active === p && main(s) && s.stack.length === 0))
+  if (ability.loyalty !== undefined) {
+    if (o.loyaltyUsed === `${s.turn}:${o.incarnation}`)
+      return 'A loyalty ability of this permanent has already been activated this turn.';
+    if ((o.loyalty ?? 0) + ability.loyalty < 0) return 'Not enough loyalty counters.';
+  }
+  if (
+    (ability.loyalty !== undefined || ability.timing === 'sorcery') &&
+    !(s.active === p && main(s) && s.stack.length === 0)
+  )
     return 'Activate this only as a sorcery.';
 
   if (ability.targetGroups) {
@@ -322,6 +336,7 @@ function cycle(s, p, c) {
     controller: p,
     source: ref(o),
     sourceKeywords: keywords(s, o),
+    sourceDefinition: structuredClone(definition(s, o)),
     ...(o.attachedTo ? { sourceAttachment: structuredClone(o.attachedTo) } : {}),
     effects: d.cyclingType
       ? [
@@ -355,6 +370,7 @@ function activate(s, p, c) {
     controller: p,
     source: ref(o),
     sourceKeywords: keywords(s, o),
+    sourceDefinition: structuredClone(definition(s, o)),
     ...(o.attachedTo ? { sourceAttachment: structuredClone(o.attachedTo) } : {}),
     effects: structuredClone(a.effects),
     ...(a.targetGroups
@@ -366,6 +382,10 @@ function activate(s, p, c) {
   });
   if (s.rulesRevision !== 1) notifyTargeted(s, s.stack.at(-1));
   if (a.oncePerTurn) (o.abilityUses ??= {})[c.ability] = `${s.turn}:${o.incarnation}`;
+  if (a.loyalty !== undefined) {
+    o.loyalty = (o.loyalty ?? 0) + a.loyalty;
+    o.loyaltyUsed = `${s.turn}:${o.incarnation}`;
+  }
   payCost(s, p, a.cost, { sourceId: o.id, discardCard: c.discardCard });
   s.passes = 0;
   emit(s, 'activated', { player: p, name: o.name, objectId: o.id, ability: c.ability });
@@ -394,7 +414,9 @@ function handleChoice(s, p, c) {
       'sacrifice',
       'payCost',
       'optionalEffect',
+      'attackDefenders',
       'exilePlay',
+      'empowerJace',
       'bindingNegotiation',
       'revealDiscard',
       'exileToGraveyard',
@@ -473,7 +495,7 @@ function handleChoice(s, p, c) {
     }
     case 'attackers':
       requireRule(c.type === 'attackers', 'CHOICE', 'Declare attackers first.');
-      declareAttackers(s, c.cards);
+      declareAttackers(s, c.cards, c.defenders);
       return;
     case 'blockers':
       requireRule(c.type === 'blockers', 'CHOICE', 'Declare blockers first.');
@@ -716,8 +738,14 @@ export function legalActions(s, p, { x: exactX } = {}) {
     if (!turnFaceUpProblem(s, p, o.id)) actions.push({ type: 'turnFaceUp', card: o.id });
     if (canTapForMana(s, o, p))
       for (const color of manaOptions(s, o)) actions.push({ type: 'tapMana', card: o.id, color });
-    if (o.zone !== 'battlefield' || o.controller !== p) continue;
-    if (definition(s, o).crew !== undefined) {
+    if (
+      !(
+        (o.zone === 'battlefield' && o.controller === p) ||
+        (o.zone === 'graveyard' && o.owner === p)
+      )
+    )
+      continue;
+    if (o.zone === 'battlefield' && definition(s, o).crew !== undefined) {
       const cards = crewPlan(s, p, o.id);
       if (cards) actions.push({ type: 'crew', card: o.id, cards });
     }
@@ -796,6 +824,7 @@ export function replay(record) {
         '0.42.0',
         '0.43.0',
         '0.44.0',
+        '0.45.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

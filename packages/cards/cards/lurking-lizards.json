@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "616312a9-83c8-4fb7-87ce-079ccd3231fa",
+  "name": "Lurking Lizards",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Villain"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Trample\nWhenever you cast a spell with mana value 4 or greater, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "manaValue": {
+            "gte": 4
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

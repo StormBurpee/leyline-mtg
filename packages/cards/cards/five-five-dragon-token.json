@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/five-five-dragon-token",
+  "name": "Five Five Dragon Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dragon"],
+    "colors": ["R"],
+    "manaCost": null,
+    "power": 5,
+    "toughness": 5,
+    "token": true
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

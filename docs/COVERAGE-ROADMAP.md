@@ -4,35 +4,39 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.45.0
+## Implemented progress through v0.46.0
 
-Current dated inventory coverage: **1,157 / 5,164**; **4,007 remain**. This is 278 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **1,204 / 5,164**; **3,960 remain**. This is 325 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
-| Delivered feature/card batch            | Cards added |
-| --------------------------------------- | ----------: |
-| Existing-engine cards and subtype buffs |          52 |
-| Land/typecycling                        |          23 |
-| Linked battlefield exile                |          20 |
-| Vehicles and crew                       |          18 |
-| Public spell-history conditions         |          18 |
-| Combat-damage triggers                  |          14 |
-| Warp                                    |          12 |
-| Changeling                              |          10 |
-| Chosen X spells                         |          10 |
-| Convoke                                 |           9 |
-| Mobilize                                |           9 |
-| Actual sacrifice-event triggers         |           8 |
-| Resolving sacrifice effects             |           7 |
-| Targeting and limited triggers          |           7 |
-| Additional casting sacrifice costs      |           6 |
-| Flashback                               |           5 |
-| Plot                                    |           5 |
-| Targeted permanent token copies         |           4 |
-| Adventure pairs                         |          24 |
-| Shocklands and Starting Town            |          11 |
-| Twobrid payment choices                 |           4 |
-| Mandatory revealed-hand discard         |           2 |
-| **Total since v0.38.0**                 |     **278** |
+| Delivered feature/card batch                                      | Cards added |
+| ----------------------------------------------------------------- | ----------: |
+| Existing-engine cards and subtype buffs                           |          52 |
+| Land/typecycling                                                  |          23 |
+| Linked battlefield exile                                          |          20 |
+| Vehicles and crew                                                 |          18 |
+| Public spell-history conditions                                   |          18 |
+| Combat-damage triggers                                            |          14 |
+| Warp                                                              |          12 |
+| Changeling                                                        |          10 |
+| Chosen X spells                                                   |          10 |
+| Convoke                                                           |           9 |
+| Mobilize                                                          |           9 |
+| Actual sacrifice-event triggers                                   |           8 |
+| Resolving sacrifice effects                                       |           7 |
+| Targeting and limited triggers                                    |           7 |
+| Additional casting sacrifice costs                                |           6 |
+| Flashback                                                         |           5 |
+| Plot                                                              |           5 |
+| Targeted permanent token copies                                   |           4 |
+| Adventure pairs                                                   |          24 |
+| Shocklands and Starting Town                                      |          11 |
+| Twobrid payment choices                                           |           4 |
+| Mandatory revealed-hand discard                                   |           2 |
+| Izzet completion and reusable selection/history/reflexive effects |           7 |
+| Planeswalker/Empower spells                                       |           3 |
+| Land animation (Restless Bivouac)                                 |           1 |
+| Boros spells and further existing-engine cards                    |          36 |
+| **Total since v0.38.0**                                           |     **325** |
 
 The baseline forecasts below remain unchanged for comparison. They were conservative first-pass probes: several implemented families unlocked more cards than those probes identified. Remaining cards in each family can still require other unsupported behavior.
 

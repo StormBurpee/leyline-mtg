@@ -1,3 +1,4 @@
+import { hasType } from './types.js';
 import {
   notifyTriggers,
   controlled,
@@ -43,7 +44,55 @@ export function canBlock(s, blocker, attacker, p) {
       hasKeyword(s, blocker, 'reach'))
   );
 }
-export function declareAttackers(s, ids) {
+/** Defenders are declared without targeting: hexproof/shroud do not restrict attacks. */
+export function attackDefenders(s, player = s.active) {
+  return [
+    { kind: 'player', id: opponent(player) },
+    ...Object.values(s.objects)
+      .filter(
+        (o) =>
+          o.zone === 'battlefield' &&
+          o.controller === opponent(player) &&
+          hasType(definition(s, o), 'planeswalker'),
+      )
+      .map(ref),
+  ];
+}
+export function attackDefender(s, attacker) {
+  const selected = s.combat.defenders?.[attacker] ?? { kind: 'player', id: opponent(s.active) };
+  if (selected.kind === 'player') return selected.id === opponent(s.active) ? selected : null;
+  const object = s.objects[selected.id];
+  return object?.zone === 'battlefield' &&
+    object.incarnation === selected.incarnation &&
+    object.controller === opponent(s.active) &&
+    hasType(definition(s, object), 'planeswalker')
+    ? selected
+    : null;
+}
+export function validateAttackDefenders(s, ids, defenders = {}) {
+  requireRule(
+    defenders &&
+      typeof defenders === 'object' &&
+      !Array.isArray(defenders) &&
+      Object.keys(defenders).every((id) => ids.includes(id)),
+    'DEFENDERS',
+    'Choose defenders only for selected attackers.',
+  );
+  const legal = attackDefenders(s);
+  for (const target of Object.values(defenders))
+    requireRule(
+      target &&
+        legal.some(
+          (t) =>
+            t.kind === target.kind &&
+            t.id === target.id &&
+            (t.kind === 'player' || t.incarnation === target.incarnation),
+        ),
+      'DEFENDER',
+      'Choose the defending player or one of their current planeswalkers.',
+    );
+}
+export function declareAttackers(s, ids, defenders = {}) {
   requireRule(
     Array.isArray(ids) && new Set(ids).size === ids.length,
     'ATTACKERS',
@@ -55,7 +104,9 @@ export function declareAttackers(s, ids) {
       'ATTACKER',
       `${s.objects[id]?.name ?? id} cannot attack.`,
     );
+  validateAttackDefenders(s, ids, defenders);
   s.combat = {
+    ...(Object.keys(defenders).length ? { defenders: structuredClone(defenders) } : {}),
     attackers: ids.map((id) => ref(s.objects[id])),
     blocks: {},
     blocked: [],
@@ -66,7 +117,11 @@ export function declareAttackers(s, ids) {
   s.choice = null;
   s.priority = s.active;
   s.passes = 0;
-  emit(s, 'attackers', { player: s.active, ids });
+  emit(s, 'attackers', {
+    player: s.active,
+    ids,
+    ...(Object.keys(defenders).length ? { defenders: structuredClone(defenders) } : {}),
+  });
   // CR 508.1m: only declared attackers trigger. Resolve nothing during declaration.
   for (const id of ids) notifyTriggers(s, 'attack', { object: s.objects[id] });
   if (ids.length)
@@ -146,15 +201,15 @@ export function beginDamage(s, first) {
     const blocked = s.combat.blocked.includes(a.id),
       trample = hasKeyword(s, a, 'trample');
     if (blocked && !blockers.length && !trample) continue;
+    const defender = attackDefender(s, a.id);
+    if (!blockers.length && !defender) continue;
     sources.push({
       source: ref(a),
       controller: a.controller,
       power: Math.max(0, stats(s, a).power),
-      targets: [
-        ...blockers.map(ref),
-        ...(!blocked || trample ? [{ kind: 'player', id: opponent(s.active) }] : []),
-      ],
+      targets: [...blockers.map(ref), ...((!blocked || trample) && defender ? [defender] : [])],
       trample,
+      ...(defender ? { defender } : {}),
       blockers: blockers.map(ref),
       keywords: keywords(s, a),
     });
@@ -201,7 +256,11 @@ export function suggestedDamage(s, choice = s.choice) {
     const assignments = [];
     for (const target of source.targets) {
       let amount = remaining;
-      if (target.kind === 'object' && source.targets.length > 1) {
+      if (
+        target.kind === 'object' &&
+        source.blockers.some((b) => sameTarget(b, target)) &&
+        source.targets.length > 1
+      ) {
         const o = s.objects[target.id];
         amount = Math.min(
           remaining,
@@ -273,8 +332,12 @@ export function assignDamage(s, orders) {
       'DAMAGE_TOTAL',
       'Assign exactly the creature’s power in combat damage.',
     );
-    const playerDamage = order.assignments.some((x) => x.target.kind === 'player' && x.amount > 0);
-    if (source.trample && playerDamage)
+    const defenderDamage = order.assignments.some(
+      (x) =>
+        x.amount > 0 &&
+        (source.defender ? sameTarget(x.target, source.defender) : x.target.kind === 'player'),
+    );
+    if (source.trample && defenderDamage)
       for (const blocker of source.blockers) {
         const o = s.objects[blocker.id],
           amount = order.assignments.find((x) => sameTarget(x.target, blocker))?.amount ?? 0;
@@ -282,7 +345,7 @@ export function assignDamage(s, orders) {
           amount + o.damage >= stats(s, o).toughness ||
             (amount > 0 && source.keywords.includes('deathtouch')),
           'TRAMPLE',
-          'Assign lethal damage to every blocker before assigning trample damage to the player.',
+          'Assign lethal damage to every blocker before assigning trample damage to the defender.',
         );
       }
   }

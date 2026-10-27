@@ -1227,7 +1227,7 @@
   {
     "oracleId": "0534e20d-8352-4d9f-a617-378070602673",
     "name": "Pileated Provisioner",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "361b0d7f-1e43-45c5-92c2-92baacaf326f",
@@ -1237,7 +1237,7 @@
   {
     "oracleId": "d13f0907-de39-4a90-940a-831740d7aa9b",
     "name": "Pilfer",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "8dbe7a06-3935-44a3-ac47-4ef00ed990f1",
@@ -2432,7 +2432,7 @@
   {
     "oracleId": "c3c25a2c-f71c-4cb7-9117-0bcda9248bfd",
     "name": "Prismari Charm",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fa3e28b1-131c-4223-81e0-18dfbab22c26",
@@ -2762,7 +2762,7 @@
   {
     "oracleId": "07617648-6490-4719-acec-7705671f7e01",
     "name": "Protege's Awakening",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ac935fad-2fa7-4afc-9db4-3cd30ec4aabd",

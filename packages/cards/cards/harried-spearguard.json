@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e3542d0f-fcee-4df7-aa95-b55138caa2ab",
+  "name": "Harried Spearguard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Haste\nWhen this creature dies, create a 1/1 black Rat creature token with \"This token can't block.\"",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/nonblocking-rat-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

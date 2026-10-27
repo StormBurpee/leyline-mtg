@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2679d0dd-ba30-4a1c-b6a0-b3ac6c790496",
+  "name": "Boros Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "subtypes": [],
+    "supertypes": [],
+    "colors": ["R", "W"],
+    "manaCost": "{R}{W}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Boros Charm deals 4 damage to target player or planeswalker.\n\u2022 Permanents you control gain indestructible until end of turn.\n\u2022 Target creature gains double strike until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Deal 4 damage to target player or planeswalker",
+          "target": {
+            "scope": "playerOrPlaneswalker"
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 4
+            }
+          ]
+        },
+        {
+          "label": "Permanents you control gain indestructible",
+          "effects": [
+            {
+              "op": "modifyAll",
+              "where": {
+                "controller": "you"
+              },
+              "power": 0,
+              "toughness": 0,
+              "keywords": ["indestructible"],
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Target creature gains double strike",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "keywords": ["double strike"],
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

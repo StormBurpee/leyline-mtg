@@ -2359,3 +2359,30 @@ html[data-motion='reduced'] .hand-card:focus-visible {
     padding: 12px 18px;
   }
 }
+
+.attack-defender-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+}
+.attack-defender-row select {
+  min-height: 44px;
+  width: 100%;
+  font: inherit;
+  padding: 8px;
+}
+.loyalty-badge {
+  color: var(--text);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.attack-destination {
+  display: block;
+  padding: 2px 4px;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #fff;
+  background: #403458;
+  overflow-wrap: anywhere;
+}

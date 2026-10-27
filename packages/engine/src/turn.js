@@ -37,6 +37,7 @@ export function finishCleanup(s) {
     delete o.playPermission;
     o.deathtouchDamage = false;
   }
+  delete s.damagePreventionDisabledTurn;
   s.modifiers = s.modifiers.filter((m) => m.expires !== s.turn);
   const before = s.events.length;
   stabilize(s);

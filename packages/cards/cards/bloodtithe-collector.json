@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "93088b0c-d158-473a-9c06-aa2f344a9868",
+  "name": "Bloodtithe Collector",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Noble"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this creature enters, if an opponent lost life this turn, each opponent discards a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "opponent",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "opponentLostLifeThisTurn"
+      }
+    }
+  ]
+}

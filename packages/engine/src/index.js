@@ -44,7 +44,7 @@ export {
 } from './engine.js';
 export { planPayment, canTapForMana, manaOptions } from './mana.js';
 export { legalTarget, targetsFor } from './effects.js';
-export { canAttack, canBlock, suggestedDamage } from './combat.js';
+export { canAttack, canBlock, attackDefenders, attackDefender, suggestedDamage } from './combat.js';
 export { chooseBotCommand } from './bot.js';
 
 export { createRegistry, validateDefinition, RegistryError } from './registry.js';

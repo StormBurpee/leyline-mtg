@@ -56,6 +56,7 @@ export function validateEventSpec(value) {
           'excludeSource',
           'step',
           'spellNumber',
+          'castByController',
           'targetingController',
           'targetingKind',
           'firstEachTurn',
@@ -138,6 +139,11 @@ export function validateEventSpec(value) {
     errors.push(
       'firstEachTurn requires a self targeted event, true, and no object filter/controller predicate.',
     );
+  if (
+    spec.castByController !== undefined &&
+    (spec.castByController !== true || spec.event !== 'enter' || spec.object !== 'source')
+  )
+    errors.push('castByController requires a self-entry event.');
   if (spec.filter !== undefined) errors.push(...validateFilter(spec.filter));
   return errors;
 }
@@ -148,6 +154,7 @@ export function matchesEvent(value, event, facts, source) {
   if (event === 'step' && spec.step !== facts.step) return false;
   if (spec.object === 'source' && facts.id !== source.id) return false;
   if (spec.excludeSource && facts.id === source.id) return false;
+  if (spec.castByController && facts.castPlayer !== source.controller) return false;
   if (event === 'targeted') {
     if (spec.targetingController === 'you' && facts.targetingController !== source.controller)
       return false;

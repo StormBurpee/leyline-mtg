@@ -187,13 +187,20 @@ function impliesCreature(filter) {
   if (filter.any) return filter.any.length > 0 && filter.any.every(impliesCreature);
   return false;
 }
+function impliesDamageable(filter) {
+  if (!filter) return false;
+  if (['creature', 'planeswalker'].includes(filter.type)) return true;
+  if (filter.all) return filter.all.some(impliesDamageable);
+  if (filter.any) return filter.any.length > 0 && filter.any.every(impliesDamageable);
+  return false;
+}
 export function effectTargetCompatible(op, value, effect = null) {
   const spec = targetSpec(value);
   if (!spec) return false;
   if (op === 'damage')
     return (
       ['damageable', 'player', 'playerOrPlaneswalker'].includes(spec.scope) ||
-      (spec.scope === 'permanent' && impliesCreature(spec.where))
+      (spec.scope === 'permanent' && impliesDamageable(spec.where))
     );
   if (op === 'attachEquipment') return spec.scope === 'permanent' && impliesCreature(spec.where);
   // CR 208.3a: a P/T modifier may be created for a noncreature permanent;

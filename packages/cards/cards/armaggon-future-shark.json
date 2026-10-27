@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e2a35850-92c5-40ab-8697-2e995819d7ac",
+  "name": "Armaggon, Future Shark",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Shark", "Horror", "Mutant"],
+    "colors": ["B"],
+    "manaCost": "{6}{B}{B}",
+    "power": 9,
+    "toughness": 6
+  },
+  "rulesText": "Flash\nWhen Armaggon enters, destroy up to three target creatures.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 3
+        }
+      ]
+    }
+  ]
+}

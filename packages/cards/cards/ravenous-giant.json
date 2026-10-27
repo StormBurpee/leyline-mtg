@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "46c7a552-4a98-4e1a-8651-8fb0e7153aec",
+  "name": "Ravenous Giant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "At the beginning of your upkeep, this creature deals 1 damage to you.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "upkeep",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "damageAll",
+          "amount": 1,
+          "players": "controller"
+        }
+      ]
+    }
+  ]
+}

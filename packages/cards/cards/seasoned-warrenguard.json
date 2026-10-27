@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5bf1dbb6-ed65-4968-8edd-b98e9bd19d4d",
+  "name": "Seasoned Warrenguard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rabbit", "Warrior"],
+    "colors": ["W"],
+    "manaCost": "{W}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature attacks while you control a token, this creature gets +2/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 2,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "you",
+          "where": {
+            "token": true
+          }
+        },
+        "operator": "gte",
+        "right": 1
+      }
+    }
+  ]
+}
