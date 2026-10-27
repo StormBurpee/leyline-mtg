@@ -411,6 +411,27 @@ test('legacy 0.1 replay envelopes remain readable', () => {
   delete record.schemaVersion;
   delete record.config.catalog;
   const restored = replay(record);
-  assert.equal(restored.version, '0.36.0');
+  assert.equal(restored.version, '0.36.1');
   assert.equal(restored.seed, 17);
+});
+
+test('every recent published replay envelope survives an engine update', () => {
+  const record = exportReplay(createGame({ seed: 41, mulligan: false }));
+  for (const version of [
+    '0.27.0',
+    '0.27.1',
+    '0.28.0',
+    '0.29.0',
+    '0.30.0',
+    '0.31.0',
+    '0.32.0',
+    '0.33.0',
+    '0.34.0',
+    '0.35.0',
+    '0.36.0',
+  ]) {
+    const restored = replay({ ...record, version });
+    assert.equal(restored.seed, 41);
+    assert.deepEqual(restored.catalog, record.config.catalog);
+  }
 });

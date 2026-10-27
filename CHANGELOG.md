@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.36.1 — Resume compatibility
+
+- Accept saved replay envelopes from every recent published version (0.27.0–0.36.0, including 0.27.1), preserving each saved catalog. Unknown schemas and engine versions still fail explicitly.
+
 ## 0.36.0 — Stun counters
 
 - Apply stun-counter replacement to normal, explicit and group untaps. Consume only one counter per actual untap event; leave counters on already untapped permanents and when another effect skips untapping. Clear counters on zone changes.
