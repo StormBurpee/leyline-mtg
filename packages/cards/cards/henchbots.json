@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1f097c91-6c2e-410f-8c8f-c021f39491af",
+  "name": "Henchbots",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot"],
+    "colors": [],
+    "manaCost": "{4}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, exile target tapped creature an opponent controls until this creature leaves the battlefield.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "tapped": true
+                }
+              ]
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "exileUntilSourceLeaves",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

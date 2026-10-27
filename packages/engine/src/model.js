@@ -8,7 +8,7 @@ import { matchesEvent } from './events.js';
 import { hasType, typesOf, primaryType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.43.0';
+export const VERSION = '0.44.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -507,6 +507,23 @@ export function captureDepartureContext(s) {
     ),
   };
 }
+/** Sacrifice is an action, not a synonym for any battlefield-to-graveyard move.
+ * Capture observers and object facts before the entire simultaneous batch (CR 603.10a).
+ * Do not use this helper for destruction, legend rules, or zero toughness.
+ */
+export function sacrificePermanents(s, objects) {
+  const unique = [
+    ...new Map(objects.filter((o) => o?.zone === 'battlefield').map((o) => [o.id, o])).values(),
+  ];
+  if (!unique.length) return;
+  const context = captureDepartureContext(s);
+  const departed = unique.map((o) => structuredClone(o));
+  for (const o of unique) move(s, o, 'graveyard', context);
+  for (const o of departed) {
+    emit(s, 'sacrificed', { player: o.controller, objectId: o.id, name: o.name });
+    notifyTriggers(s, 'sacrifice', { object: o, player: o.controller }, context);
+  }
+}
 /** Stun replaces an actual untap, not an attempt to untap an untapped object. */
 export function untapObject(s, object) {
   if (object.zone !== 'battlefield' || !object.tapped) return false;
@@ -520,6 +537,14 @@ export function untapObject(s, object) {
 }
 export function move(s, o, to, departureContext = null) {
   const from = o.zone;
+  const leaving = from === 'battlefield' && to !== 'battlefield';
+  if (leaving && s.linkedExiles?.length) {
+    const returning = s.linkedExiles.filter(
+      (link) => link.source.id === o.id && link.source.incarnation === o.incarnation,
+    );
+    s.linkedExiles = s.linkedExiles.filter((link) => !returning.includes(link));
+    (s.pendingLinkedReturns ??= []).push(...returning.flatMap((link) => link.cards));
+  }
   // CR 702.34a: replace every departure, not just successful resolution.
   if (from === 'stack' && to !== 'stack' && o.flashbackPaid) to = 'exile';
   if (to !== 'stack') delete o.flashbackPaid;

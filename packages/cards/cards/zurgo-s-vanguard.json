@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d6fdfd94-cef5-482c-83ed-11c5ba40abe9",
+  "name": "Zurgo's Vanguard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dog", "Soldier"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 0,
+    "toughness": 3
+  },
+  "rulesText": "Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)\nZurgo's Vanguard's power is equal to the number of creatures you control.",
+  "abilities": [
+    {
+      "kind": "baseStats",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mobilize",
+          "amount": 1,
+          "token": "leyline:token/mobilized-warrior"
+        }
+      ]
+    }
+  ]
+}

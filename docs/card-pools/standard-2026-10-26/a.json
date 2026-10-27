@@ -42,7 +42,7 @@
   {
     "oracleId": "0eec9984-cd11-4a52-9234-469c6a5fb9aa",
     "name": "Abandoned Campground",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "a0657586-0404-4bb0-a92d-25f040d560c1",
@@ -582,7 +582,7 @@
   {
     "oracleId": "da9ec010-8b42-4927-b602-4e96bced4e99",
     "name": "All-Fates Stalker",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "c15e5e93-2eff-407d-ae75-437e36ef85ba",
@@ -1312,7 +1312,7 @@
   {
     "oracleId": "7b0d9d79-2e86-4079-8db3-500483c8807e",
     "name": "Avatar Enthusiasts",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "08e8a63c-9fcc-48cf-a9af-15cbaeec943f",
@@ -1327,7 +1327,7 @@
   {
     "oracleId": "158d0272-a850-4399-8afa-d0caa143c3cb",
     "name": "Avenger of the Fallen",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "3477e1cc-46af-46f4-9ea2-bdf0bf1f880e",

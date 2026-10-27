@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bf8de96b-0a75-4459-a123-dcf95e1b89f2",
+  "name": "Tanufel Rimespeaker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Whenever you cast a spell with mana value 4 or greater, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "manaValue": {
+            "gte": 4
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

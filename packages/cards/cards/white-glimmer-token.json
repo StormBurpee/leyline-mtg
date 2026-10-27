@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/white-glimmer-token",
+  "name": "White Glimmer Token",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "subtypes": ["Glimmer"],
+    "supertypes": [],
+    "colors": ["W"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

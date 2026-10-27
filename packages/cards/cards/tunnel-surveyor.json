@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7aae54a6-3011-4867-b5ee-21a2111aecc6",
+  "name": "Tunnel Surveyor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Detective"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, create a 1/1 white Glimmer enchantment creature token.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-glimmer-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

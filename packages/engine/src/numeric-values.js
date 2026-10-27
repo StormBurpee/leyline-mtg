@@ -92,7 +92,7 @@ export function effectValues(state, effect, entry) {
       if (result === effect) result = { ...effect };
       const value = numericValue(state, effect[key], context);
       result[key] = ['amount', 'count'].includes(key) ? Math.max(0, value) : value;
-      if (key === 'count' && effect.op === 'token')
+      if (key === 'count' && ['token', 'mobilize'].includes(effect.op))
         requireRule(
           result[key] <= 1000,
           'VALUE_BUDGET',

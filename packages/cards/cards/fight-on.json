@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4ab42daa-8726-4973-947d-1d6c32f0ba61",
+  "name": "Fight On!",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "Return up to two target creature cards from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "targetGroup": "chosen",
+          "destination": "hand"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "owner": "you"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 2
+        }
+      ]
+    }
+  ]
+}

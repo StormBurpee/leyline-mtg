@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/large-green-beast-token",
+  "name": "Large Green Beast Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Beast"],
+    "supertypes": [],
+    "colors": ["G"],
+    "manaCost": null,
+    "power": 4,
+    "toughness": 4,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

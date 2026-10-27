@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/small-robot-token",
+  "name": "Small Robot Token",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Robot"],
+    "supertypes": [],
+    "colors": [],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

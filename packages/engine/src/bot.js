@@ -61,7 +61,7 @@ function groupedSpellScore(s, p, action, card) {
     if (effect.op === 'draw' && effect.player !== 'opponent') tempo += effect.count * 3;
     if (effect.op === 'token') tempo += effect.count * 2;
     if (effect.op === 'gainLife' && effect.player !== 'opponent') tempo += effect.amount * 0.25;
-    if (['bounce', 'moveTarget'].includes(effect.op)) {
+    if (['bounce', 'moveTarget', 'exileUntilSourceLeaves'].includes(effect.op)) {
       for (const t of targets) {
         const d = data(t);
         if (!d) continue;
@@ -333,6 +333,7 @@ export function chooseBotCommand(s, p) {
               'discard',
               'mill',
               'sacrifice',
+              'exileUntilSourceLeaves',
             ].includes(effect.op) ||
             (effect.op === 'moveTarget' && effect.destination === 'exile'),
         );

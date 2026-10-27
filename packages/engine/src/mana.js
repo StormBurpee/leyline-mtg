@@ -1,7 +1,15 @@
 import { hasType } from './types.js';
 import { hasSubtype } from './creature-types.js';
 import { meetsCondition } from './conditions.js';
-import { COLORS, controlled, definition, isSick, requireRule, emit, move } from './model.js';
+import {
+  COLORS,
+  controlled,
+  definition,
+  isSick,
+  requireRule,
+  emit,
+  sacrificePermanents,
+} from './model.js';
 export function manaRestriction(s, o, color) {
   const restriction = definition(s, o).manaRestrictions?.[color];
   return restriction
@@ -56,8 +64,7 @@ export function tapForMana(s, id, p, color) {
   else s.players[p].mana[chosen]++;
   emit(s, 'mana', { player: p, objectId: id, color: chosen });
   if (definition(s, o).manaSacrifice) {
-    emit(s, 'sacrificed', { player: p, objectId: id, name: o.name });
-    move(s, o, 'graveyard');
+    sacrificePermanents(s, [o]);
   }
 }
 /** Pure unit-capacity matching. Flexible sources must not strand a colored cost. */

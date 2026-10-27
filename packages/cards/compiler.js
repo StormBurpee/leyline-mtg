@@ -140,6 +140,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'gainLife',
           'loseLife',
           'moveTarget',
+          'exileUntilSourceLeaves',
           'draw',
           'mill',
           'scry',
@@ -154,6 +155,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'attachEquipment',
           'modify',
           'createToken',
+          'mobilize',
           'copyToken',
           'addCounters',
           'addStunCounters',
@@ -190,6 +192,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         bindingNegotiation: [],
         gainLife: ['target', 'amount'],
         loseLife: ['target', 'amount'],
+        exileUntilSourceLeaves: ['target'],
         moveTarget: ['target', 'destination', 'controller', 'tapped'],
         draw: ['target', 'amount'],
         mill: ['target', 'amount'],
@@ -205,6 +208,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         attachEquipment: ['target'],
         modify: ['target', 'power', 'toughness', 'keywords', 'until'],
         token: ['token', 'amount', 'controller', 'tapped', 'temporaryKeywords'],
+        mobilize: ['token', 'amount'],
         copyToken: ['target', 'count', 'exceptions'],
         counterOn: ['target', 'amount', 'counter'],
         stunOn: ['target', 'amount'],
@@ -248,7 +252,18 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         if (effect.where !== undefined) e.where = structuredClone(effect.where);
       }
       if (e.op === 'addMana') e.mana = mana(effect.mana, `${p}.mana`);
-      if (['draw', 'mill', 'scry', 'surveil', 'discard', 'token', 'impulseChoose'].includes(e.op))
+      if (
+        [
+          'draw',
+          'mill',
+          'scry',
+          'surveil',
+          'discard',
+          'token',
+          'mobilize',
+          'impulseChoose',
+        ].includes(e.op)
+      )
         e.count = effect.amount;
       if (['draw', 'gainLife', 'loseLife', 'scry', 'surveil', 'discard'].includes(e.op)) {
         if (!['controller', 'opponent', 'target'].includes(effect.target))
@@ -313,7 +328,9 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         if (effect.tapped !== undefined) e.tapped = effect.tapped;
       }
       if (
-        ['damage', 'counter', 'attachEquipment', 'copyToken'].includes(e.op) &&
+        ['damage', 'counter', 'attachEquipment', 'copyToken', 'exileUntilSourceLeaves'].includes(
+          e.op,
+        ) &&
         effect.target !== 'target'
       )
         problem(
@@ -363,7 +380,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           ...(effect.keywords !== undefined ? { keywords: effect.keywords } : {}),
         });
       }
-      if (e.op === 'token') {
+      if (['token', 'mobilize'].includes(e.op)) {
         e.definition = Object.hasOwn(identities, effect.token) ? identities[effect.token] : null;
         if (!e.definition)
           problem('UNKNOWN_TOKEN', `${p}.token`, 'Token identity is not in this pack.');

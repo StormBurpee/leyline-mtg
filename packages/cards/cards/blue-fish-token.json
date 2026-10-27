@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/blue-fish-token",
+  "name": "Blue Fish Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Fish"],
+    "supertypes": [],
+    "colors": ["U"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

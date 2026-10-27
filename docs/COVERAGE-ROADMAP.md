@@ -4,28 +4,31 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.43.0
+## Implemented progress through v0.44.0
 
-Current dated inventory coverage: **1,031 / 5,164**; **4,133 remain**. This is 152 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **1,116 / 5,164**; **4,048 remain**. This is 237 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
-| Delivered feature/card batch                           | Cards added |
-| ------------------------------------------------------ | ----------: |
-| Land/typecycling                                       |          23 |
-| Vehicles and crew                                      |          18 |
-| Public spell-history conditions                        |          18 |
-| Combat-damage triggers                                 |          14 |
-| Warp                                                   |          12 |
-| Changeling                                             |          10 |
-| Chosen X spells                                        |          10 |
-| Convoke                                                |           9 |
-| Resolving sacrifice effects                            |           7 |
-| Targeting and limited triggers                         |           7 |
-| Additional casting sacrifice costs                     |           6 |
-| Flashback                                              |           5 |
-| Plot                                                   |           5 |
-| Targeted permanent token copies                        |           4 |
-| Other complete existing-engine cards and subtype buffs |           4 |
-| **Total since v0.38.0**                                |     **152** |
+| Delivered feature/card batch            | Cards added |
+| --------------------------------------- | ----------: |
+| Existing-engine cards and subtype buffs |          52 |
+| Land/typecycling                        |          23 |
+| Linked battlefield exile                |          20 |
+| Vehicles and crew                       |          18 |
+| Public spell-history conditions         |          18 |
+| Combat-damage triggers                  |          14 |
+| Warp                                    |          12 |
+| Changeling                              |          10 |
+| Chosen X spells                         |          10 |
+| Convoke                                 |           9 |
+| Mobilize                                |           9 |
+| Actual sacrifice-event triggers         |           8 |
+| Resolving sacrifice effects             |           7 |
+| Targeting and limited triggers          |           7 |
+| Additional casting sacrifice costs      |           6 |
+| Flashback                               |           5 |
+| Plot                                    |           5 |
+| Targeted permanent token copies         |           4 |
+| **Total since v0.38.0**                 |     **237** |
 
 The baseline forecasts below remain unchanged for comparison. They were conservative first-pass probes: several implemented families unlocked more cards than those probes identified. Remaining cards in each family can still require other unsupported behavior.
 

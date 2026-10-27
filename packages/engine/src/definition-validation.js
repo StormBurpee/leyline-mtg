@@ -176,6 +176,7 @@ function validateEffects(
           'tap',
           'untap',
           'moveTarget',
+          'exileUntilSourceLeaves',
         ].includes(e.op) ||
         e.subject !== undefined ||
         (e.op === 'moveTarget' && e.destination === 'battlefield')
@@ -214,6 +215,7 @@ function validateEffects(
       bindingNegotiation: [],
       gainLife: ['amount', 'player'],
       loseLife: ['amount', 'player'],
+      exileUntilSourceLeaves: [],
       moveTarget: ['destination', 'controller', 'tapped', 'subject'],
       draw: ['count', 'player'],
       mill: ['count', 'player'],
@@ -229,6 +231,7 @@ function validateEffects(
       attachEquipment: [],
       modify: ['subject', 'power', 'toughness', 'keywords'],
       token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords'],
+      mobilize: ['definition', 'count'],
       copyToken: ['count', 'exceptions'],
       stunOn: ['subject', 'amount'],
       counterOn: ['subject', 'amount'],
@@ -263,7 +266,7 @@ function validateEffects(
     )
       errors.push(`${p}.amount: expected a nonnegative safe integer.`);
     if (
-      ['draw', 'mill', 'token', 'scry', 'surveil', 'discard'].includes(e.op) &&
+      ['draw', 'mill', 'token', 'mobilize', 'scry', 'surveil', 'discard'].includes(e.op) &&
       !validNumericValue(e.count, { nonnegative: true, limit: 1000 })
     )
       errors.push(`${p}.count: expected a literal count from 0 to 1000.`);
@@ -383,7 +386,7 @@ function validateEffects(
       if (e.tapped !== undefined && typeof e.tapped !== 'boolean')
         errors.push(`${p}.tapped: expected boolean.`);
     }
-    if (e.op === 'token' && (typeof e.definition !== 'string' || !e.definition))
+    if (['token', 'mobilize'].includes(e.op) && (typeof e.definition !== 'string' || !e.definition))
       errors.push(`${p}.definition: expected a token definition name.`);
     if (
       [
@@ -460,6 +463,7 @@ function validateEffects(
         'attachEquipment',
         'modify',
         'moveTarget',
+        'exileUntilSourceLeaves',
         'untap',
         'tap',
         'counterOn',
@@ -1081,5 +1085,29 @@ export function validateDefinition(card) {
         );
       }
   }
+  const usesLinkedExile = (effects, depth = 0) =>
+    depth < 9 &&
+    Array.isArray(effects) &&
+    effects.some(
+      (e) =>
+        e?.op === 'exileUntilSourceLeaves' ||
+        (e?.op === 'conditional' &&
+          (usesLinkedExile(e.then, depth + 1) || usesLinkedExile(e.else, depth + 1))),
+    );
+  const linked =
+    usesLinkedExile(card.effects) ||
+    usesLinkedExile(card.etb) ||
+    (Array.isArray(card.triggers) && card.triggers.some((t) => usesLinkedExile(t.effects))) ||
+    (Array.isArray(card.activated) && card.activated.some((a) => usesLinkedExile(a.effects)));
+  if (
+    linked &&
+    (!['creature', 'artifact', 'enchantment', 'land'].includes(card.type) ||
+      card.manaSacrifice ||
+      (Array.isArray(card.activated) &&
+        card.activated.some((a) => a.cost?.sacrificeSelf && a.cost?.life)))
+  )
+    errors.push(
+      `${name}: linked exile requires a permanent source without sacrificing mana abilities or combined sacrifice/life activation costs.`,
+    );
   return errors;
 }

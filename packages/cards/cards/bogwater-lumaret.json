@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0109432d-5a2a-456f-ad39-b75cb4c73420",
+  "name": "Bogwater Lumaret",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit", "Frog"],
+    "colors": ["B", "G"],
+    "manaCost": "{B}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature or another creature you control enters, you gain 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

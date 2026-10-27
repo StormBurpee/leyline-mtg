@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2db8dda3-8136-4cf2-ba2d-ecc344a36725",
+  "name": "Mechanized Ninja Cavalry",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot", "Ninja"],
+    "colors": ["R", "W"],
+    "manaCost": "{1}{R/W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, create a 1/1 colorless Robot artifact creature token.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/small-robot-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

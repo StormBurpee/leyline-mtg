@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "922a8e27-a367-40c6-84df-86ed32f71c7c",
+  "name": "Oltec Cloud Guard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhen this creature enters, create a 1/1 colorless Gnome artifact creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/artifact-gnome-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

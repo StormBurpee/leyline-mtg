@@ -93,11 +93,22 @@ export function compilePack(cards, { mechanics = {} } = {}) {
       ...(d.triggers ?? []).flatMap((t) => t.effects),
       ...(d.activated ?? []).flatMap((a) => a.effects),
     ])
-      if (e.op === 'token' && !byName[e.definition]?.token)
+      if (['token', 'mobilize'].includes(e.op) && !byName[e.definition]?.token)
         diagnostics.push({
           code: 'TOKEN_REFERENCE',
           path: d.name,
           message: `${e.definition} is not a token definition.`,
+        });
+      else if (
+        e.op === 'mobilize' &&
+        (byName[e.definition].type !== 'creature' ||
+          byName[e.definition].chooseCreatureType ||
+          byName[e.definition].aura)
+      )
+        diagnostics.push({
+          code: 'MOBILIZE_TOKEN',
+          path: d.name,
+          message: 'Mobilize requires a creature token without entry choices.',
         });
   return diagnostics.length
     ? { ok: false, diagnostics }

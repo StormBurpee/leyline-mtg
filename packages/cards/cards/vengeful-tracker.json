@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fe540a23-0357-44fa-8e1c-0a5c2a04cb01",
+  "name": "Vengeful Tracker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Detective"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever an opponent sacrifices an artifact, this creature deals 2 damage to them.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "sacrifice",
+        "controller": "opponent",
+        "filter": {
+          "type": "artifact"
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

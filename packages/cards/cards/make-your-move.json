@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8226f31d-6f51-49c3-87f7-0c68f7f4f9ce",
+  "name": "Make Your Move",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "Destroy target artifact, enchantment, or creature with power 4 or greater.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "enchantment"
+            },
+            {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "power": {
+                    "gte": 4
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

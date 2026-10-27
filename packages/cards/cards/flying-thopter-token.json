@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/flying-thopter-token",
+  "name": "Flying Thopter Token",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "subtypes": ["Thopter"],
+    "supertypes": [],
+    "colors": [],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

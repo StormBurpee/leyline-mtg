@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "158d0272-a850-4399-8afa-d0caa143c3cb",
+  "name": "Avenger of the Fallen",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Warrior"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Deathtouch\nMobilize X, where X is the number of creature cards in your graveyard. (Whenever this creature attacks, create X tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mobilize",
+          "amount": {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "token": "leyline:token/mobilized-warrior"
+        }
+      ]
+    }
+  ]
+}

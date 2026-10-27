@@ -2098,7 +2098,7 @@ dialog::backdrop {
 
 /* Physical card interactions. Motion never changes rules state. */
 .hand-card {
-  touch-action: pan-x;
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
   cursor: grab;
@@ -2337,5 +2337,25 @@ html[data-motion='reduced'] .hand-card:focus-visible {
 @media (max-width: 500px) {
   .target-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* The card owns its pointer from contact, before the browser chooses a pan.
+   Empty table/hand space remains available for ordinary page/rail scrolling. */
+.permanent[data-card],
+.land-card[data-card] {
+  touch-action: none;
+}
+.touch-drag-ghost {
+  border: 2px solid #dfcc8e;
+  box-shadow:
+    0 24px 48px #0009,
+    0 0 24px #dfcc8e35;
+}
+@media (pointer: coarse) {
+  .drag-instruction {
+    bottom: max(12px, env(safe-area-inset-bottom));
+    font-size: 14px;
+    padding: 12px 18px;
   }
 }

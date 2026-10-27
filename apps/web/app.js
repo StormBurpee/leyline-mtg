@@ -31,6 +31,7 @@ import {
 } from './deck-room.js';
 import { cardDropPlan } from './drop-plan.js';
 import { installCardDrag } from './gestures.js';
+import { installTableViewport } from './table-viewport.js';
 import { captureTable, animateTable, renderCombatLinks, animateEffects } from './motion.js';
 import {
   spellProfile,
@@ -71,6 +72,7 @@ import {
   artStyle,
   mana,
 } from './view.js';
+installTableViewport(document.documentElement);
 const SAVE_KEY = 'leyline.match.v1';
 const app = document.querySelector('#app'),
   dialog = document.querySelector('#dialog');

@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6d44c87b-8945-4c39-b034-7690cf483992",
+  "name": "Mary Jane Watson",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Performer"],
+    "colors": ["G", "W"],
+    "manaCost": "{1}{G/W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever a Spider you control enters, draw a card. This ability triggers only once each turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Spider"
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "oncePerTurn": true
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "88f8f683-738e-48f3-afff-c8f73f1033a2",
+  "name": "Botanical Sanctum",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {G} or {U}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "you",
+          "where": {
+            "type": "land"
+          },
+          "excludeSource": true
+        },
+        "operator": "lte",
+        "right": 2
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["G", "U"]
+    }
+  ]
+}
