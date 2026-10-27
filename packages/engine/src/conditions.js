@@ -17,6 +17,7 @@ export function meetsCondition(s, player, value, excludedIds = [], source = null
     return s.players[1 - player].lifeLostTurn === s.turn;
   if (value.kind === 'controllerLostLifeThisTurn') return s.players[player].lifeLostTurn === s.turn;
   if (value.kind === 'controllerTurn') return s.active === player;
+  if (value.kind === 'opponentTurn') return s.active !== player;
   if (['sourceAttacking', 'sourceEnteredThisTurn'].includes(value.kind)) {
     const object = source && s.objects[source.id];
     if (!object || object.zone !== 'battlefield' || object.incarnation !== source.incarnation)

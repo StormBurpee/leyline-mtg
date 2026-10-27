@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7d765055-da62-43f7-9580-98e9d164753b",
+  "name": "Truck Toss",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}"
+  },
+  "rulesText": "This spell costs {2} less to cast if you control a Vehicle.\nTruck Toss deals 4 damage to any target.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 2,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "subtype": "Vehicle"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      }
+    }
+  ]
+}

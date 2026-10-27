@@ -1,0 +1,132 @@
+import {
+  definition,
+  battlefield,
+  stats,
+  keywords,
+  isAttacking,
+  isBlocking,
+  requireRule,
+} from './model.js';
+import { spellProfile } from './spell-modes.js';
+import { matchesFilter } from './selectors.js';
+import { numericValue } from './numeric-values.js';
+import { meetsCondition } from './conditions.js';
+const manaValue = (card) => Object.values(card.cost).reduce((a, b) => a + b, 0);
+function targetFacts(state, target) {
+  if (target?.kind === 'player') return { controller: target.id, owner: target.id };
+  if (target?.kind === 'stack') {
+    const entry = state.stack.find((e) => e.id === target.id);
+    if (!entry) return null;
+    const object = state.objects[entry.source?.id],
+      card = entry.sourceDefinition ?? (object ? definition(state, object) : null);
+    return card
+      ? {
+          definition: card,
+          controller: entry.controller,
+          owner: object?.owner,
+          manaValue: manaValue(card),
+          keywords: card.keywords,
+          ...(object ? stats(state, object) : {}),
+        }
+      : null;
+  }
+  const object = target?.kind === 'object' && state.objects[target.id];
+  if (
+    !object ||
+    !['battlefield', 'graveyard'].includes(object.zone) ||
+    object.incarnation !== target.incarnation
+  )
+    return null;
+  const card = definition(state, object);
+  return {
+    definition: card,
+    controller: object.controller,
+    owner: object.owner,
+    token: object.token,
+    tapped: object.tapped,
+    attacking: isAttacking(state, object),
+    blocking: isBlocking(state, object),
+    ...stats(state, object),
+    keywords: keywords(state, object),
+    manaValue: manaValue(card),
+  };
+}
+/** Determine, then lock, the mana cost. Increases precede reductions (CR 601.2f). */
+export function castingProfile(
+  state,
+  player,
+  object,
+  mode,
+  target = null,
+  card = definition(state, object),
+) {
+  const profile = spellProfile(card, mode);
+  if (!profile) return null;
+  const intrinsic = (profile.costModifiers ?? []).filter((m) => m.scope === 'self');
+  const sources = battlefield(state)
+    .map((source) => ({
+      source,
+      modifiers: (definition(state, source).costModifiers ?? []).filter((m) => m.scope !== 'self'),
+    }))
+    .filter((x) => x.modifiers.length);
+  if (!intrinsic.length && !sources.length) return profile;
+  // Cost determination sees the proposed spell on the stack, not in its old zone.
+  const proposed = { ...object, zone: 'stack', controller: player };
+  const projected = {
+    ...state,
+    objects: { ...state.objects, [object.id]: proposed },
+    players: state.players.map((p) => ({
+      ...p,
+      ...Object.fromEntries(
+        ['hand', 'graveyard', 'exile', 'library']
+          .filter((zone) => p[zone]?.includes(object.id))
+          .map((zone) => [zone, p[zone].filter((id) => id !== object.id)]),
+      ),
+    })),
+  };
+  const spell = {
+    definition: profile,
+    controller: player,
+    owner: object.owner,
+    manaValue: profile.faceDownCast ? 0 : manaValue(card),
+    keywords: profile.keywords,
+    ...(profile.faceDownCast ? { power: 2, toughness: 2 } : stats(projected, proposed)),
+  };
+  const targetInfo = targetFacts(projected, target);
+  let increase = 0,
+    reduction = 0;
+  const apply = (modifier, source, controller) => {
+    if (modifier.scope === 'you' && player !== controller) return;
+    if (modifier.scope === 'opponent' && player === controller) return;
+    if (
+      !matchesFilter(spell, modifier.where, controller) ||
+      !meetsCondition(projected, controller, modifier.condition, [], source)
+    )
+      return;
+    if (
+      modifier.targetWhere &&
+      (!targetInfo || !matchesFilter(targetInfo, modifier.targetWhere, controller))
+    )
+      return;
+    const amount = Math.max(0, numericValue(projected, modifier.amount, { controller, source }));
+    if (modifier.change === 'increase') increase += amount;
+    else reduction += amount;
+  };
+  intrinsic.forEach((m) => apply(m, proposed, player));
+  for (const { source, modifiers } of sources)
+    modifiers.forEach((m) => apply(m, source, source.controller));
+  requireRule(
+    Number.isSafeInteger(increase) && Number.isSafeInteger(reduction),
+    'COST_RANGE',
+    'Cost adjustments exceed the safe integer range.',
+  );
+  const generic = Math.max(0, (profile.cost.generic ?? 0) + increase - reduction);
+  requireRule(
+    Number.isSafeInteger(generic),
+    'COST_RANGE',
+    'The casting cost exceeds the safe integer range.',
+  );
+  const cost = { ...profile.cost };
+  if (generic || Object.hasOwn(cost, 'generic')) cost.generic = generic;
+  return { ...profile, cost };
+}

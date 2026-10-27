@@ -1,3 +1,4 @@
+import { castingProfile } from './casting-costs.js';
 import { effectValues } from './numeric-values.js';
 import { spellProfile } from './spell-modes.js';
 import { definition } from './model.js';
@@ -61,13 +62,17 @@ export function actionEffects(state, action) {
   return effects.map((effect) => effectValues(state, effect, entry));
 }
 
-function actionCost(state, action) {
+function actionCost(state, player, action) {
   if (!action.card) return {};
   const card = definition(state, state.objects[action.card]);
   if (action.type === 'cycle') return { mana: card.cycling };
   return action.type === 'activate'
     ? card.activated[action.ability].cost
-    : { mana: spellProfile(card, action.mode)?.cost ?? card.cost };
+    : {
+        mana:
+          castingProfile(state, player, state.objects[action.card], action.mode, action.target)
+            ?.cost ?? card.cost,
+      };
 }
 
 /** Check ward after the actual automatic base-payment plan, not against mana that
@@ -101,7 +106,7 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
 
 export function actionSafe(state, player, action) {
   if (!['cast', 'activate'].includes(action.type)) return true;
-  const cost = actionCost(state, action);
+  const cost = actionCost(state, player, action);
   if ((cost.life ?? 0) >= state.players[player].life) return false;
   return (
     !resolutionRisk(state, player, actionEffects(state, action), action.target, cost.life ?? 0) &&

@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7ac608bc-dc2a-43c9-9b3b-1b985c121d60",
+  "name": "Seized from Slumber",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{4}{W}"
+  },
+  "rulesText": "This spell costs {3} less to cast if it targets a tapped creature.\nDestroy target creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 3,
+      "targetWhere": {
+        "all": [
+          {
+            "tapped": true
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      }
+    }
+  ]
+}

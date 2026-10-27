@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bf7ec320-64bb-46ca-aac0-ca3d4224b69e",
+  "name": "Ajani's Response",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{4}{W}"
+  },
+  "rulesText": "This spell costs {3} less to cast if it targets a tapped creature.\nDestroy target creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 3,
+      "targetWhere": {
+        "all": [
+          {
+            "tapped": true
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      }
+    }
+  ]
+}

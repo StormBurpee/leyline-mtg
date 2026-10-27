@@ -25,6 +25,7 @@ export function validateCondition(value, { continuous = false } = {}) {
       opponentLostLifeThisTurn: ['kind'],
       controllerLostLifeThisTurn: ['kind'],
       controllerTurn: ['kind'],
+      opponentTurn: ['kind'],
       sourceAttacking: ['kind'],
       sourceEnteredThisTurn: ['kind'],
       controlAtLeast: ['kind', 'where', 'count'],

@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "43fb0f35-8eea-4344-9415-6ecb8aa46491",
+  "name": "Quicksand Whirlpool",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{5}{W}"
+  },
+  "rulesText": "This spell costs {3} less to cast if it targets a tapped creature.\nExile target creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 3,
+      "targetWhere": {
+        "all": [
+          {
+            "tapped": true
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      }
+    }
+  ]
+}

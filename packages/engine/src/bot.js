@@ -1,3 +1,4 @@
+import { castingProfile } from './casting-costs.js';
 import { meetsCondition } from './conditions.js';
 import { effectValues, numericValue } from './numeric-values.js';
 import { spellProfile } from './spell-modes.js';
@@ -454,7 +455,14 @@ export function chooseBotCommand(s, p) {
   const casts = actions
     .filter((a) => a.type === 'cast')
     .map((a) => {
-      const d = spellProfile(definition(s, s.objects[a.card]), a.mode);
+      const d = castingProfile(
+        s,
+        p,
+        s.objects[a.card],
+        a.mode,
+        a.target,
+        definition(s, s.objects[a.card]),
+      );
       let score = -100;
       if (d.type === 'creature' || d.static || d.mana)
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);

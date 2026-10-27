@@ -1,5 +1,5 @@
 {
-  "version": "0.33.0",
+  "version": "0.34.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -185,6 +185,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ajani's Response",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Alesha's Legacy",
       "type": "instant",
       "keywords": [],
@@ -301,6 +309,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Arcane Epiphany",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Archaeomender",
       "type": "creature",
       "keywords": [],
@@ -327,6 +343,14 @@
         }
       },
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Archmage of Runes",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": ["controllerCastsInstantOrSorcery"],
       "activatedAbilities": 0
     },
     {
@@ -422,6 +446,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["destroy", "token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ballyrush Banneret",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1137,6 +1169,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Claws Out",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modifyAll"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Cleansing Ray",
       "type": "sorcery",
       "keywords": [],
@@ -1585,6 +1625,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Depower",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Deserted Beach",
       "type": "land",
       "keywords": [],
@@ -1765,6 +1813,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Dragon's Prey",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dragon Sniper",
       "type": "creature",
       "keywords": ["vigilance", "reach", "deathtouch"],
@@ -1777,6 +1833,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dragonlord's Servant",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2183,6 +2247,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Fate of the Sun-Cryst",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2613,6 +2685,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gargantuan Leech",
+      "type": "creature",
+      "keywords": ["lifelink"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Gastal Thrillseeker",
       "type": "creature",
       "keywords": [],
@@ -2627,6 +2707,14 @@
       "opcodes": ["gainLife", "draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Geist of Saint Thalia",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Get a Leg Up",
@@ -2653,6 +2741,14 @@
           }
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Geyser Drake",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -3017,6 +3113,22 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Grounded for Life",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Grow Extra Arms",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Grow from the Ashes",
       "type": "sorcery",
       "keywords": [],
@@ -3276,6 +3388,14 @@
       "keywords": ["flash", "flying"],
       "opcodes": ["gainLife", "scry"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Honest Rutstein",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -3803,6 +3923,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Lashwhip Predator",
+      "type": "creature",
+      "keywords": ["reach"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Last Gasp",
       "type": "instant",
       "keywords": [],
@@ -4018,6 +4146,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Luminous Rebuke",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Lunatic Pandora",
       "type": "artifact",
       "keywords": [],
@@ -4102,6 +4238,14 @@
       "opcodes": ["token", "moveTarget"],
       "triggers": ["selfDies"],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Magnificent End",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Magnifying Glass",
@@ -4280,6 +4424,14 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Memory Guardian",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Merciless Enforcers",
@@ -4486,6 +4638,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Mistmeadow Council",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Misty Palms Oasis",
       "type": "land",
       "keywords": [],
@@ -4507,6 +4667,14 @@
           }
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Mocking Sprite",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -4941,6 +5109,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Out of Air",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counter"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Outlaw Medic",
       "type": "creature",
       "keywords": ["lifelink"],
@@ -5046,6 +5222,14 @@
         "Destroy target enchantment",
         "Draw a card. Create a Food token"
       ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pearl of Wisdom",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -5418,6 +5602,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Quicksand Whirlpool",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -5813,6 +6005,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ride's End",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Rig for War",
       "type": "instant",
       "keywords": [],
@@ -6012,6 +6212,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Salt Road Packbeast",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Samut, Hazoret's Champion",
       "type": "creature",
       "keywords": [],
@@ -6080,6 +6288,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Saved by the Shell",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["counterOn", "modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Savor",
       "type": "instant",
       "keywords": [],
@@ -6110,6 +6326,14 @@
       "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Scales of Shale",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Scampering Surveyor",
@@ -6212,6 +6436,14 @@
         "Target opponent discards two cards",
         "Creatures your opponents control get -1/-1 until end of turn"
       ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Seized from Slumber",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -7019,6 +7251,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Stormcatch Mentor",
+      "type": "creature",
+      "keywords": ["haste"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stormchaser Mage",
       "type": "creature",
       "keywords": ["flying", "haste"],
@@ -7193,6 +7433,14 @@
     {
       "name": "Swamp",
       "type": "land",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Swampsnare Trap",
+      "type": "enchantment",
       "keywords": [],
       "opcodes": [],
       "triggers": [],
@@ -7463,6 +7711,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Thalia, the Survivor",
+      "type": "creature",
+      "keywords": ["lifelink"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Thawbringer",
       "type": "creature",
       "keywords": [],
@@ -7654,6 +7910,19 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Tolarian Terror",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "ward": {
+        "mana": {
+          "generic": 2
+        }
+      },
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Tomakul Honor Guard",
       "type": "creature",
       "keywords": [],
@@ -7664,6 +7933,14 @@
         }
       },
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tombstone, Career Criminal",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -7723,6 +8000,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Travel the Overworld",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Treasure Dredger",
       "type": "creature",
       "keywords": [],
@@ -7751,6 +8036,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Truck Toss",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -7973,6 +8266,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Valkyrie Aerial Unit",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["surveil"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Valley Flamecaller",
       "type": "creature",
       "keywords": [],
@@ -8081,6 +8382,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Venom's Hunger",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["destroy", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Venomized Cat",
       "type": "creature",
       "keywords": ["deathtouch"],
@@ -8178,6 +8487,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Visions of Villainy",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Voracious Greatshark",
       "type": "creature",
       "keywords": ["flash"],
@@ -8192,6 +8509,22 @@
       "opcodes": ["destroy"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Voyage Home",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Voyager Quickwelder",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Vulture, Scheming Scavenger",

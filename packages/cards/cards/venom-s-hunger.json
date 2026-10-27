@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8388faa0-f64e-4b01-836e-617f99b808a4",
+  "name": "Venom's Hunger",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{4}{B}"
+  },
+  "rulesText": "This spell costs {2} less to cast if you control a Villain.\nDestroy target creature. You gain 2 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 2,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "subtype": "Villain"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "411b9158-e427-4099-bd30-3fbb22edb553",
+  "name": "Geyser Drake",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Drake"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nDuring turns other than yours, spells you cast cost {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "condition": {
+        "kind": "opponentTurn"
+      }
+    }
+  ]
+}

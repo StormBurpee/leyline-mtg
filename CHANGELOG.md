@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.34.0 — Casting-cost reductions and taxes
+
+- Determine casting costs from intrinsic and battlefield modifiers, including stable conditions, target predicates and public counts. Add increases before reductions, preserve coloured requirements, and lock the result before payment.
+- Compute costs with the proposed spell removed from its prior zone. Keep printed mana value for cast triggers, including kicker and discounted spells. A permitted spell is controlled by its caster on the stack.
+- Add 41 complete Standard cards, including affinity spells, Tolarian Terror, Mocking Sprite and target-dependent discounted removal. Catalog: 1036 cards and 27 tokens.
+- Activation-cost changes, minimum-cost replacement rules, dynamic coloured reductions and unimplemented clauses remain rejected.
+
 ## 0.33.0 — Conditional continuous bonuses
 
 - Add self and attached continuous bonuses with public comparisons, turn ownership, source attacking/entry-turn state, and stable controlled-permanent conditions. Avoid evaluating unnecessary derived facts and reject dependency cycles.

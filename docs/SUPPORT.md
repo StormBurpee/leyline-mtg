@@ -96,3 +96,7 @@ A closed expression language supports public-zone counts with stable filters, pu
 ### Conditional continuous bonuses
 
 Self and attached bonuses support stable public-state comparisons, controlled-permanent thresholds, turn ownership, attacking status and source entry-turn state. Source-state conditions are currently continuous-only; computed-keyword/statistic dependency cycles are rejected. Attackers and blockers remain in combat through the end-of-combat priority window under [CR 511.3](https://media.wizards.com/2026/downloads/MagicCompRules%2020260925.txt). Nonbattlefield card counts exclude tokens. Conditional casting permissions and spell-history counters are not implemented.
+
+### Casting-cost modifiers
+
+Generic casting-cost increases and reductions can be intrinsic or supplied by battlefield sources, filtered by caster and spell/target characteristics, and gated by supported public conditions. Determination uses the proposed stack state, adds increases before reductions, never removes coloured requirements and locks the cost before mana abilities/payments. Kicker and other supported additional costs precede these modifiers; printed mana value remains unchanged. Target menus show the selected cast cost. Activation-cost reductions and minimum-cost replacement rules are not implemented. Rules basis: [CR 601.2f–h](https://media.wizards.com/2026/downloads/MagicCompRules%2020260925.txt).

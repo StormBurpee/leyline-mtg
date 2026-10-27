@@ -660,6 +660,16 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           ),
         };
         break;
+      case 'costModifier':
+        fields(a, ['kind', 'scope', 'change', 'amount', 'where', 'targetWhere', 'condition'], path);
+        (d.costModifiers ??= []).push(
+          Object.fromEntries(
+            ['scope', 'change', 'amount', 'where', 'targetWhere', 'condition']
+              .filter((k) => a[k] !== undefined)
+              .map((k) => [k, structuredClone(a[k])]),
+          ),
+        );
+        break;
       case 'conditionalBonus':
         fields(a, ['kind', 'affects', 'condition', 'power', 'toughness', 'keywords'], path);
         (d.conditionalBonuses ??= []).push(

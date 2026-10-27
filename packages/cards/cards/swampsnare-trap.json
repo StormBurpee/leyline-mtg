@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fc532d1d-6cf5-4b59-afb3-325d0bc0db77",
+  "name": "Swampsnare Trap",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "This spell costs {1} less to cast if it targets a creature with flying.\nEnchant creature\nEnchanted creature gets -5/-3.",
+  "abilities": [
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 1,
+      "targetWhere": {
+        "all": [
+          {
+            "keyword": "flying"
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": -5,
+      "toughness": -3
+    }
+  ]
+}
