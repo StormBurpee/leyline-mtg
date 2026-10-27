@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "42fa99ab-d35f-4439-ab00-fe99bad626ac",
+  "name": "Starfield Shepherd",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Angel"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhen this creature enters, search your library for a basic Plains card or a creature card with mana value 1 or less, reveal it, put it into your hand, then shuffle.\nWarp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "reveal": true,
+          "where": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "basic": true
+                  },
+                  {
+                    "subtype": "Plains"
+                  }
+                ]
+              },
+              {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "manaValue": {
+                      "lte": 1
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "kind": "warp",
+      "cost": "{1}{W}"
+    }
+  ]
+}

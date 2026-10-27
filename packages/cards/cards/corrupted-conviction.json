@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b45e35df-9032-4482-89a6-c7c50c6d0a79",
+  "name": "Corrupted Conviction",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "As an additional cost to cast this spell, sacrifice a creature.\nDraw two cards.",
+  "abilities": [
+    {
+      "kind": "sacrificeCost",
+      "where": {
+        "type": "creature"
+      }
+    },
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

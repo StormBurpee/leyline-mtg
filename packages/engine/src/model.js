@@ -8,7 +8,7 @@ import { matchesEvent } from './events.js';
 import { hasType, typesOf, primaryType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.42.0';
+export const VERSION = '0.43.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -42,6 +42,7 @@ export function playableZone(s, o, p) {
     ((o.zone === 'hand' && o.owner === p) ||
       (o.zone === 'graveyard' && o.owner === p && !!definition(s, o).flashback) ||
       (o.zone === 'exile' && o.owner === p && o.plotted?.incarnation === o.incarnation) ||
+      (o.zone === 'exile' && o.owner === p && o.warped?.incarnation === o.incarnation) ||
       (o.zone === 'exile' &&
         o.playPermission?.player === p &&
         o.playPermission.turn === s.turn &&
@@ -381,6 +382,18 @@ export function queueTrigger(
 }
 /** Match declarative trigger predicates against committed game events. */
 export function notifyTriggers(s, event, payload, context = null) {
+  if (event === 'step' && payload.step === 'end') {
+    const due = s.delayedTriggers ?? [];
+    delete s.delayedTriggers;
+    for (const entry of due) {
+      s.pendingTriggers.push({ ...entry, id: `s${++s.nextId}` });
+      emit(s, 'triggered', {
+        objectId: entry.source.id,
+        name: entry.name,
+        player: entry.controller,
+      });
+    }
+  }
   const object = payload.object;
   const d = payload.definition ?? (object ? definition(s, object) : null);
   const pt =
@@ -397,6 +410,9 @@ export function notifyTriggers(s, event, payload, context = null) {
     spellNumber:
       event === 'cast' ? spellsCastCount(s, [payload.player ?? object.controller]) : undefined,
     objects: payload.objects,
+    targetingController: payload.targetingController,
+    targetingKind: payload.targetingKind,
+    targetNumbers: payload.targetNumbers,
     owner: object?.owner,
     token: object?.token,
     tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
@@ -411,11 +427,26 @@ export function notifyTriggers(s, event, payload, context = null) {
     context?.watchers ??
     battlefield(s).map((object) => ({ object, keywords: keywords(s, object) }));
   for (const { object: watcher, keywords: sourceKeywords } of watchers)
-    for (const trigger of definition(s, watcher).triggers ?? [])
+    for (const [triggerIndex, trigger] of (definition(s, watcher).triggers ?? []).entries())
       if (
         matchesEvent(trigger.event, event === 'enters' ? 'enter' : event, facts, watcher) &&
         meetsCondition(s, watcher.controller, trigger.condition, [], watcher)
       ) {
+        const use = `${s.turn}:${watcher.incarnation}`;
+        const current = s.objects[watcher.id];
+        const sameIncarnation = current?.incarnation === watcher.incarnation;
+        if (
+          trigger.oncePerTurn &&
+          (watcher.triggerUses?.[triggerIndex] === use ||
+            (sameIncarnation && current.triggerUses?.[triggerIndex] === use))
+        )
+          continue;
+        // Consume on occurrence, even if declined/countered later. Departure
+        // observers are snapshots: also update the surviving permanent, if any.
+        if (trigger.oncePerTurn) {
+          (watcher.triggerUses ??= {})[triggerIndex] = use;
+          if (sameIncarnation) (current.triggerUses ??= {})[triggerIndex] = use;
+        }
         queueTrigger(
           s,
           watcher,
@@ -492,6 +523,7 @@ export function move(s, o, to, departureContext = null) {
   // CR 702.34a: replace every departure, not just successful resolution.
   if (from === 'stack' && to !== 'stack' && o.flashbackPaid) to = 'exile';
   if (to !== 'stack') delete o.flashbackPaid;
+  if (to !== 'stack') delete o.warpPaid;
   delete o.chosenX;
   const dying =
     from === 'battlefield' && to === 'graveyard' && hasType(definition(s, o), 'creature');
@@ -559,6 +591,7 @@ export function move(s, o, to, departureContext = null) {
   delete o.chosenCreatureType;
   delete o.playPermission;
   delete o.plotted;
+  delete o.warped;
   if (s.players[o.owner][to]) s.players[o.owner][to].push(o.id);
   emit(s, 'zoneChange', {
     objectId: o.id,
@@ -609,6 +642,7 @@ export function createGame({
   }
   const s = {
     version: VERSION,
+    rulesRevision: 2,
     catalog: rules,
     seed,
     rng: seed || 1,

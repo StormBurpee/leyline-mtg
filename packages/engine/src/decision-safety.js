@@ -1,4 +1,4 @@
-import { convokePayment } from './convoke.js';
+import { castingPayment } from './casting-sacrifice.js';
 import { predictedEffects } from './conditional-effects.js';
 import { flattenTargets } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
@@ -88,12 +88,11 @@ function actionCost(state, player, action) {
     undefined,
     action.x,
   );
-  const plan =
-    profile?.keywords.includes('convoke') &&
-    convokePayment(state, player, profile, action.convoke, action.autoTap !== false);
+  const plan = profile && castingPayment(state, player, profile, action);
   return {
     mana: plan?.cost ?? profile?.cost ?? card.cost,
     excludeSources: plan?.excludeSources ?? [],
+    sacrifice: plan?.sacrifice,
   };
 }
 
@@ -117,6 +116,8 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
   if (sourceId && cost.tap) objects[sourceId] = { ...objects[sourceId], tapped: true };
   if (sourceId && cost.sacrificeSelf)
     objects[sourceId] = { ...objects[sourceId], zone: 'graveyard' };
+  if (cost.sacrifice)
+    objects[cost.sacrifice.id] = { ...objects[cost.sacrifice.id], zone: 'graveyard' };
   const projected = {
     ...state,
     objects,

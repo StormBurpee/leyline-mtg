@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f50bbe5e-a839-40e1-ba79-1e96f91bd218",
+  "name": "Seedglaive Mentor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Mouse", "Soldier"],
+    "colors": ["R", "W"],
+    "manaCost": "{1}{R}{W}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Vigilance, haste\nValiant \u2014 Whenever this creature becomes the target of a spell or ability you control for the first time each turn, put a +1/+1 counter on it.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "targeted",
+        "object": "source",
+        "targetingController": "you",
+        "firstEachTurn": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

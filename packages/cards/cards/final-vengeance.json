@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cdba7f43-df9e-4bfb-9480-721c787ad051",
+  "name": "Final Vengeance",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "As an additional cost to cast this spell, sacrifice a creature or enchantment.\nExile target creature.",
+  "abilities": [
+    {
+      "kind": "sacrificeCost",
+      "where": {
+        "any": [
+          {
+            "type": "creature"
+          },
+          {
+            "type": "enchantment"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

@@ -425,7 +425,8 @@
             "noncombatDamageToPlayer",
             "lifeGain",
             "faceUp",
-            "combatDamagePlayer"
+            "combatDamagePlayer",
+            "targeted"
           ]
         },
         "object": {
@@ -447,6 +448,15 @@
           "type": "integer",
           "minimum": 1,
           "maximum": 9007199254740991
+        },
+        "targetingController": {
+          "enum": ["you", "opponent"]
+        },
+        "targetingKind": {
+          "enum": ["spell", "ability"]
+        },
+        "firstEachTurn": {
+          "const": true
         }
       },
       "required": ["event"],
@@ -1425,6 +1435,9 @@
             },
             "targetGroups": {
               "$ref": "#/$defs/targetGroups"
+            },
+            "oncePerTurn": {
+              "type": "boolean"
             }
           },
           "required": ["kind", "on", "effects"],
@@ -1895,6 +1908,32 @@
           },
           "required": ["kind", "power"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "warp"
+            },
+            "cost": {
+              "$ref": "#/$defs/mana"
+            }
+          },
+          "required": ["kind", "cost"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "sacrificeCost"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": ["kind", "where"],
+          "additionalProperties": false
         }
       ]
     },
@@ -2039,7 +2078,11 @@
       "oneOf": [
         {
           "type": "object",
-          "properties": { "kind": { "const": "x" } },
+          "properties": {
+            "kind": {
+              "const": "x"
+            }
+          },
           "required": ["kind"],
           "additionalProperties": false
         },

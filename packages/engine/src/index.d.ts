@@ -81,13 +81,17 @@ export interface EventSpec {
     | 'noncombatDamageToPlayer'
     | 'combatDamagePlayer'
     | 'lifeGain'
-    | 'faceUp';
+    | 'faceUp'
+    | 'targeted';
   step?: 'upkeep' | 'beginCombat' | 'end' | 'main1' | 'main2';
   object?: 'source';
   controller?: 'you' | 'opponent';
   filter?: CardPredicate;
   excludeSource?: boolean;
   spellNumber?: number;
+  targetingController?: 'you' | 'opponent';
+  targetingKind?: 'spell' | 'ability';
+  firstEachTurn?: true;
 }
 export type SpellHistoryPredicate =
   | { type: CardType }
@@ -264,6 +268,7 @@ export interface CardDefinition {
   readonly cyclingType?: string;
   readonly flashback?: ManaCost;
   readonly plot?: ManaCost;
+  readonly warp?: ManaCost;
   readonly kicker?: { cost: ManaCost; effects: readonly Effect[] };
   readonly offspring?: ManaCost;
   readonly disguise?: ManaCost;
@@ -285,6 +290,7 @@ export interface CardDefinition {
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
   readonly baseStats?: { power?: NumericValue; toughness?: NumericValue };
+  readonly sacrificeCost?: { where: CardPredicate };
   readonly costModifiers?: readonly {
     scope: 'self' | 'you' | 'opponent' | 'all';
     change: 'reduce' | 'increase';
@@ -335,6 +341,7 @@ export interface CardDefinition {
     target?: TargetKind;
     targetGroups?: readonly TargetGroup[];
     optional?: boolean;
+    oncePerTurn?: boolean;
     condition?: StateCondition;
   }[];
   readonly activated?: readonly {
@@ -368,11 +375,15 @@ export interface GameObject {
   attachedTo: ObjectTarget | null;
   faceDown?: boolean;
   flashbackPaid?: boolean;
+  warpPaid?: boolean;
   definitionOverride?: CardDefinition;
   chosenCreatureType?: string;
   chosenX?: number;
   abilityUses?: Record<number, string>;
+  triggerUses?: Record<number, string>;
+  targetHistory?: { stamp: string; counts: Record<string, number> };
   plotted?: { turn: number; incarnation: number };
+  warped?: { turn: number; incarnation: number };
   playPermission?: { player: PlayerId; turn: number; incarnation: number };
 }
 export interface PlayerState {
@@ -422,8 +433,10 @@ export interface StackEntry {
   x?: number;
   castingCost?: ManaCost;
   convoke?: ConvokeChoice[];
-  rule?: 'increaseSpeed';
+  sacrifice?: ObjectTarget;
+  rule?: 'increaseSpeed' | 'warpExile';
   flashbackPaid?: boolean;
+  warpPaid?: boolean;
   kicked?: boolean;
   offspringPaid?: boolean;
   uncounterable?: boolean;
@@ -587,6 +600,7 @@ export interface GameEvent {
   readonly [key: string]: unknown;
 }
 export interface GameState {
+  rulesRevision: 1 | 2;
   catalog: Readonly<Record<string, CardDefinition>>;
   version: string;
   seed: number;
@@ -605,6 +619,7 @@ export interface GameState {
   objects: Record<string, GameObject>;
   stack: StackEntry[];
   pendingTriggers: StackEntry[];
+  delayedTriggers?: Omit<StackEntry, 'id'>[];
   modifiers: {
     objectId: string;
     incarnation: number;
@@ -649,6 +664,7 @@ export type Action =
       target?: Target;
       autoTap?: boolean;
       convoke?: ConvokeChoice[];
+      sacrifice?: ObjectTarget;
       x?: number;
       mode?: number;
     }
@@ -700,6 +716,7 @@ export type DispatchResult =
       events: readonly GameEvent[];
     };
 export interface Replay {
+  rulesRevision?: 1 | 2;
   schemaVersion?: number;
   version: string;
   config: GameConfig;
@@ -790,6 +807,7 @@ export function castProblem(
     targets?: TargetPlan;
     x?: number;
     convoke?: ConvokeChoice[];
+    sacrifice?: ObjectTarget;
   },
 ): string | null;
 export function abilityProblem(
@@ -890,9 +908,27 @@ export function convokePayment(
   profile: CardDefinition,
   choices?: ConvokeChoice[],
   autoTap?: boolean,
+  excludeManaSources?: string[],
 ): {
   cost: ManaCost;
   choices: ConvokeChoice[];
   excludeSources: string[];
   mana: { activations: { card: string; color: Color }[] };
 } | null;
+
+export function castingSacrificeCandidates(
+  state: GameState,
+  player: PlayerId,
+  profile: CardDefinition,
+): GameObject[];
+export function castingPayment(
+  state: GameState,
+  player: PlayerId,
+  profile: CardDefinition,
+  options?: {
+    card?: string;
+    sacrifice?: ObjectTarget;
+    convoke?: ConvokeChoice[];
+    autoTap?: boolean;
+  },
+): (NonNullable<ReturnType<typeof convokePayment>> & { sacrifice?: ObjectTarget }) | null;

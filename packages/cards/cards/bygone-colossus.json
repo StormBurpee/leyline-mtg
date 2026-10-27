@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1bd584d5-4e11-428c-b51e-462e4292b07f",
+  "name": "Bygone Colossus",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot", "Giant"],
+    "colors": [],
+    "manaCost": "{9}",
+    "power": 9,
+    "toughness": 9
+  },
+  "rulesText": "Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+  "abilities": [
+    {
+      "kind": "warp",
+      "cost": "{3}"
+    }
+  ]
+}

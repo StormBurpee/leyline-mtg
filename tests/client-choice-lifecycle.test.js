@@ -802,3 +802,43 @@ test('convoke payment reviews every creature and symbol; cancel, reopen and conf
     h.cleanup();
   }
 });
+
+test('additional casting sacrifice reviews choices, retains selection through Read/Back, cancels safely and submits once', async () => {
+  const { castingSacrificePosition } = await import('./helpers/casting-sacrifice-position.js');
+  const s = castingSacrificePosition();
+  const card = s.players[0].hand
+    .map((id) => s.objects[id])
+    .find((o) => o.name === 'Corrupted Conviction');
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${card.id}"]`);
+    h.click('[data-action="playSelected"]');
+    assert.match(h.dialog.textContent, /Choose additional sacrifice/);
+    assert.ok(h.dialog.querySelector('[data-action="confirmCastingSacrifice"]').disabled);
+    h.click('[data-action="closeDialog"]');
+    assert.equal(h.dialog.open, false);
+    h.click('[data-action="playSelected"]');
+    const select = h.dialog.querySelector('[data-action="selectCastingSacrifice"]');
+    h.click(`[data-action="selectCastingSacrifice"][data-cardid="${select.dataset.cardid}"]`);
+    assert.match(h.dialog.textContent, /Payment is available/);
+    h.click(`[data-action="readDecisionCard"][data-cardid="${select.dataset.cardid}"]`);
+    h.click('[data-action="returnDecision"]');
+    assert.equal(
+      h.dialog
+        .querySelector(
+          `[data-action="selectCastingSacrifice"][data-cardid="${select.dataset.cardid}"]`,
+        )
+        .getAttribute('aria-pressed'),
+      'true',
+    );
+    const stale = h.click('[data-action="confirmCastingSacrifice"]');
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    const casts = saved.replay.commands.filter((c) => c.type === 'cast' && c.card === card.id);
+    assert.equal(casts.length, 1);
+    assert.equal(casts[0].sacrifice.id, select.dataset.cardid);
+  } finally {
+    h.cleanup();
+  }
+});

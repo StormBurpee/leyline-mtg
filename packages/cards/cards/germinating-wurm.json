@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8735c62d-1508-4bdc-a5d0-f7c68d892a5e",
+  "name": "Germinating Wurm",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Plant", "Wurm"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "When this creature enters, you gain 2 life.\nWarp {1}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "warp",
+      "cost": "{1}{G}"
+    }
+  ]
+}

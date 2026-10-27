@@ -138,6 +138,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const abilities = d.keywords.map((keyword) => ({ kind: 'keyword', keyword }));
   for (const restriction of ['cannotAttack', 'cannotBlock', 'unblockable'])
     if (d[restriction]) abilities.push({ kind: 'combatRestriction', restriction });
+  if (d.warp) abilities.push({ kind: 'warp', cost: mana(d.warp) });
   if (d.plot) abilities.push({ kind: 'plot', cost: mana(d.plot) });
   if (d.flashback) abilities.push({ kind: 'flashback', cost: mana(d.flashback) });
   if (d.crew !== undefined) abilities.push({ kind: 'crew', power: d.crew });
@@ -193,6 +194,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     else if (
       t.event === 'controllerLandEnters' &&
       !t.optional &&
+      !t.oncePerTurn &&
       !t.target &&
       t.effects.length === 1 &&
       t.effects[0].op === 'modify' &&
@@ -211,6 +213,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         ...(t.targetGroups ? { targetGroups: structuredClone(t.targetGroups) } : {}),
         ...(t.target ? { target: structuredClone(targetSpec(t.target)) } : {}),
         ...(t.optional !== undefined ? { optional: t.optional } : {}),
+        ...(t.oncePerTurn !== undefined ? { oncePerTurn: t.oncePerTurn } : {}),
         ...(t.condition ? { condition: structuredClone(t.condition) } : {}),
         effects: effects(t.effects),
       });
@@ -250,6 +253,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     if (d.static.kind !== 'anthem') throw new Error('Unsupported continuous rule.');
     abilities.push(structuredClone(d.static));
   }
+  if (d.sacrificeCost)
+    abilities.push({ kind: 'sacrificeCost', ...structuredClone(d.sacrificeCost) });
   for (const modifier of d.costModifiers ?? [])
     abilities.push({ kind: 'costModifier', ...structuredClone(modifier) });
   for (const bonus of d.conditionalBonuses ?? [])

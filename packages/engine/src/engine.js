@@ -1,4 +1,5 @@
-import { convokePayment, convokeCandidates } from './convoke.js';
+import { castingPayment, castingSacrificeCandidates } from './casting-sacrifice.js';
+import { convokeCandidates } from './convoke.js';
 import { recordSpellCast } from './spell-history.js';
 import { crewProblem, crewPlan } from './crew.js';
 import { MAX_X, manaValue } from './mana-value.js';
@@ -49,12 +50,20 @@ import {
 import { assignDamage, canAttack, declareAttackers, declareBlockers } from './combat.js';
 import { advanceStep, finishCleanup } from './turn.js';
 const main = (s) => ['main1', 'main2'].includes(s.step);
-export function castProblem(s, p, id, target, { autoTap = true, mode, targets, x, convoke } = {}) {
+export function castProblem(
+  s,
+  p,
+  id,
+  target,
+  { autoTap = true, mode, targets, x, convoke, sacrifice } = {},
+) {
   const o = s.objects[id];
   if (!playableZone(s, o, p)) return 'You cannot play this card from its current zone.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
   const d = castingProfile(s, p, o, mode, targets ? flattenTargets(targets) : target, undefined, x);
   if (!d) return `Choose a valid spell mode and X value (0–${MAX_X} for X spells).`;
+  if (o.warped?.incarnation === o.incarnation && s.turn <= o.warped.turn)
+    return 'Cast a warped card only after the turn it was exiled.';
   if (d.type === 'land') return 'Lands are played, not cast.';
   if (d.plottedCast && s.turn <= o.plotted.turn) return 'Cast a plotted card only on a later turn.';
   if (
@@ -69,8 +78,8 @@ export function castProblem(s, p, id, target, { autoTap = true, mode, targets, x
   } else if (targets !== undefined) return 'This spell has no target groups.';
   if (d.target && !legalTarget(s, d.target, target, p)) return 'Choose a legal target.';
   if (!d.target && target != null) return 'This spell has no targets.';
-  if (!convokePayment(s, p, d, convoke, autoTap))
-    return 'Cannot pay the casting cost with the selected mana and convoke creatures.';
+  if (!castingPayment(s, p, d, { card: id, convoke, autoTap, sacrifice }))
+    return 'Cannot pay the casting cost with the selected mana, convoke creatures, and additional sacrifice.';
   return null;
 }
 export function canPlayLand(s, p, id) {
@@ -93,6 +102,7 @@ function cast(s, p, c) {
     mode: c.mode,
     x: c.x,
     convoke: c.convoke,
+    sacrifice: c.sacrifice,
     targets: c.targets,
   });
   requireRule(!problem, 'CAST', problem);
@@ -106,28 +116,44 @@ function cast(s, p, c) {
       undefined,
       c.x,
     );
-  const plan = d.keywords.includes('convoke')
-    ? convokePayment(s, p, d, c.convoke, c.autoTap !== false)
-    : { cost: d.cost, excludeSources: [], choices: [] };
-  const payment = pay(s, p, plan.cost, c.autoTap !== false, plan.excludeSources, {
-    type: 'cast',
-    card: d,
-  });
-  for (const choice of plan.choices) s.objects[choice.card].tapped = true;
+  requireRule(
+    !d.sacrificeCost || c.sacrifice !== undefined,
+    'CAST',
+    'Choose a permanent to sacrifice as an additional cost.',
+  );
+  const plan = castingPayment(s, p, d, c);
+  // Legacy saves bind trigger choices to sequential stack IDs. Keep their
+  // original cost/target timing throughout resume and subsequent re-exports.
+  const legacyTiming = s.rulesRevision === 1;
+  const payCastingCost = () => {
+    const payment = pay(s, p, plan.cost, c.autoTap !== false, plan.excludeSources, {
+      type: 'cast',
+      card: d,
+    });
+    for (const choice of plan.choices) s.objects[choice.card].tapped = true;
+    if (plan.sacrifice) {
+      const sacrificed = s.objects[plan.sacrifice.id];
+      move(s, sacrificed, 'graveyard');
+      emit(s, 'sacrificed', { player: p, objectId: sacrificed.id, name: sacrificed.name });
+    }
+    return payment;
+  };
+  const legacyPayment = legacyTiming ? payCastingCost() : null;
   if (d.faceDownCast) o.castingFaceDown = true;
   move(s, o, 'stack');
   o.controller = p;
   if (c.x !== undefined) o.chosenX = c.x;
   if (d.flashbackPaid) o.flashbackPaid = true;
+  if (d.warpPaid) o.warpPaid = true;
   delete o.castingFaceDown;
   if (d.faceDownCast) o.faceDown = true;
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'spell',
-    ...(c.x !== undefined || d.keywords.includes('convoke')
+    ...(c.x !== undefined || d.keywords.includes('convoke') || d.sacrificeCost
       ? { castingCost: structuredClone(d.cost) }
       : {}),
-    uncounterable: payment.uncounterable || !!d.uncounterable,
+    uncounterable: !!d.uncounterable,
     name: o.faceDown ? 'Face-down creature' : o.name,
     controller: p,
     source: ref(o),
@@ -137,7 +163,9 @@ function cast(s, p, c) {
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
     ...(c.x !== undefined ? { x: c.x } : {}),
     ...(d.keywords.includes('convoke') ? { convoke: structuredClone(plan.choices) } : {}),
+    ...(plan.sacrifice ? { sacrifice: structuredClone(plan.sacrifice) } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
+    ...(d.warpPaid ? { warpPaid: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
     ...(d.targetGroups
@@ -146,6 +174,12 @@ function cast(s, p, c) {
     targetKind: d.target ?? null,
     target: c.target ?? null,
   });
+  // Targets are chosen before payment (CR 601.2c, 601.2h); all validation
+  // above is read-only, and dispatch rolls back an unsuccessful command.
+  const entry = s.stack.at(-1);
+  if (!legacyTiming) notifyTargeted(s, entry);
+  const payment = legacyPayment ?? payCastingCost();
+  entry.uncounterable ||= payment.uncounterable;
   recordSpellCast(s, p, definition(s, o));
   s.passes = 0;
   emit(s, 'cast', {
@@ -157,12 +191,14 @@ function cast(s, p, c) {
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
     ...(c.x !== undefined ? { x: c.x } : {}),
     ...(d.keywords.includes('convoke') ? { convoke: structuredClone(plan.choices) } : {}),
+    ...(plan.sacrifice ? { sacrifice: structuredClone(plan.sacrifice) } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
+    ...(d.warpPaid ? { warpPaid: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
   });
   notifyTriggers(s, 'cast', { player: p, definition: definition(s, o), object: o });
-  notifyTargeted(s, s.stack.at(-1));
+  if (legacyTiming) notifyTargeted(s, entry);
 }
 export function abilityProblem(s, p, id, index, target, discardCard, targets) {
   const o = s.objects[id];
@@ -315,11 +351,12 @@ function activate(s, p, c) {
     target: c.target ?? null,
     label: a.text,
   });
+  if (s.rulesRevision !== 1) notifyTargeted(s, s.stack.at(-1));
   if (a.oncePerTurn) (o.abilityUses ??= {})[c.ability] = `${s.turn}:${o.incarnation}`;
   payCost(s, p, a.cost, { sourceId: o.id, discardCard: c.discardCard });
   s.passes = 0;
   emit(s, 'activated', { player: p, name: o.name, objectId: o.id, ability: c.ability });
-  notifyTargeted(s, s.stack.at(-1));
+  if (s.rulesRevision === 1) notifyTargeted(s, s.stack.at(-1));
 }
 function completeMulligan(s, p) {
   s.players[p].kept = true;
@@ -618,30 +655,35 @@ export function legalActions(s, p, { x: exactX } = {}) {
             ]
               .filter((x) => x >= 0 && x <= MAX_X)
               .sort((a, b) => a - b);
-      for (const x of proposals) {
-        if (profile.targetGroups) {
-          for (const targets of targetPlans(s, profile.targetGroups, p))
-            if (!castProblem(s, p, id, null, { mode, targets, x }))
+      for (const sacrifice of profile.sacrificeCost
+        ? castingSacrificeCandidates(s, p, profile).map(ref)
+        : [undefined])
+        for (const x of proposals) {
+          if (profile.targetGroups) {
+            for (const targets of targetPlans(s, profile.targetGroups, p))
+              if (!castProblem(s, p, id, null, { mode, targets, x, sacrifice }))
+                actions.push({
+                  type: 'cast',
+                  card: id,
+                  ...(sacrifice ? { sacrifice } : {}),
+                  ...(mode !== undefined ? { mode } : {}),
+                  ...(x !== undefined ? { x } : {}),
+                  targets,
+                });
+            continue;
+          }
+          const targets = profile.target ? targetsFor(s, profile.target, p) : [null];
+          for (const target of targets)
+            if (!castProblem(s, p, id, target, { mode, x, sacrifice }))
               actions.push({
                 type: 'cast',
                 card: id,
+                ...(sacrifice ? { sacrifice } : {}),
                 ...(mode !== undefined ? { mode } : {}),
                 ...(x !== undefined ? { x } : {}),
-                targets,
+                ...(target ? { target } : {}),
               });
-          continue;
         }
-        const targets = profile.target ? targetsFor(s, profile.target, p) : [null];
-        for (const target of targets)
-          if (!castProblem(s, p, id, target, { mode, x }))
-            actions.push({
-              type: 'cast',
-              card: id,
-              ...(mode !== undefined ? { mode } : {}),
-              ...(x !== undefined ? { x } : {}),
-              ...(target ? { target } : {}),
-            });
-      }
     }
   }
   for (const o of Object.values(s.objects)) {
@@ -714,6 +756,7 @@ export function exportReplay(s) {
   return structuredClone({
     schemaVersion: REPLAY_SCHEMA_VERSION,
     version: VERSION,
+    rulesRevision: s.rulesRevision ?? 2,
     config: s.config,
     commands: s.history,
   });
@@ -724,6 +767,7 @@ export function replay(record) {
       [
         VERSION,
         '0.41.0',
+        '0.42.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',
@@ -773,7 +817,15 @@ export function replay(record) {
     'REPLAY',
     'Invalid or oversized replay.',
   );
+  requireRule(
+    record.rulesRevision === undefined || [1, 2].includes(record.rulesRevision),
+    'REPLAY_VERSION',
+    'Unsupported replay rules revision.',
+  );
   let s = createGame(record.config);
+  // Revision 2 introduced announcement-time targeting in v0.43. Unmarked
+  // published envelopes through v0.42 use the historical timing and ID order.
+  s.rulesRevision = record.rulesRevision ?? (Number(record.version.split('.')[1]) <= 42 ? 1 : 2);
   for (const [index, c] of record.commands.entries()) {
     const r = dispatch(s, c);
     requireRule(r.ok, 'REPLAY_COMMAND', `Replay command ${index} rejected: ${r.error?.message}`);

@@ -2543,15 +2543,15 @@
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
     "packages/engine/src/registry.js": "282e2a6da52197795ab6c7eea9972106f6a16eb638b1df78038c2da23042c3ac",
-    "packages/engine/src/definition-validation.js": "163c3c44308282d153c3baada36bdb5eb84bb26b479ac0b39f86e8ddc83bad5e",
+    "packages/engine/src/definition-validation.js": "9428c66545b678417c800031238e582cd13355a376450b90627a8b109fe8ea2a",
     "packages/engine/src/condition-schema.js": "87777077fa93ad6668647c7ac7ae41f9b5ddf02f2516318d1eb0e1e433789cda",
     "packages/engine/src/target-group-schema.js": "488c4d5141dd2395cb5fcc02303bacd9ec4047abb08e0d8e5c7d9bea78498681",
     "packages/engine/src/selectors.js": "6f66dc9b719d93651129f0ab463d7da398c8db8d929303fe82e9cf5944763d59",
     "packages/engine/src/value-schema.js": "744a57bbaf991a8ff7412023ec8e5e263cb6ddd0886fe00a2636efcb7f584bdf",
     "packages/engine/src/spell-history.js": "9a615e4f842b5a0cb345497d34f0fa6c4ba8bcad0ff9f3d458d65232070472c7",
-    "packages/engine/src/events.js": "4e0e4be45826954bcc144842d38134327af88606f0fd65a964b7ded65dc34d8e",
+    "packages/engine/src/events.js": "424ab1df6f1a97822815c2e358252ca08dc831d285d316eea8eb63a8dece6c26",
     "packages/engine/src/types.js": "6f38a72621d110e1cf58fef110fc0edf3c3821df4d2ff9ffc107de39a3985092",
     "packages/engine/src/creature-types.js": "a9795a0aee66966054a854ece62af6406bc029c2b9e85d83b344e38eeb82a109"
   },
-  "auditedWithEngine": "0.42.0"
+  "auditedWithEngine": "0.43.0"
 }

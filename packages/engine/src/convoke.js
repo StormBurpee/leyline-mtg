@@ -6,16 +6,21 @@ export function convokeCandidates(s, p) {
   return controlled(s, p).filter((o) => !o.tapped && hasType(definition(s, o), 'creature'));
 }
 /** Explicit assignments are validated independently of the bounded automatic witness. */
-export function convokePayment(s, p, profile, choices, autoTap = true) {
+export function convokePayment(s, p, profile, choices, autoTap = true, excludeManaSources = []) {
   const enabled = profile.keywords?.includes('convoke');
   const purpose = { type: 'cast', card: profile };
   if (!enabled) {
     if (choices !== undefined && (!Array.isArray(choices) || choices.length)) return null;
-    const mana = planPayment(s, p, profile.cost, { autoTap, purpose });
+    const mana = planPayment(s, p, profile.cost, { autoTap, purpose, excludeManaSources });
     return mana ? { cost: profile.cost, choices: [], excludeSources: [], mana } : null;
   }
   if (choices === undefined) {
-    const plan = planPayment(s, p, profile.cost, { autoTap, purpose, convoke: enabled });
+    const plan = planPayment(s, p, profile.cost, {
+      autoTap,
+      purpose,
+      convoke: enabled,
+      excludeManaSources,
+    });
     if (!plan) return null;
     choices = plan.convoked;
   }
@@ -52,6 +57,6 @@ export function convokePayment(s, p, profile, choices, autoTap = true) {
     cost[symbol]--;
   }
   const excludeSources = choices.map((c) => c.card);
-  const mana = planPayment(s, p, cost, { autoTap, purpose, excludeSources });
+  const mana = planPayment(s, p, cost, { autoTap, purpose, excludeSources, excludeManaSources });
   return mana ? { cost, choices, excludeSources, mana } : null;
 }

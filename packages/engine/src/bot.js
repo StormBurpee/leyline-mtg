@@ -784,6 +784,10 @@ export function chooseBotCommand(s, p) {
       if (a.x !== undefined && score > 0) score += a.x / 1001;
       return { a, score };
     })
+    .map(({ a, score }) => ({
+      a,
+      score: score - (a.sacrifice ? permanentValue(s, s.objects[a.sacrifice.id]) : 0),
+    }))
     .sort((a, b) => b.score - a.score);
   const sequence = chooseSequence(s, p, casts);
   const cast =
