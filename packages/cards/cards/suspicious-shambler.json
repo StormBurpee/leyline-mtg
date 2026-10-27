@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ea6ee33f-0cba-4e96-817f-dc89c9064ead",
+  "name": "Suspicious Shambler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Zombie"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "{4}{B}{B}, Exile this card from your graveyard: Create two 2/2 black Zombie creature tokens. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{B}{B}",
+        "exileSelf": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/zombie-token",
+          "amount": 2
+        }
+      ],
+      "zone": "graveyard",
+      "timing": "sorcery"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f70d65bf-5f1c-4aee-9bd1-f5ee6974b058",
+  "name": "Flaring Cinder",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Sorcerer"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U/R}{U/R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters and whenever you cast a spell with mana value 4 or greater, you may discard a card. If you do, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "optionalDiscardDraw"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "manaValue": {
+            "gte": 4
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "optionalDiscardDraw"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "38405a37-921a-49ab-a95b-28eb8c26474a",
+  "name": "Crash and Burn",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{3}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Destroy target Vehicle.\n\u2022 Crash and Burn deals 6 damage to target creature or planeswalker.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target Vehicle.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "subtype": "Vehicle"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Deal 6 damage to target creature or planeswalker.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "planeswalker"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 6
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

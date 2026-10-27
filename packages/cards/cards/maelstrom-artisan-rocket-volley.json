@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "03931270-504a-4b0b-af3f-918bf124ea07",
+  "name": "Maelstrom Artisan // Rocket Volley",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Minotaur", "Sorcerer"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Haste\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Maelstrom Artisan",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/rocket-volley",
+        "name": "Rocket Volley",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["R"],
+          "manaCost": "{1}{R}"
+        },
+        "rulesText": "Destroy target nonbasic land.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "destroy",
+                "target": "target"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "land"
+                  },
+                  {
+                    "basic": false
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

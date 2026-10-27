@@ -29,10 +29,6 @@
       ]
     },
     {
-      "kind": "mana",
-      "produces": ["W", "U", "B", "R", "G"]
-    },
-    {
       "kind": "crew",
       "power": 1
     }

@@ -5,11 +5,11 @@ import { numericValue } from './numeric-values.js';
 import { FACE_DOWN } from './disguise.js';
 import { meetsCondition } from './conditions.js';
 import { matchesFilter, targetSpec } from './selectors.js';
-import { matchesEvent } from './events.js';
+import { matchesEvent, eventSpec } from './events.js';
 import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.47.0';
+export const VERSION = '0.48.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -853,6 +853,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     step: payload.step,
     chapterNumber: payload.chapterNumber,
     castPlayer: payload.castPlayer,
+    drawNumber: payload.drawNumber,
     spellNumber:
       event === 'cast' ? spellsCastCount(s, [payload.player ?? object.controller]) : undefined,
     objects: payload.objects,
@@ -925,7 +926,7 @@ export function notifyTriggers(s, event, payload, context = null) {
           };
         if (watcherDefinition) queued.sourceDefinition = structuredClone(watcherDefinition);
         if (
-          event === 'dies' &&
+          ['dies', 'battlefieldToGraveyard'].includes(event) &&
           watcher.id === object?.id &&
           watcher.incarnation === object.incarnation
         )
@@ -945,7 +946,7 @@ export function notifyTriggers(s, event, payload, context = null) {
         // but use this one-time snapshot for "another" target exclusion. Never
         // chase that ID through a later move or return to the battlefield.
         if (
-          event === 'dies' &&
+          ['dies', 'battlefieldToGraveyard'].includes(event) &&
           watcher.id === object?.id &&
           watcher.incarnation === object.incarnation &&
           [trigger.target, ...(trigger.targetGroups ?? []).map((group) => group.selector)].some(
@@ -1040,6 +1041,28 @@ export function sacrificePermanents(s, objects, departureContext = null) {
     notifyTriggers(s, 'sacrifice', { object: o, player: o.controller }, context);
   }
 }
+/** CR 603.2e: observe actual battlefield status transitions, after the whole
+ * simultaneous batch is tapped. Entry tapped is initialization, not this event.
+ * This does not represent "taps for mana" or aggregate "one or more" events. */
+export function tapObjects(s, objects) {
+  const changed = [
+    ...new Map(
+      objects.filter((o) => o?.zone === 'battlefield' && !o.tapped).map((o) => [o.id, o]),
+    ).values(),
+  ];
+  for (const object of changed) object.tapped = true;
+  // Ordinary games without tap watchers need neither event facts nor stack IDs.
+  if (
+    changed.length &&
+    battlefield(s).some((watcher) =>
+      (definition(s, watcher).triggers ?? []).some(
+        (trigger) => eventSpec(trigger.event)?.event === 'tap',
+      ),
+    )
+  )
+    for (const object of changed) notifyTriggers(s, 'tap', { object });
+  return changed.length;
+}
 /** Stun replaces an actual untap, not an attempt to untap an untapped object. */
 export function untapObject(s, object) {
   if (object.zone !== 'battlefield' || !object.tapped) return false;
@@ -1088,10 +1111,12 @@ export function move(s, o, to, departureContext = null) {
   if (to !== 'stack') delete o.warpPaid;
   delete o.chosenX;
   delete o.castPlayer;
-  const dying =
-    from === 'battlefield' && to === 'graveyard' && hasType(definition(s, o), 'creature');
-  const context = dying ? (departureContext ?? captureDepartureContext(s)) : null;
-  const departed = dying ? structuredClone(o) : null;
+  const toGraveyard = from === 'battlefield' && to === 'graveyard';
+  const context = toGraveyard ? (departureContext ?? captureDepartureContext(s)) : null;
+  // Preserve the historic creature-only dies family for existing definitions
+  // and replay catalogs. The explicit zone event also observes noncreatures.
+  const dying = toGraveyard && hasType(definition(s, o), 'creature');
+  const departed = toGraveyard ? structuredClone(o) : null;
   if (from === 'battlefield' || from === 'stack') {
     const entries = [
       ...s.stack,
@@ -1193,7 +1218,7 @@ export function move(s, o, to, departureContext = null) {
     from,
     to,
   });
-  if (dying || (from === 'battlefield' && to === 'exile')) {
+  if (toGraveyard || (from === 'battlefield' && to === 'exile')) {
     for (const delayed of earthbend) {
       const { object: watched, ...entry } = delayed;
       s.pendingTriggers.push({
@@ -1206,9 +1231,10 @@ export function move(s, o, to, departureContext = null) {
     }
   }
   if (dying) notifyTriggers(s, 'dies', { object: departed }, context);
+  if (toGraveyard) notifyTriggers(s, 'battlefieldToGraveyard', { object: departed }, context);
   return o;
 }
-export function draw(s, p, count) {
+export function draw(s, p, count, { openingHand = false } = {}) {
   // CR121.2a: replacements referring to one or more draws modify the whole
   // instruction before its individual draws, once per replacement source.
   if (count > 0) {
@@ -1228,6 +1254,15 @@ export function draw(s, p, count) {
     }
     move(s, s.objects[id], 'hand');
     emit(s, 'draw', { player: p, objectId: id });
+    if (!openingHand) {
+      const player = s.players[p];
+      const previous = player.cardsDrawn?.turn === s.turn ? player.cardsDrawn.count : 0;
+      player.cardsDrawn = { turn: s.turn, count: previous + 1 };
+      // CR 121.2/603.3: each successful draw is an event, but its triggers
+      // wait for the enclosing instruction/resolution to finish. No hidden ID
+      // is needed to match a player draw event.
+      notifyTriggers(s, 'draw', { player: p, drawNumber: previous + 1 });
+    }
   }
 }
 export function createGame({
@@ -1308,7 +1343,7 @@ export function createGame({
   for (let p = 0; p < 2; p++) {
     for (const name of decks[p]) addObject(s, name, p);
     shuffle(s, s.players[p].library);
-    draw(s, p, 7);
+    draw(s, p, 7, { openingHand: true });
   }
   emit(s, 'gameStarted', { seed });
   if (mulligan) s.choice = { kind: 'mulligan', player: startingPlayer };

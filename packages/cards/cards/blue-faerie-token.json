@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/blue-faerie-token",
+  "name": "Blue Faerie Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Faerie"],
+    "colors": ["U"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

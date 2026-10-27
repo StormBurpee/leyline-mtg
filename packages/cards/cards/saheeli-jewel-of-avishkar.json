@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "83705258-1f42-41db-a32e-de99ffd759eb",
+  "name": "Saheeli, Jewel of Avishkar",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Artificer"],
+    "colors": ["R", "U"],
+    "manaCost": "{2}{U}{R}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Thopters you control have haste.\nWhenever you cast a noncreature spell, create a 1/1 colorless Thopter artifact creature token with flying.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "subtype": "Thopter"
+          },
+          {
+            "controller": "you"
+          }
+        ]
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["haste"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/flying-thopter-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

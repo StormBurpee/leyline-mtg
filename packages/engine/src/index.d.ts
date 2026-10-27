@@ -98,13 +98,16 @@ export interface EventSpec {
     | 'enter'
     | 'cast'
     | 'dies'
+    | 'battlefieldToGraveyard'
     | 'sacrifice'
     | 'attack'
+    | 'tap'
     | 'step'
     | 'attackGroup'
     | 'noncombatDamageToPlayer'
     | 'combatDamagePlayer'
     | 'librarySearch'
+    | 'draw'
     | 'lifeGain'
     | 'faceUp'
     | 'targeted';
@@ -115,6 +118,7 @@ export interface EventSpec {
   excludeSource?: boolean;
   chapters?: number[];
   spellNumber?: number;
+  drawNumber?: number;
   castByController?: boolean;
   targetingController?: 'you' | 'opponent';
   targetingKind?: 'spell' | 'ability';
@@ -265,6 +269,7 @@ type EffectInstruction =
   | { op: 'counter'; unlessPay?: ManaCost; exile?: boolean }
   | { op: 'attachEquipment' }
   | { op: 'exileUntilSourceLeaves' | 'moveLinkedExileToGraveyard' }
+  | { op: 'delayedBlink'; controller?: 'owner' | 'you' }
   | { op: 'exileUntilSourceLeavesAll'; where: CardPredicate }
   | { op: 'bounce' | 'destroy'; subject?: 'source' | 'attached' }
   | { op: 'untap' | 'tap'; subject?: 'source' | 'attached' }
@@ -435,7 +440,7 @@ export interface CardDefinition {
   readonly startEngines?: boolean;
   readonly maxSpeedKeywords?: readonly string[];
   readonly entryKeywordCounters?: string[];
-  readonly entryPlusCounters?: number;
+  readonly entryPlusCounters?: number | { readonly kind: 'x' };
   readonly landNameLock?: true;
   readonly exileGraveyardMoves?: true;
   readonly prepareSpell?: CardDefinition;
@@ -621,6 +626,7 @@ export interface PlayerState {
   speed?: number;
   speedTriggeredTurn?: number;
   lifeLostTurn?: number;
+  cardsDrawn?: { turn: number; count: number };
   spellsCast?: {
     turn: number;
     profiles: {
@@ -688,6 +694,7 @@ export interface StackEntry {
     | Effect
     | { op: 'animateVehicle' }
     | { op: 'returnEarthbent' }
+    | { op: 'returnDelayedBlink'; controller: 'owner' | 'you' }
     | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } }
   )[];
   targetGroups?: TargetGroup[];

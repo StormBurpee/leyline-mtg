@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "49598fd5-2aad-4974-b499-38b60fc371b6",
+  "name": "Null Group Biological Assets",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Mutant", "Mercenary"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "During your turn, this creature has first strike.\nWhenever this creature attacks, you may discard a card. If you do, draw a card.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["first strike"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "optionalDiscardDraw"
+        }
+      ]
+    }
+  ]
+}

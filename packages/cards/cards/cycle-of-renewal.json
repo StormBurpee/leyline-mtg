@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "77eda626-5cef-496d-b291-cfa1ee6fc1fb",
+  "name": "Cycle of Renewal",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": ["Lesson"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "sacrifice",
+          "count": 1,
+          "player": "controller",
+          "where": {
+            "type": "land"
+          }
+        },
+        {
+          "op": "searchLibrary",
+          "amount": 2,
+          "destination": "battlefield",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

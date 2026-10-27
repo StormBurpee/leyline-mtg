@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e85c6bd2-db15-4052-88c0-3ae25414f0ca",
+  "name": "Strife Scholar // Awaken the Ages",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Orc", "Sorcerer"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Ward\u2014Pay 2 life.\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "life": 2
+      }
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Strife Scholar",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/awaken-the-ages",
+        "name": "Awaken the Ages",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["R"],
+          "manaCost": "{5}{R}"
+        },
+        "rulesText": "Create two 2/2 red and white Spirit creature tokens.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/red-white-spirit-token",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

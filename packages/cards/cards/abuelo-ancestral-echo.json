@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eaa9baac-72f2-4bde-9146-860878d9860b",
+  "name": "Abuelo, Ancestral Echo",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Spirit"],
+    "colors": ["U", "W"],
+    "manaCost": "{1}{W}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying, ward {2}\n{1}{W}{U}: Exile another target creature or artifact you control. Return it to the battlefield under its owner's control at the beginning of the next end step.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{W}{U}"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "artifact"
+                }
+              ]
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "delayedBlink",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

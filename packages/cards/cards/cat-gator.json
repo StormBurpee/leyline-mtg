@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "349e6b9e-40a8-49bc-9cd3-4a22f5363fa5",
+  "name": "Cat-Gator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Fish", "Crocodile"],
+    "colors": ["B"],
+    "manaCost": "{6}{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Lifelink\nWhen this creature enters, it deals damage equal to the number of Swamps you control to any target.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "subtype": "Swamp"
+            }
+          }
+        }
+      ],
+      "target": {
+        "scope": "damageable"
+      }
+    }
+  ]
+}

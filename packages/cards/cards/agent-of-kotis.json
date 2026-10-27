@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "584fe1e4-029d-43fe-8c9e-6995dd392d65",
+  "name": "Agent of Kotis",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Rogue"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Renew \u2014 {3}{U}, Exile this card from your graveyard: Put two +1/+1 counters on target creature. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "timing": "sorcery",
+      "cost": {
+        "mana": "{3}{U}",
+        "exileSelf": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "amount": 2,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

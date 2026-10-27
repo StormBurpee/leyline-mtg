@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "acac15c8-877d-49d4-9b42-90181c05a684",
+  "name": "Chitin Gravestalker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Insect", "Warrior"],
+    "colors": ["B"],
+    "manaCost": "{5}{B}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "This spell costs {1} less to cast for each artifact and/or creature card in your graveyard.\nCycling {2} ({2}, Discard this card: Draw a card.)",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": {
+        "kind": "count",
+        "zone": "graveyard",
+        "player": "you",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}"
+    }
+  ]
+}

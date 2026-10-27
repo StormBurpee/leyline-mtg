@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0a427652-9745-4802-8c8f-5ae29a29b496",
+  "name": "Champion of Dusan",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Warrior"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Trample\nRenew \u2014 {1}{G}, Exile this card from your graveyard: Put a +1/+1 counter and a trample counter on target creature. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "timing": "sorcery",
+      "cost": {
+        "mana": "{1}{G}",
+        "exileSelf": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "amount": 1,
+          "counter": "+1/+1"
+        },
+        {
+          "op": "keywordCounters",
+          "keywords": ["trample"]
+        }
+      ]
+    }
+  ]
+}

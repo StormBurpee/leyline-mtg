@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7c179e54-3beb-4761-bddf-41fa98b082db",
+  "name": "Driver of the Dead",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature dies, return target creature card with mana value 2 or less from your graveyard to the battlefield.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "battlefield"
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "type": "creature"
+            },
+            {
+              "manaValue": {
+                "lte": 2
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

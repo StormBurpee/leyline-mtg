@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dbc56f3b-83b3-41c8-a8ae-d3774fe6ee01",
+  "name": "Linden, the Steadfast Queen",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Noble"],
+    "colors": ["W"],
+    "manaCost": "{W}{W}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Vigilance (Attacking doesn't cause this creature to tap.)\nWhenever a white creature you control attacks, you gain 1 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "controller": "you",
+        "filter": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "color": "W"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

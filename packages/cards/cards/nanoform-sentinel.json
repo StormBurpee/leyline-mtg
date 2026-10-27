@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "07155470-c5ab-41ae-ade3-bdc06d357379",
+  "name": "Nanoform Sentinel",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature becomes tapped, untap another target permanent. This ability triggers only once each turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "tap",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "excludeSource": true
+      },
+      "oncePerTurn": true,
+      "effects": [
+        {
+          "op": "untap",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

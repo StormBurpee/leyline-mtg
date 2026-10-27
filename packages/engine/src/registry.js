@@ -37,7 +37,24 @@ export function createRegistry(input = CARDS) {
     registry[copy.name] = {
       ...copy,
       ...(copy.prepareSpell
-        ? { prepareSpell: createRegistry([copy.prepareSpell])[copy.prepareSpell.name] }
+        ? {
+            // The enclosing registry owns token cross-references. Validating an
+            // isolated one-spell registry rejects valid prepared token spells.
+            prepareSpell: {
+              ...copy.prepareSpell,
+              types: copy.prepareSpell.types ?? [copy.prepareSpell.type],
+              keywords: copy.prepareSpell.keywords ?? [],
+              subtypes: copy.prepareSpell.subtypes ?? [],
+              text: copy.prepareSpell.text ?? '',
+              color: copy.prepareSpell.color ?? [
+                ...new Set(
+                  Object.keys(copy.prepareSpell.cost)
+                    .flatMap((key) => key.split('/'))
+                    .filter((key) => COLORS.has(key)),
+                ),
+              ],
+            },
+          }
         : {}),
       ...(copy.backFace
         ? {

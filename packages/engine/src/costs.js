@@ -1,3 +1,4 @@
+import { tapObjects } from './model.js';
 import {
   definition,
   isSick,
@@ -63,7 +64,7 @@ export function payCost(s, p, cost, options = {}) {
     move(s, object, 'exile');
     emit(s, 'exiledAsCost', { player: p, objectId: object.id, name: object.name });
   }
-  if (cost.tap) s.objects[options.sourceId].tapped = true;
+  if (cost.tap) tapObjects(s, [s.objects[options.sourceId]]);
   if (cost.sacrificeSelf) {
     const object = s.objects[options.sourceId];
     sacrificePermanents(s, [object]);

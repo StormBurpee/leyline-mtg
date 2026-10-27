@@ -1,3 +1,4 @@
+import { tapObjects } from './model.js';
 import { hasType } from './types.js';
 import {
   maximumBlockers,
@@ -129,7 +130,10 @@ export function declareAttackers(s, ids, defenders = {}) {
     firstEligible: [],
     hasFirst: false,
   };
-  for (const id of ids) if (!hasKeyword(s, s.objects[id], 'vigilance')) s.objects[id].tapped = true;
+  tapObjects(
+    s,
+    ids.map((id) => s.objects[id]).filter((o) => !hasKeyword(s, o, 'vigilance')),
+  );
   s.choice = null;
   s.priority = s.active;
   s.passes = 0;

@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "68f84643-c0f9-4d31-ba2e-38b65ab45d04",
+  "name": "Tiger-Seal",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Seal"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Vigilance\nAt the beginning of your upkeep, tap this creature.\nWhenever you draw your second card each turn, untap this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "upkeep",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "source"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "draw",
+        "controller": "you",
+        "drawNumber": 2
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

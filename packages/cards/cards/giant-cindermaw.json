@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bd0c0e85-ff24-46c9-a547-4f633355c131",
+  "name": "Giant Cindermaw",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur", "Beast"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nPlayers can't gain life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "globalRule",
+      "rule": "cantGainLife"
+    }
+  ]
+}

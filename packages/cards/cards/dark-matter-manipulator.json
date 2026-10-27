@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6a3862f0-8dfc-4ac9-8eb9-faefcad685d4",
+  "name": "Dark Matter Manipulator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{B}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, mill three cards.\nThis creature gets +2/+0 for every seven cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "scale",
+        "factor": 2,
+        "value": {
+          "kind": "floorDivide",
+          "value": {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you"
+          },
+          "divisor": 7
+        }
+      },
+      "toughness": 0
+    }
+  ]
+}

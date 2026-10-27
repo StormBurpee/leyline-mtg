@@ -1,3 +1,4 @@
+import { tapObjects } from './model.js';
 import { proposedCastingState } from './casting-costs.js';
 import { controlled, definition, ref, stats, loseLife, move, emit, requireRule } from './model.js';
 import { matchesFilter } from './selectors.js';
@@ -248,6 +249,9 @@ export function payAdditionalCost(s, p, profile, choice) {
       'ADDITIONAL_COST',
       'The teamwork payment changed.',
     );
-    for (const r of choice.teamwork) s.objects[r.id].tapped = true;
+    tapObjects(
+      s,
+      choice.teamwork.map((r) => s.objects[r.id]),
+    );
   }
 }

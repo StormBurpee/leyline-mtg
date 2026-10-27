@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "49f0da4a-e046-4220-b90e-e105a5f2ef00",
+  "name": "Incinerating Blast",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{4}{R}"
+  },
+  "rulesText": "Incinerating Blast deals 6 damage to target creature.\nYou may discard a card. If you do, draw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 6
+        },
+        {
+          "op": "optionalDiscardDraw"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

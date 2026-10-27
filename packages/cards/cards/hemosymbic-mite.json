@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "103e0b63-fbde-4054-91f7-dd04b40b59ef",
+  "name": "Hemosymbic Mite",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Mite"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Whenever this creature becomes tapped, another target creature you control gets +X/+X until end of turn, where X is this creature's power.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "tap",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "sourceStat",
+            "stat": "power"
+          },
+          "toughness": {
+            "kind": "sourceStat",
+            "stat": "power"
+          },
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

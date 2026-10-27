@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e0828e8d-f01f-4088-9123-6d923ddb3242",
+  "name": "Ancestral Anger",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Target creature gains trample and gets +X/+0 until end of turn, where X is 1 plus the number of cards named Ancestral Anger in your graveyard.\nDraw a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "sum",
+            "values": [
+              1,
+              {
+                "kind": "count",
+                "zone": "graveyard",
+                "player": "you",
+                "where": {
+                  "name": "Ancestral Anger"
+                }
+              }
+            ]
+          },
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["trample"]
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

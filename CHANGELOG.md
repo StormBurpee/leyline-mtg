@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.48.0 — Draw, tap and delayed-return coverage
+
+- Add 200 complete Standard cards: 164 existing-engine definitions, 15 actual-draw payoffs, 15 tap-event cards, three delayed-blink cards and three X-entry creatures. Catalog: 1789 playable cards and 62 tokens.
+- Track successful individual draws and per-turn draw counts, excluding opening hands and mulligans. Capture actual untapped-to-tapped transitions across costs, mana, combat and resolving effects.
+- Implement bounded next-end-step blink returns with exact exile incarnations and entry choices. Preserve chosen X for entry counters before entry observers and state-based actions.
+- Correct separate Giott entry events, Wojek resolution-time comparison and Stromkirk Vampire targeting. Observe artifact graveyard departures for Al Bhed and return earthbent lands even after their creature animation ends.
+- Correct Careening Mine Cart: its Treasure reminder text no longer grants the Vehicle a mana ability. Preserve all eight complete tournament deck presets.
+
 ## 0.47.0 — Complete tournament deck coverage
 
 - Complete every main-deck and sideboard card across all eight sourced Standard presets: 146 unique required names, no substitutions or missing definitions/images. Keep the requested Storm deck as default. Sideboards remain reference-only; this does not introduce a best-of-three sideboarding workflow.

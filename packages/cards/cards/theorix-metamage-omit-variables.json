@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "92a0aa44-0ef7-4e6f-8288-7c33067c5fd1",
+  "name": "Theorix Metamage // Omit Variables",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Shade", "Wizard"],
+    "colors": ["B", "U"],
+    "manaCost": "{2}{U/B}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\nThreshold \u2014 This creature gets +1/+0 and has flying as long as there are seven or more cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 7
+      },
+      "power": 1,
+      "toughness": 0,
+      "keywords": ["flying"]
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Theorix Metamage",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/omit-variables",
+        "name": "Omit Variables",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["B", "U"],
+          "manaCost": "{U/B}"
+        },
+        "rulesText": "Mill three cards. (Put the top three cards of your library into your graveyard.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "mill",
+                "target": "controller",
+                "amount": 3
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

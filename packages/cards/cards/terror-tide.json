@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "12be58f4-1c12-4bca-8069-1f049cd8a90c",
+  "name": "Terror Tide",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}{B}"
+  },
+  "rulesText": "Fathomless descent \u2014 All creatures get -X/-X until end of turn, where X is the number of permanent cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "type": "creature"
+          },
+          "power": {
+            "kind": "scale",
+            "factor": -1,
+            "value": {
+              "kind": "count",
+              "zone": "graveyard",
+              "player": "you",
+              "where": {
+                "not": {
+                  "any": [
+                    {
+                      "type": "instant"
+                    },
+                    {
+                      "type": "sorcery"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "toughness": {
+            "kind": "scale",
+            "factor": -1,
+            "value": {
+              "kind": "count",
+              "zone": "graveyard",
+              "player": "you",
+              "where": {
+                "not": {
+                  "any": [
+                    {
+                      "type": "instant"
+                    },
+                    {
+                      "type": "sorcery"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

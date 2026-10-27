@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "df5e4100-8c83-42d6-af96-1a1ec84a9210",
+  "name": "Spellbook Seeker // Careful Study",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Spellbook Seeker",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/careful-study",
+        "name": "Careful Study",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["U"],
+          "manaCost": "{U}"
+        },
+        "rulesText": "Draw two cards, then discard two cards.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "draw",
+                "target": "controller",
+                "amount": 2
+              },
+              {
+                "op": "discard",
+                "target": "controller",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

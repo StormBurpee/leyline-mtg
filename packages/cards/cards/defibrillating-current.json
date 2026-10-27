@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5a96b93b-bae6-48fb-87f5-05f3ffcf7ba9",
+  "name": "Defibrillating Current",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "R", "W"],
+    "manaCost": "{2/R}{2/W}{2/B}"
+  },
+  "rulesText": "Defibrillating Current deals 4 damage to target creature or planeswalker and you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 4
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "type": "planeswalker"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

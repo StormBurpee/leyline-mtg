@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b80d21de-2ace-4e0d-92b2-6f0273512621",
+  "name": "Frontline Rush",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "W"],
+    "manaCost": "{R}{W}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Create two 1/1 red Goblin creature tokens.\n\u2022 Target creature gets +X/+X until end of turn, where X is the number of creatures you control.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Create two Goblins.",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/goblin-token",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "Target creature gets +X/+X for your creature count.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": {
+                "kind": "count",
+                "zone": "battlefield",
+                "player": "you",
+                "where": {
+                  "type": "creature"
+                }
+              },
+              "toughness": {
+                "kind": "count",
+                "zone": "battlefield",
+                "player": "you",
+                "where": {
+                  "type": "creature"
+                }
+              },
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

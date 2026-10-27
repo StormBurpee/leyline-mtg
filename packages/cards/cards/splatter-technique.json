@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2620dcfe-8738-4f81-b23d-0c1c60cf9047",
+  "name": "Splatter Technique",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U}{U}{R}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Draw four cards.\n\u2022 Splatter Technique deals 4 damage to each creature and planeswalker.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Draw four cards.",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 4
+            }
+          ]
+        },
+        {
+          "label": "Deal 4 damage to each creature and planeswalker.",
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "any": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "type": "planeswalker"
+                  }
+                ]
+              },
+              "amount": 4
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

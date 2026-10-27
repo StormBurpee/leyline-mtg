@@ -4,9 +4,9 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.47.0
+## Implemented progress through v0.48.0
 
-Current dated inventory coverage: **1,371 / 5,164**; **3,793 remain**. This is 492 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **1,571 / 5,164**; **3,593 remain**. This is 692 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
 | Delivered feature/card batch                                      | Cards added |
 | ----------------------------------------------------------------- | ----------: |
@@ -47,7 +47,12 @@ Current dated inventory coverage: **1,371 / 5,164**; **3,793 remain**. This is 4
 | Explore and Map-token cards                                       |          15 |
 | Temporary combat restrictions                                     |          21 |
 | Remaining selected meta-deck definitions                          |          65 |
-| **Total since v0.38.0**                                           |     **492** |
+| Existing-engine expansion after meta completion                   |         164 |
+| Actual draw events and turn history                               |          15 |
+| Actual tap-event triggers                                         |          15 |
+| Next-end-step blink returns                                       |           3 |
+| Chosen-X entry counters                                           |           3 |
+| **Total since v0.38.0**                                           |     **692** |
 
 The baseline forecasts below remain unchanged for comparison. They were conservative first-pass probes: several implemented families unlocked more cards than those probes identified. Remaining cards in each family can still require other unsupported behavior.
 

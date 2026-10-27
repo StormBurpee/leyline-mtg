@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2b62543f-a475-457a-a96b-b5d070383d3c",
+  "name": "Goldvein Hydra",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Hydra"],
+    "colors": ["G"],
+    "manaCost": "{X}{G}",
+    "power": 0,
+    "toughness": 0
+  },
+  "rulesText": "Vigilance, trample, haste\nThis creature enters with X +1/+1 counters on it.\nWhen this creature dies, create a number of tapped Treasure tokens equal to its power.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "entryPlusCounters",
+      "amount": {
+        "kind": "x"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": {
+            "kind": "sourceStat",
+            "stat": "power"
+          },
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

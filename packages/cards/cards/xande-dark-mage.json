@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "36b5c793-30f6-4f21-8bf6-c18d1c46d732",
+  "name": "Xande, Dark Mage",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["B", "U"],
+    "manaCost": "{2}{U}{B}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)\nXande gets +1/+1 for each noncreature, nonland card in your graveyard.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "count",
+        "zone": "graveyard",
+        "player": "you",
+        "where": {
+          "not": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "type": "land"
+              }
+            ]
+          }
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "graveyard",
+        "player": "you",
+        "where": {
+          "not": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "type": "land"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

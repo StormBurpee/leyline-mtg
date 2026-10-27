@@ -1,3 +1,4 @@
+import { tapObjects } from './model.js';
 import { manaValue } from './mana-value.js';
 import { beginDamage, assignDamage, canBlock, canAttack, attackDefenders } from './combat.js';
 import { stateBasedActions, stabilize, resolveTop, finishTriggerOrder } from './effects.js';
@@ -372,9 +373,10 @@ export function preserveForDefense(s, source, p) {
 function projectAttackDeclaration(s, p, ids) {
   const work = boardCopy(s, p, [], ids);
   work.step = 'attackers';
-  for (const id of ids) {
-    if (!hasKeyword(work, work.objects[id], 'vigilance')) work.objects[id].tapped = true;
-  }
+  tapObjects(
+    work,
+    ids.map((id) => work.objects[id]).filter((o) => !hasKeyword(work, o, 'vigilance')),
+  );
   for (const id of ids) notifyTriggers(work, 'attack', { object: work.objects[id] });
   work.pendingTriggers = work.pendingTriggers.filter(
     (entry) =>

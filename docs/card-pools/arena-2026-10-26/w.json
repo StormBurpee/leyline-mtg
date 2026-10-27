@@ -177,7 +177,7 @@
   {
     "oracleId": "4b4dcdb1-0017-494f-8d83-6706b188e575",
     "name": "Wanderbrine Preacher",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "915d70ac-46ce-41d0-a137-f17e7aaea87d",
@@ -247,7 +247,7 @@
   {
     "oracleId": "6c0f6673-bc24-4c84-b4e7-736283ffd60e",
     "name": "Wanderwine Distracter",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "7e1da4a1-5922-4a2e-8bbc-25fbcbf20935",
@@ -852,7 +852,7 @@
   {
     "oracleId": "b93eaf66-91b3-44da-851c-79810901be0c",
     "name": "Wayspeaker Bodyguard",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "c752e001-56cc-46dc-acb3-3fca6c0bdd2e",
@@ -1712,7 +1712,7 @@
   {
     "oracleId": "c566317e-cd82-46c1-b506-f41256d815f6",
     "name": "Wingblade Disciple",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "423c8465-82cd-4f54-b5ac-022b7ebcf3e4",
@@ -2112,7 +2112,7 @@
   {
     "oracleId": "ab41243d-b178-4ebe-a7ac-bea37427be99",
     "name": "Wojek Investigator",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "adc47a25-daab-49c7-93a5-5bbf2bc20cf9",
@@ -2367,7 +2367,7 @@
   {
     "oracleId": "0f8ebf11-b5ec-4f21-8c49-90d569b5a4c5",
     "name": "Worthy Cost",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "37733e29-3ade-4bfd-89c9-efd13b548a53",
@@ -2402,7 +2402,7 @@
   {
     "oracleId": "c1994d6a-984d-4b75-9198-1f1822eab6eb",
     "name": "Wrath of the Bloodmane",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "21efa6f2-3e7c-4576-b5a3-0b75b2843442",
@@ -2522,6 +2522,6 @@
   {
     "oracleId": "b3ac27d6-7e18-404d-9af2-b03897a5f1d9",
     "name": "Wylie Duke, Atiin Hero",
-    "status": "unsupported"
+    "status": "curated"
   }
 ]

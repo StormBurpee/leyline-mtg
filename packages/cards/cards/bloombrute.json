@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b7040175-7411-43a8-9b46-dba1d7c2135d",
+  "name": "Bloombrute",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Plant", "Elemental"],
+    "colors": ["G", "W"],
+    "manaCost": "{2}{G}{W}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Whenever you gain life, draw a card. This ability triggers only once each turn.\n{4}{G}{W}: Target creature gains trample and lifelink until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "lifeGain",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "oncePerTurn": true
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{G}{W}"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["trample", "lifelink"]
+        }
+      ]
+    }
+  ]
+}

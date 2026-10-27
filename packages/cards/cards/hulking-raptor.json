@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9f2e7533-cfc1-4dd8-a9b8-09cdc712ef2f",
+  "name": "Hulking Raptor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}{G}",
+    "power": 5,
+    "toughness": 3
+  },
+  "rulesText": "Ward {2}\nAt the beginning of your first main phase, add {G}{G}.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "main1",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addMana",
+          "mana": "{G}{G}"
+        }
+      ]
+    }
+  ]
+}

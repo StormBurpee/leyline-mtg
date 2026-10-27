@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "00ad5200-5179-4d1b-8bb3-a09e1b31be58",
+  "name": "Theorix Annex",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control a planeswalker.\n{T}: Add {U} or {B}.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "type": "planeswalker"
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["U", "B"]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "63e5180f-16d0-4524-94bf-ecbf3c417814",
+  "name": "Yuyan Archers",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Archer"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "Reach\nWhen this creature enters, you may discard a card. If you do, draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "optionalDiscardDraw"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "141a2757-8f20-4e10-9866-bb5d612ed62d",
+  "name": "Loxodon Eavesdropper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elephant", "Detective"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")\nWhenever you draw your second card each turn, this creature gets +1/+1 and gains vigilance until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "draw",
+        "controller": "you",
+        "drawNumber": 2
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 1,
+          "keywords": ["vigilance"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

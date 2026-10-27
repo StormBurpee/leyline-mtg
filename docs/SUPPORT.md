@@ -2,13 +2,17 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
+## Latest coverage (v0.48)
+
+The dated expansion sections below extend the original kernel scope. The catalog now includes actual draw events with per-turn counts, actual tap transitions, bounded next-end-step blink returns, and chosen-X entry counters. Aggregate draw/tap events, first-tap-per-creature predicates and general mass-blink return batching remain unsupported. These features do not imply support for every card using them.
+
 ## Scope
 
 - Two-player, 20-life local constructed games, with configurable test fixtures.
 - Deck validation: at least 60 cards in the client, at most 250, up to four copies of nonbasic cards. No format-specific banned list or set-rotation certification.
 - London mulligans, chosen bottom cards, first-player first-draw skip, cleanup discard.
 - Main-phase land timing, one land per turn, instant/sorcery timing, priority and LIFO stack.
-- Mana pools, colored and generic costs, mana abilities, flexible single-mana sources and optional automatic source selection. No hybrid, Phyrexian, snow, variable X, alternative or additional costs.
+- Mana pools, colored and generic costs, mana abilities, flexible single-mana sources and optional automatic source selection. Supported hybrid/twobrid, chosen-X, alternative and additional cost families are detailed below; Phyrexian and snow payments remain unsupported.
 - Creature tap costs and attacking remain restricted until the controller’s next turn begins, unless the creature has haste.
 - Objects changing zones become new incarnations; spells recheck targets at resolution.
 - Creatures, instants, sorceries, basic/nonbasic mana lands, supported artifacts and enchantments. Artifact and enchantment creatures retain both types; only the listed executable definitions are supported.

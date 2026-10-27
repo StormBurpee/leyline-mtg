@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "629f247c-1e64-4c32-8892-0716ed469d1c",
+  "name": "Bumi Bash",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{3}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Bumi Bash deals damage equal to the number of lands you control to target creature.\n\u2022 Destroy target land creature or nonbasic land.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Deal damage equal to your lands to target creature.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": {
+                "kind": "count",
+                "zone": "battlefield",
+                "player": "you",
+                "where": {
+                  "type": "land"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "label": "Destroy target land creature or nonbasic land.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "land"
+                },
+                {
+                  "any": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "not": {
+                        "basic": true
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
