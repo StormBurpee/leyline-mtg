@@ -1,5 +1,5 @@
 {
-  "version": "0.40.0",
+  "version": "0.41.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -24,6 +24,14 @@
       "keywords": [],
       "opcodes": ["damage", "destroy"],
       "modes": ["Abrade deals 3 damage to target creature.", "Destroy target artifact."],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Abyssal Gorestalker",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["sacrifice"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -570,6 +578,19 @@
       "keywords": ["trample"],
       "opcodes": ["gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Ball Lightning",
+      "type": "creature",
+      "keywords": ["trample", "haste"],
+      "opcodes": ["sacrificeSelf"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "end"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -1386,6 +1407,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Choco-Comet",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["damage", "token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Chomping Changeling",
       "type": "creature",
       "keywords": ["changeling"],
@@ -1585,6 +1614,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Cornered by Black Mages",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["sacrifice", "token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Corrupt Court Official",
       "type": "creature",
       "keywords": [],
@@ -1678,6 +1715,14 @@
       "opcodes": ["mill"],
       "triggers": ["selfDies"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Crude Bent Blade",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["sacrifice", "attachEquipment"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
     },
     {
       "name": "Cruel Truths",
@@ -3082,6 +3127,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Form a Posse",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Forum of Amity",
       "type": "land",
       "keywords": [],
@@ -3171,6 +3224,23 @@
           "event": "step",
           "step": "end",
           "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Frostbite Pyromental",
+      "type": "creature",
+      "keywords": ["trample", "haste"],
+      "opcodes": ["draw", "sacrificeSelf"],
+      "triggers": [
+        {
+          "event": "combatDamagePlayer",
+          "object": "source"
+        },
+        {
+          "event": "step",
+          "step": "end"
         }
       ],
       "activatedAbilities": 0
@@ -4943,6 +5013,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Lorehold Charm",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["sacrifice", "moveTarget", "modifyAll"],
+      "modes": [
+        "Each opponent sacrifices a nontoken artifact.",
+        "Return an artifact or creature with mana value 2 or less.",
+        "Creatures you control get +1/+1 and trample."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Los Diablos Missile Base",
       "type": "land",
       "keywords": [],
@@ -5437,6 +5520,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["mill"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Mind Spring",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6120,6 +6211,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Pedal to the Metal",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Peerless Ropemaster",
       "type": "creature",
       "keywords": [],
@@ -6215,6 +6314,19 @@
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pick Your Poison",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["sacrifice"],
+      "modes": [
+        "Each opponent sacrifices an artifact.",
+        "Each opponent sacrifices an enchantment.",
+        "Each opponent sacrifices a creature with flying."
+      ],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6397,6 +6509,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Primal Might",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["modify", "fight"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Primeval Bounty",
       "type": "enchantment",
       "keywords": [],
@@ -6409,6 +6529,14 @@
       "type": "creature",
       "keywords": ["reach", "trample"],
       "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Procrastinate",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -7986,6 +8114,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Slice from the Shadows",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Smaug's Fury",
       "type": "instant",
       "keywords": [],
@@ -8046,6 +8182,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Song of Totentanz",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["token", "modifyAll"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -9318,6 +9462,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Traumatic Critique",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage", "draw", "discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Travel the Overworld",
       "type": "sorcery",
       "keywords": [],
@@ -9584,6 +9736,14 @@
         "Destroy target enchantment",
         "Create a 2/2 black and green Elf creature token"
       ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "United Front",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["token", "counterAll"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -10403,6 +10563,7 @@
   "tokens": [
     "Ally Token",
     "Beast Token",
+    "Black Mage Wizard Token",
     "Cadet",
     "Cat Token",
     "Clue Token",
@@ -10423,7 +10584,10 @@
     "Insect Token",
     "Knight Token",
     "Koma's Coil",
+    "Landfall Bird Token",
+    "Mercenary Token",
     "Mutant Token",
+    "Nonblocking Rat Token",
     "Rabbit Token",
     "Soldier Token",
     "Treasure Token",

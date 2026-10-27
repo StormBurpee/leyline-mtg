@@ -21,9 +21,10 @@ export function cardDropPlan(state, player, id) {
         .map((attacker) => ({ target: attacker, card: id })),
     };
   if (state.choice || !playableZone(state, object, player)) return null;
-  if (castingChoices(definition(state, object)))
+  const card = definition(state, object);
+  if (castingChoices(card) || card.cost.X)
     return {
-      kind: 'chooseMode',
+      kind: card.cost.X ? 'chooseX' : 'chooseMode',
       destinations: legalActions(state, player).some((a) => a.type === 'cast' && a.card === id)
         ? [{ field: player, card: id }]
         : [],

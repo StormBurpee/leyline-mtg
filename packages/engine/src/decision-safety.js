@@ -66,6 +66,7 @@ export function actionEffects(state, action) {
     controller: object.controller,
     source: { id: object.id, incarnation: object.incarnation },
     target: action.target,
+    x: action.x ?? 0,
   };
   return predictedEffects(state, effects, entry);
 }
@@ -84,6 +85,8 @@ function actionCost(state, player, action) {
             state.objects[action.card],
             action.mode,
             action.targets ? flattenTargets(action.targets) : action.target,
+            undefined,
+            action.x,
           )?.cost ?? card.cost,
       };
 }

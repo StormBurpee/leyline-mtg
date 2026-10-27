@@ -1,5 +1,6 @@
 import { recordSpellCast } from './spell-history.js';
 import { crewProblem, crewPlan } from './crew.js';
+import { MAX_X, manaValue } from './mana-value.js';
 import { cyclingFilter } from './cycling.js';
 import { flattenTargets, targetPlanProblem, targetPlans } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
@@ -47,12 +48,12 @@ import {
 import { assignDamage, canAttack, declareAttackers, declareBlockers } from './combat.js';
 import { advanceStep, finishCleanup } from './turn.js';
 const main = (s) => ['main1', 'main2'].includes(s.step);
-export function castProblem(s, p, id, target, { autoTap = true, mode, targets } = {}) {
+export function castProblem(s, p, id, target, { autoTap = true, mode, targets, x } = {}) {
   const o = s.objects[id];
   if (!playableZone(s, o, p)) return 'You cannot play this card from its current zone.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
-  const d = castingProfile(s, p, o, mode, targets ? flattenTargets(targets) : target);
-  if (!d) return 'Choose one valid spell mode.';
+  const d = castingProfile(s, p, o, mode, targets ? flattenTargets(targets) : target, undefined, x);
+  if (!d) return `Choose a valid spell mode and X value (0–${MAX_X} for X spells).`;
   if (d.type === 'land') return 'Lands are played, not cast.';
   if (
     d.type !== 'instant' &&
@@ -89,21 +90,32 @@ function cast(s, p, c) {
   const problem = castProblem(s, p, c.card, c.target, {
     autoTap: c.autoTap !== false,
     mode: c.mode,
+    x: c.x,
     targets: c.targets,
   });
   requireRule(!problem, 'CAST', problem);
   const o = s.objects[c.card],
-    d = castingProfile(s, p, o, c.mode, c.targets ? flattenTargets(c.targets) : c.target);
+    d = castingProfile(
+      s,
+      p,
+      o,
+      c.mode,
+      c.targets ? flattenTargets(c.targets) : c.target,
+      undefined,
+      c.x,
+    );
   const payment = pay(s, p, d.cost, c.autoTap !== false, [], { type: 'cast', card: d });
   if (d.faceDownCast) o.castingFaceDown = true;
   move(s, o, 'stack');
   o.controller = p;
+  if (c.x !== undefined) o.chosenX = c.x;
   if (d.flashbackPaid) o.flashbackPaid = true;
   delete o.castingFaceDown;
   if (d.faceDownCast) o.faceDown = true;
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'spell',
+    ...(c.x !== undefined ? { castingCost: structuredClone(d.cost) } : {}),
     uncounterable: payment.uncounterable || !!d.uncounterable,
     name: o.faceDown ? 'Face-down creature' : o.name,
     controller: p,
@@ -112,6 +124,7 @@ function cast(s, p, c) {
     sourceDefinition: structuredClone(definition(s, o)),
     effects: structuredClone(d.effects ?? []),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
+    ...(c.x !== undefined ? { x: c.x } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
@@ -130,6 +143,7 @@ function cast(s, p, c) {
     target: c.target ?? null,
     ...(d.targetGroups ? { targets: structuredClone(c.targets) } : {}),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
+    ...(c.x !== undefined ? { x: c.x } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
@@ -293,6 +307,7 @@ function handleChoice(s, p, c) {
       'libraryOrder',
       'librarySearch',
       'discardEffect',
+      'sacrifice',
       'payCost',
       'optionalEffect',
       'exilePlay',
@@ -489,7 +504,10 @@ export function dispatch(state, command) {
     throw error;
   }
 }
-export function legalActions(s, p) {
+/** A bounded proposal set; explicit submitted X values need not appear here.
+ * Pass {x} to inspect exact-X casts without enumerating every integer per target.
+ */
+export function legalActions(s, p, { x: exactX } = {}) {
   if (s.status === 'finished') return [];
   if (s.choice?.kind === 'auraEntry' && s.choice.player === p)
     return [
@@ -529,26 +547,59 @@ export function legalActions(s, p) {
     const d = definition(s, s.objects[id]);
     if (d.type === 'land') continue;
     for (const { mode, profile } of spellOptions(d)) {
-      if (profile.targetGroups) {
-        for (const targets of targetPlans(s, profile.targetGroups, p))
-          if (!castProblem(s, p, id, null, { mode, targets }))
+      const available = profile.cost.X
+        ? Object.values(s.players[p].mana).reduce((a, b) => a + b, 0) +
+          (s.players[p].restrictedMana?.length ?? 0) +
+          Object.values(s.objects).filter((o) => canTapForMana(s, o, p)).length
+        : 0;
+      const proposals = !profile.cost.X
+        ? [undefined]
+        : exactX !== undefined
+          ? [exactX]
+          : [
+              ...new Set([
+                ...Array.from({ length: 11 }, (_, i) => i),
+                16,
+                20,
+                32,
+                50,
+                64,
+                100,
+                128,
+                200,
+                256,
+                500,
+                1000,
+                Math.floor((available - manaValue(profile)) / profile.cost.X),
+                Math.floor(available / profile.cost.X),
+              ]),
+            ]
+              .filter((x) => x >= 0 && x <= MAX_X)
+              .sort((a, b) => a - b);
+      for (const x of proposals) {
+        if (profile.targetGroups) {
+          for (const targets of targetPlans(s, profile.targetGroups, p))
+            if (!castProblem(s, p, id, null, { mode, targets, x }))
+              actions.push({
+                type: 'cast',
+                card: id,
+                ...(mode !== undefined ? { mode } : {}),
+                ...(x !== undefined ? { x } : {}),
+                targets,
+              });
+          continue;
+        }
+        const targets = profile.target ? targetsFor(s, profile.target, p) : [null];
+        for (const target of targets)
+          if (!castProblem(s, p, id, target, { mode, x }))
             actions.push({
               type: 'cast',
               card: id,
               ...(mode !== undefined ? { mode } : {}),
-              targets,
+              ...(x !== undefined ? { x } : {}),
+              ...(target ? { target } : {}),
             });
-        continue;
       }
-      const targets = profile.target ? targetsFor(s, profile.target, p) : [null];
-      for (const target of targets)
-        if (!castProblem(s, p, id, target, { mode }))
-          actions.push({
-            type: 'cast',
-            card: id,
-            ...(mode !== undefined ? { mode } : {}),
-            ...(target ? { target } : {}),
-          });
     }
   }
   for (const o of Object.values(s.objects)) {
@@ -630,6 +681,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.40.0',
         '0.39.0',
         '0.38.0',
         '0.37.0',

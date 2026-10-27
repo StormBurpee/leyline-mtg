@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4d31d3f4-4748-4713-808f-24699fcd7b10",
+  "name": "Slice from the Shadows",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{X}{B}"
+  },
+  "rulesText": "This spell can't be countered. (This includes by the ward ability.)\nTarget creature gets -X/-X until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "scale",
+            "factor": -1,
+            "value": {
+              "kind": "x"
+            }
+          },
+          "toughness": {
+            "kind": "scale",
+            "factor": -1,
+            "value": {
+              "kind": "x"
+            }
+          },
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "uncounterable"
+    }
+  ]
+}

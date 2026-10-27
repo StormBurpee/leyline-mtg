@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9a104f73-597b-49e3-8088-13db31f61900",
+  "name": "Frostbite Pyromental",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental"],
+    "colors": ["R", "U"],
+    "manaCost": "{U}{R}{R}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Trample, haste\nWhenever this creature deals combat damage to a player, draw two cards.\nAt the beginning of the end step, sacrifice this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "combatDamagePlayer",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end"
+      },
+      "effects": [
+        {
+          "op": "sacrificeSelf"
+        }
+      ]
+    }
+  ]
+}

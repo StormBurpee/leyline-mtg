@@ -35,6 +35,7 @@ import { captureTable, animateTable, renderCombatLinks, animateEffects } from '.
 import {
   spellProfile,
   castingProfile,
+  MAX_X,
   CARDS,
   definition,
   DECKS,
@@ -128,6 +129,7 @@ const ui = {
   targeting: false,
   activation: null,
   spellMode: null,
+  x: null,
   chosen: [],
   blocks: [],
   inspect: null,
@@ -229,6 +231,7 @@ function resetSelection() {
   ui.targeting = false;
   ui.activation = null;
   ui.spellMode = null;
+  ui.x = null;
   ui.chosen = [];
   ui.blocks = [];
 }
@@ -263,7 +266,14 @@ function send(command, { autoPass = true, automatic = false } = {}) {
     toast('Exit replay inspection before playing.');
     return false;
   }
-  const c = { player: viewer(), expectedRevision: state.revision, ...command };
+  const c = {
+    player: viewer(),
+    expectedRevision: state.revision,
+    ...(!automatic && command.type === 'cast' && command.card === ui.selected && ui.x != null
+      ? { x: ui.x }
+      : {}),
+    ...command,
+  };
   const result = dispatch(state, c);
   if (!result.ok) {
     toast(result.error.message);
@@ -497,7 +507,7 @@ function presentStateChoice() {
     return;
   }
   const source = state.resolving?.entry.name ?? c.entry?.name ?? c.name ?? '';
-  const multi = ['bottom', 'discard', 'discardEffect'].includes(c.kind);
+  const multi = ['bottom', 'discard', 'discardEffect', 'sacrifice'].includes(c.kind);
   const selected = multi ? ui.chosen : dialog._selectedCards;
   let title = '',
     subtitle = '',
@@ -516,13 +526,17 @@ function presentStateChoice() {
     title =
       c.kind === 'bottom'
         ? `Put ${c.count} card${c.count === 1 ? '' : 's'} back`
-        : `Discard ${c.count} card${c.count === 1 ? '' : 's'}`;
+        : c.kind === 'sacrifice'
+          ? `Sacrifice ${c.count} permanent${c.count === 1 ? '' : 's'}`
+          : `Discard ${c.count} card${c.count === 1 ? '' : 's'}`;
     subtitle =
       c.kind === 'bottom'
         ? 'Choose cards for the bottom of your library. Nothing moves until you confirm.'
-        : 'Select the cards to discard, then confirm your choice.';
-    cards = state.players[viewer()].hand;
-    actions = `<span class="choice-selection-summary">${selected.length} of ${c.count} selected</span><button class="btn primary" data-action="confirmDecision" ${selected.length === c.count ? '' : 'disabled'}>${c.kind === 'bottom' ? 'Put selected cards back' : 'Discard selected cards'}</button>`;
+        : c.kind === 'sacrifice'
+          ? 'Choose permanents you control to sacrifice. This does not target or destroy them.'
+          : 'Select the cards to discard, then confirm your choice.';
+    cards = c.kind === 'sacrifice' ? c.cards : state.players[viewer()].hand;
+    actions = `<span class="choice-selection-summary">${selected.length} of ${c.count} selected</span><button class="btn primary" data-action="confirmDecision" ${selected.length === c.count ? '' : 'disabled'}>${c.kind === 'bottom' ? 'Put selected cards back' : c.kind === 'sacrifice' ? 'Sacrifice selected permanents' : 'Discard selected cards'}</button>`;
   } else if (
     ['exilePlay', 'bindingNegotiation', 'exileToGraveyard', 'legendRule'].includes(c.kind)
   ) {
@@ -601,8 +615,8 @@ function presentStateChoice() {
 function selectDecisionCard(id) {
   const c = state?.choice;
   if (dialog._choiceLease !== decisionLease(state, viewer()) || c?.player !== viewer()) return;
-  const multi = ['bottom', 'discard', 'discardEffect'].includes(c.kind);
-  const allowed = multi ? state.players[viewer()].hand : c.cards;
+  const multi = ['bottom', 'discard', 'discardEffect', 'sacrifice'].includes(c.kind);
+  const allowed = multi && c.kind !== 'sacrifice' ? state.players[viewer()].hand : c.cards;
   if (
     !allowed?.includes(id) ||
     (c.kind === 'bindingNegotiation' && definition(state, state.objects[id]).type === 'land')
@@ -622,7 +636,7 @@ function confirmDecision(decline = false) {
   const c = state?.choice;
   if (dialog._choiceLease !== decisionLease(state, viewer()) || c?.player !== viewer()) return;
   let command;
-  if (['bottom', 'discard', 'discardEffect'].includes(c.kind))
+  if (['bottom', 'discard', 'discardEffect', 'sacrifice'].includes(c.kind))
     command = { type: c.kind, cards: [...ui.chosen] };
   else if (c.kind === 'auraEntry')
     command = { type: 'chooseAuraAttachment', card: dialog._selectedCards[0] };
@@ -802,10 +816,35 @@ function showDeck() {
       .join('')}`,
   );
 }
+function showXChoice() {
+  const o = state?.objects[ui.selected];
+  if (!o) return;
+  const values = [
+    ...new Set(
+      legalActions(state, viewer())
+        .filter((a) => a.type === 'cast' && a.card === o.id && a.x !== undefined)
+        .map((a) => a.x),
+    ),
+  ];
+  ui.x = null;
+  ui.targeting = false;
+  openChoiceDialog(
+    'Choose X',
+    `${o.name} · Choose X before targets; targets can change the final cost. Implementation range: 0–${MAX_X}.`,
+    `<label>Other X value <input id="cast-x-value" type="number" min="0" max="${MAX_X}" step="1" value="0"></label><button class="btn primary" data-action="chooseX">Use this X</button><div class="decision-mode-grid">${values.map((x) => `<button class="decision-mode" data-action="chooseX" data-x="${x}"><strong>X = ${x}</strong><span>${mana(castingProfile(state, viewer(), o, undefined, null, undefined, x).cost)}</span></button>`).join('')}</div>`,
+    '<button class="btn quiet" data-action="closeDialog">Cancel casting</button>',
+    { eyebrow: 'VARIABLE COST' },
+  );
+  dialog._xCard = ref(o);
+  dialog._xRevision = state.revision;
+  dialog._activeChoice = null;
+  dialog._stageRender = showXChoice;
+}
 function showSpellModes() {
   const o = state?.objects[ui.selected];
   if (!o || !playableZone(state, o, viewer()) || !castingChoices(definition(state, o))) return;
   ui.spellMode = null;
+  ui.x = null;
   ui.targeting = false;
   render();
   const choices = castingChoices(definition(state, o)),
@@ -983,6 +1022,7 @@ function groupedTargetProblem(context, plan) {
     return abilityProblem(state, viewer(), context.object.id, ui.activation, null, undefined, plan);
   return castProblem(state, viewer(), context.object.id, null, {
     mode: ui.spellMode ?? undefined,
+    x: ui.x ?? undefined,
     targets: plan,
   });
 }
@@ -1032,8 +1072,15 @@ function showGroupedTargets() {
     ? null
     : ability
       ? (ability.cost.mana ?? {})
-      : castingProfile(state, viewer(), object, ui.spellMode ?? undefined, flattenTargets(plan))
-          .cost;
+      : castingProfile(
+          state,
+          viewer(),
+          object,
+          ui.spellMode ?? undefined,
+          flattenTargets(plan),
+          undefined,
+          ui.x ?? undefined,
+        ).cost;
   openChoiceDialog(
     group.label ?? 'Choose targets',
     name,
@@ -1057,13 +1104,13 @@ function showTargetMenu() {
   const commands =
     choice?.kind === 'triggerTarget'
       ? choice.targets.map((target) => ({ type: 'chooseTriggerTarget', target }))
-      : legalActions(state, viewer()).filter(
+      : legalActions(state, viewer(), { x: ui.x ?? undefined }).filter(
           (command) =>
             command.card === ui.selected &&
             command.target &&
             command.type === (ui.activation === null ? 'cast' : 'activate') &&
             (ui.activation === null
-              ? command.mode === (ui.spellMode ?? undefined)
+              ? command.mode === (ui.spellMode ?? undefined) && command.x === (ui.x ?? undefined)
               : command.ability === ui.activation),
         );
   const key = `${state.revision}:${ui.selected}:${ui.activation}:${ui.spellMode}:${choice?.entry?.id ?? ''}`;
@@ -1110,6 +1157,8 @@ function showTargetMenu() {
           state.objects[selectedCommand.card],
           selectedCommand.mode,
           selectedCommand.target,
+          undefined,
+          selectedCommand.x,
         )?.cost
       : null;
   openChoiceDialog(
@@ -1844,6 +1893,33 @@ async function action(name, el) {
       send(command);
       break;
     }
+    case 'chooseX': {
+      const o = state.objects[dialog._xCard?.id],
+        x = Number(el.dataset.x ?? dialog.querySelector('#cast-x-value')?.value);
+      if (
+        !o ||
+        ui.selected !== o.id ||
+        o.incarnation !== dialog._xCard.incarnation ||
+        state.revision !== dialog._xRevision
+      ) {
+        closeDialog();
+        resetSelection();
+        render();
+        break;
+      }
+      if (
+        !legalActions(state, viewer(), { x }).some(
+          (a) => a.type === 'cast' && a.card === o.id && a.x === x,
+        )
+      ) {
+        toast(`Choose a payable integer X from 0 to ${MAX_X} with legal targets.`);
+        break;
+      }
+      ui.x = x;
+      closeDialog();
+      action('playSelected', el);
+      break;
+    }
     case 'spellModes':
       showSpellModes();
       break;
@@ -1893,6 +1969,10 @@ async function action(name, el) {
       const d = spellProfile(printed, ui.spellMode ?? undefined);
       if (!d) {
         showSpellModes();
+        break;
+      }
+      if (d.cost.X && ui.x == null) {
+        showXChoice();
         break;
       }
       if (d.type === 'land') send({ type: 'playLand', card: o.id });
@@ -2143,16 +2223,15 @@ const cardDrag = installCardDrag(app, {
             )
           : null);
       if (!element) continue;
-      const label =
-        plan.kind === 'chooseMode'
-          ? `Release to choose a mode for ${object.name}`
-          : plan.kind === 'attack'
-            ? `Release to select ${object.name} as an attacker`
-            : plan.kind === 'block'
-              ? `Release to assign ${object.name} as a blocker`
-              : target
-                ? `Release to target ${element.getAttribute('aria-label') ?? element.textContent.trim()}`
-                : `Release to ${destination.type === 'playLand' ? 'play' : 'cast'} ${object.name}`;
+      const label = ['chooseMode', 'chooseX'].includes(plan.kind)
+        ? `Release to choose ${plan.kind === 'chooseX' ? 'X' : 'a mode'} for ${object.name}`
+        : plan.kind === 'attack'
+          ? `Release to select ${object.name} as an attacker`
+          : plan.kind === 'block'
+            ? `Release to assign ${object.name} as a blocker`
+            : target
+              ? `Release to target ${element.getAttribute('aria-label') ?? element.textContent.trim()}`
+              : `Release to ${destination.type === 'playLand' ? 'play' : 'cast'} ${object.name}`;
       zones.push({
         element,
         command: destination,
@@ -2197,10 +2276,11 @@ const cardDrag = installCardDrag(app, {
       toast('The game changed while you were dragging. Pick the card up again.');
       return false;
     }
-    if (gesture.kind === 'chooseMode') {
+    if (['chooseMode', 'chooseX'].includes(gesture.kind)) {
       resetSelection();
       ui.selected = gesture.id;
-      showSpellModes();
+      if (gesture.kind === 'chooseX') showXChoice();
+      else showSpellModes();
       return true;
     }
     if (zone.intent) {
@@ -2327,6 +2407,7 @@ function selectCard(id) {
       return;
     }
     ui.spellMode = null;
+    ui.x = null;
     ui.selected = ui.selected === id ? null : id;
     if (
       ui.selected &&
@@ -2454,6 +2535,7 @@ app.addEventListener('dblclick', (e) => {
   ui.selected = id;
   ui.activation = null;
   ui.spellMode = null;
+  ui.x = null;
   action('playSelected', card);
 });
 app.addEventListener(

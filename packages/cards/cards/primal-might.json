@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "58d7b8b3-ac47-4805-8259-4ba8e70d7dc3",
+  "name": "Primal Might",
+  "characteristics": {
+    "types": ["sorcery"],
+    "subtypes": [],
+    "colors": ["G"],
+    "supertypes": [],
+    "manaCost": "{X}{G}"
+  },
+  "rulesText": "Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "actor",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victim",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "targetGroup": "actor",
+          "power": {
+            "kind": "x"
+          },
+          "toughness": {
+            "kind": "x"
+          },
+          "until": "endOfTurn"
+        },
+        {
+          "op": "fight",
+          "sourceGroup": "actor",
+          "victimGroup": "victim"
+        }
+      ]
+    }
+  ]
+}

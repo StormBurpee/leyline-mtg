@@ -4,7 +4,7 @@ import { targetSpec } from '../engine/src/selectors.js';
 import { EVENTS, canonical } from './compiler.js';
 const equal = (a, b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
 const mana = (cost) => {
-  const result = [];
+  const result = Array.from({ length: cost.X ?? 0 }, () => '{X}');
   if (Object.hasOwn(cost, 'generic')) result.push(`{${cost.generic}}`);
   for (const [symbol, n] of Object.entries(cost)
     .filter(([symbol]) => symbol.includes('/'))
@@ -33,6 +33,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         return { ...effects([rest])[0], targetGroup };
       }
       switch (e.op) {
+        case 'sacrifice':
+        case 'sacrificeSelf':
         case 'fight':
         case 'bite':
           return structuredClone(e);

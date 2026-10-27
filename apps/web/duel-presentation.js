@@ -51,7 +51,15 @@ export function installDuelPresentation(root, context) {
     if (!playableZone(state, object, player) || state.choice) return;
     const d = definition(state, object);
     if (d.type === 'land') return;
-    const profile = castingProfile(state, player, object, ui.spellMode ?? undefined);
+    const profile = castingProfile(
+      state,
+      player,
+      object,
+      ui.spellMode ?? undefined,
+      null,
+      undefined,
+      d.cost.X ? (ui.selected === id ? (ui.x ?? 0) : 0) : undefined,
+    );
     if (!profile) return;
     const plan = planPayment(state, player, profile.cost, {
       purpose: { type: 'cast', card: profile },

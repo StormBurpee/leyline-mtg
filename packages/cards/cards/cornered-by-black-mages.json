@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "68a58e0b-1506-492e-8ca3-016e520c10ba",
+  "name": "Cornered by Black Mages",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}{B}"
+  },
+  "rulesText": "Target opponent sacrifices a creature of their choice.\nCreate a 0/1 black Wizard creature token with \"Whenever you cast a noncreature spell, this token deals 1 damage to each opponent.\"",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "sacrifice",
+          "player": "target",
+          "count": 1,
+          "where": {
+            "type": "creature"
+          }
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/black-mage-wizard-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

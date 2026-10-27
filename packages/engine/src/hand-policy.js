@@ -1,7 +1,6 @@
+import { manaValue } from './mana-value.js';
 import { controlled, definition } from './model.js';
 import { manaOptions } from './mana.js';
-
-const manaValue = (d) => Object.values(d.cost).reduce((sum, n) => sum + n, 0);
 
 /** Marginal value of a known card. No inference from catalog membership, library
  * order or opposing cards; only our hand and public mana sources are consulted. */
@@ -13,7 +12,7 @@ export function keepValue(s, p, id, hand = s.players[p].hand) {
     .map((other) => definition(s, s.objects[other]));
   const lands = others.filter((d) => d.type === 'land');
   const spells = others.filter((d) => d.type !== 'land');
-  const target = Math.max(3, Math.min(6, Math.max(0, ...spells.map(manaValue))));
+  const target = Math.max(3, Math.min(6, Math.max(0, ...spells.map((d) => manaValue(d)))));
   const colors = board.map((o) => manaOptions(s, o));
   for (const d of lands) colors.push(Array.isArray(d.mana) ? d.mana : [d.mana]);
   if (card.type === 'land') {
@@ -30,7 +29,7 @@ export function keepValue(s, p, id, hand = s.players[p].hand) {
   const available = board.length + lands.length;
   const shortfall = Math.max(0, manaValue(card) - available);
   const missingColor = Object.entries(card.cost).some(
-    ([c, n]) => c !== 'generic' && colors.filter((cs) => cs.includes(c)).length < n,
+    ([c, n]) => !['generic', 'X'].includes(c) && colors.filter((cs) => cs.includes(c)).length < n,
   );
   return (
     8 +

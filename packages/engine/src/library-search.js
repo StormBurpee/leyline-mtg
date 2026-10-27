@@ -1,3 +1,4 @@
+import { manaValue } from './mana-value.js';
 import { matchesFilter } from './selectors.js';
 import { definition, stats } from './model.js';
 
@@ -14,7 +15,7 @@ export function searchableCards(state, player, where) {
         token: false,
         tapped: false,
         ...stats(state, object),
-        manaValue: Object.values(card.cost).reduce((a, b) => a + b, 0),
+        manaValue: manaValue(card),
       },
       where,
       player,
@@ -46,10 +47,7 @@ export function chooseSearchCards(state, player) {
     const d = definition(state, state.objects[id]);
     if (choice.destination === 'graveyard')
       return d.type === 'creature'
-        ? 20 +
-            (d.power ?? 0) +
-            (d.toughness ?? 0) +
-            Object.values(d.cost).reduce((a, b) => a + b, 0)
+        ? 20 + (d.power ?? 0) + (d.toughness ?? 0) + manaValue(d)
         : d.type === 'land'
           ? -50
           : 1;
@@ -67,7 +65,7 @@ export function chooseSearchCards(state, player) {
         )
       );
     }
-    const cost = Object.values(d.cost).reduce((a, b) => a + b, 0);
+    const cost = manaValue(d);
     return (
       10 + (d.power ?? 0) + (d.toughness ?? 0) + cost - Math.max(0, cost - sources.length - 1) * 3
     );

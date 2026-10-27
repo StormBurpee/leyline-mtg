@@ -1,3 +1,4 @@
+import { manaValue } from './mana-value.js';
 import { subtypesOf } from './creature-types.js';
 import { predictedEffects } from './conditional-effects.js';
 import { flattenTargets, targetPlans } from './target-groups.js';
@@ -53,6 +54,7 @@ function groupedSpellScore(s, p, action, card) {
   for (const raw of card.effects ?? []) {
     const effect = effectValues(s, raw, {
       controller: p,
+      x: action.x ?? 0,
       source: card.source ?? { id: action.card, incarnation: s.objects[action.card]?.incarnation },
     });
     const targets = action.targets[effect.targetGroup] ?? [];
@@ -128,9 +130,9 @@ function groupedSpellScore(s, p, action, card) {
   return score;
 }
 
-function definition(s, o) {
+function definition(s, o, x = o.zone === 'stack' ? (o.chosenX ?? 0) : 0) {
   const d = rawDefinition(s, o),
-    entry = { controller: o.controller, source: { id: o.id, incarnation: o.incarnation } };
+    entry = { controller: o.controller, source: { id: o.id, incarnation: o.incarnation }, x };
   const effects = (list) => (list ? predictedEffects(s, list, entry) : list);
   const activeAttached = (d.conditionalBonuses ?? []).filter(
     (b) => b.affects === 'attached' && meetsCondition(s, o.controller, b.condition, [], o),
@@ -181,7 +183,7 @@ const value = (s, o) => {
   const d = definition(s, o);
   return d.type === 'creature'
     ? stats(s, o).power + stats(s, o).toughness + d.keywords.length * 1.2
-    : Object.values(d.cost).reduce((a, b) => a + b, 0);
+    : manaValue(d);
 };
 /** Deterministic, intentionally modest sparring bot. It never reads enemy hands
  * or libraries. No claim of competitive play strength or Monte Carlo search. */
@@ -285,9 +287,7 @@ export function chooseBotCommand(s, p) {
           c.action === 'surveil' && canReanimate
             ? c.cards.filter((id) => {
                 const d = definition(s, s.objects[id]);
-                return (
-                  d.type === 'creature' && Object.values(d.cost).reduce((a, b) => a + b, 0) >= 5
-                );
+                return d.type === 'creature' && manaValue(d) >= 5;
               })
             : [];
         let ordered = chooseLibraryOrder(s, p, rest);
@@ -307,6 +307,14 @@ export function chooseBotCommand(s, p) {
           ...ordered,
         };
       }
+      case 'sacrifice':
+        return {
+          type: 'sacrifice',
+          player: p,
+          cards: [...c.cards]
+            .sort((a, b) => value(s, s.objects[a]) - value(s, s.objects[b]) || a.localeCompare(b))
+            .slice(0, c.count),
+        };
       case 'discardEffect':
       case 'bottom':
       case 'discard': {
@@ -316,9 +324,16 @@ export function chooseBotCommand(s, p) {
       case 'triggerTarget': {
         const harmful = c.entry.effects.some(
           (effect) =>
-            ['damage', 'destroy', 'bounce', 'counter', 'loseLife', 'discard', 'mill'].includes(
-              effect.op,
-            ) ||
+            [
+              'damage',
+              'destroy',
+              'bounce',
+              'counter',
+              'loseLife',
+              'discard',
+              'mill',
+              'sacrifice',
+            ].includes(effect.op) ||
             (effect.op === 'moveTarget' && effect.destination === 'exile'),
         );
         const untapsTarget = c.entry.effects.some(
@@ -601,18 +616,26 @@ export function chooseBotCommand(s, p) {
   const casts = actions
     .filter((a) => a.type === 'cast')
     .map((a) => {
-      const d = castingProfile(
+      const profile = castingProfile(
         s,
         p,
         s.objects[a.card],
         a.mode,
         a.targets ? flattenTargets(a.targets) : a.target,
-        definition(s, s.objects[a.card]),
+        definition(s, s.objects[a.card], a.x),
+        a.x,
       );
+      const d = { ...profile };
+      const valuedEffects =
+        a.x === undefined
+          ? null
+          : d.effects?.map((e) =>
+              effectValues(s, e, { controller: p, source: s.objects[a.card], x: a.x ?? 0 }),
+            );
+      if (valuedEffects) d.effects = valuedEffects;
       let score = -100;
       if (d.targetGroups) return { a, score: groupedSpellScore(s, p, a, d) };
-      if (d.type === 'creature' || d.static || d.mana)
-        score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);
+      if (d.type === 'creature' || d.static || d.mana) score = 5 + manaValue(d);
       if (d.type === 'creature') {
         // Printed mana value is a cost, not the amount of board presence gained.
         // Compare actual bodies/abilities; include known cantrip ETBs and mana
@@ -751,6 +774,14 @@ export function chooseBotCommand(s, p) {
         )
       )
         score = -100;
+      if (
+        a.x !== undefined &&
+        d.effects?.length === 1 &&
+        d.effects[0].op === 'draw' &&
+        d.effects[0].count === 0
+      )
+        score = -100;
+      if (a.x !== undefined && score > 0) score += a.x / 1001;
       return { a, score };
     })
     .sort((a, b) => b.score - a.score);

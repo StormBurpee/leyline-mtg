@@ -607,3 +607,161 @@ test('crew selection supports multiple toggles, inspection/back, cancel/reopen a
     page.cleanup();
   }
 });
+
+test('X chooser cancels, reopens, announces once, and rejects a repeated stale click', async () => {
+  const catalog = { ...CARDS, 'Mind Spring': { ...CARDS['Mind Spring'], cost: { X: 1 } } };
+  let s;
+  for (let seed = 1; seed < 100; seed++) {
+    s = createGame({
+      seed,
+      mulligan: false,
+      catalog,
+      decks: [
+        [...Array(4).fill('Mind Spring'), ...Array(56).fill('Island')],
+        Array(60).fill('Forest'),
+      ],
+    });
+    if (s.players[0].hand.some((id) => s.objects[id].name === 'Mind Spring')) break;
+  }
+  while (s.step !== 'main1') s = act(s, 'pass');
+  const id = s.players[0].hand.find((id) => s.objects[id].name === 'Mind Spring');
+  s = act(s, 'playLand', { card: s.players[0].hand.find((id) => s.objects[id].name === 'Island') });
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${id}"]`);
+    h.click('[data-action="playSelected"]');
+    assert.match(h.dialog.textContent, /Choose X/);
+    h.click('#dialog [data-action="closeDialog"]');
+    assert.equal(
+      JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.filter((c) => c.type === 'cast')
+        .length,
+      0,
+    );
+    h.click('[data-action="playSelected"]');
+    const stale = h.click('#dialog [data-action="chooseX"][data-x="1"]');
+    assert.equal(h.dialog.open, false);
+    let saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.filter((c) => c.type === 'cast').length, 1);
+    assert.equal(saved.replay.commands.find((c) => c.type === 'cast').x, 1);
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.filter((c) => c.type === 'cast').length, 1);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('numeric X input accepts a payable non-proposed value and rejects out-of-budget input', async () => {
+  const catalog = {
+    ...CARDS,
+    'Mind Spring': {
+      ...CARDS['Mind Spring'],
+      cost: { X: 1 },
+      costModifiers: [{ scope: 'self', change: 'reduce', amount: 40 }],
+    },
+  };
+  let s;
+  for (let seed = 1; seed < 100; seed++) {
+    s = createGame({
+      seed,
+      mulligan: false,
+      catalog,
+      decks: [
+        [...Array(4).fill('Mind Spring'), ...Array(56).fill('Island')],
+        Array(60).fill('Forest'),
+      ],
+    });
+    if (s.players[0].hand.some((id) => s.objects[id].name === 'Mind Spring')) break;
+  }
+  while (s.step !== 'main1') s = act(s, 'pass');
+  const id = s.players[0].hand.find((id) => s.objects[id].name === 'Mind Spring');
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${id}"]`);
+    h.click('[data-action="playSelected"]');
+    assert.equal(h.dialog.querySelector('[data-x="37"]'), null);
+    h.dialog.querySelector('#cast-x-value').value = '1001';
+    h.click('#dialog [data-action="chooseX"]:not([data-x])');
+    assert.equal(h.dialog.open, true);
+    h.dialog.querySelector('#cast-x-value').value = '37';
+    h.click('#dialog [data-action="chooseX"]:not([data-x])');
+    assert.equal(h.dialog.open, false);
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.find((c) => c.type === 'cast').x, 37);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('sacrifice uses large eligible permanent cards and survives Read, Back, dismissal and replay', async () => {
+  const catalog = {
+    ...CARDS,
+    'Sacrifice UI creature': {
+      name: 'Sacrifice UI creature',
+      type: 'creature',
+      cost: {},
+      power: 2,
+      toughness: 2,
+    },
+    'Sacrifice UI edict': {
+      name: 'Sacrifice UI edict',
+      type: 'sorcery',
+      cost: {},
+      effects: [{ op: 'sacrifice', player: 'controller', count: 1, where: { type: 'creature' } }],
+    },
+  };
+  let s;
+  for (let seed = 1; seed < 200; seed++) {
+    s = createGame({
+      catalog,
+      seed,
+      mulligan: false,
+      decks: [
+        [
+          ...Array(52).fill('Forest'),
+          ...Array(4).fill('Sacrifice UI creature'),
+          ...Array(4).fill('Sacrifice UI edict'),
+        ],
+        Array(60).fill('Forest'),
+      ],
+    });
+    if (
+      ['Sacrifice UI creature', 'Sacrifice UI edict'].every((name) =>
+        s.players[0].hand.some((id) => s.objects[id].name === name),
+      )
+    )
+      break;
+  }
+  while (s.step !== 'main1') s = act(s, 'pass');
+  const card = s.players[0].hand.find((id) => s.objects[id].name === 'Sacrifice UI creature');
+  s = act(s, 'cast', { card });
+  s = act(s, 'pass');
+  s = act(s, 'pass');
+  s = act(s, 'cast', {
+    card: s.players[0].hand.find((id) => s.objects[id].name === 'Sacrifice UI edict'),
+  });
+  s = act(s, 'pass');
+  s = act(s, 'pass');
+  assert.equal(s.choice.kind, 'sacrifice');
+  const ui = await mount(exportReplay(s));
+  try {
+    ui.click('[data-action="resume"]');
+    assert.match(ui.dialog.textContent, /Sacrifice 1 permanent/);
+    assert.equal(ui.dialog.querySelectorAll('[data-action="selectDecisionCard"]').length, 1);
+    ui.click('[data-action="selectDecisionCard"]');
+    ui.click('[data-action="readDecisionCard"]');
+    ui.click('[data-action="returnDecision"]');
+    assert.match(ui.dialog.textContent, /1 of 1 selected/);
+    ui.dialog.close();
+    ui.click('[data-action="reviewDecision"]');
+    assert.ok(ui.dialog.open);
+    ui.click('[data-action="confirmDecision"]');
+    assert.ok(!ui.dialog.open);
+    const record = JSON.parse(ui.storage.get('leyline.match.v1')).replay;
+    assert.equal(record.commands.at(-1).type, 'sacrifice');
+  } finally {
+    ui.cleanup();
+  }
+});

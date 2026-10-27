@@ -1,3 +1,4 @@
+import { manaValue } from './mana-value.js';
 import {
   flattenTargets,
   survivingTargets,
@@ -58,7 +59,7 @@ export function legalTarget(s, kind, target, controller) {
         definition: d,
         controller: entry.controller,
         owner: source?.owner,
-        manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+        manaValue: manaValue(d, entry.x ?? 0),
         power: d.power,
         toughness: d.toughness,
       },
@@ -96,7 +97,7 @@ export function legalTarget(s, kind, target, controller) {
       keywords: o.zone === 'battlefield' ? keywords(s, o) : d.keywords,
       power: pt.power,
       toughness: pt.toughness,
-      manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+      manaValue: manaValue(d),
     },
     spec.where,
     controller,
@@ -520,7 +521,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
                   blocking: isBlocking(s, object),
                   keywords: keywords(s, object),
                   ...pt,
-                  manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
+                  manaValue: manaValue(d),
                 },
                 e.where,
                 entry.controller,
@@ -665,6 +666,60 @@ export function resolveEffects(s, entry, startIndex = 0) {
           reveal: !!e.reveal,
           where: e.where ? structuredClone(e.where) : null,
         };
+        return false;
+      }
+      case 'sacrificeSelf': {
+        const source = s.objects[entry.source?.id];
+        if (
+          source?.zone === 'battlefield' &&
+          source.incarnation === entry.source.incarnation &&
+          source.controller === entry.controller
+        ) {
+          move(s, source, 'graveyard', captureDepartureContext(s));
+          emit(s, 'sacrificed', { player: entry.controller, objectId: source.id });
+        }
+        break;
+      }
+      case 'sacrifice': {
+        // CR 101.4: every player chooses in APNAP order before any departure.
+        const players = e.player === 'all' ? [s.active, opponent(s.active)] : [recipient];
+        const choices = players
+          .map((player) => {
+            const objects = battlefield(s).filter((object) => {
+              if (object.controller !== player) return false;
+              const d = definition(s, object);
+              return (
+                !e.where ||
+                matchesFilter(
+                  {
+                    definition: d,
+                    controller: object.controller,
+                    owner: object.owner,
+                    token: object.token,
+                    tapped: object.tapped,
+                    attacking: isAttacking(s, object),
+                    blocking: isBlocking(s, object),
+                    keywords: keywords(s, object),
+                    ...stats(s, object),
+                    manaValue: manaValue(d),
+                  },
+                  e.where,
+                  entry.controller,
+                )
+              );
+            });
+            return {
+              player,
+              cards: objects.map((o) => o.id),
+              refs: objects.map(ref),
+              count: Math.min(e.count, objects.length),
+            };
+          })
+          .filter((choice) => choice.count);
+        if (!choices.length) break;
+        const [first, ...remaining] = choices;
+        s.resolving = { entry, index: index + 1 };
+        s.choice = { kind: 'sacrifice', ...first, remaining, selected: [] };
         return false;
       }
       case 'discard': {
@@ -991,6 +1046,48 @@ export function finishResolutionChoice(s, command) {
       kept: command.top.length,
       moved: command.rest.length,
     });
+  } else if (choice.kind === 'sacrifice') {
+    requireRule(
+      command.type === 'sacrifice' &&
+        Array.isArray(command.cards) &&
+        command.cards.length === choice.count &&
+        new Set(command.cards).size === choice.count &&
+        command.cards.every((id) =>
+          choice.refs.some(
+            (r) =>
+              r.id === id &&
+              s.objects[id]?.incarnation === r.incarnation &&
+              s.objects[id]?.zone === 'battlefield' &&
+              s.objects[id]?.controller === choice.player,
+          ),
+        ),
+      'SACRIFICE_CHOICE',
+      `Choose exactly ${choice.count} eligible permanents you control.`,
+    );
+    const selected = [
+      ...choice.selected,
+      ...command.cards.map((id) => ({
+        ...choice.refs.find((r) => r.id === id),
+        player: choice.player,
+      })),
+    ];
+    if (choice.remaining.length) {
+      const [first, ...remaining] = choice.remaining;
+      s.choice = { kind: 'sacrifice', ...first, remaining, selected };
+      return;
+    }
+    const context = captureDepartureContext(s);
+    for (const r of selected) {
+      const object = s.objects[r.id];
+      if (
+        object?.zone !== 'battlefield' ||
+        object.incarnation !== r.incarnation ||
+        object.controller !== r.player
+      )
+        continue;
+      move(s, object, 'graveyard', context);
+      emit(s, 'sacrificed', { player: r.player, objectId: r.id });
+    }
   } else if (choice.kind === 'discardEffect') {
     requireRule(
       command.type === 'discardEffect',

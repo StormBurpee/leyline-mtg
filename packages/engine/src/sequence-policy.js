@@ -47,6 +47,8 @@ export function chooseSequence(s, p, ranked, { budget = SEQUENCE_BUDGET, depth =
         state.objects[a.card],
         a.mode,
         a.targets ? flattenTargets(a.targets) : a.target,
+        undefined,
+        a.x,
       );
       const payment = planPayment(state, p, card.cost);
       if (!payment || !actionSafe(state, p, a)) continue;

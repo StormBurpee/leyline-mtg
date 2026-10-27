@@ -1,0 +1,102 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a5729f11-6cde-4830-b882-ab4c5251c1a9",
+  "name": "Lorehold Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "W"],
+    "manaCost": "{R}{W}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Each opponent sacrifices a nontoken artifact of their choice.\n\u2022 Return target artifact or creature card with mana value 2 or less from your graveyard to the battlefield.\n\u2022 Creatures you control get +1/+1 and gain trample until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Each opponent sacrifices a nontoken artifact.",
+          "effects": [
+            {
+              "op": "sacrifice",
+              "player": "opponent",
+              "count": 1,
+              "where": {
+                "all": [
+                  {
+                    "type": "artifact"
+                  },
+                  {
+                    "not": {
+                      "token": true
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Return an artifact or creature with mana value 2 or less.",
+          "target": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "owner": "you"
+                },
+                {
+                  "any": [
+                    {
+                      "type": "artifact"
+                    },
+                    {
+                      "type": "creature"
+                    }
+                  ]
+                },
+                {
+                  "manaValue": {
+                    "lte": 2
+                  }
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "battlefield",
+              "controller": "you"
+            }
+          ]
+        },
+        {
+          "label": "Creatures you control get +1/+1 and trample.",
+          "effects": [
+            {
+              "op": "modifyAll",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              },
+              "power": 1,
+              "toughness": 1,
+              "keywords": ["trample"],
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

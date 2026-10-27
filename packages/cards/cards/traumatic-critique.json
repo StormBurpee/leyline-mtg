@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "06c1f8a4-4948-435b-ae98-b1276b57e958",
+  "name": "Traumatic Critique",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "U"],
+    "manaCost": "{X}{U}{R}"
+  },
+  "rulesText": "Traumatic Critique deals X damage to any target. Draw two cards, then discard a card.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": {
+            "kind": "x"
+          }
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

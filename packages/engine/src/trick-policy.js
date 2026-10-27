@@ -1,3 +1,4 @@
+import { effectValues } from './numeric-values.js';
 import { actionEffects } from './decision-safety.js';
 import { combatOutcome, permanentValue } from './combat-policy.js';
 import { legalTarget, resolveEffects } from './effects.js';
@@ -26,7 +27,10 @@ export function projectedModifiers(s, p, action) {
 }
 function threatens(s, entry, target) {
   if (!legalTarget(s, entry.targetKind, entry.target, entry.controller)) return false;
-  const effects = entry.effects ?? [];
+  const effects =
+    entry.x === undefined
+      ? (entry.effects ?? [])
+      : (entry.effects ?? []).map((e) => effectValues(s, e, entry));
   if (entry.kind === 'spell' && s.catalog[entry.name]?.aura === 'pacifism') return true;
   if (
     effects.some(

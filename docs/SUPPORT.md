@@ -138,3 +138,11 @@ Crew taps selected other untapped creatures with sufficient current total power,
 ### Public spell-cast history
 
 Turn-keyed per-player profile counts retain only public type, color, subtype and changeling characteristics, not identities or hidden face-down information. Successful casts record after payment and before cast triggers; the proposed spell is excluded during cost determination. Event-time spellNumber predicates count all spells by that caster and survive later casts. Filtered spell-count values support public type/color/subtype predicates. Cast-origin history, mana-value history, filtered ordinals and generic resolution-time subtraction of another spell are not implemented.
+
+### Cast-time X
+
+Supported instant/sorcery spells announce X before costs and targets are committed. Repeated symbols contribute repeatedly; taxes/reductions apply to the determined total, and payment is locked. X contributes zero to mana value outside the stack and its chosen value on the stack. Values flow through damage, draws, token counts and temporary modifiers. Manual commands accept 0–1000 as a documented implementation budget, not a Magic rule; default policy proposals use at most 24 values and exact-X action inspection is available. Unsupported permanent/activated/static expressions and alternate-cost combinations fail closed.
+
+### Sacrifice effects
+
+Source self-sacrifice and mandatory filtered player choices use actual sacrifice, not destruction. Players choose in APNAP order before a simultaneous multi-player departure batch; references retain incarnation/controller checks and pre-batch death snapshots. Effects continue after choices. No targeted-permanent restrictions apply to these untargeted choices, and indestructible does not stop sacrifice. Additional casting-cost sacrifices, bargain, delayed scheduling, sacrifice-event triggers and linked outcomes are separate unsupported work.

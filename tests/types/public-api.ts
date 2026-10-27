@@ -67,3 +67,7 @@ void modal;
 void spellProfile(CARDS.Abrade, 1);
 void spellOptions(CARDS.Abrade);
 void castProblem(state, 0, 'c2', undefined, { mode: 1 });
+
+const variableSpell: Command = { type: 'cast', player: 0, card: 'c2', x: 777 };
+void variableSpell;
+legalActions(state, player, { x: 777 });

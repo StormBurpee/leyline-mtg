@@ -83,13 +83,13 @@ export class RegistryError extends Error {
     this.diagnostics = diagnostics;
   }
 }
-function validateCost(cost, path, errors) {
+function validateCost(cost, path, errors, allowX = false) {
   if (!plain(cost)) {
     errors.push(`${path}: expected a mana-cost object.`);
     return;
   }
   for (const [key, n] of Object.entries(cost))
-    if (!MANA.has(key) || !natural(n))
+    if ((!MANA.has(key) && !(allowX && key === 'X' && n > 0 && n <= 10)) || !natural(n))
       errors.push(`${path}.${key}: unsupported mana symbol or nonnegative integer amount.`);
 }
 function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
@@ -217,6 +217,8 @@ function validateEffects(
       scry: ['count', 'player'],
       surveil: ['count', 'player'],
       discard: ['count', 'player'],
+      sacrifice: ['count', 'player', 'where'],
+      sacrificeSelf: [],
       searchLibrary: ['count', 'where', 'destination', 'tapped', 'reveal'],
       counter: [],
       bounce: ['subject'],
@@ -274,6 +276,15 @@ function validateEffects(
         (e.player === 'target' && !effectTargetCompatible(e.op, target)))
     )
       errors.push(`${p}.player: expected a compatible player recipient.`);
+    if (e.op === 'sacrifice') {
+      if (!natural(e.count) || e.count > 1000) errors.push(`${p}.count: expected 0 to 1000.`);
+      if (!['controller', 'opponent', 'target', 'all'].includes(e.player))
+        errors.push(`${p}.player: unsupported sacrifice player.`);
+      if (e.player === 'target' && targetSpec(target)?.scope !== 'player')
+        errors.push(`${p}: sacrifice requires a player target.`);
+      if (e.where !== undefined)
+        for (const error of validateFilter(e.where)) errors.push(`${p}.where: ${error}`);
+    }
     if (e.op === 'searchLibrary') {
       if (!natural(e.count) || e.count > 1000) errors.push(`${p}.count: expected 0 to 1000.`);
       if (!['hand', 'battlefield', 'top', 'graveyard'].includes(e.destination))
@@ -488,7 +499,34 @@ export function validateDefinition(card) {
       !/^[A-Za-z][A-Za-z -]{0,79}$/.test(card.cyclingType))
   )
     errors.push(`${name}.cyclingType: expected a type name and a cycling cost.`);
-  validateCost(card.cost, `${name}.cost`, errors);
+  validateCost(card.cost, `${name}.cost`, errors, true);
+  const contains = (value, predicate, seen = new Set(), depth = 0) => {
+    if (!value || typeof value !== 'object' || seen.has(value)) return false;
+    if (depth > 16) return true; // Reject rather than recurse into unbounded input.
+    seen.add(value);
+    return (
+      predicate(value) || Object.values(value).some((v) => contains(v, predicate, seen, depth + 1))
+    );
+  };
+  const hasX = (value) => contains(value, (v) => v.kind === 'x');
+  if (contains(card.effects, (v) => v.condition && hasX(v.condition)))
+    errors.push(`${name}: X-dependent conditions are not supported.`);
+  const { effects: spellEffects, cost: printedCost, ...otherFields } = card;
+  if (hasX(otherFields)) errors.push(`${name}: X expressions are supported only in spell effects.`);
+  if (hasX(spellEffects) && !printedCost?.X)
+    errors.push(`${name}: X expressions require an X mana cost.`);
+  if (
+    printedCost?.X &&
+    (!['instant', 'sorcery'].includes(card.type) ||
+      card.modes ||
+      card.kicker ||
+      card.flashback ||
+      card.disguise ||
+      card.offspring)
+  )
+    errors.push(
+      `${name}: X currently supports only instant/sorcery spells without alternative casting options.`,
+    );
   if (card.ward !== undefined) validatePaymentCost(card.ward, `${name}.ward`, errors);
   if (card.text !== undefined && typeof card.text !== 'string')
     errors.push(`${name}.text: expected a string.`);

@@ -72,7 +72,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           problem('MANA_LIMIT', path, 'Literal mana amounts must be at most 1000.');
         else result.generic = (result.generic ?? 0) + amount;
       } else if (
-        /^[WUBRGC]$/.test(symbol) ||
+        /^[WUBRGCX]$/.test(symbol) ||
         (/^[WUBRG]\/[WUBRG]$/.test(symbol) && symbol[0] !== symbol[2])
       )
         result[symbol] = (result[symbol] ?? 0) + 1;
@@ -145,6 +145,8 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'scry',
           'surveil',
           'discard',
+          'sacrifice',
+          'sacrificeSelf',
           'searchLibrary',
           'counterSpell',
           'returnToHand',
@@ -193,6 +195,8 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         scry: ['target', 'amount'],
         surveil: ['target', 'amount'],
         discard: ['target', 'amount'],
+        sacrifice: ['count', 'player', 'where'],
+        sacrificeSelf: [],
         searchLibrary: ['amount', 'where', 'destination', 'tapped', 'reveal'],
         counter: ['target'],
         bounce: ['target'],
@@ -236,6 +240,11 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         ].includes(e.op)
       )
         e.amount = effect.amount;
+      if (e.op === 'sacrifice') {
+        e.count = effect.count;
+        e.player = effect.player;
+        if (effect.where !== undefined) e.where = structuredClone(effect.where);
+      }
       if (e.op === 'addMana') e.mana = mana(effect.mana, `${p}.mana`);
       if (['draw', 'mill', 'scry', 'surveil', 'discard', 'token', 'impulseChoose'].includes(e.op))
         e.count = effect.amount;

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "leyline:token/black-mage-wizard-token",
+  "name": "Black Mage Wizard Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Wizard"],
+    "colors": ["B"],
+    "manaCost": null,
+    "power": 0,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

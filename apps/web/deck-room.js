@@ -1,3 +1,4 @@
+import { manaValue } from '../../packages/engine/src/mana-value.js';
 import { REQUESTED_DECKS } from './requested-decks.js';
 import { CARDS, DECKS, expandDeck, validateDeck } from '../../packages/engine/src/index.js';
 import { escape, artStyle, mana, footer } from './view.js';
@@ -52,7 +53,7 @@ export function curve(cards) {
   for (const [name, count] of Object.entries(cards)) {
     const d = CARDS[name];
     if (!d || d.type === 'land') continue;
-    const value = Object.values(d.cost).reduce((a, b) => a + b, 0);
+    const value = manaValue(d);
     values[Math.min(7, value)] += count;
   }
   const max = Math.max(1, ...values);

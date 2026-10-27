@@ -1,3 +1,4 @@
+import { manaValue } from './mana-value.js';
 import { legalActions } from './engine.js';
 import { actionSafe, directLethal } from './decision-safety.js';
 import { controlled, definition } from './model.js';
@@ -47,9 +48,7 @@ export function chooseLandAction(s, p, actions) {
       0,
       ...[...enabled.values()].map((candidate) => {
         const next = definition(projected, projected.objects[candidate.card]);
-        return candidate.type === 'cast'
-          ? 5 + Object.values(next.cost).reduce((total, amount) => total + amount, 0)
-          : 3;
+        return candidate.type === 'cast' ? 5 + manaValue(next) : 3;
       }),
     );
     const options = manaOptions(projected, projected.objects[object.id]);

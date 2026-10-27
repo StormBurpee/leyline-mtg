@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "465cda20-c8f3-4a7c-a250-875877bce21d",
+  "name": "Abyssal Gorestalker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Horror"],
+    "colors": ["B"],
+    "manaCost": "{4}{B}{B}",
+    "power": 6,
+    "toughness": 6
+  },
+  "rulesText": "When this creature enters, each player sacrifices two creatures of their choice.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "sacrifice",
+          "player": "all",
+          "count": 2,
+          "where": {
+            "type": "creature"
+          }
+        }
+      ]
+    }
+  ]
+}
