@@ -26,6 +26,7 @@ import {
   battlefield,
   creatures,
   definition,
+  copiableDefinition,
   draw,
   emit,
   hasKeyword,
@@ -379,6 +380,20 @@ function damageSource(s, entry) {
     controller: current ? source.controller : (entry.sourceController ?? entry.controller),
     keywords: current ? keywords(s, source) : (entry.sourceKeywords ?? []),
   };
+}
+function copyToken(s, base, controller, exceptions = {}) {
+  const copied = structuredClone(base);
+  if (exceptions.power !== undefined) {
+    copied.power = exceptions.power;
+    copied.toughness = exceptions.toughness;
+    // CR 707.9d: fixed P/T replaces the characteristic-defining ability itself.
+    delete copied.baseStats;
+  }
+  if (exceptions.nonlegendary) delete copied.legendary;
+  if (exceptions.addSubtypes && hasType(copied, 'creature'))
+    copied.subtypes = [...new Set([...(copied.subtypes ?? []), ...exceptions.addSubtypes])];
+  copied.token = true;
+  return addObject(s, copied.name, controller, 'void', copied);
 }
 export function resolveEffects(s, entry, startIndex = 0) {
   let effects = entry.effects ?? [];
@@ -741,24 +756,37 @@ export function resolveEffects(s, entry, startIndex = 0) {
         emit(s, 'mill', { player, count: cards.length, requested: e.count });
         break;
       }
+      case 'copyToken': {
+        const source = entry.target?.kind === 'object' && s.objects[entry.target.id];
+        if (
+          !source ||
+          source.zone !== 'battlefield' ||
+          source.incarnation !== entry.target.incarnation
+        )
+          break;
+        const base = copiableDefinition(s, source);
+        const entries = Array.from({ length: e.count }, () => ({
+          object: copyToken(s, base, entry.controller, e.exceptions),
+          controller: entry.controller,
+        }));
+        if (enterBattlefieldBatch(s, entries) === false) {
+          s.resolving = { entry, index: index + 1 };
+          return false;
+        }
+        break;
+      }
       case 'offspringCopy': {
         const source = s.objects[entry.source.id];
         const base =
           source?.zone === 'battlefield' && source.incarnation === entry.source.incarnation
-            ? definition(s, source)
-            : entry.sourceDefinition;
+            ? copiableDefinition(s, source)
+            : entry.sourceCopyDefinition;
         if (!base) break;
-        const token = addObject(s, base.name, entry.controller, 'void');
-        token.definitionOverride = {
-          ...structuredClone(base),
-          power: 1,
-          toughness: 1,
-          token: true,
-        };
-        // A fixed 1/1 copy exception does not copy a power/toughness-defining ability.
-        delete token.definitionOverride.baseStats;
-        token.token = true;
-        enterBattlefield(s, token, entry.controller);
+        const token = copyToken(s, base, entry.controller, { power: 1, toughness: 1 });
+        if (enterBattlefield(s, token, entry.controller) === false) {
+          s.resolving = { entry, index: index + 1 };
+          return false;
+        }
         break;
       }
       case 'addMana':

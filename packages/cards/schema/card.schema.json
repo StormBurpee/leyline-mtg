@@ -381,7 +381,8 @@
                 "shroud",
                 "indestructible",
                 "menace",
-                "changeling"
+                "changeling",
+                "convoke"
               ]
             }
           },
@@ -1188,6 +1189,46 @@
           },
           "required": ["op"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "copyToken"
+            },
+            "target": {
+              "const": "target"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            },
+            "exceptions": {
+              "type": "object",
+              "properties": {
+                "power": {
+                  "type": "integer"
+                },
+                "toughness": {
+                  "type": "integer"
+                },
+                "nonlegendary": {
+                  "type": "boolean"
+                },
+                "addSubtypes": {
+                  "type": "array",
+                  "items": {
+                    "enum": ["Hero", "Coward"]
+                  },
+                  "maxItems": 16
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": ["op", "target", "count"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1235,7 +1276,8 @@
                 "shroud",
                 "indestructible",
                 "menace",
-                "changeling"
+                "changeling",
+                "convoke"
               ]
             }
           },
@@ -1626,6 +1668,19 @@
             }
           },
           "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "plot"
+            },
+            "cost": {
+              "$ref": "#/$defs/mana"
+            }
+          },
+          "required": ["kind", "cost"],
           "additionalProperties": false
         },
         {

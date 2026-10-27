@@ -1,3 +1,4 @@
+export { convokeCandidates, convokePayment } from './convoke.js';
 export { crewProblem, crewCandidates, crewPlan } from './crew.js';
 export { manaValue, MAX_X } from './mana-value.js';
 export { castingProfile } from './casting-costs.js';
@@ -33,6 +34,7 @@ export {
   legalActions,
   castProblem,
   cyclingProblem,
+  plotProblem,
   abilityProblem,
   canPlayLand,
   assertInvariants,

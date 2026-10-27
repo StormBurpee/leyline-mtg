@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d709f396-021f-49eb-adb5-374aa790eaae",
+  "name": "Merrow Skyswimmer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Soldier"],
+    "colors": ["U", "W"],
+    "manaCost": "{3}{W/U}{W/U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying, vigilance\nWhen this creature enters, create a 1/1 white and blue Merfolk creature token.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "convoke"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/merfolk-white-blue-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

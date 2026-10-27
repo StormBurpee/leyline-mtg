@@ -28,6 +28,7 @@ export const KEYWORD_NAMES = Object.freeze([
   'indestructible',
   'menace',
   'changeling',
+  'convoke',
 ]);
 
 export const HYBRID_SYMBOLS = Object.freeze(

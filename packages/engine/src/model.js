@@ -8,7 +8,7 @@ import { matchesEvent } from './events.js';
 import { hasType, typesOf, primaryType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.41.0';
+export const VERSION = '0.42.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -41,6 +41,7 @@ export function playableZone(s, o, p) {
     !!o &&
     ((o.zone === 'hand' && o.owner === p) ||
       (o.zone === 'graveyard' && o.owner === p && !!definition(s, o).flashback) ||
+      (o.zone === 'exile' && o.owner === p && o.plotted?.incarnation === o.incarnation) ||
       (o.zone === 'exile' &&
         o.playPermission?.player === p &&
         o.playPermission.turn === s.turn &&
@@ -57,6 +58,12 @@ export function playableCards(s, p) {
 }
 
 export const emptyMana = () => Object.fromEntries(COLORS.map((c) => [c, 0]));
+/** CR 707.2: layer-1 copy values, never counters, choices or temporary layers. */
+export function copiableDefinition(s, object) {
+  return object.faceDown
+    ? FACE_DOWN
+    : (object.definitionOverride ?? cardDefinition(object.name, s.catalog));
+}
 export function definition(stateOrObject, object) {
   if ((object ?? stateOrObject).faceDown) return FACE_DOWN;
   const d = object
@@ -284,8 +291,8 @@ export function shuffle(s, items) {
   }
   return items;
 }
-export function addObject(s, name, owner, zone = 'library') {
-  const d = cardDefinition(name, s.catalog),
+export function addObject(s, name, owner, zone = 'library', override = null) {
+  const d = override ?? cardDefinition(name, s.catalog),
     id = `c${++s.nextId}`;
   s.objects[id] = {
     id,
@@ -301,6 +308,7 @@ export function addObject(s, name, owner, zone = 'library') {
     controlledSince: s.turn,
     ...(zone === 'battlefield' ? { enteredTurn: s.turn } : {}),
     token: !!d.token,
+    ...(override ? { definitionOverride: structuredClone(override) } : {}),
     attachedTo: null,
   };
   if (s.players[owner][zone]) s.players[owner][zone].push(id);
@@ -362,6 +370,9 @@ export function queueTrigger(
     sourceKeywords: sourceKeywords ?? keywords(s, source),
     ...(source.attachedTo ? { sourceAttachment: structuredClone(source.attachedTo) } : {}),
     sourceDefinition: structuredClone(definition(s, source)),
+    ...(effects.some((e) => e.op === 'offspringCopy')
+      ? { sourceCopyDefinition: structuredClone(copiableDefinition(s, source)) }
+      : {}),
     label,
     ...(optional ? { optional: true } : {}),
     ...(targetKind ? { targetKind: structuredClone(targetKind) } : {}),
@@ -520,6 +531,8 @@ export function move(s, o, to, departureContext = null) {
         if (o.attachedTo || entry.sourceAttachment !== undefined)
           entry.sourceAttachment = o.attachedTo ? structuredClone(o.attachedTo) : null;
         entry.sourceDefinition = structuredClone(lastDefinition);
+        if (entry.sourceCopyDefinition)
+          entry.sourceCopyDefinition = structuredClone(copiableDefinition(s, o));
       }
     }
   }
@@ -545,6 +558,7 @@ export function move(s, o, to, departureContext = null) {
   o.attachedTo = null;
   delete o.chosenCreatureType;
   delete o.playPermission;
+  delete o.plotted;
   if (s.players[o.owner][to]) s.players[o.owner][to].push(o.id);
   emit(s, 'zoneChange', {
     objectId: o.id,

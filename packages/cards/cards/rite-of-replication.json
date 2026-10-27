@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fb60739e-1dc3-481d-a056-ad72e665c680",
+  "name": "Rite of Replication",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}{U}"
+  },
+  "rulesText": "Kicker {5} (You may pay an additional {5} as you cast this spell.)\nCreate a token that's a copy of target creature. If this spell was kicked, create five of those tokens instead.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "copyToken",
+          "target": "target",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "kind": "kicker",
+      "cost": "{5}",
+      "effects": [
+        {
+          "op": "copyToken",
+          "target": "target",
+          "count": 5
+        }
+      ]
+    }
+  ]
+}

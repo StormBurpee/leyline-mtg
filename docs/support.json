@@ -1,5 +1,5 @@
 {
-  "version": "0.41.0",
+  "version": "0.42.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -363,6 +363,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Appeal to Eirdu",
+      "type": "instant",
+      "keywords": ["convoke"],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Appendage Amalgam",
       "type": "creature",
       "keywords": ["flash"],
@@ -709,6 +717,14 @@
       "keywords": [],
       "opcodes": ["draw"],
       "triggers": ["controllerCastsCreature"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Beastbond Outcaster",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -2159,6 +2175,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Djinn of Fool's Fall",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Donatello, Turtle Techie",
       "type": "creature",
       "keywords": [],
@@ -2520,6 +2544,18 @@
       "opcodes": ["damage"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Ember Island Production",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["copyToken"],
+      "modes": [
+        "Copy a creature you controls as a 4/4 Hero",
+        "Copy a creature opponent controls as a 2/2 Coward"
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Enchantress's Presence",
@@ -4988,6 +5024,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Lofty Dreams",
+      "type": "enchantment",
+      "keywords": ["convoke"],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Long-Bodied Grey Dog",
       "type": "creature",
       "keywords": ["flash", "reach"],
@@ -5387,6 +5431,14 @@
       "opcodes": ["draw", "discard"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Merrow Skyswimmer",
+      "type": "creature",
+      "keywords": ["convoke", "flying", "vigilance"],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Mesa Enchantress",
@@ -6569,6 +6621,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Protective Response",
+      "type": "instant",
+      "keywords": ["convoke"],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Pulse Tracker",
       "type": "creature",
       "keywords": [],
@@ -7031,6 +7091,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Relm's Sketching",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["copyToken"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Remnant Elemental",
       "type": "creature",
       "keywords": ["reach"],
@@ -7174,6 +7242,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["draw", "loseLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rite of Replication",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["copyToken"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -7675,6 +7751,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Self-Reflection",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["copyToken"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sephiroth's Intervention",
       "type": "instant",
       "keywords": [],
@@ -8122,6 +8206,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Slickshot Show-Off",
+      "type": "creature",
+      "keywords": ["flying", "haste"],
+      "opcodes": ["modify"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Smaug's Fury",
       "type": "instant",
       "keywords": [],
@@ -8332,6 +8424,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Spinewoods Paladin",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Spirit of Malevolence",
       "type": "creature",
       "keywords": [],
@@ -8537,6 +8637,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Stingerback Terror",
+      "type": "creature",
+      "keywords": ["flying", "trample"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Stingerquill Charm",
       "type": "instant",
       "keywords": [],
@@ -8708,6 +8816,14 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Sun-Dappled Celebrant",
+      "type": "creature",
+      "keywords": ["convoke", "vigilance"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Sunbillow Verge",
@@ -9160,6 +9276,14 @@
       "name": "The Walls of Ba Sing Se",
       "type": "creature",
       "keywords": ["defender"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "The Wandering Rescuer",
+      "type": "creature",
+      "keywords": ["convoke", "flash", "double strike"],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -9701,6 +9825,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Unexpected Assistance",
+      "type": "instant",
+      "keywords": ["convoke"],
+      "opcodes": ["draw", "discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Unflinching Courage",
       "type": "enchantment",
       "keywords": [],
@@ -10108,6 +10240,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Vote Out",
+      "type": "sorcery",
+      "keywords": ["convoke"],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Voyage Home",
       "type": "sorcery",
       "keywords": [],
@@ -10363,6 +10503,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Winter, Team Player",
+      "type": "creature",
+      "keywords": ["convoke"],
+      "opcodes": ["modifyAll"],
+      "triggers": ["controllerCastsNoncreature"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Winter's Intervention",
       "type": "instant",
       "keywords": [],
@@ -10586,6 +10734,7 @@
     "Koma's Coil",
     "Landfall Bird Token",
     "Mercenary Token",
+    "White and Blue Merfolk Token",
     "Mutant Token",
     "Nonblocking Rat Token",
     "Rabbit Token",

@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "19a32e29-45ec-433e-9cb4-b2c32cac8f80",
+  "name": "Beastbond Outcaster",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, if you control a creature with power 4 or greater, draw a card.\nPlot {1}{G} (You may pay {1}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "controlAtLeast",
+        "where": {
+          "all": [
+            {
+              "power": {
+                "gte": 4
+              }
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        },
+        "count": 1
+      }
+    },
+    {
+      "kind": "plot",
+      "cost": "{1}{G}"
+    }
+  ]
+}

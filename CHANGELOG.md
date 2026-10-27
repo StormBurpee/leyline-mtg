@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.42.0 — Convoke, plot and token copies
+
+- Add explicit/automatic convoke payment matching, shared mana/creature capacity, no overpayment, summoning-sickness handling, payment review and replay. Add nine complete cards and one token.
+- Add plot special actions, persistent exile-incarnation permission, later-turn sorcery-only casting and ordinary taxes. Add five complete cards.
+- Add bounded targeted permanent token copies from copiable snapshots, preserving CDA/copy/face-down semantics and simultaneous entry choices. Correct offspring snapshots so temporary crew types are not copied. Add four complete cards.
+- Catalog: 1224 playable cards and 34 tokens. General copy exceptions, delayed copy removal, effect-driven plotting and unsupported casting combinations remain rejected.
+
 ## 0.41.0 — Chosen X and real sacrifice effects
 
 - Announce X explicitly, including repeated-X payment, locked cost modifiers and correct stack/nonstack mana value. Add chosen-X values, numeric UI, bounded policy proposals and opaque/replay transport.

@@ -146,3 +146,15 @@ Supported instant/sorcery spells announce X before costs and targets are committ
 ### Sacrifice effects
 
 Source self-sacrifice and mandatory filtered player choices use actual sacrifice, not destruction. Players choose in APNAP order before a simultaneous multi-player departure batch; references retain incarnation/controller checks and pre-batch death snapshots. Effects continue after choices. No targeted-permanent restrictions apply to these untargeted choices, and indestructible does not stop sacrifice. Additional casting-cost sacrifices, bargain, delayed scheduling, sacrifice-event triggers and linked outcomes are separate unsupported work.
+
+### Convoke
+
+Explicit creature/symbol choices and bounded automatic witnesses pay adjusted generic/colored/hybrid costs; colorless requirements cannot be convoked. Untapped summoning-sick creatures are eligible. Unit-capacity matching prevents using one creature for both mana and convoke, and rejects overpayment. Normal mana is paid from remaining sources after the total is locked. The shared UI reviews creatures and payment symbols. Plot special-action costs do not convoke; actual later spell taxes can.
+
+### Plot
+
+Plot pays a fixed cost and exiles face up as a sorcery-speed special action, not a spell or stack ability. That exile incarnation may be cast without its mana cost on a later turn, only during its owner’s main phase with an empty stack, even for instants/flash. Taxes still apply. Permission persists across cleanup and ends on leaving exile. X, modal and other unsupported casting-option combinations are rejected; effect-driven plotting is separate work.
+
+### Permanent token copies
+
+Targeted current-permanent copies use independent copiable snapshots, excluding counters, damage, choices and temporary layers such as crew animation. Current copy overrides and face-down characteristics are respected without exposing hidden identities. Fixed P/T exceptions remove the corresponding CDA; nonlegendary and limited Hero/Coward additions are supported. Copies enter together with resumable Aura/Cavern choices. Existing offspring alone retains separately captured copiable LKI. General graveyard/event/source copy authoring, spell copies, group-target copies, arbitrary exceptions and delayed token exile/sacrifice are unsupported.

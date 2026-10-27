@@ -808,5 +808,9 @@ export function chooseBotCommand(s, p) {
       Object.values(s.objects).some((o) => canAttack(s, o, p));
     if (!delay) return { ...cast, player: p };
   }
+  const plotting = actions.find(
+    (a) => a.type === 'plot' && !actions.some((c) => c.type === 'cast' && c.card === a.card),
+  );
+  if (plotting) return { ...plotting, player: p };
   return { type: 'pass', player: p };
 }

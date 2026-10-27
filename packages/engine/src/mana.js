@@ -1,3 +1,4 @@
+import { hasType } from './types.js';
 import { hasSubtype } from './creature-types.js';
 import { meetsCondition } from './conditions.js';
 import { COLORS, controlled, definition, isSick, requireRule, emit, move } from './model.js';
@@ -60,18 +61,29 @@ export function tapForMana(s, id, p, color) {
   }
 }
 /** Pure unit-capacity matching. Flexible sources must not strand a colored cost. */
-export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], purpose } = {}) {
+export function planPayment(
+  s,
+  p,
+  cost,
+  { autoTap = true, excludeSources = [], purpose, convoke = false } = {},
+) {
   if (cost.X) return null; // X must be announced and expanded before payment.
   const pool = { ...s.players[p].mana };
   const spent = Object.fromEntries(COLORS.map((c) => [c, 0]));
-  let sources = autoTap
-    ? controlled(s, p).filter((o) => !excludeSources.includes(o.id) && canTapForMana(s, o, p))
-    : [];
+  const canConvoke = (o) => convoke && !o.tapped && hasType(definition(s, o), 'creature');
+  const realChoices = (o) =>
+    autoTap && canTapForMana(s, o, p)
+      ? manaOptions(s, o).filter((color) => manaEligible(manaRestriction(s, o, color), purpose))
+      : [];
+  let sources = controlled(s, p).filter(
+    (o) => !excludeSources.includes(o.id) && (realChoices(o).length || canConvoke(o)),
+  );
   const sacrificial = sources.filter((o) => definition(s, o).manaSacrifice).map((o) => o.id);
   if (sacrificial.length) {
     const preserve = planPayment(s, p, cost, {
       autoTap,
       purpose,
+      convoke,
       excludeSources: [...excludeSources, ...sacrificial],
     });
     if (preserve) return preserve;
@@ -80,9 +92,7 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], p
     ...(s.players[p].restrictedMana ?? [])
       .map((unit, index) => ({ id: `restricted:${index}`, unit, index }))
       .filter((o) => manaEligible(o.unit, purpose)),
-    ...sources.filter((o) =>
-      manaOptions(s, o).some((color) => manaEligible(manaRestriction(s, o, color), purpose)),
-    ),
+    ...sources,
   ];
   const demand = [];
   for (const color of COLORS) {
@@ -109,9 +119,14 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], p
         ? [o.floatingColor]
         : o.unit
           ? [o.unit.color]
-          : manaOptions(s, o).filter((color) =>
-              manaEligible(manaRestriction(s, o, color), purpose),
-            ),
+          : [
+              ...new Set([
+                ...realChoices(o),
+                ...(canConvoke(o)
+                  ? [...(definition(s, o).color ?? []).filter((c) => c !== 'C'), '*']
+                  : []),
+              ]),
+            ],
     ),
     assigned = Array(sources.length).fill(-1);
   const match = (slot, visited) => {
@@ -127,11 +142,16 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], p
     return false;
   };
   for (let slot = 0; slot < demand.length; slot++) if (!match(slot, new Set())) return null;
+  const convoked = [];
   const activations = [],
     restrictedSpent = [],
     restrictedSources = [];
   let uncounterable = false;
-  const consume = (source, color) => {
+  const consume = (source, color, symbol = 'generic') => {
+    if (!source.floatingColor && !source.unit && !realChoices(source).includes(color)) {
+      convoked.push({ card: source.id, symbol });
+      return;
+    }
     if (source.floatingColor) {
       spent[color]++;
       pool[color]--;
@@ -149,7 +169,7 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], p
   for (let i = 0; i < sources.length; i++)
     if (assigned[i] >= 0) {
       const color = choices[i].find((color) => demand[assigned[i]].split('/').includes(color));
-      consume(sources[i], color);
+      consume(sources[i], color, demand[assigned[i]]);
     }
   let generic = cost.generic ?? 0;
   for (const color of ['C', 'W', 'U', 'B', 'R', 'G']) {
@@ -166,6 +186,7 @@ export function planPayment(s, p, cost, { autoTap = true, excludeSources = [], p
     }
   if (generic > 0) return null;
   return {
+    convoked,
     taps: activations.map((a) => a.card),
     activations,
     spent,

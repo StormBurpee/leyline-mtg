@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d2aa9649-8394-48ca-bee6-a044e5a86b38",
+  "name": "Spinewoods Paladin",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Knight"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Trample\nWhen this creature enters, you gain 3 life.\nPlot {3}{G} (You may pay {3}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "plot",
+      "cost": "{3}{G}"
+    }
+  ]
+}

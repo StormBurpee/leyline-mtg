@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c840b89b-81be-4644-8bb5-35d14b1bc620",
+  "name": "Protective Response",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target attacking or blocking creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "convoke"
+    },
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "any": [
+                {
+                  "attacking": true
+                },
+                {
+                  "blocking": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

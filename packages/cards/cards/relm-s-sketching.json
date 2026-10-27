@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dd6601c6-810d-4883-89d2-5d31419fb1cc",
+  "name": "Relm's Sketching",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}{U}"
+  },
+  "rulesText": "Create a token that's a copy of target artifact, creature, or land.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "creature"
+            },
+            {
+              "type": "land"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "copyToken",
+          "target": "target",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

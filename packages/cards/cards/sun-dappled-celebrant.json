@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "27c87371-697e-4ca6-a7f4-d99215d908bc",
+  "name": "Sun-Dappled Celebrant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Treefolk", "Cleric"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}{W}",
+    "power": 5,
+    "toughness": 6
+  },
+  "rulesText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nVigilance",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "convoke"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    }
+  ]
+}

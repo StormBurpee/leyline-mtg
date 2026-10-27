@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5c68853e-4fb8-465e-b262-e6dbaf972533",
+  "name": "Self-Reflection",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{4}{U}{U}"
+  },
+  "rulesText": "Create a token that's a copy of target creature you control.\nFlashback {3}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "copyToken",
+          "target": "target",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "kind": "flashback",
+      "cost": "{3}{U}"
+    }
+  ]
+}

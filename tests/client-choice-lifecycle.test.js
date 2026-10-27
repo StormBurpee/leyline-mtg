@@ -765,3 +765,40 @@ test('sacrifice uses large eligible permanent cards and survives Read, Back, dis
     ui.cleanup();
   }
 });
+
+test('convoke payment reviews every creature and symbol; cancel, reopen and confirm cast only once', async () => {
+  const { convokePosition } = await import('./helpers/convoke-position.js');
+  const s = convokePosition();
+  const card = s.players[0].hand
+    .map((id) => s.objects[id])
+    .find((o) => o.name === 'Sun-Dappled Celebrant');
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${card.id}"]`);
+    h.click('[data-action="playSelected"]');
+    assert.match(h.dialog.textContent, /Choose creatures to convoke/);
+    assert.match(h.dialog.textContent, /Remaining mana:/);
+    assert.ok(h.document.querySelectorAll('[data-action="selectConvoke"]').length >= 2);
+    h.click('[data-action="closeDialog"]');
+    assert.equal(h.dialog.open, false);
+    h.click('[data-action="playSelected"]');
+    const option = h.document.querySelector('[data-action="selectConvoke"][data-symbol="generic"]');
+    if (option)
+      h.click(
+        `[data-action="selectConvoke"][data-cardid="${option.dataset.cardid}"][data-symbol="generic"]`,
+      );
+    const reader = h.dialog.querySelector('[data-action="readDecisionCard"]');
+    h.click(`[data-action="readDecisionCard"][data-cardid="${reader.dataset.cardid}"]`);
+    h.click('[data-action="returnDecision"]');
+    assert.match(h.dialog.textContent, /Remaining mana:/);
+    const stale = h.click('[data-action="confirmConvoke"]');
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    const casts = saved.replay.commands.filter((c) => c.type === 'cast' && c.card === card.id);
+    assert.equal(casts.length, 1);
+    assert.ok(Array.isArray(casts[0].convoke));
+  } finally {
+    h.cleanup();
+  }
+});

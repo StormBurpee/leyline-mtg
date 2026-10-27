@@ -154,6 +154,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'attachEquipment',
           'modify',
           'createToken',
+          'copyToken',
           'addCounters',
           'addStunCounters',
           'untap',
@@ -204,6 +205,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         attachEquipment: ['target'],
         modify: ['target', 'power', 'toughness', 'keywords', 'until'],
         token: ['token', 'amount', 'controller', 'tapped', 'temporaryKeywords'],
+        copyToken: ['target', 'count', 'exceptions'],
         counterOn: ['target', 'amount', 'counter'],
         stunOn: ['target', 'amount'],
         untap: ['target'],
@@ -285,6 +287,10 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
             'Only end-of-turn group modifiers are implemented.',
           );
       }
+      if (e.op === 'copyToken') {
+        e.count = effect.count;
+        if (effect.exceptions !== undefined) e.exceptions = structuredClone(effect.exceptions);
+      }
       if (e.op === 'token') {
         if (effect.temporaryKeywords !== undefined)
           e.temporaryKeywords = structuredClone(effect.temporaryKeywords);
@@ -306,7 +312,10 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         if (effect.controller !== undefined) e.controller = effect.controller;
         if (effect.tapped !== undefined) e.tapped = effect.tapped;
       }
-      if (['damage', 'counter', 'attachEquipment'].includes(e.op) && effect.target !== 'target')
+      if (
+        ['damage', 'counter', 'attachEquipment', 'copyToken'].includes(e.op) &&
+        effect.target !== 'target'
+      )
         problem(
           'UNSUPPORTED_BINDING',
           `${p}.target`,
@@ -537,6 +546,11 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           cost: mana(a.cost, `${path}.cost`),
           effects: effects(a.effects, `${path}.effects`),
         };
+        break;
+      case 'plot':
+        fields(a, ['kind', 'cost'], path);
+        if (d.plot) problem('DUPLICATE_PLOT', path, 'Only one plot ability is supported.');
+        d.plot = mana(a.cost, `${path}.cost`);
         break;
       case 'flashback':
         fields(a, ['kind', 'cost'], path);
