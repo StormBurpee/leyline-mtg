@@ -110,6 +110,15 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         problem('INVALID_EFFECT', p, 'Expected an effect object.');
         return { op: 'unsupported' };
       }
+      if (effect.targetGroup !== undefined) {
+        const { targetGroup, ...rest } = effect;
+        const native = effects([rest], p)[0];
+        return { ...native, targetGroup };
+      }
+      if (effect.op === 'fight' || effect.op === 'bite') {
+        fields(effect, ['op', 'sourceGroup', 'victimGroup'], p);
+        return structuredClone(effect);
+      }
       if (
         ![
           'damage',
@@ -567,9 +576,10 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
             : structuredClone(a.produces);
         break;
       case 'spell':
-        fields(a, ['kind', 'target', 'effects'], path);
+        fields(a, ['kind', 'target', 'targetGroups', 'effects'], path);
         spells++;
         d.target = a.target === undefined ? null : target(a.target, `${path}.target`);
+        if (a.targetGroups !== undefined) d.targetGroups = structuredClone(a.targetGroups);
         d.effects = effects(a.effects, `${path}.effects`);
         break;
       case 'modalSpell':

@@ -4,8 +4,9 @@
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
     "packages/engine/src/registry.js": "282e2a6da52197795ab6c7eea9972106f6a16eb638b1df78038c2da23042c3ac",
-    "packages/engine/src/definition-validation.js": "b80977b7fbdb8a3024ab49f089981922a19233f23a9d674d0ee597566153e117",
+    "packages/engine/src/definition-validation.js": "b8f6118276d96064a67e6575ecd4dd2ef765a427e2798545a26cf3c5eb70ec2e",
     "packages/engine/src/condition-schema.js": "87777077fa93ad6668647c7ac7ae41f9b5ddf02f2516318d1eb0e1e433789cda",
+    "packages/engine/src/target-group-schema.js": "488c4d5141dd2395cb5fcc02303bacd9ec4047abb08e0d8e5c7d9bea78498681",
     "packages/engine/src/selectors.js": "aed0814cc9f5248e16f7f54a62c2c6ac34181ec8fdcaf708eeb11afba9dddfc3",
     "packages/engine/src/value-schema.js": "0cedbdb46ae39b9426932244b5e9d9b6bce2d2605eb321c01e4256c0b8bcdfd9",
     "packages/engine/src/events.js": "703c8be329d05a8e987bc438413f2d90cdbd2ccb350f8b1b9a475182169b9d70",
@@ -23,8 +24,8 @@
   "excluded": {},
   "coverage": {
     "no_exact_forge_match": 261,
-    "unsupported": 4085,
-    "curated": 818
+    "unsupported": 4071,
+    "curated": 832
   },
   "layouts": {
     "normal": 4823,
@@ -74,10 +75,10 @@
     "First strike": 32,
     "Warp": 32,
     "Max speed": 31,
-    "Fight": 31,
     "Double": 31,
     "Saddle": 30,
     "Prowess": 29,
+    "Fight": 28,
     "Station": 27,
     "Sneak": 27,
     "Earthbend": 26,
@@ -302,37 +303,37 @@
     "Burning Chains": 1
   },
   "diagnostics": {
-    "Unreferenced or unsupported SVar": 3811,
-    "Unsupported spell field": 3306,
-    "Unsupported spell opcode": 2442,
+    "Unreferenced or unsupported SVar": 3799,
+    "Unsupported spell field": 3265,
+    "Unsupported spell opcode": 2439,
     "Unsupported trigger field": 1892,
     "Unsupported trigger mode": 1077,
     "unsupported field S.": 898,
     "Unsupported supertype or card type.": 878,
     "Unsupported mana symbol": 843,
     "Unsupported targeted zone transition.": 542,
-    "Unsupported target predicate": 403,
+    "Unsupported target predicate": 401,
     "Unsupported ability opcode": 397,
-    "Only source +1/+1 counters on abilities are supported.": 336,
+    "Only source +1/+1 counters on abilities are supported.": 332,
     "Keywords on this card type require manual review.": 232,
     "Unsupported graveyard target predicate": 219,
     "Unsupported zone-change trigger predicate": 199,
     "SubAbility references must point to a DB instruction.": 160,
     "Pump needs a creature target or an activated source.": 153,
     "Only one tap ability producing one mana of a listed color is supported.": 129,
-    "unsupported field Variant.": 128,
+    "unsupported field Variant.": 127,
     "Unsupported cast trigger predicate": 116,
     "unsupported keyword Equip": 105,
     "Only an unconditional self enters-tapped replacement is supported.": 103,
     "Unexpected PT on a noncreature.": 96,
-    "NumDmg must be a literal nonnegative integer.": 91,
-    "DealDamage requires a supported target predicate.": 91,
-    "CounterNum must be a literal nonnegative integer.": 91,
+    "DealDamage requires a supported target predicate.": 89,
+    "CounterNum must be a literal nonnegative integer.": 89,
     "Unsupported dies trigger predicate": 85,
     "NumCards must be a literal nonnegative integer.": 84,
-    "A subability cannot introduce a new target in this subset.": 84,
+    "NumDmg must be a literal nonnegative integer.": 80,
     "unsupported keyword Enchant": 79,
     "Destroy requires a supported permanent target.": 74,
+    "A subability cannot introduce a new target in this subset.": 73,
     "unsupported keyword Crew": 72,
     "unsupported keyword etbCounter": 63,
     "Only Defined Self is supported for source pumps.": 60,
@@ -588,5 +589,5 @@
       "sha256": "57b91dec0d3b810928ff8420c5b5b35d8e2bace62ac89d4afcdeddbda57ef206"
     }
   ],
-  "reclassifiedWithEngine": "0.34.0"
+  "reclassifiedWithEngine": "0.35.0"
 }

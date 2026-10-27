@@ -1,3 +1,4 @@
+import { flattenTargets, targetPlanProblem, targetPlans } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { cardDefinition } from './cards.js';
 import { meetsCondition } from './conditions.js';
@@ -42,11 +43,11 @@ import {
 import { assignDamage, canAttack, declareAttackers, declareBlockers } from './combat.js';
 import { advanceStep, finishCleanup } from './turn.js';
 const main = (s) => ['main1', 'main2'].includes(s.step);
-export function castProblem(s, p, id, target, { autoTap = true, mode } = {}) {
+export function castProblem(s, p, id, target, { autoTap = true, mode, targets } = {}) {
   const o = s.objects[id];
   if (!playableZone(s, o, p)) return 'You cannot play this card from its current zone.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
-  const d = castingProfile(s, p, o, mode, target);
+  const d = castingProfile(s, p, o, mode, targets ? flattenTargets(targets) : target);
   if (!d) return 'Choose one valid spell mode.';
   if (d.type === 'land') return 'Lands are played, not cast.';
   if (
@@ -55,6 +56,11 @@ export function castProblem(s, p, id, target, { autoTap = true, mode } = {}) {
     !(s.active === p && main(s) && s.stack.length === 0)
   )
     return 'Cast this only during your main phase with an empty stack.';
+  if (d.targetGroups) {
+    if (target != null) return 'Use grouped targets for this spell.';
+    const problem = targetPlanProblem(s, d.targetGroups, targets, p);
+    if (problem) return problem;
+  } else if (targets !== undefined) return 'This spell has no target groups.';
   if (d.target && !legalTarget(s, d.target, target, p)) return 'Choose a legal target.';
   if (!d.target && target != null) return 'This spell has no targets.';
   if (!planPayment(s, p, d.cost, { autoTap, purpose: { type: 'cast', card: d } }))
@@ -79,10 +85,11 @@ function cast(s, p, c) {
   const problem = castProblem(s, p, c.card, c.target, {
     autoTap: c.autoTap !== false,
     mode: c.mode,
+    targets: c.targets,
   });
   requireRule(!problem, 'CAST', problem);
   const o = s.objects[c.card],
-    d = castingProfile(s, p, o, c.mode, c.target);
+    d = castingProfile(s, p, o, c.mode, c.targets ? flattenTargets(c.targets) : c.target);
   const payment = pay(s, p, d.cost, c.autoTap !== false, [], { type: 'cast', card: d });
   if (d.faceDownCast) o.castingFaceDown = true;
   move(s, o, 'stack');
@@ -102,6 +109,9 @@ function cast(s, p, c) {
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
+    ...(d.targetGroups
+      ? { targetGroups: structuredClone(d.targetGroups), targets: structuredClone(c.targets) }
+      : {}),
     targetKind: d.target ?? null,
     target: c.target ?? null,
   });
@@ -111,6 +121,7 @@ function cast(s, p, c) {
     objectId: o.id,
     name: o.faceDown ? 'Face-down creature' : o.name,
     target: c.target ?? null,
+    ...(d.targetGroups ? { targets: structuredClone(c.targets) } : {}),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
@@ -453,6 +464,17 @@ export function legalActions(s, p) {
     const d = definition(s, s.objects[id]);
     if (d.type === 'land') continue;
     for (const { mode, profile } of spellOptions(d)) {
+      if (profile.targetGroups) {
+        for (const targets of targetPlans(s, profile.targetGroups, p))
+          if (!castProblem(s, p, id, null, { mode, targets }))
+            actions.push({
+              type: 'cast',
+              card: id,
+              ...(mode !== undefined ? { mode } : {}),
+              targets,
+            });
+        continue;
+      }
       const targets = profile.target ? targetsFor(s, profile.target, p) : [null];
       for (const target of targets)
         if (!castProblem(s, p, id, target, { mode }))

@@ -92,7 +92,9 @@ export function castingProfile(
     keywords: profile.keywords,
     ...(profile.faceDownCast ? { power: 2, toughness: 2 } : stats(projected, proposed)),
   };
-  const targetInfo = targetFacts(projected, target);
+  const targetInfo = (Array.isArray(target) ? target : [target])
+    .map((t) => targetFacts(projected, t))
+    .filter(Boolean);
   let increase = 0,
     reduction = 0;
   const apply = (modifier, source, controller) => {
@@ -105,7 +107,7 @@ export function castingProfile(
       return;
     if (
       modifier.targetWhere &&
-      (!targetInfo || !matchesFilter(targetInfo, modifier.targetWhere, controller))
+      !targetInfo.some((info) => matchesFilter(info, modifier.targetWhere, controller))
     )
       return;
     const amount = Math.max(0, numericValue(projected, modifier.amount, { controller, source }));

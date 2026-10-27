@@ -6,7 +6,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.34.0';
+export const VERSION = '0.35.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -459,19 +459,24 @@ export function move(s, o, to, departureContext = null) {
         ? [...s.choice.entries, ...s.choice.remaining.flatMap((group) => group.entries)]
         : []),
     ];
+    // Simultaneous departures retain the facts from before the entire batch.
+    const lastKnown = departureContext?.facts?.[o.id];
+    const lastKeywords = lastKnown?.keywords ?? keywords(s, o);
+    const lastController = lastKnown?.controller ?? o.controller;
+    const lastDefinition = lastKnown?.definition ?? definition(s, o);
     for (const entry of entries) {
       if (entry.eventSource?.id === o.id && entry.eventSource.incarnation === o.incarnation) {
-        entry.eventSource.keywords = keywords(s, o);
-        entry.eventSource.controller = o.controller;
-        entry.eventSource.power = stats(s, o).power;
-        entry.eventSource.definition = structuredClone(definition(s, o));
+        entry.eventSource.keywords = [...lastKeywords];
+        entry.eventSource.controller = lastController;
+        entry.eventSource.power = lastKnown?.power ?? stats(s, o).power;
+        entry.eventSource.definition = structuredClone(lastDefinition);
       }
       if (entry.source?.id === o.id && entry.source.incarnation === o.incarnation) {
-        entry.sourceKeywords = keywords(s, o);
-        entry.sourceController = o.controller;
+        entry.sourceKeywords = [...lastKeywords];
+        entry.sourceController = lastController;
         if (o.attachedTo || entry.sourceAttachment !== undefined)
           entry.sourceAttachment = o.attachedTo ? structuredClone(o.attachedTo) : null;
-        entry.sourceDefinition = structuredClone(definition(s, o));
+        entry.sourceDefinition = structuredClone(lastDefinition);
       }
     }
   }

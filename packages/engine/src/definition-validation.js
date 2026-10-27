@@ -1,3 +1,4 @@
+import { validateTargetGroups } from './target-group-schema.js';
 import { validNumericValue } from './value-schema.js';
 import { validateCondition } from './condition-schema.js';
 import { validateEventSpec } from './events.js';
@@ -38,6 +39,7 @@ const FIELDS = new Set([
   'maxSpeedKeywords',
   'entersTappedUnless',
   'target',
+  'targetGroups',
   'effects',
   'modes',
   'cycling',
@@ -108,7 +110,7 @@ function filterOnlyPermanents(where) {
   if (where?.any) return where.any.every(filterOnlyPermanents);
   return false;
 }
-function validateEffects(effects, path, target, errors) {
+function validateEffects(effects, path, target, errors, groups = []) {
   if (!Array.isArray(effects) || effects.length > 64) {
     errors.push(`${path}: expected at most 64 effect instructions.`);
     return;
@@ -117,6 +119,46 @@ function validateEffects(effects, path, target, errors) {
     const p = `${path}[${index}]`;
     if (!plain(e)) {
       errors.push(`${p}: expected an effect object.`);
+      continue;
+    }
+    if (e.targetGroup !== undefined) {
+      const group = groups.find((g) => g.id === e.targetGroup);
+      if (
+        !group ||
+        ![
+          'damage',
+          'destroy',
+          'bounce',
+          'modify',
+          'counterOn',
+          'tap',
+          'untap',
+          'moveTarget',
+        ].includes(e.op) ||
+        e.subject !== undefined ||
+        (e.op === 'moveTarget' && e.destination === 'battlefield')
+      ) {
+        errors.push(`${p}: unsupported target group binding.`);
+        continue;
+      }
+      const { targetGroup, ...bound } = e;
+      validateEffects([bound], p, group.selector, errors);
+      continue;
+    }
+    if (e.op === 'fight' || e.op === 'bite') {
+      const actor = groups.find((g) => g.id === e.sourceGroup);
+      const victim = groups.find((g) => g.id === e.victimGroup);
+      if (
+        Object.keys(e).some((k) => !['op', 'sourceGroup', 'victimGroup'].includes(k)) ||
+        !actor ||
+        actor.min !== 1 ||
+        actor.max !== 1 ||
+        !victim ||
+        !effectTargetCompatible('attachEquipment', actor.selector) ||
+        !effectTargetCompatible('attachEquipment', victim.selector) ||
+        (e.op === 'fight' && victim.max !== 1)
+      )
+        errors.push(`${p}: fight/bite requires creature target groups and exactly one source.`);
       continue;
     }
     const schema = {
@@ -507,6 +549,20 @@ export function validateDefinition(card) {
   if (card.legendary && ['instant', 'sorcery'].includes(card.type))
     errors.push(`${name}: legendary spell casting restrictions are not implemented.`);
   if (card.basic && card.type !== 'land') errors.push(`${name}: only lands can be basic.`);
+  if (card.targetGroups !== undefined) {
+    errors.push(
+      ...validateTargetGroups(card.targetGroups).map((e) => `${name}.targetGroups: ${e}`),
+    );
+    if (
+      !['instant', 'sorcery'].includes(card.type) ||
+      card.target != null ||
+      card.modes ||
+      card.kicker
+    )
+      errors.push(
+        `${name}.targetGroups: currently requires a nonmodal instant or sorcery without kicker or a legacy target.`,
+      );
+  }
   if (card.target != null)
     errors.push(...validateTargetSpec(card.target).map((error) => `${name}.target: ${error}`));
   if (card.costModifiers !== undefined) {
@@ -699,7 +755,13 @@ export function validateDefinition(card) {
   }
   for (const key of ['effects', 'etb'])
     if (card[key] !== undefined)
-      validateEffects(card[key], `${name}.${key}`, key === 'effects' ? card.target : null, errors);
+      validateEffects(
+        card[key],
+        `${name}.${key}`,
+        key === 'effects' ? card.target : null,
+        errors,
+        key === 'effects' && Array.isArray(card.targetGroups) ? card.targetGroups : [],
+      );
   if (card.triggers !== undefined) {
     if (!Array.isArray(card.triggers) || card.triggers.length > 32)
       errors.push(`${name}.triggers: expected at most 32 triggers.`);

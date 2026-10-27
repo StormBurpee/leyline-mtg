@@ -1,3 +1,4 @@
+import { flattenTargets, survivingTargets } from './target-groups.js';
 import { effectValues } from './numeric-values.js';
 import { CREATURE_TYPES } from './creature-types.js';
 import { meetsCondition } from './conditions.js';
@@ -107,6 +108,16 @@ export function targetsFor(s, kind, p) {
 }
 /** Ward is triggered, not a targeting restriction (CR 702.21). */
 export function notifyTargeted(s, entry) {
+  if (entry.targetGroups) {
+    const seen = new Set();
+    for (const target of flattenTargets(entry.targets)) {
+      const key = `${target.kind}:${target.id}:${target.incarnation ?? ''}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      notifyTargeted(s, { ...entry, targetGroups: undefined, target });
+    }
+    return;
+  }
   if (entry.target?.kind !== 'object') return;
   const source = s.objects[entry.target.id];
   if (!source || source.zone !== 'battlefield' || source.controller === entry.controller) return;
@@ -344,6 +355,78 @@ export function resolveEffects(s, entry, startIndex = 0) {
   const effects = entry.effects ?? [];
   for (let index = startIndex; index < effects.length; index++) {
     const e = effectValues(s, effects[index], entry);
+    if (e.targetGroup !== undefined) {
+      const targets = entry.targets?.[e.targetGroup] ?? [];
+      const { targetGroup, ...effect } = e;
+      if (e.op === 'damage') {
+        const source = damageSource(s, entry);
+        dealDamageBatch(
+          s,
+          targets.map((target) => ({ source, target, amount: e.amount })),
+        );
+      } else if (['destroy', 'bounce', 'moveTarget'].includes(e.op)) {
+        const context = captureDepartureContext(s);
+        for (const target of targets) {
+          const object = s.objects[target.id];
+          if (target.kind !== 'object' || object?.incarnation !== target.incarnation) continue;
+          const zone = e.op === 'moveTarget' ? ['battlefield', 'graveyard'] : ['battlefield'];
+          if (!zone.includes(object.zone)) continue;
+          if (e.op === 'destroy' && hasKeyword(s, object, 'indestructible')) continue;
+          move(
+            s,
+            object,
+            e.op === 'destroy' ? 'graveyard' : e.op === 'bounce' ? 'hand' : e.destination,
+            context,
+          );
+        }
+      } else {
+        for (const target of targets) resolveEffects(s, { ...entry, target, effects: [effect] });
+      }
+      continue;
+    }
+    if (e.op === 'fight' || e.op === 'bite') {
+      const currentCreature = (target) => {
+        const object = target?.kind === 'object' && s.objects[target.id];
+        return object?.zone === 'battlefield' &&
+          object.incarnation === target.incarnation &&
+          hasType(definition(s, object), 'creature')
+          ? object
+          : null;
+      };
+      const actor = currentCreature(entry.targets?.[e.sourceGroup]?.[0]);
+      if (!actor) continue;
+      const victims = (entry.targets?.[e.victimGroup] ?? []).map(currentCreature).filter(Boolean);
+      const source = (object) => ({
+        ...ref(object),
+        controller: object.controller,
+        definition: definition(s, object),
+        keywords: keywords(s, object),
+      });
+      const packets = [];
+      for (const victim of victims) {
+        if (e.op === 'fight' && victim.id === actor.id) {
+          packets.push({
+            source: source(actor),
+            target: ref(actor),
+            amount: Math.max(0, stats(s, actor).power) * 2,
+          });
+          continue;
+        }
+        packets.push({
+          source: source(actor),
+          target: ref(victim),
+          amount: Math.max(0, stats(s, actor).power),
+        });
+        if (e.op === 'fight')
+          packets.push({
+            source: source(victim),
+            target: ref(actor),
+            amount: Math.max(0, stats(s, victim).power),
+          });
+      }
+      dealDamageBatch(s, packets);
+      continue;
+    }
     const recipient =
       e.player === 'target'
         ? entry.target?.id
@@ -875,6 +958,15 @@ export function resolveTop(s) {
     return;
   const object = s.objects[entry.source?.id],
     d = entry.kind === 'spell' && object ? definition(s, object) : null;
+  if (entry.targetGroups) {
+    const originalCount = flattenTargets(entry.targets).length;
+    entry.targets = survivingTargets(s, entry.targetGroups, entry.targets, entry.controller);
+    if (originalCount && !flattenTargets(entry.targets).length) {
+      emit(s, 'fizzled', { name: entry.name, stackId: entry.id });
+      if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
+      return;
+    }
+  }
   if (entry.targetKind && !legalTarget(s, entry.targetKind, entry.target, entry.controller)) {
     emit(s, 'fizzled', { name: entry.name, stackId: entry.id });
     if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');

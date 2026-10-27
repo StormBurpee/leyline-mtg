@@ -35,6 +35,7 @@ for (const path of [
   'packages/engine/src/registry.js',
   'packages/engine/src/definition-validation.js',
   'packages/engine/src/condition-schema.js',
+  'packages/engine/src/target-group-schema.js',
   'packages/engine/src/selectors.js',
   'packages/engine/src/value-schema.js',
   'packages/engine/src/events.js',

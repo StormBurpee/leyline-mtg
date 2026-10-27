@@ -387,3 +387,60 @@ test('noncast Aura attachment uses the shared card stage and preserves a reviewe
     h.cleanup();
   }
 });
+
+test('grouped spell targets use large sequential choices and preserve selection through Read and Back', async () => {
+  const catalog = {
+    ...CARDS,
+    'Group guide': { name: 'Group guide', type: 'creature', cost: {}, power: 2, toughness: 2 },
+    'Group spell': { ...CARDS['Assert Perfection'], name: 'Group spell', cost: {} },
+  };
+  let state;
+  for (let seed = 1; seed < 200; seed++) {
+    state = createGame({
+      seed,
+      mulligan: false,
+      catalog,
+      decks: [
+        [
+          ...Array(4).fill('Group guide'),
+          ...Array(4).fill('Group spell'),
+          ...Array(52).fill('Forest'),
+        ],
+        Array(60).fill('Forest'),
+      ],
+    });
+    const names = state.players[0].hand.map((id) => state.objects[id].name);
+    if (names.includes('Group guide') && names.includes('Group spell')) break;
+  }
+  while (state.step !== 'main1') state = act(state, 'pass');
+  state = act(state, 'cast', {
+    card: state.players[0].hand.find((id) => state.objects[id].name === 'Group guide'),
+  });
+  state = act(state, 'pass');
+  state = act(state, 'pass');
+  const spell = state.players[0].hand.find((id) => state.objects[id].name === 'Group spell');
+  const h = await mount(exportReplay(state));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${spell}"]`);
+    h.click('[data-action="playSelected"]');
+    assert.ok(h.dialog.classList.contains('choice-stage'));
+    assert.equal(h.dialog.querySelector('[data-action="nextTargetGroup"]').disabled, true);
+    h.click('[data-action="selectGroupTarget"]');
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.ok(h.dialog.querySelector('.is-selected'));
+    h.click('[data-action="nextTargetGroup"]');
+    assert.match(h.dialog.textContent, /Step 2 of 2/);
+    h.click('[data-action="previousTargetGroup"]');
+    assert.ok(h.dialog.querySelector('.is-selected'));
+    h.click('[data-action="nextTargetGroup"]');
+    h.click('[data-action="nextTargetGroup"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).type, 'cast');
+    assert.deepEqual(saved.replay.commands.at(-1).targets.victims, []);
+    assert.equal(h.dialog.open, false);
+  } finally {
+    h.cleanup();
+  }
+});

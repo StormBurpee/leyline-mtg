@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.35.0 — Grouped targets and creature fights
+
+- Add ordered target groups with cardinality, distinctness and cross-group exclusions. Check legality per target at resolution, resolve partially legal spells and trigger ward once per targeted permanent.
+- Add simultaneous creature fight/bite damage and grouped synchronous effects. Preserve pre-batch source facts during simultaneous departures.
+- Add large staged target selection with Read, Back and guarded confirmation, plus bounded bot target-plan proposals and profitable fight/bite evaluation.
+- Add 14 full-text Standard cards. Catalog: 1050 cards and 27 tokens. Grouped targets currently cover nonmodal instants/sorceries without kicker; triggered/activated groups and pausable group-bound effects remain unsupported.
+
 ## 0.34.0 — Casting-cost reductions and taxes
 
 - Determine casting costs from intrinsic and battlefield modifiers, including stable conditions, target predicates and public counts. Add increases before reductions, preserve coloured requirements, and lock the result before payment.

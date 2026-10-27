@@ -95,7 +95,18 @@ export type NumericValue =
   | { kind: 'life'; player: 'you' | 'opponent' }
   | { kind: 'sum'; values: NumericValue[] }
   | { kind: 'scale'; value: NumericValue; factor: number };
-export type Effect =
+export interface TargetGroup {
+  id: string;
+  label?: string;
+  selector: TargetKind;
+  min: number;
+  max: number;
+  excludeFrom?: string[];
+}
+export type TargetPlan = Record<string, Target[]>;
+export type Effect = EffectInstruction & { targetGroup?: string };
+type EffectInstruction =
+  | { op: 'fight' | 'bite'; sourceGroup: string; victimGroup: string }
   | { op: 'damageEventPowerOpponent' }
   | { op: 'impulseChoose'; count: number }
   | { op: 'bindingNegotiation' }
@@ -210,6 +221,7 @@ export interface CardDefinition {
   readonly entersTapped?: boolean;
   readonly entersTappedUnless?: StateCondition;
   readonly manaConditions?: Partial<Record<Color, StateCondition>>;
+  readonly targetGroups?: readonly TargetGroup[];
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
   readonly cycling?: ManaCost;
@@ -351,6 +363,8 @@ export interface StackEntry {
   sourceController?: PlayerId;
   sourceAttachment?: ObjectTarget | null;
   effects: (Effect | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } })[];
+  targetGroups?: TargetGroup[];
+  targets?: TargetPlan;
   targetKind?: TargetKind | null;
   target?: Target | null;
   label?: string;
@@ -534,7 +548,14 @@ export type Action =
   | { type: 'pass' | 'concede' | 'keep' | 'mulligan' }
   | { type: 'playLand'; card: string }
   | { type: 'tapMana'; card: string; color?: Color }
-  | { type: 'cast'; card: string; target?: Target; autoTap?: boolean; mode?: number }
+  | {
+      type: 'cast';
+      card: string;
+      targets?: TargetPlan;
+      target?: Target;
+      autoTap?: boolean;
+      mode?: number;
+    }
   | { type: 'activate'; card: string; ability: number; discardCard?: string; target?: Target }
   | { type: 'bottom' | 'discard' | 'discardEffect' | 'attackers'; cards: string[] }
   | { type: 'blockers'; pairs: { blocker: string; attacker: string }[] }
@@ -652,7 +673,7 @@ export function castProblem(
   player: PlayerId,
   id: string,
   target?: Target,
-  options?: { autoTap?: boolean; mode?: number },
+  options?: { autoTap?: boolean; mode?: number; targets?: TargetPlan },
 ): string | null;
 export function abilityProblem(
   state: GameState,
@@ -726,6 +747,6 @@ export function castingProfile(
   player: PlayerId,
   object: GameObject,
   mode?: number,
-  target?: Target | null,
+  target?: Target | Target[] | null,
   card?: CardDefinition,
 ): CardDefinition | null;
