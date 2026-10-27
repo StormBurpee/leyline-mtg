@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "73346137-3117-4dc3-b5a4-1aca1da54548",
+  "name": "Large Bear",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bear"],
+    "colors": ["B", "G"],
+    "manaCost": "{3}{B/G}{B/G}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Reach, trample, haste",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    }
+  ]
+}

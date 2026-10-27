@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "38877c68-b69b-4ee1-8e8f-5137a184a8f7",
+  "name": "Spell Snare",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Counter target spell with mana value 2.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell",
+        "where": {
+          "manaValue": {
+            "eq": 2
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

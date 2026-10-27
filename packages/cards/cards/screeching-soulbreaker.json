@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "47e33aa1-2f54-471c-a484-de13bcd2dceb",
+  "name": "Screeching Soulbreaker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Siren", "Bard"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhenever this creature attacks, it deals 1 damage to each opponent and you gain 1 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

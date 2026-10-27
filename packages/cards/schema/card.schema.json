@@ -1481,6 +1481,16 @@
           },
           "required": ["kind", "cost"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "uncounterable"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
         }
       ]
     },

@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2fcb1c1c-6157-4955-b899-e8a8b337d188",
+  "name": "Gallant Citizen",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Citizen"],
+    "colors": ["G", "W"],
+    "manaCost": "{G/W}{G/W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

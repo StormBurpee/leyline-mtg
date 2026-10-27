@@ -28,3 +28,9 @@ export const KEYWORD_NAMES = Object.freeze([
   'indestructible',
   'menace',
 ]);
+
+export const HYBRID_SYMBOLS = Object.freeze(
+  ['W', 'U', 'B', 'R', 'G'].flatMap((a) =>
+    ['W', 'U', 'B', 'R', 'G'].filter((b) => a !== b).map((b) => `${a}/${b}`),
+  ),
+);

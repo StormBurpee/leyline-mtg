@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "60ac490c-b489-4ad2-bcc2-3babaabf8ccb",
+  "name": "Tempest Angler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Otter", "Wizard"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U/R}{U/R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

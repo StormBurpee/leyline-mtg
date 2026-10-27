@@ -2,6 +2,22 @@
 
 The UI submits the same commands as the CLI and simulation policies. Dragging never moves a card in engine state until a legal command is accepted.
 
+## Card-first decision stage (v0.27)
+
+Required card decisions open automatically over a dimmed battlefield. Fireglass/exile choices, opening hands, mulligan bottoming, discards, legend choices, searches, ward and optional effects use one shared presentation. Readable card fronts, named captions, gold selection marks and explicit confirmation replace tiny name-only choices.
+
+- **View battlefield / Escape:** dismisses only the presentation. The engine choice remains pending; use **View cards & choose** to return. Selection and ordering drafts are retained.
+- **Read card:** opens the printed card plus a large rules-text panel; Back to cards returns to the same draft.
+- **Scry / surveil:** separate library and bottom/graveyard lanes, ordered left-to-right. Drag cards between lanes or use the touch/keyboard move and order buttons.
+- **Searches / public zones:** large card grids, name filtering and visible copy counts. Search choices remain provisional until confirmation.
+- **Graveyard targets:** image-based selection and a separate target confirmation. The selected command retains its original revision and incarnation handles.
+- **Mulligans:** a large seven-card opening-hand view, clear Keep/Mulligan actions and a separate bottom-card selection after keeping.
+- **Accessibility:** native modal focus containment, named controls, explicit selection state, non-drag alternatives, image-failure rules text and reduced-motion support.
+
+The visual references were Wizards' [Streets of New Capenna Hideaway choice](https://magic.wizards.com/en/news/mtg-arena/mtg-arena-state-game-streets-new-capenna-2022-04-21) and [Kaldheim Foretell choice](https://magic.wizards.com/en/news/mtg-arena/mtg-arena-state-game-january-2021-01-21). Leyline retains its own forest/gold palette and typography; no Arena interface assets are shipped.
+
+DOM lifecycle tests execute the actual client controls for mulligan, Fireglass, scry, surveil, search, legend, optional and ward decisions, including dismiss/read/return/confirm paths. These tests do not verify pixel layout or native-browser behaviour. Fresh native-browser visual QA has not been completed for this update; the managed preview and authenticated browser route were unavailable.
+
 ## Controls
 
 - **Play a land or untargeted spell:** drag from your hand onto your battlefield.
@@ -19,6 +35,7 @@ Cards lift and return, hands reflow, tapped cards turn, and visible cards transi
 - `drop-plan.js` projects engine legal actions and combat predicates into drop destinations.
 - `gestures.js` handles pointer thresholds, capture, drag presentation and cancellation.
 - `motion.js` snapshots visible DOM positions and animates after accepted state changes.
+- `choice-stage.js` and `choice-stage.css` provide reusable large-card decision presentation.
 - `app.js` owns the command boundary, revision checks, timers and selection state.
 
 Bot/automatic-yield timers pause while a card is held. A stale revision cannot turn an old target highlight into an accepted command. Gesture selection of attackers/blockers is provisional until the entire declaration is submitted.

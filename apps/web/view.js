@@ -1,3 +1,4 @@
+import { CARD_DECISIONS } from './choice-stage.js';
 import { playableZone, playableCards } from '../../packages/engine/src/model.js';
 import { castingChoices } from '../../packages/engine/src/spell-modes.js';
 import { readableCard } from './card-inspection.js';
@@ -366,6 +367,9 @@ function actionDock(s, ui, p, actions) {
     buttons = `${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">Cycle ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${d.type === 'land' ? 'Play land' : castingChoices(d) ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
   } else
     buttons = `<button class="btn primary advance-button" data-action="pass">${advanceLabel(s, p)} <span>→</span><small>Space</small></button>`;
+  if (c && c.player === p && CARD_DECISIONS.has(c.kind))
+    buttons =
+      '<button class="btn primary" data-action="reviewDecision">View cards & choose →</button>';
   return `<div class="action-dock" aria-live="polite"><div class="action-copy"><strong>${escape(title)}</strong><p>${escape(desc)}</p></div><div class="action-buttons"><button class="btn quiet short-read-card" data-action="readCard" ${readableCard(s, ui, p) ? '' : 'disabled'} aria-label="Read selected card">Read</button>${ui.yieldMode ? '<button class="btn short-yield-stop" data-action="cancelYield">Stop passing</button>' : ''}${buttons}</div>${ui.mode === 'bot' && s.status === 'playing' ? `<div class="priority-controls"><button data-action="toggleFullControl" aria-pressed="${ui.controlMode === 'full'}" title="Full control: stop at every priority window (F)">${ui.controlMode === 'full' ? '● Full control' : '○ Smart play'}</button>${ui.yieldMode ? `<button class="yield-active" data-action="cancelYield">Auto-passing · Stop ×</button>` : `<button data-action="yieldResponse" title="Pass until an opponent puts a new effect on the stack (Enter)">Pass until response</button><button data-action="yieldTurn" title="Pass through this turn, including responses (Shift+Enter)">Pass turn</button>`}<button data-action="prioritySettings" aria-label="Priority automation settings">⚙</button></div>` : ''}</div>`;
 }
 export function inspect(name, meta, state = null, objectId = null, viewer = null) {

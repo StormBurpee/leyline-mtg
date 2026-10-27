@@ -1,3 +1,11 @@
+import {
+  CARD_DECISIONS,
+  decisionLease,
+  decisionCard,
+  decisionGallery,
+  choiceHeader,
+  decisionReader,
+} from './choice-stage.js';
 import { playableZone, playableCards } from '../../packages/engine/src/model.js';
 import { castingChoices } from '../../packages/engine/src/spell-modes.js';
 import { inspectableCard, readableCard } from './card-inspection.js';
@@ -193,6 +201,7 @@ function render() {
     app.querySelector('.action-dock button:not(:disabled)')?.focus({ preventScroll: true });
   renderCombatLinks(app, state, ui.blocks);
   duelPresentation.refresh();
+  syncDecisionOverlay();
   schedule();
 }
 let combatFrame = null;
@@ -333,29 +342,320 @@ function schedule() {
   }, delay);
 }
 function openDialog(title, body, actions = '') {
+  dialog.classList.remove('choice-stage');
+  dialog.removeAttribute('aria-labelledby');
+  dialog.removeAttribute('aria-describedby');
+  dialog._activeChoice = null;
+  dialog._stageRender = null;
   clearTimeout(botTimer);
   duelPresentation.hidePreview();
   dialog.innerHTML = `<div class="dialog-head"><h2>${escape(title)}</h2><button class="icon-btn" data-action="closeDialog" aria-label="Close dialog">×</button></div><div class="dialog-body">${body}</div><div class="dialog-actions">${actions || '<button class="btn" data-action="closeDialog">Done</button>'}</div>`;
   if (!dialog.open) dialog.showModal();
 }
+
+function openChoiceDialog(title, subtitle, body, actions, options = {}) {
+  clearTimeout(botTimer);
+  duelPresentation.hidePreview();
+  const focused = document.activeElement;
+  const focusCard = focused?.dataset.cardid;
+  const focusAction = focused?.dataset.action;
+  const focusedFilter = focused?.matches?.('[data-choice-filter]');
+  const selectionStart = focusedFilter ? focused.selectionStart : null;
+  const wasOpen = dialog.open;
+  dialog.classList.add('choice-stage');
+  dialog.setAttribute('aria-labelledby', 'choice-title');
+  dialog.setAttribute('aria-describedby', 'choice-description');
+  dialog.innerHTML = `${choiceHeader(title, subtitle, options)}<div class="dialog-body">${body}</div><div class="dialog-actions">${actions}</div>`;
+  if (!wasOpen) dialog.showModal();
+  const restore =
+    focusCard && focusAction
+      ? dialog.querySelector(
+          `[data-action="${CSS.escape(focusAction)}"][data-cardid="${CSS.escape(focusCard)}"]`,
+        )
+      : null;
+  const filter = dialog.querySelector('[data-choice-filter]');
+  if (filter) {
+    filter.value = dialog._choiceQuery ?? '';
+    for (const tile of dialog.querySelectorAll('[data-search]'))
+      tile.hidden = !tile.dataset.search.includes(filter.value.toLowerCase().trim());
+  }
+  if (focusedFilter && filter) {
+    filter.focus({ preventScroll: true });
+    filter.setSelectionRange(selectionStart, selectionStart);
+  } else if (restore && !restore.disabled) restore.focus({ preventScroll: true });
+  else
+    (
+      dialog.querySelector('.is-selected .decision-card-face:not(:disabled)') ??
+      dialog.querySelector('.decision-card-face:not(:disabled)') ??
+      dialog.querySelector('.dialog-actions .primary:not(:disabled)')
+    )?.focus({ preventScroll: true });
+}
+function syncDecisionOverlay() {
+  const c = state?.choice;
+  if (
+    !state ||
+    ui.view !== 'play' ||
+    ui.replayRecord ||
+    c?.player !== viewer() ||
+    !(
+      CARD_DECISIONS.has(c?.kind) ||
+      (c?.kind === 'triggerTarget' &&
+        c.targets.some((t) => state.objects[t.id]?.zone === 'graveyard'))
+    )
+  ) {
+    if (dialog.open && dialog._activeChoice) {
+      dialog._activeChoice = null;
+      dialog.close();
+    }
+    return;
+  }
+  const lease = decisionLease(state, viewer());
+  if (ui.dismissedChoiceLease === lease || (dialog.open && dialog._activeChoice === c)) return;
+  if (dialog.open && !dialog._activeChoice) return;
+  presentStateChoice();
+}
+function presentStateChoice() {
+  const c = state?.choice;
+  if (
+    !c ||
+    c.player !== viewer() ||
+    !(
+      CARD_DECISIONS.has(c.kind) ||
+      (c.kind === 'triggerTarget' &&
+        c.targets.some((t) => state.objects[t.id]?.zone === 'graveyard'))
+    )
+  )
+    return;
+  const lease = decisionLease(state, viewer());
+  if (dialog._choiceLease !== lease) {
+    dialog._selectedCards = [];
+    dialog._choiceLease = lease;
+    dialog._choiceQuery = '';
+    dialog._creatureType = 'Lizard';
+  }
+  dialog._choiceRevision = state.revision;
+  dialog._activeChoice = c;
+  ui.dismissedChoiceLease = null;
+  if (c.kind === 'triggerTarget') {
+    showTargetMenu();
+    return;
+  }
+  if (c.kind === 'libraryOrder') {
+    showLibraryOrder();
+    return;
+  }
+  if (c.kind === 'librarySearch') {
+    showLibrarySearch();
+    return;
+  }
+  const source = state.resolving?.entry.name ?? c.entry?.name ?? c.name ?? '';
+  const multi = ['bottom', 'discard', 'discardEffect'].includes(c.kind);
+  const selected = multi ? ui.chosen : dialog._selectedCards;
+  let title = '',
+    subtitle = '',
+    cards = [],
+    actions = '',
+    body = '';
+  if (c.kind === 'mulligan') {
+    title = state.startingPlayer === viewer() ? 'You play first' : 'You draw first';
+    subtitle =
+      c.player === state.startingPlayer
+        ? 'Your opening hand. Keep seven, or take a London mulligan.'
+        : 'Choose your opening hand. Your opponent plays first.';
+    cards = state.players[viewer()].hand;
+    actions = `<span class="choice-selection-summary">${c.player === state.startingPlayer ? 'On the play' : 'On the draw'}<strong>${state.players[viewer()].mulligans ? `${state.players[viewer()].mulligans} card(s) to put back after keeping` : 'Seven cards. Your decision.'}</strong></span><button class="btn" data-action="mulligan" ${state.players[viewer()].mulligans >= 7 ? 'disabled' : ''}>Mulligan</button><button class="btn primary" data-action="keep">Keep ${cards.length}</button>`;
+  } else if (multi) {
+    title =
+      c.kind === 'bottom'
+        ? `Put ${c.count} card${c.count === 1 ? '' : 's'} back`
+        : `Discard ${c.count} card${c.count === 1 ? '' : 's'}`;
+    subtitle =
+      c.kind === 'bottom'
+        ? 'Choose cards for the bottom of your library. Nothing moves until you confirm.'
+        : 'Select the cards to discard, then confirm your choice.';
+    cards = state.players[viewer()].hand;
+    actions = `<span class="choice-selection-summary">${selected.length} of ${c.count} selected</span><button class="btn primary" data-action="confirmDecision" ${selected.length === c.count ? '' : 'disabled'}>${c.kind === 'bottom' ? 'Put selected cards back' : 'Discard selected cards'}</button>`;
+  } else if (
+    ['exilePlay', 'bindingNegotiation', 'exileToGraveyard', 'legendRule'].includes(c.kind)
+  ) {
+    title =
+      c.kind === 'exilePlay'
+        ? 'Choose one'
+        : c.kind === 'bindingNegotiation'
+          ? 'Choose a card to discard'
+          : c.kind === 'exileToGraveyard'
+            ? 'Choose an exiled card'
+            : 'Choose a legend to keep';
+    subtitle =
+      c.kind === 'exilePlay'
+        ? 'You may play the chosen card until the end of this turn. Normal timing and mana costs still apply.'
+        : c.kind === 'bindingNegotiation'
+          ? 'Their hand is revealed. Choose a nonland card, or choose none to consider their exile.'
+          : c.kind === 'exileToGraveyard'
+            ? 'You may put a face-up card the opponent owns from exile into their graveyard.'
+            : 'Keep one copy on the battlefield. The other copies go to their owners’ graveyards.';
+    cards = c.cards;
+    const optional = ['bindingNegotiation', 'exileToGraveyard'].includes(c.kind);
+    actions = `<span class="choice-selection-summary">${selected.length} of 1 selected<strong>${selected[0] ? escape(state.objects[selected[0]].name) : 'Select a card above'}</strong></span>${optional ? '<button class="btn" data-action="declineDecision">Choose none</button>' : ''}<button class="btn primary" data-action="confirmDecision" ${selected.length === 1 ? '' : 'disabled'}>${c.kind === 'legendRule' ? 'Keep selected copy' : 'Confirm choice'}</button>`;
+  } else if (c.kind === 'optionalEffect' || c.kind === 'payCost') {
+    const sourceId = state.resolving?.entry.source?.id;
+    cards = sourceId && state.objects[sourceId] ? [sourceId] : [];
+    title = c.kind === 'payCost' ? 'Pay for ward?' : 'Resolve this ability?';
+    subtitle =
+      c.kind === 'payCost'
+        ? `Pay ${[...Object.entries(c.cost.mana ?? {}).map(([k, n]) => (k === 'generic' ? `${n} mana` : `${n}${k}`)), ...(c.cost.life ? [`${c.cost.life} life`] : [])].join(' + ')} or the affected spell or ability will be countered.`
+        : 'This effect is optional. Review the card before choosing.';
+    actions =
+      c.kind === 'payCost'
+        ? `<button class="btn" data-action="declineWard">Don't pay</button><button class="btn primary" data-action="payWard" ${c.payable ? '' : 'disabled'}>Pay ward</button>`
+        : '<button class="btn" data-action="declineOptional">Decline</button><button class="btn primary" data-action="acceptOptional">Resolve effect</button>';
+  } else if (c.kind === 'creatureType') {
+    title = 'Choose a creature type';
+    subtitle =
+      'Cavern of Souls can protect spells of this type when its colored mana pays for them.';
+    cards = [c.card];
+    actions =
+      '<button class="btn primary" data-action="chooseCreatureType">Confirm creature type</button>';
+  }
+  body = decisionGallery(state, cards, metadata, {
+    viewer: viewer(),
+    action:
+      c.kind === 'mulligan' || ['optionalEffect', 'payCost', 'creatureType'].includes(c.kind)
+        ? 'readDecisionCard'
+        : 'selectDecisionCard',
+    forCard: (id) => ({
+      selected: selected.includes(id),
+      disabled:
+        c.kind === 'bindingNegotiation' && definition(state, state.objects[id]).type === 'land',
+      badge:
+        c.kind === 'legendRule'
+          ? `Copy ${cards.indexOf(id) + 1}`
+          : multi && selected.includes(id)
+            ? `Selected ${selected.indexOf(id) + 1}`
+            : '',
+    }),
+  });
+  if (c.kind === 'creatureType')
+    body = `<div class="choice-type-layout">${body}<select class="choice-type-select" id="entry-creature-type" aria-label="Creature type">${c.types.map((type) => `<option value="${escape(type)}" ${type === dialog._creatureType ? 'selected' : ''}>${escape(type)}</option>`).join('')}</select></div>`;
+  openChoiceDialog(title, subtitle, body, actions, {
+    source,
+    eyebrow: c.kind === 'mulligan' ? 'OPENING HAND' : 'YOUR DECISION',
+  });
+  dialog._activeChoice = c;
+  dialog._stageRender = presentStateChoice;
+}
+function selectDecisionCard(id) {
+  const c = state?.choice;
+  if (dialog._choiceLease !== decisionLease(state, viewer()) || c?.player !== viewer()) return;
+  const multi = ['bottom', 'discard', 'discardEffect'].includes(c.kind);
+  const allowed = multi ? state.players[viewer()].hand : c.cards;
+  if (
+    !allowed?.includes(id) ||
+    (c.kind === 'bindingNegotiation' && definition(state, state.objects[id]).type === 'land')
+  )
+    return;
+  if (multi) {
+    if (ui.chosen.includes(id)) ui.chosen = ui.chosen.filter((x) => x !== id);
+    else if (ui.chosen.length < c.count) ui.chosen.push(id);
+    else {
+      toast(`Choose exactly ${c.count} cards. Deselect one first.`);
+      return;
+    }
+  } else dialog._selectedCards = dialog._selectedCards.includes(id) ? [] : [id];
+  presentStateChoice();
+}
+function confirmDecision(decline = false) {
+  const c = state?.choice;
+  if (dialog._choiceLease !== decisionLease(state, viewer()) || c?.player !== viewer()) return;
+  let command;
+  if (['bottom', 'discard', 'discardEffect'].includes(c.kind))
+    command = { type: c.kind, cards: [...ui.chosen] };
+  else if (c.kind === 'legendRule')
+    command = { type: 'chooseLegend', card: dialog._selectedCards[0] };
+  else command = { type: 'chooseResolutionCard', card: decline ? null : dialog._selectedCards[0] };
+  command.expectedRevision = dialog._choiceRevision;
+  closeDialog();
+  send(command);
+}
+
 function showCardReader(id) {
   const object = inspectableCard(state, id, viewer());
   if (!object) return false;
   ui.inspect = object.name;
   ui.inspectObject = id;
-  openDialog(
-    object.faceDown && object.controller !== viewer() ? 'Face-down creature' : object.name,
-    inspect(object.name, metadata, state, id, viewer()),
+  openChoiceDialog(
+    'A closer look',
+    'Card details and current characteristics.',
+    decisionReader(state, id, metadata, viewer()).replace(
+      'data-action="returnDecision"',
+      'data-action="closeDialog"',
+    ),
+    '<button class="btn primary" data-action="closeDialog">Back to battlefield</button>',
+    { eyebrow: 'CARD DETAILS' },
   );
+  dialog._activeChoice = null;
+  dialog._stageRender = null;
   return true;
 }
 function closeDialog() {
+  if (dialog._activeChoice && state) ui.dismissedChoiceLease = decisionLease(state, viewer());
   dialog.close();
   schedule();
 }
+dialog.addEventListener('cancel', (event) => {
+  if (dialog.classList.contains('choice-stage')) {
+    event.preventDefault();
+    closeDialog();
+  }
+});
 dialog.addEventListener('close', () => {
   duelPresentation.hidePreview();
   schedule();
+});
+dialog.addEventListener('input', (event) => {
+  if (!event.target.matches('[data-choice-filter]')) return;
+  dialog._choiceQuery = event.target.value;
+  const query = event.target.value.toLowerCase().trim();
+  for (const tile of dialog.querySelectorAll('[data-search]'))
+    tile.hidden = !tile.dataset.search.includes(query);
+});
+dialog.addEventListener('change', (event) => {
+  if (event.target.id === 'entry-creature-type') dialog._creatureType = event.target.value;
+});
+dialog.addEventListener(
+  'error',
+  (event) => {
+    if (event.target.tagName === 'IMG') event.target.hidden = true;
+  },
+  true,
+);
+dialog.addEventListener('dragstart', (event) => {
+  const card = event.target.closest('[data-order-card]');
+  if (!card) return;
+  event.dataTransfer.setData('text/leyline-choice', card.dataset.orderCard);
+  event.dataTransfer.effectAllowed = 'move';
+});
+dialog.addEventListener('dragover', (event) => {
+  const lane = event.target.closest('[data-order-drop]');
+  if (!lane || !event.dataTransfer.types.includes('text/leyline-choice')) return;
+  event.preventDefault();
+  lane.classList.add('drag-over');
+});
+dialog.addEventListener('dragleave', (event) =>
+  event.target.closest('[data-order-drop]')?.classList.remove('drag-over'),
+);
+dialog.addEventListener('drop', (event) => {
+  const lane = event.target.closest('[data-order-drop]');
+  if (!lane) return;
+  event.preventDefault();
+  const id = event.dataTransfer.getData('text/leyline-choice');
+  if (
+    state?.choice?.kind !== 'libraryOrder' ||
+    dialog._libraryChoice !== state.choice ||
+    !state.choice.cards.includes(id)
+  )
+    return;
+  action('libraryMove', { dataset: { cardid: id, group: lane.dataset.orderDrop } });
 });
 dialog.addEventListener('click', (e) => {
   if (e.target === dialog) {
@@ -451,23 +751,23 @@ function showSpellModes() {
   ui.spellMode = null;
   ui.targeting = false;
   render();
-  openDialog(
-    `Casting options: ${o.name}`,
-    spellModeBody(state, viewer(), o.id),
-    '<button class="btn quiet" data-action="closeDialog">Cancel</button>',
+  const choices = castingChoices(definition(state, o)),
+    legal = legalActions(state, viewer());
+  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(spellProfile(definition(state, o), index).cost)}<br>${mode.target ? 'Choose a target next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
+  openChoiceDialog(
+    'Choose how to cast',
+    o.name,
+    body,
+    '<button class="btn quiet" data-action="closeDialog">Cancel casting</button>',
+    { eyebrow: 'CASTING OPTIONS', closeLabel: 'View battlefield' },
   );
+  dialog._activeChoice = null;
+  dialog._stageRender = showSpellModes;
   dialog._spellModeCard = ref(o);
   dialog._spellModeRevision = state.revision;
 }
 function showLegendChoice() {
-  const c = state.choice;
-  if (c?.kind !== 'legendRule' || c.player !== viewer()) return;
-  openDialog(
-    'Legend rule: choose one to keep',
-    legendChoiceBody(state, metadata),
-    '<button class="btn quiet" data-action="closeDialog">Review table</button>',
-  );
-  dialog._legendChoice = c;
+  presentStateChoice();
 }
 function showLibrarySearch() {
   const choice = state.choice;
@@ -476,33 +776,52 @@ function showLibrarySearch() {
     dialog._searchChoice = choice;
     dialog._searchCards = [];
   }
-  const selected = dialog._searchCards;
-  const groups = new Map();
+  const selected = dialog._searchCards,
+    groups = new Map();
   for (const id of choice.cards) {
     const name = state.objects[id].name;
     if (!groups.has(name)) groups.set(name, []);
     groups.get(name).push(id);
   }
-  const chosen = selected
+  const picked = selected
     .map(
       (id, index) =>
-        `<div class="search-picked"><span>${choice.destination === 'top' ? `${index + 1}. ` : ''}${escape(state.objects[id].name)}</span>${choice.destination === 'top' ? `<button class="icon-btn" data-action="searchReorder" data-index="${index}" data-direction="-1" aria-label="Move earlier" ${index === 0 ? 'disabled' : ''}>↑</button><button class="icon-btn" data-action="searchReorder" data-index="${index}" data-direction="1" aria-label="Move later" ${index === selected.length - 1 ? 'disabled' : ''}>↓</button>` : ''}<button class="icon-btn" data-action="searchRemove" data-cardid="${id}" aria-label="Remove ${escape(state.objects[id].name)}">×</button></div>`,
+        `<div class="choice-picked-entry"><button class="choice-picked-chip" data-action="searchRemove" data-cardid="${escape(id)}">${choice.destination === 'top' ? `${index + 1}. ` : ''}${escape(state.objects[id].name)} <span aria-hidden="true">×</span></button>${choice.destination === 'top' ? `<button class="icon-btn" data-action="searchReorder" data-index="${index}" data-direction="-1" aria-label="Move earlier" ${index === 0 ? 'disabled' : ''}>←</button><button class="icon-btn" data-action="searchReorder" data-index="${index}" data-direction="1" aria-label="Move later" ${index === selected.length - 1 ? 'disabled' : ''}>→</button>` : ''}</div>`,
     )
     .join('');
-  const body = `<p>${choice.min === 0 ? 'You may find fewer cards, including none.' : `Choose exactly ${choice.min} card${choice.min === 1 ? '' : 's'}.`} Your library is shuffled when you confirm. ${choice.destination === 'top' ? 'Selected cards go on top afterward, first card drawn first.' : `Found cards go to ${choice.destination === 'hand' ? 'your hand' : choice.destination === 'graveyard' ? 'your graveyard' : `the battlefield${choice.tapped ? ' tapped' : ''}`}.`}</p><div class="search-picked-list">${chosen || '<p>No cards selected.</p>'}</div><div class="search-options">${
+  const body = `<div class="decision-toolbar"><input type="search" data-choice-filter placeholder="Find a card…" aria-label="Filter available cards"><span>${choice.cards.length} matching cards · ${selected.length} selected</span></div><div class="choice-picked-tray">${picked || '<span>Choose from the cards below.</span>'}</div><div class="decision-card-grid">${
     [...groups]
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([name, ids]) => {
         const used = ids.filter((id) => selected.includes(id)).length;
-        return `<div class="library-choice"><div class="library-thumb">${metadata[name]?.image ? `<img src="${escape(metadata[name].image)}" alt="" loading="lazy">` : '◇'}</div><div class="library-choice-body"><strong>${escape(name)}</strong><span class="small muted">${ids.length} available · ${used} selected</span><div class="library-choice-actions"><button class="btn" data-action="searchAdd" data-name="${escape(name)}" ${selected.length >= choice.max || used === ids.length ? 'disabled' : ''}>Choose</button><button class="btn quiet" data-action="readSearchCard" data-name="${escape(name)}">Read</button></div></div></div>`;
+        return decisionCard(state, ids[0], metadata, {
+          viewer: viewer(),
+          action: 'searchAdd',
+          extra: `data-name="${escape(name)}"`,
+          selected: used > 0,
+          disabled: (selected.length >= choice.max && choice.max !== 1) || used === ids.length,
+          badge: `${used ? `${used} selected · ` : ''}${ids.length} ${ids.length === 1 ? 'copy' : 'copies'}`,
+        });
       })
-      .join('') || '<p>No matching cards remain.</p>'
+      .join('') || '<div class="decision-empty"><p>No matching cards remain.</p></div>'
   }</div>`;
-  openDialog(
-    `Search · ${selected.length}/${choice.max} selected`,
+  const destination =
+    choice.destination === 'top'
+      ? 'on top of your library'
+      : choice.destination === 'hand'
+        ? 'into your hand'
+        : choice.destination === 'graveyard'
+          ? 'into your graveyard'
+          : `onto the battlefield${choice.tapped ? ' tapped' : ''}`;
+  openChoiceDialog(
+    'Search your library',
+    `Choose ${choice.min === choice.max ? choice.max : `up to ${choice.max}`} card${choice.max === 1 ? '' : 's'} to put ${destination}. Your library will be shuffled.`,
     body,
-    `<button class="btn quiet" data-action="closeDialog">Review table</button><button class="btn primary" data-action="confirmSearch" ${selected.length < choice.min ? 'disabled' : ''}>${selected.length ? 'Find cards & shuffle' : 'Find none & shuffle'}</button>`,
+    `<span class="choice-selection-summary">${selected.length} of ${choice.max} selected</span><button class="btn primary" data-action="confirmSearch" ${selected.length < choice.min ? 'disabled' : ''}>${selected.length ? 'Confirm cards & shuffle' : 'Find none & shuffle'}</button>`,
+    { source: state.resolving?.entry.name ?? '' },
   );
+  dialog._activeChoice = choice;
+  dialog._stageRender = showLibrarySearch;
 }
 function showLibraryOrder() {
   if (dialog._libraryChoice !== state.choice) {
@@ -513,31 +832,28 @@ function showLibraryOrder() {
 }
 function renderLibraryOrder() {
   const order = dialog._libraryOrder,
-    choice = state.choice,
-    restLabel = choice.action === 'scry' ? 'Bottom of library' : 'Graveyard';
-  const groups = [
+    choice = state.choice;
+  if (choice?.kind !== 'libraryOrder' || dialog._libraryChoice !== choice) return;
+  const restLabel = choice.action === 'scry' ? 'Bottom of library' : 'Graveyard';
+  const body = `<div class="decision-order-lanes">${[
     ['top', 'Top of library'],
     ['rest', restLabel],
-  ];
-  const body = `<p>The first card in the top group will be drawn first. Move cards between groups and choose their order.</p>${groups
+  ]
     .map(
       ([key, label]) =>
-        `<h3 style="margin:20px 0 10px">${label}</h3><div class="library-group">${
-          order[key]
-            .map((id, i) => {
-              const o = state.objects[id];
-              return `<div class="library-choice"><div class="library-thumb">${metadata[o.name]?.image ? `<img src="${escape(metadata[o.name].image)}" alt="${escape(o.name)}">` : '◇'}</div><div class="library-choice-body"><strong>${escape(o.name)}</strong><span class="small muted">Position ${i + 1}</span><div class="library-choice-actions"><button class="btn small" data-action="libraryMove" data-cardid="${id}" data-group="${key === 'top' ? 'rest' : 'top'}">${key === 'top' ? restLabel : 'Keep on top'}</button><button class="icon-btn" data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="-1" aria-label="Move ${escape(o.name)} earlier" ${i === 0 ? 'disabled' : ''}>↑</button><button class="icon-btn" data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="1" aria-label="Move ${escape(o.name)} later" ${i === order[key].length - 1 ? 'disabled' : ''}>↓</button></div></div></div>`;
-            })
-            .join('') || '<p class="muted">No cards here.</p>'
-        }</div>`,
+        `<section class="decision-order-lane" data-order-drop="${key}"><h3>${label}</h3><p>${key === 'top' ? 'Leftmost card will be drawn first.' : choice.action === 'scry' ? 'These cards go below the rest of your library.' : 'These cards go to your graveyard.'}</p><div class="decision-card-gallery" style="--choice-count:${Math.max(1, order[key].length)}">${order[key].map((id, i) => decisionCard(state, id, metadata, { viewer: viewer(), action: 'libraryMove', extra: `data-group="${key === 'top' ? 'rest' : 'top'}"`, draggable: true, badge: key === 'top' ? (i === 0 ? 'Draw first' : `Draw ${i + 1}`) : restLabel, label: `Move ${state.objects[id].name} to ${key === 'top' ? restLabel : 'top of library'}` }).replace('</article>', `<div class="decision-order-controls"><button data-action="libraryMove" data-cardid="${id}" data-group="${key === 'top' ? 'rest' : 'top'}">${key === 'top' ? (choice.action === 'scry' ? 'Bottom' : 'Graveyard') : 'Keep on top'}</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="-1" aria-label="Move ${escape(state.objects[id].name)} earlier" ${i === 0 ? 'disabled' : ''}>←</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="1" aria-label="Move ${escape(state.objects[id].name)} later" ${i === order[key].length - 1 ? 'disabled' : ''}>→</button></div></article>`)).join('') || '<div class="decision-empty"><span>◇</span><p>Move cards here</p></div>'}</div></section>`,
     )
-    .join('')}`;
-  openDialog(
-    choice.action === 'scry' ? 'Scry' : 'Surveil',
+    .join('')}</div>`;
+  openChoiceDialog(
+    `${choice.action === 'scry' ? 'Scry' : 'Surveil'} ${choice.cards.length}`,
+    'Click a card to move it between destinations, or drag it. Use the arrows to set the draw order.',
     body,
-    '<button class="btn quiet" data-action="closeDialog">Review table</button><button class="btn primary" data-action="submitLibrary">Confirm arrangement</button>',
+    `<span class="choice-selection-summary">${order.top.length} on top · ${order.rest.length} ${choice.action === 'scry' ? 'on bottom' : 'to graveyard'}</span><button class="btn primary" data-action="submitLibrary">Confirm arrangement</button>`,
+    { source: state.resolving?.entry.name ?? '' },
   );
   dialog._libraryOrder = order;
+  dialog._activeChoice = choice;
+  dialog._stageRender = renderLibraryOrder;
 }
 function showDamage() {
   const orders = suggestedDamage(state);
@@ -599,31 +915,71 @@ function showTargetMenu() {
               ? command.mode === (ui.spellMode ?? undefined)
               : command.ability === ui.activation),
         );
+  const key = `${state.revision}:${ui.selected}:${ui.activation}:${ui.spellMode}:${choice?.entry?.id ?? ''}`;
+  if (dialog._targetKey !== key) {
+    dialog._selectedTargetIndex = -1;
+    dialog._targetKey = key;
+    dialog._choiceQuery = '';
+  }
+  const selected = dialog._selectedTargetIndex;
   const name =
     choice?.kind === 'triggerTarget' ? choice.entry.name : state.objects[ui.selected]?.name;
-  openDialog(
-    `Target for ${name}`,
-    `<p>Choose a legal target. The spell or ability will still use the stack.</p><div class="target-grid">${
-      commands
-        .map((command, index) => {
-          const target = command.target,
-            object = target.kind === 'object' ? state.objects[target.id] : null;
-          const label =
-            object?.name ??
-            (target.kind === 'player'
-              ? state.players[target.id].name
-              : state.stack.find((entry) => entry.id === target.id)?.name);
-          const detail = object
-            ? `${object.zone} · ${state.players[object.owner].name}`
-            : target.kind;
-          return `<button class="btn target-option" data-action="submitTargetChoice" data-index="${index}"><strong>${escape(label)}</strong><span>${escape(detail)}</span></button>`;
-        })
-        .join('') || '<p>No legal targets remain.</p>'
-    }</div>`,
-    '<button class="btn" data-action="closeDialog">Back to table</button>',
+  const body = `<div class="decision-toolbar"><input type="search" data-choice-filter placeholder="Find a target…" aria-label="Filter legal targets"><span>${commands.length} legal target${commands.length === 1 ? '' : 's'}</span></div><div class="${commands.length > 7 ? 'decision-card-grid' : `decision-card-gallery ${commands.length <= 3 ? 'decision-hero' : 'decision-many'}`}" style="--choice-count:${Math.max(1, commands.length)}">${
+    commands
+      .map((command, index) => {
+        const target = command.target,
+          object =
+            target.kind === 'object'
+              ? state.objects[target.id]
+              : target.kind === 'stack'
+                ? state.objects[state.stack.find((e) => e.id === target.id)?.source?.id]
+                : null;
+        if (object)
+          return decisionCard(state, object.id, metadata, {
+            viewer: viewer(),
+            action: 'selectTargetCard',
+            extra: `data-index="${index}"`,
+            selected: selected === index,
+            badge:
+              target.kind === 'stack'
+                ? 'On the stack'
+                : `${object.owner === viewer() ? 'Your' : "Opponent's"} ${object.zone}`,
+          });
+        const label = target.kind === 'player' ? state.players[target.id].name : 'Stack target';
+        return `<article class="decision-player-tile ${selected === index ? 'is-selected' : ''}" data-search="${escape(label.toLowerCase())}"><button class="decision-player-option" data-action="selectTargetCard" data-index="${index}" aria-pressed="${selected === index}"><span class="decision-avatar">${target.kind === 'player' ? state.players[target.id].life : '◇'}</span><strong>${escape(label)}</strong><span>${target.kind === 'player' ? 'Player · life total' : 'Stack object'}</span><span class="decision-selected-mark">✓</span></button></article>`;
+      })
+      .join('') || '<div class="decision-empty"><p>No legal targets remain.</p></div>'
+  }</div>`;
+  openChoiceDialog(
+    'Choose a target',
+    `Select a legal target for ${name}, then confirm.`,
+    body,
+    `<span class="choice-selection-summary">${selected >= 0 ? '1 target selected' : 'Select a target above'}</span><button class="btn primary" data-action="confirmTargetChoice" ${selected >= 0 ? '' : 'disabled'}>Confirm target</button>`,
+    { source: name },
   );
   dialog._targetCommands = commands;
   dialog._targetRevision = state.revision;
+  dialog._activeChoice = choice?.kind === 'triggerTarget' ? choice : null;
+  dialog._stageRender = showTargetMenu;
+}
+function showPublicZone(player, zone) {
+  if (![0, 1].includes(player) || !['graveyard', 'exile'].includes(zone)) return;
+  const key = `${state.revision}:${player}:${zone}`;
+  if (dialog._zoneKey !== key) {
+    dialog._zoneKey = key;
+    dialog._choiceQuery = '';
+  }
+  const cards = state.players[player][zone];
+  const body = `<div class="decision-toolbar"><input type="search" data-choice-filter placeholder="Find a card…" aria-label="Filter zone cards"><span>${cards.length} card${cards.length === 1 ? '' : 's'}</span></div><div class="decision-card-grid">${cards.map((id) => decisionCard(state, id, metadata, { viewer: viewer(), action: 'readDecisionCard', label: `Read ${state.objects[id].name}` })).join('') || '<div class="decision-empty"><span>◇</span><p>This zone is empty.</p></div>'}</div>`;
+  openChoiceDialog(
+    player === viewer() ? `Your ${zone}` : `Opponent's ${zone}`,
+    state.players[player].name,
+    body,
+    '<button class="btn primary" data-action="closeDialog">Back to battlefield</button>',
+    { eyebrow: 'PUBLIC ZONE' },
+  );
+  dialog._activeChoice = null;
+  dialog._stageRender = () => showPublicZone(player, zone);
 }
 function preserveDraft() {
   ui.recoveredDraft = ui.deckDraft;
@@ -931,6 +1287,32 @@ async function action(name, el) {
       editDeck({ name: 'Imported deck', cards });
       break;
     }
+    case 'reviewDecision':
+      presentStateChoice();
+      break;
+    case 'selectDecisionCard':
+      selectDecisionCard(el.dataset.cardid);
+      break;
+    case 'confirmDecision':
+      confirmDecision();
+      break;
+    case 'declineDecision':
+      confirmDecision(true);
+      break;
+    case 'readDecisionCard': {
+      const restore = dialog._stageRender;
+      openChoiceDialog(
+        'A closer look',
+        'Read the card, then return to your decision.',
+        decisionReader(state, el.dataset.cardid, metadata, viewer()),
+        '<button class="btn primary" data-action="returnDecision">Back to cards</button>',
+      );
+      dialog._returnStage = restore;
+      break;
+    }
+    case 'returnDecision':
+      dialog._returnStage?.();
+      break;
     case 'acceptOptional':
     case 'declineOptional':
       send({ type: 'resolveOptional', accept: name === 'acceptOptional' });
@@ -1016,6 +1398,11 @@ async function action(name, el) {
         dialog._searchChoice !== state.choice
       )
         break;
+      if (
+        state.choice.max === 1 &&
+        !dialog._searchCards.some((id) => state.objects[id].name === el.dataset.name)
+      )
+        dialog._searchCards = [];
       const selected = dialog._searchCards;
       const id = state.choice.cards.find(
         (id) => state.objects[id].name === el.dataset.name && !selected.includes(id),
@@ -1054,12 +1441,27 @@ async function action(name, el) {
       break;
     case 'confirmSearch':
       if (dialog._searchChoice !== state.choice) break;
-      if (send({ type: 'searchLibrary', cards: [...dialog._searchCards] })) closeDialog();
+      {
+        const command = {
+          type: 'searchLibrary',
+          cards: [...dialog._searchCards],
+          expectedRevision: dialog._choiceRevision,
+        };
+        closeDialog();
+        send(command);
+      }
       break;
     case 'libraryOrder':
       showLibraryOrder();
       break;
     case 'libraryMove': {
+      if (
+        state.choice?.kind !== 'libraryOrder' ||
+        dialog._libraryChoice !== state.choice ||
+        !state.choice.cards.includes(el.dataset.cardid) ||
+        !['top', 'rest'].includes(el.dataset.group)
+      )
+        break;
       const order = dialog._libraryOrder,
         id = el.dataset.cardid;
       order.top = order.top.filter((x) => x !== id);
@@ -1069,16 +1471,24 @@ async function action(name, el) {
       break;
     }
     case 'libraryReorder': {
+      if (
+        state.choice?.kind !== 'libraryOrder' ||
+        dialog._libraryChoice !== state.choice ||
+        !['top', 'rest'].includes(el.dataset.group)
+      )
+        break;
       const group = dialog._libraryOrder[el.dataset.group],
         i = Number(el.dataset.index),
         j = i + Number(el.dataset.direction);
+      if (!Number.isInteger(i) || i < 0 || j < 0 || i >= group.length || j >= group.length) break;
       [group[i], group[j]] = [group[j], group[i]];
       renderLibraryOrder();
       break;
     }
     case 'submitLibrary': {
       const order = structuredClone(dialog._libraryOrder);
-      if (send({ type: 'orderLibrary', ...order })) closeDialog();
+      closeDialog();
+      send({ type: 'orderLibrary', ...order, expectedRevision: dialog._choiceRevision });
       break;
     }
     case 'editDamage':
@@ -1098,9 +1508,21 @@ async function action(name, el) {
     case 'spellTargets':
       showTargetMenu();
       break;
+    case 'selectTargetCard':
+      if (dialog._targetRevision !== state.revision) break;
+      dialog._selectedTargetIndex = Number(el.dataset.index);
+      showTargetMenu();
+      break;
+    case 'confirmTargetChoice':
+      if (dialog._selectedTargetIndex < 0) break;
+      el = { dataset: { index: String(dialog._selectedTargetIndex) } };
     case 'submitTargetChoice': {
       const command = dialog._targetCommands?.[Number(el.dataset.index)];
-      if (command && send({ ...command, expectedRevision: dialog._targetRevision })) closeDialog();
+      if (command) {
+        const revision = dialog._targetRevision;
+        closeDialog();
+        send({ ...command, expectedRevision: revision });
+      }
       break;
     }
     case 'orderTriggers':
@@ -1139,18 +1561,21 @@ async function action(name, el) {
         const choices = legalActions(state, viewer()).filter(
           (c) => c.type === 'activate' && c.card === id && c.ability === index,
         );
-        openDialog(
-          'Discard a card as the activation cost',
-          choices
-            .map(
-              (c, i) =>
-                `<button class="btn" data-action="payActivationDiscard" data-index="${i}">${escape(state.objects[c.discardCard].name)}</button>`,
-            )
-            .join(''),
-          '<button class="btn quiet" data-action="closeDialog">Cancel</button>',
-        );
         dialog._discardActions = choices;
         dialog._discardRevision = state.revision;
+        const body = `<div class="decision-card-gallery ${choices.length <= 3 ? 'decision-hero' : 'decision-many'}" style="--choice-count:${choices.length}">${choices.map((c, i) => decisionCard(state, c.discardCard, metadata, { viewer: viewer(), action: 'payActivationDiscard', extra: `data-index="${i}"`, label: `Discard ${state.objects[c.discardCard].name} to activate ${state.objects[id].name}` })).join('')}</div>`;
+        const reopen = () => {
+          openChoiceDialog(
+            'Discard a card to activate',
+            `Choose the card to pay ${state.objects[id].name}'s activation cost. This card is discarded immediately.`,
+            body,
+            '<button class="btn" data-action="closeDialog">Cancel activation</button>',
+            { source: state.objects[id].name },
+          );
+          dialog._stageRender = reopen;
+          dialog._activeChoice = null;
+        };
+        reopen();
       } else if (a.target) {
         ui.targeting = true;
         render();
@@ -1429,22 +1854,9 @@ async function action(name, el) {
         `<p>This developer view includes both hands and libraries. It is not a multiplayer protocol.</p><pre>${escape(JSON.stringify({ ...state, events: state.events.slice(-15), history: `${state.history.length} commands (export replay for full history)` }, null, 2))}</pre>`,
       );
       break;
-    case 'zone': {
-      const p = Number(el.dataset.player),
-        z = el.dataset.zone;
-      openDialog(
-        `${state.players[p].name} · ${z}`,
-        `<div class="zone-grid">${
-          state.players[p][z]
-            .map((id) => {
-              const o = state.objects[id];
-              return `<div>${metadata[o.name]?.image ? `<img src="${escape(metadata[o.name].image)}" alt="${escape(o.name)}">` : ''}<p>${escape(o.name)}</p></div>`;
-            })
-            .join('') || '<p>This zone is empty.</p>'
-        }</div>`,
-      );
+    case 'zone':
+      showPublicZone(Number(el.dataset.player), el.dataset.zone);
       break;
-    }
     case 'closeDialog':
       closeDialog();
       break;

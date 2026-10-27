@@ -89,7 +89,7 @@ function cast(s, p, c) {
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'spell',
-    uncounterable: payment.uncounterable,
+    uncounterable: payment.uncounterable || !!d.uncounterable,
     name: o.faceDown ? 'Face-down creature' : o.name,
     controller: p,
     source: ref(o),
@@ -511,6 +511,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.26.0',
         '0.25.0',
         '0.24.0',
         '0.23.0',

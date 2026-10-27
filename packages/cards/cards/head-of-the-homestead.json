@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "467d6acb-9a3c-433f-836d-54e0e670b7d0",
+  "name": "Head of the Homestead",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rabbit", "Citizen"],
+    "colors": ["G", "W"],
+    "manaCost": "{3}{G/W}{G/W}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, create two 1/1 white Rabbit creature tokens.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/rabbit-token",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "38684c31-e8c6-4825-8740-1a3d34b58b39",
+  "name": "Wraith, Vicious Vigilante",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Detective", "Hero"],
+    "colors": ["U", "W"],
+    "manaCost": "{1}{W}{U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Double strike\nFear Gas — Wraith can't be blocked.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    },
+    {
+      "kind": "combatRestriction",
+      "restriction": "unblockable"
+    }
+  ]
+}

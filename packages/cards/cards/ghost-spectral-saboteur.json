@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "88f34d15-c338-40a7-b56c-c5b650847430",
+  "name": "Ghost, Spectral Saboteur",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Rogue", "Villain"],
+    "colors": ["B", "U"],
+    "manaCost": "{2}{U/B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nIntangibility — Ghost can't be blocked.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "combatRestriction",
+      "restriction": "unblockable"
+    }
+  ]
+}

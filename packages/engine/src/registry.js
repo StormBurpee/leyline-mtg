@@ -40,7 +40,13 @@ export function createRegistry(input = CARDS) {
       keywords: copy.keywords ?? [],
       subtypes: copy.subtypes ?? [],
       text: copy.text ?? '',
-      color: copy.color ?? Object.keys(copy.cost).filter((k) => COLORS.has(k)),
+      color: copy.color ?? [
+        ...new Set(
+          Object.keys(copy.cost)
+            .flatMap((k) => k.split('/'))
+            .filter((k) => COLORS.has(k)),
+        ),
+      ],
     };
   }
   if (errors.length) throw new RegistryError(errors.slice(0, 100));
