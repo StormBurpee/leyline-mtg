@@ -11,7 +11,17 @@ export function activatedAbilityButtons(state, player, object, legal) {
       );
       const reason =
         !enabled && (ability.exhaust || ability.classLevel !== undefined)
-          ? abilityProblem(state, player, object.id, index)
+          ? abilityProblem(
+              state,
+              player,
+              object.id,
+              index,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              ability.cost.mana?.X ? 0 : undefined,
+            )
           : null;
       const description = `ability-problem-${index}`;
       return `<button class="btn primary" data-action="activateAbility" data-ability="${index}" ${enabled ? '' : 'disabled'}${reason ? ` aria-describedby="${description}"` : ''}>${ability.cost.sacrificeSelf ? `<span>⚑ Sacrifice ${escape(object.name)} · </span>` : ''}${escape((ability.text ?? 'Activate ability').replaceAll('CARDNAME', object.name))}</button>${reason ? `<small id="${description}" class="muted">${escape(reason)}</small>` : ''}`;

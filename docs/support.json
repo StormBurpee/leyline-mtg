@@ -1,5 +1,5 @@
 {
-  "version": "0.60.0",
+  "version": "0.61.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -549,6 +549,14 @@
       ],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Alquist Proft, Master Sleuth",
+      "type": "creature",
+      "keywords": ["vigilance"],
+      "opcodes": ["token", "draw", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Ambition's Cost",
@@ -3053,6 +3061,14 @@
           }
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Caradora, Heart of Alacria",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -12918,6 +12934,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Michelangelo, Weirdness to 11",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Micromancer",
       "type": "creature",
       "keywords": [],
@@ -13121,6 +13145,14 @@
         }
       ],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Mindspring Merfolk",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw", "counterAll"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Minecart Daredevil // Ride the Rails",
@@ -19229,6 +19261,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Stature, Size Shifter",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Steadfast Cathar",
       "type": "creature",
       "keywords": [],
@@ -23827,6 +23867,14 @@
       "opcodes": ["modify", "conditional"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Yoshimaru, Beloved Companion",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Yoshimaru, Scrappy Stray",

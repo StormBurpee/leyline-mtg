@@ -2,7 +2,15 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.60)
+## Latest coverage (v0.61)
+
+Alquist Proft, Mindspring Merfolk and Stature add complete chosen-X nonmana activations. Explicit X and determined payment remain locked through targets, chosen sacrifice costs, Power-up reductions, Exhaust, source departures and optional continuations. The client selects X before targets/costs and protects cancellation and stale submissions; bot previews include pending grouped X draws. See [activated-X support](activated-x-support.md).
+
+Caradora, Michelangelo and Yoshimaru add complete, bounded additive +1/+1 counter replacement cards. Each applicable source adds its fixed bonus once per positive placement; entering sources cannot enhance their own simultaneous entry group. All supported placement routes share this contract. Multipliers, placer/player scopes and noncommuting replacements remain unsupported. See [counter replacement support](COUNTER-REPLACEMENTS.md).
+
+Total catalog: 2425 playable cards and 108 tokens; dated Standard: 2206 of 5164. No new tokens or existing-definition migrations. Previous Classes, linked-return continuations, revision 4 and legacy revisions 1–3, published v0.60 replay envelopes, exact default/meta lists and saved-catalog caching remain preserved. These bounded families do not imply unrestricted activated costs or generalized replacements. DOM/inspector checks are not browser-layout verification.
+
+## Previous coverage (v0.60)
 
 Leader's Talent, Gossip's Talent and Does Machines now have all printed Class levels. Counter-bearing departures use last-known facts; optional immediate blink follows the exact damage source and restores linked-exile victims first; artifact animation permanently adds creature/Robot and 0/0 base statistics without erasing other types or abilities. Staged entry choices retain the resolving continuation. See [Class support](CLASS-CARDS.md).
 

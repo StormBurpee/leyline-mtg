@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "35142b01-4b8d-4335-a943-a3172fa04573",
+  "name": "Mindspring Merfolk",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Exhaust — {X}{U}{U}, {T}: Draw X cards. Put a +1/+1 counter on each Merfolk creature you control. (Activate each exhaust ability only once.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{X}{U}{U}",
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": {
+            "kind": "x"
+          }
+        },
+        {
+          "op": "counterAll",
+          "amount": 1,
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "subtype": "Merfolk"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        }
+      ],
+      "text": "Exhaust — {X}{U}{U}, {T}: Draw X cards. Put a +1/+1 counter on each Merfolk creature you control. (Activate each exhaust ability only once.)",
+      "exhaust": true
+    }
+  ]
+}

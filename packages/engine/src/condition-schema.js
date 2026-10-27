@@ -33,6 +33,7 @@ export function validateCondition(
       controllerTurn: ['kind'],
       sourceType: ['kind', 'type'],
       sourceToughnessAtMost: ['kind', 'count'],
+      sourcePowerAtMost: ['kind', 'count'],
       targetMatches: ['kind', 'target', 'targetGroup', 'where'],
       targetEnteredThisTurn: ['kind', 'target', 'targetGroup'],
       sourcePrepared: ['kind', 'prepared'],
@@ -101,10 +102,12 @@ export function validateCondition(
     if (v.kind === 'sourcePrepared' && typeof v.prepared !== 'boolean')
       errors.push('Preparation conditions require a boolean prepared state.');
     if (
-      v.kind === 'sourceToughnessAtMost' &&
+      ['sourceToughnessAtMost', 'sourcePowerAtMost'].includes(v.kind) &&
       (continuous || !Number.isSafeInteger(v.count) || Math.abs(v.count) > 1000)
     )
-      errors.push('Source toughness conditions require a bounded trigger threshold.');
+      errors.push(
+        'Source-stat conditions require a bounded threshold outside continuous characteristic bonuses.',
+      );
     if (v.kind === 'sourceType' && !CARD_TYPES.includes(v.type))
       errors.push('Invalid source type.');
     if (v.kind === 'controlAtLeast') {

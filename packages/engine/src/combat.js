@@ -64,6 +64,7 @@ export function canBlock(s, blocker, attacker, p) {
     !definition(s, blocker).cannotBlock &&
     !conditionalRestriction(s, blocker, 'cannotBlock') &&
     !definition(s, attacker).unblockable &&
+    !conditionalRestriction(s, attacker, 'unblockable') &&
     !hasCombatRestriction(s, blocker, 'cannotBlock') &&
     !hasCombatRestriction(s, attacker, 'cannotBeBlocked') &&
     (!definition(s, attacker).cannotBeBlockedByLowerPower ||

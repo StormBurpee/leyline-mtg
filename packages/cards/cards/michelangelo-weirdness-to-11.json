@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "170ab932-9d50-4ce7-9a42-08e1edce7e7c",
+  "name": "Michelangelo, Weirdness to 11",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Mutant", "Ninja", "Turtle"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When Michelangelo enters, create a Mutagen token. (It's an artifact with \"{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.\")\nIf one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mutagen-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "plusCounterBonus",
+      "amount": 1,
+      "scope": "creatureYouControl"
+    }
+  ]
+}

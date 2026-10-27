@@ -520,7 +520,7 @@ function stack(s, ui, meta = {}) {
           .reverse()
           .map(
             (e, i) =>
-              `<button class="stack-item" data-stack="${e.id}" ${e.kind === 'spell' ? `data-motion-card="${e.source.id}" data-motion-zone="stack"` : ''}>${meta[e.name]?.image ? `<img class="stack-card-art" src="${escape(meta[e.name].image)}" alt="" draggable="false">` : ''}<small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape([e.kind === 'ability' ? e.label : e.modeLabel ? `Mode: ${e.modeLabel}` : !e.target ? 'Spell' : '', e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : ''].filter(Boolean).join(' · '))}</p></button>`,
+              `<button class="stack-item" data-stack="${e.id}" ${e.kind === 'spell' ? `data-motion-card="${e.source.id}" data-motion-zone="stack"` : ''}>${meta[e.name]?.image ? `<img class="stack-card-art" src="${escape(meta[e.name].image)}" alt="" draggable="false">` : ''}<small>${i === 0 ? 'RESOLVES NEXT' : 'WAITING'} · ${escape(s.players[e.controller].name)}</small><strong>${escape(e.name)}</strong><p>${escape([e.x !== undefined ? `X = ${e.x}` : '', e.kind === 'ability' ? e.label : e.modeLabel ? `Mode: ${e.modeLabel}` : !e.target ? 'Spell' : '', e.target ? `Target: ${e.target.kind === 'player' ? s.players[e.target.id].name : (s.objects[e.target.id]?.name ?? s.stack.find((x) => x.id === e.target.id)?.name ?? 'spell')}` : ''].filter(Boolean).join(' · '))}</p></button>`,
           )
           .join('')
       : resolving
@@ -535,7 +535,7 @@ export function eventText(e, s) {
     case 'cast':
       return `${p} cast ${name}.`;
     case 'activated':
-      return `${p} activated ${name}.`;
+      return `${p} activated ${name}${e.x !== undefined ? ` (X = ${e.x})` : ''}.`;
     case 'land':
       return `${p} played ${name}.`;
     case 'resolved':

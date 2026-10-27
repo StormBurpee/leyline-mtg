@@ -1,3 +1,4 @@
+export { activationCost } from './costs.js';
 export { activationSacrificeCandidates } from './activation-sacrifice.js';
 export {
   castingPayment,

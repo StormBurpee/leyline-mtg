@@ -3906,6 +3906,24 @@
           },
           "required": ["kind", "level", "cost", "abilities"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "plusCounterBonus"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "scope": {
+              "enum": ["creatureYouControl", "creatureOrVehicleYouControl"]
+            }
+          },
+          "required": ["kind", "amount", "scope"],
+          "additionalProperties": false
         }
       ]
     },
@@ -4162,7 +4180,7 @@
           "type": "object",
           "properties": {
             "kind": {
-              "const": "sourceToughnessAtMost"
+              "enum": ["sourceToughnessAtMost", "sourcePowerAtMost"]
             },
             "count": {
               "type": "integer",

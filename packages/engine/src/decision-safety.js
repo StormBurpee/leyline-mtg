@@ -171,7 +171,12 @@ function actionCost(state, player, action) {
   if (action.type === 'ninjutsu') return { mana: card.ninjutsu };
   if (action.type === 'cycle') return { mana: card.cycling };
   if (action.type === 'activate') {
-    const cost = activationCost(state, state.objects[action.card], card.activated[action.ability]);
+    const cost = activationCost(
+      state,
+      state.objects[action.card],
+      card.activated[action.ability],
+      action.x,
+    );
     const excludeSources = costManaExclusions(state, cost, {
       sourceId: action.card,
       sacrifices: action.sacrifices,

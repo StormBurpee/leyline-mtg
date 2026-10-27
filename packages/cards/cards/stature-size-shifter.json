@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bd49a05c-ed51-4d69-ab9b-11192442ec17",
+  "name": "Stature, Size Shifter",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Hero"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Stature can't be blocked if her power is 1 or less.\nPower-up \u2014 {X}{U}{U}: Put X +1/+1 counters on Stature. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)",
+  "abilities": [
+    {
+      "kind": "combatRestriction",
+      "restriction": "unblockable",
+      "condition": {
+        "kind": "sourcePowerAtMost",
+        "count": 1
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{X}{U}{U}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "counter": "+1/+1",
+          "target": "source",
+          "amount": {
+            "kind": "x"
+          }
+        }
+      ],
+      "text": "Power-up \u2014 {X}{U}{U}: Put X +1/+1 counters on Stature. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)",
+      "powerUp": true
+    }
+  ]
+}

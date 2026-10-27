@@ -45,6 +45,7 @@ import {
   harmonizeCandidates,
   castingSacrificeCandidates,
   activationSacrificeCandidates,
+  activationCost,
   additionalCostCandidates,
   convokeCandidates,
   MAX_X,
@@ -282,7 +283,10 @@ function send(
   const c = {
     player: viewer(),
     expectedRevision: state.revision,
-    ...(!automatic && command.type === 'cast' && command.card === ui.selected && ui.x != null
+    ...(!automatic &&
+    ['cast', 'activate'].includes(command.type) &&
+    command.card === ui.selected &&
+    ui.x != null
       ? { x: ui.x }
       : {}),
     ...command,
@@ -1094,21 +1098,59 @@ function showDeck() {
       .join('')}`,
   );
 }
+function continueActivation() {
+  const id = ui.selected,
+    index = ui.activation,
+    a = definition(state, state.objects[id]).activated[index];
+  if (a.cost.discard) {
+    const choices = legalActions(state, viewer(), { x: ui.x ?? undefined }).filter(
+      (c) => c.type === 'activate' && c.card === id && c.ability === index,
+    );
+    dialog._discardActions = choices;
+    dialog._discardRevision = state.revision;
+    const body = `<div class="decision-card-gallery ${choices.length <= 3 ? 'decision-hero' : 'decision-many'}" style="--choice-count:${choices.length}">${choices.map((c, i) => decisionCard(state, c.discardCard, metadata, { viewer: viewer(), action: 'payActivationDiscard', extra: `data-index="${i}"`, label: `Discard ${state.objects[c.discardCard].name} to activate ${state.objects[id].name}` })).join('')}</div>`;
+    const reopen = () => {
+      openChoiceDialog(
+        'Discard a card to activate',
+        `Choose the card to pay ${state.objects[id].name}'s activation cost. This card is discarded immediately.`,
+        body,
+        '<button class="btn" data-action="closeDialog">Cancel activation</button>',
+        { source: state.objects[id].name },
+      );
+      dialog._stageRender = reopen;
+      dialog._activeChoice = null;
+    };
+    reopen();
+  } else if (a.targetGroups) {
+    showGroupedTargets();
+  } else if (a.target) {
+    ui.targeting = true;
+    render();
+    if (
+      targetsFor(state, a.target, viewer(), ref(state.objects[id])).some(
+        (target) => state.objects[target.id]?.zone === 'graveyard',
+      )
+    )
+      showTargetMenu();
+  } else send({ type: 'activate', card: id, ability: index });
+}
 function showXChoice() {
-  const discover = state?.choice?.kind === 'castExiled' && state.choice.discover !== undefined;
+  const activating = ui.activation !== null;
+  const discover =
+    !activating && state?.choice?.kind === 'castExiled' && state.choice.discover !== undefined;
   const maximum = discover ? 0 : MAX_X;
   const o = state?.objects[ui.selected];
   if (!o) return;
+  const ability = activating ? definition(state, o).activated[ui.activation] : null;
+  const matchesX = (a) =>
+    a.type === (activating ? 'activate' : 'cast') &&
+    a.card === o.id &&
+    a.x !== undefined &&
+    (activating ? a.ability === ui.activation : a.mode === (ui.spellMode ?? undefined));
   const values = [
     ...new Set(
       legalActions(state, viewer())
-        .filter(
-          (a) =>
-            a.type === 'cast' &&
-            a.card === o.id &&
-            a.x !== undefined &&
-            a.mode === (ui.spellMode ?? undefined),
-        )
+        .filter(matchesX)
         .map((a) => a.x),
     ),
   ];
@@ -1119,12 +1161,13 @@ function showXChoice() {
     discover
       ? `${o.name} · Discover casts without its mana cost, so X must be 0.`
       : `${o.name} · Choose X before targets; targets can change the final cost. Implementation range: 0–${MAX_X}.`,
-    `<label>Other X value <input id="cast-x-value" type="number" min="0" max="${maximum}" step="1" value="0"></label><button class="btn primary" data-action="chooseX">Use this X</button><div class="decision-mode-grid">${values.map((x) => `<button class="decision-mode" data-action="chooseX" data-x="${x}"><strong>X = ${x}</strong><span>${mana(castingProfile(state, viewer(), o, ui.spellMode ?? undefined, null, undefined, x).cost)}</span></button>`).join('')}</div>`,
-    '<button class="btn quiet" data-action="closeDialog">Cancel casting</button>',
+    `<label>Other X value <input id="cast-x-value" type="number" min="0" max="${maximum}" step="1" value="0"></label><button class="btn primary" data-action="chooseX">Use this X</button><div class="decision-mode-grid">${values.map((x) => `<button class="decision-mode" data-action="chooseX" data-x="${x}"><strong>X = ${x}</strong><span>${mana(activating ? activationCost(state, o, ability, x).mana : castingProfile(state, viewer(), o, ui.spellMode ?? undefined, null, undefined, x).cost)}</span></button>`).join('')}</div>`,
+    `<button class="btn quiet" data-action="closeDialog">Cancel ${activating ? 'activation' : 'casting'}</button>`,
     { eyebrow: 'VARIABLE COST' },
   );
   dialog._xCard = ref(o);
   dialog._xRevision = state.revision;
+  dialog._xActivation = ui.activation;
   dialog._activeChoice = null;
   dialog._stageRender = showXChoice;
 }
@@ -1497,6 +1540,7 @@ function showActivationSacrifice(command, sacrifices = []) {
     command.discardCard,
     command.targets,
     sacrifices,
+    command.x,
   );
   const body = `<p>Choose ${cost.count} eligible permanent${cost.count === 1 ? '' : 's'} to sacrifice as an activation cost. These are not targets. They leave before opponents can respond, even if the ability is countered.${ability.cost.sacrificeSelf ? ` ${escape(object.name)} is also sacrificed.` : ''}</p><div class="decision-card-grid">${candidates
     .map((o) => {
@@ -1506,7 +1550,7 @@ function showActivationSacrifice(command, sacrifices = []) {
     .join('')}</div>`;
   openChoiceDialog(
     'Choose activation sacrifice',
-    object.name,
+    `${object.name}${command.x !== undefined ? ` · X = ${command.x}` : ''}`,
     body,
     `<button class="btn" data-action="closeDialog">Cancel activation</button><span>${sacrifices.length} of ${cost.count} selected. ${problem ? escape(problem) : 'Payment is available.'}</span><button class="btn primary" data-action="confirmActivationSacrifice" ${problem ? 'disabled' : ''}>Confirm sacrifice and activate</button>`,
     { source: object.name },
@@ -1592,7 +1636,7 @@ function groupedTargetProblem(context, plan) {
       context.choice.entry.targetingSource ?? context.choice.entry.source,
     );
   if (context.ability) {
-    const witness = legalActions(state, viewer()).find(
+    const witness = legalActions(state, viewer(), { x: ui.x ?? undefined }).find(
       (a) => a.type === 'activate' && a.card === context.object.id && a.ability === ui.activation,
     );
     return abilityProblem(
@@ -1604,6 +1648,7 @@ function groupedTargetProblem(context, plan) {
       undefined,
       plan,
       witness?.sacrifices,
+      ui.x ?? undefined,
     );
   }
   return castProblem(state, viewer(), context.object.id, null, {
@@ -1664,7 +1709,7 @@ function showGroupedTargets() {
   const cost = choice
     ? null
     : ability
-      ? (ability.cost.mana ?? {})
+      ? (activationCost(state, object, ability, ui.x ?? undefined).mana ?? {})
       : castingProfile(
           state,
           viewer(),
@@ -1704,7 +1749,7 @@ function showTargetMenu() {
             command.type === (ui.activation === null ? 'cast' : 'activate') &&
             (ui.activation === null
               ? command.mode === (ui.spellMode ?? undefined) && command.x === (ui.x ?? undefined)
-              : command.ability === ui.activation),
+              : command.ability === ui.activation && command.x === (ui.x ?? undefined)),
         );
   const key = `${state.revision}:${ui.selected}:${ui.activation}:${ui.spellMode}:${choice?.entry?.id ?? ''}`;
   if (dialog._targetKey !== key) {
@@ -2705,37 +2750,9 @@ async function action(name, el) {
       closeDialog();
       ui.selected = id;
       ui.activation = index;
-      if (a.cost.discard) {
-        const choices = legalActions(state, viewer()).filter(
-          (c) => c.type === 'activate' && c.card === id && c.ability === index,
-        );
-        dialog._discardActions = choices;
-        dialog._discardRevision = state.revision;
-        const body = `<div class="decision-card-gallery ${choices.length <= 3 ? 'decision-hero' : 'decision-many'}" style="--choice-count:${choices.length}">${choices.map((c, i) => decisionCard(state, c.discardCard, metadata, { viewer: viewer(), action: 'payActivationDiscard', extra: `data-index="${i}"`, label: `Discard ${state.objects[c.discardCard].name} to activate ${state.objects[id].name}` })).join('')}</div>`;
-        const reopen = () => {
-          openChoiceDialog(
-            'Discard a card to activate',
-            `Choose the card to pay ${state.objects[id].name}'s activation cost. This card is discarded immediately.`,
-            body,
-            '<button class="btn" data-action="closeDialog">Cancel activation</button>',
-            { source: state.objects[id].name },
-          );
-          dialog._stageRender = reopen;
-          dialog._activeChoice = null;
-        };
-        reopen();
-      } else if (a.targetGroups) {
-        showGroupedTargets();
-      } else if (a.target) {
-        ui.targeting = true;
-        render();
-        if (
-          targetsFor(state, a.target, viewer(), ref(state.objects[id])).some(
-            (target) => state.objects[target.id]?.zone === 'graveyard',
-          )
-        )
-          showTargetMenu();
-      } else send({ type: 'activate', card: id, ability: index });
+      ui.x = null;
+      if (a.cost.mana?.X) showXChoice();
+      else continueActivation();
       break;
     }
     case 'payActivationDiscard': {
@@ -2756,7 +2773,8 @@ async function action(name, el) {
         !o ||
         ui.selected !== o.id ||
         o.incarnation !== dialog._xCard.incarnation ||
-        state.revision !== dialog._xRevision
+        state.revision !== dialog._xRevision ||
+        ui.activation !== dialog._xActivation
       ) {
         closeDialog();
         resetSelection();
@@ -2766,10 +2784,12 @@ async function action(name, el) {
       if (
         !legalActions(state, viewer(), { x }).some(
           (a) =>
-            a.type === 'cast' &&
+            a.type === (ui.activation !== null ? 'activate' : 'cast') &&
             a.card === o.id &&
             a.x === x &&
-            a.mode === (ui.spellMode ?? undefined),
+            (ui.activation !== null
+              ? a.ability === ui.activation
+              : a.mode === (ui.spellMode ?? undefined)),
         )
       ) {
         toast(`Choose a payable integer X from 0 to ${MAX_X} with legal targets.`);
@@ -2777,7 +2797,8 @@ async function action(name, el) {
       }
       ui.x = x;
       closeDialog();
-      action('playSelected', el);
+      if (ui.activation !== null) continueActivation();
+      else action('playSelected', el);
       break;
     }
     case 'spellModes':
@@ -2853,6 +2874,8 @@ async function action(name, el) {
       if (ui.selected) send({ type: 'cycle', card: ui.selected });
       break;
     case 'playSelected': {
+      // Casting starts a new intent, including after a canceled activation chooser.
+      ui.activation = null;
       const o = state.objects[ui.selected];
       if (!o) break;
       const printed = definition(state, o);
@@ -3320,6 +3343,7 @@ function selectCard(id) {
       return;
     }
     ui.spellMode = null;
+    ui.activation = null;
     ui.x = null;
     ui.selected = ui.selected === id ? null : id;
     if (
