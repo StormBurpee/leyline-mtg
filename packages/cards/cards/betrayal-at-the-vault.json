@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f1dce3f0-30c8-488f-bbeb-b0533886c655",
+  "name": "Betrayal at the Vault",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{4}{G}{G}"
+  },
+  "rulesText": "Target creature you control deals damage equal to its power to each of two other target creatures.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "actor",
+          "label": "Choose your creature",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victims",
+          "label": "Choose damage recipients",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 2,
+          "max": 2,
+          "excludeFrom": ["actor"]
+        }
+      ],
+      "effects": [
+        {
+          "op": "bite",
+          "sourceGroup": "actor",
+          "victimGroup": "victims"
+        }
+      ]
+    }
+  ]
+}

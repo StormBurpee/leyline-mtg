@@ -1,3 +1,4 @@
+import { flattenTargets } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { definition } from './model.js';
 import { planPayment } from './mana.js';
@@ -13,7 +14,8 @@ const targetKey = (a) => (a.target?.kind === 'object' ? a.target.id : null);
  * targets are deliberately outside this horizon. */
 export function chooseSequence(s, p, ranked, { budget = SEQUENCE_BUDGET, depth = 4 } = {}) {
   if (s.stack.length || s.active !== p || !['main1', 'main2'].includes(s.step)) return null;
-  const positive = ranked.filter((r) => r.score > 0);
+  // Grouped removal is scored directly and replanned after resolution, not projected as independent resource-only plays.
+  const positive = ranked.filter((r) => r.score > 0 && !r.a.targets);
   const groups = new Map();
   for (const r of positive) {
     if (!groups.has(r.a.card)) groups.set(r.a.card, []);
@@ -39,7 +41,13 @@ export function chooseSequence(s, p, ranked, { budget = SEQUENCE_BUDGET, depth =
       if (examined >= budget) break;
       if (used.has(a.card) || (targetKey(a) && targets.has(targetKey(a)))) continue;
       examined++;
-      const card = castingProfile(state, p, state.objects[a.card], a.mode, a.target);
+      const card = castingProfile(
+        state,
+        p,
+        state.objects[a.card],
+        a.mode,
+        a.targets ? flattenTargets(a.targets) : a.target,
+      );
       const payment = planPayment(state, p, card.cost);
       if (!payment || !actionSafe(state, p, a)) continue;
       const effects = actionEffects(state, a);

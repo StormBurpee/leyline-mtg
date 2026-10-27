@@ -1,3 +1,4 @@
+import { flattenTargets } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { meetsCondition } from './conditions.js';
 import { effectValues, numericValue } from './numeric-values.js';
@@ -35,6 +36,60 @@ import {
   opponent,
   stats,
 } from './model.js';
+function groupedSpellScore(s, p, action, card) {
+  const adjusted = new Map();
+  const data = (target) => {
+    const object = target?.kind === 'object' && s.objects[target.id];
+    if (!object) return null;
+    if (!adjusted.has(object.id))
+      adjusted.set(object.id, { object, ...stats(s, object), damage: object.damage, death: false });
+    return adjusted.get(object.id);
+  };
+  for (const effect of card.effects ?? []) {
+    const targets = action.targets[effect.targetGroup] ?? [];
+    if (effect.op === 'modify' || effect.op === 'counterOn') {
+      for (const t of targets) {
+        const d = data(t);
+        if (!d) continue;
+        d.power += effect.op === 'modify' ? effect.power : effect.amount;
+        d.toughness += effect.op === 'modify' ? effect.toughness : effect.amount;
+      }
+    }
+    if (effect.op === 'fight' || effect.op === 'bite') {
+      const actor = data(action.targets[effect.sourceGroup]?.[0]);
+      if (!actor) continue;
+      for (const t of action.targets[effect.victimGroup] ?? []) {
+        const victim = data(t);
+        if (!victim) continue;
+        victim.damage += Math.max(0, actor.power);
+        if (actor.power > 0 && hasKeyword(s, actor.object, 'deathtouch')) victim.death = true;
+        if (effect.op === 'fight') {
+          actor.damage += Math.max(0, victim.power);
+          if (victim.power > 0 && hasKeyword(s, victim.object, 'deathtouch')) actor.death = true;
+        }
+      }
+    }
+    if (effect.op === 'damage')
+      for (const t of targets) {
+        const d = data(t);
+        if (d) d.damage += effect.amount;
+      }
+    if (effect.op === 'destroy')
+      for (const t of targets) {
+        const d = data(t);
+        if (d) d.death = true;
+      }
+  }
+  let score = -1;
+  for (const d of adjusted.values()) {
+    const killed =
+      d.toughness <= 0 ||
+      ((d.death || d.damage >= d.toughness) && !hasKeyword(s, d.object, 'indestructible'));
+    if (killed) score += (d.object.controller === p ? -1 : 1) * (6 + value(s, d.object));
+  }
+  return score;
+}
+
 function definition(s, o) {
   const d = rawDefinition(s, o),
     entry = { controller: o.controller, source: { id: o.id, incarnation: o.incarnation } };
@@ -460,10 +515,11 @@ export function chooseBotCommand(s, p) {
         p,
         s.objects[a.card],
         a.mode,
-        a.target,
+        a.targets ? flattenTargets(a.targets) : a.target,
         definition(s, s.objects[a.card]),
       );
       let score = -100;
+      if (d.targetGroups) return { a, score: groupedSpellScore(s, p, a, d) };
       if (d.type === 'creature' || d.static || d.mana)
         score = 5 + Object.values(d.cost).reduce((a, b) => a + b, 0);
       if (d.type === 'creature') {
@@ -602,7 +658,10 @@ export function chooseBotCommand(s, p) {
     })
     .sort((a, b) => b.score - a.score);
   const sequence = chooseSequence(s, p, casts);
-  const cast = sequence?.action ?? (casts[0]?.score > 0 ? casts[0].a : null);
+  const cast =
+    casts[0]?.a.targets && casts[0].score > 0
+      ? casts[0].a
+      : (sequence?.action ?? (casts[0]?.score > 0 ? casts[0].a : null));
   if (cast) {
     const d = definition(s, s.objects[cast.card]);
     // Choose the best play before delaying an ordinary creature until main two.

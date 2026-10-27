@@ -21,7 +21,14 @@ const cost = (value) => ({
 export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const effects = (list) =>
     list.map((e) => {
+      if (e.targetGroup !== undefined) {
+        const { targetGroup, ...rest } = e;
+        return { ...effects([rest])[0], targetGroup };
+      }
       switch (e.op) {
+        case 'fight':
+        case 'bite':
+          return structuredClone(e);
         case 'impulseChoose':
           return { op: 'impulseChoose', amount: e.count };
         case 'attachEquipment':
@@ -143,6 +150,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   if (d.effects)
     abilities.push({
       kind: 'spell',
+      ...(d.targetGroups ? { targetGroups: structuredClone(d.targetGroups) } : {}),
       ...(d.target ? { target: structuredClone(targetSpec(d.target)) } : {}),
       effects: effects(d.effects),
     });

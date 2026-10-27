@@ -1,5 +1,5 @@
 {
-  "version": "0.34.0",
+  "version": "0.35.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -386,6 +386,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Assert Perfection",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["modify", "bite"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Attercop",
       "type": "creature",
       "keywords": ["reach", "deathtouch"],
@@ -567,6 +575,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Betrayal at the Vault",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bite"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1145,6 +1161,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Chelonian Tackle",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["modify", "fight"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Circuitous Route",
       "type": "sorcery",
       "keywords": [],
@@ -1698,6 +1722,14 @@
       "keywords": ["menace"],
       "opcodes": ["modify"],
       "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Diplomatic Relations",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "bite"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -2311,6 +2343,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Felling Blow",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["counterOn", "bite"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -3447,6 +3487,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Huatli's Final Strike",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "bite"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Hullcarver",
       "type": "creature",
       "keywords": ["deathtouch"],
@@ -3807,6 +3855,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Kapow!",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["counterOn", "fight"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Kargan Dragonrider",
       "type": "creature",
       "keywords": [],
@@ -3881,6 +3937,14 @@
       "opcodes": ["draw", "attachEquipment"],
       "triggers": [],
       "activatedAbilities": 2
+    },
+    {
+      "name": "Knockout Maneuver",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["counterOn", "bite"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Krang, Utrom Warlord",
@@ -5590,6 +5654,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Quarrel",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bite"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Quick-Draw Katana",
       "type": "artifact",
       "keywords": [],
@@ -5618,6 +5690,22 @@
       "type": "land",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rabid Bite",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["bite"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rabid Gnaw",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "bite"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6078,6 +6166,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rocky Rebuke",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bite"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -7671,6 +7767,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Tenderize",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bite"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Terramorphic Expanse",
       "type": "land",
       "keywords": [],
@@ -8036,6 +8140,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Troll Negotiations",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["counterOn", "fight"],
       "triggers": [],
       "activatedAbilities": 0
     },

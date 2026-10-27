@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a03fa584-ceb5-410c-9b80-f75d00215537",
+  "name": "Tenderize",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Target creature you control deals damage equal to its power to target creature an opponent controls.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "actor",
+          "label": "Choose your creature",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victims",
+          "label": "Choose damage recipients",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "bite",
+          "sourceGroup": "actor",
+          "victimGroup": "victims"
+        }
+      ]
+    }
+  ]
+}

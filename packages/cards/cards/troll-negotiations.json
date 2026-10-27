@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6e275711-eb76-4924-ba38-c38a36d9d82a",
+  "name": "Troll Negotiations",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}{G}"
+  },
+  "rulesText": "Put two +1/+1 counters on target creature you control. Then it fights target creature an opponent controls. (Each deals damage equal to its power to the other.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "actor",
+          "label": "Choose your creature",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victims",
+          "label": "Choose creatures to fight",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "targetGroup": "actor",
+          "counter": "+1/+1",
+          "amount": 2
+        },
+        {
+          "op": "fight",
+          "sourceGroup": "actor",
+          "victimGroup": "victims"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fbfa19ca-98bb-4c7d-a04e-920a8aafb031",
+  "name": "Felling Blow",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature an opponent controls.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "actor",
+          "label": "Choose your creature",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victims",
+          "label": "Choose damage recipients",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "targetGroup": "actor",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "bite",
+          "sourceGroup": "actor",
+          "victimGroup": "victims"
+        }
+      ]
+    }
+  ]
+}

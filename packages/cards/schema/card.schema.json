@@ -566,6 +566,9 @@
             },
             "amount": {
               "$ref": "#/$defs/numericValue"
+            },
+            "targetGroup": {
+              "type": "string"
             }
           },
           "required": ["op", "target", "amount"],
@@ -608,6 +611,9 @@
             },
             "target": {
               "enum": ["source", "attached", "target"]
+            },
+            "targetGroup": {
+              "type": "string"
             }
           },
           "required": ["op", "target"],
@@ -621,6 +627,9 @@
             },
             "target": {
               "enum": ["source", "attached", "target"]
+            },
+            "targetGroup": {
+              "type": "string"
             }
           },
           "required": ["op", "target"],
@@ -667,6 +676,9 @@
             },
             "until": {
               "const": "endOfTurn"
+            },
+            "targetGroup": {
+              "type": "string"
             }
           },
           "required": ["op", "target", "power", "toughness", "until"],
@@ -733,6 +745,9 @@
             },
             "amount": {
               "$ref": "#/$defs/numericValue"
+            },
+            "targetGroup": {
+              "type": "string"
             }
           },
           "required": ["op", "target", "counter", "amount"],
@@ -746,6 +761,9 @@
             },
             "target": {
               "enum": ["source", "target", "attached"]
+            },
+            "targetGroup": {
+              "type": "string"
             }
           },
           "required": ["op", "target"],
@@ -784,6 +802,9 @@
             },
             "tapped": {
               "type": "boolean"
+            },
+            "targetGroup": {
+              "type": "string"
             }
           },
           "required": ["op", "target", "destination"],
@@ -960,6 +981,9 @@
             },
             "target": {
               "enum": ["source", "target", "attached"]
+            },
+            "targetGroup": {
+              "type": "string"
             }
           },
           "required": ["op", "target"],
@@ -1037,6 +1061,38 @@
             }
           },
           "required": ["op", "target"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "fight"
+            },
+            "sourceGroup": {
+              "type": "string"
+            },
+            "victimGroup": {
+              "type": "string"
+            }
+          },
+          "required": ["op", "sourceGroup", "victimGroup"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "bite"
+            },
+            "sourceGroup": {
+              "type": "string"
+            },
+            "victimGroup": {
+              "type": "string"
+            }
+          },
+          "required": ["op", "sourceGroup", "victimGroup"],
           "additionalProperties": false
         }
       ]
@@ -1157,6 +1213,9 @@
               },
               "minItems": 0,
               "maxItems": 64
+            },
+            "targetGroups": {
+              "$ref": "#/$defs/targetGroups"
             }
           },
           "required": ["kind", "effects"],
@@ -1847,6 +1906,47 @@
           "additionalProperties": false
         }
       ]
+    },
+    "targetGroups": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_]{0,39}$"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "selector": {
+            "$ref": "#/$defs/selector"
+          },
+          "min": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8
+          },
+          "max": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "excludeFrom": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 7,
+            "uniqueItems": true
+          }
+        },
+        "required": ["id", "selector", "min", "max"],
+        "additionalProperties": false
+      }
     }
   }
 }

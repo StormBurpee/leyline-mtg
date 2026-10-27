@@ -1,3 +1,5 @@
+import { flattenTargets, targetGroupCandidates } from '../../packages/engine/src/target-groups.js';
+import { castProblem } from '../../packages/engine/src/engine.js';
 import {
   CARD_DECISIONS,
   decisionLease,
@@ -216,6 +218,7 @@ function updateCombatLinks() {
 app.addEventListener('scroll', updateCombatLinks, true);
 window.addEventListener('resize', updateCombatLinks);
 function resetSelection() {
+  dialog._groupKey = null;
   ui.selected = null;
   ui.targeting = false;
   ui.activation = null;
@@ -910,6 +913,73 @@ function showSettings() {
     `<div class="options-row"><label class="toggle"><input type="checkbox" id="auto-yield" ${ui.autoYield ? 'checked' : ''}>Yield when no response is available</label><label class="toggle"><input type="checkbox" id="hold-priority" ${ui.holdPriority ? 'checked' : ''}>Hold priority after casting</label><label class="toggle"><input type="checkbox" id="reduce-motion" ${ui.reduceMotion ? 'checked' : ''}>Reduce motion</label></div><p class="small muted">System reduced-motion preferences are always respected.</p><p style="margin-top:22px">Automatic yielding stops whenever you can cast a spell. Disable it to inspect every priority window. Mana sources are paid automatically when casting, or click a land to float mana manually.</p><p style="margin-top:12px">Drag a card onto your field to play, or onto a highlighted target to cast. Drag creatures toward your opponent to select attackers, or onto an attacker to assign a blocker, then confirm the group. Keyboard: Space passes priority. Escape cancels a drag or card selection. All match controls are reachable with Tab.</p>`,
   );
 }
+function showGroupedTargets() {
+  const object = state.objects[ui.selected];
+  if (!object) return;
+  const profile = spellProfile(definition(state, object), ui.spellMode ?? undefined);
+  const groups = profile?.targetGroups;
+  if (!groups) return;
+  const key = `${state.revision}:${object.id}:${ui.spellMode}`;
+  if (dialog._groupKey !== key) {
+    dialog._groupKey = key;
+    dialog._groupIndex = 0;
+    dialog._groupPlan = Object.fromEntries(groups.map((g) => [g.id, []]));
+  }
+  const index = dialog._groupIndex,
+    group = groups[index],
+    plan = dialog._groupPlan;
+  const candidates = targetGroupCandidates(state, groups, group.id, viewer(), plan);
+  const chosen = plan[group.id];
+  const matches = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  const body = `<div class="decision-toolbar"><span>Step ${index + 1} of ${groups.length} · Choose ${group.min === group.max ? group.min : `${group.min}–${group.max}`}</span></div><div class="decision-card-gallery ${candidates.length <= 3 ? 'decision-hero' : 'decision-many'}" style="--choice-count:${Math.max(1, candidates.length)}">${
+    candidates
+      .map((target, i) => {
+        const selected = chosen.some((t) => matches(t, target));
+        const card =
+          target.kind === 'object'
+            ? state.objects[target.id]
+            : target.kind === 'stack'
+              ? state.objects[state.stack.find((e) => e.id === target.id)?.source?.id]
+              : null;
+        if (card)
+          return decisionCard(state, card.id, metadata, {
+            viewer: viewer(),
+            action: 'selectGroupTarget',
+            extra: `data-index="${i}"`,
+            selected,
+          });
+        const label = state.players[target.id]?.name ?? 'Target';
+        return `<article class="decision-player-tile ${selected ? 'is-selected' : ''}"><button class="decision-player-option" data-action="selectGroupTarget" data-index="${i}" aria-pressed="${selected}"><strong>${escape(label)}</strong><span class="decision-selected-mark">✓</span></button></article>`;
+      })
+      .join('') || '<div class="decision-empty">No legal targets in this group.</div>'
+  }</div>`;
+  const validStep = chosen.length >= group.min && chosen.length <= group.max;
+  const last = index === groups.length - 1;
+  const problem = castProblem(state, viewer(), object.id, null, {
+    mode: ui.spellMode ?? undefined,
+    targets: plan,
+  });
+  const cost = castingProfile(
+    state,
+    viewer(),
+    object,
+    ui.spellMode ?? undefined,
+    flattenTargets(plan),
+  ).cost;
+  openChoiceDialog(
+    group.label ?? 'Choose targets',
+    object.name,
+    body,
+    `${index ? '<button class="btn" data-action="previousTargetGroup">Back</button>' : ''}<span class="decision-selection-summary">${chosen.length} selected · ${mana(cost)}${last && problem ? `<small>${escape(problem)}</small>` : ''}</span><button class="btn primary" data-action="nextTargetGroup" ${validStep && (!last || !problem) ? '' : 'disabled'}>${last ? 'Confirm and cast' : 'Next targets'}</button>`,
+    { source: object.name },
+  );
+  dialog._activeChoice = null;
+  dialog._groupCandidates = candidates;
+  dialog._groupRevision = state.revision;
+  dialog._groupDefinitions = groups;
+  dialog._stageRender = showGroupedTargets;
+}
+
 function showTargetMenu() {
   const choice = state.choice;
   const commands =
@@ -1528,6 +1598,53 @@ async function action(name, el) {
     case 'spellTargets':
       showTargetMenu();
       break;
+    case 'selectGroupTarget': {
+      if (dialog._groupRevision !== state.revision) break;
+      const group = dialog._groupDefinitions[dialog._groupIndex];
+      const target = dialog._groupCandidates[Number(el.dataset.index)];
+      if (!target) break;
+      const chosen = dialog._groupPlan[group.id];
+      const index = chosen.findIndex((t) => JSON.stringify(t) === JSON.stringify(target));
+      if (index >= 0) chosen.splice(index, 1);
+      else if (group.max === 1) chosen.splice(0, chosen.length, target);
+      else if (chosen.length < group.max) chosen.push(target);
+      else {
+        toast(`Choose at most ${group.max} targets.`);
+        break;
+      }
+      for (const later of dialog._groupDefinitions.slice(dialog._groupIndex + 1))
+        dialog._groupPlan[later.id] = [];
+      showGroupedTargets();
+      break;
+    }
+    case 'previousTargetGroup':
+      if (dialog._groupRevision === state.revision && dialog._groupIndex > 0) {
+        dialog._groupIndex--;
+        showGroupedTargets();
+      }
+      break;
+    case 'nextTargetGroup': {
+      if (dialog._groupRevision !== state.revision) break;
+      const group = dialog._groupDefinitions[dialog._groupIndex];
+      const chosen = dialog._groupPlan[group.id];
+      if (chosen.length < group.min || chosen.length > group.max) break;
+      if (dialog._groupIndex < dialog._groupDefinitions.length - 1) {
+        dialog._groupIndex++;
+        showGroupedTargets();
+      } else {
+        const command = {
+          type: 'cast',
+          card: ui.selected,
+          targets: structuredClone(dialog._groupPlan),
+          expectedRevision: dialog._groupRevision,
+        };
+        if (ui.spellMode != null) command.mode = ui.spellMode;
+        if (castProblem(state, viewer(), command.card, null, command)) break;
+        closeDialog();
+        send(command);
+      }
+      break;
+    }
     case 'selectTargetCard':
       if (dialog._targetRevision !== state.revision) break;
       dialog._selectedTargetIndex = Number(el.dataset.index);
@@ -1671,7 +1788,9 @@ async function action(name, el) {
         break;
       }
       if (d.type === 'land') send({ type: 'playLand', card: o.id });
-      else if (d.target) {
+      else if (d.targetGroups) {
+        showGroupedTargets();
+      } else if (d.target) {
         ui.targeting = true;
         ui.sideTab = targetsFor(state, d.target, viewer()).some((target) => target.kind === 'stack')
           ? 'stack'

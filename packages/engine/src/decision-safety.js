@@ -1,3 +1,4 @@
+import { flattenTargets } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { effectValues } from './numeric-values.js';
 import { spellProfile } from './spell-modes.js';
@@ -70,8 +71,13 @@ function actionCost(state, player, action) {
     ? card.activated[action.ability].cost
     : {
         mana:
-          castingProfile(state, player, state.objects[action.card], action.mode, action.target)
-            ?.cost ?? card.cost,
+          castingProfile(
+            state,
+            player,
+            state.objects[action.card],
+            action.mode,
+            action.targets ? flattenTargets(action.targets) : action.target,
+          )?.cost ?? card.cost,
       };
 }
 
@@ -107,6 +113,28 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
 export function actionSafe(state, player, action) {
   if (!['cast', 'activate'].includes(action.type)) return true;
   const cost = actionCost(state, player, action);
+  if (action.targets) {
+    const seen = new Set();
+    const mana = { ...(cost.mana ?? {}) };
+    let life = cost.life ?? 0;
+    for (const target of flattenTargets(action.targets)) {
+      if (target.kind !== 'object' || seen.has(target.id)) continue;
+      seen.add(target.id);
+      const object = state.objects[target.id];
+      if (object?.zone !== 'battlefield' || object.controller === player) continue;
+      const ward = definition(state, object).ward;
+      if (!ward) continue;
+      life += ward.life ?? 0;
+      for (const [symbol, amount] of Object.entries(ward.mana ?? {}))
+        mana[symbol] = (mana[symbol] ?? 0) + amount;
+    }
+    return (
+      life < state.players[player].life &&
+      !!planPayment(state, player, mana) &&
+      !resolutionRisk(state, player, actionEffects(state, action), null, life)
+    );
+  }
+
   if ((cost.life ?? 0) >= state.players[player].life) return false;
   return (
     !resolutionRisk(state, player, actionEffects(state, action), action.target, cost.life ?? 0) &&
