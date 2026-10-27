@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "efddf972-94c4-49d1-a844-b4aba70c93aa",
+  "name": "Topiary Panther",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Plant", "Cat"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}{G}",
+    "power": 6,
+    "toughness": 5
+  },
+  "rulesText": "Trample\nBasic landcycling {1}{G} ({1}{G}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "cycling",
+      "cost": "{1}{G}",
+      "type": "Basic land"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eab71e4e-27c3-4c41-b95f-259c1d14b97a",
+  "name": "Dragon Mage",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dragon", "Wizard"],
+    "colors": ["R"],
+    "manaCost": "{5}{R}{R}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Flying\nWhenever this creature deals combat damage to a player, each player discards their hand, then draws seven cards.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "combatDamagePlayer",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": {
+            "kind": "count",
+            "zone": "hand",
+            "player": "you"
+          }
+        },
+        {
+          "op": "discard",
+          "target": "opponent",
+          "amount": {
+            "kind": "count",
+            "zone": "hand",
+            "player": "opponent"
+          }
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 7
+        },
+        {
+          "op": "draw",
+          "target": "opponent",
+          "amount": 7
+        }
+      ]
+    }
+  ]
+}

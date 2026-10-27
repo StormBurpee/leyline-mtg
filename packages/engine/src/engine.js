@@ -1,3 +1,4 @@
+import { cyclingFilter } from './cycling.js';
 import { flattenTargets, targetPlanProblem, targetPlans } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { cardDefinition } from './cards.js';
@@ -95,6 +96,7 @@ function cast(s, p, c) {
   if (d.faceDownCast) o.castingFaceDown = true;
   move(s, o, 'stack');
   o.controller = p;
+  if (d.flashbackPaid) o.flashbackPaid = true;
   delete o.castingFaceDown;
   if (d.faceDownCast) o.faceDown = true;
   s.stack.push({
@@ -108,6 +110,7 @@ function cast(s, p, c) {
     sourceDefinition: structuredClone(definition(s, o)),
     effects: structuredClone(d.effects ?? []),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
+    ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
     ...(d.targetGroups
@@ -124,6 +127,7 @@ function cast(s, p, c) {
     target: c.target ?? null,
     ...(d.targetGroups ? { targets: structuredClone(c.targets) } : {}),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
+    ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
   });
@@ -199,10 +203,20 @@ function cycle(s, p, c) {
     source: ref(o),
     sourceKeywords: keywords(s, o),
     ...(o.attachedTo ? { sourceAttachment: structuredClone(o.attachedTo) } : {}),
-    effects: [{ op: 'draw', count: 1 }],
+    effects: d.cyclingType
+      ? [
+          {
+            op: 'searchLibrary',
+            count: 1,
+            destination: 'hand',
+            reveal: true,
+            where: cyclingFilter(d.cyclingType),
+          },
+        ]
+      : [{ op: 'draw', count: 1 }],
     targetKind: null,
     target: null,
-    label: 'Cycling',
+    label: d.cyclingType ? `${d.cyclingType}cycling` : 'Cycling',
   });
   pay(s, p, d.cycling);
   move(s, o, 'graveyard');
@@ -586,6 +600,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.38.0',
         '0.37.0',
         '0.36.1',
         '0.36.0',

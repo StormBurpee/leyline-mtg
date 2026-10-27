@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6e21ebdf-b97c-494e-a1d5-19db1b7d3016",
+  "name": "Savage Land Dinosaur",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}{G}",
+    "power": 7,
+    "toughness": 6
+  },
+  "rulesText": "Trample\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Basic land"
+    }
+  ]
+}

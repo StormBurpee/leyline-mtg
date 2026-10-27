@@ -44,6 +44,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return { op: 'bindingNegotiation' };
         case 'addMana':
           return { op: 'addMana', mana: mana(e.mana) };
+        case 'drawEventAmount':
         case 'damageEventPowerOpponent':
         case 'damageEventOpponent':
         case 'destroyAll':
@@ -133,7 +134,13 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const abilities = d.keywords.map((keyword) => ({ kind: 'keyword', keyword }));
   for (const restriction of ['cannotAttack', 'cannotBlock', 'unblockable'])
     if (d[restriction]) abilities.push({ kind: 'combatRestriction', restriction });
-  if (d.cycling) abilities.push({ kind: 'cycling', cost: mana(d.cycling) });
+  if (d.flashback) abilities.push({ kind: 'flashback', cost: mana(d.flashback) });
+  if (d.cycling)
+    abilities.push({
+      kind: 'cycling',
+      cost: mana(d.cycling),
+      ...(d.cyclingType ? { type: d.cyclingType } : {}),
+    });
   if (d.ward) abilities.push({ kind: 'keyword', keyword: 'ward', cost: cost(d.ward) });
   if (d.entersTapped) abilities.push({ kind: 'entry', tapped: true });
   if (d.entersTappedUnless)

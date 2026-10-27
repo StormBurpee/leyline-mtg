@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c15cad77-e70f-42cc-a9f5-50e1fd8c9c96",
+  "name": "Shoreline Looter",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rat", "Rogue"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "This creature can't be blocked.\nThreshold \u2014 Whenever this creature deals combat damage to a player, draw a card. Then discard a card unless there are seven or more cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "combatRestriction",
+      "restriction": "unblockable"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "combatDamagePlayer",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "count",
+              "zone": "graveyard",
+              "player": "you"
+            },
+            "operator": "gte",
+            "right": 7
+          },
+          "then": [],
+          "else": [
+            {
+              "op": "discard",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

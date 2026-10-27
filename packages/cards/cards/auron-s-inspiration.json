@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "53a4d9ee-6dfa-4a8b-a1e4-7f671a666188",
+  "name": "Auron's Inspiration",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "Attacking creatures get +2/+0 until end of turn.\nFlashback {2}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "attacking": true
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          },
+          "power": 2,
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "flashback",
+      "cost": "{2}{W}{W}"
+    }
+  ]
+}

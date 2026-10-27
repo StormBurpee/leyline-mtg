@@ -40,6 +40,7 @@ for (const path of [
   'packages/engine/src/value-schema.js',
   'packages/engine/src/events.js',
   'packages/engine/src/types.js',
+  'packages/engine/src/creature-types.js',
 ])
   compilerInputs[path] = createHash('sha256')
     .update(await readFile(new URL(`../${path}`, import.meta.url)))

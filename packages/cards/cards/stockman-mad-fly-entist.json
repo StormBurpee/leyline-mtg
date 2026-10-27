@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "baa4cb1b-6fb5-46df-9cdd-54421ee0fc88",
+  "name": "Stockman, Mad Fly-entist",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Insect", "Mutant", "Scientist"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen Stockman enters, draw a card, then discard a card.\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Island"
+    }
+  ]
+}

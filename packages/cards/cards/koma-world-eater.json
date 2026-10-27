@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1ebf2142-f171-40cd-8143-15f50084b707",
+  "name": "Koma, World-Eater",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Serpent"],
+    "colors": ["G", "U"],
+    "manaCost": "{3}{G}{G}{U}{U}",
+    "power": 8,
+    "toughness": 12
+  },
+  "rulesText": "This spell can't be countered.\nTrample, ward {4}\nWhenever Koma deals combat damage to a player, create four 3/3 blue Serpent creature tokens named Koma's Coil.",
+  "abilities": [
+    {
+      "kind": "uncounterable"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{4}"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "combatDamagePlayer",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/komas-coil",
+          "amount": 4
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7af493e3-15a1-42d6-a66c-82aacabe816f",
+  "name": "Saber-Tooth Moose-Lion",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elk", "Cat"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}{G}",
+    "power": 7,
+    "toughness": 7
+  },
+  "rulesText": "Reach\nForestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Forest"
+    }
+  ]
+}

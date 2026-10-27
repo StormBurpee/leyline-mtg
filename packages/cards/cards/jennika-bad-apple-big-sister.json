@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b55da4d3-2cad-4c89-ad3f-7d8397b64d52",
+  "name": "Jennika, Bad Apple Big Sister",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Mutant", "Ninja", "Turtle"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "When Jennika enters, create a 2/2 red Mutant creature token.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mutant-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Plains"
+    }
+  ]
+}

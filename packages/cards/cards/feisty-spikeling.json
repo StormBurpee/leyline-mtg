@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fcf796fa-43ae-43d1-a124-776338bc3542",
+  "name": "Feisty Spikeling",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Shapeshifter"],
+    "supertypes": [],
+    "colors": ["R", "W"],
+    "manaCost": "{1}{R/W}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Changeling (This card is every creature type.)\nDuring your turn, this creature has first strike.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "changeling"
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["first strike"]
+    }
+  ]
+}

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.39.0 — Parallel coverage expansion
+
+- Add player combat-damage events, recorded damage-sized draws, and simultaneous-condition handling. Add 14 complete combat-trigger cards and two existing-engine additions.
+- Add 23 land/typecyclers using non-spell activation, discard-before-search, optional revealed search/shuffle, bot land development and card-choice UI.
+- Add 10 changelings with shared effective subtype checks across zones, triggers, costs and Cavern mana. Reject unsupported dynamic changeling grants until the relevant type/ability layers exist.
+- Add five fixed-mana flashback cards with graveyard timing/target/cost checks, actual payment previews and exile replacement on every stack departure.
+- Catalog: 1151 playable cards and 29 tokens. Preserve the coverage-gap audit and its conservative, non-additive forecasts.
+
 ## 0.38.0 — Conditional resolution instructions
 
 - Add bounded conditional effect branches evaluated at their actual resolution position. Once selected, a branch survives paused scry/search/discard decisions without being re-evaluated.

@@ -380,7 +380,8 @@
                 "hexproof",
                 "shroud",
                 "indestructible",
-                "menace"
+                "menace",
+                "changeling"
               ]
             }
           },
@@ -422,7 +423,8 @@
             "attackGroup",
             "noncombatDamageToPlayer",
             "lifeGain",
-            "faceUp"
+            "faceUp",
+            "combatDamagePlayer"
           ]
         },
         "object": {
@@ -1140,6 +1142,16 @@
           },
           "required": ["op", "condition", "then"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "drawEventAmount"
+            }
+          },
+          "required": ["op"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1186,7 +1198,8 @@
                 "hexproof",
                 "shroud",
                 "indestructible",
-                "menace"
+                "menace",
+                "changeling"
               ]
             }
           },
@@ -1451,7 +1464,8 @@
             },
             "cost": {
               "$ref": "#/$defs/mana"
-            }
+            },
+            "type": { "type": "string", "pattern": "^[A-Za-z][A-Za-z -]{0,79}$" }
           },
           "required": ["kind", "cost"],
           "additionalProperties": false
@@ -1573,6 +1587,19 @@
             }
           },
           "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "flashback"
+            },
+            "cost": {
+              "$ref": "#/$defs/mana"
+            }
+          },
+          "required": ["kind", "cost"],
           "additionalProperties": false
         },
         {

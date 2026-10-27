@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "930035c6-cde7-40ac-98ef-0840812037db",
+  "name": "Chitinous Graspling",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Shapeshifter"],
+    "colors": ["G", "U"],
+    "manaCost": "{3}{G/U}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Changeling (This card is every creature type.)\nReach",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "changeling"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    }
+  ]
+}

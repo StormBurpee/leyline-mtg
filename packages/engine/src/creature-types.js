@@ -368,3 +368,20 @@ export const CREATURE_TYPES = Object.freeze([
   'Zombie',
   'Zubera',
 ]);
+
+// Changeling is a characteristic-defining ability (CR 702.73): it applies in
+// every zone, before later type/ability-changing effects. Read the current
+// definition, never an object's printed name or its layer-6 granted keywords.
+export function subtypesOf(card) {
+  const printed = card?.subtypes ?? [];
+  return card?.keywords?.includes('changeling')
+    ? [...new Set([...printed, ...CREATURE_TYPES])]
+    : printed;
+}
+export function hasSubtype(card, subtype) {
+  return !!(
+    card &&
+    (card.subtypes?.includes(subtype) ||
+      (card.keywords?.includes('changeling') && CREATURE_TYPES.includes(subtype)))
+  );
+}

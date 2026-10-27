@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "faf2f368-a7e7-4427-bc03-929f294b1e03",
+  "name": "Prideful Feastling",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Shapeshifter"],
+    "colors": ["B", "W"],
+    "manaCost": "{2}{W/B}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Changeling (This card is every creature type.)\nLifelink",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "changeling"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    }
+  ]
+}

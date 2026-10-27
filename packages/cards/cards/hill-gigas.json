@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "137594f7-2422-461b-a3ae-7ce3c135e0c7",
+  "name": "Hill Gigas",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Trample, haste\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Mountain"
+    }
+  ]
+}

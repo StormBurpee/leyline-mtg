@@ -114,3 +114,19 @@ Stun counters replace actual untapping in the untap step and from explicit/group
 ### Conditional resolution instructions
 
 A conditional instruction selects its then/else branch against the public state at that instruction, after earlier instructions have run. Selection is retained across resolution choices. Instruction graphs are bounded to 256 nodes and eight nested levels. Initial intervening-if trigger clauses remain trigger conditions checked at both event and resolution; a trailing condition is not promoted to that gate. Policy previews evaluate branches against the current public state and do not claim full future-state simulation. Outcome-linked conditions, target history and unsupported Oracle clauses still fail closed.
+
+### Player combat-damage triggers
+
+Self-hit and per-creature player combat-damage predicates use the actual damage source and recorded damage amount. Simultaneous packets finish damage/lifelink changes before trigger-condition checks. Damage-sized draws retain the amount if the source subsequently changes. One-or-more grouped combat hits and unsupported linked outcomes are not implied.
+
+### Typecycling
+
+One cycling ability per card can search a type/subtype or basic land rather than draw. Mana and discard are paid before the ability resolves; searches are optional, revealed and followed by shuffling. Nonbasic subtype lands and changeling creature types are recognized. Cycling-trigger and cycling-cost-modifier mechanics and arbitrary combined-supertype searches remain unsupported.
+
+### Changeling
+
+Printed/current-copy changeling supplies all supported creature types in every zone through shared subtype evaluation; it does not add card types or land/artifact subtypes. Face-down definitions suppress it. Tribal selectors, triggers, reducers and chosen-type mana share this behavior. General type-changing layers and dynamically granted changeling are not implemented; unsupported grant paths are rejected.
+
+### Flashback
+
+Fixed-mana, nonmodal instant/sorcery flashback uses normal timing/target legality and casting-cost modifiers from the graveyard. Its stack incarnation is exiled whenever it leaves the stack, including countering and failed target resolution. Graveyard actions, cost previews, replay and opaque command handles use the same casting path. Additional unsupported costs, X, duplicate flashback and kicker/offspring/disguise combinations are rejected.

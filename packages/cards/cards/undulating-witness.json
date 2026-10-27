@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "77b684b8-227b-40de-80b4-15d0e70914f4",
+  "name": "Undulating Witness",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Serpent"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 3,
+    "toughness": 5
+  },
+  "rulesText": "Flying\n{2}: This creature gets +1/-1 until end of turn.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": -1,
+          "keywords": [],
+          "until": "endOfTurn"
+        }
+      ],
+      "text": "This creature gets +1/-1 until end of turn."
+    },
+    {
+      "kind": "cycling",
+      "cost": "{2}",
+      "type": "Basic land"
+    }
+  ]
+}
