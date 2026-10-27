@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a5492d28-b1bf-408d-a048-8f200158d6b1",
+  "name": "Plow Through",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{G}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Target creature you control fights target creature an opponent controls. (Each deals damage equal to its power to the other.)\n\u2022 Destroy target Vehicle.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target creature you control fights target creature an opponent controls",
+          "effects": [
+            {
+              "op": "fight",
+              "sourceGroup": "actor",
+              "victimGroup": "victims"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "actor",
+              "label": "Choose your creature",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "controller": "you"
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 1
+            },
+            {
+              "id": "victims",
+              "label": "Choose creatures to fight",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "controller": "opponent"
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 1
+            }
+          ]
+        },
+        {
+          "label": "Destroy target Vehicle",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "subtype": "Vehicle"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

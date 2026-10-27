@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0217da8e-e74f-4f5c-ab75-f17600f94405",
+  "name": "Rock Soldiers",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Soldier"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "When this creature enters, destroy up to one target noncreature artifact.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "label": "Choose up to one target",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "not": {
+                    "type": "creature"
+                  }
+                },
+                {
+                  "type": "artifact"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

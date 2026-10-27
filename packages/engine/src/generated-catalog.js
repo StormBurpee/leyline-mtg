@@ -180,6 +180,41 @@ export const definitions = [
     toughness: 5,
   },
   {
+    name: 'Afterthought Sentry',
+    type: 'creature',
+    types: ['artifact', 'creature'],
+    cost: { generic: 2 },
+    keywords: [],
+    subtypes: ['Gargoyle'],
+    color: [],
+    text: '{2}: This creature gains flying until end of turn.\nWhenever this creature attacks, exile up to one target card from a graveyard.',
+    power: 2,
+    toughness: 2,
+    activated: [
+      {
+        cost: { mana: { generic: 2 } },
+        effects: [
+          { op: 'modify', subject: 'source', power: 0, toughness: 0, keywords: ['flying'] },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        event: 'selfAttacks',
+        effects: [{ op: 'moveTarget', destination: 'exile', targetGroup: 'chosen' }],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: { scope: 'graveyard' },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Agate-Blade Assassin',
     type: 'creature',
     types: ['creature'],
@@ -488,6 +523,33 @@ export const definitions = [
           scope: 'permanent',
           where: { all: [{ controller: 'opponent' }, { type: 'creature' }] },
         },
+      },
+    ],
+  },
+  {
+    name: 'Ambush Wolf',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, G: 1 },
+    keywords: ['flash'],
+    subtypes: ['Wolf'],
+    color: ['G'],
+    text: 'Flash (You may cast this spell any time you could cast an instant.)\nWhen this creature enters, exile up to one target card from a graveyard.',
+    power: 4,
+    toughness: 2,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'moveTarget', destination: 'exile', targetGroup: 'chosen' }],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: { scope: 'graveyard' },
+            min: 0,
+            max: 1,
+          },
+        ],
       },
     ],
   },
@@ -2173,6 +2235,57 @@ export const definitions = [
     kicker: { cost: { generic: 4 }, effects: [{ op: 'damage', amount: 4 }] },
   },
   {
+    name: 'Bushwhack',
+    type: 'sorcery',
+    types: ['sorcery'],
+    cost: { G: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['G'],
+    text: "Choose one —\n• Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n• Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)",
+    modes: [
+      {
+        label:
+          'Search your library for a basic land card, reveal it, put it into your hand, then shuffle',
+        effects: [
+          {
+            op: 'searchLibrary',
+            count: 1,
+            destination: 'hand',
+            where: { all: [{ type: 'land' }, { basic: true }] },
+            reveal: true,
+          },
+        ],
+      },
+      {
+        label: "Target creature you control fights target creature you don't control",
+        targetGroups: [
+          {
+            id: 'actor',
+            label: 'Choose your creature',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+          {
+            id: 'victims',
+            label: 'Choose creatures to fight',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'opponent' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+        ],
+        effects: [{ op: 'fight', sourceGroup: 'actor', victimGroup: 'victims' }],
+      },
+    ],
+  },
+  {
     name: 'Buzz Bots',
     type: 'creature',
     types: ['artifact', 'creature'],
@@ -3263,6 +3376,37 @@ export const definitions = [
     ],
   },
   {
+    name: 'Curious Farm Animals',
+    type: 'creature',
+    types: ['creature'],
+    cost: { W: 1 },
+    keywords: [],
+    subtypes: ['Boar', 'Elk', 'Bird', 'Ox'],
+    color: ['W'],
+    text: 'When this creature dies, you gain 3 life.\n{2}, Sacrifice this creature: Destroy up to one target artifact or enchantment.',
+    power: 1,
+    toughness: 1,
+    triggers: [{ event: 'selfDies', effects: [{ op: 'gainLife', amount: 3 }] }],
+    activated: [
+      {
+        cost: { mana: { generic: 2 }, sacrificeSelf: true },
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: {
+              scope: 'permanent',
+              where: { any: [{ type: 'artifact' }, { type: 'enchantment' }] },
+            },
+            min: 0,
+            max: 1,
+          },
+        ],
+        effects: [{ op: 'destroy', targetGroup: 'chosen' }],
+      },
+    ],
+  },
+  {
     name: 'Daggerfang Duo',
     type: 'creature',
     types: ['creature'],
@@ -4240,6 +4384,42 @@ export const definitions = [
             toughness: 1,
           },
         ],
+      },
+    ],
+  },
+  {
+    name: 'Dubious Delicacy',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 2, B: 1 },
+    keywords: ['flash'],
+    subtypes: ['Food'],
+    color: ['B'],
+    text: 'Flash\nWhen this artifact enters, up to one target creature gets -3/-3 until end of turn.\n{2}, {T}, Sacrifice this artifact: You gain 3 life.\n{2}, {T}, Sacrifice this artifact: Target opponent loses 3 life.',
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'modify', power: -3, toughness: -3, targetGroup: 'chosen' }],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: { scope: 'permanent', where: { type: 'creature' } },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
+    activated: [
+      {
+        cost: { mana: { generic: 2 }, sacrificeSelf: true, tap: true },
+        effects: [{ op: 'gainLife', amount: 3 }],
+      },
+      {
+        cost: { mana: { generic: 2 }, sacrificeSelf: true, tap: true },
+        target: 'opponent',
+        effects: [{ op: 'loseLife', amount: 3, player: 'target' }],
       },
     ],
   },
@@ -6226,6 +6406,46 @@ export const definitions = [
     toughness: 4,
   },
   {
+    name: 'Giantfall',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 1, R: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['R'],
+    text: 'Choose one —\n• Target creature you control deals damage equal to its power to target creature an opponent controls.\n• Destroy target artifact.',
+    modes: [
+      {
+        label:
+          'Target creature you control deals damage equal to its power to target creature an opponent controls',
+        targetGroups: [
+          {
+            id: 'actor',
+            label: 'Choose your creature',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+          {
+            id: 'victims',
+            label: 'Choose damage recipients',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'opponent' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+        ],
+        effects: [{ op: 'bite', sourceGroup: 'actor', victimGroup: 'victims' }],
+      },
+      { label: 'Destroy target artifact', target: 'artifact', effects: [{ op: 'destroy' }] },
+    ],
+  },
+  {
     name: 'Gigantic Big Bear',
     type: 'creature',
     types: ['creature'],
@@ -7374,6 +7594,36 @@ export const definitions = [
     power: 4,
     toughness: 3,
     triggers: [{ event: 'selfAttacks', effects: [{ op: 'gainLife', amount: 2 }] }],
+  },
+  {
+    name: 'Heritage Reclamation',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 1, G: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['G'],
+    text: 'Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Exile up to one target card from a graveyard. Draw a card.',
+    modes: [
+      { label: 'Destroy target artifact', target: 'artifact', effects: [{ op: 'destroy' }] },
+      { label: 'Destroy target enchantment', target: 'enchantment', effects: [{ op: 'destroy' }] },
+      {
+        label: 'Exile up to one target card from a graveyard. Draw a card',
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: { scope: 'graveyard' },
+            min: 0,
+            max: 1,
+          },
+        ],
+        effects: [
+          { op: 'moveTarget', destination: 'exile', targetGroup: 'chosen' },
+          { op: 'draw', count: 1 },
+        ],
+      },
+    ],
   },
   {
     name: 'Hermitic Nautilus',
@@ -11472,6 +11722,36 @@ export const definitions = [
     ],
   },
   {
+    name: 'Peerless Ropemaster',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 4, U: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Rogue'],
+    color: ['U'],
+    text: "When this creature enters, return up to one target tapped creature to its owner's hand.",
+    power: 4,
+    toughness: 4,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'bounce', targetGroup: 'chosen' }],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ tapped: true }, { type: 'creature' }] },
+            },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Pelakka Wurm',
     type: 'creature',
     types: ['creature'],
@@ -11706,6 +11986,49 @@ export const definitions = [
     ],
   },
   {
+    name: 'Plow Through',
+    type: 'sorcery',
+    types: ['sorcery'],
+    cost: { G: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['G'],
+    text: 'Choose one —\n• Target creature you control fights target creature an opponent controls. (Each deals damage equal to its power to the other.)\n• Destroy target Vehicle.',
+    modes: [
+      {
+        label: 'Target creature you control fights target creature an opponent controls',
+        targetGroups: [
+          {
+            id: 'actor',
+            label: 'Choose your creature',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+          {
+            id: 'victims',
+            label: 'Choose creatures to fight',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'opponent' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+        ],
+        effects: [{ op: 'fight', sourceGroup: 'actor', victimGroup: 'victims' }],
+      },
+      {
+        label: 'Destroy target Vehicle',
+        target: { scope: 'permanent', where: { subtype: 'Vehicle' } },
+        effects: [{ op: 'destroy' }],
+      },
+    ],
+  },
+  {
     name: 'Plumecreed Escort',
     type: 'creature',
     types: ['creature'],
@@ -11739,6 +12062,31 @@ export const definitions = [
     power: 3,
     toughness: 2,
     etb: [{ op: 'token', count: 1, definition: 'Treasure Token' }],
+  },
+  {
+    name: 'Plunge into Winter',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 1, W: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['W'],
+    text: 'Tap up to one target creature. Scry 1, then draw a card.',
+    target: null,
+    targetGroups: [
+      {
+        id: 'chosen',
+        label: 'Choose up to one target',
+        selector: { scope: 'permanent', where: { type: 'creature' } },
+        min: 0,
+        max: 1,
+      },
+    ],
+    effects: [
+      { op: 'tap', targetGroup: 'chosen' },
+      { op: 'scry', count: 1 },
+      { op: 'draw', count: 1 },
+    ],
   },
   {
     name: 'Poison Dart Frog',
@@ -13161,6 +13509,36 @@ export const definitions = [
       },
     },
     mana: ['R', 'U'],
+  },
+  {
+    name: 'Rock Soldiers',
+    type: 'creature',
+    types: ['artifact', 'creature'],
+    cost: { generic: 3, R: 1 },
+    keywords: [],
+    subtypes: ['Elemental', 'Soldier'],
+    color: ['R'],
+    text: 'When this creature enters, destroy up to one target noncreature artifact.',
+    power: 4,
+    toughness: 3,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'destroy', targetGroup: 'chosen' }],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ not: { type: 'creature' } }, { type: 'artifact' }] },
+            },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
   },
   {
     name: 'Rockface Village',
@@ -15241,6 +15619,34 @@ export const definitions = [
     ],
   },
   {
+    name: 'Spider-Byte, Web Warden',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, U: 1 },
+    keywords: [],
+    subtypes: ['Spider', 'Avatar', 'Hero'],
+    color: ['U'],
+    text: "When Spider-Byte enters, return up to one target nonland permanent to its owner's hand.",
+    legendary: true,
+    power: 2,
+    toughness: 2,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'bounce', targetGroup: 'chosen' }],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: { scope: 'permanent', where: { not: { type: 'land' } } },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Spider-Rex, Daring Dino',
     type: 'creature',
     types: ['creature'],
@@ -15582,6 +15988,33 @@ export const definitions = [
         effects: [{ op: 'damage', amount: 1 }],
       },
       { label: 'Destroy target artifact.', target: 'artifact', effects: [{ op: 'destroy' }] },
+    ],
+  },
+  {
+    name: 'Startled Relic Sloth',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, R: 1, W: 1 },
+    keywords: ['trample', 'lifelink'],
+    subtypes: ['Sloth', 'Beast'],
+    color: ['R', 'W'],
+    text: 'Trample, lifelink\nAt the beginning of combat on your turn, exile up to one target card from a graveyard.',
+    power: 4,
+    toughness: 4,
+    triggers: [
+      {
+        event: { event: 'step', step: 'beginCombat', controller: 'you' },
+        effects: [{ op: 'moveTarget', destination: 'exile', targetGroup: 'chosen' }],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: { scope: 'graveyard' },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
     ],
   },
   {
@@ -17603,6 +18036,35 @@ export const definitions = [
     ],
   },
   {
+    name: 'True Ancestry',
+    type: 'sorcery',
+    types: ['sorcery'],
+    cost: { generic: 1, G: 1 },
+    keywords: [],
+    subtypes: ['Lesson'],
+    color: ['G'],
+    text: 'Return up to one target permanent card from your graveyard to your hand.\nCreate a Clue token. (It\'s an artifact with "{2}, Sacrifice this token: Draw a card.")',
+    target: null,
+    targetGroups: [
+      {
+        id: 'chosen',
+        label: 'Choose up to one target',
+        selector: {
+          scope: 'graveyard',
+          where: {
+            all: [{ owner: 'you' }, { not: { any: [{ type: 'instant' }, { type: 'sorcery' }] } }],
+          },
+        },
+        min: 0,
+        max: 1,
+      },
+    ],
+    effects: [
+      { op: 'moveTarget', destination: 'hand', targetGroup: 'chosen' },
+      { op: 'token', count: 1, definition: 'Clue Token' },
+    ],
+  },
+  {
     name: "True Love's Kiss",
     type: 'instant',
     types: ['instant'],
@@ -18022,6 +18484,36 @@ export const definitions = [
     attachmentBonus: { power: 2, toughness: 1, keywords: ['menace'] },
   },
   {
+    name: 'Utrom Scientists',
+    type: 'creature',
+    types: ['artifact', 'creature'],
+    cost: { generic: 2, U: 1 },
+    keywords: [],
+    subtypes: ['Utrom', 'Robot', 'Scientist'],
+    color: ['U'],
+    text: 'When this creature enters, tap up to one target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)',
+    power: 2,
+    toughness: 2,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [
+          { op: 'tap', targetGroup: 'chosen' },
+          { op: 'stunOn', amount: 1, targetGroup: 'chosen' },
+        ],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: { scope: 'permanent', where: { type: 'creature' } },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Valkyrie Aerial Unit',
     type: 'creature',
     types: ['artifact', 'creature'],
@@ -18439,6 +18931,62 @@ export const definitions = [
     toughness: 2,
     triggers: [
       { event: 'selfAttacks', effects: [{ op: 'loseLife', amount: 1, player: 'opponent' }] },
+    ],
+  },
+  {
+    name: 'Vigorbloom Charm',
+    type: 'instant',
+    types: ['instant'],
+    cost: { G: 1, W: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['G', 'W'],
+    text: 'Choose one —\n• Target permanent you control gains hexproof and indestructible until end of turn.\n• You draw a card and gain 3 life.\n• Put a +1/+1 counter on target creature you control. Then it fights target creature an opponent controls. (Each deals damage equal to its power to the other.)',
+    modes: [
+      {
+        label: 'Target permanent you control gains hexproof and indestructible until end of turn',
+        target: { scope: 'permanent', where: { controller: 'you' } },
+        effects: [
+          { op: 'modify', power: 0, toughness: 0, keywords: ['hexproof', 'indestructible'] },
+        ],
+      },
+      {
+        label: 'You draw a card and gain 3 life',
+        effects: [
+          { op: 'draw', count: 1 },
+          { op: 'gainLife', amount: 3 },
+        ],
+      },
+      {
+        label:
+          'Put a +1/+1 counter on target creature you control. Then it fights target creature an opponent controls',
+        targetGroups: [
+          {
+            id: 'actor',
+            label: 'Choose your creature',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+          {
+            id: 'victims',
+            label: 'Choose creatures to fight',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'opponent' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+        ],
+        effects: [
+          { op: 'counterOn', amount: 1, targetGroup: 'actor' },
+          { op: 'fight', sourceGroup: 'actor', victimGroup: 'victims' },
+        ],
+      },
     ],
   },
   {
@@ -19069,6 +19617,41 @@ export const definitions = [
     kicker: { cost: { generic: 1, U: 1 }, effects: [{ op: 'bounce' }, { op: 'draw', count: 1 }] },
   },
   {
+    name: 'Wild Pack Squad',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, W: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Mercenary'],
+    color: ['W'],
+    text: 'At the beginning of combat on your turn, up to one target creature gains first strike and vigilance until end of turn.',
+    power: 2,
+    toughness: 3,
+    triggers: [
+      {
+        event: { event: 'step', step: 'beginCombat', controller: 'you' },
+        effects: [
+          {
+            op: 'modify',
+            power: 0,
+            toughness: 0,
+            keywords: ['first strike', 'vigilance'],
+            targetGroup: 'chosen',
+          },
+        ],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: { scope: 'permanent', where: { type: 'creature' } },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Wildheart Invoker',
     type: 'creature',
     types: ['creature'],
@@ -19273,6 +19856,45 @@ export const definitions = [
     power: 1,
     toughness: 1,
     unblockable: true,
+  },
+  {
+    name: 'Wreck Remover',
+    type: 'creature',
+    types: ['artifact', 'creature'],
+    cost: { generic: 4 },
+    keywords: [],
+    subtypes: ['Construct'],
+    color: [],
+    text: 'Whenever this creature enters or attacks, exile up to one target card from a graveyard. You gain 1 life.\nCycling {2} ({2}, Discard this card: Draw a card.)',
+    power: 3,
+    toughness: 4,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [
+          { op: 'moveTarget', destination: 'exile', targetGroup: 'chosen' },
+          { op: 'gainLife', amount: 1 },
+        ],
+        targetGroups: [
+          {
+            id: 'chosen',
+            label: 'Choose up to one target',
+            selector: { scope: 'graveyard' },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+      {
+        event: 'selfAttacks',
+        effects: [
+          { op: 'moveTarget', destination: 'exile' },
+          { op: 'gainLife', amount: 1 },
+        ],
+        target: { scope: 'graveyard' },
+      },
+    ],
+    cycling: { generic: 2 },
   },
   {
     name: 'Wreckage Wickerfolk',
@@ -19568,6 +20190,7 @@ export const cardIds = {
   '602cce3e-7033-47d6-aec1-d755f234f270': 'Adept Watershaper',
   '232bd88c-ecdb-43dd-b34a-d381cb3bedf2': "Adventurer's Inn",
   'f84c30e7-2ea8-43ff-9356-1f907558cfd9': 'Aegis Turtle',
+  'f0c533a2-751a-4c5a-8cec-b83da3c8c62f': 'Afterthought Sentry',
   '381a3e8e-71dd-48e4-ab62-53478bde4a14': 'Agate-Blade Assassin',
   'cd403866-bef1-413a-85e2-c86e295b3589': 'Agent of Atlas',
   'dae20bcd-dc24-4f9d-9400-a6f013b49f14': 'Agent Phil Coulson',
@@ -19584,6 +20207,7 @@ export const cardIds = {
   '84de4fec-2f38-4293-93d3-b3882c5aac14': "Ambition's Cost",
   '75070eaf-c931-46e5-9aa1-b849e33580c6': 'Ambling Stormshell',
   '4faf62c3-3ba7-4540-be26-777305ef184e': 'Ambush Gigapede',
+  '4c48de92-e053-4af7-b936-d7ec0875e0d3': 'Ambush Wolf',
   '234a734b-ba28-4f1b-9d01-3c3e7d516590': "An Offer You Can't Refuse",
   'a95a0b13-d50f-41cf-8668-de60d445e7b0': "Ancestors' Aid",
   'dbfa2743-34ff-40e3-81f7-740fc08cd18a': 'Ancestral Reminiscence',
@@ -19676,6 +20300,7 @@ export const cardIds = {
   'f293da27-e42d-4e87-8b61-d3c27e4c6d71': 'Burrowguard Mentor',
   '8551e1df-47eb-419e-8dd2-e96b9a450912': 'Burrowing Razormaw',
   'ac2086fe-98ee-4280-9c7c-c5c2d6548a8b': 'Burst Lightning',
+  'c61374e5-a7f6-455e-a40b-a481751b536b': 'Bushwhack',
   '434e720f-2bfa-49b6-a5ac-fe0c0b24764d': 'Buzz Bots',
   '7265d768-b79f-44eb-9873-d834e55f6463': 'Cadaver Imp',
   'leyline:token/cadet': 'Cadet',
@@ -19734,6 +20359,7 @@ export const cardIds = {
   'ea384b0d-3091-4d50-b15f-1f6763647b7c': 'Crusader of Odric',
   'b2eb7a64-a307-4a78-a25d-63fb3ae1e237': 'Cryptic Caves',
   '96335212-ec57-4beb-bab1-11c8eaa62119': 'Cunning Maneuver',
+  'e451b5aa-5832-42b3-8d72-f67e126a529f': 'Curious Farm Animals',
   '43ccc568-2509-49b6-99d7-c56900d1565a': 'Daggerfang Duo',
   '9b1d79b7-a812-4f48-9be0-789294da3b56': 'Daring Mechanic',
   '0f5401c2-0189-4a07-8e7b-a765ccd7c954': 'Daring Thunder-Thief',
@@ -19793,6 +20419,7 @@ export const cardIds = {
   'b1793c3b-25d6-4fae-a99d-cfdd2210ca67': 'Druid of the Cowl',
   '9740ce6d-ef6b-4d70-839a-8bd5e0e1e0a1': 'Druid of the Spade',
   '155e01a1-5809-4be9-ad38-c11553a4a723': 'Dual-Sun Adepts',
+  '697b8045-0edb-4f7b-a933-4d41ec2b53d5': 'Dubious Delicacy',
   'ea2dce18-195e-4681-a687-f9819edaf9fc': 'Dusk Legion Zealot',
   'b51e0ae3-126b-4b7e-9dd1-818a5b8e512a': 'Dwarven Castle Guard',
   'e69a8970-3ead-479d-860a-26ed65f9c846': 'Dwarven Forge-Chanter',
@@ -19903,6 +20530,7 @@ export const cardIds = {
   '88f34d15-c338-40a7-b56c-c5b650847430': 'Ghost, Spectral Saboteur',
   '5748ebf1-24e3-499d-ab7c-c2cebd462a24': 'Giant Growth',
   'e740ce2f-2134-473c-afa1-1b6d2d1e38ef': 'Giant Spider',
+  '77e5e7e3-b97b-4953-9df4-1aee509fbf2a': 'Giantfall',
   '88d7bd11-7b1d-426c-8552-01448531c6ad': 'Gigantic Big Bear',
   'fa5e4aa5-e2cb-4c8c-91cb-554bec0f21d4': 'Gigantoad',
   'e666bae7-dd51-4921-8b89-7e8d423caba0': 'Gigantosaurus',
@@ -19967,6 +20595,7 @@ export const cardIds = {
   '1337d89e-a883-4568-a14f-9ca3305cc3df': "Hell's Kitchen",
   'c0864adb-e9aa-40b6-91ff-a0646193e887': 'Helpful Hunter',
   'cb97da84-1d13-4795-b68a-2bf111a50067': 'Herald of Faith',
+  '09955b4b-6052-4c27-8b63-9548482b3c5c': 'Heritage Reclamation',
   '6bda307b-1508-4582-952b-c690db85e045': 'Hermitic Nautilus',
   'leyline:token/hero-token': 'Hero Token',
   '52732f93-b951-43c3-bb02-c254996606e5': "Hierophant's Chalice",
@@ -20199,6 +20828,7 @@ export const cardIds = {
   '0ba86a50-13df-4b26-8b3a-9e3917ff850f': 'Patchwork Automaton',
   'fa99cf82-ebf1-4526-ab9c-b24eb2970f2a': 'Pawpatch Formation',
   '91ddd2bd-2dec-4670-8edb-e89c009b2187': 'Pearl of Wisdom',
+  'd7aaffed-a143-49d6-a516-b9bc8b503aee': 'Peerless Ropemaster',
   'd36075c2-de66-4202-9217-b1102a2bc14b': 'Pelakka Wurm',
   '992075d5-f413-4896-b75e-7bb2d589c50e': 'Pendulum of Patterns',
   'f1e8f746-1837-4ea8-9a07-e57946883353': 'Perilous Myr',
@@ -20215,8 +20845,10 @@ export const cardIds = {
   '86e2bbdd-a788-4f76-9ebb-ef48d9bc9dcf': 'Pitchburn Devils',
   'bc71ebf6-2056-41f7-be35-b2e5c34afa99': 'Plains',
   '2094fb68-3859-401f-97f2-c8bae64a4822': 'Playful Shove',
+  'a5492d28-b1bf-408d-a048-8f200158d6b1': 'Plow Through',
   '04669a6f-6299-465b-a26e-6cae37cdc081': 'Plumecreed Escort',
   '3ab13412-1eaf-40c0-905d-8a3ca0c51be5': 'Plundering Pirate',
+  'a272f15d-caa2-40e9-894f-19638bd5f375': 'Plunge into Winter',
   'e88a2b71-c90d-4e16-99a3-93d11fe7a968': 'Poison Dart Frog',
   'd0e810bb-5f38-4045-a718-30d423c05659': 'Poison-Tip Archer',
   '6eabebdf-c1a3-4789-a67f-859f0957c5df': 'Pond Prophet',
@@ -20299,6 +20931,7 @@ export const cardIds = {
   'a7c55495-6aca-4d17-b61a-cab8fa38b9f4': 'Risky Shortcut',
   '0bdebad7-a05e-439a-b5a9-241a2d09f943': "Riverguard's Reflexes",
   '510a6ac5-f098-4145-ac07-771b1b6f7cdf': 'Riverpyre Verge',
+  '0217da8e-e74f-4f5c-ab75-f17600f94405': 'Rock Soldiers',
   '7e103748-3f76-42ce-a063-d0256b2dce2b': 'Rockface Village',
   '185c70c1-8403-4ae5-b45d-3679d4ee092a': 'Rockfall Vale',
   'fd85db70-8616-42df-9dac-bad7923f88d7': 'Rocky Rebuke',
@@ -20410,6 +21043,7 @@ export const cardIds = {
   '38877c68-b69b-4ee1-8e8f-5137a184a8f7': 'Spell Snare',
   '7db31623-5dea-4165-8593-fbac568bf5b4': 'Spellgyre',
   'e4bb33b2-adde-4176-9274-7598b559aa6a': 'Spider-Bot',
+  '845472ca-3fcb-4bcd-953c-96eb8d914af9': 'Spider-Byte, Web Warden',
   '58b771d4-dfaf-4189-a5f6-4bc0fb4c0fa3': 'Spider-Rex, Daring Dino',
   'c1b6795a-1ac6-4edb-bcee-4db1f1fbe8ea': 'Spin Out',
   '3a124fe5-f525-43e5-9746-501c68a98330': 'Spined Megalodon',
@@ -20431,6 +21065,7 @@ export const cardIds = {
   'f0691d46-5bf4-4617-8a0a-19d17afb7219': 'Starlight Snare',
   '8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802': 'Starscape Cleric',
   'd8e255ec-7d66-43f6-b5f0-712f5957687f': 'Start from Scratch',
+  '5d46e85f-4a04-48b1-afe9-3a47678041d4': 'Startled Relic Sloth',
   '00895741-f94f-4d80-8ca4-c436bf3c8d56': 'Steadfast Cathar',
   '75237b2c-232b-479a-ab3a-e1566c8a9fe7': 'Steampath Charger',
   '3178c1f9-f644-4926-ac9a-d40e4db79955': 'Sterling Hound',
@@ -20540,6 +21175,7 @@ export const cardIds = {
   '6d5bb714-1bf4-4f75-9ea8-bdbd18b0425b': 'Treno, Dark City',
   '6e275711-eb76-4924-ba38-c38a36d9d82a': 'Troll Negotiations',
   '7d765055-da62-43f7-9580-98e9d164753b': 'Truck Toss',
+  '26c2dd96-07e7-4294-9431-96d5aeff3761': 'True Ancestry',
   '9506aba2-5e1d-48c5-ace8-4beb824ad8af': "True Love's Kiss",
   '12c7289f-da53-403a-a607-227f43c7e171': 'Trusty Packbeast',
   '15934a19-a29e-4728-816f-20b610eec377': 'Turtle Power!',
@@ -20564,6 +21200,7 @@ export const cardIds = {
   '9d059345-1a2f-4ecb-b419-3873ebadf318': 'Unsubtle Mockery',
   '837182db-1bf3-4a2c-bd01-1af9d9873561': 'Unsummon',
   '550abd9b-9aae-4812-9bc0-7f131d6dcde8': 'Untamed Hunger',
+  '89793c8c-98a3-4621-ad3d-cfc5949c65da': 'Utrom Scientists',
   '1333d690-a6dc-4ef8-8c57-2ba16727c0a5': 'Valkyrie Aerial Unit',
   '60654004-7d9a-47ac-a70d-b246dd1728d3': 'Valley Flamecaller',
   '1f938353-9081-4dc1-b8e7-d18ece038bd4': 'Valorous Stance',
@@ -20585,6 +21222,7 @@ export const cardIds = {
   'be0b86fc-8450-41d4-9836-6de11cecb857': 'Vibranium Energy Daggers',
   '6a7f3e1f-6798-4644-b64c-7765f81f0938': 'Vibrant Cityscape',
   '26b077df-7a05-459a-b5ff-bf27767bb519': 'Vicious Conquistador',
+  '826f17d1-3806-4579-8b1b-2082b7b03d69': 'Vigorbloom Charm',
   '556dd333-4066-41f7-98f6-41794754de71': 'Vile Entomber',
   'leyline:token/villain-token': 'Villain Token',
   '1c7c1867-20cb-4035-bb2a-42760edf0a55': 'Villainous Wrath',
@@ -20617,6 +21255,7 @@ export const cardIds = {
   '3cc333a1-c854-4b7c-8002-910e48222371': 'Well-Worn Spatula',
   'c55a4b25-ccc4-49de-9f98-a829c547a64d': 'White Lotus Reinforcements',
   '855353e2-b686-482a-b987-c6ae456f088c': 'Whoosh!',
+  '294b2aa7-cb46-46bd-8241-69b26d73aa2d': 'Wild Pack Squad',
   'ff8fb796-af5d-4d64-ab3c-7f2469dfa6bf': 'Wildheart Invoker',
   'c52eaa87-9251-4a47-83fd-04e582ade612': 'Willowrush Verge',
   'd6ffdaf0-ac08-4de9-bbce-2eab2f86bcca': 'Wind Drake',
@@ -20629,6 +21268,7 @@ export const cardIds = {
   '8973bd99-20f8-4867-90ef-50392147ee1b': 'Wood Elves',
   '51d4f95e-aad2-4e5f-9f15-a68bbdf9ab3e': 'World Map',
   '38684c31-e8c6-4825-8740-1a3d34b58b39': 'Wraith, Vicious Vigilante',
+  '89c89499-23a8-412d-9406-1a7ffc88c64d': 'Wreck Remover',
   '8ba5af76-2485-4fd6-bd2e-fe90d1f2691c': 'Wreckage Wickerfolk',
   '4a9e0294-c967-4e90-b776-6d3195034a23': 'Wrecking Gecko',
   '628cf9ab-8f8b-49b6-b761-2450088ad03b': 'Wretched Doll',
@@ -20648,7 +21288,7 @@ export const cardIds = {
 };
 export const packIdentity = {
   id: 'leyline.core',
-  version: '0.36.1',
+  version: '0.37.0',
   schemaVersion: 1,
-  sourceHash: 'feebdefa558c2ad584b5d0fa8acae1508ee6bd2f7d856d94fe4c77e99f74b89d',
+  sourceHash: 'a55a57f377386c3f48a49195b14d5e86677f93cdbd200e58f70d9be4bcace52a',
 };

@@ -344,6 +344,12 @@ function actionDock(s, ui, p, actions) {
         buttons =
           '<button class="btn" data-action="editDamage">Review split</button><button class="btn primary" data-action="damage">Use suggested split →</button>';
         break;
+      case 'triggerTargets':
+        title = 'Choose ability targets';
+        desc = 'Review each target group before putting this ability on the stack.';
+        buttons =
+          '<button class="btn primary" data-action="triggerTargets">Choose targets →</button>';
+        break;
       case 'orderTriggers':
         title = 'Order your triggered abilities';
         desc = 'Put them on the stack bottom to top. The last one resolves first.';

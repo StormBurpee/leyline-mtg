@@ -44,6 +44,7 @@ export function spellProfile(card, mode) {
     cost,
     effects: selected.effects,
     target: selected.target ?? null,
+    ...(selected.targetGroups ? { targetGroups: selected.targetGroups } : {}),
     kicked: !!selected.kicked,
     offspringPaid: !!selected.offspringPaid,
     castingLabel: selected.label,

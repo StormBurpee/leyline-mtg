@@ -111,6 +111,13 @@ function filterOnlyPermanents(where) {
   if (where?.any) return where.any.every(filterOnlyPermanents);
   return false;
 }
+function validateGroupHolder(holder, path, errors) {
+  if (holder.targetGroups === undefined) return;
+  errors.push(
+    ...validateTargetGroups(holder.targetGroups).map((e) => `${path}.targetGroups: ${e}`),
+  );
+  if (holder.target != null) errors.push(`${path}: use either a single target or target groups.`);
+}
 function validateEffects(effects, path, target, errors, groups = []) {
   if (!Array.isArray(effects) || effects.length > 64) {
     errors.push(`${path}: expected at most 64 effect instructions.`);
@@ -744,7 +751,9 @@ export function validateDefinition(card) {
         const path = `${name}.modes[${i}]`;
         if (
           !plain(mode) ||
-          Object.keys(mode).some((key) => !['label', 'target', 'effects'].includes(key))
+          Object.keys(mode).some(
+            (key) => !['label', 'target', 'targetGroups', 'effects'].includes(key),
+          )
         ) {
           errors.push(`${path}: unsupported mode fields.`);
           continue;
@@ -761,7 +770,14 @@ export function validateDefinition(card) {
         labels.add(mode.label);
         if (mode.target != null)
           errors.push(...validateTargetSpec(mode.target).map((e) => `${path}.target: ${e}`));
-        validateEffects(mode.effects, `${path}.effects`, mode.target, errors);
+        validateGroupHolder(mode, path, errors);
+        validateEffects(
+          mode.effects,
+          `${path}.effects`,
+          mode.target,
+          errors,
+          Array.isArray(mode.targetGroups) ? mode.targetGroups : [],
+        );
       }
     }
   }
@@ -782,7 +798,8 @@ export function validateDefinition(card) {
         if (
           !plain(t) ||
           Object.keys(t).some(
-            (k) => !['event', 'effects', 'optional', 'target', 'condition'].includes(k),
+            (k) =>
+              !['event', 'effects', 'optional', 'target', 'targetGroups', 'condition'].includes(k),
           )
         ) {
           errors.push(`${name}.triggers[${i}]: unsupported trigger predicate or field.`);
@@ -800,7 +817,18 @@ export function validateDefinition(card) {
               (error) => `${name}.triggers[${i}].target: ${error}`,
             ),
           );
-        validateEffects(t.effects, `${name}.triggers[${i}].effects`, t.target, errors);
+        validateGroupHolder(t, `${name}.triggers[${i}]`, errors);
+        if (Array.isArray(t.targetGroups) && t.targetGroups.some((g) => g?.excludeFrom?.length))
+          errors.push(
+            `${name}.triggers[${i}]: cross-group exclusions are currently spell/activated-only.`,
+          );
+        validateEffects(
+          t.effects,
+          `${name}.triggers[${i}].effects`,
+          t.target,
+          errors,
+          Array.isArray(t.targetGroups) ? t.targetGroups : [],
+        );
       }
   }
   if (card.activated !== undefined) {
@@ -816,9 +844,16 @@ export function validateDefinition(card) {
         if (
           Object.keys(a).some(
             (k) =>
-              !['cost', 'effects', 'target', 'text', 'timing', 'condition', 'oncePerTurn'].includes(
-                k,
-              ),
+              ![
+                'cost',
+                'effects',
+                'target',
+                'targetGroups',
+                'text',
+                'timing',
+                'condition',
+                'oncePerTurn',
+              ].includes(k),
           )
         )
           errors.push(`${p}: unsupported ability field.`);
@@ -832,7 +867,16 @@ export function validateDefinition(card) {
           errors.push(...validateTargetSpec(a.target).map((error) => `${p}.target: ${error}`));
         if (a.text !== undefined && typeof a.text !== 'string')
           errors.push(`${p}.text: expected a string.`);
-        validateEffects(a.effects, `${p}.effects`, a.target, errors);
+        validateGroupHolder(a, p, errors);
+        if (a.targetGroups && a.cost.discard)
+          errors.push(`${p}: grouped targets with discard costs are not yet supported.`);
+        validateEffects(
+          a.effects,
+          `${p}.effects`,
+          a.target,
+          errors,
+          Array.isArray(a.targetGroups) ? a.targetGroups : [],
+        );
       }
   }
   return errors;

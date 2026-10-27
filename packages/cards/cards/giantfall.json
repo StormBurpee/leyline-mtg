@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "77e5e7e3-b97b-4953-9df4-1aee509fbf2a",
+  "name": "Giantfall",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Target creature you control deals damage equal to its power to target creature an opponent controls.\n\u2022 Destroy target artifact.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target creature you control deals damage equal to its power to target creature an opponent controls",
+          "effects": [
+            {
+              "op": "bite",
+              "sourceGroup": "actor",
+              "victimGroup": "victims"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "actor",
+              "label": "Choose your creature",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "controller": "you"
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 1
+            },
+            {
+              "id": "victims",
+              "label": "Choose damage recipients",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "controller": "opponent"
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 1
+            }
+          ]
+        },
+        {
+          "label": "Destroy target artifact",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

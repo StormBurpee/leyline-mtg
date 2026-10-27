@@ -21,6 +21,7 @@ export const CARD_DECISIONS = new Set([
   'payCost',
   'creatureType',
   'auraEntry',
+  'triggerTargets',
 ]);
 const gameIdentities = new WeakMap();
 let nextGameIdentity = 0;

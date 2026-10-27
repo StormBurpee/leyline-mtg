@@ -1,0 +1,113 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "826f17d1-3806-4579-8b1b-2082b7b03d69",
+  "name": "Vigorbloom Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G", "W"],
+    "manaCost": "{G}{W}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Target permanent you control gains hexproof and indestructible until end of turn.\n\u2022 You draw a card and gain 3 life.\n\u2022 Put a +1/+1 counter on target creature you control. Then it fights target creature an opponent controls. (Each deals damage equal to its power to the other.)",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Target permanent you control gains hexproof and indestructible until end of turn",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "controller": "you"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "keywords": ["hexproof", "indestructible"],
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "You draw a card and gain 3 life",
+          "effects": [
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            },
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "Put a +1/+1 counter on target creature you control. Then it fights target creature an opponent controls",
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "targetGroup": "actor",
+              "counter": "+1/+1",
+              "amount": 1
+            },
+            {
+              "op": "fight",
+              "sourceGroup": "actor",
+              "victimGroup": "victims"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "actor",
+              "label": "Choose your creature",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "controller": "you"
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 1
+            },
+            {
+              "id": "victims",
+              "label": "Choose creatures to fight",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "controller": "opponent"
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

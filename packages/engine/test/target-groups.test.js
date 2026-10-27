@@ -164,3 +164,72 @@ test('a creature fighting itself takes twice its power as damage', () => {
     4,
   );
 });
+
+test('optional triggered target groups can select none and preserve APNAP continuation', () => {
+  let s = fixture();
+  s.catalog = createRegistry({
+    ...CARDS,
+    'Optional witness': {
+      name: 'Optional witness',
+      type: 'creature',
+      cost: {},
+      power: 1,
+      toughness: 1,
+      triggers: [
+        {
+          event: 'selfEnters',
+          targetGroups: [{ id: 'victim', selector: 'creature', min: 0, max: 1 }],
+          effects: [{ op: 'destroy', targetGroup: 'victim' }],
+        },
+      ],
+    },
+  });
+  const card = put(s, 'Optional witness', 0, 'hand');
+  s = act(s, 'cast', { card: card.id });
+  s = resolve(s);
+  assert.equal(s.choice.kind, 'triggerTargets');
+  const command = chooseBotCommand(s, 0);
+  assert.deepEqual(command.targets.victim, []);
+  s = act(s, 'chooseTriggerTargets', { targets: { victim: [] } });
+  assert.equal(s.choice, null);
+  s = resolve(s);
+  assert.equal(s.objects[card.id].zone, 'battlefield');
+});
+test('modal groups do not leak into a different selected mode', () => {
+  const s = fixture();
+  s.catalog = createRegistry({
+    ...CARDS,
+    'Modal groups': {
+      name: 'Modal groups',
+      type: 'sorcery',
+      cost: {},
+      modes: [
+        {
+          label: 'Fight',
+          targetGroups: twoCreatures,
+          effects: [{ op: 'fight', sourceGroup: 'actor', victimGroup: 'victim' }],
+        },
+        { label: 'Gain', effects: [{ op: 'gainLife', amount: 2 }] },
+      ],
+    },
+  });
+  const card = put(s, 'Modal groups', 0, 'hand');
+  const actions = legalActions(s, 0).filter((a) => a.card === card.id);
+  assert.equal(actions.length, 1);
+  assert.equal(actions[0].mode, 1);
+  assert.equal(actions[0].targets, undefined);
+});
+
+test('grouped activated targets are locked before sacrifice costs and still resolve', () => {
+  let s = fixture();
+  lands(s, 'Forest', 2);
+  const source = put(s, 'Curious Farm Animals'),
+    target = put(s, 'Short Bow', 1);
+  s = act(s, 'activate', { card: source.id, ability: 0, targets: { chosen: [ref(target)] } });
+  assert.equal(s.objects[source.id].zone, 'graveyard');
+  // The death trigger resolves above the activated ability.
+  s = resolve(s);
+  s = resolve(s);
+  assert.equal(s.objects[target.id].zone, 'graveyard');
+  assert.equal(s.players[0].life, 23);
+});

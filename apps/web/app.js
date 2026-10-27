@@ -1,5 +1,9 @@
-import { flattenTargets, targetGroupCandidates } from '../../packages/engine/src/target-groups.js';
-import { castProblem } from '../../packages/engine/src/engine.js';
+import {
+  flattenTargets,
+  targetGroupCandidates,
+  targetPlanProblem,
+} from '../../packages/engine/src/target-groups.js';
+import { castProblem, abilityProblem } from '../../packages/engine/src/engine.js';
 import {
   CARD_DECISIONS,
   decisionLease,
@@ -440,6 +444,10 @@ function presentStateChoice() {
   dialog._choiceRevision = state.revision;
   dialog._activeChoice = c;
   ui.dismissedChoiceLease = null;
+  if (c.kind === 'triggerTargets') {
+    showGroupedTargets();
+    return;
+  }
   if (c.kind === 'triggerTarget') {
     showTargetMenu();
     return;
@@ -765,7 +773,7 @@ function showSpellModes() {
   render();
   const choices = castingChoices(definition(state, o)),
     legal = legalActions(state, viewer());
-  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(castingProfile(state, viewer(), o, index).cost)}<br>${mode.target ? 'Choose a target next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
+  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(castingProfile(state, viewer(), o, index).cost)}<br>${mode.target || mode.targetGroups ? 'Choose targets next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
   openChoiceDialog(
     'Choose how to cast',
     o.name,
@@ -913,13 +921,40 @@ function showSettings() {
     `<div class="options-row"><label class="toggle"><input type="checkbox" id="auto-yield" ${ui.autoYield ? 'checked' : ''}>Yield when no response is available</label><label class="toggle"><input type="checkbox" id="hold-priority" ${ui.holdPriority ? 'checked' : ''}>Hold priority after casting</label><label class="toggle"><input type="checkbox" id="reduce-motion" ${ui.reduceMotion ? 'checked' : ''}>Reduce motion</label></div><p class="small muted">System reduced-motion preferences are always respected.</p><p style="margin-top:22px">Automatic yielding stops whenever you can cast a spell. Disable it to inspect every priority window. Mana sources are paid automatically when casting, or click a land to float mana manually.</p><p style="margin-top:12px">Drag a card onto your field to play, or onto a highlighted target to cast. Drag creatures toward your opponent to select attackers, or onto an attacker to assign a blocker, then confirm the group. Keyboard: Space passes priority. Escape cancels a drag or card selection. All match controls are reachable with Tab.</p>`,
   );
 }
-function showGroupedTargets() {
+function groupedTargetContext() {
+  const choice = state.choice?.kind === 'triggerTargets' ? state.choice : null;
   const object = state.objects[ui.selected];
-  if (!object) return;
-  const profile = spellProfile(definition(state, object), ui.spellMode ?? undefined);
-  const groups = profile?.targetGroups;
-  if (!groups) return;
-  const key = `${state.revision}:${object.id}:${ui.spellMode}`;
+  const ability =
+    !choice && ui.activation !== null && object?.zone === 'battlefield'
+      ? definition(state, object).activated?.[ui.activation]
+      : null;
+  const profile =
+    choice?.entry ??
+    ability ??
+    (object ? spellProfile(definition(state, object), ui.spellMode ?? undefined) : null);
+  if (!profile?.targetGroups) return null;
+  const command = choice
+    ? { type: 'chooseTriggerTargets' }
+    : ability
+      ? { type: 'activate', card: object.id, ability: ui.activation }
+      : { type: 'cast', card: object.id, ...(ui.spellMode != null ? { mode: ui.spellMode } : {}) };
+  return { choice, object, ability, profile, command, name: choice?.entry.name ?? object.name };
+}
+function groupedTargetProblem(context, plan) {
+  if (context.choice) return targetPlanProblem(state, context.profile.targetGroups, plan, viewer());
+  if (context.ability)
+    return abilityProblem(state, viewer(), context.object.id, ui.activation, null, undefined, plan);
+  return castProblem(state, viewer(), context.object.id, null, {
+    mode: ui.spellMode ?? undefined,
+    targets: plan,
+  });
+}
+function showGroupedTargets() {
+  const context = groupedTargetContext();
+  if (!context) return;
+  const { object, profile, choice, ability, name } = context;
+  const groups = profile.targetGroups;
+  const key = `${state.revision}:${choice?.entry.id ?? object.id}:${ui.spellMode}:${ui.activation}`;
   if (dialog._groupKey !== key) {
     dialog._groupKey = key;
     dialog._groupIndex = 0;
@@ -955,25 +990,21 @@ function showGroupedTargets() {
   }</div>`;
   const validStep = chosen.length >= group.min && chosen.length <= group.max;
   const last = index === groups.length - 1;
-  const problem = castProblem(state, viewer(), object.id, null, {
-    mode: ui.spellMode ?? undefined,
-    targets: plan,
-  });
-  const cost = castingProfile(
-    state,
-    viewer(),
-    object,
-    ui.spellMode ?? undefined,
-    flattenTargets(plan),
-  ).cost;
+  const problem = groupedTargetProblem(context, plan);
+  const cost = choice
+    ? null
+    : ability
+      ? (ability.cost.mana ?? {})
+      : castingProfile(state, viewer(), object, ui.spellMode ?? undefined, flattenTargets(plan))
+          .cost;
   openChoiceDialog(
     group.label ?? 'Choose targets',
-    object.name,
+    name,
     body,
-    `${index ? '<button class="btn" data-action="previousTargetGroup">Back</button>' : ''}<span class="decision-selection-summary">${chosen.length} selected · ${mana(cost)}${last && problem ? `<small>${escape(problem)}</small>` : ''}</span><button class="btn primary" data-action="nextTargetGroup" ${validStep && (!last || !problem) ? '' : 'disabled'}>${last ? 'Confirm and cast' : 'Next targets'}</button>`,
-    { source: object.name },
+    `${index ? '<button class="btn" data-action="previousTargetGroup">Back</button>' : ''}<span class="decision-selection-summary">${chosen.length} selected · ${cost ? mana(cost) : 'Triggered ability'}${last && problem ? `<small>${escape(problem)}</small>` : ''}</span><button class="btn primary" data-action="nextTargetGroup" ${validStep && (!last || !problem) ? '' : 'disabled'}>${last ? (choice ? 'Confirm targets' : ability ? 'Confirm and activate' : 'Confirm and cast') : 'Next targets'}</button>`,
+    { source: name },
   );
-  dialog._activeChoice = null;
+  dialog._activeChoice = choice;
   dialog._groupCandidates = candidates;
   dialog._groupRevision = state.revision;
   dialog._groupDefinitions = groups;
@@ -981,6 +1012,10 @@ function showGroupedTargets() {
 }
 
 function showTargetMenu() {
+  if (groupedTargetContext()) {
+    showGroupedTargets();
+    return;
+  }
   const choice = state.choice;
   const commands =
     choice?.kind === 'triggerTarget'
@@ -1632,14 +1667,13 @@ async function action(name, el) {
         dialog._groupIndex++;
         showGroupedTargets();
       } else {
+        const context = groupedTargetContext();
+        if (!context || groupedTargetProblem(context, dialog._groupPlan)) break;
         const command = {
-          type: 'cast',
-          card: ui.selected,
+          ...context.command,
           targets: structuredClone(dialog._groupPlan),
           expectedRevision: dialog._groupRevision,
         };
-        if (ui.spellMode != null) command.mode = ui.spellMode;
-        if (castProblem(state, viewer(), command.card, null, command)) break;
         closeDialog();
         send(command);
       }
@@ -1713,6 +1747,8 @@ async function action(name, el) {
           dialog._activeChoice = null;
         };
         reopen();
+      } else if (a.targetGroups) {
+        showGroupedTargets();
       } else if (a.target) {
         ui.targeting = true;
         render();

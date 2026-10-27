@@ -1,4 +1,9 @@
-import { flattenTargets, survivingTargets } from './target-groups.js';
+import {
+  flattenTargets,
+  survivingTargets,
+  targetPlanProblem,
+  targetPlans,
+} from './target-groups.js';
 import { effectValues } from './numeric-values.js';
 import { CREATURE_TYPES } from './creature-types.js';
 import { meetsCondition } from './conditions.js';
@@ -1162,6 +1167,27 @@ function placeTriggerGroups(s, groups) {
 function placeOrderedTriggers(s, entries, remaining) {
   for (let index = 0; index < entries.length; index++) {
     const entry = entries[index];
+    if (entry.targetGroups) {
+      // Trigger declarations currently have independent groups, so existence is exact.
+      if (
+        entry.targetGroups.some((g) => targetsFor(s, g.selector, entry.controller).length < g.min)
+      ) {
+        emit(s, 'triggerRemoved', {
+          stackId: entry.id,
+          name: entry.name,
+          reason: 'no legal target plan',
+        });
+        continue;
+      }
+      s.choice = {
+        kind: 'triggerTargets',
+        player: entry.controller,
+        entry,
+        remainingEntries: entries.slice(index + 1),
+        remaining,
+      };
+      return false;
+    }
     if (entry.targetKind) {
       const targets = targetsFor(s, entry.targetKind, entry.controller);
       if (!targets.length) {
@@ -1198,6 +1224,18 @@ export function finishTriggerOrder(s, ids) {
       choice.remaining,
     )
   )
+    placeTriggerGroups(s, choice.remaining);
+}
+export function finishTriggerTargets(s, targets) {
+  const choice = s.choice,
+    entry = choice.entry;
+  const problem = targetPlanProblem(s, entry.targetGroups, targets, choice.player);
+  requireRule(!problem, 'TRIGGER_TARGETS', problem);
+  entry.targets = structuredClone(targets);
+  s.stack.push(entry);
+  s.choice = null;
+  notifyTargeted(s, entry);
+  if (placeOrderedTriggers(s, choice.remainingEntries, choice.remaining))
     placeTriggerGroups(s, choice.remaining);
 }
 export function finishTriggerTarget(s, target) {

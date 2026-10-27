@@ -444,3 +444,64 @@ test('grouped spell targets use large sequential choices and preserve selection 
     h.cleanup();
   }
 });
+
+test('optional trigger groups auto-open and preserve an empty choice through Read and Back', async () => {
+  const catalog = {
+    ...CARDS,
+    'Optional stage guide': {
+      name: 'Optional stage guide',
+      type: 'creature',
+      cost: {},
+      power: 2,
+      toughness: 2,
+      triggers: [
+        {
+          event: 'selfEnters',
+          targetGroups: [{ id: 'chosen', selector: 'creature', min: 0, max: 1 }],
+          effects: [{ op: 'tap', targetGroup: 'chosen' }],
+        },
+      ],
+    },
+  };
+  let state;
+  for (let seed = 1; seed < 100; seed++) {
+    state = createGame({
+      seed,
+      mulligan: false,
+      catalog,
+      decks: [
+        [...Array(4).fill('Optional stage guide'), ...Array(56).fill('Forest')],
+        Array(60).fill('Forest'),
+      ],
+    });
+    if (state.players[0].hand.some((id) => state.objects[id].name === 'Optional stage guide'))
+      break;
+  }
+  while (state.step !== 'main1') state = act(state, 'pass');
+  state = act(state, 'cast', {
+    card: state.players[0].hand.find((id) => state.objects[id].name === 'Optional stage guide'),
+  });
+  state = act(state, 'pass');
+  state = act(state, 'pass');
+  assert.equal(state.choice.kind, 'triggerTargets');
+  const h = await mount(exportReplay(state));
+  try {
+    h.click('[data-action="resume"]');
+    assert.equal(h.dialog.open, true);
+    assert.equal(h.dialog.querySelector('[data-action="nextTargetGroup"]').disabled, false);
+    h.click('[data-action="selectGroupTarget"]');
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.ok(h.dialog.querySelector('.is-selected'));
+    h.click('[data-action="selectGroupTarget"]');
+    h.click('#dialog [data-action="closeDialog"]');
+    h.click('[data-action="reviewDecision"]');
+    h.click('[data-action="nextTargetGroup"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).type, 'chooseTriggerTargets');
+    assert.deepEqual(saved.replay.commands.at(-1).targets.chosen, []);
+    assert.equal(h.dialog.open, false);
+  } finally {
+    h.cleanup();
+  }
+});

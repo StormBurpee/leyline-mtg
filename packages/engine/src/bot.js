@@ -1,4 +1,4 @@
-import { flattenTargets } from './target-groups.js';
+import { flattenTargets, targetPlans } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { meetsCondition } from './conditions.js';
 import { effectValues, numericValue } from './numeric-values.js';
@@ -47,8 +47,26 @@ function groupedSpellScore(s, p, action, card) {
       adjusted.set(object.id, { object, ...stats(s, object), damage: object.damage, death: false });
     return adjusted.get(object.id);
   };
-  for (const effect of card.effects ?? []) {
+  for (const raw of card.effects ?? []) {
+    const effect = effectValues(s, raw, {
+      controller: p,
+      source: card.source ?? { id: action.card, incarnation: s.objects[action.card]?.incarnation },
+    });
     const targets = action.targets[effect.targetGroup] ?? [];
+    if (effect.op === 'draw' && effect.player !== 'opponent') tempo += effect.count * 3;
+    if (effect.op === 'token') tempo += effect.count * 2;
+    if (effect.op === 'gainLife' && effect.player !== 'opponent') tempo += effect.amount * 0.25;
+    if (['bounce', 'moveTarget'].includes(effect.op)) {
+      for (const t of targets) {
+        const d = data(t);
+        if (!d) continue;
+        const helpful =
+          d.object.zone === 'graveyard' && effect.destination === 'hand'
+            ? d.object.owner === p
+            : d.object.controller !== p;
+        tempo += (helpful ? 1 : -1) * (3 + value(s, d.object));
+      }
+    }
     if (['tap', 'stunOn'].includes(effect.op)) {
       for (const t of targets) {
         const d = data(t);
@@ -63,6 +81,11 @@ function groupedSpellScore(s, p, action, card) {
       for (const t of targets) {
         const d = data(t);
         if (!d) continue;
+        if (d.object.controller === p)
+          tempo +=
+            effect.op === 'modify'
+              ? Math.max(0, effect.power + effect.toughness) * 0.25 + (effect.keywords?.length ?? 0)
+              : effect.amount;
         d.power += effect.op === 'modify' ? effect.power : effect.amount;
         d.toughness += effect.op === 'modify' ? effect.toughness : effect.amount;
       }
@@ -173,6 +196,15 @@ export function chooseBotCommand(s, p) {
         );
         candidates.sort((a, b) => value(s, s.objects[b]) - value(s, s.objects[a]));
         return { type: 'chooseResolutionCard', player: p, card: candidates[0] ?? null };
+      }
+      case 'triggerTargets': {
+        const plans = targetPlans(s, c.entry.targetGroups, p);
+        plans.sort(
+          (a, b) =>
+            groupedSpellScore(s, p, { targets: b }, c.entry) -
+            groupedSpellScore(s, p, { targets: a }, c.entry),
+        );
+        return { type: 'chooseTriggerTargets', player: p, targets: plans[0] ?? {} };
       }
       case 'auraEntry': {
         const d = definition(s, s.objects[c.card]);
@@ -329,6 +361,21 @@ export function chooseBotCommand(s, p) {
   }
   if (s.priority !== p) return null;
   const actions = legalActions(s, p).filter((action) => actionSafe(s, p, action));
+  const groupedAbility = actions
+    .filter((a) => a.type === 'activate' && a.targets)
+    .map((a) => {
+      const source = s.objects[a.card],
+        ability = definition(s, source).activated[a.ability];
+      return {
+        a,
+        score:
+          groupedSpellScore(s, p, a, ability) -
+          (ability.cost.sacrificeSelf ? value(s, source) : 0) -
+          (ability.cost.life ?? 0),
+      };
+    })
+    .sort((a, b) => b.score - a.score)[0];
+  if (groupedAbility?.score > 0) return { ...groupedAbility.a, player: p };
   const faceUp = actions.find((a) => a.type === 'turnFaceUp');
   if (faceUp) return { ...faceUp, player: p };
   const lethal = actions.find((action) => directLethal(s, p, action));
@@ -357,6 +404,7 @@ export function chooseBotCommand(s, p) {
     .filter(
       (a) =>
         a.type === 'activate' &&
+        !a.targets &&
         definition(s, s.objects[a.card]).activated[a.ability].cost.sacrificeSelf,
     )
     .map((a) => {
@@ -483,7 +531,7 @@ export function chooseBotCommand(s, p) {
     .sort((a, b) => value(s, s.objects[b.target.id]) - value(s, s.objects[a.target.id]))[0];
   if (equip) return { ...equip, player: p };
   const ability = actions.find((action) => {
-    if (action.type !== 'activate') return false;
+    if (action.type !== 'activate' || action.targets) return false;
     const activated = definition(s, s.objects[action.card]).activated[action.ability];
     if (activated.cost.sacrificeSelf || (activated.cost.tap && keepBlocker(action.card)))
       return false;

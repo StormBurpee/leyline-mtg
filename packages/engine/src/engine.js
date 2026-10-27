@@ -31,6 +31,7 @@ import {
   finishAuraEntryChoice,
   finishTriggerOrder,
   finishTriggerTarget,
+  finishTriggerTargets,
   legalTarget,
   resolveTop,
   stabilize,
@@ -129,7 +130,7 @@ function cast(s, p, c) {
   notifyTriggers(s, 'cast', { player: p, definition: definition(s, o), object: o });
   notifyTargeted(s, s.stack.at(-1));
 }
-export function abilityProblem(s, p, id, index, target, discardCard) {
+export function abilityProblem(s, p, id, index, target, discardCard, targets) {
   const o = s.objects[id];
   if (!o || o.zone !== 'battlefield' || o.controller !== p)
     return 'You do not control that permanent.';
@@ -144,6 +145,11 @@ export function abilityProblem(s, p, id, index, target, discardCard) {
   if (ability.timing === 'sorcery' && !(s.active === p && main(s) && s.stack.length === 0))
     return 'Activate this only as a sorcery.';
 
+  if (ability.targetGroups) {
+    if (target != null) return 'Use grouped ability targets.';
+    const problem = targetPlanProblem(s, ability.targetGroups, targets, p);
+    if (problem) return problem;
+  } else if (targets !== undefined) return 'This ability has no target groups.';
   if (ability.target && !legalTarget(s, ability.target, target, p))
     return 'Choose a legal ability target.';
   if (!ability.target && target != null) return 'This ability has no targets.';
@@ -204,7 +210,7 @@ function cycle(s, p, c) {
   emit(s, 'cycled', { player: p, objectId: o.id, name: o.name });
 }
 function activate(s, p, c) {
-  const problem = abilityProblem(s, p, c.card, c.ability, c.target, c.discardCard);
+  const problem = abilityProblem(s, p, c.card, c.ability, c.target, c.discardCard, c.targets);
   requireRule(!problem, 'ACTIVATE', problem);
   const o = s.objects[c.card],
     a = definition(s, o).activated[c.ability];
@@ -217,6 +223,9 @@ function activate(s, p, c) {
     sourceKeywords: keywords(s, o),
     ...(o.attachedTo ? { sourceAttachment: structuredClone(o.attachedTo) } : {}),
     effects: structuredClone(a.effects),
+    ...(a.targetGroups
+      ? { targetGroups: structuredClone(a.targetGroups), targets: structuredClone(c.targets) }
+      : {}),
     targetKind: a.target ?? null,
     target: c.target ?? null,
     label: a.text,
@@ -258,6 +267,14 @@ function handleChoice(s, p, c) {
     return;
   }
   switch (choice.kind) {
+    case 'triggerTargets':
+      requireRule(
+        c.type === 'chooseTriggerTargets',
+        'CHOICE',
+        'Choose the triggered ability targets.',
+      );
+      finishTriggerTargets(s, c.targets);
+      return;
     case 'auraEntry':
       finishAuraEntryChoice(s, c);
       return;
@@ -441,6 +458,14 @@ export function legalActions(s, p) {
     ];
   if (s.choice?.kind === 'legendRule' && s.choice.player === p)
     return [...s.choice.cards.map((card) => ({ type: 'chooseLegend', card })), { type: 'concede' }];
+  if (s.choice?.kind === 'triggerTargets' && s.choice.player === p)
+    return [
+      ...targetPlans(s, s.choice.entry.targetGroups, p).map((targets) => ({
+        type: 'chooseTriggerTargets',
+        targets,
+      })),
+      { type: 'concede' },
+    ];
   if (s.choice?.kind === 'triggerTarget' && s.choice.player === p)
     return [
       ...s.choice.targets.map((target) => ({
@@ -491,7 +516,20 @@ export function legalActions(s, p) {
     if (canTapForMana(s, o, p))
       for (const color of manaOptions(s, o)) actions.push({ type: 'tapMana', card: o.id, color });
     if (o.zone !== 'battlefield' || o.controller !== p) continue;
-    for (const [index, a] of (definition(s, o).activated ?? []).entries())
+    for (const [index, a] of (definition(s, o).activated ?? []).entries()) {
+      if (a.targetGroups) {
+        for (const targets of targetPlans(s, a.targetGroups, p))
+          for (const discardCard of a.cost.discard ? s.players[p].hand : [undefined])
+            if (!abilityProblem(s, p, o.id, index, null, discardCard, targets))
+              actions.push({
+                type: 'activate',
+                card: o.id,
+                ability: index,
+                targets,
+                ...(discardCard ? { discardCard } : {}),
+              });
+        continue;
+      }
       for (const target of a.target ? targetsFor(s, a.target, p) : [null])
         for (const discardCard of a.cost.discard ? s.players[p].hand : [undefined])
           if (!abilityProblem(s, p, o.id, index, target, discardCard))
@@ -502,6 +540,7 @@ export function legalActions(s, p) {
               ...(discardCard ? { discardCard } : {}),
               ...(target ? { target } : {}),
             });
+    }
   }
   return actions;
 }
@@ -547,6 +586,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.36.1',
         '0.36.0',
         '0.35.0',
         '0.34.0',

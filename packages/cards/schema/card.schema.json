@@ -1271,6 +1271,9 @@
             },
             "oncePerTurn": {
               "type": "boolean"
+            },
+            "targetGroups": {
+              "$ref": "#/$defs/targetGroups"
             }
           },
           "required": ["kind", "cost", "effects"],
@@ -1301,6 +1304,9 @@
             },
             "condition": {
               "$ref": "#/$defs/condition"
+            },
+            "targetGroups": {
+              "$ref": "#/$defs/targetGroups"
             }
           },
           "required": ["kind", "on", "effects"],
@@ -1397,6 +1403,9 @@
                     },
                     "minItems": 0,
                     "maxItems": 64
+                  },
+                  "targetGroups": {
+                    "$ref": "#/$defs/targetGroups"
                   }
                 },
                 "required": ["label", "effects"],
