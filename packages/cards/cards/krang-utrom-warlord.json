@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2d56a491-b3eb-4f3e-82ab-981d3036c45d",
+  "name": "Krang, Utrom Warlord",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Utrom", "Robot"],
+    "colors": [],
+    "manaCost": "{9}",
+    "power": 9,
+    "toughness": 9
+  },
+  "rulesText": "Flying, trample, indestructible, haste\nOther artifact creatures you control have flying, trample, indestructible, and haste.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "indestructible"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "type": "artifact"
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["flying", "trample", "indestructible", "haste"]
+    }
+  ]
+}

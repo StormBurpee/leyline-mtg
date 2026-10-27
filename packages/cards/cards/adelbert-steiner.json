@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "657a4500-4b47-4c78-945b-a7791af7d10e",
+  "name": "Adelbert Steiner",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Knight"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Lifelink\nAdelbert Steiner gets +1/+1 for each Equipment you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "subtype": "Equipment"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "subtype": "Equipment"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

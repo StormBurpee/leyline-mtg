@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "80ea56ad-e741-4a85-b4e8-ce62e7d593d5",
+  "name": "Blanchwood Armor",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "Enchant creature\nEnchanted creature gets +1/+1 for each Forest you control.",
+  "abilities": [
+    {
+      "kind": "attachmentBonus",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "subtype": "Forest"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "subtype": "Forest"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

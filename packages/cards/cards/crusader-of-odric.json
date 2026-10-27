@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ea384b0d-3091-4d50-b15f-1f6763647b7c",
+  "name": "Crusader of Odric",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 0,
+    "toughness": 0
+  },
+  "rulesText": "Crusader of Odric's power and toughness are each equal to the number of creatures you control.",
+  "abilities": [
+    {
+      "kind": "baseStats",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

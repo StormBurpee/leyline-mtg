@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2b2b3b16-389c-4581-b889-b8a2e76f83a2",
+  "name": "Meticulous Artisan",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Djinn", "Artificer"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen this creature enters, create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

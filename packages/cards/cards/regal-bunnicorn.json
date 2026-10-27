@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "efd93428-88a5-4f7b-95f3-1d6eec069a4c",
+  "name": "Regal Bunnicorn",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rabbit", "Unicorn"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 0,
+    "toughness": 0
+  },
+  "rulesText": "Regal Bunnicorn's power and toughness are each equal to the number of nonland permanents you control.",
+  "abilities": [
+    {
+      "kind": "baseStats",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "not": {
+                "type": "land"
+              }
+            }
+          ]
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "not": {
+                "type": "land"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

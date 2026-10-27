@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3abd2342-f783-4871-ac78-1a54b35722c2",
+  "name": "Biosynthic Burst",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Put a +1/+1 counter on target creature you control. It gains reach, trample, and indestructible until end of turn. Untap it. (Damage and effects that say \"destroy\" don't destroy it.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["reach", "trample", "indestructible"],
+          "until": "endOfTurn"
+        },
+        {
+          "op": "untap",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

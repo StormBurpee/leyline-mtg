@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1c7c1867-20cb-4035-bb2a-42760edf0a55",
+  "name": "Villainous Wrath",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}{B}"
+  },
+  "rulesText": "Target opponent loses life equal to the number of creatures they control. Then destroy all creatures.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "target",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "all",
+            "where": {
+              "all": [
+                {
+                  "controller": "opponent"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "op": "destroyAll",
+          "where": {
+            "type": "creature"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { numericValue } from './numeric-values.js';
 import { FACE_DOWN } from './disguise.js';
 import { meetsCondition } from './conditions.js';
 import { matchesFilter, targetSpec } from './selectors.js';
@@ -5,7 +6,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.31.0';
+export const VERSION = '0.32.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -159,8 +160,14 @@ export function keywords(s, o) {
 export const hasKeyword = (s, o, k) => keywords(s, o).includes(k);
 export function stats(s, o) {
   const d = definition(s, o);
-  let power = (d.power ?? 0) + (o.plusCounters ?? 0),
-    toughness = (d.toughness ?? 0) + (o.plusCounters ?? 0);
+  const context = { controller: o.controller, source: ref(o) };
+  let power = numericValue(s, d.baseStats?.power ?? d.power ?? 0, context) + (o.plusCounters ?? 0),
+    toughness =
+      numericValue(s, d.baseStats?.toughness ?? d.toughness ?? 0, context) + (o.plusCounters ?? 0);
+  if (o.zone === 'battlefield' && d.selfBonus) {
+    power += numericValue(s, d.selfBonus.power, context);
+    toughness += numericValue(s, d.selfBonus.toughness, context);
+  }
   for (const m of s.modifiers)
     if (m.objectId === o.id && m.incarnation === o.incarnation) {
       power += m.power ?? 0;
@@ -170,13 +177,22 @@ export function stats(s, o) {
     for (const a of battlefield(s)) {
       const d = definition(s, a);
       if (d.attachmentBonus && attachmentApplies(s, a, o)) {
-        power += d.attachmentBonus.power;
-        toughness += d.attachmentBonus.toughness;
+        power += numericValue(s, d.attachmentBonus.power, {
+          controller: a.controller,
+          source: ref(a),
+        });
+        toughness += numericValue(s, d.attachmentBonus.toughness, {
+          controller: a.controller,
+          source: ref(a),
+        });
       }
       const effect = d.static;
       if (effect?.kind === 'anthem' && staticApplies(s, a, o, effect)) {
-        power += effect.power;
-        toughness += effect.toughness;
+        power += numericValue(s, effect.power, { controller: a.controller, source: ref(a) });
+        toughness += numericValue(s, effect.toughness, {
+          controller: a.controller,
+          source: ref(a),
+        });
       }
     }
   return { power, toughness };
@@ -317,7 +333,7 @@ export function notifyTriggers(s, event, payload, context = null) {
   const object = payload.object;
   const d = payload.definition ?? (object ? definition(s, object) : null);
   const pt =
-    object?.zone === 'battlefield' && hasType(d, 'creature')
+    object && hasType(d, 'creature')
       ? stats(s, object)
       : { power: d?.power, toughness: d?.toughness };
   const facts = context?.facts?.[object?.id] ?? {
@@ -472,7 +488,8 @@ export function draw(s, p, count) {
     const id = s.players[p].library[0];
     if (!id) {
       s.players[p].failedDraw = true;
-      emit(s, 'emptyDraw', { player: p });
+      emit(s, 'emptyDraw', { player: p, ...(count > 1000 ? { attempts: count - i } : {}) });
+      if (count > 1000) break;
       continue;
     }
     move(s, s.objects[id], 'hand');

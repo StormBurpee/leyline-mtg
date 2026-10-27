@@ -83,14 +83,30 @@ export interface EventSpec {
   filter?: CardPredicate;
   excludeSource?: boolean;
 }
+export type NumericValue =
+  | number
+  | {
+      kind: 'count';
+      zone: 'battlefield' | 'graveyard' | 'exile' | 'hand' | 'library';
+      player: 'you' | 'opponent' | 'all';
+      where?: CardPredicate;
+      excludeSource?: boolean;
+    }
+  | { kind: 'life'; player: 'you' | 'opponent' }
+  | { kind: 'sum'; values: NumericValue[] }
+  | { kind: 'scale'; value: NumericValue; factor: number };
 export type Effect =
   | { op: 'damageEventPowerOpponent' }
   | { op: 'impulseChoose'; count: number }
   | { op: 'bindingNegotiation' }
   | { op: 'addMana'; mana: ManaCost }
-  | { op: 'damageEventOpponent'; amount: number }
-  | { op: 'damage' | 'damageOpponent'; amount: number }
-  | { op: 'gainLife' | 'loseLife'; amount: number; player?: 'controller' | 'opponent' | 'target' }
+  | { op: 'damageEventOpponent'; amount: NumericValue }
+  | { op: 'damage' | 'damageOpponent'; amount: NumericValue }
+  | {
+      op: 'gainLife' | 'loseLife';
+      amount: NumericValue;
+      player?: 'controller' | 'opponent' | 'target';
+    }
   | {
       op: 'moveTarget';
       subject?: 'source' | 'attached';
@@ -100,7 +116,7 @@ export type Effect =
     }
   | {
       op: 'draw' | 'scry' | 'surveil' | 'discard';
-      count: number;
+      count: NumericValue;
       player?: 'controller' | 'opponent' | 'target';
     }
   | {
@@ -111,7 +127,7 @@ export type Effect =
       tapped?: boolean;
       reveal?: boolean;
     }
-  | { op: 'mill'; count: number; player: 'controller' | 'opponent' | 'target' }
+  | { op: 'mill'; count: NumericValue; player: 'controller' | 'opponent' | 'target' }
   | { op: 'counter' | 'attachEquipment' }
   | { op: 'bounce' | 'destroy'; subject?: 'source' | 'attached' }
   | { op: 'untap' | 'tap'; subject?: 'source' | 'attached' }
@@ -120,41 +136,41 @@ export type Effect =
       where: CardPredicate;
       excludeSource?: boolean;
     }
-  | { op: 'counterAll'; where: CardPredicate; amount: number; excludeSource?: boolean }
+  | { op: 'counterAll'; where: CardPredicate; amount: NumericValue; excludeSource?: boolean }
   | {
       op: 'modifyAll';
       where: CardPredicate;
-      power: number;
-      toughness: number;
+      power: NumericValue;
+      toughness: NumericValue;
       keywords?: readonly string[];
       excludeSource?: boolean;
     }
   | {
       op: 'damageAll';
       where?: CardPredicate;
-      amount: number;
+      amount: NumericValue;
       players?: 'none' | 'controller' | 'opponent' | 'all';
       excludeSource?: boolean;
     }
-  | { op: 'counterOn'; subject?: 'source' | 'attached'; amount: number }
+  | { op: 'counterOn'; subject?: 'source' | 'attached'; amount: NumericValue }
   | {
       op: 'modify';
       subject?: 'source' | 'attached';
-      power: number;
-      toughness: number;
+      power: NumericValue;
+      toughness: NumericValue;
       keywords?: string[];
     }
   | {
       op: 'token';
       definition: string;
-      count: number;
+      count: NumericValue;
       temporaryKeywords?: string[];
       player?: 'controller' | 'opponent' | 'target' | 'targetController';
       tapped?: boolean;
     };
 export type StateCondition =
   | { kind: 'opponentLostLifeThisTurn' }
-  | { kind: 'controlAtLeast'; count: number; where: CardPredicate };
+  | { kind: 'controlAtLeast'; count: NumericValue; where: CardPredicate };
 export interface CardDefinition {
   readonly name: string;
   readonly type: CardType;
@@ -193,17 +209,19 @@ export interface CardDefinition {
   readonly modes?: readonly { label: string; target?: TargetKind; effects: readonly Effect[] }[];
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
+  readonly baseStats?: { power?: NumericValue; toughness?: NumericValue };
+  readonly selfBonus?: { power: NumericValue; toughness: NumericValue };
   readonly aura?: 'pacifism' | 'creature';
   readonly attachmentBonus?: {
     noUntap?: boolean;
-    power: number;
-    toughness: number;
+    power: NumericValue;
+    toughness: NumericValue;
     keywords?: readonly string[];
   };
   readonly static?: {
     kind: 'anthem';
-    power: number;
-    toughness: number;
+    power: NumericValue;
+    toughness: NumericValue;
     where?: CardPredicate;
     excludeSource?: boolean;
     keywords?: readonly string[];

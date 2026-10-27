@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0334a2f8-a74a-44c9-ba64-d9b7fabe160c",
+  "name": "Cosmic Spider-Man",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Spider", "Human", "Hero"],
+    "colors": ["B", "G", "R", "U", "W"],
+    "manaCost": "{W}{U}{B}{R}{G}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Flying, first strike, trample, lifelink, haste\nAt the beginning of combat on your turn, other Spiders you control gain flying, first strike, trample, lifelink, and haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "subtype": "Spider"
+              }
+            ]
+          },
+          "excludeSource": true,
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["flying", "first strike", "trample", "lifelink", "haste"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

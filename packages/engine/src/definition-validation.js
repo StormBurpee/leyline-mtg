@@ -1,3 +1,4 @@
+import { validNumericValue } from './value-schema.js';
 import { validateCondition } from './condition-schema.js';
 import { validateEventSpec } from './events.js';
 import {
@@ -50,6 +51,8 @@ const FIELDS = new Set([
   'etb',
   'aura',
   'attachmentBonus',
+  'baseStats',
+  'selfBonus',
   'static',
   'triggers',
   'activated',
@@ -164,12 +167,12 @@ function validateEffects(effects, path, target, errors) {
         'loseLife',
         'counterOn',
       ].includes(e.op) &&
-      !natural(e.amount)
+      !validNumericValue(e.amount, { nonnegative: true })
     )
       errors.push(`${p}.amount: expected a nonnegative safe integer.`);
     if (
       ['draw', 'mill', 'token', 'scry', 'surveil', 'discard'].includes(e.op) &&
-      (!natural(e.count) || e.count > 1000)
+      !validNumericValue(e.count, { nonnegative: true, limit: 1000 })
     )
       errors.push(`${p}.count: expected a literal count from 0 to 1000.`);
     if (
@@ -266,7 +269,10 @@ function validateEffects(effects, path, target, errors) {
         errors.push(`${p}.where: a group effect needs an explicit filter.`);
       if (e.excludeSource !== undefined && typeof e.excludeSource !== 'boolean')
         errors.push(`${p}.excludeSource: expected boolean.`);
-      if (['damageAll', 'counterAll'].includes(e.op) && !natural(e.amount))
+      if (
+        ['damageAll', 'counterAll'].includes(e.op) &&
+        !validNumericValue(e.amount, { nonnegative: true })
+      )
         errors.push(`${p}.amount: expected a nonnegative integer.`);
       if (e.op === 'damageAll') {
         if (!['none', 'controller', 'opponent', 'all'].includes(e.players ?? 'none'))
@@ -278,7 +284,7 @@ function validateEffects(effects, path, target, errors) {
       }
     }
     if (e.op === 'modify' || e.op === 'modifyAll') {
-      if (!signed(e.power) || !signed(e.toughness))
+      if (!validNumericValue(e.power) || !validNumericValue(e.toughness))
         errors.push(`${p}: power and toughness changes must be safe integers.`);
       if (e.subject !== undefined && !['source', 'attached'].includes(e.subject))
         errors.push(
@@ -501,14 +507,27 @@ export function validateDefinition(card) {
   if (card.basic && card.type !== 'land') errors.push(`${name}: only lands can be basic.`);
   if (card.target != null)
     errors.push(...validateTargetSpec(card.target).map((error) => `${name}.target: ${error}`));
+  for (const field of ['baseStats', 'selfBonus'])
+    if (card[field] !== undefined) {
+      const value = card[field];
+      if (
+        !plain(value) ||
+        !Object.keys(value).length ||
+        Object.keys(value).some((k) => !['power', 'toughness'].includes(k)) ||
+        Object.values(value).some((v) => !validNumericValue(v)) ||
+        (field === 'selfBonus' && (value.power === undefined || value.toughness === undefined)) ||
+        card.type !== 'creature'
+      )
+        errors.push(`${name}.${field}: expected supported creature stat values.`);
+    }
   if (card.attachmentBonus !== undefined) {
     const b = card.attachmentBonus;
     if (b?.noUntap !== undefined && typeof b.noUntap !== 'boolean')
       errors.push(`${name}.attachmentBonus.noUntap: expected boolean.`);
     if (
       !plain(b) ||
-      !signed(b.power) ||
-      !signed(b.toughness) ||
+      !validNumericValue(b.power) ||
+      !validNumericValue(b.toughness) ||
       Object.keys(b).some((k) => !['power', 'toughness', 'keywords', 'noUntap'].includes(k)) ||
       (b.keywords !== undefined &&
         (!Array.isArray(b.keywords) || b.keywords.some((k) => !KEYWORDS.has(k)))) ||
@@ -542,8 +561,8 @@ export function validateDefinition(card) {
     card.static !== undefined &&
     (!plain(card.static) ||
       card.static.kind !== 'anthem' ||
-      !signed(card.static.power) ||
-      !signed(card.static.toughness) ||
+      !validNumericValue(card.static.power) ||
+      !validNumericValue(card.static.toughness) ||
       Object.keys(card.static).some(
         (k) => !['kind', 'power', 'toughness', 'where', 'excludeSource', 'keywords'].includes(k),
       ))

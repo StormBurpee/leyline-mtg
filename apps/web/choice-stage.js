@@ -63,7 +63,7 @@ export function decisionCard(
   const rules = concealed ? 'Colorless 2/2 creature with ward {2}.' : (m?.oracle_text ?? d.text);
   return `<article class="decision-card-tile ${selected ? 'is-selected' : ''} ${disabled ? 'is-ineligible' : ''}" data-search="${esc(name.toLowerCase())}">
  <button class="decision-card-face" data-action="${esc(action)}" data-cardid="${esc(id)}" ${extra} ${draggable ? `draggable="true" data-order-card="${esc(id)}"` : ''} aria-label="${esc(label || `Choose ${name}`)}" aria-pressed="${selected}" ${disabled ? 'disabled' : ''}>
- <span class="decision-card-fallback"><strong>${esc(name)}</strong><span>${esc(details)}</span><span class="decision-rules">${esc(rules)}</span>${d.type === 'creature' ? `<b>${d.power}/${d.toughness}</b>` : ''}</span>
+ <span class="decision-card-fallback"><strong>${esc(name)}</strong><span>${esc(details)}</span><span class="decision-rules">${esc(rules)}</span>${d.type === 'creature' ? `<b>${m?.power ?? (d.baseStats?.power !== undefined ? '*' : d.power)}/${m?.toughness ?? (d.baseStats?.toughness !== undefined ? '*' : d.toughness)}</b>` : ''}</span>
  ${image ? `<img src="${esc(image)}" alt="${esc(name)}" draggable="false" loading="eager">` : ''}
  <span class="decision-selected-mark" aria-hidden="true">✓</span>${badge ? `<span class="decision-card-badge">${esc(badge)}</span>` : ''}
  </button><div class="decision-card-caption"><strong>${esc(name)}</strong><span>${esc(details)}</span></div>

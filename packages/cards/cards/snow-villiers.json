@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "01cdaf69-f53a-4735-92f2-ef149de4d5c9",
+  "name": "Snow Villiers",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Rebel", "Monk"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 0,
+    "toughness": 3
+  },
+  "rulesText": "Vigilance\nSnow Villiers's power is equal to the number of creatures you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "baseStats",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

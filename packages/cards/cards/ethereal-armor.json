@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dbba75f5-2404-4bd5-982b-f6c4effa5316",
+  "name": "Ethereal Armor",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura"],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Enchant creature\nEnchanted creature gets +1/+1 for each enchantment you control and has first strike.",
+  "abilities": [
+    {
+      "kind": "attachmentBonus",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "enchantment"
+            }
+          ]
+        }
+      },
+      "keywords": ["first strike"]
+    },
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}
