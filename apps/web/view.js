@@ -307,6 +307,10 @@ function actionDock(s, ui, p, actions) {
             : '');
         break;
       }
+      case 'auraEntry':
+        title = 'Choose an Aura attachment';
+        desc = 'Choose a legal permanent for the entering Aura.';
+        break;
       case 'creatureType':
         title = 'Choose a creature type';
         desc = 'Choose the type for Cavern of Souls as it enters.';

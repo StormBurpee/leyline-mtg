@@ -1,11 +1,11 @@
 import { FACE_DOWN } from './disguise.js';
 import { meetsCondition } from './conditions.js';
-import { matchesFilter } from './selectors.js';
+import { matchesFilter, targetSpec } from './selectors.js';
 import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.30.0';
+export const VERSION = '0.31.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -99,11 +99,40 @@ export function legalEquipmentAttachment(s, equipment, target) {
     hasType(definition(s, target), 'creature')
   );
 }
+export function legalAuraAttachment(s, aura, target, controller = aura?.controller) {
+  if (!aura || !target || aura.id === target.id || target.zone !== 'battlefield') return false;
+  const d = definition(s, aura),
+    t = definition(s, target);
+  if (!d.aura || hasType(d, 'creature') || !hasType(t, 'creature')) return false;
+  return matchesFilter(
+    {
+      definition: t,
+      controller: target.controller,
+      owner: target.owner,
+      token: target.token,
+      tapped: target.tapped,
+      attacking: isAttacking(s, target),
+      blocking: isBlocking(s, target),
+      manaValue: Object.values(t.cost).reduce((a, b) => a + b, 0),
+    },
+    targetSpec(d.target)?.where,
+    controller,
+  );
+}
 function attachmentApplies(s, equipment, target) {
   return (
     equipment.attachedTo?.id === target.id &&
     equipment.attachedTo.incarnation === target.incarnation &&
-    legalEquipmentAttachment(s, equipment, target)
+    equipment.zone === 'battlefield' &&
+    (definition(s, equipment).aura
+      ? legalAuraAttachment(s, equipment, target)
+      : legalEquipmentAttachment(s, equipment, target))
+  );
+}
+export function skipsUntap(s, object) {
+  return battlefield(s).some(
+    (source) =>
+      definition(s, source).attachmentBonus?.noUntap && attachmentApplies(s, source, object),
   );
 }
 export function keywords(s, o) {
@@ -275,6 +304,7 @@ export function queueTrigger(
     controller: source.controller,
     effects: structuredClone(effects),
     sourceKeywords: sourceKeywords ?? keywords(s, source),
+    ...(source.attachedTo ? { sourceAttachment: structuredClone(source.attachedTo) } : {}),
     sourceDefinition: structuredClone(definition(s, source)),
     label,
     ...(optional ? { optional: true } : {}),
@@ -402,6 +432,8 @@ export function move(s, o, to, departureContext = null) {
       if (entry.source?.id === o.id && entry.source.incarnation === o.incarnation) {
         entry.sourceKeywords = keywords(s, o);
         entry.sourceController = o.controller;
+        if (o.attachedTo || entry.sourceAttachment !== undefined)
+          entry.sourceAttachment = o.attachedTo ? structuredClone(o.attachedTo) : null;
         entry.sourceDefinition = structuredClone(definition(s, o));
       }
     }

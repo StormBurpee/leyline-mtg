@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { parseHTML } from 'linkedom';
 import {
   createGame,
+  CARDS,
   dispatch,
   exportReplay,
   chooseBotCommand,
@@ -309,6 +310,79 @@ test('graveyard spell targets use card images and an explicit guarded confirmati
     assert.equal(command.card, 'c27');
     assert.equal(command.target.id, 'c43');
     assert.equal(command.target.incarnation, 1);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('noncast Aura attachment uses the shared card stage and preserves a reviewed selection', async () => {
+  const catalog = {
+    ...CARDS,
+    'Aura entry guide': {
+      name: 'Aura entry guide',
+      type: 'creature',
+      cost: {},
+      power: 1,
+      toughness: 1,
+    },
+    'Aura entry search': {
+      name: 'Aura entry search',
+      type: 'sorcery',
+      cost: {},
+      effects: [
+        {
+          op: 'searchLibrary',
+          count: 1,
+          where: { type: 'enchantment' },
+          destination: 'battlefield',
+        },
+      ],
+    },
+  };
+  let state;
+  for (let seed = 1; seed < 200; seed++) {
+    state = createGame({
+      seed,
+      mulligan: false,
+      catalog,
+      decks: [
+        [
+          ...Array(4).fill('Aura entry guide'),
+          ...Array(4).fill('Aura entry search'),
+          ...Array(4).fill('Frantic Strength'),
+          ...Array(48).fill('Forest'),
+        ],
+        Array(60).fill('Forest'),
+      ],
+    });
+    const names = state.players[0].hand.map((id) => state.objects[id].name);
+    if (names.includes('Aura entry guide') && names.includes('Aura entry search')) break;
+  }
+  while (state.step !== 'main1') state = act(state, 'pass');
+  for (const name of ['Aura entry guide', 'Aura entry search']) {
+    state = act(state, 'cast', {
+      card: state.players[0].hand.find((id) => state.objects[id].name === name),
+    });
+    state = act(state, 'pass');
+    state = act(state, 'pass');
+  }
+  state = act(state, 'searchLibrary', {
+    cards: [state.choice.cards.find((id) => state.objects[id].name === 'Frantic Strength')],
+  });
+  assert.equal(state.choice.kind, 'auraEntry');
+  const h = await mount(exportReplay(state));
+  try {
+    h.click('[data-action="resume"]');
+    assert.ok(h.dialog.classList.contains('choice-stage'));
+    assert.equal(h.dialog.querySelector('[data-action="confirmDecision"]').disabled, true);
+    h.click('#dialog [data-action="selectDecisionCard"]');
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.ok(h.dialog.querySelector('.is-selected'));
+    h.click('#dialog [data-action="confirmDecision"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).type, 'chooseAuraAttachment');
+    assert.equal(h.dialog.open, false);
   } finally {
     h.cleanup();
   }

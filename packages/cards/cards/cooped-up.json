@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3e8bcb44-b875-4fe4-b96f-97a20cbfec93",
+  "name": "Cooped Up",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Enchant creature\nEnchanted creature can't attack or block.\n{2}{W}: Exile enchanted creature.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{W}"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "attached",
+          "destination": "exile"
+        }
+      ]
+    },
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "restriction": "cantAttackOrBlock"
+    }
+  ]
+}

@@ -621,7 +621,7 @@
               "const": "returnToHand"
             },
             "target": {
-              "const": "target"
+              "enum": ["source", "attached", "target"]
             }
           },
           "required": ["op", "target"],
@@ -634,7 +634,7 @@
               "const": "destroy"
             },
             "target": {
-              "const": "target"
+              "enum": ["source", "attached", "target"]
             }
           },
           "required": ["op", "target"],
@@ -647,7 +647,7 @@
               "const": "modify"
             },
             "target": {
-              "enum": ["source", "target"]
+              "enum": ["source", "target", "attached"]
             },
             "power": {
               "type": "integer",
@@ -746,7 +746,7 @@
               "const": "addCounters"
             },
             "target": {
-              "enum": ["source", "target"]
+              "enum": ["source", "target", "attached"]
             },
             "counter": {
               "const": "+1/+1"
@@ -767,7 +767,7 @@
               "const": "untap"
             },
             "target": {
-              "enum": ["source", "target"]
+              "enum": ["source", "target", "attached"]
             }
           },
           "required": ["op", "target"],
@@ -798,7 +798,7 @@
               "const": "moveTarget"
             },
             "target": {
-              "const": "target"
+              "enum": ["source", "attached", "target"]
             },
             "destination": {
               "enum": ["hand", "battlefield", "exile"]
@@ -985,7 +985,7 @@
               "const": "tap"
             },
             "target": {
-              "enum": ["source", "target"]
+              "enum": ["source", "target", "attached"]
             }
           },
           "required": ["op", "target"],
@@ -1317,7 +1317,7 @@
               "const": "cantAttackOrBlock"
             }
           },
-          "required": ["kind", "enchant", "restriction"],
+          "required": ["kind", "enchant"],
           "additionalProperties": false
         },
         {
@@ -1538,6 +1538,9 @@
                 "type": "string"
               },
               "uniqueItems": true
+            },
+            "noUntap": {
+              "type": "boolean"
             }
           },
           "required": ["kind", "power", "toughness"],

@@ -42,7 +42,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         case 'modifyAll':
           return { ...structuredClone(e), until: 'endOfTurn' };
         case 'tap':
-          return { op: 'tap', target: e.subject === 'source' ? 'source' : 'target' };
+          return { op: 'tap', target: e.subject ?? 'target' };
         case 'damage':
           return { op: 'damage', target: 'target', amount: e.amount };
         case 'damageOpponent':
@@ -54,7 +54,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         case 'moveTarget':
           return {
             op: 'moveTarget',
-            target: 'target',
+            target: e.subject ?? 'target',
             destination: e.destination,
             ...(e.controller !== undefined ? { controller: e.controller } : {}),
             ...(e.tapped !== undefined ? { tapped: e.tapped } : {}),
@@ -71,12 +71,12 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         case 'destroy':
           return {
             op: { counter: 'counterSpell', bounce: 'returnToHand', destroy: 'destroy' }[e.op],
-            target: 'target',
+            target: e.subject ?? 'target',
           };
         case 'modify':
           return {
             op: 'modify',
-            target: e.subject === 'source' ? 'source' : 'target',
+            target: e.subject ?? 'target',
             power: e.power,
             toughness: e.toughness,
             ...(e.keywords !== undefined ? { keywords: e.keywords } : {}),
@@ -86,11 +86,11 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return {
             op: 'addCounters',
             counter: '+1/+1',
-            target: e.subject === 'source' ? 'source' : 'target',
+            target: e.subject ?? 'target',
             amount: e.amount,
           };
         case 'untap':
-          return { op: 'untap', target: e.subject === 'source' ? 'source' : 'target' };
+          return { op: 'untap', target: e.subject ?? 'target' };
         case 'searchLibrary':
           return {
             op: 'searchLibrary',
@@ -218,11 +218,11 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   if (d.attachmentBonus)
     abilities.push({ kind: 'attachmentBonus', ...structuredClone(d.attachmentBonus) });
   if (d.aura) {
-    if (d.aura !== 'pacifism') throw new Error('Unsupported aura.');
+    if (!['pacifism', 'creature'].includes(d.aura)) throw new Error('Unsupported aura.');
     abilities.push({
       kind: 'aura',
-      enchant: structuredClone(targetSpec('creature')),
-      restriction: 'cantAttackOrBlock',
+      enchant: structuredClone(targetSpec(d.target)),
+      ...(d.aura === 'pacifism' ? { restriction: 'cantAttackOrBlock' } : {}),
     });
   }
   const characteristics = {

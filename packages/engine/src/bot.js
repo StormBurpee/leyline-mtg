@@ -48,6 +48,21 @@ export function chooseBotCommand(s, p) {
         candidates.sort((a, b) => value(s, s.objects[b]) - value(s, s.objects[a]));
         return { type: 'chooseResolutionCard', player: p, card: candidates[0] ?? null };
       }
+      case 'auraEntry': {
+        const d = definition(s, s.objects[c.card]);
+        const harmful =
+          d.aura === 'pacifism' ||
+          d.attachmentBonus?.noUntap ||
+          (d.attachmentBonus && d.attachmentBonus.power + d.attachmentBonus.toughness < 0);
+        const score = (id) =>
+          (s.objects[id].controller === p ? (harmful ? -1 : 1) : harmful ? 1 : -1) *
+          value(s, s.objects[id]);
+        return {
+          type: 'chooseAuraAttachment',
+          player: p,
+          card: [...c.cards].sort((a, b) => score(b) - score(a))[0],
+        };
+      }
       case 'creatureType': {
         const counts = new Map();
         for (const o of Object.values(s.objects))
@@ -343,6 +358,33 @@ export function chooseBotCommand(s, p) {
     const activated = definition(s, s.objects[action.card]).activated[action.ability];
     if (activated.cost.sacrificeSelf || (activated.cost.tap && keepBlocker(action.card)))
       return false;
+    if (
+      activated.effects.some(
+        (effect) =>
+          effect.subject === 'source' &&
+          (effect.op === 'bounce' || (effect.op === 'moveTarget' && effect.destination === 'hand')),
+      )
+    )
+      return s.stack.some((entry) => entry.controller !== p && entry.target?.id === action.card);
+    if (activated.effects.some((effect) => effect.subject === 'attached')) {
+      const source = s.objects[action.card],
+        target = source.attachedTo && s.objects[source.attachedTo.id];
+      if (
+        !target ||
+        target.zone !== 'battlefield' ||
+        target.incarnation !== source.attachedTo.incarnation
+      )
+        return false;
+      if (
+        activated.effects.some((effect) => ['destroy', 'bounce', 'moveTarget'].includes(effect.op))
+      )
+        return target.controller !== p;
+      if (activated.effects.some((effect) => effect.op === 'untap'))
+        return target.controller === p && target.tapped;
+      if (activated.effects.some((effect) => effect.op === 'tap'))
+        return target.controller !== p && !target.tapped;
+      return false;
+    }
     if (activated.effects.some((effect) => effect.op === 'modify'))
       return trickScore(s, p, action) > 0;
     return action.target?.kind === 'player' ? action.target.id !== p : !action.target;
@@ -453,7 +495,7 @@ export function chooseBotCommand(s, p) {
       if (
         target &&
         target.controller !== p &&
-        (d.aura ||
+        (d.aura === 'pacifism' ||
           d.effects?.some(
             (e) =>
               e.op === 'bounce' || (e.op === 'destroy' && !hasKeyword(s, target, 'indestructible')),
@@ -463,6 +505,18 @@ export function chooseBotCommand(s, p) {
       // A second Pacifism does not neutralize another threat. Existing pacified
       // bodies can still have relevant abilities, so only reject the redundant
       // combat restriction, not all removal targeting those permanents.
+      if (d.aura === 'creature' && target) {
+        const bonus = d.attachmentBonus;
+        const harmful = bonus?.noUntap || (bonus && bonus.power + bonus.toughness < 0);
+        score =
+          target.controller === p
+            ? harmful
+              ? -100
+              : 3 + value(s, target) * 0.5
+            : harmful
+              ? 3 + value(s, target)
+              : -100;
+      }
       if (d.aura === 'pacifism' && target && isPacified(s, target)) score = -100;
       if (d.effects?.some((e) => e.op === 'modify') && target?.controller === p)
         score = Math.max(score, trickScore(s, p, a));
