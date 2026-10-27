@@ -2,7 +2,7 @@ import { EVENT_PRESETS, eventSpec, validateEventSpec } from '../engine/src/event
 import { jsonDataProblem } from './json-data.js';
 import { validateDefinition } from '../engine/src/definition-validation.js';
 import { primaryType } from '../engine/src/types.js';
-import { targetSpec, validateTargetSpec } from '../engine/src/selectors.js';
+import { targetSpec, validateTargetSpec, effectTargetCompatible } from '../engine/src/selectors.js';
 export const CARD_SCHEMA_VERSION = 1;
 const plain = (v) =>
   v !== null &&
@@ -266,21 +266,24 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         if (effect.reveal !== undefined) e.reveal = effect.reveal;
       }
       if (e.op === 'moveTarget') {
-        if (effect.target !== 'target')
-          problem('UNSUPPORTED_BINDING', `${p}.target`, 'A zone change needs a declared target.');
+        if (!['source', 'attached', 'target'].includes(effect.target))
+          problem('UNSUPPORTED_BINDING', `${p}.target`, 'A zone change needs a supported binding.');
+        if (effect.target !== 'target') e.subject = effect.target;
         e.destination = effect.destination;
         if (effect.controller !== undefined) e.controller = effect.controller;
         if (effect.tapped !== undefined) e.tapped = effect.tapped;
       }
-      if (
-        ['damage', 'counter', 'bounce', 'destroy', 'attachEquipment'].includes(e.op) &&
-        effect.target !== 'target'
-      )
+      if (['damage', 'counter', 'attachEquipment'].includes(e.op) && effect.target !== 'target')
         problem(
           'UNSUPPORTED_BINDING',
           `${p}.target`,
           'This instruction requires the declared target binding.',
         );
+      if (['bounce', 'destroy'].includes(e.op)) {
+        if (!['source', 'attached', 'target'].includes(effect.target))
+          problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source, attached or target.');
+        if (effect.target !== 'target') e.subject = effect.target;
+      }
       if (e.op === 'mill')
         e.player =
           effect.target === 'target'
@@ -293,17 +296,17 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       if (e.op === 'counterOn' && effect.counter !== '+1/+1')
         problem('UNSUPPORTED_COUNTER', `${p}.counter`, 'Only +1/+1 counters are implemented.');
       if (e.op === 'counterOn') {
-        if (!['source', 'target'].includes(effect.target))
+        if (!['source', 'target', 'attached'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
-        if (effect.target === 'source') e.subject = 'source';
+        if (['source', 'attached'].includes(effect.target)) e.subject = effect.target;
       }
       if (e.op === 'untap' || e.op === 'tap') {
-        if (!['source', 'target'].includes(effect.target))
+        if (!['source', 'target', 'attached'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
-        if (effect.target === 'source') e.subject = 'source';
+        if (['source', 'attached'].includes(effect.target)) e.subject = effect.target;
       }
       if (e.op === 'modify') {
-        if (!['source', 'target'].includes(effect.target))
+        if (!['source', 'target', 'attached'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
         if (effect.until !== 'endOfTurn')
           problem(
@@ -312,7 +315,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
             'Only end-of-turn modifications are implemented.',
           );
         Object.assign(e, {
-          ...(effect.target === 'source' ? { subject: 'source' } : {}),
+          ...(['source', 'attached'].includes(effect.target) ? { subject: effect.target } : {}),
           power: effect.power,
           toughness: effect.toughness,
           ...(effect.keywords !== undefined ? { keywords: effect.keywords } : {}),
@@ -658,17 +661,20 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         };
         break;
       case 'attachmentBonus':
-        fields(a, ['kind', 'power', 'toughness', 'keywords'], path);
+        fields(a, ['kind', 'power', 'toughness', 'keywords', 'noUntap'], path);
         if (d.attachmentBonus)
           problem(
             'MULTIPLE_ATTACHMENT_BONUS',
             path,
             'Combine attachment bonuses into one instruction.',
           );
+        if (a.keywords !== undefined && !Array.isArray(a.keywords))
+          problem('INVALID_KEYWORDS', path, 'Expected an array of keywords.');
         d.attachmentBonus = {
           power: a.power,
           toughness: a.toughness,
-          ...(a.keywords ? { keywords: [...a.keywords] } : {}),
+          ...(Array.isArray(a.keywords) ? { keywords: [...a.keywords] } : {}),
+          ...(a.noUntap !== undefined ? { noUntap: a.noUntap } : {}),
         };
         break;
       case 'equip':
@@ -698,17 +704,19 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       case 'aura':
         fields(a, ['kind', 'enchant', 'restriction'], path);
         if (
-          !same(a.enchant, targetSpec('creature')) ||
-          a.restriction !== 'cantAttackOrBlock' ||
+          !effectTargetCompatible('attachEquipment', a.enchant) ||
+          (a.restriction !== undefined && a.restriction !== 'cantAttackOrBlock') ||
           d.aura
         )
           problem(
             'UNSUPPORTED_AURA',
             path,
-            'This profile supports the creature combat-restriction aura only.',
+            'Expected a creature enchant selector and an optional combat restriction.',
           );
-        d.aura = 'pacifism';
-        d.target = 'creature';
+        d.aura = a.restriction ? 'pacifism' : 'creature';
+        d.target = same(a.enchant, targetSpec('creature'))
+          ? 'creature'
+          : structuredClone(a.enchant);
         break;
       default:
         problem(

@@ -84,3 +84,7 @@ Positive life gains trigger controller-filtered life-gain abilities. Lifelink da
 ### Equipment
 
 Equipment uses normal stack-based activated abilities with sorcery timing and controller-filtered creature targets. Fixed attached power/toughness and keyword bonuses, typed equip restrictions, literal mana/discard costs, and target-based enters-trigger attachment are supported. Zone-incarnation checks prevent stale attachments. An illegal attachment detaches without destroying the Equipment. Equipment and wearer controllers remain independent. Dynamic bonuses and granted activated/triggered abilities are still unsupported. See [CR 301.5 and 702.6](https://media.wizards.com/2026/downloads/MagicCompRules%2020260925.txt).
+
+### Creature Auras
+
+Fixed attached stat/keyword bonuses, combat restrictions, no-untap restrictions, and supported attached-permanent effect bindings are implemented. Creature enchant restrictions are rechecked independently of targeting protection. Noncast entry has explicit attachment choices, preserves simultaneous entrants and leaves an Aura in its prior zone if nothing legal can be enchanted. Attached-subject abilities use the current attachment or last-known attachment when their source leaves. Dynamic stats, control-changing Auras, ability removal and dependent-characteristic enchant filters remain unsupported. See [CR 303.4](https://media.wizards.com/2026/downloads/MagicCompRules%2020260925.txt).

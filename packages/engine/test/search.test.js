@@ -173,7 +173,7 @@ test('search visibility is scoped and hidden handles cannot track shuffled ident
 test('search definitions reject unsupported fields, filters and unsafe battlefield destinations', () => {
   for (const effect of [
     { op: 'searchLibrary', count: 1, destination: 'battlefield' },
-    { op: 'searchLibrary', count: 1, destination: 'battlefield', where: { type: 'enchantment' } },
+    { op: 'searchLibrary', count: 1, destination: 'battlefield', where: { type: 'instant' } },
     { op: 'searchLibrary', count: 1, destination: 'hand', tapped: true },
     { op: 'searchLibrary', count: 1, destination: 'hand', where: { unknown: true } },
     { op: 'searchLibrary', count: 1, destination: 'hand', player: 'opponent' },
@@ -240,4 +240,26 @@ test('fetch lands are activated rather than left idle by the practice bot', () =
   const command = chooseBotCommand(s, 0);
   assert.equal(command.type, 'activate');
   assert.equal(command.card, land.id);
+});
+
+test('enchantment battlefield searches are accepted with the explicit Aura-entry choice system', () => {
+  assert.deepEqual(
+    validateDefinition({
+      name: 'Aura search',
+      type: 'sorcery',
+      cost: {},
+      color: [],
+      keywords: [],
+      text: '',
+      effects: [
+        {
+          op: 'searchLibrary',
+          count: 1,
+          destination: 'battlefield',
+          where: { type: 'enchantment' },
+        },
+      ],
+    }),
+    [],
+  );
 });

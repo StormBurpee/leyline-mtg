@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "88923ca1-a793-42f0-b9f8-ed9ff9c1185d",
+  "name": "Super Speed",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura"],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Flash\nEnchant creature\nWhen this Aura enters, enchanted creature gains first strike until end of turn.\nEnchanted creature gets +1/+0 and has haste.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "attached",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["first strike"],
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 0,
+      "keywords": ["haste"]
+    }
+  ]
+}

@@ -509,6 +509,12 @@ function presentStateChoice() {
       c.kind === 'payCost'
         ? `<button class="btn" data-action="declineWard">Don't pay</button><button class="btn primary" data-action="payWard" ${c.payable ? '' : 'disabled'}>Pay ward</button>`
         : '<button class="btn" data-action="declineOptional">Decline</button><button class="btn primary" data-action="acceptOptional">Resolve effect</button>';
+  } else if (c.kind === 'auraEntry') {
+    title = `Choose what ${state.objects[c.card].name} enchants`;
+    subtitle =
+      'This Aura is entering without being cast. Choose a legal permanent; this does not target it.';
+    cards = c.cards;
+    actions = `<button class="btn primary" data-action="confirmDecision" ${selected.length !== 1 ? 'disabled' : ''}>Attach Aura</button>`;
   } else if (c.kind === 'creatureType') {
     title = 'Choose a creature type';
     subtitle =
@@ -570,6 +576,8 @@ function confirmDecision(decline = false) {
   let command;
   if (['bottom', 'discard', 'discardEffect'].includes(c.kind))
     command = { type: c.kind, cards: [...ui.chosen] };
+  else if (c.kind === 'auraEntry')
+    command = { type: 'chooseAuraAttachment', card: dialog._selectedCards[0] };
   else if (c.kind === 'legendRule')
     command = { type: 'chooseLegend', card: dialog._selectedCards[0] };
   else command = { type: 'chooseResolutionCard', card: decline ? null : dialog._selectedCards[0] };

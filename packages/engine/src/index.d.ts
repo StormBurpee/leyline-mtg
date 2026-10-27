@@ -93,6 +93,7 @@ export type Effect =
   | { op: 'gainLife' | 'loseLife'; amount: number; player?: 'controller' | 'opponent' | 'target' }
   | {
       op: 'moveTarget';
+      subject?: 'source' | 'attached';
       destination: 'hand' | 'battlefield' | 'exile';
       controller?: 'owner' | 'you';
       tapped?: boolean;
@@ -111,8 +112,9 @@ export type Effect =
       reveal?: boolean;
     }
   | { op: 'mill'; count: number; player: 'controller' | 'opponent' | 'target' }
-  | { op: 'counter' | 'bounce' | 'destroy' | 'attachEquipment' }
-  | { op: 'untap' | 'tap'; subject?: 'source' }
+  | { op: 'counter' | 'attachEquipment' }
+  | { op: 'bounce' | 'destroy'; subject?: 'source' | 'attached' }
+  | { op: 'untap' | 'tap'; subject?: 'source' | 'attached' }
   | {
       op: 'destroyAll' | 'exileAll' | 'tapAll' | 'untapAll';
       where: CardPredicate;
@@ -134,8 +136,14 @@ export type Effect =
       players?: 'none' | 'controller' | 'opponent' | 'all';
       excludeSource?: boolean;
     }
-  | { op: 'counterOn'; subject?: 'source'; amount: number }
-  | { op: 'modify'; subject?: 'source'; power: number; toughness: number; keywords?: string[] }
+  | { op: 'counterOn'; subject?: 'source' | 'attached'; amount: number }
+  | {
+      op: 'modify';
+      subject?: 'source' | 'attached';
+      power: number;
+      toughness: number;
+      keywords?: string[];
+    }
   | {
       op: 'token';
       definition: string;
@@ -185,8 +193,13 @@ export interface CardDefinition {
   readonly modes?: readonly { label: string; target?: TargetKind; effects: readonly Effect[] }[];
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
-  readonly aura?: 'pacifism';
-  readonly attachmentBonus?: { power: number; toughness: number; keywords?: readonly string[] };
+  readonly aura?: 'pacifism' | 'creature';
+  readonly attachmentBonus?: {
+    noUntap?: boolean;
+    power: number;
+    toughness: number;
+    keywords?: readonly string[];
+  };
   readonly static?: {
     kind: 'anthem';
     power: number;
@@ -284,6 +297,7 @@ export interface StackEntry {
   condition?: StateCondition;
   sourceKeywords: string[];
   sourceController?: PlayerId;
+  sourceAttachment?: ObjectTarget | null;
   effects: (Effect | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } })[];
   targetKind?: TargetKind | null;
   target?: Target | null;
@@ -314,7 +328,23 @@ export type Choice =
       targetPlayer?: PlayerId;
     }
   | {
+      kind: 'auraEntry';
+      player: PlayerId;
+      card: string;
+      cards: string[];
+      targets: ObjectTarget[];
+      typeChoices: Record<string, string>;
+      auraChoices: Record<string, ObjectTarget>;
+      entries: {
+        object: ObjectTarget;
+        controller?: PlayerId;
+        attachment?: ObjectTarget | null;
+        tapped?: boolean;
+      }[];
+    }
+  | {
       kind: 'creatureType';
+      auraChoices?: Record<string, ObjectTarget>;
       player: PlayerId;
       card: string;
       types: readonly string[];
@@ -443,6 +473,7 @@ export interface GameState {
 export type Action =
   | { type: 'turnFaceUp'; card: string }
   | { type: 'chooseCreatureType'; creatureType: string }
+  | { type: 'chooseAuraAttachment'; card: string }
   | { type: 'chooseResolutionCard'; card: string | null }
   | { type: 'chooseLegend'; card: string }
   | { type: 'cycle'; card: string }

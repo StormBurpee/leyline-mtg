@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0e969a27-1609-4ab4-b0db-46b1af8066a9",
+  "name": "Unflinching Courage",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura"],
+    "colors": ["G", "W"],
+    "manaCost": "{1}{G}{W}"
+  },
+  "rulesText": "Enchant creature\nEnchanted creature gets +2/+2 and has trample and lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)",
+  "abilities": [
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 2,
+      "toughness": 2,
+      "keywords": ["trample", "lifelink"]
+    }
+  ]
+}

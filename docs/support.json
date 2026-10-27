@@ -1,5 +1,5 @@
 {
-  "version": "0.30.0",
+  "version": "0.31.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -282,6 +282,14 @@
       "keywords": ["flash"],
       "opcodes": ["surveil"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Aquitect's Defenses",
+      "type": "enchantment",
+      "keywords": ["flash"],
+      "opcodes": ["modify"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1017,6 +1025,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Charmed Sleep",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["tap"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Chase Inspiration",
       "type": "instant",
       "keywords": [],
@@ -1114,6 +1130,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Colossification",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["tap"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Commercial District",
       "type": "land",
       "keywords": [],
@@ -1144,6 +1168,14 @@
       "opcodes": ["surveil", "draw"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Cooped Up",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Coral Sword",
@@ -1353,6 +1385,14 @@
           "excludeSource": true
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dead Weight",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -1953,6 +1993,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Fae Flight",
+      "type": "enchantment",
+      "keywords": ["flash"],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Falkenrath Perforator",
       "type": "creature",
       "keywords": [],
@@ -2018,6 +2066,14 @@
       "keywords": ["vigilance"],
       "opcodes": ["surveil"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Feather of Flight",
+      "type": "enchantment",
+      "keywords": ["flash"],
+      "opcodes": ["draw"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -2109,6 +2165,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Fire-Rim Form",
+      "type": "enchantment",
+      "keywords": ["flash"],
+      "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2287,6 +2351,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Frantic Strength",
+      "type": "enchantment",
+      "keywords": ["flash"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Friendly Ghost",
       "type": "creature",
       "keywords": ["flying"],
@@ -2438,6 +2510,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Gilt-Leaf's Embrace",
+      "type": "enchantment",
+      "keywords": ["flash"],
+      "opcodes": ["modify"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6469,6 +6549,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Starlight Snare",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["tap"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Starscape Cleric",
       "type": "creature",
       "keywords": ["flying"],
@@ -6686,6 +6774,14 @@
       "opcodes": ["token", "modify", "damage", "draw"],
       "triggers": [],
       "activatedAbilities": 4
+    },
+    {
+      "name": "Super Speed",
+      "type": "enchantment",
+      "keywords": ["flash"],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Supply Drop",
@@ -7320,6 +7416,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Twinblade Blessing",
+      "type": "enchantment",
+      "keywords": ["flash"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Typhoid Rats",
       "type": "creature",
       "keywords": ["deathtouch"],
@@ -7374,6 +7478,14 @@
       "opcodes": ["destroy"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Unflinching Courage",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Unflinching Hortimancer",
@@ -7465,6 +7577,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["bounce"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Untamed Hunger",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -7889,6 +8009,14 @@
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Wingspan Stride",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["bounce"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Winter's Intervention",

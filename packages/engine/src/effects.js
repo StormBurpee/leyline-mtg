@@ -9,6 +9,7 @@ import {
   isAttacking,
   isBlocking,
   legalEquipmentAttachment,
+  legalAuraAttachment,
   addObject,
   queueTrigger,
   notifyTriggers,
@@ -140,8 +141,8 @@ export function enterBattlefield(s, o, controller = o.owner, attachment = null, 
   return enterBattlefieldBatch(s, [{ object: o, controller, attachment, tapped: options.tapped }]);
 }
 /** Move every entrant before observing any enters event, so simultaneous entrants see one another. */
-export function enterBattlefieldBatch(s, entries, typeChoices = {}) {
-  const entering = entries.filter(
+export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices = {}) {
+  let entering = entries.filter(
     ({ object }) =>
       object.zone !== 'battlefield' &&
       ['creature', 'artifact', 'enchantment', 'land'].includes(definition(s, object).type),
@@ -156,10 +157,49 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}) {
       card: chooser.object.id,
       entries: entering.map(({ object, ...rest }) => ({ ...rest, object: ref(object) })),
       typeChoices,
+      auraChoices,
       types: CREATURE_TYPES,
     };
     return false;
   }
+  const ready = [];
+  for (const item of entering) {
+    const { object, controller = object.owner } = item;
+    if (!definition(s, object).aura) {
+      ready.push(item);
+      continue;
+    }
+    const attachment = item.attachment ?? auraChoices[object.id];
+    if (attachment) {
+      const target = s.objects[attachment.id];
+      if (
+        target?.incarnation === attachment.incarnation &&
+        legalAuraAttachment(s, object, target, controller)
+      )
+        ready.push({ ...item, attachment });
+      else if (object.zone === 'stack') move(s, object, 'graveyard');
+      continue;
+    }
+    const targets = battlefield(s)
+      .filter((target) => legalAuraAttachment(s, object, target, controller))
+      .map(ref);
+    if (!targets.length) {
+      if (object.zone === 'stack') move(s, object, 'graveyard');
+      continue;
+    }
+    s.choice = {
+      kind: 'auraEntry',
+      player: controller,
+      card: object.id,
+      cards: targets.map((t) => t.id),
+      targets,
+      entries: entering.map(({ object, ...rest }) => ({ ...rest, object: ref(object) })),
+      typeChoices,
+      auraChoices,
+    };
+    return false;
+  }
+  entering = ready;
   const tappedReplacements = new Map(
     entering.map(({ object, controller = object.owner }) => [
       object.id,
@@ -214,7 +254,30 @@ export function finishCreatureTypeChoice(s, command) {
     object: s.objects[object.id],
   }));
   s.choice = null;
-  if (enterBattlefieldBatch(s, entries, choices) !== false && s.resolving) continueResolution(s);
+  if (enterBattlefieldBatch(s, entries, choices, choice.auraChoices ?? {}) !== false && s.resolving)
+    continueResolution(s);
+}
+export function finishAuraEntryChoice(s, command) {
+  const choice = s.choice;
+  const target = choice.targets.find((t) => t.id === command.card);
+  const aura = s.objects[choice.card],
+    object = target && s.objects[target.id];
+  requireRule(
+    command.type === 'chooseAuraAttachment' &&
+      target &&
+      object?.incarnation === target.incarnation &&
+      legalAuraAttachment(s, aura, object, choice.player),
+    'AURA_ATTACHMENT',
+    'Choose a legal permanent for this Aura to enchant.',
+  );
+  const entries = choice.entries.map(({ object, ...rest }) => ({
+    ...rest,
+    object: s.objects[object.id],
+  }));
+  s.choice = null;
+  const selections = { ...choice.auraChoices, [aura.id]: target };
+  if (enterBattlefieldBatch(s, entries, choice.typeChoices, selections) !== false && s.resolving)
+    continueResolution(s);
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
 export function dealDamage(s, source, target, amount, combat = false, lifeGains = null) {
@@ -286,7 +349,17 @@ export function resolveEffects(s, entry, startIndex = 0) {
         : e.player === 'opponent'
           ? opponent(entry.controller)
           : entry.controller;
-    const target = e.subject === 'source' ? entry.source : entry.target;
+    const sourceObject = s.objects[entry.source?.id];
+    const sourceAttachment =
+      sourceObject?.zone === 'battlefield' && sourceObject.incarnation === entry.source?.incarnation
+        ? sourceObject.attachedTo
+        : entry.sourceAttachment;
+    const target =
+      e.subject === 'source'
+        ? entry.source
+        : e.subject === 'attached'
+          ? sourceAttachment
+          : entry.target;
     const candidate = target?.kind === 'object' ? s.objects[target.id] : null;
     const o =
       candidate?.zone === 'battlefield' && candidate.incarnation === target.incarnation
@@ -780,6 +853,7 @@ export function finishResolutionChoice(s, command) {
     for (const id of command.cards) move(s, s.objects[id], 'graveyard');
     emit(s, 'discard', { player: choice.player, count: command.cards.length });
   } else throw new Error('Unexpected resolution choice.');
+  if (s.choice !== choice) return;
   s.choice = null;
   continueResolution(s);
 }
@@ -875,7 +949,7 @@ export function stateBasedActions(s) {
         !target ||
         target.zone !== 'battlefield' ||
         target.incarnation !== o.attachedTo.incarnation ||
-        definition(s, target).type !== 'creature'
+        !legalAuraAttachment(s, o, target)
       )
         toGrave.push(o);
     }

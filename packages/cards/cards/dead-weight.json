@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b1804304-fac1-4b19-a48d-6ade9407972a",
+  "name": "Dead Weight",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura"],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "Enchant creature\nEnchanted creature gets -2/-2.",
+  "abilities": [
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": -2,
+      "toughness": -2
+    }
+  ]
+}

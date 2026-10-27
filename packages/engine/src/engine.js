@@ -26,6 +26,7 @@ import { canTapForMana, manaOptions, pay, planPayment, tapForMana } from './mana
 import {
   finishLegendChoice,
   finishCreatureTypeChoice,
+  finishAuraEntryChoice,
   finishTriggerOrder,
   finishTriggerTarget,
   legalTarget,
@@ -177,6 +178,7 @@ function cycle(s, p, c) {
     controller: p,
     source: ref(o),
     sourceKeywords: keywords(s, o),
+    ...(o.attachedTo ? { sourceAttachment: structuredClone(o.attachedTo) } : {}),
     effects: [{ op: 'draw', count: 1 }],
     targetKind: null,
     target: null,
@@ -199,6 +201,7 @@ function activate(s, p, c) {
     controller: p,
     source: ref(o),
     sourceKeywords: keywords(s, o),
+    ...(o.attachedTo ? { sourceAttachment: structuredClone(o.attachedTo) } : {}),
     effects: structuredClone(a.effects),
     targetKind: a.target ?? null,
     target: c.target ?? null,
@@ -241,6 +244,9 @@ function handleChoice(s, p, c) {
     return;
   }
   switch (choice.kind) {
+    case 'auraEntry':
+      finishAuraEntryChoice(s, c);
+      return;
     case 'creatureType':
       finishCreatureTypeChoice(s, c);
       return;
@@ -414,6 +420,11 @@ export function dispatch(state, command) {
 }
 export function legalActions(s, p) {
   if (s.status === 'finished') return [];
+  if (s.choice?.kind === 'auraEntry' && s.choice.player === p)
+    return [
+      ...s.choice.cards.map((card) => ({ type: 'chooseAuraAttachment', card })),
+      { type: 'concede' },
+    ];
   if (s.choice?.kind === 'legendRule' && s.choice.player === p)
     return [...s.choice.cards.map((card) => ({ type: 'chooseLegend', card })), { type: 'concede' }];
   if (s.choice?.kind === 'triggerTarget' && s.choice.player === p)

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.31.0 — Creature Auras and attachment choices
+
+- Add fixed creature Aura stat/keyword bonuses, attached-subject effects, no-untap restrictions and legal-attachment state-based checks without incorrectly treating hexproof as an ongoing enchant restriction.
+- Noncast Aura entry uses explicit, non-targeting attachment choices and retains simultaneous-entry choices and resolution continuation. Choices use the shared large-card UI.
+- Preserve last-known attached permanents for pending abilities when their source leaves. Keep library-search entry choices rather than discarding them.
+- Add sixteen full-text Standard Auras. Catalog: 948 cards and 26 tokens. Control-changing Auras, dynamic bonuses, ability removal and other unimplemented clauses remain rejected.
+
 ## 0.30.0 — Equipment foundation
 
 - Add Equip using normal activated abilities, costs, sorcery timing, targeting, stack resolution and zone-incarnation checks. Support typed equip and literal alternative discard costs.

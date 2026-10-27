@@ -98,7 +98,7 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
     errors.push(`${path}.tap: expected a boolean.`);
 }
 function filterOnlyPermanents(where) {
-  if (where?.type) return ['land', 'creature', 'artifact'].includes(where.type);
+  if (where?.type) return ['land', 'creature', 'artifact', 'enchantment'].includes(where.type);
   if (where?.all) return where.all.some(filterOnlyPermanents);
   if (where?.any) return where.any.every(filterOnlyPermanents);
   return false;
@@ -124,7 +124,7 @@ function validateEffects(effects, path, target, errors) {
       bindingNegotiation: [],
       gainLife: ['amount', 'player'],
       loseLife: ['amount', 'player'],
-      moveTarget: ['destination', 'controller', 'tapped'],
+      moveTarget: ['destination', 'controller', 'tapped', 'subject'],
       draw: ['count', 'player'],
       mill: ['count', 'player'],
       scry: ['count', 'player'],
@@ -132,8 +132,8 @@ function validateEffects(effects, path, target, errors) {
       discard: ['count', 'player'],
       searchLibrary: ['count', 'where', 'destination', 'tapped', 'reveal'],
       counter: [],
-      bounce: [],
-      destroy: [],
+      bounce: ['subject'],
+      destroy: ['subject'],
       attachEquipment: [],
       modify: ['subject', 'power', 'toughness', 'keywords'],
       token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords'],
@@ -280,18 +280,38 @@ function validateEffects(effects, path, target, errors) {
     if (e.op === 'modify' || e.op === 'modifyAll') {
       if (!signed(e.power) || !signed(e.toughness))
         errors.push(`${p}: power and toughness changes must be safe integers.`);
-      if (e.subject !== undefined && e.subject !== 'source')
-        errors.push(`${p}.subject: only source or the chosen target is supported.`);
+      if (e.subject !== undefined && !['source', 'attached'].includes(e.subject))
+        errors.push(
+          `${p}.subject: only source, attached permanent or the chosen target is supported.`,
+        );
       if (
         e.keywords !== undefined &&
         (!Array.isArray(e.keywords) || e.keywords.some((k) => !KEYWORDS.has(k)))
       )
         errors.push(`${p}.keywords: unsupported keyword.`);
     }
-    if (['untap', 'tap'].includes(e.op) && e.subject !== undefined && e.subject !== 'source')
-      errors.push(`${p}.subject: only source or the chosen target is supported.`);
-    if (e.op === 'counterOn' && e.subject !== undefined && e.subject !== 'source')
-      errors.push(`${p}.subject: only source or the chosen target is supported.`);
+    if (
+      ['bounce', 'destroy', 'moveTarget'].includes(e.op) &&
+      e.subject !== undefined &&
+      !['source', 'attached'].includes(e.subject)
+    )
+      errors.push(`${p}.subject: unsupported binding.`);
+    if (
+      ['untap', 'tap'].includes(e.op) &&
+      e.subject !== undefined &&
+      !['source', 'attached'].includes(e.subject)
+    )
+      errors.push(
+        `${p}.subject: only source, attached permanent or the chosen target is supported.`,
+      );
+    if (
+      e.op === 'counterOn' &&
+      e.subject !== undefined &&
+      !['source', 'attached'].includes(e.subject)
+    )
+      errors.push(
+        `${p}.subject: only source, attached permanent or the chosen target is supported.`,
+      );
     if (
       [
         'damage',
@@ -305,7 +325,7 @@ function validateEffects(effects, path, target, errors) {
         'tap',
         'counterOn',
       ].includes(e.op) &&
-      e.subject !== 'source' &&
+      !['source', 'attached'].includes(e.subject) &&
       !effectTargetCompatible(e.op, target, e)
     )
       errors.push(`${p}: effect requires a compatible target selector.`);
@@ -483,22 +503,41 @@ export function validateDefinition(card) {
     errors.push(...validateTargetSpec(card.target).map((error) => `${name}.target: ${error}`));
   if (card.attachmentBonus !== undefined) {
     const b = card.attachmentBonus;
+    if (b?.noUntap !== undefined && typeof b.noUntap !== 'boolean')
+      errors.push(`${name}.attachmentBonus.noUntap: expected boolean.`);
     if (
       !plain(b) ||
       !signed(b.power) ||
       !signed(b.toughness) ||
-      Object.keys(b).some((k) => !['power', 'toughness', 'keywords'].includes(k)) ||
+      Object.keys(b).some((k) => !['power', 'toughness', 'keywords', 'noUntap'].includes(k)) ||
       (b.keywords !== undefined &&
         (!Array.isArray(b.keywords) || b.keywords.some((k) => !KEYWORDS.has(k)))) ||
-      !card.subtypes?.includes('Equipment')
+      (!card.subtypes?.includes('Equipment') && !card.aura)
     )
-      errors.push(`${name}.attachmentBonus: expected a supported Equipment bonus.`);
+      errors.push(`${name}.attachmentBonus: expected a supported Equipment or Aura bonus.`);
   }
   if (
     card.aura !== undefined &&
-    (card.aura !== 'pacifism' || card.type !== 'enchantment' || card.target !== 'creature')
+    (!['pacifism', 'creature'].includes(card.aura) ||
+      card.type !== 'enchantment' ||
+      !effectTargetCompatible('attachEquipment', card.target))
   )
-    errors.push(`${name}.aura: only the supported Pacifism attachment is implemented.`);
+    errors.push(`${name}.aura: expected a creature-enchanting Aura.`);
+  if (card.aura) {
+    const stable = (v) =>
+      !v ||
+      Object.entries(v).every(([k, value]) =>
+        ['all', 'any'].includes(k)
+          ? value.every(stable)
+          : k === 'not'
+            ? stable(value)
+            : !['power', 'toughness', 'keyword'].includes(k),
+      );
+    if (!validateTargetSpec(card.target).length && !stable(targetSpec(card.target)?.where))
+      errors.push(
+        `${name}.aura: dependent characteristic enchant restrictions are not implemented.`,
+      );
+  }
   if (
     card.static !== undefined &&
     (!plain(card.static) ||
