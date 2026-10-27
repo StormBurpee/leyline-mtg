@@ -123,7 +123,9 @@
 .decision-card-gallery {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
+  justify-content: safe center;
+  overflow-x: auto;
   gap: clamp(14px, 2vw, 30px);
   min-height: 100%;
   padding: 18px 14px 16px;
@@ -604,8 +606,7 @@
   .decision-card-caption {
     margin-top: 8px;
   }
-  .decision-card-caption > span,
-  .decision-read {
+  .decision-card-caption > span {
     display: none;
   }
   .decision-order-lanes {
