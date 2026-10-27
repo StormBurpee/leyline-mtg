@@ -4,9 +4,9 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.59.0
+## Implemented progress through v0.60.0
 
-Current dated inventory coverage: **2,188 / 5,164**; **2,976 remain**. This is 1309 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **2,200 / 5,164**; **2,964 remain**. This is 1321 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
 | Delivered feature/card batch                                      | Cards added |
 | ----------------------------------------------------------------- | ----------: |
@@ -80,7 +80,9 @@ Current dated inventory coverage: **2,188 / 5,164**; **2,976 remain**. This is 1
 | Simultaneous entry-group payoffs                                  |           3 |
 | Source-only choices, grants and recipient bindings                |          18 |
 | Connive, recruit and optional discard-search                      |          18 |
-| **Total since v0.38.0**                                           |    **1309** |
+| Further complete Class cards                                      |           3 |
+| Source-only flashback, target bindings and discard continuations  |           9 |
+| **Total since v0.38.0**                                           |    **1321** |
 
 Stormchaser’s Talent is a fourth executable Class but is banned in Standard; it increases Arena coverage only. Elvish Archivist and Enduring Innocence were corrected to grouped entry predicates and are not new cards.
 

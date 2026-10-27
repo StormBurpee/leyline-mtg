@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/trampling-beast-token",
+  "name": "Trampling Beast Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Beast"],
+    "colors": ["G"],
+    "manaCost": null,
+    "power": 4,
+    "toughness": 4,
+    "token": true
+  },
+  "rulesText": "Trample",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    }
+  ]
+}

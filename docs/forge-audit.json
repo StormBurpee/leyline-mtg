@@ -2544,15 +2544,15 @@
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
     "packages/engine/src/registry.js": "8426f6d386d583110b57aa2a55bc00ca44d6a55416338384f8df0374b86b7095",
     "packages/engine/src/effect-tree.js": "86a39c9e2e0a428d3195a57e53ba6a054a367702a23ee4805986320012ab3b6b",
-    "packages/engine/src/definition-validation.js": "ec97fbe9a4ded7caa1c62fc959ce8a0d3d539151c13fa7018793b10419535026",
+    "packages/engine/src/definition-validation.js": "5bcfaf5b460fe744f015af58632502989011bb98d339f4f252cc6fa505fc3ca3",
     "packages/engine/src/condition-schema.js": "7ca4630f00234f2af1502c67f4442b5214bfb273061ae7a9ed36740f547ddb76",
     "packages/engine/src/target-group-schema.js": "488c4d5141dd2395cb5fcc02303bacd9ec4047abb08e0d8e5c7d9bea78498681",
     "packages/engine/src/selectors.js": "ae4cc83e272d010166aeb18a1db9b623fda373181ea4854ac4fcdbfad24891e9",
     "packages/engine/src/value-schema.js": "9b43c61b96a4fe7434839f5d538fc3fb3e2f5d8c7bbb80b61935eb5d2a016f98",
     "packages/engine/src/spell-history.js": "9a615e4f842b5a0cb345497d34f0fa6c4ba8bcad0ff9f3d458d65232070472c7",
-    "packages/engine/src/events.js": "422fadd26d7769e4991507459c5a344f92cb43c4e5cee642167f05862a0b7b9f",
+    "packages/engine/src/events.js": "f9db467db7e57fa7244fdeb7bd667d6c57acdb3da9469afbe2de5c3873b3e073",
     "packages/engine/src/types.js": "cd3ad79db1d75dab6abeb564373d213814ab9aeee6d9301fa160cbd57dca8f25",
     "packages/engine/src/creature-types.js": "a9795a0aee66966054a854ece62af6406bc029c2b9e85d83b344e38eeb82a109"
   },
-  "auditedWithEngine": "0.59.0"
+  "auditedWithEngine": "0.60.0"
 }

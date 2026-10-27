@@ -4,8 +4,16 @@ import { readFile } from 'node:fs/promises';
 import { CARDS, CARD_IDS, definition } from '../packages/engine/src/index.js';
 import { inspect, catalog } from '../apps/web/view.js';
 import { fixture, put } from '../packages/engine/test/helpers.js';
-const cards = ['hunter-s-talent', 'stormchaser-s-talent', 'caretaker-s-talent', 'builder-s-talent'];
-test('all four complete Classes preserve exact Oracle identity, full levels, cost, artwork and inspector text', async () => {
+const cards = [
+  'hunter-s-talent',
+  'stormchaser-s-talent',
+  'caretaker-s-talent',
+  'builder-s-talent',
+  'leader-s-talent',
+  'gossip-s-talent',
+  'does-machines',
+];
+test('all seven complete Classes preserve exact Oracle identity, full levels, cost, artwork and inspector text', async () => {
   const meta = JSON.parse(
     await readFile(new URL('../apps/web/card-metadata.json', import.meta.url)),
   );

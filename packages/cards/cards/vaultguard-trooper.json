@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e15c78d4-6fb1-4bd3-8219-c66b83fcaba1",
+  "name": "Vaultguard Trooper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Kavu", "Soldier"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "At the beginning of your end step, if you control two or more tapped creatures, you may discard your hand. If you do, draw two cards.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "optional": true,
+      "condition": {
+        "kind": "controlAtLeast",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "tapped": true
+            }
+          ]
+        },
+        "count": 2
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": {
+            "kind": "count",
+            "zone": "hand",
+            "player": "you"
+          }
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

@@ -38,6 +38,15 @@ Generic activated, triggered and static grants are tested.
 - **Builder's Talent:** the exact white 0/4 defender Wall; one level-2 counter
   trigger per qualifying entry group; level-3 targeted noncreature, nonland
   permanent reanimation.
+- **Leader's Talent:** targeted attack counter; level-2 life for each own
+  counter-bearing creature departure using last-known counters; level-3 spell-cast
+  counters on the creatures currently controlled when the trigger resolves.
+- **Gossip's Talent:** each own creature entry surveils; level-2 attacking power-3-or-less
+  creature becomes unblockable for the turn; level-3 optional exact-damage-source
+  immediate blink under its owner's control.
+- **Does Machines:** ordered entry mill/draw/discard; level-2 return of up to two
+  targeted own artifact graveyard cards; level-3 counters and conditional permanent
+  additive 0/0 Robot animation of a controlled artifact.
 - **Stormchaser's Talent:** entry Otter; level-2 graveyard instant/sorcery return;
   level-3 spell-cast Otter creation. The blue-red 1/1 Otter has real prowess.
 
@@ -47,19 +56,45 @@ it in Standard on August 10, 2026. Its addition is Arena executable coverage.
 ## Dated Standard inventory and remaining work
 
 The October 26, 2026 legal Standard inventory contains 14 Classes. Hunter's,
-Caretaker's and Builder's Talents are the three complete legal Standard unlocks
-here; Stormchaser's adds executable Arena coverage outside legal Standard.
+Caretaker's, Builder's, Leader's and Gossip's Talents plus Does Machines are the
+six complete legal Standard Classes here; Stormchaser's adds executable Arena
+coverage outside legal Standard.
 Caretaker's and Builder's use real simultaneous `enterGroup` events, not
 per-object approximations. Token-copy and permanent-return targets use the
 existing incarnation-bound targeting and entry-choice continuations.
 
 The other legal names are Artist's Talent, Bandit's Talent, Blacksmith's Talent,
-Cool but Rude, Does Machines, Gossip's Talent, Innkeeper's Talent, Leader's
-Talent, Ninja Teen, Party Dude and Scavenger's Talent. Each stays unsupported
-until every clause works. In particular this Class foundation does not itself
+Cool but Rude, Innkeeper's Talent, Ninja Teen, Party Dude and Scavenger's Talent.
+Each stays unsupported until every clause works. In particular this Class foundation does not itself
 provide arbitrary damage/counter replacement ordering, sacrifice-three and
 reanimation continuations, sneak, random discard, equipment reassignment, or
-instantaneous event-source blinking. It is not support for any of those cards.
+life-gain replacement multiplication. It is not support for any of those cards.
+
+## Bounded follow-through primitives
+
+`hadCounters` is a boolean event predicate restricted to battlefield-departure
+families. It reads counters from the shared predeparture snapshot (including
+loyalty, keyword and charge counters), not the object after counters reset. Group
+predicates require controller, type and counter facts on the same group member.
+The historical fact remains true when a queued Leader trigger resolves; it is
+not an intervening-if lookup of a newly returned object.
+
+`blink` binds either the normal permanent target, the exact source, or the exact
+event source. It exiles then returns a nontoken immediately under owner/you
+control, with normal entry-choice continuations and no intervening priority.
+Linked-exile duration returns happen immediately after the blink exile (CR 610.3),
+before the blinked permanent returns; both phases retain their entry-choice
+continuations. Optional triggers offer the decision at resolution. No battlefield incarnation
+is followed across an unrelated zone change, and tokens cannot return.
+
+`animatePermanent` adds the creature type and listed creature subtypes, setting
+base power/toughness without removing existing types, colors or abilities. It is
+an indefinite, noncopiable modifier on one battlefield incarnation, not an
+ability granted by the Class. Existing artifact creatures get the counters but
+are not animated by Does Machines. A later crew/Station threshold does not undo
+the 0/0 base; Equipment becomes unattached normally. Both new operations accept
+only a single target-group member; arbitrary batch blink/animation remains
+unsupported rather than being approximated sequentially.
 
 ## Verification
 
@@ -70,6 +105,14 @@ ability loss/restoration, stable command identity, real-card effects, opaque bot
 commands, readable cost/level controls, and deterministic replay. Neighboring
 ability, registry, source-copy and trigger suites remain separate focused checks.
 `class-grouped-entry-cards.test.js` covers the two group-dependent Classes.
+`class-next-cards.test.js` covers all three follow-through Classes, historical
+counter snapshots, same-member group matching, optional blink/incarnations,
+continuations, native/source rejection boundaries, Vehicle/Station/Equipment
+animation interactions, opaque bot decisions and deterministic replay.
+`class-next-adversarial.test.js` independently covers linked-exile blink ordering,
+Aura legality before the source returns, nested linked/blink entry choices, exact
+return incarnations, actual token-copy characteristics, and replay at each paused
+entry stage (CR 111.8, 400.7, 610.3, 613.1d and 613.4, effective September 25, 2026).
 `tests/class-card-metadata.test.js` verifies the generated catalog/Oracle display
 contract and inspector output after integration regenerates the catalog and
 imports the reviewed external metadata.
@@ -86,4 +129,5 @@ of this source change.
 
 Sources: [official Class rules](https://magic.wizards.com/en/rules),
 [Bloomburrow release notes](https://magic.wizards.com/en/news/feature/bloomburrow-release-notes),
+[TMNT release notes](https://magic.wizards.com/en/news/feature/teenage-mutant-ninja-turtles-release-notes),
 [August 10, 2026 banned announcement](https://magic.wizards.com/en/news/announcements/banned-and-restricted-august-10-2026).

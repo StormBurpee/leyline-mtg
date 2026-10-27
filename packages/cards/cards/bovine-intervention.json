@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7402d98f-6d58-4ff2-a0db-9eec4417a75f",
+  "name": "Bovine Intervention",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Destroy target artifact or creature. Its controller creates a 2/2 white Ox creature token.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-ox-token",
+          "amount": 1,
+          "controller": "targetController"
+        }
+      ]
+    }
+  ]
+}

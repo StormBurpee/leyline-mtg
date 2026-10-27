@@ -2,7 +2,15 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.59)
+## Latest coverage (v0.60)
+
+Leader's Talent, Gossip's Talent and Does Machines now have all printed Class levels. Counter-bearing departures use last-known facts; optional immediate blink follows the exact damage source and restores linked-exile victims first; artifact animation permanently adds creature/Robot and 0/0 base statistics without erasing other types or abilities. Staged entry choices retain the resolving continuation. See [Class support](CLASS-CARDS.md).
+
+Nine further complete Standard cards reuse flashback, conditional target checks, recipient-bound token creation, optional discard-search and intervening-if end-step triggers. The exact new tokens are a green 4/4 Beast with trample and a white 2/2 Ox. These bounded implementations do not imply generalized replacement effects, arbitrary mass blink, all Classes or format-legality enforcement.
+
+Total catalog: 2419 playable cards and 108 tokens; dated Standard: 2200 of 5164. All previous definitions, revision 4 Class/entryGroup behavior, legacy revisions 1–3, exact default/meta lists and saved-catalog caching remain preserved. DOM/inspector checks are not browser-layout verification.
+
+## Previous coverage (v0.59)
 
 Eighteen complete Standard cards add single-creature connive, recruit, and Formidable Speaker’s optional discard-linked creature search. Connive uses the current or last controller, draws before discarding, and awards a counter only for an actually discarded nonland card on the same battlefield incarnation. Recruit’s Human Soldier token follows an actual nonland discard, even after the source leaves. Abandon Attachments now uses the same paid-discard continuation instead of a hand-count approximation. See [connive and recruit support](CONNIVE-RECRUIT.md).
 

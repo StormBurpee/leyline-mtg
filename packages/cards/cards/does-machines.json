@@ -1,0 +1,142 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "df54b79d-f31d-4582-86c0-1d34ec77be0f",
+  "name": "Does Machines",
+  "characteristics": {
+    "types": ["enchantment"],
+    "subtypes": ["Class"],
+    "supertypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "(Gain the next level as a sorcery to add its ability.)\nWhen this Class enters, mill two cards, draw two cards, then discard two cards.\n{1}{U}: Level 2\nWhen this Class becomes level 2, return up to two target artifact cards from your graveyard to your hand.\n{4}{U}: Level 3\nAt the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it isn't a creature, it becomes a 0/0 Robot creature in addition to its other types.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "classLevel",
+      "level": 2,
+      "cost": "{1}{U}",
+      "abilities": [
+        {
+          "kind": "triggered",
+          "on": {
+            "event": "classLevel",
+            "object": "source",
+            "classLevel": 2
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "targetGroup": "cards",
+              "destination": "hand"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "cards",
+              "label": "Return up to two artifact cards",
+              "selector": {
+                "scope": "graveyard",
+                "where": {
+                  "all": [
+                    {
+                      "type": "artifact"
+                    },
+                    {
+                      "owner": "you"
+                    }
+                  ]
+                }
+              },
+              "min": 0,
+              "max": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "classLevel",
+      "level": 3,
+      "cost": "{4}{U}",
+      "abilities": [
+        {
+          "kind": "triggered",
+          "on": {
+            "event": "step",
+            "controller": "you",
+            "step": "beginCombat"
+          },
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "counter": "+1/+1",
+              "amount": 3
+            },
+            {
+              "op": "conditional",
+              "condition": {
+                "kind": "targetMatches",
+                "target": "target",
+                "where": {
+                  "not": {
+                    "type": "creature"
+                  }
+                }
+              },
+              "then": [
+                {
+                  "op": "animatePermanent",
+                  "target": "target",
+                  "power": 0,
+                  "toughness": 0,
+                  "subtypes": ["Robot"],
+                  "until": "permanent"
+                }
+              ]
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

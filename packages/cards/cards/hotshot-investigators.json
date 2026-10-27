@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "288fcf5c-f5aa-4f62-9dd8-ba295df48f7a",
+  "name": "Hotshot Investigators",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vedalken", "Detective"],
+    "colors": ["U"],
+    "manaCost": "{5}{U}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, return up to one other target creature to its owner's hand. If you controlled it, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "returned",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "where": {
+              "controller": "you"
+            },
+            "targetGroup": "returned"
+          },
+          "then": [
+            {
+              "op": "returnToHand",
+              "target": "target",
+              "targetGroup": "returned"
+            },
+            {
+              "op": "createToken",
+              "token": "leyline:token/clue-token",
+              "amount": 1
+            }
+          ],
+          "else": [
+            {
+              "op": "returnToHand",
+              "target": "target",
+              "targetGroup": "returned"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

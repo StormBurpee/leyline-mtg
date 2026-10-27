@@ -48,6 +48,33 @@ function selectionYield(s, p, effect, source) {
   const e = effectValues(s, effect, { controller: p, source });
   return Math.min(e.count, e.selectCount ?? 1, libraryCount(s, p));
 }
+// Optional immediate blink should not consume our token, give back a stolen
+// creature, or forfeit a double striker's remaining hit. Only inspect public
+// exact-incarnation facts; this does not predict hidden entry outcomes.
+function harmfulOptionalBlink(s, p, entry) {
+  return predictedEffects(s, entry.effects, entry).some((effect) => {
+    if (effect.op !== 'blink') return false;
+    const target =
+      effect.subject === 'source'
+        ? entry.source
+        : effect.subject === 'eventSource'
+          ? entry.eventSource
+          : entry.target;
+    const object = target?.kind === 'object' ? s.objects[target.id] : null;
+    if (
+      !object ||
+      object.zone !== 'battlefield' ||
+      object.incarnation !== target.incarnation ||
+      object.controller !== p
+    )
+      return false;
+    return (
+      object.token ||
+      (effect.controller !== 'you' && object.owner !== p) ||
+      (s.step === 'firstDamage' && hasKeyword(s, object, 'double strike'))
+    );
+  });
+}
 function groupedSpellScore(s, p, action, card) {
   const adjusted = new Map();
   let tempo = 0;
@@ -512,17 +539,18 @@ export function chooseBotCommand(s, p) {
           type: 'resolveOptional',
           player: p,
           accept:
-            acceptLifePayoff(s, entry) ??
-            !resolutionRisk(
-              s,
-              p,
-              entry.effects,
-              entry.target,
-              0,
-              entry.source,
-              entry.eventAmount,
-              entry,
-            ),
+            !harmfulOptionalBlink(s, p, entry) &&
+            (acceptLifePayoff(s, entry) ??
+              !resolutionRisk(
+                s,
+                p,
+                entry.effects,
+                entry.target,
+                0,
+                entry.source,
+                entry.eventAmount,
+                entry,
+              )),
         };
       }
       case 'payCost':

@@ -557,6 +557,9 @@
         },
         "classLevel": {
           "enum": [2, 3]
+        },
+        "hadCounters": {
+          "type": "boolean"
         }
       },
       "required": ["event"],
@@ -2396,6 +2399,57 @@
             }
           },
           "required": ["op", "count", "then"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "blink"
+            },
+            "target": {
+              "enum": ["source", "eventSource", "target"]
+            },
+            "controller": {
+              "enum": ["owner", "you"]
+            }
+          },
+          "required": ["op", "target"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "animatePermanent"
+            },
+            "target": {
+              "const": "target"
+            },
+            "power": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "toughness": {
+              "type": "integer",
+              "minimum": -1000,
+              "maximum": 1000
+            },
+            "subtypes": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 20,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "until": {
+              "const": "permanent"
+            }
+          },
+          "required": ["op", "target", "power", "toughness", "subtypes", "until"],
           "additionalProperties": false
         }
       ]

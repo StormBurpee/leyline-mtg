@@ -64,6 +64,7 @@ export function validateEventSpec(value) {
           'chapters',
           'classLevel',
           'destinations',
+          'hadCounters',
         ].includes(key),
     )
   )
@@ -196,6 +197,18 @@ export function validateEventSpec(value) {
       );
   } else if (spec.chapters !== undefined) errors.push('Only chapter events take chapter numbers.');
   if (
+    spec.hadCounters !== undefined &&
+    (typeof spec.hadCounters !== 'boolean' ||
+      ![
+        'leave',
+        'dies',
+        'diesGroup',
+        'battlefieldToGraveyard',
+        'battlefieldToGraveyardGroup',
+      ].includes(spec.event))
+  )
+    errors.push('hadCounters requires a battlefield-departure event and a boolean.');
+  if (
     spec.destinations !== undefined &&
     (spec.event !== 'leave' ||
       !Array.isArray(spec.destinations) ||
@@ -226,6 +239,7 @@ export function matchesEvent(value, event, facts, source) {
         ),
       ) ?? false
     );
+  if (spec.hadCounters !== undefined && facts.hadCounters !== spec.hadCounters) return false;
   if (spec.destinations && !spec.destinations.includes(facts.destination)) return false;
   if (event === 'classLevel' && spec.classLevel !== facts.classLevel) return false;
   if (event === 'chapter' && !spec.chapters.includes(facts.chapterNumber)) return false;

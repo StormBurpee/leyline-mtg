@@ -141,6 +141,12 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return { op: 'gainLife', target: e.player ?? 'controller', amount: e.amount };
         case 'loseLife':
           return { op: 'loseLife', target: e.player ?? 'controller', amount: e.amount };
+        case 'blink': {
+          const { subject, ...rest } = structuredClone(e);
+          return { ...rest, target: subject ?? 'target' };
+        }
+        case 'animatePermanent':
+          return { ...structuredClone(e), target: 'target', until: 'permanent' };
         case 'delayedBlink':
           return { ...e, target: 'target' };
         case 'exileUntilSourceLeaves':

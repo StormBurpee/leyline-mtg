@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.60.0 — Class follow-through and complete Standard definitions
+
+- Add 12 complete Standard cards: Leader's Talent, Gossip's Talent, Does Machines and nine existing-engine definitions. Standard reaches 2200 of 5164; Arena reaches 2407 of 15332. Catalog: 2419 playable cards and 108 tokens.
+- Add last-known counter-bearing departure predicates, optional exact-incarnation immediate blink and permanent additive Robot animation. Linked-exile returns complete before a blinked source reenters, including staged entry choices.
+- Add full flashback, conditional bounce/recovery, recipient-bound removal tokens, optional discard-search and end-step hand-refresh cards, plus exact trampling Beast and white Ox tokens. Preserve all previous definitions, revision 4 and legacy 1–3 behavior, exact deck lists and saved-catalog caching.
+
 ## 0.59.0 — Connive and recruit continuations
 
 - Add 18 complete Standard cards: ten connive cards, seven recruit cards and Formidable Speaker. Standard reaches 2188 of 5164; Arena reaches 2395 of 15332. Catalog: 2407 playable cards and 106 tokens. Migrate Abandon Attachments without counting it as a new card.

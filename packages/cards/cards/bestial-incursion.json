@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bc00f29a-e9d2-4b86-bb22-33b686ac4365",
+  "name": "Bestial Incursion",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{3}{G}"
+  },
+  "rulesText": "Create a 4/4 green Beast creature token with trample.\nFlashback {5}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/trampling-beast-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "flashback",
+      "cost": "{5}{G}"
+    }
+  ]
+}

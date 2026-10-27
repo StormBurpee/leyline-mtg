@@ -340,6 +340,8 @@ function validateEffects(
           'moveTarget',
           'exileUntilSourceLeaves',
           'delayedBlink',
+          'blink',
+          'animatePermanent',
           'removeAbilities',
           'counterAbility',
           'keywordCounters',
@@ -347,9 +349,15 @@ function validateEffects(
           'attachedToken',
         ].includes(e.op) ||
         e.subject !== undefined ||
-        (['counter', 'copyToken', 'connive', 'delayedBlink', 'damageTargetController'].includes(
-          e.op,
-        ) &&
+        ([
+          'counter',
+          'copyToken',
+          'connive',
+          'delayedBlink',
+          'blink',
+          'animatePermanent',
+          'damageTargetController',
+        ].includes(e.op) &&
           group.max !== 1) ||
         (e.op === 'counter' && e.unlessPay !== undefined) ||
         (e.op === 'damageTargetController' &&
@@ -427,6 +435,8 @@ function validateEffects(
       gainLife: ['amount', 'player'],
       loseLife: ['amount', 'player'],
       exileUntilSourceLeaves: [],
+      blink: ['subject', 'controller'],
+      animatePermanent: ['power', 'toughness', 'subtypes'],
       delayedBlink: ['controller'],
       moveTarget: [
         'destination',
@@ -869,7 +879,16 @@ function validateEffects(
         targetSpec(target)?.scope !== 'permanent')
     )
       errors.push(`${p}: earthbend requires a permanent target and 0–1000 counters.`);
-    if (e.op === 'animateLand' || e.op === 'creatureForm') {
+    if (
+      e.op === 'blink' &&
+      ((e.subject !== undefined && !['source', 'eventSource'].includes(e.subject)) ||
+        (e.subject === undefined && targetSpec(target)?.scope !== 'permanent') ||
+        (e.controller !== undefined && !['owner', 'you'].includes(e.controller)))
+    )
+      errors.push(`${p}: blink requires an exact permanent binding and owner/you controller.`);
+    if (e.op === 'animatePermanent' && targetSpec(target)?.scope !== 'permanent')
+      errors.push(`${p}: permanent animation requires a permanent target.`);
+    if (['animateLand', 'creatureForm', 'animatePermanent'].includes(e.op)) {
       if (
         !Number.isSafeInteger(e.power) ||
         !Number.isSafeInteger(e.toughness) ||
