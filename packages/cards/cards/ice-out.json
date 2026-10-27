@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fed3bc35-4269-48f0-9133-a595ce49c2d1",
+  "name": "Ice Out",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}{U}"
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nThis spell costs {1} less to cast if it's bargained.\nCounter target spell.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell"
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 1,
+      "condition": {
+        "kind": "sourceBargained"
+      }
+    }
+  ]
+}

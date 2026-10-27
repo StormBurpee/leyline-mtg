@@ -1,0 +1,96 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c47caa45-e7fc-414a-8a5d-59b58f1751f3",
+  "name": "Burrog Barrage",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Target creature you control gets +1/+0 until end of turn if you've cast another instant or sorcery spell this turn. Then it deals damage equal to its power to up to one target creature an opponent controls.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "actor",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victim",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "spellsCast",
+              "player": "you",
+              "where": {
+                "any": [
+                  {
+                    "type": "instant"
+                  },
+                  {
+                    "type": "sorcery"
+                  }
+                ]
+              }
+            },
+            "operator": "gte",
+            "right": 2
+          },
+          "then": [
+            {
+              "op": "modify",
+              "target": "target",
+              "targetGroup": "actor",
+              "power": 1,
+              "toughness": 0,
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "op": "bite",
+          "sourceGroup": "actor",
+          "victimGroup": "victim"
+        }
+      ]
+    }
+  ]
+}

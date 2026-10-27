@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0380e99c-18f9-4472-8223-bb208e5f0963",
+  "name": "Earth Village Ruffians",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier", "Rogue"],
+    "colors": ["B", "G"],
+    "manaCost": "{2}{B/G}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "When this creature dies, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "earthbend",
+          "amount": 2
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "land"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

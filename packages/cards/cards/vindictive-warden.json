@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "43b339ec-4d7d-41ac-a5ab-96c6a6de00e2",
+  "name": "Vindictive Warden",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["B", "R"],
+    "manaCost": "{2}{B/R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)\nFirebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.)\n{3}: This creature deals 1 damage to each opponent.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "combatMana",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

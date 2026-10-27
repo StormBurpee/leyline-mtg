@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "051ff7e0-dd00-4467-8796-a5d1c21934ed",
+  "name": "Bejeweled Warg",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Wolf"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Trample\nWhenever this creature deals combat damage to a player, choose one \u2014\n\u2022 Put a +1/+1 counter on target Wolf you control.\n\u2022 Create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "combatDamagePlayer",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Put a +1/+1 counter on target Wolf you control.",
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "amount": 1,
+              "counter": "+1/+1"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "subtype": "Wolf"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "label": "Create a Treasure token.",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/treasure-token",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

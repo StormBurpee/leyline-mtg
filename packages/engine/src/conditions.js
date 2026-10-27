@@ -25,6 +25,14 @@ export function meetsCondition(s, player, value, excludedIds = [], source = null
   const eventManaSpent = typeof context === 'number' ? context : (context?.eventManaSpent ?? null);
   if (!value) return true;
   if (value.kind === 'additionalCostPaid') return !!context?.additionalCost;
+  if (value.kind === 'sourceBargained') {
+    if (context?.bargained || context?.sourceBargained || source?.bargainedLKI) return true;
+    const object = source && s.objects[source.id];
+    return (
+      !!source?.bargained ||
+      (!!object && object.incarnation === source.incarnation && !!object.bargained)
+    );
+  }
   if (value.kind === 'sourceQuestCountersAtLeast') {
     const object = source && s.objects[source.id];
     const count =

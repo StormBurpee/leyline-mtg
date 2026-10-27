@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bc5631ae-494e-4987-8d17-57674bfbdb9f",
+  "name": "Archon's Glory",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nTarget creature gets +2/+2 until end of turn. If this spell was bargained, that creature also gains flying and lifelink until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 2,
+          "toughness": 2,
+          "until": "endOfTurn"
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "sourceBargained"
+          },
+          "then": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "keywords": ["flying", "lifelink"],
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    }
+  ]
+}

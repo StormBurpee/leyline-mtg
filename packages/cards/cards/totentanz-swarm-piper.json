@@ -1,0 +1,89 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cfa46f8f-b3ec-4ee0-acdd-622f3177e02a",
+  "name": "Totentanz, Swarm Piper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Warlock", "Bard"],
+    "colors": ["B", "R"],
+    "manaCost": "{1}{B}{R}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Whenever Totentanz or another nontoken creature you control dies, create a 1/1 black Rat creature token with \"This token can't block.\"\n{1}{B}: Target attacking Rat you control gains deathtouch until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/nonblocking-rat-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "token": false
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/nonblocking-rat-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{B}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["deathtouch"]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "subtype": "Rat"
+            },
+            {
+              "controller": "you"
+            },
+            {
+              "attacking": true
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

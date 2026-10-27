@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "89f96032-5cba-404d-82b0-38d2be963e4b",
+  "name": "Azula, On the Hunt",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Noble"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Firebending 2 (Whenever this creature attacks, add {R}{R}. This mana lasts until end of combat.)\nWhenever Azula attacks, you lose 1 life and create a Clue token. (It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "combatMana",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

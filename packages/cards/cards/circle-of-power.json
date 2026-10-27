@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2d41fd1f-4a98-45dd-a3c5-f7c5e0152109",
+  "name": "Circle of Power",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}"
+  },
+  "rulesText": "You draw two cards and you lose 2 life. Create a 0/1 black Wizard creature token with \"Whenever you cast a noncreature spell, this token deals 1 damage to each opponent.\"\nWizards you control get +1/+0 and gain lifelink until end of turn.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/black-wizard-spellslinger-token",
+          "amount": 1
+        },
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "subtype": "Wizard"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 0,
+          "keywords": ["lifelink"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

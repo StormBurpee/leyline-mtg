@@ -4,9 +4,9 @@ Baseline: v0.38.0, 879 curated cards out of the dated 5,164-card Standard invent
 
 The [machine-readable audit](coverage/standard-gap-2026-10-27.json) preserves counts, candidate names, baseline commit and limitations.
 
-## Implemented progress through v0.50.0
+## Implemented progress through v0.51.0
 
-Current dated inventory coverage: **1,764 / 5,164**; **3,400 remain**. This is 885 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
+Current dated inventory coverage: **1,849 / 5,164**; **3,315 remain**. This is 970 complete card additions since the audit baseline, not a projection. Each row attributes a card once to its delivered batch; it does not imply every card containing that feature now works.
 
 | Delivered feature/card batch                                      | Cards added |
 | ----------------------------------------------------------------- | ----------: |
@@ -59,7 +59,10 @@ Current dated inventory coverage: **1,764 / 5,164**; **3,400 remain**. This is 8
 | Source-only expansion after preparation                           |          61 |
 | True modal triggered abilities                                    |          14 |
 | Simultaneous death-group triggers                                 |           4 |
-| **Total since v0.38.0**                                           |     **885** |
+| Source-only expansion after modal triggers                        |          65 |
+| Optional Bargain costs                                            |          13 |
+| Source-bound fight and planeswalker bite                          |           7 |
+| **Total since v0.38.0**                                           |     **970** |
 
 The baseline forecasts below remain unchanged for comparison. They were conservative first-pass probes: several implemented families unlocked more cards than those probes identified. Remaining cards in each family can still require other unsupported behavior.
 

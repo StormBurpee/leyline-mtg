@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "987c1144-69f6-4441-b0a4-d23f931df81f",
+  "name": "Southern Air Temple",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Shrine"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}"
+  },
+  "rulesText": "When Southern Air Temple enters, put X +1/+1 counters on each creature you control, where X is the number of Shrines you control.\nWhenever another Shrine you control enters, put a +1/+1 counter on each creature you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "subtype": "Shrine"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "subtype": "Shrine"
+        }
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

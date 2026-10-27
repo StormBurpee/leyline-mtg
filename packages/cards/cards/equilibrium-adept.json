@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "42bf9435-02e6-428f-a93c-fe4652deb4fc",
+  "name": "Equilibrium Adept",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dog", "Monk"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.\nFlurry \u2014 Whenever you cast your second spell each turn, this creature gains double strike until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 1,
+          "player": "controller",
+          "duration": "nextTurn"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "spellNumber": 2
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["double strike"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c87da757-3daa-4874-a1e4-be0aa2adcb28",
+  "name": "Yoshimaru, Scrappy Stray",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dog"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When Yoshimaru enters, another target creature you control fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)\n{6}: Put a +1/+1 counter on target nonlegendary creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "fight",
+          "sourceGroup": "fighter",
+          "victimGroup": "victim"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "fighter",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            },
+            "excludeSource": true
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "victim",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{6}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "legendary": false
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

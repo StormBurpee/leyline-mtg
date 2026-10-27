@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "de3a469a-e38b-456b-994d-abec1b010e42",
+  "name": "Hakoda, Selfless Commander",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Warrior", "Ally"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 3,
+    "toughness": 5
+  },
+  "rulesText": "Vigilance\nYou may look at the top card of your library any time.\nYou may cast Ally spells from the top of your library.\nSacrifice Hakoda: Creatures you control get +0/+5 and gain indestructible until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "libraryTopAccess",
+      "play": {
+        "subtype": "Ally"
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 5,
+          "keywords": ["indestructible"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

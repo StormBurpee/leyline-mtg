@@ -9,7 +9,7 @@ import { matchesEvent, eventSpec } from './events.js';
 import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.50.0';
+export const VERSION = '0.51.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -767,6 +767,7 @@ export function queueTrigger(
     ...(source.attachedTo ? { sourceAttachment: structuredClone(source.attachedTo) } : {}),
     sourceDefinition: structuredClone(definition(s, source)),
     sourceStats: structuredClone(stats(s, source)),
+    ...(source.bargained ? { sourceBargained: true } : {}),
     sourceCopyDefinition: structuredClone(copiableDefinition(s, source)),
     label,
     ...(optional ? { optional: true } : {}),
@@ -1172,6 +1173,7 @@ export function move(s, o, to, departureContext = null) {
   // and replay catalogs. The explicit zone event also observes noncreatures.
   const dying = toGraveyard && hasType(definition(s, o), 'creature');
   const departed = toGraveyard ? structuredClone(o) : null;
+  if (!(from === 'stack' && to === 'battlefield')) delete o.bargained;
   if (from === 'battlefield' || from === 'stack') {
     const entries = [
       ...s.stack,

@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a9e3e8b0-4276-419d-9326-be56af3c41be",
+  "name": "Ooze Patrol",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Ooze"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, mill two cards, then put a +1/+1 counter on this creature for each artifact and/or creature card in your graveyard. (To mill two cards, put the top two cards of your library into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you",
+            "where": {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

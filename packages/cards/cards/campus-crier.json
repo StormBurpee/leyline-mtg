@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c1a9d60f-a469-48f9-8f1c-3ca5ae86bd64",
+  "name": "Campus Crier",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Advisor"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "{1}, Exile this card from your graveyard: Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[\u22121]: Surveil 1\" and \"[\u22123]: Draw a card.\")",
+  "abilities": [
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{1}",
+        "exileSelf": true
+      },
+      "effects": [
+        {
+          "op": "empowerJace",
+          "token": "leyline:token/jace",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

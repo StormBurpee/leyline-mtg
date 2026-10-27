@@ -96,6 +96,7 @@ const FIELDS = new Set([
   'conditionalBonuses',
   'costModifiers',
   'sacrificeCost',
+  'bargain',
   'additionalCost',
   'static',
   'triggers',
@@ -288,17 +289,25 @@ function validateEffects(
     if (e.op === 'fight' || e.op === 'bite') {
       const actor = groups.find((g) => g.id === e.sourceGroup);
       const victim = groups.find((g) => g.id === e.victimGroup);
+      const sourceBound = e.source === 'source' && e.sourceGroup === undefined;
+      const groupBound =
+        e.source === undefined &&
+        actor &&
+        actor.min === 1 &&
+        actor.max === 1 &&
+        effectTargetCompatible('attachEquipment', actor.selector);
       if (
-        Object.keys(e).some((k) => !['op', 'sourceGroup', 'victimGroup'].includes(k)) ||
-        !actor ||
-        actor.min !== 1 ||
-        actor.max !== 1 ||
+        Object.keys(e).some((k) => !['op', 'source', 'sourceGroup', 'victimGroup'].includes(k)) ||
+        (!sourceBound && !groupBound) ||
         !victim ||
-        !effectTargetCompatible('attachEquipment', actor.selector) ||
-        !effectTargetCompatible('attachEquipment', victim.selector) ||
-        (e.op === 'fight' && victim.max !== 1)
+        !(e.op === 'fight'
+          ? effectTargetCompatible('attachEquipment', victim.selector) && victim.max === 1
+          : targetSpec(victim.selector)?.scope === 'permanent' &&
+            effectTargetCompatible('damage', victim.selector))
       )
-        errors.push(`${p}: fight/bite requires creature target groups and exactly one source.`);
+        errors.push(
+          `${p}: fight/bite requires exactly one explicit source binding and compatible victim groups.`,
+        );
       continue;
     }
     if (e.op === 'empowerJace' && (!natural(e.count) || e.count > 1000))
@@ -1502,6 +1511,31 @@ export function validateDefinition(card) {
     )
       errors.push(`${name}: additional cost cannot combine with other casting choices.`);
   }
+  if (card.bargain !== undefined) {
+    if (
+      card.bargain !== true ||
+      card.type === 'land' ||
+      card.modes ||
+      card.kicker ||
+      card.offspring ||
+      card.gift ||
+      card.spree ||
+      card.disguise ||
+      card.adventure ||
+      card.warp ||
+      card.plot ||
+      card.flashback ||
+      card.harmonize ||
+      card.sacrificeCost ||
+      card.additionalCost ||
+      card.distributedCounters ||
+      twobridCount ||
+      card.keywords?.includes('convoke')
+    )
+      errors.push(`${name}.bargain: requires a nonland without competing casting options.`);
+  }
+  if (contains(card, (v) => v.kind === 'sourceBargained') && !card.bargain)
+    errors.push(`${name}: bargained conditions require bargain.`);
   if (card.sacrificeCost !== undefined) {
     const cost = card.sacrificeCost;
     const typeFilter = (v) =>

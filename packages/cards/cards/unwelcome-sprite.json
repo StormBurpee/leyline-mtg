@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d0a38e8c-c42c-4c99-8a44-d390ff2511ff",
+  "name": "Unwelcome Sprite",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Rogue"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Flying\nWhenever you cast a spell during an opponent's turn, surveil 2. (Look at the top two cards of your library. You may put any number of them into your graveyard and the rest on top of your library in any order.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 2
+        }
+      ],
+      "triggerCondition": {
+        "kind": "opponentTurn"
+      }
+    }
+  ]
+}

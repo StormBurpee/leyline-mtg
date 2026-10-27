@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/lifelink-cat-token",
+  "name": "Lifelink Cat Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Cat"],
+    "colors": ["W"],
+    "supertypes": [],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    }
+  ],
+  "rulesText": "Lifelink"
+}

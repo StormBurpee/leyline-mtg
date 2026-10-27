@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "90ecd452-333a-43b0-be08-a61f3779b3bd",
+  "name": "High Fae Negotiator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}{B}",
+    "power": 3,
+    "toughness": 5
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nFlying\nWhen this creature enters, if it was bargained, each opponent loses 3 life and you gain 3 life.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "condition": {
+        "kind": "sourceBargained"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 3
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    }
+  ]
+}

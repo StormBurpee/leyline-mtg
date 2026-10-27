@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "405c4a7b-dbb3-48a1-9205-7dbe6e2ad363",
+  "name": "Aatchik, Emerald Radian",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Insect", "Druid"],
+    "colors": ["B", "G"],
+    "manaCost": "{3}{B}{B}{G}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "When Aatchik enters, create a 1/1 green Insect creature token for each artifact and/or creature card in your graveyard.\nWhenever another Insect you control dies, put a +1/+1 counter on Aatchik. Each opponent loses 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/green-insect-token",
+          "amount": {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you",
+            "where": {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "controller": "you",
+        "filter": {
+          "subtype": "Insect"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        },
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4b803bf2-025a-4bf6-9d3c-a28d714b4781",
+  "name": "Kellan's Lightblades",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nKellan's Lightblades deals 3 damage to target attacking or blocking creature. If this spell was bargained, destroy that creature instead.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "any": [
+                {
+                  "attacking": true
+                },
+                {
+                  "blocking": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "sourceBargained"
+          },
+          "then": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ],
+          "else": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    }
+  ]
+}

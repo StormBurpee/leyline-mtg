@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "011558f3-3c23-430e-a08b-8f91238e7971",
+  "name": "Unfortunate Accident",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}"
+  },
+  "rulesText": "Spree (Choose one or more additional costs.)\n+ {2}{B} \u2014 Destroy target creature.\n+ {1} \u2014 Create a 1/1 red Mercenary creature token with \"{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.\"",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": "oneOrMore",
+      "modes": [
+        {
+          "label": "Destroy target creature.",
+          "additionalCost": "{2}{B}",
+          "targetGroups": [
+            {
+              "id": "destroyed",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "type": "creature"
+                }
+              },
+              "min": 1,
+              "max": 1
+            }
+          ],
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target",
+              "targetGroup": "destroyed"
+            }
+          ]
+        },
+        {
+          "label": "Create a Mercenary.",
+          "additionalCost": "{1}",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/mercenary-token",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

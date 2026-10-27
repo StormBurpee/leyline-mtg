@@ -310,7 +310,7 @@ function send(
     !automatic &&
     c.type === 'cast' &&
     c.sacrifice === undefined &&
-    definition(state, state.objects[c.card]).sacrificeCost
+    spellProfile(definition(state, state.objects[c.card]), c.mode)?.sacrificeCost
   ) {
     showCastingSacrifice(c);
     return false;

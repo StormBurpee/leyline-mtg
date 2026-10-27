@@ -1,0 +1,84 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6317d45a-fe02-4879-b515-bc5327ecb5ae",
+  "name": "Wispdrinker Vampire",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Rogue"],
+    "colors": ["B", "W"],
+    "manaCost": "{2}{W}{B}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhenever another creature you control with power 2 or less enters, each opponent loses 1 life and you gain 1 life.\n{5}{W}{B}: Creatures you control with power 2 or less gain deathtouch and lifelink until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "power": {
+                "lte": 2
+              }
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{5}{W}{B}"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              },
+              {
+                "power": {
+                  "lte": 2
+                }
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["deathtouch", "lifelink"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

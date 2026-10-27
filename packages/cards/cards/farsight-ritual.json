@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7de66ba3-6e97-4e0a-928e-7ce45dee278b",
+  "name": "Farsight Ritual",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}{U}"
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nLook at the top four cards of your library. If this spell was bargained, look at the top eight cards of your library instead. Put two of them into your hand and the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "sourceBargained"
+          },
+          "then": [
+            {
+              "op": "lookChooseHand",
+              "target": "controller",
+              "amount": 8,
+              "selectCount": 2,
+              "restOrder": "random"
+            }
+          ],
+          "else": [
+            {
+              "op": "lookChooseHand",
+              "target": "controller",
+              "amount": 4,
+              "selectCount": 2,
+              "restOrder": "random"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    }
+  ]
+}

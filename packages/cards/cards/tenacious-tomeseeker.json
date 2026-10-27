@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b07bf08b-d9ec-429f-be6d-a7afa27c60c4",
+  "name": "Tenacious Tomeseeker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Knight"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nWhen this creature enters, if it was bargained, return target instant or sorcery card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "condition": {
+        "kind": "sourceBargained"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    }
+  ]
+}

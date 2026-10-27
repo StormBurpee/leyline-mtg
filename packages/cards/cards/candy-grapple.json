@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9588a7fd-bbe5-4a81-9a7e-d8e8f6c0537d",
+  "name": "Candy Grapple",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nTarget creature gets -3/-3 until end of turn. If this spell was bargained, that creature gets -5/-5 until end of turn instead.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "sourceBargained"
+          },
+          "then": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": -5,
+              "toughness": -5,
+              "until": "endOfTurn"
+            }
+          ],
+          "else": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": -3,
+              "toughness": -3,
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5c151e3b-fcf2-4adb-a60b-9eff0c360705",
+  "name": "Arcane Amphisbaena",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Snake"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Deathtouch\nWhen this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[\u22121]: Surveil 1\" and \"[\u22123]: Draw a card.\")",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "empowerJace",
+          "token": "leyline:token/jace",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

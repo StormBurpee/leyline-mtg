@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "23c3de07-8aa2-48e9-848c-50b5a40bd133",
+  "name": "Goblin Glasswright // Craft with Pride",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Sorcerer"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)",
+  "abilities": [
+    {
+      "kind": "prepare",
+      "mainName": "Goblin Glasswright",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:prepare/craft-with-pride",
+        "name": "Craft with Pride",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["R"],
+          "manaCost": "{R}"
+        },
+        "rulesText": "Create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/treasure-token",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      "entersPrepared": true
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

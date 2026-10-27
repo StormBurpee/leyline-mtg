@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5fe3aabd-3271-41bf-ae50-f6efaba7c4ae",
+  "name": "Carrot Cake",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Food"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "When this artifact enters and when you sacrifice it, create a 1/1 white Rabbit creature token and scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{2}, {T}, Sacrifice this artifact: You gain 3 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/rabbit-token",
+          "amount": 1
+        },
+        {
+          "op": "scry",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "sacrifice",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/rabbit-token",
+          "amount": 1
+        },
+        {
+          "op": "scry",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

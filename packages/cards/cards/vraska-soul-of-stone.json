@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cad63b31-667b-4518-bc49-be4ffb82bc63",
+  "name": "Vraska, Soul of Stone",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Gorgon", "Wizard"],
+    "colors": ["R", "U", "W"],
+    "manaCost": "{U}{R}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Artifact creatures you control have vigilance.\nWhenever you cast a noncreature spell, create a 1/1 colorless Sculpture Treasure artifact creature token with \"{T}, Sacrifice this token: Add one mana of any color.\"",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "type": "creature"
+          },
+          {
+            "type": "artifact"
+          },
+          {
+            "controller": "you"
+          }
+        ]
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["vigilance"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/sculpture-treasure-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

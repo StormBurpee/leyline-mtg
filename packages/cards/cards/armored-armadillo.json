@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "dca25245-523a-4587-a059-a14ee2ef908d",
+  "name": "Armored Armadillo",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Armadillo"],
+    "colors": ["W"],
+    "manaCost": "{W}",
+    "power": 0,
+    "toughness": 4
+  },
+  "rulesText": "Ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\n{3}{W}: This creature gets +X/+0 until end of turn, where X is its toughness.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{1}"
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}{W}"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": {
+            "kind": "sourceStat",
+            "stat": "toughness"
+          },
+          "toughness": 0,
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

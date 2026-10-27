@@ -151,7 +151,11 @@ function groupedSpellScore(s, p, action, card) {
       }
     }
     if (effect.op === 'fight' || effect.op === 'bite') {
-      const actor = data(action.targets[effect.sourceGroup]?.[0]);
+      const actor = data(
+        effect.source === 'source'
+          ? { kind: 'object', ...(card.source ?? { id: action.card }) }
+          : action.targets[effect.sourceGroup]?.[0],
+      );
       if (!actor) continue;
       for (const t of action.targets[effect.victimGroup] ?? []) {
         const victim = data(t);
@@ -185,13 +189,20 @@ function groupedSpellScore(s, p, action, card) {
   return score;
 }
 
-function definition(s, o, x = o.zone === 'stack' ? (o.chosenX ?? 0) : 0, additionalCost = null) {
+function definition(
+  s,
+  o,
+  x = o.zone === 'stack' ? (o.chosenX ?? 0) : 0,
+  additionalCost = null,
+  bargained = !!o.bargained,
+) {
   const d = rawDefinition(s, o),
     entry = {
       controller: o.controller,
       source: { id: o.id, incarnation: o.incarnation },
       x,
       additionalCost,
+      bargained,
     };
   const effects = (list) => (list ? predictedEffects(s, list, entry) : list);
   const activeAttached = (d.conditionalBonuses ?? []).filter(
@@ -993,7 +1004,13 @@ export function chooseBotCommand(s, p) {
         s.objects[a.card],
         a.mode,
         a.targets ? flattenTargets(a.targets) : a.target,
-        definition(s, s.objects[a.card], a.x, a.additionalCost),
+        definition(
+          s,
+          s.objects[a.card],
+          a.x,
+          a.additionalCost,
+          !!spellProfile(rawDefinition(s, s.objects[a.card]), a.mode)?.bargained,
+        ),
         a.x,
       );
       const d = { ...profile };

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.51.0 — Bargain and complete power-damage bindings
+
+- Add 85 complete Standard cards: 65 source-only additions, thirteen Bargain cards and seven fight/bite cards. Catalog: 2067 playable cards and 79 tokens.
+- Implement optional Bargain sacrifice payments as distinct casting options, with locked payment state, valid artifact/enchantment/token selection, cost reductions, entry-trigger facts, bot proposals and replay. Preserve the distinction between casting options and rules-level modal spells.
+- Extend fight/bite effects with explicit source binding. Fight requires both creatures to remain present; source damage uses last-known facts where rules require them. Bite effects can target planeswalkers without allowing planeswalkers to fight.
+- Preserve full client payment review, cancel/reopen and Read/Back behavior. Correct Unwelcome Sprite's trigger-time-only turn restriction and retain exact new token characteristics.
+- Keep previous replay revisions and all eight exact meta decks. Browser/iPhone visual verification remains outstanding.
+
 ## 0.50.0 — Modal triggers and simultaneous death events
 
 - Add 79 complete Standard cards: 61 existing-engine definitions, fourteen modal-trigger cards and four aggregate-death cards. Catalog: 1982 playable cards and 72 tokens.

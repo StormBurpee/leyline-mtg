@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c0b7e989-8194-484c-93aa-a44df0764a77",
+  "name": "Ureni's Rebuff",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Return target creature to its owner's hand.\nHarmonize {5}{U} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "harmonize",
+      "cost": "{5}{U}"
+    }
+  ]
+}

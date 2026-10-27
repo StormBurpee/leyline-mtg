@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1322734c-3c3e-4885-a6d2-d6460a16fca2",
+  "name": "Stonesplitter Bolt",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{X}{R}"
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nStonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "type": "planeswalker"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "sourceBargained"
+          },
+          "then": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": {
+                "kind": "scale",
+                "factor": 2,
+                "value": {
+                  "kind": "x"
+                }
+              }
+            }
+          ],
+          "else": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": {
+                "kind": "x"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    }
+  ]
+}

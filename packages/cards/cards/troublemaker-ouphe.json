@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "16cdba97-73cf-44ba-9d64-f27009b829f8",
+  "name": "Troublemaker Ouphe",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Ouphe"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nWhen this creature enters, if it was bargained, exile target artifact or enchantment an opponent controls.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "opponent"
+            },
+            {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "enchantment"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "condition": {
+        "kind": "sourceBargained"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    }
+  ]
+}

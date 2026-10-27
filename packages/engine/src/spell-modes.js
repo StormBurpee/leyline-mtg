@@ -31,6 +31,17 @@ export function castingChoices(card) {
       ...(card.targetGroups ? { targetGroups: card.targetGroups } : {}),
     }));
   }
+  // Bargain is an optional additional cost, not a modal spell ability.
+  if (card.bargain)
+    return [
+      { label: 'Cast without bargain', effects: card.effects ?? [], target: card.target ?? null },
+      {
+        label: 'Bargain — sacrifice an artifact, enchantment, or token',
+        effects: card.effects ?? [],
+        target: card.target ?? null,
+        bargained: true,
+      },
+    ];
   if (card.spree)
     return Array.from({ length: 2 ** card.modes.length - 1 }, (_, index) => {
       const selected = card.modes.filter((_, i) => (index + 1) & (1 << i));
@@ -134,6 +145,14 @@ export function spellProfile(card, mode) {
     target: selected.target ?? null,
     ...(selected.targetGroups ? { targetGroups: selected.targetGroups } : {}),
     ...(selected.warpPaid ? { warpPaid: true } : {}),
+    ...(selected.bargained
+      ? {
+          bargained: true,
+          sacrificeCost: {
+            where: { any: [{ type: 'artifact' }, { type: 'enchantment' }, { token: true }] },
+          },
+        }
+      : {}),
     kicked: !!selected.kicked,
     offspringPaid: !!selected.offspringPaid,
     giftPromised: !!selected.giftPromised,
