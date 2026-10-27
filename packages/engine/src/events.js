@@ -61,6 +61,7 @@ export function validateEventSpec(value) {
       'faceUp',
       'attackGroup',
       'noncombatDamageToPlayer',
+      'lifeGain',
     ].includes(spec.event)
   )
     errors.push('Unsupported event family.');
@@ -71,6 +72,11 @@ export function validateEventSpec(value) {
     errors.push(
       'Source identity predicates currently apply to enter, dies and attack events only.',
     );
+  if (
+    spec.event === 'lifeGain' &&
+    (spec.object !== undefined || spec.filter !== undefined || spec.excludeSource !== undefined)
+  )
+    errors.push('Life-gain events identify a player, not an object.');
   if (spec.event === 'step') {
     if (!['upkeep', 'beginCombat', 'end', 'main1', 'main2'].includes(spec.step))
       errors.push('Unsupported beginning-of-step trigger.');

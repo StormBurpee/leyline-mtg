@@ -1,5 +1,5 @@
 {
-  "version": "0.28.0",
+  "version": "0.29.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -100,6 +100,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Agent Phil Coulson",
+      "type": "creature",
+      "keywords": ["vigilance"],
+      "opcodes": ["counterAll"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Agent Venom",
       "type": "creature",
       "keywords": ["flash", "menace"],
@@ -154,6 +162,19 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Ajani's Pridemate",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
     },
     {
       "name": "Alesha's Legacy",
@@ -545,6 +566,19 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Blech, Loafing Pest",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterAll"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -1346,6 +1380,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Deepchannel Duelist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["untap"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "end",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Deface",
       "type": "sorcery",
       "keywords": [],
@@ -1572,6 +1620,19 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Drogskol Reaver",
+      "type": "creature",
+      "keywords": ["flying", "double strike", "lifelink"],
+      "opcodes": ["draw"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -3554,6 +3615,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Lyra, Archangel of Dawn",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["counterAll"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Lyra Dawnbringer",
       "type": "creature",
       "keywords": ["flying", "first strike", "lifelink"],
@@ -3672,6 +3746,19 @@
       "keywords": [],
       "opcodes": ["searchLibrary"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Marauding Blight-Priest",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["loseLife"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -3908,6 +3995,19 @@
       "keywords": [],
       "opcodes": ["token"],
       "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Minwu, White Mage",
+      "type": "creature",
+      "keywords": ["vigilance", "lifelink"],
+      "opcodes": ["counterAll"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -4504,6 +4604,19 @@
       "keywords": [],
       "opcodes": ["destroyAll"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Pest Mascot",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -6236,6 +6349,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Starscape Cleric",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["loseLife"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Start from Scratch",
       "type": "sorcery",
       "keywords": [],
@@ -6851,6 +6977,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Tigra, Feline Fury",
+      "type": "creature",
+      "keywords": ["flash", "trample"],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Timid Shieldbearer",
       "type": "creature",
       "keywords": [],
@@ -7075,6 +7214,24 @@
       "opcodes": ["destroy"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Unflinching Hortimancer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "ward": {
+        "mana": {
+          "generic": 1
+        }
+      },
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
     },
     {
       "name": "Unforgiving Aim",

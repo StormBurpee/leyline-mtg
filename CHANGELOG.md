@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.29.0 — Life-gain triggers
+
+- Implement positive life-gain events, including lifelink batching by damage source. Separate sources trigger separately; split damage from one source triggers once. Zero gain does not trigger.
+- Add twelve full-text Standard cards, including Ajani’s Pridemate, Marauding Blight-Priest, Starscape Cleric, Minwu and Drogskol Reaver.
+- Isolate pending trigger queues in bot life-payoff scoring so evaluating a hypothetical gain cannot modify the match.
+- Catalog: 910 cards and 26 tokens. Broader life replacement, dynamic amounts and dependent card mechanics remain unsupported.
+
 ## 0.28.0 — Combat-role targeting and Standard removal
 
 - Add blocking predicates alongside attacking predicates, using current combat membership and zone incarnations for targeting, group effects and trigger facts.

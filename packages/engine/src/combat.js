@@ -13,7 +13,7 @@ import {
   requireRule,
   stats,
 } from './model.js';
-import { dealDamage } from './effects.js';
+import { dealDamageBatch } from './effects.js';
 export function canAttack(s, o, p) {
   return (
     o.zone === 'battlefield' &&
@@ -260,6 +260,7 @@ export function assignDamage(s, orders) {
         packets.push({
           source: {
             id: source.source.id,
+            incarnation: source.source.incarnation,
             controller: source.controller,
             keywords: source.keywords,
           },
@@ -292,7 +293,7 @@ export function assignDamage(s, orders) {
     return;
   }
   // All sources and damage amounts were frozen before any packet was applied.
-  for (const packet of c.packets) dealDamage(s, packet.source, packet.target, packet.amount, true);
+  dealDamageBatch(s, c.packets, true);
   s.choice = null;
   s.priority = s.active;
   s.passes = 0;

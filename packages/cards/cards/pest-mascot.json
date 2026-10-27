@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b8ecddf7-ba89-40dd-9f63-5bad27dd850d",
+  "name": "Pest Mascot",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Pest", "Ape"],
+    "colors": ["B", "G"],
+    "manaCost": "{1}{B}{G}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Trample\nWhenever you gain life, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "lifeGain",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

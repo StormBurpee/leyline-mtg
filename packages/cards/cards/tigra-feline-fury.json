@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "39d993be-30ad-4756-a494-fd8808d474c9",
+  "name": "Tigra, Feline Fury",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Cat", "Human", "Hero"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Flash\nTrample\nWhenever you gain life, put a +1/+1 counter on Tigra.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "lifeGain",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

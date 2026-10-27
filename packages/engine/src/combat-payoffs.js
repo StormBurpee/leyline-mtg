@@ -36,6 +36,7 @@ function valueAfter(s, entry, target) {
     ...s,
     players: s.players.map((player) => ({ ...player })),
     events: [],
+    pendingTriggers: [],
   };
   resolveEffects(copy, { ...entry, target });
   return lifeValue(

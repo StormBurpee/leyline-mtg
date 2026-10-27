@@ -421,6 +421,7 @@
             "step",
             "attackGroup",
             "noncombatDamageToPlayer",
+            "lifeGain",
             "faceUp"
           ]
         },

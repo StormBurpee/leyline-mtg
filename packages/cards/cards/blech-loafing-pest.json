@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c1bdd361-c7f2-4aa2-8d07-b582775551ff",
+  "name": "Blech, Loafing Pest",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Pest"],
+    "colors": ["B", "G"],
+    "manaCost": "{1}{B}{G}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Whenever you gain life, put a +1/+1 counter on each Pest, Bat, Insect, Snake, and Spider you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "lifeGain",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "amount": 1,
+          "where": {
+            "all": [
+              {
+                "any": [
+                  {
+                    "subtype": "Pest"
+                  },
+                  {
+                    "subtype": "Bat"
+                  },
+                  {
+                    "subtype": "Insect"
+                  },
+                  {
+                    "subtype": "Snake"
+                  },
+                  {
+                    "subtype": "Spider"
+                  }
+                ]
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
