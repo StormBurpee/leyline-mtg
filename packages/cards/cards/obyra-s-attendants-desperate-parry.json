@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "396b088d-f9af-4ee1-843f-dbe1633f9cc8",
+  "name": "Obyra's Attendants // Desperate Parry",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Obyra's Attendants",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/desperate-parry",
+        "name": "Desperate Parry",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["U"],
+          "manaCost": "{1}{U}"
+        },
+        "rulesText": "Target creature gets -4/-0 until end of turn. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            },
+            "effects": [
+              {
+                "op": "modify",
+                "target": "target",
+                "power": -4,
+                "toughness": 0,
+                "until": "endOfTurn"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "id": "50bee80e-89df-48c2-b608-ba66ff3e794a",
+  "name": "Imodane's Recruiter // Train Troops",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Knight"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, creatures you control get +1/+0 and gain haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 0,
+          "keywords": ["haste"],
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Imodane's Recruiter",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/train-troops",
+        "name": "Train Troops",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["W"],
+          "manaCost": "{4}{W}"
+        },
+        "rulesText": "Create two 2/2 white Knight creature tokens with vigilance. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/adventure-vigilant-knight",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

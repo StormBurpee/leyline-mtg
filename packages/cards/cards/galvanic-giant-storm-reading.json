@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "id": "48ab8ba0-0e85-4656-a798-ceb961fb02ce",
+  "name": "Galvanic Giant // Storm Reading",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Whenever you cast a spell with mana value 5 or greater, tap target creature an opponent controls and put a stun counter on it.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "manaValue": {
+            "gte": 5
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        },
+        {
+          "op": "addStunCounters",
+          "target": "target",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Galvanic Giant",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/storm-reading",
+        "name": "Storm Reading",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["U"],
+          "manaCost": "{5}{U}{U}"
+        },
+        "rulesText": "Draw four cards, then discard two cards. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "draw",
+                "target": "controller",
+                "amount": 4
+              },
+              {
+                "op": "discard",
+                "target": "controller",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

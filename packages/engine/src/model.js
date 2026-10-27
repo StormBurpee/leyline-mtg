@@ -8,7 +8,7 @@ import { matchesEvent } from './events.js';
 import { hasType, typesOf, primaryType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.44.0';
+export const VERSION = '0.45.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -40,6 +40,9 @@ export function playableZone(s, o, p) {
   return (
     !!o &&
     ((o.zone === 'hand' && o.owner === p) ||
+      (o.zone === 'exile' &&
+        o.adventured?.player === p &&
+        o.adventured.incarnation === o.incarnation) ||
       (o.zone === 'graveyard' && o.owner === p && !!definition(s, o).flashback) ||
       (o.zone === 'exile' && o.owner === p && o.plotted?.incarnation === o.incarnation) ||
       (o.zone === 'exile' && o.owner === p && o.warped?.incarnation === o.incarnation) ||
@@ -60,16 +63,25 @@ export function playableCards(s, p) {
 
 export const emptyMana = () => Object.fromEntries(COLORS.map((c) => [c, 0]));
 /** CR 707.2: layer-1 copy values, never counters, choices or temporary layers. */
+function printedFace(card, object) {
+  if (!card.adventure) return card;
+  if (object.zone === 'stack' && object.adventureCast)
+    return { ...card.adventure, adventureCast: true };
+  return { ...card, name: card.mainName };
+}
 export function copiableDefinition(s, object) {
   return object.faceDown
     ? FACE_DOWN
-    : (object.definitionOverride ?? cardDefinition(object.name, s.catalog));
+    : printedFace(object.definitionOverride ?? cardDefinition(object.name, s.catalog), object);
 }
 export function definition(stateOrObject, object) {
   if ((object ?? stateOrObject).faceDown) return FACE_DOWN;
-  const d = object
-    ? (object.definitionOverride ?? cardDefinition(object.name, stateOrObject.catalog))
-    : (stateOrObject.definitionOverride ?? cardDefinition(stateOrObject.name));
+  const d = printedFace(
+    object
+      ? (object.definitionOverride ?? cardDefinition(object.name, stateOrObject.catalog))
+      : (stateOrObject.definitionOverride ?? cardDefinition(stateOrObject.name)),
+    object ?? stateOrObject,
+  );
   // Type-changing effects are not copiable printed characteristics. They are
   // bounded to this battlefield incarnation and the turn that created them.
   if (!object || object.zone !== 'battlefield') return d;
@@ -602,6 +614,7 @@ export function move(s, o, to, departureContext = null) {
   if (o.faceDown && !preserveFaceDown) emit(s, 'revealed', { objectId: o.id, name: o.name });
   if (!preserveFaceDown) delete o.faceDown;
   o.zone = to;
+  if (to !== 'stack') delete o.adventureCast;
   o.incarnation++;
   o.controller = o.owner;
   o.damage = 0;
@@ -617,6 +630,7 @@ export function move(s, o, to, departureContext = null) {
   delete o.playPermission;
   delete o.plotted;
   delete o.warped;
+  delete o.adventured;
   if (s.players[o.owner][to]) s.players[o.owner][to].push(o.id);
   emit(s, 'zoneChange', {
     objectId: o.id,

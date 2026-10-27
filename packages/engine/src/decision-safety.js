@@ -78,7 +78,13 @@ function actionCost(state, player, action) {
   const card = definition(state, state.objects[action.card]);
   if (action.type === 'plot') return { mana: card.plot };
   if (action.type === 'cycle') return { mana: card.cycling };
-  if (action.type === 'activate') return card.activated[action.ability].cost;
+  if (action.type === 'activate') {
+    const cost = card.activated[action.ability].cost;
+    const payment = planPayment(state, player, cost.mana ?? {}, {
+      excludeSources: cost.tap ? [action.card] : [],
+    });
+    return { ...cost, manaLife: payment?.life ?? 0 };
+  }
   const profile = castingProfile(
     state,
     player,
@@ -93,6 +99,7 @@ function actionCost(state, player, action) {
     mana: plan?.cost ?? profile?.cost ?? card.cost,
     excludeSources: plan?.excludeSources ?? [],
     sacrifice: plan?.sacrifice,
+    manaLife: plan?.mana?.life ?? 0,
   };
 }
 
@@ -104,12 +111,13 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
   if (!object || object.zone !== 'battlefield' || object.controller === player) return true;
   const ward = definition(state, object).ward;
   if (!ward) return true;
-  const life = state.players[player].life - (cost.life ?? 0);
-  if ((ward.life ?? 0) >= life) return false;
+  let life = state.players[player].life - (cost.life ?? 0);
   const payment = planPayment(state, player, cost.mana ?? {}, {
     excludeSources: [...(cost.excludeSources ?? []), ...(cost.tap ? [sourceId] : [])],
   });
   if (!payment) return false;
+  life -= payment.life ?? 0;
+  if ((ward.life ?? 0) >= life) return false;
   const objects = { ...state.objects };
   for (const id of [...payment.taps, ...(cost.excludeSources ?? [])])
     objects[id] = { ...objects[id], tapped: true };
@@ -125,7 +133,8 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
       index === player ? { ...entry, life, mana: payment.remaining } : entry,
     ),
   };
-  return !!planPayment(projected, player, ward.mana ?? {});
+  const wardPayment = planPayment(projected, player, ward.mana ?? {});
+  return !!wardPayment && (wardPayment.life ?? 0) + (ward.life ?? 0) < life;
 }
 
 export function actionSafe(state, player, action) {
@@ -146,16 +155,19 @@ export function actionSafe(state, player, action) {
       for (const [symbol, amount] of Object.entries(ward.mana ?? {}))
         mana[symbol] = (mana[symbol] ?? 0) + amount;
     }
+    const payment = planPayment(state, player, mana, { excludeSources: cost.excludeSources ?? [] });
+    life += payment?.life ?? 0;
     return (
       life < state.players[player].life &&
-      !!planPayment(state, player, mana, { excludeSources: cost.excludeSources ?? [] }) &&
+      !!payment &&
       !resolutionRisk(state, player, actionEffects(state, action), null, life)
     );
   }
 
-  if ((cost.life ?? 0) >= state.players[player].life) return false;
+  const totalLife = (cost.life ?? 0) + (cost.manaLife ?? 0);
+  if (totalLife >= state.players[player].life) return false;
   return (
-    !resolutionRisk(state, player, actionEffects(state, action), action.target, cost.life ?? 0) &&
+    !resolutionRisk(state, player, actionEffects(state, action), action.target, totalLife) &&
     canPayTargetWard(state, player, action.target, cost, action.card)
   );
 }

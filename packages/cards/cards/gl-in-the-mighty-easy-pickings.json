@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "id": "6505a53b-00db-44c4-8eaa-09a1a01451a4",
+  "name": "Glóin the Mighty // Easy Pickings",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dwarf", "Warrior"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "At the beginning of your first main phase, add {R}{R}.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "main1",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addMana",
+          "mana": "{R}{R}"
+        }
+      ]
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Glóin the Mighty",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/easy-pickings",
+        "name": "Easy Pickings",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["R"],
+          "manaCost": "{2}{R}"
+        },
+        "rulesText": "Easy Pickings deals 1 damage to each creature your opponents control. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "damageAll",
+                "where": {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "controller": "opponent"
+                    }
+                  ]
+                },
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

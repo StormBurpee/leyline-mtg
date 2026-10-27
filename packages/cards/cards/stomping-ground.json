@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "16052b52-ade1-406f-a06b-ce7ea607fb63",
+  "name": "Stomping Ground",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Mountain", "Forest"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "({T}: Add {R} or {G}.)\nAs this land enters, you may pay 2 life. If you don't, it enters tapped.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "payLife": 2
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "G"]
+    }
+  ]
+}

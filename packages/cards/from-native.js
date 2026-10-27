@@ -50,6 +50,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return { op: 'impulseChoose', amount: e.count };
         case 'attachEquipment':
           return { op: 'attachEquipment', target: 'target' };
+        case 'revealDiscard':
+          return { op: 'revealDiscard' };
         case 'bindingNegotiation':
           return { op: 'bindingNegotiation' };
         case 'addMana':
@@ -146,6 +148,15 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const abilities = d.keywords.map((keyword) => ({ kind: 'keyword', keyword }));
   for (const restriction of ['cannotAttack', 'cannotBlock', 'unblockable'])
     if (d[restriction]) abilities.push({ kind: 'combatRestriction', restriction });
+  if (d.adventure)
+    abilities.push({
+      kind: 'adventure',
+      mainName: d.mainName,
+      spell: sourceFromDefinition(d.adventure, {
+        id: `leyline:adventure/${d.adventure.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+        idsByName,
+      }),
+    });
   if (d.warp) abilities.push({ kind: 'warp', cost: mana(d.warp) });
   if (d.plot) abilities.push({ kind: 'plot', cost: mana(d.plot) });
   if (d.flashback) abilities.push({ kind: 'flashback', cost: mana(d.flashback) });
@@ -157,6 +168,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
       ...(d.cyclingType ? { type: d.cyclingType } : {}),
     });
   if (d.ward) abilities.push({ kind: 'keyword', keyword: 'ward', cost: cost(d.ward) });
+  if (d.entryLifePayment)
+    abilities.push({ kind: 'entry', tapped: true, payLife: d.entryLifePayment });
   if (d.entersTapped) abilities.push({ kind: 'entry', tapped: true });
   if (d.entersTappedUnless)
     abilities.push({ kind: 'entry', tapped: true, unless: structuredClone(d.entersTappedUnless) });
@@ -164,6 +177,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     abilities.push({
       kind: 'mana',
       ...(d.manaConditions ? { conditions: structuredClone(d.manaConditions) } : {}),
+      ...(d.manaLifeCosts ? { lifeCosts: structuredClone(d.manaLifeCosts) } : {}),
       ...(d.manaRestrictions ? { restrictions: structuredClone(d.manaRestrictions) } : {}),
       produces: Array.isArray(d.mana) ? d.mana : [d.mana],
       ...(d.manaSacrifice ? { sacrificeSelf: true } : {}),

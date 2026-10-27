@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "f01cf0c5-0ac6-4ad3-8642-dd21c8e8563e",
+  "name": "Hearth Elemental // Stoke Genius",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental"],
+    "colors": ["R"],
+    "manaCost": "{5}{R}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "This spell costs {X} less to cast, where X is the number of cards in your graveyard that are instant cards, sorcery cards, and/or have an Adventure.",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": {
+        "kind": "count",
+        "zone": "graveyard",
+        "player": "you",
+        "where": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            },
+            {
+              "adventure": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Hearth Elemental",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/stoke-genius",
+        "name": "Stoke Genius",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["R"],
+          "manaCost": "{1}{R}"
+        },
+        "rulesText": "Discard your hand, then draw two cards. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "discard",
+                "target": "controller",
+                "amount": {
+                  "kind": "count",
+                  "zone": "hand",
+                  "player": "you"
+                }
+              },
+              {
+                "op": "draw",
+                "target": "controller",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

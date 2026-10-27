@@ -1,5 +1,6 @@
 import { manaValue } from '../../packages/engine/src/mana-value.js';
 import { REQUESTED_DECKS } from './requested-decks.js';
+import { META_DECKS } from './meta-decks.js';
 import { CARDS, DECKS, expandDeck, validateDeck } from '../../packages/engine/src/index.js';
 import { escape, artStyle, mana, footer } from './view.js';
 
@@ -30,6 +31,7 @@ export function readDeckLibrary(storage) {
 export function deckEntries(ui) {
   return [
     ...Object.entries(REQUESTED_DECKS),
+    ...Object.entries(META_DECKS),
     ...Object.entries(DECKS),
     ...ui.personalDecks.map((d) => [
       d.id,
@@ -48,6 +50,20 @@ export function selectedDeck(ui) {
   return deckEntries(ui).find(([id]) => id === ui.deck)?.[1] ?? DECKS.ember;
 }
 export const deckProblems = (d) => validateDeck(expandDeck(d.cards));
+export function missingDeckCards(deck) {
+  return Object.entries(deck.cards)
+    .filter(([name]) => !CARDS[name])
+    .map(([name, count]) => ({ name, count }));
+}
+function metaDeckDetails(deck) {
+  if (!deck.meta) return '';
+  const missing = missingDeckCards(deck);
+  return `<div class="meta-deck-details"><p class="meta-deck-source"><strong>${escape(deck.source.date)}</strong> · ${escape(deck.source.event)}<br>${escape(deck.source.pilot)} · ${escape(deck.source.result)} · <a href="${escape(deck.source.url)}" target="_blank" rel="noopener noreferrer">Original tournament list ↗</a>${deck.source.listSourceUrl ? ` · <a href="${escape(deck.source.listSourceUrl)}" target="_blank" rel="noopener noreferrer">Verified card list ↗</a>` : ''}</p>${missing.length ? `<details class="meta-deck-blockers" open><summary>${missing.length} card names still need rules support</summary><ul>${missing.map(({ name, count }) => `<li>${count} × ${escape(name)}</li>`).join('')}</ul><p>This exact list is not playable yet. Cards are never replaced with substitutes.</p></details>` : '<p class="ready-label">All 60 main-deck cards are supported.</p>'}<details class="meta-deck-sideboard"><summary>Original sideboard · reference only</summary><p>Matches currently use the 60-card main deck. Sideboarding is not implemented.</p><ul>${Object.entries(
+    deck.sideboard,
+  )
+    .map(([name, count]) => `<li>${count} × ${escape(name)}</li>`)
+    .join('')}</ul></details></div>`;
+}
 export function curve(cards) {
   const values = Array(8).fill(0);
   for (const [name, count] of Object.entries(cards)) {
@@ -71,7 +87,7 @@ export function deckRoom(ui, meta) {
   const opponent = entries.find(([id]) => id === ui.opponentDeck)?.[1] ?? DECKS.grove;
   const total = Object.values(deck.cards).reduce((a, b) => a + b, 0);
   return `<main class="deck-room"><section class="room-heading"><div><span class="eyebrow">YOUR TABLE. YOUR TERMS.</span><h1>The deck room<span>.</span></h1></div><div class="room-tools">${ui.recoveredDraft ? '<button class="btn quiet" data-action="resumeDraft">Resume draft</button>' : ''}${ui.saved ? '<button class="btn" data-action="resume">Resume match ↗</button>' : ''}<button class="btn" data-action="importDeck">Import list</button><button class="btn primary" data-action="newDeck">＋ Build a deck</button></div></section>
-  <section class="deck-spotlight"><div class="spotlight-art" ${artStyle(meta, deck.art)}></div><div class="spotlight-copy"><span class="eyebrow">${escape(deck.archetype)}</span><h2>${escape(deck.name)}</h2><p>${escape(deck.description)}</p><div class="spotlight-tags">${mana(Object.fromEntries(deck.colors.map((c) => [c, 1])))}<span>${total} cards</span><span>${problems.length ? (deck.requested ? 'Rules implementation pending' : 'Needs attention') : 'Ready to play'}</span></div><div class="spotlight-buttons"><button class="btn" data-action="editDeck">${deck.personal ? 'Edit list' : 'Customize deck'}</button><button class="btn quiet" data-action="deckList">View all cards ↗</button></div></div><div class="match-launch"><span class="eyebrow">SET THE MATCHUP</span><label for="opponent-deck">Opponent deck</label><select id="opponent-deck">${entries
+  <section class="deck-spotlight"><div class="spotlight-art" ${artStyle(meta, deck.art)}></div><div class="spotlight-copy"><span class="eyebrow">${escape(deck.archetype)}</span><h2>${escape(deck.name)}</h2><p>${escape(deck.description)}</p>${metaDeckDetails(deck)}<div class="spotlight-tags">${mana(Object.fromEntries(deck.colors.map((c) => [c, 1])))}<span>${total} cards</span><span>${problems.length ? (deck.meta || deck.requested ? 'Rules implementation pending' : 'Needs attention') : 'Ready to play'}</span></div><div class="spotlight-buttons"><button class="btn" data-action="editDeck">${deck.personal ? 'Edit list' : 'Customize deck'}</button><button class="btn quiet" data-action="deckList">View all cards ↗</button></div></div><div class="match-launch"><span class="eyebrow">SET THE MATCHUP</span><label for="opponent-deck">Opponent deck</label><select id="opponent-deck">${entries
     .filter(([, d]) => !deckProblems(d).length)
     .map(
       ([id, d]) =>
@@ -84,10 +100,10 @@ export function deckRoom(ui, meta) {
     visible
       .map(([id, d]) => {
         const issues = deckProblems(d);
-        return `<button class="deck-box ${ui.deck === id ? 'selected' : ''}" data-action="selectDeck" data-deck="${escape(id)}" aria-pressed="${ui.deck === id}"><div class="deck-box-art" ${artStyle(meta, d.art)}></div><span class="deck-box-status">${issues.length ? (d.requested ? 'Your default · rules pending' : 'Incomplete list') : ui.deck === id ? 'Selected' : d.personal ? 'Saved deck' : 'Starter deck'}</span><div class="deck-box-content"><div class="deck-box-mana">${mana(Object.fromEntries(d.colors.map((c) => [c, 1])))}</div><h3>${escape(d.name)}</h3><p>${escape(d.archetype)}</p><span>${Object.values(d.cards).reduce((a, b) => a + b, 0)} cards <b>↗</b></span></div></button>`;
+        return `<button class="deck-box ${ui.deck === id ? 'selected' : ''}" data-action="selectDeck" data-deck="${escape(id)}" aria-pressed="${ui.deck === id}"><div class="deck-box-art" ${artStyle(meta, d.art)}></div><span class="deck-box-status">${issues.length ? (d.meta ? `Meta · ${missingDeckCards(d).length} card names pending` : d.requested ? 'Your default · rules pending' : 'Incomplete list') : ui.deck === id ? 'Selected' : d.meta ? 'Standard meta' : d.personal ? 'Saved deck' : 'Starter deck'}</span><div class="deck-box-content"><div class="deck-box-mana">${mana(Object.fromEntries(d.colors.map((c) => [c, 1])))}</div><h3>${escape(d.name)}</h3><p>${escape(d.archetype)}</p><span>${Object.values(d.cards).reduce((a, b) => a + b, 0)} cards <b>↗</b></span></div></button>`;
       })
       .join('') || '<p class="empty-library">No decks match these filters.</p>'
-  }<button class="new-deck-tile" data-action="newDeck"><span>＋</span><strong>Something of your own</strong><small>Build from the executable card pool</small></button></div></section><p class="library-disclosure">Starter lists are for exploring the engine, not competitive or format-certified decks. ${Object.values(CARDS).filter((d) => !d.token).length} executable cards. Unsupported cards are never substituted.</p>${footer()}</main>`;
+  }<button class="new-deck-tile" data-action="newDeck"><span>＋</span><strong>Something of your own</strong><small>Build from the executable card pool</small></button></div></section><p class="library-disclosure">Standard meta lists are source-exact tournament snapshots, checked 27 October 2026. Their supported main decks unlock automatically as rules coverage grows. Starter lists are for exploring the engine, not competitive or format-certified decks. ${Object.values(CARDS).filter((d) => !d.token).length} executable cards. Unsupported cards are never substituted.</p>${footer()}</main>`;
 }
 export function deckBuilder(ui, meta) {
   const draft = ui.deckDraft,

@@ -1,3 +1,4 @@
+import { META_DECKS } from '../apps/web/meta-decks.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -52,7 +53,10 @@ test('deck room and builder escape custom titles and clearly gate incomplete lis
     mode: 'bot',
     seed: 7,
   };
-  assert.equal(deckEntries(ui).length, Object.keys(DECKS).length + 2);
+  assert.equal(
+    deckEntries(ui).length,
+    Object.keys(DECKS).length + Object.keys(META_DECKS).length + 2,
+  );
   const room = deckRoom(ui, {});
   assert.ok(room.includes('&lt;script&gt;'));
   assert.ok(room.includes('Needs attention'));

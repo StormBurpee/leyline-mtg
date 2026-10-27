@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fa85f9e6-69ff-4669-b70a-440aa7b16c97",
+  "name": "Bilbo Baggins, Burglar // Take a Glance",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Halfling", "Rogue"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When Bilbo Baggins enters, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Bilbo Baggins, Burglar",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/take-a-glance",
+        "name": "Take a Glance",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["U"],
+          "manaCost": "{U}"
+        },
+        "rulesText": "Scry 2. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "scry",
+                "target": "controller",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -215,7 +215,13 @@ export function enterBattlefield(s, o, controller = o.owner, attachment = null, 
   return enterBattlefieldBatch(s, [{ object: o, controller, attachment, tapped: options.tapped }]);
 }
 /** Move every entrant before observing any enters event, so simultaneous entrants see one another. */
-export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices = {}) {
+export function enterBattlefieldBatch(
+  s,
+  entries,
+  typeChoices = {},
+  auraChoices = {},
+  lifeChoices = {},
+) {
   let entering = entries.filter(
     ({ object }) =>
       object.zone !== 'battlefield' &&
@@ -224,6 +230,28 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
   const ready = [];
   for (const item of entering) {
     const { object, controller = object.owner } = item;
+    if (definition(s, object).entryLifePayment && !Object.hasOwn(lifeChoices, object.id)) {
+      const amount = definition(s, object).entryLifePayment;
+      s.choice = {
+        kind: 'entryLife',
+        player: controller,
+        card: object.id,
+        amount,
+        payable: s.players[controller].life >= amount,
+        forcedTapped:
+          !!item.tapped ||
+          !!definition(s, object).entersTapped ||
+          !!(
+            definition(s, object).entersTappedUnless &&
+            !meetsCondition(s, controller, definition(s, object).entersTappedUnless, [], object)
+          ),
+        entries: entering.map(({ object, ...rest }) => ({ ...rest, object: ref(object) })),
+        typeChoices,
+        auraChoices,
+        lifeChoices,
+      };
+      return false;
+    }
     if (definition(s, object).chooseCreatureType && !typeChoices[object.id]) {
       s.choice = {
         kind: 'creatureType',
@@ -232,6 +260,7 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
         entries: entering.map(({ object, ...rest }) => ({ ...rest, object: ref(object) })),
         typeChoices,
         auraChoices,
+        lifeChoices,
         types: CREATURE_TYPES,
       };
       return false;
@@ -267,6 +296,7 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
       entries: entering.map(({ object, ...rest }) => ({ ...rest, object: ref(object) })),
       typeChoices,
       auraChoices,
+      lifeChoices,
     };
     return false;
   }
@@ -275,6 +305,7 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
     entering.map(({ object, controller = object.owner }) => [
       object.id,
       !!definition(s, object).entersTapped ||
+        (!!definition(s, object).entryLifePayment && !lifeChoices[object.id]) ||
         (definition(s, object).entersTappedUnless &&
           !meetsCondition(s, controller, definition(s, object).entersTappedUnless, [], object)),
     ]),
@@ -359,7 +390,45 @@ export function finishCreatureTypeChoice(s, command) {
     object: s.objects[object.id],
   }));
   s.choice = null;
-  if (enterBattlefieldBatch(s, entries, choices, choice.auraChoices ?? {}) !== false && s.resolving)
+  if (
+    enterBattlefieldBatch(
+      s,
+      entries,
+      choices,
+      choice.auraChoices ?? {},
+      choice.lifeChoices ?? {},
+    ) !== false &&
+    s.resolving
+  )
+    continueResolution(s);
+}
+export function finishEntryLifeChoice(s, command) {
+  const choice = s.choice;
+  requireRule(
+    command.type === 'payEntryLife' && typeof command.pay === 'boolean',
+    'ENTRY_LIFE',
+    'Choose whether to pay life.',
+  );
+  requireRule(
+    !command.pay || s.players[choice.player].life >= choice.amount,
+    'ENTRY_LIFE',
+    'You cannot pay that much life.',
+  );
+  if (command.pay) {
+    loseLife(s, choice.player, choice.amount);
+    emit(s, 'lifePaid', { player: choice.player, amount: choice.amount, objectId: choice.card });
+  }
+  const entries = choice.entries.map(({ object, ...rest }) => ({
+    ...rest,
+    object: s.objects[object.id],
+  }));
+  const lifeChoices = { ...choice.lifeChoices, [choice.card]: command.pay };
+  s.choice = null;
+  if (
+    enterBattlefieldBatch(s, entries, choice.typeChoices, choice.auraChoices, lifeChoices) !==
+      false &&
+    s.resolving
+  )
     continueResolution(s);
 }
 export function finishAuraEntryChoice(s, command) {
@@ -381,7 +450,11 @@ export function finishAuraEntryChoice(s, command) {
   }));
   s.choice = null;
   const selections = { ...choice.auraChoices, [aura.id]: target };
-  if (enterBattlefieldBatch(s, entries, choice.typeChoices, selections) !== false && s.resolving)
+  if (
+    enterBattlefieldBatch(s, entries, choice.typeChoices, selections, choice.lifeChoices ?? {}) !==
+      false &&
+    s.resolving
+  )
     continueResolution(s);
 }
 /** Damage is marked before state-based actions. Caller batches combat packets. */
@@ -735,11 +808,19 @@ export function resolveEffects(s, entry, startIndex = 0) {
         s.choice = { kind: 'exilePlay', player: entry.controller, cards };
         return false;
       }
+      case 'revealDiscard':
       case 'bindingNegotiation': {
         s.resolving = { entry, index: index + 1, revealedPlayer: entry.target.id };
         s.choice = {
-          kind: 'bindingNegotiation',
+          kind: e.op,
           player: entry.controller,
+          ...(e.op === 'revealDiscard'
+            ? {
+                eligibleCards: s.players[entry.target.id].hand.filter(
+                  (id) => definition(s, s.objects[id]).type !== 'land',
+                ),
+              }
+            : {}),
           cards: [...s.players[entry.target.id].hand],
           targetPlayer: entry.target.id,
         };
@@ -1046,7 +1127,17 @@ export function continueResolution(s) {
   if (resolveEffects(s, frame.entry, frame.index) === false) return;
   const entry = frame.entry,
     object = s.objects[entry.source?.id];
-  if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
+  if (entry.kind === 'spell' && object?.zone === 'stack') {
+    if (entry.adventureCast) {
+      move(s, object, 'exile');
+      object.adventured = { player: entry.controller, incarnation: object.incarnation };
+      emit(s, 'adventureExiled', {
+        objectId: object.id,
+        name: object.name,
+        player: entry.controller,
+      });
+    } else move(s, object, 'graveyard');
+  }
   emit(s, 'resolved', { name: entry.name, stackId: entry.id });
   s.resolving = null;
   s.priority = s.active;
@@ -1054,7 +1145,9 @@ export function continueResolution(s) {
 }
 export function finishResolutionChoice(s, command) {
   const choice = s.choice;
-  if (['exilePlay', 'bindingNegotiation', 'exileToGraveyard'].includes(choice.kind)) {
+  if (
+    ['exilePlay', 'bindingNegotiation', 'revealDiscard', 'exileToGraveyard'].includes(choice.kind)
+  ) {
     requireRule(
       command.type === 'chooseResolutionCard',
       'RESOLUTION_CHOICE',
@@ -1062,7 +1155,10 @@ export function finishResolutionChoice(s, command) {
     );
     const id = command.card;
     requireRule(
-      (id === null && choice.kind !== 'exilePlay') || choice.cards.includes(id),
+      (id === null &&
+        choice.kind !== 'exilePlay' &&
+        (choice.kind !== 'revealDiscard' || !choice.eligibleCards.length)) ||
+        choice.cards.includes(id),
       'RESOLUTION_CARD',
       'Choose an offered card.',
     );
@@ -1074,7 +1170,7 @@ export function finishResolutionChoice(s, command) {
         turn: s.turn,
         incarnation: object.incarnation,
       };
-    } else if (choice.kind === 'bindingNegotiation') {
+    } else if (choice.kind === 'bindingNegotiation' || choice.kind === 'revealDiscard') {
       if (id !== null) {
         requireRule(
           s.objects[id].zone === 'hand' &&
@@ -1084,7 +1180,7 @@ export function finishResolutionChoice(s, command) {
           'Choose a nonland from the revealed hand.',
         );
         move(s, s.objects[id], 'graveyard');
-      } else {
+      } else if (choice.kind === 'bindingNegotiation') {
         s.choice = {
           kind: 'exileToGraveyard',
           player: choice.player,
@@ -1398,8 +1494,9 @@ export function stateBasedActions(s) {
     const byName = new Map();
     for (const o of battlefield(s)) {
       if (o.controller !== player || !definition(s, o).legendary) continue;
-      if (!byName.has(o.name)) byName.set(o.name, []);
-      byName.get(o.name).push(o.id);
+      const name = definition(s, o).name;
+      if (!byName.has(name)) byName.set(name, []);
+      byName.get(name).push(o.id);
     }
     for (const [name, cards] of byName) if (cards.length > 1) groups.push({ player, name, cards });
   }

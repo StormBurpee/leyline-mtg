@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b8c5e481-371c-4999-bb2c-347a2aa33171",
+  "name": "Reigning Victor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Orc", "Warrior"],
+    "colors": ["B", "R", "W"],
+    "manaCost": "{2/R}{2/W}{2/B}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)\nWhen this creature enters, target creature gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mobilize",
+          "amount": 1,
+          "token": "leyline:token/mobilized-warrior"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 1,
+          "toughness": 0,
+          "keywords": ["indestructible"],
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

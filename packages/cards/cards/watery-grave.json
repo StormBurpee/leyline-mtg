@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fc9ec820-4245-4a96-b009-5308a818ca58",
+  "name": "Watery Grave",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Island", "Swamp"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "({T}: Add {U} or {B}.)\nAs this land enters, you may pay 2 life. If you don't, it enters tapped.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "payLife": 2
+    },
+    {
+      "kind": "mana",
+      "produces": ["U", "B"]
+    }
+  ]
+}

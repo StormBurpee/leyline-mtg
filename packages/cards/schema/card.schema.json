@@ -388,6 +388,16 @@
           },
           "required": ["keyword"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "adventure": {
+              "type": "boolean"
+            }
+          },
+          "required": ["adventure"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1273,6 +1283,16 @@
               "type": "string"
             }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "revealDiscard"
+            }
+          },
+          "required": ["op"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1372,6 +1392,42 @@
               "type": "object",
               "additionalProperties": {
                 "enum": ["creature", "chosenCreatureType"]
+              }
+            },
+            "lifeCosts": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "W": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000
+                },
+                "U": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000
+                },
+                "B": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000
+                },
+                "R": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000
+                },
+                "G": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000
+                },
+                "C": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000
+                }
               }
             }
           },
@@ -1488,6 +1544,11 @@
             },
             "unless": {
               "$ref": "#/$defs/condition"
+            },
+            "payLife": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
             }
           },
           "required": ["kind", "tapped"],
@@ -1968,6 +2029,24 @@
           },
           "required": ["kind", "where"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "adventure"
+            },
+            "mainName": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "spell": {
+              "$ref": "#"
+            }
+          },
+          "required": ["kind", "mainName", "spell"],
+          "additionalProperties": false
         }
       ]
     },
@@ -2104,6 +2183,21 @@
             }
           },
           "required": ["kind"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "controllerFirstTurns"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            }
+          },
+          "required": ["kind", "count"],
           "additionalProperties": false
         }
       ]

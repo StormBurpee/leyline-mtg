@@ -14,6 +14,7 @@ export const CARD_DECISIONS = new Set([
   'sacrifice',
   'exilePlay',
   'bindingNegotiation',
+  'revealDiscard',
   'exileToGraveyard',
   'libraryOrder',
   'librarySearch',
@@ -22,6 +23,7 @@ export const CARD_DECISIONS = new Set([
   'payCost',
   'creatureType',
   'auraEntry',
+  'entryLife',
   'triggerTargets',
 ]);
 const gameIdentities = new WeakMap();

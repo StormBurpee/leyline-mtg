@@ -842,3 +842,81 @@ test('additional casting sacrifice reviews choices, retains selection through Re
     h.cleanup();
   }
 });
+
+test('Adventure casting previews both faces, survives cancel/reopen, and submits the chosen spell mode', async () => {
+  const name = 'Bilbo Baggins, Burglar // Take a Glance';
+  let s, id;
+  for (let seed = 1; seed < 40; seed++) {
+    s = createGame({
+      decks: [[...Array(4).fill(name), ...Array(56).fill('Island')], Array(60).fill('Forest')],
+      mulligan: false,
+      seed,
+    });
+    id = s.players[0].hand.find((id) => s.objects[id].name === name);
+    if (id) break;
+  }
+  const advance = (command) => {
+    const r = dispatch(s, command);
+    assert.equal(r.ok, true, r.error?.message);
+    s = r.state;
+  };
+  while (s.step !== 'main1') advance({ type: 'pass', player: s.priority });
+  advance({
+    type: 'playLand',
+    player: 0,
+    card: s.players[0].hand.find((id) => s.objects[id].name === 'Island'),
+  });
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    h.click(`[data-card="${id}"]`);
+    h.click('[data-action="playSelected"]');
+    assert.match(h.dialog.textContent, /Adventure: Take a Glance/);
+    assert.match(h.dialog.textContent, /Scry 2/);
+    assert.match(h.dialog.textContent, /When Bilbo Baggins enters, draw a card/);
+    h.click('[data-action="closeDialog"]');
+    h.click('[data-action="playSelected"]');
+    h.click('[data-action="chooseSpellMode"][data-mode="1"]');
+    const record = JSON.parse(h.storage.get('leyline.match.v1')).replay;
+    const cast = record.commands.findLast((c) => c.type === 'cast');
+    assert.equal(cast.card, id);
+    assert.equal(cast.mode, 1);
+    assert.equal(record.commands.filter((c) => c.type === 'cast').length, 1);
+  } finally {
+    h.cleanup();
+  }
+});
+
+test('shockland entry offers readable life/tapped choices and survives card inspection', async () => {
+  let s;
+  for (let seed = 1; seed < 100; seed++) {
+    s = createGame({
+      seed,
+      mulligan: false,
+      decks: [
+        [...Array(56).fill('Mountain'), ...Array(4).fill('Blood Crypt')],
+        Array(60).fill('Forest'),
+      ],
+    });
+    if (s.players[0].hand.some((id) => s.objects[id].name === 'Blood Crypt')) break;
+  }
+  while (s.step !== 'main1') s = act(s, 'pass');
+  s = act(s, 'playLand', {
+    card: s.players[0].hand.find((id) => s.objects[id].name === 'Blood Crypt'),
+  });
+  const h = await mount(exportReplay(s));
+  try {
+    h.click('[data-action="resume"]');
+    assert.equal(h.dialog.open, true);
+    assert.ok(h.dialog.classList.contains('choice-stage'));
+    assert.match(h.dialog.textContent, /Pay 2 life/);
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    h.click('#dialog [data-action="payEntryLife"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.ok(saved.replay.commands.some((c) => c.type === 'payEntryLife' && c.pay === true));
+    assert.equal(h.dialog.open, false);
+  } finally {
+    h.cleanup();
+  }
+});

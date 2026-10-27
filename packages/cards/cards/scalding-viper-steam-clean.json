@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "id": "12c71296-1243-49e6-a196-8b016a7b635c",
+  "name": "Scalding Viper // Steam Clean",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Snake"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Whenever an opponent casts a spell with mana value 3 or less, this creature deals 1 damage to that player.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "opponent",
+        "filter": {
+          "manaValue": {
+            "lte": 3
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Scalding Viper",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/steam-clean",
+        "name": "Steam Clean",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["U"],
+          "manaCost": "{1}{U}"
+        },
+        "rulesText": "Return target nonland permanent to its owner's hand. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "returnToHand",
+                "target": "target"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "not": {
+                  "type": "land"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

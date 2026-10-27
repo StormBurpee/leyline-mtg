@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.45.0 — Tournament presets, Adventures and meta mana
+
+- Add eight exact dated Standard tournament presets with provenance, original sideboards as reference-only, and explicit missing-card blockers. The Rakdos Lizards main deck is fully executable; incomplete lists cannot launch or be selected as opponents. Keep the requested Storm deck as default.
+- Add 24 complete Adventure pairs and one token, main-face Arena import aliases, alternative stack characteristics and resolving-controller exile permission.
+- Add explicit twobrid casting payment announcements before cost modifiers, preserving printed mana value. Add four complete cards.
+- Add all ten Standard shocklands and Starting Town, explicit life-payment entry choices and least-life affordable mana planning. Add mandatory revealed-hand discard and two Rakdos meta cards.
+- Catalog: 1375 playable cards and 46 tokens; Standard inventory 1157 of 5164. Sideboarding, unsupported Adventure combinations and broader meta deck blockers remain explicit.
+
 ## 0.44.0 — Mobile play fixes and broader card coverage
 
 - Fix iOS viewport clipping of the action dock: remove the legacy viewport-height minimum, fit the visible browser viewport, respect safe areas and keep a touch-sized primary action visible.

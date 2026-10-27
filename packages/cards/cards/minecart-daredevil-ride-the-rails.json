@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "df555f60-2164-49dc-be67-00aca9eb0d45",
+  "name": "Minecart Daredevil // Ride the Rails",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dwarf", "Knight"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "",
+  "abilities": [
+    {
+      "kind": "adventure",
+      "mainName": "Minecart Daredevil",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/ride-the-rails",
+        "name": "Ride the Rails",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["R"],
+          "manaCost": "{1}{R}"
+        },
+        "rulesText": "Target creature gets +2/+1 until end of turn. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            },
+            "effects": [
+              {
+                "op": "modify",
+                "target": "target",
+                "power": 2,
+                "toughness": 1,
+                "until": "endOfTurn"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

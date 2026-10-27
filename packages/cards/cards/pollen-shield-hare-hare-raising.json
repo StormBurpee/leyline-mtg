@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "id": "3ef02f2b-b611-40c3-a1d5-8b34989643cf",
+  "name": "Pollen-Shield Hare // Hare Raising",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rabbit"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Creature tokens you control get +1/+1.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "type": "creature"
+          },
+          {
+            "token": true
+          },
+          {
+            "controller": "you"
+          }
+        ]
+      },
+      "power": 1,
+      "toughness": 1
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Pollen-Shield Hare",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/hare-raising",
+        "name": "Hare Raising",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["G"],
+          "manaCost": "{G}"
+        },
+        "rulesText": "Target creature you control gains vigilance and gets +X/+X until end of turn, where X is the number of creatures you control.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "modify",
+                "target": "target",
+                "power": {
+                  "kind": "count",
+                  "zone": "battlefield",
+                  "player": "you",
+                  "where": {
+                    "type": "creature"
+                  }
+                },
+                "toughness": {
+                  "kind": "count",
+                  "zone": "battlefield",
+                  "player": "you",
+                  "where": {
+                    "type": "creature"
+                  }
+                },
+                "keywords": ["vigilance"],
+                "until": "endOfTurn"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

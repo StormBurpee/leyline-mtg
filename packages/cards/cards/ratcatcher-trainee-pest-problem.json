@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "ecc91e38-90fa-4d89-b262-d5f36dce5be4",
+  "name": "Ratcatcher Trainee // Pest Problem",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Peasant"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "During your turn, this creature has first strike.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["first strike"]
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Ratcatcher Trainee",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/pest-problem",
+        "name": "Pest Problem",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["R"],
+          "manaCost": "{2}{R}"
+        },
+        "rulesText": "Create two 1/1 black Rat creature tokens with \"This token can't block.\" (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/nonblocking-rat-token",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

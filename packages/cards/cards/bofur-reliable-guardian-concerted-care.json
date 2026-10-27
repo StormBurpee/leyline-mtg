@@ -1,0 +1,74 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8a0e35ac-6c03-4922-b3b4-e419419fe3d7",
+  "name": "Bofur, Reliable Guardian // Concerted Care",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dwarf", "Scout"],
+    "colors": ["W"],
+    "manaCost": "{W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Lifelink",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Bofur, Reliable Guardian",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/concerted-care",
+        "name": "Concerted Care",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["W"],
+          "manaCost": "{1}{W}"
+        },
+        "rulesText": "Target artifact or creature you control gains hexproof and indestructible until end of turn. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "controller": "you"
+                  },
+                  {
+                    "any": [
+                      {
+                        "type": "artifact"
+                      },
+                      {
+                        "type": "creature"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "effects": [
+              {
+                "op": "modify",
+                "target": "target",
+                "power": 0,
+                "toughness": 0,
+                "keywords": ["hexproof", "indestructible"],
+                "until": "endOfTurn"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

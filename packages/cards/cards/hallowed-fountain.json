@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f1750962-a87c-49f6-b731-02ae971ac6ea",
+  "name": "Hallowed Fountain",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Plains", "Island"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "({T}: Add {W} or {U}.)\nAs this land enters, you may pay 2 life. If you don't, it enters tapped.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "payLife": 2
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "U"]
+    }
+  ]
+}

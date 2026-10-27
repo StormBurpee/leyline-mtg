@@ -99,7 +99,9 @@ export function validateFilter(filter) {
         errors.push(`${path}.subtype: expected a subtype name.`);
       return;
     }
-    if (['tapped', 'token', 'basic', 'legendary', 'attacking', 'blocking'].includes(key)) {
+    if (
+      ['tapped', 'token', 'basic', 'legendary', 'attacking', 'blocking', 'adventure'].includes(key)
+    ) {
       if (typeof operand !== 'boolean') errors.push(`${path}.${key}: expected a boolean.`);
       return;
     }
@@ -147,6 +149,8 @@ export function matchesFilter(facts, filter, you) {
     return (
       Number.isInteger(facts[key]) && (value === 'you' ? facts[key] === you : facts[key] !== you)
     );
+  if (key === 'adventure')
+    return !!(facts.definition?.adventure || facts.definition?.adventureCast) === value;
   if (key === 'basic' || key === 'legendary') return !!facts.definition?.[key] === value;
   if (key === 'keyword')
     return (facts.keywords ?? facts.definition?.keywords ?? []).includes(value);

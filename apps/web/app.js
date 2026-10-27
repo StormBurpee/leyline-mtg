@@ -561,12 +561,14 @@ function presentStateChoice() {
     cards = c.kind === 'sacrifice' ? c.cards : state.players[viewer()].hand;
     actions = `<span class="choice-selection-summary">${selected.length} of ${c.count} selected</span><button class="btn primary" data-action="confirmDecision" ${selected.length === c.count ? '' : 'disabled'}>${c.kind === 'bottom' ? 'Put selected cards back' : c.kind === 'sacrifice' ? 'Sacrifice selected permanents' : 'Discard selected cards'}</button>`;
   } else if (
-    ['exilePlay', 'bindingNegotiation', 'exileToGraveyard', 'legendRule'].includes(c.kind)
+    ['exilePlay', 'bindingNegotiation', 'revealDiscard', 'exileToGraveyard', 'legendRule'].includes(
+      c.kind,
+    )
   ) {
     title =
       c.kind === 'exilePlay'
         ? 'Choose one'
-        : c.kind === 'bindingNegotiation'
+        : ['bindingNegotiation', 'revealDiscard'].includes(c.kind)
           ? 'Choose a card to discard'
           : c.kind === 'exileToGraveyard'
             ? 'Choose an exiled card'
@@ -574,14 +576,20 @@ function presentStateChoice() {
     subtitle =
       c.kind === 'exilePlay'
         ? 'You may play the chosen card until the end of this turn. Normal timing and mana costs still apply.'
-        : c.kind === 'bindingNegotiation'
-          ? 'Their hand is revealed. Choose a nonland card, or choose none to consider their exile.'
-          : c.kind === 'exileToGraveyard'
-            ? 'You may put a face-up card the opponent owns from exile into their graveyard.'
-            : 'Keep one copy on the battlefield. The other copies go to their owners’ graveyards.';
+        : c.kind === 'revealDiscard'
+          ? c.eligibleCards.length
+            ? 'Their hand is revealed. You must choose one of the nonland cards to discard.'
+            : 'Their hand contains no nonland card. Review it, then continue.'
+          : c.kind === 'bindingNegotiation'
+            ? 'Their hand is revealed. Choose a nonland card, or choose none to consider their exile.'
+            : c.kind === 'exileToGraveyard'
+              ? 'You may put a face-up card the opponent owns from exile into their graveyard.'
+              : 'Keep one copy on the battlefield. The other copies go to their owners’ graveyards.';
     cards = c.cards;
-    const optional = ['bindingNegotiation', 'exileToGraveyard'].includes(c.kind);
-    actions = `<span class="choice-selection-summary">${selected.length} of 1 selected<strong>${selected[0] ? escape(state.objects[selected[0]].name) : 'Select a card above'}</strong></span>${optional ? '<button class="btn" data-action="declineDecision">Choose none</button>' : ''}<button class="btn primary" data-action="confirmDecision" ${selected.length === 1 ? '' : 'disabled'}>${c.kind === 'legendRule' ? 'Keep selected copy' : 'Confirm choice'}</button>`;
+    const optional =
+      ['bindingNegotiation', 'exileToGraveyard'].includes(c.kind) ||
+      (c.kind === 'revealDiscard' && !c.eligibleCards.length);
+    actions = `<span class="choice-selection-summary">${selected.length} of 1 selected<strong>${selected[0] ? escape(state.objects[selected[0]].name) : 'Select a card above'}</strong></span>${optional ? `<button class="btn" data-action="declineDecision">${c.kind === 'revealDiscard' ? 'Continue' : 'Choose none'}</button>` : ''}<button class="btn primary" data-action="confirmDecision" ${selected.length === 1 ? '' : 'disabled'}>${c.kind === 'legendRule' ? 'Keep selected copy' : 'Confirm choice'}</button>`;
   } else if (c.kind === 'optionalEffect' || c.kind === 'payCost') {
     const sourceId = state.resolving?.entry.source?.id;
     cards = sourceId && state.objects[sourceId] ? [sourceId] : [];
@@ -594,6 +602,13 @@ function presentStateChoice() {
       c.kind === 'payCost'
         ? `<button class="btn" data-action="declineWard">Don't pay</button><button class="btn primary" data-action="payWard" ${c.payable ? '' : 'disabled'}>Pay ward</button>`
         : '<button class="btn" data-action="declineOptional">Decline</button><button class="btn primary" data-action="acceptOptional">Resolve effect</button>';
+  } else if (c.kind === 'entryLife') {
+    title = `How should ${state.objects[c.card].name} enter?`;
+    subtitle = c.forcedTapped
+      ? `Another effect makes this land enter tapped even if you pay ${c.amount} life.`
+      : `Pay ${c.amount} life to use this land immediately, or keep your life and let it enter tapped.`;
+    cards = [c.card];
+    actions = `<button class="btn" data-action="declineEntryLife">Enter tapped · keep life</button><button class="btn primary" data-action="payEntryLife" ${c.payable ? '' : 'disabled'}>Pay ${c.amount} life${c.forcedTapped ? ' · still tapped' : ' · enter untapped'}</button>`;
   } else if (c.kind === 'auraEntry') {
     title = `Choose what ${state.objects[c.card].name} enchants`;
     subtitle =
@@ -611,13 +626,15 @@ function presentStateChoice() {
   body = decisionGallery(state, cards, metadata, {
     viewer: viewer(),
     action:
-      c.kind === 'mulligan' || ['optionalEffect', 'payCost', 'creatureType'].includes(c.kind)
+      c.kind === 'mulligan' ||
+      ['optionalEffect', 'payCost', 'creatureType', 'entryLife'].includes(c.kind)
         ? 'readDecisionCard'
         : 'selectDecisionCard',
     forCard: (id) => ({
       selected: selected.includes(id),
       disabled:
-        c.kind === 'bindingNegotiation' && definition(state, state.objects[id]).type === 'land',
+        ['bindingNegotiation', 'revealDiscard'].includes(c.kind) &&
+        definition(state, state.objects[id]).type === 'land',
       badge:
         c.kind === 'legendRule'
           ? `Copy ${cards.indexOf(id) + 1}`
@@ -642,7 +659,8 @@ function selectDecisionCard(id) {
   const allowed = multi && c.kind !== 'sacrifice' ? state.players[viewer()].hand : c.cards;
   if (
     !allowed?.includes(id) ||
-    (c.kind === 'bindingNegotiation' && definition(state, state.objects[id]).type === 'land')
+    (['bindingNegotiation', 'revealDiscard'].includes(c.kind) &&
+      definition(state, state.objects[id]).type === 'land')
   )
     return;
   if (multi) {
@@ -874,7 +892,7 @@ function showSpellModes() {
   render();
   const choices = castingChoices(definition(state, o)),
     legal = legalActions(state, viewer());
-  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(castingProfile(state, viewer(), o, index)?.cost ?? spellProfile(definition(state, o), index).cost)}<br>${mode.target || mode.targetGroups ? 'Choose targets next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
+  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(castingProfile(state, viewer(), o, index)?.cost ?? spellProfile(definition(state, o), index).cost)}<br>${escape(spellProfile(definition(state, o), index).type)}<br>${escape(spellProfile(definition(state, o), index).text ?? '')}<br>${mode.target || mode.targetGroups ? 'Choose targets next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
   openChoiceDialog(
     'Choose how to cast',
     o.name,
@@ -1640,6 +1658,10 @@ async function action(name, el) {
         card: name === 'skipResolutionCard' ? null : el.dataset.cardid,
       });
       break;
+    case 'declineEntryLife':
+    case 'payEntryLife':
+      send({ type: 'payEntryLife', pay: name === 'payEntryLife' });
+      break;
     case 'chooseCreatureType':
       send({
         type: 'chooseCreatureType',
@@ -2122,7 +2144,11 @@ async function action(name, el) {
         )
           showTargetMenu();
       } else
-        send({ type: 'cast', card: o.id, ...(castingChoices(d) ? { mode: ui.spellMode } : {}) });
+        send({
+          type: 'cast',
+          card: o.id,
+          ...(castingChoices(printed) ? { mode: ui.spellMode } : {}),
+        });
       break;
     }
     case 'pause':
@@ -2570,7 +2596,7 @@ function selectCard(id) {
       ? manaOptions(state, o)
           .map(
             (color) =>
-              `<button class="btn" data-action="chooseMana" data-color="${color}" ${canTapForMana(state, o, p) ? '' : 'disabled'}>${mana({ [color]: 1 })} Tap: add ${color}</button>`,
+              `<button class="btn" data-action="chooseMana" data-color="${color}" ${canTapForMana(state, o, p) ? '' : 'disabled'}>${mana({ [color]: 1 })} Tap: add ${color}${definition(state, o).manaLifeCosts?.[color] ? ` · pay ${definition(state, o).manaLifeCosts[color]} life` : ''}</button>`,
           )
           .join('')
       : '';
@@ -2602,7 +2628,7 @@ function selectCard(id) {
         options
           .map(
             (color) =>
-              `<button class="btn primary" data-action="chooseMana" data-color="${color}">${mana({ [color]: 1 })} Add ${color}</button>`,
+              `<button class="btn primary" data-action="chooseMana" data-color="${color}">${mana({ [color]: 1 })} Add ${color}${definition(state, o).manaLifeCosts?.[color] ? ` · pay ${definition(state, o).manaLifeCosts[color]} life` : ''}</button>`,
           )
           .join('') + '<button class="btn" data-action="closeDialog">Cancel</button>',
       );

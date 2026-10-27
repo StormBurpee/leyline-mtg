@@ -413,7 +413,10 @@ export function parseDeck(text, { catalog = CARDS } = {}) {
       errors.push(`Line ${i + 1}: invalid quantity.`);
       continue;
     }
-    names.push(...Array(n).fill(match[2]));
+    const aliases = Object.values(catalog).filter((card) => card.mainName === match[2]);
+    const name =
+      !Object.hasOwn(catalog, match[2]) && aliases.length === 1 ? aliases[0].name : match[2];
+    names.push(...Array(n).fill(name));
   }
   return { names, errors: [...errors, ...validateDeck(names, { catalog })] };
 }

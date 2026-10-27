@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fc75cfec-e1f6-4cb5-8a3c-2f7b2c39c03f",
+  "name": "Smaug, the Great Calamity // Spew Flame",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Dragon"],
+    "colors": ["R"],
+    "manaCost": "{5}{R}{R}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Smaug, the Great Calamity",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/spew-flame",
+        "name": "Spew Flame",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["R"],
+          "manaCost": "{4}{R}"
+        },
+        "rulesText": "Spew Flame deals 5 damage to target creature. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            },
+            "effects": [
+              {
+                "op": "damage",
+                "target": "target",
+                "amount": 5
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -36,6 +36,24 @@ export function createRegistry(input = CARDS) {
     const copy = structuredClone(card);
     registry[copy.name] = {
       ...copy,
+      ...(copy.adventure
+        ? {
+            adventure: {
+              ...copy.adventure,
+              types: copy.adventure.types ?? [copy.adventure.type],
+              keywords: copy.adventure.keywords ?? [],
+              subtypes: copy.adventure.subtypes ?? [],
+              text: copy.adventure.text ?? '',
+              color: copy.adventure.color ?? [
+                ...new Set(
+                  Object.keys(copy.adventure.cost)
+                    .flatMap((key) => key.split('/'))
+                    .filter((key) => COLORS.has(key)),
+                ),
+              ],
+            },
+          }
+        : {}),
       types: copy.types ?? [copy.type],
       keywords: copy.keywords ?? [],
       subtypes: copy.subtypes ?? [],
@@ -53,6 +71,7 @@ export function createRegistry(input = CARDS) {
   for (const card of Object.values(registry))
     for (const e of [
       ...(card.effects ?? []),
+      ...(card.adventure?.effects ?? []),
       ...(card.kicker?.effects ?? []),
       ...(card.modes ?? []).flatMap((mode) => mode.effects),
       ...(card.etb ?? []),

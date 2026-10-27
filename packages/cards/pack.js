@@ -88,6 +88,7 @@ export function compilePack(cards, { mechanics = {} } = {}) {
   for (const d of definitions)
     for (const e of [
       ...(d.effects ?? []),
+      ...(d.adventure?.effects ?? []),
       ...(d.modes ?? []).flatMap((mode) => mode.effects),
       ...(d.etb ?? []),
       ...(d.triggers ?? []).flatMap((t) => t.effects),

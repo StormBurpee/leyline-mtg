@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "975ec9a3-6f20-4177-8211-82526e092538",
+  "name": "Overgrown Tomb",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Swamp", "Forest"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "({T}: Add {B} or {G}.)\nAs this land enters, you may pay 2 life. If you don't, it enters tapped.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "payLife": 2
+    },
+    {
+      "kind": "mana",
+      "produces": ["B", "G"]
+    }
+  ]
+}

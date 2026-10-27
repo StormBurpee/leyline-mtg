@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "43985bbc-a0f6-4812-984e-392bc8562633",
+  "name": "Blood Crypt",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Swamp", "Mountain"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "({T}: Add {B} or {R}.)\nAs this land enters, you may pay 2 life. If you don't, it enters tapped.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "payLife": 2
+    },
+    {
+      "kind": "mana",
+      "produces": ["B", "R"]
+    }
+  ]
+}
