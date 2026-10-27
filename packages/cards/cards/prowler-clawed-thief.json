@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "76742bfc-ae99-4b06-b29d-e0e41d92ae14",
+  "name": "Prowler, Clawed Thief",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Rogue", "Villain"],
+    "colors": ["B", "U"],
+    "manaCost": "{1}{U}{B}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhenever another Villain you control enters, Prowler connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Villain"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "connive",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

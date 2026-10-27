@@ -1,0 +1,97 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ee1db746-f5c1-4dce-82eb-24b273cc9507",
+  "name": "Witherbloom Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "G"],
+    "manaCost": "{B}{G}"
+  },
+  "rulesText": "Choose one —\n• You may sacrifice a permanent. If you do, draw two cards.\n• You gain 5 life.\n• Destroy target nonland permanent with mana value 2 or less.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Sacrifice a permanent to draw two cards",
+          "effects": [
+            {
+              "op": "chooseEffect",
+              "options": [
+                {
+                  "label": "Sacrifice a permanent and draw 2",
+                  "condition": {
+                    "kind": "compare",
+                    "left": {
+                      "kind": "count",
+                      "zone": "battlefield",
+                      "player": "you"
+                    },
+                    "operator": "gt",
+                    "right": 0
+                  },
+                  "effects": [
+                    {
+                      "op": "sacrifice",
+                      "player": "controller",
+                      "count": 1
+                    },
+                    {
+                      "op": "draw",
+                      "target": "controller",
+                      "amount": 2
+                    }
+                  ]
+                },
+                {
+                  "label": "Decline",
+                  "effects": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Gain 5 life",
+          "effects": [
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "label": "Destroy a small nonland permanent",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "not": {
+                    "type": "land"
+                  }
+                },
+                {
+                  "manaValue": {
+                    "lte": 2
+                  }
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

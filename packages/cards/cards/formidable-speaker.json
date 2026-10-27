@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5bd06f9e-9a42-455d-ad26-24bc04e51c7c",
+  "name": "Formidable Speaker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, you may discard a card. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.\n{1}, {T}: Untap another target permanent.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discardThen",
+          "count": 1,
+          "optional": true,
+          "then": [
+            {
+              "op": "searchLibrary",
+              "amount": 1,
+              "where": {
+                "type": "creature"
+              },
+              "destination": "hand",
+              "reveal": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "tap": true
+      },
+      "target": {
+        "scope": "permanent",
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

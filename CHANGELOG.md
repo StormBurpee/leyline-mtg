@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.59.0 — Connive and recruit continuations
+
+- Add 18 complete Standard cards: ten connive cards, seven recruit cards and Formidable Speaker. Standard reaches 2188 of 5164; Arena reaches 2395 of 15332. Catalog: 2407 playable cards and 106 tokens. Migrate Abandon Attachments without counting it as a new card.
+- Implement single-permanent connive with current/last-controller draw-discard order, actual nonland-discard counters and same-incarnation protection. Recruit uses discard-result snapshots and a nested continuation; optional costs require full payment and may be declined.
+- Preserve parent bindings and target groups through nested choices. Add bot draw-risk checks and optional-discard UI controls; recursively report executable continuation and Class/Station grant instructions.
+- Retain revision 4 Class/entryGroup rules, explicit/inferred legacy revisions 1–3, published v0.58 replay envelopes, exact default/meta lists and cached saved catalogs. Refresh Oracle display metadata, dated coverage, compiler fingerprints and support artifacts. No manual browser, server or Forge runtime differential testing is claimed.
+
+## 0.58.0 — Class levels and simultaneous entry groups
+
+- Add 25 complete cards and three exact tokens: four Classes, three entry-group payoffs and 18 existing-engine source definitions. Standard gains 24 cards (2170 of 5164); banned Stormchaser’s Talent counts only in Arena (2377 of 15332). Catalog: 2389 playable cards and 106 tokens.
+- Implement sequential Class level designations with sorcery-speed mana payment, real stack resolution, stable activation identity, noncopiable progress and accumulated grants. Countering, ability loss, control changes and incarnation changes retain their distinct semantics; generic unsupported scalar-grant composition fails closed.
+- Observe actual simultaneous entry groups with same-member predicates, suppression, per-turn limits and additional triggers. Preserve atomic entry choices and all-entrant observations for ordinary multi-token creation. Correct Elvish Archivist and Enduring Innocence without counting them as additions.
+- Introduce rules revision 4 while preserving revision 1–3 token/object/trigger ordering and explicit/inferred saved-game revision. Restore published v0.55–v0.57 envelope aliases and retain deterministic resume/re-export.
+- Preserve Station thresholds, Role Aura/Equipment-owned grants, selected-cost controls, exact default and eight meta decks, client contracts and saved-catalog caching. Refresh complete Oracle display metadata, compiler input hashes, support grants and dated coverage artifacts. No manual browser, server or Forge runtime differential testing is claimed.
+
 ## 0.57.0 — Station and continuous charge thresholds
 
 - Add 17 complete Standard cards with their full entry, threshold, attack and activation clauses. Catalog: 2364 playable cards and 103 tokens; dated Standard coverage: 2146 of 5164.

@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2f7b46c1-3d82-4fd9-9882-589315cab47b",
+  "name": "Candlestick",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Clue", "Equipment"],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Equipped creature gets +1/+1 and has \"Whenever this creature attacks, surveil 2.\" (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\n{2}, Sacrifice this Equipment: Draw a card.\nEquip {2}",
+  "abilities": [
+    {
+      "kind": "attachmentBonus",
+      "power": 1,
+      "toughness": 1
+    },
+    {
+      "kind": "attachmentTriggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "equip",
+      "cost": "{2}"
+    }
+  ]
+}

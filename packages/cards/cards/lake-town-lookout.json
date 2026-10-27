@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cf765efe-884c-48e2-9edb-9d45cf2756dd",
+  "name": "Lake-town Lookout",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Scout"],
+    "colors": ["W"],
+    "manaCost": "{W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature dies, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discardThen",
+          "count": 1,
+          "where": {
+            "not": {
+              "type": "land"
+            }
+          },
+          "then": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/human-soldier-token",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

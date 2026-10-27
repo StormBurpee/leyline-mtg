@@ -21,7 +21,7 @@
     {
       "kind": "triggered",
       "on": {
-        "event": "enter",
+        "event": "enterGroup",
         "controller": "you",
         "filter": {
           "all": [

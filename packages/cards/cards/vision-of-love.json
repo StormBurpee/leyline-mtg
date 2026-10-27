@@ -1,0 +1,86 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "70c96b50-ac2b-493d-bd15-fc66eb767111",
+  "name": "Vision of Love",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "You may sacrifice an artifact or discard a card. If you do, draw two cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Sacrifice a permanent and draw 2",
+              "condition": {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "battlefield",
+                  "player": "you",
+                  "where": {
+                    "type": "artifact"
+                  }
+                },
+                "operator": "gt",
+                "right": 0
+              },
+              "effects": [
+                {
+                  "op": "sacrifice",
+                  "player": "controller",
+                  "where": {
+                    "type": "artifact"
+                  },
+                  "count": 1
+                },
+                {
+                  "op": "draw",
+                  "target": "controller",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "label": "Discard a card and draw 2",
+              "condition": {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "hand",
+                  "player": "you"
+                },
+                "operator": "gt",
+                "right": 0
+              },
+              "effects": [
+                {
+                  "op": "discard",
+                  "target": "controller",
+                  "amount": 1
+                },
+                {
+                  "op": "draw",
+                  "target": "controller",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "label": "Decline",
+              "effects": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b43350a8-fc4d-41ed-becd-f0277512bb5f",
+  "name": "Kang, Temporal Tyrant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Villain"],
+    "colors": ["B", "U"],
+    "manaCost": "{2}{U}{B}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Whenever Kang attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever you draw your second card each turn, each opponent loses 1 life and you gain 1 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "connive",
+          "target": "source"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "draw",
+        "controller": "you",
+        "drawNumber": 2
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

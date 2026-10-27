@@ -1,0 +1,92 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0618a217-2a6e-4fa1-bfe6-89c6612a594d",
+  "name": "K'un-Lun Warrior",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Warrior", "Hero"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, you may sacrifice an artifact or discard a card. If you do, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Sacrifice a permanent and draw 1",
+              "condition": {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "battlefield",
+                  "player": "you",
+                  "where": {
+                    "type": "artifact"
+                  }
+                },
+                "operator": "gt",
+                "right": 0
+              },
+              "effects": [
+                {
+                  "op": "sacrifice",
+                  "player": "controller",
+                  "where": {
+                    "type": "artifact"
+                  },
+                  "count": 1
+                },
+                {
+                  "op": "draw",
+                  "target": "controller",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "label": "Discard a card and draw 1",
+              "condition": {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "hand",
+                  "player": "you"
+                },
+                "operator": "gt",
+                "right": 0
+              },
+              "effects": [
+                {
+                  "op": "discard",
+                  "target": "controller",
+                  "amount": 1
+                },
+                {
+                  "op": "draw",
+                  "target": "controller",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "label": "Decline",
+              "effects": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -48,6 +48,6 @@ test('new first-turn step sequence replays exactly', () => {
   let s = createGame({ mulligan: false });
   s = resolve(s);
   assert.equal(s.step, 'main1');
-  assert.equal(exportReplay(s).rulesRevision, 3);
+  assert.equal(exportReplay(s).rulesRevision, 4);
   assert.deepEqual(replay(exportReplay(s)), s);
 });

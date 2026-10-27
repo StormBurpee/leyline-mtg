@@ -17,7 +17,7 @@
     {
       "kind": "triggered",
       "on": {
-        "event": "enter",
+        "event": "enterGroup",
         "controller": "you",
         "filter": {
           "type": "artifact"
@@ -36,7 +36,7 @@
     {
       "kind": "triggered",
       "on": {
-        "event": "enter",
+        "event": "enterGroup",
         "controller": "you",
         "filter": {
           "type": "enchantment"

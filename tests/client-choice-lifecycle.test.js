@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parseHTML } from 'linkedom';
+import { compileCard } from '../packages/cards/compiler.js';
 import { createMatchStorage } from '../apps/web/match-storage.js';
 import {
   createGame,
@@ -2120,5 +2121,67 @@ test('station selection keeps exactly one payer across inspection, cancellation 
     assert.equal(page.dialog.open, false);
   } finally {
     page.cleanup();
+  }
+});
+
+async function optionalDiscardContinuationReplay() {
+  const source = JSON.parse(
+    await readFile(
+      new URL('../packages/cards/cards/abandon-attachments.json', import.meta.url),
+      'utf8',
+    ),
+  );
+  const compiled = compileCard(source);
+  assert.equal(compiled.ok, true);
+  const name = source.name;
+  const catalog = { ...CARDS, [name]: { ...compiled.definition, cost: {} } };
+  let state;
+  for (let seed = 1; seed < 100; seed++) {
+    state = createGame({
+      catalog,
+      mulligan: false,
+      seed,
+      decks: [[...Array(4).fill(name), ...Array(56).fill('Island')], Array(60).fill('Forest')],
+    });
+    if (state.players[0].hand.some((id) => state.objects[id].name === name)) break;
+  }
+  while (state.step !== 'main1') state = act(state, 'pass');
+  state = act(state, 'cast', {
+    card: state.players[0].hand.find((id) => state.objects[id].name === name),
+  });
+  state = act(act(state, 'pass'), 'pass');
+  assert.equal(state.choice.kind, 'discardEffect');
+  return exportReplay(state);
+}
+
+test('optional discard continuation stage states the real draw reward and preserves decline, reopen and stale-click safety', async () => {
+  const replay = await optionalDiscardContinuationReplay();
+  for (const decline of [true, false]) {
+    const h = await mount(replay);
+    try {
+      h.click('[data-action="resume"]');
+      assert.match(h.dialog.textContent, /discard 1 card to draw 2 cards/);
+      assert.ok(h.dialog.querySelector('[data-action="declineDecision"]'));
+      h.click('#dialog [data-action="closeDialog"]');
+      h.click('[data-action="reviewDecision"]');
+      assert.match(h.dialog.textContent, /draw 2 cards/);
+      if (!decline) h.click('#dialog [data-action="selectDecisionCard"]');
+      const stale = h.click(
+        `#dialog [data-action="${decline ? 'declineDecision' : 'confirmDecision'}"]`,
+      );
+      const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+      const command = saved.replay.commands.at(-1);
+      assert.equal(command.type, 'discardEffect');
+      assert.equal(command.cards.length, decline ? 0 : 1);
+      assert.equal(h.dialog.open, false);
+      h.document.body.append(stale);
+      stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+      assert.equal(
+        JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.length,
+        saved.replay.commands.length,
+      );
+    } finally {
+      h.cleanup();
+    }
   }
 });

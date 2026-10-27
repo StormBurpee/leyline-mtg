@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fe7cc414-42d0-4dad-8516-7a0be0860a67",
+  "name": "M.O.D.O.K.",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Villain"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying, lifelink\nMental Organism \u2014 Pay 3 life: M.O.D.O.K. connives. Activate only during your turn. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nDesigned Only for Killing \u2014 Creatures your opponents control get -1/-1.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "life": 3
+      },
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "effects": [
+        {
+          "op": "connive",
+          "target": "source"
+        }
+      ]
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "opponent"
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      },
+      "power": -1,
+      "toughness": -1
+    }
+  ]
+}

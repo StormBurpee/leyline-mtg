@@ -1,3 +1,4 @@
+import { CLASS_ABILITY_FIELDS } from '../engine/src/class-levels.js';
 import { EVENT_PRESETS, eventSpec, validateEventSpec } from '../engine/src/events.js';
 import { jsonDataProblem } from './json-data.js';
 import { validateDefinition } from '../engine/src/definition-validation.js';
@@ -43,6 +44,7 @@ export function compileCard(
     adventureDepth = 0,
     transformBack = false,
     stationDepth = 0,
+    classDepth = 0,
   } = {},
 ) {
   const invalidJSON = jsonDataProblem(source) ?? jsonDataProblem(mechanics);
@@ -172,6 +174,10 @@ export function compileCard(
           effects: effects(effect.effects, `${p}.effects`),
         };
       }
+      if (effect.op === 'discardThen') {
+        fields(effect, ['op', 'count', 'optional', 'where', 'then'], p);
+        return { ...structuredClone(effect), then: effects(effect.then, `${p}.then`) };
+      }
       if (effect.op === 'behold') {
         fields(effect, ['op', 'subtype', 'then'], p);
         return { op: 'behold', subtype: effect.subtype, then: effects(effect.then, `${p}.then`) };
@@ -211,6 +217,12 @@ export function compileCard(
         const { targetGroup, ...rest } = effect;
         const native = effects([rest], p)[0];
         return { ...native, targetGroup };
+      }
+      if (effect.op === 'connive') {
+        fields(effect, ['op', 'target'], p);
+        if (!['source', 'target', 'eventSource'].includes(effect.target))
+          problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source, target, or eventSource.');
+        return { op: 'connive', ...(effect.target === 'target' ? {} : { subject: effect.target }) };
       }
       if (effect.op === 'fight' || effect.op === 'bite') {
         fields(effect, ['op', 'source', 'sourceGroup', 'victimGroup'], p);
@@ -1106,6 +1118,12 @@ export function compileCard(
         break;
       case 'damageBonus':
         fields(a, ['kind', 'amount', 'where'], path);
+        if (d.damageBonus)
+          problem(
+            'MULTIPLE_DAMAGE_BONUS',
+            path,
+            'Multiple simultaneous damage replacements are not supported.',
+          );
         d.damageBonus = { amount: a.amount, where: structuredClone(a.where) };
         break;
       case 'keyword':
@@ -1268,6 +1286,64 @@ export function compileCard(
             };
           });
         break;
+      case 'classLevel': {
+        fields(a, ['kind', 'level', 'cost', 'abilities'], path);
+        if (classDepth || ![2, 3].includes(a.level)) {
+          problem(
+            'INVALID_CLASS_LEVEL',
+            path,
+            'Class bars require levels 2 and 3 without nesting.',
+          );
+          break;
+        }
+        const nested = compileCard(
+          { ...source, abilities: a.abilities },
+          { mechanics, identities, adventureDepth, transformBack, classDepth: 1 },
+        );
+        if (!nested.ok)
+          diagnostics.push(
+            ...nested.diagnostics.map((issue) => ({ ...issue, path: `${path}.${issue.path}` })),
+          );
+        else {
+          if (nested.definition.keywords?.length)
+            problem(
+              'UNSUPPORTED_CLASS_ABILITY',
+              path,
+              'Class keyword grants need a supported fragment field.',
+            );
+          const identity = new Set([
+            'name',
+            'type',
+            'types',
+            'cost',
+            'text',
+            'color',
+            'keywords',
+            'subtypes',
+            'power',
+            'toughness',
+            'loyalty',
+            'basic',
+            'legendary',
+            'token',
+          ]);
+          const fragment = Object.fromEntries(
+            Object.entries(nested.definition).filter(([key]) => !identity.has(key)),
+          );
+          if (Object.keys(fragment).some((key) => !CLASS_ABILITY_FIELDS.includes(key)))
+            problem(
+              'UNSUPPORTED_CLASS_ABILITY',
+              path,
+              'This class ability needs a supported grant field.',
+            );
+          (d.classLevels ??= []).push({
+            level: a.level,
+            cost: mana(a.cost, `${path}.cost`),
+            abilities: fragment,
+          });
+        }
+        break;
+      }
       case 'activated':
         fields(
           a,

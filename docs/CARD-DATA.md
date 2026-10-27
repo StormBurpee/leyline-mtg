@@ -63,7 +63,7 @@ Targets and triggers share predicate operators: `all`, `any`, `not`, card type, 
 
 This selector is evaluated against the actual game state, including supported power/toughness modifiers, and rechecked during resolution. It does not bypass shroud, hexproof or zone incarnations. Event predicates are observations, not targeting: they do not incorrectly apply targeting restrictions.
 
-The current event families are casting and entering the battlefield. For example, `{"event":"cast","controller":"you","filter":{"color":"R"}}` works without introducing a new red-spell trigger enum. Other event families remain explicit unsupported capabilities.
+Event predicates include casting, battlefield entry and departure, and the other explicitly validated families. For example, `{"event":"cast","controller":"you","filter":{"color":"R"}}` works without introducing a new red-spell trigger enum. `enter` observes each entrant; `enterGroup` observes one actual simultaneous entry event for “one or more” abilities (CR 603.2c, 603.6a). Its controller, identity, and filter predicates must match the same member. Entry choices finish before the whole group enters; simultaneous entrants then observe one another, after replacement counters and continuous effects. Separate instructions are never merged. Rules revision 4 batches an ordinary multi-token instruction; revisions 1–3 retain historical sequential entry and object/trigger IDs when replaying old exports.
 
 ## What compilation guarantees
 

@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "84597236-2cfc-4654-b126-a8ee252f4d14",
+  "name": "Esgaroth Garrison",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 0,
+    "toughness": 5
+  },
+  "rulesText": "Esgaroth Garrison's power is equal to the number of creatures you control.\nWhen this creature enters, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)",
+  "abilities": [
+    {
+      "kind": "baseStats",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "you",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "toughness": 5
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discardThen",
+          "count": 1,
+          "where": {
+            "not": {
+              "type": "land"
+            }
+          },
+          "then": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/human-soldier-token",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

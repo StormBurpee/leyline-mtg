@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7fa5237e-dd79-4646-b935-cb8c6ee803ab",
+  "name": "Mister Fantastic, Reed Richards",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Scientist", "Hero"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Reach\nWhenever one or more tokens you control enter, you may draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enterGroup",
+        "controller": "you",
+        "filter": {
+          "token": true
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

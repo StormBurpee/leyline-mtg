@@ -54,10 +54,32 @@ test('legacy ward resume, decisions, export and replay preserve compatibility ac
 
 test('new games explicitly export announcement-time rules even under older envelope aliases', () => {
   const state = createGame({ mulligan: false });
-  assert.equal(state.rulesRevision, 3);
+  assert.equal(state.rulesRevision, 4);
   const record = exportReplay(state);
-  assert.equal(record.rulesRevision, 3);
+  assert.equal(record.rulesRevision, 4);
   assert.deepEqual(replay(record), state);
   assert.deepEqual(replay({ ...record, version: '0.3.0' }), state);
-  assert.throws(() => replay({ ...record, rulesRevision: 4 }), /Unsupported replay rules revision/);
+  assert.throws(() => replay({ ...record, rulesRevision: 5 }), /Unsupported replay rules revision/);
+});
+
+// These versions were published before the simultaneous-token-entry revision.
+// Keep aliases explicit when VERSION advances so unmarked saved games remain valid.
+test('published v0.55–v0.57 envelopes preserve revision 3 with and without explicit marker', () => {
+  const state = createGame({ mulligan: false });
+  state.rulesRevision = 3;
+  const record = exportReplay(state);
+  for (const version of ['0.55.0', '0.56.0', '0.57.0']) {
+    assert.deepEqual(replay({ ...record, version }), state);
+    const unmarked = { ...record, version };
+    delete unmarked.rulesRevision;
+    assert.deepEqual(replay(unmarked), state);
+  }
+});
+
+test('published v0.58 envelopes preserve revision 4 with and without explicit marker', () => {
+  const state = createGame({ mulligan: false });
+  const record = { ...exportReplay(state), version: '0.58.0' };
+  assert.deepEqual(replay(record), state);
+  delete record.rulesRevision;
+  assert.deepEqual(replay(record), state);
 });

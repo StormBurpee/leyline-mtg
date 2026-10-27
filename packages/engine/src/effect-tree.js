@@ -8,7 +8,8 @@ export function* effectInstructions(effects) {
     if (effect.op === 'conditional') {
       yield* effectInstructions(effect.then);
       yield* effectInstructions(effect.else ?? []);
-    } else if (effect.op === 'behold') yield* effectInstructions(effect.then);
+    } else if (['behold', 'discardThen'].includes(effect.op))
+      yield* effectInstructions(effect.then);
     else if (effect.op === 'chooseEffect')
       for (const option of effect.options) yield* effectInstructions(option.effects);
     else if (['questCounterTrigger', 'removeCounterTrigger', 'discardTrigger'].includes(effect.op))

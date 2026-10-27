@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "81c509b2-3164-47e9-94b3-bdba0487d2f1",
+  "name": "Valley Questcaller",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rabbit", "Warrior"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Whenever one or more other Rabbits, Bats, Birds, and/or Mice you control enter, scry 1.\nOther Rabbits, Bats, Birds, and Mice you control get +1/+1.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enterGroup",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "any": [
+            {
+              "subtype": "Rabbit"
+            },
+            {
+              "subtype": "Bat"
+            },
+            {
+              "subtype": "Bird"
+            },
+            {
+              "subtype": "Mouse"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "scry",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "controller": "you"
+          },
+          {
+            "any": [
+              {
+                "subtype": "Rabbit"
+              },
+              {
+                "subtype": "Bat"
+              },
+              {
+                "subtype": "Bird"
+              },
+              {
+                "subtype": "Mouse"
+              }
+            ]
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

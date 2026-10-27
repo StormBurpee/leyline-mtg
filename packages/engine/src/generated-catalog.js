@@ -14,6 +14,21 @@ export const definitions = [
     etb: [{ op: 'gainLife', amount: 1 }],
   },
   {
+    name: 'A.I.M. Scientists',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 3, U: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Scientist', 'Villain'],
+    color: ['U'],
+    text: 'When this creature enters, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)',
+    power: 3,
+    toughness: 3,
+    etb: [{ op: 'connive', subject: 'source' }],
+    cyclingType: 'Basic land',
+    cycling: { generic: 2 },
+  },
+  {
     name: 'A.I.M. Synthoids',
     type: 'creature',
     types: ['artifact', 'creature'],
@@ -64,6 +79,18 @@ export const definitions = [
         ],
       },
     ],
+  },
+  {
+    name: 'Abandon Attachments',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 1, 'U/R': 1 },
+    keywords: [],
+    subtypes: ['Lesson'],
+    color: ['R', 'U'],
+    text: 'You may discard a card. If you do, draw two cards.',
+    target: null,
+    effects: [{ op: 'discardThen', count: 1, optional: true, then: [{ op: 'draw', count: 2 }] }],
   },
   {
     name: 'Abandoned Air Temple',
@@ -3160,6 +3187,39 @@ export const definitions = [
     mana: ['U', 'R'],
   },
   {
+    name: 'Baron Bertram Graywater',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, W: 1, B: 1 },
+    keywords: [],
+    subtypes: ['Vampire', 'Noble'],
+    color: ['B', 'W'],
+    text: 'Whenever one or more tokens you control enter, create a 1/1 black Vampire Rogue creature token with lifelink. This ability triggers only once each turn.\n{1}{B}, Sacrifice another creature or artifact: Draw a card.',
+    legendary: true,
+    power: 3,
+    toughness: 4,
+    triggers: [
+      {
+        event: { event: 'enterGroup', controller: 'you', filter: { token: true } },
+        effects: [{ op: 'token', count: 1, definition: 'Black Vampire Rogue Token' }],
+        oncePerTurn: true,
+      },
+    ],
+    activated: [
+      {
+        cost: {
+          mana: { generic: 1, B: 1 },
+          sacrifice: {
+            count: 1,
+            where: { any: [{ type: 'creature' }, { type: 'artifact' }] },
+            excludeSource: true,
+          },
+        },
+        effects: [{ op: 'draw', count: 1 }],
+      },
+    ],
+  },
+  {
     name: 'Barrow Naughty',
     type: 'creature',
     types: ['creature'],
@@ -3821,6 +3881,75 @@ export const definitions = [
     mainName: "Beluna's Gatekeeper",
   },
   {
+    name: 'Benthic Criminologists',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 4, U: 1 },
+    keywords: [],
+    subtypes: ['Merfolk', 'Wizard'],
+    color: ['U'],
+    text: 'Whenever this creature enters or attacks, you may sacrifice an artifact. If you do, draw a card.',
+    power: 4,
+    toughness: 5,
+    etb: [
+      {
+        op: 'chooseEffect',
+        options: [
+          {
+            label: 'Sacrifice a permanent and draw 1',
+            condition: {
+              kind: 'compare',
+              left: {
+                kind: 'count',
+                zone: 'battlefield',
+                player: 'you',
+                where: { type: 'artifact' },
+              },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'sacrifice', count: 1, player: 'controller', where: { type: 'artifact' } },
+              { op: 'draw', count: 1 },
+            ],
+          },
+          { label: 'Decline', effects: [] },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        event: 'selfAttacks',
+        effects: [
+          {
+            op: 'chooseEffect',
+            options: [
+              {
+                label: 'Sacrifice a permanent and draw 1',
+                condition: {
+                  kind: 'compare',
+                  left: {
+                    kind: 'count',
+                    zone: 'battlefield',
+                    player: 'you',
+                    where: { type: 'artifact' },
+                  },
+                  operator: 'gt',
+                  right: 0,
+                },
+                effects: [
+                  { op: 'sacrifice', count: 1, player: 'controller', where: { type: 'artifact' } },
+                  { op: 'draw', count: 1 },
+                ],
+              },
+              { label: 'Decline', effects: [] },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Besotted Knight // Betroth the Beast',
     type: 'creature',
     types: ['creature'],
@@ -4388,6 +4517,19 @@ export const definitions = [
     subtypes: ['Goblin'],
     color: ['B', 'R'],
     text: 'No abilities.',
+    power: 1,
+    toughness: 1,
+    token: true,
+  },
+  {
+    name: 'Black Vampire Rogue Token',
+    type: 'creature',
+    types: ['creature'],
+    cost: {},
+    keywords: ['lifelink'],
+    subtypes: ['Vampire', 'Rogue'],
+    color: ['B'],
+    text: 'Lifelink',
     power: 1,
     toughness: 1,
     token: true,
@@ -5998,6 +6140,68 @@ export const definitions = [
     ],
   },
   {
+    name: "Builder's Talent",
+    type: 'enchantment',
+    types: ['enchantment'],
+    cost: { generic: 1, W: 1 },
+    keywords: [],
+    subtypes: ['Class'],
+    color: ['W'],
+    text: '(Gain the next level as a sorcery to add its ability.)\nWhen this Class enters, create a 0/4 white Wall creature token with defender.\n{W}: Level 2\nWhenever one or more noncreature, nonland permanents you control enter, put a +1/+1 counter on target creature you control.\n{4}{W}: Level 3\nWhen this Class becomes level 3, return target noncreature, nonland permanent card from your graveyard to the battlefield.',
+    etb: [{ op: 'token', count: 1, definition: 'White Wall Token' }],
+    classLevels: [
+      {
+        level: 2,
+        cost: { W: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: {
+                event: 'enterGroup',
+                controller: 'you',
+                filter: { all: [{ not: { type: 'creature' } }, { not: { type: 'land' } }] },
+              },
+              effects: [{ op: 'counterOn', amount: 1 }],
+              target: {
+                scope: 'permanent',
+                where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+              },
+            },
+          ],
+        },
+      },
+      {
+        level: 3,
+        cost: { generic: 4, W: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: { event: 'classLevel', object: 'source', classLevel: 3 },
+              effects: [{ op: 'moveTarget', destination: 'battlefield', controller: 'you' }],
+              target: {
+                scope: 'graveyard',
+                where: {
+                  all: [
+                    { owner: 'you' },
+                    { not: { type: 'creature' } },
+                    { not: { type: 'land' } },
+                    {
+                      any: [
+                        { type: 'artifact' },
+                        { type: 'enchantment' },
+                        { type: 'planeswalker' },
+                      ],
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
     name: 'Bulk Up',
     type: 'instant',
     types: ['instant'],
@@ -6709,6 +6913,31 @@ export const definitions = [
     effects: [{ op: 'counter' }],
   },
   {
+    name: 'Candlestick',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { U: 1 },
+    keywords: [],
+    subtypes: ['Clue', 'Equipment'],
+    color: ['U'],
+    text: 'Equipped creature gets +1/+1 and has "Whenever this creature attacks, surveil 2." (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\n{2}, Sacrifice this Equipment: Draw a card.\nEquip {2}',
+    attachmentBonus: { power: 1, toughness: 1 },
+    attachmentTriggers: [{ event: 'selfAttacks', effects: [{ op: 'surveil', count: 2 }] }],
+    activated: [
+      { cost: { mana: { generic: 2 }, sacrificeSelf: true }, effects: [{ op: 'draw', count: 1 }] },
+      {
+        cost: { mana: { generic: 2 } },
+        timing: 'sorcery',
+        target: {
+          scope: 'permanent',
+          where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+        },
+        effects: [{ op: 'attachEquipment' }],
+        text: 'Equip',
+      },
+    ],
+  },
+  {
     name: 'Candy Grapple',
     type: 'instant',
     types: ['instant'],
@@ -6840,6 +7069,53 @@ export const definitions = [
     effects: [
       { op: 'draw', count: 2 },
       { op: 'discard', count: 2 },
+    ],
+  },
+  {
+    name: "Caretaker's Talent",
+    type: 'enchantment',
+    types: ['enchantment'],
+    cost: { generic: 2, W: 1 },
+    keywords: [],
+    subtypes: ['Class'],
+    color: ['W'],
+    text: "(Gain the next level as a sorcery to add its ability.)\nWhenever one or more tokens you control enter, draw a card. This ability triggers only once each turn.\n{W}: Level 2\nWhen this Class becomes level 2, create a token that's a copy of target token you control.\n{3}{W}: Level 3\nCreature tokens you control get +2/+2.",
+    triggers: [
+      {
+        event: { event: 'enterGroup', controller: 'you', filter: { token: true } },
+        effects: [{ op: 'draw', count: 1 }],
+        oncePerTurn: true,
+      },
+    ],
+    classLevels: [
+      {
+        level: 2,
+        cost: { W: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: { event: 'classLevel', object: 'source', classLevel: 2 },
+              effects: [{ op: 'copyToken', count: 1 }],
+              target: {
+                scope: 'permanent',
+                where: { all: [{ token: true }, { controller: 'you' }] },
+              },
+            },
+          ],
+        },
+      },
+      {
+        level: 3,
+        cost: { generic: 3, W: 1 },
+        abilities: {
+          static: {
+            kind: 'anthem',
+            power: 2,
+            toughness: 2,
+            where: { all: [{ type: 'creature' }, { token: true }, { controller: 'you' }] },
+          },
+        },
+      },
     ],
   },
   {
@@ -7181,6 +7457,42 @@ export const definitions = [
       G: 'chosenCreatureType',
     },
     mana: ['C', 'W', 'U', 'B', 'R', 'G'],
+  },
+  {
+    name: 'Celebrate the Mountain-king',
+    type: 'enchantment',
+    types: ['enchantment'],
+    cost: { generic: 3, W: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['W'],
+    text: 'When this enchantment enters, for each opponent, exile up to one target nonland permanent that player controls until this enchantment leaves the battlefield.\nWhen this enchantment enters, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)',
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'exileUntilSourceLeaves', targetGroup: 'exile' }],
+        targetGroups: [
+          {
+            id: 'exile',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ controller: 'opponent' }, { not: { type: 'land' } }] },
+            },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
+    etb: [
+      { op: 'draw', count: 1 },
+      {
+        op: 'discardThen',
+        count: 1,
+        where: { not: { type: 'land' } },
+        then: [{ op: 'token', count: 1, definition: 'Human Soldier Token' }],
+      },
+    ],
   },
   {
     name: 'Celestial Armor',
@@ -11041,6 +11353,32 @@ export const definitions = [
     ],
   },
   {
+    name: 'Diamond Pick-Axe',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { R: 1 },
+    keywords: ['indestructible'],
+    subtypes: ['Equipment'],
+    color: ['R'],
+    text: 'Indestructible (Effects that say "destroy" don\'t destroy this Equipment.)\nEquipped creature gets +1/+1 and has "Whenever this creature attacks, create a Treasure token." (It\'s an artifact with "{T}, Sacrifice this token: Add one mana of any color.")\nEquip {2}',
+    attachmentBonus: { power: 1, toughness: 1 },
+    attachmentTriggers: [
+      { event: 'selfAttacks', effects: [{ op: 'token', count: 1, definition: 'Treasure Token' }] },
+    ],
+    activated: [
+      {
+        cost: { mana: { generic: 2 } },
+        timing: 'sorcery',
+        target: {
+          scope: 'permanent',
+          where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+        },
+        effects: [{ op: 'attachEquipment' }],
+        text: 'Equip',
+      },
+    ],
+  },
+  {
     name: 'Dictate of Kruphix',
     type: 'enchantment',
     types: ['enchantment'],
@@ -11486,6 +11824,19 @@ export const definitions = [
     power: 4,
     toughness: 3,
     plot: { generic: 3, U: 1 },
+  },
+  {
+    name: "Doc Ock's Henchmen",
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, U: 1 },
+    keywords: ['flash'],
+    subtypes: ['Human', 'Villain'],
+    color: ['U'],
+    text: 'Flash\nWhenever this creature attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)',
+    power: 2,
+    toughness: 1,
+    triggers: [{ event: 'selfAttacks', effects: [{ op: 'connive', subject: 'source' }] }],
   },
   {
     name: 'Doctor Doom',
@@ -13481,12 +13832,12 @@ export const definitions = [
     toughness: 1,
     triggers: [
       {
-        event: { event: 'enter', controller: 'you', filter: { type: 'artifact' } },
+        event: { event: 'enterGroup', controller: 'you', filter: { type: 'artifact' } },
         effects: [{ op: 'counterOn', amount: 2, subject: 'source' }],
         oncePerTurn: true,
       },
       {
-        event: { event: 'enter', controller: 'you', filter: { type: 'enchantment' } },
+        event: { event: 'enterGroup', controller: 'you', filter: { type: 'enchantment' } },
         effects: [{ op: 'draw', count: 1 }],
         oncePerTurn: true,
       },
@@ -13893,7 +14244,7 @@ export const definitions = [
     triggers: [
       {
         event: {
-          event: 'enter',
+          event: 'enterGroup',
           controller: 'you',
           filter: { all: [{ type: 'creature' }, { power: { lte: 2 } }] },
           excludeSource: true,
@@ -14193,6 +14544,31 @@ export const definitions = [
           where: { all: [{ type: 'creature' }, { power: { lte: 2 } }] },
         },
         effects: [{ op: 'combatRestriction', restriction: 'cannotBeBlocked' }],
+      },
+    ],
+  },
+  {
+    name: 'Esgaroth Garrison',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 4, W: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Soldier'],
+    color: ['W'],
+    text: "Esgaroth Garrison's power is equal to the number of creatures you control.\nWhen this creature enters, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)",
+    power: 0,
+    toughness: 5,
+    baseStats: {
+      power: { kind: 'count', zone: 'battlefield', player: 'you', where: { type: 'creature' } },
+      toughness: 5,
+    },
+    etb: [
+      { op: 'draw', count: 1 },
+      {
+        op: 'discardThen',
+        count: 1,
+        where: { not: { type: 'land' } },
+        then: [{ op: 'token', count: 1, definition: 'Human Soldier Token' }],
       },
     ],
   },
@@ -16753,6 +17129,41 @@ export const definitions = [
     text: 'This land enters tapped unless you control a planeswalker.\n{T}: Add {B} or {G}.',
     entersTappedUnless: { kind: 'controlAtLeast', count: 1, where: { type: 'planeswalker' } },
     mana: ['B', 'G'],
+  },
+  {
+    name: 'Formidable Speaker',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, G: 1 },
+    keywords: [],
+    subtypes: ['Elf', 'Druid'],
+    color: ['G'],
+    text: 'When this creature enters, you may discard a card. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.\n{1}, {T}: Untap another target permanent.',
+    power: 2,
+    toughness: 4,
+    etb: [
+      {
+        op: 'discardThen',
+        count: 1,
+        optional: true,
+        then: [
+          {
+            op: 'searchLibrary',
+            count: 1,
+            destination: 'hand',
+            where: { type: 'creature' },
+            reveal: true,
+          },
+        ],
+      },
+    ],
+    activated: [
+      {
+        cost: { mana: { generic: 1 }, tap: true },
+        target: { scope: 'permanent', excludeSource: true },
+        effects: [{ op: 'untap' }],
+      },
+    ],
   },
   {
     name: 'Forum Familiar',
@@ -19424,6 +19835,33 @@ export const definitions = [
     mana: ['W', 'U', 'B', 'R', 'G'],
   },
   {
+    name: 'Great Gilded Boat',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 2, U: 1 },
+    keywords: [],
+    subtypes: ['Vehicle'],
+    color: ['U'],
+    text: 'Whenever you attack, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)',
+    power: 4,
+    toughness: 4,
+    triggers: [
+      {
+        event: { event: 'attackGroup', controller: 'you' },
+        effects: [
+          { op: 'draw', count: 1 },
+          {
+            op: 'discardThen',
+            count: 1,
+            where: { not: { type: 'land' } },
+            then: [{ op: 'token', count: 1, definition: 'Human Soldier Token' }],
+          },
+        ],
+      },
+    ],
+    crew: 2,
+  },
+  {
     name: 'Greed Bat Token',
     type: 'creature',
     types: ['creature'],
@@ -21484,6 +21922,52 @@ export const definitions = [
     ],
   },
   {
+    name: 'Highway Robbery',
+    type: 'sorcery',
+    types: ['sorcery'],
+    cost: { generic: 1, R: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['R'],
+    text: 'You may discard a card or sacrifice a land. If you do, draw two cards.\nPlot {1}{R} (You may pay {1}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)',
+    target: null,
+    effects: [
+      {
+        op: 'chooseEffect',
+        options: [
+          {
+            label: 'Discard a card and draw 2',
+            condition: {
+              kind: 'compare',
+              left: { kind: 'count', zone: 'hand', player: 'you' },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'discard', count: 1 },
+              { op: 'draw', count: 2 },
+            ],
+          },
+          {
+            label: 'Sacrifice a permanent and draw 2',
+            condition: {
+              kind: 'compare',
+              left: { kind: 'count', zone: 'battlefield', player: 'you', where: { type: 'land' } },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'sacrifice', count: 1, player: 'controller', where: { type: 'land' } },
+              { op: 'draw', count: 2 },
+            ],
+          },
+          { label: 'Decline', effects: [] },
+        ],
+      },
+    ],
+    plot: { generic: 1, R: 1 },
+  },
+  {
     name: 'Hill Giant',
     type: 'creature',
     types: ['creature'],
@@ -22232,6 +22716,79 @@ export const definitions = [
             ],
           },
         ],
+      },
+    ],
+  },
+  {
+    name: "Hunter's Talent",
+    type: 'enchantment',
+    types: ['enchantment'],
+    cost: { generic: 1, G: 1 },
+    keywords: [],
+    subtypes: ['Class'],
+    color: ['G'],
+    text: "(Gain the next level as a sorcery to add its ability.)\nWhen this Class enters, target creature you control deals damage equal to its power to target creature you don't control.\n{1}{G}: Level 2\nWhenever you attack, target attacking creature gets +1/+0 and gains trample until end of turn.\n{3}{G}: Level 3\nAt the beginning of your end step, if you control a creature with power 4 or greater, draw a card.",
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'bite', sourceGroup: 'actor', victimGroup: 'victims' }],
+        targetGroups: [
+          {
+            id: 'actor',
+            label: 'Choose your creature',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+          {
+            id: 'victims',
+            label: 'Choose damage recipients',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'opponent' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+        ],
+      },
+    ],
+    classLevels: [
+      {
+        level: 2,
+        cost: { generic: 1, G: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: { event: 'attackGroup', controller: 'you' },
+              effects: [{ op: 'modify', power: 1, toughness: 0, keywords: ['trample'] }],
+              target: {
+                scope: 'permanent',
+                where: { all: [{ type: 'creature' }, { attacking: true }] },
+              },
+            },
+          ],
+        },
+      },
+      {
+        level: 3,
+        cost: { generic: 3, G: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: { event: 'step', step: 'end', controller: 'you' },
+              effects: [{ op: 'draw', count: 1 }],
+              condition: {
+                kind: 'controlAtLeast',
+                count: 1,
+                where: { all: [{ type: 'creature' }, { power: { gte: 4 } }] },
+              },
+            },
+          ],
+        },
       },
     ],
   },
@@ -24039,6 +24596,57 @@ export const definitions = [
     etb: [{ op: 'gainLife', amount: 1 }],
   },
   {
+    name: "K'un-Lun Warrior",
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 1, R: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Warrior', 'Hero'],
+    color: ['R'],
+    text: 'When this creature enters, you may sacrifice an artifact or discard a card. If you do, draw a card.',
+    power: 2,
+    toughness: 2,
+    etb: [
+      {
+        op: 'chooseEffect',
+        options: [
+          {
+            label: 'Sacrifice a permanent and draw 1',
+            condition: {
+              kind: 'compare',
+              left: {
+                kind: 'count',
+                zone: 'battlefield',
+                player: 'you',
+                where: { type: 'artifact' },
+              },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'sacrifice', count: 1, player: 'controller', where: { type: 'artifact' } },
+              { op: 'draw', count: 1 },
+            ],
+          },
+          {
+            label: 'Discard a card and draw 1',
+            condition: {
+              kind: 'compare',
+              left: { kind: 'count', zone: 'hand', player: 'you' },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'discard', count: 1 },
+              { op: 'draw', count: 1 },
+            ],
+          },
+          { label: 'Decline', effects: [] },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Ka-Zar of the Savage Land',
     type: 'creature',
     types: ['creature'],
@@ -24107,6 +24715,29 @@ export const definitions = [
     legendary: true,
     power: 7,
     toughness: 2,
+  },
+  {
+    name: 'Kang, Temporal Tyrant',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, U: 1, B: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Villain'],
+    color: ['B', 'U'],
+    text: 'Whenever Kang attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever you draw your second card each turn, each opponent loses 1 life and you gain 1 life.',
+    legendary: true,
+    power: 3,
+    toughness: 4,
+    triggers: [
+      { event: 'selfAttacks', effects: [{ op: 'connive', subject: 'source' }] },
+      {
+        event: { event: 'draw', controller: 'you', drawNumber: 2 },
+        effects: [
+          { op: 'loseLife', amount: 1, player: 'opponent' },
+          { op: 'gainLife', amount: 1 },
+        ],
+      },
+    ],
   },
   {
     name: 'Kapow!',
@@ -25159,6 +25790,32 @@ export const definitions = [
       },
     ],
     saddle: 1,
+  },
+  {
+    name: 'Lake-town Lookout',
+    type: 'creature',
+    types: ['creature'],
+    cost: { W: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Scout'],
+    color: ['W'],
+    text: 'When this creature dies, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)',
+    power: 1,
+    toughness: 1,
+    triggers: [
+      {
+        event: 'selfDies',
+        effects: [
+          { op: 'draw', count: 1 },
+          {
+            op: 'discardThen',
+            count: 1,
+            where: { not: { type: 'land' } },
+            then: [{ op: 'token', count: 1, definition: 'Human Soldier Token' }],
+          },
+        ],
+      },
+    ],
   },
   {
     name: 'Lake-town',
@@ -26289,6 +26946,27 @@ export const definitions = [
     effects: [{ op: 'destroy' }],
   },
   {
+    name: 'Long Lake Nuisance',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 3, U: 1 },
+    keywords: ['flying'],
+    subtypes: ['Bird'],
+    color: ['U'],
+    text: 'Flying\nWhen this creature enters, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)',
+    power: 3,
+    toughness: 1,
+    etb: [
+      { op: 'draw', count: 1 },
+      {
+        op: 'discardThen',
+        count: 1,
+        where: { not: { type: 'land' } },
+        then: [{ op: 'token', count: 1, definition: 'Human Soldier Token' }],
+      },
+    ],
+  },
+  {
     name: 'Loporrit Scout',
     type: 'creature',
     types: ['creature'],
@@ -26688,6 +27366,32 @@ export const definitions = [
     triggers: [{ event: 'selfDies', effects: [{ op: 'surveil', count: 1 }] }],
   },
   {
+    name: 'M.O.D.O.K.',
+    type: 'creature',
+    types: ['artifact', 'creature'],
+    cost: { generic: 3, B: 2 },
+    keywords: ['flying', 'lifelink'],
+    subtypes: ['Villain'],
+    color: ['B'],
+    text: 'Flying, lifelink\nMental Organism — Pay 3 life: M.O.D.O.K. connives. Activate only during your turn. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nDesigned Only for Killing — Creatures your opponents control get -1/-1.',
+    legendary: true,
+    power: 2,
+    toughness: 2,
+    activated: [
+      {
+        cost: { life: 3 },
+        effects: [{ op: 'connive', subject: 'source' }],
+        condition: { kind: 'controllerTurn' },
+      },
+    ],
+    static: {
+      kind: 'anthem',
+      power: -1,
+      toughness: -1,
+      where: { all: [{ controller: 'opponent' }, { type: 'creature' }] },
+    },
+  },
+  {
     name: 'Maalfeld Twins',
     type: 'creature',
     types: ['creature'],
@@ -26775,6 +27479,26 @@ export const definitions = [
           excludeSource: true,
         },
         effects: [{ op: 'counterOn', amount: 1, subject: 'source' }],
+      },
+    ],
+  },
+  {
+    name: 'Madame Masque',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 4, B: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Villain'],
+    color: ['B'],
+    text: "When Madame Masque enters, she connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever you draw your second card each turn, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)",
+    legendary: true,
+    power: 3,
+    toughness: 2,
+    etb: [{ op: 'connive', subject: 'source' }],
+    triggers: [
+      {
+        event: { event: 'draw', controller: 'you', drawNumber: 2 },
+        effects: [{ op: 'token', count: 1, definition: 'Villain Token' }],
       },
     ],
   },
@@ -27648,6 +28372,39 @@ export const definitions = [
     ],
   },
   {
+    name: 'Mechanical Mobster',
+    type: 'creature',
+    types: ['artifact', 'creature'],
+    cost: { generic: 3 },
+    keywords: [],
+    subtypes: ['Human', 'Robot', 'Villain'],
+    color: [],
+    text: 'When this creature enters, exile up to one target card from a graveyard. Target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)',
+    power: 2,
+    toughness: 1,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [
+          { op: 'moveTarget', destination: 'exile', targetGroup: 'graveyard' },
+          { op: 'connive', targetGroup: 'creature' },
+        ],
+        targetGroups: [
+          { id: 'graveyard', selector: { scope: 'graveyard' }, min: 0, max: 1 },
+          {
+            id: 'creature',
+            selector: {
+              scope: 'permanent',
+              where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+            },
+            min: 1,
+            max: 1,
+          },
+        ],
+      },
+    ],
+  },
+  {
     name: 'Mechanized Ninja Cavalry',
     type: 'creature',
     types: ['artifact', 'creature'],
@@ -27704,6 +28461,43 @@ export const definitions = [
         cost: { mana: { generic: 4 }, sacrificeSelf: true, tap: true },
         effects: [{ op: 'draw', count: 1 }],
         text: 'Draw a card.',
+      },
+    ],
+  },
+  {
+    name: 'Melded Moxite',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 1, R: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['R'],
+    text: 'When this artifact enters, you may discard a card. If you do, draw two cards.\n{3}, Sacrifice this artifact: Create a tapped 2/2 colorless Robot artifact creature token.',
+    etb: [
+      {
+        op: 'chooseEffect',
+        options: [
+          {
+            label: 'Discard a card and draw 2',
+            condition: {
+              kind: 'compare',
+              left: { kind: 'count', zone: 'hand', player: 'you' },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'discard', count: 1 },
+              { op: 'draw', count: 2 },
+            ],
+          },
+          { label: 'Decline', effects: [] },
+        ],
+      },
+    ],
+    activated: [
+      {
+        cost: { mana: { generic: 3 }, sacrificeSelf: true },
+        effects: [{ op: 'token', count: 1, tapped: true, definition: 'Robot Token' }],
       },
     ],
   },
@@ -28811,6 +29605,26 @@ export const definitions = [
     toughness: 2,
   },
   {
+    name: 'Mister Fantastic, Reed Richards',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 3, U: 1 },
+    keywords: ['reach'],
+    subtypes: ['Human', 'Scientist', 'Hero'],
+    color: ['U'],
+    text: 'Reach\nWhenever one or more tokens you control enter, you may draw a card.',
+    legendary: true,
+    power: 2,
+    toughness: 4,
+    triggers: [
+      {
+        event: { event: 'enterGroup', controller: 'you', filter: { token: true } },
+        effects: [{ op: 'draw', count: 1 }],
+        optional: true,
+      },
+    ],
+  },
+  {
     name: 'Mistmeadow Council',
     type: 'creature',
     types: ['creature'],
@@ -28877,6 +29691,28 @@ export const definitions = [
         event: { event: 'enter', controller: 'you', filter: { type: 'artifact' } },
         effects: [{ op: 'counterOn', amount: 1 }],
         target: 'creature',
+      },
+    ],
+  },
+  {
+    name: 'Mob Lookout',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 1, 'U/B': 1 },
+    keywords: [],
+    subtypes: ['Human', 'Rogue', 'Villain'],
+    color: ['B', 'U'],
+    text: 'When this creature enters, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)',
+    power: 0,
+    toughness: 3,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [{ op: 'connive' }],
+        target: {
+          scope: 'permanent',
+          where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+        },
       },
     ],
   },
@@ -29976,6 +30812,29 @@ export const definitions = [
         effects: [{ op: 'untap' }],
         target: { scope: 'permanent', excludeSource: true },
         oncePerTurn: true,
+      },
+    ],
+  },
+  {
+    name: 'Narset, Jeskai Waymaster',
+    type: 'creature',
+    types: ['creature'],
+    cost: { U: 1, R: 1, W: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Monk'],
+    color: ['R', 'U', 'W'],
+    text: "At the beginning of your end step, you may discard your hand. If you do, draw cards equal to the number of spells you've cast this turn.",
+    legendary: true,
+    power: 3,
+    toughness: 4,
+    triggers: [
+      {
+        event: { event: 'step', step: 'end', controller: 'you' },
+        effects: [
+          { op: 'discard', count: { kind: 'count', zone: 'hand', player: 'you' } },
+          { op: 'draw', count: { kind: 'spellsCast', player: 'you' } },
+        ],
+        optional: true,
       },
     ],
   },
@@ -31262,6 +32121,25 @@ export const definitions = [
     ],
   },
   {
+    name: 'Otter Prowess Token',
+    type: 'creature',
+    types: ['creature'],
+    cost: {},
+    keywords: [],
+    subtypes: ['Otter'],
+    color: ['U', 'R'],
+    text: 'Prowess',
+    power: 1,
+    toughness: 1,
+    token: true,
+    triggers: [
+      {
+        event: 'controllerCastsNoncreature',
+        effects: [{ op: 'modify', subject: 'source', power: 1, toughness: 1 }],
+      },
+    ],
+  },
+  {
     name: 'Ouroboroid',
     type: 'creature',
     types: ['creature'],
@@ -31758,6 +32636,27 @@ export const definitions = [
     etb: [{ op: 'explore', subject: 'source' }],
   },
   {
+    name: 'Patient Instructor',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, 'W/U': 1 },
+    keywords: ['vigilance'],
+    subtypes: ['Human', 'Citizen'],
+    color: ['U', 'W'],
+    text: 'Vigilance\nWhen this creature enters, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)',
+    power: 2,
+    toughness: 2,
+    etb: [
+      { op: 'draw', count: 1 },
+      {
+        op: 'discardThen',
+        count: 1,
+        where: { not: { type: 'land' } },
+        then: [{ op: 'token', count: 1, definition: 'Human Soldier Token' }],
+      },
+    ],
+  },
+  {
     name: 'Patriot, Shield Wielder',
     type: 'creature',
     types: ['creature'],
@@ -31868,6 +32767,21 @@ export const definitions = [
     text: 'Target creature gets +X/+0 and gains first strike until end of turn.',
     target: 'creature',
     effects: [{ op: 'modify', power: { kind: 'x' }, toughness: 0, keywords: ['first strike'] }],
+  },
+  {
+    name: 'Peer Past the Veil',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 2, R: 1, G: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['G', 'R'],
+    text: 'Discard your hand. Then draw X cards, where X is the number of card types among cards in your graveyard.',
+    target: null,
+    effects: [
+      { op: 'discard', count: { kind: 'count', zone: 'hand', player: 'you' } },
+      { op: 'draw', count: { kind: 'graveyardCardTypes', player: 'you' } },
+    ],
   },
   {
     name: 'Peerless Ropemaster',
@@ -32352,6 +33266,48 @@ export const definitions = [
     power: 2,
     toughness: 1,
     entersTapped: true,
+  },
+  {
+    name: 'Pirate Hat',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 1, U: 1 },
+    keywords: [],
+    subtypes: ['Equipment'],
+    color: ['U'],
+    text: 'Equipped creature gets +1/+1 and has "Whenever this creature attacks, draw a card, then discard a card."\nEquip Pirate {1}\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)',
+    attachmentBonus: { power: 1, toughness: 1 },
+    attachmentTriggers: [
+      {
+        event: 'selfAttacks',
+        effects: [
+          { op: 'draw', count: 1 },
+          { op: 'discard', count: 1 },
+        ],
+      },
+    ],
+    activated: [
+      {
+        cost: { mana: { generic: 1 } },
+        timing: 'sorcery',
+        target: {
+          scope: 'permanent',
+          where: { all: [{ type: 'creature' }, { controller: 'you' }, { subtype: 'Pirate' }] },
+        },
+        effects: [{ op: 'attachEquipment' }],
+        text: 'Equip',
+      },
+      {
+        cost: { mana: { generic: 2 } },
+        timing: 'sorcery',
+        target: {
+          scope: 'permanent',
+          where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+        },
+        effects: [{ op: 'attachEquipment' }],
+        text: 'Equip',
+      },
+    ],
   },
   {
     name: 'Pirate Peddlers',
@@ -33486,6 +34442,30 @@ export const definitions = [
     ],
   },
   {
+    name: 'Prowler, Clawed Thief',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 1, U: 1, B: 1 },
+    keywords: ['menace'],
+    subtypes: ['Human', 'Rogue', 'Villain'],
+    color: ['B', 'U'],
+    text: "Menace (This creature can't be blocked except by two or more creatures.)\nWhenever another Villain you control enters, Prowler connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)",
+    legendary: true,
+    power: 2,
+    toughness: 3,
+    triggers: [
+      {
+        event: {
+          event: 'enter',
+          controller: 'you',
+          filter: { subtype: 'Villain' },
+          excludeSource: true,
+        },
+        effects: [{ op: 'connive', subject: 'source' }],
+      },
+    ],
+  },
+  {
     name: 'Psychic Whorl',
     type: 'sorcery',
     types: ['sorcery'],
@@ -33568,6 +34548,40 @@ export const definitions = [
     power: 4,
     toughness: 5,
     ward: { mana: { generic: 3 } },
+  },
+  {
+    name: 'Pursue the Past',
+    type: 'sorcery',
+    types: ['sorcery'],
+    cost: { R: 1, W: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['R', 'W'],
+    text: 'You gain 2 life. You may discard a card. If you do, draw two cards.\nFlashback {2}{R}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)',
+    target: null,
+    effects: [
+      { op: 'gainLife', amount: 2 },
+      {
+        op: 'chooseEffect',
+        options: [
+          {
+            label: 'Discard a card and draw 2',
+            condition: {
+              kind: 'compare',
+              left: { kind: 'count', zone: 'hand', player: 'you' },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'discard', count: 1 },
+              { op: 'draw', count: 2 },
+            ],
+          },
+          { label: 'Decline', effects: [] },
+        ],
+      },
+    ],
+    flashback: { generic: 2, R: 1, W: 1 },
   },
   {
     name: 'Pym Particles',
@@ -34160,6 +35174,50 @@ export const definitions = [
           where: { all: [{ type: 'creature' }, { power: { lte: 2 } }] },
         },
         effects: [{ op: 'combatRestriction', restriction: 'cannotBeBlocked' }],
+      },
+    ],
+  },
+  {
+    name: 'Ragged Short Spear',
+    type: 'artifact',
+    types: ['artifact'],
+    cost: { generic: 1, R: 1 },
+    keywords: [],
+    subtypes: ['Equipment'],
+    color: ['R'],
+    text: 'When this Equipment enters, you may discard a card. If you do, draw two cards.\nEquipped creature gets +2/+0.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)',
+    etb: [
+      {
+        op: 'chooseEffect',
+        options: [
+          {
+            label: 'Discard a card and draw 2',
+            condition: {
+              kind: 'compare',
+              left: { kind: 'count', zone: 'hand', player: 'you' },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'discard', count: 1 },
+              { op: 'draw', count: 2 },
+            ],
+          },
+          { label: 'Decline', effects: [] },
+        ],
+      },
+    ],
+    attachmentBonus: { power: 2, toughness: 0 },
+    activated: [
+      {
+        cost: { mana: { generic: 3 } },
+        timing: 'sorcery',
+        target: {
+          scope: 'permanent',
+          where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+        },
+        effects: [{ op: 'attachEquipment' }],
+        text: 'Equip',
       },
     ],
   },
@@ -35069,6 +36127,19 @@ export const definitions = [
         effects: [{ op: 'modify', subject: 'source', power: 1, toughness: 1 }],
       },
     ],
+  },
+  {
+    name: 'Red Room Recruit',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 1, B: 1 },
+    keywords: [],
+    subtypes: ['Human', 'Spy', 'Villain'],
+    color: ['B'],
+    text: 'When this creature enters, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)',
+    power: 1,
+    toughness: 2,
+    etb: [{ op: 'connive', subject: 'source' }],
   },
   {
     name: 'Red Tiger Mechan',
@@ -36683,6 +37754,33 @@ export const definitions = [
           { op: 'gainLife', amount: 3 },
         ],
         targetGroups: [{ id: 'cards', selector: { scope: 'graveyard' }, min: 0, max: 2 }],
+      },
+    ],
+  },
+  {
+    name: 'Rook Turret',
+    type: 'creature',
+    types: ['artifact', 'creature'],
+    cost: { generic: 3, U: 1 },
+    keywords: ['flying'],
+    subtypes: ['Construct'],
+    color: ['U'],
+    text: 'Flying\nWhenever another artifact you control enters, you may draw a card. If you do, discard a card.',
+    power: 3,
+    toughness: 3,
+    triggers: [
+      {
+        event: {
+          event: 'enter',
+          controller: 'you',
+          filter: { type: 'artifact' },
+          excludeSource: true,
+        },
+        effects: [
+          { op: 'draw', count: 1 },
+          { op: 'discard', count: 1 },
+        ],
+        optional: true,
       },
     ],
   },
@@ -41941,6 +43039,36 @@ export const definitions = [
     ],
   },
   {
+    name: 'Stadium Tidalmage',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 2, U: 1, R: 1 },
+    keywords: [],
+    subtypes: ['Djinn', 'Sorcerer'],
+    color: ['R', 'U'],
+    text: 'Whenever this creature enters or attacks, you may draw a card. If you do, discard a card.',
+    power: 4,
+    toughness: 4,
+    triggers: [
+      {
+        event: 'selfEnters',
+        effects: [
+          { op: 'draw', count: 1 },
+          { op: 'discard', count: 1 },
+        ],
+        optional: true,
+      },
+      {
+        event: 'selfAttacks',
+        effects: [
+          { op: 'draw', count: 1 },
+          { op: 'discard', count: 1 },
+        ],
+        optional: true,
+      },
+    ],
+  },
+  {
     name: 'Stagecoach Security',
     type: 'creature',
     types: ['creature'],
@@ -42871,6 +43999,49 @@ export const definitions = [
       {
         event: 'controllerCastsNoncreature',
         effects: [{ op: 'modify', subject: 'source', power: 1, toughness: 1 }],
+      },
+    ],
+  },
+  {
+    name: "Stormchaser's Talent",
+    type: 'enchantment',
+    types: ['enchantment'],
+    cost: { U: 1 },
+    keywords: [],
+    subtypes: ['Class'],
+    color: ['U'],
+    text: '(Gain the next level as a sorcery to add its ability.)\nWhen this Class enters, create a 1/1 blue and red Otter creature token with prowess.\n{3}{U}: Level 2\nWhen this Class becomes level 2, return target instant or sorcery card from your graveyard to your hand.\n{5}{U}: Level 3\nWhenever you cast an instant or sorcery spell, create a 1/1 blue and red Otter creature token with prowess.',
+    etb: [{ op: 'token', count: 1, definition: 'Otter Prowess Token' }],
+    classLevels: [
+      {
+        level: 2,
+        cost: { generic: 3, U: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: { event: 'classLevel', object: 'source', classLevel: 2 },
+              effects: [{ op: 'moveTarget', destination: 'hand' }],
+              target: {
+                scope: 'graveyard',
+                where: {
+                  all: [{ owner: 'you' }, { any: [{ type: 'instant' }, { type: 'sorcery' }] }],
+                },
+              },
+            },
+          ],
+        },
+      },
+      {
+        level: 3,
+        cost: { generic: 5, U: 1 },
+        abilities: {
+          triggers: [
+            {
+              event: 'controllerCastsInstantOrSorcery',
+              effects: [{ op: 'token', count: 1, definition: 'Otter Prowess Token' }],
+            },
+          ],
+        },
       },
     ],
   },
@@ -45596,6 +46767,50 @@ export const definitions = [
       ],
     },
     frontName: 'The Legend of Roku',
+  },
+  {
+    name: "The Mountain-king's Return",
+    type: 'enchantment',
+    types: ['enchantment'],
+    cost: { generic: 2, W: 1 },
+    keywords: [],
+    subtypes: ['Saga'],
+    color: ['W'],
+    text: '(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)\nII — Return target creature card with mana value 3 or less from your graveyard to the battlefield.\nIII — Put a +1/+1 counter on up to one target creature.',
+    triggers: [
+      {
+        event: { event: 'chapter', object: 'source', chapters: [1] },
+        effects: [
+          { op: 'draw', count: 1 },
+          {
+            op: 'discardThen',
+            count: 1,
+            where: { not: { type: 'land' } },
+            then: [{ op: 'token', count: 1, definition: 'Human Soldier Token' }],
+          },
+        ],
+      },
+      {
+        event: { event: 'chapter', object: 'source', chapters: [2] },
+        effects: [{ op: 'moveTarget', destination: 'battlefield', controller: 'you' }],
+        target: {
+          scope: 'graveyard',
+          where: { all: [{ type: 'creature' }, { manaValue: { lte: 3 } }, { owner: 'you' }] },
+        },
+      },
+      {
+        event: { event: 'chapter', object: 'source', chapters: [3] },
+        effects: [{ op: 'counterOn', amount: 1, targetGroup: 'creature' }],
+        targetGroups: [
+          {
+            id: 'creature',
+            selector: { scope: 'permanent', where: { type: 'creature' } },
+            min: 0,
+            max: 1,
+          },
+        ],
+      },
+    ],
   },
   {
     name: 'The Seriema',
@@ -48479,6 +49694,33 @@ export const definitions = [
     ],
   },
   {
+    name: 'Unstable Experiment',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 1, U: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['U'],
+    text: 'Target player draws a card, then up to one target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)',
+    target: null,
+    targetGroups: [
+      { id: 'player', selector: { scope: 'player' }, min: 1, max: 1 },
+      {
+        id: 'creature',
+        selector: {
+          scope: 'permanent',
+          where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+        },
+        min: 0,
+        max: 1,
+      },
+    ],
+    effects: [
+      { op: 'draw', count: 1, player: 'target', targetGroup: 'player' },
+      { op: 'connive', targetGroup: 'creature' },
+    ],
+  },
+  {
     name: 'Unstable Obelisk',
     type: 'artifact',
     types: ['artifact'],
@@ -48778,6 +50020,55 @@ export const definitions = [
         effects: [{ op: 'counterOn', amount: 1, subject: 'source' }],
       },
     ],
+  },
+  {
+    name: 'Valley Questcaller',
+    type: 'creature',
+    types: ['creature'],
+    cost: { generic: 1, W: 1 },
+    keywords: [],
+    subtypes: ['Rabbit', 'Warrior'],
+    color: ['W'],
+    text: 'Whenever one or more other Rabbits, Bats, Birds, and/or Mice you control enter, scry 1.\nOther Rabbits, Bats, Birds, and Mice you control get +1/+1.',
+    power: 2,
+    toughness: 3,
+    triggers: [
+      {
+        event: {
+          event: 'enterGroup',
+          controller: 'you',
+          excludeSource: true,
+          filter: {
+            any: [
+              { subtype: 'Rabbit' },
+              { subtype: 'Bat' },
+              { subtype: 'Bird' },
+              { subtype: 'Mouse' },
+            ],
+          },
+        },
+        effects: [{ op: 'scry', count: 1 }],
+      },
+    ],
+    static: {
+      kind: 'anthem',
+      power: 1,
+      toughness: 1,
+      where: {
+        all: [
+          { controller: 'you' },
+          {
+            any: [
+              { subtype: 'Rabbit' },
+              { subtype: 'Bat' },
+              { subtype: 'Bird' },
+              { subtype: 'Mouse' },
+            ],
+          },
+        ],
+      },
+      excludeSource: true,
+    },
   },
   {
     name: 'Valley Rotcaller',
@@ -49894,6 +51185,56 @@ export const definitions = [
     power: 1,
     toughness: 1,
     etb: [{ op: 'discard', count: 1, player: 'opponent' }],
+  },
+  {
+    name: 'Vision of Love',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 1, R: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['R'],
+    text: 'You may sacrifice an artifact or discard a card. If you do, draw two cards.',
+    target: null,
+    effects: [
+      {
+        op: 'chooseEffect',
+        options: [
+          {
+            label: 'Sacrifice a permanent and draw 2',
+            condition: {
+              kind: 'compare',
+              left: {
+                kind: 'count',
+                zone: 'battlefield',
+                player: 'you',
+                where: { type: 'artifact' },
+              },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'sacrifice', count: 1, player: 'controller', where: { type: 'artifact' } },
+              { op: 'draw', count: 2 },
+            ],
+          },
+          {
+            label: 'Discard a card and draw 2',
+            condition: {
+              kind: 'compare',
+              left: { kind: 'count', zone: 'hand', player: 'you' },
+              operator: 'gt',
+              right: 0,
+            },
+            effects: [
+              { op: 'discard', count: 1 },
+              { op: 'draw', count: 2 },
+            ],
+          },
+          { label: 'Decline', effects: [] },
+        ],
+      },
+    ],
   },
   {
     name: 'Visions of Villainy',
@@ -51395,6 +52736,19 @@ export const definitions = [
     token: true,
   },
   {
+    name: 'White Wall Token',
+    type: 'creature',
+    types: ['creature'],
+    cost: {},
+    keywords: ['defender'],
+    subtypes: ['Wall'],
+    color: ['W'],
+    text: 'Defender',
+    power: 0,
+    toughness: 4,
+    token: true,
+  },
+  {
     name: 'White Widow, Free Agent',
     type: 'creature',
     types: ['creature'],
@@ -51936,6 +53290,51 @@ export const definitions = [
         cost: { mana: { generic: 3, U: 1 }, sacrificeSelf: true },
         effects: [{ op: 'draw', count: 2 }],
         text: 'Draw two cards.',
+      },
+    ],
+  },
+  {
+    name: 'Witherbloom Charm',
+    type: 'instant',
+    types: ['instant'],
+    cost: { B: 1, G: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['B', 'G'],
+    text: 'Choose one —\n• You may sacrifice a permanent. If you do, draw two cards.\n• You gain 5 life.\n• Destroy target nonland permanent with mana value 2 or less.',
+    modes: [
+      {
+        label: 'Sacrifice a permanent to draw two cards',
+        effects: [
+          {
+            op: 'chooseEffect',
+            options: [
+              {
+                label: 'Sacrifice a permanent and draw 2',
+                condition: {
+                  kind: 'compare',
+                  left: { kind: 'count', zone: 'battlefield', player: 'you' },
+                  operator: 'gt',
+                  right: 0,
+                },
+                effects: [
+                  { op: 'sacrifice', count: 1, player: 'controller' },
+                  { op: 'draw', count: 2 },
+                ],
+              },
+              { label: 'Decline', effects: [] },
+            ],
+          },
+        ],
+      },
+      { label: 'Gain 5 life', effects: [{ op: 'gainLife', amount: 5 }] },
+      {
+        label: 'Destroy a small nonland permanent',
+        target: {
+          scope: 'permanent',
+          where: { all: [{ not: { type: 'land' } }, { manaValue: { lte: 2 } }] },
+        },
+        effects: [{ op: 'destroy' }],
       },
     ],
   },
@@ -52690,6 +54089,30 @@ export const definitions = [
     ],
   },
   {
+    name: 'Zealous Display',
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 2, W: 1 },
+    keywords: [],
+    subtypes: [],
+    color: ['W'],
+    text: "Creatures you control get +2/+0 until end of turn. If it's not your turn, untap those creatures.",
+    target: null,
+    effects: [
+      {
+        op: 'modifyAll',
+        where: { all: [{ type: 'creature' }, { controller: 'you' }] },
+        power: 2,
+        toughness: 0,
+      },
+      {
+        op: 'conditional',
+        condition: { kind: 'opponentTurn' },
+        then: [{ op: 'untapAll', where: { all: [{ type: 'creature' }, { controller: 'you' }] } }],
+      },
+    ],
+  },
+  {
     name: 'Zealous Lorecaster',
     type: 'creature',
     types: ['creature'],
@@ -52890,6 +54313,24 @@ export const definitions = [
     },
   },
   {
+    name: "Zuko's Exile",
+    type: 'instant',
+    types: ['instant'],
+    cost: { generic: 5 },
+    keywords: [],
+    subtypes: ['Lesson'],
+    color: [],
+    text: 'Exile target artifact, creature, or enchantment. Its controller creates a Clue token. (It\'s an artifact with "{2}, Sacrifice this token: Draw a card.")',
+    target: {
+      scope: 'permanent',
+      where: { any: [{ type: 'artifact' }, { type: 'creature' }, { type: 'enchantment' }] },
+    },
+    effects: [
+      { op: 'moveTarget', destination: 'exile' },
+      { op: 'token', count: 1, player: 'targetController', definition: 'Clue Token' },
+    ],
+  },
+  {
     name: 'Zulaport Cutthroat',
     type: 'creature',
     types: ['creature'],
@@ -52939,8 +54380,10 @@ export const definitions = [
 ];
 export const cardIds = {
   '8417f2d5-93c9-474a-a143-5c4e17097a88': 'A.I.M. Labs',
+  'fa732888-5b7d-4087-a6e5-1db1c98fbd4c': 'A.I.M. Scientists',
   '10916f33-aaa6-43a1-9835-b60fd061161f': 'A.I.M. Synthoids',
   '405c4a7b-dbb3-48a1-9205-7dbe6e2ad363': 'Aatchik, Emerald Radian',
+  '82333385-631f-4abf-b159-bb367f1c6fd9': 'Abandon Attachments',
   '9575d7ce-f26d-4b90-87a3-6329e9799572': 'Abandoned Air Temple',
   '0eec9984-cd11-4a52-9234-469c6a5fb9aa': 'Abandoned Campground',
   '2f5f46ed-b8aa-4864-bd20-17281d4632bf': 'Abigale, Poet Laureate // Heroic Stanza',
@@ -53081,6 +54524,7 @@ export const cardIds = {
   'f28b21a6-f7ce-437a-8c5b-0423cb55cefb': 'Banishing Light',
   'ec076f5b-b0e3-4b6f-9293-a8fc42f20bd8': 'Bard the Bowman',
   'cc710da0-5a2e-4bc4-8fdd-d90e7bc1f224': 'Baron, Airship Kingdom',
+  'e25b516c-bf95-42bc-8b1e-04617a3d28df': 'Baron Bertram Graywater',
   '95664c29-9801-4dfc-9dbd-465abf6bb4ee': 'Barrow Naughty',
   'f47e4c56-0a0b-422d-bf3d-7a20ee289f15': 'Bartolomé del Presidio',
   '796dc53d-5a0d-4d19-9fa4-f474a9d96041': 'Basilica Bell-Haunt',
@@ -53108,6 +54552,7 @@ export const cardIds = {
   'cdb84830-faf2-4beb-8d57-ad696d75876b': 'Bellowing Bruiser // Beat a Path',
   'f2f3be8a-5ea1-47c2-8104-747f4589f5e6': 'Bellowing Crier',
   '52fd9309-b849-419a-8d19-5882c00a72b4': "Beluna's Gatekeeper // Entry Denied",
+  '5539d78c-1acc-46dd-ba6d-cc0cdad6ff44': 'Benthic Criminologists',
   'c7b6d2cd-9105-404b-88f0-a67037fb2120': 'Besotted Knight // Betroth the Beast',
   '679480aa-f9ad-4a6c-bd79-db9f9f75433d': 'Bespoke Bō',
   'a3ae6694-6314-42e2-bc12-d0e32d49b347': 'Bestial Bloodline',
@@ -53133,6 +54578,7 @@ export const cardIds = {
   'leyline:token/black-mage-wizard-token': 'Black Mage Wizard Token',
   'b0bf1964-c543-4c53-9f09-0dd7c608d5c5': 'Black Panther, Vanguard',
   'leyline:token/black-red-goblin-token': 'Black Red Goblin Token',
+  'leyline:token/black-vampire-rogue-token': 'Black Vampire Rogue Token',
   '9c84c681-40c1-4ff3-86e6-48b4ab7491e5': 'Black Waltz No. 3',
   'leyline:token/black-wizard-spellslinger-token': 'Black Wizard Spellslinger Token',
   '80ea56ad-e741-4a85-b4e8-ce62e7d593d5': 'Blanchwood Armor',
@@ -53212,6 +54658,7 @@ export const cardIds = {
   '5e316864-d55c-496f-8f46-773567896864': 'Broken Wings',
   '1b759831-abe8-4996-a897-3c6d6d30a1c7': 'Broodheart Engine',
   '723669e0-4a04-45ec-8c76-b1a369aa6892': 'Budding Insurgent',
+  '0b19082c-8f80-448b-9e1b-0f324a159409': "Builder's Talent",
   'fade8af0-5fdb-4237-9dd6-48bfd1d62767': 'Bulk Up',
   '6e152529-64b4-472c-8e50-99095af6af99': "Bumbleflower's Sharepot",
   '629f247c-1e64-4c32-8892-0716ed469d1c': 'Bumi Bash',
@@ -53244,6 +54691,7 @@ export const cardIds = {
   'c1a9d60f-a469-48f9-8f1c-3ca5ae86bd64': 'Campus Crier',
   '5b8e0913-47e9-4d56-971d-abd91b0f7587': 'Campus Guide',
   '7d00fb28-ea6c-49a9-b4af-ffb38860a9a7': 'Cancel',
+  '2f7b46c1-3d82-4fd9-9882-589315cab47b': 'Candlestick',
   '9588a7fd-bbe5-4a81-9a7e-d8e8f6c0537d': 'Candy Grapple',
   '7c8e4f29-53e0-4242-8ef8-7a9476dce178': 'Candy Trail',
   'bac94fc9-808b-4dc9-b405-408dd2aa6194': 'Canyon Crawler',
@@ -53251,6 +54699,7 @@ export const cardIds = {
   '431e85e3-15e6-471b-ba71-6058394c9a96': 'Captain Storm, Cosmium Raider',
   'c3775748-ff62-469f-916b-8e551ccce23c': 'Careening Mine Cart',
   '32e9aa23-fc0a-4b82-82f9-1659c304428c': 'Careful Study',
+  'c97957a2-8310-4cff-8aad-871b7901d124': "Caretaker's Talent",
   'db655c5a-06f6-42bc-8180-d9ca1c1d939a': 'Carnivorous Cultivator // Enroot',
   '5fe3aabd-3271-41bf-ae50-f6efaba7c4ae': 'Carrot Cake',
   '460c0f0b-bbf4-4307-9b44-350175d83bfe': "Cartographer's Companion",
@@ -53265,6 +54714,7 @@ export const cardIds = {
   'd262f3e1-b5bc-4dab-86c2-cd89c2419e54': 'Caught in the Crossfire',
   'a2f8cde8-bf7b-4234-89f0-a95f9dc937e3': 'Cauldron of Essence',
   '89ca686a-7c72-4d8f-9290-e89635624a83': 'Cavern of Souls',
+  'd51136fa-3c13-48a5-83fd-51fe00010a4b': 'Celebrate the Mountain-king',
   '4f1b68d7-7d16-4bb1-af5f-f1708b23ca73': 'Celestial Armor',
   'ec3911c0-686f-4c78-838d-a683eed6c01c': 'Cenote Scout',
   '2f5bf099-2e01-4e1c-9ebf-0ce0ac66939e': 'Centaur Courser',
@@ -53443,6 +54893,7 @@ export const cardIds = {
   '0ea2c5ad-2982-4041-8c9d-a1d31ced11aa': 'Detention Chariot',
   'f7620c46-b3d8-4694-ac7c-a43933c86c22': 'Devoted Duelist',
   '92f8c8b1-1fd5-4e80-b8a9-51671937aaf2': 'Devout Decree',
+  '542e7d60-3fc8-46e2-8786-f7c8b3d4c979': 'Diamond Pick-Axe',
   'be74a4c1-d569-4203-b28a-3e2ac6a82990': 'Dictate of Kruphix',
   '8151668c-6459-41b5-9e57-bb47c3876b81': 'Didact Echo',
   '96742ebc-10a6-49e6-812a-631e5a60847d': 'Dig Site Inventory',
@@ -53468,6 +54919,7 @@ export const cardIds = {
   '273b339c-964b-4a18-8eb5-ceb8abcdfd9e': 'Divination',
   'd0ce03fa-2284-4217-85b2-4db6b8a88c94': 'Divining Duelist',
   '7dbb540f-ee96-4115-b6ef-28ffc73da8b7': "Djinn of Fool's Fall",
+  'ae91c16c-5267-4957-b36c-5aa787fa6b5e': "Doc Ock's Henchmen",
   '9e4fa592-71f8-4c71-8c91-78e6326cd736': 'Doctor Doom',
   'leyline:token/dog-token': 'Dog Token',
   '10d24900-cd40-4c98-bb1e-b9e66113f703': 'Dog Walker',
@@ -53592,6 +55044,7 @@ export const cardIds = {
   '852c6520-d148-4923-a312-05a9af821f24': 'Eroded Canyon',
   '7d4b6613-9000-4f53-9737-fe0338f3f629': 'Erudite Wizard',
   '0056fc91-4398-471c-b561-7ff99750ac8a': 'Escape Tunnel',
+  '84597236-2cfc-4654-b126-a8ee252f4d14': 'Esgaroth Garrison',
   '85d87087-48ee-4dc8-a1c0-9c9ccb885adc': 'Eshki Dragonclaw',
   '26a7f92d-6914-466d-b7c7-9ac121dd5118': 'Essence of Antiquity',
   '46665089-aa3d-44c3-964d-6638dfbb5782': 'Essence Scatter',
@@ -53715,6 +55168,7 @@ export const cardIds = {
   'ebb3e2ff-2214-4e11-88fb-e0fa84288cf1': 'Forlorn Flats',
   '8923462f-0540-41e8-931e-97b5f1dadd51': 'Form a Posse',
   '3e51c060-1e86-4a0e-8fee-8b7273161468': 'Formidable Commons',
+  '5bd06f9e-9a42-455d-ad26-24bc04e51c7c': 'Formidable Speaker',
   '7ea0012b-b90b-43d6-bb5b-e4e92452bea7': 'Forum Familiar',
   '349ea6c7-6b3e-417f-b082-b712e2b1635b': 'Forum of Amity',
   'd4e4c8a5-e97b-4295-a403-d17834f73502': 'Foul Roads',
@@ -53835,6 +55289,7 @@ export const cardIds = {
   '9c009b3f-6580-4ab8-84e8-d4cf7a456a02': 'Gravpack Monoist',
   '37f82ad8-4f0b-4b17-abcc-03f43d4fdf1c': 'Great Fierce Bee',
   '5cb6ebf7-6a75-4464-9e39-e171fcb52de3': 'Great Forest Druid',
+  'd4607026-80b2-4fa6-99d5-694cd3b43868': 'Great Gilded Boat',
   'leyline:token/greed-bat-token': 'Greed Bat Token',
   '0868ebbb-2fe9-4f53-9697-acad8cda5ec1': "Greed's Gambit",
   'd4a9d63a-5a8a-4f51-9e49-43d6dc3234b1': 'Greedy Freebooter',
@@ -53931,6 +55386,7 @@ export const cardIds = {
   'ab0aea13-1dbc-424a-ab7e-cdb303036a56': 'High Stride',
   '1adcf587-9035-4299-a2bd-62f805fdd897': 'Highborn Vampire',
   '6d2d250b-cdce-4075-8724-b52ad31664fb': 'Highspire Bell-Ringer',
+  'df020a47-1784-479b-9882-be77b7f30950': 'Highway Robbery',
   '342199e0-15b6-4824-83da-25caef2592b3': 'Hill Giant',
   '137594f7-2422-461b-a3ae-7ce3c135e0c7': 'Hill Gigas',
   'd812fc6d-b96d-4986-b171-9f3feee603dc': 'Hinterland Sanctifier',
@@ -53964,6 +55420,7 @@ export const cardIds = {
   '690ae865-87bd-46b2-8e65-c53bd80c1a18': 'Hungering Puppetbeast',
   '4a7a55a3-568c-4c31-9460-5b94dc0121d8': 'Hungry Ghoul',
   'd7d59fef-1401-464b-b1bb-ee5da92cde51': "Hunter's Axe",
+  'a8a9b103-0cb8-4810-a2d7-42f6a10f80bd': "Hunter's Talent",
   'cce328b9-6100-417e-9ddf-808bbe3e3bc5': 'Hushwood Verge',
   'a2558476-5506-4a09-93fc-b8ab33c98985': 'HYDRA Assault Robot',
   'a93a8edf-2879-4cae-b3b9-b46298270823': 'Hydro-Man, Fluid Felon',
@@ -54049,9 +55506,11 @@ export const cardIds = {
   'aad9f9f2-4c6b-48d0-80bd-77b73a9ea5f1': 'Judgment Bolt',
   'e0bdfbb4-3060-4492-bd9b-0c47e719400a': 'Jumbo Cactuar',
   '6de714e1-446d-4fb9-9e3d-bcd3ec6af9ca': 'Jungle Hollow',
+  '0618a217-2a6e-4fa1-bfe6-89c6612a594d': "K'un-Lun Warrior",
   '88eeb519-5782-4732-bd34-81d1ee6dbc8f': 'Ka-Zar of the Savage Land',
   'fa43077b-5d8b-4fb1-8dda-2a9185e6715e': 'Kaito, Bane of Nightmares',
   'd85f5edb-60a8-4abd-82b0-f9a58f3d4185': 'Kalakscion, Hunger Tyrant',
+  'b43350a8-fc4d-41ed-becd-f0277512bb5f': 'Kang, Temporal Tyrant',
   'd6eabbff-cc0c-4000-8feb-4826e1b6bc66': 'Kapow!',
   'df366871-8ed7-4183-8b0c-414ca361a711': 'Kargan Dragonrider',
   'aecc621f-67da-41a7-9d47-05ded302ae35': 'Karn, Argent Defender',
@@ -54101,6 +55560,7 @@ export const cardIds = {
   'da81b78b-89fd-4fc1-9395-b5b01b96be70': 'Kyoshi Village',
   'b29abb09-75ea-431c-ab60-f2940d002e83': 'Kyoshi Warriors',
   'f7b6f5d4-b122-4ab4-a2c2-449ac781359a': 'Lagorin, Soul of Alacria',
+  'cf765efe-884c-48e2-9edb-9d45cf2756dd': 'Lake-town Lookout',
   '717c6beb-81c6-43ed-aab0-aedfc1cbac33': 'Lake-town',
   '80bcb154-b4be-4bbd-bbc1-b116a59045b7': 'Lakeshore Apothecary',
   'c56cd2ec-5907-4282-9162-d93b7dfd63b5': 'Lakeside Shack',
@@ -54151,6 +55611,7 @@ export const cardIds = {
   '36508a8a-d1a4-400e-bfda-09436bc4d5d4': 'Lonely Arroyo',
   '6f83da19-fd89-44ec-88f3-0c3fddfbd1b2': 'Long-Bodied Grey Dog',
   '9d63ba8a-a5cd-4fdb-bba3-95612be0077c': 'Long Goodbye',
+  'a833fdf1-db0c-4846-8452-d3b2059c2355': 'Long Lake Nuisance',
   '24630190-a630-4dd3-a8f7-82f129c881e3': 'Loporrit Scout',
   'f5bed085-bb7a-4250-9599-b2a8a95e6b6f': 'Lord Skitter, Sewer King',
   'a5729f11-6cde-4830-b882-ab4c5251c1a9': 'Lorehold Charm',
@@ -54169,10 +55630,12 @@ export const cardIds = {
   '0fca3328-484f-4050-925e-91840710b5d6': 'Lyra, Archangel of Dawn',
   '592c91fc-6430-4c76-9460-65f047350f67': 'Lyra Dawnbringer',
   'b5058b5c-0359-42ec-ba9e-ae1371bb9c22': 'Lys Alana Informant',
+  'fe7cc414-42d0-4dad-8516-7a0be0860a67': 'M.O.D.O.K.',
   'dda4b515-49c0-43fe-9f6a-36defa326bb1': 'Maalfeld Twins',
   'c657626f-7444-4c26-842c-dda9b9656fa3': "Mabel's Mettle",
   'cf75dbd8-b65a-48d9-b96b-4afb43f336d1': 'Macabre Waltz',
   '945e8443-9647-4eab-b091-ee8e7bc347f5': 'Machinesmith Automaton',
+  'b5b0e85f-6651-4667-829c-2253ff8b130d': 'Madame Masque',
   'b1e0841d-b004-40f9-a644-aecb422f6ad5': 'Madame Web, Clairvoyant',
   '03931270-504a-4b0b-af3f-918bf124ea07': 'Maelstrom Artisan // Rocket Volley',
   '0c38f159-367b-4e4b-94cd-bf1b0721c3a8': 'Magebane Lizard',
@@ -54214,9 +55677,11 @@ export const cardIds = {
   'f0e85b74-12fb-4d63-853e-7a3f41f731b4': 'Maximum Overdrive',
   '2c2ef1ed-2f93-48c5-bf86-e46318599aeb': 'Mechan Assembler',
   'fa72c607-7eb4-41b7-9af1-f3d6c69abf09': 'Mechan Navigator',
+  'b0672aa3-3207-4ff8-af8f-bdabacbb4d04': 'Mechanical Mobster',
   '2db8dda3-8136-4cf2-ba2d-ecc344a36725': 'Mechanized Ninja Cavalry',
   '1aeb43f7-4d8a-4648-9c13-fd101081b448': 'Mechanozoa',
   '66208129-20fb-4cb4-8f00-8d4574c9c653': 'Meditation Pools',
+  '86e0e718-82b5-4c99-9837-1b4d8729a27e': 'Melded Moxite',
   '1d6742a3-592b-4e67-8cc6-56e2962ad7c7': "Meltstrider's Gear",
   '6f9bc0c6-1792-4771-a839-95a22d9c699a': "Meltstrider's Resolve",
   '7663ac7c-1de3-4250-b96a-fae9dbd66a27': 'Memnite',
@@ -54269,9 +55734,11 @@ export const cardIds = {
   '542831c6-6279-4977-9b29-0fb9c0ebf04d': 'Mischievous Mystic',
   'e75b187d-0e3b-4d94-a940-8b7e4e7ed1ca': 'Mischievous Pup',
   'fe7a4361-561a-4bab-921e-d01bab19dad3': 'Mischievous Sneakling',
+  '7fa5237e-dd79-4646-b935-cb8c6ee803ab': 'Mister Fantastic, Reed Richards',
   '9acfec0d-05a0-4b28-a883-e6863f1cb773': 'Mistmeadow Council',
   'dfd2c57a-4557-4df1-8f6f-da2cbd317f12': 'Misty Palms Oasis',
   '6c05b882-51d9-43d8-93b8-c3317590f76a': "Mm'menon, Uthros Exile",
+  '47654b36-b215-4333-aa70-d88d627447e3': 'Mob Lookout',
   'leyline:token/mobilized-warrior': 'Mobilized Warrior Token',
   '013ca531-1ff7-4efc-a280-4bc3ab574072': 'Mocking Sprite',
   '2091eb7e-2357-4ef8-b15e-1e6f82176340': 'Mold Adder',
@@ -54325,6 +55792,7 @@ export const cardIds = {
   '834b8f71-9a45-42ae-9e99-e749fa6fb45e': 'Mystic Monastery',
   '81d72511-88b4-45ec-a5a9-e722caf55577': 'Mystical Teachings',
   '07155470-c5ab-41ae-ade3-bdc06d357379': 'Nanoform Sentinel',
+  '1a2a74b8-0689-4959-9348-02cc832194cf': 'Narset, Jeskai Waymaster',
   'ee86cce6-c7c1-40a6-896b-cde9b86bb532': 'Nasty Little Rabbit',
   'bdb3ca68-ec1f-4e16-81cc-d23f8f52c728': 'Naturalize',
   '724b4a59-9c69-4f2b-a436-72183c62f1ff': 'Nebula Dragon',
@@ -54392,6 +55860,7 @@ export const cardIds = {
   '57b37df5-fee4-4720-931f-f0cb0a8b338c': 'Orzhov Guildgate',
   '4d2e233c-0173-417f-82a0-1e692a400ae1': 'Oscorp Research Team',
   'e2171c48-a816-41b2-aa55-e0ba2503fd6a': 'Otter-Penguin',
+  'leyline:token/otter-prowess': 'Otter Prowess Token',
   '50d6fd91-23d3-4d32-804f-6233e4386904': 'Ouroboroid',
   '2d16d51b-47e0-4cdc-83dd-a805ba50bd83': 'Out Cold',
   'fcea912b-58b1-4068-ac4d-1bc89aa7f33c': 'Out of Air',
@@ -54417,11 +55886,13 @@ export const cardIds = {
   '0ba86a50-13df-4b26-8b3a-9e3917ff850f': 'Patchwork Automaton',
   '6cf995e9-115a-4659-bace-9fbe75898b48': 'Patchwork Beastie',
   '54452df0-560c-4561-9dd2-3903ae49c91b': 'Pathfinding Axejaw',
+  'bddd7e99-ec74-4ca6-9137-155b85695a95': 'Patient Instructor',
   '1df7a09f-fbc8-4c2a-a903-bab9e680eda7': 'Patriot, Shield Wielder',
   'fa99cf82-ebf1-4526-ab9c-b24eb2970f2a': 'Pawpatch Formation',
   '91ddd2bd-2dec-4670-8edb-e89c009b2187': 'Pearl of Wisdom',
   'd55f7e20-11c6-44e2-8a21-dca67d3dbc68': 'Peculiar Lighthouse',
   '22196948-9f30-4fcd-b43b-c7f81a0f4f36': 'Pedal to the Metal',
+  '8fb7ad08-9bb2-49f1-8ed0-8cc8abca4fe0': 'Peer Past the Veil',
   'd7aaffed-a143-49d6-a516-b9bc8b503aee': 'Peerless Ropemaster',
   'd36075c2-de66-4202-9217-b1102a2bc14b': 'Pelakka Wurm',
   '992075d5-f413-4896-b75e-7bb2d589c50e': 'Pendulum of Patterns',
@@ -54447,6 +55918,7 @@ export const cardIds = {
   'ad556aee-3dbf-4c8b-9f3a-31947e26c6f5': 'Pinnacle Kill-Ship',
   '10e0b563-4dfc-4530-a010-0ba40bdf02ac': 'Pinnacle Starcage',
   '58d87cfe-7402-43c3-81ce-13de8cd04005': 'Piranha Fly',
+  'b9080653-87cb-4443-a4a3-36637d5ad165': 'Pirate Hat',
   '4771a871-576e-4a14-92f0-b5b41c63d615': 'Pirate Peddlers',
   '044d2788-6daa-4849-a813-1f577eef9295': 'Pit of Offerings',
   '86e2bbdd-a788-4f76-9ebb-ef48d9bc9dcf': 'Pitchburn Devils',
@@ -54497,11 +55969,13 @@ export const cardIds = {
   'c840b89b-81be-4644-8bb5-35d14b1bc620': 'Protective Response',
   '07617648-6490-4719-acec-7705671f7e01': "Protege's Awakening",
   '594132ac-32a7-41d5-b7f0-3692bbed7f6f': 'Prowcatcher Specialist',
+  '76742bfc-ae99-4b06-b29d-e0e41d92ae14': 'Prowler, Clawed Thief',
   '3df4eb80-e8dd-4a9e-bd8a-b4b23fb9de6c': 'Psychic Whorl',
   'cca03b76-dd3c-4228-b97a-f7fa20819b2e': 'Pterafractyl',
   'c5373026-8b43-42a7-aa69-a1b0f1619795': 'Pull from the Grave',
   'f916f689-a314-4952-8107-41c4c2f2e811': 'Pulse Tracker',
   'dfb13eca-55fd-4ac6-aee3-2bdbfe9e1c4e': 'Punk Frogs',
+  '4384996f-aeaa-41ac-aa0e-12d72c887731': 'Pursue the Past',
   '636b44dc-f7e4-42d2-abf6-ae49432b6052': 'Pym Particles',
   '5a8977fc-0732-4807-b876-01819aedd70b': 'Pym Technologies',
   '13b0a3f3-04a5-465f-898b-13a28f795a16': 'Pyre Spawn',
@@ -54531,6 +56005,7 @@ export const cardIds = {
   '186efd85-83d4-40cc-b617-76f32dbe99ce': 'Radiant Strike',
   'f15bd5c0-99ff-42c6-8eed-48de6df81b61': 'Radioactive Spider',
   'd0732ebf-91ad-4e3c-a09a-f410d20587fc': 'Ragged Playmate',
+  'bb67d0a4-864e-4f46-8538-fdd920bf0197': 'Ragged Short Spear',
   '30997b43-fc13-41d3-8064-1ccc2cb6fd2b': 'Raging Goblin',
   '679841ad-f3ac-48e2-ba11-2cf6d78642b4': 'Raging Redcap',
   'cbc9c731-181a-4f00-a7b0-eb7e56eac2ea': 'Raise Dead',
@@ -54579,6 +56054,7 @@ export const cardIds = {
   'f4361602-63da-430b-adbb-36d74e987aa6': 'Recover',
   'leyline:token/red-gremlin-token': 'Red Gremlin Token',
   'leyline:token/red-prowess-monk-token': 'Red Prowess Monk Token',
+  '4e60c38c-cbf5-4ff7-8fff-634f7e3086cc': 'Red Room Recruit',
   '94c9aea7-564d-4fc8-ae14-7b22cba18b95': 'Red Tiger Mechan',
   'leyline:token/red-white-spirit-token': 'Red White Spirit Token',
   'e055bc6d-d395-4f85-8e15-3bce65b7fcca': 'Redcap Thief',
@@ -54657,6 +56133,7 @@ export const cardIds = {
   '8ca585b5-25c4-41cc-a0b9-dc66ae803d04': 'Romantic Rendezvous',
   '3c6913cc-c543-45f8-ad3b-ccd282efa6f7': 'Ronom Unicorn',
   '3dc73517-0767-46ae-bc8d-ee378237a509': 'Rooftop Percher',
+  'c5a6d752-9975-4059-8552-55c6ffb3ab68': 'Rook Turret',
   '9c4fdd20-0396-40b7-8687-43b1035b6956': 'Rosa, Resolute White Mage',
   '0394846e-bc27-4d67-988e-b08a389690de': 'Rover Blades',
   '74224cce-c2ce-4456-8a97-3abbbb199385': 'Rowdy Snowballers',
@@ -54902,6 +56379,7 @@ export const cardIds = {
   '315ddc7a-c39c-43d9-b134-23acbd865e3e': 'Squirrelanoids',
   'b4ee6843-bb79-4665-9763-83f656863dc5': 'Stab',
   'd8cfa20a-343e-4661-9f5a-a8265f6917a8': 'Stadium Headliner',
+  '1c45e872-3af8-47a4-9dc7-a99c293338f8': 'Stadium Tidalmage',
   '4b4589ff-d141-49a4-a0bd-1c73fc3651ef': 'Stagecoach Security',
   '57bda813-ad4b-40ab-aa35-3f8343ff8668': 'Staggering Size',
   'ce55c0a9-3334-440e-ae1b-c04a9e1c3d87': 'Stall Out',
@@ -54949,6 +56427,7 @@ export const cardIds = {
   '4722105b-0085-4bb8-bca1-9de0d3eb5600': 'Stormcarved Coast',
   'b2252471-01ca-4d58-aa99-4ab0aa5eae12': 'Stormcatch Mentor',
   '32902854-2c64-431e-9d9c-9a23e52afb1b': 'Stormchaser Mage',
+  '00c1788d-c52f-4839-9cd8-11fb86c418b6': "Stormchaser's Talent",
   'd9c0e089-92ca-4fbd-9ddd-1802ac3553c9': 'Stormkeld Prowler',
   '4ad9c550-5605-4ffe-8e27-e9f2d9ada000': 'Stormplain Detainment',
   '51bb6d3b-be6a-435d-8a80-0c0f0161892d': 'Storyteller Pixie',
@@ -55074,6 +56553,7 @@ export const cardIds = {
   '04a38b92-619e-4fe8-b0cb-6fa31f0824ff': 'The Coming of Galactus',
   'df4ef2f8-2591-4be3-b905-4f9ff9c538ea': "The Crystal's Chosen",
   '2f26f270-26d9-46d3-957f-19f52d51eb03': 'The Legend of Roku // Avatar Roku',
+  '32ad5b3e-92c0-45be-b2e4-6f1794552f36': "The Mountain-king's Return",
   'a6bcec1f-f515-4e63-9e84-8eb04cc582ff': 'The Seriema',
   'b677a73c-f179-46bf-83ee-c2b05f9fca67': 'The Spirit Oasis',
   '20bb8c55-4b0b-425f-8201-b54fa2fdde86': 'The Theorist, Jace Beleren',
@@ -55203,6 +56683,7 @@ export const cardIds = {
   '0edaf433-4ded-4841-bc86-136780c0767f': 'Unliving Legionnaire',
   'de5c6c9d-04a2-4287-8c6e-fdf56c411507': 'Unrooted Ancestor',
   'b2b0a5d0-0084-43a4-b6dc-e893ef42cdb7': 'Unruly Catapult',
+  '5b7bbc76-22cc-482e-8d65-34cff34c93c8': 'Unstable Experiment',
   '060ae1bb-956a-4264-b405-a33151f31493': 'Unstable Obelisk',
   '3f6f4c98-ed7e-4fb1-8bfe-4210a39f77f2': 'Unstoppable Plan',
   '9d059345-1a2f-4ecb-b419-3873ebadf318': 'Unsubtle Mockery',
@@ -55218,6 +56699,7 @@ export const cardIds = {
   '1333d690-a6dc-4ef8-8c57-2ba16727c0a5': 'Valkyrie Aerial Unit',
   '60654004-7d9a-47ac-a70d-b246dd1728d3': 'Valley Flamecaller',
   '16e9c452-6288-4da8-813d-2eb6b7a538c3': 'Valley Mightcaller',
+  '81c509b2-3164-47e9-94b3-bdba0487d2f1': 'Valley Questcaller',
   '8da0599a-8f63-4dba-857f-b4e10b7191b6': 'Valley Rotcaller',
   '1f938353-9081-4dc1-b8e7-d18ece038bd4': 'Valorous Stance',
   'b753d7dd-4c6b-4472-a009-671572f927eb': 'Vampire Interloper',
@@ -55267,6 +56749,7 @@ export const cardIds = {
   'fae36da0-bf9c-484f-b2fe-dd8ab2effc5c': 'Virtue of Persistence // Locthwain Scorn',
   '3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f': 'Virulent Emissary',
   'e1e489f6-37e5-469e-bca3-0e9d3fc3fa95': 'Virus Beetle',
+  '70c96b50-ac2b-493d-bd15-fc66eb767111': 'Vision of Love',
   '3b46800b-711b-4cbb-b296-26115b4f6839': 'Visions of Villainy',
   '03ee49c9-95a3-44f1-b010-f7c4b2f86a7c': "Vito's Inquisitor",
   '517f84b5-cf99-410d-96ea-910740231dac': 'Void Extrapolator // Omit Variables',
@@ -55337,6 +56820,7 @@ export const cardIds = {
   'leyline:token/white-mouse-token': 'White Mouse Token',
   'leyline:token/white-sheep-token': 'White Sheep Token',
   'leyline:token/white-soldier-token': 'White Soldier Token',
+  'leyline:token/white-wall-token': 'White Wall Token',
   '4f0c055f-f614-44b0-9374-c53541f89185': 'White Widow, Free Agent',
   '855353e2-b686-482a-b987-c6ae456f088c': 'Whoosh!',
   'leyline:token/wicked-role': 'Wicked',
@@ -55359,6 +56843,7 @@ export const cardIds = {
   '6317d45a-fe02-4879-b515-bc5327ecb5ae': 'Wispdrinker Vampire',
   '00807825-88e5-4b88-8527-a49f553a91be': "Witch's Mark",
   'baadfc17-42fd-4771-aabe-027ef7b3bf69': 'Witching Well',
+  'ee1db746-f5c1-4dce-82eb-24b273cc9507': 'Witherbloom Charm',
   'fbb04a21-e513-4317-aac8-fa6df91c3438': 'Witherbloom, the Balancer',
   'ffce81c5-1b58-4882-a4e7-6f8d7cb170de': 'Withering Torment',
   'ab41243d-b178-4ebe-a7ac-bea37427be99': 'Wojek Investigator',
@@ -55392,6 +56877,7 @@ export const cardIds = {
   '983f4fde-ab04-44f0-a294-c3b472de0b19': 'Yuriko, Hope from the Shadows',
   '63e5180f-16d0-4524-94bf-ecbf3c417814': 'Yuyan Archers',
   'leyline:token/zabu': 'Zabu',
+  '0ff3afba-7a90-4f62-a1b0-b553ad81c32b': 'Zealous Display',
   'f82265fd-e772-4347-a27f-37b00ccd416b': 'Zealous Lorecaster',
   '7da0e5de-3e4c-420a-8685-991206100b9d': 'Zetalpa, Primal Dawn',
   'd6b0198a-c1f2-4142-b5e2-8205adf14d0a': 'Zhao, Ruthless Admiral',
@@ -55403,12 +56889,13 @@ export const cardIds = {
   '6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0': 'Zookeeper Mechan',
   '3231ce2e-d4f8-44fc-872d-aeafa59aed4b': 'Zuko, Exiled Prince',
   'f034e8a3-82f7-4c70-93ea-0bf2688f66e1': "Zuko's Conviction",
+  '5cf18398-9552-415e-a61f-2c149e35ec3d': "Zuko's Exile",
   '76b003e0-15af-4f22-bdf2-1ade5430964a': 'Zulaport Cutthroat',
   'd6fdfd94-cef5-482c-83ed-11c5ba40abe9': "Zurgo's Vanguard",
 };
 export const packIdentity = {
   id: 'leyline.core',
-  version: '0.57.0',
+  version: '0.59.0',
   schemaVersion: 1,
-  sourceHash: '4614b3db76e7aba7e388f17d9329efe2538f82784881c48fb71bd7f28e65dd6f',
+  sourceHash: 'a5f024d57a98243e72fa72773bbea5815a3aa28d465633f0fc710ebf67218db0',
 };

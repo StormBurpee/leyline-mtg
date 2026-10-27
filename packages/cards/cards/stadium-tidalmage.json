@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1c45e872-3af8-47a4-9dc7-a99c293338f8",
+  "name": "Stadium Tidalmage",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Djinn", "Sorcerer"],
+    "colors": ["R", "U"],
+    "manaCost": "{2}{U}{R}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Whenever this creature enters or attacks, you may draw a card. If you do, discard a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "optional": true
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

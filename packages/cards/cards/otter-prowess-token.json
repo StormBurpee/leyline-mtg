@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/otter-prowess",
+  "name": "Otter Prowess Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Otter"],
+    "colors": ["U", "R"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "Prowess",
+  "abilities": [
+    {
+      "use": "prowess"
+    }
+  ]
+}

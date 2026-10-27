@@ -1,0 +1,103 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "00c1788d-c52f-4839-9cd8-11fb86c418b6",
+  "name": "Stormchaser's Talent",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Class"],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "(Gain the next level as a sorcery to add its ability.)\nWhen this Class enters, create a 1/1 blue and red Otter creature token with prowess.\n{3}{U}: Level 2\nWhen this Class becomes level 2, return target instant or sorcery card from your graveyard to your hand.\n{5}{U}: Level 3\nWhenever you cast an instant or sorcery spell, create a 1/1 blue and red Otter creature token with prowess.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/otter-prowess",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "classLevel",
+      "level": 2,
+      "cost": "{3}{U}",
+      "abilities": [
+        {
+          "kind": "triggered",
+          "on": {
+            "event": "classLevel",
+            "object": "source",
+            "classLevel": 2
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand"
+            }
+          ],
+          "target": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "owner": "you"
+                },
+                {
+                  "any": [
+                    {
+                      "type": "instant"
+                    },
+                    {
+                      "type": "sorcery"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "classLevel",
+      "level": 3,
+      "cost": "{5}{U}",
+      "abilities": [
+        {
+          "kind": "triggered",
+          "on": {
+            "event": "cast",
+            "controller": "you",
+            "filter": {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/otter-prowess",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

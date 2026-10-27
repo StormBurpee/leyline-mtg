@@ -1,0 +1,74 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "86e0e718-82b5-4c99-9837-1b4d8729a27e",
+  "name": "Melded Moxite",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "When this artifact enters, you may discard a card. If you do, draw two cards.\n{3}, Sacrifice this artifact: Create a tapped 2/2 colorless Robot artifact creature token.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Discard a card and draw 2",
+              "condition": {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "hand",
+                  "player": "you"
+                },
+                "operator": "gt",
+                "right": 0
+              },
+              "effects": [
+                {
+                  "op": "discard",
+                  "target": "controller",
+                  "amount": 1
+                },
+                {
+                  "op": "draw",
+                  "target": "controller",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "label": "Decline",
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}",
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/robot-token",
+          "amount": 1,
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

@@ -86,6 +86,23 @@ export function decisionCard(
 export function decisionGallery(state, ids, metadata, options = {}) {
   return `<div class="decision-card-gallery ${ids.length <= 3 ? 'decision-hero' : 'decision-many'}" style="--choice-count:${Math.max(1, ids.length)}">${ids.map((id, i) => decisionCard(state, id, metadata, { ...options, ...options.forCard?.(id, i) })).join('') || '<div class="decision-empty"><span>◇</span><p>No cards available.</p></div>'}</div>`;
 }
+export function discardChoiceSubtitle(choice) {
+  if (!choice.optional) return 'Select the cards to discard, then confirm your choice.';
+  const count = `${choice.count} card${choice.count === 1 ? '' : 's'}`;
+  const effects = choice.continuation?.then;
+  const draw =
+    choice.drawOnDiscard ??
+    (choice.continuation?.where === undefined &&
+    effects?.length === 1 &&
+    effects[0].op === 'draw' &&
+    [undefined, 'controller'].includes(effects[0].player)
+      ? effects[0].count
+      : null);
+  return Number.isSafeInteger(draw)
+    ? `You may discard ${count} to draw ${draw} card${draw === 1 ? '' : 's'}. Or keep your hand unchanged.`
+    : `You may discard ${count} to continue this effect. Or keep your hand unchanged.`;
+}
+
 export function choiceHeader(
   title,
   subtitle,

@@ -1,3 +1,4 @@
+import { CLASS_ABILITY_FIELDS } from './class-levels.js';
 import { CREATURE_TYPES } from './creature-types.js';
 import { validateTargetGroups } from './target-group-schema.js';
 import { validNumericValue } from './value-schema.js';
@@ -107,6 +108,7 @@ const FIELDS = new Set([
   'static',
   'triggers',
   'activated',
+  'classLevels',
   'ward',
   'opponentCreatureProtectionBypass',
   'entersTapped',
@@ -252,6 +254,17 @@ function validateEffects(
       );
       continue;
     }
+    if (e.op === 'discardThen') {
+      if (Object.keys(e).some((k) => !['op', 'count', 'optional', 'where', 'then'].includes(k)))
+        errors.push(`${p}: unsupported discard continuation field.`);
+      if (!Number.isSafeInteger(e.count) || e.count < 1 || e.count > 16)
+        errors.push(`${p}.count: expected 1–16 cards.`);
+      if (e.optional !== undefined && typeof e.optional !== 'boolean')
+        errors.push(`${p}.optional: expected a boolean.`);
+      if (e.where !== undefined) errors.push(...validateFilter(e.where));
+      validateEffects(e.then, `${p}.then`, target, errors, groups, budget, depth + 1);
+      continue;
+    }
     if (e.op === 'behold') {
       if (
         Object.keys(e).some((k) => !['op', 'subtype', 'then'].includes(k)) ||
@@ -311,6 +324,8 @@ function validateEffects(
           'counter',
           'damageTargetController',
           'copyToken',
+          'connive',
+          'draw',
           'damage',
           'destroy',
           'bounce',
@@ -332,7 +347,9 @@ function validateEffects(
           'attachedToken',
         ].includes(e.op) ||
         e.subject !== undefined ||
-        (['counter', 'copyToken', 'delayedBlink', 'damageTargetController'].includes(e.op) &&
+        (['counter', 'copyToken', 'connive', 'delayedBlink', 'damageTargetController'].includes(
+          e.op,
+        ) &&
           group.max !== 1) ||
         (e.op === 'counter' && e.unlessPay !== undefined) ||
         (e.op === 'damageTargetController' &&
@@ -377,7 +394,10 @@ function validateEffects(
       if (!Number.isSafeInteger(e.power) || !Number.isSafeInteger(e.toughness))
         errors.push(`${p}: expected integer emblem bonus.`);
     }
+    if (e.op === 'setClassLevel' && ![2, 3].includes(e.level))
+      errors.push(`${p}: Class levels must be 2 or 3.`);
     const schema = {
+      setClassLevel: ['level'],
       damage: ['amount'],
       damageOpponent: ['amount'],
       damageEventOpponent: ['amount'],
@@ -432,6 +452,7 @@ function validateEffects(
       scry: ['count', 'player'],
       surveil: ['count', 'player'],
       explore: ['subject'],
+      connive: ['subject'],
       prepare: ['subject'],
       unprepare: ['subject'],
       discard: ['count', 'player'],
@@ -732,6 +753,13 @@ function validateEffects(
         : !effectTargetCompatible('explore', target))
     )
       errors.push(`${p}: explore requires source or a creature target.`);
+    if (
+      e.op === 'connive' &&
+      (e.subject !== undefined
+        ? !['source', 'eventSource'].includes(e.subject)
+        : !effectTargetCompatible('connive', target))
+    )
+      errors.push(`${p}: connive requires source, eventSource, or a creature target.`);
     if (e.op === 'copyToken') {
       if (!natural(e.count) || e.count > 1000) errors.push(`${p}.count: expected 0 to 1000.`);
       if (e.subject !== undefined && e.subject !== 'source')
@@ -2172,6 +2200,55 @@ export function validateDefinition(card) {
         );
       }
   }
+  if (card.classLevels !== undefined) {
+    if (
+      !hasType(card, 'enchantment') ||
+      !(card.subtypes ?? []).includes('Class') ||
+      !Array.isArray(card.classLevels) ||
+      card.classLevels.length !== 2
+    )
+      errors.push(`${name}.classLevels: requires a Class with complete level 2 and 3 bars.`);
+    else
+      for (const [index, grant] of card.classLevels.entries()) {
+        const path = `${name}.classLevels[${index}]`;
+        if (
+          !plain(grant) ||
+          Object.keys(grant).some((key) => !['level', 'cost', 'abilities'].includes(key)) ||
+          grant.level !== index + 2 ||
+          !plain(grant.abilities) ||
+          !Object.keys(grant.abilities).length ||
+          Object.keys(grant.abilities).some((key) => !CLASS_ABILITY_FIELDS.includes(key))
+        ) {
+          errors.push(`${path}: expected an ordered level bar and supported ability fragment.`);
+          continue;
+        }
+        validateCost(grant.cost, `${path}.cost`, errors);
+        const base = Object.fromEntries(
+          Object.entries(card).filter(
+            ([key]) => !CLASS_ABILITY_FIELDS.includes(key) && key !== 'classLevels',
+          ),
+        );
+        errors.push(
+          ...validateDefinition({ ...base, ...grant.abilities }).map(
+            (issue) => `${path}: ${issue}`,
+          ),
+        );
+      }
+    if (
+      Array.isArray(card.classLevels) &&
+      [card, ...card.classLevels.map((grant) => grant?.abilities)].filter((a) => a?.static).length >
+        1
+    )
+      errors.push(`${name}.classLevels: multiple simultaneous anthems are not supported.`);
+    if (
+      Array.isArray(card.classLevels) &&
+      [card, ...card.classLevels.map((grant) => grant?.abilities)].filter((a) => a?.damageBonus)
+        .length > 1
+    )
+      errors.push(
+        `${name}.classLevels: multiple simultaneous damage replacements are not supported.`,
+      );
+  }
   if (card.activated !== undefined) {
     if (!Array.isArray(card.activated) || card.activated.length > 32)
       errors.push(`${name}.activated: expected at most 32 abilities.`);
@@ -2277,6 +2354,7 @@ export function validateDefinition(card) {
         e?.op === 'exileUntilSourceLeaves' ||
         (e?.op === 'conditional' &&
           (usesLinkedExile(e.then, depth + 1) || usesLinkedExile(e.else, depth + 1))) ||
+        (['discardThen', 'behold'].includes(e?.op) && usesLinkedExile(e.then, depth + 1)) ||
         (e?.op === 'chooseEffect' &&
           Array.isArray(e.options) &&
           e.options.some((option) => usesLinkedExile(option?.effects, depth + 1))),
@@ -2306,6 +2384,7 @@ export function validateDefinition(card) {
         e?.op === 'becomeLand' ||
         (e?.op === 'conditional' &&
           (usesLandForm(e.then, depth + 1) || usesLandForm(e.else, depth + 1))) ||
+        (['discardThen', 'behold'].includes(e?.op) && usesLandForm(e.then, depth + 1)) ||
         (e?.op === 'chooseEffect' &&
           Array.isArray(e.options) &&
           e.options.some((option) => usesLandForm(option?.effects, depth + 1))),

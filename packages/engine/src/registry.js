@@ -109,6 +109,15 @@ export function createRegistry(input = CARDS) {
   if (errors.length) throw new RegistryError(errors.slice(0, 100));
   for (const card of Object.values(registry))
     for (const e of effectInstructions([
+      ...[...(card.classLevels ?? []), ...(card.backFace?.classLevels ?? [])].flatMap(
+        ({ abilities }) => [
+          ...(abilities.etb ?? []),
+          ...(abilities.triggers ?? []).flatMap((t) =>
+            t.modes ? t.modes.flatMap((m) => m.effects) : t.effects,
+          ),
+          ...(abilities.activated ?? []).flatMap((a) => a.effects),
+        ],
+      ),
       ...(card.effects ?? []),
       ...(card.adventure?.effects ?? []),
       ...(card.prepareSpell?.effects ?? []),

@@ -598,9 +598,43 @@ export function chooseBotCommand(s, p) {
             .sort((a, b) => value(s, s.objects[a]) - value(s, s.objects[b]) || a.localeCompare(b))
             .slice(0, c.count),
         };
-      case 'discardEffect':
-        if (c.optional && libraryCount(s, p) === 0)
+      case 'discardEffect': {
+        const cards = chooseDiscards(s, p, c.count);
+        // The continuation sees the hand after payment, including draw-bonus thresholds.
+        const paidState = {
+          ...s,
+          players: s.players.map((player, index) =>
+            index === p
+              ? {
+                  ...player,
+                  hand: player.hand.filter((id) => !cards.includes(id)),
+                  ...(player.handCount !== undefined
+                    ? { handCount: player.handCount - cards.length }
+                    : {}),
+                }
+              : player,
+          ),
+        };
+        if (
+          c.optional &&
+          ((c.drawOnDiscard &&
+            drawsFor([{ op: 'draw', count: c.drawOnDiscard }], p, null, p, paidState) >
+              libraryCount(s, p)) ||
+            (c.continuation &&
+              resolutionRisk(
+                paidState,
+                p,
+                c.continuation.then,
+                s.resolving?.entry.target,
+                0,
+                s.resolving?.entry.source,
+                s.resolving?.entry.eventAmount,
+                s.resolving?.entry ?? {},
+              )))
+        )
           return { type: 'discardEffect', player: p, cards: [] };
+        return { type: 'discardEffect', player: p, cards };
+      }
       case 'bottom':
       case 'discard': {
         const cards = chooseDiscards(s, p, c.count);
@@ -1059,6 +1093,7 @@ export function chooseBotCommand(s, p) {
   const ability = actions.find((action) => {
     if (action.type !== 'activate' || action.targets || action.sacrifices) return false;
     const activated = definition(s, s.objects[action.card]).activated[action.ability];
+    if (activated.classLevel !== undefined) return true;
     if (activated.effects.some((e) => e.op === 'earthbend')) {
       const target = s.objects[action.target?.id];
       if (!target || target.controller !== p) return false;
@@ -1202,6 +1237,7 @@ export function chooseBotCommand(s, p) {
       // Sagas are developing permanents, not inert enchantments. Chapter
       // choices still use the same public-information trigger target policies.
       const chapters = (d.triggers ?? []).filter((t) => t.event?.event === 'chapter');
+      if (d.classLevels) score = Math.max(score, 5 + d.classLevels.length);
       if (chapters.length) score = Math.max(score, 5 + chapters.length);
       if (d.attachmentBonus)
         score = controlled(s, p).some((o) => definition(s, o).type === 'creature')

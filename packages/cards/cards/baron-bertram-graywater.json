@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e25b516c-bf95-42bc-8b1e-04617a3d28df",
+  "name": "Baron Bertram Graywater",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Vampire", "Noble"],
+    "colors": ["B", "W"],
+    "manaCost": "{2}{W}{B}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Whenever one or more tokens you control enter, create a 1/1 black Vampire Rogue creature token with lifelink. This ability triggers only once each turn.\n{1}{B}, Sacrifice another creature or artifact: Draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enterGroup",
+        "controller": "you",
+        "filter": {
+          "token": true
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/black-vampire-rogue-token",
+          "amount": 1
+        }
+      ],
+      "oncePerTurn": true
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{B}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "type": "artifact"
+              }
+            ]
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

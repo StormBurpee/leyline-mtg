@@ -6,6 +6,7 @@ import {
   decisionCard,
   decisionReader,
   CARD_DECISIONS,
+  discardChoiceSubtitle,
 } from '../apps/web/choice-stage.js';
 import { fixture, put } from '../packages/engine/test/helpers.js';
 
@@ -64,4 +65,27 @@ test('opening hand, mulligan bottoming, exile and library decisions share automa
     'legendRule',
   ])
     assert.ok(CARD_DECISIONS.has(kind));
+});
+
+test('optional discard copy reflects continuation counts and does not invent a draw reward', () => {
+  assert.match(
+    discardChoiceSubtitle({ optional: true, count: 1, drawOnDiscard: 1 }),
+    /discard 1 card to draw 1 card/,
+  );
+  assert.match(
+    discardChoiceSubtitle({
+      optional: true,
+      count: 1,
+      continuation: { then: [{ op: 'draw', count: 2 }] },
+    }),
+    /discard 1 card to draw 2 cards/,
+  );
+  for (const continuation of [
+    { then: [{ op: 'searchLibrary' }] },
+    { where: { type: 'creature' }, then: [{ op: 'draw', count: 2 }] },
+  ]) {
+    const text = discardChoiceSubtitle({ optional: true, count: 2, continuation });
+    assert.match(text, /discard 2 cards to continue this effect/);
+    assert.doesNotMatch(text, /to draw/);
+  }
 });

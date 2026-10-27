@@ -1,0 +1,116 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5539d78c-1acc-46dd-ba6d-cc0cdad6ff44",
+  "name": "Benthic Criminologists",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Whenever this creature enters or attacks, you may sacrifice an artifact. If you do, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Sacrifice a permanent and draw 1",
+              "condition": {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "battlefield",
+                  "player": "you",
+                  "where": {
+                    "type": "artifact"
+                  }
+                },
+                "operator": "gt",
+                "right": 0
+              },
+              "effects": [
+                {
+                  "op": "sacrifice",
+                  "player": "controller",
+                  "where": {
+                    "type": "artifact"
+                  },
+                  "count": 1
+                },
+                {
+                  "op": "draw",
+                  "target": "controller",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "label": "Decline",
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseEffect",
+          "options": [
+            {
+              "label": "Sacrifice a permanent and draw 1",
+              "condition": {
+                "kind": "compare",
+                "left": {
+                  "kind": "count",
+                  "zone": "battlefield",
+                  "player": "you",
+                  "where": {
+                    "type": "artifact"
+                  }
+                },
+                "operator": "gt",
+                "right": 0
+              },
+              "effects": [
+                {
+                  "op": "sacrifice",
+                  "player": "controller",
+                  "where": {
+                    "type": "artifact"
+                  },
+                  "count": 1
+                },
+                {
+                  "op": "draw",
+                  "target": "controller",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "label": "Decline",
+              "effects": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

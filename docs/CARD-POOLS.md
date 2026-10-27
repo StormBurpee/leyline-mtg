@@ -11,8 +11,10 @@ The maintenance queries use Scryfall Oracle identities, exclude future printings
 
 | Inventory         | In scope | Curated definitions | Compiler candidates | Unsupported scripts | No exact Forge match |
 | ----------------- | -------: | ------------------: | ------------------: | ------------------: | -------------------: |
-| Standard          |    5,164 |               2,146 |                   0 |               2,824 |                  194 |
-| Non-Alchemy Arena |   15,332 |               2,352 |                 597 |              11,765 |                  618 |
+| Standard          |    5,164 |               2,188 |                   0 |               2,782 |                  194 |
+| Non-Alchemy Arena |   15,332 |               2,395 |                 597 |              11,722 |                  618 |
+
+Stormchaser’s Talent is executable but banned in Standard, so this release counts it only in the Arena inventory, not among Standard additions.
 
 - **Curated:** a definition in the executable registry, subject to the kernel's documented interaction limits. Not a certification of all Magic rules.
 - **Compiler candidate:** the adapter recognizes its syntax. Not installed or counted as playable.

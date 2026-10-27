@@ -128,7 +128,7 @@ function permanent(s, o, meta, ui, targetable) {
           .slice(0, 1)
           .map((k) => k.toUpperCase())
           .join('') || d.type.toUpperCase()
-  }</span>${o.questCounters ? `<strong class="saga-badge" aria-label="${o.questCounters} quest counters">Quest ${o.questCounters}</strong>` : ''}${sagaFinal ? `<strong class="saga-badge" aria-label="${o.loreCounters ?? 0} lore counters, final chapter ${sagaFinal}">Chapter ${o.loreCounters ?? 0}/${sagaFinal}</strong>` : ''}${d.type === 'creature' ? `<strong class="pt">${pt.power}/${pt.toughness}</strong>` : ''}${(d.types ?? [d.type]).includes('planeswalker') ? `<strong class="loyalty-badge" aria-label="${o.loyalty ?? 0} loyalty">◆ ${o.loyalty ?? 0}</strong>` : ''}</div></button>`;
+  }</span>${d.subtypes.includes('Class') || o.classLevel !== undefined ? `<strong class="saga-badge" aria-label="Class level ${o.classLevel ?? 1}">Level ${o.classLevel ?? 1}</strong>` : ''}${o.questCounters ? `<strong class="saga-badge" aria-label="${o.questCounters} quest counters">Quest ${o.questCounters}</strong>` : ''}${sagaFinal ? `<strong class="saga-badge" aria-label="${o.loreCounters ?? 0} lore counters, final chapter ${sagaFinal}">Chapter ${o.loreCounters ?? 0}/${sagaFinal}</strong>` : ''}${d.type === 'creature' ? `<strong class="pt">${pt.power}/${pt.toughness}</strong>` : ''}${(d.types ?? [d.type]).includes('planeswalker') ? `<strong class="loyalty-badge" aria-label="${o.loyalty ?? 0} loyalty">◆ ${o.loyalty ?? 0}</strong>` : ''}</div></button>`;
 }
 export function game(s, ui, meta) {
   const viewer = ui.mode === 'hotseat' ? ui.seat : 0,
@@ -662,6 +662,8 @@ function liveCharacteristics(s, o) {
   if (o.plusCounters) bits.push(`+${o.plusCounters} counter${o.plusCounters === 1 ? '' : 's'}`);
   const gained = keywords(s, o).filter((keyword) => !d.keywords.includes(keyword));
   if (gained.length) bits.push(`Gained: ${gained.join(', ')}`);
+  if (d.subtypes.includes('Class') || o.classLevel !== undefined)
+    bits.push(`Class level ${o.classLevel ?? 1}`);
   if (o.loreCounters !== undefined)
     bits.push(
       `${o.loreCounters} lore counter${o.loreCounters === 1 ? '' : 's'} · next chapter at your first main phase`,
