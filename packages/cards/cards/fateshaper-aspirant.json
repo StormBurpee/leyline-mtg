@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bb3996b6-b68d-4ea1-b3dd-1600f8da2f1c",
+  "name": "Fateshaper Aspirant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rhino", "Cleric"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, choose one \u2014\n\u2022 Return target legendary card from your graveyard to your hand.\n\u2022 Put a +1/+1 counter on target creature. It gains vigilance and indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Return target legendary card from your graveyard.",
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand"
+            }
+          ],
+          "target": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "owner": "you"
+                },
+                {
+                  "legendary": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "label": "Put a +1/+1 counter on target creature. It gains vigilance and indestructible.",
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "amount": 1,
+              "counter": "+1/+1"
+            },
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["vigilance", "indestructible"]
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

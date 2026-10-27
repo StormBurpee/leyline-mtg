@@ -808,38 +808,44 @@ export function resolveEffects(s, entry, startIndex = 0) {
       continue;
     }
     if (e.op === 'fight' || e.op === 'bite') {
-      const currentCreature = (target) => {
+      const currentPermanent = (target) => {
         const object = target?.kind === 'object' && s.objects[target.id];
-        return object?.zone === 'battlefield' &&
-          object.incarnation === target.incarnation &&
-          hasType(definition(s, object), 'creature')
+        return object?.zone === 'battlefield' && object.incarnation === target.incarnation
           ? object
           : null;
       };
-      const actor = currentCreature(entry.targets?.[e.sourceGroup]?.[0]);
-      if (!actor) continue;
-      const victims = (entry.targets?.[e.victimGroup] ?? []).map(currentCreature).filter(Boolean);
+      const actorRef = e.source === 'source' ? entry.source : entry.targets?.[e.sourceGroup]?.[0];
+      const actor = currentPermanent(actorRef);
+      // A fight requires both current creatures (CR 701.14b). A nontargeted
+      // bite source instead uses its last battlefield information (CR 608.2h).
+      if (
+        (!actor || !hasType(definition(s, actor), 'creature')) &&
+        (e.op === 'fight' || e.source !== 'source')
+      )
+        continue;
       const source = (object) => ({
         ...ref(object),
         controller: object.controller,
         definition: definition(s, object),
         keywords: keywords(s, object),
       });
+      const actorSource = actor ? source(actor) : damageSource(s, entry);
+      const power = Math.max(0, actor ? stats(s, actor).power : (entry.sourceStats?.power ?? 0));
       const packets = [];
-      for (const victim of victims) {
+      for (const target of entry.targets?.[e.victimGroup] ?? []) {
+        const victim = currentPermanent(target);
+        if (
+          !victim ||
+          !(e.op === 'fight'
+            ? hasType(definition(s, victim), 'creature')
+            : ['creature', 'planeswalker'].some((type) => hasType(definition(s, victim), type)))
+        )
+          continue;
         if (e.op === 'fight' && victim.id === actor.id) {
-          packets.push({
-            source: source(actor),
-            target: ref(actor),
-            amount: Math.max(0, stats(s, actor).power) * 2,
-          });
+          packets.push({ source: actorSource, target: ref(actor), amount: power * 2 });
           continue;
         }
-        packets.push({
-          source: source(actor),
-          target: ref(victim),
-          amount: Math.max(0, stats(s, actor).power),
-        });
+        packets.push({ source: actorSource, target: ref(victim), amount: power });
         if (e.op === 'fight')
           packets.push({
             source: source(victim),
@@ -2555,7 +2561,11 @@ export function resolveTop(s) {
       entry.controller,
       entry.condition,
       [],
-      { ...entry.source, questCountersLKI: entry.sourceQuestCounters },
+      {
+        ...entry.source,
+        questCountersLKI: entry.sourceQuestCounters,
+        bargainedLKI: entry.sourceBargained,
+      },
       entry.eventManaSpent ?? null,
     )
   )

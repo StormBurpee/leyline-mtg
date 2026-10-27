@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bb8c6dd2-1abe-4eb2-be1f-b0c078e5f257",
+  "name": "Turtle Blimp",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": [],
+    "manaCost": "{5}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this Vehicle enters, create a 2/2 red Mutant creature token.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mutant-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 2
+    }
+  ]
+}

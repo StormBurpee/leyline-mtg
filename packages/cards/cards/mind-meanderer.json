@@ -1,0 +1,83 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "18d1765b-3b60-4dda-93a6-d02a4e53f185",
+  "name": "Mind Meanderer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird", "Fish", "Illusion"],
+    "colors": ["G", "U"],
+    "manaCost": "{3}{G}{U}{U}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nThis creature has vigilance as long as you control a Jace planeswalker.\nWhen this creature enters, it fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "you",
+          "where": {
+            "all": [
+              {
+                "type": "planeswalker"
+              },
+              {
+                "subtype": "Jace"
+              }
+            ]
+          }
+        },
+        "operator": "gte",
+        "right": 1
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["vigilance"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "victim",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "fight",
+          "source": "source",
+          "victimGroup": "victim"
+        }
+      ]
+    }
+  ]
+}

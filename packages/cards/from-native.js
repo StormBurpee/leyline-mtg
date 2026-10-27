@@ -461,6 +461,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
     if (d.static.kind !== 'anthem') throw new Error('Unsupported continuous rule.');
     abilities.push(structuredClone(d.static));
   }
+  if (d.bargain) abilities.push({ kind: 'bargain' });
   if (d.sacrificeCost)
     abilities.push({ kind: 'sacrificeCost', ...structuredClone(d.sacrificeCost) });
   for (const modifier of d.costModifiers ?? [])

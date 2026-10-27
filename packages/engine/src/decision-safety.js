@@ -88,6 +88,7 @@ export function actionEffects(state, action) {
     target: action.target,
     x: action.x ?? 0,
     additionalCost: action.additionalCost,
+    bargained: action.type === 'cast' && !!spellProfile(card, action.mode)?.bargained,
   };
   return predictedEffects(state, effects, entry);
 }

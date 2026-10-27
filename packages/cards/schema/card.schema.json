@@ -1265,10 +1265,23 @@
             },
             "victimGroup": {
               "type": "string"
+            },
+            "source": {
+              "const": "source"
             }
           },
-          "required": ["op", "sourceGroup", "victimGroup"],
-          "additionalProperties": false
+          "required": ["op", "victimGroup"],
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "properties": { "sourceGroup": {} },
+              "required": ["sourceGroup"]
+            },
+            {
+              "properties": { "source": {} },
+              "required": ["source"]
+            }
+          ]
         },
         {
           "type": "object",
@@ -1281,10 +1294,23 @@
             },
             "victimGroup": {
               "type": "string"
+            },
+            "source": {
+              "const": "source"
             }
           },
-          "required": ["op", "sourceGroup", "victimGroup"],
-          "additionalProperties": false
+          "required": ["op", "victimGroup"],
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "properties": { "sourceGroup": {} },
+              "required": ["sourceGroup"]
+            },
+            {
+              "properties": { "source": {} },
+              "required": ["source"]
+            }
+          ]
         },
         {
           "type": "object",
@@ -3404,6 +3430,16 @@
           },
           "required": ["kind", "cost"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bargain"
+            }
+          },
+          "required": ["kind"],
+          "additionalProperties": false
         }
       ]
     },
@@ -3644,6 +3680,16 @@
             }
           },
           "required": ["kind", "prepared"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "sourceBargained"
+            }
+          },
+          "required": ["kind"],
           "additionalProperties": false
         }
       ]

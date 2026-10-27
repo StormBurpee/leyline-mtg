@@ -1,0 +1,77 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "06343800-b555-4a13-ad4d-19e37d200138",
+  "name": "Fangkeeper's Familiar",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Snake"],
+    "colors": ["B", "G", "U"],
+    "manaCost": "{1}{B}{G}{U}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flash\nWhen this creature enters, choose one \u2014\n\u2022 You gain 3 life and surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\n\u2022 Destroy target enchantment.\n\u2022 Counter target creature spell.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Gain 3 life and surveil 3.",
+          "effects": [
+            {
+              "op": "gainLife",
+              "target": "controller",
+              "amount": 3
+            },
+            {
+              "op": "surveil",
+              "target": "controller",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "Destroy target enchantment.",
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "enchantment"
+            }
+          }
+        },
+        {
+          "label": "Counter target creature spell.",
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "spell",
+            "where": {
+              "type": "creature"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

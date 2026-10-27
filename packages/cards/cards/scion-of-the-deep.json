@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/scion-of-the-deep",
+  "name": "Scion of the Deep",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Octopus"],
+    "colors": ["U"],
+    "manaCost": null,
+    "power": 8,
+    "toughness": 8,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

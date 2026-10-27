@@ -1531,3 +1531,48 @@ test('choosing targeted trigger mode advances directly to its target stage with 
     h.cleanup();
   }
 });
+
+test('bargain casting option can be declined, or reviewed and paid once after cancel/read/back', async () => {
+  const { bargainPosition } = await import('./helpers/bargain-position.js');
+  const s = bargainPosition();
+  const card = s.players[0].hand
+    .map((id) => s.objects[id])
+    .find((o) => o.name === 'Hamlet Glutton');
+  for (const mode of [0, 1]) {
+    const h = await mount(exportReplay(s));
+    try {
+      h.click('[data-action="resume"]');
+      h.click(`[data-card="${card.id}"]`);
+      h.click('[data-action="playSelected"]');
+      assert.match(h.dialog.textContent, /Cast without bargain/);
+      h.click(`[data-action="chooseSpellMode"][data-mode="${mode}"]`);
+      if (mode === 1) {
+        assert.match(h.dialog.textContent, /Choose additional sacrifice/);
+        assert.ok(h.dialog.querySelector('[data-action="confirmCastingSacrifice"]').disabled);
+        h.click('[data-action="closeDialog"]');
+        h.click('[data-action="playSelected"]');
+        const select = h.dialog.querySelector('[data-action="selectCastingSacrifice"]');
+        h.click(`[data-action="selectCastingSacrifice"][data-cardid="${select.dataset.cardid}"]`);
+        h.click(`[data-action="readDecisionCard"][data-cardid="${select.dataset.cardid}"]`);
+        h.click('[data-action="returnDecision"]');
+        assert.equal(
+          h.dialog
+            .querySelector(
+              `[data-action="selectCastingSacrifice"][data-cardid="${select.dataset.cardid}"]`,
+            )
+            .getAttribute('aria-pressed'),
+          'true',
+        );
+        const stale = h.click('[data-action="confirmCastingSacrifice"]');
+        stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+      }
+      const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+      const casts = saved.replay.commands.filter((c) => c.type === 'cast' && c.card === card.id);
+      assert.equal(casts.length, 1);
+      assert.equal(casts[0].mode, mode);
+      assert.equal(!!casts[0].sacrifice, mode === 1);
+    } finally {
+      h.cleanup();
+    }
+  }
+});

@@ -25,6 +25,7 @@ export function validateCondition(value, { continuous = false } = {}) {
     const fields = {
       opponentLostLifeThisTurn: ['kind'],
       additionalCostPaid: ['kind'],
+      sourceBargained: ['kind'],
       controllerLostLifeThisTurn: ['kind'],
       controllerTurn: ['kind'],
       sourceType: ['kind', 'type'],

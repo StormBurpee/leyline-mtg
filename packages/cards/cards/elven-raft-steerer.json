@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d0f62148-1015-49b8-b61f-a4332325a6b0",
+  "name": "Elven Raft-Steerer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Pilot"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Landfall \u2014 Whenever a land you control enters, choose one \u2014\n\u2022 Tap target creature an opponent controls.\n\u2022 Untap target creature you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Tap target creature an opponent controls.",
+          "effects": [
+            {
+              "op": "tap",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "label": "Untap target creature you control.",
+          "effects": [
+            {
+              "op": "untap",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

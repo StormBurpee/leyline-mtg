@@ -192,6 +192,7 @@ export function castingProfile(
   if (!intrinsic.length && !sources.length) return profile;
   const projected = proposedCastingState(state, player, object, x);
   const proposed = projected.objects[object.id];
+  if (profile.bargained) proposed.bargained = true;
   const spell = {
     definition: profile,
     controller: player,

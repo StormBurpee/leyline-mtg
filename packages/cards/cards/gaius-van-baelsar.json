@@ -1,0 +1,81 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "86d2a45a-e452-4241-8ab4-28a2bb808ffa",
+  "name": "Gaius van Baelsar",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}{B}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When Gaius van Baelsar enters, choose one \u2014\n\u2022 Each player sacrifices a creature token of their choice.\n\u2022 Each player sacrifices a nontoken creature of their choice.\n\u2022 Each player sacrifices an enchantment of their choice.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Each player sacrifices a creature token.",
+          "effects": [
+            {
+              "op": "sacrifice",
+              "player": "all",
+              "count": 1,
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "token": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Each player sacrifices a nontoken creature.",
+          "effects": [
+            {
+              "op": "sacrifice",
+              "player": "all",
+              "count": 1,
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "token": false
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Each player sacrifices an enchantment.",
+          "effects": [
+            {
+              "op": "sacrifice",
+              "player": "all",
+              "count": 1,
+              "where": {
+                "type": "enchantment"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/scaling-construct-token",
+  "name": "Scaling Construct Token",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Construct"],
+    "colors": [],
+    "manaCost": null,
+    "power": 0,
+    "toughness": 0,
+    "token": true
+  },
+  "rulesText": "This token gets +1/+1 for each artifact you control.",
+  "abilities": [
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "you",
+        "where": {
+          "type": "artifact"
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "you",
+        "where": {
+          "type": "artifact"
+        }
+      }
+    }
+  ]
+}

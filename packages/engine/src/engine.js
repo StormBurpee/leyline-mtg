@@ -204,6 +204,7 @@ function cast(s, p, c) {
   if (d.flashbackPaid) o.flashbackPaid = true;
   if (d.harmonizePaid) o.harmonizePaid = true;
   if (d.warpPaid) o.warpPaid = true;
+  if (d.bargained) o.bargained = true;
   if (d.adventureCast) o.adventureCast = true;
   delete o.castingFaceDown;
   if (d.faceDownCast) o.faceDown = true;
@@ -231,6 +232,7 @@ function cast(s, p, c) {
     ...(d.harmonizePaid ? { harmonizePaid: true, harmonize: structuredClone(plan.harmonize) } : {}),
     ...(d.warpPaid ? { warpPaid: true } : {}),
     ...(d.adventureCast ? { adventureCast: true } : {}),
+    ...(d.bargained ? { bargained: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
     ...(d.giftPromised ? { giftPromised: true } : {}),
@@ -287,6 +289,7 @@ function finishCasting(s) {
     ...(d.harmonizePaid ? { harmonizePaid: true, harmonize: structuredClone(plan.harmonize) } : {}),
     ...(d.warpPaid ? { warpPaid: true } : {}),
     ...(d.adventureCast ? { adventureCast: true } : {}),
+    ...(d.bargained ? { bargained: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
     ...(d.giftPromised ? { giftPromised: true } : {}),
@@ -1101,6 +1104,7 @@ export function replay(record) {
         '0.47.0',
         '0.48.0',
         '0.49.0',
+        '0.50.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "814e06c0-9b61-4a64-8c67-73a8eb00a768",
+  "name": "Ferocification",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "At the beginning of combat on your turn, choose one \u2014\n\u2022 Target creature you control gets +2/+0 until end of turn.\n\u2022 Target creature you control gains menace and haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Give a friendly creature +2/+0.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 2,
+              "toughness": 0,
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Give a friendly creature menace and haste.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["menace", "haste"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

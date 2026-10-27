@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b0bf1964-c543-4c53-9f09-0dd7c608d5c5",
+  "name": "Black Panther, Vanguard",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Warrior", "Hero"],
+    "colors": ["G", "W"],
+    "manaCost": "{2}{G}{W}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Whenever another nontoken Hero you control enters, choose one \u2014\n\u2022 Create a 1/1 white Soldier creature token.\n\u2022 Creatures you control get +1/+1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "all": [
+            {
+              "subtype": "Hero"
+            },
+            {
+              "token": false
+            }
+          ]
+        }
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Create a 1/1 white Soldier creature token.",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/soldier-token",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Creatures you control get +1/+1 until end of turn.",
+          "effects": [
+            {
+              "op": "modifyAll",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              },
+              "power": 1,
+              "toughness": 1,
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

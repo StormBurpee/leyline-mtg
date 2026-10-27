@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "21aaecc7-b9ec-4068-8e47-4dffaa12f102",
+  "name": "Broadcast Rambler",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Vehicle"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "When this Vehicle enters, create a 1/1 colorless Thopter artifact creature token with flying.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/flying-thopter-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "crew",
+      "power": 1
+    }
+  ]
+}

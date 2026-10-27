@@ -12,7 +12,7 @@ export function harmonizeCandidates(s, p) {
 export function castingSacrificeCandidates(s, p, profile) {
   if (!profile.sacrificeCost) return [];
   return controlled(s, p).filter((o) =>
-    matchesFilter({ definition: definition(s, o) }, profile.sacrificeCost.where, p),
+    matchesFilter({ definition: definition(s, o), token: o.token }, profile.sacrificeCost.where, p),
   );
 }
 function baseCastingPayment(

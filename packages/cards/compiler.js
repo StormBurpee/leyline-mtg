@@ -174,7 +174,7 @@ export function compileCard(
         return { ...native, targetGroup };
       }
       if (effect.op === 'fight' || effect.op === 'bite') {
-        fields(effect, ['op', 'sourceGroup', 'victimGroup'], p);
+        fields(effect, ['op', 'source', 'sourceGroup', 'victimGroup'], p);
         return structuredClone(effect);
       }
       if (
@@ -852,6 +852,10 @@ export function compileCard(
       case 'chooseCreatureType':
         fields(a, ['kind'], path);
         d.chooseCreatureType = true;
+        break;
+      case 'bargain':
+        fields(a, ['kind'], path);
+        d.bargain = true;
         break;
       case 'kicker':
         fields(a, ['kind', 'cost', 'effects'], path);

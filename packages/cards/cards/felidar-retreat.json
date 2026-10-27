@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "16629f59-bae8-4c19-bf50-443eb0ed6856",
+  "name": "Felidar Retreat",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{3}{W}"
+  },
+  "rulesText": "Landfall \u2014 Whenever a land you control enters, choose one \u2014\n\u2022 Create a 2/2 white Cat Beast creature token.\n\u2022 Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Create a 2/2 white Cat Beast creature token.",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/cat-beast-token",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Put a +1/+1 counter on each creature you control. They gain vigilance.",
+          "effects": [
+            {
+              "op": "counterAll",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              },
+              "amount": 1
+            },
+            {
+              "op": "modifyAll",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              },
+              "power": 0,
+              "toughness": 0,
+              "keywords": ["vigilance"],
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

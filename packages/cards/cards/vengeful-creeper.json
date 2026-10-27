@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d5b7c283-357b-409f-9afc-985a3b89cc40",
+  "name": "Vengeful Creeper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Plant", "Elemental"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "Disguise {5}{G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen this creature is turned face up, destroy target artifact or enchantment an opponent controls.",
+  "abilities": [
+    {
+      "kind": "disguise",
+      "cost": "{5}{G}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "faceUp",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "controller": "opponent"
+            },
+            {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "enchantment"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0c061a1b-206a-4fcc-92e5-30c8ed9d65c1",
+  "name": "Artistic Process",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{3}{R}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Artistic Process deals 6 damage to target creature.\n\u2022 Artistic Process deals 2 damage to each creature you don't control.\n\u2022 Create a 3/3 blue and red Elemental creature token with flying. It gains haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Deal 6 damage to target creature.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 6
+            }
+          ]
+        },
+        {
+          "label": "Deal 2 damage to each creature you don't control.",
+          "effects": [
+            {
+              "op": "damageAll",
+              "amount": 2,
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "opponent"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Create a flying blue and red Elemental with temporary haste.",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/blue-red-flying-elemental-token",
+              "amount": 1,
+              "temporaryKeywords": ["haste"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5b5ef88c-f863-4f55-91fc-a63f7f3c1b3f",
+  "name": "Outlaws' Fury",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "Creatures you control get +2/+0 until end of turn. If you control an outlaw, exile the top card of your library. Until the end of your next turn, you may play that card. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 2,
+          "toughness": 0,
+          "until": "endOfTurn"
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "controlAtLeast",
+            "count": 1,
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "any": [
+                    {
+                      "subtype": "Assassin"
+                    },
+                    {
+                      "subtype": "Mercenary"
+                    },
+                    {
+                      "subtype": "Pirate"
+                    },
+                    {
+                      "subtype": "Rogue"
+                    },
+                    {
+                      "subtype": "Warlock"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "then": [
+            {
+              "op": "exileTop",
+              "count": 1,
+              "player": "controller",
+              "duration": "nextTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

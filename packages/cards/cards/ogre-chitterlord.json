@@ -1,0 +1,106 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "532cac99-e3cf-4869-a19f-cba67a2a6fd0",
+  "name": "Ogre Chitterlord",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Ogre", "Warrior"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}",
+    "power": 6,
+    "toughness": 5
+  },
+  "rulesText": "Menace\nWhenever this creature enters or attacks, create two 1/1 black Rat creature tokens with \"This token can't block.\" Then if you control five or more Rats, each Rat you control gets +2/+0 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/nonblocking-rat-token",
+          "amount": 2
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "controlAtLeast",
+            "count": 5,
+            "where": {
+              "subtype": "Rat"
+            }
+          },
+          "then": [
+            {
+              "op": "modifyAll",
+              "where": {
+                "all": [
+                  {
+                    "subtype": "Rat"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              },
+              "power": 2,
+              "toughness": 0,
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/nonblocking-rat-token",
+          "amount": 2
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "controlAtLeast",
+            "count": 5,
+            "where": {
+              "subtype": "Rat"
+            }
+          },
+          "then": [
+            {
+              "op": "modifyAll",
+              "where": {
+                "all": [
+                  {
+                    "subtype": "Rat"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              },
+              "power": 2,
+              "toughness": 0,
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

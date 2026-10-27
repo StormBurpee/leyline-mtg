@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "aa571676-b390-4b8a-baea-4c4cd60c01f6",
+  "name": "Regal Caracal",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Other Cats you control get +1/+1 and have lifelink. (Damage dealt by those creatures also causes you to gain that much life.)\nWhen this creature enters, create two 1/1 white Cat creature tokens with lifelink.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "type": "creature"
+          },
+          {
+            "controller": "you"
+          },
+          {
+            "subtype": "Cat"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 1,
+      "toughness": 1,
+      "keywords": ["lifelink"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/lifelink-cat-token",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

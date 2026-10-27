@@ -198,7 +198,10 @@ type EffectInstruction =
   | { op: 'conditional'; condition: StateCondition; then: Effect[]; else?: Effect[] }
   | { op: 'stunOn'; amount: EffectNumericValue; subject?: 'source' | 'attached' }
   | { op: 'keywordCounter'; subject: 'source'; keyword: 'indestructible'; amount: number }
-  | { op: 'fight' | 'bite'; sourceGroup: string; victimGroup: string }
+  | ({ op: 'fight' | 'bite'; victimGroup: string } & (
+      | { sourceGroup: string; source?: never }
+      | { source: 'source'; sourceGroup?: never }
+    ))
   | { op: 'damageEventPowerOpponent' }
   | {
       op: 'exileTop';
@@ -373,6 +376,7 @@ export type AdditionalCostPayment =
 export type StateCondition =
   | { kind: 'sourceQuestCountersAtLeast'; count: number }
   | { kind: 'additionalCostPaid' }
+  | { kind: 'sourceBargained' }
   | { kind: 'sourceType'; type: CardType }
   | { kind: 'sourcePrepared'; prepared: boolean }
   | { kind: 'sourceExiledCardTypesAtLeast'; count: number }
@@ -495,6 +499,7 @@ export interface CardDefinition {
   readonly abilitiesRemoved?: true;
   readonly baseStats?: { power?: NumericValue; toughness?: NumericValue };
   readonly sacrificeCost?: { where: CardPredicate };
+  readonly bargain?: true;
   readonly costModifiers?: readonly {
     scope: 'self' | 'you' | 'opponent' | 'all';
     change: 'reduce' | 'increase';
@@ -620,6 +625,7 @@ export interface GameObject {
   chosenBasicLandType?: string;
   chosenX?: number;
   castPlayer?: PlayerId;
+  bargained?: boolean;
   abilityUses?: Record<number, string>;
   triggerUses?: Record<number, string>;
   targetHistory?: { stamp: string; counts: Record<string, number> };
@@ -698,6 +704,8 @@ export interface StackEntry {
   harmonize?: ObjectTarget | null;
   rule?: 'increaseSpeed' | 'warpExile' | 'mobilizeSacrifice' | 'earthbendReturn';
   sourceQuestCounters?: number;
+  sourceBargained?: boolean;
+  bargained?: boolean;
   additionalCost?: AdditionalCostPayment;
   delayedObjects?: ObjectTarget[];
   flashbackPaid?: boolean;

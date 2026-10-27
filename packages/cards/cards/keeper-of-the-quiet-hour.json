@@ -1,0 +1,32 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ecdfee75-15fd-41ea-89d4-4bfc1fa4d032",
+  "name": "Keeper of the Quiet Hour",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Chimera"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[\u22121]: Surveil 1\" and \"[\u22123]: Draw a card.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "empowerJace",
+          "token": "leyline:token/jace",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

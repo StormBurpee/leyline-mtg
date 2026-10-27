@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "50ace222-57f1-477f-9e06-155d7b403512",
+  "name": "Realm-Scorcher Hellkite",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dragon"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}",
+    "power": 4,
+    "toughness": 6
+  },
+  "rulesText": "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nFlying, haste\nWhen this creature enters, if it was bargained, add four mana in any combination of colors.\n{1}{R}: This creature deals 1 damage to any target.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "condition": {
+        "kind": "sourceBargained"
+      },
+      "effects": [
+        {
+          "op": "chooseMana"
+        },
+        {
+          "op": "chooseMana"
+        },
+        {
+          "op": "chooseMana"
+        },
+        {
+          "op": "chooseMana"
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{R}"
+      },
+      "target": {
+        "scope": "damageable"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "bargain"
+    }
+  ]
+}
