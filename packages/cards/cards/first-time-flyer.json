@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cbbea4e2-4b36-4965-89b6-00d2a564f146",
+  "name": "First-Time Flyer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Pilot", "Ally"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nThis creature gets +1/+1 as long as there's a Lesson card in your graveyard.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "subtype": "Lesson"
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      },
+      "power": 1,
+      "toughness": 1
+    }
+  ]
+}

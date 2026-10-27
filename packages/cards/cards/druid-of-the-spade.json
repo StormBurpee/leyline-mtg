@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9740ce6d-ef6b-4d70-839a-8bd5e0e1e0a1",
+  "name": "Druid of the Spade",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rabbit", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "As long as you control a token, this creature gets +2/+0 and has trample.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "you",
+          "where": {
+            "token": true
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      },
+      "power": 2,
+      "toughness": 0,
+      "keywords": ["trample"]
+    }
+  ]
+}

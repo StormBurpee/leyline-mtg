@@ -1,5 +1,5 @@
 {
-  "version": "0.32.0",
+  "version": "0.33.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -442,6 +442,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Barrow Naughty",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Basilica Bell-Haunt",
       "type": "creature",
       "keywords": [],
@@ -458,6 +466,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Basking Capybara",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Bear Cub",
       "type": "creature",
       "keywords": [],
@@ -470,6 +486,14 @@
       "type": "artifact",
       "keywords": ["flash"],
       "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Bearer of Glory",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modifyAll"],
       "triggers": [],
       "activatedAbilities": 1
     },
@@ -1130,6 +1154,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Cloudsculpt Technician",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Coeurl",
       "type": "creature",
       "keywords": [],
@@ -1589,6 +1621,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Didact Echo",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dimension X",
       "type": "land",
       "keywords": [],
@@ -1786,6 +1826,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Druid of the Spade",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dual-Sun Adepts",
       "type": "creature",
       "keywords": ["double strike"],
@@ -1859,6 +1907,14 @@
           "excludeSource": true
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Echo of Dusk",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -2317,6 +2373,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "First-Time Flyer",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Fisk Tower",
       "type": "land",
       "keywords": [],
@@ -2461,6 +2525,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Frilled Cave-Wurm",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Frog Butler",
       "type": "creature",
       "keywords": ["deathtouch"],
@@ -2507,6 +2579,14 @@
       "opcodes": ["draw"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Gaelicat",
+      "type": "creature",
+      "keywords": ["flying", "vigilance"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Galewind Moose",
@@ -2603,6 +2683,14 @@
       "name": "Gigantic Big Bear",
       "type": "creature",
       "keywords": ["hexproof", "haste"],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Gigantoad",
+      "type": "creature",
+      "keywords": [],
       "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
@@ -2761,6 +2849,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Goblin Tomb Raider",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Gohn, Town of Ruin",
       "type": "land",
       "keywords": [],
@@ -2822,6 +2918,14 @@
       "keywords": ["reach"],
       "opcodes": ["gainLife"],
       "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Gravblade Heavy",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -3583,6 +3687,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Kargan Dragonrider",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Kavaron Turbodrone",
       "type": "creature",
       "keywords": [],
@@ -3633,6 +3745,22 @@
       "opcodes": ["modify", "scry"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Kitesail Corsair",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Knife",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw", "attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 2
     },
     {
       "name": "Krang, Utrom Warlord",
@@ -5278,6 +5406,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Quick-Draw Katana",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["attachEquipment"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Quick Study",
       "type": "instant",
       "keywords": [],
@@ -6028,6 +6164,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Scorpion Sentinel",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Scoured Barrens",
       "type": "land",
       "keywords": [],
@@ -6108,6 +6252,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": ["surveil"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Shardmage's Rescue",
+      "type": "enchantment",
+      "keywords": ["flash"],
+      "opcodes": [],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -6393,6 +6545,14 @@
       "opcodes": ["damage"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Skilled Battlecarver",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Skirmish Rhino",
@@ -7632,6 +7792,19 @@
       "keywords": ["flash"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Twinblade Paladin",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "lifeGain",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {

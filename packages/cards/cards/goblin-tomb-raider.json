@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "37ce95bb-8ff5-47b9-85e4-21be7a794940",
+  "name": "Goblin Tomb Raider",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Pirate"],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "As long as you control an artifact, this creature gets +1/+0 and has haste.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "artifact"
+              }
+            ]
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      },
+      "power": 1,
+      "toughness": 0,
+      "keywords": ["haste"]
+    }
+  ]
+}

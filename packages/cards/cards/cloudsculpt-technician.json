@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7c5183be-cddf-48fb-a4b5-dc5f6faf26de",
+  "name": "Cloudsculpt Technician",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Jellyfish", "Artificer"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nAs long as you control an artifact, this creature gets +1/+0.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "artifact"
+              }
+            ]
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      },
+      "power": 1,
+      "toughness": 0
+    }
+  ]
+}

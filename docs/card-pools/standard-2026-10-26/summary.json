@@ -4,8 +4,8 @@
   "compilerInputs": {
     "packages/forge-import/compile.js": "3b5482940ce563bbc49017b5f8e035e3c2617abe5d6c0a17cd6bbaf4a1ccd22b",
     "packages/engine/src/registry.js": "282e2a6da52197795ab6c7eea9972106f6a16eb638b1df78038c2da23042c3ac",
-    "packages/engine/src/definition-validation.js": "90395f7762ed4a45f0a5893f380c4fb0b09e0e6c1bf29cabd6d864b0d69c9270",
-    "packages/engine/src/condition-schema.js": "5ae7a42619debe71a3aa585ef1b84015ab8b37a4d6c69e1e37180375b647567b",
+    "packages/engine/src/definition-validation.js": "44bf988068ae2524db0f597a02916567ae61088e606668adafdc214424ea129d",
+    "packages/engine/src/condition-schema.js": "249a5c1a2ea6554fe4151d06809b82983234ac734dd09e5ef4c7635b9da2481e",
     "packages/engine/src/selectors.js": "aed0814cc9f5248e16f7f54a62c2c6ac34181ec8fdcaf708eeb11afba9dddfc3",
     "packages/engine/src/value-schema.js": "0cedbdb46ae39b9426932244b5e9d9b6bce2d2605eb321c01e4256c0b8bcdfd9",
     "packages/engine/src/events.js": "703c8be329d05a8e987bc438413f2d90cdbd2ccb350f8b1b9a475182169b9d70",
@@ -23,8 +23,8 @@
   "excluded": {},
   "coverage": {
     "no_exact_forge_match": 261,
-    "unsupported": 4147,
-    "curated": 756
+    "unsupported": 4126,
+    "curated": 777
   },
   "layouts": {
     "normal": 4823,
@@ -39,20 +39,20 @@
     "meld": 3
   },
   "keywordsOnUnimplementedCards": {
-    "Flying": 457,
-    "Vigilance": 171,
+    "Flying": 453,
+    "Vigilance": 170,
     "Trample": 164,
     "Surveil": 130,
-    "Flash": 120,
+    "Flash": 119,
     "Mill": 115,
     "Reach": 113,
-    "Equip": 110,
+    "Equip": 108,
     "Menace": 107,
     "Haste": 97,
     "Transform": 88,
     "Ward": 83,
-    "Enchant": 81,
     "Lifelink": 81,
+    "Enchant": 80,
     "Crew": 76,
     "Treasure": 75,
     "Deathtouch": 73,
@@ -105,7 +105,6 @@
     "Threshold": 18,
     "Indestructible": 17,
     "Suspect": 16,
-    "Descend": 16,
     "Job select": 16,
     "Eerie": 15,
     "Amass": 14,
@@ -115,6 +114,7 @@
     "Survival": 13,
     "Basic landcycling": 13,
     "Raid": 13,
+    "Descend": 12,
     "Renew": 12,
     "Teamwork": 12,
     "Mobilize": 12,
@@ -302,17 +302,17 @@
     "Burning Chains": 1
   },
   "diagnostics": {
-    "Unreferenced or unsupported SVar": 3819,
+    "Unreferenced or unsupported SVar": 3814,
     "Unsupported spell field": 3308,
     "Unsupported spell opcode": 2443,
-    "Unsupported trigger field": 1893,
-    "Unsupported trigger mode": 1078,
-    "unsupported field S.": 955,
+    "Unsupported trigger field": 1892,
+    "Unsupported trigger mode": 1077,
+    "unsupported field S.": 933,
     "Unsupported supertype or card type.": 882,
     "Unsupported mana symbol": 843,
     "Unsupported targeted zone transition.": 544,
     "Unsupported target predicate": 405,
-    "Unsupported ability opcode": 398,
+    "Unsupported ability opcode": 397,
     "Only source +1/+1 counters on abilities are supported.": 337,
     "Keywords on this card type require manual review.": 236,
     "Unsupported graveyard target predicate": 220,
@@ -322,7 +322,7 @@
     "unsupported field Variant.": 130,
     "Only one tap ability producing one mana of a listed color is supported.": 129,
     "Unsupported cast trigger predicate": 116,
-    "unsupported keyword Equip": 107,
+    "unsupported keyword Equip": 105,
     "Only an unconditional self enters-tapped replacement is supported.": 103,
     "Unexpected PT on a noncreature.": 96,
     "NumDmg must be a literal nonnegative integer.": 91,
@@ -331,7 +331,7 @@
     "Unsupported dies trigger predicate": 85,
     "NumCards must be a literal nonnegative integer.": 84,
     "A subability cannot introduce a new target in this subset.": 84,
-    "unsupported keyword Enchant": 81,
+    "unsupported keyword Enchant": 80,
     "Destroy requires a supported permanent target.": 75,
     "unsupported keyword Crew": 72,
     "unsupported keyword etbCounter": 63,
@@ -588,5 +588,5 @@
       "sha256": "57b91dec0d3b810928ff8420c5b5b35d8e2bace62ac89d4afcdeddbda57ef206"
     }
   ],
-  "reclassifiedWithEngine": "0.32.0"
+  "reclassifiedWithEngine": "0.33.0"
 }

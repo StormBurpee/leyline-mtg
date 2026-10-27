@@ -63,6 +63,8 @@ export function advanceStep(s) {
     cleanup(s);
     return;
   }
+  if (s.step === 'endCombat')
+    s.combat = { attackers: [], blocks: {}, blocked: [], firstEligible: [], hasFirst: false };
   let index = STEPS.indexOf(s.step) + 1;
   if (s.step === 'attackers' && !s.combat.attackers.length) index = STEPS.indexOf('endCombat');
   if (s.step === 'blockers') {
@@ -92,7 +94,6 @@ export function advanceStep(s) {
       beginDamage(s, false);
       break;
     case 'endCombat':
-      s.combat = { attackers: [], blocks: {}, blocked: [], firstEligible: [], hasFirst: false };
       break;
     case 'cleanup':
       cleanup(s);

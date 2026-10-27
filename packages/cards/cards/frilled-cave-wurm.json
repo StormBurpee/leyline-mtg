@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ac5294c6-bc79-4a0f-b8b3-52b554561e38",
+  "name": "Frilled Cave-Wurm",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Salamander", "Wurm"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 2,
+    "toughness": 5
+  },
+  "rulesText": "Descend 4 \u2014 This creature gets +2/+0 as long as there are four or more permanent cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "not": {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            }
+          }
+        },
+        "right": 4,
+        "operator": "gte"
+      },
+      "power": 2,
+      "toughness": 0
+    }
+  ]
+}

@@ -206,7 +206,7 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
       object.id,
       !!definition(s, object).entersTapped ||
         (definition(s, object).entersTappedUnless &&
-          !meetsCondition(s, controller, definition(s, object).entersTappedUnless)),
+          !meetsCondition(s, controller, definition(s, object).entersTappedUnless, [], object)),
     ]),
   );
   const entryCounters = new Map(
@@ -220,7 +220,7 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
           source.controller === controller &&
           source.id !== object.id &&
           hasType(definition(s, object), 'creature') &&
-          meetsCondition(s, controller, bonus.condition)
+          meetsCondition(s, controller, bonus.condition, [], source)
             ? bonus.amount
             : 0)
         );
@@ -871,7 +871,8 @@ export function resolveTop(s) {
     }
     return;
   }
-  if (entry.condition && !meetsCondition(s, entry.controller, entry.condition)) return;
+  if (entry.condition && !meetsCondition(s, entry.controller, entry.condition, [], entry.source))
+    return;
   const object = s.objects[entry.source?.id],
     d = entry.kind === 'spell' && object ? definition(s, object) : null;
   if (entry.targetKind && !legalTarget(s, entry.targetKind, entry.target, entry.controller)) {

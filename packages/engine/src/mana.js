@@ -25,7 +25,7 @@ export function manaEligible(unit, purpose) {
 export function manaOptions(s, o) {
   const mana = definition(s, o).mana;
   return (mana ? (Array.isArray(mana) ? mana : [mana]) : []).filter((color) =>
-    meetsCondition(s, o.controller, definition(s, o).manaConditions?.[color]),
+    meetsCondition(s, o.controller, definition(s, o).manaConditions?.[color], [], o),
   );
 }
 export function canTapForMana(s, o, p) {

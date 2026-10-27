@@ -53,6 +53,7 @@ const FIELDS = new Set([
   'attachmentBonus',
   'baseStats',
   'selfBonus',
+  'conditionalBonuses',
   'static',
   'triggers',
   'activated',
@@ -507,6 +508,39 @@ export function validateDefinition(card) {
   if (card.basic && card.type !== 'land') errors.push(`${name}: only lands can be basic.`);
   if (card.target != null)
     errors.push(...validateTargetSpec(card.target).map((error) => `${name}.target: ${error}`));
+  if (card.conditionalBonuses !== undefined) {
+    if (
+      !Array.isArray(card.conditionalBonuses) ||
+      !card.conditionalBonuses.length ||
+      card.conditionalBonuses.length > 16
+    )
+      errors.push(`${name}.conditionalBonuses: expected 1–16 bonuses.`);
+    else
+      for (const bonus of card.conditionalBonuses) {
+        if (!plain(bonus)) {
+          errors.push(`${name}.conditionalBonuses: expected an object.`);
+          continue;
+        }
+        if (
+          Object.keys(bonus).some(
+            (k) => !['affects', 'condition', 'power', 'toughness', 'keywords'].includes(k),
+          ) ||
+          !['self', 'attached'].includes(bonus.affects) ||
+          !validNumericValue(bonus.power) ||
+          !validNumericValue(bonus.toughness) ||
+          (bonus.keywords !== undefined &&
+            (!Array.isArray(bonus.keywords) || bonus.keywords.some((k) => !KEYWORDS.has(k))))
+        )
+          errors.push(`${name}.conditionalBonuses: unsupported bonus.`);
+        errors.push(
+          ...validateCondition(bonus.condition, { continuous: true }).map(
+            (e) => `${name}.conditionalBonuses: ${e}`,
+          ),
+        );
+        if (bonus.affects === 'attached' && !card.aura && !card.subtypes?.includes('Equipment'))
+          errors.push(`${name}.conditionalBonuses: attached bonuses need an Aura or Equipment.`);
+      }
+  }
   for (const field of ['baseStats', 'selfBonus'])
     if (card[field] !== undefined) {
       const value = card[field];

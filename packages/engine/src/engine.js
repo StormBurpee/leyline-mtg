@@ -124,7 +124,8 @@ export function abilityProblem(s, p, id, index, target, discardCard) {
   if (!Number.isSafeInteger(index) || index < 0) return 'That ability does not exist.';
   const ability = definition(s, o).activated?.[index];
   if (!ability) return 'That ability does not exist.';
-  if (!meetsCondition(s, p, ability.condition)) return 'The activation condition is not met.';
+  if (!meetsCondition(s, p, ability.condition, [], o))
+    return 'The activation condition is not met.';
   if (ability.oncePerTurn && o.abilityUses?.[index] === `${s.turn}:${o.incarnation}`)
     return 'This ability has already been activated this turn.';
   if (ability.timing === 'sorcery' && !(s.active === p && main(s) && s.stack.length === 0))
