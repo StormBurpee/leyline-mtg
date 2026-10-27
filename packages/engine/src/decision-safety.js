@@ -1,3 +1,4 @@
+import { convokePayment } from './convoke.js';
 import { predictedEffects } from './conditional-effects.js';
 import { flattenTargets } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
@@ -57,6 +58,7 @@ export function actionEffects(state, action) {
   const object = state.objects[action.card];
   if (!object) return [];
   const card = definition(state, object);
+  if (action.type === 'plot') return [];
   if (action.type === 'cycle') return [{ op: 'draw', count: 1 }];
   const effects =
     action.type === 'activate'
@@ -74,21 +76,25 @@ export function actionEffects(state, action) {
 function actionCost(state, player, action) {
   if (!action.card) return {};
   const card = definition(state, state.objects[action.card]);
+  if (action.type === 'plot') return { mana: card.plot };
   if (action.type === 'cycle') return { mana: card.cycling };
-  return action.type === 'activate'
-    ? card.activated[action.ability].cost
-    : {
-        mana:
-          castingProfile(
-            state,
-            player,
-            state.objects[action.card],
-            action.mode,
-            action.targets ? flattenTargets(action.targets) : action.target,
-            undefined,
-            action.x,
-          )?.cost ?? card.cost,
-      };
+  if (action.type === 'activate') return card.activated[action.ability].cost;
+  const profile = castingProfile(
+    state,
+    player,
+    state.objects[action.card],
+    action.mode,
+    action.targets ? flattenTargets(action.targets) : action.target,
+    undefined,
+    action.x,
+  );
+  const plan =
+    profile?.keywords.includes('convoke') &&
+    convokePayment(state, player, profile, action.convoke, action.autoTap !== false);
+  return {
+    mana: plan?.cost ?? profile?.cost ?? card.cost,
+    excludeSources: plan?.excludeSources ?? [],
+  };
 }
 
 /** Check ward after the actual automatic base-payment plan, not against mana that
@@ -102,11 +108,12 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
   const life = state.players[player].life - (cost.life ?? 0);
   if ((ward.life ?? 0) >= life) return false;
   const payment = planPayment(state, player, cost.mana ?? {}, {
-    excludeSources: cost.tap ? [sourceId] : [],
+    excludeSources: [...(cost.excludeSources ?? []), ...(cost.tap ? [sourceId] : [])],
   });
   if (!payment) return false;
   const objects = { ...state.objects };
-  for (const id of payment.taps) objects[id] = { ...objects[id], tapped: true };
+  for (const id of [...payment.taps, ...(cost.excludeSources ?? [])])
+    objects[id] = { ...objects[id], tapped: true };
   if (sourceId && cost.tap) objects[sourceId] = { ...objects[sourceId], tapped: true };
   if (sourceId && cost.sacrificeSelf)
     objects[sourceId] = { ...objects[sourceId], zone: 'graveyard' };
@@ -140,7 +147,7 @@ export function actionSafe(state, player, action) {
     }
     return (
       life < state.players[player].life &&
-      !!planPayment(state, player, mana) &&
+      !!planPayment(state, player, mana, { excludeSources: cost.excludeSources ?? [] }) &&
       !resolutionRisk(state, player, actionEffects(state, action), null, life)
     );
   }

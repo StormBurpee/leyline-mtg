@@ -35,6 +35,8 @@ import { captureTable, animateTable, renderCombatLinks, animateEffects } from '.
 import {
   spellProfile,
   castingProfile,
+  convokeCandidates,
+  convokePayment,
   MAX_X,
   CARDS,
   definition,
@@ -274,6 +276,15 @@ function send(command, { autoPass = true, automatic = false } = {}) {
       : {}),
     ...command,
   };
+  if (
+    !automatic &&
+    c.type === 'cast' &&
+    c.convoke === undefined &&
+    definition(state, state.objects[c.card]).keywords.includes('convoke')
+  ) {
+    showConvoke(c);
+    return false;
+  }
   const result = dispatch(state, c);
   if (!result.ok) {
     toast(result.error.message);
@@ -669,6 +680,7 @@ function showCardReader(id) {
 }
 function closeDialog() {
   dialog._crewDraft = null;
+  dialog._convokeDraft = null;
   if (dialog._activeChoice && state) ui.dismissedChoiceLease = decisionLease(state, viewer());
   dialog.close();
   schedule();
@@ -990,6 +1002,49 @@ function replayTo(index) {
   } catch (e) {
     toast(e.message);
   }
+}
+function showConvoke(command, choices) {
+  const object = state.objects[command.card];
+  const profile = castingProfile(
+    state,
+    viewer(),
+    object,
+    command.mode,
+    command.targets ? flattenTargets(command.targets) : command.target,
+    undefined,
+    command.x,
+  );
+  if (!profile || command.expectedRevision !== state.revision) {
+    toast('The game changed. Choose this spell again.');
+    return;
+  }
+  choices ??=
+    convokePayment(state, viewer(), profile, undefined, command.autoTap !== false)?.choices ?? [];
+  const payment = convokePayment(state, viewer(), profile, choices, command.autoTap !== false);
+  const candidates = convokeCandidates(state, viewer());
+  const body = `<p>Total locked cost: ${mana(profile.cost)}. Each creature pays one matching colored symbol or one generic mana. Newly entered creatures may convoke.</p><div class="decision-card-grid">${candidates
+    .map((o) => {
+      const chosen = choices.find((c) => c.card === o.id)?.symbol;
+      const symbols = Object.keys(profile.cost).filter(
+        (symbol) =>
+          profile.cost[symbol] > 0 &&
+          (symbol === 'generic' ||
+            (symbol !== 'C' &&
+              symbol.split('/').some((color) => definition(state, o).color?.includes(color)))),
+      );
+      return `<section>${decisionCard(state, o.id, metadata, { viewer: viewer(), action: 'readDecisionCard', selected: chosen !== undefined })}<div>${symbols.map((symbol) => `<button class="btn ${chosen === symbol ? 'primary' : ''}" data-action="selectConvoke" data-cardid="${o.id}" data-symbol="${symbol}" aria-pressed="${chosen === symbol}">Pay ${symbol === 'generic' ? '{1}' : `{${symbol}}`}</button>`).join('')}<button class="btn" data-action="selectConvoke" data-cardid="${o.id}" data-symbol="">Do not tap</button></div></section>`;
+    })
+    .join('')}</div>`;
+  openChoiceDialog(
+    'Choose creatures to convoke',
+    object.name,
+    body,
+    `<button class="btn" data-action="closeDialog">Cancel</button><span>${choices.length} creatures selected. ${payment ? `Remaining mana: ${mana(payment.cost)}. Auto-tap: ${payment.mana.activations.map((a) => escape(state.objects[a.card].name)).join(', ') || 'none'}.` : 'Cannot pay with this selection; choose other creatures or symbols.'}</span><button class="btn primary" data-action="confirmConvoke" ${payment ? '' : 'disabled'}>Confirm payment and cast</button>`,
+    { source: object.name },
+  );
+  dialog._convokeDraft = { command, choices };
+  dialog._activeChoice = null;
+  dialog._stageRender = () => showConvoke(command, choices);
 }
 function showSettings() {
   openDialog(
@@ -1744,6 +1799,22 @@ async function action(name, el) {
         showGroupedTargets();
       }
       break;
+    case 'selectConvoke': {
+      const draft = dialog._convokeDraft;
+      if (!draft || draft.command.expectedRevision !== state.revision) break;
+      const choices = draft.choices.filter((c) => c.card !== el.dataset.cardid);
+      if (el.dataset.symbol) choices.push({ card: el.dataset.cardid, symbol: el.dataset.symbol });
+      showConvoke(draft.command, choices);
+      break;
+    }
+    case 'confirmConvoke': {
+      const draft = dialog._convokeDraft;
+      if (!draft || draft.command.expectedRevision !== state.revision) break;
+      const command = { ...draft.command, convoke: draft.choices };
+      closeDialog();
+      send(command);
+      break;
+    }
     case 'nextTargetGroup': {
       if (dialog._groupRevision !== state.revision) break;
       const group = dialog._groupDefinitions[dialog._groupIndex];
@@ -1954,6 +2025,9 @@ async function action(name, el) {
     case 'turnFaceUp':
       closeDialog();
       send({ type: 'turnFaceUp', card: el.dataset.cardid });
+      break;
+    case 'plotSelected':
+      if (ui.selected) send({ type: 'plot', card: ui.selected });
       break;
     case 'cycleSelected':
       if (ui.selected) send({ type: 'cycle', card: ui.selected });

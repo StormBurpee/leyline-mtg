@@ -1,3 +1,7 @@
+export type ConvokeChoice = {
+  card: string;
+  symbol: Exclude<Color, 'C'> | 'generic' | HybridSymbol;
+};
 /** Public types for the dependency-free JavaScript engine. */
 export type CardType = 'land' | 'creature' | 'instant' | 'sorcery' | 'artifact' | 'enchantment';
 export type PlayerId = 0 | 1;
@@ -193,6 +197,16 @@ type EffectInstruction =
       keywords?: string[];
     }
   | {
+      op: 'copyToken';
+      count: number;
+      exceptions?: {
+        power?: number;
+        toughness?: number;
+        nonlegendary?: boolean;
+        addSubtypes?: ('Hero' | 'Coward')[];
+      };
+    }
+  | {
       op: 'token';
       definition: string;
       count: NumericValue;
@@ -249,6 +263,7 @@ export interface CardDefinition {
   readonly cycling?: ManaCost;
   readonly cyclingType?: string;
   readonly flashback?: ManaCost;
+  readonly plot?: ManaCost;
   readonly kicker?: { cost: ManaCost; effects: readonly Effect[] };
   readonly offspring?: ManaCost;
   readonly disguise?: ManaCost;
@@ -357,6 +372,7 @@ export interface GameObject {
   chosenCreatureType?: string;
   chosenX?: number;
   abilityUses?: Record<number, string>;
+  plotted?: { turn: number; incarnation: number };
   playPermission?: { player: PlayerId; turn: number; incarnation: number };
 }
 export interface PlayerState {
@@ -402,8 +418,10 @@ export interface StackEntry {
   controller: PlayerId;
   source: ObjectTarget | null;
   sourceDefinition?: CardDefinition;
+  sourceCopyDefinition?: CardDefinition;
   x?: number;
   castingCost?: ManaCost;
+  convoke?: ConvokeChoice[];
   rule?: 'increaseSpeed';
   flashbackPaid?: boolean;
   kicked?: boolean;
@@ -618,6 +636,7 @@ export type Action =
   | { type: 'chooseLegend'; card: string }
   | { type: 'crew'; card: string; cards: string[] }
   | { type: 'cycle'; card: string }
+  | { type: 'plot'; card: string }
   | { type: 'resolveOptional'; accept: boolean }
   | { type: 'payCost'; pay: boolean }
   | { type: 'pass' | 'concede' | 'keep' | 'mulligan' }
@@ -629,6 +648,7 @@ export type Action =
       targets?: TargetPlan;
       target?: Target;
       autoTap?: boolean;
+      convoke?: ConvokeChoice[];
       x?: number;
       mode?: number;
     }
@@ -663,6 +683,7 @@ export type LegalAction =
           | 'turnFaceUp'
           | 'crew'
           | 'cycle'
+          | 'plot'
           | 'activate'
           | 'chooseTriggerTarget'
           | 'chooseTriggerTargets'
@@ -763,7 +784,13 @@ export function castProblem(
   player: PlayerId,
   id: string,
   target?: Target,
-  options?: { autoTap?: boolean; mode?: number; targets?: TargetPlan; x?: number },
+  options?: {
+    autoTap?: boolean;
+    mode?: number;
+    targets?: TargetPlan;
+    x?: number;
+    convoke?: ConvokeChoice[];
+  },
 ): string | null;
 export function abilityProblem(
   state: GameState,
@@ -832,6 +859,7 @@ export function validateEventSpec(value: unknown): string[];
 export function spellProfile(card: CardDefinition, mode?: number): CardDefinition | null;
 export function spellOptions(card: CardDefinition): { mode?: number; profile: CardDefinition }[];
 
+export function plotProblem(state: GameState, player: PlayerId, id: string): string | null;
 export function cyclingProblem(state: GameState, player: PlayerId, id: string): string | null;
 
 export function castingProfile(
@@ -854,3 +882,17 @@ export function crewCandidates(state: GameState, player: PlayerId, id: string): 
 export function crewPlan(state: GameState, player: PlayerId, id: string): string[] | null;
 export function manaValue(card: CardDefinition, x?: number): number;
 export const MAX_X: number;
+
+export function convokeCandidates(state: GameState, player: PlayerId): GameObject[];
+export function convokePayment(
+  state: GameState,
+  player: PlayerId,
+  profile: CardDefinition,
+  choices?: ConvokeChoice[],
+  autoTap?: boolean,
+): {
+  cost: ManaCost;
+  choices: ConvokeChoice[];
+  excludeSources: string[];
+  mana: { activations: { card: string; color: Color }[] };
+} | null;

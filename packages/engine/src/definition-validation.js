@@ -49,6 +49,7 @@ const FIELDS = new Set([
   'cycling',
   'cyclingType',
   'flashback',
+  'plot',
   'kicker',
   'offspring',
   'disguise',
@@ -226,6 +227,7 @@ function validateEffects(
       attachEquipment: [],
       modify: ['subject', 'power', 'toughness', 'keywords'],
       token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords'],
+      copyToken: ['count', 'exceptions'],
       stunOn: ['subject', 'amount'],
       counterOn: ['subject', 'amount'],
       untap: ['subject'],
@@ -325,6 +327,37 @@ function validateEffects(
         Object.keys(e.mana ?? {}).some((symbol) => !['W', 'U', 'B', 'R', 'G', 'C'].includes(symbol))
       )
         errors.push(`${p}.mana: mana production cannot be generic.`);
+    }
+    if (e.op === 'copyToken') {
+      if (!natural(e.count) || e.count > 1000) errors.push(`${p}.count: expected 0 to 1000.`);
+      if (!effectTargetCompatible('copyToken', target))
+        errors.push(`${p}: requires a current permanent target.`);
+      const x = e.exceptions;
+      if (x !== undefined) {
+        if (
+          !plain(x) ||
+          Object.keys(x).some(
+            (k) => !['power', 'toughness', 'nonlegendary', 'addSubtypes'].includes(k),
+          )
+        )
+          errors.push(`${p}.exceptions: unsupported copy exception.`);
+        else {
+          if (
+            (x.power !== undefined || x.toughness !== undefined) &&
+            (!Number.isSafeInteger(x.power) || !Number.isSafeInteger(x.toughness))
+          )
+            errors.push(`${p}.exceptions: both fixed power and toughness are required.`);
+          if (x.nonlegendary !== undefined && typeof x.nonlegendary !== 'boolean')
+            errors.push(`${p}.exceptions.nonlegendary: expected boolean.`);
+          if (
+            x.addSubtypes !== undefined &&
+            (!Array.isArray(x.addSubtypes) ||
+              x.addSubtypes.length > 16 ||
+              x.addSubtypes.some((t) => !['Hero', 'Coward'].includes(t)))
+          )
+            errors.push(`${p}.exceptions.addSubtypes: only Hero/Coward additions are supported.`);
+        }
+      }
     }
     if (e.op === 'token') {
       if (
@@ -555,6 +588,21 @@ export function validateDefinition(card) {
       card.maxSpeedKeywords.some((k) => !GRANTED_KEYWORDS.has(k)))
   )
     errors.push(`${name}.maxSpeedKeywords: unsupported keywords.`);
+  if (card.plot !== undefined) {
+    validateCost(card.plot, `${name}.plot`, errors);
+    if (
+      card.type === 'land' ||
+      card.cost?.X ||
+      card.modes ||
+      card.kicker ||
+      card.offspring ||
+      card.disguise ||
+      card.flashback
+    )
+      errors.push(
+        `${name}.plot: requires a fixed-cost nonland without alternative or additional casting options.`,
+      );
+  }
   if (card.flashback !== undefined) {
     validateCost(card.flashback, `${name}.flashback`, errors);
     if (

@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b8ef65df-f8e7-44e3-9864-9c127232a2b6",
+  "name": "The Wandering Rescuer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Samurai", "Noble"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Flash\nConvoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDouble strike\nOther tapped creatures you control have hexproof.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "convoke"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "type": "creature"
+          },
+          {
+            "controller": "you"
+          },
+          {
+            "tapped": true
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["hexproof"]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0b786547-67ed-49fa-9981-35c4c2175f62",
+  "name": "Ember Island Production",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Create a token that's a copy of target creature you control, except it's not legendary and it's a 4/4 Hero in addition to its other types.\n\u2022 Create a token that's a copy of target creature an opponent controls, except it's not legendary and it's a 2/2 Coward in addition to its other types.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Copy a creature you controls as a 4/4 Hero",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "copyToken",
+              "target": "target",
+              "count": 1,
+              "exceptions": {
+                "power": 4,
+                "toughness": 4,
+                "nonlegendary": true,
+                "addSubtypes": ["Hero"]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Copy a creature opponent controls as a 2/2 Coward",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "copyToken",
+              "target": "target",
+              "count": 1,
+              "exceptions": {
+                "power": 2,
+                "toughness": 2,
+                "nonlegendary": true,
+                "addSubtypes": ["Coward"]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

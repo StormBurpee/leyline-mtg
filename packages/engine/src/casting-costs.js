@@ -69,6 +69,8 @@ export function castingProfile(
         : null
       : base;
   if (!profile) return null;
+  if (object.zone === 'exile' && object.plotted?.incarnation === object.incarnation)
+    profile = { ...profile, cost: {}, plottedCast: true };
   if (profile.cost.X) {
     if (!Number.isSafeInteger(x) || x < 0 || x > MAX_X) return null;
     const cost = { ...profile.cost, generic: (profile.cost.generic ?? 0) + profile.cost.X * x };

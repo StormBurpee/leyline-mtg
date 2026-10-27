@@ -33,6 +33,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
         return { ...effects([rest])[0], targetGroup };
       }
       switch (e.op) {
+        case 'copyToken':
+          return { ...structuredClone(e), target: 'target' };
         case 'sacrifice':
         case 'sacrificeSelf':
         case 'fight':
@@ -136,6 +138,7 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const abilities = d.keywords.map((keyword) => ({ kind: 'keyword', keyword }));
   for (const restriction of ['cannotAttack', 'cannotBlock', 'unblockable'])
     if (d[restriction]) abilities.push({ kind: 'combatRestriction', restriction });
+  if (d.plot) abilities.push({ kind: 'plot', cost: mana(d.plot) });
   if (d.flashback) abilities.push({ kind: 'flashback', cost: mana(d.flashback) });
   if (d.crew !== undefined) abilities.push({ kind: 'crew', power: d.crew });
   if (d.cycling)

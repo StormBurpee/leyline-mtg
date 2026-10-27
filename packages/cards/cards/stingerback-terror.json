@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73",
+  "name": "Stingerback Terror",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Scorpion", "Dragon"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}",
+    "power": 7,
+    "toughness": 7
+  },
+  "rulesText": "Flying, trample\nThis creature gets -1/-1 for each card in your hand.\nPlot {2}{R} (You may pay {2}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "scale",
+        "value": {
+          "kind": "count",
+          "zone": "hand",
+          "player": "you"
+        },
+        "factor": -1
+      },
+      "toughness": {
+        "kind": "scale",
+        "value": {
+          "kind": "count",
+          "zone": "hand",
+          "player": "you"
+        },
+        "factor": -1
+      }
+    },
+    {
+      "kind": "plot",
+      "cost": "{2}{R}"
+    }
+  ]
+}

@@ -65,3 +65,41 @@ test('second-spell predicates see chosen-X stack mana value without storing it a
   assert.equal(s.players[0].hand.length, 3);
   assert.equal(JSON.stringify(s.players[0].spellsCast).includes('Mind Spring'), false);
 });
+
+import { dispatch } from '../src/index.js';
+import { nextTurn } from '../src/turn.js';
+test('plot special-action costs cannot convoke, while later casting can convoke only actual taxes', () => {
+  for (const taxed of [false, true]) {
+    let s = fixture();
+    s.catalog = createRegistry({
+      ...CARDS,
+      'Plotted convoke fixture': {
+        name: 'Plotted convoke fixture',
+        type: 'instant',
+        cost: { generic: 5 },
+        plot: { generic: 2 },
+        keywords: ['convoke'],
+        effects: [],
+      },
+    });
+    const card = put(s, 'Plotted convoke fixture', 0, 'hand'),
+      creature = put(s, 'Grizzly Bears');
+    assert.equal(dispatch(s, { type: 'plot', player: 0, card: card.id }).ok, false);
+    s.players[0].mana.U = 2;
+    s = act(s, 'plot', { card: card.id });
+    assert.equal(s.objects[creature.id].tapped, false);
+    nextTurn(s);
+    nextTurn(s);
+    s.step = 'main1';
+    if (taxed) put(s, 'Thalia, the Survivor', 1);
+    const payment = [{ card: creature.id, symbol: 'generic' }];
+    if (!taxed)
+      assert.equal(
+        dispatch(s, { type: 'cast', player: 0, card: card.id, convoke: payment }).ok,
+        false,
+      );
+    s = act(s, 'cast', { card: card.id, convoke: taxed ? payment : [] });
+    assert.equal(s.objects[creature.id].tapped, taxed);
+    assert.equal(s.objects[card.id].zone, 'stack');
+  }
+});

@@ -1,0 +1,26 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7dbb540f-ee96-4115-b6ef-28ffc73da8b7",
+  "name": "Djinn of Fool's Fall",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Djinn"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nPlot {3}{U} (You may pay {3}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "plot",
+      "cost": "{3}{U}"
+    }
+  ]
+}

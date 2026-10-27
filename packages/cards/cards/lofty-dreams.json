@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f75568a0-33ed-45a0-a885-48a19a5bb58b",
+  "name": "Lofty Dreams",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Aura"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}"
+  },
+  "rulesText": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nEnchant creature\nWhen this Aura enters, draw a card.\nEnchanted creature gets +2/+2 and has flying.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "convoke"
+    },
+    {
+      "kind": "aura",
+      "enchant": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "use": "etb.draw",
+      "args": {
+        "cards": 1
+      }
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 2,
+      "toughness": 2,
+      "keywords": ["flying"]
+    }
+  ]
+}

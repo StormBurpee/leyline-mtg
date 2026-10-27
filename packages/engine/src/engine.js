@@ -1,3 +1,4 @@
+import { convokePayment, convokeCandidates } from './convoke.js';
 import { recordSpellCast } from './spell-history.js';
 import { crewProblem, crewPlan } from './crew.js';
 import { MAX_X, manaValue } from './mana-value.js';
@@ -48,16 +49,16 @@ import {
 import { assignDamage, canAttack, declareAttackers, declareBlockers } from './combat.js';
 import { advanceStep, finishCleanup } from './turn.js';
 const main = (s) => ['main1', 'main2'].includes(s.step);
-export function castProblem(s, p, id, target, { autoTap = true, mode, targets, x } = {}) {
+export function castProblem(s, p, id, target, { autoTap = true, mode, targets, x, convoke } = {}) {
   const o = s.objects[id];
   if (!playableZone(s, o, p)) return 'You cannot play this card from its current zone.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
   const d = castingProfile(s, p, o, mode, targets ? flattenTargets(targets) : target, undefined, x);
   if (!d) return `Choose a valid spell mode and X value (0–${MAX_X} for X spells).`;
   if (d.type === 'land') return 'Lands are played, not cast.';
+  if (d.plottedCast && s.turn <= o.plotted.turn) return 'Cast a plotted card only on a later turn.';
   if (
-    d.type !== 'instant' &&
-    !hasKeyword(s, o, 'flash') &&
+    (d.plottedCast || (d.type !== 'instant' && !hasKeyword(s, o, 'flash'))) &&
     !(s.active === p && main(s) && s.stack.length === 0)
   )
     return 'Cast this only during your main phase with an empty stack.';
@@ -68,8 +69,8 @@ export function castProblem(s, p, id, target, { autoTap = true, mode, targets, x
   } else if (targets !== undefined) return 'This spell has no target groups.';
   if (d.target && !legalTarget(s, d.target, target, p)) return 'Choose a legal target.';
   if (!d.target && target != null) return 'This spell has no targets.';
-  if (!planPayment(s, p, d.cost, { autoTap, purpose: { type: 'cast', card: d } }))
-    return 'Not enough available mana.';
+  if (!convokePayment(s, p, d, convoke, autoTap))
+    return 'Cannot pay the casting cost with the selected mana and convoke creatures.';
   return null;
 }
 export function canPlayLand(s, p, id) {
@@ -91,6 +92,7 @@ function cast(s, p, c) {
     autoTap: c.autoTap !== false,
     mode: c.mode,
     x: c.x,
+    convoke: c.convoke,
     targets: c.targets,
   });
   requireRule(!problem, 'CAST', problem);
@@ -104,7 +106,14 @@ function cast(s, p, c) {
       undefined,
       c.x,
     );
-  const payment = pay(s, p, d.cost, c.autoTap !== false, [], { type: 'cast', card: d });
+  const plan = d.keywords.includes('convoke')
+    ? convokePayment(s, p, d, c.convoke, c.autoTap !== false)
+    : { cost: d.cost, excludeSources: [], choices: [] };
+  const payment = pay(s, p, plan.cost, c.autoTap !== false, plan.excludeSources, {
+    type: 'cast',
+    card: d,
+  });
+  for (const choice of plan.choices) s.objects[choice.card].tapped = true;
   if (d.faceDownCast) o.castingFaceDown = true;
   move(s, o, 'stack');
   o.controller = p;
@@ -115,7 +124,9 @@ function cast(s, p, c) {
   s.stack.push({
     id: `s${++s.nextId}`,
     kind: 'spell',
-    ...(c.x !== undefined ? { castingCost: structuredClone(d.cost) } : {}),
+    ...(c.x !== undefined || d.keywords.includes('convoke')
+      ? { castingCost: structuredClone(d.cost) }
+      : {}),
     uncounterable: payment.uncounterable || !!d.uncounterable,
     name: o.faceDown ? 'Face-down creature' : o.name,
     controller: p,
@@ -125,6 +136,7 @@ function cast(s, p, c) {
     effects: structuredClone(d.effects ?? []),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
     ...(c.x !== undefined ? { x: c.x } : {}),
+    ...(d.keywords.includes('convoke') ? { convoke: structuredClone(plan.choices) } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
@@ -144,6 +156,7 @@ function cast(s, p, c) {
     ...(d.targetGroups ? { targets: structuredClone(c.targets) } : {}),
     ...(d.castingLabel ? { mode: c.mode ?? 0, modeLabel: d.castingLabel } : {}),
     ...(c.x !== undefined ? { x: c.x } : {}),
+    ...(d.keywords.includes('convoke') ? { convoke: structuredClone(plan.choices) } : {}),
     ...(d.flashbackPaid ? { flashbackPaid: true } : {}),
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
@@ -197,6 +210,27 @@ function turnFaceUp(s, p, id) {
   s.passes = 0;
   emit(s, 'turnedFaceUp', { player: p, objectId: id, name: o.name });
   notifyTriggers(s, 'faceUp', { object: o });
+}
+// CR 702.170: plotting is a special action; casting remains restricted even with flash.
+export function plotProblem(s, p, id) {
+  const o = s.objects[id];
+  if (!o || o.zone !== 'hand' || o.owner !== p || !definition(s, o).plot)
+    return 'That card cannot be plotted from your hand.';
+  if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
+  if (!(s.active === p && main(s) && s.stack.length === 0)) return 'Plot only as a sorcery.';
+  if (!planPayment(s, p, definition(s, o).plot))
+    return 'Not enough available mana to plot this card.';
+  return null;
+}
+function plot(s, p, id) {
+  const problem = plotProblem(s, p, id);
+  requireRule(!problem, 'PLOT', problem);
+  const o = s.objects[id];
+  pay(s, p, definition(s, o).plot);
+  move(s, o, 'exile');
+  o.plotted = { turn: s.turn, incarnation: o.incarnation };
+  s.passes = 0;
+  emit(s, 'plotted', { player: p, objectId: id, name: o.name });
 }
 export function cyclingProblem(s, p, id) {
   const o = s.objects[id];
@@ -466,6 +500,9 @@ export function dispatch(state, command) {
         case 'turnFaceUp':
           turnFaceUp(s, p, command.card);
           break;
+        case 'plot':
+          plot(s, p, command.card);
+          break;
         case 'cycle':
           cycle(s, p, command);
           break;
@@ -539,6 +576,7 @@ export function legalActions(s, p, { x: exactX } = {}) {
   if (s.priority !== p) return [{ type: 'concede' }];
   const actions = [{ type: 'pass' }, { type: 'concede' }];
   for (const id of playableCards(s, p)) {
+    if (!plotProblem(s, p, id)) actions.push({ type: 'plot', card: id });
     if (!cyclingProblem(s, p, id)) actions.push({ type: 'cycle', card: id });
     if (canPlayLand(s, p, id)) {
       actions.push({ type: 'playLand', card: id });
@@ -550,7 +588,11 @@ export function legalActions(s, p, { x: exactX } = {}) {
       const available = profile.cost.X
         ? Object.values(s.players[p].mana).reduce((a, b) => a + b, 0) +
           (s.players[p].restrictedMana?.length ?? 0) +
-          Object.values(s.objects).filter((o) => canTapForMana(s, o, p)).length
+          Object.values(s.objects).filter(
+            (o) =>
+              canTapForMana(s, o, p) ||
+              (profile.keywords.includes('convoke') && convokeCandidates(s, p).includes(o)),
+          ).length
         : 0;
       const proposals = !profile.cost.X
         ? [undefined]
@@ -681,6 +723,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.41.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

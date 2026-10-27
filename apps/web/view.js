@@ -97,14 +97,14 @@ const fallback = (name, d = CARDS[name]) =>
 export function handCard(s, id, meta, ui, playable, index = 0) {
   const o = s.objects[id],
     d = definition(s, o);
-  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="${o.zone}" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${o.zone === 'graveyard' ? ', flashback from graveyard' : ''}${playable ? ', playable' : ''}" aria-description="${escape(d.text)}" title="${escape(o.name)}">${o.zone === 'graveyard' ? '<span class="flashback-label">Flashback · graveyard</span>' : ''}${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
+  return `<button class="hand-card ${playable ? 'playable' : ''} ${ui.selected === id || ui.chosen.includes(id) ? 'selected' : ''}" data-card="${id}" data-motion-card="${id}" data-motion-zone="${o.zone}" style="--fan:${Math.max(-4, Math.min(4, index - (s.players[s.objects[id].owner].hand.length - 1) / 2))}" aria-label="${escape(o.name)}${o.plotted ? ', plotted in exile' : o.zone === 'graveyard' ? ', flashback from graveyard' : ''}${playable ? ', playable' : ''}" aria-description="${escape(d.text)}" title="${escape(o.name)}">${o.plotted ? '<span class="flashback-label">Plotted · exile</span>' : o.zone === 'graveyard' ? '<span class="flashback-label">Flashback · graveyard</span>' : ''}${meta[o.name]?.image ? `<img src="${escape(meta[o.name].image)}" alt="${escape(o.name)}" loading="eager">` : fallback(o.name, d)}</button>`;
 }
 function permanent(s, o, meta, ui, targetable) {
   if (o.faceDown) o = { ...o, name: 'Face-down creature' };
   const d = definition(s, o),
     land = d.type === 'land';
   if (land)
-    return `<button class="land-card ${o.tapped ? 'tapped' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" ${artStyle(meta, o.name)} title="${escape(o.name)}${o.tapped ? ' · tapped' : ''}" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}">${d.mana ? mana(Object.fromEntries((Array.isArray(d.mana) ? d.mana : [d.mana]).map((color) => [color, 1]))) : '—'}</button>`;
+    return `<button class="land-card ${o.tapped ? 'tapped' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" ${artStyle(meta, o.name)} title="${escape(o.name || (o.token ? 'Nameless token' : ''))}${o.tapped ? ' · tapped' : ''}" aria-label="${escape(o.name || (o.token ? 'Nameless token' : ''))}${o.tapped ? ' tapped' : ''}">${d.mana ? mana(Object.fromEntries((Array.isArray(d.mana) ? d.mana : [d.mana]).map((color) => [color, 1]))) : '—'}</button>`;
   const pt = stats(s, o),
     gained = keywords(s, o).filter((keyword) => !d.keywords.includes(keyword)),
     attacking = s.combat.attackers.some((r) => r.id === o.id),
@@ -112,7 +112,7 @@ function permanent(s, o, meta, ui, targetable) {
       Object.values(s.combat.blocks)
         .flat()
         .some((r) => r.id === o.id) || ui.blocks.some((b) => b.blocker === o.id);
-  return `<button class="permanent ${o.tapped ? 'tapped' : ''} ${attacking ? 'attacking' : ''} ${blocking ? 'blocking' : ''} ${ui.chosen.includes(o.id) || ui.selected === o.id ? 'selected' : ''} ${targetable ? 'targetable' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" aria-label="${escape(o.name)}${o.tapped ? ' tapped' : ''}${d.type === 'creature' ? `, ${pt.power}/${pt.toughness}` : ''}">${meta[o.name]?.image ? `<picture>${meta[o.name]?.art ? `<source media="(max-width: 900px), (max-width: 1000px) and (max-height: 600px)" srcset="${escape(meta[o.name].art)}">` : ''}<img class="battlefield-card-image" src="${escape(meta[o.name].image)}" alt="" draggable="false"></picture>` : ''}<div class="permanent-art" ${artStyle(meta, o.name)}>${o.damage ? `<span class="damage-marker">−${o.damage}</span>` : ''}${d.type === 'creature' && isSick(s, o) ? '<span class="sick-marker">NEW</span>' : ''}</div><div class="permanent-name">${escape(o.name)}</div><div class="permanent-footer"><span>${
+  return `<button class="permanent ${o.tapped ? 'tapped' : ''} ${attacking ? 'attacking' : ''} ${blocking ? 'blocking' : ''} ${ui.chosen.includes(o.id) || ui.selected === o.id ? 'selected' : ''} ${targetable ? 'targetable' : ''}" data-card="${o.id}" data-motion-card="${o.id}" data-motion-zone="battlefield" aria-label="${escape(o.name || (o.token ? 'Nameless token' : ''))}${o.tapped ? ' tapped' : ''}${d.type === 'creature' ? `, ${pt.power}/${pt.toughness}` : ''}">${meta[o.name]?.image ? `<picture>${meta[o.name]?.art ? `<source media="(max-width: 900px), (max-width: 1000px) and (max-height: 600px)" srcset="${escape(meta[o.name].art)}">` : ''}<img class="battlefield-card-image" src="${escape(meta[o.name].image)}" alt="" draggable="false"></picture>` : ''}<div class="permanent-art" ${artStyle(meta, o.name)}>${o.damage ? `<span class="damage-marker">−${o.damage}</span>` : ''}${d.type === 'creature' && isSick(s, o) ? '<span class="sick-marker">NEW</span>' : ''}</div><div class="permanent-name">${escape(o.name || (o.token ? 'Nameless token' : ''))}</div><div class="permanent-footer"><span>${
     isPacified(s, o)
       ? 'PACIFIED'
       : [...gained, ...d.keywords]
@@ -370,16 +370,18 @@ function actionDock(s, ui, p, actions) {
       d = definition(s, o),
       available = actions.some((a) => a.card === o.id && ['cast', 'playLand'].includes(a.type));
     title = o.name;
-    desc = available
-      ? castingChoices(d)
-        ? 'Choose one mode, then any required target. Mana is paid when you cast.'
-        : d.target
-          ? 'Choose a target next. Mana is paid automatically.'
-          : d.type === 'land'
-            ? 'Playing a land does not use the stack.'
-            : 'Available mana sources will be tapped automatically.'
-      : 'Not playable right now. Check timing, available mana and targets.';
-    buttons = `${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">${d.cyclingType ? `${escape(d.cyclingType)}cycling` : 'Cycle'} ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${o.zone === 'graveyard' ? `Flashback ${mana(d.flashback)}` : d.type === 'land' ? 'Play land' : castingChoices(d) ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
+    desc = o.plotted
+      ? 'Plotted: cast without paying its mana cost on a later turn, only during your main phase with an empty stack. Additional taxes still apply.'
+      : available
+        ? castingChoices(d)
+          ? 'Choose one mode, then any required target. Mana is paid when you cast.'
+          : d.target
+            ? 'Choose a target next. Mana is paid automatically.'
+            : d.type === 'land'
+              ? 'Playing a land does not use the stack.'
+              : 'Available mana sources will be tapped automatically.'
+        : 'Not playable right now. Check timing, available mana and targets.';
+    buttons = `${actions.some((a) => a.type === 'plot' && a.card === o.id) ? `<button class="btn" data-action="plotSelected">Plot ${mana(d.plot)}</button>` : ''}${actions.some((a) => a.type === 'cycle' && a.card === o.id) ? `<button class="btn" data-action="cycleSelected">${d.cyclingType ? `${escape(d.cyclingType)}cycling` : 'Cycle'} ${mana(d.cycling)}</button>` : ''}<button class="btn quiet" data-action="cancelSelection">Cancel</button><button class="btn primary" data-action="playSelected" ${!available ? 'disabled' : ''}>${o.zone === 'graveyard' ? `Flashback ${mana(d.flashback)}` : d.type === 'land' ? 'Play land' : castingChoices(d) ? 'Choose mode' : d.target ? 'Choose target' : 'Cast spell'} →</button>`;
   } else
     buttons = `<button class="btn primary advance-button" data-action="pass">${advanceLabel(s, p)} <span>→</span><small>Space</small></button>`;
   if (c && c.player === p && CARD_DECISIONS.has(c.kind))
@@ -392,10 +394,13 @@ export function inspect(name, meta, state = null, objectId = null, viewer = null
   if (object?.faceDown && object.controller !== viewer)
     return '<div class="inspect-copy"><h3>Face-down creature</h3><p>Colorless 2/2 creature with ward {2}. Its identity is concealed.</p></div>';
 
-  if (!name || !(state?.catalog?.[name] ?? CARDS[name]))
+  const d = object?.definitionOverride ?? state?.catalog?.[name] ?? CARDS[name];
+  if (!d)
     return '<div class="inspect-placeholder"><div><span>◇</span>A closer look.<br>Hover or select any card.</div></div>';
-  const d = state?.catalog?.[name] ?? CARDS[name],
-    m = meta[name];
+  // A copied token can be nameless or have different copiable characteristics
+  // from the printed card; printed metadata must not override its copy values.
+  const m = object?.definitionOverride ? null : meta[name];
+  name = d.name || (object?.token ? 'Nameless token' : name);
   return `<div class="inspect-card">${m?.image ? `<img src="${escape(m.image)}" alt="${escape(name)}">` : `<div class="inspect-placeholder"><div><span>◇</span>${escape(name)}</div></div>`}</div><div class="inspect-copy"><h3>${escape(name)}</h3><div class="type">${escape(m?.type_line ?? `${d.legendary ? 'Legendary ' : ''}${d.type}`)}</div><div class="rules">${escape(m?.oracle_text ?? d.text)}</div>${state && state.objects[objectId]?.zone === 'battlefield' ? liveCharacteristics(state, state.objects[objectId]) : ''}<div class="artist">${m?.artist ? `Illustration: ${escape(m.artist)} · ` : ''}Supported executable definition${d.token ? ' · Token' : ''}</div></div>`;
 }
 function stack(s, ui, meta = {}) {
@@ -446,6 +451,8 @@ export function eventText(e, s) {
       return `${p} declared ${e.ids.length} attackers.`;
     case 'blockers':
       return `${p} declared ${e.pairs.length} blockers.`;
+    case 'plotted':
+      return `${p} plotted ${name}.`;
     case 'cycled':
       return `${p} cycled ${name}.`;
     case 'legendChosen':
