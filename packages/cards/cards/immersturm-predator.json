@@ -1,0 +1,79 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fcb6c6d4-ea8d-49cf-b6df-377084bdb757",
+  "name": "Immersturm Predator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Dragon"],
+    "colors": ["B", "R"],
+    "manaCost": "{2}{B}{R}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Flying\nWhenever this creature becomes tapped, exile up to one target card from a graveyard and put a +1/+1 counter on this creature.\nSacrifice another creature: This creature gains indestructible until end of turn. Tap it.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "tap",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile",
+          "targetGroup": "chosen"
+        },
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "graveyard"
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "creature"
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["indestructible"]
+        },
+        {
+          "op": "tap",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

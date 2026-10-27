@@ -62,10 +62,11 @@ export function chooseLibraryOrder(s, p, forcedRest = []) {
   return { top, rest: cards.filter((id) => !top.includes(id)) };
 }
 
-/** Mandatory selection ranks every inspected card, including those a scry would bottom. */
+/** Rank only eligible inspected cards; taking cards into hand is not a draw. */
 export function chooseLibrarySelection(s, p, count) {
-  const ranked = [...s.choice.cards].sort(
+  const ranked = [...(s.choice.eligibleCards ?? s.choice.cards)].sort(
     (a, b) => keepValue(s, p, b) - keepValue(s, p, a) || a.localeCompare(b),
   );
-  return { top: ranked.slice(0, count), rest: ranked.slice(count) };
+  const top = ranked.slice(0, count);
+  return { top, rest: s.choice.cards.filter((id) => !top.includes(id)) };
 }

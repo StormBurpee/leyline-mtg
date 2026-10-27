@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e6227840-6e3e-48c7-b4a4-42cfd8f14b68",
+  "name": "Eclipsed Kithkin",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Kithkin", "Scout"],
+    "colors": ["G", "W"],
+    "manaCost": "{G/W}{G/W}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, look at the top four cards of your library. You may reveal a Kithkin, Forest, or Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 4,
+          "where": {
+            "any": [
+              {
+                "subtype": "Kithkin"
+              },
+              {
+                "subtype": "Forest"
+              },
+              {
+                "subtype": "Plains"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

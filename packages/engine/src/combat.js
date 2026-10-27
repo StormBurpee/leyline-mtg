@@ -1,4 +1,5 @@
 import { tapObjects } from './model.js';
+import { manaValue } from './mana-value.js';
 import { hasType } from './types.js';
 import {
   maximumBlockers,
@@ -147,10 +148,27 @@ export function declareAttackers(s, ids, defenders = {}) {
   if (ids.length)
     notifyTriggers(s, 'attackGroup', {
       player: s.active,
-      objects: ids.map((id) => ({
-        definition: definition(s, s.objects[id]),
-        controller: s.active,
-      })),
+      objects: ids.map((id) => {
+        const object = s.objects[id];
+        const card = definition(s, object);
+        // Capture the declared attacker's current public characteristics, not just its
+        // printed definition. Group filters use these same facts as individual events.
+        return {
+          id,
+          incarnation: object.incarnation,
+          definition: card,
+          controller: object.controller,
+          owner: object.owner,
+          token: object.token,
+          tapped: object.tapped,
+          attacking: true,
+          blocking: false,
+          stunCounters: object.stunCounters,
+          manaValue: manaValue(card),
+          keywords: keywords(s, object),
+          ...stats(s, object),
+        };
+      }),
     });
 }
 export function declareBlockers(s, pairs) {

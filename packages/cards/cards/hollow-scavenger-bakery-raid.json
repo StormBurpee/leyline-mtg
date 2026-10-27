@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "4fad3816-41af-4fa4-85b4-ba37614ec848",
+  "name": "Hollow Scavenger // Bakery Raid",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Wolf"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "{1}, Sacrifice a Food: This creature gets +2/+2 until end of turn. Activate only once each turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "subtype": "Food"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 2,
+          "toughness": 2,
+          "until": "endOfTurn"
+        }
+      ],
+      "oncePerTurn": true
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Hollow Scavenger",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/bakery-raid",
+        "name": "Bakery Raid",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["G"],
+          "manaCost": "{G}"
+        },
+        "rulesText": "Create a Food token. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/food-token",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

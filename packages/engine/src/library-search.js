@@ -3,7 +3,7 @@ import { matchesFilter } from './selectors.js';
 import { definition, stats } from './model.js';
 
 /** Searching looks at printed library characteristics, not battlefield modifiers. */
-export function searchableCards(state, player, where) {
+export function searchableCards(state, player, where, controller = player) {
   return state.players[player].library.filter((id) => {
     const object = state.objects[id];
     const card = definition(state, object);
@@ -18,7 +18,7 @@ export function searchableCards(state, player, where) {
         manaValue: manaValue(card),
       },
       where,
-      player,
+      controller,
     );
   });
 }

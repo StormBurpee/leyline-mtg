@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c77dc11e-d95d-4e7e-bb24-d971c179e9b0",
+  "name": "Legion Extruder",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "When this artifact enters, it deals 2 damage to any target.\n{2}, {T}, Sacrifice another artifact: Create a 3/3 colorless Golem artifact creature token.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ],
+      "target": {
+        "scope": "damageable"
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true,
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "artifact"
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/colorless-golem-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

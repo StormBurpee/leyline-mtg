@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "51a6819d-c8fb-4f52-ab0c-4ae845728ed2",
+  "name": "Redrock Sentinel",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Golem"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Defender\n{2}, {T}, Sacrifice a land: Draw a card and create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "defender"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "land"
+          }
+        },
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

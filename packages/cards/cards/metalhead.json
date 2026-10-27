@@ -1,0 +1,83 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7df45a2a-75bc-4343-8dad-3a642efd13ee",
+  "name": "Metalhead",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Robot", "Turtle"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When Metalhead enters, return up to one other target artifact or creature to its owner's hand.\n{R}, Sacrifice another artifact: Put a +1/+1 counter on Metalhead. He gains menace and haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "targetGroup": "returned",
+          "destination": "hand"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "returned",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "artifact"
+                }
+              ]
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{R}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "artifact"
+          },
+          "excludeSource": true
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 0,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["menace", "haste"]
+        }
+      ]
+    }
+  ]
+}

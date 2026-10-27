@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ae03782f-8f05-4ce2-a049-005b1b688faf",
+  "name": "Dáin's Company",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dwarf", "Warrior"],
+    "colors": ["R", "W"],
+    "manaCost": "{R}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "This creature has lifelink as long as you control another Dwarf.\nWhen this creature enters, look at the top four cards of your library. You may reveal a Dwarf or Equipment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "you",
+          "where": {
+            "subtype": "Dwarf"
+          },
+          "excludeSource": true
+        },
+        "operator": "gte",
+        "right": 1
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["lifelink"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 4,
+          "where": {
+            "any": [
+              {
+                "subtype": "Dwarf"
+              },
+              {
+                "subtype": "Equipment"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

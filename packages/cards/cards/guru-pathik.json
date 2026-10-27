@@ -1,0 +1,90 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4dcd7b78-ce5a-43eb-a16d-3b9ea411795d",
+  "name": "Guru Pathik",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Monk", "Ally"],
+    "colors": ["G", "U"],
+    "manaCost": "{2}{G/U}{G/U}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "When Guru Pathik enters, look at the top five cards of your library. You may reveal a Lesson, Saga, or Shrine card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nWhenever you cast a Lesson, Saga, or Shrine spell, put a +1/+1 counter on another target creature you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 5,
+          "where": {
+            "any": [
+              {
+                "subtype": "Lesson"
+              },
+              {
+                "subtype": "Saga"
+              },
+              {
+                "subtype": "Shrine"
+              }
+            ]
+          },
+          "optional": true,
+          "reveal": true,
+          "restOrder": "random"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "subtype": "Lesson"
+            },
+            {
+              "subtype": "Saga"
+            },
+            {
+              "subtype": "Shrine"
+            }
+          ]
+        }
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

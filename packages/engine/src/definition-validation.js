@@ -141,7 +141,7 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
     return;
   }
   const allowed = allowTap
-    ? ['mana', 'life', 'tap', 'sacrificeSelf', 'exileSelf', 'discard']
+    ? ['mana', 'life', 'tap', 'sacrificeSelf', 'sacrifice', 'exileSelf', 'discard']
     : ['mana', 'life'];
   if (Object.keys(cost).some((key) => !allowed.includes(key)))
     errors.push(`${path}: unsupported cost.`);
@@ -150,6 +150,22 @@ function validatePaymentCost(cost, path, errors, { allowTap = false } = {}) {
     errors.push(`${path}.life: expected a nonnegative safe integer.`);
   if (cost.sacrificeSelf !== undefined && typeof cost.sacrificeSelf !== 'boolean')
     errors.push(`${path}.sacrificeSelf: expected a boolean.`);
+  if (cost.sacrifice !== undefined) {
+    const selected = cost.sacrifice;
+    if (
+      !plain(selected) ||
+      Object.keys(selected).some((k) => !['count', 'where', 'excludeSource'].includes(k)) ||
+      !Number.isSafeInteger(selected.count) ||
+      selected.count < 1 ||
+      selected.count > 10 ||
+      (selected.excludeSource !== undefined && typeof selected.excludeSource !== 'boolean')
+    )
+      errors.push(
+        `${path}.sacrifice: expected 1–10 chosen permanents with an optional filter and source exclusion.`,
+      );
+    if (plain(selected) && selected.where !== undefined)
+      errors.push(...validateFilter(selected.where).map((e) => `${path}.sacrifice: ${e}`));
+  }
   if (cost.exileSelf !== undefined && typeof cost.exileSelf !== 'boolean')
     errors.push(`${path}.exileSelf: expected a boolean.`);
   if (cost.discard !== undefined && cost.discard !== 1)
@@ -356,7 +372,17 @@ function validateEffects(
       moveTarget: ['destination', 'controller', 'tapped', 'subject', 'trackSource'],
       draw: ['count', 'player'],
       mill: ['count', 'player'],
-      lookChooseHand: ['count', 'player', 'selectCount', 'restOrder'],
+      lookChooseHand: [
+        'count',
+        'player',
+        'selectCount',
+        'restOrder',
+        'where',
+        'optional',
+        'reveal',
+        'revealAll',
+        'restDestination',
+      ],
       scry: ['count', 'player'],
       surveil: ['count', 'player'],
       explore: ['subject'],
@@ -477,6 +503,14 @@ function validateEffects(
         errors.push(`${p}.selectCount: expected a bounded nonnegative selection count.`);
       if (e.restOrder !== undefined && !['chosen', 'random'].includes(e.restOrder))
         errors.push(`${p}.restOrder: expected chosen or random.`);
+      if (e.where !== undefined) errors.push(...validateFilter(e.where));
+      for (const key of ['optional', 'reveal', 'revealAll'])
+        if (e[key] !== undefined && typeof e[key] !== 'boolean')
+          errors.push(`${p}.${key}: expected a boolean.`);
+      if (e.restDestination !== undefined && !['bottom', 'graveyard'].includes(e.restDestination))
+        errors.push(`${p}.restDestination: expected bottom or graveyard.`);
+      if (e.restDestination === 'graveyard' && e.restOrder === 'random')
+        errors.push(`${p}.restOrder: random ordering requires a bottom destination.`);
     }
     if (
       e.op === 'mill' &&
@@ -1986,6 +2020,16 @@ export function validateDefinition(card) {
         if (a.timing !== undefined && a.timing !== 'sorcery')
           errors.push(`${p}.timing: unsupported timing.`);
         validatePaymentCost(a.cost, `${p}.cost`, errors, { allowTap: true });
+        if (
+          a.cost.sacrifice &&
+          !a.target &&
+          !a.targetGroups &&
+          a.loyalty === undefined &&
+          contains(a.effects, (v) => v.op === 'addMana')
+        )
+          errors.push(
+            `${p}: selected-sacrifice mana abilities require unsupported mana payment planning.`,
+          );
         if (a.target != null)
           errors.push(...validateTargetSpec(a.target).map((error) => `${p}.target: ${error}`));
         if (a.text !== undefined && typeof a.text !== 'string')

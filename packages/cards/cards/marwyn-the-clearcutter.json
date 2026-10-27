@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "aff4e43d-cafa-47de-8e39-011f9254a26a",
+  "name": "Marwyn, the Clearcutter",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Elf", "Warrior"],
+    "colors": ["R"],
+    "manaCost": "{R}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "{2}, {T}, Sacrifice an artifact or land: Draw a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "any": [
+              {
+                "type": "artifact"
+              },
+              {
+                "type": "land"
+              }
+            ]
+          }
+        },
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

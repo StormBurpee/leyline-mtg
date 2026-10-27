@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ce000c0b-db42-4569-855f-f4eae0431c09",
+  "name": "Ripchain Razorkin",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Berserker"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 5,
+    "toughness": 3
+  },
+  "rulesText": "Reach\n{2}{R}, Sacrifice a land: Draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{R}",
+        "sacrifice": {
+          "count": 1,
+          "where": {
+            "type": "land"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

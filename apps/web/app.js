@@ -31,6 +31,7 @@ import {
   DECK_LIBRARY_KEY,
 } from './deck-room.js';
 import { cardDropPlan } from './drop-plan.js';
+import { createMatchStorage } from './match-storage.js';
 import { installCardDrag } from './gestures.js';
 import { installTableViewport } from './table-viewport.js';
 import { captureTable, animateTable, renderCombatLinks, animateEffects } from './motion.js';
@@ -40,6 +41,7 @@ import {
   castingPayment,
   harmonizeCandidates,
   castingSacrificeCandidates,
+  activationSacrificeCandidates,
   additionalCostCandidates,
   convokeCandidates,
   MAX_X,
@@ -77,7 +79,7 @@ import {
   mana,
 } from './view.js';
 installTableViewport(document.documentElement);
-const SAVE_KEY = 'leyline.match.v1';
+const matchStorage = createMatchStorage();
 const app = document.querySelector('#app'),
   dialog = document.querySelector('#dialog');
 let metadata = {};
@@ -98,13 +100,6 @@ for (const [name, slug] of [
 let state = null,
   botTimer = null,
   toastTimer = null;
-function readSave() {
-  try {
-    return localStorage.getItem(SAVE_KEY);
-  } catch {
-    return null;
-  }
-}
 const ui = {
   view: 'play',
   catalog: CARDS,
@@ -133,7 +128,7 @@ const ui = {
   presentationUntil: 0,
   holdPriority: false,
   reduceMotion: false,
-  saved: !!readSave(),
+  saved: matchStorage.hasSave(),
   selected: null,
   targeting: false,
   activation: null,
@@ -249,32 +244,33 @@ function resetSelection() {
 function save() {
   if (!state || ui.replayRecord) return;
   try {
-    localStorage.setItem(
-      SAVE_KEY,
-      JSON.stringify({
-        replay: exportReplay(state),
-        mode: ui.mode,
-        deck: ui.deck,
-        customDeck: ui.customDeck,
-        autoYield: ui.autoYield,
-        holdPriority: ui.holdPriority,
-        controls: {
-          controlMode: ui.controlMode,
-          stops: ui.stops,
-          autoOrderTriggers: ui.autoOrderTriggers,
-          autoDamage: ui.autoDamage,
-          handExpanded: ui.handExpanded,
-        },
-      }),
-    );
+    matchStorage.write(state, {
+      mode: ui.mode,
+      deck: ui.deck,
+      customDeck: ui.customDeck,
+      autoYield: ui.autoYield,
+      holdPriority: ui.holdPriority,
+      controls: {
+        controlMode: ui.controlMode,
+        stops: ui.stops,
+        autoOrderTriggers: ui.autoOrderTriggers,
+        autoDamage: ui.autoDamage,
+        handExpanded: ui.handExpanded,
+      },
+    });
     ui.saved = true;
-  } catch {
-    toast('Local storage is full or unavailable. Export a replay to save this match.');
+  } catch (error) {
+    toast(`Could not save on this device: ${error.message} Export a replay to keep this match.`);
   }
 }
 function send(
   command,
-  { autoPass = true, automatic = false, additionalCostConfirmed = false } = {},
+  {
+    autoPass = true,
+    automatic = false,
+    additionalCostConfirmed = false,
+    activationSacrificeConfirmed = false,
+  } = {},
 ) {
   if (ui.replayRecord) {
     toast('Exit replay inspection before playing.');
@@ -325,6 +321,15 @@ function send(
     showConvoke(c);
     return false;
   }
+  if (
+    !automatic &&
+    c.type === 'activate' &&
+    !activationSacrificeConfirmed &&
+    definition(state, state.objects[c.card]).activated[c.ability]?.cost.sacrifice
+  ) {
+    showActivationSacrifice({ ...c, sacrifices: undefined });
+    return false;
+  }
   const result = dispatch(state, c);
   if (!result.ok) {
     toast(result.error.message);
@@ -359,7 +364,6 @@ function send(
             ? 450
             : 100);
   resetSelection();
-  save();
   save();
   render();
   animateTable(app, motion, state, { skip: dragMotionCard });
@@ -877,6 +881,7 @@ function closeDialog() {
   dialog._harmonizeDraft = null;
   dialog._distributionDraft = null;
   dialog._castingSacrificeDraft = null;
+  dialog._activationSacrificeDraft = null;
   dialog._additionalCostDraft = null;
   if (dialog._activeChoice && state) ui.dismissedChoiceLease = decisionLease(state, viewer());
   dialog.close();
@@ -1008,7 +1013,7 @@ function startConfirmed() {
 function exportMatch() {
   let record;
   try {
-    record = state ? exportReplay(state) : JSON.parse(readSave() ?? 'null')?.replay;
+    record = state ? exportReplay(state) : matchStorage.read()?.replay;
   } catch {
     toast('The saved match could not be read.');
     return;
@@ -1167,37 +1172,81 @@ function renderLibraryOrder() {
   if (choice?.kind !== 'libraryOrder' || dialog._libraryChoice !== choice) return;
   const selectHand = choice.action === 'lookChooseHand';
   const selectCount = choice.selectCount ?? Math.min(1, choice.cards.length);
+  const quantity = `${choice.optional ? 'up to ' : ''}${selectCount} card${selectCount === 1 ? '' : 's'}`;
   const randomRest = choice.restOrder === 'random';
-  const restLabel = !['surveil', 'explore'].includes(choice.action)
-    ? 'Bottom of library'
-    : 'Graveyard';
+  const graveyardRest =
+    ['surveil', 'explore'].includes(choice.action) || choice.restDestination === 'graveyard';
+  const restLabel = graveyardRest ? 'Graveyard' : 'Bottom of library';
   const topLabel = selectHand ? 'Put into your hand' : 'Top of library';
+  const eligible = (id) =>
+    !selectHand || !choice.eligibleCards || choice.eligibleCards.includes(id);
   const body = `<div class="decision-order-lanes">${[
     ['top', topLabel],
     ['rest', restLabel],
   ]
-    .map(
-      ([key, label]) =>
-        `<section class="decision-order-lane" data-order-drop="${key}"><h3>${label}</h3><p>${key === 'top' ? (selectHand ? `Choose exactly ${selectCount} card${selectCount === 1 ? '' : 's'}.` : 'Leftmost card will be drawn first.') : !['surveil', 'explore'].includes(choice.action) ? (randomRest ? 'These cards go below the rest of your library in a random order.' : 'These cards go below the rest of your library in the order shown.') : 'These cards go to your graveyard.'}</p><div class="decision-card-gallery" style="--choice-count:${Math.max(1, order[key].length)}">${order[key].map((id, i) => decisionCard(state, id, metadata, { viewer: viewer(), action: 'libraryMove', extra: `data-group="${key === 'top' ? 'rest' : 'top'}"`, draggable: true, badge: key === 'top' ? (selectHand ? 'To hand' : i === 0 ? 'Draw first' : `Draw ${i + 1}`) : restLabel, label: `Move ${state.objects[id].name} to ${key === 'top' ? restLabel : topLabel}` }).replace('</article>', `<div class="decision-order-controls"><button data-action="libraryMove" data-cardid="${id}" data-group="${key === 'top' ? 'rest' : 'top'}">${key === 'top' ? (!['surveil', 'explore'].includes(choice.action) ? 'Bottom' : 'Graveyard') : selectHand ? 'Choose for hand' : 'Keep on top'}</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="-1" aria-label="Move ${escape(state.objects[id].name)} earlier" ${i === 0 || (selectHand && key === 'top') || (randomRest && key === 'rest') ? 'disabled' : ''}>←</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="1" aria-label="Move ${escape(state.objects[id].name)} later" ${i === order[key].length - 1 || (selectHand && key === 'top') || (randomRest && key === 'rest') ? 'disabled' : ''}>→</button></div></article>`)).join('') || '<div class="decision-empty"><span>◇</span><p>Move cards here</p></div>'}</div></section>`,
-    )
+    .map(([key, label]) => {
+      const cards = order[key]
+        .map((id, i) => {
+          const disabled = key === 'rest' && !eligible(id);
+          const destination = key === 'top' ? restLabel : topLabel;
+          return decisionCard(state, id, metadata, {
+            viewer: viewer(),
+            action: 'libraryMove',
+            extra: `data-group="${key === 'top' ? 'rest' : 'top'}"`,
+            disabled,
+            draggable: !disabled,
+            badge: disabled
+              ? 'Not eligible for hand'
+              : key === 'top'
+                ? selectHand
+                  ? 'To hand'
+                  : i === 0
+                    ? 'Draw first'
+                    : `Draw ${i + 1}`
+                : restLabel,
+            label: disabled
+              ? `${state.objects[id].name} is not eligible for your hand`
+              : `Move ${state.objects[id].name} to ${destination}`,
+          }).replace(
+            '</article>',
+            `<div class="decision-order-controls"><button data-action="libraryMove" data-cardid="${id}" data-group="${key === 'top' ? 'rest' : 'top'}" ${disabled ? 'disabled' : ''}>${disabled ? 'Not eligible' : key === 'top' ? (graveyardRest ? 'Graveyard' : 'Bottom') : selectHand ? 'Choose for hand' : 'Keep on top'}</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="-1" aria-label="Move ${escape(state.objects[id].name)} earlier" ${i === 0 || (selectHand && key === 'top') || (randomRest && key === 'rest') ? 'disabled' : ''}>←</button><button data-action="libraryReorder" data-group="${key}" data-index="${i}" data-direction="1" aria-label="Move ${escape(state.objects[id].name)} later" ${i === order[key].length - 1 || (selectHand && key === 'top') || (randomRest && key === 'rest') ? 'disabled' : ''}>→</button></div></article>`,
+          );
+        })
+        .join('');
+      const instruction =
+        key === 'top'
+          ? selectHand
+            ? `Choose ${choice.optional ? 'up to' : 'exactly'} ${selectCount} eligible card${selectCount === 1 ? '' : 's'}.`
+            : 'Leftmost card will be drawn first.'
+          : graveyardRest
+            ? 'These cards go to your graveyard.'
+            : randomRest
+              ? 'These cards go below the rest of your library in a random order.'
+              : 'These cards go below the rest of your library in the order shown.';
+      return `<section class="decision-order-lane" data-order-drop="${key}"><h3>${label}</h3><p>${instruction}</p><div class="decision-card-gallery" style="--choice-count:${Math.max(1, order[key].length)}">${cards || '<div class="decision-empty"><span>◇</span><p>Move cards here</p></div>'}</div></section>`;
+    })
     .join('')}</div>`;
+  const validCount = choice.optional
+    ? order.top.length <= selectCount
+    : order.top.length === selectCount;
   openChoiceDialog(
     selectHand
-      ? `Choose ${selectCount} card${selectCount === 1 ? '' : 's'} for your hand`
+      ? `Choose ${quantity} for your hand`
       : `${choice.action === 'explore' ? 'Explore' : choice.action === 'scry' ? 'Scry' : 'Surveil'} ${choice.cards.length}`,
     selectHand
-      ? `Put ${selectCount} card${selectCount === 1 ? '' : 's'} into your hand and the rest on the bottom ${randomRest ? 'in a random order' : 'in any order'}.`
+      ? `Put ${quantity} into your hand and the rest ${graveyardRest ? 'into your graveyard' : `on the bottom ${randomRest ? 'in a random order' : 'in any order'}`}.${choice.revealed ? ' All inspected cards are revealed.' : choice.reveal ? ' Only selected cards will be revealed.' : ''}${choice.optional ? ' You may choose none.' : ''}`
       : choice.action === 'explore'
         ? 'This revealed nonland card gave your creature a +1/+1 counter if it is still on the battlefield. Keep the card on top or put it into your graveyard.'
         : 'Click a card to move it between destinations, or drag it. Use the arrows to set the draw order.',
     body,
-    `<span class="choice-selection-summary">${order.top.length} ${selectHand ? 'to hand' : 'on top'} · ${order.rest.length} ${!['surveil', 'explore'].includes(choice.action) ? 'on bottom' : 'to graveyard'}</span><button class="btn primary" data-action="submitLibrary" ${selectHand && order.top.length !== selectCount ? 'disabled' : ''}>Confirm arrangement</button>`,
+    `<span class="choice-selection-summary">${order.top.length} ${selectHand ? 'to hand' : 'on top'} · ${order.rest.length} ${graveyardRest ? 'to graveyard' : 'on bottom'}</span><button class="btn primary" data-action="submitLibrary" ${selectHand && (!validCount || !order.top.every(eligible)) ? 'disabled' : ''}>Confirm arrangement</button>`,
     { source: state.resolving?.entry.name ?? '' },
   );
   dialog._libraryOrder = order;
   dialog._activeChoice = choice;
   dialog._stageRender = renderLibraryOrder;
 }
+
 function showDamage() {
   const orders = suggestedDamage(state);
   openDialog(
@@ -1377,6 +1426,42 @@ function showCastingSacrifice(command, sacrifice) {
   dialog._activeChoice = null;
   dialog._stageRender = () => showCastingSacrifice(command, sacrifice);
 }
+function showActivationSacrifice(command, sacrifices = []) {
+  const object = state.objects[command.card],
+    ability = object && definition(state, object).activated?.[command.ability];
+  if (!ability?.cost.sacrifice || command.expectedRevision !== state.revision) {
+    toast('The game changed. Choose this ability again.');
+    return;
+  }
+  const cost = ability.cost.sacrifice,
+    candidates = activationSacrificeCandidates(state, viewer(), ability.cost, object.id);
+  const problem = abilityProblem(
+    state,
+    viewer(),
+    object.id,
+    command.ability,
+    command.target,
+    command.discardCard,
+    command.targets,
+    sacrifices,
+  );
+  const body = `<p>Choose ${cost.count} eligible permanent${cost.count === 1 ? '' : 's'} to sacrifice as an activation cost. These are not targets. They leave before opponents can respond, even if the ability is countered.${ability.cost.sacrificeSelf ? ` ${escape(object.name)} is also sacrificed.` : ''}</p><div class="decision-card-grid">${candidates
+    .map((o) => {
+      const selected = sacrifices.some((r) => r.id === o.id);
+      return `<section>${decisionCard(state, o.id, metadata, { viewer: viewer(), action: 'readDecisionCard', selected })}<button class="btn ${selected ? 'primary' : ''}" data-action="selectActivationSacrifice" data-cardid="${o.id}" aria-pressed="${selected}">${selected ? 'Selected' : 'Sacrifice'} ${escape(o.name)}</button></section>`;
+    })
+    .join('')}</div>`;
+  openChoiceDialog(
+    'Choose activation sacrifice',
+    object.name,
+    body,
+    `<button class="btn" data-action="closeDialog">Cancel activation</button><span>${sacrifices.length} of ${cost.count} selected. ${problem ? escape(problem) : 'Payment is available.'}</span><button class="btn primary" data-action="confirmActivationSacrifice" ${problem ? 'disabled' : ''}>Confirm sacrifice and activate</button>`,
+    { source: object.name },
+  );
+  dialog._activationSacrificeDraft = { command, sacrifices };
+  dialog._activeChoice = null;
+  dialog._stageRender = () => showActivationSacrifice(command, sacrifices);
+}
 function showConvoke(command, choices) {
   const object = state.objects[command.card];
   const profile = castingProfile(
@@ -1453,8 +1538,21 @@ function groupedTargetProblem(context, plan) {
       viewer(),
       context.choice.entry.targetingSource ?? context.choice.entry.source,
     );
-  if (context.ability)
-    return abilityProblem(state, viewer(), context.object.id, ui.activation, null, undefined, plan);
+  if (context.ability) {
+    const witness = legalActions(state, viewer()).find(
+      (a) => a.type === 'activate' && a.card === context.object.id && a.ability === ui.activation,
+    );
+    return abilityProblem(
+      state,
+      viewer(),
+      context.object.id,
+      ui.activation,
+      null,
+      undefined,
+      plan,
+      witness?.sacrifices,
+    );
+  }
   return castProblem(state, viewer(), context.object.id, null, {
     mode: ui.spellMode ?? undefined,
     x: ui.x ?? undefined,
@@ -1880,7 +1978,7 @@ async function action(name, el) {
       break;
     case 'resume':
       try {
-        const saved = JSON.parse(readSave());
+        const saved = matchStorage.read();
         state = replay(saved.replay);
         ui.catalog = state.catalog;
         ui.mode = saved.mode;
@@ -2207,7 +2305,10 @@ async function action(name, el) {
         state.choice?.kind !== 'libraryOrder' ||
         dialog._libraryChoice !== state.choice ||
         !state.choice.cards.includes(el.dataset.cardid) ||
-        !['top', 'rest'].includes(el.dataset.group)
+        !['top', 'rest'].includes(el.dataset.group) ||
+        (el.dataset.group === 'top' &&
+          state.choice.eligibleCards &&
+          !state.choice.eligibleCards.includes(el.dataset.cardid))
       )
         break;
       const order = dialog._libraryOrder,
@@ -2234,6 +2335,7 @@ async function action(name, el) {
       break;
     }
     case 'submitLibrary': {
+      if (state.choice?.kind !== 'libraryOrder' || dialog._libraryChoice !== state.choice) break;
       const order = structuredClone(dialog._libraryOrder);
       closeDialog();
       send({ type: 'orderLibrary', ...order, expectedRevision: dialog._choiceRevision });
@@ -2373,6 +2475,31 @@ async function action(name, el) {
       const command = { ...draft.command, sacrifice: draft.sacrifice };
       closeDialog();
       send(command);
+      break;
+    }
+    case 'selectActivationSacrifice': {
+      const draft = dialog._activationSacrificeDraft;
+      if (!draft || draft.command.expectedRevision !== state.revision) break;
+      const object = state.objects[el.dataset.cardid];
+      if (!object) break;
+      const cost = definition(state, state.objects[draft.command.card]).activated[
+        draft.command.ability
+      ].cost.sacrifice;
+      const selected = draft.sacrifices.some((r) => r.id === object.id);
+      const sacrifices = selected
+        ? draft.sacrifices.filter((r) => r.id !== object.id)
+        : cost.count === 1
+          ? [ref(object)]
+          : [...draft.sacrifices, ref(object)];
+      showActivationSacrifice(draft.command, sacrifices);
+      break;
+    }
+    case 'confirmActivationSacrifice': {
+      const draft = dialog._activationSacrificeDraft;
+      if (!draft || draft.command.expectedRevision !== state.revision) break;
+      const command = { ...draft.command, sacrifices: draft.sacrifices };
+      closeDialog();
+      send(command, { activationSacrificeConfirmed: true });
       break;
     }
     case 'selectConvoke': {

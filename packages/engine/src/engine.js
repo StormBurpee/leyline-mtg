@@ -1,3 +1,4 @@
+import { activationSacrificeOptions } from './activation-sacrifice.js';
 import { tapObjects } from './model.js';
 import { sacrificePermanents } from './model.js';
 import {
@@ -307,7 +308,7 @@ function finishCasting(s) {
     continueResolution(s);
   }
 }
-export function abilityProblem(s, p, id, index, target, discardCard, targets) {
+export function abilityProblem(s, p, id, index, target, discardCard, targets, sacrifices) {
   const o = s.objects[id];
   if (!o) return 'That ability source does not exist.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
@@ -354,7 +355,11 @@ export function abilityProblem(s, p, id, index, target, discardCard, targets) {
   if (ability.target && !legalTarget(s, ability.target, target, p, ref(o)))
     return 'Choose a legal ability target.';
   if (!ability.target && target != null) return 'This ability has no targets.';
-  const payment = costProblem(s, p, activationCost(s, o, ability), { sourceId: id, discardCard });
+  const payment = costProblem(s, p, activationCost(s, o, ability), {
+    sourceId: id,
+    discardCard,
+    sacrifices,
+  });
   if (payment) return payment;
   return null;
 }
@@ -541,7 +546,16 @@ function cycle(s, p, c) {
   emit(s, 'cycled', { player: p, objectId: o.id, name: o.name });
 }
 function activate(s, p, c) {
-  const problem = abilityProblem(s, p, c.card, c.ability, c.target, c.discardCard, c.targets);
+  const problem = abilityProblem(
+    s,
+    p,
+    c.card,
+    c.ability,
+    c.target,
+    c.discardCard,
+    c.targets,
+    c.sacrifices,
+  );
   requireRule(!problem, 'ACTIVATE', problem);
   const o = s.objects[c.card],
     a = definition(s, o).activated[c.ability];
@@ -572,7 +586,11 @@ function activate(s, p, c) {
     o.loyalty = (o.loyalty ?? 0) + a.loyalty;
     o.loyaltyUsed = `${s.turn}:${o.incarnation}`;
   }
-  payCost(s, p, lockedCost, { sourceId: o.id, discardCard: c.discardCard });
+  payCost(s, p, lockedCost, {
+    sourceId: o.id,
+    discardCard: c.discardCard,
+    sacrifices: c.sacrifices,
+  });
   s.passes = 0;
   emit(s, 'activated', { player: p, name: o.name, objectId: o.id, ability: c.ability });
   if (s.rulesRevision === 1) notifyTargeted(s, s.stack.at(-1));
@@ -1056,29 +1074,33 @@ export function legalActions(s, p, { x: exactX } = {}) {
       if (cards) actions.push({ type: 'crew', card: o.id, cards });
     }
     for (const [index, a] of (definition(s, o).activated ?? []).entries()) {
-      if (a.targetGroups) {
-        for (const targets of targetPlans(s, a.targetGroups, p, 256, ref(o)))
+      for (const sacrifices of activationSacrificeOptions(s, p, a.cost, o.id)) {
+        if (a.targetGroups) {
+          for (const targets of targetPlans(s, a.targetGroups, p, 256, ref(o)))
+            for (const discardCard of a.cost.discard ? s.players[p].hand : [undefined])
+              if (!abilityProblem(s, p, o.id, index, null, discardCard, targets, sacrifices))
+                actions.push({
+                  type: 'activate',
+                  card: o.id,
+                  ability: index,
+                  targets,
+                  ...(discardCard ? { discardCard } : {}),
+                  ...(sacrifices ? { sacrifices } : {}),
+                });
+          continue;
+        }
+        for (const target of a.target ? targetsFor(s, a.target, p, ref(o)) : [null])
           for (const discardCard of a.cost.discard ? s.players[p].hand : [undefined])
-            if (!abilityProblem(s, p, o.id, index, null, discardCard, targets))
+            if (!abilityProblem(s, p, o.id, index, target, discardCard, undefined, sacrifices))
               actions.push({
                 type: 'activate',
                 card: o.id,
                 ability: index,
-                targets,
                 ...(discardCard ? { discardCard } : {}),
+                ...(sacrifices ? { sacrifices } : {}),
+                ...(target ? { target } : {}),
               });
-        continue;
       }
-      for (const target of a.target ? targetsFor(s, a.target, p, ref(o)) : [null])
-        for (const discardCard of a.cost.discard ? s.players[p].hand : [undefined])
-          if (!abilityProblem(s, p, o.id, index, target, discardCard))
-            actions.push({
-              type: 'activate',
-              card: o.id,
-              ability: index,
-              ...(discardCard ? { discardCard } : {}),
-              ...(target ? { target } : {}),
-            });
     }
   }
   return actions;
@@ -1138,6 +1160,7 @@ export function replay(record) {
         '0.50.0',
         '0.51.0',
         '0.52.0',
+        '0.53.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

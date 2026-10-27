@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b759e8a6-8dd0-48ce-8816-e45b35a79895",
+  "name": "Faerie Snoop",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Detective"],
+    "colors": ["B", "U"],
+    "manaCost": "{1}{U}{B}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nDisguise {1}{U/B}{U/B} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen this creature is turned face up, look at the top two cards of your library. Put one into your hand and the other into your graveyard.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "disguise",
+      "cost": "{1}{U/B}{U/B}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "faceUp",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 2,
+          "restDestination": "graveyard"
+        }
+      ]
+    }
+  ]
+}
