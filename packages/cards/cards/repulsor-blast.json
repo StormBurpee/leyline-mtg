@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "150f920c-c942-4feb-824f-79dd9b531687",
+  "name": "Repulsor Blast",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{3}{R}"
+  },
+  "rulesText": "Teamwork 2 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 2 or more.)\nRepulsor Blast deals 5 damage to target creature. If this spell was cast using teamwork, it also deals 2 damage to that creature's controller.",
+  "abilities": [
+    {
+      "kind": "additionalCost",
+      "cost": {
+        "kind": "teamwork",
+        "power": 2
+      }
+    },
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 5
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "additionalCostPaid"
+          },
+          "then": [
+            {
+              "op": "damageTargetController",
+              "amount": 2
+            }
+          ]
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

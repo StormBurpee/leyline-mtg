@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2886f95e-c4e8-4770-b7de-40985f336cfb",
+  "name": "Crescent Island Temple",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Shrine"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}"
+  },
+  "rulesText": "When Crescent Island Temple enters, for each Shrine you control, create a 1/1 red Monk creature token with prowess. (Whenever you cast a noncreature spell, it gets +1/+1 until end of turn.)\nWhenever another Shrine you control enters, create a 1/1 red Monk creature token with prowess.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/red-prowess-monk-token",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "subtype": "Shrine"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Shrine"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/red-prowess-monk-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

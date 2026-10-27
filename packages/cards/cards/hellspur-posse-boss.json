@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "15260fa6-6062-423a-a248-81292ea46178",
+  "name": "Hellspur Posse Boss",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Rogue"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Other outlaws you control have haste. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\nWhen this creature enters, create two 1/1 red Mercenary creature tokens with \"{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.\"",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "type": "creature"
+          },
+          {
+            "controller": "you"
+          },
+          {
+            "any": [
+              {
+                "subtype": "Assassin"
+              },
+              {
+                "subtype": "Mercenary"
+              },
+              {
+                "subtype": "Pirate"
+              },
+              {
+                "subtype": "Rogue"
+              },
+              {
+                "subtype": "Warlock"
+              }
+            ]
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["haste"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mercenary-token",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

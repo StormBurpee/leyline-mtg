@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "858067f9-eb1f-4569-9831-30441cba5f90",
+  "name": "Annie Flash, the Veteran",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Rogue"],
+    "colors": ["G", "R", "W"],
+    "manaCost": "{3}{R}{G}{W}",
+    "power": 4,
+    "toughness": 5
+  },
+  "rulesText": "Flash\nWhen Annie Flash enters, if you cast it, return target permanent card with mana value 3 or less from your graveyard to the battlefield tapped.\nWhenever Annie Flash becomes tapped, exile the top two cards of your library. You may play those cards this turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source",
+        "castByController": true
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "battlefield",
+          "tapped": true
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "manaValue": {
+                "lte": 3
+              }
+            },
+            {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "enchantment"
+                },
+                {
+                  "type": "land"
+                },
+                {
+                  "type": "planeswalker"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "tap",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 2,
+          "player": "controller",
+          "duration": "turn"
+        }
+      ]
+    }
+  ]
+}

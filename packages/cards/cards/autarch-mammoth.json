@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eb50b5f2-4840-4f90-9c85-40fc581be9c7",
+  "name": "Autarch Mammoth",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elephant", "Mount"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}{G}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "When this creature enters and whenever it attacks while saddled, create a 3/3 green Elephant creature token.\nSaddle 5 (Tap any number of other creatures you control with total power 5 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/green-elephant-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "triggerCondition": {
+        "kind": "sourceSaddled"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/green-elephant-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "saddle",
+      "power": 5
+    }
+  ]
+}

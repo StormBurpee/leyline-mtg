@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/doombot",
+  "name": "Doombot",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot", "Villain"],
+    "colors": [],
+    "manaCost": null,
+    "power": 3,
+    "toughness": 3,
+    "token": true
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "882f30e4-4ce1-4581-8d2d-d763aa13befe",
+  "name": "Elemental Mascot",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Bird"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U}{R}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Flying, vigilance\nOpus \u2014 Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn. If five or more mana was spent to cast that spell, exile the top card of your library. You may play that card until the end of your next turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn"
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "eventManaSpentAtLeast",
+            "count": 5
+          },
+          "then": [
+            {
+              "op": "exileTop",
+              "count": 1,
+              "player": "controller",
+              "duration": "nextTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

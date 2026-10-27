@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "88eeb519-5782-4732-bd34-81d1ee6dbc8f",
+  "name": "Ka-Zar of the Savage Land",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Barbarian", "Hero"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "You may look at the top card of your library any time.\nYou may play lands from the top of your library.\nWhen Ka-Zar enters, create Zabu, a legendary 2/2 green Cat creature token with \"Landfall \u2014 Whenever a land you control enters, put a +1/+1 counter on Zabu.\"",
+  "abilities": [
+    {
+      "kind": "libraryTopAccess",
+      "play": {
+        "type": "land"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/zabu",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

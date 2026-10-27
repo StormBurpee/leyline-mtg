@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "34b93a66-de1e-4133-a479-e0d90ba94a3a",
+  "name": "Mutable Explorer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Shapeshifter"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Changeling (This card is every creature type.)\nWhen this creature enters, create a tapped Mutavault token. (It's a land with \"{T}: Add {C}\" and \"{1}: This token becomes a 2/2 creature with all creature types until end of turn. It's still a land.\")",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "changeling"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mutavault",
+          "amount": 1,
+          "tapped": true
+        }
+      ]
+    }
+  ]
+}

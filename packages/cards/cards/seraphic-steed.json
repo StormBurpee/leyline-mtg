@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "51622e89-aa5e-4dd6-a078-eb45e8ebb434",
+  "name": "Seraphic Steed",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Unicorn", "Mount"],
+    "colors": ["G", "W"],
+    "manaCost": "{G}{W}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "First strike, lifelink\nWhenever this creature attacks while saddled, create a 3/3 white Angel creature token with flying.\nSaddle 4 (Tap any number of other creatures you control with total power 4 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "triggerCondition": {
+        "kind": "sourceSaddled"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-angel-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "saddle",
+      "power": 4
+    }
+  ]
+}

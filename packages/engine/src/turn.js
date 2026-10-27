@@ -51,6 +51,8 @@ export function nextTurn(s) {
 export function finishCleanup(s) {
   for (const o of Object.values(s.objects)) {
     o.damage = 0;
+    delete o.saddledTurn;
+    delete o.saddleHistory;
     if (
       o.playPermission &&
       (o.playPermission.untilNextTurn === undefined || o.playPermission.nextTurnStarted)

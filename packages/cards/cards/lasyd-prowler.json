@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f780d6f6-540b-4773-8a48-e56e95c2d39e",
+  "name": "Lasyd Prowler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Snake", "Ranger"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}{G}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "When this creature enters, you may mill cards equal to the number of lands you control.\nRenew \u2014 {1}{G}, Exile this card from your graveyard: Put X +1/+1 counters on target creature, where X is the number of land cards in your graveyard. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "land"
+            }
+          }
+        }
+      ],
+      "optional": true
+    },
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{1}{G}",
+        "exileSelf": true
+      },
+      "timing": "sorcery",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "amount": {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you",
+            "where": {
+              "type": "land"
+            }
+          },
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

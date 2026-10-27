@@ -30,6 +30,7 @@ export function validateCondition(value, { continuous = false } = {}) {
       controllerTurn: ['kind'],
       sourceType: ['kind', 'type'],
       sourcePrepared: ['kind', 'prepared'],
+      sourceSaddled: ['kind'],
       sourceQuestCountersAtLeast: ['kind', 'count'],
       sourceExiledCardTypesAtLeast: ['kind', 'count'],
       eventManaSpentAtLeast: ['kind', 'count'],

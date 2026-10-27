@@ -65,6 +65,8 @@ const FIELDS = new Set([
   'spree',
   'modes',
   'crew',
+  'saddle',
+  'crewSaddlePowerBonus',
   'cycling',
   'ninjutsu',
   'turnLoyaltyCreature',
@@ -932,6 +934,15 @@ export function validateDefinition(card) {
     errors.push(
       `${name}.crew: requires a noncreature artifact Vehicle with literal power/toughness and crew 0–1000.`,
     );
+  for (const field of ['saddle', 'crewSaddlePowerBonus'])
+    if (
+      card[field] !== undefined &&
+      (!Number.isSafeInteger(card[field]) ||
+        card[field] < 0 ||
+        card[field] > 1000 ||
+        !hasType(card, 'creature'))
+    )
+      errors.push(`${name}.${field}: requires a creature and an integer from 0 to 1000.`);
   if (card.ninjutsu !== undefined) validateCost(card.ninjutsu, `${name}.ninjutsu`, errors);
   if (card.turnLoyaltyCreature !== undefined) {
     const f = card.turnLoyaltyCreature;

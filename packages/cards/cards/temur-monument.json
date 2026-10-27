@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5464d5ae-5be5-4e52-b9d0-ddce48fd93b3",
+  "name": "Temur Monument",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{2}"
+  },
+  "rulesText": "When this artifact enters, search your library for a basic Forest, Island, or Mountain card, reveal it, put it into your hand, then shuffle.\n{3}{G}{U}{R}, {T}, Sacrifice this artifact: Create a 5/5 green Elephant creature token. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "basic": true
+              },
+              {
+                "any": [
+                  {
+                    "subtype": "Forest"
+                  },
+                  {
+                    "subtype": "Island"
+                  },
+                  {
+                    "subtype": "Mountain"
+                  }
+                ]
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}{G}{U}{R}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/five-five-elephant-token",
+          "amount": 1
+        }
+      ],
+      "timing": "sorcery"
+    }
+  ]
+}

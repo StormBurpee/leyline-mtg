@@ -1040,6 +1040,15 @@ export function compileCard(
           problem('UNSUPPORTED_RESTRICTION', path, 'Unsupported combat restriction.');
         else d[a.restriction] = true;
         break;
+      case 'saddle':
+      case 'crewSaddlePowerBonus':
+        fields(a, ['kind', 'power'], path);
+        if (!Number.isSafeInteger(a.power) || a.power < 0 || a.power > 1000)
+          problem('INVALID_TAP_POWER', path, 'Requires integer power from 0 to 1000.');
+        if (d[a.kind] !== undefined)
+          problem('DUPLICATE_TAP_POWER', path, 'Duplicate tap-power ability.');
+        d[a.kind] = a.power;
+        break;
       case 'crew':
         fields(a, ['kind', 'power'], path);
         if (!Number.isSafeInteger(a.power) || a.power < 0 || a.power > 1000)

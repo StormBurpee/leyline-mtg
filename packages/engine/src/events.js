@@ -78,6 +78,7 @@ export function validateEventSpec(value) {
       'sacrifice',
       'attack',
       'tap',
+      'saddled',
       'step',
       'faceUp',
       'attackGroup',
@@ -103,6 +104,7 @@ export function validateEventSpec(value) {
         'sacrifice',
         'attack',
         'tap',
+        'saddled',
         'faceUp',
         'combatDamagePlayer',
         'targeted',
@@ -146,17 +148,17 @@ export function validateEventSpec(value) {
     (spec.event !== 'targeted' || !['spell', 'ability'].includes(spec.targetingKind))
   )
     errors.push('targetingKind requires a targeted event and spell or ability.');
-  // First-event history is intentionally bounded to self target events, not generic aggregation.
+  // First-event history is bounded to self targeting and saddle-designation events.
   if (
     spec.firstEachTurn !== undefined &&
     (spec.firstEachTurn !== true ||
-      spec.event !== 'targeted' ||
+      !['targeted', 'saddled'].includes(spec.event) ||
       spec.object !== 'source' ||
       spec.filter !== undefined ||
       spec.controller !== undefined)
   )
     errors.push(
-      'firstEachTurn requires a self targeted event, true, and no object filter/controller predicate.',
+      'firstEachTurn requires a self targeted/saddled event, true, and no object filter/controller predicate.',
     );
   if (
     spec.castByController !== undefined &&
@@ -198,6 +200,7 @@ export function matchesEvent(value, event, facts, source) {
   if (spec.object === 'source' && facts.id !== source.id) return false;
   if (spec.excludeSource && facts.id === source.id) return false;
   if (spec.castByController && facts.castPlayer !== source.controller) return false;
+  if (event === 'saddled' && spec.firstEachTurn && facts.saddleNumber !== 1) return false;
   if (event === 'targeted') {
     if (spec.targetingController === 'you' && facts.targetingController !== source.controller)
       return false;

@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9db71b76-eda7-49dd-af5a-3de18acb8ccb",
+  "name": "Sultai Monument",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{2}"
+  },
+  "rulesText": "When this artifact enters, search your library for a basic Swamp, Forest, or Island card, reveal it, put it into your hand, then shuffle.\n{2}{B}{G}{U}, {T}, Sacrifice this artifact: Create two 2/2 black Zombie Druid creature tokens. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "basic": true
+              },
+              {
+                "any": [
+                  {
+                    "subtype": "Swamp"
+                  },
+                  {
+                    "subtype": "Forest"
+                  },
+                  {
+                    "subtype": "Island"
+                  }
+                ]
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{B}{G}{U}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/zombie-druid-token",
+          "amount": 2
+        }
+      ],
+      "timing": "sorcery"
+    }
+  ]
+}

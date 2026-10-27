@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0394846e-bc27-4d67-988e-b08a389690de",
+  "name": "Rover Blades",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Equipment", "Vehicle"],
+    "colors": [],
+    "manaCost": "{3}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Double strike\nEquipped creature has double strike.\nEquip {4}\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn. Creatures can't be attached to other permanents.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "double strike"
+    },
+    {
+      "kind": "attachmentBonus",
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["double strike"]
+    },
+    {
+      "kind": "equip",
+      "cost": "{4}"
+    },
+    {
+      "kind": "crew",
+      "power": 2
+    }
+  ]
+}

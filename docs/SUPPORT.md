@@ -2,7 +2,11 @@
 
 This is a small executable kernel, not a full Magic implementation. A name appearing in Scryfall or a display image does not imply support. The source of truth is `packages/cards/cards/`; `packages/engine/src/generated-catalog.js` is its compiled runtime artifact.
 
-## Latest coverage (v0.51)
+## Latest coverage (v0.52)
+
+Saddle is a sorcery-speed activated ability that taps other creatures, uses printed/current power plus only applicable cost bonuses, and grants an incarnation-bound designation until turn end on resolution. It is distinct from crew animation. Contributor-history-dependent cards and other unsupported Saddle clauses are not admitted. Designation-gain triggers are separate from repeated resolution audit events.
+
+## Previous coverage (v0.51)
 
 Bargain is an optional additional sacrifice cost, not a modal-spell rule, with captured paid status and supported cost/effect/entry consequences. Fight and bite may bind their actor to their own source; only bite permits planeswalker victims. Unsupported Bargain cards and general prevention/protection remain outside the admitted subset.
 

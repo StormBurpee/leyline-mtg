@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "623c1873-cd83-4a5f-b391-fd0d2bb89061",
+  "name": "Thunder Magic",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Tiered (Choose one additional cost.)\n\u2022 Thunder \u2014 {0} \u2014 Thunder Magic deals 2 damage to target creature.\n\u2022 Thundara \u2014 {3} \u2014 Thunder Magic deals 4 damage to target creature.\n\u2022 Thundaga \u2014 {5}{R} \u2014 Thunder Magic deals 8 damage to target creature.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Thunder",
+          "additionalCost": "{0}",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "Thundara",
+          "additionalCost": "{3}",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 4
+            }
+          ]
+        },
+        {
+          "label": "Thundaga",
+          "additionalCost": "{5}{R}",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 8
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

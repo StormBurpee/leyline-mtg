@@ -1,0 +1,125 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "78e1beca-840d-47b2-8759-cc31454fdf5a",
+  "name": "Gloom Ripper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Assassin"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}{B}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, target creature you control gets +X/+0 until end of turn and up to one target creature an opponent controls gets -0/-X until end of turn, where X is the number of Elves you control plus the number of Elf cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "sum",
+            "values": [
+              {
+                "kind": "count",
+                "zone": "battlefield",
+                "player": "you",
+                "where": {
+                  "subtype": "Elf"
+                }
+              },
+              {
+                "kind": "count",
+                "zone": "graveyard",
+                "player": "you",
+                "where": {
+                  "subtype": "Elf"
+                }
+              }
+            ]
+          },
+          "toughness": 0,
+          "until": "endOfTurn",
+          "targetGroup": "friendly"
+        },
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": {
+            "kind": "scale",
+            "value": {
+              "kind": "sum",
+              "values": [
+                {
+                  "kind": "count",
+                  "zone": "battlefield",
+                  "player": "you",
+                  "where": {
+                    "subtype": "Elf"
+                  }
+                },
+                {
+                  "kind": "count",
+                  "zone": "graveyard",
+                  "player": "you",
+                  "where": {
+                    "subtype": "Elf"
+                  }
+                }
+              ]
+            },
+            "factor": -1
+          },
+          "until": "endOfTurn",
+          "targetGroup": "enemy"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "friendly",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "enemy",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

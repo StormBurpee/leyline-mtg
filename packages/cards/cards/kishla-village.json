@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4eb428ab-f5b0-46ca-98dd-b3466a91ef97",
+  "name": "Kishla Village",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control an Island or a Swamp.\n{T}: Add {G}.\n{3}{G}, {T}: Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "any": [
+            {
+              "subtype": "Island"
+            },
+            {
+              "subtype": "Swamp"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}{G}",
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

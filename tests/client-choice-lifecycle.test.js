@@ -1576,3 +1576,52 @@ test('bargain casting option can be declined, or reviewed and paid once after ca
     }
   }
 });
+
+test('saddle selection retains multiple payers across inspection, cancels, reopens and dispatches once', async () => {
+  const { saddlePosition } = await import('./helpers/saddle-catalog.js');
+  const s = saddlePosition();
+  const mountCard = Object.values(s.objects).find(
+    (o) => o.name === 'Brightfield Glider' && o.zone === 'battlefield',
+  );
+  const pilots = Object.values(s.objects)
+    .filter((o) => o.name === 'Savannah Lions' && o.zone === 'battlefield')
+    .slice(0, 2);
+  assert.equal(pilots.length, 2);
+  const page = await mount(exportReplay(s));
+  try {
+    page.click('[data-action="resume"]');
+    page.click(`[data-card="${mountCard.id}"]`);
+    page.click('[data-action="startSaddle"]');
+    assert.match(page.dialog.textContent, /Saddle only as a sorcery/);
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, true);
+    page.click(`[data-action="toggleCrew"][data-cardid="${pilots[0].id}"]`);
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, true);
+    page.click(`[data-action="toggleCrew"][data-cardid="${pilots[1].id}"]`);
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, false);
+    page.click(`[data-action="readDecisionCard"][data-cardid="${pilots[0].id}"]`);
+    page.click('[data-action="returnDecision"]');
+    for (const p of pilots)
+      assert.equal(
+        page.dialog
+          .querySelector(`[data-action="toggleCrew"][data-cardid="${p.id}"]`)
+          .getAttribute('aria-pressed'),
+        'true',
+      );
+    page.click('[data-action="closeDialog"]');
+    assert.equal(page.dialog.open, false);
+    page.click(`[data-card="${mountCard.id}"]`);
+    page.click('[data-action="startSaddle"]');
+    assert.equal(page.dialog.querySelector('[data-action="confirmCrew"]').disabled, true);
+    for (const p of pilots) page.click(`[data-action="toggleCrew"][data-cardid="${p.id}"]`);
+    page.click('[data-action="confirmCrew"]');
+    const saved = JSON.parse(page.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.filter((c) => c.type === 'saddle').length, 1);
+    assert.deepEqual(
+      saved.replay.commands.find((c) => c.type === 'saddle').cards,
+      pilots.map((p) => p.id),
+    );
+    assert.equal(page.dialog.open, false);
+  } finally {
+    page.cleanup();
+  }
+});

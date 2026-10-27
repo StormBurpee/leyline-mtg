@@ -624,6 +624,15 @@ export function chooseBotCommand(s, p) {
   }
   if (s.priority !== p) return null;
   const actions = legalActions(s, p).filter((action) => actionSafe(s, p, action));
+  const saddling = actions.find(
+    (a) =>
+      a.type === 'saddle' &&
+      s.step === 'main1' &&
+      s.objects[a.card].saddledTurn !== s.turn &&
+      !s.objects[a.card].tapped &&
+      !isSick(s, s.objects[a.card]),
+  );
+  if (saddling) return { ...saddling, player: p };
   const crewing = actions.find(
     (a) =>
       a.type === 'crew' &&

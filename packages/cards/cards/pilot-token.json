@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/pilot-token",
+  "name": "Pilot Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Pilot"],
+    "colors": [],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "This token saddles Mounts and crews Vehicles as though its power were 2 greater.",
+  "abilities": [
+    {
+      "kind": "crewSaddlePowerBonus",
+      "power": 2
+    }
+  ]
+}
