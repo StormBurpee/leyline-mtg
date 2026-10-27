@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "439bf6d1-bd65-474b-a70c-7fdd446de4bb",
+  "name": "Honest Rutstein",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Warlock"],
+    "colors": ["B", "G"],
+    "manaCost": "{1}{B}{G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When Honest Rutstein enters, return target creature card from your graveyard to your hand.\nCreature spells you cast cost {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "where": {
+        "type": "creature"
+      }
+    }
+  ]
+}

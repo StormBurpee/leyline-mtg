@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "013ca531-1ff7-4efc-a280-4bc3ab574072",
+  "name": "Mocking Sprite",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Rogue"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Flying\nInstant and sorcery spells you cast cost {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "where": {
+        "any": [
+          {
+            "type": "instant"
+          },
+          {
+            "type": "sorcery"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ef32a4a9-14e2-4738-b4c2-53ce5e1d2a53",
+  "name": "Geist of Saint Thalia",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Spirit", "Cleric"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nNoncreature spells you cast cost {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "where": {
+        "not": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

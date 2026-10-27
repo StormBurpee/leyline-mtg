@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3b46800b-711b-4cbb-b296-26115b4f6839",
+  "name": "Visions of Villainy",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "This spell costs {1} less to cast if you control a Villain.\nYou draw two cards and lose 2 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 1,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "subtype": "Villain"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      }
+    }
+  ]
+}

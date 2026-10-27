@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0ad27d0e-b6c3-4c3f-a389-285d889b6a65",
+  "name": "Ballyrush Banneret",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Kithkin", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Kithkin spells and Soldier spells you cast cost {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "where": {
+        "any": [
+          {
+            "subtype": "Kithkin"
+          },
+          {
+            "subtype": "Soldier"
+          }
+        ]
+      }
+    }
+  ]
+}

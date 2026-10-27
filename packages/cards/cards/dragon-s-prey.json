@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "86cb340f-ef06-4be9-b457-703784387dbe",
+  "name": "Dragon's Prey",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{2}{B}"
+  },
+  "rulesText": "This spell costs {2} more to cast if it targets a Dragon.\nDestroy target creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "increase",
+      "amount": 2,
+      "targetWhere": {
+        "subtype": "Dragon"
+      }
+    }
+  ]
+}

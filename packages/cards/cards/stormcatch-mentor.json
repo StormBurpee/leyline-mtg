@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b2252471-01ca-4d58-aa99-4ab0aa5eae12",
+  "name": "Stormcatch Mentor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Otter", "Wizard"],
+    "colors": ["R", "U"],
+    "manaCost": "{U}{R}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Haste\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nInstant and sorcery spells you cast cost {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "where": {
+        "any": [
+          {
+            "type": "instant"
+          },
+          {
+            "type": "sorcery"
+          }
+        ]
+      }
+    }
+  ]
+}

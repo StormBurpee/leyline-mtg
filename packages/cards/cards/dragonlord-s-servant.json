@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "faf81ae0-0b35-45ef-a50d-6cecf0c0eeeb",
+  "name": "Dragonlord's Servant",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin", "Shaman"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Dragon spells you cast cost {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "where": {
+        "subtype": "Dragon"
+      }
+    }
+  ]
+}

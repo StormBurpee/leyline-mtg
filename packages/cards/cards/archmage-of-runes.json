@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "28045b32-4c1a-40e5-a15d-524d0f8fe6ec",
+  "name": "Archmage of Runes",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Giant", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}",
+    "power": 3,
+    "toughness": 6
+  },
+  "rulesText": "Instant and sorcery spells you cast cost {1} less to cast.\nWhenever you cast an instant or sorcery spell, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "where": {
+        "any": [
+          {
+            "type": "instant"
+          },
+          {
+            "type": "sorcery"
+          }
+        ]
+      }
+    }
+  ]
+}

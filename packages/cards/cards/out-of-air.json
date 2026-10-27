@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fcea912b-58b1-4068-ac4d-1bc89aa7f33c",
+  "name": "Out of Air",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}{U}"
+  },
+  "rulesText": "This spell costs {2} less to cast if it targets a creature spell.\nCounter target spell.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell"
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 2,
+      "targetWhere": {
+        "type": "creature"
+      }
+    }
+  ]
+}

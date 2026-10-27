@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "89e209f3-c474-453f-9659-ccebfc88bc0f",
+  "name": "Ride's End",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{4}{W}"
+  },
+  "rulesText": "This spell costs {3} less to cast if it targets a tapped permanent.\nExile target creature or Vehicle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "subtype": "Vehicle"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 3,
+      "targetWhere": {
+        "tapped": true
+      }
+    }
+  ]
+}

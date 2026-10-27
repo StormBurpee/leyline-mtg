@@ -26,6 +26,7 @@ import { installCardDrag } from './gestures.js';
 import { captureTable, animateTable, renderCombatLinks, animateEffects } from './motion.js';
 import {
   spellProfile,
+  castingProfile,
   CARDS,
   definition,
   DECKS,
@@ -761,7 +762,7 @@ function showSpellModes() {
   render();
   const choices = castingChoices(definition(state, o)),
     legal = legalActions(state, viewer());
-  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(spellProfile(definition(state, o), index).cost)}<br>${mode.target ? 'Choose a target next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
+  const body = `<div class="decision-mode-grid">${choices.map((mode, index) => `<button class="decision-mode" data-action="chooseSpellMode" data-mode="${index}" ${legal.some((a) => a.type === 'cast' && a.card === o.id && a.mode === index) ? '' : 'disabled'}>${metadata[o.name]?.art ? `<img src="${escape(metadata[o.name].art)}" alt="" draggable="false">` : ''}<strong>${escape(mode.label)}</strong><span>${mana(castingProfile(state, viewer(), o, index).cost)}<br>${mode.target ? 'Choose a target next.' : 'Cast with this option.'}</span></button>`).join('')}</div>`;
   openChoiceDialog(
     'Choose how to cast',
     o.name,
@@ -958,11 +959,22 @@ function showTargetMenu() {
       })
       .join('') || '<div class="decision-empty"><p>No legal targets remain.</p></div>'
   }</div>`;
+  const selectedCommand = commands[selected];
+  const selectedCost =
+    selectedCommand?.type === 'cast'
+      ? castingProfile(
+          state,
+          viewer(),
+          state.objects[selectedCommand.card],
+          selectedCommand.mode,
+          selectedCommand.target,
+        )?.cost
+      : null;
   openChoiceDialog(
     'Choose a target',
     `Select a legal target for ${name}, then confirm.`,
     body,
-    `<span class="choice-selection-summary">${selected >= 0 ? '1 target selected' : 'Select a target above'}</span><button class="btn primary" data-action="confirmTargetChoice" ${selected >= 0 ? '' : 'disabled'}>Confirm target</button>`,
+    `<span class="choice-selection-summary">${selected >= 0 ? '1 target selected' : 'Select a target above'}${selectedCost ? `<strong>Cast cost ${mana(selectedCost)}</strong>` : ''}</span><button class="btn primary" data-action="confirmTargetChoice" ${selected >= 0 ? '' : 'disabled'}>Confirm target</button>`,
     { source: name },
   );
   dialog._targetCommands = commands;

@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d96141af-313f-4ea9-a249-d9eb22cd2431",
+  "name": "Luminous Rebuke",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{4}{W}"
+  },
+  "rulesText": "This spell costs {3} less to cast if it targets a tapped creature.\nDestroy target creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 3,
+      "targetWhere": {
+        "all": [
+          {
+            "tapped": true
+          },
+          {
+            "type": "creature"
+          }
+        ]
+      }
+    }
+  ]
+}

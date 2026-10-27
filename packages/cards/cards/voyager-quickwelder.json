@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "87e8c044-5f83-437d-a89e-8a95559045f6",
+  "name": "Voyager Quickwelder",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot", "Artificer"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Artifact spells you cast cost {1} less to cast.",
+  "abilities": [
+    {
+      "kind": "costModifier",
+      "scope": "you",
+      "change": "reduce",
+      "amount": 1,
+      "where": {
+        "type": "artifact"
+      }
+    }
+  ]
+}

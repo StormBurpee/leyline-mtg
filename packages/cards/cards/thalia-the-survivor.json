@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "55ef129e-698e-424f-be3c-3fbba6c2cc3e",
+  "name": "Thalia, the Survivor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Lifelink\nNoncreature spells your opponents cast cost {1} more to cast.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "opponent",
+      "change": "increase",
+      "amount": 1,
+      "where": {
+        "not": {
+          "type": "creature"
+        }
+      }
+    }
+  ]
+}

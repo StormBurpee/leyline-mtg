@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "91ddd2bd-2dec-4670-8edb-e89c009b2187",
+  "name": "Pearl of Wisdom",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{2}{U}"
+  },
+  "rulesText": "This spell costs {1} less to cast if you control an Otter.\nDraw two cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 1,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "subtype": "Otter"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      }
+    }
+  ]
+}

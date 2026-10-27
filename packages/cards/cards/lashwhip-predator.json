@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "56035e66-e730-436d-8de2-4ded7fd1b51e",
+  "name": "Lashwhip Predator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Plant", "Beast"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}{G}",
+    "power": 5,
+    "toughness": 7
+  },
+  "rulesText": "This spell costs {2} less to cast if your opponents control three or more creatures.\nReach",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 2,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "opponent",
+          "where": {
+            "all": [
+              {
+                "controller": "opponent"
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          }
+        },
+        "right": 3,
+        "operator": "gte"
+      }
+    }
+  ]
+}

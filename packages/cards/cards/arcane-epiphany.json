@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "fe1556cc-32d0-4e51-bb15-f3fce669a5e1",
+  "name": "Arcane Epiphany",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}"
+  },
+  "rulesText": "This spell costs {1} less to cast if you control a Wizard.\nDraw three cards.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": 1,
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "subtype": "Wizard"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          }
+        },
+        "right": 1,
+        "operator": "gte"
+      }
+    }
+  ]
+}

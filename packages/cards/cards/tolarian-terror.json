@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b9d0f2e1-62c2-44fd-ad38-471daf17bb0a",
+  "name": "Tolarian Terror",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Serpent"],
+    "colors": ["U"],
+    "manaCost": "{6}{U}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "This spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": {
+        "kind": "scale",
+        "factor": 1,
+        "value": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "any": [
+              {
+                "type": "instant"
+              },
+              {
+                "type": "sorcery"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

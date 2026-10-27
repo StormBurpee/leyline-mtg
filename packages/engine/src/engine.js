@@ -1,3 +1,4 @@
+import { castingProfile } from './casting-costs.js';
 import { cardDefinition } from './cards.js';
 import { meetsCondition } from './conditions.js';
 import { spellProfile, spellOptions } from './spell-modes.js';
@@ -45,7 +46,7 @@ export function castProblem(s, p, id, target, { autoTap = true, mode } = {}) {
   const o = s.objects[id];
   if (!playableZone(s, o, p)) return 'You cannot play this card from its current zone.';
   if (s.status !== 'playing' || s.choice || s.priority !== p) return 'You do not have priority.';
-  const d = spellProfile(definition(s, o), mode);
+  const d = castingProfile(s, p, o, mode, target);
   if (!d) return 'Choose one valid spell mode.';
   if (d.type === 'land') return 'Lands are played, not cast.';
   if (
@@ -81,10 +82,11 @@ function cast(s, p, c) {
   });
   requireRule(!problem, 'CAST', problem);
   const o = s.objects[c.card],
-    d = spellProfile(definition(s, o), c.mode);
+    d = castingProfile(s, p, o, c.mode, c.target);
   const payment = pay(s, p, d.cost, c.autoTap !== false, [], { type: 'cast', card: d });
   if (d.faceDownCast) o.castingFaceDown = true;
   move(s, o, 'stack');
+  o.controller = p;
   delete o.castingFaceDown;
   if (d.faceDownCast) o.faceDown = true;
   s.stack.push({
@@ -113,7 +115,7 @@ function cast(s, p, c) {
     ...(d.kicked ? { kicked: true } : {}),
     ...(d.offspringPaid ? { offspringPaid: true } : {}),
   });
-  notifyTriggers(s, 'cast', { player: p, definition: d, object: o });
+  notifyTriggers(s, 'cast', { player: p, definition: definition(s, o), object: o });
   notifyTargeted(s, s.stack.at(-1));
 }
 export function abilityProblem(s, p, id, index, target, discardCard) {

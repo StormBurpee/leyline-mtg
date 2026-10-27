@@ -54,6 +54,7 @@ const FIELDS = new Set([
   'baseStats',
   'selfBonus',
   'conditionalBonuses',
+  'costModifiers',
   'static',
   'triggers',
   'activated',
@@ -508,6 +509,37 @@ export function validateDefinition(card) {
   if (card.basic && card.type !== 'land') errors.push(`${name}: only lands can be basic.`);
   if (card.target != null)
     errors.push(...validateTargetSpec(card.target).map((error) => `${name}.target: ${error}`));
+  if (card.costModifiers !== undefined) {
+    if (
+      !Array.isArray(card.costModifiers) ||
+      !card.costModifiers.length ||
+      card.costModifiers.length > 32
+    )
+      errors.push(`${name}.costModifiers: expected 1–32 modifiers.`);
+    else
+      for (const m of card.costModifiers) {
+        if (!plain(m)) {
+          errors.push(`${name}.costModifiers: expected an object.`);
+          continue;
+        }
+        if (
+          Object.keys(m).some(
+            (k) => !['scope', 'change', 'amount', 'where', 'targetWhere', 'condition'].includes(k),
+          ) ||
+          !['self', 'you', 'opponent', 'all'].includes(m.scope) ||
+          !['increase', 'reduce'].includes(m.change) ||
+          !validNumericValue(m.amount, { nonnegative: true })
+        )
+          errors.push(`${name}.costModifiers: unsupported modifier.`);
+        if (m.where !== undefined) errors.push(...validateFilter(m.where));
+        if (m.targetWhere !== undefined) errors.push(...validateFilter(m.targetWhere));
+        if (m.condition !== undefined) errors.push(...validateCondition(m.condition));
+        if (m.scope !== 'self' && !permanent)
+          errors.push(`${name}.costModifiers: global modifiers need a permanent source.`);
+        if (m.scope === 'self' && card.type === 'land')
+          errors.push(`${name}.costModifiers: lands are not cast.`);
+      }
+  }
   if (card.conditionalBonuses !== undefined) {
     if (
       !Array.isArray(card.conditionalBonuses) ||

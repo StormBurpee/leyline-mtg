@@ -1,3 +1,4 @@
+import { castingProfile } from './casting-costs.js';
 import { definition } from './model.js';
 import { planPayment } from './mana.js';
 import { actionEffects, actionSafe, drawsFor, libraryCount } from './decision-safety.js';
@@ -38,7 +39,7 @@ export function chooseSequence(s, p, ranked, { budget = SEQUENCE_BUDGET, depth =
       if (examined >= budget) break;
       if (used.has(a.card) || (targetKey(a) && targets.has(targetKey(a)))) continue;
       examined++;
-      const card = definition(state, state.objects[a.card]);
+      const card = castingProfile(state, p, state.objects[a.card], a.mode, a.target);
       const payment = planPayment(state, p, card.cost);
       if (!payment || !actionSafe(state, p, a)) continue;
       const effects = actionEffects(state, a);

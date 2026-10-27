@@ -169,7 +169,13 @@ export type Effect =
       tapped?: boolean;
     };
 export type StateCondition =
-  | { kind: 'opponentLostLifeThisTurn' | 'controllerLostLifeThisTurn' | 'controllerTurn' }
+  | {
+      kind:
+        | 'opponentLostLifeThisTurn'
+        | 'controllerLostLifeThisTurn'
+        | 'controllerTurn'
+        | 'opponentTurn';
+    }
   | { kind: 'controlAtLeast'; count: number; where: CardPredicate }
   | {
       kind: 'compare';
@@ -222,6 +228,14 @@ export interface CardDefinition {
   readonly etb?: readonly Effect[];
   readonly ward?: { mana?: ManaCost; life?: number };
   readonly baseStats?: { power?: NumericValue; toughness?: NumericValue };
+  readonly costModifiers?: readonly {
+    scope: 'self' | 'you' | 'opponent' | 'all';
+    change: 'reduce' | 'increase';
+    amount: NumericValue;
+    where?: CardPredicate;
+    targetWhere?: CardPredicate;
+    condition?: StateCondition;
+  }[];
   readonly conditionalBonuses?: readonly {
     affects: 'self' | 'attached';
     condition: ContinuousCondition;
@@ -706,3 +720,12 @@ export function spellProfile(card: CardDefinition, mode?: number): CardDefinitio
 export function spellOptions(card: CardDefinition): { mode?: number; profile: CardDefinition }[];
 
 export function cyclingProblem(state: GameState, player: PlayerId, id: string): string | null;
+
+export function castingProfile(
+  state: GameState,
+  player: PlayerId,
+  object: GameObject,
+  mode?: number,
+  target?: Target | null,
+  card?: CardDefinition,
+): CardDefinition | null;

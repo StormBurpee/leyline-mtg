@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "5c0cbc44-6c31-44fe-a3da-a97a37a01726",
+  "name": "Voyage Home",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U", "W"],
+    "manaCost": "{5}{W}{U}"
+  },
+  "rulesText": "Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nYou draw three cards and gain 3 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "all",
+        "where": {
+          "all": [
+            {
+              "controller": "you"
+            },
+            {
+              "type": "artifact"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

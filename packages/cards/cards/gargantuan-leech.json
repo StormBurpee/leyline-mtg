@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "073f12d1-eaa1-4d08-bc1d-b216a3dc0c67",
+  "name": "Gargantuan Leech",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Leech"],
+    "colors": ["B"],
+    "manaCost": "{7}{B}",
+    "power": 5,
+    "toughness": 5
+  },
+  "rulesText": "This spell costs {1} less to cast for each Cave you control and each Cave card in your graveyard.\nLifelink",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "costModifier",
+      "scope": "self",
+      "change": "reduce",
+      "amount": {
+        "kind": "scale",
+        "factor": 1,
+        "value": {
+          "kind": "sum",
+          "values": [
+            {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "all",
+              "where": {
+                "all": [
+                  {
+                    "subtype": "Cave"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "count",
+              "zone": "graveyard",
+              "player": "you",
+              "where": {
+                "subtype": "Cave"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

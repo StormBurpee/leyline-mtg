@@ -1602,6 +1602,34 @@
           },
           "required": ["kind", "affects", "condition", "power", "toughness"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "costModifier"
+            },
+            "scope": {
+              "enum": ["self", "you", "opponent", "all"]
+            },
+            "change": {
+              "enum": ["reduce", "increase"]
+            },
+            "amount": {
+              "$ref": "#/$defs/numericValue"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            },
+            "targetWhere": {
+              "$ref": "#/$defs/predicate"
+            },
+            "condition": {
+              "$ref": "#/$defs/condition"
+            }
+          },
+          "required": ["kind", "scope", "change", "amount"],
+          "additionalProperties": false
         }
       ]
     },
@@ -1728,6 +1756,16 @@
             }
           },
           "required": ["kind", "conditions"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "opponentTurn"
+            }
+          },
+          "required": ["kind"],
           "additionalProperties": false
         }
       ]
