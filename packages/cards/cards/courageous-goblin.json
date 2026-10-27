@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c107e271-5741-4a84-bfc4-3bc322972d0d",
+  "name": "Courageous Goblin",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Goblin"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature attacks while you control a creature with power 4 or greater, this creature gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 0,
+          "until": "endOfTurn",
+          "keywords": ["menace"]
+        }
+      ],
+      "triggerCondition": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "power": {
+                "gte": 4
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

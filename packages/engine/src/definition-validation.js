@@ -1772,11 +1772,52 @@ export function validateDefinition(card) {
                 'target',
                 'targetGroups',
                 'condition',
+                'triggerCondition',
                 'oncePerTurn',
+                'modes',
               ].includes(k),
           )
         ) {
           errors.push(`${name}.triggers[${i}]: unsupported trigger predicate or field.`);
+          continue;
+        }
+        if (t.modes !== undefined) {
+          const path = `${name}.triggers[${i}].modes`;
+          if (t.effects !== undefined || t.target !== undefined || t.targetGroups !== undefined)
+            errors.push(`${path}: modes cannot share effects or targets.`);
+          if (!Array.isArray(t.modes) || t.modes.length < 2 || t.modes.length > 8)
+            errors.push(`${path}: expected 2–8 choose-one modes.`);
+          else {
+            const labels = new Set();
+            for (const [j, mode] of t.modes.entries()) {
+              if (
+                !plain(mode) ||
+                Object.keys(mode).some(
+                  (key) => !['label', 'target', 'targetGroups', 'effects'].includes(key),
+                )
+              ) {
+                errors.push(`${path}[${j}]: unsupported triggered mode fields.`);
+                continue;
+              }
+              if (
+                typeof mode.label !== 'string' ||
+                !mode.label.trim() ||
+                mode.label.length > 180 ||
+                labels.has(mode.label)
+              )
+                errors.push(
+                  `${path}[${j}].label: expected a distinct nonempty label of at most 180 characters.`,
+                );
+              labels.add(mode.label);
+              const { modes, ...trigger } = t;
+              const { label, ...branch } = mode;
+              errors.push(
+                ...validateDefinition({ ...card, triggers: [{ ...trigger, ...branch }] }).map(
+                  (error) => `${path}[${j}]: ${error}`,
+                ),
+              );
+            }
+          }
           continue;
         }
         if (t.event?.event === 'chapter' && !(card.subtypes ?? []).includes('Saga'))
@@ -1789,6 +1830,7 @@ export function validateDefinition(card) {
         if (t.oncePerTurn !== undefined && typeof t.oncePerTurn !== 'boolean')
           errors.push(`${name}.triggers[${i}].oncePerTurn: expected a boolean.`);
         if (t.condition !== undefined) errors.push(...validateCondition(t.condition));
+        if (t.triggerCondition !== undefined) errors.push(...validateCondition(t.triggerCondition));
         if (t.optional !== undefined && typeof t.optional !== 'boolean')
           errors.push(`${name}.triggers[${i}].optional: expected a boolean.`);
         if (t.target != null)
@@ -1807,7 +1849,9 @@ export function validateDefinition(card) {
         const triggerEvent = eventSpec(t.event);
         if (
           ((triggerEvent?.event === 'dies' && triggerEvent.object !== 'source') ||
-            triggerEvent?.event === 'sacrifice') &&
+            ['sacrifice', 'diesGroup', 'battlefieldToGraveyardGroup'].includes(
+              triggerEvent?.event,
+            )) &&
           targetSelectors.some((selector) => {
             const spec = targetSpec(selector);
             return spec?.scope === 'graveyard' && spec.excludeSource;

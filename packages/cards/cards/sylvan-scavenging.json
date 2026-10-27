@@ -1,0 +1,82 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "398afdf2-4a12-430e-85c9-c68847230939",
+  "name": "Sylvan Scavenging",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}{G}"
+  },
+  "rulesText": "At the beginning of your end step, choose one —\n• Put a +1/+1 counter on target creature you control.\n• Create a 3/3 green Raccoon creature token if you control a creature with power 4 or greater.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Put a +1/+1 counter on target creature you control",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "addCounters",
+              "counter": "+1/+1",
+              "target": "target",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Create a 3/3 green Raccoon if you control a creature with power 4 or greater",
+          "effects": [
+            {
+              "op": "conditional",
+              "condition": {
+                "kind": "controlAtLeast",
+                "count": 1,
+                "where": {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "power": {
+                        "gte": 4
+                      }
+                    }
+                  ]
+                }
+              },
+              "then": [
+                {
+                  "op": "createToken",
+                  "token": "leyline:token/green-raccoon",
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

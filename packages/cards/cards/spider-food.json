@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "38eabfea-5ea5-4baa-8ad6-7a7cb00e1fed",
+  "name": "Spider Food",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "Destroy up to one target artifact, enchantment, or creature with flying. Create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target",
+          "targetGroup": "chosen"
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/food-token",
+          "amount": 1
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "enchantment"
+                },
+                {
+                  "all": [
+                    {
+                      "type": "creature"
+                    },
+                    {
+                      "keyword": "flying"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

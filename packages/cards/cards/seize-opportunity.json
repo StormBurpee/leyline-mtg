@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d0458ffe-9a61-443f-8e80-3d2dde224a4d",
+  "name": "Seize Opportunity",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n\u2022 Up to two target creatures each get +2/+1 until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Exile two cards to play until the end of your next turn.",
+          "effects": [
+            {
+              "op": "exileTop",
+              "count": 2,
+              "player": "controller",
+              "duration": "nextTurn"
+            }
+          ]
+        },
+        {
+          "label": "Up to two creatures get +2/+1.",
+          "targetGroups": [
+            {
+              "id": "chosen",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "type": "creature"
+                }
+              },
+              "min": 0,
+              "max": 2
+            }
+          ],
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 2,
+              "toughness": 1,
+              "until": "endOfTurn",
+              "targetGroup": "chosen"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

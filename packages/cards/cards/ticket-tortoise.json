@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "952083c5-9ffa-4cd9-915f-b7de7f3e5326",
+  "name": "Ticket Tortoise",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Turtle"],
+    "colors": [],
+    "manaCost": "{2}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "Defender\nWhen this creature enters, if an opponent controls more lands than you, you create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "defender"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/treasure-token",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "opponent",
+          "where": {
+            "type": "land"
+          }
+        },
+        "operator": "gt",
+        "right": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "you",
+          "where": {
+            "type": "land"
+          }
+        }
+      }
+    }
+  ]
+}

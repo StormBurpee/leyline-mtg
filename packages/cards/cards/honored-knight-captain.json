@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "69741d3b-1259-43f5-897f-6f4c3ca0844b",
+  "name": "Honored Knight-Captain",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Advisor", "Knight"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, create a 1/1 white Human Soldier creature token.\n{4}{W}{W}, Sacrifice this creature: Search your library for an Equipment card, put it onto the battlefield, then shuffle.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/human-soldier-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}{W}{W}",
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "where": {
+            "all": [
+              {
+                "type": "artifact"
+              },
+              {
+                "subtype": "Equipment"
+              }
+            ]
+          },
+          "destination": "battlefield"
+        }
+      ]
+    }
+  ]
+}

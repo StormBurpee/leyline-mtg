@@ -1,0 +1,77 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "609d13dc-c850-4877-8ad3-e84171b58069",
+  "name": "Jazal Goldmane",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Cat", "Warrior"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}{W}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "First strike (This creature deals combat damage before creatures without first strike.)\n{3}{W}{W}: Attacking creatures you control get +X/+X until end of turn, where X is the number of attacking creatures.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}{W}{W}"
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              },
+              {
+                "attacking": true
+              }
+            ]
+          },
+          "power": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "all",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "attacking": true
+                }
+              ]
+            }
+          },
+          "toughness": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "all",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "attacking": true
+                }
+              ]
+            }
+          },
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

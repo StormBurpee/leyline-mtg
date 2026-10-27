@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "855a2579-8f78-46ce-a3a8-eddc808bd7b4",
+  "name": "Outcaster Greenblade",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Mercenary"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, search your library for a basic land card or a Desert card, reveal it, put it into your hand, then shuffle.\nThis creature gets +1/+1 for each Desert you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "type": "land"
+                  },
+                  {
+                    "basic": true
+                  }
+                ]
+              },
+              {
+                "subtype": "Desert"
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ]
+    },
+    {
+      "kind": "selfBonus",
+      "power": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "you",
+        "where": {
+          "subtype": "Desert"
+        }
+      },
+      "toughness": {
+        "kind": "count",
+        "zone": "battlefield",
+        "player": "you",
+        "where": {
+          "subtype": "Desert"
+        }
+      }
+    }
+  ]
+}

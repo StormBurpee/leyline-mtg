@@ -113,7 +113,9 @@ export function createRegistry(input = CARDS) {
       ...(card.prepareSpell?.effects ?? []),
       ...(card.backFace?.effects ?? []),
       ...(card.backFace?.etb ?? []),
-      ...(card.backFace?.triggers ?? []).flatMap((t) => t.effects),
+      ...(card.backFace?.triggers ?? []).flatMap((t) =>
+        t.modes ? t.modes.flatMap((mode) => mode.effects) : t.effects,
+      ),
       ...(card.backFace?.activated ?? []).flatMap((a) => a.effects),
       ...(card.kicker?.effects ?? []),
       ...(card.gift
@@ -121,7 +123,9 @@ export function createRegistry(input = CARDS) {
         : []),
       ...(card.modes ?? []).flatMap((mode) => mode.effects),
       ...(card.etb ?? []),
-      ...(card.triggers ?? []).flatMap((t) => t.effects),
+      ...(card.triggers ?? []).flatMap((t) =>
+        t.modes ? t.modes.flatMap((mode) => mode.effects) : t.effects,
+      ),
       ...(card.activated ?? []).flatMap((a) => a.effects),
     ]) {
       if (

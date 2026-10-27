@@ -98,7 +98,9 @@ export interface EventSpec {
     | 'enter'
     | 'cast'
     | 'dies'
+    | 'diesGroup'
     | 'battlefieldToGraveyard'
+    | 'battlefieldToGraveyardGroup'
     | 'sacrifice'
     | 'attack'
     | 'tap'
@@ -396,6 +398,12 @@ export type ContinuousCondition =
   | { kind: 'sourceAttacking' | 'sourceEnteredThisTurn' }
   | { kind: 'all' | 'any'; conditions: ContinuousCondition[] };
 
+export interface TriggerMode {
+  label: string;
+  target?: TargetKind;
+  targetGroups?: readonly TargetGroup[];
+  effects: readonly Effect[];
+}
 export interface CardDefinition {
   readonly name: string;
   readonly type: CardType;
@@ -535,12 +543,16 @@ export interface CardDefinition {
       | 'otherCreatureEnters'
       | 'controllerCastsNoncreature'
       | 'controllerCastsInstantOrSorcery';
-    effects: readonly Effect[];
+    effects?: readonly Effect[];
+    modes?: readonly TriggerMode[];
     target?: TargetKind;
     targetGroups?: readonly TargetGroup[];
     optional?: boolean;
     oncePerTurn?: boolean;
+    /** Intervening-if: checked both when the event occurs and on resolution. */
     condition?: StateCondition;
+    /** Trigger restriction: checked only when the event occurs. */
+    triggerCondition?: StateCondition;
   }[];
   readonly activated?: readonly {
     powerUp?: true;
@@ -663,6 +675,7 @@ export interface PlayerState {
   kept: boolean;
 }
 export interface StackEntry {
+  modes?: readonly TriggerMode[];
   targetController?: PlayerId;
   movedCount?: number;
   emblem?: boolean;
@@ -808,6 +821,14 @@ export type Choice =
       remaining: { player: PlayerId; name: string; cards: string[] }[];
       toGrave: string[];
       sagaSacrifices?: string[];
+    }
+  | {
+      kind: 'triggerMode';
+      player: PlayerId;
+      entry: StackEntry;
+      modes: number[];
+      remainingEntries: StackEntry[];
+      remaining: { player: PlayerId; entries: StackEntry[] }[];
     }
   | {
       kind: 'triggerTarget';
@@ -1048,6 +1069,7 @@ export type Action =
   | { type: 'blockers'; pairs: { blocker: string; attacker: string }[] }
   | { type: 'assignDamage'; orders: DamageOrder[] }
   | { type: 'orderTriggers'; ids: string[] }
+  | { type: 'chooseTriggerMode'; mode: number }
   | { type: 'chooseTriggerTargets'; targets: TargetPlan }
   | { type: 'chooseTriggerTarget'; target: Target }
   | { type: 'chooseLandName'; name: string }
@@ -1070,6 +1092,7 @@ export type LegalAction =
           | 'cycle'
           | 'plot'
           | 'activate'
+          | 'chooseTriggerMode'
           | 'chooseTriggerTarget'
           | 'chooseTriggerTargets'
           | 'chooseLegend';

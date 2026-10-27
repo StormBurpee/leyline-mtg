@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "id": "c63b3511-d597-4c6e-9094-eabdeaa8a394",
+  "name": "Jadzi, Steward of Fate // Oracle's Gift",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Jadzi enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\nWhen Jadzi enters, draw two cards, then discard two cards.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Jadzi, Steward of Fate",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:prepare/oracle-s-gift",
+        "name": "Oracle's Gift",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": [],
+          "colors": ["U"],
+          "manaCost": "{X}{X}{U}"
+        },
+        "rulesText": "Create X 0/0 green and blue Fractal creature tokens, then put X +1/+1 counters on each Fractal you control.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/fractal-token",
+                "amount": {
+                  "kind": "x"
+                }
+              },
+              {
+                "op": "counterAll",
+                "where": {
+                  "all": [
+                    {
+                      "subtype": "Fractal"
+                    },
+                    {
+                      "controller": "you"
+                    }
+                  ]
+                },
+                "amount": {
+                  "kind": "x"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "entersPrepared": true
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

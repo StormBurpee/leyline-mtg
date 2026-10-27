@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c844cc98-b8b9-447d-92ee-64f4a4906e7c",
+  "name": "Explosive Getaway",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "W"],
+    "manaCost": "{3}{R}{W}"
+  },
+  "rulesText": "Exile up to one target artifact or creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nExplosive Getaway deals 4 damage to each creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "delayedBlink",
+          "target": "target",
+          "targetGroup": "blink"
+        },
+        {
+          "op": "damageAll",
+          "amount": 4,
+          "where": {
+            "type": "creature"
+          }
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "blink",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "creature"
+                }
+              ]
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "aeeab1df-0b8b-4bc4-a5f9-aac413449bec",
+  "name": "Mudflat Village",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {C}.\n{T}: Add {B}. Spend this mana only to cast a creature spell.\n{1}{B}, {T}, Sacrifice this land: Return target Bat, Lizard, Rat, or Squirrel card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C", "B"],
+      "restrictions": {
+        "B": "creature"
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{B}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "any": [
+                {
+                  "subtype": "Bat"
+                },
+                {
+                  "subtype": "Lizard"
+                },
+                {
+                  "subtype": "Rat"
+                },
+                {
+                  "subtype": "Squirrel"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

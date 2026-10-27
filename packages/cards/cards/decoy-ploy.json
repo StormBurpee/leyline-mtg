@@ -1,0 +1,86 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "035cddbc-39c9-42af-9e26-c88419b43b49",
+  "name": "Decoy Ploy",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{1}{B}"
+  },
+  "rulesText": "Choose one or both \u2014\n\u2022 Return target Villain card from your graveyard to your hand.\n\u2022 Return target Hero card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": "oneOrMore",
+      "modes": [
+        {
+          "label": "Return target Villain card from your graveyard.",
+          "additionalCost": "{0}",
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand",
+              "targetGroup": "mode0"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "mode0",
+              "selector": {
+                "scope": "graveyard",
+                "where": {
+                  "all": [
+                    {
+                      "owner": "you"
+                    },
+                    {
+                      "subtype": "Villain"
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 1
+            }
+          ]
+        },
+        {
+          "label": "Return target Hero card from your graveyard.",
+          "additionalCost": "{0}",
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand",
+              "targetGroup": "mode1"
+            }
+          ],
+          "targetGroups": [
+            {
+              "id": "mode1",
+              "selector": {
+                "scope": "graveyard",
+                "where": {
+                  "all": [
+                    {
+                      "owner": "you"
+                    },
+                    {
+                      "subtype": "Hero"
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

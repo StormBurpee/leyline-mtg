@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7e074b14-0ec8-439b-9b83-5f7c1a904384",
+  "name": "Haunt the Network",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "U"],
+    "manaCost": "{3}{U}{B}"
+  },
+  "rulesText": "Choose target opponent. Create two 1/1 colorless Thopter artifact creature tokens with flying. Then the chosen player loses X life and you gain X life, where X is the number of artifacts you control.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/flying-thopter-token",
+          "amount": 2
+        },
+        {
+          "op": "loseLife",
+          "target": "target",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "artifact"
+            }
+          }
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "artifact"
+            }
+          }
+        }
+      ],
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      }
+    }
+  ]
+}

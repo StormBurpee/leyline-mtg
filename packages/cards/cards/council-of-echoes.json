@@ -1,0 +1,74 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7b513bd0-27df-45f3-a85f-1f0aba3cae48",
+  "name": "Council of Echoes",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Spirit", "Advisor"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}{U}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nDescend 4 \u2014 When this creature enters, if there are four or more permanent cards in your graveyard, return up to one target nonland permanent other than this creature to its owner's hand.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "not": {
+                "type": "land"
+              }
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "not": {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            }
+          }
+        },
+        "operator": "gte",
+        "right": 4
+      }
+    }
+  ]
+}

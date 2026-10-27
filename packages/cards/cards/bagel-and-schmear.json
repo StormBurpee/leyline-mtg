@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1389c9fa-fec2-4212-a7aa-6dfb318dc202",
+  "name": "Bagel and Schmear",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Food"],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "Share \u2014 {W}, {T}, Sacrifice this artifact: Put a +1/+1 counter on up to one target creature. Draw a card. Activate only as a sorcery.\nNosh \u2014 {2}, {T}, Sacrifice this artifact: You gain 3 life and draw a card.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{W}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "timing": "sorcery",
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "amount": 1,
+          "counter": "+1/+1",
+          "targetGroup": "chosen"
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

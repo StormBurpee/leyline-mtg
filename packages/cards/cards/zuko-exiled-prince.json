@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3231ce2e-d4f8-44fc-872d-aeafa59aed4b",
+  "name": "Zuko, Exiled Prince",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Noble"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Firebending 3 (Whenever this creature attacks, add {R}{R}{R}. This mana lasts until end of combat.)\n{3}: Exile the top card of your library. You may play that card this turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "combatMana",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}"
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 1,
+          "player": "controller",
+          "duration": "turn"
+        }
+      ]
+    }
+  ]
+}

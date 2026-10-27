@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a7b0d897-38c0-4f90-81e8-3c5b8d31a607",
+  "name": "Glamermite",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Faerie", "Rogue"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nFlying\nWhen this creature enters, choose one \u2014\n\u2022 Tap target creature.\n\u2022 Untap target creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Tap target permanent.",
+          "effects": [
+            {
+              "op": "tap",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          }
+        },
+        {
+          "label": "Untap target permanent.",
+          "effects": [
+            {
+              "op": "untap",
+              "target": "target"
+            }
+          ],
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

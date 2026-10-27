@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1b759831-abe8-4996-a897-3c6d6d30a1c7",
+  "name": "Broodheart Engine",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "G"],
+    "manaCost": "{B}{G}"
+  },
+  "rulesText": "At the beginning of your upkeep, surveil 1.\n{2}{B}{G}, {T}, Sacrifice this artifact: Return target creature or Vehicle card from your graveyard to the battlefield. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "upkeep",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "surveil",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{B}{G}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "timing": "sorcery",
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "subtype": "Vehicle"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "battlefield"
+        }
+      ]
+    }
+  ]
+}

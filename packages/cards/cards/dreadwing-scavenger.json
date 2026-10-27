@@ -1,0 +1,77 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bbfd0de0-3558-4833-bae4-8efae44b7fff",
+  "name": "Dreadwing Scavenger",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Nightmare", "Bird"],
+    "colors": ["B", "U"],
+    "manaCost": "{1}{U}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Flying\nWhenever this creature enters or attacks, draw a card, then discard a card.\nThreshold \u2014 This creature gets +1/+1 and has deathtouch as long as there are seven or more cards in your graveyard.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "conditionalBonus",
+      "affects": "self",
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you"
+        },
+        "operator": "gte",
+        "right": 7
+      },
+      "power": 1,
+      "toughness": 1,
+      "keywords": ["deathtouch"]
+    }
+  ]
+}

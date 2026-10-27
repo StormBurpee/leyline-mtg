@@ -48,6 +48,7 @@ import {
   finishAuraEntryChoice,
   finishEntryLifeChoice,
   finishTriggerOrder,
+  finishTriggerMode,
   finishTriggerTarget,
   finishTriggerTargets,
   legalTarget,
@@ -673,6 +674,14 @@ function handleChoice(s, p, c) {
       requireRule(c.type === 'assignDamage', 'CHOICE', 'Assign combat damage first.');
       assignDamage(s, c.orders);
       return;
+    case 'triggerMode':
+      requireRule(
+        c.type === 'chooseTriggerMode',
+        'CHOICE',
+        'Choose the triggered ability mode first.',
+      );
+      finishTriggerMode(s, c.mode);
+      return;
     case 'triggerTarget':
       requireRule(
         c.type === 'chooseTriggerTarget',
@@ -830,6 +839,11 @@ export function legalActions(s, p, { x: exactX } = {}) {
     ];
   if (s.choice?.kind === 'legendRule' && s.choice.player === p)
     return [...s.choice.cards.map((card) => ({ type: 'chooseLegend', card })), { type: 'concede' }];
+  if (s.choice?.kind === 'triggerMode' && s.choice.player === p)
+    return [
+      ...s.choice.modes.map((mode) => ({ type: 'chooseTriggerMode', mode })),
+      { type: 'concede' },
+    ];
   if (s.choice?.kind === 'triggerTargets' && s.choice.player === p)
     return [
       ...targetPlans(
@@ -1086,6 +1100,7 @@ export function replay(record) {
         '0.46.0',
         '0.47.0',
         '0.48.0',
+        '0.49.0',
         '0.40.0',
         '0.39.0',
         '0.38.0',

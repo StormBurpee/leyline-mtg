@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/white-flying-spirit",
+  "name": "White Flying Spirit Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Spirit"],
+    "colors": ["W"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

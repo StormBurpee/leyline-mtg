@@ -15,7 +15,10 @@ const manifest = {
             ...(c.effects ?? []),
             ...(c.modes ?? []).flatMap((mode) => mode.effects),
             ...(c.etb ?? []),
-            ...(c.triggers ?? []).flatMap((t) => t.effects),
+            ...(c.triggers ?? []).flatMap((t) => [
+              ...(t.effects ?? []),
+              ...(t.modes ?? []).flatMap((mode) => mode.effects),
+            ]),
             ...(c.activated ?? []).flatMap((a) => a.effects),
           ].map((e) => e.op),
         ),

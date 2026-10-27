@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ec19a9bc-6fc1-4150-976b-37a47b165016",
+  "name": "Sandstorm Salvager",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Artificer"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "When this creature enters, create a 3/3 colorless Golem artifact creature token.\n{2}, {T}: Put a +1/+1 counter on each creature token you control. They gain trample until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/colorless-golem-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              },
+              {
+                "token": true
+              }
+            ]
+          },
+          "amount": 1
+        },
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              },
+              {
+                "token": true
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["trample"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

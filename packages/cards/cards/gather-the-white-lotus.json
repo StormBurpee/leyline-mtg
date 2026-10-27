@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "db69c3c9-d809-4361-8055-8c2dd4c6dd67",
+  "name": "Gather the White Lotus",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{4}{W}"
+  },
+  "rulesText": "Create a 1/1 white Ally creature token for each Plains you control. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/ally-token",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "subtype": "Plains"
+            }
+          }
+        },
+        {
+          "op": "scry",
+          "target": "controller",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

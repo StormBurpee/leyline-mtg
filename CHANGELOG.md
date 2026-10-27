@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.50.0 — Modal triggers and simultaneous death events
+
+- Add 79 complete Standard cards: 61 existing-engine definitions, fourteen modal-trigger cards and four aggregate-death cards. Catalog: 1982 playable cards and 72 tokens.
+- Choose triggered modes when abilities enter the stack, then announce that mode's targets. Preserve APNAP ordering, impossible-mode rejection, source incarnation, replay and opaque commands. Provide a guarded, readable client choice with Read/Back and dismissal recovery.
+- Observe one-or-more simultaneous creature or artifact deaths as real event batches, including sacrifice, legend, Saga and lethal state-based departures, with predeparture facts and graveyard replacements. Preserve legacy per-object events when no aggregate observer exists.
+- Separate trigger-time-only restrictions from intervening-if conditions, correcting Courageous Goblin without changing true intervening-if rechecks.
+- Keep all eight exact meta decks complete. DOM interaction checks cover modal decisions; physical browser and iOS visual verification remain unperformed.
+
 ## 0.49.0 — Preparation, graveyard activations and negative counters
 
 - Add 114 complete Standard cards: 92 source-only additions, seven graveyard self-return cards, four negative-counter cards and eleven preparation cards. Catalog: 1903 playable cards and 67 tokens.

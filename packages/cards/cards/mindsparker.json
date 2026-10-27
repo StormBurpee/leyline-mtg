@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "54866c25-b332-46c8-a2c5-1a71b702ddc0",
+  "name": "Mindsparker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}{R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "First strike (This creature deals combat damage before creatures without first strike.)\nWhenever an opponent casts a white or blue instant or sorcery spell, this creature deals 2 damage to that player.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "opponent",
+        "filter": {
+          "all": [
+            {
+              "any": [
+                {
+                  "type": "instant"
+                },
+                {
+                  "type": "sorcery"
+                }
+              ]
+            },
+            {
+              "any": [
+                {
+                  "color": "W"
+                },
+                {
+                  "color": "U"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "opponent",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}

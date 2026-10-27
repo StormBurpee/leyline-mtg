@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3cb91696-242f-4e91-806b-61b1bb45a20c",
+  "name": "Oltec Matterweaver",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Artificer"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Whenever you cast a creature spell, choose one —\n• Create a 1/1 colorless Gnome artifact creature token.\n• Create a token that's a copy of target artifact token you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "type": "creature"
+        }
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Create a 1/1 colorless Gnome artifact creature token",
+          "effects": [
+            {
+              "op": "createToken",
+              "token": "leyline:token/artifact-gnome-token",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Copy target artifact token you control",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "token": true
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "copyToken",
+              "count": 1,
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

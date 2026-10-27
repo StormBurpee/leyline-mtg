@@ -306,6 +306,12 @@ function actionDock(s, ui, p, actions) {
           : 'Drag a blocker onto an attacker, or click both. Click a paired blocker to undo.';
         buttons = `<button class="btn primary" data-action="block">${ui.blocks.length ? `Confirm ${ui.blocks.length} blocks` : 'No blocks'} →</button>`;
         break;
+      case 'triggerMode':
+        title = `${c.entry.name}: choose one mode`;
+        desc =
+          'Announce the mode before its targets. Neither player has priority during this choice.';
+        buttons = '<button class="btn primary" data-action="triggerModes">Choose mode →</button>';
+        break;
       case 'triggerTarget':
         title = `${c.entry.name}: choose a target`;
         desc =

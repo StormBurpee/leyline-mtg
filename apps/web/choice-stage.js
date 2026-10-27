@@ -32,6 +32,7 @@ export const CARD_DECISIONS = new Set([
   'auraEntry',
   'entryLife',
   'triggerTargets',
+  'triggerMode',
 ]);
 const gameIdentities = new WeakMap();
 let nextGameIdentity = 0;

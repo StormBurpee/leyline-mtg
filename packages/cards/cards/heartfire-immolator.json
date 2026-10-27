@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1e414a4f-6e76-4cbe-9c69-d52852cd5bc0",
+  "name": "Heartfire Immolator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Wizard"],
+    "colors": ["R"],
+    "manaCost": "{1}{R}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{R}, Sacrifice this creature: It deals damage equal to its power to target creature or planeswalker.",
+  "abilities": [
+    {
+      "use": "prowess"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{R}",
+        "sacrificeSelf": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "type": "planeswalker"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": {
+            "kind": "sourceStat",
+            "stat": "power"
+          }
+        }
+      ]
+    }
+  ]
+}

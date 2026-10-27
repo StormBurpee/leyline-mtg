@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f5bed085-bb7a-4250-9599-b2a8a95e6b6f",
+  "name": "Lord Skitter, Sewer King",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Rat", "Noble"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Whenever another Rat you control enters, exile up to one target card from an opponent's graveyard.\nAt the beginning of combat on your turn, create a 1/1 black Rat creature token with \"This token can't block.\"",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Rat"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile",
+          "targetGroup": "chosen"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "graveyard",
+            "where": {
+              "owner": "opponent"
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/nonblocking-rat-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

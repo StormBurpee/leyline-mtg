@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f4e61b03-e6c8-4751-9720-b91fdecd57da",
+  "name": "Wildwood Mentor",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Treefolk"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Whenever a token you control enters, put a +1/+1 counter on this creature.\nWhenever this creature attacks, another target attacking creature gets +X/+X until end of turn, where X is this creature's power.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "token": true
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": {
+            "kind": "sourceStat",
+            "stat": "power"
+          },
+          "toughness": {
+            "kind": "sourceStat",
+            "stat": "power"
+          },
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "attacking": true
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    }
+  ]
+}

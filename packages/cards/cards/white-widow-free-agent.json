@@ -1,0 +1,84 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4f0c055f-f614-44b0-9374-c53541f89185",
+  "name": "White Widow, Free Agent",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Hero", "Villain"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "When White Widow enters, choose one —\n• Put a +1/+1 counter on each of up to two target creatures.\n• Return target artifact or enchantment card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Put a +1/+1 counter on each of up to two target creatures",
+          "targetGroups": [
+            {
+              "id": "creatures",
+              "label": "Up to two creatures",
+              "selector": {
+                "scope": "permanent",
+                "where": {
+                  "type": "creature"
+                }
+              },
+              "min": 0,
+              "max": 2
+            }
+          ],
+          "effects": [
+            {
+              "op": "addCounters",
+              "counter": "+1/+1",
+              "target": "target",
+              "amount": 1,
+              "targetGroup": "creatures"
+            }
+          ]
+        },
+        {
+          "label": "Return target artifact or enchantment card from your graveyard to your hand",
+          "target": {
+            "scope": "graveyard",
+            "where": {
+              "all": [
+                {
+                  "owner": "you"
+                },
+                {
+                  "any": [
+                    {
+                      "type": "artifact"
+                    },
+                    {
+                      "type": "enchantment"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

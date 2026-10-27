@@ -1149,7 +1149,10 @@ export function compileCard(
             'targetGroups',
             'effects',
             'condition',
+            'triggerCondition',
             'oncePerTurn',
+            'choose',
+            'modes',
           ],
           path,
         );
@@ -1159,10 +1162,40 @@ export function compileCard(
           problem('UNSUPPORTED_EVENT', `${path}.on`, error);
         const event =
           Object.keys(EVENTS).find((key) => same(EVENTS[key], a.on)) ?? structuredClone(a.on);
-        const instructions = effects(a.effects, `${path}.effects`);
+        let modes;
+        if (a.modes !== undefined || a.choose !== undefined) {
+          if (a.choose !== 1)
+            problem(
+              'UNSUPPORTED_MODE_COUNT',
+              `${path}.choose`,
+              'Only choose-one triggered abilities are implemented.',
+            );
+          if (a.effects !== undefined || a.target !== undefined || a.targetGroups !== undefined)
+            problem('SHARED_MODE_FIELDS', path, 'Triggered modes cannot share effects or targets.');
+          if (!Array.isArray(a.modes) || a.modes.length < 2 || a.modes.length > 8)
+            problem('INVALID_MODES', `${path}.modes`, 'Expected 2–8 modes.');
+          else
+            modes = a.modes.map((mode, index) => {
+              const mp = `${path}.modes[${index}]`;
+              fields(mode, ['label', 'target', 'targetGroups', 'effects'], mp);
+              return {
+                label: mode?.label,
+                ...(mode?.target !== undefined
+                  ? { target: target(mode.target, `${mp}.target`) }
+                  : {}),
+                ...(mode?.targetGroups !== undefined
+                  ? { targetGroups: structuredClone(mode.targetGroups) }
+                  : {}),
+                effects: effects(mode?.effects, `${mp}.effects`),
+              };
+            });
+        }
+        const instructions = modes ? undefined : effects(a.effects, `${path}.effects`);
         if (
           event === 'selfEnters' &&
+          !modes &&
           !a.condition &&
+          !a.triggerCondition &&
           !a.oncePerTurn &&
           !a.optional &&
           !a.target &&
@@ -1173,8 +1206,11 @@ export function compileCard(
         else
           (d.triggers ??= []).push({
             event,
-            effects: instructions,
+            ...(modes ? { modes } : { effects: instructions }),
             ...(a.condition ? { condition: structuredClone(a.condition) } : {}),
+            ...(a.triggerCondition
+              ? { triggerCondition: structuredClone(a.triggerCondition) }
+              : {}),
             ...(a.target !== undefined ? { target: target(a.target, `${path}.target`) } : {}),
             ...(a.targetGroups ? { targetGroups: structuredClone(a.targetGroups) } : {}),
             ...(a.optional !== undefined ? { optional: a.optional } : {}),

@@ -1443,3 +1443,91 @@ test('Bitter Triumph additional cost stage preserves a reviewed discard, support
     h.cleanup();
   }
 });
+
+function modalTriggerReplay() {
+  const name = 'Modal trigger stage';
+  const catalog = {
+    ...CARDS,
+    [name]: {
+      name,
+      type: 'creature',
+      cost: {},
+      power: 2,
+      toughness: 2,
+      triggers: [
+        {
+          event: 'selfEnters',
+          modes: [
+            { label: 'Gain 3 life', effects: [{ op: 'gainLife', amount: 3 }] },
+            { label: 'Destroy an artifact', target: 'artifact', effects: [{ op: 'destroy' }] },
+            {
+              label: 'Tap up to one creature',
+              targetGroups: [{ id: 'chosen', selector: 'creature', min: 0, max: 1 }],
+              effects: [{ op: 'tap', targetGroup: 'chosen' }],
+            },
+          ],
+        },
+      ],
+    },
+  };
+  const deck = [...Array(4).fill(name), ...Array(3).fill('Forest')];
+  let state = createGame({ catalog, mulligan: false, minimumDeckSize: 7, decks: [deck, deck] });
+  while (state.step !== 'main1') state = act(state, 'pass');
+  state = act(state, 'cast', {
+    card: state.players[0].hand.find((id) => state.objects[id].name === name),
+  });
+  state = act(state, 'pass');
+  state = act(state, 'pass');
+  return exportReplay(state);
+}
+test('triggered mode stage labels choices, disables illegal modes, dismisses/reopens, and rejects duplicate stale clicks', async () => {
+  const h = await mount(modalTriggerReplay());
+  try {
+    h.click('[data-action="resume"]');
+    assert.equal(h.dialog.open, true);
+    assert.match(h.dialog.textContent, /Choose one triggered mode/);
+    assert.match(h.dialog.textContent, /Neither player gets priority/);
+    assert.equal(h.dialog.querySelector('[data-mode="1"]').disabled, true);
+    assert.match(h.dialog.querySelector('[data-mode="1"]').textContent, /No legal targets/);
+    h.click('#dialog [data-action="closeDialog"]');
+    assert.equal(h.dialog.open, false);
+    h.click('[data-action="reviewDecision"]');
+    assert.equal(h.dialog.open, true);
+    const stale = h.click('#dialog [data-action="chooseTriggerMode"][data-mode="0"]');
+    const saved = JSON.parse(h.storage.get('leyline.match.v1'));
+    assert.equal(saved.replay.commands.at(-1).type, 'chooseTriggerMode');
+    assert.equal(saved.replay.commands.at(-1).mode, 0);
+    assert.equal(h.dialog.open, false);
+    // A detached former mode option must not dispatch against a subsequent state.
+    h.document.body.append(stale);
+    stale.dispatchEvent(new window.Event('click', { bubbles: true }));
+    assert.equal(
+      JSON.parse(h.storage.get('leyline.match.v1')).replay.commands.length,
+      saved.replay.commands.length,
+    );
+  } finally {
+    h.cleanup();
+  }
+});
+test('choosing targeted trigger mode advances directly to its target stage with no priority, survives dismissal and reader', async () => {
+  const h = await mount(modalTriggerReplay());
+  try {
+    h.click('[data-action="resume"]');
+    h.click('#dialog [data-action="chooseTriggerMode"][data-mode="2"]');
+    assert.equal(h.dialog.open, true);
+    assert.match(h.dialog.textContent, /Confirm targets/);
+    h.click('#dialog [data-action="selectGroupTarget"]');
+    h.click('#dialog [data-action="readDecisionCard"]');
+    h.click('#dialog [data-action="returnDecision"]');
+    assert.ok(h.dialog.querySelector('.is-selected'));
+    h.click('#dialog [data-action="closeDialog"]');
+    h.click('[data-action="reviewDecision"]');
+    h.click('#dialog [data-action="nextTargetGroup"]');
+    const commands = JSON.parse(h.storage.get('leyline.match.v1')).replay.commands;
+    const modeIndex = commands.findIndex((c) => c.type === 'chooseTriggerMode');
+    assert.equal(commands[modeIndex + 1].type, 'chooseTriggerTargets');
+    assert.equal(commands[modeIndex + 1].targets.chosen.length, 1);
+  } finally {
+    h.cleanup();
+  }
+});

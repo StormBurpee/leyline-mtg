@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "44bffa3e-4d31-4f9b-829c-e2066ab2f641",
+  "name": "Honored Dreyleader",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Squirrel", "Warrior"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Trample\nWhen this creature enters, put a +1/+1 counter on it for each other Squirrel and/or Food you control.\nWhenever another Squirrel or Food you control enters, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "any": [
+                {
+                  "subtype": "Squirrel"
+                },
+                {
+                  "subtype": "Food"
+                }
+              ]
+            },
+            "excludeSource": true
+          },
+          "counter": "+1/+1"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "subtype": "Squirrel"
+            },
+            {
+              "subtype": "Food"
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

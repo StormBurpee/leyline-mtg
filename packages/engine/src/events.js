@@ -72,7 +72,9 @@ export function validateEventSpec(value) {
       'chapter',
       'cast',
       'dies',
+      'diesGroup',
       'battlefieldToGraveyard',
+      'battlefieldToGraveyardGroup',
       'sacrifice',
       'attack',
       'tap',
@@ -95,7 +97,9 @@ export function validateEventSpec(value) {
         'enter',
         'chapter',
         'dies',
+        'diesGroup',
         'battlefieldToGraveyard',
+        'battlefieldToGraveyardGroup',
         'sacrifice',
         'attack',
         'tap',
@@ -179,6 +183,14 @@ export function validateEventSpec(value) {
 export function matchesEvent(value, event, facts, source) {
   const spec = eventSpec(value);
   if (!spec || spec.event !== event) return false;
+  // Apply identity, controller and type predicates to the same departed object,
+  // not to the group or to independently matching members (CR 603.2c).
+  if (['diesGroup', 'battlefieldToGraveyardGroup'].includes(event))
+    return (
+      facts.objects?.some((object) =>
+        matchesEvent({ ...spec, event: 'dies' }, 'dies', object, source),
+      ) ?? false
+    );
   if (event === 'chapter' && !spec.chapters.includes(facts.chapterNumber)) return false;
   if (spec.spellNumber !== undefined && facts.spellNumber !== spec.spellNumber) return false;
   if (spec.drawNumber !== undefined && facts.drawNumber !== spec.drawNumber) return false;

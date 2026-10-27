@@ -1,0 +1,86 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c0535854-e4e7-43e4-bc5c-7cc95fb17929",
+  "name": "Shepherd of the Clouds",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Pegasus"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Flying, vigilance\nWhen this creature enters, return target permanent card with mana value 3 or less from your graveyard to your hand. Return that card to the battlefield instead if you control a Mount.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "controlAtLeast",
+            "count": 1,
+            "where": {
+              "subtype": "Mount"
+            }
+          },
+          "then": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "battlefield"
+            }
+          ],
+          "else": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand"
+            }
+          ]
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "manaValue": {
+                "lte": 3
+              }
+            },
+            {
+              "not": {
+                "any": [
+                  {
+                    "type": "instant"
+                  },
+                  {
+                    "type": "sorcery"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
