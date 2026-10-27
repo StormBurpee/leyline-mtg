@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/mutavault",
+  "name": "Mutavault",
+  "characteristics": {
+    "types": ["land"],
+    "subtypes": [],
+    "colors": [],
+    "supertypes": [],
+    "manaCost": null,
+    "token": true
+  },
+  "rulesText": "{T}: Add {C}.\n{1}: This token becomes a 2/2 creature with all creature types until end of turn. It is still a land.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}"
+      },
+      "effects": [
+        {
+          "op": "animateLand",
+          "power": 2,
+          "toughness": 2,
+          "allCreatureTypes": true,
+          "subtypes": [],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

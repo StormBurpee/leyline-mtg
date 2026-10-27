@@ -1,0 +1,96 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d262f3e1-b5bc-4dab-86c2-cd89c2419e54",
+  "name": "Caught in the Crossfire",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}{R}"
+  },
+  "rulesText": "Spree (Choose one or more additional costs.)\n+ {1} \u2014 Caught in the Crossfire deals 2 damage to each outlaw creature. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\n+ {1} \u2014 Caught in the Crossfire deals 2 damage to each non-outlaw creature.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": "oneOrMore",
+      "modes": [
+        {
+          "label": "Deal 2 damage to each outlaw creature.",
+          "additionalCost": "{1}",
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "any": [
+                      {
+                        "subtype": "Assassin"
+                      },
+                      {
+                        "subtype": "Mercenary"
+                      },
+                      {
+                        "subtype": "Pirate"
+                      },
+                      {
+                        "subtype": "Rogue"
+                      },
+                      {
+                        "subtype": "Warlock"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "Deal 2 damage to each non-outlaw creature.",
+          "additionalCost": "{1}",
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "not": {
+                      "any": [
+                        {
+                          "subtype": "Assassin"
+                        },
+                        {
+                          "subtype": "Mercenary"
+                        },
+                        {
+                          "subtype": "Pirate"
+                        },
+                        {
+                          "subtype": "Rogue"
+                        },
+                        {
+                          "subtype": "Warlock"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

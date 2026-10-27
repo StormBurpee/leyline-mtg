@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.52.0 — Saddle and broader Standard coverage
+
+- Add 87 complete Standard cards: 66 source-only definitions and twenty-one Mounts. Catalog: 2154 playable cards and 92 tokens.
+- Add sorcery-speed Saddle activation, exact other-creature tap costs, cost-only Pilot power bonuses, source-incarnation saddled designation and independently tracked first-event history. Actual tap triggers remain above the activated ability; resolving Saddle does not animate the Mount.
+- Separate repeated successful resolutions from actual designation-gain events. Attack-while-saddled restrictions check at occurrence, not again at resolution.
+- Reuse large readable multi-payer selection with inspection, cancel/reopen protection, bot proposals, opaque actions and deterministic replay.
+- Bind nested conditional target-controller effects before target movement. Correct Hobbit Hole's mandatory search/shuffle and extend typecycling coverage beyond basic-land examples.
+
 ## 0.51.0 — Bargain and complete power-damage bindings
 
 - Add 85 complete Standard cards: 65 source-only additions, thirteen Bargain cards and seven fight/bite cards. Catalog: 2067 playable cards and 79 tokens.

@@ -732,6 +732,17 @@ function copyToken(s, base, controller, exceptions = {}) {
   copied.token = true;
   return addObject(s, copied.name, controller, 'void', copied);
 }
+// Bind the primary target's controller before effects move it. Conditional branches
+// are inspected only for this dependency; their conditions still resolve in order.
+function needsTargetController(effects = []) {
+  return effects.some(
+    (effect) =>
+      effect.player === 'targetController' ||
+      effect.op === 'damageTargetController' ||
+      (effect.op === 'conditional' &&
+        (needsTargetController(effect.then) || needsTargetController(effect.else))),
+  );
+}
 export function resolveEffects(s, entry, startIndex = 0) {
   let effects = entry.effects ?? [];
   for (let index = startIndex; index < effects.length; index++) {
@@ -1823,6 +1834,27 @@ export function resolveEffects(s, entry, startIndex = 0) {
           });
         break;
       }
+      case 'becomeSaddled': {
+        const source = s.objects[entry.source.id];
+        if (source?.zone === 'battlefield' && source.incarnation === entry.source.incarnation) {
+          // Resolution history is permanent/incarnation history, not ability-use history.
+          // Track it even if this permanent currently has no saddle-related trigger.
+          const previous = source.saddleHistory?.turn === s.turn ? source.saddleHistory.count : 0;
+          source.saddleHistory = { turn: s.turn, count: previous + 1 };
+          emit(s, 'saddleResolved', {
+            objectId: source.id,
+            player: source.controller,
+            count: previous + 1,
+          });
+          // CR 603.2e: a persisting designation does not itself become true again.
+          if (source.saddledTurn !== s.turn) {
+            source.saddledTurn = s.turn;
+            emit(s, 'saddled', { objectId: source.id, player: source.controller });
+            notifyTriggers(s, 'saddled', { object: source, saddleNumber: previous + 1 });
+          }
+        }
+        break;
+      }
       case 'animateVehicle': {
         const source = s.objects[entry.source.id];
         if (
@@ -2601,9 +2633,7 @@ export function resolveTop(s) {
     if (entry.kind === 'spell' && object?.zone === 'stack') move(s, object, 'graveyard');
     return;
   }
-  if (
-    entry.effects?.some((e) => e.player === 'targetController' || e.op === 'damageTargetController')
-  )
+  if (needsTargetController(entry.effects))
     entry.targetController =
       entry.target?.kind === 'player'
         ? entry.target.id

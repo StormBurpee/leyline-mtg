@@ -14,12 +14,13 @@ import {
 } from '../src/index.js';
 import { fixture, put, lands, act, resolve } from './helpers.js';
 import { move } from '../src/model.js';
+import { hasSubtype } from '../src/creature-types.js';
 import { compileCard, canonical } from '../../cards/compiler.js';
 import { sourceFromDefinition } from '../../cards/from-native.js';
 
 const names = Object.keys(CARDS).filter((name) => CARDS[name].cyclingType);
-test('all 24 complete landcyclers validate and round-trip through source compilation', () => {
-  assert.equal(names.length, 24);
+test('all complete typecyclers validate and round-trip through source compilation', () => {
+  assert.ok(names.length > 0);
   assert.ok(names.includes('Zog, Triceraton Castaway'));
   assert.equal(CARDS['Zog, Triceraton Castaway'].cyclingType, 'Mountain');
   for (const name of names) {
@@ -40,10 +41,29 @@ for (const name of names)
   test(`${name}: pays and discards before an optional revealed search, never casts`, () => {
     let s = fixture();
     const card = put(s, name, 0, 'hand');
-    lands(s, 'Forest', 2);
-    lands(s, 'Island', 2);
+    const d = CARDS[name];
+    const manaSources = {
+      generic: 'Forest',
+      W: 'Plains',
+      U: 'Island',
+      B: 'Swamp',
+      R: 'Mountain',
+      G: 'Forest',
+      C: 'Wastes',
+    };
+    for (const [symbol, amount] of Object.entries(d.cycling)) {
+      assert.ok(manaSources[symbol], `Add a payment fixture for cycling symbol ${symbol}`);
+      lands(s, manaSources[symbol], amount);
+    }
     for (const basic of ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest'])
       put(s, basic, 0, 'library');
+    const matchesCyclingType = (candidate) =>
+      d.cyclingType === 'Basic land'
+        ? candidate.type === 'land' && candidate.basic
+        : hasSubtype(candidate, d.cyclingType);
+    const matchingCard = Object.values(CARDS).find(matchesCyclingType);
+    assert.ok(matchingCard, `No fixture candidate for ${d.cyclingType}cycling`);
+    const candidate = put(s, matchingCard.name, 0, 'library');
     const life = s.players[0].life;
     assert.equal(cyclingProblem(s, 0, card.id), null);
     s = act(s, 'cycle', { card: card.id });
@@ -55,7 +75,7 @@ for (const name of names)
     assert.equal(s.events.filter((e) => e.type === 'cast').length, 0);
     assert.equal(
       Object.values(s.objects).filter((o) => o.zone === 'battlefield' && o.tapped).length,
-      2,
+      Object.values(d.cycling).reduce((total, amount) => total + amount, 0),
     );
     assert.ok(!legalActions(s, 0).some((a) => a.type === 'cycle' && a.card === card.id));
     s = resolve(s);
@@ -63,6 +83,8 @@ for (const name of names)
     assert.equal(s.choice.min, 0);
     assert.equal(s.choice.max, 1);
     assert.equal(s.choice.reveal, true);
+    assert.ok(s.choice.cards.includes(candidate.id));
+    assert.ok(s.choice.cards.every((id) => matchesCyclingType(CARDS[s.objects[id].name])));
     const chosen = s.choice.cards[0];
     assert.ok(chosen);
     s = act(s, 'searchLibrary', { cards: [chosen] });

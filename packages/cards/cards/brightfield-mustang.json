@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1b05e355-38a5-4307-9d8b-e99ec30f8ed3",
+  "name": "Brightfield Mustang",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Horse", "Mount"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Whenever this creature attacks while saddled, untap it and put a +1/+1 counter on it.\nSaddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "triggerCondition": {
+        "kind": "sourceSaddled"
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "source"
+        },
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "saddle",
+      "power": 1
+    }
+  ]
+}

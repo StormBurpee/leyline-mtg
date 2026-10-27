@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "457e3218-b2ef-4280-931a-5320987b9657",
+  "name": "Dracosaur Auxiliary",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur", "Dragon", "Mount"],
+    "colors": ["R"],
+    "manaCost": "{4}{R}{R}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Flying, haste\nWhenever this creature attacks while saddled, it deals 2 damage to any target.\nSaddle 3 (Tap any number of other creatures you control with total power 3 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "haste"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "triggerCondition": {
+        "kind": "sourceSaddled"
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 2
+        }
+      ],
+      "target": {
+        "scope": "damageable"
+      }
+    },
+    {
+      "kind": "saddle",
+      "power": 3
+    }
+  ]
+}

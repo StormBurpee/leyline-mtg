@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d0a4efc3-fa68-48f2-a6d0-2fff93e05c77",
+  "name": "Greenbelt Radical",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Centaur", "Citizen"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Disguise {5}{G}{G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen this creature is turned face up, put a +1/+1 counter on each creature you control. Creatures you control gain trample until end of turn.",
+  "abilities": [
+    {
+      "kind": "disguise",
+      "cost": "{5}{G}{G}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "faceUp",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "counterAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "amount": 1
+        },
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["trample"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1a846ad6-15c9-4bf9-9127-612018a557b9",
+  "name": "Judge Magister Gabranth",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Advisor", "Knight"],
+    "colors": ["B", "W"],
+    "manaCost": "{W}{B}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Menace (This creature can't be blocked except by two or more creatures.)\nWhenever another creature or artifact you control dies, put a +1/+1 counter on Judge Magister Gabranth.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "menace"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "battlefieldToGraveyard",
+        "controller": "you",
+        "filter": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "type": "artifact"
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ]
+    }
+  ]
+}

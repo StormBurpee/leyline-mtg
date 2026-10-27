@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6f2e4607-bece-42ba-a2a3-5dc50f246793",
+  "name": "Mammoth Bellow",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G", "R", "U"],
+    "manaCost": "{2}{G}{U}{R}"
+  },
+  "rulesText": "Create a 5/5 green Elephant creature token.\nHarmonize {5}{G}{U}{R} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/five-five-elephant-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "harmonize",
+      "cost": "{5}{G}{U}{R}"
+    }
+  ]
+}

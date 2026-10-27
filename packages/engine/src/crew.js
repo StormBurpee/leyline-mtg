@@ -1,6 +1,13 @@
 import { definition, controlled, stats } from './model.js';
 import { hasType } from './types.js';
 
+export const tapPower = (s, o, sourceId, ability = 'crew') =>
+  stats(s, o).power +
+  (s.objects[sourceId] &&
+  definition(s, s.objects[sourceId]).subtypes.includes(ability === 'saddle' ? 'Mount' : 'Vehicle')
+    ? (definition(s, o).crewSaddlePowerBonus ?? 0)
+    : 0);
+
 export function crewCandidates(s, p, id) {
   return controlled(s, p).filter(
     (o) => o.id !== id && !o.tapped && hasType(definition(s, o), 'creature'),
@@ -22,7 +29,8 @@ export function crewProblem(s, p, id, cards) {
   if (cards.some((id) => !candidates.has(id)))
     return 'Choose other untapped creatures you control.';
   if (
-    cards.reduce((sum, id) => sum + stats(s, s.objects[id]).power, 0) < definition(s, source).crew
+    cards.reduce((sum, cardId) => sum + tapPower(s, s.objects[cardId], id), 0) <
+    definition(s, source).crew
   )
     return 'The selected creatures have insufficient total power.';
   return null;
@@ -32,10 +40,10 @@ export function crewProblem(s, p, id, cards) {
 export function crewPlan(s, p, id) {
   const cards = [];
   for (const o of crewCandidates(s, p, id).sort(
-    (a, b) => stats(s, b).power - stats(s, a).power || a.id.localeCompare(b.id),
+    (a, b) => tapPower(s, b, id) - tapPower(s, a, id) || a.id.localeCompare(b.id),
   )) {
     if (!crewProblem(s, p, id, cards)) return cards;
-    if (stats(s, o).power > 0) cards.push(o.id);
+    if (tapPower(s, o, id) > 0) cards.push(o.id);
   }
   return crewProblem(s, p, id, cards) ? null : cards;
 }

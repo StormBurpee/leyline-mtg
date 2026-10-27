@@ -1,0 +1,35 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6f1e5571-ddda-4cea-84ef-36a571d8fd51",
+  "name": "Ashiok's Reaper",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Nightmare"],
+    "colors": ["B"],
+    "manaCost": "{3}{B}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "Whenever an enchantment you control is put into a graveyard from the battlefield, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "battlefieldToGraveyard",
+        "controller": "you",
+        "filter": {
+          "type": "enchantment"
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -488,6 +488,7 @@
             "faceUp",
             "combatDamagePlayer",
             "tap",
+            "saddled",
             "targeted",
             "chapter",
             "librarySearch",
@@ -3015,7 +3016,7 @@
           "type": "object",
           "properties": {
             "kind": {
-              "const": "crew"
+              "enum": ["crew", "saddle", "crewSaddlePowerBonus"]
             },
             "power": {
               "type": "integer",
@@ -3507,7 +3508,7 @@
           "type": "object",
           "properties": {
             "kind": {
-              "const": "sourceEnteredThisTurn"
+              "enum": ["sourceEnteredThisTurn", "sourceSaddled"]
             }
           },
           "required": ["kind"],

@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39",
+  "name": "Alacrian Jaguar",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Mount"],
+    "colors": ["G"],
+    "manaCost": "{4}{G}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Vigilance\nWhenever this creature attacks while saddled, it gets +2/+2 until end of turn.\nSaddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "triggerCondition": {
+        "kind": "sourceSaddled"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 2,
+          "toughness": 2,
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "saddle",
+      "power": 1
+    }
+  ]
+}

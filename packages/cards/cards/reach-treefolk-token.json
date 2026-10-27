@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/reach-treefolk-token",
+  "name": "Reach Treefolk Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Treefolk"],
+    "colors": ["G"],
+    "supertypes": [],
+    "manaCost": null,
+    "power": 3,
+    "toughness": 4,
+    "token": true
+  },
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    }
+  ],
+  "rulesText": "reach"
+}

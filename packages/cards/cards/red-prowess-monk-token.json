@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/red-prowess-monk-token",
+  "name": "Red Prowess Monk Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Monk"],
+    "colors": ["R"],
+    "manaCost": null,
+    "power": 1,
+    "toughness": 1,
+    "token": true
+  },
+  "rulesText": "Prowess",
+  "abilities": [
+    {
+      "use": "prowess"
+    }
+  ]
+}

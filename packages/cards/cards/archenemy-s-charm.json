@@ -1,0 +1,115 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "edcb0248-e7c9-4df9-8dba-982048654fd2",
+  "name": "Archenemy's Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}{B}{B}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Exile target creature or planeswalker.\n\u2022 Return one or two target creature and/or planeswalker cards from your graveyard to your hand.\n\u2022 Put two +1/+1 counters on target creature you control. It gains lifelink until end of turn.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Exile target creature or planeswalker.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "planeswalker"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "exile"
+            }
+          ]
+        },
+        {
+          "label": "Return one or two creature and/or planeswalker cards.",
+          "targetGroups": [
+            {
+              "id": "chosen",
+              "selector": {
+                "scope": "graveyard",
+                "where": {
+                  "all": [
+                    {
+                      "owner": "you"
+                    },
+                    {
+                      "any": [
+                        {
+                          "type": "creature"
+                        },
+                        {
+                          "type": "planeswalker"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "min": 1,
+              "max": 2
+            }
+          ],
+          "effects": [
+            {
+              "op": "moveTarget",
+              "target": "target",
+              "destination": "hand",
+              "targetGroup": "chosen"
+            }
+          ]
+        },
+        {
+          "label": "Put two +1/+1 counters on your creature and grant lifelink.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "amount": 2,
+              "counter": "+1/+1"
+            },
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["lifelink"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

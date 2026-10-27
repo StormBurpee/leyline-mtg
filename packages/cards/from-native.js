@@ -315,6 +315,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   if (d.plot) abilities.push({ kind: 'plot', cost: mana(d.plot) });
   if (d.harmonize) abilities.push({ kind: 'harmonize', cost: mana(d.harmonize) });
   if (d.flashback) abilities.push({ kind: 'flashback', cost: mana(d.flashback) });
+  for (const kind of ['saddle', 'crewSaddlePowerBonus'])
+    if (d[kind] !== undefined) abilities.push({ kind, power: d[kind] });
   if (d.crew !== undefined) abilities.push({ kind: 'crew', power: d.crew });
   if (d.cycling)
     abilities.push({

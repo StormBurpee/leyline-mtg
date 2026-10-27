@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bc983c67-eb5d-4a85-a12e-a410f85e949e",
+  "name": "Gila Courser",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Lizard", "Mount"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature attacks while saddled, exile the top card of your library. Until the end of your next turn, you may play that card.\nSaddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "triggerCondition": {
+        "kind": "sourceSaddled"
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 1,
+          "player": "controller",
+          "duration": "nextTurn"
+        }
+      ]
+    },
+    {
+      "kind": "saddle",
+      "power": 1
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "80312910-5d53-44f1-9982-e46dc7532abb",
+  "name": "The Unbeatable Squirrel Girl",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Squirrel", "Human", "Hero"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}{G}{G}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Do You Like Squirrels? \u2014 Whenever The Unbeatable Squirrel Girl enters or attacks, create a 1/1 green Squirrel creature token.\nI LOVE Squirrels! \u2014 {1}{G}{G}{G}: Create X 1/1 green Squirrel creature tokens, where X is the number of Squirrels you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/green-squirrel-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/green-squirrel-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{G}{G}{G}"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/green-squirrel-token",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "subtype": "Squirrel"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

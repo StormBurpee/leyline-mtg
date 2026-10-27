@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "376cbc85-2941-4d97-b031-bffff86550e7",
+  "name": "Congregation Gryff",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Hippogriff", "Mount"],
+    "colors": ["G", "W"],
+    "manaCost": "{1}{G}{W}",
+    "power": 1,
+    "toughness": 4
+  },
+  "rulesText": "Flying, lifelink\nWhenever this creature attacks while saddled, it gets +X/+X until end of turn, where X is the number of Mounts you control.\nSaddle 3 (Tap any number of other creatures you control with total power 3 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "triggerCondition": {
+        "kind": "sourceSaddled"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "subtype": "Mount"
+            }
+          },
+          "toughness": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "subtype": "Mount"
+            }
+          },
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "saddle",
+      "power": 3
+    }
+  ]
+}

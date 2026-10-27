@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "24bc7bd5-f262-45a2-8e94-377fef2ba5d5",
+  "name": "Stubborn Burrowfiend",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Badger", "Beast", "Mount"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever this creature becomes saddled for the first time each turn, mill two cards, then this creature gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "saddled",
+        "object": "source",
+        "firstEachTurn": true
+      },
+      "effects": [
+        {
+          "op": "mill",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "modify",
+          "target": "source",
+          "power": {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "toughness": {
+            "kind": "count",
+            "zone": "graveyard",
+            "player": "you",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "saddle",
+      "power": 2
+    }
+  ]
+}

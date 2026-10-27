@@ -104,6 +104,7 @@ export interface EventSpec {
     | 'sacrifice'
     | 'attack'
     | 'tap'
+    | 'saddled'
     | 'step'
     | 'attackGroup'
     | 'noncombatDamageToPlayer'
@@ -374,6 +375,7 @@ export type AdditionalCostPayment =
   | { blight: ObjectTarget }
   | { teamwork: ObjectTarget[] };
 export type StateCondition =
+  | { kind: 'sourceSaddled' }
   | { kind: 'sourceQuestCountersAtLeast'; count: number }
   | { kind: 'additionalCostPaid' }
   | { kind: 'sourceBargained' }
@@ -438,6 +440,8 @@ export interface CardDefinition {
   readonly target?: TargetKind | null;
   readonly effects?: readonly Effect[];
   readonly crew?: number;
+  readonly saddle?: number;
+  readonly crewSaddlePowerBonus?: number;
   readonly ninjutsu?: ManaCost;
   readonly turnLoyaltyCreature?: {
     power: number;
@@ -591,6 +595,8 @@ export interface GameObject {
   zone: Zone;
   incarnation: number;
   tapped: boolean;
+  saddledTurn?: number;
+  saddleHistory?: { turn: number; count: number };
   plusCounters: number;
   chosenLandName?: string;
   keywordCounters?: Record<string, number>;
@@ -726,7 +732,7 @@ export interface StackEntry {
   sourceAttachment?: ObjectTarget | null;
   effects: (
     | Effect
-    | { op: 'animateVehicle' }
+    | { op: 'animateVehicle' | 'becomeSaddled' }
     | { op: 'returnEarthbent' }
     | { op: 'returnDelayedBlink'; controller: 'owner' | 'you' }
     | { op: 'wardPayment'; cost: { mana?: ManaCost; life?: number } }
@@ -1039,7 +1045,7 @@ export type Action =
   | { type: 'chooseManaColor'; color: Exclude<Color, 'C'> }
   | { type: 'chooseResolutionCard'; card: string | null }
   | { type: 'chooseLegend'; card: string }
-  | { type: 'crew'; card: string; cards: string[] }
+  | { type: 'crew' | 'saddle'; card: string; cards: string[] }
   | { type: 'ninjutsu'; card: string; attacker: ObjectTarget }
   | { type: 'cycle'; card: string }
   | { type: 'plot'; card: string }
@@ -1097,6 +1103,7 @@ export type LegalAction =
           | 'cast'
           | 'turnFaceUp'
           | 'crew'
+          | 'saddle'
           | 'cycle'
           | 'plot'
           | 'activate'
@@ -1306,6 +1313,20 @@ export function castingProfile(
   x?: number,
 ): CardDefinition | null;
 
+export function tapPower(
+  state: GameState,
+  object: GameObject,
+  sourceId: string,
+  ability?: 'crew' | 'saddle',
+): number;
+export function saddleProblem(
+  state: GameState,
+  player: PlayerId,
+  id: string,
+  cards: string[],
+): string | null;
+export function saddleCandidates(state: GameState, player: PlayerId, id: string): GameObject[];
+export function saddlePlan(state: GameState, player: PlayerId, id: string): string[] | null;
 export function crewProblem(
   state: GameState,
   player: PlayerId,

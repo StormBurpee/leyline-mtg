@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d3cad867-142c-4e9d-bcd8-0e7ed1fd2f77",
+  "name": "Sinuous Benthisaur",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dinosaur"],
+    "colors": ["U"],
+    "manaCost": "{5}{U}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, look at the top X cards of your library, where X is the number of Caves you control plus the number of Cave cards in your graveyard. Put two of those cards into your hand and the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": {
+            "kind": "sum",
+            "values": [
+              {
+                "kind": "count",
+                "zone": "battlefield",
+                "player": "you",
+                "where": {
+                  "subtype": "Cave"
+                }
+              },
+              {
+                "kind": "count",
+                "zone": "graveyard",
+                "player": "you",
+                "where": {
+                  "subtype": "Cave"
+                }
+              }
+            ]
+          },
+          "selectCount": 2,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

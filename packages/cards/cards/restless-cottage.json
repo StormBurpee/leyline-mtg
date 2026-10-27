@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7e16595f-bdeb-422e-b99a-bfc0ed52e9f8",
+  "name": "Restless Cottage",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {B} or {G}.\n{2}{B}{G}: This land becomes a 4/4 black and green Horror creature until end of turn. It's still a land.\nWhenever this land attacks, create a Food token and exile up to one target card from a graveyard.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["B", "G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{B}{G}"
+      },
+      "effects": [
+        {
+          "op": "animateLand",
+          "power": 4,
+          "toughness": 4,
+          "colors": ["B", "G"],
+          "subtypes": ["Horror"],
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/food-token",
+          "amount": 1
+        },
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "targetGroup": "chosen",
+          "destination": "exile"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "graveyard"
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

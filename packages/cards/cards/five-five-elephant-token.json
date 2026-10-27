@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/five-five-elephant-token",
+  "name": "Five Five Elephant Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Elephant"],
+    "colors": ["G"],
+    "supertypes": [],
+    "manaCost": null,
+    "power": 5,
+    "toughness": 5,
+    "token": true
+  },
+  "abilities": [],
+  "rulesText": "No abilities."
+}

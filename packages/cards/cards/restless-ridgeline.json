@@ -1,0 +1,74 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4c0f4a63-586a-4dde-9621-b0dd9118b2e5",
+  "name": "Restless Ridgeline",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {R} or {G}.\n{2}{R}{G}: This land becomes a 3/4 red and green Dinosaur creature until end of turn. It's still a land.\nWhenever this land attacks, another target attacking creature gets +2/+0 until end of turn. Untap that creature.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["R", "G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{R}{G}"
+      },
+      "effects": [
+        {
+          "op": "animateLand",
+          "power": 3,
+          "toughness": 4,
+          "colors": ["R", "G"],
+          "subtypes": ["Dinosaur"],
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 2,
+          "toughness": 0,
+          "until": "endOfTurn"
+        },
+        {
+          "op": "untap",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "attacking": true
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    }
+  ]
+}

@@ -614,6 +614,8 @@ function liveCharacteristics(s, o) {
     bits.push(
       `${d.type === 'creature' ? 'Land creature' : 'Land'} until player ${form.untilNextTurn + 1}’s next turn · Gained: Tap: Add ${form.landForm.mana.join(' or ')}`,
     );
+  if (o.saddledTurn === s.turn) bits.push('Saddled until end of turn');
+  if (d.saddle !== undefined) bits.push(`Saddle ${d.saddle}`);
   if (d.crew !== undefined)
     bits.push(
       d.type === 'creature'

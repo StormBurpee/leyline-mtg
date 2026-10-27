@@ -3,7 +3,8 @@ import {
   targetGroupCandidates,
   targetPlanProblem,
 } from '../../packages/engine/src/target-groups.js';
-import { crewProblem, crewCandidates } from '../../packages/engine/src/crew.js';
+import { crewProblem, crewCandidates, tapPower } from '../../packages/engine/src/crew.js';
+import { saddleProblem, saddleCandidates } from '../../packages/engine/src/saddle.js';
 import { stats } from '../../packages/engine/src/model.js';
 import { castProblem, abilityProblem } from '../../packages/engine/src/engine.js';
 import {
@@ -419,27 +420,32 @@ function showCrewSelection() {
   }
   const p = viewer(),
     o = state.objects[draft.card];
-  const problem = crewProblem(state, p, draft.card, draft.cards);
-  const total = draft.cards.reduce((sum, id) => sum + stats(state, state.objects[id]).power, 0);
-  const body = `<div class="decision-card-gallery decision-many">${crewCandidates(
-    state,
-    p,
-    draft.card,
-  )
+  const saddle = draft.kind === 'saddle',
+    label = saddle ? 'Saddle' : 'Crew';
+  const problem = (saddle ? saddleProblem : crewProblem)(state, p, draft.card, draft.cards);
+  const total = draft.cards.reduce(
+    (sum, id) => sum + tapPower(state, state.objects[id], draft.card, draft.kind),
+    0,
+  );
+  const body = `<div class="decision-card-gallery decision-many">${(saddle
+    ? saddleCandidates
+    : crewCandidates)(state, p, draft.card)
     .map((c) =>
       decisionCard(state, c.id, metadata, {
         viewer: p,
         action: 'toggleCrew',
         selected: draft.cards.includes(c.id),
-        label: `Crew with ${c.name} (${stats(state, c).power} power)`,
+        label: `${label} with ${c.name} (${tapPower(state, c, draft.card, draft.kind)} power)`,
       }),
     )
     .join('')}</div>`;
   openChoiceDialog(
-    `Crew ${definition(state, o).crew} — ${o.name}`,
-    'Tap other untapped creatures with enough total power. Summoning-sick creatures can crew. Animation resolves on the stack and lasts until end of turn.',
+    `${label} ${definition(state, o)[saddle ? 'saddle' : 'crew']} — ${o.name}`,
+    saddle
+      ? 'Tap other untapped creatures with enough total power. Summoning-sick creatures can saddle. Saddle only as a sorcery; the designation resolves on the stack and lasts until end of turn.'
+      : 'Tap other untapped creatures with enough total power. Summoning-sick creatures can crew. Animation resolves on the stack and lasts until end of turn.',
     body,
-    `<span>${total} total power${problem ? ` · ${escape(problem)}` : ''}</span><button class="btn primary" data-action="confirmCrew" ${problem ? 'disabled' : ''}>Tap and crew</button><button class="btn" data-action="closeDialog">Cancel</button>`,
+    `<span>${total} total power${problem ? ` · ${escape(problem)}` : ''}</span><button class="btn primary" data-action="confirmCrew" ${problem ? 'disabled' : ''}>Tap and ${saddle ? 'saddle' : 'crew'}</button><button class="btn" data-action="closeDialog">Cancel</button>`,
     { source: o.name },
   );
   dialog._activeChoice = null;
@@ -2448,8 +2454,14 @@ async function action(name, el) {
       resetSelection();
       render();
       break;
+    case 'startSaddle':
     case 'startCrew': {
-      dialog._crewDraft = { card: dialog._activationCard, cards: [], revision: state.revision };
+      dialog._crewDraft = {
+        card: dialog._activationCard,
+        cards: [],
+        revision: state.revision,
+        kind: el.dataset.action === 'startSaddle' ? 'saddle' : 'crew',
+      };
       showCrewSelection();
       break;
     }
@@ -2473,12 +2485,17 @@ async function action(name, el) {
         closeDialog();
         break;
       }
-      const problem = crewProblem(state, viewer(), draft.card, draft.cards);
+      const problem = (draft.kind === 'saddle' ? saddleProblem : crewProblem)(
+        state,
+        viewer(),
+        draft.card,
+        draft.cards,
+      );
       if (problem) {
         toast(problem);
         break;
       }
-      const command = { type: 'crew', card: draft.card, cards: [...draft.cards] };
+      const command = { type: draft.kind ?? 'crew', card: draft.card, cards: [...draft.cards] };
       closeDialog();
       send(command);
       break;
@@ -3133,7 +3150,9 @@ function selectCard(id) {
       (o.zone === 'graveyard' &&
         o.owner === p &&
         definition(state, o).activated?.some((a) => a.zone === 'graveyard'))) &&
-    (definition(state, o).activated?.length || definition(state, o).crew !== undefined)
+    (definition(state, o).activated?.length ||
+      definition(state, o).crew !== undefined ||
+      definition(state, o).saddle !== undefined)
   ) {
     const abilities = definition(state, o).activated ?? [],
       legal = legalActions(state, p);
@@ -3149,6 +3168,9 @@ function selectCard(id) {
       o.name,
       `<p style="margin-bottom:16px">Mana abilities resolve immediately. Other abilities use the stack. Costs are paid when you activate, not when the ability resolves.</p>`,
       manaButtons +
+        (definition(state, o).saddle !== undefined
+          ? `<button class="btn primary" data-action="startSaddle" ${legal.some((a) => a.type === 'saddle' && a.card === id) ? '' : 'disabled'}>Saddle ${definition(state, o).saddle}</button>`
+          : '') +
         (definition(state, o).crew !== undefined
           ? `<button class="btn primary" data-action="startCrew" ${legal.some((a) => a.type === 'crew' && a.card === id) ? '' : 'disabled'}>Crew ${definition(state, o).crew}</button>`
           : '') +

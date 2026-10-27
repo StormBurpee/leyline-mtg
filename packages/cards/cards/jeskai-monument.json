@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0b2b7d04-73f3-43f6-86e0-fa00cbbc6469",
+  "name": "Jeskai Monument",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": "{2}"
+  },
+  "rulesText": "When this artifact enters, search your library for a basic Island, Mountain, or Plains card, reveal it, put it into your hand, then shuffle.\n{1}{U}{R}{W}, {T}, Sacrifice this artifact: Create two 1/1 white Bird creature tokens with flying. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              },
+              {
+                "any": [
+                  {
+                    "subtype": "Island"
+                  },
+                  {
+                    "subtype": "Mountain"
+                  },
+                  {
+                    "subtype": "Plains"
+                  }
+                ]
+              }
+            ]
+          },
+          "amount": 1,
+          "destination": "hand",
+          "reveal": true
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{U}{R}{W}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "timing": "sorcery",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-flying-bird-token",
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}
