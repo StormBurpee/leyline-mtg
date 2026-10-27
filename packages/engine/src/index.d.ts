@@ -106,6 +106,7 @@ export interface TargetGroup {
 export type TargetPlan = Record<string, Target[]>;
 export type Effect = EffectInstruction & { targetGroup?: string };
 type EffectInstruction =
+  | { op: 'stunOn'; amount: NumericValue; subject?: 'source' | 'attached' }
   | { op: 'fight' | 'bite'; sourceGroup: string; victimGroup: string }
   | { op: 'damageEventPowerOpponent' }
   | { op: 'impulseChoose'; count: number }
@@ -230,6 +231,7 @@ export interface CardDefinition {
   readonly disguise?: ManaCost;
   readonly startEngines?: boolean;
   readonly maxSpeedKeywords?: readonly string[];
+  readonly entryStunCounters?: number;
   readonly entryCounterBonus?: { amount: number; condition: StateCondition };
   readonly damageBonus?: { amount: number; where: CardPredicate };
   readonly cannotAttack?: boolean;
@@ -312,6 +314,7 @@ export interface GameObject {
   incarnation: number;
   tapped: boolean;
   plusCounters: number;
+  stunCounters?: number;
   damage: number;
   deathtouchDamage: boolean;
   controlledSince: number;

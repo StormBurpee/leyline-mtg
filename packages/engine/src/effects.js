@@ -8,6 +8,7 @@ import { hasType } from './types.js';
 import { costProblem, payCost } from './costs.js';
 import { cardDefinition } from './cards.js';
 import {
+  untapObject,
   isAttacking,
   isBlocking,
   legalEquipmentAttachment,
@@ -244,6 +245,8 @@ export function enterBattlefieldBatch(s, entries, typeChoices = {}, auraChoices 
     if (typeChoices[object.id]) object.chosenCreatureType = typeChoices[object.id];
     object.attachedTo = attachment;
     object.plusCounters += entryCounters.get(object.id) ?? 0;
+    if (definition(s, object).entryStunCounters)
+      object.stunCounters = definition(s, object).entryStunCounters;
     object.tapped = !!tappedReplacements.get(object.id) || tapped;
   }
   for (const { object } of entering) {
@@ -519,7 +522,8 @@ export function resolveEffects(s, entry, startIndex = 0) {
                 expires: s.turn,
               });
             else if (e.op === 'counterAll') object.plusCounters += e.amount;
-            else object.tapped = e.op === 'tapAll';
+            else if (e.op === 'untapAll') untapObject(s, object);
+            else object.tapped = true;
           }
         break;
       }
@@ -560,12 +564,22 @@ export function resolveEffects(s, entry, startIndex = 0) {
           e.amount,
         );
         break;
+      case 'stunOn':
+        if (o) {
+          const next = (o.stunCounters ?? 0) + e.amount;
+          requireRule(Number.isSafeInteger(next), 'COUNTER_RANGE', 'Too many stun counters.');
+          o.stunCounters = next;
+        }
+        break;
       case 'counterOn':
         if (o) o.plusCounters += e.amount;
         break;
       case 'tap':
       case 'untap':
-        if (o) o.tapped = e.op === 'tap';
+        if (o) {
+          if (e.op === 'untap') untapObject(s, o);
+          else o.tapped = true;
+        }
         break;
       case 'impulseChoose': {
         const cards = s.players[entry.controller].library.slice(0, e.count);

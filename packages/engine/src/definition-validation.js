@@ -34,6 +34,7 @@ const FIELDS = new Set([
   'manaRestrictions',
   'chooseCreatureType',
   'entryCounterBonus',
+  'entryStunCounters',
   'damageBonus',
   'startEngines',
   'maxSpeedKeywords',
@@ -131,6 +132,7 @@ function validateEffects(effects, path, target, errors, groups = []) {
           'bounce',
           'modify',
           'counterOn',
+          'stunOn',
           'tap',
           'untap',
           'moveTarget',
@@ -184,6 +186,7 @@ function validateEffects(effects, path, target, errors, groups = []) {
       attachEquipment: [],
       modify: ['subject', 'power', 'toughness', 'keywords'],
       token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords'],
+      stunOn: ['subject', 'amount'],
       counterOn: ['subject', 'amount'],
       untap: ['subject'],
       tap: ['subject'],
@@ -210,6 +213,7 @@ function validateEffects(effects, path, target, errors, groups = []) {
         'gainLife',
         'loseLife',
         'counterOn',
+        'stunOn',
       ].includes(e.op) &&
       !validNumericValue(e.amount, { nonnegative: true })
     )
@@ -355,7 +359,7 @@ function validateEffects(effects, path, target, errors, groups = []) {
         `${p}.subject: only source, attached permanent or the chosen target is supported.`,
       );
     if (
-      e.op === 'counterOn' &&
+      ['counterOn', 'stunOn'].includes(e.op) &&
       e.subject !== undefined &&
       !['source', 'attached'].includes(e.subject)
     )
@@ -374,9 +378,10 @@ function validateEffects(effects, path, target, errors, groups = []) {
         'untap',
         'tap',
         'counterOn',
+        'stunOn',
       ].includes(e.op) &&
       !['source', 'attached'].includes(e.subject) &&
-      !effectTargetCompatible(e.op, target, e)
+      !effectTargetCompatible(e.op === 'stunOn' ? 'tap' : e.op, target, e)
     )
       errors.push(`${p}: effect requires a compatible target selector.`);
   }
@@ -549,6 +554,13 @@ export function validateDefinition(card) {
   if (card.legendary && ['instant', 'sorcery'].includes(card.type))
     errors.push(`${name}: legendary spell casting restrictions are not implemented.`);
   if (card.basic && card.type !== 'land') errors.push(`${name}: only lands can be basic.`);
+  if (
+    card.entryStunCounters !== undefined &&
+    (!natural(card.entryStunCounters) ||
+      card.entryStunCounters > 1000 ||
+      !['creature', 'artifact', 'enchantment', 'land'].includes(card.type))
+  )
+    errors.push(`${name}.entryStunCounters: expected 0–1000 counters on a permanent.`);
   if (card.targetGroups !== undefined) {
     errors.push(
       ...validateTargetGroups(card.targetGroups).map((e) => `${name}.targetGroups: ${e}`),

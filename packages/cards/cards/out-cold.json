@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2d16d51b-47e0-4cdc-83dd-a805ba50bd83",
+  "name": "Out Cold",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{3}{U}"
+  },
+  "rulesText": "This spell can't be countered. (This includes by the ward ability.)\nTap up to two target creatures and put a stun counter on each of them. Investigate. (If a permanent with a stun counter would become untapped, remove one from it instead.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target",
+          "targetGroup": "creatures"
+        },
+        {
+          "op": "addStunCounters",
+          "target": "target",
+          "amount": 1,
+          "targetGroup": "creatures"
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/clue-token",
+          "amount": 1
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "creatures",
+          "label": "Choose creatures to stun",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "kind": "uncounterable"
+    }
+  ]
+}

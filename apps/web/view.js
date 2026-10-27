@@ -507,6 +507,7 @@ function liveCharacteristics(s, o) {
   }
   const gained = keywords(s, o).filter((keyword) => !d.keywords.includes(keyword));
   if (gained.length) bits.push(`Gained: ${gained.join(', ')}`);
+  if (o.stunCounters) bits.push(`${o.stunCounters} stun counter${o.stunCounters === 1 ? '' : 's'}`);
   if (o.tapped) bits.push('Tapped');
   if (isPacified(s, o)) bits.push('Pacified');
   if (o.attachedTo) {

@@ -38,6 +38,8 @@ import {
 } from './model.js';
 function groupedSpellScore(s, p, action, card) {
   const adjusted = new Map();
+  let tempo = 0;
+  const tempoTargets = new Set();
   const data = (target) => {
     const object = target?.kind === 'object' && s.objects[target.id];
     if (!object) return null;
@@ -47,6 +49,16 @@ function groupedSpellScore(s, p, action, card) {
   };
   for (const effect of card.effects ?? []) {
     const targets = action.targets[effect.targetGroup] ?? [];
+    if (['tap', 'stunOn'].includes(effect.op)) {
+      for (const t of targets) {
+        const d = data(t);
+        if (!d || tempoTargets.has(d.object.id)) continue;
+        tempoTargets.add(d.object.id);
+        tempo +=
+          (d.object.controller === p ? -1 : 1) *
+          ((d.object.stunCounters ?? 0) > 0 ? 0.5 : 2 + value(s, d.object) * 0.4);
+      }
+    }
     if (effect.op === 'modify' || effect.op === 'counterOn') {
       for (const t of targets) {
         const d = data(t);
@@ -80,7 +92,7 @@ function groupedSpellScore(s, p, action, card) {
         if (d) d.death = true;
       }
   }
-  let score = -1;
+  let score = -1 + tempo;
   for (const d of adjusted.values()) {
     const killed =
       d.toughness <= 0 ||
@@ -502,6 +514,8 @@ export function chooseBotCommand(s, p) {
         return target.controller !== p && !target.tapped;
       return false;
     }
+    if (activated.effects.some((effect) => effect.op === 'untap' && effect.subject === 'source'))
+      return !!s.objects[action.card].tapped;
     if (activated.effects.some((effect) => effect.op === 'modify'))
       return trickScore(s, p, action) > 0;
     return action.target?.kind === 'player' ? action.target.id !== p : !action.target;
@@ -578,6 +592,12 @@ export function chooseBotCommand(s, p) {
         if (enables) score += 10;
       }
       const target = a.target?.kind === 'object' ? s.objects[a.target.id] : null;
+      if (
+        target &&
+        target.controller !== p &&
+        d.effects?.some((e) => ['tap', 'stunOn'].includes(e.op))
+      )
+        score = (target.stunCounters ?? 0) > 0 ? -1 : 2 + value(s, target) * 0.4;
       const movement = d.effects?.find((effect) => effect.op === 'moveTarget');
       if (movement && target) {
         if (target.zone === 'graveyard' && ['hand', 'battlefield'].includes(movement.destination))

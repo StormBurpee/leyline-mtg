@@ -143,6 +143,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'modify',
           'createToken',
           'addCounters',
+          'addStunCounters',
           'untap',
           'tap',
           'destroyAll',
@@ -163,6 +164,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           returnToHand: 'bounce',
           createToken: 'token',
           addCounters: 'counterOn',
+          addStunCounters: 'stunOn',
         }[effect.op] ?? effect.op;
       const allowed = {
         damage: ['target', 'amount'],
@@ -188,6 +190,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
         modify: ['target', 'power', 'toughness', 'keywords', 'until'],
         token: ['token', 'amount', 'controller', 'tapped', 'temporaryKeywords'],
         counterOn: ['target', 'amount', 'counter'],
+        stunOn: ['target', 'amount'],
         untap: ['target'],
         tap: ['target'],
         destroyAll: ['where', 'excludeSource'],
@@ -218,6 +221,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
           'gainLife',
           'loseLife',
           'counterOn',
+          'stunOn',
         ].includes(e.op)
       )
         e.amount = effect.amount;
@@ -304,7 +308,7 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
                 : null;
       if (e.op === 'counterOn' && effect.counter !== '+1/+1')
         problem('UNSUPPORTED_COUNTER', `${p}.counter`, 'Only +1/+1 counters are implemented.');
-      if (e.op === 'counterOn') {
+      if (e.op === 'counterOn' || e.op === 'stunOn') {
         if (!['source', 'target', 'attached'].includes(effect.target))
           problem('UNSUPPORTED_BINDING', `${p}.target`, 'Expected source or target.');
         if (['source', 'attached'].includes(effect.target)) e.subject = effect.target;
@@ -529,6 +533,10 @@ export function compileCard(source, { mechanics = {}, identities = {} } = {}) {
       case 'maxSpeedKeywords':
         fields(a, ['kind', 'keywords'], path);
         d.maxSpeedKeywords = structuredClone(a.keywords);
+        break;
+      case 'entryStunCounters':
+        fields(a, ['kind', 'amount'], path);
+        d.entryStunCounters = a.amount;
         break;
       case 'entryCounterBonus':
         fields(a, ['kind', 'amount', 'condition'], path);

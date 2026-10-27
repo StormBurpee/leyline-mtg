@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "75070eaf-c931-46e5-9aa1-b849e33580c6",
+  "name": "Ambling Stormshell",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Turtle"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}",
+    "power": 5,
+    "toughness": 9
+  },
+  "rulesText": "Ward {2}\nWhenever this creature attacks, put three stun counters on it and draw three cards. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nWhenever you cast a Turtle spell, untap this creature.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{2}"
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addStunCounters",
+          "target": "source",
+          "amount": 3
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "subtype": "Turtle"
+        }
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

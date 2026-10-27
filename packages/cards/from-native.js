@@ -48,6 +48,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
           return structuredClone(e);
         case 'modifyAll':
           return { ...structuredClone(e), until: 'endOfTurn' };
+        case 'stunOn':
+          return { op: 'addStunCounters', target: e.subject ?? 'target', amount: e.amount };
         case 'tap':
           return { op: 'tap', target: e.subject ?? 'target' };
         case 'damage':
@@ -216,6 +218,8 @@ export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   if (d.startEngines) abilities.push({ kind: 'startEngines' });
   if (d.maxSpeedKeywords)
     abilities.push({ kind: 'maxSpeedKeywords', keywords: [...d.maxSpeedKeywords] });
+  if (d.entryStunCounters !== undefined)
+    abilities.push({ kind: 'entryStunCounters', amount: d.entryStunCounters });
   if (d.entryCounterBonus)
     abilities.push({ kind: 'entryCounterBonus', ...structuredClone(d.entryCounterBonus) });
   if (d.damageBonus) abilities.push({ kind: 'damageBonus', ...structuredClone(d.damageBonus) });

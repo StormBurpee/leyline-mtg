@@ -6,7 +6,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.35.0';
+export const VERSION = '0.36.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -437,6 +437,17 @@ export function captureDepartureContext(s) {
     ),
   };
 }
+/** Stun replaces an actual untap, not an attempt to untap an untapped object. */
+export function untapObject(s, object) {
+  if (object.zone !== 'battlefield' || !object.tapped) return false;
+  if ((object.stunCounters ?? 0) > 0) {
+    object.stunCounters--;
+    emit(s, 'stunRemoved', { objectId: object.id, remaining: object.stunCounters });
+    return false;
+  }
+  object.tapped = false;
+  return true;
+}
 export function move(s, o, to, departureContext = null) {
   const from = o.zone;
   const dying =
@@ -493,6 +504,7 @@ export function move(s, o, to, departureContext = null) {
   o.controller = o.owner;
   o.damage = 0;
   o.plusCounters = 0;
+  delete o.stunCounters;
   o.deathtouchDamage = false;
   o.tapped = false;
   o.controlledSince = s.turn;
