@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "97326cad-b13c-4e52-82ce-850a39e5ff08",
+  "name": "Torpor Orb",
+  "characteristics": {
+    "types": ["artifact"],
+    "manaCost": "{2}",
+    "colors": [],
+    "supertypes": [],
+    "subtypes": []
+  },
+  "rulesText": "Creatures entering don't cause abilities to trigger.",
+  "abilities": [
+    {
+      "kind": "suppressEnterTriggers",
+      "where": {
+        "type": "creature"
+      }
+    }
+  ]
+}

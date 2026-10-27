@@ -18,8 +18,10 @@ import { compileCard, canonical } from '../../cards/compiler.js';
 import { sourceFromDefinition } from '../../cards/from-native.js';
 
 const names = Object.keys(CARDS).filter((name) => CARDS[name].cyclingType);
-test('all 23 complete landcyclers validate and round-trip through source compilation', () => {
-  assert.equal(names.length, 23);
+test('all 24 complete landcyclers validate and round-trip through source compilation', () => {
+  assert.equal(names.length, 24);
+  assert.ok(names.includes('Zog, Triceraton Castaway'));
+  assert.equal(CARDS['Zog, Triceraton Castaway'].cyclingType, 'Mountain');
   for (const name of names) {
     const d = CARDS[name];
     assert.deepEqual(validateDefinition(d), [], name);

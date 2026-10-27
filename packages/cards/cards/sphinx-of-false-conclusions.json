@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9f004382-c57b-4fde-af97-0c85516c3cf4",
+  "name": "Sphinx of False Conclusions",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Sphinx", "Illusion"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}{U}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nFlying\nWhenever this creature attacks, draw a card, then discard a card.\nWhen this creature dies, if it isn't a token, create a token that's a copy of it.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source",
+        "filter": {
+          "token": false
+        }
+      },
+      "effects": [
+        {
+          "op": "copyToken",
+          "target": "source",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

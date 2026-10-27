@@ -1,3 +1,4 @@
+import { canGainLife } from './effects.js';
 import { flattenTargets } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { definition } from './model.js';
@@ -50,7 +51,7 @@ export function chooseSequence(s, p, ranked, { budget = SEQUENCE_BUDGET, depth =
         undefined,
         a.x,
       );
-      const payment = planPayment(state, p, card.cost);
+      const payment = planPayment(state, p, card.cost, { purpose: { type: 'cast', card } });
       if (!payment || !actionSafe(state, p, a)) continue;
       const effects = actionEffects(state, a);
       const ward =
@@ -81,7 +82,7 @@ export function chooseSequence(s, p, ranked, { budget = SEQUENCE_BUDGET, depth =
         projected.players[p].life -= ward.life ?? 0;
       }
       projected.players[p].libraryCount =
-        libraryCount(state, p) - drawsFor(effects, p, a.target, p);
+        libraryCount(state, p) - drawsFor(effects, p, a.target, p, projected);
       let face = 0;
       for (const e of effects) {
         const recipient =
@@ -92,8 +93,9 @@ export function chooseSequence(s, p, ranked, { budget = SEQUENCE_BUDGET, depth =
           (e.op === 'loseLife' && recipient === 1 - p)
         )
           face += e.amount;
-        if (e.op === 'gainLife' && recipient === p) projected.players[p].life += e.amount;
-        if (e.op === 'gainLife' && recipient === 1 - p) face -= e.amount;
+        if (e.op === 'gainLife' && canGainLife(projected) && recipient === p)
+          projected.players[p].life += e.amount;
+        if (e.op === 'gainLife' && canGainLife(projected) && recipient === 1 - p) face -= e.amount;
         if (e.op === 'loseLife' && recipient === p) projected.players[p].life -= e.amount;
       }
       if (projected.players[p].life <= 0) continue;

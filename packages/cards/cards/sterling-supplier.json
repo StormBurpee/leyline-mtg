@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ab23cca2-b59e-4d34-80de-98bd08985275",
+  "name": "Sterling Supplier",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bird", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this creature enters, put a +1/+1 counter on another target creature you control.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    }
+  ]
+}

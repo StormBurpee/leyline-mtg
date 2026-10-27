@@ -1,0 +1,107 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2f26f270-26d9-46d3-957f-19f52d51eb03",
+  "name": "The Legend of Roku // Avatar Roku",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Saga"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}"
+  },
+  "rulesText": "(As this Saga enters and after your draw step, add a lore counter.)\nI \u2014 Exile the top three cards of your library. Until the end of your next turn, you may play those cards.\nII \u2014 Add one mana of any color.\nIII \u2014 Exile this Saga, then return it to the battlefield transformed under your control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [1]
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "count": 3,
+          "player": "controller",
+          "duration": "nextTurn"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [2]
+      },
+      "effects": [
+        {
+          "op": "chooseMana"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [3]
+      },
+      "effects": [
+        {
+          "op": "returnTransformed"
+        }
+      ]
+    },
+    {
+      "kind": "transformFace",
+      "frontName": "The Legend of Roku",
+      "back": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:back/avatar-roku",
+        "name": "Avatar Roku",
+        "characteristics": {
+          "types": ["creature"],
+          "supertypes": ["legendary"],
+          "subtypes": ["Avatar"],
+          "colors": [],
+          "manaCost": null,
+          "power": 4,
+          "toughness": 4
+        },
+        "rulesText": "Firebending 4 (Whenever this creature attacks, add {R}{R}{R}{R}. This mana lasts until end of combat.)\n{8}: Create a 4/4 red Dragon creature token with flying and firebending 4.",
+        "abilities": [
+          {
+            "kind": "triggered",
+            "on": {
+              "event": "attack",
+              "object": "source"
+            },
+            "effects": [
+              {
+                "op": "combatMana",
+                "count": 4
+              }
+            ]
+          },
+          {
+            "kind": "activated",
+            "cost": {
+              "mana": "{8}"
+            },
+            "text": "Create a 4/4 red Dragon with flying and firebending 4.",
+            "effects": [
+              {
+                "op": "createToken",
+                "token": "leyline:token/firebending-dragon-token",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

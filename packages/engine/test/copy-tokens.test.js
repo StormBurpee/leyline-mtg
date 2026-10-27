@@ -272,13 +272,13 @@ test('Self-Reflection flashback exiles after copying and invalidated targets fiz
     assert.equal(s.objects[spell.id].zone, 'exile');
   }
 });
-test('copy authoring fails closed on source/LKI, delayed, arbitrary exceptions, and nonpermanent targets', () => {
+test('copy authoring fails closed on event-source, delayed, arbitrary exceptions, and nonpermanent targets', () => {
   const base = { name: 'Invalid copy', type: 'sorcery', cost: {}, target: 'creature' };
   for (const effect of [
     { op: 'copyToken', count: -1 },
     { op: 'copyToken', count: 1001 },
     { op: 'copyToken', count: { kind: 'x' } },
-    { op: 'copyToken', count: 1, subject: 'source' },
+    { op: 'copyToken', count: 1, subject: 'eventSource' },
     { op: 'copyToken', count: 1, exceptions: { haste: true } },
     { op: 'copyToken', count: 1, exceptions: { power: 1 } },
     { op: 'copyToken', count: 1, delayedSacrifice: true },

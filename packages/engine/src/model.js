@@ -6,10 +6,10 @@ import { FACE_DOWN } from './disguise.js';
 import { meetsCondition } from './conditions.js';
 import { matchesFilter, targetSpec } from './selectors.js';
 import { matchesEvent } from './events.js';
-import { hasType, typesOf, primaryType } from './types.js';
+import { hasType, typesOf, primaryType, LAND_TYPES } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.46.0';
+export const VERSION = '0.47.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -37,25 +37,73 @@ export function requireRule(ok, code, message) {
   if (!ok) throw new RuleError(code, message);
 }
 export const opponent = (p) => 1 - p;
+export function preparedSource(s, copy) {
+  const source = s.objects[copy.preparedFrom?.id];
+  return source?.zone === 'battlefield' &&
+    source.incarnation === copy.preparedFrom.incarnation &&
+    source.preparedCopy?.id === copy.id &&
+    source.preparedCopy.incarnation === copy.incarnation
+    ? source
+    : null;
+}
+export function preparePermanent(s, object) {
+  if (object.zone !== 'battlefield' || object.preparedCopy) return;
+  const spell = definition(s, object).prepareSpell;
+  if (!spell) return;
+  const copy = addObject(s, spell.name, object.controller, 'exile', spell);
+  copy.spellCopy = true;
+  copy.preparedFrom = ref(object);
+  object.preparedCopy = ref(copy);
+  emit(s, 'prepared', { objectId: object.id, copyId: copy.id, player: object.controller });
+}
+export function topLibraryVisible(s, player) {
+  if (s.castingCompletion) return false;
+  return battlefield(s).some((o) => o.controller === player && definition(s, o).libraryTopAccess);
+}
+export function topLibraryPlayable(s, object, player, card = null) {
+  if (object?.zone !== 'library' || object.owner !== player) return false;
+  const permissions = battlefield(s).filter(
+    (o) => o.controller === player && definition(s, o).libraryTopAccess,
+  );
+  if (!permissions.length || s.players[player].library[0] !== object.id) return false;
+  const facts = { definition: card ?? definition(s, object) };
+  return permissions.some((o) =>
+    matchesFilter(facts, definition(s, o).libraryTopAccess.play, player),
+  );
+}
 export function playableZone(s, o, p) {
   return (
     !!o &&
-    ((o.zone === 'hand' && o.owner === p) ||
+    (topLibraryPlayable(s, o, p) ||
+      (o.zone === 'exile' && preparedSource(s, o)?.controller === p) ||
+      (s.choice?.kind === 'castExiled' &&
+        s.choice.player === p &&
+        s.choice.card === o.id &&
+        s.choice.incarnation === o.incarnation &&
+        o.zone === 'exile') ||
+      (o.zone === 'hand' && o.owner === p) ||
       (o.zone === 'exile' &&
         o.adventured?.player === p &&
         o.adventured.incarnation === o.incarnation) ||
-      (o.zone === 'graveyard' && o.owner === p && !!definition(s, o).flashback) ||
+      (o.zone === 'graveyard' &&
+        o.owner === p &&
+        !!(definition(s, o).flashback || definition(s, o).harmonize)) ||
       (o.zone === 'exile' && o.owner === p && o.plotted?.incarnation === o.incarnation) ||
       (o.zone === 'exile' && o.owner === p && o.warped?.incarnation === o.incarnation) ||
       (o.zone === 'exile' &&
         o.playPermission?.player === p &&
-        o.playPermission.turn === s.turn &&
+        (o.playPermission.turn === s.turn ||
+          (o.playPermission.untilNextTurn !== undefined &&
+            o.playPermission.nextTurnStarted !== true)) &&
         o.playPermission.incarnation === o.incarnation))
   );
 }
 export function playableCards(s, p) {
   return [
     ...s.players[p].hand,
+    ...(topLibraryVisible(s, p) && topLibraryPlayable(s, s.objects[s.players[p].library[0]], p)
+      ? [s.players[p].library[0]]
+      : []),
     ...Object.values(s.objects)
       .filter((o) => ['exile', 'graveyard'].includes(o.zone) && playableZone(s, o, p))
       .map((o) => o.id),
@@ -65,6 +113,11 @@ export function playableCards(s, p) {
 export const emptyMana = () => Object.fromEntries(COLORS.map((c) => [c, 0]));
 /** CR 707.2: layer-1 copy values, never counters, choices or temporary layers. */
 function printedFace(card, object) {
+  if (card.prepareSpell) return { ...card, name: card.mainName };
+  if (card.backFace)
+    return object.transformed
+      ? { ...card.backFace, frontFaceCost: card.cost }
+      : { ...card, name: card.frontName };
   if (!card.adventure) return card;
   if (object.zone === 'stack' && object.adventureCast)
     return { ...card.adventure, adventureCast: true };
@@ -75,47 +128,289 @@ export function copiableDefinition(s, object) {
     ? FACE_DOWN
     : printedFace(object.definitionOverride ?? cardDefinition(object.name, s.catalog), object);
 }
-export function definition(stateOrObject, object) {
-  if ((object ?? stateOrObject).faceDown) return FACE_DOWN;
-  const d = printedFace(
-    object
-      ? (object.definitionOverride ?? cardDefinition(object.name, stateOrObject.catalog))
-      : (stateOrObject.definitionOverride ?? cardDefinition(stateOrObject.name)),
-    object ?? stateOrObject,
+export function maximumBlockers(s, object) {
+  return Math.min(
+    Infinity,
+    ...battlefield(s)
+      .filter(
+        (source) =>
+          definition(s, source).attachmentBonus?.maxBlockers !== undefined &&
+          attachmentApplies(s, source, object),
+      )
+      .map((source) => definition(s, source).attachmentBonus.maxBlockers),
   );
-  // Type-changing effects are not copiable printed characteristics. They are
-  // bounded to this battlefield incarnation and the turn that created them.
+}
+export function counterKinds(object) {
+  const kinds = [];
+  for (const [name, field] of Object.entries({
+    '+1/+1': 'plusCounters',
+    stun: 'stunCounters',
+    lore: 'loreCounters',
+    loyalty: 'loyalty',
+    quest: 'questCounters',
+  }))
+    if ((object[field] ?? 0) > 0) kinds.push(name);
+  kinds.push(
+    ...Object.keys(object.keywordCounters ?? {}).filter((k) => object.keywordCounters[k] > 0),
+  );
+  return kinds;
+}
+export function removeOneCounter(object, kind) {
+  const field = {
+    '+1/+1': 'plusCounters',
+    stun: 'stunCounters',
+    lore: 'loreCounters',
+    loyalty: 'loyalty',
+    quest: 'questCounters',
+  }[kind];
+  if (field) object[field]--;
+  else object.keywordCounters[kind]--;
+}
+export function trackedExileCards(s, source) {
+  if (!source) return [];
+  const current = s.objects[source.id];
+  if (current?.zone !== 'battlefield' || current.incarnation !== source.incarnation) return [];
+  return (current.trackedExile ?? [])
+    .map((r) => s.objects[r.id])
+    .filter(
+      (o, i) =>
+        o?.zone === 'exile' &&
+        o.incarnation === current.trackedExile[i].incarnation &&
+        !o.token &&
+        !o.spellCopy,
+    );
+}
+export function trackExiledCard(s, source, card) {
+  const current = s.objects[source?.id];
+  if (
+    current?.zone === 'battlefield' &&
+    current.incarnation === source.incarnation &&
+    card.zone === 'exile'
+  )
+    (current.trackedExile ??= []).push(ref(card));
+}
+export function layerTimestamp(s) {
+  return (s.layerClock = (s.layerClock ?? 0) + 1);
+}
+export function addModifier(s, modifier) {
+  s.modifiers.push({ ...modifier, timestamp: layerTimestamp(s) });
+}
+export function modifierActive(s, m) {
+  if (m.untilSourceLeaves) {
+    const source = s.objects[m.untilSourceLeaves.id];
+    return source?.zone === 'battlefield' && source.incarnation === m.untilSourceLeaves.incarnation;
+  }
+  return m.permanent || m.untilNextTurn !== undefined || m.expires === s.turn;
+}
+export function abilityLossTimestamp(s, o) {
+  return Math.max(
+    -1,
+    ...s.modifiers
+      .filter(
+        (m) =>
+          m.removeAbilities &&
+          m.objectId === o.id &&
+          m.incarnation === o.incarnation &&
+          modifierActive(s, m),
+      )
+      .map((m) => m.timestamp ?? 0),
+  );
+}
+export function definition(stateOrObject, object, { skipNamedLandGrants = false } = {}) {
+  const d = (object ?? stateOrObject).faceDown
+    ? FACE_DOWN
+    : printedFace(
+        object
+          ? (object.definitionOverride ?? cardDefinition(object.name, stateOrObject.catalog))
+          : (stateOrObject.definitionOverride ?? cardDefinition(stateOrObject.name)),
+        object ?? stateOrObject,
+      );
+  // Layer-4 changes apply in timestamp order; none are copy values. Durations
+  // tied to a player expire at turn start, independently of current controller.
   if (!object || object.zone !== 'battlefield') return d;
   const modifiers = (stateOrObject.modifiers ?? []).filter(
     (m) =>
       m.objectId === object.id &&
       m.incarnation === object.incarnation &&
-      m.expires === stateOrObject.turn,
+      modifierActive(stateOrObject, m),
   );
-  const additions = modifiers.flatMap((m) => m.addTypes ?? []);
-  const animation = modifiers.filter((m) => m.animation).at(-1)?.animation;
-  if (!additions.length && !animation) return d;
-  const types = [...new Set([...typesOf(d), ...additions])];
-  return {
-    ...d,
-    types,
-    type: animation ? 'creature' : primaryType(types),
-    ...(animation
-      ? {
-          color: animation.colors,
-          subtypes: [
-            ...d.subtypes.filter((t) => !CREATURE_TYPES.includes(t)),
-            ...animation.subtypes,
-          ],
-          baseStats: { power: animation.power, toughness: animation.toughness },
-        }
-      : {}),
-  };
+  const loyaltyForm =
+    d.turnLoyaltyCreature &&
+    stateOrObject.active === object.controller &&
+    (object.loyalty ?? 0) > 0;
+  // CR 613: this intrinsic type-changing effect begins in layer 4 and continues
+  // through layer 7 even when a later layer-6 effect removes its ability.
+  let result = loyaltyForm
+    ? {
+        ...d,
+        type: 'creature',
+        types: ['creature'],
+        subtypes: [...d.turnLoyaltyCreature.subtypes],
+        baseStats: {
+          power: d.turnLoyaltyCreature.power,
+          toughness: d.turnLoyaltyCreature.toughness,
+        },
+        keywords: [...d.keywords, ...d.turnLoyaltyCreature.keywords],
+      }
+    : d;
+  if (d.chooseBasicLandType && object.chosenBasicLandType) {
+    const landType = object.chosenBasicLandType;
+    result = {
+      ...result,
+      subtypes: [...result.subtypes.filter((t) => !LAND_TYPES.includes(t)), landType],
+      mana: { Plains: 'W', Island: 'U', Swamp: 'B', Mountain: 'R', Forest: 'G' }[landType],
+    };
+  }
+  if (d.manaFromTrackedExile)
+    result = {
+      ...d,
+      mana: [
+        ...new Set([
+          ...(Array.isArray(d.mana) ? d.mana : d.mana ? [d.mana] : []),
+          ...trackedExileCards(stateOrObject, object).flatMap(
+            (card) => copiableDefinition(stateOrObject, card).color ?? [],
+          ),
+        ]),
+      ],
+    };
+  for (const m of modifiers) {
+    if (m.enchantmentOnly) {
+      result = {
+        ...result,
+        type: 'enchantment',
+        types: ['enchantment'],
+        subtypes: result.subtypes.filter((t) => !CREATURE_TYPES.includes(t)),
+      };
+    }
+    if (m.landForm) {
+      result = {
+        ...result,
+        type: 'land',
+        types: ['land'],
+        subtypes: result.subtypes.filter((t) => LAND_TYPES.includes(t)),
+      };
+    }
+    if (m.addTypes?.length) {
+      const types = [...new Set([...typesOf(result), ...m.addTypes])];
+      result = {
+        ...result,
+        types,
+        type: types.includes('creature') ? 'creature' : primaryType(types),
+      };
+    }
+    if (m.creatureForm) {
+      result = {
+        ...result,
+        subtypes: [
+          ...result.subtypes.filter((t) => !CREATURE_TYPES.includes(t)),
+          ...m.creatureForm.subtypes,
+        ],
+        baseStats: { power: m.creatureForm.power, toughness: m.creatureForm.toughness },
+      };
+    }
+    if (m.animation) {
+      result = {
+        ...result,
+        ...(m.animation.colors !== undefined ? { color: m.animation.colors } : {}),
+        subtypes: [
+          ...result.subtypes.filter(
+            (t) => m.animation.preserveSubtypes || !CREATURE_TYPES.includes(t),
+          ),
+          ...m.animation.subtypes,
+        ],
+        baseStats: { power: m.animation.power, toughness: m.animation.toughness },
+      };
+    }
+    if (m.landForm) {
+      // A new unrestricted tap ability is another option, not an additional
+      // restriction or life cost on the original ability of that color.
+      const colors = m.landForm.mana;
+      const withoutGranted = (values) =>
+        Object.fromEntries(
+          Object.entries(values ?? {}).filter(([color]) => !colors.includes(color)),
+        );
+      result = {
+        ...result,
+        mana: [
+          ...new Set([
+            ...(Array.isArray(result.mana) ? result.mana : result.mana ? [result.mana] : []),
+            ...colors,
+          ]),
+        ],
+        manaConditions: withoutGranted(result.manaConditions),
+        manaLifeCosts: withoutGranted(result.manaLifeCosts),
+        manaRestrictions: withoutGranted(result.manaRestrictions),
+      };
+    }
+  }
+  if (hasType(result, 'creature') && object.controller !== object.owner) {
+    const extra = battlefield(stateOrObject)
+      .filter((o) => o.controller === object.controller)
+      .map((o) => copiableDefinition(stateOrObject, o).foreignCreatureSubtype)
+      .filter(Boolean);
+    if (extra.length)
+      result = { ...result, subtypes: [...new Set([...result.subtypes, ...extra])] };
+  }
+  if (modifiers.some((m) => m.removeAbilities)) {
+    // Keep characteristics, not abilities. Layer-4 animations/changeling already applied;
+    // layer-7a characteristic-defining P/T is removed before layer-7b animation P/T.
+    const keep = [
+      'name',
+      'type',
+      'types',
+      'cost',
+      'text',
+      'color',
+      'subtypes',
+      'power',
+      'toughness',
+      'loyalty',
+      'basic',
+      'legendary',
+      'token',
+      // Alternative prepared-spell characteristics are not abilities (SOS release notes).
+      'prepareSpell',
+    ];
+    const stripped = Object.fromEntries(
+      keep.filter((k) => result[k] !== undefined).map((k) => [k, result[k]]),
+    );
+    stripped.keywords = [];
+    stripped.abilitiesRemoved = true;
+    if (d.keywords?.includes('changeling'))
+      stripped.subtypes = [...new Set([...result.subtypes, ...CREATURE_TYPES])];
+    if (loyaltyForm || modifiers.some((m) => m.animation)) stripped.baseStats = result.baseStats;
+    result = stripped;
+  }
+  if (
+    !skipNamedLandGrants &&
+    hasType(result, 'land') &&
+    battlefield(stateOrObject).some(
+      (source) =>
+        source.chosenLandName === result.name &&
+        definition(stateOrObject, source, { skipNamedLandGrants: true }).landNameLock,
+    )
+  ) {
+    result = {
+      ...result,
+      mana: [
+        ...new Set([
+          ...(Array.isArray(result.mana) ? result.mana : result.mana ? [result.mana] : []),
+          'C',
+        ]),
+      ],
+    };
+    for (const field of ['manaConditions', 'manaLifeCosts', 'manaRestrictions'])
+      if (result[field]?.C !== undefined) {
+        result[field] = { ...result[field] };
+        delete result[field].C;
+      }
+  }
+  return result;
 }
 export const battlefield = (s) => Object.values(s.objects).filter((o) => o.zone === 'battlefield');
 export const creatures = (s) => battlefield(s).filter((o) => definition(s, o).type === 'creature');
 export const controlled = (s, p) => battlefield(s).filter((o) => o.controller === p);
-function staticApplies(s, source, object, effect) {
+function staticApplies(s, source, object, effect, powerToughnessLayer = false) {
   if (object.zone !== 'battlefield') return false;
   if (effect.excludeSource && source.id === object.id && source.incarnation === object.incarnation)
     return false;
@@ -128,9 +423,15 @@ function staticApplies(s, source, object, effect) {
       owner: object.owner,
       token: object.token,
       tapped: object.tapped,
+      stunCounters: object.stunCounters ?? 0,
       attacking: isAttacking(s, object),
       blocking: isBlocking(s, object),
       manaValue: manaValue(d),
+      // CR 613.1f–g, 613.4c: P/T filters see completed ability grants.
+      // Lazy evaluation avoids querying abilities for characteristic-only filters.
+      get keywords() {
+        return powerToughnessLayer ? keywords(s, object) : d.keywords;
+      },
     },
     effect.where,
     source.controller,
@@ -164,6 +465,7 @@ export function legalAuraAttachment(s, aura, target, controller = aura?.controll
       owner: target.owner,
       token: target.token,
       tapped: target.tapped,
+      stunCounters: target.stunCounters ?? 0,
       attacking: isAttacking(s, target),
       blocking: isBlocking(s, target),
       manaValue: manaValue(t),
@@ -198,25 +500,39 @@ export function skipsUntap(s, object) {
   );
 }
 export function keywords(s, o) {
+  const lostAt = o.zone === 'battlefield' ? abilityLossTimestamp(s, o) : -1;
   return [
     ...new Set([
       ...definition(s, o).keywords,
+      ...Object.keys(o.keywordCounters ?? {}).filter(
+        (k) => o.keywordCounters[k] > 0 && (o.keywordCounterTimestamps?.[k] ?? 0) > lostAt,
+      ),
       ...(s.players[o.controller].speed === 4 ? (definition(s, o).maxSpeedKeywords ?? []) : []),
       ...battlefield(s).flatMap((source) => {
+        if ((source.layerTimestamp ?? 0) <= lostAt) return [];
         const d = definition(s, source);
         const e = d.static;
         return [
           ...(d.attachmentBonus && attachmentApplies(s, source, o)
             ? (d.attachmentBonus.keywords ?? [])
             : []),
-          ...(e?.kind === 'anthem' && staticApplies(s, source, o, e) ? (e.keywords ?? []) : []),
+          // P/T-only anthems never participate in layer 6 (or recurse into it).
+          ...(e?.kind === 'anthem' && e.keywords?.length && staticApplies(s, source, o, e)
+            ? e.keywords
+            : []),
           ...(d.conditionalBonuses ?? []).flatMap((bonus) =>
             conditionalApplies(s, source, o, bonus) ? (bonus.keywords ?? []) : [],
           ),
         ];
       }),
       ...s.modifiers
-        .filter((m) => m.objectId === o.id && m.incarnation === o.incarnation)
+        .filter(
+          (m) =>
+            m.objectId === o.id &&
+            m.incarnation === o.incarnation &&
+            modifierActive(s, m) &&
+            (m.timestamp ?? 0) > lostAt,
+        )
         .flatMap((m) => m.keywords ?? []),
     ]),
   ];
@@ -227,9 +543,12 @@ export function stats(s, o) {
   // CR 208.3/301.7: battlefield Vehicles need animation; printed P/T remains outside it.
   if (o.zone === 'battlefield' && !hasType(d, 'creature')) return { power: 0, toughness: 0 };
   const context = { controller: o.controller, source: ref(o) };
-  let power = numericValue(s, d.baseStats?.power ?? d.power ?? 0, context) + (o.plusCounters ?? 0),
+  let power =
+      numericValue(s, d.baseStats?.power ?? d.power ?? 0, context) +
+      ((o.plusCounters ?? 0) - (o.minusCounters ?? 0)),
     toughness =
-      numericValue(s, d.baseStats?.toughness ?? d.toughness ?? 0, context) + (o.plusCounters ?? 0);
+      numericValue(s, d.baseStats?.toughness ?? d.toughness ?? 0, context) +
+      ((o.plusCounters ?? 0) - (o.minusCounters ?? 0));
   if (o.zone === 'battlefield' && d.selfBonus) {
     power += numericValue(s, d.selfBonus.power, context);
     toughness += numericValue(s, d.selfBonus.toughness, context);
@@ -261,7 +580,7 @@ export function stats(s, o) {
           });
         }
       const effect = d.static;
-      if (effect?.kind === 'anthem' && staticApplies(s, a, o, effect)) {
+      if (effect?.kind === 'anthem' && staticApplies(s, a, o, effect, true)) {
         power += numericValue(s, effect.power, { controller: a.controller, source: ref(a) });
         toughness += numericValue(s, effect.toughness, {
           controller: a.controller,
@@ -269,6 +588,16 @@ export function stats(s, o) {
         });
       }
     }
+  if (o.zone === 'battlefield' && hasType(d, 'creature'))
+    for (const emblem of s.emblems ?? [])
+      if (
+        emblem.kind === 'anthem' &&
+        emblem.controller === o.controller &&
+        matchesFilter({ definition: d, controller: o.controller }, emblem.where, emblem.controller)
+      ) {
+        power += emblem.power;
+        toughness += emblem.toughness;
+      }
   return { power, toughness };
 }
 export const isAttacking = (s, o) =>
@@ -335,7 +664,7 @@ export function addObject(s, name, owner, zone = 'library', override = null) {
     damage: 0,
     deathtouchDamage: false,
     controlledSince: s.turn,
-    ...(zone === 'battlefield' ? { enteredTurn: s.turn } : {}),
+    ...(zone === 'battlefield' ? { enteredTurn: s.turn, layerTimestamp: layerTimestamp(s) } : {}),
     token: !!d.token,
     ...(override ? { definitionOverride: structuredClone(override) } : {}),
     attachedTo: null,
@@ -380,6 +709,33 @@ export function loseLife(s, player, amount) {
     }
   }
 }
+// CR 714: chapter numbers are intrinsic to chapter abilities, not reminder text.
+export function sagaFinalChapter(s, object) {
+  const d = definition(s, object);
+  if (!(d.subtypes ?? []).includes('Saga')) return 0;
+  return Math.max(
+    0,
+    ...(d.triggers ?? []).flatMap((t) => (t.event?.event === 'chapter' ? t.event.chapters : [])),
+  );
+}
+export function addLoreCounters(s, object, amount = 1) {
+  requireRule(
+    Number.isSafeInteger(amount) && amount > 0 && amount <= 1000,
+    'LORE_COUNTERS',
+    'Expected a bounded positive lore counter amount.',
+  );
+  if (object.zone !== 'battlefield') return;
+  const before = object.loreCounters ?? 0;
+  object.loreCounters = before + amount;
+  emit(s, 'loreCounters', { objectId: object.id, before, after: object.loreCounters });
+  // A combined I, II ability triggers separately for each chapter crossed.
+  for (
+    let chapterNumber = before + 1;
+    chapterNumber <= Math.min(object.loreCounters, 20);
+    chapterNumber++
+  )
+    notifyTriggers(s, 'chapter', { object, chapterNumber });
+}
 export function queueTrigger(
   s,
   source,
@@ -399,17 +755,77 @@ export function queueTrigger(
     sourceKeywords: sourceKeywords ?? keywords(s, source),
     ...(source.attachedTo ? { sourceAttachment: structuredClone(source.attachedTo) } : {}),
     sourceDefinition: structuredClone(definition(s, source)),
-    ...(effects.some((e) => e.op === 'offspringCopy')
-      ? { sourceCopyDefinition: structuredClone(copiableDefinition(s, source)) }
-      : {}),
+    sourceStats: structuredClone(stats(s, source)),
+    sourceCopyDefinition: structuredClone(copiableDefinition(s, source)),
     label,
     ...(optional ? { optional: true } : {}),
     ...(targetKind ? { targetKind: structuredClone(targetKind) } : {}),
   });
   emit(s, 'triggered', { objectId: source.id, name: source.name, player: source.controller });
 }
+/** CR 603.6d: entry suppression is checked after the whole batch has entered.
+ * This blocks the occurrence, not merely a permanent's own ETB ability. */
+export function entryTriggersSuppressed(s, object) {
+  const facts = { definition: definition(s, object) };
+  return battlefield(s).some((watcher) => {
+    const filter = definition(s, watcher).suppressEnterTriggers;
+    return filter && matchesFilter(facts, filter, watcher.controller);
+  });
+}
+export function entryTriggerMultiplicity(s, object, controller) {
+  if (entryTriggersSuppressed(s, object)) return 0;
+  const facts = {
+    definition: definition(s, object),
+    controller: object.controller,
+    owner: object.owner,
+    token: object.token,
+    tapped: object.tapped,
+    attacking: isAttacking(s, object),
+    blocking: isBlocking(s, object),
+    manaValue: manaValue(definition(s, object)),
+    keywords: keywords(s, object),
+    ...stats(s, object),
+  };
+  return (
+    1 +
+    battlefield(s).filter(
+      (watcher) =>
+        watcher.controller === controller &&
+        object.controller === controller &&
+        definition(s, watcher).additionalEnterTrigger &&
+        matchesFilter(facts, definition(s, watcher).additionalEnterTrigger, controller),
+    ).length
+  );
+}
+export function queueEntryTrigger(s, object, effects, label) {
+  for (let i = 0; i < entryTriggerMultiplicity(s, object, object.controller); i++)
+    queueTrigger(s, object, effects, label);
+}
 /** Match declarative trigger predicates against committed game events. */
 export function notifyTriggers(s, event, payload, context = null) {
+  if (
+    ['enter', 'enters'].includes(event) &&
+    payload.object &&
+    entryTriggersSuppressed(s, payload.object)
+  )
+    return;
+  if (event === 'cast')
+    for (const emblem of s.emblems ?? []) {
+      if (emblem.kind === 'anthem' || emblem.controller !== payload.player) continue;
+      s.pendingTriggers.push({
+        id: `s${++s.nextId}`,
+        kind: 'ability',
+        name: emblem.name,
+        controller: emblem.controller,
+        source: { kind: 'object', id: emblem.id, incarnation: 0 },
+        sourceKeywords: [],
+        emblem: true,
+        effects: [{ op: 'damage', amount: emblem.amount }],
+        targetKind: { scope: 'damageable' },
+        label: `${emblem.name} · cast trigger`,
+      });
+      emit(s, 'triggered', { objectId: emblem.id, name: emblem.name, player: emblem.controller });
+    }
   if (event === 'step' && payload.step === 'end') {
     const due = s.delayedTriggers ?? [];
     delete s.delayedTriggers;
@@ -435,6 +851,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     definition: d,
     controller: payload.player ?? object?.controller,
     step: payload.step,
+    chapterNumber: payload.chapterNumber,
     castPlayer: payload.castPlayer,
     spellNumber:
       event === 'cast' ? spellsCastCount(s, [payload.player ?? object.controller]) : undefined,
@@ -455,11 +872,24 @@ export function notifyTriggers(s, event, payload, context = null) {
   const watchers =
     context?.watchers ??
     battlefield(s).map((object) => ({ object, keywords: keywords(s, object) }));
-  for (const { object: watcher, keywords: sourceKeywords } of watchers)
-    for (const [triggerIndex, trigger] of (definition(s, watcher).triggers ?? []).entries())
+  for (const {
+    object: watcher,
+    keywords: sourceKeywords,
+    definition: watcherDefinition,
+  } of watchers)
+    for (const [triggerIndex, trigger] of (
+      (watcherDefinition ?? definition(s, watcher)).triggers ?? []
+    ).entries())
       if (
         matchesEvent(trigger.event, event === 'enters' ? 'enter' : event, facts, watcher) &&
-        meetsCondition(s, watcher.controller, trigger.condition, [], watcher)
+        meetsCondition(
+          s,
+          watcher.controller,
+          trigger.condition,
+          [],
+          watcher,
+          payload.manaSpent ?? null,
+        )
       ) {
         const use = `${s.turn}:${watcher.incarnation}`;
         const current = s.objects[watcher.id];
@@ -486,6 +916,48 @@ export function notifyTriggers(s, event, payload, context = null) {
           sourceKeywords,
         );
         const queued = s.pendingTriggers.at(-1);
+        // Own-death triggers are queued after movement; preserve prebatch anthems.
+        const departedStats = context?.facts?.[watcher.id];
+        if (departedStats)
+          queued.sourceStats = {
+            power: departedStats.power ?? 0,
+            toughness: departedStats.toughness ?? 0,
+          };
+        if (watcherDefinition) queued.sourceDefinition = structuredClone(watcherDefinition);
+        if (
+          event === 'dies' &&
+          watcher.id === object?.id &&
+          watcher.incarnation === object.incarnation
+        )
+          queued.departedSource = ref(s.objects[watcher.id]);
+        if (
+          event === 'enters' &&
+          watcher.id === object?.id &&
+          watcher.incarnation === object.incarnation
+        )
+          queued.x = payload.x ?? 0;
+        if (event === 'chapter') {
+          queued.sagaChapter = payload.chapterNumber;
+          queued.label = `${watcher.name} · Chapter ${payload.chapterNumber}`;
+        }
+        // A source's own zone-change trigger can identify the new object in the
+        // destination zone (CR 400.7d/603.6). Preserve the old source for LKI,
+        // but use this one-time snapshot for "another" target exclusion. Never
+        // chase that ID through a later move or return to the battlefield.
+        if (
+          event === 'dies' &&
+          watcher.id === object?.id &&
+          watcher.incarnation === object.incarnation &&
+          [trigger.target, ...(trigger.targetGroups ?? []).map((group) => group.selector)].some(
+            (selector) => {
+              const spec = targetSpec(selector);
+              return spec?.scope === 'graveyard' && spec.excludeSource;
+            },
+          )
+        ) {
+          queued.targetingSource = ref(s.objects[watcher.id]);
+        }
+        if (event === 'cast') queued.eventManaSpent = payload.manaSpent ?? 0;
         if (event === 'combatDamagePlayer') {
           queued.eventAmount = payload.amount;
           queued.damagedPlayer = payload.damagedPlayer;
@@ -500,6 +972,15 @@ export function notifyTriggers(s, event, payload, context = null) {
             power: facts.power,
             definition: structuredClone(d),
           };
+        if (['enter', 'enters'].includes(event) && !trigger.oncePerTurn)
+          for (let n = 1; n < entryTriggerMultiplicity(s, object, watcher.controller); n++) {
+            s.pendingTriggers.push({ ...structuredClone(queued), id: `s${++s.nextId}` });
+            emit(s, 'triggered', {
+              objectId: watcher.id,
+              name: watcher.name,
+              player: watcher.controller,
+            });
+          }
       }
 }
 /** CR 603.10: leaves-the-battlefield triggers look back before the event.
@@ -508,9 +989,14 @@ export function notifyTriggers(s, event, payload, context = null) {
 export function captureDepartureContext(s) {
   const objects = battlefield(s);
   return {
+    exileGraveyardMoves: objects.some((o) => definition(s, o).exileGraveyardMoves),
     watchers: objects
       .filter((o) => (definition(s, o).triggers ?? []).length)
-      .map((object) => ({ object: structuredClone(object), keywords: keywords(s, object) })),
+      .map((object) => ({
+        object: structuredClone(object),
+        keywords: keywords(s, object),
+        definition: structuredClone(definition(s, object)),
+      })),
     facts: Object.fromEntries(
       objects.map((o) => {
         const d = definition(s, o),
@@ -524,6 +1010,7 @@ export function captureDepartureContext(s) {
             owner: o.owner,
             token: o.token,
             tapped: o.tapped,
+            stunCounters: o.stunCounters ?? 0,
             attacking: isAttacking(s, o),
             blocking: isBlocking(s, o),
             keywords: keywords(s, o),
@@ -540,12 +1027,12 @@ export function captureDepartureContext(s) {
  * Capture observers and object facts before the entire simultaneous batch (CR 603.10a).
  * Do not use this helper for destruction, legend rules, or zero toughness.
  */
-export function sacrificePermanents(s, objects) {
+export function sacrificePermanents(s, objects, departureContext = null) {
   const unique = [
     ...new Map(objects.filter((o) => o?.zone === 'battlefield').map((o) => [o.id, o])).values(),
   ];
   if (!unique.length) return;
-  const context = captureDepartureContext(s);
+  const context = departureContext ?? captureDepartureContext(s);
   const departed = unique.map((o) => structuredClone(o));
   for (const o of unique) move(s, o, 'graveyard', context);
   for (const o of departed) {
@@ -566,6 +1053,24 @@ export function untapObject(s, object) {
 }
 export function move(s, o, to, departureContext = null) {
   const from = o.zone;
+  // Replacement effects are checked before a move, including simultaneous departure snapshots.
+  if (
+    to === 'graveyard' &&
+    (departureContext?.exileGraveyardMoves ??
+      battlefield(s).some((source) => definition(s, source).exileGraveyardMoves))
+  )
+    to = 'exile';
+  // Earthbend creates a delayed trigger, not an ability on the land. It survives
+  // ability loss and remembers this incarnation and the effect's controller.
+  const oldRef = ref(o);
+  const earthbend =
+    from === 'battlefield'
+      ? (s.earthbendReturns ?? []).filter(
+          (v) => v.object.id === o.id && v.object.incarnation === o.incarnation,
+        )
+      : [];
+  if (from === 'battlefield' && to !== 'battlefield')
+    s.earthbendReturns = (s.earthbendReturns ?? []).filter((v) => !earthbend.includes(v));
   const leaving = from === 'battlefield' && to !== 'battlefield';
   if (leaving && s.linkedExiles?.length) {
     const returning = s.linkedExiles.filter(
@@ -575,8 +1080,11 @@ export function move(s, o, to, departureContext = null) {
     (s.pendingLinkedReturns ??= []).push(...returning.flatMap((link) => link.cards));
   }
   // CR 702.34a: replace every departure, not just successful resolution.
-  if (from === 'stack' && to !== 'stack' && o.flashbackPaid) to = 'exile';
-  if (to !== 'stack') delete o.flashbackPaid;
+  if (from === 'stack' && to !== 'stack' && (o.flashbackPaid || o.harmonizePaid)) to = 'exile';
+  if (to !== 'stack') {
+    delete o.flashbackPaid;
+    delete o.harmonizePaid;
+  }
   if (to !== 'stack') delete o.warpPaid;
   delete o.chosenX;
   delete o.castPlayer;
@@ -613,11 +1121,15 @@ export function move(s, o, to, departureContext = null) {
         entry.eventSource.definition = structuredClone(lastDefinition);
       }
       if (entry.source?.id === o.id && entry.source.incarnation === o.incarnation) {
+        entry.sourceQuestCounters = o.questCounters ?? 0;
         entry.sourceKeywords = [...lastKeywords];
         entry.sourceController = lastController;
         if (o.attachedTo || entry.sourceAttachment !== undefined)
           entry.sourceAttachment = o.attachedTo ? structuredClone(o.attachedTo) : null;
         entry.sourceDefinition = structuredClone(lastDefinition);
+        entry.sourceStats = lastKnown
+          ? { power: lastKnown.power ?? 0, toughness: lastKnown.toughness ?? 0 }
+          : structuredClone(stats(s, o));
         if (entry.sourceCopyDefinition)
           entry.sourceCopyDefinition = structuredClone(copiableDefinition(s, o));
       }
@@ -628,27 +1140,48 @@ export function move(s, o, to, departureContext = null) {
       const i = p[z].indexOf(o.id);
       if (i >= 0) p[z].splice(i, 1);
     }
+  if (from === 'battlefield' && o.preparedCopy) {
+    const copy = s.objects[o.preparedCopy.id];
+    delete o.preparedCopy;
+    if (copy?.zone === 'exile') move(s, copy, 'void');
+  }
+  if (from === 'exile' && to === 'stack' && o.preparedFrom) {
+    const source = preparedSource(s, o);
+    if (source) delete source.preparedCopy;
+  }
   const preserveFaceDown = o.faceDown && from === 'stack' && to === 'battlefield';
   if (o.faceDown && !preserveFaceDown) emit(s, 'revealed', { objectId: o.id, name: o.name });
   if (!preserveFaceDown) delete o.faceDown;
+  if (to !== 'battlefield') delete o.transformed;
   o.zone = to;
   if (to !== 'stack') delete o.adventureCast;
   o.incarnation++;
   o.controller = o.owner;
   o.damage = 0;
   o.plusCounters = 0;
+  delete o.minusCounters;
   delete o.loyaltyUsed;
-  if (to === 'battlefield' && hasType(definition(s, o), 'planeswalker'))
-    o.loyalty = definition(s, o).loyalty;
+  delete o.loreCounters;
+  delete o.questCounters;
+  if (to === 'battlefield' && hasType(copiableDefinition(s, o), 'planeswalker'))
+    o.loyalty = copiableDefinition(s, o).loyalty;
   else delete o.loyalty;
   delete o.stunCounters;
+  delete o.chosenLandName;
+  delete o.keywordCounters;
+  delete o.powerUpUses;
+  delete o.keywordCounterTimestamps;
   o.deathtouchDamage = false;
   o.tapped = false;
   o.controlledSince = s.turn;
-  if (to === 'battlefield') o.enteredTurn = s.turn;
-  else delete o.enteredTurn;
+  if (to === 'battlefield') {
+    o.enteredTurn = s.turn;
+    o.layerTimestamp = layerTimestamp(s);
+  } else delete o.enteredTurn;
   o.attachedTo = null;
   delete o.chosenCreatureType;
+  delete o.chosenBasicLandType;
+  delete o.trackedExile;
   delete o.playPermission;
   delete o.plotted;
   delete o.warped;
@@ -660,10 +1193,31 @@ export function move(s, o, to, departureContext = null) {
     from,
     to,
   });
+  if (dying || (from === 'battlefield' && to === 'exile')) {
+    for (const delayed of earthbend) {
+      const { object: watched, ...entry } = delayed;
+      s.pendingTriggers.push({
+        ...entry,
+        id: `s${++s.nextId}`,
+        rule: 'earthbendReturn',
+        delayedObjects: [ref(o)],
+      });
+      emit(s, 'triggered', { objectId: oldRef.id, name: entry.name, player: entry.controller });
+    }
+  }
   if (dying) notifyTriggers(s, 'dies', { object: departed }, context);
   return o;
 }
 export function draw(s, p, count) {
+  // CR121.2a: replacements referring to one or more draws modify the whole
+  // instruction before its individual draws, once per replacement source.
+  if (count > 0) {
+    const handCount = s.players[p].hand.length;
+    for (const object of battlefield(s)) {
+      const bonus = definition(s, object).drawBonus;
+      if (object.controller === p && bonus && handCount <= bonus.handAtMost) count += bonus.amount;
+    }
+  }
   for (let i = 0; i < count; i++) {
     const id = s.players[p].library[0];
     if (!id) {
@@ -775,10 +1329,18 @@ export function playerView(state, viewer, { includeEvents = true } = {}) {
         const o = s.objects[id];
         const visible =
           zone === 'hand'
-            ? p.id === viewer || state.resolving?.revealedPlayer === p.id
-            : state.choice?.player === viewer &&
-              ((state.choice.kind === 'libraryOrder' && state.choice.cards.includes(id)) ||
-                (state.choice.kind === 'librarySearch' && o.owner === viewer));
+            ? p.id === viewer ||
+              state.resolving?.revealedPlayer === p.id ||
+              [...state.stack, ...(state.resolving ? [state.resolving.entry] : [])].some(
+                (entry) =>
+                  entry.source?.id === id &&
+                  entry.source.incarnation === o.incarnation &&
+                  entry.effects?.some((effect) => effect.op === 'ninjutsuEnter'),
+              )
+            : (p.id === viewer && index === 0 && topLibraryVisible(state, viewer)) ||
+              ((state.choice?.player === viewer || state.choice?.revealed === true) &&
+                ((state.choice.kind === 'libraryOrder' && state.choice.cards.includes(id)) ||
+                  (state.choice.kind === 'librarySearch' && o.owner === viewer)));
         if (visible) return id;
         hidden.add(id);
         delete s.objects[id];
@@ -789,7 +1351,7 @@ export function playerView(state, viewer, { includeEvents = true } = {}) {
     }
   if (
     s.choice?.player !== viewer &&
-    ['libraryOrder', 'librarySearch', 'discardEffect'].includes(s.choice?.kind)
+    ['libraryOrder', 'librarySearch', 'discardEffect', 'behold'].includes(s.choice?.kind)
   )
     s.choice = { kind: 'opponentChoice', player: s.choice.player };
   for (const o of Object.values(s.objects))

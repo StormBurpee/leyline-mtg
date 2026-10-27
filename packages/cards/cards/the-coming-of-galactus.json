@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "04a38b92-619e-4fe8-b0cb-6fa31f0824ff",
+  "name": "The Coming of Galactus",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Saga"],
+    "colors": ["B", "G"],
+    "manaCost": "{2}{B}{B}{G}"
+  },
+  "rulesText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Destroy up to one target nonland permanent.\nII, III — Each opponent loses 2 life.\nIV — Create Galactus, a legendary 16/16 black Elder Alien creature token with flying, trample, and \"Whenever Galactus attacks, destroy target land.\"",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [1]
+      },
+      "targetGroups": [
+        {
+          "id": "permanent",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "not": {
+                "type": "land"
+              }
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target",
+          "targetGroup": "permanent"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [2, 3]
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "opponent",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [4]
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/galactus-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

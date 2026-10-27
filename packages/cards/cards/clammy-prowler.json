@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "afe4a60c-747a-439b-bf61-cd323b8dffe7",
+  "name": "Clammy Prowler",
+  "characteristics": {
+    "types": ["enchantment", "creature"],
+    "supertypes": [],
+    "subtypes": ["Horror"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}",
+    "power": 2,
+    "toughness": 5
+  },
+  "rulesText": "Whenever this creature attacks, another target attacking creature can't be blocked this turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "attacking": true
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    }
+  ]
+}

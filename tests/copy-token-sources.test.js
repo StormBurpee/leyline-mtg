@@ -9,6 +9,9 @@ const names = [
   'Rite of Replication',
   'Self-Reflection',
   'Ember Island Production',
+  'Gruff Triplets',
+  'Sphinx of False Conclusions',
+  'Joo Dee, One of Many',
 ];
 const mechanics = JSON.parse(
   await readFile(new URL('../packages/cards/mechanics.json', import.meta.url)),
@@ -26,7 +29,7 @@ const sources = await Promise.all(
     ),
   ),
 );
-test('four complete copy sources compile and round-trip every mode, kicker, flashback and exception', () => {
+test('seven complete copy sources compile and round-trip every mode, kicker, flashback and exception', () => {
   for (const source of sources) {
     const compiled = compileCard(source, { identities: CARD_IDS, mechanics });
     assert.equal(compiled.ok, true, JSON.stringify(compiled.diagnostics));
@@ -47,10 +50,9 @@ test('four complete copy sources compile and round-trip every mode, kicker, flas
   assert.deepEqual(CARDS['Self-Reflection'].flashback, { generic: 3, U: 1 });
   assert.equal(CARDS['Ember Island Production'].modes.length, 2);
 });
-test('source copy bindings, unsupported recipients, delayed instructions and exceptions fail closed', () => {
+test('Unsupported copy bindings, unsupported recipients, delayed instructions and exceptions fail closed', () => {
   const template = sources[0];
   for (const effect of [
-    { op: 'copyToken', target: 'source', count: 1 },
     { op: 'copyToken', target: 'eventSource', count: 1 },
     { op: 'copyToken', target: 'target', count: 1, controller: 'opponent' },
     { op: 'copyToken', target: 'target', count: 1, delayedExile: true },

@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4d739edc-4e02-4b35-a2a0-e9685c6e2889",
+  "name": "Diversion Unit",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Robot"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Flying\n{U}, Sacrifice this creature: Counter target instant or sorcery spell unless its controller pays {3}.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{U}",
+        "sacrificeSelf": true
+      },
+      "target": {
+        "scope": "spell",
+        "where": {
+          "any": [
+            {
+              "type": "instant"
+            },
+            {
+              "type": "sorcery"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target",
+          "unlessPay": {
+            "generic": 3
+          }
+        }
+      ]
+    }
+  ]
+}

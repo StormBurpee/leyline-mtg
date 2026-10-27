@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "91740570-1a97-4513-8af9-b32c363daf15",
+  "name": "Pillage the Bog",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "G"],
+    "manaCost": "{B}{G}"
+  },
+  "rulesText": "Look at the top X cards of your library, where X is twice the number of lands you control. Put one of them into your hand and the rest on the bottom of your library in a random order.\nPlot {1}{B}{G} (You may pay {1}{B}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": {
+            "kind": "scale",
+            "value": {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "you",
+              "where": {
+                "type": "land"
+              }
+            },
+            "factor": 2
+          },
+          "selectCount": 1,
+          "restOrder": "random"
+        }
+      ]
+    },
+    {
+      "kind": "plot",
+      "cost": "{1}{B}{G}"
+    }
+  ]
+}

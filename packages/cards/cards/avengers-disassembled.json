@@ -1,0 +1,107 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "34493cf5-7586-48ef-806d-57273b2ab034",
+  "name": "Avengers Disassembled",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}{R}"
+  },
+  "rulesText": "Choose one or both \u2014\n\u2022 Avengers Disassembled deals 3 damage to each creature.\n\u2022 Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Deal 3 damage to each creature",
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "type": "creature"
+              },
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "Destroy target land; its controller may find a basic land",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "land"
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            },
+            {
+              "op": "searchLibrary",
+              "amount": 1,
+              "where": {
+                "all": [
+                  {
+                    "type": "land"
+                  },
+                  {
+                    "basic": true
+                  }
+                ]
+              },
+              "destination": "battlefield",
+              "tapped": true,
+              "optional": true,
+              "player": "targetController"
+            }
+          ]
+        },
+        {
+          "label": "Both: damage each creature, then destroy target land",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "land"
+            }
+          },
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "type": "creature"
+              },
+              "amount": 3
+            },
+            {
+              "op": "destroy",
+              "target": "target"
+            },
+            {
+              "op": "searchLibrary",
+              "amount": 1,
+              "where": {
+                "all": [
+                  {
+                    "type": "land"
+                  },
+                  {
+                    "basic": true
+                  }
+                ]
+              },
+              "destination": "battlefield",
+              "tapped": true,
+              "optional": true,
+              "player": "targetController"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

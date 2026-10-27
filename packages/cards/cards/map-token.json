@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/map-token",
+  "name": "Map Token",
+  "characteristics": {
+    "types": ["artifact"],
+    "subtypes": ["Map"],
+    "colors": [],
+    "manaCost": null,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "timing": "sorcery",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "explore",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

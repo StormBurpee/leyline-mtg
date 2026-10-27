@@ -36,6 +36,27 @@ export function createRegistry(input = CARDS) {
     const copy = structuredClone(card);
     registry[copy.name] = {
       ...copy,
+      ...(copy.prepareSpell
+        ? { prepareSpell: createRegistry([copy.prepareSpell])[copy.prepareSpell.name] }
+        : {}),
+      ...(copy.backFace
+        ? {
+            backFace: {
+              ...copy.backFace,
+              types: copy.backFace.types ?? [copy.backFace.type],
+              keywords: copy.backFace.keywords ?? [],
+              subtypes: copy.backFace.subtypes ?? [],
+              text: copy.backFace.text ?? '',
+              color: copy.backFace.color ?? [
+                ...new Set(
+                  Object.keys(copy.backFace.cost)
+                    .flatMap((k) => k.split('/'))
+                    .filter((k) => COLORS.has(k)),
+                ),
+              ],
+            },
+          }
+        : {}),
       ...(copy.adventure
         ? {
             adventure: {
@@ -72,7 +93,15 @@ export function createRegistry(input = CARDS) {
     for (const e of [
       ...(card.effects ?? []),
       ...(card.adventure?.effects ?? []),
+      ...(card.prepareSpell?.effects ?? []),
+      ...(card.backFace?.effects ?? []),
+      ...(card.backFace?.etb ?? []),
+      ...(card.backFace?.triggers ?? []).flatMap((t) => t.effects),
+      ...(card.backFace?.activated ?? []).flatMap((a) => a.effects),
       ...(card.kicker?.effects ?? []),
+      ...(card.gift
+        ? [{ op: 'token', definition: card.gift.definition }, ...card.gift.effects]
+        : []),
       ...(card.modes ?? []).flatMap((mode) => mode.effects),
       ...(card.etb ?? []),
       ...(card.triggers ?? []).flatMap((t) => t.effects),

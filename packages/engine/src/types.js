@@ -8,6 +8,27 @@ export const CARD_TYPES = Object.freeze([
   'enchantment',
   'planeswalker',
 ]);
+// CR 205.3i. A type replacement retains only subtypes of remaining types.
+export const LAND_TYPES = Object.freeze([
+  'Cave',
+  'Desert',
+  'Forest',
+  'Gate',
+  'Island',
+  'Lair',
+  'Locus',
+  'Mine',
+  'Mountain',
+  'Plains',
+  'Planet',
+  'Power-Plant',
+  'Sphere',
+  'Swamp',
+  'Tower',
+  'Town',
+  'Urza’s',
+  "Urza's",
+]);
 export const typesOf = (card) => card.types ?? [card.type];
 export const hasType = (card, type) => typesOf(card).includes(type);
 export const primaryType = (types) => CARD_TYPES.find((type) => types.includes(type));

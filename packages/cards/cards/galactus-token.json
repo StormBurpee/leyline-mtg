@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/galactus-token",
+  "name": "Galactus Token",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Elder", "Alien"],
+    "colors": ["B"],
+    "manaCost": null,
+    "power": 16,
+    "toughness": 16,
+    "token": true
+  },
+  "rulesText": "Flying, trample\nWhenever Galactus attacks, destroy target land.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "878df304-9d6d-4ce9-b65b-1439c251f3e0",
+  "name": "Tifa Lockhart",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Monk"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Trample\nLandfall \u2014 Whenever a land you control enters, double Tifa Lockhart's power until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "doublePower",
+          "target": "source"
+        }
+      ]
+    }
+  ]
+}

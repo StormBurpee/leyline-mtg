@@ -6,7 +6,7 @@ export function predictedEffects(state, effects, entry) {
     effect.op === 'conditional'
       ? predictedEffects(
           state,
-          meetsCondition(state, entry.controller, effect.condition, [], entry.source)
+          meetsCondition(state, entry.controller, effect.condition, [], entry.source, entry)
             ? effect.then
             : (effect.else ?? []),
           entry,

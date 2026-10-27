@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e20da6b5-1057-4a28-9e85-07de714e262f",
+  "name": "Wan Shi Tong, Librarian",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Bird", "Spirit"],
+    "colors": ["U"],
+    "manaCost": "{X}{U}{U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Flash\nFlying, vigilance\nWhen Wan Shi Tong enters, put X +1/+1 counters on him. Then draw half X cards, rounded down.\nWhenever an opponent searches their library, put a +1/+1 counter on Wan Shi Tong and draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "counter": "+1/+1",
+          "target": "source",
+          "amount": {
+            "kind": "x"
+          }
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": {
+            "kind": "floorDivide",
+            "value": {
+              "kind": "x"
+            },
+            "divisor": 2
+          }
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "librarySearch",
+        "controller": "opponent"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "counter": "+1/+1",
+          "target": "source",
+          "amount": 1
+        },
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

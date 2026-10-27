@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2a2ea189-b663-4f4a-bb23-ff7a4af25f71",
+  "name": "Settle the Wreckage",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{2}{W}{W}"
+  },
+  "rulesText": "Exile all attacking creatures target player controls. That player may search their library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "player"
+      },
+      "effects": [
+        {
+          "op": "exileAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "attacking": true
+              }
+            ]
+          },
+          "player": "target",
+          "rememberMovedCount": true
+        },
+        {
+          "op": "searchLibrary",
+          "amount": 0,
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "basic": true
+              }
+            ]
+          },
+          "destination": "battlefield",
+          "tapped": true,
+          "optional": true,
+          "player": "target",
+          "countFrom": "moved"
+        }
+      ]
+    }
+  ]
+}

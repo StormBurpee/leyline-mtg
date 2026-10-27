@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "54175132-2c44-4749-8dfd-d08dcc63e4b3",
+  "name": "Elusive Otter // Grove's Bounty",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Otter"],
+    "colors": ["U"],
+    "manaCost": "{U}",
+    "power": 1,
+    "toughness": 1
+  },
+  "rulesText": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nCreatures with power less than this creature's power can't block it.",
+  "abilities": [
+    {
+      "use": "prowess"
+    },
+    {
+      "kind": "combatRestriction",
+      "restriction": "cannotBeBlockedByLowerPower"
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Elusive Otter",
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:adventure/groves-bounty",
+        "name": "Grove's Bounty",
+        "characteristics": {
+          "types": ["sorcery"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["G"],
+          "manaCost": "{X}{G}"
+        },
+        "rulesText": "Distribute X +1/+1 counters among any number of target creatures you control. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "distributedCounters",
+            "selector": {
+              "scope": "permanent",
+              "where": {
+                "all": [
+                  {
+                    "type": "creature"
+                  },
+                  {
+                    "controller": "you"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

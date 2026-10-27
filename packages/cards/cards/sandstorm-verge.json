@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "de417a82-8f03-4d7e-aee7-48f7d7eba61a",
+  "name": "Sandstorm Verge",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": ["Desert"],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {C}.\n{3}, {T}: Target creature can't block this turn. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}",
+        "tap": true
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBlock",
+          "until": "endOfTurn"
+        }
+      ],
+      "timing": "sorcery"
+    }
+  ]
+}

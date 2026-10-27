@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eddab60f-2eac-4f20-934c-3d9307f885c3",
+  "name": "Nobody",
+  "characteristics": {
+    "types": ["artifact", "creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Hero"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U/R}{U/R}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, return up to one other target artifact you control to its owner's hand. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target",
+          "targetGroup": "chosen"
+        },
+        {
+          "op": "scry",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

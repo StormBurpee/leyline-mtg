@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "66c227f2-0e74-43e2-ab24-3866d15c5eef",
+  "name": "Gateway Sneak",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vedalken", "Rogue"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Whenever a Gate you control enters, this creature can't be blocked this turn.\nWhenever this creature deals combat damage to a player, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Gate"
+        }
+      },
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "source",
+          "restriction": "cannotBeBlocked",
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "combatDamagePlayer",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

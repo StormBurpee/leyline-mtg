@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ee9b606a-a1fe-43c8-84d0-9bf7b012cc75",
+  "name": "Leatherhead, Swamp Stalker",
+  "characteristics": {
+    "types": ["creature"],
+    "manaCost": "{2}{G}{G}",
+    "colors": ["G"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Crocodile", "Mutant", "Rogue"],
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Trample\nLeatherhead enters with a hexproof counter on her.\nWhenever Leatherhead deals combat damage to a player, you may remove a counter from her. When you do, destroy target artifact or enchantment that player controls.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "entryKeywordCounters",
+      "keywords": ["hexproof"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "combatDamagePlayer",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "removeCounterTrigger",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "any": [
+                    {
+                      "type": "artifact"
+                    },
+                    {
+                      "type": "enchantment"
+                    }
+                  ]
+                },
+                {
+                  "controller": "opponent"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

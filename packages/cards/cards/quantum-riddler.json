@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "58582fac-4c42-4a1c-9ab1-4a892b500da4",
+  "name": "Quantum Riddler",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Sphinx"],
+    "colors": ["U"],
+    "manaCost": "{3}{U}{U}",
+    "power": 4,
+    "toughness": 6
+  },
+  "rulesText": "Flying\nWhen this creature enters, draw a card.\nAs long as you have one or fewer cards in hand, if you would draw one or more cards, you draw that many cards plus one instead.\nWarp {1}{U}",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "on": {
+        "event": "enter",
+        "object": "source"
+      }
+    },
+    {
+      "kind": "drawBonus",
+      "handAtMost": 1,
+      "amount": 1
+    },
+    {
+      "kind": "warp",
+      "cost": "{1}{U}"
+    }
+  ]
+}

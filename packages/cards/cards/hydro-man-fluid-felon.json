@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a93a8edf-2879-4cae-b3b9-b46298270823",
+  "name": "Hydro-Man, Fluid Felon",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Elemental", "Villain"],
+    "colors": ["U"],
+    "manaCost": "{U}{U}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Whenever you cast a blue spell, if Hydro-Man is a creature, he gets +1/+1 until end of turn.\nAt the beginning of your end step, untap Hydro-Man. Until your next turn, he becomes a land and gains \"{T}: Add {U}.\" (He's not a creature during that time.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "cast",
+        "controller": "you",
+        "filter": {
+          "color": "U"
+        }
+      },
+      "condition": {
+        "kind": "sourceType",
+        "type": "creature"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 1,
+          "toughness": 1,
+          "until": "endOfTurn"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "source"
+        },
+        {
+          "op": "becomeLand",
+          "mana": ["U"],
+          "until": "yourNextTurn"
+        }
+      ]
+    }
+  ]
+}

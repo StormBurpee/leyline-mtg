@@ -2,7 +2,7 @@ import { CREATURE_TYPES } from './creature-types.js';
 import { validateTargetGroups } from './target-group-schema.js';
 import { validNumericValue } from './value-schema.js';
 import { validateCondition } from './condition-schema.js';
-import { validateEventSpec } from './events.js';
+import { validateEventSpec, eventSpec } from './events.js';
 import {
   targetSpec,
   validateTargetSpec,
@@ -34,35 +34,59 @@ const FIELDS = new Set([
   'token',
   'mana',
   'manaSacrifice',
+  'manaFromTrackedExile',
   'manaConditions',
   'manaLifeCosts',
   'entryLifePayment',
   'manaRestrictions',
   'chooseCreatureType',
+  'chooseBasicLandType',
   'entryCounterBonus',
+  'entryKeywordCounters',
+  'entryPlusCounters',
+  'landNameLock',
+  'exileGraveyardMoves',
+  'libraryTopAccess',
+  'additionalEnterTrigger',
+  'suppressEnterTriggers',
   'entryStunCounters',
   'damageBonus',
+  'drawBonus',
+  'foreignCreatureSubtype',
+  'cantGainLife',
+  'cantPreventDamage',
   'startEngines',
   'maxSpeedKeywords',
   'entersTappedUnless',
   'target',
   'targetGroups',
   'effects',
+  'distributedCounters',
+  'spree',
   'modes',
   'crew',
   'cycling',
+  'ninjutsu',
+  'turnLoyaltyCreature',
   'cyclingType',
   'flashback',
+  'harmonize',
   'plot',
   'warp',
+  'prepareSpell',
+  'entersPrepared',
+  'backFace',
+  'frontName',
   'adventure',
   'mainName',
   'kicker',
   'offspring',
+  'gift',
   'disguise',
   'cannotAttack',
   'cannotBlock',
   'unblockable',
+  'cannotBeBlockedByLowerPower',
   'uncounterable',
   'etb',
   'aura',
@@ -72,10 +96,12 @@ const FIELDS = new Set([
   'conditionalBonuses',
   'costModifiers',
   'sacrificeCost',
+  'additionalCost',
   'static',
   'triggers',
   'activated',
   'ward',
+  'opponentCreatureProtectionBypass',
   'entersTapped',
 ]);
 const plain = (v) =>
@@ -169,6 +195,22 @@ function validateEffects(
       errors.push(`${p}: expected an effect object.`);
       continue;
     }
+    if (e.op === 'questCounterTrigger') {
+      if (Object.keys(e).some((k) => !['op', 'threshold', 'selector', 'effects'].includes(k)))
+        errors.push(`${p}: unsupported quest trigger field.`);
+      if (!Number.isSafeInteger(e.threshold) || e.threshold < 1 || e.threshold > 1000)
+        errors.push(`${p}: invalid quest threshold.`);
+      errors.push(...validateTargetSpec(e.selector));
+      validateEffects(e.effects, `${p}.effects`, e.selector, errors, [], budget, depth + 1);
+      continue;
+    }
+    if (e.op === 'removeCounterTrigger') {
+      if (Object.keys(e).some((k) => !['op', 'selector', 'effects'].includes(k)))
+        errors.push(`${p}: unsupported counter-removal trigger field.`);
+      errors.push(...validateTargetSpec(e.selector));
+      validateEffects(e.effects, `${p}.effects`, e.selector, errors, [], budget, depth + 1);
+      continue;
+    }
     if (e.op === 'discardTrigger') {
       if (Object.keys(e).some((k) => !['op', 'count', 'where', 'selector', 'effects'].includes(k)))
         errors.push(`${p}: unsupported discard-trigger field.`);
@@ -187,6 +229,15 @@ function validateEffects(
       );
       continue;
     }
+    if (e.op === 'behold') {
+      if (
+        Object.keys(e).some((k) => !['op', 'subtype', 'then'].includes(k)) ||
+        !CREATURE_TYPES.includes(e.subtype)
+      )
+        errors.push(`${p}: unsupported behold.`);
+      validateEffects(e.then, `${p}.then`, target, errors, groups, budget, depth + 1);
+      continue;
+    }
     if (e.op === 'conditional') {
       if (Object.keys(e).some((k) => !['op', 'condition', 'then', 'else'].includes(k)))
         errors.push(`${p}: unsupported conditional field.`);
@@ -201,18 +252,27 @@ function validateEffects(
       if (
         !group ||
         ![
+          'counter',
+          'copyToken',
           'damage',
           'destroy',
           'bounce',
           'modify',
+          'combatRestriction',
           'counterOn',
           'stunOn',
           'tap',
           'untap',
           'moveTarget',
           'exileUntilSourceLeaves',
+          'removeAbilities',
+          'counterAbility',
+          'keywordCounters',
+          'fightAttached',
         ].includes(e.op) ||
         e.subject !== undefined ||
+        (['counter', 'copyToken'].includes(e.op) && group.max !== 1) ||
+        (e.op === 'counter' && e.unlessPay !== undefined) ||
         (e.op === 'moveTarget' && e.destination === 'battlefield')
       ) {
         errors.push(`${p}: unsupported target group binding.`);
@@ -240,53 +300,114 @@ function validateEffects(
     }
     if (e.op === 'empowerJace' && (!natural(e.count) || e.count > 1000))
       errors.push(`${p}.count: Empower requires a literal from 0 to 1000.`);
+    if (e.op === 'anthemEmblem') {
+      errors.push(...validateFilter(e.where).map((error) => `${p}.where: ${error}`));
+      if (!Number.isSafeInteger(e.power) || !Number.isSafeInteger(e.toughness))
+        errors.push(`${p}: expected integer emblem bonus.`);
+    }
     const schema = {
       damage: ['amount'],
       damageOpponent: ['amount'],
       damageEventOpponent: ['amount'],
       damageEventPowerOpponent: [],
       drawEventAmount: [],
+      endTurn: [],
+      chooseLandName: [],
+      moveLinkedExileToGraveyard: [],
+      exileUntilSourceLeavesAll: ['where'],
       disableDamagePrevention: [],
+      exileGraveyards: ['players'],
+      damageEachPlayer: ['amount'],
+      damageTargetController: ['amount'],
+      damageEventPlayer: ['amount'],
+      exileTop: ['count', 'player', 'duration', 'castOnly', 'anyMana'],
+      impulseCastOrDamage: ['amount'],
+      castDamageEmblem: ['amount'],
+      anthemEmblem: ['where', 'power', 'toughness'],
+      returnTransformed: [],
+      chooseMana: [],
+      combatMana: ['count'],
       addMana: ['mana'],
       impulseChoose: ['count'],
       bindingNegotiation: [],
-      revealDiscard: [],
+      revealDiscard: ['where'],
       gainLife: ['amount', 'player'],
       loseLife: ['amount', 'player'],
       exileUntilSourceLeaves: [],
-      moveTarget: ['destination', 'controller', 'tapped', 'subject'],
+      moveTarget: ['destination', 'controller', 'tapped', 'subject', 'trackSource'],
       draw: ['count', 'player'],
       mill: ['count', 'player'],
-      lookChooseHand: ['count', 'player'],
+      lookChooseHand: ['count', 'player', 'selectCount', 'restOrder'],
       scry: ['count', 'player'],
       surveil: ['count', 'player'],
+      explore: ['subject'],
       discard: ['count', 'player'],
+      optionalDiscardDraw: [],
+      distributedCounters: [],
       sacrifice: ['count', 'player', 'where'],
+      chooseExile: ['count', 'player', 'where'],
+      returnSelfAsEnchantment: [],
+      shuffleSourceAndTarget: [],
       sacrificeSelf: [],
-      searchLibrary: ['count', 'where', 'destination', 'tapped', 'reveal'],
-      counter: [],
+      searchLibrary: [
+        'count',
+        'where',
+        'destination',
+        'tapped',
+        'reveal',
+        'player',
+        'optional',
+        'countFrom',
+      ],
+      counter: ['unlessPay', 'exile'],
+      counterAbility: ['removeSourceAbilities'],
+      removeAbilities: ['until'],
+      stripDestroyByManaValue: ['amount'],
       bounce: ['subject'],
       destroy: ['subject'],
       attachEquipment: [],
-      animateLand: ['power', 'toughness', 'colors', 'subtypes'],
+      becomeLand: ['mana'],
+      creatureForm: ['power', 'toughness', 'subtypes'],
+      earthbend: ['amount'],
+      animateLand: [
+        'power',
+        'toughness',
+        'colors',
+        'subtypes',
+        'keywords',
+        'permanent',
+        'allCreatureTypes',
+      ],
+      keywordCounters: ['keywords'],
       modify: ['subject', 'power', 'toughness', 'keywords'],
-      token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords'],
+      combatRestriction: ['subject', 'restriction'],
+      token: ['definition', 'count', 'player', 'tapped', 'temporaryKeywords', 'countFrom'],
       mobilize: ['definition', 'count'],
       empowerJace: ['definition', 'count'],
-      copyToken: ['count', 'exceptions'],
+      copyToken: ['subject', 'count', 'exceptions'],
+      keywordCounter: ['subject', 'keyword', 'amount'],
       stunOn: ['subject', 'amount'],
+      fightAttached: [],
+      untapSearched: [],
+      doubleCounters: ['subject', 'where'],
+      doublePower: ['subject'],
       counterOn: ['subject', 'amount'],
       untap: ['subject'],
       tap: ['subject'],
       bounceAll: ['where', 'excludeSource'],
       destroyAll: ['where', 'excludeSource'],
-      exileAll: ['where', 'excludeSource'],
+      exileAll: ['where', 'excludeSource', 'player', 'rememberMovedCount'],
       modifyAll: ['where', 'excludeSource', 'power', 'toughness', 'keywords'],
       damageAll: ['where', 'excludeSource', 'amount', 'players'],
       counterAll: ['where', 'excludeSource', 'amount'],
       tapAll: ['where', 'excludeSource'],
       untapAll: ['where', 'excludeSource'],
     }[e.op];
+    if (
+      e.op === 'exileGraveyards' &&
+      !['controller', 'opponent', 'all', 'target'].includes(e.players)
+    )
+      errors.push(`${p}.players: unsupported player set.`);
     if (!Array.isArray(schema)) {
       errors.push(`${p}: unsupported effect opcode ${String(e.op)}.`);
       continue;
@@ -298,13 +419,18 @@ function validateEffects(
       [
         'damage',
         'damageOpponent',
+        'damageEachPlayer',
+        'damageTargetController',
+        'damageEventPlayer',
         'damageEventOpponent',
+        'stripDestroyByManaValue',
+        'earthbend',
         'gainLife',
         'loseLife',
         'counterOn',
         'stunOn',
       ].includes(e.op) &&
-      !validNumericValue(e.amount, { nonnegative: true })
+      !validNumericValue(e.amount, { effect: true, nonnegative: true })
     )
       errors.push(`${p}.amount: expected a nonnegative safe integer.`);
     if (
@@ -319,9 +445,18 @@ function validateEffects(
         'surveil',
         'discard',
       ].includes(e.op) &&
-      !validNumericValue(e.count, { nonnegative: true, limit: 1000 })
+      !validNumericValue(e.count, { effect: true, nonnegative: true, limit: 1000 })
     )
       errors.push(`${p}.count: expected a literal count from 0 to 1000.`);
+    if (e.op === 'lookChooseHand') {
+      if (
+        e.selectCount !== undefined &&
+        !validNumericValue(e.selectCount, { effect: true, nonnegative: true, limit: 1000 })
+      )
+        errors.push(`${p}.selectCount: expected a bounded nonnegative selection count.`);
+      if (e.restOrder !== undefined && !['chosen', 'random'].includes(e.restOrder))
+        errors.push(`${p}.restOrder: expected chosen or random.`);
+    }
     if (
       e.op === 'mill' &&
       (!['controller', 'opponent', 'target'].includes(e.player) ||
@@ -337,7 +472,7 @@ function validateEffects(
         (e.player === 'target' && !effectTargetCompatible(e.op, target)))
     )
       errors.push(`${p}.player: expected a compatible player recipient.`);
-    if (e.op === 'sacrifice') {
+    if (['sacrifice', 'chooseExile'].includes(e.op)) {
       if (!natural(e.count) || e.count > 1000) errors.push(`${p}.count: expected 0 to 1000.`);
       if (!['controller', 'opponent', 'target', 'all'].includes(e.player))
         errors.push(`${p}.player: unsupported sacrifice player.`);
@@ -346,7 +481,36 @@ function validateEffects(
       if (e.where !== undefined)
         for (const error of validateFilter(e.where)) errors.push(`${p}.where: ${error}`);
     }
+    if (
+      e.player !== undefined &&
+      ['searchLibrary', 'exileAll'].includes(e.op) &&
+      ![
+        'controller',
+        'opponent',
+        'target',
+        ...(e.op === 'searchLibrary' ? ['targetController'] : []),
+      ].includes(e.player)
+    )
+      errors.push(`${p}: invalid player binding.`);
+    if (e.rememberMovedCount !== undefined && typeof e.rememberMovedCount !== 'boolean')
+      errors.push(`${p}: invalid moved-count flag.`);
+    if (e.op === 'exileUntilSourceLeavesAll')
+      errors.push(...validateFilter(e.where).map((error) => `${p}: ${error}`));
+    if (
+      e.op === 'keywordCounter' &&
+      (e.keyword !== 'indestructible' ||
+        !natural(e.amount) ||
+        e.amount > 1000 ||
+        e.subject !== 'source')
+    )
+      errors.push(`${p}: invalid keyword counter.`);
+    if (e.op === 'token' && e.countFrom !== undefined && e.countFrom !== 'moved')
+      errors.push(`${p}: unsupported count binding.`);
     if (e.op === 'searchLibrary') {
+      if (e.optional !== undefined && typeof e.optional !== 'boolean')
+        errors.push(`${p}: invalid optional flag.`);
+      if (e.countFrom !== undefined && e.countFrom !== 'moved')
+        errors.push(`${p}: invalid count binding.`);
       if (!natural(e.count) || e.count > 1000) errors.push(`${p}.count: expected 0 to 1000.`);
       if (!['hand', 'battlefield', 'top', 'graveyard'].includes(e.destination))
         errors.push(`${p}.destination: unsupported search destination.`);
@@ -362,7 +526,14 @@ function validateEffects(
       if (e.destination === 'battlefield' && (!e.where || !filterOnlyPermanents(e.where)))
         errors.push(`${p}.where: battlefield searches require a permanent-only filter.`);
     }
+    if (e.op === 'fightAttached' && !effectTargetCompatible('attachEquipment', target))
+      errors.push(`${p}: fightAttached requires a creature target.`);
     if (e.op === 'moveTarget') {
+      if (
+        e.trackSource !== undefined &&
+        (typeof e.trackSource !== 'boolean' || e.destination !== 'exile')
+      )
+        errors.push(`${p}.trackSource: requires exile and a boolean.`);
       if (!['hand', 'battlefield', 'exile'].includes(e.destination))
         errors.push(`${p}.destination: unsupported zone.`);
       if (
@@ -376,6 +547,22 @@ function validateEffects(
       )
         errors.push(`${p}.tapped: expected a battlefield entry flag.`);
     }
+    if (
+      e.op === 'exileTop' &&
+      (!validNumericValue(e.count) ||
+        !['controller', 'target'].includes(e.player) ||
+        ['castOnly', 'anyMana'].some((k) => e[k] !== undefined && typeof e[k] !== 'boolean') ||
+        !['turn', 'nextTurn'].includes(e.duration) ||
+        (e.player === 'target' && targetSpec(target)?.scope !== 'player'))
+    )
+      errors.push(`${p}: invalid exile permission.`);
+    if (
+      ['impulseCastOrDamage', 'castDamageEmblem'].includes(e.op) &&
+      (!natural(e.amount) || e.amount > 1000)
+    )
+      errors.push(`${p}: expected bounded literal damage.`);
+    if (e.op === 'combatMana' && (!natural(e.count) || e.count > 1000))
+      errors.push(`${p}: invalid combat mana count.`);
     if (e.op === 'impulseChoose' && (!natural(e.count) || e.count > 1000))
       errors.push(`${p}.count: invalid count.`);
     if (
@@ -383,6 +570,27 @@ function validateEffects(
       targetSpec(target)?.scope !== 'player'
     )
       errors.push(`${p}: requires a player target.`);
+    if (e.op === 'revealDiscard' && e.where !== undefined) errors.push(...validateFilter(e.where));
+    if (
+      e.op === 'removeAbilities' &&
+      (!['endOfTurn', 'sourceLeaves'].includes(e.until) ||
+        targetSpec(target)?.scope !== 'permanent')
+    )
+      errors.push(`${p}: ability removal needs a permanent and supported duration.`);
+    if (
+      e.op === 'counterAbility' &&
+      (targetSpec(target)?.scope !== 'ability' ||
+        (e.removeSourceAbilities !== undefined && typeof e.removeSourceAbilities !== 'boolean'))
+    )
+      errors.push(`${p}: ability counter requires an ability target.`);
+    if (
+      e.op === 'exileGraveyards' &&
+      (!['controller', 'opponent', 'all', 'target'].includes(e.players) ||
+        (e.players === 'target' && targetSpec(target)?.scope !== 'player'))
+    )
+      errors.push(`${p}: invalid graveyard players.`);
+    if (e.op === 'shuffleSourceAndTarget' && targetSpec(target)?.scope !== 'permanent')
+      errors.push(`${p}: shuffle needs a permanent target.`);
     if (e.op === 'addMana') {
       validateCost(e.mana, `${p}.mana`, errors);
       if (
@@ -390,9 +598,18 @@ function validateEffects(
       )
         errors.push(`${p}.mana: mana production cannot be generic.`);
     }
+    if (
+      e.op === 'explore' &&
+      (e.subject !== undefined
+        ? e.subject !== 'source'
+        : !effectTargetCompatible('explore', target))
+    )
+      errors.push(`${p}: explore requires source or a creature target.`);
     if (e.op === 'copyToken') {
       if (!natural(e.count) || e.count > 1000) errors.push(`${p}.count: expected 0 to 1000.`);
-      if (!effectTargetCompatible('copyToken', target))
+      if (e.subject !== undefined && e.subject !== 'source')
+        errors.push(`${p}.subject: only source copying is supported.`);
+      if (e.subject !== 'source' && !effectTargetCompatible('copyToken', target))
         errors.push(`${p}: requires a current permanent target.`);
       const x = e.exceptions;
       if (x !== undefined) {
@@ -468,7 +685,7 @@ function validateEffects(
         errors.push(`${p}.excludeSource: expected boolean.`);
       if (
         ['damageAll', 'counterAll'].includes(e.op) &&
-        !validNumericValue(e.amount, { nonnegative: true })
+        !validNumericValue(e.amount, { effect: true, nonnegative: true })
       )
         errors.push(`${p}.amount: expected a nonnegative integer.`);
       if (e.op === 'damageAll') {
@@ -480,7 +697,24 @@ function validateEffects(
           errors.push(`${p}: group damage requires a creature filter.`);
       }
     }
-    if (e.op === 'animateLand') {
+    if (
+      e.op === 'becomeLand' &&
+      (!Array.isArray(e.mana) ||
+        !e.mana.length ||
+        e.mana.length > 6 ||
+        new Set(e.mana).size !== e.mana.length ||
+        e.mana.some((c) => !['W', 'U', 'B', 'R', 'G', 'C'].includes(c)))
+    )
+      errors.push(`${p}: invalid granted mana colors.`);
+    if (
+      e.op === 'earthbend' &&
+      (!Number.isSafeInteger(e.amount) ||
+        e.amount < 0 ||
+        e.amount > 1000 ||
+        targetSpec(target)?.scope !== 'permanent')
+    )
+      errors.push(`${p}: earthbend requires a permanent target and 0–1000 counters.`);
+    if (e.op === 'animateLand' || e.op === 'creatureForm') {
       if (
         !Number.isSafeInteger(e.power) ||
         !Number.isSafeInteger(e.toughness) ||
@@ -488,17 +722,49 @@ function validateEffects(
         Math.abs(e.toughness) > 1000
       )
         errors.push(`${p}: animation requires bounded integer base power/toughness.`);
-      if (!Array.isArray(e.colors) || e.colors.some((c) => !['W', 'U', 'B', 'R', 'G'].includes(c)))
+      if (
+        e.colors !== undefined &&
+        (!Array.isArray(e.colors) || e.colors.some((c) => !['W', 'U', 'B', 'R', 'G'].includes(c)))
+      )
         errors.push(`${p}: invalid animation colors.`);
       if (
         !Array.isArray(e.subtypes) ||
-        !e.subtypes.length ||
+        (!e.subtypes.length && !e.allCreatureTypes) ||
         e.subtypes.some((t) => !CREATURE_TYPES.includes(t))
       )
         errors.push(`${p}: invalid animation creature subtypes.`);
     }
+    if (e.op === 'combatRestriction') {
+      if (!['cannotBlock', 'cannotBeBlocked'].includes(e.restriction))
+        errors.push(`${p}.restriction: unsupported combat restriction.`);
+      if (e.subject !== undefined && !['source', 'attached'].includes(e.subject))
+        errors.push(`${p}.subject: unsupported binding.`);
+    }
+    if (e.op === 'animateLand') {
+      if (e.permanent !== undefined && e.permanent !== true)
+        errors.push(`${p}: permanent must be true.`);
+      if (e.allCreatureTypes !== undefined && e.allCreatureTypes !== true)
+        errors.push(`${p}: allCreatureTypes must be true.`);
+    }
+    if (
+      ['animateLand', 'keywordCounters'].includes(e.op) &&
+      e.keywords !== undefined &&
+      (!Array.isArray(e.keywords) || e.keywords.some((k) => !GRANTED_KEYWORDS.has(k)))
+    )
+      errors.push(`${p}: invalid granted keywords.`);
+    if (
+      e.op === 'keywordCounters' &&
+      (!Array.isArray(e.keywords) ||
+        !e.keywords.length ||
+        e.keywords.length > 32 ||
+        targetSpec(target)?.scope !== 'permanent')
+    )
+      errors.push(`${p}: keyword counters need keywords and a target.`);
     if (e.op === 'modify' || e.op === 'modifyAll') {
-      if (!validNumericValue(e.power) || !validNumericValue(e.toughness))
+      if (
+        !validNumericValue(e.power, { effect: true }) ||
+        !validNumericValue(e.toughness, { effect: true })
+      )
         errors.push(`${p}: power and toughness changes must be safe integers.`);
       if (e.subject !== undefined && !['source', 'attached'].includes(e.subject))
         errors.push(
@@ -532,6 +798,30 @@ function validateEffects(
       errors.push(
         `${p}.subject: only source, attached permanent or the chosen target is supported.`,
       );
+    if (['doubleCounters', 'doublePower'].includes(e.op)) {
+      if (e.where !== undefined) {
+        if (e.op !== 'doubleCounters' || e.subject !== undefined)
+          errors.push(`${p}: invalid group doubling.`);
+        errors.push(...validateFilter(e.where));
+      } else if (e.subject !== undefined && !['source', 'attached'].includes(e.subject))
+        errors.push(`${p}: invalid doubling subject.`);
+      else if (e.subject === undefined && !effectTargetCompatible('counterOn', target, e))
+        errors.push(`${p}: doubling requires a permanent target.`);
+    }
+    if (e.op === 'counter') {
+      if (e.unlessPay !== undefined) {
+        validateCost(e.unlessPay, `${p}.unlessPay`, errors);
+        if (
+          plain(e.unlessPay) &&
+          Object.keys(e.unlessPay).some(
+            (key) => !['generic', 'W', 'U', 'B', 'R', 'G', 'C'].includes(key),
+          )
+        )
+          errors.push(`${p}.unlessPay: only literal generic and single-color mana are supported.`);
+      }
+      if (e.exile !== undefined && typeof e.exile !== 'boolean')
+        errors.push(`${p}.exile: expected a boolean.`);
+    }
     if (
       [
         'damage',
@@ -539,7 +829,9 @@ function validateEffects(
         'bounce',
         'destroy',
         'attachEquipment',
+        'creatureForm',
         'modify',
+        'combatRestriction',
         'moveTarget',
         'exileUntilSourceLeaves',
         'untap',
@@ -610,6 +902,21 @@ export function validateDefinition(card) {
     errors.push(
       `${name}.crew: requires a noncreature artifact Vehicle with literal power/toughness and crew 0–1000.`,
     );
+  if (card.ninjutsu !== undefined) validateCost(card.ninjutsu, `${name}.ninjutsu`, errors);
+  if (card.turnLoyaltyCreature !== undefined) {
+    const f = card.turnLoyaltyCreature;
+    if (
+      !plain(f) ||
+      Object.keys(f).some((k) => !['power', 'toughness', 'subtypes', 'keywords'].includes(k)) ||
+      !Number.isSafeInteger(f.power) ||
+      !Number.isSafeInteger(f.toughness) ||
+      !Array.isArray(f.subtypes) ||
+      f.subtypes.some((t) => !CREATURE_TYPES.includes(t)) ||
+      !Array.isArray(f.keywords) ||
+      f.keywords.some((k) => !GRANTED_KEYWORDS.has(k))
+    )
+      errors.push(`${name}.turnLoyaltyCreature: invalid creature characteristics.`);
+  }
   if (card.cycling !== undefined) validateCost(card.cycling, `${name}.cycling`, errors);
   if (
     card.cyclingType !== undefined &&
@@ -646,25 +953,75 @@ export function validateDefinition(card) {
       predicate(value) || Object.values(value).some((v) => contains(v, predicate, seen, depth + 1))
     );
   };
+  const paidCondition = (v) => v.kind === 'additionalCostPaid';
+  if (
+    contains({ ...card, effects: undefined }, paidCondition) ||
+    (contains(card.effects, paidCondition) && !card.additionalCost)
+  )
+    errors.push(
+      `${name}: additional-cost conditions require spell effects and an additional cost.`,
+    );
   const hasX = (value) => contains(value, (v) => v.kind === 'x');
   if (contains(card.effects, (v) => v.condition && hasX(v.condition)))
     errors.push(`${name}: X-dependent conditions are not supported.`);
-  const { effects: spellEffects, cost: printedCost, ...otherFields } = card;
-  if (hasX(otherFields)) errors.push(`${name}: X expressions are supported only in spell effects.`);
-  if (hasX(spellEffects) && !printedCost?.X)
+  const {
+    effects: spellEffects,
+    cost: printedCost,
+    adventure: nestedAdventure,
+    triggers,
+    etb,
+    ...otherFields
+  } = card;
+  const entryEffects = [etb];
+  const otherTriggers = (triggers ?? []).map((trigger) => {
+    const spec = eventSpec(trigger.event);
+    if (spec?.event === 'enter' && spec.object === 'source') {
+      entryEffects.push(trigger.effects);
+      const { effects, ...rest } = trigger;
+      return rest;
+    }
+    return trigger;
+  });
+  if (hasX(otherFields) || hasX(otherTriggers))
+    errors.push(
+      `${name}: X expressions are supported only in spell effects and self-entry effects.`,
+    );
+  if ((hasX(spellEffects) || hasX(entryEffects)) && !printedCost?.X)
     errors.push(`${name}: X expressions require an X mana cost.`);
   if (
     printedCost?.X &&
-    (!['instant', 'sorcery'].includes(card.type) ||
+    (!['instant', 'sorcery', 'creature', 'artifact', 'enchantment', 'planeswalker'].includes(
+      card.type,
+    ) ||
       card.modes ||
       card.kicker ||
       card.flashback ||
       card.disguise ||
       card.offspring)
   )
-    errors.push(
-      `${name}: X currently supports only instant/sorcery spells without alternative casting options.`,
-    );
+    errors.push(`${name}: X supports spells without alternative casting options.`);
+  if (card.distributedCounters !== undefined) {
+    errors.push(...validateTargetSpec(card.distributedCounters));
+    if (
+      !card.cost.X ||
+      !['instant', 'sorcery'].includes(card.type) ||
+      !effectTargetCompatible('creatureForm', card.distributedCounters) ||
+      card.target ||
+      card.targetGroups ||
+      card.effects?.length !== 1 ||
+      card.effects[0].op !== 'distributedCounters'
+    )
+      errors.push(
+        `${name}.distributedCounters: requires an X spell with exactly its distribution effect and creature selector.`,
+      );
+  }
+  if (card.effects?.some((e) => e.op === 'distributedCounters') && !card.distributedCounters)
+    errors.push(`${name}: distribution effect requires a distributedCounters declaration.`);
+  if (
+    card.opponentCreatureProtectionBypass !== undefined &&
+    card.opponentCreatureProtectionBypass !== true
+  )
+    errors.push(`${name}: protection bypass must be true.`);
   if (card.ward !== undefined) validatePaymentCost(card.ward, `${name}.ward`, errors);
   if (card.text !== undefined && typeof card.text !== 'string')
     errors.push(`${name}.text: expected a string.`);
@@ -699,20 +1056,69 @@ export function validateDefinition(card) {
     errors.push(`${name}.maxSpeedKeywords: unsupported keywords.`);
   if (
     card.mainName !== undefined &&
-    (!card.adventure ||
+    ((!card.adventure && !card.prepareSpell) ||
       typeof card.mainName !== 'string' ||
       !card.mainName.trim() ||
       card.mainName.length > 200)
   )
     errors.push(`${name}.mainName: requires an Adventure and a valid main-face name.`);
+  if (
+    card.entersPrepared !== undefined &&
+    (typeof card.entersPrepared !== 'boolean' || !card.prepareSpell)
+  )
+    errors.push(`${name}.entersPrepared: requires a prepare spell and boolean.`);
+  if (card.manaFromTrackedExile !== undefined && card.manaFromTrackedExile !== true)
+    errors.push(`${name}.manaFromTrackedExile: expected true.`);
+  if (card.prepareSpell !== undefined) {
+    const spell = card.prepareSpell;
+    if (!hasType(card, 'creature') || !card.mainName || card.adventure)
+      errors.push(`${name}.prepareSpell: requires a named creature without Adventure.`);
+    if (
+      !plain(spell) ||
+      !['instant', 'sorcery'].includes(spell.type) ||
+      spell.prepareSpell ||
+      spell.adventure ||
+      spell.mainName
+    )
+      errors.push(`${name}.prepareSpell: requires a nonnested instant or sorcery.`);
+    else errors.push(...validateDefinition(spell).map((e) => `${name}.prepareSpell: ${e}`));
+  }
+  if (
+    card.frontName !== undefined &&
+    (!card.backFace ||
+      typeof card.frontName !== 'string' ||
+      !card.frontName.trim() ||
+      card.frontName.length > 200)
+  )
+    errors.push(`${name}.frontName: requires a transforming face and valid front name.`);
+  if (card.backFace !== undefined) {
+    if (
+      !plain(card.backFace) ||
+      card.backFace.backFace ||
+      card.backFace.adventure ||
+      card.adventure ||
+      typeof card.frontName !== 'string' ||
+      !['creature', 'artifact', 'enchantment', 'land', 'planeswalker'].includes(card.backFace.type)
+    )
+      errors.push(`${name}.backFace: expected a nonnested permanent face.`);
+    else
+      errors.push(
+        ...validateDefinition(card.backFace).map((message) => `${name}.backFace: ${message}`),
+      );
+  }
   if (card.adventure !== undefined) {
     const adventure = card.adventure;
     const forbidden = [
+      'prepareSpell',
+      'entersPrepared',
       'adventure',
       'mainName',
+      'backFace',
+      'frontName',
       'modes',
       'kicker',
       'offspring',
+      'gift',
       'disguise',
       'flashback',
       'plot',
@@ -724,7 +1130,9 @@ export function validateDefinition(card) {
       card.token ||
       card.cost?.X ||
       Object.keys(card.cost ?? {}).some((key) => key.startsWith('2/')) ||
-      forbidden.slice(2).some((key) => card[key] !== undefined)
+      forbidden
+        .filter((key) => !['adventure', 'mainName'].includes(key))
+        .some((key) => card[key] !== undefined)
     )
       errors.push(
         `${name}.adventure: requires a fixed-cost permanent without other casting options.`,
@@ -732,7 +1140,6 @@ export function validateDefinition(card) {
     if (
       !plain(adventure) ||
       !['instant', 'sorcery'].includes(adventure.type) ||
-      adventure.cost?.X ||
       Object.keys(adventure.cost ?? {}).some((key) => key.startsWith('2/')) ||
       forbidden.some((key) => adventure[key] !== undefined)
     )
@@ -771,6 +1178,26 @@ export function validateDefinition(card) {
         `${name}.plot: requires a fixed-cost nonland without alternative or additional casting options.`,
       );
   }
+  if (card.harmonize !== undefined) {
+    validateCost(card.harmonize, `${name}.harmonize`, errors);
+    if (
+      !['instant', 'sorcery'].includes(card.type) ||
+      card.harmonize.X ||
+      card.cost.X ||
+      card.flashback ||
+      card.plot ||
+      card.adventure ||
+      card.modes ||
+      card.kicker ||
+      card.offspring ||
+      card.disguise ||
+      card.sacrificeCost ||
+      card.keywords?.includes('convoke')
+    )
+      errors.push(
+        `${name}.harmonize: requires fixed-cost nonmodal instant/sorcery without competing casting choices.`,
+      );
+  }
   if (card.flashback !== undefined) {
     validateCost(card.flashback, `${name}.flashback`, errors);
     if (
@@ -786,6 +1213,24 @@ export function validateDefinition(card) {
     validateCost(card.disguise, `${name}.disguise`, errors);
     if (card.type !== 'creature' || card.modes || card.kicker || card.offspring)
       errors.push(`${name}.disguise: unsupported combination.`);
+  }
+  if (card.gift !== undefined) {
+    if (
+      !plain(card.gift) ||
+      Object.keys(card.gift).some((k) => !['definition', 'effects'].includes(k)) ||
+      typeof card.gift.definition !== 'string' ||
+      !card.gift.definition.length ||
+      !['instant', 'sorcery'].includes(card.type) ||
+      card.modes ||
+      card.kicker ||
+      card.offspring ||
+      card.adventure ||
+      card.warp ||
+      card.cost.X ||
+      Object.keys(card.cost).some((k) => k.startsWith('2/'))
+    )
+      errors.push(`${name}.gift: requires a bounded nonmodal spell and token definition.`);
+    else validateEffects(card.gift.effects, `${name}.gift.effects`, card.target, errors);
   }
   if (card.offspring !== undefined) {
     validateCost(card.offspring, `${name}.offspring`, errors);
@@ -805,6 +1250,53 @@ export function validateDefinition(card) {
       validateCost(k.cost, `${name}.kicker.cost`, errors);
       validateEffects(k.effects, `${name}.kicker.effects`, card.target, errors);
     }
+  }
+  if (
+    card.entryKeywordCounters !== undefined &&
+    (!Array.isArray(card.entryKeywordCounters) ||
+      !card.entryKeywordCounters.length ||
+      card.entryKeywordCounters.some((k) => !GRANTED_KEYWORDS.has(k)))
+  )
+    errors.push(`${name}.entryKeywordCounters: expected supported keyword counters.`);
+  if (card.entryPlusCounters !== undefined && !natural(card.entryPlusCounters))
+    errors.push(`${name}.entryPlusCounters: expected a nonnegative safe integer.`);
+  if (card.landNameLock !== undefined && card.landNameLock !== true)
+    errors.push(`${name}: landNameLock must be true.`);
+  if (card.exileGraveyardMoves !== undefined && card.exileGraveyardMoves !== true)
+    errors.push(`${name}: exileGraveyardMoves must be true.`);
+  if (card.libraryTopAccess !== undefined) {
+    if (
+      !plain(card.libraryTopAccess) ||
+      Object.keys(card.libraryTopAccess).some((k) => k !== 'play')
+    )
+      errors.push(`${name}.libraryTopAccess: invalid profile.`);
+    else {
+      errors.push(...validateFilter(card.libraryTopAccess.play));
+      const supported = (f) =>
+        plain(f) &&
+        Object.keys(f).length === 1 &&
+        (typeof f.type === 'string' ||
+          typeof f.subtype === 'string' ||
+          (Array.isArray(f.any) && f.any.every(supported)) ||
+          (Array.isArray(f.all) && f.all.every(supported)) ||
+          (f.not && supported(f.not)));
+      if (!supported(card.libraryTopAccess.play))
+        errors.push(`${name}.libraryTopAccess: only type/subtype predicates are supported.`);
+    }
+  }
+  if (card.additionalEnterTrigger !== undefined)
+    errors.push(...validateFilter(card.additionalEnterTrigger));
+  if (card.suppressEnterTriggers !== undefined) {
+    errors.push(...validateFilter(card.suppressEnterTriggers));
+    const typesOnly = (f) =>
+      plain(f) &&
+      Object.keys(f).length === 1 &&
+      (typeof f.type === 'string' ||
+        (Array.isArray(f.any) && f.any.every(typesOnly)) ||
+        (Array.isArray(f.all) && f.all.every(typesOnly)) ||
+        (f.not && typesOnly(f.not)));
+    if (!typesOnly(card.suppressEnterTriggers))
+      errors.push(`${name}.suppressEnterTriggers: only type predicates are supported.`);
   }
   if (card.entryCounterBonus !== undefined) {
     const b = card.entryCounterBonus;
@@ -829,6 +1321,13 @@ export function validateDefinition(card) {
   if (card.entersTappedUnless !== undefined)
     errors.push(
       ...validateCondition(card.entersTappedUnless).map((v) => `${name}.entersTappedUnless: ${v}`),
+    );
+  if (
+    card.chooseBasicLandType !== undefined &&
+    (card.chooseBasicLandType !== true || card.type !== 'land' || card.chooseCreatureType)
+  )
+    errors.push(
+      `${name}.chooseBasicLandType: requires a land and no competing creature-type choice.`,
     );
   if (card.chooseCreatureType !== undefined && card.chooseCreatureType !== true)
     errors.push(`${name}.chooseCreatureType: expected true.`);
@@ -875,6 +1374,25 @@ export function validateDefinition(card) {
         errors.push(...validateCondition(condition).map((v) => `${name}.manaConditions: ${v}`));
       }
   }
+  if (
+    card.foreignCreatureSubtype !== undefined &&
+    !CREATURE_TYPES.includes(card.foreignCreatureSubtype)
+  )
+    errors.push(`${name}.foreignCreatureSubtype: unsupported creature subtype.`);
+  if (card.drawBonus !== undefined) {
+    const b = card.drawBonus;
+    if (
+      !plain(b) ||
+      Object.keys(b).some((k) => !['amount', 'handAtMost'].includes(k)) ||
+      !Number.isSafeInteger(b.amount) ||
+      b.amount < 1 ||
+      b.amount > 1000 ||
+      !Number.isSafeInteger(b.handAtMost) ||
+      b.handAtMost < 0 ||
+      b.handAtMost > 1000
+    )
+      errors.push(`${name}.drawBonus: invalid draw replacement.`);
+  }
   if (card.mana !== undefined) {
     const options = Array.isArray(card.mana) ? card.mana : [card.mana];
     if (
@@ -891,10 +1409,14 @@ export function validateDefinition(card) {
     'token',
     'entersTapped',
     'manaSacrifice',
+    'manaFromTrackedExile',
     'cannotAttack',
     'cannotBlock',
     'unblockable',
+    'cannotBeBlockedByLowerPower',
     'uncounterable',
+    'cantGainLife',
+    'cantPreventDamage',
   ])
     if (card[key] !== undefined && typeof card[key] !== 'boolean')
       errors.push(`${name}.${key}: expected a boolean.`);
@@ -926,6 +1448,29 @@ export function validateDefinition(card) {
   }
   if (card.target != null)
     errors.push(...validateTargetSpec(card.target).map((error) => `${name}.target: ${error}`));
+  if (card.additionalCost !== undefined) {
+    const cost = card.additionalCost;
+    const field = { discardOrLife: 'life', blight: 'amount', teamwork: 'power' }[cost?.kind];
+    if (
+      !plain(cost) ||
+      !field ||
+      Object.keys(cost).some((k) => !['kind', field].includes(k)) ||
+      !Number.isSafeInteger(cost[field]) ||
+      cost[field] < 1 ||
+      cost[field] > 1000
+    )
+      errors.push(`${name}: invalid additional cost.`);
+    if (
+      !['instant', 'sorcery'].includes(card.type) ||
+      card.sacrificeCost ||
+      card.keywords?.includes('convoke') ||
+      card.disguise ||
+      card.modes ||
+      card.kicker ||
+      card.offspring
+    )
+      errors.push(`${name}: additional cost cannot combine with other casting choices.`);
+  }
   if (card.sacrificeCost !== undefined) {
     const cost = card.sacrificeCost;
     const typeFilter = (v) =>
@@ -1028,13 +1573,20 @@ export function validateDefinition(card) {
     }
   if (card.attachmentBonus !== undefined) {
     const b = card.attachmentBonus;
+    if (
+      b?.maxBlockers !== undefined &&
+      (!Number.isInteger(b.maxBlockers) || b.maxBlockers < 1 || b.maxBlockers > 16)
+    )
+      errors.push(`${name}.attachmentBonus.maxBlockers: expected 1-16.`);
     if (b?.noUntap !== undefined && typeof b.noUntap !== 'boolean')
       errors.push(`${name}.attachmentBonus.noUntap: expected boolean.`);
     if (
       !plain(b) ||
       !validNumericValue(b.power) ||
       !validNumericValue(b.toughness) ||
-      Object.keys(b).some((k) => !['power', 'toughness', 'keywords', 'noUntap'].includes(k)) ||
+      Object.keys(b).some(
+        (k) => !['power', 'toughness', 'keywords', 'noUntap', 'maxBlockers'].includes(k),
+      ) ||
       (b.keywords !== undefined &&
         (!Array.isArray(b.keywords) || b.keywords.some((k) => !GRANTED_KEYWORDS.has(k)))) ||
       (!card.subtypes?.includes('Equipment') && !card.aura)
@@ -1084,11 +1636,13 @@ export function validateDefinition(card) {
             ? value.every(stable)
             : key === 'not'
               ? stable(value)
-              : !['power', 'toughness', 'keyword'].includes(key),
+              : !['power', 'toughness'].includes(key) &&
+                (key !== 'keyword' ||
+                  (Array.isArray(e.keywords) ? e.keywords.length === 0 : e.keywords === undefined)),
         );
       if (!validateFilter(e.where).length && !stable(e.where))
         errors.push(
-          `${name}.static.where: dependent characteristic filters require the future layer evaluator.`,
+          `${name}.static.where: power/toughness filters and keyword-dependent ability grants require the future layer evaluator.`,
         );
     }
     if (e.excludeSource !== undefined && typeof e.excludeSource !== 'boolean')
@@ -1098,6 +1652,16 @@ export function validateDefinition(card) {
       (!Array.isArray(e.keywords) || e.keywords.some((k) => !GRANTED_KEYWORDS.has(k)))
     )
       errors.push(`${name}.static.keywords: unsupported keyword.`);
+  }
+  if (
+    card.spree !== undefined &&
+    (card.spree !== true || !Array.isArray(card.modes) || card.modes.length > 3)
+  )
+    errors.push(`${name}: Spree requires 2–3 modes.`);
+  if (card.spree && Array.isArray(card.modes)) {
+    const ids = card.modes.flatMap((mode) => (mode.targetGroups ?? []).map((group) => group.id));
+    if (new Set(ids).size !== ids.length)
+      errors.push(`${name}: Spree target-group ids must be distinct across modes.`);
   }
   if (card.modes !== undefined) {
     if (
@@ -1117,7 +1681,8 @@ export function validateDefinition(card) {
         if (
           !plain(mode) ||
           Object.keys(mode).some(
-            (key) => !['label', 'target', 'targetGroups', 'effects'].includes(key),
+            (key) =>
+              !['label', 'target', 'targetGroups', 'effects', 'additionalCost'].includes(key),
           )
         ) {
           errors.push(`${path}: unsupported mode fields.`);
@@ -1133,6 +1698,11 @@ export function validateDefinition(card) {
             `${path}.label: expected a distinct nonempty label of at most 180 characters.`,
           );
         labels.add(mode.label);
+        if (card.spree) {
+          validateCost(mode.additionalCost, `${path}.additionalCost`, errors);
+          if (mode.target != null) errors.push(`${path}: Spree modes use named target groups.`);
+        } else if (mode.additionalCost !== undefined)
+          validateCost(mode.additionalCost, `${path}.additionalCost`, errors);
         if (mode.target != null)
           errors.push(...validateTargetSpec(mode.target).map((e) => `${path}.target: ${e}`));
         validateGroupHolder(mode, path, errors);
@@ -1178,6 +1748,10 @@ export function validateDefinition(card) {
           errors.push(`${name}.triggers[${i}]: unsupported trigger predicate or field.`);
           continue;
         }
+        if (t.event?.event === 'chapter' && !(card.subtypes ?? []).includes('Saga'))
+          errors.push(
+            `${name}.triggers[${i}]: chapter abilities require Saga subtype in this bounded implementation.`,
+          );
         errors.push(
           ...validateEventSpec(t.event).map((error) => `${name}.triggers[${i}].event: ${error}`),
         );
@@ -1191,6 +1765,25 @@ export function validateDefinition(card) {
             ...validateTargetSpec(t.target).map(
               (error) => `${name}.triggers[${i}].target: ${error}`,
             ),
+          );
+        // Cross-object death triggers need a simultaneous-departure identity
+        // contract before "another graveyard card" can refer to their source.
+        // Own-dies triggers have an explicit one-time targetingSource snapshot.
+        const targetSelectors = [
+          t.target,
+          ...(Array.isArray(t.targetGroups) ? t.targetGroups : []).map((g) => g?.selector),
+        ];
+        const triggerEvent = eventSpec(t.event);
+        if (
+          ((triggerEvent?.event === 'dies' && triggerEvent.object !== 'source') ||
+            triggerEvent?.event === 'sacrifice') &&
+          targetSelectors.some((selector) => {
+            const spec = targetSpec(selector);
+            return spec?.scope === 'graveyard' && spec.excludeSource;
+          })
+        )
+          errors.push(
+            `${name}.triggers[${i}]: graveyard source exclusion supports own-dies triggers only.`,
           );
         validateGroupHolder(t, `${name}.triggers[${i}]`, errors);
         if (Array.isArray(t.targetGroups) && t.targetGroups.some((g) => g?.excludeFrom?.length))
@@ -1229,6 +1822,7 @@ export function validateDefinition(card) {
                 'timing',
                 'condition',
                 'oncePerTurn',
+                'powerUp',
                 'loyalty',
               ].includes(k),
           )
@@ -1244,6 +1838,16 @@ export function validateDefinition(card) {
           errors.push(
             `${p}.loyalty: requires a planeswalker, integer loyalty cost and no other costs.`,
           );
+        if (
+          a.powerUp !== undefined &&
+          (a.powerUp !== true ||
+            !a.cost.mana ||
+            a.zone ||
+            a.oncePerTurn ||
+            a.loyalty !== undefined ||
+            Object.keys(card.cost).some((k) => k.includes('/')))
+        )
+          errors.push(`${p}: invalid power-up ability.`);
         if (a.zone !== undefined && a.zone !== 'graveyard')
           errors.push(`${p}.zone: unsupported activation zone.`);
         if (a.zone === 'graveyard' && (a.cost.tap || a.cost.sacrificeSelf || !a.cost.exileSelf))
@@ -1297,6 +1901,27 @@ export function validateDefinition(card) {
   )
     errors.push(
       `${name}: linked exile requires a permanent source without sacrificing mana abilities or combined sacrifice/life activation costs.`,
+    );
+  // The current one-option-per-color mana profile cannot represent a free
+  // grant alongside an intrinsic sacrifice-as-cost mana ability. Fail closed.
+  const usesLandForm = (effects, depth = 0) =>
+    depth <= 8 &&
+    Array.isArray(effects) &&
+    effects.some(
+      (e) =>
+        e?.op === 'becomeLand' ||
+        (e?.op === 'conditional' &&
+          (usesLandForm(e.then, depth + 1) || usesLandForm(e.else, depth + 1))),
+    );
+  if (
+    card.manaSacrifice &&
+    (usesLandForm(card.effects) ||
+      usesLandForm(card.etb) ||
+      (Array.isArray(card.triggers) && card.triggers.some((t) => usesLandForm(t.effects))) ||
+      (Array.isArray(card.activated) && card.activated.some((a) => usesLandForm(a.effects))))
+  )
+    errors.push(
+      `${name}: temporary mana grants cannot be combined with intrinsic sacrifice mana abilities.`,
     );
   return errors;
 }

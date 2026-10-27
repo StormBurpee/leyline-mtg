@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cb184995-700f-4900-994a-4ce7fd12f942",
+  "name": "It'll Quench Ya!",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": ["Lesson"],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Counter target spell unless its controller pays {2}.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell"
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target",
+          "unlessPay": {
+            "generic": 2
+          }
+        }
+      ]
+    }
+  ]
+}

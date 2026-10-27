@@ -1,0 +1,55 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "a0cbb1ba-73b1-4418-bbe3-5d1a02007c08",
+  "name": "Vibrant Outburst",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R", "U"],
+    "manaCost": "{U}{R}"
+  },
+  "rulesText": "Vibrant Outburst deals 3 damage to any target. Tap up to one target creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "damage",
+          "label": "Deal 3 damage",
+          "selector": {
+            "scope": "damageable"
+          },
+          "min": 1,
+          "max": 1
+        },
+        {
+          "id": "tap",
+          "label": "Tap up to one creature",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "targetGroup": "damage",
+          "amount": 3
+        },
+        {
+          "op": "tap",
+          "target": "target",
+          "targetGroup": "tap"
+        }
+      ]
+    }
+  ]
+}

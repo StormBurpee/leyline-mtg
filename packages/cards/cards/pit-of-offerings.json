@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "044d2788-6daa-4849-a813-1f577eef9295",
+  "name": "Pit of Offerings",
+  "characteristics": {
+    "types": ["land"],
+    "colors": [],
+    "manaCost": null,
+    "supertypes": [],
+    "subtypes": ["Cave"]
+  },
+  "rulesText": "This land enters tapped.\nWhen this land enters, exile up to three target cards from graveyards.\n{T}: Add {C}.\n{T}: Add one mana of any of the exiled cards' colors.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "cards",
+          "selector": {
+            "scope": "graveyard"
+          },
+          "min": 0,
+          "max": 3
+        }
+      ],
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile",
+          "trackSource": true,
+          "targetGroup": "cards"
+        }
+      ]
+    },
+    {
+      "kind": "mana",
+      "produces": ["C"]
+    },
+    {
+      "kind": "manaFromTrackedExile"
+    }
+  ]
+}

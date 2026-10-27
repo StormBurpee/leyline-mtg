@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2e665a03-bece-43df-bd15-b4496e233f2e",
+  "name": "Captain Marvel, Earth's Protector",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Kree", "Hero"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 5,
+    "toughness": 4
+  },
+  "rulesText": "Flash\nFlying, lifelink\nPower-up \u2014 {5}{W}{W}: Put a +1/+1 counter and an indestructible counter on Captain Marvel. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "activated",
+      "powerUp": true,
+      "cost": {
+        "mana": "{5}{W}{W}"
+      },
+      "text": "Power-up \u2014 Put a +1/+1 counter and an indestructible counter on Captain Marvel. Only once; costs {2} the turn she entered, otherwise {5}{W}{W}.",
+      "effects": [
+        {
+          "op": "addCounters",
+          "counter": "+1/+1",
+          "target": "source",
+          "amount": 1
+        },
+        {
+          "op": "keywordCounter",
+          "target": "source",
+          "keyword": "indestructible",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

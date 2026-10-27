@@ -49,7 +49,7 @@ function bestTarget(s, entry, targets) {
 }
 function orderingValue(s, entry) {
   const targets = entry.targetKind
-    ? targetsFor(s, entry.targetKind, entry.controller)
+    ? targetsFor(s, entry.targetKind, entry.controller, entry.targetingSource ?? entry.source)
     : [undefined];
   return Math.max(...targets.map((target) => valueAfter(s, entry, target)));
 }

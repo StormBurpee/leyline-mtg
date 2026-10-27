@@ -207,7 +207,7 @@
   {
     "oracleId": "de417a82-8f03-4d7e-aee7-48f7d7eba61a",
     "name": "Sandstorm Verge",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e92185f8-579c-4645-9cb8-ef5deb9eebc8",
@@ -532,7 +532,7 @@
   {
     "oracleId": "23b11fdc-61b5-4f5e-ad80-f81b729fc91d",
     "name": "Sear",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "86ec0b56-497f-481c-a03a-c4e64e8e7404",
@@ -592,7 +592,7 @@
   {
     "oracleId": "e6637f9f-8293-43a5-a134-93799a016ecb",
     "name": "Secret Identity",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "25443ea4-3177-4e29-a2b1-f3fee60b3205",
@@ -637,7 +637,7 @@
   {
     "oracleId": "cba9d6a2-1772-42dc-9bfb-c933a092be19",
     "name": "Seeker of Sunlight",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "223794f2-67a3-4ab5-81c5-046c63307c6c",
@@ -737,7 +737,7 @@
   {
     "oracleId": "a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda",
     "name": "Sentinel of the Nameless City",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "70113003-be5e-406a-9aec-cb480468c36d",
@@ -797,7 +797,7 @@
   {
     "oracleId": "2a2ea189-b663-4f4a-bb23-ff7a4af25f71",
     "name": "Settle the Wreckage",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "3a38bf69-511f-4851-870f-8a65641d832e",
@@ -1032,7 +1032,7 @@
   {
     "oracleId": "2038138e-2e52-41e4-90fc-443fa054c5c0",
     "name": "Shoot the Sheriff",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e7572317-6bec-4fb0-81ac-76aec04f14ad",
@@ -1697,7 +1697,7 @@
   {
     "oracleId": "1b5e6560-ff2e-4475-96cb-63f64c8a86db",
     "name": "Soul-Guide Lantern",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "338747e8-bed8-4e60-8b19-5c2b80799477",
@@ -1722,7 +1722,7 @@
   {
     "oracleId": "3c0f99b8-0222-4fac-932a-eb5d77826564",
     "name": "Soulstone Sanctuary",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "dbcf2a79-b455-43ac-9cf0-9e63708800f4",
@@ -1762,7 +1762,7 @@
   {
     "oracleId": "2ec1860b-89cc-4529-8b8c-fb47f79f2b4b",
     "name": "Sower of Chaos",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "bc0da02c-2b85-4ddc-9ce0-63934dd14164",
@@ -1827,7 +1827,7 @@
   {
     "oracleId": "cb5ed146-5079-46ef-a3e0-e584fa4467f6",
     "name": "Spectral Interference",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "a8fdbcdf-479d-4582-9ad5-9fbd4c740c29",
@@ -1867,7 +1867,7 @@
   {
     "oracleId": "d64b0848-0193-4025-ba62-63ecd8fb9f50",
     "name": "Spell Pierce",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "9357fc7f-c9d0-4ce2-a6dd-0ff1f24bfc56",
@@ -1892,7 +1892,7 @@
   {
     "oracleId": "9f004382-c57b-4fde-af97-0c85516c3cf4",
     "name": "Sphinx of False Conclusions",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ddb7e868-8f1d-4d57-9ee2-ebadb17b398a",
@@ -2207,7 +2207,7 @@
   {
     "oracleId": "4ec9d9eb-14e2-47ea-88a2-d2394e363784",
     "name": "Spyglass Siren",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e0b15374-b4f6-48e0-8477-4eb5d5c2a938",
@@ -2357,7 +2357,7 @@
   {
     "oracleId": "13fd7ca6-c278-409f-a9c4-57f16051ffce",
     "name": "Starling, Aerial Ally",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "0c0940c6-8126-4d58-809e-871cf8588ef9",
@@ -2502,12 +2502,12 @@
   {
     "oracleId": "ab23cca2-b59e-4d34-80de-98bd08985275",
     "name": "Sterling Supplier",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "899f0931-4e9b-4fa8-9f6d-d13a7de05334",
     "name": "Stickytongue Sentinel",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "d73913ea-44d0-408f-9f8b-8e91843f2826",
@@ -2602,7 +2602,7 @@
   {
     "oracleId": "2251e34e-4ce8-4452-9dc6-d8cce8583996",
     "name": "Stock Up",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "96c4b51c-8a10-428c-a948-e1ba9c652bfd",
@@ -2732,7 +2732,7 @@
   {
     "oracleId": "0127c13f-7b0f-44c3-8b35-97f306c5f239",
     "name": "Strategic Betrayal",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "36ab41b7-bcfb-4618-bbfb-70d608dba15a",
@@ -2752,7 +2752,7 @@
   {
     "oracleId": "52124954-b0b6-492c-8d03-fe54c220facc",
     "name": "Stress Dream",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e85c6bd2-db15-4052-88c0-3ae25414f0ca",
@@ -2877,7 +2877,7 @@
   {
     "oracleId": "b772d35a-d365-47ce-b1dd-a2ba574c74ea",
     "name": "Summit Intimidator",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "e7b88da3-7dd1-45f8-b555-98ad838b2917",
@@ -2887,7 +2887,7 @@
   {
     "oracleId": "0990e57f-279e-4348-a049-e06187cc38d4",
     "name": "Summon: Anima",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fe9f6825-597b-4d80-ab7c-f4ee4e824b6f",
@@ -2902,7 +2902,7 @@
   {
     "oracleId": "8b4bfdc5-8c0a-40c3-abbf-ada4a536dc34",
     "name": "Summon: Choco/Mog",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "697b14c6-fe6a-4880-9cf2-b6602a52ca0b",
@@ -2917,12 +2917,12 @@
   {
     "oracleId": "0d054301-8465-4a4c-91e7-9a28dda92e57",
     "name": "Summon: Esper Ramuh",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "b5d2f8e7-89d3-4015-ab99-ba4d66918e37",
     "name": "Summon: Fat Chocobo",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "3509171e-8d7d-4e9e-97a1-58e6c7d225ed",
@@ -2962,7 +2962,7 @@
   {
     "oracleId": "5846718c-7d31-4d2c-80a2-b1534e2aebc1",
     "name": "Summon: Shiva",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "66ce0c60-f406-4ece-915f-675da4e8b16d",
@@ -3057,7 +3057,7 @@
   {
     "oracleId": "479adf64-f42c-4cb6-bf25-648c044bca8b",
     "name": "Sunspine Lynx",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "de6b26e4-8700-490f-9df2-dac430463274",
@@ -3177,7 +3177,7 @@
   {
     "oracleId": "7a0fe73f-6e08-4c9a-80e1-c2ead6cebe06",
     "name": "Surrak, Elusive Hunter",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "fa56a5fa-ef96-404c-8fb6-d1f5fcebb52e",

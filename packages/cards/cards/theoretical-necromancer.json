@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "6c5ed756-b999-49f7-9a52-fb8196202f0f",
+  "name": "Theoretical Necromancer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Vampire", "Warlock"],
+    "colors": ["B"],
+    "manaCost": "{2}{B}",
+    "power": 4,
+    "toughness": 1
+  },
+  "rulesText": "{3}{B}, Exile this card from your graveyard: Return another target creature card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{3}{B}",
+        "exileSelf": true
+      },
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "owner": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ]
+    }
+  ]
+}

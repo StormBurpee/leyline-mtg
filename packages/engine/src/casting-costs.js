@@ -1,3 +1,4 @@
+import { topLibraryPlayable } from './model.js';
 import {
   definition,
   battlefield,
@@ -67,15 +68,52 @@ export function proposedCastingState(state, player, object, x) {
         return p;
       const zone = object.zone;
       const visible = Object.getOwnPropertyDescriptor(p, zone)?.value;
-      return {
-        ...p,
-        ...(Array.isArray(visible) ? { [zone]: visible.filter((id) => id !== object.id) } : {}),
-        ...(Number.isInteger(p[`${zone}Count`])
-          ? { [`${zone}Count`]: Math.max(0, p[`${zone}Count`] - 1) }
-          : {}),
-      };
+      const descriptors = Object.getOwnPropertyDescriptors(p);
+      // Preserve opaque-zone accessors without evaluating them while removing
+      // the known announced card from its one visible source zone.
+      if (Array.isArray(visible))
+        descriptors[zone] = {
+          value: visible.filter((id) => id !== object.id),
+          enumerable: true,
+          writable: true,
+          configurable: true,
+        };
+      if (Number.isInteger(p[`${zone}Count`]))
+        descriptors[`${zone}Count`] = {
+          value: Math.max(0, p[`${zone}Count`] - 1),
+          enumerable: true,
+          writable: true,
+          configurable: true,
+        };
+      return Object.create(Object.getPrototypeOf(p), descriptors);
     }),
   };
+}
+/** Announced division is fixed even if one target later becomes illegal. */
+export function distributionProblem(profile, targets, distribution) {
+  if (!profile.distributedCounters)
+    return distribution === undefined ? null : 'This spell has no distribution.';
+  const selected = targets?.distributed;
+  if (
+    !Array.isArray(selected) ||
+    !distribution ||
+    typeof distribution !== 'object' ||
+    Array.isArray(distribution) ||
+    ![Object.prototype, null].includes(Object.getPrototypeOf(distribution))
+  )
+    return 'Assign counters to the chosen creatures.';
+  if (
+    Object.keys(distribution).length !== selected.length ||
+    selected.some(
+      (t) =>
+        !Object.hasOwn(distribution, t.id) ||
+        !Number.isSafeInteger(distribution[t.id]) ||
+        distribution[t.id] < 1,
+    ) ||
+    Object.values(distribution).reduce((n, v) => n + v, 0) !== profile.chosenX
+  )
+    return 'Distribute exactly X counters, at least one per target.';
+  return null;
 }
 /** Determine, then lock, the mana cost. Increases precede reductions (CR 601.2f). */
 export function castingProfile(
@@ -88,6 +126,10 @@ export function castingProfile(
   x,
 ) {
   const base = spellProfile(card, mode);
+  // CR 601.3e: a zone permission tests the spell characteristics actually chosen,
+  // not the main face printed on an Adventure or face-down spell.
+  if (object.zone === 'library' && (!base || !topLibraryPlayable(state, object, player, base)))
+    return null;
   // The permission from a resolved Adventure permits only its main face.
   const adventurePermission =
     object.zone === 'exile' &&
@@ -95,24 +137,51 @@ export function castingProfile(
     object.adventured.player === player;
   const otherPermission =
     object.playPermission?.player === player &&
-    object.playPermission.turn === state.turn &&
+    (object.playPermission.turn === state.turn ||
+      (object.playPermission.untilNextTurn !== undefined &&
+        !object.playPermission.nextTurnStarted)) &&
     object.playPermission.incarnation === object.incarnation;
   if (base?.adventureCast && adventurePermission && !otherPermission) return null;
   let profile =
     object.zone === 'graveyard'
-      ? base?.flashback
-        ? { ...base, cost: { ...base.flashback }, flashbackPaid: true }
-        : null
+      ? base?.harmonize
+        ? { ...base, cost: { ...base.harmonize }, harmonizePaid: true }
+        : base?.flashback
+          ? { ...base, cost: { ...base.flashback }, flashbackPaid: true }
+          : null
       : base;
   if (!profile || (profile.warpPaid && object.zone !== 'hand')) return null;
+  if (object.zone === 'exile' && otherPermission && object.playPermission.anyMana)
+    profile = { ...profile, manaAsAnyType: true };
   if (object.zone === 'exile' && object.plotted?.incarnation === object.incarnation)
     profile = { ...profile, cost: {}, plottedCast: true };
+  // Alternative/free base costs never erase mandatory Spree additional costs.
+  if (base?.spree && (profile.flashbackPaid || profile.plottedCast)) {
+    const cost = { ...profile.cost };
+    for (const [symbol, amount] of Object.entries(base.modeAdditionalMana ?? {}))
+      cost[symbol] = (cost[symbol] ?? 0) + amount;
+    profile = { ...profile, cost };
+  }
   if (profile.cost.X) {
     if (!Number.isSafeInteger(x) || x < 0 || x > MAX_X) return null;
     const cost = { ...profile.cost, generic: (profile.cost.generic ?? 0) + profile.cost.X * x };
     delete cost.X;
     profile = { ...profile, cost, chosenX: x };
   } else if (x !== undefined) return null;
+  if (profile.distributedCounters)
+    profile = {
+      ...profile,
+      targetGroups: [
+        {
+          id: 'distributed',
+          label: 'Distribute +1/+1 counters',
+          selector: profile.distributedCounters,
+          min: x === 0 ? 0 : 1,
+          max: x,
+        },
+      ],
+      effects: [{ op: 'distributedCounters', targetGroup: 'distributed' }],
+    };
   const intrinsic = (profile.costModifiers ?? []).filter((m) => m.scope === 'self');
   const sources = battlefield(state)
     .map((source) => ({

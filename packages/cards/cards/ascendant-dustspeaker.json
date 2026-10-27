@@ -1,0 +1,77 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "295f8b8d-102a-47af-93c2-f8182c5f11ca",
+  "name": "Ascendant Dustspeaker",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Orc", "Cleric"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "Flying\nWhen this creature enters, put a +1/+1 counter on another target creature you control.\nAt the beginning of combat on your turn, exile up to one target card from a graveyard.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "amount": 1,
+          "counter": "+1/+1"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "targetGroup": "card",
+          "destination": "exile"
+        }
+      ],
+      "targetGroups": [
+        {
+          "id": "card",
+          "selector": {
+            "scope": "graveyard"
+          },
+          "min": 0,
+          "max": 1
+        }
+      ]
+    }
+  ]
+}

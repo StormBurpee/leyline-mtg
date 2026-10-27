@@ -1,5 +1,6 @@
 import { hasType } from './types.js';
 import {
+  maximumBlockers,
   notifyTriggers,
   controlled,
   creatures,
@@ -27,6 +28,17 @@ export function canAttack(s, o, p) {
     !hasKeyword(s, o, 'defender')
   );
 }
+// CR 509.1b, 509.1h: these change declaration legality, not abilities or
+// copy values. Never recheck them to undo a block already declared.
+function hasCombatRestriction(s, object, restriction) {
+  return s.modifiers.some(
+    (m) =>
+      m.objectId === object.id &&
+      m.incarnation === object.incarnation &&
+      m.expires === s.turn &&
+      m.combatRestriction === restriction,
+  );
+}
 export function canBlock(s, blocker, attacker, p) {
   return (
     blocker?.zone === 'battlefield' &&
@@ -38,6 +50,10 @@ export function canBlock(s, blocker, attacker, p) {
     !blocker.tapped &&
     !definition(s, blocker).cannotBlock &&
     !definition(s, attacker).unblockable &&
+    !hasCombatRestriction(s, blocker, 'cannotBlock') &&
+    !hasCombatRestriction(s, attacker, 'cannotBeBlocked') &&
+    (!definition(s, attacker).cannotBeBlockedByLowerPower ||
+      stats(s, blocker).power >= stats(s, attacker).power) &&
     !isPacified(s, blocker) &&
     (!hasKeyword(s, attacker, 'flying') ||
       hasKeyword(s, blocker, 'flying') ||
@@ -154,6 +170,11 @@ export function declareBlockers(s, pairs) {
   for (const attack of s.combat.attackers) {
     const count = pairs.filter((pair) => pair.attacker === attack.id).length;
     requireRule(
+      count <= maximumBlockers(s, s.objects[attack.id]),
+      'MAX_BLOCKERS',
+      'That attacker cannot be blocked by this many creatures.',
+    );
+    requireRule(
       count !== 1 || !hasKeyword(s, s.objects[attack.id], 'menace'),
       'MENACE',
       'A creature with menace must be blocked by at least two creatures.',
@@ -186,13 +207,18 @@ export function beginDamage(s, first) {
       .filter((o) => hasKeyword(s, o, 'first strike') || hasKeyword(s, o, 'double strike'))
       .map((o) => o.id);
     s.combat.hasFirst = s.combat.firstEligible.length > 0;
+    // A returned/reentered ninja is a new object, even when its stable UI ID is reused.
+    // Preserve historical replay behavior for the legacy rules engine.
+    if (s.rulesRevision !== 1)
+      s.combat.firstIncarnations = Object.fromEntries(cs.map((o) => [o.id, o.incarnation]));
   }
+  const dealtFirst = (o) =>
+    s.combat.firstEligible.includes(o.id) &&
+    (!s.combat.firstIncarnations || s.combat.firstIncarnations[o.id] === o.incarnation);
   const eligible = (o) =>
     s.step === 'firstDamage'
-      ? s.combat.firstEligible.includes(o.id)
-      : !s.combat.hasFirst ||
-        !s.combat.firstEligible.includes(o.id) ||
-        hasKeyword(s, o, 'double strike');
+      ? dealtFirst(o)
+      : !s.combat.hasFirst || !dealtFirst(o) || hasKeyword(s, o, 'double strike');
   const sources = [];
   for (const ar of s.combat.attackers) {
     const a = alive(s, ar);

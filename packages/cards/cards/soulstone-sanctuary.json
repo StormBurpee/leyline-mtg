@@ -1,0 +1,38 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "642553a7-6d0f-483d-a873-3a703786db42",
+  "name": "Soulstone Sanctuary",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {C}.\n{4}: This land becomes a 3/3 creature with vigilance and all creature types. It's still a land.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{4}"
+      },
+      "text": "{4}: Become a 3/3 creature with vigilance and all creature types. Still a land.",
+      "effects": [
+        {
+          "op": "animateLand",
+          "power": 3,
+          "toughness": 3,
+          "subtypes": [],
+          "allCreatureTypes": true,
+          "keywords": ["vigilance"],
+          "until": "permanent"
+        }
+      ]
+    }
+  ]
+}

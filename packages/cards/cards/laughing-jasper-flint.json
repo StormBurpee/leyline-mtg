@@ -1,0 +1,76 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "bd7c5a8b-cf62-41e1-a664-b16e3e5d142b",
+  "name": "Laughing Jasper Flint",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Lizard", "Rogue"],
+    "colors": ["B", "R"],
+    "manaCost": "{1}{B}{R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "Creatures you control but don't own are Mercenaries in addition to their other types.\nAt the beginning of your upkeep, exile the top X cards of target opponent's library, where X is the number of outlaws you control. Until end of turn, you may cast spells from among those cards, and mana of any type can be spent to cast those spells.",
+  "abilities": [
+    {
+      "kind": "foreignCreatureSubtype",
+      "subtype": "Mercenary"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "upkeep",
+        "controller": "you"
+      },
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      },
+      "effects": [
+        {
+          "op": "exileTop",
+          "player": "target",
+          "count": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "any": [
+                    {
+                      "subtype": "Assassin"
+                    },
+                    {
+                      "subtype": "Mercenary"
+                    },
+                    {
+                      "subtype": "Pirate"
+                    },
+                    {
+                      "subtype": "Rogue"
+                    },
+                    {
+                      "subtype": "Warlock"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "duration": "turn",
+          "castOnly": true,
+          "anyMana": true
+        }
+      ]
+    }
+  ]
+}

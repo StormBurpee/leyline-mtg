@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "26b441b9-fdfb-43e2-bc02-b358653eadf4",
+  "name": "Over the Edge",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Destroy target artifact or enchantment.\n\u2022 Target creature you control explores, then it explores again. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard. Then repeat this process.)",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "modes": [
+        {
+          "label": "Destroy target artifact or enchantment.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "artifact"
+                },
+                {
+                  "type": "enchantment"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Target creature you control explores twice.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "explore",
+              "target": "target"
+            },
+            {
+              "op": "explore",
+              "target": "target"
+            }
+          ]
+        }
+      ],
+      "choose": 1
+    }
+  ]
+}

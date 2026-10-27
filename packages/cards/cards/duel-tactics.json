@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "262c5ac9-af41-42d1-a53a-8a671eedd5a6",
+  "name": "Duel Tactics",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Duel Tactics deals 1 damage to target creature. It can't block this turn.\nFlashback {1}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 1
+        },
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBlock",
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "flashback",
+      "cost": "{1}{R}"
+    }
+  ]
+}

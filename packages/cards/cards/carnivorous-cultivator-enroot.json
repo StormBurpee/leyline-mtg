@@ -1,0 +1,83 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "db655c5a-06f6-42bc-8180-d9ca1c1d939a",
+  "name": "Carnivorous Cultivator // Enroot",
+  "characteristics": {
+    "types": ["creature"],
+    "manaCost": "{1}{G}",
+    "colors": ["G"],
+    "subtypes": ["Elf", "Warlock"],
+    "supertypes": [],
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Deathtouch\nThis creature enters prepared.\nWhenever this creature deals combat damage to a player, return target land card from your graveyard to your hand.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "deathtouch"
+    },
+    {
+      "kind": "prepare",
+      "mainName": "Carnivorous Cultivator",
+      "entersPrepared": true,
+      "spell": {
+        "$schema": "../schema/card.schema.json",
+        "schemaVersion": 1,
+        "id": "leyline:prepare/enroot",
+        "name": "Enroot",
+        "characteristics": {
+          "types": ["sorcery"],
+          "manaCost": "{G}",
+          "colors": ["G"],
+          "subtypes": [],
+          "supertypes": []
+        },
+        "rulesText": "Search your library for a land card, put it into your graveyard, then shuffle.",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "searchLibrary",
+                "amount": 1,
+                "where": {
+                  "type": "land"
+                },
+                "destination": "graveyard"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "combatDamagePlayer",
+        "object": "source"
+      },
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "type": "land"
+            },
+            {
+              "owner": "you"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "hand"
+        }
+      ]
+    }
+  ]
+}

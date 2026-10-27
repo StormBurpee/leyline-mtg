@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "b347be2d-9aa1-42a9-b652-8fb032832f09",
+  "name": "Halana and Alena, Partners",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Ranger"],
+    "colors": ["G", "R"],
+    "manaCost": "{2}{R}{G}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Reach (This creature can block creatures with flying.)\nFirst strike (This creature deals combat damage before creatures without first strike.)\nAt the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is Halana and Alena's power. That creature gains haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "reach"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "first strike"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "counter": "+1/+1",
+          "target": "target",
+          "amount": {
+            "kind": "sourceStat",
+            "stat": "power"
+          }
+        },
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["haste"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

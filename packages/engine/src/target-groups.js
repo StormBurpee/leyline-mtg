@@ -4,13 +4,15 @@ const same = (a, b) =>
   a?.id === b?.id &&
   (a?.kind !== 'object' || a.incarnation === b.incarnation);
 export const flattenTargets = (plan) => Object.values(plan ?? {}).flat();
-export function targetGroupCandidates(state, groups, id, player, plan = {}) {
+export function targetGroupCandidates(state, groups, id, player, plan = {}, source = null) {
   const group = groups.find((g) => g.id === id);
   if (!group) return [];
   const excluded = (group.excludeFrom ?? []).flatMap((key) => plan[key] ?? []);
-  return targetsFor(state, group.selector, player).filter((t) => !excluded.some((e) => same(t, e)));
+  return targetsFor(state, group.selector, player, source).filter(
+    (t) => !excluded.some((e) => same(t, e)),
+  );
 }
-export function targetPlanProblem(state, groups, plan, player) {
+export function targetPlanProblem(state, groups, plan, player, source = null) {
   if (
     !plan ||
     typeof plan !== 'object' ||
@@ -24,7 +26,7 @@ export function targetPlanProblem(state, groups, plan, player) {
     const chosen = plan[group.id];
     if (!Array.isArray(chosen) || chosen.length < group.min || chosen.length > group.max)
       return `Choose ${group.min}–${group.max} targets for ${group.label ?? group.id}.`;
-    const candidates = targetGroupCandidates(state, groups, group.id, player, plan);
+    const candidates = targetGroupCandidates(state, groups, group.id, player, plan, source);
     if (
       chosen.some(
         (t, i) => !candidates.some((c) => same(t, c)) || chosen.slice(0, i).some((c) => same(t, c)),
@@ -35,11 +37,12 @@ export function targetPlanProblem(state, groups, plan, player) {
   return null;
 }
 /** Deterministic bounded proposals for bots; callers may submit any validated plan. */
-export function targetPlans(state, groups, player, limit = 256) {
+export function targetPlans(state, groups, player, limit = 256, source = null) {
   const results = [];
   let visited = 0;
   const budget = 8192;
-  if (groups.some((g) => targetsFor(state, g.selector, player).length < g.min)) return results;
+  if (groups.some((g) => targetsFor(state, g.selector, player, source).length < g.min))
+    return results;
   function visit(index, plan) {
     if (results.length >= limit || ++visited > budget) return;
     if (index === groups.length) {
@@ -47,7 +50,7 @@ export function targetPlans(state, groups, player, limit = 256) {
       return;
     }
     const group = groups[index],
-      candidates = targetGroupCandidates(state, groups, group.id, player, plan);
+      candidates = targetGroupCandidates(state, groups, group.id, player, plan, source);
     function choose(start, picked) {
       if (results.length >= limit || ++visited > budget) return;
       if (picked.length >= group.min) visit(index + 1, { ...plan, [group.id]: picked });
@@ -64,11 +67,11 @@ export function targetPlans(state, groups, player, limit = 256) {
   return results;
 }
 /** Resolution checks each declaration independently, not its original minimum. */
-export function survivingTargets(state, groups, plan, player) {
+export function survivingTargets(state, groups, plan, player, source = null) {
   return Object.fromEntries(
     groups.map((g) => [
       g.id,
-      (plan[g.id] ?? []).filter((t) => legalTarget(state, g.selector, t, player)),
+      (plan[g.id] ?? []).filter((t) => legalTarget(state, g.selector, t, player, source)),
     ]),
   );
 }

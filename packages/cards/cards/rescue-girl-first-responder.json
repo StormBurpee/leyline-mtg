@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "df6fc0b4-333b-4f6c-804c-ba6c8e29c88e",
+  "name": "Rescue Girl, First Responder",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Cleric"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Flying\n{T}: Return another target permanent you control to its owner's hand. Activate only during your turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "tap": true
+      },
+      "condition": {
+        "kind": "controllerTurn"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "controller": "you"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "returnToHand",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1e0b9767-8e51-4021-a8fb-22259e2f5347",
+  "name": "Fang Guardian",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Ape", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{3}{G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nWhen this creature enters, another target creature or Vehicle you control gets +2/+2 until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "modify",
+          "target": "target",
+          "power": 2,
+          "toughness": 2,
+          "until": "endOfTurn"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "subtype": "Vehicle"
+                }
+              ]
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "622a53bd-d894-422c-a606-7126041afa02",
+  "name": "Fomori Vault",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "{T}: Add {C}.\n{3}, {T}, Discard a card: Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in a random order.",
+  "abilities": [
+    {
+      "kind": "mana",
+      "produces": ["C"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}",
+        "tap": true,
+        "discard": 1
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": {
+            "kind": "count",
+            "zone": "battlefield",
+            "player": "you",
+            "where": {
+              "type": "artifact"
+            }
+          },
+          "selectCount": 1,
+          "restOrder": "random"
+        }
+      ]
+    }
+  ]
+}

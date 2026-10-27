@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2e5675d3-3fb0-43b5-a65c-95aacbe48bf9",
+  "name": "Traveling Chocobo",
+  "characteristics": {
+    "types": ["creature"],
+    "manaCost": "{2}{G}",
+    "colors": ["G"],
+    "supertypes": [],
+    "subtypes": ["Bird"],
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "You may look at the top card of your library any time.\nYou may play lands and cast Bird spells from the top of your library.\nIf a land or Bird you control entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.",
+  "abilities": [
+    {
+      "kind": "libraryTopAccess",
+      "play": {
+        "any": [
+          {
+            "type": "land"
+          },
+          {
+            "subtype": "Bird"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "additionalEnterTrigger",
+      "where": {
+        "any": [
+          {
+            "type": "land"
+          },
+          {
+            "subtype": "Bird"
+          }
+        ]
+      }
+    }
+  ]
+}

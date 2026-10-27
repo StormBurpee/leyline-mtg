@@ -1,0 +1,86 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0d2ba371-854c-4529-b72b-e4a1887e33ab",
+  "name": "Three Blind Mice",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Saga"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}"
+  },
+  "rulesText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Create a 1/1 white Mouse creature token.\nII, III — Create a token that's a copy of target token you control.\nIV — Creatures you control get +1/+1 and gain vigilance until end of turn.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [1]
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-mouse-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [2, 3]
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "token": true
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "copyToken",
+          "count": 1,
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [4]
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 1,
+          "keywords": ["vigilance"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

@@ -61,3 +61,11 @@ export function chooseLibraryOrder(s, p, forcedRest = []) {
   top.sort((a, b) => keepValue(s, p, b) - keepValue(s, p, a) || a.localeCompare(b));
   return { top, rest: cards.filter((id) => !top.includes(id)) };
 }
+
+/** Mandatory selection ranks every inspected card, including those a scry would bottom. */
+export function chooseLibrarySelection(s, p, count) {
+  const ranked = [...s.choice.cards].sort(
+    (a, b) => keepValue(s, p, b) - keepValue(s, p, a) || a.localeCompare(b),
+  );
+  return { top: ranked.slice(0, count), rest: ranked.slice(count) };
+}

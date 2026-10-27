@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d64b0848-0193-4025-ba62-63ecd8fb9f50",
+  "name": "Spell Pierce",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{U}"
+  },
+  "rulesText": "Counter target noncreature spell unless its controller pays {2}.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell",
+        "where": {
+          "not": {
+            "type": "creature"
+          }
+        }
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target",
+          "unlessPay": {
+            "generic": 2
+          }
+        }
+      ]
+    }
+  ]
+}

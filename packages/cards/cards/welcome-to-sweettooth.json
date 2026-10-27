@@ -1,0 +1,88 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8e629a31-2e06-4f95-9628-34670dcf68b9",
+  "name": "Welcome to Sweettooth",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": ["Saga"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 1/1 white Human creature token.\nII — Create a Food token.\nIII — Put X +1/+1 counters on target creature you control, where X is one plus the number of Foods you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [1]
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/white-human-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [2]
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/food-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "chapter",
+        "object": "source",
+        "chapters": [3]
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "counter": "+1/+1",
+          "target": "target",
+          "amount": {
+            "kind": "sum",
+            "values": [
+              1,
+              {
+                "kind": "count",
+                "zone": "battlefield",
+                "player": "you",
+                "where": {
+                  "subtype": "Food"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

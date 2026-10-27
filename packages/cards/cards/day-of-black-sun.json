@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "d0e24797-3e45-4c2b-b4b0-1ef44d42eaee",
+  "name": "Day of Black Sun",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{X}{B}{B}"
+  },
+  "rulesText": "Each creature with mana value X or less loses all abilities until end of turn. Destroy those creatures.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "stripDestroyByManaValue",
+          "amount": {
+            "kind": "x"
+          }
+        }
+      ]
+    }
+  ]
+}

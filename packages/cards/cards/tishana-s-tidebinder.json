@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "907b3d1d-8c85-4707-80b5-c4d832df9846",
+  "name": "Tishana's Tidebinder",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Merfolk", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{2}{U}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nWhen this creature enters, counter up to one target activated or triggered ability. If an ability of an artifact, creature, or planeswalker is countered this way, that permanent loses all abilities for as long as this creature remains on the battlefield. (Mana abilities can't be targeted.)",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "chosen",
+          "selector": {
+            "scope": "ability"
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "counterAbility",
+          "removeSourceAbilities": true,
+          "targetGroup": "chosen"
+        }
+      ]
+    }
+  ]
+}

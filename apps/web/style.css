@@ -2386,3 +2386,13 @@ html[data-motion='reduced'] .hand-card:focus-visible {
   background: #403458;
   overflow-wrap: anywhere;
 }
+
+.saga-badge {
+  color: var(--gold, #e9c879);
+  font-size: 11px;
+  white-space: nowrap;
+  background: #13291f;
+  border: 1px solid #a58c50;
+  border-radius: 4px;
+  padding: 2px 4px;
+}

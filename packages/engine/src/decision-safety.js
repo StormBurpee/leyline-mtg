@@ -4,7 +4,8 @@ import { flattenTargets } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { effectValues } from './numeric-values.js';
 import { spellProfile } from './spell-modes.js';
-import { definition } from './model.js';
+import { definition, battlefield } from './model.js';
+import { canGainLife } from './effects.js';
 import { planPayment } from './mana.js';
 
 const recipient = (effect, controller, target) =>
@@ -19,13 +20,28 @@ const recipient = (effect, controller, target) =>
 export const libraryCount = (state, player) =>
   state.players[player].libraryCount ?? state.players[player].library?.length ?? Infinity;
 
-export function drawsFor(effects, controller, target, player = controller) {
-  return effects.reduce(
-    (count, effect) =>
-      count +
-      (effect.op === 'draw' && recipient(effect, controller, target) === player ? effect.count : 0),
-    0,
-  );
+export function drawsFor(effects, controller, target, player = controller, state = null) {
+  let count = 0,
+    hand = state ? (state.players[player].handCount ?? state.players[player].hand.length) : 0;
+  const bonuses = state
+    ? battlefield(state)
+        .filter((o) => o.controller === player)
+        .map((o) => definition(state, o).drawBonus)
+        .filter(Boolean)
+    : [];
+  for (const effect of effects) {
+    if (recipient(effect, controller, target) !== player) continue;
+    if (effect.op === 'draw') {
+      const amount =
+        effect.count +
+        (effect.count > 0
+          ? bonuses.filter((b) => hand <= b.handAtMost).reduce((n, b) => n + b.amount, 0)
+          : 0);
+      count += amount;
+      hand += amount;
+    } else if (effect.op === 'discard') hand = Math.max(0, hand - effect.count);
+  }
+  return count;
 }
 
 /** A bounded check of known effects, not a claim to solve every triggered interaction.
@@ -47,10 +63,11 @@ export function resolutionRisk(
       life -= effect.amount;
     if (recipient(effect, player, target) !== player) continue;
     if (effect.op === 'loseLife') life -= effect.amount;
-    if (effect.op === 'gainLife') life += effect.amount;
+    if (effect.op === 'gainLife' && canGainLife(state)) life += effect.amount;
   }
   if (life <= 0) return 'life';
-  if (drawsFor(effects, player, target) > libraryCount(state, player)) return 'library';
+  if (drawsFor(effects, player, target, player, state) > libraryCount(state, player))
+    return 'library';
   return null;
 }
 
@@ -58,17 +75,19 @@ export function actionEffects(state, action) {
   const object = state.objects[action.card];
   if (!object) return [];
   const card = definition(state, object);
-  if (action.type === 'plot') return [];
+  if (action.type === 'plot' || action.type === 'ninjutsu') return [];
   if (action.type === 'cycle') return [{ op: 'draw', count: 1 }];
   const effects =
     action.type === 'activate'
       ? card.activated[action.ability].effects
       : (spellProfile(card, action.mode)?.effects ?? []);
   const entry = {
-    controller: object.controller,
+    controller:
+      action.type === 'cast' ? (object.playPermission?.player ?? object.owner) : object.controller,
     source: { id: object.id, incarnation: object.incarnation },
     target: action.target,
     x: action.x ?? 0,
+    additionalCost: action.additionalCost,
   };
   return predictedEffects(state, effects, entry);
 }
@@ -77,6 +96,7 @@ function actionCost(state, player, action) {
   if (!action.card) return {};
   const card = definition(state, state.objects[action.card]);
   if (action.type === 'plot') return { mana: card.plot };
+  if (action.type === 'ninjutsu') return { mana: card.ninjutsu };
   if (action.type === 'cycle') return { mana: card.cycling };
   if (action.type === 'activate') {
     const cost = card.activated[action.ability].cost;
@@ -99,7 +119,9 @@ function actionCost(state, player, action) {
     mana: plan?.cost ?? profile?.cost ?? card.cost,
     excludeSources: plan?.excludeSources ?? [],
     sacrifice: plan?.sacrifice,
+    life: plan?.additionalCost?.life ? profile.additionalCost.life : 0,
     manaLife: plan?.mana?.life ?? 0,
+    purpose: { type: 'cast', card: profile },
   };
 }
 
@@ -114,6 +136,7 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
   let life = state.players[player].life - (cost.life ?? 0);
   const payment = planPayment(state, player, cost.mana ?? {}, {
     excludeSources: [...(cost.excludeSources ?? []), ...(cost.tap ? [sourceId] : [])],
+    purpose: cost.purpose,
   });
   if (!payment) return false;
   life -= payment.life ?? 0;
@@ -140,6 +163,19 @@ export function canPayTargetWard(state, player, target, cost = {}, sourceId = nu
 export function actionSafe(state, player, action) {
   if (!['cast', 'activate'].includes(action.type)) return true;
   const cost = actionCost(state, player, action);
+  if (action.type === 'cast' && state.objects[action.card]?.zone === 'hand')
+    state = {
+      ...state,
+      players: state.players.map((p, i) =>
+        i === player
+          ? {
+              ...p,
+              hand: p.hand.filter((id) => id !== action.card),
+              ...(p.handCount !== undefined ? { handCount: p.handCount - 1 } : {}),
+            }
+          : p,
+      ),
+    };
   if (action.targets) {
     const seen = new Set();
     const mana = { ...(cost.mana ?? {}) };

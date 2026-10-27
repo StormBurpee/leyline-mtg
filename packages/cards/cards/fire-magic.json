@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c87db803-3490-41bc-af7a-78f99bcd77c8",
+  "name": "Fire Magic",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{R}"
+  },
+  "rulesText": "Tiered (Choose one additional cost.)\n\u2022 Fire \u2014 {0} \u2014 Fire Magic deals 1 damage to each creature.\n\u2022 Fira \u2014 {2} \u2014 Fire Magic deals 2 damage to each creature.\n\u2022 Firaga \u2014 {5} \u2014 Fire Magic deals 3 damage to each creature.",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Fire \u2014 {0}",
+          "additionalCost": "{0}",
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "type": "creature"
+              },
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "Fira \u2014 {2}",
+          "additionalCost": "{2}",
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "type": "creature"
+              },
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "Firaga \u2014 {5}",
+          "additionalCost": "{5}",
+          "effects": [
+            {
+              "op": "damageAll",
+              "where": {
+                "type": "creature"
+              },
+              "amount": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

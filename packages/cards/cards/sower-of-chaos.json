@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "2ec1860b-89cc-4529-8b8c-fb47f79f2b4b",
+  "name": "Sower of Chaos",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Devil"],
+    "colors": ["R"],
+    "manaCost": "{3}{R}",
+    "power": 4,
+    "toughness": 3
+  },
+  "rulesText": "{2}{R}: Target creature can't block this turn.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}{R}"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "combatRestriction",
+          "target": "target",
+          "restriction": "cannotBlock",
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

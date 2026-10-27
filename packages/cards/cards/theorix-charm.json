@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cf527bbd-e898-4aa9-909d-daec2f4b62ad",
+  "name": "Theorix Charm",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B", "U"],
+    "manaCost": "{U}{B}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 Counter target noncreature spell unless its controller pays {2}.\n\u2022 Target creature gets -2/-2 until end of turn.\n\u2022 Mill three cards, then draw a card. (To mill three cards, put the top three cards of your library into your graveyard.)",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Counter unless they pay {2}",
+          "target": {
+            "scope": "spell",
+            "where": {
+              "not": {
+                "type": "creature"
+              }
+            }
+          },
+          "effects": [
+            {
+              "op": "counterSpell",
+              "target": "target",
+              "unlessPay": {
+                "generic": 2
+              }
+            }
+          ]
+        },
+        {
+          "label": "Creature gets -2/-2",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "effects": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": -2,
+              "toughness": -2,
+              "until": "endOfTurn"
+            }
+          ]
+        },
+        {
+          "label": "Mill three, then draw a card",
+          "effects": [
+            {
+              "op": "mill",
+              "target": "controller",
+              "amount": 3
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

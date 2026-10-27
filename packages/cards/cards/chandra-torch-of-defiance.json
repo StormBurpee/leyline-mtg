@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "12cc800c-c7be-4811-8207-fd01a99cc892",
+  "name": "Chandra, Torch of Defiance",
+  "characteristics": {
+    "types": ["planeswalker"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Chandra"],
+    "colors": ["R"],
+    "manaCost": "{2}{R}{R}",
+    "loyalty": 4
+  },
+  "rulesText": "+1: Exile the top card of your library. You may cast that card. If you don't, Chandra deals 2 damage to each opponent.\n+1: Add {R}{R}.\n\u22123: Chandra deals 4 damage to target creature.\n\u22127: You get an emblem with \"Whenever you cast a spell, this emblem deals 5 damage to any target.\"",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": 1,
+      "text": "+1: Exile the top card. Cast it now or deal 2 damage to each opponent.",
+      "effects": [
+        {
+          "op": "impulseCastOrDamage",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": 1,
+      "text": "+1: Add {R}{R}.",
+      "effects": [
+        {
+          "op": "addMana",
+          "mana": "{R}{R}"
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": -3,
+      "text": "\u22123: Deal 4 damage to target creature.",
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 4
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      }
+    },
+    {
+      "kind": "activated",
+      "cost": {},
+      "loyalty": -7,
+      "text": "\u22127: You get an emblem with a cast-triggered damage ability.",
+      "effects": [
+        {
+          "op": "castDamageEmblem",
+          "amount": 5
+        }
+      ]
+    }
+  ]
+}

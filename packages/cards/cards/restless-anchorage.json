@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "91320daf-f69c-4350-b0fc-4bb37a6904b1",
+  "name": "Restless Anchorage",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped.\n{T}: Add {W} or {U}.\n{1}{W}{U}: Until end of turn, this land becomes a 2/3 white and blue Bird creature with flying. It's still a land.\nWhenever this land attacks, create a Map token.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true
+    },
+    {
+      "kind": "mana",
+      "produces": ["W", "U"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/map-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{W}{U}"
+      },
+      "effects": [
+        {
+          "op": "animateLand",
+          "power": 2,
+          "toughness": 3,
+          "colors": ["W", "U"],
+          "subtypes": ["Bird"],
+          "until": "endOfTurn"
+        },
+        {
+          "op": "modify",
+          "target": "source",
+          "power": 0,
+          "toughness": 0,
+          "keywords": ["flying"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "cb5ed146-5079-46ef-a3e0-e584fa4467f6",
+  "name": "Spectral Interference",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["U"],
+    "manaCost": "{1}{U}"
+  },
+  "rulesText": "Counter target artifact or creature spell unless its controller pays {4}.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "spell",
+        "where": {
+          "any": [
+            {
+              "type": "artifact"
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "counterSpell",
+          "target": "target",
+          "unlessPay": {
+            "generic": 4
+          }
+        }
+      ]
+    }
+  ]
+}

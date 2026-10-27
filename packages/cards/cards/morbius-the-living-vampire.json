@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1a947e4d-8a14-45f1-bb80-760a317b1ed0",
+  "name": "Morbius the Living Vampire",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Vampire", "Scientist", "Villain"],
+    "colors": ["B", "U"],
+    "manaCost": "{2}{U}{B}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "Flying, vigilance, lifelink\n{U}{B}, Exile this card from your graveyard: Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "vigilance"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "lifelink"
+    },
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{U}{B}",
+        "exileSelf": true
+      },
+      "effects": [
+        {
+          "op": "lookChooseHand",
+          "target": "controller",
+          "amount": 3,
+          "selectCount": 1
+        }
+      ]
+    }
+  ]
+}
