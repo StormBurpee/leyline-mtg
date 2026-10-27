@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "c96424e7-63c4-4f07-959f-6ad09f91279a",
+  "name": "Beyond the Quiet",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}"
+  },
+  "rulesText": "Exile all creatures and Spacecraft.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "exileAll",
+          "where": {
+            "any": [
+              {
+                "type": "creature"
+              },
+              {
+                "subtype": "Spacecraft"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

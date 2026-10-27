@@ -7,6 +7,7 @@ import { costProblem, payCost } from './costs.js';
 import { cardDefinition } from './cards.js';
 import {
   isAttacking,
+  isBlocking,
   addObject,
   queueTrigger,
   notifyTriggers,
@@ -81,6 +82,7 @@ export function legalTarget(s, kind, target, controller) {
       token: o.token,
       tapped: o.tapped,
       attacking: isAttacking(s, o),
+      blocking: isBlocking(s, o),
       keywords: o.zone === 'battlefield' ? keywords(s, o) : d.keywords,
       power: pt.power,
       toughness: pt.toughness,
@@ -296,6 +298,7 @@ export function resolveEffects(s, entry, startIndex = 0) {
                   token: object.token,
                   tapped: object.tapped,
                   attacking: isAttacking(s, object),
+                  blocking: isBlocking(s, object),
                   keywords: keywords(s, object),
                   ...pt,
                   manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),

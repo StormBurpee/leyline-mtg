@@ -55,6 +55,7 @@ export type CardPredicate =
   | { basic: boolean }
   | { legendary: boolean }
   | { attacking: boolean }
+  | { blocking: boolean }
   | { subtype: string }
   | { keyword: string }
   | { power: NumericComparison }

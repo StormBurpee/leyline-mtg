@@ -5,7 +5,7 @@ import { matchesEvent } from './events.js';
 import { hasType } from './types.js';
 import { cardDefinition, CARDS, DECKS, expandDeck, validateDeck } from './cards.js';
 import { createRegistry } from './registry.js';
-export const VERSION = '0.27.0';
+export const VERSION = '0.28.0';
 export const REPLAY_SCHEMA_VERSION = 1;
 export const COLORS = ['W', 'U', 'B', 'R', 'G', 'C'];
 export const STEPS = [
@@ -76,6 +76,7 @@ function staticApplies(s, source, object, effect) {
       token: object.token,
       tapped: object.tapped,
       attacking: isAttacking(s, object),
+      blocking: isBlocking(s, object),
       manaValue: Object.values(d.cost).reduce((a, b) => a + b, 0),
     },
     effect.where,
@@ -120,6 +121,11 @@ export function stats(s, o) {
 export const isAttacking = (s, o) =>
   o.zone === 'battlefield' &&
   s.combat.attackers.some((r) => r.id === o.id && r.incarnation === o.incarnation);
+export const isBlocking = (s, o) =>
+  o.zone === 'battlefield' &&
+  Object.values(s.combat.blocks)
+    .flat()
+    .some((r) => r.id === o.id && r.incarnation === o.incarnation);
 // CR 302.6 measures the controller's most recent turn start, not any turn change.
 // Turns alternate in this two-player profile; extra turns are not implemented.
 export const isSick = (s, o) =>
@@ -260,6 +266,7 @@ export function notifyTriggers(s, event, payload, context = null) {
     token: object?.token,
     tapped: object?.zone === 'battlefield' ? object.tapped : undefined,
     attacking: object ? isAttacking(s, object) : false,
+    blocking: object ? isBlocking(s, object) : false,
     keywords: object?.zone === 'battlefield' ? keywords(s, object) : d?.keywords,
     power: pt.power,
     toughness: pt.toughness,
@@ -318,6 +325,7 @@ export function captureDepartureContext(s) {
             token: o.token,
             tapped: o.tapped,
             attacking: isAttacking(s, o),
+            blocking: isBlocking(s, o),
             keywords: keywords(s, o),
             power: pt.power,
             toughness: pt.toughness,

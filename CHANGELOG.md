@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.28.0 — Combat-role targeting and Standard removal
+
+- Add blocking predicates alongside attacking predicates, using current combat membership and zone incarnations for targeting, group effects and trigger facts.
+- Add Beyond the Quiet, Cosmium Blast, Daring Mechanic, Gravkill, Joust Through, Radiant Strike, Repel Calamity and Sudden Strike with full rules text.
+- Catalog: 898 cards and 26 tokens. Standard coverage: 680/5,164. Unsupported dependent-characteristic anthems remain rejected.
+
 ## 0.27.1 — Reachable card choices at every width
 
 - Keep wide card galleries start-aligned when they overflow, so the first mulligan cards remain reachable on intermediate-width screens.

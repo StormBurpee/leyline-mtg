@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "15c6837c-775b-4b4a-a2f7-9fd79215fa05",
+  "name": "Gravkill",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}"
+  },
+  "rulesText": "Exile target creature or Spacecraft.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "type": "creature"
+            },
+            {
+              "subtype": "Spacecraft"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "exile"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "33c21ef1-33eb-447a-a318-a352f163a8a0",
+  "name": "Joust Through",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Joust Through deals 3 damage to target attacking or blocking creature. You gain 1 life.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "any": [
+                {
+                  "attacking": true
+                },
+                {
+                  "blocking": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 3
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

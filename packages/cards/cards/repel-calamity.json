@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ba58f508-8036-496c-8a2f-c1e410165e93",
+  "name": "Repel Calamity",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Destroy target creature with power or toughness 4 or greater.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "any": [
+                {
+                  "power": {
+                    "gte": 4
+                  }
+                },
+                {
+                  "toughness": {
+                    "gte": 4
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "destroy",
+          "target": "target"
+        }
+      ]
+    }
+  ]
+}

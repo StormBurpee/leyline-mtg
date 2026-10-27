@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9b1d79b7-a812-4f48-9be0-789294da3b56",
+  "name": "Daring Mechanic",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Artificer"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "{3}{W}: Put a +1/+1 counter on target Mount or Vehicle.",
+  "abilities": [
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{3}{W}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "any": [
+            {
+              "subtype": "Mount"
+            },
+            {
+              "subtype": "Vehicle"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

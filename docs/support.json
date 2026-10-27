@@ -1,5 +1,5 @@
 {
-  "version": "0.27.0",
+  "version": "0.28.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -466,6 +466,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["draw", "modifyAll"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Beyond the Quiet",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["exileAll"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -1104,6 +1112,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Cosmium Blast",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Counterspell",
       "type": "instant",
       "keywords": [],
@@ -1183,6 +1199,14 @@
       "opcodes": ["mill"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Daring Mechanic",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Daring Thunder-Thief",
@@ -2510,6 +2534,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Gravkill",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Great Forest Druid",
       "type": "creature",
       "keywords": [],
@@ -3179,6 +3211,14 @@
       "type": "creature",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Joust Through",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["damage", "gainLife"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -4810,6 +4850,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Radiant Strike",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Raging Goblin",
       "type": "creature",
       "keywords": ["haste"],
@@ -5072,6 +5120,14 @@
       "keywords": ["reach"],
       "opcodes": ["modify"],
       "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Repel Calamity",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -6296,6 +6352,14 @@
       "opcodes": ["surveil"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Sudden Strike",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["destroy"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Sugar Rush",

@@ -10678,5 +10678,101 @@
     "scryfall_uri": "https://scryfall.com/card/dft/103/risky-shortcut?utm_source=api",
     "image": "https://cards.scryfall.io/normal/front/c/8/c80aa587-4445-43d7-abc0-654d94ff4cda.jpg?1783907890",
     "art": "https://cards.scryfall.io/art_crop/front/c/8/c80aa587-4445-43d7-abc0-654d94ff4cda.jpg?1783907890"
+  },
+  "Beyond the Quiet": {
+    "id": "ce503869-8130-4afe-9691-4e90376b4bc4",
+    "oracle_id": "c96424e7-63c4-4f07-959f-6ad09f91279a",
+    "name": "Beyond the Quiet",
+    "mana_cost": "{3}{W}{W}",
+    "type_line": "Sorcery",
+    "oracle_text": "Exile all creatures and Spacecraft.",
+    "artist": "Yohann Schepacz",
+    "scryfall_uri": "https://scryfall.com/card/eoe/7/beyond-the-quiet?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/c/e/ce503869-8130-4afe-9691-4e90376b4bc4.jpg?1783905999",
+    "art": "https://cards.scryfall.io/art_crop/front/c/e/ce503869-8130-4afe-9691-4e90376b4bc4.jpg?1783905999"
+  },
+  "Cosmium Blast": {
+    "id": "193d1eac-ede7-4f75-9c74-05133b215f93",
+    "oracle_id": "52c96b5a-ce47-4bde-b530-0033b9bfd808",
+    "name": "Cosmium Blast",
+    "mana_cost": "{1}{W}",
+    "type_line": "Instant",
+    "oracle_text": "Cosmium Blast deals 4 damage to target attacking or blocking creature.",
+    "artist": "Caroline Gariba",
+    "scryfall_uri": "https://scryfall.com/card/lci/7/cosmium-blast?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/1/9/193d1eac-ede7-4f75-9c74-05133b215f93.jpg?1783913816",
+    "art": "https://cards.scryfall.io/art_crop/front/1/9/193d1eac-ede7-4f75-9c74-05133b215f93.jpg?1783913816"
+  },
+  "Daring Mechanic": {
+    "id": "3382552c-2740-409a-83a1-80b60627beb8",
+    "oracle_id": "9b1d79b7-a812-4f48-9be0-789294da3b56",
+    "name": "Daring Mechanic",
+    "mana_cost": "{2}{W}",
+    "type_line": "Creature — Human Artificer",
+    "oracle_text": "{3}{W}: Put a +1/+1 counter on target Mount or Vehicle.",
+    "artist": "Elizabeth Peiró",
+    "scryfall_uri": "https://scryfall.com/card/dft/11/daring-mechanic?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/3/3/3382552c-2740-409a-83a1-80b60627beb8.jpg?1783907920",
+    "art": "https://cards.scryfall.io/art_crop/front/3/3/3382552c-2740-409a-83a1-80b60627beb8.jpg?1783907920"
+  },
+  "Gravkill": {
+    "id": "cfa6c57f-a193-48cc-9764-d8348548a111",
+    "oracle_id": "15c6837c-775b-4b4a-a2f7-9fd79215fa05",
+    "name": "Gravkill",
+    "mana_cost": "{3}{B}",
+    "type_line": "Instant",
+    "oracle_text": "Exile target creature or Spacecraft.",
+    "artist": "Dominik Mayer",
+    "scryfall_uri": "https://scryfall.com/card/eoe/103/gravkill?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/c/f/cfa6c57f-a193-48cc-9764-d8348548a111.jpg?1783905966",
+    "art": "https://cards.scryfall.io/art_crop/front/c/f/cfa6c57f-a193-48cc-9764-d8348548a111.jpg?1783905966"
+  },
+  "Joust Through": {
+    "id": "846adb38-f9bb-4fed-b8ed-36ec7885f989",
+    "oracle_id": "33c21ef1-33eb-447a-a318-a352f163a8a0",
+    "name": "Joust Through",
+    "mana_cost": "{W}",
+    "type_line": "Instant",
+    "oracle_text": "Joust Through deals 3 damage to target attacking or blocking creature. You gain 1 life.",
+    "artist": "Miro Petrov",
+    "scryfall_uri": "https://scryfall.com/card/fdn/19/joust-through?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/8/4/846adb38-f9bb-4fed-b8ed-36ec7885f989.jpg?1783909125",
+    "art": "https://cards.scryfall.io/art_crop/front/8/4/846adb38-f9bb-4fed-b8ed-36ec7885f989.jpg?1783909125"
+  },
+  "Radiant Strike": {
+    "id": "8c38e4cb-918b-4493-872b-66c90dcfd339",
+    "oracle_id": "186efd85-83d4-40cc-b617-76f32dbe99ce",
+    "name": "Radiant Strike",
+    "mana_cost": "{3}{W}",
+    "type_line": "Instant",
+    "oracle_text": "Destroy target artifact or tapped creature. You gain 3 life.",
+    "artist": "Aleksi Briclot",
+    "scryfall_uri": "https://scryfall.com/card/eoe/29/radiant-strike?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/8/c/8c38e4cb-918b-4493-872b-66c90dcfd339.jpg?1783905991",
+    "art": "https://cards.scryfall.io/art_crop/front/8/c/8c38e4cb-918b-4493-872b-66c90dcfd339.jpg?1783905991"
+  },
+  "Repel Calamity": {
+    "id": "d068192a-6270-4981-819d-4945fa4a2b83",
+    "oracle_id": "ba58f508-8036-496c-8a2f-c1e410165e93",
+    "name": "Repel Calamity",
+    "mana_cost": "{1}{W}",
+    "type_line": "Instant",
+    "oracle_text": "Destroy target creature with power or toughness 4 or greater.",
+    "artist": "Ryan Pancoast",
+    "scryfall_uri": "https://scryfall.com/card/blb/27/repel-calamity?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/d/0/d068192a-6270-4981-819d-4945fa4a2b83.jpg?1783910857",
+    "art": "https://cards.scryfall.io/art_crop/front/d/0/d068192a-6270-4981-819d-4945fa4a2b83.jpg?1783910857"
+  },
+  "Sudden Strike": {
+    "id": "03d56bb2-9cb1-4825-b31b-1f4bbf21a500",
+    "oracle_id": "8147a759-e387-48f6-9c1e-bb39622ed553",
+    "name": "Sudden Strike",
+    "mana_cost": "{1}{W}",
+    "type_line": "Instant",
+    "oracle_text": "Destroy target attacking or blocking creature.",
+    "artist": "Le Vuong",
+    "scryfall_uri": "https://scryfall.com/card/msc/779/sudden-strike?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/0/3/03d56bb2-9cb1-4825-b31b-1f4bbf21a500.jpg?1783903018",
+    "art": "https://cards.scryfall.io/art_crop/front/0/3/03d56bb2-9cb1-4825-b31b-1f4bbf21a500.jpg?1783903018"
   }
 }

@@ -6,7 +6,7 @@
     "packages/engine/src/registry.js": "282e2a6da52197795ab6c7eea9972106f6a16eb638b1df78038c2da23042c3ac",
     "packages/engine/src/definition-validation.js": "d3055875a1bb2b566028eeea0d88b6d50dceaec767cdad9164c32033483ee5c9",
     "packages/engine/src/condition-schema.js": "5ae7a42619debe71a3aa585ef1b84015ab8b37a4d6c69e1e37180375b647567b",
-    "packages/engine/src/selectors.js": "2a3325bca9111d97c59974f7b8e82c1d511746d456c59022c28eca88ab8239c2",
+    "packages/engine/src/selectors.js": "f9cb9729c94ff12848f5bf4703f3cb3ef21ed4389a9c4903fc3b99c209f00709",
     "packages/engine/src/events.js": "55feeaf1d5af4d76e7faf72aeeb3972e02b937497ecb0f9bc04fa7b3fbd30b89",
     "packages/engine/src/types.js": "00fbf8bea498daa3e56dbfa6d49968a99a7fa3552b4715af84479d599bf7b9b1"
   },
@@ -24,10 +24,10 @@
     "excluded_alchemy": 3
   },
   "coverage": {
-    "unsupported": 13172,
+    "unsupported": 13164,
     "no_exact_forge_match": 685,
     "compiler_candidate": 597,
-    "curated": 878
+    "curated": 886
   },
   "layouts": {
     "normal": 14416,
@@ -445,17 +445,17 @@
   },
   "diagnostics": {
     "Unreferenced or unsupported SVar": 11705,
-    "Unsupported spell field": 9512,
-    "Unsupported spell opcode": 6870,
+    "Unsupported spell field": 9511,
+    "Unsupported spell opcode": 6869,
     "Unsupported trigger field": 4966,
     "unsupported field S.": 3067,
     "Unsupported trigger mode": 3003,
     "Unsupported mana symbol": 2550,
     "Unsupported supertype or card type.": 2417,
-    "Unsupported targeted zone transition.": 1666,
+    "Unsupported targeted zone transition.": 1665,
     "Unsupported ability opcode": 1417,
-    "Unsupported target predicate": 1251,
-    "Only source +1/+1 counters on abilities are supported.": 970,
+    "Unsupported target predicate": 1244,
+    "Only source +1/+1 counters on abilities are supported.": 969,
     "Keywords on this card type require manual review.": 681,
     "Unsupported graveyard target predicate": 668,
     "Unsupported zone-change trigger predicate": 531,
@@ -465,14 +465,14 @@
     "unsupported keyword Enchant": 381,
     "Only an unconditional self enters-tapped replacement is supported.": 354,
     "Only one tap ability producing one mana of a listed color is supported.": 354,
-    "DealDamage requires a supported target predicate.": 351,
+    "DealDamage requires a supported target predicate.": 349,
     "unsupported keyword Equip": 335,
     "unsupported field AI.": 317,
     "NumDmg must be a literal nonnegative integer.": 294,
     "Only Defined Self is supported for source pumps.": 263,
     "CounterNum must be a literal nonnegative integer.": 261,
-    "Destroy requires a supported permanent target.": 248,
     "Unsupported card-type combination.": 248,
+    "Destroy requires a supported permanent target.": 245,
     "Unsupported dies trigger predicate": 234,
     "NumCards must be a literal nonnegative integer.": 232,
     "A subability cannot introduce a new target in this subset.": 230,
@@ -1109,5 +1109,5 @@
       "sha256": "22e4f4e89709f3f96d9ea947475ea026c8a8232cbb2cf00e81c13526c986ad23"
     }
   ],
-  "reclassifiedWithEngine": "0.27.0"
+  "reclassifiedWithEngine": "0.28.0"
 }

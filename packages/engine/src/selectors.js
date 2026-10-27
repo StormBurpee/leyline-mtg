@@ -98,7 +98,7 @@ export function validateFilter(filter) {
         errors.push(`${path}.subtype: expected a subtype name.`);
       return;
     }
-    if (['tapped', 'token', 'basic', 'legendary', 'attacking'].includes(key)) {
+    if (['tapped', 'token', 'basic', 'legendary', 'attacking', 'blocking'].includes(key)) {
       if (typeof operand !== 'boolean') errors.push(`${path}.${key}: expected a boolean.`);
       return;
     }
@@ -150,7 +150,8 @@ export function matchesFilter(facts, filter, you) {
   if (key === 'keyword')
     return (facts.keywords ?? facts.definition?.keywords ?? []).includes(value);
   if (key === 'subtype') return !!facts.definition?.subtypes?.includes(value);
-  if (key === 'token' || key === 'tapped' || key === 'attacking') return facts[key] === value;
+  if (key === 'token' || key === 'tapped' || key === 'attacking' || key === 'blocking')
+    return facts[key] === value;
   if (['power', 'toughness', 'manaValue'].includes(key)) {
     const actual = facts[key];
     if (!Number.isFinite(actual)) return false;

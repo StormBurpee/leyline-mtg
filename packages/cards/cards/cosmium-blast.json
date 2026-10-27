@@ -1,0 +1,46 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "52c96b5a-ce47-4bde-b530-0033b9bfd808",
+  "name": "Cosmium Blast",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{1}{W}"
+  },
+  "rulesText": "Cosmium Blast deals 4 damage to target attacking or blocking creature.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "any": [
+                {
+                  "attacking": true
+                },
+                {
+                  "blocking": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "damage",
+          "target": "target",
+          "amount": 4
+        }
+      ]
+    }
+  ]
+}

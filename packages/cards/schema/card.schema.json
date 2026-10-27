@@ -354,6 +354,16 @@
         {
           "type": "object",
           "properties": {
+            "blocking": {
+              "type": "boolean"
+            }
+          },
+          "required": ["blocking"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
             "keyword": {
               "enum": [
                 "flying",
