@@ -21,6 +21,13 @@ const cost = (value) => ({
 export function sourceFromDefinition(d, { id, idsByName = {} } = {}) {
   const effects = (list) =>
     list.map((e) => {
+      if (e.op === 'conditional')
+        return {
+          op: 'conditional',
+          condition: structuredClone(e.condition),
+          then: effects(e.then),
+          ...(e.else !== undefined ? { else: effects(e.else) } : {}),
+        };
       if (e.targetGroup !== undefined) {
         const { targetGroup, ...rest } = e;
         return { ...effects([rest])[0], targetGroup };

@@ -360,9 +360,23 @@ function damageSource(s, entry) {
   };
 }
 export function resolveEffects(s, entry, startIndex = 0) {
-  const effects = entry.effects ?? [];
+  let effects = entry.effects ?? [];
   for (let index = startIndex; index < effects.length; index++) {
     const e = effectValues(s, effects[index], entry);
+    if (e.op === 'conditional') {
+      const branch = meetsCondition(s, entry.controller, e.condition, [], entry.source)
+        ? e.then
+        : (e.else ?? []);
+      // Expand once at this instruction. Pausing children retain the chosen branch.
+      effects = [
+        ...effects.slice(0, index),
+        ...structuredClone(branch),
+        ...effects.slice(index + 1),
+      ];
+      entry.effects = effects;
+      index--;
+      continue;
+    }
     if (e.targetGroup !== undefined) {
       const targets = entry.targets?.[e.targetGroup] ?? [];
       const { targetGroup, ...effect } = e;

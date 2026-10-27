@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.38.0 — Conditional resolution instructions
+
+- Add bounded conditional effect branches evaluated at their actual resolution position. Once selected, a branch survives paused scry/search/discard decisions without being re-evaluated.
+- Preserve the difference between intervening-if triggers (checked at trigger and resolution) and trailing conditions checked only on resolution. Enhanced effects replace their ordinary versions instead of stacking both.
+- Add 18 full-text Standard cards and a Dinosaur token, including Take the Fall, Might of the Meek, Rapier Wit, Dwynen’s Elite and Leonin Vanguard. Catalog: 1097 cards and 28 tokens.
+- Branch predicates use supported public-state conditions; outcome-linked and target-history conditions remain unsupported.
+
 ## 0.37.0 — Optional targets across abilities and modes
 
 - Extend target groups to triggered and activated abilities and individual choose-one modes. Preserve APNAP ordering, target-before-cost choices and source snapshots while explicit target choices are pending.

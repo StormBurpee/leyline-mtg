@@ -1,3 +1,4 @@
+import { predictedEffects } from './conditional-effects.js';
 import { flattenTargets, targetPlans } from './target-groups.js';
 import { castingProfile } from './casting-costs.js';
 import { meetsCondition } from './conditions.js';
@@ -128,7 +129,7 @@ function groupedSpellScore(s, p, action, card) {
 function definition(s, o) {
   const d = rawDefinition(s, o),
     entry = { controller: o.controller, source: { id: o.id, incarnation: o.incarnation } };
-  const effects = (list) => list?.map((e) => effectValues(s, e, entry));
+  const effects = (list) => (list ? predictedEffects(s, list, entry) : list);
   const activeAttached = (d.conditionalBonuses ?? []).filter(
     (b) => b.affects === 'attached' && meetsCondition(s, o.controller, b.condition, [], o),
   );

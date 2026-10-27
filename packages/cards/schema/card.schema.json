@@ -1113,6 +1113,33 @@
           },
           "required": ["op", "target", "amount"],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "conditional"
+            },
+            "condition": {
+              "$ref": "#/$defs/condition"
+            },
+            "then": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/effect"
+              },
+              "maxItems": 64
+            },
+            "else": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/effect"
+              },
+              "maxItems": 64
+            }
+          },
+          "required": ["op", "condition", "then"],
+          "additionalProperties": false
         }
       ]
     },

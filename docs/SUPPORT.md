@@ -110,3 +110,7 @@ The client presents each group as large selectable cards with Read/Back and expl
 ### Stun counters
 
 Stun counters replace actual untapping in the untap step and from explicit/group effects. Only one is removed per untap event; counters do not tap a permanent, do not disappear from an already untapped object, and are not consumed when an effect prevents the untap event altogether. Counter placement supports source, attached, single-target and supported spell target groups. Permanents can enter with fixed stun counts. Zone changes clear counters. [Official stun-counter mechanics](https://magic.wizards.com/en/news/feature/dominaria-united-mechanics). Other counter kinds and replacement/prevention systems are not implied by this support.
+
+### Conditional resolution instructions
+
+A conditional instruction selects its then/else branch against the public state at that instruction, after earlier instructions have run. Selection is retained across resolution choices. Instruction graphs are bounded to 256 nodes and eight nested levels. Initial intervening-if trigger clauses remain trigger conditions checked at both event and resolution; a trailing condition is not promoted to that gate. Policy previews evaluate branches against the current public state and do not claim full future-state simulation. Outcome-linked conditions, target history and unsupported Oracle clauses still fail closed.

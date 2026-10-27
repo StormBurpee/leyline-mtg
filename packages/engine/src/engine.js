@@ -586,6 +586,7 @@ export function replay(record) {
     record &&
       [
         VERSION,
+        '0.37.0',
         '0.36.1',
         '0.36.0',
         '0.35.0',

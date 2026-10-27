@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3d4a7dd3-9258-4bd1-adc4-08f0205e196a",
+  "name": "Dwynen's Elite",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elf", "Warrior"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, if you control another Elf, create a 1/1 green Elf Warrior creature token.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/elf-warrior-token",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "subtype": "Elf"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "excludeSource": true
+        },
+        "right": 1,
+        "operator": "gte"
+      }
+    }
+  ]
+}

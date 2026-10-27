@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/dinosaur-token",
+  "name": "Dinosaur Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Dinosaur"],
+    "colors": ["R"],
+    "manaCost": null,
+    "power": 3,
+    "toughness": 1,
+    "token": true,
+    "supertypes": []
+  },
+  "rulesText": "No abilities.",
+  "abilities": []
+}

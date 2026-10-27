@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "ee86cce6-c7c1-40a6-896b-cde9b86bb532",
+  "name": "Nasty Little Rabbit",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Rabbit"],
+    "colors": ["G"],
+    "manaCost": "{G}",
+    "power": 1,
+    "toughness": 2
+  },
+  "rulesText": "Ferocious \u2014 At the beginning of combat on your turn, if you control a creature with power 4 or greater, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "beginCombat",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "source",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "controlAtLeast",
+        "where": {
+          "all": [
+            {
+              "power": {
+                "gte": 4
+              }
+            },
+            {
+              "type": "creature"
+            }
+          ]
+        },
+        "count": 1
+      }
+    }
+  ]
+}

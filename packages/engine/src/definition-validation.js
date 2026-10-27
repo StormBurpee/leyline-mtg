@@ -118,15 +118,40 @@ function validateGroupHolder(holder, path, errors) {
   );
   if (holder.target != null) errors.push(`${path}: use either a single target or target groups.`);
 }
-function validateEffects(effects, path, target, errors, groups = []) {
+function validateEffects(
+  effects,
+  path,
+  target,
+  errors,
+  groups = [],
+  budget = { nodes: 0 },
+  depth = 0,
+) {
+  if (depth > 8) {
+    errors.push(`${path}: conditional effects exceed depth budget.`);
+    return;
+  }
   if (!Array.isArray(effects) || effects.length > 64) {
     errors.push(`${path}: expected at most 64 effect instructions.`);
     return;
   }
   for (const [index, e] of effects.entries()) {
     const p = `${path}[${index}]`;
+    if (++budget.nodes > 256) {
+      errors.push(`${path}: effect graph exceeds instruction budget.`);
+      return;
+    }
     if (!plain(e)) {
       errors.push(`${p}: expected an effect object.`);
+      continue;
+    }
+    if (e.op === 'conditional') {
+      if (Object.keys(e).some((k) => !['op', 'condition', 'then', 'else'].includes(k)))
+        errors.push(`${p}: unsupported conditional field.`);
+      errors.push(...validateCondition(e.condition));
+      validateEffects(e.then, `${p}.then`, target, errors, groups, budget, depth + 1);
+      if (e.else !== undefined)
+        validateEffects(e.else, `${p}.else`, target, errors, groups, budget, depth + 1);
       continue;
     }
     if (e.targetGroup !== undefined) {
@@ -151,7 +176,7 @@ function validateEffects(effects, path, target, errors, groups = []) {
         continue;
       }
       const { targetGroup, ...bound } = e;
-      validateEffects([bound], p, group.selector, errors);
+      validateEffects([bound], p, group.selector, errors, [], budget, depth + 1);
       continue;
     }
     if (e.op === 'fight' || e.op === 'bite') {

@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "9dbc2fc8-ed42-4534-9676-bf0695cd518c",
+  "name": "You're Not Alone",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["W"],
+    "manaCost": "{W}"
+  },
+  "rulesText": "Target creature gets +2/+2 until end of turn. If you control three or more creatures, it gets +4/+4 until end of turn instead.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "count",
+              "zone": "battlefield",
+              "player": "all",
+              "where": {
+                "all": [
+                  {
+                    "controller": "you"
+                  },
+                  {
+                    "type": "creature"
+                  }
+                ]
+              }
+            },
+            "right": 3,
+            "operator": "gte"
+          },
+          "then": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 4,
+              "toughness": 4,
+              "until": "endOfTurn"
+            }
+          ],
+          "else": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 2,
+              "toughness": 2,
+              "until": "endOfTurn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

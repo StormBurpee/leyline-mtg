@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "4c376349-1a50-4215-8a40-f702da81eb7b",
+  "name": "Invasive Maneuvers",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{1}{R}"
+  },
+  "rulesText": "Invasive Maneuvers deals 3 damage to target creature. It deals 5 damage instead if you control a Spacecraft.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "type": "creature"
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "controlAtLeast",
+            "where": {
+              "subtype": "Spacecraft"
+            },
+            "count": 1
+          },
+          "then": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 5
+            }
+          ],
+          "else": [
+            {
+              "op": "damage",
+              "target": "target",
+              "amount": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

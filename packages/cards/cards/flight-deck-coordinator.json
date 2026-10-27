@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "57927909-11a9-44ef-989d-1dcca1f6e23f",
+  "name": "Flight-Deck Coordinator",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{2}{W}",
+    "power": 3,
+    "toughness": 3
+  },
+  "rulesText": "At the beginning of your end step, if you control two or more tapped creatures, you gain 2 life.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 2
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "all",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "tapped": true
+              },
+              {
+                "type": "creature"
+              }
+            ]
+          }
+        },
+        "right": 2,
+        "operator": "gte"
+      }
+    }
+  ]
+}
