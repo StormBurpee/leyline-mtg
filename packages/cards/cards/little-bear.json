@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "53c6c6bf-0256-424d-b937-1cc7d9e2d574",
+  "name": "Little Bear",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Bear"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 3,
+    "toughness": 2
+  },
+  "rulesText": "Flash\nWhen this creature enters, untap another target creature you control. If that creature is a Bear, put a +1/+1 counter on it.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "untap",
+          "target": "target"
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "target": "target",
+            "where": {
+              "subtype": "Bear"
+            }
+          },
+          "then": [
+            {
+              "op": "addCounters",
+              "target": "target",
+              "counter": "+1/+1",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

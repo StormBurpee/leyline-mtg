@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "147d1e5c-fcfd-4115-a2f9-bea9b7ad7bb6",
+  "name": "Intrepid Trufflesnout // Go Hog Wild",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Boar"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 3,
+    "toughness": 1
+  },
+  "rulesText": "Whenever this creature attacks alone, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "attack",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/food-token",
+          "amount": 1
+        }
+      ],
+      "triggerCondition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "battlefield",
+          "player": "you",
+          "where": {
+            "all": [
+              {
+                "controller": "you"
+              },
+              {
+                "type": "creature"
+              },
+              {
+                "attacking": true
+              }
+            ]
+          }
+        },
+        "operator": "eq",
+        "right": 1
+      }
+    },
+    {
+      "kind": "adventure",
+      "mainName": "Intrepid Trufflesnout",
+      "spell": {
+        "schemaVersion": 1,
+        "id": "leyline:adventure/go-hog-wild",
+        "name": "Go Hog Wild",
+        "characteristics": {
+          "types": ["instant"],
+          "supertypes": [],
+          "subtypes": ["Adventure"],
+          "colors": ["G"],
+          "manaCost": "{1}{G}"
+        },
+        "rulesText": "Target creature gets +2/+2 until end of turn. (Then exile this card. You may cast the creature later from exile.)",
+        "abilities": [
+          {
+            "kind": "spell",
+            "effects": [
+              {
+                "op": "modify",
+                "target": "target",
+                "power": 2,
+                "toughness": 2,
+                "until": "endOfTurn"
+              }
+            ],
+            "target": {
+              "scope": "permanent",
+              "where": {
+                "type": "creature"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "../schema/card.schema.json"
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f17b9356-a329-4f89-b690-afc2eaff4977",
+  "name": "Sunpearl Kirin",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Kirin"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}",
+    "power": 2,
+    "toughness": 1
+  },
+  "rulesText": "Flash\nFlying\nWhen this creature enters, return up to one other target nonland permanent you control to its owner's hand. If it was a token, draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flash"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "targetGroups": [
+        {
+          "id": "returned",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "all": [
+                {
+                  "not": {
+                    "type": "land"
+                  }
+                },
+                {
+                  "controller": "you"
+                }
+              ]
+            },
+            "excludeSource": true
+          },
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "targetGroup": "returned",
+            "where": {
+              "token": true
+            }
+          },
+          "then": [
+            {
+              "op": "returnToHand",
+              "target": "target",
+              "targetGroup": "returned"
+            },
+            {
+              "op": "draw",
+              "target": "controller",
+              "amount": 1
+            }
+          ],
+          "else": [
+            {
+              "op": "returnToHand",
+              "target": "target",
+              "targetGroup": "returned"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

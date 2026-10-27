@@ -1,0 +1,53 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "70ea1a9d-ec52-4c11-8c4d-0d957e5491ad",
+  "name": "Suki, Courageous Rescuer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Human", "Warrior", "Ally"],
+    "colors": ["W"],
+    "manaCost": "{1}{W}{W}",
+    "power": 2,
+    "toughness": 4
+  },
+  "rulesText": "Other creatures you control get +1/+0.\nWhenever another permanent you control leaves the battlefield during your turn, create a 1/1 white Ally creature token. This ability triggers only once each turn.",
+  "abilities": [
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "type": "creature"
+          },
+          {
+            "controller": "you"
+          }
+        ]
+      },
+      "excludeSource": true,
+      "power": 1,
+      "toughness": 0
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "leave",
+        "controller": "you",
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/ally-token",
+          "amount": 1
+        }
+      ],
+      "triggerCondition": {
+        "kind": "controllerTurn"
+      },
+      "oncePerTurn": true
+    }
+  ]
+}

@@ -98,6 +98,7 @@ export interface EventSpec {
     | 'enter'
     | 'cast'
     | 'dies'
+    | 'leave'
     | 'diesGroup'
     | 'battlefieldToGraveyard'
     | 'battlefieldToGraveyardGroup'
@@ -120,6 +121,8 @@ export interface EventSpec {
   filter?: CardPredicate;
   excludeSource?: boolean;
   chapters?: number[];
+  /** Actual post-replacement destination; only for leave events. */
+  destinations?: Exclude<Zone, 'battlefield'>[];
   spellNumber?: number;
   drawNumber?: number;
   castByController?: boolean;
@@ -196,7 +199,7 @@ type EffectInstruction =
   | { op: 'creatureForm'; power: number; toughness: number; subtypes: string[] }
   | { op: 'optionalDiscardDraw' | 'distributedCounters' }
   | { op: 'becomeLand'; mana: Color[] }
-  | { op: 'conditional'; condition: StateCondition; then: Effect[]; else?: Effect[] }
+  | { op: 'conditional'; condition: EffectCondition; then: Effect[]; else?: Effect[] }
   | { op: 'stunOn'; amount: EffectNumericValue; subject?: 'source' | 'attached' }
   | { op: 'keywordCounter'; subject: 'source'; keyword: 'indestructible'; amount: number }
   | ({ op: 'fight' | 'bite'; victimGroup: string } & (
@@ -399,6 +402,14 @@ export type StateCondition =
       operator: 'eq' | 'ne' | 'lt' | 'lte' | 'gt' | 'gte';
     }
   | { kind: 'all' | 'any'; conditions: StateCondition[] };
+export type TargetConditionBinding =
+  | { target: 'target'; targetGroup?: never }
+  | { targetGroup: string; target?: never };
+export type EffectCondition =
+  | Exclude<StateCondition, { kind: 'all' | 'any' }>
+  | ({ kind: 'targetMatches'; where: CardPredicate } & TargetConditionBinding)
+  | ({ kind: 'targetEnteredThisTurn' } & TargetConditionBinding)
+  | { kind: 'all' | 'any'; conditions: EffectCondition[] };
 export type ContinuousCondition =
   | StateCondition
   | { kind: 'sourceAttacking' | 'sourceEnteredThisTurn' }
@@ -689,6 +700,8 @@ export interface PlayerState {
 export interface StackEntry {
   modes?: readonly TriggerMode[];
   targetController?: PlayerId;
+  targetControllers?: Record<string, PlayerId>;
+  targetsRechecked?: boolean;
   movedCount?: number;
   emblem?: boolean;
   sagaChapter?: number;

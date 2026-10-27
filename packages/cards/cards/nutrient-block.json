@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "04a0382f-7e4e-4450-ae70-18999379d875",
+  "name": "Nutrient Block",
+  "characteristics": {
+    "types": ["artifact"],
+    "supertypes": [],
+    "subtypes": ["Food"],
+    "colors": [],
+    "manaCost": "{1}"
+  },
+  "rulesText": "Indestructible (Effects that say \"destroy\" don't destroy this artifact.)\n{2}, {T}, Sacrifice this artifact: You gain 3 life.\nWhen this artifact is put into a graveyard from the battlefield, draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "indestructible"
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{2}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "battlefieldToGraveyard",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

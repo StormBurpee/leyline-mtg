@@ -1,0 +1,30 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "eddfe7d7-6868-4b81-b46c-d0765e5210e7",
+  "name": "Gysahl Greens",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{1}{G}"
+  },
+  "rulesText": "Create a 2/2 green Bird creature token with \"Whenever a land you control enters, this token gets +1/+0 until end of turn.\"\nFlashback {6}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/landfall-bird-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "flashback",
+      "cost": "{6}{G}"
+    }
+  ]
+}

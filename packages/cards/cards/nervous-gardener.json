@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "15dca6a7-8367-4b86-a86c-e44f10fb3c53",
+  "name": "Nervous Gardener",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dryad"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 2
+  },
+  "rulesText": "Disguise {G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen this creature is turned face up, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle.",
+  "abilities": [
+    {
+      "kind": "disguise",
+      "cost": "{G}"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "faceUp",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "searchLibrary",
+          "amount": 1,
+          "destination": "hand",
+          "where": {
+            "all": [
+              {
+                "type": "land"
+              },
+              {
+                "any": [
+                  {
+                    "subtype": "Plains"
+                  },
+                  {
+                    "subtype": "Island"
+                  },
+                  {
+                    "subtype": "Swamp"
+                  },
+                  {
+                    "subtype": "Mountain"
+                  },
+                  {
+                    "subtype": "Forest"
+                  }
+                ]
+              }
+            ]
+          },
+          "reveal": true
+        }
+      ]
+    }
+  ]
+}

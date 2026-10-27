@@ -1,0 +1,181 @@
+{
+  "inventorySha256": "3a7d6a2dab3877d60e84408528a463f50bf488d643aaeaaa148b58f7713f259c",
+  "cards": [
+    {
+      "name": "Malamet Battle Glyph",
+      "oracle_id": "483a0caa-e912-41e9-aaa3-bcea9369ec06",
+      "mana_cost": "{G}",
+      "type_line": "Sorcery",
+      "oracle_text": "Choose target creature you control and target creature you don't control. If the creature you control entered this turn, put a +1/+1 counter on it. Then those creatures fight each other.",
+      "colors": ["G"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/lci/198/malamet-battle-glyph?utm_source=api"
+    },
+    {
+      "name": "Throw from the Saddle",
+      "oracle_id": "d6780d29-0dd7-4f04-95b8-4ca6a55308f2",
+      "mana_cost": "{1}{G}",
+      "type_line": "Sorcery",
+      "oracle_text": "Target creature you control gets +1/+1 until end of turn. Put a +1/+1 counter on it instead if it's a Mount. Then it deals damage equal to its power to target creature you don't control.",
+      "colors": ["G"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/otj/185/throw-from-the-saddle?utm_source=api"
+    },
+    {
+      "name": "Wisecrack",
+      "oracle_id": "e9c9a445-4386-4616-ad00-f08064d73dcd",
+      "mana_cost": "{2}{R}",
+      "type_line": "Instant",
+      "oracle_text": "Target creature deals damage equal to its power to itself. If that creature is attacking, Wisecrack deals 2 damage to that creature's controller.",
+      "colors": ["R"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/msc/813/wisecrack?utm_source=api"
+    },
+    {
+      "name": "Depressurize",
+      "oracle_id": "abcb5321-c295-4abf-8622-7de79679d27a",
+      "mana_cost": "{1}{B}",
+      "type_line": "Instant",
+      "oracle_text": "Target creature gets -3/-0 until end of turn. Then if that creature's power is 0 or less, destroy it.",
+      "colors": ["B"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/eoe/95/depressurize?utm_source=api"
+    },
+    {
+      "name": "Hazardroot Herbalist",
+      "oracle_id": "f40cb1af-3db6-4e90-830f-86ff4b60e239",
+      "mana_cost": "{2}{G}",
+      "type_line": "Creature — Rabbit Druid",
+      "oracle_text": "Whenever you attack, target creature you control gets +1/+0 until end of turn. If that creature is a token, it also gains deathtouch until end of turn.",
+      "colors": ["G"],
+      "power": "1",
+      "toughness": "4",
+      "scryfall_uri": "https://scryfall.com/card/blb/174/hazardroot-herbalist?utm_source=api"
+    },
+    {
+      "name": "Ingenious Leonin",
+      "oracle_id": "99853d2e-2223-4c05-bbd7-0a746f8f810d",
+      "mana_cost": "{4}{W}",
+      "type_line": "Creature — Cat Soldier",
+      "oracle_text": "{3}{W}: Put a +1/+1 counter on another target attacking creature you control. If that creature is a Cat, it gains first strike until end of turn. (It deals combat damage before creatures without first strike.)",
+      "colors": ["W"],
+      "power": "4",
+      "toughness": "4",
+      "scryfall_uri": "https://scryfall.com/card/fdn/495/ingenious-leonin?utm_source=api"
+    },
+    {
+      "name": "Little Bear",
+      "oracle_id": "53c6c6bf-0256-424d-b937-1cc7d9e2d574",
+      "mana_cost": "{2}{G}",
+      "type_line": "Creature — Bear",
+      "oracle_text": "Flash\nWhen this creature enters, untap another target creature you control. If that creature is a Bear, put a +1/+1 counter on it.",
+      "colors": ["G"],
+      "power": "3",
+      "toughness": "2",
+      "scryfall_uri": "https://scryfall.com/card/hob/128/little-bear?utm_source=api"
+    },
+    {
+      "name": "Yip Yip!",
+      "oracle_id": "5453550f-9136-4568-baf8-c3d20e33fbb6",
+      "mana_cost": "{W}",
+      "type_line": "Instant — Lesson",
+      "oracle_text": "Target creature you control gets +2/+2 until end of turn. If that creature is an Ally, it also gains flying until end of turn.",
+      "colors": ["W"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/tla/43/yip-yip!?utm_source=api"
+    },
+    {
+      "name": "Seedship Impact",
+      "oracle_id": "c6d89c4a-351f-4d63-ba57-b978a695191e",
+      "mana_cost": "{1}{G}",
+      "type_line": "Instant",
+      "oracle_text": "Destroy target artifact or enchantment. If its mana value was 2 or less, create a Lander token. (It's an artifact with \"{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\")",
+      "colors": ["G"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/eoe/205/seedship-impact?utm_source=api"
+    },
+    {
+      "name": "Tainted Treats",
+      "oracle_id": "60826714-b9fd-4c89-b9f2-1a3c3229686b",
+      "mana_cost": "{1}{B}{G}",
+      "type_line": "Instant",
+      "oracle_text": "Destroy target artifact or creature. If its mana value was 4 or less, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")",
+      "colors": ["B", "G"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/tmt/170/tainted-treats?utm_source=api"
+    },
+    {
+      "name": "Brackish Blunder",
+      "oracle_id": "4ad34f85-a185-458a-a7a1-eb60f7efce5b",
+      "mana_cost": "{1}{U}",
+      "type_line": "Instant",
+      "oracle_text": "Return target creature to its owner's hand. If it was tapped, create a Map token. (It's an artifact with \"{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.\")",
+      "colors": ["U"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/lci/46/brackish-blunder?utm_source=api"
+    },
+    {
+      "name": "Budding Insurgent",
+      "oracle_id": "723669e0-4a04-45ec-8c76-b1a369aa6892",
+      "mana_cost": "{2}{G}",
+      "type_line": "Creature — Dryad Scout",
+      "oracle_text": "Vigilance\nSacrifice this creature: Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.",
+      "colors": ["G"],
+      "power": "3",
+      "toughness": "3",
+      "scryfall_uri": "https://scryfall.com/card/fra/99/budding-insurgent?utm_source=api"
+    },
+    {
+      "name": "Consuming Ashes",
+      "oracle_id": "9ef676f0-53c5-4efe-9341-e960d00dbc69",
+      "mana_cost": "{2}{B}{B}",
+      "type_line": "Instant",
+      "oracle_text": "Exile target creature. If it had mana value 3 or less, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)",
+      "colors": ["B"],
+      "power": null,
+      "toughness": null,
+      "scryfall_uri": "https://scryfall.com/card/otj/83/consuming-ashes?utm_source=api"
+    },
+    {
+      "name": "Driftgloom Coyote",
+      "oracle_id": "f76a86f3-568a-40b3-8e2c-f84db4141293",
+      "mana_cost": "{3}{W}{W}",
+      "type_line": "Creature — Elemental Coyote",
+      "oracle_text": "When this creature enters, exile target creature an opponent controls until this creature leaves the battlefield. If that creature had power 2 or less, put a +1/+1 counter on this creature.",
+      "colors": ["W"],
+      "power": "3",
+      "toughness": "4",
+      "scryfall_uri": "https://scryfall.com/card/blb/11/driftgloom-coyote?utm_source=api"
+    },
+    {
+      "name": "Scavenging Ooze",
+      "oracle_id": "1ff25f67-36a7-4cfa-a2b1-2135b5b6fb67",
+      "mana_cost": "{1}{G}",
+      "type_line": "Creature — Ooze",
+      "oracle_text": "{G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on this creature and you gain 1 life.",
+      "colors": ["G"],
+      "power": "2",
+      "toughness": "2",
+      "scryfall_uri": "https://scryfall.com/card/fdn/232/scavenging-ooze?utm_source=api"
+    },
+    {
+      "name": "Sunpearl Kirin",
+      "oracle_id": "f17b9356-a329-4f89-b690-afc2eaff4977",
+      "mana_cost": "{1}{W}",
+      "type_line": "Creature — Kirin",
+      "oracle_text": "Flash\nFlying\nWhen this creature enters, return up to one other target nonland permanent you control to its owner's hand. If it was a token, draw a card.",
+      "colors": ["W"],
+      "power": "2",
+      "toughness": "1",
+      "scryfall_uri": "https://scryfall.com/card/tdm/29/sunpearl-kirin?utm_source=api"
+    }
+  ]
+}

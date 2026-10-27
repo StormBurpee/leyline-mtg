@@ -1,0 +1,23 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "leyline:token/greed-bat-token",
+  "name": "Greed Bat Token",
+  "characteristics": {
+    "types": ["creature"],
+    "subtypes": ["Bat"],
+    "colors": ["B"],
+    "power": 2,
+    "toughness": 1,
+    "supertypes": [],
+    "manaCost": null,
+    "token": true
+  },
+  "rulesText": "Flying",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    }
+  ]
+}

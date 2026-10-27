@@ -1,5 +1,5 @@
 {
-  "version": "0.52.0",
+  "version": "0.53.0",
   "rulesReference": "2026-09-25",
   "cards": [
     {
@@ -420,6 +420,10 @@
       "triggers": [
         {
           "event": "battlefieldToGraveyard",
+          "object": "source"
+        },
+        {
+          "event": "battlefieldToGraveyard",
           "controller": "you",
           "filter": {
             "any": [
@@ -430,7 +434,8 @@
                 "type": "artifact"
               }
             ]
-          }
+          },
+          "excludeSource": true
         }
       ],
       "activatedAbilities": 0
@@ -1359,6 +1364,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Battle Menu",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["token", "modify", "destroy", "gainLife"],
+      "modes": [
+        "Attack — Create a 2/2 white Knight.",
+        "Ability — Target creature gets +0/+4.",
+        "Magic — Destroy target creature with power 4 or greater.",
+        "Item — Gain 4 life."
+      ],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Battle-Rattle Shaman",
       "type": "creature",
       "keywords": [],
@@ -2187,6 +2206,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Brackish Blunder",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Brambleguard Captain",
       "type": "creature",
       "keywords": [],
@@ -2297,6 +2324,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Brimstone Roundup",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "cast",
+          "controller": "you",
+          "spellNumber": 2
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Brineborn Cutthroat",
       "type": "creature",
       "keywords": ["flash"],
@@ -2361,6 +2402,14 @@
           "controller": "you"
         }
       ],
+      "activatedAbilities": 1
+    },
+    {
+      "name": "Budding Insurgent",
+      "type": "creature",
+      "keywords": ["vigilance"],
+      "opcodes": ["conditional"],
+      "triggers": [],
       "activatedAbilities": 1
     },
     {
@@ -2585,6 +2634,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["moveTarget", "draw", "discard"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Call the Mountain Chocobo",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "token"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -2992,6 +3049,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "City Pigeon",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "leave",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Citywatch Sphinx",
       "type": "creature",
       "keywords": ["flying"],
@@ -3258,10 +3328,26 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Constrictor Sage",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Consult the Star Charts",
       "type": "instant",
       "keywords": [],
       "opcodes": ["lookChooseHand"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Consuming Ashes",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["conditional"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -3309,6 +3395,22 @@
       "keywords": [],
       "opcodes": ["sacrifice", "token"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Corroding Dragonstorm",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["loseLife", "gainLife", "surveil", "moveTarget"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "filter": {
+            "subtype": "Dragon"
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -3408,6 +3510,14 @@
       "opcodes": ["counter"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Country Roads",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Courageous Goblin",
@@ -3574,6 +3684,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Crumb and Get It",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Crusader of Odric",
       "type": "creature",
       "keywords": [],
@@ -3588,6 +3706,19 @@
       "opcodes": ["token"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Cryogen Relic",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["draw", "stunOn"],
+      "triggers": [
+        {
+          "event": "leave",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 1
     },
     {
       "name": "Cryotheory Adept",
@@ -3666,6 +3797,15 @@
       "type": "creature",
       "keywords": ["vigilance"],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Dai Li Indoctrination",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["revealDiscard", "earthbend"],
+      "modes": ["Opponent reveals and discards a nonland permanent card.", "Earthbend 2."],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -3966,11 +4106,28 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Defend the Rider",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "token"],
+      "modes": ["Your permanent gains hexproof and indestructible.", "Create a Pilot token."],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Defibrillating Current",
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["damage", "gainLife"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Deluge Virtuoso",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["tap", "stunOn", "conditional"],
+      "triggers": ["selfEnters", "controllerCastsInstantOrSorcery"],
       "activatedAbilities": 0
     },
     {
@@ -4015,6 +4172,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["modify", "draw"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Depressurize",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "conditional"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -4424,6 +4589,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Dragonfly Swarm",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["draw"],
+      "ward": {
+        "mana": {
+          "generic": 1
+        }
+      },
+      "triggers": ["selfDies"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Dragonlord's Servant",
       "type": "creature",
       "keywords": [],
@@ -4504,6 +4682,14 @@
       "keywords": [],
       "opcodes": ["surveil", "draw"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Driftgloom Coyote",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["conditional"],
+      "triggers": ["selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -5723,6 +5909,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Featherbrained Filcher",
+      "type": "creature",
+      "keywords": ["flying"],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "leave",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Feed the Cauldron",
       "type": "instant",
       "keywords": [],
@@ -6333,6 +6532,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Foul Roads",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Fountainport Bell",
       "type": "artifact",
       "keywords": [],
@@ -6624,6 +6831,32 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Garruk's Uprising",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["draw"],
+      "triggers": [
+        "selfEnters",
+        {
+          "event": "enter",
+          "controller": "you",
+          "filter": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "power": {
+                  "gte": 4
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Gastal Thrillseeker",
       "type": "creature",
       "keywords": [],
@@ -6681,6 +6914,23 @@
       "keywords": ["flying"],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Genghis Frog",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "filter": {
+            "subtype": "Mutant"
+          },
+          "excludeSource": true
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -6914,6 +7164,14 @@
           "controller": "you"
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Glacier Godmaw",
+      "type": "creature",
+      "keywords": ["trample"],
+      "opcodes": ["token", "modifyAll"],
+      "triggers": ["controllerLandEnters"],
       "activatedAbilities": 0
     },
     {
@@ -7299,6 +7557,24 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Greed's Gambit",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["draw", "gainLife", "token", "discard", "loseLife", "sacrifice"],
+      "triggers": [
+        {
+          "event": "step",
+          "step": "end",
+          "controller": "you"
+        },
+        {
+          "event": "leave",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Greedy Freebooter",
       "type": "creature",
       "keywords": [],
@@ -7526,6 +7802,14 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Gysahl Greens",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Haazda Vigilante",
       "type": "creature",
       "keywords": [],
@@ -7717,6 +8001,19 @@
       "keywords": [],
       "opcodes": [],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Hazardroot Herbalist",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["modify", "conditional"],
+      "triggers": [
+        {
+          "event": "attackGroup",
+          "controller": "you"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -7920,6 +8217,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["token", "modifyAll"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Hexhaven Battalion",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["token", "empowerJace"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -8161,6 +8466,19 @@
       "opcodes": ["token"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Hopeful Vigil",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["token", "scry", "sacrificeSelf"],
+      "triggers": [
+        {
+          "event": "battlefieldToGraveyard",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 1
     },
     {
       "name": "Horrid Vigor",
@@ -8498,6 +8816,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Ingenious Leonin",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn", "conditional"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Ingris Stingerquill",
       "type": "creature",
       "keywords": ["flying"],
@@ -8608,6 +8934,14 @@
       "opcodes": ["counterOn"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Intrepid Trufflesnout // Go Hog Wild",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
     },
     {
       "name": "Invasion Reinforcements",
@@ -9765,6 +10099,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Little Bear",
+      "type": "creature",
+      "keywords": ["flash"],
+      "opcodes": ["untap", "conditional"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Live or Die",
       "type": "instant",
       "keywords": [],
@@ -10177,6 +10519,14 @@
       "keywords": ["trample"],
       "opcodes": ["modify"],
       "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Malamet Battle Glyph",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["conditional", "fight"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -10672,6 +11022,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Mightform Harmonizer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["doublePower"],
+      "triggers": ["controllerLandEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Mighty Mutanimals",
       "type": "creature",
       "keywords": [],
@@ -10990,6 +11348,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Molten Man, Inferno Incarnate",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary", "sacrifice"],
+      "triggers": [
+        {
+          "event": "leave",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Moment of Craving",
       "type": "instant",
       "keywords": [],
@@ -11015,6 +11386,19 @@
         "Destroy target creature with power 4 or greater."
       ],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Momo, Playful Pet",
+      "type": "creature",
+      "keywords": ["flying", "vigilance"],
+      "opcodes": ["token", "counterOn", "scry"],
+      "triggers": [
+        {
+          "event": "leave",
+          "object": "source"
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -11176,6 +11560,19 @@
       ],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Mouser Foundry",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["token", "damage"],
+      "triggers": [
+        {
+          "event": "leave",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 1
     },
     {
       "name": "Mox Jasper",
@@ -11416,6 +11813,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Nervous Gardener",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [
+        {
+          "event": "faceUp",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Nettle Guard",
       "type": "creature",
       "keywords": [],
@@ -11651,6 +12061,19 @@
       "opcodes": ["optionalDiscardDraw"],
       "triggers": ["selfAttacks"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Nutrient Block",
+      "type": "artifact",
+      "keywords": ["indestructible"],
+      "opcodes": ["draw", "gainLife"],
+      "triggers": [
+        {
+          "event": "battlefieldToGraveyard",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 1
     },
     {
       "name": "Oasis Gardener",
@@ -11944,6 +12367,32 @@
       "keywords": [],
       "opcodes": ["searchLibrary"],
       "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Outcaster Trailblazer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["chooseMana", "draw"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "excludeSource": true,
+          "filter": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "power": {
+                  "gte": 4
+                }
+              }
+            ]
+          }
+        }
+      ],
       "activatedAbilities": 0
     },
     {
@@ -12412,6 +12861,14 @@
       "type": "land",
       "keywords": [],
       "opcodes": [],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Plan the Heist",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["conditional", "draw"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -13498,6 +13955,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Reef Roads",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Refurbish",
       "type": "sorcery",
       "keywords": [],
@@ -13748,6 +14213,15 @@
       "activatedAbilities": 1
     },
     {
+      "name": "Restoration Magic",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "gainLife", "modifyAll"],
+      "modes": ["Cure", "Cura", "Curaga"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Restore with Empathy",
       "type": "instant",
       "keywords": [],
@@ -13785,6 +14259,14 @@
       "type": "sorcery",
       "keywords": [],
       "opcodes": ["moveTarget"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Rewrite Regrets",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["moveTarget", "empowerJace"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -13938,6 +14420,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Roamer's Routine",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["searchLibrary"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Rock Soldiers",
       "type": "creature",
       "keywords": [],
@@ -13968,6 +14458,14 @@
       "opcodes": ["bite"],
       "triggers": [],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Rocky Roads",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Rodeo Pyromancers",
@@ -14074,6 +14572,14 @@
       "opcodes": ["tap", "stunOn"],
       "triggers": ["selfEnters"],
       "activatedAbilities": 0
+    },
+    {
+      "name": "Rubblebelt Maverick",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["surveil", "counterOn"],
+      "triggers": [],
+      "activatedAbilities": 1
     },
     {
       "name": "Rugged Highlands",
@@ -14542,6 +15048,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Scavenging Ooze",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["conditional"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "School Daze",
       "type": "instant",
       "keywords": [],
@@ -14727,6 +15241,14 @@
       "opcodes": ["mill", "moveTarget"],
       "triggers": [],
       "activatedAbilities": 1
+    },
+    {
+      "name": "Seedship Impact",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
     },
     {
       "name": "Seeker of Sunlight",
@@ -15675,6 +16197,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Solve for Disappointment",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["revealDiscard", "empowerJace"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Solve the Equation",
       "type": "sorcery",
       "keywords": [],
@@ -15916,6 +16446,14 @@
           "object": "source"
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Spider-Ham, Peter Porker",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -16669,6 +17207,20 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Suki, Courageous Rescuer",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "leave",
+          "controller": "you",
+          "excludeSource": true
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sultai Banner",
       "type": "artifact",
       "keywords": [],
@@ -16899,6 +17451,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Sunpearl Kirin",
+      "type": "creature",
+      "keywords": ["flash", "flying"],
+      "opcodes": ["conditional"],
+      "triggers": ["selfEnters"],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Sunset Strikemaster",
       "type": "creature",
       "keywords": [],
@@ -16940,6 +17500,19 @@
           "event": "cast",
           "spellNumber": 2,
           "controller": "you"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Super Shredder",
+      "type": "creature",
+      "keywords": ["menace"],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "leave",
+          "excludeSource": true
         }
       ],
       "activatedAbilities": 0
@@ -17145,6 +17718,14 @@
       "keywords": ["deathtouch", "lifelink"],
       "opcodes": ["modifyAll"],
       "triggers": ["selfAttacks"],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tainted Treats",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["conditional"],
+      "triggers": [],
       "activatedAbilities": 0
     },
     {
@@ -17934,6 +18515,37 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Three Tree Scribe",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["counterOn"],
+      "triggers": [
+        {
+          "event": "leave",
+          "object": "source",
+          "destinations": ["exile", "hand", "library", "stack", "void"]
+        },
+        {
+          "event": "leave",
+          "controller": "you",
+          "filter": {
+            "type": "creature"
+          },
+          "destinations": ["exile", "hand", "library", "stack", "void"],
+          "excludeSource": true
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Throw from the Saddle",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["conditional", "bite"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Thunder Magic",
       "type": "instant",
       "keywords": [],
@@ -18457,6 +19069,14 @@
           "object": "source"
         }
       ],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Tundra Tank",
+      "type": "artifact",
+      "keywords": [],
+      "opcodes": ["combatMana", "modify"],
+      "triggers": ["selfAttacks", "selfEnters"],
       "activatedAbilities": 0
     },
     {
@@ -19505,6 +20125,15 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Vraska's Final Mercy",
+      "type": "sorcery",
+      "keywords": [],
+      "opcodes": ["loseLife", "destroy", "empowerJace"],
+      "modes": ["Destroy target creature or planeswalker.", "Empower Jace 6."],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Vraska, Soul of Stone",
       "type": "creature",
       "keywords": [],
@@ -19795,6 +20424,29 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Weapons Manufacturing",
+      "type": "enchantment",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "enter",
+          "controller": "you",
+          "filter": {
+            "all": [
+              {
+                "type": "artifact"
+              },
+              {
+                "token": false
+              }
+            ]
+          }
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Web Up",
       "type": "enchantment",
       "keywords": [],
@@ -19952,6 +20604,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Wild Roads",
+      "type": "land",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [],
+      "activatedAbilities": 1
+    },
+    {
       "name": "Wildheart Invoker",
       "type": "creature",
       "keywords": [],
@@ -20043,6 +20703,14 @@
       "type": "instant",
       "keywords": [],
       "opcodes": ["damage", "gainLife"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
+      "name": "Wisecrack",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["bite", "conditional"],
       "triggers": [],
       "activatedAbilities": 0
     },
@@ -20264,6 +20932,14 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Yip Yip!",
+      "type": "instant",
+      "keywords": [],
+      "opcodes": ["modify", "conditional"],
+      "triggers": [],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Yoshimaru, Scrappy Stray",
       "type": "creature",
       "keywords": [],
@@ -20408,6 +21084,19 @@
       "activatedAbilities": 0
     },
     {
+      "name": "Zoo Escapees",
+      "type": "creature",
+      "keywords": [],
+      "opcodes": ["token"],
+      "triggers": [
+        {
+          "event": "leave",
+          "object": "source"
+        }
+      ],
+      "activatedAbilities": 0
+    },
+    {
       "name": "Zookeeper Mechan",
       "type": "creature",
       "keywords": [],
@@ -20483,6 +21172,7 @@
     "Fractal Token",
     "Galactus Token",
     "Goblin Token",
+    "Greed Bat Token",
     "Green Elephant Token",
     "Green Insect Token",
     "Green Raccoon Token",
@@ -20506,6 +21196,7 @@
     "Mercenary Token",
     "White and Blue Merfolk Token",
     "Mobilized Warrior Token",
+    "Munitions Token",
     "Mutagen Token",
     "Mutant Token",
     "Mutavault",
@@ -20526,6 +21217,7 @@
     "Soldier Token",
     "Treasure Token",
     "Two Two Cat Token",
+    "Two Two Knight Token",
     "Villain Token",
     "Wall Token",
     "Wark Bird Token",

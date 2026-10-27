@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "42565432-3a17-4274-87fc-016ab900e313",
+  "name": "Rewrite Regrets",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}"
+  },
+  "rulesText": "Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield.\nEmpower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[\u22121]: Surveil 1\" and \"[\u22123]: Draw a card.\")",
+  "abilities": [
+    {
+      "kind": "spell",
+      "effects": [
+        {
+          "op": "moveTarget",
+          "target": "target",
+          "destination": "battlefield"
+        },
+        {
+          "op": "empowerJace",
+          "amount": 2,
+          "token": "leyline:token/jace"
+        }
+      ],
+      "target": {
+        "scope": "graveyard",
+        "where": {
+          "all": [
+            {
+              "owner": "you"
+            },
+            {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "planeswalker"
+                }
+              ]
+            },
+            {
+              "manaValue": {
+                "lte": 6
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

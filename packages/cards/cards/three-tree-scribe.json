@@ -1,0 +1,80 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7d2a7741-1dff-4fac-92d8-abea24f23f97",
+  "name": "Three Tree Scribe",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Frog", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{1}{G}",
+    "power": 2,
+    "toughness": 3
+  },
+  "rulesText": "Whenever this creature or another creature you control leaves the battlefield without dying, put a +1/+1 counter on target creature you control.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "leave",
+        "object": "source",
+        "destinations": ["exile", "hand", "library", "stack", "void"]
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "leave",
+        "controller": "you",
+        "filter": {
+          "type": "creature"
+        },
+        "destinations": ["exile", "hand", "library", "stack", "void"],
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

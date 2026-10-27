@@ -1,0 +1,95 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "0868ebbb-2fe9-4f53-9697-acad8cda5ec1",
+  "name": "Greed's Gambit",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{3}{B}"
+  },
+  "rulesText": "When this enchantment enters, you draw three cards, gain 6 life, and create three 2/1 black Bat creature tokens with flying.\nAt the beginning of your end step, you discard a card, lose 2 life, and sacrifice a creature.\nWhen this enchantment leaves the battlefield, you discard three cards, lose 6 life, and sacrifice three creatures.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 3
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 6
+        },
+        {
+          "op": "createToken",
+          "token": "leyline:token/greed-bat-token",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "step",
+        "step": "end",
+        "controller": "you"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 1
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 2
+        },
+        {
+          "op": "sacrifice",
+          "player": "controller",
+          "count": 1,
+          "where": {
+            "type": "creature"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "leave",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "discard",
+          "target": "controller",
+          "amount": 3
+        },
+        {
+          "op": "loseLife",
+          "target": "controller",
+          "amount": 6
+        },
+        {
+          "op": "sacrifice",
+          "player": "controller",
+          "count": 3,
+          "where": {
+            "type": "creature"
+          }
+        }
+      ]
+    }
+  ]
+}

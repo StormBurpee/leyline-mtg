@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "8e025cda-71c5-4d06-8436-decd408667af",
+  "name": "Mightform Harmonizer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Insect", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}{G}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "Landfall \u2014 Whenever a land you control enters, double the power of target creature you control until end of turn.\nWarp {2}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "doublePower",
+          "target": "target"
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "warp",
+      "cost": "{2}{G}"
+    }
+  ]
+}

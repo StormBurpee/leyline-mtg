@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "f76a86f3-568a-40b3-8e2c-f84db4141293",
+  "name": "Driftgloom Coyote",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Elemental", "Coyote"],
+    "colors": ["W"],
+    "manaCost": "{3}{W}{W}",
+    "power": 3,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, exile target creature an opponent controls until this creature leaves the battlefield. If that creature had power 2 or less, put a +1/+1 counter on this creature.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "target": "target",
+            "where": {
+              "power": {
+                "lte": 2
+              }
+            }
+          },
+          "then": [
+            {
+              "op": "exileUntilSourceLeaves",
+              "target": "target"
+            },
+            {
+              "op": "addCounters",
+              "target": "source",
+              "counter": "+1/+1",
+              "amount": 1
+            }
+          ],
+          "else": [
+            {
+              "op": "exileUntilSourceLeaves",
+              "target": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

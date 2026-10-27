@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee",
+  "name": "Outcaster Trailblazer",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Human", "Druid"],
+    "colors": ["G"],
+    "manaCost": "{2}{G}",
+    "power": 4,
+    "toughness": 2
+  },
+  "rulesText": "When this creature enters, add one mana of any color.\nWhenever another creature you control with power 4 or greater enters, draw a card.\nPlot {2}{G} (You may pay {2}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "chooseMana"
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "excludeSource": true,
+        "filter": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "power": {
+                "gte": 4
+              }
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "plot",
+      "cost": "{2}{G}"
+    }
+  ]
+}

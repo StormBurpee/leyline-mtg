@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "e9c9a445-4386-4616-ad00-f08064d73dcd",
+  "name": "Wisecrack",
+  "characteristics": {
+    "types": ["instant"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["R"],
+    "manaCost": "{2}{R}"
+  },
+  "rulesText": "Target creature deals damage equal to its power to itself. If that creature is attacking, Wisecrack deals 2 damage to that creature's controller.",
+  "abilities": [
+    {
+      "kind": "spell",
+      "targetGroups": [
+        {
+          "id": "creature",
+          "selector": {
+            "scope": "permanent",
+            "where": {
+              "type": "creature"
+            }
+          },
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "effects": [
+        {
+          "op": "bite",
+          "sourceGroup": "creature",
+          "victimGroup": "creature"
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "targetGroup": "creature",
+            "where": {
+              "attacking": true
+            }
+          },
+          "then": [
+            {
+              "op": "damageTargetController",
+              "targetGroup": "creature",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

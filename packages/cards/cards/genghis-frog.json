@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "1d6d0348-46ad-46ed-ae7b-d7510f0ebe70",
+  "name": "Genghis Frog",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": ["legendary"],
+    "subtypes": ["Frog", "Mutant", "Rogue"],
+    "colors": ["G", "U"],
+    "manaCost": "{G}{U}",
+    "power": 1,
+    "toughness": 3
+  },
+  "rulesText": "Trample\nWhenever Genghis Frog or another Mutant you control enters, create a Mutagen token. (It's an artifact with \"{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.\")",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mutagen-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "subtype": "Mutant"
+        },
+        "excludeSource": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/mutagen-token",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -142,7 +142,7 @@
   {
     "oracleId": "3127ae9b-a7a7-43ec-89d7-688f8445b33d",
     "name": "Garruk's Uprising",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "4a6972fe-348a-4a19-a1d0-bdf8f1f9c792",
@@ -257,7 +257,7 @@
   {
     "oracleId": "1d6d0348-46ad-46ed-ae7b-d7510f0ebe70",
     "name": "Genghis Frog",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "8242cd78-6675-43b5-8924-0a88c3aa6f76",
@@ -517,7 +517,7 @@
   {
     "oracleId": "300e48df-7f7f-47ff-b450-8ba7bd1b1c67",
     "name": "Glacier Godmaw",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "295a831c-490e-42ba-afc1-dab3524a4f0c",
@@ -1052,7 +1052,7 @@
   {
     "oracleId": "0868ebbb-2fe9-4f53-9697-acad8cda5ec1",
     "name": "Greed's Gambit",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "d4a9d63a-5a8a-4f51-9e49-43d6dc3234b1",
@@ -1307,6 +1307,6 @@
   {
     "oracleId": "eddfe7d7-6868-4b81-b46c-d0765e5210e7",
     "name": "Gysahl Greens",
-    "status": "unsupported"
+    "status": "curated"
   }
 ]

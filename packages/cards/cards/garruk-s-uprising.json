@@ -1,0 +1,88 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "3127ae9b-a7a7-43ec-89d7-688f8445b33d",
+  "name": "Garruk's Uprising",
+  "characteristics": {
+    "types": ["enchantment"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["G"],
+    "manaCost": "{2}{G}"
+  },
+  "rulesText": "When this enchantment enters, if you control a creature with power 4 or greater, draw a card.\nCreatures you control have trample. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever a creature you control with power 4 or greater enters, draw a card.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "power": {
+                "gte": 4
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "anthem",
+      "where": {
+        "all": [
+          {
+            "type": "creature"
+          },
+          {
+            "controller": "you"
+          }
+        ]
+      },
+      "power": 0,
+      "toughness": 0,
+      "keywords": ["trample"]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "power": {
+                "gte": 4
+              }
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

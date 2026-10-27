@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "7799413d-e313-4a05-ad28-f4c926c26d28",
+  "name": "Vraska's Final Mercy",
+  "characteristics": {
+    "types": ["sorcery"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": ["B"],
+    "manaCost": "{B}{B}"
+  },
+  "rulesText": "Choose one \u2014\n\u2022 You lose 2 life. Destroy target creature or planeswalker.\n\u2022 You lose 2 life. Empower Jace 6. (Put six loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with \"[\u22121]: Surveil 1\" and \"[\u22123]: Draw a card.\")",
+  "abilities": [
+    {
+      "kind": "modalSpell",
+      "choose": 1,
+      "modes": [
+        {
+          "label": "Destroy target creature or planeswalker.",
+          "target": {
+            "scope": "permanent",
+            "where": {
+              "any": [
+                {
+                  "type": "creature"
+                },
+                {
+                  "type": "planeswalker"
+                }
+              ]
+            }
+          },
+          "effects": [
+            {
+              "op": "loseLife",
+              "target": "controller",
+              "amount": 2
+            },
+            {
+              "op": "destroy",
+              "target": "target"
+            }
+          ]
+        },
+        {
+          "label": "Empower Jace 6.",
+          "effects": [
+            {
+              "op": "loseLife",
+              "target": "controller",
+              "amount": 2
+            },
+            {
+              "op": "empowerJace",
+              "amount": 6,
+              "token": "leyline:token/jace"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

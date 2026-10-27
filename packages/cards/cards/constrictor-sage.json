@@ -1,0 +1,82 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "abfb7234-c5cc-4e0b-9a67-d66473f918fc",
+  "name": "Constrictor Sage",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Snake", "Wizard"],
+    "colors": ["U"],
+    "manaCost": "{4}{U}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "When this creature enters, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nRenew \u2014 {2}{U}, Exile this card from your graveyard: Tap target creature an opponent controls and put a stun counter on it. Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        },
+        {
+          "op": "addStunCounters",
+          "target": "target",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "activated",
+      "zone": "graveyard",
+      "cost": {
+        "mana": "{2}{U}",
+        "exileSelf": true
+      },
+      "timing": "sorcery",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "opponent"
+            }
+          ]
+        }
+      },
+      "effects": [
+        {
+          "op": "tap",
+          "target": "target"
+        },
+        {
+          "op": "addStunCounters",
+          "target": "target",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

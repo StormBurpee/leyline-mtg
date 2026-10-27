@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "99853d2e-2223-4c05-bbd7-0a746f8f810d",
+  "name": "Ingenious Leonin",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Cat", "Soldier"],
+    "colors": ["W"],
+    "manaCost": "{4}{W}",
+    "power": 4,
+    "toughness": 4
+  },
+  "rulesText": "{3}{W}: Put a +1/+1 counter on another target attacking creature you control. If that creature is a Cat, it gains first strike until end of turn. (It deals combat damage before creatures without first strike.)",
+  "abilities": [
+    {
+      "kind": "activated",
+      "target": {
+        "scope": "permanent",
+        "where": {
+          "all": [
+            {
+              "type": "creature"
+            },
+            {
+              "controller": "you"
+            },
+            {
+              "attacking": true
+            }
+          ]
+        },
+        "excludeSource": true
+      },
+      "cost": {
+        "mana": "{3}{W}"
+      },
+      "effects": [
+        {
+          "op": "addCounters",
+          "target": "target",
+          "counter": "+1/+1",
+          "amount": 1
+        },
+        {
+          "op": "conditional",
+          "condition": {
+            "kind": "targetMatches",
+            "target": "target",
+            "where": {
+              "subtype": "Cat"
+            }
+          },
+          "then": [
+            {
+              "op": "modify",
+              "target": "target",
+              "power": 0,
+              "toughness": 0,
+              "until": "endOfTurn",
+              "keywords": ["first strike"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

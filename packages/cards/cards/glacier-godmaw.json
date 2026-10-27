@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "300e48df-7f7f-47ff-b450-8ba7bd1b1c67",
+  "name": "Glacier Godmaw",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Leviathan"],
+    "colors": ["G"],
+    "manaCost": "{5}{G}{G}",
+    "power": 6,
+    "toughness": 6
+  },
+  "rulesText": "Trample\nWhen this creature enters, create a Lander token. (It's an artifact with \"{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\")\nLandfall \u2014 Whenever a land you control enters, creatures you control get +1/+1 and gain vigilance and haste until end of turn.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "trample"
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/lander-token",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "enter",
+        "controller": "you",
+        "filter": {
+          "type": "land"
+        }
+      },
+      "effects": [
+        {
+          "op": "modifyAll",
+          "where": {
+            "all": [
+              {
+                "type": "creature"
+              },
+              {
+                "controller": "you"
+              }
+            ]
+          },
+          "power": 1,
+          "toughness": 1,
+          "keywords": ["vigilance", "haste"],
+          "until": "endOfTurn"
+        }
+      ]
+    }
+  ]
+}

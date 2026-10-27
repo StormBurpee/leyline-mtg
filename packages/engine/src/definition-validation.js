@@ -244,7 +244,7 @@ function validateEffects(
     if (e.op === 'conditional') {
       if (Object.keys(e).some((k) => !['op', 'condition', 'then', 'else'].includes(k)))
         errors.push(`${p}: unsupported conditional field.`);
-      errors.push(...validateCondition(e.condition));
+      errors.push(...validateCondition(e.condition, { resolving: true, target, groups }));
       validateEffects(e.then, `${p}.then`, target, errors, groups, budget, depth + 1);
       if (e.else !== undefined)
         validateEffects(e.else, `${p}.else`, target, errors, groups, budget, depth + 1);
@@ -256,6 +256,7 @@ function validateEffects(
         !group ||
         ![
           'counter',
+          'damageTargetController',
           'copyToken',
           'damage',
           'destroy',
@@ -277,8 +278,11 @@ function validateEffects(
           'fightAttached',
         ].includes(e.op) ||
         e.subject !== undefined ||
-        (['counter', 'copyToken', 'delayedBlink'].includes(e.op) && group.max !== 1) ||
+        (['counter', 'copyToken', 'delayedBlink', 'damageTargetController'].includes(e.op) &&
+          group.max !== 1) ||
         (e.op === 'counter' && e.unlessPay !== undefined) ||
+        (e.op === 'damageTargetController' &&
+          !['permanent', 'graveyard'].includes(targetSpec(group.selector)?.scope)) ||
         (e.op === 'moveTarget' && e.destination === 'battlefield')
       ) {
         errors.push(`${p}: unsupported target group binding.`);
@@ -1893,7 +1897,7 @@ export function validateDefinition(card) {
         ];
         const triggerEvent = eventSpec(t.event);
         if (
-          ((triggerEvent?.event === 'dies' && triggerEvent.object !== 'source') ||
+          ((['dies', 'leave'].includes(triggerEvent?.event) && triggerEvent.object !== 'source') ||
             ['sacrifice', 'diesGroup', 'battlefieldToGraveyardGroup'].includes(
               triggerEvent?.event,
             )) &&

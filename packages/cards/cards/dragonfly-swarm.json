@@ -1,0 +1,78 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "83abf1d0-04e4-49e5-bf63-59f77829ffd1",
+  "name": "Dragonfly Swarm",
+  "characteristics": {
+    "types": ["creature"],
+    "supertypes": [],
+    "subtypes": ["Dragon", "Insect"],
+    "colors": ["R", "U"],
+    "manaCost": "{1}{U}{R}",
+    "power": 0,
+    "toughness": 3
+  },
+  "rulesText": "Flying, ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nThis creature's power is equal to the number of noncreature, nonland cards in your graveyard.\nWhen this creature dies, if there's a Lesson card in your graveyard, draw a card.",
+  "abilities": [
+    {
+      "kind": "keyword",
+      "keyword": "flying"
+    },
+    {
+      "kind": "keyword",
+      "keyword": "ward",
+      "cost": {
+        "mana": "{1}"
+      }
+    },
+    {
+      "kind": "baseStats",
+      "power": {
+        "kind": "count",
+        "zone": "graveyard",
+        "player": "you",
+        "where": {
+          "all": [
+            {
+              "not": {
+                "type": "creature"
+              }
+            },
+            {
+              "not": {
+                "type": "land"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "dies",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "draw",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "condition": {
+        "kind": "compare",
+        "left": {
+          "kind": "count",
+          "zone": "graveyard",
+          "player": "you",
+          "where": {
+            "subtype": "Lesson"
+          }
+        },
+        "operator": "gte",
+        "right": 1
+      }
+    }
+  ]
+}

@@ -82,7 +82,7 @@
   {
     "oracleId": "15dca6a7-8367-4b86-a86c-e44f10fb3c53",
     "name": "Nervous Gardener",
-    "status": "unsupported"
+    "status": "curated"
   },
   {
     "oracleId": "ab097f46-a7bf-4cf1-a96c-36b681fe79da",
@@ -392,6 +392,6 @@
   {
     "oracleId": "04a0382f-7e4e-4450-ae70-18999379d875",
     "name": "Nutrient Block",
-    "status": "unsupported"
+    "status": "curated"
   }
 ]

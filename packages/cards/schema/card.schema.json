@@ -476,6 +476,7 @@
             "enter",
             "cast",
             "dies",
+            "leave",
             "diesGroup",
             "battlefieldToGraveyard",
             "battlefieldToGraveyardGroup",
@@ -509,6 +510,13 @@
         },
         "step": {
           "enum": ["upkeep", "beginCombat", "end", "main1", "main2", "draw"]
+        },
+        "destinations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": { "enum": ["graveyard", "exile", "hand", "library", "stack", "void"] }
         },
         "drawNumber": {
           "type": "integer",
@@ -1339,7 +1347,7 @@
               "const": "conditional"
             },
             "condition": {
-              "$ref": "#/$defs/condition"
+              "$ref": "#/$defs/effectCondition"
             },
             "then": {
               "type": "array",
@@ -2079,6 +2087,9 @@
             },
             "amount": {
               "$ref": "#/$defs/effectNumericValue"
+            },
+            "targetGroup": {
+              "type": "string"
             }
           },
           "required": ["op", "amount"],
@@ -4105,6 +4116,109 @@
             }
           },
           "required": ["subtype"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "effectCondition": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/condition"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "all"
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/effectCondition"
+              },
+              "minItems": 1,
+              "maxItems": 8
+            }
+          },
+          "required": ["kind", "conditions"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "any"
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/effectCondition"
+              },
+              "minItems": 1,
+              "maxItems": 8
+            }
+          },
+          "required": ["kind", "conditions"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "targetMatches"
+            },
+            "target": {
+              "const": "target"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": ["kind", "target", "where"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "targetMatches"
+            },
+            "targetGroup": {
+              "type": "string",
+              "pattern": "^[a-z][a-zA-Z0-9_]{0,39}$"
+            },
+            "where": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": ["kind", "targetGroup", "where"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "targetEnteredThisTurn"
+            },
+            "target": {
+              "const": "target"
+            }
+          },
+          "required": ["kind", "target"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "targetEnteredThisTurn"
+            },
+            "targetGroup": {
+              "type": "string",
+              "pattern": "^[a-z][a-zA-Z0-9_]{0,39}$"
+            }
+          },
+          "required": ["kind", "targetGroup"],
           "additionalProperties": false
         }
       ]

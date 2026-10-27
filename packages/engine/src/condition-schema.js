@@ -1,5 +1,5 @@
 import { CARD_TYPES } from './types.js';
-import { validateFilter } from './selectors.js';
+import { targetSpec, validateFilter } from './selectors.js';
 import { validateNumericValue } from './value-schema.js';
 const plain = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 const stable = (v) =>
@@ -10,7 +10,10 @@ const stable = (v) =>
         ? stable(value)
         : !['power', 'toughness', 'keyword'].includes(key),
   );
-export function validateCondition(value, { continuous = false } = {}) {
+export function validateCondition(
+  value,
+  { continuous = false, resolving = false, target = null, groups = [] } = {},
+) {
   const errors = [];
   let nodes = 0;
   const visit = (v, depth = 0) => {
@@ -29,6 +32,8 @@ export function validateCondition(value, { continuous = false } = {}) {
       controllerLostLifeThisTurn: ['kind'],
       controllerTurn: ['kind'],
       sourceType: ['kind', 'type'],
+      targetMatches: ['kind', 'target', 'targetGroup', 'where'],
+      targetEnteredThisTurn: ['kind', 'target', 'targetGroup'],
       sourcePrepared: ['kind', 'prepared'],
       sourceSaddled: ['kind'],
       sourceQuestCountersAtLeast: ['kind', 'count'],
@@ -48,6 +53,26 @@ export function validateCondition(value, { continuous = false } = {}) {
       return;
     }
     if (Object.keys(v).some((k) => !fields.includes(k))) errors.push('Unexpected condition field.');
+    if (['targetMatches', 'targetEnteredThisTurn'].includes(v.kind)) {
+      if (!resolving || continuous)
+        errors.push('Target conditions are supported only in resolving effect branches.');
+      const single = v.target === 'target' && v.targetGroup === undefined;
+      const group =
+        v.target === undefined &&
+        typeof v.targetGroup === 'string' &&
+        Array.isArray(groups) &&
+        groups.find((g) => g.id === v.targetGroup && g.max === 1);
+      const spec = targetSpec(single ? target : group?.selector);
+      if (
+        (!single && !group) ||
+        !spec ||
+        !(v.kind === 'targetEnteredThisTurn'
+          ? spec.scope === 'permanent'
+          : ['permanent', 'graveyard'].includes(spec.scope))
+      )
+        errors.push('Target conditions require one explicit public object target binding.');
+      if (v.kind === 'targetMatches') errors.push(...validateFilter(v.where));
+    }
     if (v.kind === 'additionalCostPaid' && continuous)
       errors.push('Additional-cost conditions are resolution-only.');
     if (v.kind === 'sourceAttacking' && !continuous)

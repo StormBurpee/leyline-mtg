@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/card.schema.json",
+  "schemaVersion": 1,
+  "id": "36fbc8ba-bb4c-4e5e-9031-78c36e376851",
+  "name": "Wild Roads",
+  "characteristics": {
+    "types": ["land"],
+    "supertypes": [],
+    "subtypes": [],
+    "colors": [],
+    "manaCost": null
+  },
+  "rulesText": "This land enters tapped unless you control a Mount or Vehicle.\n{T}: Add {G}.\n{1}{G}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token with \"This token saddles Mounts and crews Vehicles as though its power were 2 greater.\" Activate only as a sorcery.",
+  "abilities": [
+    {
+      "kind": "entry",
+      "tapped": true,
+      "unless": {
+        "kind": "controlAtLeast",
+        "count": 1,
+        "where": {
+          "any": [
+            {
+              "subtype": "Mount"
+            },
+            {
+              "subtype": "Vehicle"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "mana",
+      "produces": ["G"]
+    },
+    {
+      "kind": "activated",
+      "cost": {
+        "mana": "{1}{G}",
+        "tap": true,
+        "sacrificeSelf": true
+      },
+      "effects": [
+        {
+          "op": "createToken",
+          "token": "leyline:token/pilot-token",
+          "amount": 1
+        }
+      ],
+      "timing": "sorcery"
+    }
+  ]
+}

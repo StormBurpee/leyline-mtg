@@ -18,6 +18,31 @@
       "kind": "triggered",
       "on": {
         "event": "battlefieldToGraveyard",
+        "object": "source"
+      },
+      "effects": [
+        {
+          "op": "loseLife",
+          "target": "target",
+          "amount": 1
+        },
+        {
+          "op": "gainLife",
+          "target": "controller",
+          "amount": 1
+        }
+      ],
+      "target": {
+        "scope": "player",
+        "where": {
+          "controller": "opponent"
+        }
+      }
+    },
+    {
+      "kind": "triggered",
+      "on": {
+        "event": "battlefieldToGraveyard",
         "controller": "you",
         "filter": {
           "any": [
@@ -28,7 +53,8 @@
               "type": "artifact"
             }
           ]
-        }
+        },
+        "excludeSource": true
       },
       "effects": [
         {
